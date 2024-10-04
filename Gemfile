@@ -37,6 +37,11 @@ gem "kamal", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
+# Authentication through Devise and Omniauth
+gem "devise"
+gem "omniauth"
+gem "omniauth-rails_csrf_protection"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -53,6 +58,7 @@ group :development, :test do
   # Testing framework
   gem "rspec-rails", "~> 7.0"
   gem "factory_bot_rails"
+  gem 'simplecov'
 end
 
 group :development do
