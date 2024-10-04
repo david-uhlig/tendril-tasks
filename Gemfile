@@ -60,11 +60,10 @@ group :development, :test do
   # Testing framework
   gem "rspec-rails", "~> 7.0"
   gem "factory_bot_rails"
-  gem 'simplecov'
+  gem "simplecov"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
-
