@@ -13,6 +13,7 @@ class User < ApplicationRecord
       # because it is required for devise features like :rememberable
       user.password = Devise.friendly_token[0, 20]
       # TODO add in name, avatar-url
+      # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     end
   end
 end

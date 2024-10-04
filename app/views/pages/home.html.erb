@@ -1,2 +1,12 @@
 <h1>Pages#home</h1>
+
+<p>
+  <% if user_signed_in?  %>
+    <strong><%= current_user.email %></strong>
+  <% else %>
+    <%= button_to "Sign in with RCB Chat", user_rocketchat_omniauth_authorize_path, data: { turbo: false } %>
+  <% end %>
+</p>
+
 <p>Find me in app/views/pages/home.html.erb</p>
+
