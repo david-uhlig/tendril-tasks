@@ -4,7 +4,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  # Authenticate through devise and omniauth
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" },
+             skip: [ :sessions ]
+
+  # Disable the `POST "/users/sign_in"` route.
+  # Prevents username/password logins. We only support omniauth.
+  devise_scope :user do
+    get "/users/sign_in", to: "devise/sessions#new", as: :new_user_session
+    delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
