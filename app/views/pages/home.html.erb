@@ -2,7 +2,8 @@
 
 <p>
   <% if user_signed_in?  %>
-    <strong><%= current_user.email %></strong>
+    <strong><%= current_user.email %></strong><br>
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
   <% else %>
     <%= button_to "Sign in with RCB Chat", user_rocketchat_omniauth_authorize_path, data: { turbo: false } %>
   <% end %>
