@@ -7,5 +7,8 @@ FactoryBot.define do
     password { "password" }
     provider { "rocketchat" }
     uid
+    name { "John Smith" }
+    username { "john.smith" }
+    avatar_url { "https://example.com/john_smith.svg" }
   end
 end

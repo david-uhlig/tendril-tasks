@@ -7,7 +7,10 @@ RSpec.describe User, type: :model do
         provider: "rocketchat",
         uid: "123456",
         info: {
-          email: "test@example.com"
+          name: "John Doe",
+          email: "john.doe@example.com",
+          username: "john.doe",
+          image: "https://example.com/avatar/john.doe"
         }
       )
     end
@@ -29,8 +32,11 @@ RSpec.describe User, type: :model do
         user = User.last
         expect(user.provider).to eq("rocketchat")
         expect(user.uid).to eq("123456")
-        expect(user.email).to eq("test@example.com")
+        expect(user.email).to eq("john.doe@example.com")
         expect(user.encrypted_password).to be_present
+        expect(user.name).to eq("John Doe")
+        expect(user.username).to eq("john.doe")
+        expect(user.avatar_url).to eq("https://example.com/avatar/john.doe")
       end
     end
   end

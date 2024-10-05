@@ -12,7 +12,9 @@ class User < ApplicationRecord
       # Although this app uses omniauth only, a password is generated
       # because it is required for devise features like :rememberable
       user.password = Devise.friendly_token[0, 20]
-      # TODO add in name, avatar-url
+      user.name = auth.info.name
+      user.username = auth.info.username
+      user.avatar_url = auth.info.image
       # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     end
   end
