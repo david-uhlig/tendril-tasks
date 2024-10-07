@@ -11,4 +11,6 @@
 #
 # @see https://viewcomponent.org/guide/getting-started.html#conventions
 class BaseComponent < ViewComponent::Base
+  include Primer::FetchOrFallbackHelper
+  include Primer::ClassNameHelper
 end

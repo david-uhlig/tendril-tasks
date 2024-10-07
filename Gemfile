@@ -53,6 +53,11 @@ gem "tailwindcss-rails"
 # See https://viewcomponent.org/
 gem "view_component"
 
+# Primer design system
+# Only using the helper modules, not the design system itself.
+# See https://primer.style/
+gem "primer_view_components"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
