@@ -13,6 +13,11 @@ require 'rspec/rails'
 # Require all spec files that are present in the spec/support folder
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+# ViewComponent helpers
+require "view_component/test_helpers"
+require "view_component/system_test_helpers"
+require "capybara/rspec"
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -40,6 +45,16 @@ RSpec.configure do |config|
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
+
+  # ViewComponent helper methods
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include ViewComponent::SystemTestHelpers, type: :component
+  config.include Capybara::RSpecMatchers, type: :component
+  # Devise’s controller helper methods
+  config.include Devise::Test::ControllerHelpers, type: :component
+  config.before(:each, type: :component) do
+    @request = vc_test_controller.request
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

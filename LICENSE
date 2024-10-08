@@ -3,6 +3,10 @@ Portions of this software are licensed as follows:
 * The Rocket.Chat icons and other Rocket.Chat related assets, residing under
   "/app/assets/images/rocketchat/" by the [Rocket.Chat.Artwork project](https://github.com/RocketChat/Rocket.Chat.Artwork)
   are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en).
+* Background texture, residing under `/spec/assets/images/for-tests.jpg` by
+  [Yves Cedric Schulze](https://unsplash.com/de/@yvced) on
+  [Unsplash](https://unsplash.com/de/fotos/hintergrundmuster-ics9UxicW78)
+  is licensed under [Unsplash License](https://unsplash.com/license)
 * All third-party components incorporated into this Software are licensed under
   the original license provided by the owner of the applicable component.
 * Content outside of the above-mentioned directories or restrictions above is
