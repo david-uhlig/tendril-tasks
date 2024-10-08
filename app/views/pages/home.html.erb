@@ -1,22 +1,21 @@
-<h1>Pages#home</h1>
-
 <div>
-  <% if user_signed_in?  %>
-    <strong><%= current_user.email %></strong><br>
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= button_to "Sign in with RCB Chat", user_rocketchat_omniauth_authorize_path, data: { turbo: false } %>
-  <% end %>
-</div>
+  <h1 class="font-bold text-4xl">Pages#home</h1>
 
-<div>
+  <div>
+    <% if user_signed_in?  %>
+      <strong><%= current_user.email %></strong><br>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= button_to "Sign in with RCB Chat", user_rocketchat_omniauth_authorize_path, data: { turbo: false } %>
+    <% end %>
+  </div>
+
   <%= render ButtonComponent.new(
     scheme: :duotone_purple_to_blue
   ) do |button| %>
     <% button.with_leading_visual(src: "rocketchat/icon-white.svg", alt: "Rocket.Chat icon") %>
     Anmelden
   <% end %>
+
+
 </div>
-
-<p>Find me in app/views/pages/home.html.erb</p>
-
