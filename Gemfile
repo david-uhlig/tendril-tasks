@@ -75,6 +75,7 @@ group :development, :test do
   gem "rspec-rails", "~> 7.0"
   gem "factory_bot_rails"
   gem "simplecov"
+  gem "capybara"
 end
 
 group :development do
