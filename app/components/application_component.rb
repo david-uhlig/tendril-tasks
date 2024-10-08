@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Base component from which all other components inherit
+# Root component from which all other components inherit
 #
 # Conventions:
 # * Component names end in -Component
@@ -10,7 +10,7 @@
 #   `AvatarComponent` instead of `UserComponent`
 #
 # @see https://viewcomponent.org/guide/getting-started.html#conventions
-class BaseComponent < ViewComponent::Base
+class ApplicationComponent < ViewComponent::Base
   include Primer::FetchOrFallbackHelper
   include Primer::ClassNameHelper
 end
