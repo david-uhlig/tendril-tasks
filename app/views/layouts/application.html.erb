@@ -24,6 +24,25 @@
   </head>
 
   <body class="p-5 bg-white dark:bg-gray-900 antialiased">
+    <%= render NavigationComponent.new do |navigation| %>
+      <% navigation.with_logo(
+           src: ENV["LOGO_URL"],
+           alt: ENV["LOGO_DESCRIPTION"],
+           label: "Mitgestalten") %>
+      <% navigation.with_links([
+                                 { name: "Start", href: "/" },
+                                 { name: "Projekte", href: "/projects" },
+                                 { name: "Aufgaben", href: "/activities" }]) %>
+      <% navigation.with_login_button(
+        scheme: :duotone_purple_to_blue,
+        classes: "hidden sm:inline-flex") do |login_button| %>
+        <% login_button.with_leading_visual(
+             src: "rocketchat/icon-white.svg",
+             alt: "Rocket.Chat icon") %>
+        Anmelden
+      <% end %>
+    <% end %>
+
     <main class="container mx-auto mt-28 px-5 flex max-w-screen-lg">
       <%= yield %>
     </main>
