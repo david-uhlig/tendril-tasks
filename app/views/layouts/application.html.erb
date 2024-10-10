@@ -34,8 +34,11 @@
                                  { name: "Projekte", href: "/projects" },
                                  { name: "Aufgaben", href: "/activities" }]) %>
       <% navigation.with_login_button(
-        scheme: :duotone_purple_to_blue,
-        classes: "hidden sm:inline-flex") do |login_button| %>
+        {
+          data: { turbo: false },
+          class: "hidden sm:inline-flex"
+        },
+        scheme: :duotone_purple_to_blue) do |login_button| %>
         <% login_button.with_leading_visual(
              src: "rocketchat/icon-white.svg",
              alt: "Rocket.Chat icon") %>

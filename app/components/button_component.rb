@@ -26,6 +26,8 @@ class ButtonComponent < ApplicationComponent
   }.freeze
   SIZE_OPTIONS = SIZE_MAPPINGS.keys
 
+  DEFAULT_LABEL = "Button"
+
   # Renders an image or visual element to appear to the left of the button text.
   # This is typically used for icons or decorative visuals accompanying the button label.
   #
@@ -55,14 +57,32 @@ class ButtonComponent < ApplicationComponent
     image_tag src, alt: alt, class: classes, aria: { hidden: "true" }
   end
 
+  # @param options [Hash, nil] @see ActionView::Helpers::FormTagHelper::button_tag
   # @param scheme [Symbol] <%= one_of(ButtonComponent::SCHEME_OPTIONS) %>
   # @param size [Symbol] <%= one_of(ButtonComponent::SIZE_OPTIONS) %>
-  # @param classes [String, nil] Additional CSS classes that are merged with the classes resulting from the `scheme:` option.
-  def initialize(scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, classes: nil)
-    @classes = class_names(
+  def initialize(options = nil, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE)
+    @options = build_options(options, scheme, size)
+  end
+
+  def call
+    @options["class"] += " inline-flex" if leading_visual?
+    btn_content = leading_visual.to_s + (content || DEFAULT_LABEL)
+
+    button_tag @options do
+      btn_content.html_safe
+    end
+  end
+
+  private
+
+  def build_options(options, scheme, size)
+    options ||= {}
+    options = options.stringify_keys
+    options["class"] = class_names(
       SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
-      classes
+      options.delete("class")
     )
+    options
   end
 end
