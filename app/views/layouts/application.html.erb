@@ -23,7 +23,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="p-5 bg-white dark:bg-gray-900 antialiased">
+  <body class="p-3 sm:p-5 bg-white dark:bg-gray-900 antialiased">
     <%= render NavigationComponent.new do |navigation| %>
       <% navigation.with_logo(
            src: ENV["LOGO_URL"],
@@ -46,7 +46,7 @@
       <% end %>
     <% end %>
 
-    <main class="container mx-auto mt-28 px-5 flex max-w-screen-lg">
+    <main class="container mx-auto mt-12 px-5 flex max-w-screen-lg">
       <%= yield %>
     </main>
   </body>

@@ -1,13 +1,55 @@
 <div>
-  <h1 class="font-bold text-4xl">Pages#home</h1>
+  <h1 class="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Bring dich <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">aktiv</span> beim RCB ein!</h1>
+  <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren. Jede Hilfe, ob groß oder klein, trägt dazu bei, den Verein voranzubringen und eine aktive Gemeinschaft zu erhalten. Gemeinsam können wir so die Ziele des Vereins erreichen und ein Umfeld schaffen, in dem sich alle gut aufgehoben fühlen.</p>
 
-  <div>
+  <%# CTA with login button %>
+  <% unless user_signed_in? %>
+  <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "text-center" do %>
+    <span class="font-mono pe-5">Jetzt einloggen, um Projekte und Aufgaben zu sehen:</span>
+    <%= render ButtonComponent.new(
+      {
+        class: "mt-4"
+      },
+      scheme: :duotone_purple_to_blue,
+      size: :extra_large) do |login_button| %>
+      <% login_button.with_leading_visual(
+           src: "rocketchat/icon-white.svg",
+           alt: "Rocket.Chat icon") %>
+      Anmelden mit RCB Chat
+    <% end %>
+  <% end %>
+  <% else %>
+  <%# CTA to projects and tasks %>
+  <div class="text-center">
+    <div class="sm:flex sm:items-center sm:justify-center sm:gap-x-4 text-center">
+      <span class="font-mono mb-4 sm:mb-0">Jetzt ansehen:</span>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:gap-x-4" role="group">
+        <%= render ButtonComponent.new(
+          {
+            class: "mt-4 sm:mt-0"
+          },
+          scheme: :alternative,
+          size: :extra_large
+        ) do %>
+          Spannende Projekte
+        <% end %>
+        <%= render ButtonComponent.new(
+          {
+            class: "mt-4 sm:mt-0"
+          },
+          scheme: :default,
+          size: :extra_large
+        ) do %>
+          Abwechslungsreiche Aufgaben
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+
     <% if user_signed_in?  %>
       <strong><%= current_user.email %></strong><br>
       <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= button_to "Sign in with RCB Chat", user_rocketchat_omniauth_authorize_path, data: { turbo: false } %>
     <% end %>
-  </div>
-
 </div>
