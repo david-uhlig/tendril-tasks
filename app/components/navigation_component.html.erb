@@ -33,7 +33,9 @@
           <% links.each do |link| %>
             <li><%= link %></li>
           <% end %>
-          <% unless helpers.user_signed_in? %>
+          <% if helpers.user_signed_in? %>
+            <li class="<%= hamburger_breakpoint %>:hidden"><%= button_to "Abmelden", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+          <% else %>
             <li class="<%= hamburger_breakpoint %>:hidden"><%= button_to "Anmelden", user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %></li>
           <% end %>
         </ul>
