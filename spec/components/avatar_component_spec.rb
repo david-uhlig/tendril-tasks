@@ -64,4 +64,82 @@ RSpec.describe AvatarComponent, type: :component do
       expect(page).to have_selector("img.my-custom-class.and-one-more")
     end
   end
+
+  context "with options" do
+    it "renders alt text" do
+      render_inline(described_class.new(
+        src: "https://example.com/test.png",
+        options: {
+          alt: "alt_text"
+        }
+      ))
+      expect(page).to have_selector("img[alt='alt_text']")
+    end
+
+    it "prefers alt parameter over alt options" do
+      render_inline(described_class.new(
+        src: "https://example.com/test.png",
+        alt: "prefers_this",
+        options: {
+          alt: "alt_text"
+        }
+      ))
+      expect(page).to have_selector("img[alt='prefers_this']")
+      expect(page).not_to have_selector("img[alt='alt_text']")
+    end
+
+    it "renders css classes" do
+      render_inline(described_class.new(
+        src: "https://example.com/test.png",
+        options: {
+          class: "my-custom-class and-some-other-class"
+        }
+      ))
+      expect(page).to have_selector("img.my-custom-class.and-some-other-class")
+    end
+
+    it "renders classes parameter and class options" do
+      render_inline(described_class.new(
+        src: "https://example.com/test.png",
+        classes: "class-from-here and-one-more",
+        options: {
+          class: "my-custom-class and-some-other-class"
+        }
+      ))
+      expect(page).to have_selector("img.class-from-here.and-one-more")
+      expect(page).to have_selector("img.my-custom-class.and-some-other-class")
+    end
+
+    context "containing HTML attributes" do
+      it "renders data attributes" do
+        render_inline(described_class.new(
+          src: "https://example.com/test.png",
+          options: {
+            data: { "dropdown-toggle": "userDropdown" }
+          }
+        ))
+        expect(page).to have_selector("img[data-dropdown-toggle='userDropdown']")
+      end
+
+      it "renders id" do
+        render_inline(described_class.new(
+          src: "https://example.com/test.png",
+          options: {
+            id: "avatarButton"
+          }
+        ))
+        expect(page).to have_selector("img[id='avatarButton']")
+      end
+
+      it "renders type" do
+        render_inline(described_class.new(
+          src: "https://example.com/test.png",
+          options: {
+            type: "button"
+          }
+        ))
+        expect(page).to have_selector("img[type='button']")
+      end
+    end
+  end
 end
