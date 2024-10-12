@@ -4,13 +4,18 @@
     <%= logo %>
     <%# Login button and user menu %>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <%# User menu %>
       <% if helpers.user_signed_in? %>
-        <%= render AvatarComponent.new(
-          src: helpers.current_user.avatar_url,
-          alt: helpers.current_user.name,
-          size: :medium,
-          classes: "p-1 ring-2 ring-gray-300 dark:ring-gray-500"
-        ) %>
+        <%= render Navigation::UserDropdownComponent.new(user: helpers.current_user) do |user_menu| %>
+          <%= user_menu.with_links([
+               { name: "Dashboard", href: "/dashboard" },
+               { name: "Einstellungen", href: "/settings" }
+          ]) %>
+          <%= user_menu.with_admin_links([
+               { name: "Administration", href: "#" }
+          ]) %>
+        <% end %>
+      <%# Login button %>
       <% else %>
         <% if login_button? %>
           <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post do %>

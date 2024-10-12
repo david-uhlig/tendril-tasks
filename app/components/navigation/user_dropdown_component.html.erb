@@ -1,0 +1,31 @@
+<%# Avatar image %>
+<%= render Navigation::UserDropdown::AvatarComponent.new(
+      src: @user.avatar_url,
+      alt: @user.name + " avatar",
+      size: :medium,
+      classes: "p-1 ring-2 ring-gray-300 dark:ring-gray-500"
+) %>
+<%# Dropdown menu %>
+<div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+  <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+    <div><%= @user.name %></div>
+    <div class="mt-2"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Admin</span></div>
+  </div>
+  <% if admin_links? %>
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+      <% admin_links.each do |link| %>
+        <li><%= link %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if links? %>
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+      <% links.each do |link| %>
+        <li><%= link %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="py-1">
+    <%= link_to "Abmelden", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", data: { "turbo-method": :delete } %>
+  </div>
+</div>
