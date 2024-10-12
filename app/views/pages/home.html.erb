@@ -45,11 +45,5 @@
       </div>
     </div>
   </div>
-
   <% end %>
-
-    <% if user_signed_in?  %>
-      <strong><%= current_user.email %></strong><br>
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-    <% end %>
 </div>
