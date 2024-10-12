@@ -8,7 +8,8 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+      # TODO improve handling of the email argument at the rocketchat provider side
+      user.email = auth.info.email || auth.extra.raw_info.emails.first.address
       # Although this app uses omniauth only, a password is generated
       # because it is required for devise features like :rememberable
       user.password = Devise.friendly_token[0, 20]
