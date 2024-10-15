@@ -37,7 +37,7 @@
       <% navigation.with_links([
                                  { name: "Start", href: "/" },
                                  { name: "Projekte", href: "/projects" },
-                                 { name: "Aufgaben", href: "/activities" }]) %>
+                                 { name: "Aufgaben", href: tasks_path }]) %>
       <% navigation.with_login_button(
         {
           data: { turbo: false },
