@@ -39,3 +39,9 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Simplecov output
+/coverage/*
+
+# Development assets
+/app/assets/images/unplash/*
