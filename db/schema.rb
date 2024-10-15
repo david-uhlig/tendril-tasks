@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_14_175523) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_15_194530) do
+  create_table "projects", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["published_at"], name: "index_projects_on_published_at"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
