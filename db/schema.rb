@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_05_214249) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_14_175523) do
+  create_table "tasks", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["published_at"], name: "index_tasks_on_published_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
