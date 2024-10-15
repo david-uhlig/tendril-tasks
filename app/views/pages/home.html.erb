@@ -6,15 +6,16 @@
   <% unless user_signed_in? %>
   <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "text-center" do %>
     <span class="font-mono pe-5">Jetzt einloggen, um Projekte und Aufgaben zu sehen:</span>
-    <%= render ButtonComponent.new(
-      {
-        class: "mt-4"
-      },
-      scheme: :duotone_purple_to_blue,
-      size: :extra_large) do |login_button| %>
-      <% login_button.with_leading_visual(
+    <%=
+      render ButtonComponent.new(
+        { class: "mt-4", data: { turbo: false } },
+        scheme: :duotone_purple_to_blue,
+        size: :extra_large) do |login_button| %>
+    <%
+        login_button.with_leading_visual(
            src: "rocketchat/icon-white.svg",
-           alt: "Rocket.Chat icon") %>
+           alt: "Rocket.Chat icon")
+    %>
       Anmelden mit RCB Chat
     <% end %>
   <% end %>
