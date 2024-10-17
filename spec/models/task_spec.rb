@@ -1,40 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  describe "validations" do
-    context "with valid attributes" do
-      it "is valid" do
-        task = create(:task)
-        expect(task).to be_valid
-      end
+  context "with valid attributes" do
+    it "is valid" do
+      task = build(:task)
+      expect(task).to be_valid
     end
 
-    context "when title is too short" do
-      it "is invalid with a title of less than 10 characters" do
-        task = build(:task, title: "a" * 9)
-        expect(task).not_to be_valid
-      end
+    it "is valid with a title of 10+ characters" do
+      task = build(:task, title: "a" * 10)
+      expect(task).to be_valid
     end
 
-    context "when title is absent" do
-      it "is invalid without a title" do
-        task = build(:task, title: nil)
-        expect(task).not_to be_valid
-      end
+    it "is valid with a description of 10+ characters" do
+      task = build(:task, description: "a" * 10)
+      expect(task).to be_valid
     end
 
-    context "when description is too short" do
-      it "is invalid with a description of less than 10 characters" do
-        task = build(:task, description: "a" * 9)
-        expect(task).not_to be_valid
-      end
+    it "persists" do
+      task = create(:task)
+      expect(task).to be_persisted
+    end
+  end
+
+  context "with invalid attributes" do
+    it "is invalid without a title" do
+      task = build(:task, title: nil)
+      expect(task).not_to be_valid
     end
 
-    context "when description is absent" do
-      it "is invalid without a description" do
-        task = build(:task, description: nil)
-        expect(task).not_to be_valid
-      end
+    it "is invalid with a title of less than 10 characters" do
+      task = build(:task, title: "a" * 9)
+      expect(task).not_to be_valid
+    end
+
+    it "is invalid without a description" do
+      task = build(:task, description: nil)
+      expect(task).not_to be_valid
+    end
+
+    it "is invalid with a description of less than 10 characters" do
+      task = build(:task, description: "a" * 9)
+      expect(task).not_to be_valid
+    end
+
+    it "is invalid without a project" do
+      task = build(:task, project: nil)
+      expect(task).not_to be_valid
     end
   end
 
@@ -69,28 +81,47 @@ RSpec.describe Task, type: :model do
   end
 
   describe "#publish" do
-    context "when publish(ed)" do
-      it "publishes the task" do
-        task = build(:task, published_at: nil)
-        task.publish
-        expect(task).to be_published
-      end
+    it "publishes the task" do
+      task = build(:task, :not_published)
+      task.publish
+      expect(task).to be_published
+    end
 
-      it "is published at the current time" do
-        task = build(:task, published_at: nil)
-        task.publish
-        expect(task.published_at).to be >= Time.zone.now - 10.seconds
-        expect(task.published_at).to be <= Time.zone.now + 10.seconds
-      end
+    it "publishes at the current time" do
+      task = build(:task, :not_published)
+      task.publish
+      expect(task.published_at).to be >= Time.zone.now - 10.seconds
+      expect(task.published_at).to be <= Time.zone.now + 10.seconds
     end
   end
 
   describe "#unpublish" do
-    context "when unpublish(ed)" do
-      it "unpublishes the task" do
-        task = build(:task, published_at: Time.zone.yesterday)
-        task.unpublish
-        expect(task).not_to be_published
+    it "unpublishes the task" do
+      task = build(:task, :published)
+      task.unpublish
+      expect(task).not_to be_published
+    end
+  end
+
+  describe "#active?" do
+    context "when task and project are published" do
+      it "returns true" do
+        task = build(:task, :published, :with_published_project)
+        expect(task).to be_active
+      end
+    end
+
+    context "when task is not published" do
+      it "returns false" do
+        task = build(:task, :not_published)
+        expect(task).not_to be_active
+      end
+    end
+
+    context "when project is not published" do
+      it "returns false" do
+        task = build(:task, :published, :with_unpublished_project)
+        expect(task).not_to be_active
       end
     end
   end
