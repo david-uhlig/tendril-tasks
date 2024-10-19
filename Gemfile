@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-# Use main development branch of Rails
-gem "rails", github: "rails/rails", branch: "main"
+# Use 8.0 development branch of Rails
+gem "rails", github: "rails/rails", branch: "8-0-stable"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -51,7 +51,7 @@ gem "tailwindcss-rails"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component"
+gem "view_component", "~> 3.18"
 
 # Primer design system
 # Only using the helper modules, not the design system itself.
