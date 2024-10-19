@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :task do
     title { "A default valid title" }
     description { "A default valid description" }
+    coordinators { [ association(:user) ] }
     association :project
 
     trait :published do
@@ -18,6 +19,10 @@ FactoryBot.define do
 
     trait :with_unpublished_project do
       association :project, :not_published
+    end
+
+    trait :without_coordinators do
+      coordinators { [] }
     end
   end
 end

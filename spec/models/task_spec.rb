@@ -48,6 +48,11 @@ RSpec.describe Task, type: :model do
       task = build(:task, project: nil)
       expect(task).not_to be_valid
     end
+
+    it "is invalid without a coordinator" do
+      task = build(:task, :without_coordinators)
+      expect(task).not_to be_valid
+    end
   end
 
   describe "#published?" do
