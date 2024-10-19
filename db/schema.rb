@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_19_171353) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_19_174544) do
   create_table "project_coordinators", primary_key: ["project_id", "user_id"], force: :cascade do |t|
     t.integer "project_id", null: false
     t.integer "user_id", null: false
@@ -25,6 +25,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_19_171353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["published_at"], name: "index_projects_on_published_at"
+  end
+
+  create_table "task_applications", primary_key: ["task_id", "user_id"], force: :cascade do |t|
+    t.integer "task_id", null: false
+    t.integer "user_id", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_applications_on_task_id"
+    t.index ["user_id"], name: "index_task_applications_on_user_id"
   end
 
   create_table "task_coordinators", primary_key: ["task_id", "user_id"], force: :cascade do |t|
@@ -61,6 +71,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_19_171353) do
 
   add_foreign_key "project_coordinators", "projects"
   add_foreign_key "project_coordinators", "users"
+  add_foreign_key "task_applications", "tasks"
+  add_foreign_key "task_applications", "users"
   add_foreign_key "task_coordinators", "tasks"
   add_foreign_key "task_coordinators", "users"
   add_foreign_key "tasks", "projects"
