@@ -28,6 +28,11 @@ RSpec.describe Project, type: :model do
       project = build(:project, description: nil)
       expect(project).not_to be_valid
     end
+
+    it "is invalid without a coordinator" do
+      project = build(:project, :without_coordinators)
+      expect(project).not_to be_valid
+    end
   end
 
   describe "#published?" do

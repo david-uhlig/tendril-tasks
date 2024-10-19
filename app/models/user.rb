@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  has_and_belongs_to_many :projects_as_coordinator,
+                          class_name: "Project",
+                          join_table: "project_coordinators",
+                          association_foreign_key: "project_id",
+                          foreign_key: "user_id"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # TODO add in :rememberable functionality
