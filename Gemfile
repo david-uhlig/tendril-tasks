@@ -76,6 +76,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "simplecov"
   gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :development do
