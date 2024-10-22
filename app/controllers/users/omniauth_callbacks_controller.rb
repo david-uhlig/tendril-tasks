@@ -4,7 +4,6 @@ class Users::OmniauthCallbacksController < ApplicationController
     @user = User.from_omniauth(auth)
 
     if @user.persisted?
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Rocket.Chat"
       sign_in_and_redirect @user, event: :authentication
     else
       session["devise.rocketchat_data"] = auth.except(:extra)

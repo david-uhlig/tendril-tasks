@@ -28,6 +28,7 @@
   </head>
 
   <body class="min-w-[320px] p-3 sm:p-5 bg-white dark:bg-gray-900 antialiased">
+    <%# Navigation %>
     <%= render NavigationComponent.new do |navigation| %>
       <% navigation.with_logo(
            src: ENV["LOGO_URL"],
@@ -50,8 +51,14 @@
       <% end %>
     <% end %>
 
+    <%# Content %>
     <main class="container mx-auto mt-6 px-5 max-w-screen-lg space-y-6">
       <%= yield %>
     </main>
+
+    <%# Toast %>
+    <% flash.each do |type, message| %>
+      <%= render "layouts/flash", type: type, message: message %>
+    <% end %>
   </body>
 </html>
