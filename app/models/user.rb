@@ -11,6 +11,9 @@ class User < ApplicationRecord
                           association_foreign_key: "task_id",
                           foreign_key: "user_id"
 
+  has_many :task_applications, dependent: :destroy
+  has_many :tasks_applied, through: :task_applications, source: :task
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # TODO add in :rememberable functionality

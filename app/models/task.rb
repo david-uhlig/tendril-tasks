@@ -6,6 +6,9 @@ class Task < ApplicationRecord
                           association_foreign_key: "user_id",
                           foreign_key: "task_id"
 
+  has_many :task_applications, dependent: :destroy
+  has_many :applicatiants, through: :task_applications, source: :user
+
   validates :title, presence: { message: "can't be blank" }, length: { minimum: 10, message: "must be at least 10 characters" }
   validates :description, presence: { message: "can't be blank" }, length: { minimum: 10, message: "must be at least 10 characters" }
   validates :coordinators, presence: true
