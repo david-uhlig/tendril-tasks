@@ -51,7 +51,7 @@ gem "tailwindcss-rails"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component", "~> 3.18"
+gem "view_component", "~> 3.20"
 
 # Primer design system
 # Only using the helper modules, not the design system itself.
