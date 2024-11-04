@@ -1,0 +1,35 @@
+de:
+  date:
+    formats:
+      default: "%d.%m.%Y"       # Example: 31.10.2024
+      short: "%e. %b"           # Example: 31. Okt
+      long: "%e. %B %Y"         # Example: 31. Oktober 2024
+
+  activerecord:
+    models:
+      task: "Aufgabe"
+      project: "Projekt"
+      user: "Benutzer"
+
+    attributes:
+      task:
+        project: "Projekt"
+        title: "Titel"
+        description: "Beschreibung"
+        coordinators: "Ansprechpersonen"
+        applicants: "Bewerber"
+
+    errors:
+      models:
+        task:
+          attributes:
+            project:
+              required: "Bitte ordne die Aufgabe einem Projekt zu."
+            title:
+              blank: "Bitte gib einen Titel an."
+              too_short: "Der Titel muss mindestens 10 Zeichen lang sein."
+            description:
+              blank: "Bitte beschreibe die Aufgabe."
+              too_short: "Die Beschreibung muss mindestens 10 Zeichen lang sein."
+            coordinators:
+              blank: "Bitte wähle mindestens eine Ansprechperson aus."

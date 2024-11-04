@@ -9,8 +9,8 @@ class Task < ApplicationRecord
   has_many :task_applications, dependent: :destroy
   has_many :applicants, through: :task_applications, source: :user
 
-  validates :title, presence: { message: "can't be blank" }, length: { minimum: 10, message: "must be at least 10 characters" }
-  validates :description, presence: { message: "can't be blank" }, length: { minimum: 10, message: "must be at least 10 characters" }
+  validates :title, presence: true, length: { minimum: 10 }
+  validates :description, presence: true, length: { minimum: 10 }
   validates :coordinators, presence: true
 
   def visible?
