@@ -13,7 +13,7 @@ class Task < ApplicationRecord
   validates :description, presence: { message: "can't be blank" }, length: { minimum: 10, message: "must be at least 10 characters" }
   validates :coordinators, presence: true
 
-  def active?
+  def visible?
     published? && self.project.published?
   end
 

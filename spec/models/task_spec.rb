@@ -108,25 +108,25 @@ RSpec.describe Task, type: :model do
     end
   end
 
-  describe "#active?" do
+  describe "#visible?" do
     context "when task and project are published" do
       it "returns true" do
         task = build(:task, :published, :with_published_project)
-        expect(task).to be_active
+        expect(task).to be_visible
       end
     end
 
     context "when task is not published" do
       it "returns false" do
         task = build(:task, :not_published)
-        expect(task).not_to be_active
+        expect(task).not_to be_visible
       end
     end
 
     context "when project is not published" do
       it "returns false" do
         task = build(:task, :published, :with_unpublished_project)
-        expect(task).not_to be_active
+        expect(task).not_to be_visible
       end
     end
   end

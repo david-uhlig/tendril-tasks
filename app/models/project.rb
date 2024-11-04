@@ -10,7 +10,7 @@ class Project < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10 }
   validates :coordinators, presence: true
 
-  def active?
+  def visible?
     published? && tasks.present? && tasks.any?(&:published?)
   end
 
