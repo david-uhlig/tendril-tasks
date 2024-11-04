@@ -38,6 +38,9 @@ module RcbAufgabenportal
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Prevent the default `<div class="field_with_errors"></div>`
+    config.action_view.field_error_proc = Proc.new { |html_tag, _| html_tag }
   end
 end
 
