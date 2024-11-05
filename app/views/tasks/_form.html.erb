@@ -1,0 +1,65 @@
+<%= form_with model: task_form,
+              url: task_form_url(task_form),
+              method: task_form_method(task_form),
+              class: "mx-auto space-y-4" do |f| %>
+  <!-- Selectbox for Project -->
+  <div>
+    <%= render "form_label", target: :project_id, text: "Projekt", form: f %>
+    <%= render FieldErrorComponent.new(task_form, :project) do %>
+      <%= f.collection_select :project_id,
+                              task_form.project_options, :id, :title,
+                              { prompt: "Projekt auswählen", selected: task_form.project&.id },
+                              class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <% end %>
+  </div>
+
+  <!-- Title as text input -->
+  <div class="form-group">
+    <%= render "form_label", target: :title, text: "Titel", form: f %>
+    <%= render FieldErrorComponent.new(task_form, :title) do %>
+      <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <% end %>
+  </div>
+
+  <!-- Description as text area -->
+  <div>
+    <%= render 'form_label', target: :description, text: "Beschreibung", form: f %>
+    <%= render FieldErrorComponent.new(task_form, :description) do %>
+      <%= f.text_area :description, rows: 10, class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <% end %>
+  </div>
+
+  <%# Coordinators %>
+  <div class="space-y-3">
+    <%= render "form_label", target: "", text: "Ansprechpersonen und Bearbeitende", form: f %>
+    <p>Selected coordinators go here</p>
+  </div>
+
+  <div>
+    <%= render ButtonComponent.new({
+                                       id: "task_coordinator",
+                                       class: "w-full",
+                                       type: "button"
+                                   }, scheme: :alternative) do %>
+      <span>Ansprechpersonen bearbeiten</span>
+    <% end %>
+  </div>
+
+  <!-- Checkbox for published_at -->
+  <div>
+    <%= render "form_label", target: :publish, text: "Sichtbarkeit", form: f %>
+    <label class="inline-flex items-center mb-5 cursor-pointer">
+      <%= f.check_box :publish, { class: "sr-only peer" }, '1', '0' %>
+      <span class="me-3 text-sm font-medium text-gray-900 dark:text-gray-300">Entwurf</span>
+      <span class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></span>
+      <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Öffentlich</span>
+    </label>
+  </div>
+
+  <%# Submit buttons %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+    <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save_and_new" }, size: :large).with_content("Speichern & Neu") %>
+    <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save" }, size: :large).with_content("Speichern") %>
+  </div>
+
+<% end %>
