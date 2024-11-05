@@ -21,6 +21,10 @@ class User < ApplicationRecord
          :omniauthable,
          omniauth_providers: %i[rocketchat]
 
+  scope :default, -> { all }
+  scope :exclude, ->(users) { where.not(id: users) }
+  scope :exclude_ids, ->(user_ids) { where.not(id: user_ids) }
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       # TODO improve handling of the email argument at the rocketchat provider side
@@ -33,5 +37,18 @@ class User < ApplicationRecord
       user.avatar_url = auth.info.image
       # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     end
+  end
+
+  def self.search(terms = nil)
+    return default unless terms.present?
+
+    terms = terms.downcase
+    users = User.arel_table
+
+    terms = "%#{sanitize_sql_like(terms)}%"
+    terms = terms.split.join("%") # Simple fuzzy search
+
+    where(users[:name].matches(terms))
+      .or(where(users[:username].matches(terms)))
   end
 end

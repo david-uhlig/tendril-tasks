@@ -1,0 +1,8 @@
+<turbo-stream action="update" method="morph" target="candidates">
+  <template>
+    <%= render partial: "tasks/coordinator_item",
+               collection: @coordinators,
+               as: :coordinator,
+               locals: { target: "modal", is_checked: false } %>
+  </template>
+</turbo-stream>

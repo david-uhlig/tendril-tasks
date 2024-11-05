@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :tasks, only: [ :index, :new ]
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   # Defines the root path route ("/")
   root "pages#home"
 
@@ -16,9 +13,13 @@ Rails.application.routes.draw do
     delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
   end
 
+  resources :tasks, only: [ :index, :new ]
+  namespace :coordinators do
+    resources :searches, only: %i[ index create ]
+  end
+
   get "/profile", to: "users/profile#edit"
   delete "/profile", to: "users/profile#destroy"
-
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

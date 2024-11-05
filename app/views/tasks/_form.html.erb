@@ -29,15 +29,22 @@
     <% end %>
   </div>
 
-  <%# Coordinators %>
+<%# Coordinators %>
   <div class="space-y-3">
     <%= render "form_label", target: "", text: "Ansprechpersonen und Bearbeitende", form: f %>
-    <p>Selected coordinators go here</p>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2" id="selected-coordinators">
+      <%= render partial: "coordinator_item",
+                 collection: task_form.coordinators,
+                 as: :coordinator,
+                 locals: { target: "main-form", is_checked: true } %>
+    </ul>
   </div>
 
   <div>
     <%= render ButtonComponent.new({
                                        id: "task_coordinator",
+                                       data: { "modal-target": "coordinator-search-modal",
+                                               "modal-show": "coordinator-search-modal" },
                                        class: "w-full",
                                        type: "button"
                                    }, scheme: :alternative) do %>
@@ -63,3 +70,7 @@
   </div>
 
 <% end %>
+
+
+<!-- Main modal -->
+<%= render 'coordinators_search_modal' %>
