@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
   end
 
-  resources :tasks, only: [ :index, :new ]
+  resources :tasks, only: [ :index, :new, :create ]
   namespace :coordinators do
     resources :searches, only: %i[ index create ]
   end
