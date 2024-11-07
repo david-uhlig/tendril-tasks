@@ -1,3 +1,4 @@
+<% is_in_edit_mode = task_form.persisted? %>
 <%= form_with model: task_form,
               url: task_form_url(task_form),
               method: task_form_method(task_form),
@@ -63,14 +64,25 @@
     </label>
   </div>
 
-  <%# Submit buttons %>
+<%# Submit buttons %>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-    <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save_and_new" }, size: :large).with_content("Speichern & Neu") %>
-    <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save" }, size: :large).with_content("Speichern") %>
+    <% if is_in_edit_mode %>
+      <%= render DeleteConfirm::ButtonComponent.new(text: "Löschen", target_modal_id: "confirm-task-delete") %>
+      <%= render ButtonComponent.new({ class: "w-full" }, size: :large).with_content("Speichern") %>
+    <% else %>
+      <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save_and_new" }, size: :large).with_content("Speichern & Neu") %>
+      <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save" }, size: :large).with_content("Speichern") %>
+    <% end %>
   </div>
 
 <% end %>
 
-
-<!-- Main modal -->
 <%= render 'coordinators_search_modal' %>
+
+<% if is_in_edit_mode %>
+  <%= render DeleteConfirm::ModalComponent.new(id: "confirm-task-delete", delete_path: task_path(task_form.task)) do |modal| %>
+    <% modal.heading("Aufgabe löschen?") %>
+    <% modal.text("Bist du sicher, dass du diese Aufgabe löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
+    <% modal.text("Auch alle Meldungen von Mitgliedern, die auf diese Aufgabe eingegangen sind, werden unwiderruflich gelöscht.") %>
+  <% end %>
+<% end %>

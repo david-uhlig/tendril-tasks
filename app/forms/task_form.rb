@@ -64,6 +64,10 @@ class TaskForm
     false
   end
 
+  def persisted?
+    task.persisted?
+  end
+
   def changed?
     task.changed? || @unsaved_coordinators.present?
   end
