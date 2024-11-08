@@ -33,24 +33,10 @@
 <%# Coordinators %>
   <div class="space-y-3">
     <%= render "form_label", target: "", text: "Ansprechpersonen und Bearbeitende", form: f %>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2" id="selected-coordinators">
-      <%= render partial: "coordinator_item",
-                 collection: task_form.coordinators,
-                 as: :coordinator,
-                 locals: { target: "main-form", is_checked: true } %>
-    </ul>
-  </div>
-
-  <div>
-    <%= render ButtonComponent.new({
-                                       id: "task_coordinator",
-                                       data: { "modal-target": "coordinator-search-modal",
-                                               "modal-show": "coordinator-search-modal" },
-                                       class: "w-full",
-                                       type: "button"
-                                   }, scheme: :alternative) do %>
-      <span>Ansprechpersonen bearbeiten</span>
+    <%= render CoordinatorAssignment::AssignedListComponent.new do |coordinator_list| %>
+      <% coordinator_list.with_coordinators(task_form.coordinators) %>
     <% end %>
+    <%= render CoordinatorAssignment::EditButtonComponent.new %>
   </div>
 
   <!-- Checkbox for published_at -->
@@ -77,7 +63,7 @@
 
 <% end %>
 
-<%= render 'coordinators_search_modal' %>
+<%= render CoordinatorAssignment::ModalComponent.new(selected: task_form.coordinators, options: task_form.coordinator_options) %>
 
 <% if is_in_edit_mode %>
   <%= render DeleteConfirm::ModalComponent.new(id: "confirm-task-delete", delete_path: task_path(task_form.task)) do |modal| %>

@@ -1,0 +1,12 @@
+<li>
+  <label class="cursor-pointer group">
+    <%= hidden_field_tag "assigned_coordinator_ids[]",
+                         @coordinator.id,
+                         id: "coordinator_ids_#{@coordinator.id}" %>
+
+    <span class="flex items-center gap-2 text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white p-2 peer-focus:ring-2 peer-focus:ring-blue-500">
+        <%= render AvatarComponent.new(src: @coordinator.avatar_url, size: :small) %>
+      <%= tag.span @coordinator.name, class: "font-medium dark:text-white truncate" %>
+      </span>
+  </label>
+</li>
