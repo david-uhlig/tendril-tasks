@@ -13,7 +13,6 @@ class TaskForm
 
   def initialize(task_or_params = {})
     @task = task_or_params.is_a?(Task) ? task_or_params : Task.new
-    # @publish = @task.published?
     super(task_or_params.is_a?(Task) ? {} : task_or_params)
   end
 
