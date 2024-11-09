@@ -11,7 +11,7 @@ module CoordinatorAssignment
 
     def call
       unless coordinators.empty?
-        tag.ul id: "selected-coordinators", class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2" do
+        tag.ul id: "selected-coordinators", class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-3" do
           coordinators.each do |coordinator|
             concat coordinator
           end
