@@ -1,0 +1,30 @@
+<%= form_with model: form_object, url: form_object.form_path, method: form_object.form_method, class: "mx-auto space-y-4" do |f| %>
+  <%= render Form::TextFieldComponent.new(f, :title, "Titel") %>
+  <%= render Form::TextAreaComponent.new(f, :description, "Beschreibung", rows: 10) %>
+  <%= render Form::CoordinatorPickerComponent.new(f, :coordinators, "Ansprechpersonen und Bearbeitende") %>
+  <%= render Form::ToggleComponent.new(f, :publish, "Sichtbarkeit") do |toggle| %>
+    <% toggle.checked_state_text("Entwurf") %>
+    <% toggle.unchecked_state_text("Öffentlich") %>
+  <% end %>
+
+  <%= render Form::SubmitButtonGroupComponent.new(f, render_if: !form_object.persisted?) do |save_buttons| %>
+    <% save_buttons.button("Speichern", value: "save") %>
+    <% save_buttons.button("Speichern & Aufgabe erstellen", value: "save_and_new") %>
+  <% end %>
+  <%= render Form::SubmitButtonGroupComponent.new(f, render_if: form_object.persisted?) do |edit_buttons| %>
+    <% edit_buttons.delete_button("Delete", target_modal_id: "confirm-project-delete") %>
+    <% edit_buttons.button("Speichern") %>
+  <% end %>
+<% end %>
+
+<%= render CoordinatorAssignment::ModalComponent.new(selected: form_object.coordinators, options: form_object.coordinator_options) %>
+
+<% if form_object.persisted? %>
+  <%= render DeleteConfirm::ModalComponent.new(
+        id: "confirm-project-delete",
+        delete_path: form_object.form_path) do |modal| %>
+    <% modal.heading("Projekt löschen?") %>
+    <% modal.text("Bist du sicher, dass du dieses Projekt löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
+    <% modal.text("Auch alle Aufgaben, die diesem Projekt zugeordnet wurden, werden unwiderruflich gelöscht.") %>
+  <% end %>
+<% end %>
