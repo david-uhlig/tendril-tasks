@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :searches, only: %i[ index create ]
   end
 
+  resources :projects, only: %i[ index new create edit ]
+
   get "/profile", to: "users/profile#edit"
   delete "/profile", to: "users/profile#destroy"
 
