@@ -10,25 +10,20 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task_form = TaskForm.new
-    task_preset = GlobalID::Locator.locate_signed(params[:preset])
-
-    # When "save and new" was selected while creating the previous task, keep project and coordinators for convenience.
-    if task_preset
-      @task_form.project_id = task_preset.project_id
-      @task_form.coordinator_ids = task_preset.coordinator_ids
-    else
-      @task_form.coordinators << current_user
-    end
+    @task_form = TaskForm.new(preset_params)
+    @task_form.coordinators << current_user unless @task_form.coordinators.present?
   end
 
   def create
     @task_form = TaskForm.new(task_form_params)
 
     if @task_form.save
-      task_sgid = @task_form.task.to_signed_global_id(expires_in: 1.minutes)
-      redirect_path = @task_form.submit_type == "save_and_new" ? new_task_path(preset: task_sgid) : root_path
-      redirect_to redirect_path, notice: "Task was successfully created."
+      success_msg = "Task was successfully created."
+      if @task_form.submit_type == "save_and_new"
+        redirect_to new_task_with_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.project.coordinators.join("-")), notice: success_msg
+      else
+        redirect_to root_path, notice: success_msg
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -70,6 +65,15 @@ class TasksController < ApplicationController
     params[:task_form][:coordinator_ids] = params[:assigned_coordinator_ids]
     params.require(:task_form)
           .permit(:project_id, :title, :description, :publish, :submit_type, coordinator_ids: [])
+  end
+
+  def preset_params
+    return nil unless params[:project_id].present?
+
+    preset = {}
+    preset[:project_id] = params[:project_id]
+    preset[:coordinator_ids] = params[:coordinator_ids].split("-")
+    preset
   end
 
   # TODO replace with pundit

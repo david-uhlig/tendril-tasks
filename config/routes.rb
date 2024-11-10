@@ -14,11 +14,13 @@ Rails.application.routes.draw do
   end
 
   resources :tasks
+  get "/tasks/new/from-preset/:project_id/:coordinator_ids", to: "tasks#new", as: :new_task_with_preset
+
+  resources :projects, only: %i[ index new create edit ]
+
   namespace :coordinators do
     resources :searches, only: %i[ index create ]
   end
-
-  resources :projects, only: %i[ index new create edit ]
 
   get "/profile", to: "users/profile#edit"
   delete "/profile", to: "users/profile#destroy"
