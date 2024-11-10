@@ -4,6 +4,7 @@ class ProjectForm
   include ActiveModel::Model
 
   attr_reader :project
+  attr_accessor :submit_type
 
   delegate :title, :title=,
            :description, :description=,

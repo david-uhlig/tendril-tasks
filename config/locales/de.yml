@@ -18,6 +18,11 @@ de:
         description: "Beschreibung"
         coordinators: "Ansprechpersonen"
         applicants: "Bewerber"
+      project:
+        title: "Titel"
+        description: "Beschreibung"
+        coordinators: "Ansprechpersonen"
+        applicants: "Bewerber"
 
     errors:
       models:
@@ -31,5 +36,15 @@ de:
             description:
               blank: "Bitte beschreibe die Aufgabe."
               too_short: "Die Beschreibung muss mindestens 10 Zeichen lang sein."
+            coordinators:
+              blank: "Bitte wähle mindestens eine Ansprechperson aus."
+        project:
+          attributes:
+            title:
+              blank: "Bitte gib einen Titel an."
+              too_short: "Der Titel muss mindestens 10 Zeichen lang sein."
+            description:
+              blank: "Bitte beschreibe das Projekt."
+              too_short: "Die Beschreibung muss mindestens 10 Zeichen lan sein."
             coordinators:
               blank: "Bitte wähle mindestens eine Ansprechperson aus."

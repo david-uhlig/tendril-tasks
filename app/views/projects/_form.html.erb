@@ -9,7 +9,7 @@
 
   <%= render Form::SubmitButtonGroupComponent.new(f, render_if: !form_object.persisted?) do |save_buttons| %>
     <% save_buttons.button("Speichern", value: "save") %>
-    <% save_buttons.button("Speichern & Aufgabe erstellen", value: "save_and_new") %>
+    <% save_buttons.button("Speichern & Aufgabe erstellen", value: "save_and_new_task") %>
   <% end %>
   <%= render Form::SubmitButtonGroupComponent.new(f, render_if: form_object.persisted?) do |edit_buttons| %>
     <% edit_buttons.delete_button("Delete", target_modal_id: "confirm-project-delete") %>
