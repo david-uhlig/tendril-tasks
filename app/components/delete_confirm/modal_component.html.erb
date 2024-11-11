@@ -1,5 +1,5 @@
 <%# Modal: confirm account deletion %>
-<%= tag.div id: @id,
+<%= tag.section id: @id,
             data: { "modal-backdrop": "static" },
             tabindex: "-1",
             aria_hidden: "true",
@@ -19,8 +19,8 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
-        <% texts.each do |paragraph| %>
-          <%= paragraph %>
+        <% body_elements.each do |element| %>
+          <%= element %>
         <% end %>
       </div>
       <!-- Modal footer -->

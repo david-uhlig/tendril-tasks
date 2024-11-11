@@ -17,14 +17,22 @@
   <% end %>
 <% end %>
 
-<%= render CoordinatorAssignment::ModalComponent.new(selected: form_object.coordinators, options: form_object.coordinator_options) %>
-
-<% if form_object.persisted? %>
+<%= content_for :modal do %>
   <%= render DeleteConfirm::ModalComponent.new(
-        id: "confirm-project-delete",
-        delete_path: form_object.form_path) do |modal| %>
-    <% modal.heading("Projekt löschen?") %>
-    <% modal.text("Bist du sicher, dass du dieses Projekt löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
-    <% modal.text("Auch alle Aufgaben, die diesem Projekt zugeordnet wurden, werden unwiderruflich gelöscht.") %>
+      id: "confirm-project-delete",
+      delete_path: form_object.form_path) do |modal| %>
+        <% modal.heading("Projekt löschen?") %>
+        <% modal.paragraph("Bist du sicher, dass du dieses Projekt löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
+        <% modal.paragraph("Auch alle Aufgaben, die diesem Projekt zugeordnet wurden, werden unwiderruflich gelöscht.") %>
+        <% modal.section do %>
+          <div>
+            <h2 class="mb-2 text-base font-medium text-gray-900 dark:text-white">Betroffene Aufgaben:</h2>
+            <%= tag.ul class: "max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400" do %>
+              <% form_object.project.tasks.each do |task| %>
+                <%= tag.li tag.a task.title, href: task_path(task) %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
   <% end %>
 <% end %>

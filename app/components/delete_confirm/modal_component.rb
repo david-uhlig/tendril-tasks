@@ -11,12 +11,17 @@ module DeleteConfirm
     end
     alias heading with_heading_slot
 
-    renders_many :texts, ->(text = nil) do
-      tag.p class: "text-base leading-relaxed text-gray-500 dark:text-gray-400" do
-        text
-      end
-    end
-    alias text with_text
+    renders_many :body_elements, types: {
+      paragraph: ->(text) {
+        tag.p text, class: "text-base leading-relaxed text-gray-500 dark:text-gray-400"
+      },
+      element: ->(&block) {
+        block.call
+      }
+    }
+    alias paragraph with_body_element_paragraph
+    alias element with_body_element_element
+    alias section with_body_element_element
 
     renders_one :abort_button_slot, ->(text = "Abbrechen") do
       ::ButtonComponent

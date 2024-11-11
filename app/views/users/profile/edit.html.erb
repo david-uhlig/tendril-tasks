@@ -55,9 +55,11 @@
 </div>
 
 <%= render DeleteConfirm::ButtonComponent.new(text: "Mein Konto löschen", target_modal_id: "confirm-account-deletion") %>
-<%= render DeleteConfirm::ModalComponent.new(id: "confirm-account-deletion", delete_path: profile_path) do |modal| %>
-  <% modal.heading("Konto löschen?") %>
-  <% modal.text("Bist du sicher, dass du dein Konto endgültig löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden. Alle deine Daten werden unwiderruflich gelöscht.") %>
-  <% modal.text("Dein RCB Chat Konto ist von der Löschung nicht betroffen.") %>
-  <% modal.confirm_button("Konto löschen") %>
+<%= content_for :modal do %>
+  <%= render DeleteConfirm::ModalComponent.new(id: "confirm-account-deletion", delete_path: profile_path) do |modal| %>
+    <% modal.heading("Konto löschen?") %>
+    <% modal.paragraph("Bist du sicher, dass du dein Konto endgültig löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden. Alle deine Daten werden unwiderruflich gelöscht.") %>
+    <% modal.paragraph("Dein RCB Chat Konto ist von der Löschung nicht betroffen.") %>
+    <% modal.confirm_button("Konto löschen") %>
+  <% end %>
 <% end %>
