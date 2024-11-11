@@ -2,7 +2,6 @@
 
 module Form
   class TextFieldComponent < ApplicationComponent
-
     def initialize(form, attribute, label = nil)
       @form = form
       @attribute = attribute
