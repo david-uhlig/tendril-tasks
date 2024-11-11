@@ -4,3 +4,7 @@
   <% end %>
   <%= render CoordinatorAssignment::EditButtonComponent.new %>
 <% end %>
+
+<%= content_for :modal do %>
+  <%= render CoordinatorAssignment::ModalComponent.new(selected: @form.object.coordinators, options: @form.object.coordinator_options) %>
+<% end %>
