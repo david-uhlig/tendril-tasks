@@ -55,6 +55,9 @@
       <%= yield %>
     </main>
 
+    <%# Modals injected through `content_for :modal` %>
+    <%= yield :modal %>
+
     <%# Toast %>
     <% flash.each do |type, message| %>
       <%= render "layouts/flash", type: type, message: message %>
