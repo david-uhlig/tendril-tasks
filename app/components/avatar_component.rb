@@ -59,14 +59,12 @@ class AvatarComponent < ApplicationComponent
   # Initialize the AvatarComponent with provided options.
   #
   # @param src [String] The source URL of the avatar image.
-  # @param alt [String, nil] The alt text for the image (optional).
   # @param scheme [Symbol] The shape scheme for the avatar (optional, default: :round).
   # @param size [Symbol] The size of the avatar (optional, default: :medium).
-  # @param classes [String, nil] Additional custom CSS classes (optional).
   # @param options [Hash, nil] Additional HTML attributes for the image element (optional).
-  def initialize(src:, alt: nil, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, classes: nil, options: nil)
+  def initialize(src, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, **options)
     @src = src
-    @options = build_options(alt, scheme, size, classes, options)
+    @options = build_options(scheme, size, **options)
   end
 
   # Renders the avatar as an HTML <img> tag with the appropriate options.
@@ -80,17 +78,13 @@ class AvatarComponent < ApplicationComponent
 
   # Builds the options hash for the image tag, merging default and custom options.
   #
-  # @param alt [String, nil] Alt text for the avatar image.
   # @param scheme [Symbol] Shape scheme for the avatar.
   # @param size [Symbol] Size of the avatar.
-  # @param classes [String, nil] Additional CSS classes for the avatar image.
   # @param options [Hash] Options hash for HTML attributes.
   # @return [Hash] The final options hash for the image tag.
-  def build_options(alt, scheme, size, classes, options)
-    options ||= {}
-    options = options.stringify_keys
-    options["class"] = build_classes(scheme, size, classes, options)
-    options["alt"] = alt.presence || options.fetch("alt", nil)
+  def build_options(scheme, size, **options)
+    options.stringify_keys!
+    options["class"] = build_classes(scheme, size, options["class"])
     options["role"] ||= "img"
     options
   end
@@ -99,15 +93,13 @@ class AvatarComponent < ApplicationComponent
   #
   # @param scheme [Symbol] The shape scheme for the avatar.
   # @param size [Symbol] The size of the avatar.
-  # @param classes [String, nil] Additional CSS classes to append.
-  # @param options [Hash] Hash of options passed to the image tag.
+  # @param custom_classes [String] Custom CSS classes for the avatar.
   # @return [String] The combined CSS class string.
-  def build_classes(scheme, size, classes, options)
+  def build_classes(scheme, size, custom_classes = nil)
     base_classes = [
       SCHEME_MAPPINGS.fetch(fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)),
       SIZE_MAPPINGS.fetch(fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE))
     ]
-
-    class_names(base_classes.compact, classes.presence, options.delete("class"))
+    class_names(base_classes.compact, custom_classes)
   end
 end

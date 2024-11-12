@@ -54,10 +54,10 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
     <% if is_in_edit_mode %>
       <%= render DeleteConfirm::ButtonComponent.new(text: "Löschen", target_modal_id: "confirm-task-delete") %>
-      <%= render ButtonComponent.new({ class: "w-full" }, size: :large).with_content("Speichern") %>
+      <%= render ButtonComponent.new(size: :large, class: "w-full").with_content("Speichern") %>
     <% else %>
-      <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save_and_new" }, size: :large).with_content("Speichern & Neu") %>
-      <%= render ButtonComponent.new({ class: "w-full", name: "task_form[submit_type]", value: "save" }, size: :large).with_content("Speichern") %>
+      <%= render ButtonComponent.new(size: :large, class: "w-full", name: "task_form[submit_type]", value: "save_and_new").with_content("Speichern & Neu") %>
+      <%= render ButtonComponent.new(size: :large, class: "w-full", name: "task_form[submit_type]", value: "save").with_content("Speichern") %>
     <% end %>
   </div>
 

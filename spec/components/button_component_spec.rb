@@ -37,7 +37,7 @@ RSpec.describe ButtonComponent, type: :component do
       options = {
         class: "my-class and-some-other-class"
       }
-      render_inline(described_class.new(options)) { "content" }
+      render_inline(described_class.new(**options)) { "content" }
     end
 
     it "renders additional css classes" do
@@ -71,7 +71,7 @@ RSpec.describe ButtonComponent, type: :component do
     let(:with_default_options) do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(src: @test_image_path)
+        c.with_leading_visual(@test_image_path)
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe ButtonComponent, type: :component do
     it "renders alt text" do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(src: @test_image_path, alt: "alt text")
+        c.with_leading_visual(@test_image_path, alt: "alt text")
       end
       expect(page).to have_selector("img[alt='alt text']")
     end
@@ -111,7 +111,7 @@ RSpec.describe ButtonComponent, type: :component do
     it "renders additional css classes" do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(src: @test_image_path, classes: "my-class some-other-class")
+        c.with_leading_visual(@test_image_path, class: "my-class some-other-class")
       end
       expect(page).to have_selector("img.my-class.some-other-class")
     end

@@ -10,13 +10,15 @@ module DeleteConfirm
     end
 
     def call
-      render ::ButtonComponent
-        .new({ class: "w-full",
-               "data-modal-target": @target_modal_id,
-               "data-modal-toggle": @target_modal_id,
-               type: "button"
-             }, scheme: :red, size: :large)
-        .with_content(@text)
+      render ::ButtonComponent.new(
+               scheme: :red,
+               size: :large,
+               class: "w-full",
+               data: { "modal-target": @target_modal_id,
+                       "modal-toggle": @target_modal_id
+               },
+               type: :button
+             ).with_content(@text)
     end
   end
 end

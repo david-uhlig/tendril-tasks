@@ -2,7 +2,7 @@
 
 module Form
   class BaseFieldComponent < ApplicationComponent
-    def initialize(form, attribute, label = nil, options = {})
+    def initialize(form, attribute, label = nil, **options)
       @form = form
       @attribute = attribute
       @label = label

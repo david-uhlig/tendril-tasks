@@ -5,9 +5,9 @@ module Form
     BUTTON_CLASS = "w-full"
 
     renders_many :buttons, types: {
-      regular: ->(text, options = {}) {
+      regular: ->(text, **options) {
         options = parse_options(options)
-        ButtonComponent.new(options, size: :large).with_content(text)
+        ButtonComponent.new(size: :large, **options).with_content(text)
       },
       delete: ->(text, target_modal_id:) {
         DeleteConfirm::ButtonComponent.new(text: text, target_modal_id: target_modal_id)
@@ -28,9 +28,10 @@ module Form
     private
 
     def parse_options(options)
-      options[:class] = class_names(BUTTON_CLASS, options.delete(:class))
-      options[:name] = options.delete(:name) || "#{@form.object_name}[submit_type]"
-      options[:value] = options.delete(:value) || "save"
+      options.stringify_keys!
+      options["class"] = class_names(BUTTON_CLASS, options.delete("class"))
+      options["name"] = options.delete("name") || "#{@form.object_name}[submit_type]"
+      options["value"] = options.delete("value") || "save"
       options
     end
   end

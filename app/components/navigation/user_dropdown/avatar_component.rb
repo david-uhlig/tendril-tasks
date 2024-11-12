@@ -26,44 +26,41 @@
 #     classes: "border rounded-lg"
 #   ) %>
 #
-class Navigation::UserDropdown::AvatarComponent < ApplicationComponent
-  # Initialize the AvatarComponent for use in the user dropdown button.
-  #
-  # @param src [String] The source URL of the avatar image.
-  # @param alt [String, nil] The alt text for the avatar image (optional, defaults to nil).
-  # @param scheme [Symbol] The shape scheme for the avatar (optional, default: AvatarComponent::DEFAULT_SCHEME).
-  # @param size [Symbol] The size of the avatar (optional, default: AvatarComponent::DEFAULT_SIZE).
-  # @param classes [String, nil] Additional CSS classes to apply to the avatar (optional).
-  # @param options [Hash, nil] Additional HTML options for the button and avatar (optional).
-  #   - This includes ensuring an "id" of "avatarButton" and adding dropdown-specific data attributes.
-  def initialize(src:, alt: nil, scheme: AvatarComponent::DEFAULT_SCHEME, size: AvatarComponent::DEFAULT_SIZE, classes: nil, options: nil)
-    options ||= {}
-    options = options.stringify_keys
-    options["id"] = "avatarButton"
-    options["type"] = "button"
+module Navigation
+  module UserDropdown
+    class AvatarComponent < ApplicationComponent
+      # Initialize the AvatarComponent for use in the user dropdown button.
+      #
+      # @param src [String] The source URL of the avatar image.
+      # @param scheme [Symbol] The shape scheme for the avatar (optional, default: AvatarComponent::DEFAULT_SCHEME).
+      # @param size [Symbol] The size of the avatar (optional, default: AvatarComponent::DEFAULT_SIZE).
+      # @param options [Hash, nil] Additional HTML options for the button and avatar (optional).
+      #   - This includes ensuring an "id" of "avatarButton" and adding dropdown-specific data attributes.
+      def initialize(src, scheme: ::AvatarComponent::DEFAULT_SCHEME, size: ::AvatarComponent::DEFAULT_SIZE, **options)
+        options.stringify_keys!
+        options["id"] = "avatarButton"
+        options["type"] = "button"
 
-    # Ensure "data" is a hash before merging dropdown-specific attributes.
-    options["data"] = options.fetch("data", {}).tap do |data|
-      raise ArgumentError, '"data" must be a hash' unless data.is_a?(Hash)
-    end.merge({
-                "dropdown-toggle": "userDropdown",
-                "dropdown-placement": "bottom-start"
-              })
+        # Ensure "data" is a hash before merging dropdown-specific attributes.
+        options["data"] = options.fetch("data", {}).tap do |data|
+          raise ArgumentError, '"data" must be a hash' unless data.is_a?(Hash)
+        end.merge({
+                    "dropdown-toggle": "userDropdown",
+                    "dropdown-placement": "bottom-start"
+                  })
 
-    @options = {
-      src: src,
-      alt: alt,
-      scheme: scheme,
-      size: size,
-      classes: classes,
-      options: options
-    }
-  end
+        @src = src
+        @scheme = scheme
+        @size = size
+        @options = options
+      end
 
-  # Renders the avatar for the user dropdown.
-  #
-  # @return [String] HTML-safe string representing the avatar image within the button element.
-  def call
-    render AvatarComponent.new(**@options)
+      # Renders the avatar for the user dropdown.
+      #
+      # @return [String] HTML-safe string representing the avatar image within the button element.
+      def call
+        render ::AvatarComponent.new(@src, scheme: @scheme, size: @size, **@options)
+      end
+    end
   end
 end

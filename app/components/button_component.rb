@@ -53,14 +53,17 @@ class ButtonComponent < ApplicationComponent
   # @note The `aria-hidden="true"` attribute is automatically applied to hide the image from screen readers,
   #   as it is usually decorative and doesn't convey critical information.
   #
-  renders_one :leading_visual, ->(src:, alt: nil, classes: "w-5 h-5 me-2") do
-    image_tag src, alt: alt, class: classes, aria: { hidden: "true" }
+  renders_one :leading_visual, ->(src, **options) do
+    options.stringify_keys!
+    options["class"] = class_names("w-5 h-5 me-2", options.delete("class"))
+    options["aria-hidden"] = options.delete("aria-hidden") || "true"
+    image_tag src, **options
   end
 
   # @param options [Hash, nil] @see ActionView::Helpers::FormTagHelper::button_tag
   # @param scheme [Symbol] <%= one_of(ButtonComponent::SCHEME_OPTIONS) %>
   # @param size [Symbol] <%= one_of(ButtonComponent::SIZE_OPTIONS) %>
-  def initialize(options = nil, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE)
+  def initialize(scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, **options)
     @options = build_options(options, scheme, size)
   end
 
@@ -76,8 +79,7 @@ class ButtonComponent < ApplicationComponent
   private
 
   def build_options(options, scheme, size)
-    options ||= {}
-    options = options.stringify_keys
+    options.stringify_keys!
     options["class"] = class_names(
       SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],

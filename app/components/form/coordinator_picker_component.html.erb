@@ -1,4 +1,4 @@
-<%= render Form::BaseFieldComponent.new(@form, @attribute, @label, @options) do %>
+<%= render Form::BaseFieldComponent.new(@form, @attribute, @label, **@options) do %>
   <%= render CoordinatorAssignment::AssignedListComponent.new do |list| %>
     <% list.with_coordinators(@form.object.coordinators) %>
   <% end %>

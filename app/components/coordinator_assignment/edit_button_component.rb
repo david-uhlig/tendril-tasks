@@ -8,15 +8,15 @@ module CoordinatorAssignment
     end
 
     def call
-      render ButtonComponent.new({
-                            id: "edit-coordinator-assignment",
-                            data: {
-                              "modal-target": "coordinator-search-modal",
-                              "modal-show": "coordinator-search-modal"
-                            },
-                            class: "w-full",
-                            type: "button"
-                          }, scheme: :alternative).with_content(@text)
+      render ButtonComponent.new(
+        scheme: :alternative,
+        id: "edit-coordinator-assignment",
+        data: {
+          "modal-target": "coordinator-search-modal",
+          "modal-show": "coordinator-search-modal"
+        },
+        class: "w-full",
+        type: "button").with_content(@text)
     end
   end
 end

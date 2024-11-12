@@ -11,7 +11,7 @@ RSpec.describe Navigation::UserDropdown::AvatarComponent, type: :component do
 
   context "with default values" do
     before(:each) do
-      render_inline(described_class.new(src: avatar_img_url))
+      render_inline(described_class.new(avatar_img_url))
     end
 
     it "renders id attribute" do
@@ -32,12 +32,12 @@ RSpec.describe Navigation::UserDropdown::AvatarComponent, type: :component do
     before(:each) do
       options = {
         id: "willGetIgnored",
-        typ: "willAlsoGetIgnored",
+        type: "willAlsoGetIgnored",
         width: "96%",
         tabindex: "34",
         data: { turbo: false }
       }
-      render_inline(described_class.new(src: avatar_img_url, options: options))
+      render_inline(described_class.new(avatar_img_url, **options))
     end
 
     it "ignores id attribute from options" do

@@ -34,18 +34,14 @@
            alt: ENV["LOGO_DESCRIPTION"],
            label: "Mitgestalten") %>
       <% navigation.with_links([
-                                 { name: "Start", href: "/" },
-                                 { name: "Projekte", href: "/projects" },
+                                 { name: "Start", href: root_path },
+                                 { name: "Projekte", href: projects_path },
                                  { name: "Aufgaben", href: tasks_path }]) %>
       <% navigation.with_login_button(
-        {
-          data: { turbo: false },
-          class: "hidden sm:inline-flex"
-        },
-        scheme: :duotone_purple_to_blue) do |login_button| %>
-        <% login_button.with_leading_visual(
-             src: "rocketchat/icon-white.svg",
-             alt: "Rocket.Chat icon") %>
+        scheme: :duotone_purple_to_blue,
+        data: { turbo: false },
+        class: "hidden sm:inline-flex") do |login_button| %>
+        <% login_button.with_leading_visual("rocketchat/icon-white.svg", alt: "Rocket.Chat icon") %>
         Anmelden
       <% end %>
     <% end %>

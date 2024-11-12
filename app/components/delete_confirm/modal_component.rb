@@ -24,16 +24,17 @@ module DeleteConfirm
     alias section with_body_element_element
 
     renders_one :abort_button_slot, ->(text = "Abbrechen") do
-      ::ButtonComponent
-        .new({ class: "w-full lg:w-auto", "data-modal-hide": @id, type: "reset" }, scheme: :light)
+      ::ButtonComponent.new(scheme: :light, class: "w-full lg:w-auto", "data-modal-hide": @id, type: "reset")
         .with_content(text)
     end
     alias abort_button with_abort_button_slot
 
     renders_one :confirm_button_slot, ->(text = "Endgültig löschen") do
-      ::ButtonComponent
-        .new({ class: "w-full lg:w-auto", "data-modal-hide": @id }, scheme: :red)
-        .with_content(text)
+      ::ButtonComponent.new(
+          scheme: :red,
+          class: "w-full lg:w-auto",
+          data: { "modal-hide": @id }
+      ).with_content(text)
     end
     alias confirm_button with_confirm_button_slot
 
