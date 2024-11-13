@@ -6,7 +6,7 @@
   <!-- Selectbox for Project -->
   <div>
     <%= render "form_label", target: :project_id, text: "Projekt", form: f %>
-    <%= render FieldErrorComponent.new(task_form, :project) do %>
+    <%= render Form::FieldErrorComponent.new(task_form, :project) do %>
       <%= f.collection_select :project_id,
                               task_form.project_options, :id, :title,
                               { prompt: "Projekt auswählen", selected: task_form.project&.id },
@@ -17,7 +17,7 @@
   <!-- Title as text input -->
   <div class="form-group">
     <%= render "form_label", target: :title, text: "Titel", form: f %>
-    <%= render FieldErrorComponent.new(task_form, :title) do %>
+    <%= render Form::FieldErrorComponent.new(task_form, :title) do %>
       <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
     <% end %>
   </div>
@@ -25,7 +25,7 @@
   <!-- Description as text area -->
   <div>
     <%= render 'form_label', target: :description, text: "Beschreibung", form: f %>
-    <%= render FieldErrorComponent.new(task_form, :description) do %>
+    <%= render Form::FieldErrorComponent.new(task_form, :description) do %>
       <%= f.text_area :description, rows: 10, class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
     <% end %>
   </div>
