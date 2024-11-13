@@ -31,13 +31,7 @@
   </div>
 
 <%# Coordinators %>
-  <div class="space-y-3">
-    <%= render "form_label", target: "", text: "Ansprechpersonen und Bearbeitende", form: f %>
-    <%= render CoordinatorAssignment::AssignedListComponent.new do |coordinator_list| %>
-      <% coordinator_list.with_coordinators(task_form.coordinators) %>
-    <% end %>
-    <%= render CoordinatorAssignment::EditButtonComponent.new %>
-  </div>
+  <%= render Form::CoordinatorPickerComponent.new(f, :coordinators, "Ansprechpersonen und Bearbeitende") %>
 
   <!-- Checkbox for published_at -->
   <div>
@@ -63,12 +57,10 @@
 
 <% end %>
 
-<%= render CoordinatorAssignment::ModalComponent.new(selected: task_form.coordinators, options: task_form.coordinator_options) %>
-
 <% if is_in_edit_mode %>
   <%= render DeleteConfirm::ModalComponent.new(id: "confirm-task-delete", delete_path: task_path(task_form.task)) do |modal| %>
     <% modal.heading("Aufgabe löschen?") %>
-    <% modal.text("Bist du sicher, dass du diese Aufgabe löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
-    <% modal.text("Auch alle Meldungen von Mitgliedern, die auf diese Aufgabe eingegangen sind, werden unwiderruflich gelöscht.") %>
+    <% modal.paragraph("Bist du sicher, dass du diese Aufgabe löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
+    <% modal.paragraph("Auch alle Meldungen von Mitgliedern, die auf diese Aufgabe eingegangen sind, werden unwiderruflich gelöscht.") %>
   <% end %>
 <% end %>

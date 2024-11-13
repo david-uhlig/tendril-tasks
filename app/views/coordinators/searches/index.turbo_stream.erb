@@ -1,7 +1,7 @@
 <turbo-stream action="update" method="morph" target="candidates">
   <template>
     <% @coordinators.each do |coordinator| %>
-      <%= render CoordinatorAssignment::Modal::CoordinatorListItemComponent.new(coordinator) %>
+      <%= render Form::CoordinatorPicker::SelectionItemComponent.new(coordinator) %>
     <% end %>
   </template>
 </turbo-stream>
