@@ -75,6 +75,15 @@ class TaskForm
     super && validate_task
   end
 
+  def form_path
+    url_helpers = Rails.application.routes.url_helpers
+    persisted? ? url_helpers.task_path(task) : url_helpers.tasks_path
+  end
+
+  def form_method
+    persisted? ? :patch : :post
+  end
+
   private
 
   def validate_task
