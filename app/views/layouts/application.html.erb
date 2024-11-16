@@ -26,7 +26,16 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-w-[320px] p-3 sm:p-5 bg-white dark:bg-gray-900 antialiased">
+  <body class="min-w-[320px] dark:bg-gray-900 antialiased">
+    <%# Background gradients %>
+    <%# -- Bottom right %>
+    <div class="fixed inset-0 pointer-events-none -z-[100]">
+      <div class="absolute bottom-0 right-0 w-full h-full bg-gradient-to-br from-transparent from-70% via-blue-200 via-90% to-fuchsia-100"></div>
+    </div>
+    <%# -- Top left %>
+    <div class="fixed inset-0 pointer-events-none -z-[99]">
+      <div class="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-transparent from-80% via-blue-200 via-95% to-fuchsia-100"></div>
+    </div>
     <%# Navigation %>
     <%= render NavigationComponent.new do |navigation| %>
       <% navigation.with_logo(
@@ -47,7 +56,7 @@
     <% end %>
 
     <%# Content %>
-    <main id="main-content" class="container mx-auto mt-6 px-5 max-w-screen-lg space-y-6">
+    <main id="main-content" class="container mx-auto mt-10 px-5 max-w-screen-lg space-y-6">
       <%= yield %>
     </main>
 
