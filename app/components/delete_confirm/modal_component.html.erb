@@ -24,7 +24,7 @@
         <% end %>
       </div>
       <!-- Modal footer -->
-      <%= form_tag @delete_path, method: :delete, class: "grid grid-cols-2 place-items-stretch gap-2 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600" do %>
+      <%= form_tag @delete_path, method: :delete, class: "grid grid-cols-1 md:grid-cols-2 place-items-stretch gap-2 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600" do %>
         <%= abort_button_slot || abort_button %>
         <%= confirm_button_slot || confirm_button %>
       <% end %>
