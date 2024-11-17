@@ -71,6 +71,9 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
+  # Help to kill N+1 queries and unused eager loading [https://github.com/flyerhzm/bullet]
+  gem "bullet"
+
   # Testing framework
   gem "rspec-rails", "~> 7.0"
   gem "factory_bot_rails"
