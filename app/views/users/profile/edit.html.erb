@@ -3,10 +3,9 @@
 <%# Profile header %>
 <div class="flex flex-nowrap gap-2">
   <%= render AvatarComponent.new(
-    @user.avatar_url,
-    alt: @user.name + " avatar",
+    @user,
     size: :large,
-    class: "ms-2 ring-4 ring-gray-900 dark:ring-gray-500"
+    class: "ms-2"
   ) %>
 
   <div class="ms-2 mt-2 mb-4">

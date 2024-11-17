@@ -3,9 +3,12 @@
 require "rails_helper"
 
 RSpec.describe AvatarComponent, type: :component do
+  let(:user) { build_stubbed(:user) }
+
   context "with default options" do
     before(:each) do
-      render_inline(described_class.new("https://example.com/test.png")) { "content" }
+      user = build_stubbed(:user, avatar_url: "https://example.com/test.png")
+      render_inline(described_class.new(user)) { "content" }
     end
 
     it "renders no content" do
@@ -28,7 +31,7 @@ RSpec.describe AvatarComponent, type: :component do
   context "with alt text" do
     it "renders the alt text" do
       render_inline(described_class.new(
-        "https://example.com/test.png",
+        user,
         alt: "alt_text")
       )
       expect(page).to have_selector("img[alt='alt_text']")
@@ -38,7 +41,7 @@ RSpec.describe AvatarComponent, type: :component do
   context "with scheme" do
     it "renders the scheme classes" do
       render_inline(described_class.new(
-        "https://example.com/test.png",
+        user,
         scheme: :square)
       )
       expect(page).to have_selector("img.rounded")
@@ -48,7 +51,7 @@ RSpec.describe AvatarComponent, type: :component do
   context "with size" do
     it "renders the size classes" do
       render_inline(described_class.new(
-        "https://example.com/test.png",
+        user,
         size: :extra_small
       ))
       expect(page).to have_selector("img.w-6.h-6")
@@ -58,8 +61,8 @@ RSpec.describe AvatarComponent, type: :component do
   context "with additional css classes" do
     it "renders the css classes" do
       render_inline(described_class.new(
-      "https://example.com/test.png",
-      class: "my-custom-class and-one-more"
+        user,
+        class: "my-custom-class and-one-more"
       ))
       expect(page).to have_selector("img.my-custom-class.and-one-more")
     end
@@ -68,7 +71,7 @@ RSpec.describe AvatarComponent, type: :component do
   context "with options" do
     it "renders alt text" do
       render_inline(described_class.new(
-        "https://example.com/test.png",
+        user,
         alt: "alt_text"
       ))
       expect(page).to have_selector("img[alt='alt_text']")
@@ -76,8 +79,8 @@ RSpec.describe AvatarComponent, type: :component do
 
     it "renders css classes" do
       render_inline(described_class.new(
-        "https://example.com/test.png",
-          class: "my-custom-class and-some-other-class"
+        user,
+        class: "my-custom-class and-some-other-class"
       ))
       expect(page).to have_selector("img.my-custom-class.and-some-other-class")
     end
@@ -85,24 +88,24 @@ RSpec.describe AvatarComponent, type: :component do
     context "containing HTML attributes" do
       it "renders data attributes" do
         render_inline(described_class.new(
-          "https://example.com/test.png",
-            data: { "dropdown-toggle": "userDropdown" }
+          user,
+          data: { "dropdown-toggle": "userDropdown" }
         ))
         expect(page).to have_selector("img[data-dropdown-toggle='userDropdown']")
       end
 
       it "renders id" do
         render_inline(described_class.new(
-          "https://example.com/test.png",
-            id: "avatarButton"
+          user,
+          id: "avatarButton"
         ))
         expect(page).to have_selector("img[id='avatarButton']")
       end
 
       it "renders type" do
         render_inline(described_class.new(
-          "https://example.com/test.png",
-            type: "button"
+          user,
+          type: "button"
         ))
         expect(page).to have_selector("img[type='button']")
       end

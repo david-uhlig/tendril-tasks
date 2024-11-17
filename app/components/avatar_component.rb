@@ -21,7 +21,7 @@
 #     - :large       -> "w-20 h-20"
 #     - :extra_large -> "w-36 h-36"
 #
-# @param src [String] The source URL of the avatar image.
+# @param user [User] The source URL of the avatar image.
 # @param alt [String, nil] The alt text for the image (optional, defaults to nil).
 # @param scheme [Symbol] The shape scheme for the avatar (optional, default: :round).
 # @param size [Symbol] The size of the avatar (optional, default: :medium).
@@ -31,8 +31,7 @@
 #
 # == Example Usage:
 #   <%= render AvatarComponent.new(
-#     src: "https://example.com/avatar.jpg",
-#     alt: "User's avatar",
+#     user: User.first,
 #     scheme: :square,
 #     size: :large,
 #     classes: "border-2 border-blue-500"
@@ -52,18 +51,19 @@ class AvatarComponent < ApplicationComponent
     small: "w-8 h-8",
     medium: "w-10 h-10",
     large: "w-20 h-20",
-    extra_large: "w-36 h-36"
+    extra_large: "w-36 h-36",
+    custom: ""
   }.freeze
   SIZE_OPTIONS = SIZE_MAPPINGS.keys
 
   # Initialize the AvatarComponent with provided options.
   #
-  # @param src [String] The source URL of the avatar image.
+  # @param user [User] The user for whom the avatar is shown.
   # @param scheme [Symbol] The shape scheme for the avatar (optional, default: :round).
   # @param size [Symbol] The size of the avatar (optional, default: :medium).
   # @param options [Hash, nil] Additional HTML attributes for the image element (optional).
-  def initialize(src, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, **options)
-    @src = src
+  def initialize(user, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, **options)
+    @src = user.avatar_url
     @options = build_options(scheme, size, **options)
   end
 

@@ -27,7 +27,6 @@ RSpec.describe Navigation::UserDropdownComponent, type: :component do
 
     it "renders the user's avatar" do
       expect(page).to have_selector("img[src='#{@user.avatar_url}']")
-      expect(page).to have_selector("img[alt='#{@user.name + " avatar"}']")
     end
 
     it "renders no links" do

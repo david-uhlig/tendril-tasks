@@ -1,9 +1,8 @@
 <%# Avatar image %>
 <%= render Navigation::UserDropdown::AvatarComponent.new(
-      @user.avatar_url,
+      @user,
       size: :medium,
-      alt: @user.name + " avatar",
-      class: "p-1 ring-2 ring-gray-600 dark:ring-gray-500"
+      class: "p-0.5 sm:h-14 sm:w-14 bg-gradient-to-br from-blue-500 to-purple-600 drop-shadow"
 ) %>
 <%# Dropdown menu %>
 <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">

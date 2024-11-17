@@ -5,13 +5,11 @@ require "rails_helper"
 # Test the specific modifications of this wrapper component.
 # General `AvatarComponent` tests are carried out in that component.
 RSpec.describe Navigation::UserDropdown::AvatarComponent, type: :component do
-  let(:avatar_img_url) do
-    "https://example.com/example.png"
-  end
+  let(:user) { build_stubbed(:user) }
 
   context "with default values" do
     before(:each) do
-      render_inline(described_class.new(avatar_img_url))
+      render_inline(described_class.new(user))
     end
 
     it "renders id attribute" do
@@ -37,7 +35,7 @@ RSpec.describe Navigation::UserDropdown::AvatarComponent, type: :component do
         tabindex: "34",
         data: { turbo: false }
       }
-      render_inline(described_class.new(avatar_img_url, **options))
+      render_inline(described_class.new(user, **options))
     end
 
     it "ignores id attribute from options" do

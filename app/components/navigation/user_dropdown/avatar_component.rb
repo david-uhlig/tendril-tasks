@@ -6,7 +6,7 @@
 #
 # This component is designed to be used in user dropdown menus in the application's navigation.
 #
-# @param src [String] The source URL of the avatar image.
+# @param user [User] The user for whom the avatar is shown.
 # @param alt [String, nil] The alt text for the image (optional).
 # @param scheme [Symbol] The shape scheme for the avatar (optional, default: AvatarComponent::DEFAULT_SCHEME).
 # @param size [Symbol] The size of the avatar (optional, default: AvatarComponent::DEFAULT_SIZE).
@@ -20,8 +20,7 @@
 #
 # == Example Usage:
 #   <%= render Navigation::UserDropdown::AvatarComponent.new(
-#     src: "https://example.com/avatar.jpg",
-#     alt: "User's avatar",
+#     user: User.first,
 #     size: :small,
 #     classes: "border rounded-lg"
 #   ) %>
@@ -31,12 +30,12 @@ module Navigation
     class AvatarComponent < ApplicationComponent
       # Initialize the AvatarComponent for use in the user dropdown button.
       #
-      # @param src [String] The source URL of the avatar image.
+      # @param user [User] The user for whom the avatar is shown.
       # @param scheme [Symbol] The shape scheme for the avatar (optional, default: AvatarComponent::DEFAULT_SCHEME).
       # @param size [Symbol] The size of the avatar (optional, default: AvatarComponent::DEFAULT_SIZE).
       # @param options [Hash, nil] Additional HTML options for the button and avatar (optional).
       #   - This includes ensuring an "id" of "avatarButton" and adding dropdown-specific data attributes.
-      def initialize(src, scheme: ::AvatarComponent::DEFAULT_SCHEME, size: ::AvatarComponent::DEFAULT_SIZE, **options)
+      def initialize(user, scheme: ::AvatarComponent::DEFAULT_SCHEME, size: ::AvatarComponent::DEFAULT_SIZE, **options)
         options.stringify_keys!
         options["id"] = "avatarButton"
         options["type"] = "button"
@@ -49,7 +48,7 @@ module Navigation
                     "dropdown-placement": "bottom-start"
                   })
 
-        @src = src
+        @user = user
         @scheme = scheme
         @size = size
         @options = options
@@ -59,7 +58,7 @@ module Navigation
       #
       # @return [String] HTML-safe string representing the avatar image within the button element.
       def call
-        render ::AvatarComponent.new(@src, scheme: @scheme, size: @size, **@options)
+        render ::AvatarComponent.new(@user, scheme: @scheme, size: @size, **@options)
       end
     end
   end
