@@ -6,7 +6,7 @@
 # larger viewports.
 class ButtonGridComponent < ApplicationComponent
   # Default CSS classes applied to the grid container.
-  DEFAULT_GRID_CLASS = "grid grid-cols-1 gap-2"
+  DEFAULT_GRID_CLASS = "gap-2 grid grid-cols-1"
 
   renders_many :buttons, ->(**options) {
     options = parse_button_options(options)
@@ -30,7 +30,9 @@ class ButtonGridComponent < ApplicationComponent
   def call
     return unless buttons?
 
-    tag.div **@grid_options do
+    @grid_options[:class] << responsive_cols
+
+    content_tag :div, @grid_options do
       buttons.each do |button|
         concat button
       end
@@ -38,12 +40,6 @@ class ButtonGridComponent < ApplicationComponent
   end
 
   private
-
-  # Prepares adjustments to the grid options before rendering.
-  # Adds a responsive grid column class based on the number of buttons.
-  def before_render
-    @grid_options[:class] += " sm:grid-cols-#{buttons.size}"
-  end
 
   def parse_grid_options(options)
     options.stringify_keys!
@@ -57,5 +53,32 @@ class ButtonGridComponent < ApplicationComponent
     options = @general_button_options.merge(options)
     options.symbolize_keys!
     options
+  end
+
+  # Returns the responsive tailwind class so that all buttons fit on one
+  # horizontal grid row (up to 6)
+  #
+  # Bear with me before submitting this to The Daily WTF. Somehow string
+  # interpolation doesn't work for dynamically generated classes in this
+  # component. Although the class name would appear correctly in the
+  # HTML-document, it has no effect whatsoever. So, this workaround is the only
+  # option for now.
+  def responsive_cols
+    case buttons.count
+    when 1
+      ""
+    when 2
+      " sm:grid-cols-2"
+    when 3
+      " sm:grid-cols-3"
+    when 4
+      " sm:grid-cols-4"
+    when 5
+      " sm:grid-cols-5"
+    when 6
+      " sm:grid-cols-6"
+    else
+      " sm:grid-cols-2"
+    end
   end
 end
