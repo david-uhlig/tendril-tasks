@@ -1,6 +1,6 @@
 <section class="bg-white sm:bg-transparent border rounded-xl sm:border-0 shadow-md sm:shadow-none dark:bg-gray-900">
   <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:px-12">
-    <%= render HeadingComponent.new(tag: :h2, scheme: :secondary, has_anchor: true).with_content(@project.title) %>
+    <%= render HeadingComponent.new(tag: :h2, scheme: :secondary).with_content(@project.title) %>
     <p class="text-start mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"><%= @project.description.split("\n").first %></p>
 
     <%= render Modal::ToggleButtonComponent.new(scheme: :none,
