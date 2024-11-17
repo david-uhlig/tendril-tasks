@@ -2,12 +2,10 @@
 
 module Form
   class SubmitButtonGroupComponent < ApplicationComponent
-    BUTTON_CLASS = "w-full"
-
     renders_many :buttons, types: {
       regular: ->(text, **options) {
         options = parse_options(options)
-        ButtonComponent.new(size: :large, **options).with_content(text)
+        Form::ButtonComponent.new(**options).with_content(text)
       },
       delete: ->(text, target_modal_id:) {
         DeleteConfirm::ButtonComponent.new(text: text, target_modal_id: target_modal_id)
@@ -18,18 +16,17 @@ module Form
 
     def initialize(form, render_if: true)
       @form = form
-      @render = render_if
+      @is_rendered = render_if
     end
 
     def render?
-      @render
+      @is_rendered
     end
 
     private
 
     def parse_options(options)
       options.stringify_keys!
-      options["class"] = class_names(BUTTON_CLASS, options.delete("class"))
       options["name"] = options.delete("name") || "#{@form.object_name}[submit_type]"
       options["value"] = options.delete("value") || "save"
       options
