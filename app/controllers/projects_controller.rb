@@ -3,7 +3,11 @@ class ProjectsController < ApplicationController
   before_action :set_project_form, only: [ :edit, :update ]
   before_action :check_permission, only: [ :edit, :update, :destroy ]
 
-  def index; end
+  def index
+    @projects = Project.published
+                       .has_published_task
+                       .includes(:tasks, :coordinators)
+  end
 
   def show; end
 
@@ -36,7 +40,7 @@ class ProjectsController < ApplicationController
     if @project_form.save
       flash[:notice] = "Project #{@project_form.title} was updated." if project_has_changed
       # TODO redirect to show page when implemented
-      redirect_to edit_project_path(@project_form.project)
+      redirect_to projects_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -57,7 +61,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.includes(:coordinators).find(params[:id])
   end
 
   def set_project_form

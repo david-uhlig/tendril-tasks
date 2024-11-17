@@ -13,6 +13,10 @@ class Task < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10 }
   validates :coordinators, presence: true
 
+  scope :is_published, -> {
+    where(published_at: ...Time.zone.now)
+  }
+
   def visible?
     published? && self.project.published?
   end

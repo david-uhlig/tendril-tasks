@@ -10,6 +10,14 @@ class Project < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10 }
   validates :coordinators, presence: true
 
+  scope :published, -> {
+    where(published_at: ...Time.zone.now)
+  }
+
+  scope :has_published_task, -> {
+    joins(:tasks).merge(Task.is_published).distinct
+  }
+
   def visible?
     published? && tasks.present? && tasks.any?(&:published?)
   end
@@ -24,5 +32,9 @@ class Project < ApplicationRecord
 
   def unpublish
     self.published_at = nil
+  end
+
+  def editable_by?(user)
+    coordinators.include?(user)
   end
 end
