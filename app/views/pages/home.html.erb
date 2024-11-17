@@ -7,6 +7,7 @@
   <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "text-center" do %>
     <span class="font-mono pe-5">Jetzt einloggen, um Projekte und Aufgaben zu sehen:</span>
     <%= render ButtonComponent.new(
+        type: :submit,
         scheme: :duotone_purple_to_blue,
         size: :extra_large,
         class: "mt-4",
@@ -22,15 +23,18 @@
       <span class="font-mono mb-4 sm:mb-0">Jetzt ansehen:</span>
       <div class="flex flex-col sm:flex-row sm:items-center sm:gap-x-4" role="group">
         <%= render ButtonComponent.new(
+          tag: :a,
+          href: projects_path,
           scheme: :alternative,
-          size: :extra_large,
+          size: :large,
           class: "mt-4 sm:mt-0"
         ) do %>
           Spannende Projekte
         <% end %>
         <%= render ButtonComponent.new(
-          scheme: :default,
-          size: :extra_large,
+          tag: :a,
+          href: tasks_path,
+          size: :large,
           class: "mt-4 sm:mt-0"
         ) do %>
           Abwechslungsreiche Aufgaben

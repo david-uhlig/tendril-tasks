@@ -4,6 +4,7 @@
 class ButtonComponent < ApplicationComponent
   DEFAULT_SCHEME = :default
   SCHEME_MAPPINGS = {
+    :none => "",
     DEFAULT_SCHEME => "btn-default",
     :alternative => "btn-alternative",
     :dark => "btn-dark",
@@ -18,6 +19,7 @@ class ButtonComponent < ApplicationComponent
 
   DEFAULT_SIZE = :base
   SIZE_MAPPINGS = {
+    :none => "",
     DEFAULT_SIZE => "px-5 py-2.5 text-sm font-medium",
     :extra_small => "px-3 py-2 text-xs font-medium",
     :small => "px-3 py-2 text-sm font-medium",
@@ -25,6 +27,12 @@ class ButtonComponent < ApplicationComponent
     :extra_large => "px-6 py-3.5 text-base font-medium"
   }.freeze
   SIZE_OPTIONS = SIZE_MAPPINGS.keys
+
+  DEFAULT_TAG = :button
+  TAG_OPTIONS = [ DEFAULT_TAG, :a ].freeze
+
+  DEFAULT_TYPE = :button
+  TYPE_OPTIONS = [ DEFAULT_TYPE, :reset, :submit ].freeze
 
   DEFAULT_LABEL = "Button"
 
@@ -63,28 +71,30 @@ class ButtonComponent < ApplicationComponent
   # @param options [Hash, nil] @see ActionView::Helpers::FormTagHelper::button_tag
   # @param scheme [Symbol] <%= one_of(ButtonComponent::SCHEME_OPTIONS) %>
   # @param size [Symbol] <%= one_of(ButtonComponent::SIZE_OPTIONS) %>
-  def initialize(scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, **options)
-    @options = build_options(options, scheme, size)
+  def initialize(tag: DEFAULT_TAG, type: DEFAULT_TYPE, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, **options)
+    @options = build_options(options, scheme, size, tag, type)
+    @tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
   end
 
   def call
     @options["class"] += " inline-flex" if leading_visual?
     btn_content = leading_visual.to_s + (content || DEFAULT_LABEL)
 
-    button_tag @options do
+    content_tag @tag, @options do
       btn_content.html_safe
     end
   end
 
   private
 
-  def build_options(options, scheme, size)
+  def build_options(options, scheme, size, tag, type)
     options.stringify_keys!
     options["class"] = class_names(
       SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
       options.delete("class")
     )
+    options["type"] = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if tag == :button
     options
   end
 end
