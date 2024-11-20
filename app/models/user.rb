@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :task_applications, dependent: :destroy
   has_many :tasks_applied, through: :task_applications, source: :task
 
+  enum :role, [ :user, :editor, :admin ]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # TODO add in :rememberable functionality

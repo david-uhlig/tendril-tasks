@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_19_174544) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_201343) do
   create_table "project_coordinators", primary_key: ["project_id", "user_id"], force: :cascade do |t|
     t.integer "project_id", null: false
     t.integer "user_id", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_19_174544) do
     t.string "name", default: "", null: false
     t.string "username", default: "", null: false
     t.string "avatar_url", default: "", null: false
+    t.integer "role", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
