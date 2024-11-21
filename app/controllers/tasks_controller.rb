@@ -3,6 +3,8 @@ class TasksController < ApplicationController
   authorize_resource
   before_action :set_task_form, only: [ :edit, :update ]
 
+  rescue_from CanCan::AccessDenied, with: :access_denied_handler
+
   def index; end
 
   def show

@@ -3,6 +3,8 @@ class ProjectsController < ApplicationController
   authorize_resource
   before_action :set_project_form, only: [ :edit, :update ]
 
+  rescue_from CanCan::AccessDenied, with: :access_denied_handler
+
   def index
     @projects = Project.accessible_by(current_ability).includes(:tasks, :coordinators)
   end

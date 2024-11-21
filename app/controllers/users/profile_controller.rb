@@ -1,6 +1,8 @@
 class Users::ProfileController < ApplicationController
   before_action :set_user, only: [ :edit, :destroy ]
 
+  rescue_from CanCan::AccessDenied, with: :access_denied_handler
+
   def edit
     authorize! :edit, @user
   end

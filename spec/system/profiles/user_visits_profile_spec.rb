@@ -2,12 +2,9 @@ require "rails_helper"
 
 RSpec.describe "User visits profile page", type: :system do
   context "when unauthorized" do
-    it "redirects to login page" do
-      expect {
-        visit profile_path
-      }.to raise_error(CanCan::AccessDenied)
-      # expect(page).to have_current_path(new_user_session_path)
-      # expect(page).to have_content("Log in")
+    it "returns :not_found" do
+      visit profile_path
+      expect(page).to have_http_status(:not_found)
     end
   end
 
