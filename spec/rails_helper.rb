@@ -58,7 +58,9 @@ RSpec.configure do |config|
 
   # Warden test helpers
   config.include Warden::Test::Helpers, type: :system
+  config.include Warden::Test::Helpers, type: :request
   config.after(type: :system) { Warden.test_reset! }  # Clean up after each test
+  config.after(type: :request) { Warden.test_reset! }
 
   # System tests
   config.before(:each, type: :system) do

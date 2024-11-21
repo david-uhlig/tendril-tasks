@@ -1,11 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "Editor creates new task", type: :system, js: true do
-  let(:user) { create(:user) }
+  let(:editor) { create(:user, :editor) }
 
   before do
-    # TODO change scope to editor once its implemented
-    login_as(user, scope: :user)  # Logging in the user using Warden helpers
+    login_as(editor)  # Logging in the user using Warden helpers
     create(:project)
     visit new_task_path
   end
@@ -44,7 +43,7 @@ RSpec.describe "Editor creates new task", type: :system, js: true do
 
       expect(page).to have_content("Aufgabe erstellen")
       expect(page.has_select?("Projekt", selected: "Project title")).to be_truthy
-      expect(page).to have_content(user.name)
+      expect(page).to have_content(editor.name)
     end
   end
 end

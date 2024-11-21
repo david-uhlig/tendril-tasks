@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
+  authorize_resource
   before_action :set_task_form, only: [ :edit, :update ]
-  before_action :check_permission, only: [ :edit, :update, :destroy ]
 
   def index; end
 
@@ -72,12 +72,5 @@ class TasksController < ApplicationController
     preset[:project_id] = params[:project_id]
     preset[:coordinator_ids] = params[:coordinator_ids].split("-")
     preset
-  end
-
-  # TODO replace with pundit
-  def check_permission
-    unless @task.coordinators.include?(current_user)
-      redirect_to tasks_path, alert: "Das darfst du nicht."
-    end
   end
 end

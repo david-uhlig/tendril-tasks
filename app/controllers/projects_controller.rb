@@ -1,12 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [ :show, :edit, :update, :destroy ]
+  authorize_resource
   before_action :set_project_form, only: [ :edit, :update ]
-  before_action :check_permission, only: [ :edit, :update, :destroy ]
 
   def index
-    @projects = Project.published
-                       .has_published_task
-                       .includes(:tasks, :coordinators)
+    @projects = Project.accessible_by(current_ability).includes(:tasks, :coordinators)
   end
 
   def show; end

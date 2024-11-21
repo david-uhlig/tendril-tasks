@@ -1,4 +1,6 @@
 class Coordinators::SearchesController < ApplicationController
+  before_action :authenticate_user!
+
   # Displays search results in the dialog
   def index
     if params[:search].present?

@@ -10,5 +10,14 @@ FactoryBot.define do
     name { "John Smith" }
     username { "john.smith" }
     avatar_url { "https://example.com/john_smith.svg" }
+    role { :user }
+
+    trait :admin do
+      role { :admin }
+    end
+
+    trait :editor do
+      role { :editor }
+    end
   end
 end

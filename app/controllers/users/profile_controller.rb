@@ -1,11 +1,12 @@
 class Users::ProfileController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_user, only: %i[edit destroy]
+  before_action :set_user, only: [ :edit, :destroy ]
 
   def edit
+    authorize! :edit, @user
   end
 
   def destroy
+    authorize! :destroy, @user
     if @user.destroy
       reset_session # Log the user out after account deletion
       redirect_to root_path, notice: "Dein Konto wurde gelöscht!"
