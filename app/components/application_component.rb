@@ -13,4 +13,7 @@
 class ApplicationComponent < ViewComponent::Base
   include Primer::FetchOrFallbackHelper
   include Primer::ClassNameHelper
+
+  delegate :current_user, :user_signed_in?, to: :view_context
+  delegate :can?, :cannot?, to: :view_context
 end

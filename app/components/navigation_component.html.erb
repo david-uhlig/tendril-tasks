@@ -5,8 +5,8 @@
     <%# Login button and user menu %>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <%# User menu %>
-      <% if helpers.user_signed_in? %>
-        <%= render Navigation::UserDropdownComponent.new(user: helpers.current_user) do |user_menu| %>
+      <% if user_signed_in? %>
+        <%= render Navigation::UserDropdownComponent.new(user: current_user) do |user_menu| %>
           <%= user_menu.with_links([
                { name: "Profil", href: "/profile" },
                { name: "Dashboard", href: "/dashboard" }
@@ -38,7 +38,7 @@
             <li><%= link %></li>
           <% end %>
           <%# Login/Logout buttons in hamburger menu %>
-          <% if helpers.user_signed_in? %>
+          <% if user_signed_in? %>
             <li class="md:hidden"><%= button_to "Abmelden", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
           <% else %>
             <li class="md:hidden"><%= button_to "Anmelden", user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %></li>
