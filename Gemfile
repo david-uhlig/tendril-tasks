@@ -53,11 +53,6 @@ gem "tailwindcss-rails"
 # See https://viewcomponent.org/
 gem "view_component", "~> 3.18"
 
-# Primer design system
-# Only using the helper modules, not the design system itself.
-# See https://primer.style/
-gem "primer_view_components"
-
 # Authorization
 gem "cancancan"
 
