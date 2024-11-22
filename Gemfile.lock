@@ -182,7 +182,7 @@ GEM
     matrix (0.4.2)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.2)
     msgpack (1.7.5)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -239,7 +239,7 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
-    primer_view_components (0.35.1)
+    primer_view_components (0.35.2)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
       octicons (>= 18.0.0)
