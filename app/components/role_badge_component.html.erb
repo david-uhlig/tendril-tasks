@@ -1,0 +1,8 @@
+<% if @user.admin? %>
+  <%= render BadgeComponent.new("Admin", **@options) %>
+<% end %>
+<% if @user.editor? %>
+  <%= render BadgeComponent.new("Redakteur", **@options) %>
+<% end %>
+
+<%# TODO add permissions explainer modal for @user.admin? || @user.editor? %>

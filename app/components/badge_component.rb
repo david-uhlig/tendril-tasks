@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Renders badges with various styles, sizes, and optional borders.
 class BadgeComponent < ApplicationComponent
   DEFAULT_SCHEME = :default
