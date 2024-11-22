@@ -33,8 +33,4 @@ class Project < ApplicationRecord
   def unpublish
     self.published_at = nil
   end
-
-  def editable_by?(user)
-    coordinators.include?(user)
-  end
 end
