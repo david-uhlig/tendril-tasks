@@ -1,0 +1,78 @@
+<section class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col">
+  <div class="inline text-left mb-2">
+    <%= link_to project_path(@task.project) do %>
+      <%= render BadgeComponent.new(@task.project.title, scheme: @badge_scheme) %>
+    <% end %>
+    <%= render BadgeComponent.new("Neu", scheme: :green) if is_new? %>
+  </div>
+
+  <%= link_to task_path(@task) do %>
+    <%= render HeadingComponent.new(tag: :h2, scheme: :none, class: "mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white").with_content(@task.title) %>
+  <% end %>
+
+  <div class="flex-grow">
+    <p class="text-start mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
+      <%= @task.description.split("\n").first %>
+    </p>
+  </div>
+
+  <div>
+    <%# Coordinators %>
+    <%= render Modal::ToggleButtonComponent.new(scheme: :none,
+                                                size: :none,
+                                                modal_id: "task-contacts-#{@task.id}",
+                                                class: "inline-flex items-center max-w-full py-1 px-1 pr-2 my-4 mx-0 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do %>
+      <span class="flex-shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3">Kontakte</span>
+      <span class="flex gap-2 overflow-hidden flex-shrink truncate">
+          <% @task.coordinators.each do |coordinator| %>
+            <span class="flex items-center gap-2 text-sm font-medium">
+              <%= render AvatarComponent.new(coordinator, size: :extra_small) %>
+              <%= tag.span coordinator.name, class: "dark:text-white truncate" %>
+            </span>
+          <% end %>
+        </span>
+      <svg class="flex-shrink-0 ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+      </svg>
+    <% end %>
+  </div>
+
+  <%# Action buttons %>
+  <%= render ButtonGridComponent.new(tag: :a, size: :base, orientation: :vertical) do |grid| %>
+    <% grid.button(href: task_path(@task), scheme: :alternative).with_content("Mehr erfahren") %>
+    <% grid.button(href: "#").with_content("Interesse bekunden") %>
+  <% end %>
+</section>
+
+<%# Modal for viewing coordinators %>
+<%= content_for :modal do %>
+  <%= render Modal::DialogComponent.new("task-contacts-#{@task.id}") do |modal| %>
+    <% modal.heading("Deine Ansprechpersonen") %>
+    <% modal.button(scheme: :light, type: :reset) do  %>
+      Fenster schließen
+    <% end %>
+    <%= render Modal::ParagraphComponent.new do %>
+      Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
+    <% end %>
+    <ul class="my-4 space-y-3">
+      <% @task.coordinators.each do |coordinator| %>
+        <li>
+              <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                <%= render AvatarComponent.new(coordinator) %>
+                <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= coordinator.name %></span>
+                <span class="inline-flex items-center justify-center">
+                  <%= render ButtonComponent.new(tag: :a,
+                                                 href: "https://rcbchat.de/direct/#{coordinator.username}",
+                                                 scheme: :duotone_purple_to_blue,
+                                                 size: :small, class: "m-0") do |contact_button| %>
+                    <% contact_button.with_leading_visual("rocketchat/icon-white.svg") %>
+                    Kontaktieren
+                  <% end %>
+                </span>
+              </span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+<%# End of modal for coordinators %>

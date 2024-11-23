@@ -5,7 +5,11 @@ class TasksController < ApplicationController
 
   rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
-  def index; end
+  def index
+    @tasks = Task.accessible_by(current_ability)
+                 .includes(:coordinators, :project)
+                 .order(created_at: :desc)
+  end
 
   def show
     # TODO implement
