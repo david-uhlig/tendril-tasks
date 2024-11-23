@@ -34,7 +34,7 @@ class Ability
     can [ :update, :destroy ], User, { id: user.id }
 
     # ----- Editor -----
-    return unless user.editor?
+    return unless user.editor? || user.admin?
 
     # Can create new projects and tasks
     can [ :create ], [ Project, Task ]
