@@ -74,5 +74,26 @@ RSpec.describe "Tasks", type: :request do
       get "/tasks"
       expect(response).to have_http_status(:success)
     end
+
+    it "fails to access tasks of unpublished project" do
+      project = create(:project, :not_published, :with_published_tasks)
+
+      get "/projects/#{project.id}/tasks"
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "fails to access project with unpublished tasks" do
+      project = create(:project, :published, :with_unpublished_tasks)
+
+      get "/projects/#{project.id}/tasks"
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "can access published project with published tasks" do
+      project = create(:project, :published, :with_published_tasks)
+
+      get "/projects/#{project.id}/tasks"
+      expect(response).to have_http_status(:success)
+    end
   end
 end

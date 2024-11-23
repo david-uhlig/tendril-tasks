@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resources :tasks
   get "/tasks/new/from-preset/:project_id/:coordinator_ids", to: "tasks#new", as: :new_task_with_preset
 
-  resources :projects
+  resources :projects do
+    resources :tasks, only: %i[ index ]
+  end
 
   namespace :coordinators do
     resources :searches, only: %i[ index create ]

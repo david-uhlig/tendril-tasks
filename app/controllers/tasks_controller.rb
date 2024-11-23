@@ -6,9 +6,21 @@ class TasksController < ApplicationController
   rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
   def index
+    @type = :all_published_tasks
+
+    filter_params = params.permit(:project_id)
+
     @tasks = Task.accessible_by(current_ability)
                  .includes(:coordinators, :project)
-                 .order(created_at: :desc)
+
+    # Apply filters
+    if filter_params[:project_id].present?
+      @project = Project.select(:title).accessible_by(current_ability).find(filter_params[:project_id])
+      @tasks = @tasks.where(project_id: filter_params[:project_id])
+      @type = :tasks_for_project
+    end
+
+    @tasks = @tasks.order(created_at: :desc)
   end
 
   def show

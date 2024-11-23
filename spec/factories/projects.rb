@@ -22,6 +22,16 @@ FactoryBot.define do
       end
     end
 
+    trait :with_unpublished_tasks do
+      transient do
+        tasks_count { 5 }
+      end
+
+      tasks do
+        Array.new(tasks_count) { association :task, :not_published }
+      end
+    end
+
     trait :without_coordinators do
       coordinators { [] }
     end
