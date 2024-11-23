@@ -5,8 +5,23 @@
 # The buttons stack vertically on mobile viewports and horizontally on
 # larger viewports.
 class ButtonGridComponent < ApplicationComponent
-  # Default CSS classes applied to the grid container.
-  DEFAULT_GRID_CLASS = "gap-2 grid grid-cols-1"
+  GRID_DEFAULT_CLASS = "gap-2 grid text-center"
+
+  # Determines the orientation of the button grid
+  #
+  # Options
+  # `:responsive` - Vertical by default (smallest viewports). Horizontal on `sm`
+  # and larger viewports
+  # `:vertical` - Vertical. Buttons stacked one over another
+  # `:horizontal` - Horizontal. Buttons stacked next to each other.
+  DEFAULT_ORIENTATION = :responsive
+  ORIENTATION_OPTIONS = [ DEFAULT_ORIENTATION, :vertical, :horizontal ].freeze
+
+  GRID_ORIENTATION_MAPPINGS = {
+    responsive: "grid-cols-1",
+    vertical: "grid-cols-1",
+    horizontal: "grid-rows-1"
+  }
 
   renders_many :buttons, ->(**options) {
     options = parse_button_options(options)
@@ -16,9 +31,11 @@ class ButtonGridComponent < ApplicationComponent
 
   # Initializes the ButtonGridComponent.
   #
+  # @param orientation [Symbol] Grid behaviour. One of: :responsive, :horizontal, :vertical.
   # @param grid_options [Hash] Options for customizing the grid container.
   # @param options [Hash] General options applied to all buttons.
-  def initialize(grid_options: {}, **options)
+  def initialize(orientation: DEFAULT_ORIENTATION, grid_options: {}, **options)
+    @orientation = fetch_or_fallback(ORIENTATION_OPTIONS, orientation, DEFAULT_ORIENTATION)
     @grid_options = parse_grid_options(grid_options)
     @general_button_options = options.stringify_keys
   end
@@ -41,9 +58,17 @@ class ButtonGridComponent < ApplicationComponent
 
   private
 
+  def responsive?
+    @orientation == :responsive
+  end
+
   def parse_grid_options(options)
     options.stringify_keys!
-    options["class"] = class_names(DEFAULT_GRID_CLASS, options.delete("class"))
+    options["class"] = class_names(
+      GRID_DEFAULT_CLASS,
+      GRID_ORIENTATION_MAPPINGS[@orientation],
+      options.delete("class")
+    )
     options.symbolize_keys!
     options
   end
@@ -56,7 +81,7 @@ class ButtonGridComponent < ApplicationComponent
   end
 
   # Returns the responsive tailwind class so that all buttons fit on one
-  # horizontal grid row (up to 6)
+  # horizontal grid row (up to 4)
   #
   # Bear with me before submitting this to The Daily WTF. Somehow string
   # interpolation doesn't work for dynamically generated classes in this
@@ -64,21 +89,15 @@ class ButtonGridComponent < ApplicationComponent
   # HTML-document, it has no effect whatsoever. So, this workaround is the only
   # option for now.
   def responsive_cols
-    case buttons.count
-    when 1
-      ""
+    return "" unless responsive? && buttons.size > 1
+
+    case buttons.size
     when 2
       " sm:grid-cols-2"
     when 3
       " sm:grid-cols-3"
-    when 4
-      " sm:grid-cols-4"
-    when 5
-      " sm:grid-cols-5"
-    when 6
-      " sm:grid-cols-6"
     else
-      " sm:grid-cols-2"
+      " sm:grid-cols-4"
     end
   end
 end
