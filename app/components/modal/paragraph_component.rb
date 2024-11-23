@@ -5,7 +5,7 @@ class Modal::ParagraphComponent < ApplicationComponent
 
   def initialize(text = nil, **options)
     @text = text
-    @options = parse_options(options)
+    @options = build_options(options)
   end
 
   def call
@@ -16,9 +16,10 @@ class Modal::ParagraphComponent < ApplicationComponent
 
   private
 
-  def parse_options(options)
+  def build_options(options)
     options.stringify_keys!
     options["class"] = class_names(DEFAULT_CLASS, options.delete("class"))
+    options.symbolize_keys!
     options
   end
 end

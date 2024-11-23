@@ -3,7 +3,7 @@
 class TaskCardComponent < ApplicationComponent
   def initialize(task, **options)
     @task = task
-    @options = parse_options(options)
+    @options = build_options(options)
     @badge_scheme = badge_scheme(task)
   end
 
@@ -13,7 +13,7 @@ class TaskCardComponent < ApplicationComponent
 
   private
 
-  def parse_options(options)
+  def build_options(options)
     options
   end
 

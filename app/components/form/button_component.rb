@@ -10,7 +10,7 @@ module Form
     def initialize(scheme: ::ButtonComponent::DEFAULT_SCHEME, size: :large, **options)
       @scheme = scheme
       @size = size
-      @options = parse_options(options)
+      @options = build_options(options)
     end
 
     def call
@@ -21,9 +21,10 @@ module Form
 
     private
 
-    def parse_options(options)
+    def build_options(options)
       options.stringify_keys!
       options["class"] = class_names(DEFAULT_CLASS, options.delete("class"))
+      options.symbolize_keys!
       options
     end
   end

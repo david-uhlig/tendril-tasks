@@ -20,7 +20,7 @@ class HeadingComponent < ApplicationComponent
     @tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
     @scheme = fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)
     @text = text
-    @options = parse_options(options)
+    @options = build_options(options)
   end
 
   def call
@@ -35,7 +35,7 @@ class HeadingComponent < ApplicationComponent
     @options[:id] ||= helpers.strip_tags(@text || content).parameterize
   end
 
-  def parse_options(options)
+  def build_options(options)
     options.stringify_keys!
     options["class"] = class_names(
       SCHEME_MAPPINGS[@scheme],

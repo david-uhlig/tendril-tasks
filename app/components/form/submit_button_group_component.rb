@@ -4,7 +4,7 @@ module Form
   class SubmitButtonGroupComponent < ApplicationComponent
     renders_many :buttons, types: {
       regular: ->(text, **options) {
-        options = parse_options(options)
+        options = build_options(options)
         Form::ButtonComponent.new(**options).with_content(text)
       },
       delete: ->(text, target_modal_id:) {
@@ -25,10 +25,11 @@ module Form
 
     private
 
-    def parse_options(options)
+    def build_options(options)
       options.stringify_keys!
       options["name"] = options.delete("name") || "#{@form.object_name}[submit_type]"
       options["value"] = options.delete("value") || "save"
+      options.symbolize_keys!
       options
     end
   end
