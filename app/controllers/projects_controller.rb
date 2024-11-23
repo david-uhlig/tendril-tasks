@@ -6,7 +6,8 @@ class ProjectsController < ApplicationController
   rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
   def index
-    @projects = Project.accessible_by(current_ability).includes(:tasks, :coordinators)
+    @projects = Project.accessible_by(current_ability)
+                       .includes(:coordinators)
   end
 
   def show; end

@@ -55,7 +55,7 @@
     <%= render ButtonGridComponent.new(tag: :a, size: :large) do |grid| %>
       <% grid.button(href: edit_project_path(@project), scheme: :alternative).with_content("Bearbeiten") if can? :edit, @project %>
       <% grid.button(href: project_path(@project), scheme: :alternative).with_content("Mehr erfahren") %>
-      <% grid.button(href: tasks_path).with_content("#{@project.tasks.size} Aufgaben") %>
+      <% grid.button(href: tasks_path).with_content("#{@project.tasks.is_published.size} Aufgaben") %>
     <% end %>
   </div>
 </section>
