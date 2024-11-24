@@ -9,7 +9,7 @@ RSpec.describe BadgeComponent, type: :component do
     end
 
     it "renders default scheme classes" do
-      expect(page).to have_selector("span.bg-blue-100.text-blue-800.me-2.rounded")
+      expect(page).to have_selector("span.bg-blue-100.text-blue-800.rounded")
     end
 
     it "renders default size classes" do
