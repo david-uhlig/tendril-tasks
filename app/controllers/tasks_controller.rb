@@ -6,18 +6,25 @@ class TasksController < ApplicationController
   rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
   def index
+    filter = params.permit(:project_id)
     @type = :all_published_tasks
 
-    filter_params = params.permit(:project_id)
+    @projects = Project.select(:id, :title)
+                       .accessible_by(current_ability)
+                       .published
+                       .order(:updated_at)
 
     @tasks = Task.accessible_by(current_ability)
                  .includes(:coordinators, :project)
 
     # Apply filters
-    if filter_params[:project_id].present?
-      @project = Project.select(:title).accessible_by(current_ability).find(filter_params[:project_id])
-      @tasks = @tasks.where(project_id: filter_params[:project_id])
+    if filter[:project_id].present?
       @type = :tasks_for_project
+      # Raises an ActiveRecord::RecordNotFound exception when trying to access
+      # a non-existing or non-authorized project
+      @selected_project = @projects.find(filter[:project_id])
+      # Apply project filter
+      @tasks = @tasks.where(project_id: filter[:project_id])
     end
 
     @tasks = @tasks.order(created_at: :desc)
