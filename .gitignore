@@ -45,3 +45,5 @@
 
 # Development assets
 /app/assets/images/unplash/*
+
+/compose.yaml
