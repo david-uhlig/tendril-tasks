@@ -64,6 +64,8 @@ RSpec.configure do |config|
 
   # System tests
   config.before(:each, type: :system) do
+    # This doesn't take any screenshots on failed tests, so we might
+    # have to switch to :selenium_chrome_headless for improved CI
     driven_by :rack_test # rack_test by default, for performance
   end
 
