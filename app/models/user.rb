@@ -37,6 +37,7 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.username = auth.info.username
       user.avatar_url = auth.info.image
+      user.role = determine_role(auth)
       # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     end
   end
@@ -52,5 +53,13 @@ class User < ApplicationRecord
 
     where(users[:name].matches(terms))
       .or(where(users[:username].matches(terms)))
+  end
+
+  private
+
+  def self.determine_role(email)
+    return :admin if ENV["ADMIN_EMAIL"]&.downcase == email.downcase
+
+    User.count == 0 ? :admin : :user
   end
 end
