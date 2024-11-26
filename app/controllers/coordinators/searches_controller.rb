@@ -1,13 +1,15 @@
 class Coordinators::SearchesController < ApplicationController
+  NUM_SEARCH_RESULTS = 12
+
   before_action :authenticate_user!
 
   # Displays search results in the dialog
   def index
     if params[:search].present?
-      @coordinators = User.search(params[:search]).exclude_ids(params[:coordinator_ids]).limit(15)
+      @coordinators = User.search(params[:search]).exclude_ids(params[:coordinator_ids]).limit(NUM_SEARCH_RESULTS)
     else
       # TODO return smarter default choices
-      @coordinators = User.exclude_ids(params[:coordinator_ids]).limit(15)
+      @coordinators = User.exclude_ids(params[:coordinator_ids]).limit(NUM_SEARCH_RESULTS)
     end
   end
 

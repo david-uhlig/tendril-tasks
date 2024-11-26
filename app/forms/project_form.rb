@@ -41,7 +41,11 @@ class ProjectForm
   end
 
   def coordinator_options
-    @coordinator_options ||= User.select(:id, :name, :avatar_url).exclude(coordinators).limit(15).presence || []
+    @coordinator_options ||= User.select(:id, :name, :avatar_url)
+                                 .excluding(coordinators)
+                                 .limit(Coordinators::SearchesController::NUM_SEARCH_RESULTS)
+                                 .presence
+    @coordinator_options ||= []
   end
 
   def save

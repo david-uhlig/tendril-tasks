@@ -39,8 +39,6 @@ module Form
       end
 
       def call
-        return if @coordinators.empty?
-
         tag.ul id: @id, class: "flex flex-wrap gap-2 min-rows" do
           @coordinators.each do |coordinator|
             concat render SelectionItemComponent.new(coordinator, is_checked: @is_checked)
