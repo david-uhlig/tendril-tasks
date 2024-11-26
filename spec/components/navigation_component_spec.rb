@@ -19,19 +19,6 @@ RSpec.describe NavigationComponent, type: :component do
     end
   end
 
-  context "with logo" do
-    it "renders the logo" do
-      @test_image_path = Rails.root.join("spec", "assets", "images", "for-tests.jpg").to_s
-      render_inline(described_class.new) do |component|
-        component.with_logo(src: @test_image_path, alt: "test_image", label: "application_name", href: "https://example.com")
-      end
-      expect(page).to have_selector("img[src='#{@test_image_path}']")
-      expect(page).to have_selector("img[alt='test_image']")
-      expect(page).to have_text("application_name")
-      expect(page).to have_link(href: "https://example.com")
-    end
-  end
-
   context "with links" do
     it "renders one link" do
       render_inline(described_class.new) do |component|

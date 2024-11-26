@@ -38,11 +38,6 @@
     </div>
     <%# Navigation %>
     <%= render NavigationComponent.new do |navigation| %>
-      <% navigation.with_logo(
-           src: ENV["LOGO_URL"],
-           alt: ENV["LOGO_DESCRIPTION"],
-           href: root_path,
-           label: "Mitgestalten") %>
       <% navigation.with_links([
                                  { name: "Start", href: root_path },
                                  { name: "Projekte", href: projects_path },
