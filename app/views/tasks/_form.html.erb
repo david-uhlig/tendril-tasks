@@ -10,8 +10,10 @@
       form_object.project_options, :id, :title,
       error_field_attribute: :project,
       prompt: "Projekt auswählen",
-      selected: form_object.project&.id)
+      selected: form_object.project&.id) do |project_select|
   %>
+    <% project_select.trailing_button(tag: :a, href: new_project_path).with_content("Neu") %>
+  <% end %>
   <%= render Form::TextFieldComponent.new(f, :title, "Titel") %>
   <%= render Form::TextAreaComponent.new(f, :description, "Beschreibung", rows: 10) %>
   <%= render Form::CoordinatorPickerComponent.new(f, :coordinators, "Ansprechpersonen und Bearbeitende") %>
