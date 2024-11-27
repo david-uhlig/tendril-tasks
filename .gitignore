@@ -9,6 +9,7 @@
 
 # Ignore all environment files.
 /.env*
+/secrets.env
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -47,3 +48,5 @@
 /app/assets/images/unplash/*
 
 /compose.yaml
+/app/assets/images/brand/custom/
+/.rubycritic.yml
