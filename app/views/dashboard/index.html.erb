@@ -1,0 +1,19 @@
+<%= render HeadingComponent.new(tag: :h1, scheme: :primary).with_content("Dashboard") %>
+<%= render HorizontalLineComponent.new %>
+<%= render HeadingComponent.new(tag: :h2, scheme: :tertiary).with_content("Editor Aktionen") %>
+<%= render ButtonGridComponent.new(tag: :a, size: :large) do |grid| %>
+  <% grid.button(href: new_project_path).with_content("Projekt erstellen") %>
+  <% grid.button(href: new_task_path).with_content("Aufgabe erstellen") %>
+<% end %>
+<%= render HeadingComponent.new(tag: :h3, scheme: :quaternary).with_content("Projekte als Ansprechperson") %>
+<ul>
+  <% current_user.projects_as_coordinator.each do |project| %>
+  <li><%= link_to project.title, edit_project_path(project) %></li>
+  <% end %>
+</ul>
+<%= render HeadingComponent.new(tag: :h3, scheme: :quaternary).with_content("Aufgaben als Ansprechperson") %>
+<ul>
+  <% current_user.tasks_as_coordinator.each do |task| %>
+    <li><%= link_to task.title, edit_task_path(task) %></li>
+  <% end %>
+</ul>
