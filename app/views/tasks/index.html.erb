@@ -32,10 +32,28 @@
   <% end %>
 </div>
 
-<%# Link to all tasks when filter is applied %>
-<% if @type != :all_published_tasks %>
-  <hr class="hidden sm:flex h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <div class="flex items-center justify-center w-full">
-    <%= render ::ButtonComponent.new(tag: :a, href: tasks_path, scheme: :alternative, size: :large, class: "w-full text-center").with_content("Alle Aufgaben ansehen") %>
-  </div>
+<%= render HorizontalLineComponent.new %>
+
+<%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }) do |grid| %>
+  <%# Link to all tasks when filter is applied %>
+  <% grid.button(
+       tag: :a,
+       href: tasks_path,
+       scheme: :alternative,
+       size: :large,
+       class: "w-full text-center"
+     ).with_content("Alle Aufgaben ansehen") if @type != :all_published_tasks %>
+
+<%# Link to projects for convenience %>
+  <% grid.button(
+       tag: :a,
+       href: projects_path,
+       scheme: :alternative,
+       size: :large,
+       class: "w-full justify-center") do |button| %>
+    <% button.leading_svg xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 14 10", class: "rotate-180 mt-0.5" do %>
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+    <% end %>
+    <span>Zu den Projekten</span>
+  <% end %>
 <% end %>

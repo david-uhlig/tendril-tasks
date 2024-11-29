@@ -17,3 +17,18 @@
     <%= render ProjectSectionComponent.new(project) %>
   <% end %>
 <% end %>
+
+<%= render HorizontalLineComponent.new %>
+
+<%# Link to tasks for convenience %>
+<%= render ::ButtonComponent.new(
+  tag: :a,
+  href: tasks_path,
+  scheme: :alternative,
+  size: :large,
+  class: "w-full justify-center") do |button| %>
+  <% button.trailing_svg xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 14 10" do %>
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+  <% end %>
+  <span>Zu den Aufgaben</span>
+<% end %>
