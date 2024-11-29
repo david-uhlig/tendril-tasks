@@ -16,6 +16,9 @@ module RocketChatHelper
     return "#" unless to.is_a?(User)
     return "#" if to.id == current_user.id
 
-    "#{ROCKET_CHAT_DEEPLINK_HOST}/room?host=#{ROCKET_CHAT_HOST}&path=direct/#{to.uid}#{current_user.uid}"
+    room_id = "#{to.uid}#{current_user.uid}"
+
+    # rid for mobile, path for web-clients
+    "#{ROCKET_CHAT_DEEPLINK_HOST}/room?host=#{ROCKET_CHAT_HOST}&rid=#{room_id}&path=direct/#{room_id}"
   end
 end
