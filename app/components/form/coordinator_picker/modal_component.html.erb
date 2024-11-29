@@ -30,7 +30,7 @@
                     class: "mx-auto" do |f| %>
         <div class="p-4 md:p-5">
           <%# Search box %>
-          <div class="min-h-96 space-y-4">
+          <div class="md:min-h-96 space-y-4">
             <label for="search" class="text-sm font-normal text-gray-500 dark:text-gray-400">Wähle zusätzliche Ansprechpersonen aus</label>
             <%# Search field %>
             <%= f.text_field :search,
@@ -50,7 +50,7 @@
           </div>
 
           <%# Chosen coordinators %>
-          <div class="min-h-36 space-y-4">
+          <div class="md:min-h-36 space-y-4">
             <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Ausgewählte Ansprechpersonen</p>
             <%= render Form::CoordinatorPicker::SelectionComponent.new("coordinators", @assigned, is_checked: true) %>
           </div>
