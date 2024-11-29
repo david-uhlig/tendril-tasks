@@ -60,8 +60,10 @@
     <%= yield :modal %>
 
     <%# Toast %>
-    <% flash.each do |type, message| %>
-      <%= render "layouts/flash", type: type, message: message %>
-    <% end %>
+    <div id="notifications">
+      <% flash.each do |type, message| %>
+        <%= render Toast::NotificationComponent.new(message, type: type) %>
+      <% end %>
+    </div>
   </body>
 </html>
