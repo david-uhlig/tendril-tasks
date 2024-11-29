@@ -61,12 +61,44 @@ class ButtonComponent < ApplicationComponent
   # @note The `aria-hidden="true"` attribute is automatically applied to hide the image from screen readers,
   #   as it is usually decorative and doesn't convey critical information.
   #
-  renders_one :leading_visual, ->(src, **options) do
-    options.stringify_keys!
-    options["class"] = class_names("w-5 h-5 me-2", options.delete("class"))
-    options["aria-hidden"] = options.delete("aria-hidden") || "true"
-    image_tag src, **options
-  end
+  renders_one :leading_visual, types: {
+    image: ->(src, **options) {
+      options.stringify_keys!
+      options["class"] = class_names("w-5 h-5 me-2", options.delete("class"))
+      options["aria-hidden"] = options.delete("aria-hidden") || "true"
+      options.symbolize_keys!
+      image_tag src, **options
+    },
+    svg: ->(**options, &block) {
+      options.stringify_keys!
+      options["class"] = class_names("w-5 h-5 me-2 mt-0.5", options.delete("class"))
+      options["aria-hidden"] = options.delete("aria-hidden") || "true"
+      options.symbolize_keys!
+      content_tag :svg, **options, &block
+    }
+  }
+  alias with_leading_visual with_leading_visual_image
+  alias leading_image with_leading_visual_image
+  alias leading_svg with_leading_visual_svg
+
+  renders_one :trailing_visual, types: {
+    image: ->(src, **options) {
+      options.stringify_keys!
+      options["class"] = class_names("w-5 h-5 me-2", options.delete("class"))
+      options["aria-hidden"] = options.delete("aria-hidden") || "true"
+      options.symbolize_keys!
+      image_tag src, **options
+    },
+    svg: ->(**options, &block) {
+      options.stringify_keys!
+      options["class"] = class_names("w-5 h-5 ms-2 mt-0.5", options.delete("class"))
+      options["aria-hidden"] = options.delete("aria-hidden") || "true"
+      options.symbolize_keys!
+      content_tag :svg, **options, &block
+    }
+  }
+  alias trailing_image with_trailing_visual_image
+  alias trailing_svg with_trailing_visual_svg
 
   # @param options [Hash, nil] @see ActionView::Helpers::FormTagHelper::button_tag
   # @param scheme [Symbol] <%= one_of(ButtonComponent::SCHEME_OPTIONS) %>
@@ -77,11 +109,12 @@ class ButtonComponent < ApplicationComponent
   end
 
   def call
-    @options["class"] += " inline-flex" if leading_visual?
-    btn_content = leading_visual.to_s + (content || DEFAULT_LABEL)
+    @options["class"] += " inline-flex" if leading_visual? || trailing_visual?
 
-    content_tag @tag, @options do
-      btn_content.html_safe
+    content_tag @tag, **@options do
+      concat leading_visual if leading_visual?
+      concat content || DEFAULT_LABEL
+      concat trailing_visual if trailing_visual?
     end
   end
 
