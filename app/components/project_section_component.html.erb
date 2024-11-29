@@ -38,7 +38,7 @@
                 <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= coordinator.name %></span>
                 <span class="inline-flex items-center justify-center">
                   <%= render ButtonComponent.new(tag: :a,
-                                                 href: "https://rcbchat.de/direct/#{coordinator.username}",
+                                                 href: rocketchat_pm(to: coordinator),
                                                  scheme: :duotone_purple_to_blue,
                                                  size: :small, class: "m-0") do |contact_button| %>
                     <% contact_button.with_leading_visual("rocketchat/icon-white.svg") %>
