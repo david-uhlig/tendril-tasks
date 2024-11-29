@@ -53,6 +53,7 @@ class ButtonGridComponent < ApplicationComponent
       buttons.each do |button|
         concat button
       end
+      concat content
     end
   end
 
