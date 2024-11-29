@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
   end
 
-  resources :tasks
+  resources :tasks do
+    resources :applications, controller: "tasks/applications", only: [ :create, :destroy ]
+  end
   get "/tasks/new/from-preset/:project_id/:coordinator_ids", to: "tasks#new", as: :new_task_with_preset
 
   resources :projects do

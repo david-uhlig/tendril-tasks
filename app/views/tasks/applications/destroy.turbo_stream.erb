@@ -1,0 +1,17 @@
+<%# Updates the task card %>
+<turbo-stream action="replace" method="morph" target="task-card-<%= @task.id %>">
+  <template>
+    <%= render TaskCardComponent.new(@task) %>
+  </template>
+</turbo-stream>
+
+<%# Removes the modal %>
+<turbo-stream action="remove" target="confirm-application-withdrawal-<%= @task.id %>">
+</turbo-stream>
+
+<%# Issue a toast notification %>
+<turbo-stream action="append" target="notifications">
+  <template>
+    <%= render Toast::NotificationComponent.new("Deine Meldung für \"#{@task.title}\" wurde entfernt.") %>
+  </template>
+</turbo-stream>

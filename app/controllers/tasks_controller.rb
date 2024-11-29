@@ -15,7 +15,7 @@ class TasksController < ApplicationController
                        .order(:updated_at)
 
     @tasks = Task.accessible_by(current_ability)
-                 .includes(:coordinators, :project)
+                 .includes(:coordinators, :project, :applicants)
 
     # Apply filters
     if filter[:project_id].present?

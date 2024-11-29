@@ -17,6 +17,10 @@ class Task < ApplicationRecord
     where(published_at: ...Time.zone.now)
   }
 
+  def applicant?(user)
+    applicants.include?(user)
+  end
+
   def visible?
     published? && self.project.published?
   end

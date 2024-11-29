@@ -1,0 +1,13 @@
+<%# Update the task card %>
+<turbo-stream action="replace" method="morph" target="task-card-<%= @task.id %>">
+  <template>
+    <%= render TaskCardComponent.new(@task) %>
+  </template>
+</turbo-stream>
+
+<%# Issue a toast notification %>
+<turbo-stream action="append" target="notifications">
+  <template>
+    <%= render Toast::NotificationComponent.new("Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt.") %>
+  </template>
+</turbo-stream>
