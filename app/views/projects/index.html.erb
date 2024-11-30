@@ -20,15 +20,23 @@
 
 <%= render HorizontalLineComponent.new %>
 
+<%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
 <%# Link to tasks for convenience %>
-<%= render ::ButtonComponent.new(
+<% grid.button(
   tag: :a,
   href: tasks_path,
   scheme: :alternative,
-  size: :large,
   class: "w-full justify-center") do |button| %>
-  <% button.trailing_svg xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 14 10" do %>
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-  <% end %>
-  <span>Zu den Aufgaben</span>
+    <% button.trailing_svg xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 14 10" do %>
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+    <% end %>
+    <span>Zu den Aufgaben</span>
+<% end %>
+
+<%# Link to create project %>
+<% grid.button(
+  tag: :a,
+  href: new_project_path,
+  class: "w-full"
+).with_content("Projekt erstellen") if can? :create, Project %>
 <% end %>

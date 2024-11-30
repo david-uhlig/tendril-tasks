@@ -34,26 +34,31 @@
 
 <%= render HorizontalLineComponent.new %>
 
-<%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }) do |grid| %>
+<%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
   <%# Link to all tasks when filter is applied %>
   <% grid.button(
        tag: :a,
        href: tasks_path,
        scheme: :alternative,
-       size: :large,
        class: "w-full text-center"
      ).with_content("Alle Aufgaben ansehen") if @type != :all_published_tasks %>
 
-<%# Link to projects for convenience %>
+  <%# Link to projects for convenience %>
   <% grid.button(
        tag: :a,
        href: projects_path,
        scheme: :alternative,
-       size: :large,
        class: "w-full justify-center") do |button| %>
     <% button.leading_svg xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 14 10", class: "rotate-180 mt-0.5" do %>
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
     <% end %>
     <span>Zu den Projekten</span>
   <% end %>
+
+  <%# Link to create project %>
+  <% grid.button(
+       tag: :a,
+       href: new_task_path,
+       class: "w-full"
+       ).with_content("Aufgabe erstellen") if can? :create, Task %>
 <% end %>
