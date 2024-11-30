@@ -20,7 +20,7 @@ class ButtonGridComponent < ApplicationComponent
   GRID_ORIENTATION_MAPPINGS = {
     responsive: "grid-cols-1",
     vertical: "grid-cols-1",
-    horizontal: "grid-rows-1"
+    horizontal: ""
   }
 
   renders_many :buttons, ->(**options) {
@@ -47,6 +47,7 @@ class ButtonGridComponent < ApplicationComponent
   def call
     return unless buttons?
 
+    @grid_options[:class] << horizontal_cols
     @grid_options[:class] << responsive_cols
 
     content_tag :div, @grid_options do
@@ -61,6 +62,10 @@ class ButtonGridComponent < ApplicationComponent
 
   def responsive?
     @orientation == :responsive
+  end
+
+  def horizontal?
+    @orientation == :horizontal
   end
 
   def parse_grid_options(options)
@@ -99,6 +104,33 @@ class ButtonGridComponent < ApplicationComponent
       " sm:grid-cols-3"
     else
       " sm:grid-cols-4"
+    end
+  end
+
+  # Returns the responsive tailwind class so that all buttons fit on one
+  # horizontal grid row (up to 8)
+  #
+  # See above for reasoning why it is implemented this way.
+  def horizontal_cols
+    return "" unless horizontal?
+
+    case buttons.size
+    when 1
+      " grid-cols-1"
+    when 2
+      " grid-cols-2"
+    when 3
+      " grid-cols-3"
+    when 4
+      " grid-cols-4"
+    when 5
+      " grid-cols-5"
+    when 6
+      " grid-cols-6"
+    when 7
+      " grid-cols-7"
+    else
+      " grid-cols-8"
     end
   end
 end
