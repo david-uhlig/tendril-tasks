@@ -8,12 +8,12 @@
       <% if user_signed_in? %>
         <%= render Navigation::UserDropdownComponent.new(user: current_user) do |user_menu| %>
           <%= user_menu.with_links([
-               { name: "Profil", href: "/profile" },
-               { name: "Dashboard", href: "/dashboard" }
+               { name: "Profil", href: profile_path },
+               { name: "Dashboard", href: dashboard_index_path }
           ]) %>
-          <%= user_menu.with_admin_links([
-               { name: "Administration", href: "#" }
-          ]) %>
+          <% if can? :show, :admin_settings %>
+            <% user_menu.with_admin_link(name: "Administration", href: admin_index_path) %>
+          <% end %>
         <% end %>
       <%# Login button %>
       <% else %>

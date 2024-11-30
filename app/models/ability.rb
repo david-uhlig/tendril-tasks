@@ -40,7 +40,10 @@ class Ability
     can [ :create ], [ Project, Task ]
 
     # ----- Admin -----
-    nil unless user.admin?
+    return unless user.admin?
+
+    can :manage, :admin_settings
+    can :manage, :user_roles
 
     # Can assign user roles
 

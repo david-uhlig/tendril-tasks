@@ -28,6 +28,13 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: %i[ index ]
 
+  resources :admin, only: %i[ index ]
+  namespace :admin do
+    namespace :users do
+      resources :roles, only: %i[ update ]
+    end
+  end
+
   get "/profile", to: "users/profile#edit"
   delete "/profile", to: "users/profile#destroy"
 

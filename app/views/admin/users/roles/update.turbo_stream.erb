@@ -1,0 +1,36 @@
+<%# TODO refactor template code into a component %>
+<turbo-stream action="replace" method="morph" target="user-role-<%= @user.id %>">
+  <template>
+    <li id="user-role-<%= @user.id %>">
+      <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+        <%= render AvatarComponent.new(@user) %>
+        <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= @user.name %></span>
+        <%= form_with url: admin_users_role_path(@user), method: :patch do |f| %>
+          <%# TODO this should become a selectbox %>
+          <%= render ButtonGridComponent.new(orientation: :horizontal, size: :small) do |grid| %>
+            <% User.roles.each do |role_name, role_id| %>
+              <% if role_name == @user.role %>
+                <% grid.button(
+                     scheme: :duotone_purple_to_blue,
+                     disabled: true
+                   ).with_content(role_name.capitalize) %>
+              <% else %>
+                <% grid.button(
+                     scheme: :alternative,
+                     type: :submit,
+                     name: :role,
+                     value: role_name).with_content(role_name.capitalize) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </span>
+    </li>    
+  </template>
+</turbo-stream>
+
+<turbo-stream action="append" target="notifications">
+  <template>
+    <%= render Toast::NotificationComponent.new("Gespeichert.") %>
+  </template>
+</turbo-stream>
