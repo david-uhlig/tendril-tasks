@@ -6,8 +6,5 @@
 </turbo-stream>
 
 <%# Issue a toast notification %>
-<turbo-stream action="append" target="notifications">
-  <template>
-    <%= render Toast::NotificationComponent.new("Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt.") %>
-  </template>
-</turbo-stream>
+<%= render TurboStream::NotificationComponent
+             .new("Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt.") %>

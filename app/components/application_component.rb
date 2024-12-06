@@ -17,4 +17,5 @@ class ApplicationComponent < ViewComponent::Base
   delegate :rocketchat_pm, to: :view_context
   delegate :current_user, :user_signed_in?, to: :view_context
   delegate :can?, :cannot?, to: :view_context
+  delegate :turbo_stream, to: :view_context
 end

@@ -10,8 +10,5 @@
 </turbo-stream>
 
 <%# Issue a toast notification %>
-<turbo-stream action="append" target="notifications">
-  <template>
-    <%= render Toast::NotificationComponent.new("Deine Meldung für \"#{@task.title}\" wurde entfernt.") %>
-  </template>
-</turbo-stream>
+<%= render TurboStream::NotificationComponent
+             .new("Deine Meldung für \"#{@task.title}\" wurde entfernt.") %>

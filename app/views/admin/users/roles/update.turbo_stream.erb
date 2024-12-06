@@ -29,8 +29,4 @@
   </template>
 </turbo-stream>
 
-<turbo-stream action="append" target="notifications">
-  <template>
-    <%= render Toast::NotificationComponent.new("Gespeichert.") %>
-  </template>
-</turbo-stream>
+<%= render TurboStream::NotificationComponent.new("Gespeichert.") %>
