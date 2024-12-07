@@ -14,7 +14,7 @@ class ApplicationComponent < ViewComponent::Base
   include Primer::FetchOrFallbackHelper
   include Primer::ClassNameHelper
 
-  delegate :rocketchat_pm, to: :view_context
+  delegate :rocketchat_applink, :rocketchat_link, to: :view_context
   delegate :current_user, :user_signed_in?, to: :view_context
   delegate :can?, :cannot?, to: :view_context
   delegate :turbo_stream, to: :view_context
