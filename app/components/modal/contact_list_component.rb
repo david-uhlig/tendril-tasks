@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+module Modal
+  class ContactListComponent < ApplicationComponent
+    DEFAULT_CLASS = "my-4 space-y-3"
+
+    def initialize(coordinators, **options)
+      @coordinators = coordinators
+      @options = build_options(options)
+    end
+
+    def call
+      tag.ul **@options do
+        @coordinators.each do |coordinator|
+          concat render Modal::ContactItemComponent.new(coordinator)
+        end
+      end
+    end
+
+    private
+
+    def build_options(options)
+      options.stringify_keys!
+      options["class"] = class_names(
+        DEFAULT_CLASS,
+        options.delete("class")
+      )
+      options.symbolize_keys!
+      options
+    end
+  end
+end

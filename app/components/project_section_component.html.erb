@@ -22,40 +22,16 @@
     <% end %>
 
     <%= content_for :modal do %>
-    <%= render Modal::DialogComponent.new("project-contacts-#{@project.id}") do |modal| %>
-      <% modal.heading("Deine Ansprechpersonen") %>
-      <% modal.button(scheme: :light, type: :reset) do  %>
-        Fenster schließen
-      <% end %>
+      <%= render Modal::DialogComponent.new("project-contacts-#{@project.id}") do |modal| %>
+        <% modal.heading("Deine Ansprechpersonen") %>
         <%= render Modal::ParagraphComponent.new do %>
           Hier findest du die Ansprechpersonen für dieses Projekt. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
         <% end %>
-        <ul class="my-4 space-y-3">
-          <% @project.coordinators.each do |coordinator| %>
-            <li>
-              <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                <%= render AvatarComponent.new(coordinator) %>
-                <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= coordinator.name %></span>
-                <span class="inline-flex items-center justify-center">
-                  <%= render ButtonComponent.new(tag: :a,
-                                                 href: rocketchat_link(to: coordinator),
-                                                 target: "_blank",
-                                                 scheme: :duotone_purple_to_blue,
-                                                 size: :small,
-                                                 data: {
-                                                   controller: "deeplink",
-                                                   "app-link": rocketchat_applink(to: coordinator),
-                                                 },
-                                                 class: "m-0") do |contact_button| %>
-                    <% contact_button.with_leading_visual("rocketchat/icon-white.svg") %>
-                    Kontaktieren
-                  <% end %>
-                </span>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-    <% end %>
+        <%= render Modal::ContactListComponent.new(@project.coordinators) %>
+        <% modal.button(scheme: :light, type: :reset) do  %>
+          Fenster schließen
+        <% end %>
+      <% end %>
     <% end %>
 
     <%= render ButtonGridComponent.new(tag: :a, size: :large) do |grid| %>
