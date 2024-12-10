@@ -9,7 +9,7 @@ class HeadingComponent < ApplicationComponent
     :none => "",
     DEFAULT_SCHEME => "group mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white",
     :secondary => "group mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white",
-    :tertiary => "",
+    :tertiary => "group mb-4 text-2xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white",
     :quaternary => "",
     :quinary => "",
     :senary => ""
