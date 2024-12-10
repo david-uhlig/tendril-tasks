@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
                        .includes(:coordinators)
   end
 
-  def show; end
+  def show
+    @tasks = Task.accessible_by(current_ability).where(project: @project)
+  end
 
   def new
     @project_form = ProjectForm.new
@@ -25,7 +27,7 @@ class ProjectsController < ApplicationController
       if @project_form.submit_type == "save_and_new_task"
         redirect_to new_task_with_preset_path(project_id: @project_form.project.id, coordinator_ids: @project_form.project.coordinator_ids.join("-")), notice: success_msg
       else
-        redirect_to root_path, notice: "Project was successfully created."
+        redirect_to project_path(@project_form.project), notice: "Project was successfully created."
       end
     else
       render :new, status: :unprocessable_entity
@@ -40,8 +42,7 @@ class ProjectsController < ApplicationController
 
     if @project_form.save
       flash[:notice] = "Project #{@project_form.title} was updated." if project_has_changed
-      # TODO redirect to show page when implemented
-      redirect_to projects_path
+      redirect_to project_path(@project_form.project)
     else
       render :edit, status: :unprocessable_entity
     end
