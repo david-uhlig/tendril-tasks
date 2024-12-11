@@ -1,5 +1,6 @@
-<div class="mx-auto sm:px-16 xl:px-24 space-y-6">
+<%= render ContentComponent.new(width: :large) do %>
   <div class="space-y-6 sm:flex sm:space-y-0 sm:gap-4">
+    <%# Edit button %>
     <% if can? :update, @project %>
       <ul class="block sm:flex-grow w-full text-end sm:order-last whitespace-nowrap">
         <li class="inline-flex">
@@ -124,4 +125,4 @@
                                    scheme: :alternative,
                                    size: :large).with_content("Zur Projektübersicht") %>
   </div>
-</div>
+<% end %>

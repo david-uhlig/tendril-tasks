@@ -1,4 +1,4 @@
-<h1 class="font-bold text-4xl">Projekt bearbeiten</h1>
+<%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
     <% breadcrumb.section("Start", href: root_path, icon: :home) %>
     <% breadcrumb.section("Projekte", href: projects_path) %>
@@ -6,4 +6,7 @@
     <% breadcrumb.section("Bearbeiten") %>
   <% end %>
 
-<%= render 'form', form_object: @project_form %>
+  <%= render HeadingComponent.new(tag: :h1, scheme: :secondary).with_content("Projekt bearbeiten") %>
+
+  <%= render 'form', form_object: @project_form %>
+<% end %>

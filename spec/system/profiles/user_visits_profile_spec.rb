@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe "User visits profile page", type: :system do
   context "when unauthorized" do
-    it "returns :not_found" do
+    it "redirects to the login page" do
       visit profile_path
-      expect(page).to have_http_status(:not_found)
+      expect(page).to have_content("Willkommen zurück")
+      expect(page).to have_content("Anmelden mit RCB Chat")
     end
   end
 
