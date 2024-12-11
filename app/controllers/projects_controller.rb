@@ -11,7 +11,9 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @tasks = Task.accessible_by(current_ability).where(project: @project)
+    @tasks = Task.accessible_by(current_ability)
+                 .where(project: @project)
+                 .includes(:coordinators, :applicants)
   end
 
   def new
