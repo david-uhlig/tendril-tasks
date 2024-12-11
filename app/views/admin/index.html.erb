@@ -6,6 +6,10 @@
 <%= render HeadingComponent
              .new(tag: :h2, scheme: :secondary)
              .with_content("Rechtemanagement") %>
+  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.section("Administration") %>
+  <% end %>
 
 <ul class="my-4 space-y-3">
   <%# TODO this should only list users with roles > user. Regular users can then get permissions through a search box %>

@@ -1,3 +1,8 @@
 <h1 class="font-bold text-4xl">Aufgabe erstellen</h1>
+  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.section("Aufgaben", href: tasks_path) %>
+    <% breadcrumb.section("Anlegen") %>
+  <% end %>
 
 <%= render 'form', form_object: @task_form %>

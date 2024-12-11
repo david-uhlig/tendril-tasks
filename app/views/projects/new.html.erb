@@ -1,3 +1,8 @@
 <h1 class="font-bold text-4xl">Projekt erstellen</h1>
+  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.section("Projekte", href: projects_path) %>
+    <% breadcrumb.section("Anlegen") %>
+  <% end %>
 
 <%= render 'form', form_object: @project_form %>
