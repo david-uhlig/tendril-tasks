@@ -1,3 +1,19 @@
-<h2>Log in</h2>
-
-<%= render "devise/shared/links" %>
+<%= render ContentComponent.new do %>
+  <%= render HeadingComponent
+               .new(tag: :h1, schema: :secondary, class: "text-center")
+               .with_content("Willkommen zurück")
+  %>
+  <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Du bist nur einen Klick davon entfernt, loszulegen! Sobald du dich eingeloggt hast, kannst du alle unsere spannenden Projekte und Aufgaben entdecken, die auf dich warten. Es ist ganz einfach: Melde dich unkompliziert mit deinem RCB Chat Account an. Wir freuen uns auf dich! 🚴‍♂️✨</p>
+  <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "text-center" do %>
+    <span class="font-mono pe-5">Einfach hier klicken und gleich loslegen:</span>
+    <%= render ButtonComponent.new(
+      type: :submit,
+      scheme: :duotone_purple_to_blue,
+      size: :extra_large,
+      class: "mt-4",
+      data: { turbo: false }) do |login_button| %>
+      <% login_button.with_leading_visual("rocketchat/icon-white.svg", alt: "Rocket.Chat icon") %>
+      Anmelden mit RCB Chat
+    <% end %>
+  <% end %>
+<% end %>
