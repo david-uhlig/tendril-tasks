@@ -1,19 +1,6 @@
 <%= render ContentComponent.new(width: :large) do %>
+  <%# Breadcrumb navigation %>
   <div class="space-y-6 sm:flex sm:space-y-0 sm:gap-4">
-    <%# Edit button %>
-    <% if can? :update, @project %>
-      <ul class="block sm:flex-grow w-full text-end sm:order-last whitespace-nowrap">
-        <li class="inline-flex">
-          <%= render ButtonComponent.new(tag: :a,
-                                         href: edit_project_path(@project),
-                                         scheme: :default,
-                                         size: :small) do |edit_button| %>
-            <span>Bearbeiten</span>
-          <% end %>
-        </li>
-      </ul>
-    <% end %>
-    <%# Breadcrumb navigation %>
     <%= render BreadcrumbComponent.new do |breadcrumb| %>
       <% breadcrumb.section("Start", href: root_path, icon: :home) %>
       <% breadcrumb.section("Projekte", href: projects_path) %>
@@ -21,35 +8,85 @@
     <% end %>
   </div>
 
+  <%#
+    Info and action bar for editors and coordinators
+    Displays published status and action buttons: edit, create task, and create project
+  %>
+  <% if can?(:coordinate, @project) || can?(:update, @project) || can?(:create, Project) || can?(:create, Task) %>
+    <div class="flex flex-row flex-wrap-reverse gap-4">
+      <% if can?(:coordinate, @project) %>
+        <div class="whitespace-nowrap my-auto">
+          <% if @project.published? %>
+            <%= render BadgeComponent.new("Veröffentlicht",
+                                          scheme: :green,
+                                          size: :medium) %>
+          <% else %>
+            <%= render BadgeComponent.new("Entwurf",
+                                          scheme: :dark,
+                                          size: :medium) %>
+          <% end %>
+          <% if @project.visible? %>
+            <%= render BadgeComponent.new("Sichtbar",
+                                          scheme: :green,
+                                          size: :medium) %>
+          <% else %>
+            <%= render BadgeComponent.new("Unsichtbar",
+                                          scheme: :dark,
+                                          size: :medium) %>
+          <% end %>
 
-
-  <% if can? :update, @project %>
-    <div class="mb-4">
-      <% if @project.published? %>
-        <%= render BadgeComponent.new("Veröffentlicht",
-                                      scheme: :green,
-                                      size: :medium) %>
-      <% else %>
-        <%= render BadgeComponent.new("Entwurf", scheme: :dark, size: :medium) %>
+          <%# Visibility explainer icon %>
+          <svg class="w-5 h-5 mb-0.5 text-gray-800 dark:text-white inline align-center" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" data-popover-target="popover-visibility-info">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+        </div>
       <% end %>
+
+      <%# Action buttons %>
+      <% if can?(:update, @project) || can?(:create, Task) || can?(:create, Project) %>
+        <ul class="grow text-start sm:text-end whitespace-nowrap">
+          <% if can? :update, @project %>
+            <li class="inline-flex">
+              <%= render ButtonComponent.new(tag: :a,
+                                             href: edit_project_path(@project),
+                                             scheme: :default,
+                                             size: :small) do |edit_button| %>
+                <span>Bearbeiten</span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :create, Task %>
+            <li class="inline-flex">
+              <%= render ButtonComponent.new(tag: :a,
+                                             href: new_task_with_preset_path(
+                                               project_id: @project.id,
+                                               coordinator_ids: @project.coordinator_ids.join("-")),
+                                             scheme: :default,
+                                             size: :small) do |edit_button| %>
+                <span>+Aufgabe</span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :create, Project %>
+            <li class="inline-flex">
+              <%= render ButtonComponent.new(tag: :a,
+                                             href: new_project_path,
+                                             scheme: :default,
+                                             size: :small) do |edit_button| %>
+                <span>+Projekt</span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
       <% if @project.visible? %>
-        <%= render BadgeComponent.new("Sichtbar",
-                                      scheme: :green,
-                                      size: :medium) %>
-      <% else %>
-        <%= render BadgeComponent.new("Unsichtbar", scheme: :dark, size: :medium) %>
-      <% end %>
-
-      <svg class="w-5 h-5 mb-0.5 text-gray-800 dark:text-white inline align-center" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" data-popover-target="popover-visibility-info">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-      </svg>
-
-      <% if @project.published? && @project.tasks.present? && @project.tasks.any?(&:published?) %>
         <% headline = "Für alle sichtbar" %>
       <% else %>
         <% headline = "Nur für Ansprechpersonen sichtbar" %>
       <% end %>
 
+      <%# Visibility explainer popover %>
       <div data-popover id="popover-visibility-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 left-48">
         <div class="p-3 space-y-2">
           <h3 class="font-semibold text-gray-900 dark:text-white"><%= headline %></h3>
