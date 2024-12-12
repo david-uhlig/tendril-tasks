@@ -95,7 +95,7 @@
   <%# Project name %>
   <%= render HeadingComponent.new(tag: :h2, scheme: :secondary).with_content(@project.title) %>
   <%# Project description %>
-  <% @project.description.split("\n").each do |paragraph| %>
+  <% paragraphize(@project.description).each do |paragraph| %>
     <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
   <% end %>
 
