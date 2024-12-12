@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   def show
     @tasks = Task.accessible_by(current_ability)
                  .where(project: @project)
-                 .includes(:coordinators, :applicants)
+                 .includes(:coordinators, :applicants, :project)
   end
 
   def new
