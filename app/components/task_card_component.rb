@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class TaskCardComponent < ApplicationComponent
+  SCHEME_OPTIONS = BadgeComponent::SCHEME_OPTIONS
+  SCHEME_SIZE = SCHEME_OPTIONS.size
+
   def initialize(task, **options)
     @task = task
     @options = build_options(options)
@@ -18,8 +21,6 @@ class TaskCardComponent < ApplicationComponent
   end
 
   def badge_scheme(task)
-    schemes = BadgeComponent::SCHEME_OPTIONS
-    size = schemes.size
-    BadgeComponent::SCHEME_OPTIONS[task.project.id % size]
+    SCHEME_OPTIONS[task.project.id % SCHEME_SIZE]
   end
 end
