@@ -16,7 +16,7 @@ class Ability
     }
 
     # Can show, update and destroy projects when they are coordinators
-    can [ :show, :update, :destroy ], Project, {
+    can [ :show, :coordinate, :update, :destroy ], Project, {
       coordinators: { id: user.id }
     }
 
