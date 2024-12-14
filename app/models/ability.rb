@@ -15,7 +15,7 @@ class Ability
       tasks: { published_at: ..Time.zone.now }
     }
 
-    # Can show, update and destroy projects when they are coordinators
+    # Can show, coordinate, update, and destroy projects when they are coordinators
     can [ :show, :coordinate, :update, :destroy ], Project, {
       coordinators: { id: user.id }
     }
@@ -26,8 +26,8 @@ class Ability
       project: { published_at: ..Time.zone.now }
     }
 
-    # Can show, update and destroy tasks where they are coordinators
-    can [ :show, :update, :destroy ], Task, {
+    # Can show, coordinate, update and destroy tasks where they are coordinators
+    can [ :show, :coordinate, :update, :destroy ], Task, {
       coordinators: { id: user.id }
     }
 
