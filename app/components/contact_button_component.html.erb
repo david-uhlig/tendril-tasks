@@ -1,0 +1,18 @@
+<%= render ButtonComponent.new(tag: :a,
+                               href: rocketchat_link(to: @user),
+                               target: "_blank",
+                               scheme: :duotone_purple_to_blue,
+                               size: :small,
+                               data: {
+                                 controller: "deeplink",
+                                 "app-link": rocketchat_applink(to: @user)
+                               },
+                               class: "m-0") do |contact_button| %>
+  <% contact_button.with_leading_visual("rocketchat/icon-white.svg") %>
+  <% if responsive? %>
+    <span class="hidden sm:inline">Kontaktieren</span>
+    <span class="sm:hidden">PN</span>
+  <% else %>
+    <span>Kontaktieren</span>
+  <% end %>
+<% end %>
