@@ -1,9 +1,50 @@
 de:
   date:
+    month_names:
+      - ~              # Placeholder for index 0, since months are 1-based in Ruby
+      - Januar         # January
+      - Februar        # February
+      - März           # March
+      - April          # April
+      - Mai            # May
+      - Juni           # June
+      - Juli           # July
+      - August         # August
+      - September      # September
+      - Oktober        # October
+      - November       # November
+      - Dezember       # December
+    abbr_month_names:
+      - ~              # Placeholder for index 0
+      - Jan            # January
+      - Feb            # February
+      - Mär            # March
+      - Apr            # April
+      - Mai            # May
+      - Jun            # June
+      - Jul            # July
+      - Aug            # August
+      - Sep            # September
+      - Okt            # October
+      - Nov            # November
+      - Dez            # December
+    day_names:
+      - ~              # Placeholder for index 0
+      - Montag
+      - Dienstag
+      - Mittwoch
+      - Donnerstag
+      - Freitag
+      - Samstag
+      - Sonntag
     formats:
       default: "%d.%m.%Y"       # Example: 31.10.2024
       short: "%e. %b"           # Example: 31. Okt
       long: "%e. %B %Y"         # Example: 31. Oktober 2024
+  time:
+    formats:
+      short: "%d.%m.%Y %H:%M" # e.g., "12.12.2024 15:30"
+      long: "%A, %d. %B %Y %H:%M" # e.g., "Donnerstag, 12. Dezember 2024 15:30"
 
   activerecord:
     models:
