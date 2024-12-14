@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_201343) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_174439) do
   create_table "project_coordinators", primary_key: ["project_id", "user_id"], force: :cascade do |t|
     t.integer "project_id", null: false
     t.integer "user_id", null: false
@@ -33,6 +33,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_201343) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "withdrawn_at"
+    t.integer "status", default: 0
     t.index ["task_id"], name: "index_task_applications_on_task_id"
     t.index ["user_id"], name: "index_task_applications_on_user_id"
   end
@@ -70,8 +72,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_201343) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "project_coordinators", "projects"
-  add_foreign_key "project_coordinators", "users"
   add_foreign_key "task_applications", "tasks"
   add_foreign_key "task_applications", "users"
   add_foreign_key "task_coordinators", "tasks"

@@ -14,7 +14,16 @@ Rails.application.routes.draw do
   end
 
   resources :tasks do
-    resources :applications, controller: "tasks/applications", only: [ :create, :destroy ]
+    resources :applications,
+              controller: "tasks/applications",
+              only: [ :create, :destroy ],
+              param: :user_id
+    patch "/applications/:user_id/status",
+          to: "tasks/applications/statuses#update",
+          as: :application_status
+    put "/applications/:user_id/status",
+        to: "tasks/applications/statuses#update",
+        as: nil
   end
   get "/tasks/new/from-preset/:project_id/:coordinator_ids", to: "tasks#new", as: :new_task_with_preset
 

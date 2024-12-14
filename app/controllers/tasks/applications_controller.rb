@@ -3,15 +3,27 @@ class Tasks::ApplicationsController < ApplicationController
 
   def create
     authorize! :read, @task
-    @application = TaskApplication.new(task_id: params[:task_id], user_id: current_user.id)
+    # Clear out any old application
+    @application = TaskApplication.destroy_by(
+      task_id: params[:task_id],
+      user_id: current_user.id
+    )
+    # Create new entry
+    @application = TaskApplication.new(
+      task_id: params[:task_id],
+      user_id: current_user.id
+    )
     @application.save!
   end
 
-
   def destroy
     authorize! :read, @task
-    @application = TaskApplication.find([ @task.id, current_user.id ])
-    @application.destroy
+    @application = TaskApplication.find_by(
+      task_id: @task.id,
+      user_id: current_user.id
+    )
+    @application.withdraw
+    @application.save!
   end
 
   private

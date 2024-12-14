@@ -59,6 +59,15 @@ de:
         description: "Beschreibung"
         coordinators: "Ansprechpersonen"
         applicants: "Bewerber"
+      task_application:
+        status:
+          received: "Eingegangen"
+          under_review: "In Prüfung"
+          interviewing: "Im Gespräch"
+          on_hold: "Wartend"
+          accepted: "Angenommen"
+          rejected: "Abgelehnt"
+          withdrawn: "Zurückgezogen"
       project:
         title: "Titel"
         description: "Beschreibung"
