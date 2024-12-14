@@ -1,12 +1,10 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%# Breadcrumb navigation %>
-  <div class="space-y-6 sm:flex sm:space-y-0 sm:gap-4">
-    <%= render BreadcrumbComponent.new do |breadcrumb| %>
-      <% breadcrumb.section("Start", href: root_path, icon: :home) %>
-      <% breadcrumb.section("Projekte", href: projects_path) %>
-      <% breadcrumb.section(@project.title) %>
-    <% end %>
-  </div>
+  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.section("Projekte", href: projects_path) %>
+    <% breadcrumb.section(@project.title) %>
+  <% end %>
 
   <%#
     Info and action bar for editors and coordinators
@@ -50,7 +48,7 @@
               <%= render ButtonComponent.new(tag: :a,
                                              href: edit_project_path(@project),
                                              scheme: :default,
-                                             size: :small) do |edit_button| %>
+                                             size: :small) do %>
                 <span>Bearbeiten</span>
               <% end %>
             </li>
@@ -62,7 +60,7 @@
                                                project_id: @project.id,
                                                coordinator_ids: @project.coordinator_ids.join("-")),
                                              scheme: :default,
-                                             size: :small) do |edit_button| %>
+                                             size: :small) do %>
                 <span>+Aufgabe</span>
               <% end %>
             </li>
@@ -72,7 +70,7 @@
               <%= render ButtonComponent.new(tag: :a,
                                              href: new_project_path,
                                              scheme: :default,
-                                             size: :small) do |edit_button| %>
+                                             size: :small) do %>
                 <span>+Projekt</span>
               <% end %>
             </li>
@@ -80,13 +78,12 @@
         </ul>
       <% end %>
 
+      <%# Visibility explainer popover %>
       <% if @project.visible? %>
         <% headline = "Für alle sichtbar" %>
       <% else %>
         <% headline = "Nur für Ansprechpersonen sichtbar" %>
       <% end %>
-
-      <%# Visibility explainer popover %>
       <div data-popover id="popover-visibility-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 left-48">
         <div class="p-3 space-y-2">
           <h3 class="font-semibold text-gray-900 dark:text-white"><%= headline %></h3>
@@ -135,7 +132,6 @@
   <% paragraphize(@project.description).each do |paragraph| %>
     <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
   <% end %>
-
 
   <%= render HorizontalLineComponent.new %>
 
