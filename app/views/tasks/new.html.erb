@@ -1,6 +1,6 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
-    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.home %>
     <% breadcrumb.section("Aufgaben", href: tasks_path) %>
     <% breadcrumb.section(@task_form.project.title,
                           href: project_path(@task_form.project)) if @task_form.project.present? %>

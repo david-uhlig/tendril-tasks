@@ -1,6 +1,6 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
-    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.home %>
     <% breadcrumb.section("Projekte", href: projects_path) %>
     <% breadcrumb.section("Anlegen") %>
   <% end %>

@@ -1,7 +1,7 @@
 <%# User profile %>
 <%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
-    <% breadcrumb.section("Start", href: root_path, icon: :home) %>
+    <% breadcrumb.home %>
     <% breadcrumb.section("Profil") %>
   <% end %>
 
