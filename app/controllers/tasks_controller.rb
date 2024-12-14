@@ -31,7 +31,12 @@ class TasksController < ApplicationController
   end
 
   def show
-    # TODO implement
+    if can?(:coordinate, @task)
+      @task_applications = TaskApplication
+                             .where(task: @task)
+                             .includes(:user, :task)
+                             .order(created_at: :desc)
+    end
   end
 
   def new
@@ -62,8 +67,7 @@ class TasksController < ApplicationController
 
     if @task_form.save
       flash[:notice] = "Task #{@task_form.title} was updated." if task_has_changed
-      # TODO redirect to show page when implemented
-      redirect_to tasks_path
+      redirect_to task_path(@task_form.task)
     else
       render :edit, status: :unprocessable_entity
     end
