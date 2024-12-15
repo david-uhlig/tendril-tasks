@@ -35,7 +35,7 @@ module RcbAufgabenportal
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = ENV.fetch("TIME_ZONE", "UTC")
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
@@ -44,6 +44,7 @@ module RcbAufgabenportal
     # Prevent the default `<div class="field_with_errors"></div>`
     config.action_view.field_error_proc = Proc.new { |html_tag, _| html_tag }
 
+    # Custom Omniauth Rocket Chat strategy
     config.autoload_paths << Rails.root.join("lib/omniauth")
   end
 end
