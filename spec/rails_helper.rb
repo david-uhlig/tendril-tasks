@@ -67,10 +67,13 @@ RSpec.configure do |config|
     # This doesn't take any screenshots on failed tests, so we might
     # have to switch to :selenium_chrome_headless for improved CI
     driven_by :rack_test # rack_test by default, for performance
+    # driven_by :selenium_chrome_headless
   end
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless # selenium when we need javascript
+    # to be used when debugging tests
+    # driven_by :selenium_chrome
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
