@@ -120,10 +120,14 @@
     <%= render HorizontalLineComponent.new %>
   <% end %>
 
+  <%# Apply to task %>
+  <%= render "application", task: @task %>
+  <%= render HorizontalLineComponent.new %>
+
   <%# Contacts %>
   <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary)
                .with_content("Ansprechpersonen") %>
-  <p class="mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400">Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.</p>
+  <p class="mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400">Noch unschlüssig? Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du vorab Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.</p>
   <%= render Modal::ContactListComponent.new(@task.coordinators) %>
 
   <%= render HorizontalLineComponent.new %>

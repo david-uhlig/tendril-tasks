@@ -1,0 +1,68 @@
+<div id="task-application">
+  <% application = task.task_applications.find_by(user_id: current_user.id) %>
+  <%#
+    User has applied
+    - within the grace period they can edit their entry
+    - after the grace period has passed they can withdraw their entry
+  %>
+  <% if application.present? && !application.withdrawn? %>
+    <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary, id: "apply-now").with_content("Vielen Dank für deine Meldung!") %>
+    <% if application.editable? %>
+      <p class="mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400">Wir melden uns bald bei dir, um die nächsten Schritte zu besprechen. Falls du deinen Kommentar noch bearbeiten möchtest, kannst du das hier ganz einfach tun.</p>
+    <% else %>
+      <p class="mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400">Wir melden uns bald bei dir, um die nächsten Schritte zu besprechen. Die Ansprechpersonen wurden bereits benachrichtigt.</p>
+    <% end %>
+    <%= form_with model: application,
+                  method: :patch,
+                  url: task_application_path(task_id: task.id, user_id: current_user.id),
+                  class: "mx-auto space-y-4" do |f| %>
+      <% if application.editable? %>
+        <%= render Form::TextAreaComponent.new(f, :comment, "Kommentar (optional)", rows: 8) %>
+      <% else %>
+        <%= render Form::TextAreaComponent.new(
+          f,
+          :comment,
+          "Dein Kommentar",
+          rows: 8,
+          disabled: true,
+          placeholder: "Du hast dich ohne den optionalen Kommentar gemeldet."
+        ) %>
+      <% end %>
+      <%= render Form::SubmitButtonGroupComponent.new(f) do |save_buttons| %>
+        <% save_buttons.button("Meldung bearbeiten", value: "save") if application.editable? %>
+        <% save_buttons.delete_button("Meldung zurückziehen", target_modal_id: "confirm-application-withdrawal-#{task.id}") %>
+      <% end %>
+    <% end %>
+
+    <%#
+      Modal for withdrawing the application for the task
+      The card is re-rendered in turbo-stream requests, so the modal has to appear
+      here, instead of in the appropriate `content_for :modal` area. Otherwise it
+      would not render.
+    %>
+    <% if task.applicant?(current_user) %>
+      <%= render DeleteConfirm::ModalComponent.new(
+        id: "confirm-application-withdrawal-#{task.id}",
+        delete_path: task_application_path(task, current_user)) do |modal| %>
+        <% modal.heading("Meldung zurückziehen?") %>
+        <% modal.paragraph("Bist du sicher, dass du kein Interesse mehr an dieser Aufgabe hast?") %>
+        <% modal.paragraph("Wir informieren die Kontaktpersonen über deine Entscheidung.") %>
+        <% modal.confirm_button("Meldung zurückziehen") %>
+      <% end %>
+    <% end %>
+  <%#
+    User has not yet applied or withdrawn
+  %>
+  <% else %>
+    <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary, id: "apply-now").with_content("Interessiert? Hier melden!") %>
+    <p class="mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400">Du hast Interesse an dieser Aufgabe? Dann melde dich einfach unverbindlich bei uns, indem du dieses Formular abschickst! Wir besprechen die Details ganz entspannt mit dir. Wenn du uns schon vorab etwas mitteilen möchtest, kannst du gerne einen Kommentar hinterlassen. Wir freuen uns auf dein Engagement!</p>
+    <%= form_with model: TaskApplication.new,
+                  url: task_applications_path(task),
+                  class: "mx-auto space-y-4" do |f| %>
+      <%= render Form::TextAreaComponent.new(f, :comment, "Kommentar (optional)", rows: 8) %>
+      <%= render Form::SubmitButtonGroupComponent.new(f) do |save_buttons| %>
+        <% save_buttons.button("Zählt auf mich!", value: "save") %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
