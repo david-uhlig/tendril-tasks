@@ -29,14 +29,13 @@ de:
       - Nov            # November
       - Dez            # December
     day_names:
-      - ~              # Placeholder for index 0
+      - Sonntag
       - Montag
       - Dienstag
       - Mittwoch
       - Donnerstag
       - Freitag
       - Samstag
-      - Sonntag
     formats:
       default: "%d.%m.%Y"       # Example: 31.10.2024
       short: "%e. %b"           # Example: 31. Okt
