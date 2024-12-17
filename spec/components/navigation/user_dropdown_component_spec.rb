@@ -46,7 +46,7 @@ RSpec.describe Navigation::UserDropdownComponent, type: :component do
       component = described_class.new(user: @user)
       component.with_links([
          { name: "Example", href: "https://example.com" },
-         { name: "Projekte", href: "/projects" }
+         { name: "Themen", href: "/projects" }
       ])
       render_inline(component)
     end
@@ -62,7 +62,7 @@ RSpec.describe Navigation::UserDropdownComponent, type: :component do
 
     it "renders internal link" do
       expect(page).to have_selector("li>a[href='/projects']")
-      expect(page).to have_text("Projekte")
+      expect(page).to have_text("Themen")
     end
   end
 

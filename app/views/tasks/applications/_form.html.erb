@@ -1,0 +1,22 @@
+<div id="task-application">
+  <% application = task.task_applications.find_by(user_id: current_user.id) %>
+  <%#
+    User has applied
+    - within the grace period they can edit their entry
+    - after the grace period has passed they can withdraw their entry
+  %>
+  <% if application.present? && !application.withdrawn? %>
+    <%= render 'tasks/applications/form_when_user_has_applied_to_task',
+               application: application,
+               task: task
+    %>
+  <%#
+    User has not yet applied or withdrawn
+  %>
+  <% else %>
+    <%= render 'tasks/applications/form_when_user_has_not_applied_to_task',
+               application: application,
+               task: task
+    %>
+  <% end %>
+</div>

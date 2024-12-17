@@ -9,7 +9,7 @@
       <!-- Modal header -->
       <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-          Ansprechpersonen bearbeiten
+          <%= t ".title" %>
         </h3>
         <%= tag.button type: "button",
                        data: { "modal-hide": @id },
@@ -31,10 +31,10 @@
         <div class="p-4 md:p-5">
           <%# Search box %>
           <div class="md:min-h-96 space-y-4">
-            <label for="search" class="text-sm font-normal text-gray-500 dark:text-gray-400">Wähle zusätzliche Ansprechpersonen aus</label>
+            <label for="search" class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= t ".select_additional_contacts" %></label>
             <%# Search field %>
             <%= f.text_field :search,
-                             placeholder: "Suche nach Namen oder Benutzernamen",
+                             placeholder: t(".search_by_name_or_username"),
                              data: {
                                  action: "input->auto-submit#delayed",
                                  auto_focus_target: "focusHere"
@@ -44,19 +44,19 @@
             <% end %>
             <%# Search field submit button %>
             <%# Auto submit the search field through a GET request %>
-            <%= f.submit "Suchen", data: { auto_submit_target: "submit" }, class: "sr-only", tabindex: "-1", formmethod: "get" %>
+            <%= f.submit t("forms.search"), data: { auto_submit_target: "submit" }, class: "sr-only", tabindex: "-1", formmethod: "get" %>
             <%# Search results %>
             <%= render Form::CoordinatorPicker::SelectionComponent.new("candidates", @suggestions) %>
           </div>
 
           <%# Chosen coordinators %>
           <div class="md:min-h-36 space-y-4">
-            <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Ausgewählte Ansprechpersonen</p>
+            <p class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= t ".selected_contacts" %></p>
             <%= render Form::CoordinatorPicker::SelectionComponent.new("coordinators", @assigned, is_checked: true) %>
           </div>
         </div>
         <div class="flex items-center justify-between p-4 md:p-5 border-t rounded-b dark:border-gray-600">
-          <%= render ButtonComponent.new(type: :submit, class: "w-full", data: { "modal-hide": @id }).with_content("Auswahl übernehmen") %>
+          <%= render ButtonComponent.new(type: :submit, class: "w-full", data: { "modal-hide": @id }).with_content(t ".submit") %>
         </div>
       <% end # of form %>
     </div>

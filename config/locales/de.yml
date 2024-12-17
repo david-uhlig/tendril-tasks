@@ -47,18 +47,29 @@ de:
 
   activerecord:
     models:
-      task: "Aufgabe"
-      project: "Projekt"
-      user: "Benutzer"
+      task:
+        zero: "Aufgaben"
+        one: "Aufgabe"
+        other: "Aufgaben"
+      project:
+        one: "Thema"
+        other: "Themen"
+      user:
+        one: "Benutzer"
+        other: "Benutzer"
+      task_applications:
+        one: "Bewerbung"
+        other: "Bewerbungen"
 
     attributes:
       task:
-        project: "Projekt"
+        project: "Thema"
         title: "Titel"
         description: "Beschreibung"
         coordinators: "Ansprechpersonen"
         applicants: "Bewerber"
       task_application:
+        comment: "Kommentar"
         status:
           received: "Eingegangen"
           under_review: "In Prüfung"
@@ -78,7 +89,7 @@ de:
         task:
           attributes:
             project:
-              required: "Bitte ordne die Aufgabe einem Projekt zu."
+              required: "Bitte ordne die Aufgabe einem Thema zu."
             title:
               blank: "Bitte gib einen Titel an."
               too_short: "Der Titel muss mindestens 10 Zeichen lang sein."
@@ -93,7 +104,225 @@ de:
               blank: "Bitte gib einen Titel an."
               too_short: "Der Titel muss mindestens 10 Zeichen lang sein."
             description:
-              blank: "Bitte beschreibe das Projekt."
-              too_short: "Die Beschreibung muss mindestens 10 Zeichen lan sein."
+              blank: "Bitte beschreibe das Thema."
+              too_short: "Die Beschreibung muss mindestens 10 Zeichen lang sein."
             coordinators:
               blank: "Bitte wähle mindestens eine Ansprechperson aus."
+  breadcrumbs:
+    profile: "Profil"
+    dashboard: "Dashboard"
+    admin: "Administration"
+    new: "Anlegen"
+    edit: "Bearbeiten"
+    create: "Anlegen"
+
+  components:
+    coordinator_picker:
+      edit_contacts: "Ansprechpersonen bearbeiten"
+
+  forms:
+    create: "Speichern"
+    edit: "Bearbeiten"
+    update: "Speichern"
+    delete: "Löschen"
+    search: "Suchen"
+
+  rocketchat:
+    brand: "RCB Chat"
+    sign_in_button:
+      short: "Anmelden"
+      long: "Anmelden mit %{brand}"
+
+  projects:
+    new:
+      title: "Thema anlegen"
+    form:
+      visibility: "Status"
+      private: "Entwurf"
+      public: "Veröffentlicht"
+      save_and_create_task: "Speichern & Aufgabe erstellen"
+      delete_confirm_modal:
+        heading: "Thema löschen?"
+        content: |
+          Bist du sicher, dass du dieses Thema löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+          Auch alle Aufgaben, die diesem Thema zugeordnet wurden, werden unwiderruflich gelöscht.
+        affected_tasks: "Betroffene Aufgaben"
+    edit:
+      title: "Thema bearbeiten"
+    index:
+      title:
+        zero: "Aktuell keine Themen!"
+        one: "Mach mit bei diesem Thema!"
+        other: "Mach mit bei %{count} Themen!"
+      title_highlight:
+        zero: "Themen"
+        one: "Thema"
+        other: "Themen"
+      no_initiatives: |
+        Unsere fleißigen Mitglieder haben sich aller Aufgaben angenommen. Juhu! Schau doch später wieder vorbei.
+      goto_tasks_button: "Zu den Aufgaben"
+      create_initiative_button: "Thema anlegen"
+    show:
+      visible: "Sichtbar"
+      invisible: "Unsichtbar"
+      visible_for_everyone: "Für alle sichtbar"
+      visible_for_coordinators: "Nur für Ansprechpersonen sichtbar"
+      properties: "Eigenschaften:"
+      initiative_was_published: "Thema veröffentlicht"
+      at_least_one_published_task: "1+ veröffentlichte Aufgaben"
+      add_task: "+Aufgabe"
+      add_initiative: "+Thema"
+      contact_persons: "Ansprechpersonen"
+      contact_persons_explainer: |
+        Hier findest du die Ansprechpersonen für dieses Thema. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
+      goto_initiatives_overview: "Zur Themenübersicht"
+    status:
+      published: "Veröffentlicht"
+      private: "Entwurf"
+    visibility:
+      visible: "Sichtbar"
+      hidden: "Versteckt"
+  pages:
+    home:
+      title: "Bring dich aktiv beim RCB ein!"
+      title_highlight: "aktiv"
+      hero: | 
+        Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren. Jede Hilfe, ob groß oder klein, trägt dazu bei, den Verein voranzubringen und eine aktive Gemeinschaft zu erhalten. Gemeinsam können wir so die Ziele des Vereins erreichen und ein Umfeld schaffen, in dem sich alle gut aufgehoben fühlen.
+      cta_when_signed_in:
+        view_now: "Jetzt ansehen:"
+        interesting_initiatives: "Spannende Themen"
+        variety_of_tasks: "Abwechslungsreiche Aufgaben"
+      cta_when_signed_out:
+        login_to_see_initiatives_and_tasks: |
+          Jetzt einloggen, um Themen und Aufgaben zu sehen:
+
+  layouts:
+    application:
+      application_title: "TendrilTasks - gemeinsam über uns hinauswachsen"
+
+  navigation:
+    home: "Start"
+  tasks:
+    index:
+      headline_for_all_published_tasks:
+        title:
+          zero: "Aktuell sind keine Aufgaben zu vergeben"
+          one: "Diese Aufgabe wartet auf dich!"
+          other: "%{count} Aufgaben warten auf dich!"
+        title_highlight:
+          one: "Aufgabe"
+          other: "Aufgaben"
+      headline_for_filtered_by_initiative:
+        title:
+          one: "%{count} Aufgabe in %{initiative}"
+          other: "%{count} Aufgaben in %{initiative}"
+      filter_by_project:
+        show_all: "Alle"
+      view_all_tasks: "Alle Aufgaben ansehen"
+      goto_initiatives: "Zu den Themen"
+      create_task: "Aufgabe anlegen"
+    form:
+      choose_initiative: "Thema auswählen"
+      visibility: "Status"
+      private: "Entwurf"
+      public: "Veröffentlicht"
+      save_and_new: "Speichern & Neu"
+      delete_confirm:
+        modal:
+          title: "Aufgabe löschen?"
+          content: |
+            Bist du sicher, dass du diese Aufgabe löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+            Auch alle Meldungen von Mitgliedern, die auf diese Aufgabe eingegangen sind, werden unwiderruflich gelöscht.  
+
+      new_initiative_button: "Neu"
+    show:
+      section_title:
+        applications: "Bewerbungen"
+      this_task_hasnt_received_applications: "Diese Aufgabe hat noch keine Bewerbungen erhalten."
+      contact_people: "Ansprechpersonen"
+      contact_people_content: "Noch unschlüssig? Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du vorab Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren."
+      goto_tasks_button: "Zur Aufgabenübersicht"
+      goto_initiative: "Zum Thema"
+      action_button:
+        edit: "Bearbeiten"
+        add_task: "+Aufgabe"
+        add_initiative: "+Thema"
+    applications:
+      form_when_user_has_applied_to_task:
+        thanks_for_your_application: "Vielen Dank für deine Meldung!"
+        next_steps_within_grace_period: |
+          Wir melden uns bald bei dir, um die nächsten Schritte zu besprechen. Falls du deinen Kommentar noch bearbeiten möchtest, kannst du das hier ganz einfach tun.
+        next_steps_outside_of_grace_period: |
+            Wir melden uns bald bei dir, um die nächsten Schritte zu besprechen. Die Ansprechpersonen wurden bereits benachrichtigt.
+
+        you_applied_without_a_comment: "Du hast dich ohne den optionalen Kommentar gemeldet."
+        update_application: "Meldung bearbeiten"
+        withdraw_application: "Meldung zurückziehen"
+        delete_confirm:
+          modal:
+            title: "Meldung zurückziehen?"
+            content: |
+              Bist du sicher, dass du kein Interesse mehr an dieser Aufgabe hast?
+              Wir informieren die Ansprechpersonen über deine Entscheidung.
+            withdraw_application: "Meldung zurückziehen"
+      form_when_user_has_not_applied_to_task:
+        apply_here: "Interessiert? Hier melden!"
+        procedure_and_motivation: "Du hast Interesse an dieser Aufgabe? Dann melde dich einfach unverbindlich bei uns, indem du dieses Formular abschickst! Wir besprechen die Details ganz entspannt mit dir. Wenn du uns schon vorab etwas mitteilen möchtest, kannst du gerne einen Kommentar hinterlassen. Wir freuen uns auf dein Engagement!"
+        submit: "Zählt auf mich!"
+      update:
+        we_couldnt_update_your_application: "Wir konnten deine Meldung leider nicht mehr aktualisieren."
+        we_updated_your_message: "Vielen Dank! Wir haben deine Meldung aktualisiert."
+      create:
+        we_received_your_application: "Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt."
+      destroy:
+        application_successfully_removed: "Deine Meldung für %{task_title} wurde entfernt."
+    visibility_explainer:
+      visible_for_everyone: "Für alle sichtbar"
+      visible_for_coordinators: "Nur für Ansprechpersonen sichtbar"
+      properties: "Eigenschaften:"
+      initiative_was_published: "Thema veröffentlich"
+      task_was_published: "Aufgabe veröffentlicht"
+  admin:
+    users:
+      roles:
+        cannot_change_current_user:
+          cannot_remove_last_administrator: "Der letzte Administrator kann nicht entfernt werden."
+          cannot_change_own_permissions: "Du kannst deine eigenen Rechte nicht bearbeiten."
+  users:
+    profile:
+      edit:
+        your_email_address: "Deine E-Mail-Adresse"
+        your_rocket_chat_username: "Dein %{brand} Benutzername"
+        data_sync_info: |
+          Wir übernehmen deine Daten aus dem %{brand} und synchronisieren sie automatisch bei Änderungen. Löschst du deinen %{brand}-Account, wird auch dein Konto hier gelöscht.
+
+        delete_confirm:
+          delete_my_account_button: "Mein Konto löschen"
+          modal:
+            title: "Konto löschen?"
+            content: |
+              Bist du sicher, dass du dein Konto endgültig löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden. Alle deine Daten werden unwiderruflich gelöscht.
+              Dein %{brand} Konto ist von der Löschung nicht betroffen.
+
+            confirm_button: "Konto löschen"
+      destroy:
+        success: "Dein Konto wurde gelöscht!"
+        failure: "Wir konnten dein Konto nicht löschen. Bitte versuche es nochmals!"
+    omniauth_callbacks:
+      failure:
+        failure: "Fehler. Bitte versuche es erneut."
+  devise:
+    sessions:
+      new:
+        welcome_back: "Willkommen zurück"
+        content: |
+          Du bist nur einen Klick davon entfernt, loszulegen! Sobald du dich eingeloggt hast, kannst du alle unsere spannenden Themen und Aufgaben entdecken, die auf dich warten. Es ist ganz einfach: Melde dich unkompliziert mit deinem %{brand} Account an. Wir freuen uns auf dich! 🚴‍♂️✨          
+
+        click_here_to_start: "Einfach hier klicken und gleich loslegen:"
+        login_with_rocket_chat_button: "Anmelden mit %{brand}"
+  dashboard:
+    index:
+      title: "Dashboard"
+      create_initiative_button: "Thema anlegen"
+  badges:
+    new: "Neu"

@@ -1,19 +1,27 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section("Dashboard") %>
+    <% breadcrumb.section(t "breadcrumbs.dashboard") %>
   <% end %>
 
-  <%= render HeadingComponent.new(tag: :h1, scheme: :secondary).with_content("Dashboard") %>
+  <%= render HeadingComponent
+               .new(tag: :h1,
+                    scheme: :secondary)
+               .with_content(t ".title")
+  %>
   <%= render HorizontalLineComponent.new %>
   <% if can? :create, Project %>
+    <%# TODO I18n when dashboard left WIP phase %>
     <%= render HeadingComponent.new(tag: :h2, scheme: :tertiary).with_content("Redaktionelle Aktionen") %>
     <%= render ButtonGridComponent.new(tag: :a, size: :large) do |grid| %>
-      <% grid.button(href: new_project_path).with_content("Projekt erstellen") %>
-      <% grid.button(href: new_task_path).with_content("Aufgabe erstellen") %>
+      <% grid.button(href: new_project_path)
+             .with_content(t ".create_initiative_button")
+      %>
+      <% grid.button(href: new_task_path)
+             .with_content("Aufgabe erstellen") %>
     <% end %>
   <% end %>
-  <%= render HeadingComponent.new(tag: :h3, scheme: :quaternary).with_content("Projekte als Ansprechperson") %>
+  <%= render HeadingComponent.new(tag: :h3, scheme: :quaternary).with_content("Themen als Ansprechperson") %>
   <ul>
     <% current_user.projects_as_coordinator.each do |project| %>
     <li><%= link_to project.title, edit_project_path(project) %></li>

@@ -1,8 +1,8 @@
 <%# Visibility explainer popover %>
 <% if task.visible? %>
-  <% headline = "Für alle sichtbar" %>
+  <% headline = t ".visible_for_everyone" %>
 <% else %>
-  <% headline = "Nur für Ansprechpersonen sichtbar" %>
+  <% headline = t ".visible_for_coordinators" %>
 <% end %>
 <div data-popover id="popover-visibility-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 left-48">
   <div class="p-3 space-y-2">
@@ -13,7 +13,7 @@
       <% bg_color = task.published? ? "bg-green-300 dark:bg-green-400" : "bg-gray-200 dark:bg-gray-600" %>
       <div class="h-1 <%= bg_color %>"></div>
     </div>
-    <p>Eigenschaften:</p>
+    <%= tag.p t(".properties") %>
     <ul>
       <li class="flex items-center">
         <% if task.project.published? %>
@@ -25,7 +25,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
         <% end %>
-        Projekt veröffentlicht
+        <%= t ".initiative_was_published" %>
       </li>
       <li class="flex items-center mb-1">
         <% if task.published? %>
@@ -37,7 +37,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
         <% end %>
-        Aufgabe veröffentlicht
+        <%= t ".task_was_published" %>
       </li>
     </ul>
   </div>

@@ -1,0 +1,13 @@
+en:
+  title: "Edit contact persons"
+  select_additional_contacts: "Select additional contact persons"
+  search_by_name_or_username: "Search by name or username"
+  selected_contacts: "Selected contacts"
+  submit: "Apply selection"
+
+de:
+  title: "Ansprechpersonen bearbeiten"
+  select_additional_contacts: "Wähle zusätzliche Ansprechpersonen aus"
+  search_by_name_or_username: "Suche nach Namen oder Benutzernamen"
+  selected_contacts: "Ausgewählte Ansprechpersonen"
+  submit: "Auswahl übernehmen"

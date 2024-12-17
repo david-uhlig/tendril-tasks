@@ -1,0 +1,19 @@
+<%= form_tag user_rocketchat_omniauth_authorize_path,
+             method: :post,
+             class: "text-center" do
+%>
+  <%= tag.span t(".login_to_see_initiatives_and_tasks"),
+               class: "font-mono pe-5"
+  %>
+  <%= render ButtonComponent.new(type: :submit,
+                                 scheme: :duotone_purple_to_blue,
+                                 size: :extra_large,
+                                 class: "mt-4",
+                                 data: { turbo: false }) do |login_button|
+  %>
+    <% login_button.with_leading_visual("rocketchat/icon-white.svg") %>
+    <%= t "rocketchat.sign_in_button.long",
+          brand: t("rocketchat.brand")
+    %>
+  <% end %>
+<% end %>

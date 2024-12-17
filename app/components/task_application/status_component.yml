@@ -1,0 +1,10 @@
+en:
+  selectbox:
+    title: "Informal status"
+    undertitle: "Only visible for contact people!"
+
+
+de:
+  selectbox:
+    title: "Informeller Status"
+    undertitle: "Nur für Ansprechpersonen sichtbar!"

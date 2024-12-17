@@ -3,7 +3,9 @@
     <%= link_to project_path(@task.project) do %>
       <%= render BadgeComponent.new(@task.project.title, scheme: @badge_scheme) %>
     <% end %>
-    <%= render BadgeComponent.new("Neu", scheme: :green) if is_new? %>
+    <%= render BadgeComponent.new(t("badges.new"),
+                                  scheme: :green) if is_new?
+    %>
   </div>
 
   <%= link_to task_path(@task) do %>

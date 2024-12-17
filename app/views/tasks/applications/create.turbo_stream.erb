@@ -10,7 +10,7 @@
   <%# Update the application section %>
   <turbo-stream action="replace" method="morph" target="task-application">
     <template>
-      <%= render partial: "tasks/application", locals: { task: @application.task } %>
+      <%= render partial: "tasks/applications/form", locals: { task: @application.task } %>
     </template>
   </turbo-stream>
 
@@ -24,4 +24,4 @@
 
 <%# Issue a toast notification %>
 <%= render TurboStream::NotificationComponent
-             .new("Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt.") %>
+             .new(t ".we_received_your_application") %>

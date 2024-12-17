@@ -88,6 +88,12 @@ class TaskForm
     persisted? ? :patch : :post
   end
 
+  class << self
+    def human_attribute_name(attribute, **options)
+      Task.human_attribute_name(attribute, **options)
+    end
+  end
+
   private
 
   def validate_task

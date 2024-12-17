@@ -2,7 +2,7 @@
   <%# Breadcrumb navigation %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section("Aufgaben", href: tasks_path) %>
+    <% breadcrumb.section(Task.model_name.human(count: 10), href: tasks_path) %>
     <% breadcrumb.section(@task.project.title, href: project_path(@task.project)) %>
     <% breadcrumb.section(@task.title) %>
   <% end %>
@@ -50,8 +50,9 @@
               <%= render ButtonComponent.new(tag: :a,
                                              href: edit_task_path(@task),
                                              scheme: :default,
-                                             size: :small) do %>
-                <span>Bearbeiten</span>
+                                             size: :small) do
+              %>
+                <%= tag.span t(".action_button.edit") %>
               <% end %>
             </li>
           <% end %>
@@ -62,8 +63,9 @@
                                                project_id: @task.project.id,
                                                coordinator_ids: @task.project.coordinator_ids.join("-")),
                                              scheme: :default,
-                                             size: :small) do %>
-                <span>+Aufgabe</span>
+                                             size: :small) do
+              %>
+                <%= tag.span t(".action_button.add_task") %>
               <% end %>
             </li>
           <% end %>
@@ -72,8 +74,9 @@
               <%= render ButtonComponent.new(tag: :a,
                                              href: new_project_path,
                                              scheme: :default,
-                                             size: :small) do %>
-                <span>+Projekt</span>
+                                             size: :small) do
+              %>
+                <%= tag.span t(".action_button.add_initiative") %>
               <% end %>
             </li>
           <% end %>
@@ -103,43 +106,48 @@
 
   <%# Applications %>
   <% if can?(:coordinate, @task) %>
-    <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary)
-                 .with_content("Bewerbungen") %>
+    <%= render HeadingComponent
+                 .new(tag: :h3,
+                      scheme: :tertiary)
+                 .with_content(t(".section_title.applications"))
+    %>
     <div>
-    <% if @task_applications.size > 0 %>
-      <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5" id="task-applications-list">
-        <% @task_applications.each do |application| %>
-          <%= render TaskApplicationComponent.new(application) %>
-        <% end %>
-      </ol>
-    <% else %>
-        <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Diese Aufgabe hat bisher noch keine Bewerbungen erhalten.</p>
-    <% end %>
+      <% if @task_applications.size > 0 %>
+        <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5" id="task-applications-list">
+          <% @task_applications.each do |application| %>
+            <%= render TaskApplicationComponent.new(application) %>
+          <% end %>
+        </ol>
+      <% else %>
+        <%= tag.p t(".this_task_hasnt_received_applications"),
+                  class: "mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"
+        %>
+      <% end %>
     </div>
-
     <%= render HorizontalLineComponent.new %>
   <% end %>
 
   <%# Apply to task %>
-  <%= render "application", task: @task %>
+  <%= render "tasks/applications/form",
+             task: @task
+  %>
   <%= render HorizontalLineComponent.new %>
 
   <%# Contacts %>
   <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary)
-               .with_content("Ansprechpersonen") %>
-  <p class="mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400">Noch unschlüssig? Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du vorab Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.</p>
+               .with_content(t(".contact_people")) %>
+  <%= tag.p t(".contact_people_content") %>
   <%= render Modal::ContactListComponent.new(@task.coordinators) %>
-
   <%= render HorizontalLineComponent.new %>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 justify-center text-center gap-2">
     <%= render ButtonComponent.new(tag: :a,
                                    href: tasks_path,
                                    scheme: :alternative,
-                                   size: :large).with_content("Zur Aufgabenübersicht") %>
+                                   size: :large).with_content(t(".goto_tasks_button")) %>
     <%= render ButtonComponent.new(tag: :a,
                                    href: project_path(@task.project),
                                    scheme: :alternative,
-                                   size: :large).with_content("Zum Projekt") %>
+                                   size: :large).with_content(t(".goto_initiative")) %>
   </div>
 <% end %>

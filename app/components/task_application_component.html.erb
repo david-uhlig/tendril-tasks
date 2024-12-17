@@ -15,14 +15,21 @@
           <%= @application.user.name %>
         <% end %>
         <%# New application badge %>
-        <%= render BadgeComponent.new("Neu", scheme: :green, size: :small, class: "ms-2 align-text-top") if is_new? %>
+        <%= render BadgeComponent.new(t("badges.new"),
+                                      scheme: :green,
+                                      size: :small,
+                                      class: "ms-2 align-text-top") if is_new?
+        %>
       <% end %>
       <%# Submission date %>
-      <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Beworben am <%= l @application.created_at, format: :long %></time>
+      <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
+        <%= t ".applied_on_date", date: l(@application.created_at, format: :long) %>
+      </time>
       <%# Withdrawal date %>
-      <%# Todo replace with withdrawn_at after migration %>
       <% if @application.withdrawn_at.present? %>
-        <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Zurückgezogen am <%= l @application.withdrawn_at, format: :long %></time>
+        <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
+          <%= t ".withdrawn_on_date", date: l(@application.withdrawn_at, format: :long) %>
+        </time>
       <% end %>
     </div>
     <div class="grow text-end">
@@ -31,7 +38,11 @@
   </div>
   <%# User comment %>
   <% paragraphize(@application.comment)&.each do |paragraph| %>
-    <p class="mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"><%= paragraph %></p>
+    <%= tag.p paragraph,
+              class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
+    %>
   <% end %>
-  <%= render ContactButtonComponent.new(@application.user, is_responsive: false) %>
+  <%= render ContactButtonComponent.new(@application.user,
+                                        is_responsive: false)
+  %>
 </li>

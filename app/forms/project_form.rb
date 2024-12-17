@@ -83,6 +83,12 @@ class ProjectForm
     persisted? ? :patch : :post
   end
 
+  class << self
+    def human_attribute_name(attribute, **options)
+      Project.human_attribute_name(attribute, **options)
+    end
+  end
+
   private
 
   def validate_project

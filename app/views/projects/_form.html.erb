@@ -1,19 +1,28 @@
-<%= form_with model: form_object, url: form_object.form_path, method: form_object.form_method, class: "mx-auto space-y-4" do |f| %>
-  <%= render Form::TextFieldComponent.new(f, :title, "Titel") %>
-  <%= render Form::TextAreaComponent.new(f, :description, "Beschreibung", rows: 10) %>
-  <%= render Form::CoordinatorPickerComponent.new(f, :coordinators, "Ansprechpersonen und Bearbeitende") %>
-  <%= render Form::ToggleComponent.new(f, :publish, "Sichtbarkeit") do |toggle| %>
-    <% toggle.checked_state_text("Entwurf") %>
-    <% toggle.unchecked_state_text("Öffentlich") %>
+<%= form_with model: form_object,
+              url: form_object.form_path,
+              method: form_object.form_method,
+              class: "mx-auto space-y-4" do |f|
+%>
+  <%= render Form::TextFieldComponent.new(f, :title) %>
+  <%= render Form::TextAreaComponent.new(f, :description, rows: 10) %>
+  <%= render Form::CoordinatorPickerComponent.new(f, :coordinators) %>
+  <%= render Form::ToggleComponent.new(f, :publish, t(".visibility")) do |toggle| %>
+    <% toggle.checked_state_text(t(".private")) %>
+    <% toggle.unchecked_state_text(t(".public")) %>
   <% end %>
 
-  <%= render Form::SubmitButtonGroupComponent.new(f, render_if: !form_object.persisted?) do |save_buttons| %>
-    <% save_buttons.button("Speichern", value: "save") %>
-    <% save_buttons.button("Speichern & Aufgabe erstellen", value: "save_and_new_task") %>
-  <% end %>
-  <%= render Form::SubmitButtonGroupComponent.new(f, render_if: form_object.persisted?) do |edit_buttons| %>
-    <% edit_buttons.delete_button("Löschen", target_modal_id: "confirm-project-delete") %>
-    <% edit_buttons.button("Speichern") %>
+  <% if form_object.persisted? %>
+    <%# Update buttons %>
+    <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
+      <% button_group.delete_button(t("forms.delete"), target_modal_id: "confirm-project-delete") %>
+      <% button_group.button(t("forms.update")) %>
+    <% end %>
+  <% else %>
+    <%# Create buttons %>
+    <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
+      <% button_group.button(t("forms.create"), value: "save") %>
+      <% button_group.button(t(".save_and_create_task"), value: "save_and_new_task") %>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -21,12 +30,13 @@
   <%= render DeleteConfirm::ModalComponent.new(
       id: "confirm-project-delete",
       delete_path: form_object.form_path) do |modal| %>
-        <% modal.heading("Projekt löschen?") %>
-        <% modal.paragraph("Bist du sicher, dass du dieses Projekt löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.") %>
-        <% modal.paragraph("Auch alle Aufgaben, die diesem Projekt zugeordnet wurden, werden unwiderruflich gelöscht.") %>
+        <% modal.heading(t(".delete_confirm_modal.heading")) %>
+        <% paragraphize(t(".delete_confirm_modal.content")).each do |text| %>
+          <% modal.paragraph(text) %>
+        <% end %>
         <% modal.section do %>
           <div>
-            <h2 class="mb-2 text-base font-medium text-gray-900 dark:text-white">Betroffene Aufgaben:</h2>
+            <h2 class="mb-2 text-base font-medium text-gray-900 dark:text-white"><%= t ".delete_confirm_modal.affected_tasks" %>:</h2>
             <%= tag.ul class: "max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400" do %>
               <% form_object.project.tasks.each do |task| %>
                 <%= tag.li tag.a task.title, href: task_path(task) %>

@@ -1,0 +1,23 @@
+en:
+  contacts: "Contacts"
+  modal:
+    title: "Your contacts"
+    content: |
+      Here you will find the contact people for this initiative. If you have any questions, need support or just want some information, you can contact them directly.
+    close_button: "Close window"
+  more_button: "Read more"
+  tasks_button:
+    one: "%{count} task"
+    other: "%{count} tasks"
+
+de:
+  contacts: "Kontakte"
+  modal:
+    title: "Deine Ansprechpersonen"
+    content: |
+      Hier findest du die Ansprechpersonen für dieses Thema. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
+    close_button: "Fenster schließen"
+  more_button: "Mehr erfahren"
+  tasks_button:
+    one: "%{count} Aufgabe"
+    other: "%{count} Aufgaben"

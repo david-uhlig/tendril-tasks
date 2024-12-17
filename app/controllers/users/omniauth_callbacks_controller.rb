@@ -14,6 +14,6 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def failure
-    redirect_to root_path, alert: "Failure. Please try again."
+    redirect_to root_path, alert: t(".failure")
   end
 end

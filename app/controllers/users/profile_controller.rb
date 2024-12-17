@@ -11,9 +11,9 @@ class Users::ProfileController < ApplicationController
     authorize! :destroy, @user
     if @user.destroy
       reset_session # Log the user out after account deletion
-      redirect_to root_path, notice: "Dein Konto wurde gelöscht!"
+      redirect_to root_path, notice: t(".success")
     else
-      redirect_to profile_path, alert: "Wir konnten dein Konto nicht löschen. Bitte versuche es nochmals!"
+      redirect_to profile_path, alert: t(".failure")
     end
   end
 

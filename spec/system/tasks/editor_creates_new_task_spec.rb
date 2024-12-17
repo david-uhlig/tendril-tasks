@@ -36,13 +36,13 @@ RSpec.describe "Editor creates new task", type: :system, js: true do
     end
 
     it "saves the task with `Speichern und Neu`" do
-      select "Project title", from: "Projekt"
+      select "Project title", from: "Thema"
       fill_in "Titel", with: "Some lengthy title"
       fill_in "Beschreibung", with: "Some lengthy description"
       click_on "Speichern & Neu"
 
       expect(page).to have_content("Aufgabe anlegen")
-      expect(page.has_select?("Projekt", selected: "Project title")).to be_truthy
+      expect(page.has_select?("Thema", selected: "Project title")).to be_truthy
       expect(page).to have_content(editor.name)
     end
   end

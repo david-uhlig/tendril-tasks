@@ -22,7 +22,9 @@ module Form
       @form = form
       @attribute = attribute
       @error_field_attribute = error_field_attribute || attribute
-      @label = label
+      @label = label ||
+        form.object.class.human_attribute_name(attribute).presence ||
+        attribute.to_s.humanize
       @options = options
     end
   end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "RCB Aufgabenportal" %></title>
+    <title><%= content_for(:title) || t(".application_title") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -14,7 +14,6 @@
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
 
     <%= favicon_link_tag asset_path("icon.svg"), type: "image/svg+xml" %>
     <%= favicon_link_tag asset_path("icon.png"), type: "image/png" %>
@@ -38,16 +37,21 @@
     </div>
     <%# Navigation %>
     <%= render NavigationComponent.new do |navigation| %>
-      <% navigation.with_links([
-                                 { name: "Start", href: root_path },
-                                 { name: "Projekte", href: projects_path },
-                                 { name: "Aufgaben", href: tasks_path }]) %>
-      <% navigation.with_login_button(
-        scheme: :duotone_purple_to_blue,
-        data: { turbo: false },
-        class: "hidden sm:inline-flex") do |login_button| %>
-        <% login_button.with_leading_visual("rocketchat/icon-white.svg", alt: "Rocket.Chat icon") %>
-        Anmelden
+      <% navigation.link(name: t("navigation.home"),
+                         href: root_path)
+      %>
+      <% navigation.link(name: Project.model_name.human(count: 10),
+                         href: projects_path)
+      %>
+      <% navigation.link(name: Task.model_name.human(count: 10),
+                         href: tasks_path)
+      %>
+      <% navigation.with_login_button(scheme: :duotone_purple_to_blue,
+                                      data: { turbo: false },
+                                      class: "hidden sm:inline-flex") do |login_button|
+      %>
+        <% login_button.with_leading_visual("rocketchat/icon-white.svg") %>
+        <%= t "rocketchat.sign_in_button.short" %>
       <% end %>
     <% end %>
 

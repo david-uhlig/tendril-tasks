@@ -1,0 +1,55 @@
+<%= render HeadingComponent
+             .new(tag: :h3,
+                  scheme: :tertiary,
+                  id: "apply-now")
+             .with_content(t ".thanks_for_your_application")
+%>
+<% if application.editable? %>
+  <%= tag.p t(".next_steps_within_grace_period"),
+            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
+  %>
+<% else %>
+  <%= tag.p t(".next_steps_outside_of_grace_period"),
+            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
+  %>
+<% end %>
+<%= form_with model: application,
+              method: :patch,
+              url: task_application_path(task_id: task.id, user_id: current_user.id),
+              class: "mx-auto space-y-4" do |f| %>
+  <% if application.editable? %>
+    <%= render Form::TextAreaComponent.new(f,
+                                           :comment,
+                                           rows: 8)
+    %>
+  <% else %>
+    <%= render Form::TextAreaComponent.new(f,
+                                           :comment,
+                                           rows: 8,
+                                           disabled: true,
+                                           placeholder: t(".you_applied_without_a_comment"))
+    %>
+  <% end %>
+  <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
+    <% button_group.button(t(".update_application"), value: "save") if application.editable? %>
+    <% button_group.delete_button(t(".withdraw_application"), target_modal_id: "confirm-application-withdrawal-#{task.id}") %>
+  <% end %>
+<% end %>
+
+<%#
+      Modal for withdrawing the application for the task
+      The card is re-rendered in turbo-stream requests, so the modal has to appear
+      here, instead of in the appropriate `content_for :modal` area. Otherwise it
+      would not render.
+    %>
+<% if task.applicant?(current_user) %>
+  <%= render DeleteConfirm::ModalComponent.new(
+    id: "confirm-application-withdrawal-#{task.id}",
+    delete_path: task_application_path(task, current_user)) do |modal| %>
+    <% modal.heading(t ".delete_confirm.modal.title") %>
+    <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
+      <%= modal.paragraph(text) %>
+    <% end %>
+    <% modal.confirm_button(t(".delete_confirm.modal.withdraw_application")) %>
+  <% end %>
+<% end %>

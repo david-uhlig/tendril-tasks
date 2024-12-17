@@ -21,8 +21,10 @@
                 },
                 class: "z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 text-start" do |f| %>
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-      <div>Informeller Status</div>
-      <div class="font-medium truncate">Nur für Ansprechpersonen sichtbar!</div>
+      <%= tag.div t(".selectbox.title") %>
+      <%= tag.div t(".selectbox.undertitle"),
+                  class: "font-medium truncate"
+      %>
     </div>
     <div class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-status-info-<%= @application.user.id %>">
       <% @statuses.each do |status, id| %>

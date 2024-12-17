@@ -2,16 +2,29 @@
   <%# Headline %>
   <% case @type %>
   <% when :all_published_tasks %>
-    <h1 class="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white"><%= @tasks.size %> <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Aufgaben</span> warten auf dich!</h1>
-  <% when :tasks_for_project %>
-    <h1 class="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white"><%= @tasks.size %> <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Aufgaben</span> in <%= @selected_project.title %></h1>
+    <%= render 'tasks/index/headline_for_all_published_tasks',
+               count: @tasks.size
+    %>
+  <% else %>
+    <%= render partial: 'tasks/index/headline_for_filtered_by_initiative',
+               locals: {
+                 count: @tasks.size,
+                 project: @selected_project
+               }
+    %>
   <% end %>
 
   <%# Filter by projects %>
   <% if @projects.size > 0 %>
     <ul class="flex flex-wrap gap-2">
       <%= link_to tasks_path do %>
-        <li><%= render BadgeComponent.new("Alle", size: :extra_large, border: !params[:project_id].present?) %></li>
+        <li>
+          <%= render BadgeComponent
+                       .new(t(".filter_by_project.show_all"),
+                              size: :extra_large,
+                              border: !params[:project_id].present?)
+          %>
+        </li>
       <% end %>
       <% @projects.each do |project| %>
         <li>
@@ -32,35 +45,40 @@
       <%= render TaskCardComponent.new(task) %>
     <% end %>
   </div>
-
   <%= render HorizontalLineComponent.new %>
 
   <%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
     <%# Link to all tasks when filter is applied %>
-    <% grid.button(
-      tag: :a,
-      href: tasks_path,
-      scheme: :alternative,
-      class: "w-full text-center"
-    ).with_content("Alle Aufgaben ansehen") if @type != :all_published_tasks %>
+    <% grid
+         .button(tag: :a,
+                 href: tasks_path,
+                 scheme: :alternative,
+                 class: "w-full text-center")
+         .with_content(t ".view_all_tasks") if @type != :all_published_tasks
+    %>
 
     <%# Link to projects for convenience %>
-    <% grid.button(
-      tag: :a,
-      href: projects_path,
-      scheme: :alternative,
-      class: "w-full justify-center") do |button| %>
-      <% button.leading_svg xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 14 10", class: "rotate-180 mt-0.5" do %>
+    <% grid
+         .button(tag: :a,
+                 href: projects_path,
+                 scheme: :alternative,
+                 class: "w-full justify-center") do |button|
+    %>
+      <% button.leading_svg xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 14 10",
+                            class: "rotate-180 mt-0.5" do
+      %>
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
       <% end %>
-      <span>Zu den Projekten</span>
+      <% t ".goto_initiatives" %>
     <% end %>
 
     <%# Link to create project %>
-    <% grid.button(
-      tag: :a,
-      href: new_task_path,
-      class: "w-full"
-    ).with_content("Aufgabe erstellen") if can? :create, Task %>
+    <% grid
+         .button(tag: :a,
+                 href: new_task_path,
+                 class: "w-full")
+         .with_content(t ".create_task") if can? :create, Task %>
   <% end %>
 <% end %>

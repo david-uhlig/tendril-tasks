@@ -1,0 +1,16 @@
+<%= render HeadingComponent
+             .new(tag: :h3,
+                  scheme: :tertiary,
+                  id: "apply-now")
+             .with_content(t ".apply_here") %>
+<%= tag.p t(".procedure_and_motivation"),
+          class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
+%>
+<%= form_with model: TaskApplication.new,
+              url: task_applications_path(task),
+              class: "mx-auto space-y-4" do |f| %>
+  <%= render Form::TextAreaComponent.new(f, :comment, rows: 8) %>
+  <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
+    <% button_group.button(t(".submit"), value: "save") %>
+  <% end %>
+<% end %>
