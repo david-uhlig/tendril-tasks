@@ -8,5 +8,9 @@ FactoryBot.define do
     trait :withdrawn do
       association :status, :withdrawn
     end
+
+    trait :grace_period_expired do
+      created_at { (TaskApplication::GRACE_PERIOD + 1.second).ago }
+    end
   end
 end
