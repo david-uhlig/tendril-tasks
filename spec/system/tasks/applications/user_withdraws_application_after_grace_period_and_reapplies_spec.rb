@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "User withdraws application after grace period and reapplies",
                type: :system,
-               js:true do
+               js: true do
   let(:user) { create(:user) }
   let(:task) { create(:task,
                       :published,
