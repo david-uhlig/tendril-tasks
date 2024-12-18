@@ -322,13 +322,12 @@ de:
     coordinator_picker:
       edit_contacts: "Ansprechpersonen bearbeiten"
 
-
-
   rocketchat:
     brand: "RCB Chat"
     sign_in_button:
       short: "Anmelden"
       long: "Anmelden mit %{brand}"
+
 
 
 
