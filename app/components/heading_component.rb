@@ -36,12 +36,11 @@ class HeadingComponent < ApplicationComponent
   end
 
   def build_options(options)
-    options.stringify_keys!
-    options["class"] = class_names(
+    options.deep_symbolize_keys!
+    options[:class] = class_names(
       SCHEME_MAPPINGS[@scheme],
-      options.delete("class")
+      options.delete(:class)
     )
-    options.symbolize_keys!
     options
   end
 end

@@ -25,13 +25,12 @@ class ContentComponent < ApplicationComponent
   private
 
   def build_options(width, options)
-    options.symbolize_keys!
-    options["class"] = class_names(
+    options.deep_symbolize_keys!
+    options[:class] = class_names(
       WIDTH_MAPPINGS[fetch_or_fallback(WIDTH_OPTIONS, width, DEFAULT_WIDTH)],
-      options.delete("class")
+      options.delete(:class)
     )
-    options["class"] = nil if options["class"].empty?
-    options.stringify_keys!
+    options[:class] = nil if options[:class].empty?
     options
   end
 end

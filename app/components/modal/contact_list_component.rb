@@ -20,12 +20,11 @@ module Modal
     private
 
     def build_options(options)
-      options.stringify_keys!
-      options["class"] = class_names(
+      options.deep_symbolize_keys!
+      options[:class] = class_names(
         DEFAULT_CLASS,
-        options.delete("class")
+        options.delete(:class)
       )
-      options.symbolize_keys!
       options
     end
   end

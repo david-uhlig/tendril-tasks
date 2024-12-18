@@ -13,11 +13,10 @@ module Modal
     private
 
     def build_options(options)
-      options.stringify_keys!
-      options["data-modal-target"] = modal_id
-      options["data-modal-toggle"] = modal_id
-      options["type"] ||= :button
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:"data-modal-target"] = modal_id
+      options[:"data-modal-toggle"] = modal_id
+      options[:type] ||= :button
       options
     end
   end

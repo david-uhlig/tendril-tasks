@@ -26,12 +26,11 @@ module Text
       private
 
       def build_options(options, scheme)
-        options.symbolize_keys!
+        options.deep_symbolize_keys!
         options[:class] = class_names(
           SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
           options.delete(:class)
         )
-        options.stringify_keys!
         options
       end
     end

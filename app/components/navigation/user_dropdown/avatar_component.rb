@@ -36,22 +36,10 @@ module Navigation
       # @param options [Hash, nil] Additional HTML options for the button and avatar (optional).
       #   - This includes ensuring an "id" of "avatarButton" and adding dropdown-specific data attributes.
       def initialize(user, scheme: ::AvatarComponent::DEFAULT_SCHEME, size: ::AvatarComponent::DEFAULT_SIZE, **options)
-        options.stringify_keys!
-        options["id"] = "avatarButton"
-        options["type"] = "button"
-
-        # Ensure "data" is a hash before merging dropdown-specific attributes.
-        options["data"] = options.fetch("data", {}).tap do |data|
-          raise ArgumentError, '"data" must be a hash' unless data.is_a?(Hash)
-        end.merge({
-                    "dropdown-toggle": "userDropdown",
-                    "dropdown-placement": "bottom-start"
-                  })
-
         @user = user
         @scheme = scheme
         @size = size
-        @options = options
+        @options = build_options(options)
       end
 
       # Renders the avatar for the user dropdown.
@@ -59,6 +47,23 @@ module Navigation
       # @return [String] HTML-safe string representing the avatar image within the button element.
       def call
         render ::AvatarComponent.new(@user, scheme: @scheme, size: @size, **@options)
+      end
+
+      private
+
+      def build_options(options)
+        options.deep_symbolize_keys!
+        options[:id] = "avatarButton"
+        options[:type] = "button"
+
+        # Ensure "data" is a hash before merging dropdown-specific attributes.
+        options[:data] = options.fetch(:data, {}).tap do |data|
+          raise ArgumentError, '"data" must be a hash' unless data.is_a?(Hash)
+        end.merge({
+                    "dropdown-toggle": "userDropdown",
+                    "dropdown-placement": "bottom-start"
+                  })
+        options
       end
     end
   end

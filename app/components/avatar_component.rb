@@ -83,23 +83,13 @@ class AvatarComponent < ApplicationComponent
   # @param options [Hash] Options hash for HTML attributes.
   # @return [Hash] The final options hash for the image tag.
   def build_options(scheme, size, **options)
-    options.stringify_keys!
-    options["class"] = build_classes(scheme, size, options["class"])
-    options["role"] ||= "img"
+    options.deep_symbolize_keys!
+    options[:class] = class_names(
+      SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
+      SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
+      options.delete(:class)
+    )
+    options[:role] ||= "img"
     options
-  end
-
-  # Generate the CSS class string based on the provided scheme, size, and custom classes.
-  #
-  # @param scheme [Symbol] The shape scheme for the avatar.
-  # @param size [Symbol] The size of the avatar.
-  # @param custom_classes [String] Custom CSS classes for the avatar.
-  # @return [String] The combined CSS class string.
-  def build_classes(scheme, size, custom_classes = nil)
-    base_classes = [
-      SCHEME_MAPPINGS.fetch(fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)),
-      SIZE_MAPPINGS.fetch(fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE))
-    ]
-    class_names(base_classes.compact, custom_classes)
   end
 end

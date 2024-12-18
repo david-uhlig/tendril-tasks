@@ -37,7 +37,7 @@ class ButtonGridComponent < ApplicationComponent
   def initialize(orientation: DEFAULT_ORIENTATION, grid_options: {}, **options)
     @orientation = fetch_or_fallback(ORIENTATION_OPTIONS, orientation, DEFAULT_ORIENTATION)
     @grid_options = parse_grid_options(grid_options)
-    @general_button_options = options.stringify_keys
+    @general_button_options = options.deep_symbolize_keys
   end
 
   # Renders the component.
@@ -69,20 +69,18 @@ class ButtonGridComponent < ApplicationComponent
   end
 
   def parse_grid_options(options)
-    options.stringify_keys!
-    options["class"] = class_names(
+    options.deep_symbolize_keys!
+    options[:class] = class_names(
       GRID_DEFAULT_CLASS,
       GRID_ORIENTATION_MAPPINGS[@orientation],
-      options.delete("class")
+      options.delete(:class)
     )
-    options.symbolize_keys!
     options
   end
 
   def parse_button_options(options)
-    options.stringify_keys!
+    options.deep_symbolize_keys!
     options = @general_button_options.merge(options)
-    options.symbolize_keys!
     options
   end
 

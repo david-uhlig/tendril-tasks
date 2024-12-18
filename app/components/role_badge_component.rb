@@ -21,11 +21,10 @@ class RoleBadgeComponent < ApplicationComponent
   private
 
   def build_options(options, user)
-    options.stringify_keys!
-    options["scheme"] ||= ROLE_SCHEME_MAPPINGS[fetch_or_fallback(ROLE_SCHEME_OPTIONS, user.role.to_sym, DEFAULT_ROLE_SCHEME)]
-    options["size"] ||= DEFAULT_SIZE
-    options["border"] ||= DEFAULT_BORDER
-    options.symbolize_keys!
+    options.deep_symbolize_keys!
+    options[:scheme] ||= ROLE_SCHEME_MAPPINGS[fetch_or_fallback(ROLE_SCHEME_OPTIONS, user.role.to_sym, DEFAULT_ROLE_SCHEME)]
+    options[:size] ||= DEFAULT_SIZE
+    options[:border] ||= DEFAULT_BORDER
     options
   end
 end

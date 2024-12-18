@@ -26,10 +26,9 @@ module Form
     private
 
     def build_options(options)
-      options.stringify_keys!
-      options["name"] = options.delete("name") || "#{@form.object_name}[submit_type]"
-      options["value"] = options.delete("value") || "save"
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:name] = options.delete(:name) || "#{@form.object_name}[submit_type]"
+      options[:value] = options.delete(:value) || "save"
       options
     end
   end

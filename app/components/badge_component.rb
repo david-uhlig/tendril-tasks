@@ -83,15 +83,14 @@ class BadgeComponent < ApplicationComponent
     scheme = fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME).to_sym
     border_classes = BORDER_MAPPINGS[scheme] if border
 
-    options.stringify_keys!
-    options["class"] = class_names(
+    options.deep_symbolize_keys!
+    options[:class] = class_names(
       DEFAULT_CLASS,
       SCHEME_MAPPINGS[scheme],
       border_classes,
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
-      options.delete("class")
+      options.delete(:class)
     )
-    options.symbolize_keys!
     options
   end
 end

@@ -63,17 +63,17 @@ class ButtonComponent < ApplicationComponent
   #
   renders_one :leading_visual, types: {
     image: ->(src, **options) {
-      options.stringify_keys!
-      options["class"] = class_names("w-5 h-5 me-2", options.delete("class"))
-      options["aria-hidden"] = options.delete("aria-hidden") || "true"
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:class] = class_names("w-5 h-5 me-2",
+                                    options.delete(:class))
+      options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       image_tag src, **options
     },
     svg: ->(**options, &block) {
-      options.stringify_keys!
-      options["class"] = class_names("w-5 h-5 me-2 mt-0.5", options.delete("class"))
-      options["aria-hidden"] = options.delete("aria-hidden") || "true"
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:class] = class_names("w-5 h-5 me-2 mt-0.5",
+                                     options.delete(:class))
+      options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       content_tag :svg, **options, &block
     }
   }
@@ -83,17 +83,17 @@ class ButtonComponent < ApplicationComponent
 
   renders_one :trailing_visual, types: {
     image: ->(src, **options) {
-      options.stringify_keys!
-      options["class"] = class_names("w-5 h-5 me-2", options.delete("class"))
-      options["aria-hidden"] = options.delete("aria-hidden") || "true"
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:class] = class_names("w-5 h-5 ms-2",
+                                    options.delete(:class))
+      options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       image_tag src, **options
     },
     svg: ->(**options, &block) {
-      options.stringify_keys!
-      options["class"] = class_names("w-5 h-5 ms-2 mt-0.5", options.delete("class"))
-      options["aria-hidden"] = options.delete("aria-hidden") || "true"
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:class] = class_names("w-5 h-5 ms-2 mt-0.5",
+                                    options.delete(:class))
+      options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       content_tag :svg, **options, &block
     }
   }
@@ -109,7 +109,7 @@ class ButtonComponent < ApplicationComponent
   end
 
   def call
-    @options["class"] += " inline-flex" if leading_visual? || trailing_visual?
+    @options[:class] += " inline-flex" if leading_visual? || trailing_visual?
 
     content_tag @tag, **@options do
       concat leading_visual if leading_visual?
@@ -121,13 +121,13 @@ class ButtonComponent < ApplicationComponent
   private
 
   def build_options(options, scheme, size, tag, type)
-    options.stringify_keys!
-    options["class"] = class_names(
+    options.deep_symbolize_keys!
+    options[:class] = class_names(
       SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
-      options.delete("class")
+      options.delete(:class)
     )
-    options["type"] = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if tag == :button
+    options[:type] = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if tag == :button
     options
   end
 end

@@ -14,10 +14,8 @@ class HorizontalLineComponent < ApplicationComponent
   private
 
   def build_options(options)
-    options.stringify_keys!
-    options["class"] = class_names(DEFAULT_CLASS, options.delete("class"))
-    options.symbolize_keys!
-
+    options.deep_symbolize_keys!
+    options[:class] = class_names(DEFAULT_CLASS, options.delete(:class))
     options
   end
 end

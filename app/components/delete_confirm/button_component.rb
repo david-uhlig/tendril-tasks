@@ -17,13 +17,12 @@ module DeleteConfirm
     private
 
     def build_options(options)
-      options.stringify_keys!
-      options["scheme"] ||= :red
-      options["size"] ||= :large
-      options["class"] ||= "w-full"
-      options["type"] ||= :button
-      options["data"] = { "modal-target": @target_modal_id, "modal-toggle": @target_modal_id }.merge(options.delete("data") || {})
-      options.symbolize_keys!
+      options.deep_symbolize_keys!
+      options[:scheme] ||= :red
+      options[:size] ||= :large
+      options[:class] ||= "w-full"
+      options[:type] ||= :button
+      options[:data] = { "modal-target": @target_modal_id, "modal-toggle": @target_modal_id }.merge(options.delete("data") || {})
       options
     end
   end
