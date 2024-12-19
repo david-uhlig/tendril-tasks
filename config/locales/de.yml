@@ -249,6 +249,8 @@ de:
           Du bist nur einen Klick davon entfernt, loszulegen! Sobald du dich eingeloggt hast, kannst du alle unsere spannenden Themen und Aufgaben entdecken, die auf dich warten. Es ist ganz einfach: Melde dich unkompliziert mit deinem %{brand} Account an. Wir freuen uns auf dich! 🚴‍♂️✨
         click_here_to_start: "Einfach hier klicken und gleich loslegen:"
         login_with_rocket_chat_button: "Anmelden mit %{brand}"
+      user:
+        signed_out: "Du wurdest erfolgreich abgemeldet"
 
   dashboard:
     index:
@@ -327,13 +329,3 @@ de:
     sign_in_button:
       short: "Anmelden"
       long: "Anmelden mit %{brand}"
-
-
-
-
-
-
-
-
-
-
