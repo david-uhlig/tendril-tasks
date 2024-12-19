@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t rcb_aufgabenportal .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name rcb_aufgabenportal rcb_aufgabenportal
+# docker build -t tendril_tasks .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name tendril_tasks tendril_tasks
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
