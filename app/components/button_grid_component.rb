@@ -47,8 +47,11 @@ class ButtonGridComponent < ApplicationComponent
   def call
     return unless buttons?
 
-    @grid_options[:class] << horizontal_cols
-    @grid_options[:class] << responsive_cols
+    @grid_options[:class] = class_merge(
+      horizontal_cols,
+      responsive_cols,
+      @grid_options.delete(:class),
+    )
 
     content_tag :div, @grid_options do
       buttons.each do |button|
@@ -70,7 +73,7 @@ class ButtonGridComponent < ApplicationComponent
 
   def parse_grid_options(options)
     options.deep_symbolize_keys!
-    options[:class] = class_names(
+    options[:class] = class_merge(
       GRID_DEFAULT_CLASS,
       GRID_ORIENTATION_MAPPINGS[@orientation],
       options.delete(:class)
@@ -86,49 +89,17 @@ class ButtonGridComponent < ApplicationComponent
 
   # Returns the responsive tailwind class so that all buttons fit on one
   # horizontal grid row (up to 4)
-  #
-  # Bear with me before submitting this to The Daily WTF. Somehow string
-  # interpolation doesn't work for dynamically generated classes in this
-  # component. Although the class name would appear correctly in the
-  # HTML-document, it has no effect whatsoever. So, this workaround is the only
-  # option for now.
   def responsive_cols
     return "" unless responsive? && buttons.size > 1
-
-    case buttons.size
-    when 2
-      " sm:grid-cols-2"
-    when 3
-      " sm:grid-cols-3"
-    else
-      " sm:grid-cols-4"
-    end
+    return "sm:grid-cols-4" if buttons.size >= 4
+    "sm:grid-cols-#{buttons.size}"
   end
 
   # Returns the responsive tailwind class so that all buttons fit on one
   # horizontal grid row (up to 8)
-  #
-  # See above for reasoning why it is implemented this way.
   def horizontal_cols
     return "" unless horizontal?
-
-    case buttons.size
-    when 1
-      " grid-cols-1"
-    when 2
-      " grid-cols-2"
-    when 3
-      " grid-cols-3"
-    when 4
-      " grid-cols-4"
-    when 5
-      " grid-cols-5"
-    when 6
-      " grid-cols-6"
-    when 7
-      " grid-cols-7"
-    else
-      " grid-cols-8"
-    end
+    return "grid-cols-8" if buttons.size >= 8
+    "grid-cols-#{buttons.size}"
   end
 end

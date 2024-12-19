@@ -34,7 +34,7 @@ module Breadcrumb
 
       margin = icon == :home ? "" : "ms-1 md:ms-2"
       @link_options = {
-        class: class_names(LINK_CLASS, margin)
+        class: class_merge(LINK_CLASS, margin)
       }
 
       @icon = {}

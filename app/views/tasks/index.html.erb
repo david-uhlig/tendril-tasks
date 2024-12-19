@@ -47,7 +47,7 @@
   </div>
   <%= render HorizontalLineComponent.new %>
 
-  <%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
+  <%= render ButtonGridComponent.new(orientation: :vertical, size: :large) do |grid| %>
     <%# Link to all tasks when filter is applied %>
     <% grid
          .button(tag: :a,

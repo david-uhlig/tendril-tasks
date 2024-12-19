@@ -37,7 +37,7 @@ class HeadingComponent < ApplicationComponent
 
   def build_options(options)
     options.deep_symbolize_keys!
-    options[:class] = class_names(
+    options[:class] = class_merge(
       SCHEME_MAPPINGS[@scheme],
       options.delete(:class)
     )

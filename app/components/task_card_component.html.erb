@@ -40,25 +40,28 @@
   </div>
 
   <%# Action buttons %>
-  <%= render ButtonGridComponent.new(tag: :a, size: :base, orientation: :vertical) do |grid| %>
+  <%= render ButtonGridComponent.new(tag: :a,
+                                     size: :base,
+                                     orientation: :vertical) do |grid|
+  %>
     <% grid.button(href: task_path(@task),
                    scheme: :alternative)
            .with_content(t(".read_more")) %>
     <% if @task.applicant?(current_user) %>
-      <%= render ButtonComponent
-                   .new(tag: :a,
-                        href: task_path(@task, anchor: "apply-now"),
-                        size: :base,
-                        scheme: :green,
-                        class: "w-full")
-                   .with_content(t(".applied_for_task_button")) %>
+      <% grid.button(tag: :a,
+                     href: task_path(@task, anchor: "apply-now"),
+                     size: :base,
+                     scheme: :green,
+                     class: "w-full")
+             .with_content(t(".applied_for_task_button"))
+      %>
     <% else %>
-      <%= render ButtonComponent
-                   .new(tag: :a,
+      <% grid.button(tag: :a,
                         href: task_path(@task, anchor: "apply-now"),
                         size: :base,
                         class: "w-full")
-                   .with_content(t(".express_interest_button")) %>
+             .with_content(t(".express_interest_button"))
+      %>
     <% end %>
   <% end %>
 </section>

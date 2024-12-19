@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TasksHelper
   def task_form_url(task_form)
     task_form.task.persisted? ? task_path(task_form.task) : tasks_path

@@ -26,7 +26,7 @@ class ContentComponent < ApplicationComponent
 
   def build_options(width, options)
     options.deep_symbolize_keys!
-    options[:class] = class_names(
+    options[:class] = class_merge(
       WIDTH_MAPPINGS[fetch_or_fallback(WIDTH_OPTIONS, width, DEFAULT_WIDTH)],
       options.delete(:class)
     )

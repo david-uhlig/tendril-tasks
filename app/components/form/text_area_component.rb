@@ -8,14 +8,21 @@ module Form
       @form = form
       @attribute = attribute
       @label = label
-      @options = options
+      @options = build_options(options)
     end
 
     def call
-      @options[:class] = class_names(CLASSES, @options.delete(:class))
       render BaseFieldComponent.new(@form, @attribute, @label) do
         @form.text_area @attribute, @options
       end
+    end
+
+    private
+
+    def build_options(options)
+      options.deep_symbolize_keys!
+      options[:class] = class_merge(CLASSES, options.delete(:class))
+      options
     end
   end
 end

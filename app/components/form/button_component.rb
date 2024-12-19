@@ -23,7 +23,7 @@ module Form
 
     def build_options(options)
       options.deep_symbolize_keys!
-      options[:class] = class_names(DEFAULT_CLASS, options.delete(:class))
+      options[:class] = class_merge(DEFAULT_CLASS, options.delete(:class))
       options
     end
   end

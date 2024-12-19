@@ -21,7 +21,7 @@ module Modal
 
     def build_options(options)
       options.deep_symbolize_keys!
-      options[:class] = class_names(
+      options[:class] = class_merge(
         DEFAULT_CLASS,
         options.delete(:class)
       )

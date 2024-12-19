@@ -84,7 +84,7 @@ class BadgeComponent < ApplicationComponent
     border_classes = BORDER_MAPPINGS[scheme] if border
 
     options.deep_symbolize_keys!
-    options[:class] = class_names(
+    options[:class] = class_merge(
       DEFAULT_CLASS,
       SCHEME_MAPPINGS[scheme],
       border_classes,

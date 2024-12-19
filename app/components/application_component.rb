@@ -12,7 +12,7 @@
 # @see https://viewcomponent.org/guide/getting-started.html#conventions
 class ApplicationComponent < ViewComponent::Base
   include Primer::FetchOrFallbackHelper
-  include Primer::ClassNameHelper
+  include TailwindHelper
 
   delegate :paragraphize, to: :view_context
   delegate :rocketchat_applink, :rocketchat_link, to: :view_context

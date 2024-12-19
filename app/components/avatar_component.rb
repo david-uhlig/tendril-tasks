@@ -84,7 +84,7 @@ class AvatarComponent < ApplicationComponent
   # @return [Hash] The final options hash for the image tag.
   def build_options(scheme, size, **options)
     options.deep_symbolize_keys!
-    options[:class] = class_names(
+    options[:class] = class_merge(
       SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
       options.delete(:class)

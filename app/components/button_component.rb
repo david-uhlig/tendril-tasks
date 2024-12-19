@@ -64,14 +64,14 @@ class ButtonComponent < ApplicationComponent
   renders_one :leading_visual, types: {
     image: ->(src, **options) {
       options.deep_symbolize_keys!
-      options[:class] = class_names("w-5 h-5 me-2",
+      options[:class] = class_merge("w-5 h-5 me-2",
                                     options.delete(:class))
       options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       image_tag src, **options
     },
     svg: ->(**options, &block) {
       options.deep_symbolize_keys!
-      options[:class] = class_names("w-5 h-5 me-2 mt-0.5",
+      options[:class] = class_merge("w-5 h-5 me-2 mt-0.5",
                                      options.delete(:class))
       options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       content_tag :svg, **options, &block
@@ -84,14 +84,14 @@ class ButtonComponent < ApplicationComponent
   renders_one :trailing_visual, types: {
     image: ->(src, **options) {
       options.deep_symbolize_keys!
-      options[:class] = class_names("w-5 h-5 ms-2",
+      options[:class] = class_merge("w-5 h-5 ms-2",
                                     options.delete(:class))
       options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       image_tag src, **options
     },
     svg: ->(**options, &block) {
       options.deep_symbolize_keys!
-      options[:class] = class_names("w-5 h-5 ms-2 mt-0.5",
+      options[:class] = class_merge("w-5 h-5 ms-2 mt-0.5",
                                     options.delete(:class))
       options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
       content_tag :svg, **options, &block
@@ -122,7 +122,7 @@ class ButtonComponent < ApplicationComponent
 
   def build_options(options, scheme, size, tag, type)
     options.deep_symbolize_keys!
-    options[:class] = class_names(
+    options[:class] = class_merge(
       SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
       SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
       options.delete(:class)

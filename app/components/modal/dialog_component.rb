@@ -29,7 +29,7 @@ class Modal::DialogComponent < ApplicationComponent
   private
 
   def dialog_buttons
-    classes = class_names(DEFAULT_FOOTER_CLASS, "md:grid-cols-#{buttons.size}")
+    classes = class_merge(DEFAULT_FOOTER_CLASS, "md:grid-cols-#{buttons.size}")
     if @form_path.present?
       form_tag @form_path, method: @form_method, class: classes do
         buttons.each do |button|

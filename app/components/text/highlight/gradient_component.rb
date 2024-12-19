@@ -27,7 +27,7 @@ module Text
 
       def build_options(options, scheme)
         options.deep_symbolize_keys!
-        options[:class] = class_names(
+        options[:class] = class_merge(
           SCHEME_MAPPINGS[fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)],
           options.delete(:class)
         )
