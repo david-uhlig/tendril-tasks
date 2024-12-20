@@ -13,25 +13,28 @@ module OmniAuth
       # the pkce option to true: https://tools.ietf.org/html/rfc7636
       option :pkce, true
 
-      # These are called after authentication has succeeded. If
-      # possible, you should try to set the UID without making
-      # additional calls (if the user id is returned with the token
-      # or as a URI parameter). This may not be possible with all
-      # providers.
-      uid { raw_info["_id"] }
+      uid do
+        raw_info["_id"]
+      end
 
       info do
         {
-          name: raw_info["name"],
           email: raw_info["email"],
+          active: raw_info["active"],
+          roles: raw_info["roles"],
+          name: raw_info["name"],
           username: raw_info["username"],
-          image: raw_info["avatar_url"]
+          avatar: {
+            url: raw_info["avatar_url"],
+            e_tag: raw_info["avatar_e_tag"],
+            origin: raw_info["avatar_origin"]
+          }
         }
       end
 
       extra do
         {
-          "raw_info" => raw_info
+          raw_info: raw_info
         }
       end
 

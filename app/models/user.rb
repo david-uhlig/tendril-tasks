@@ -28,17 +28,18 @@ class User < ApplicationRecord
   scope :exclude_ids, ->(user_ids) { where.not(id: user_ids) }
 
   def self.from_omniauth(auth)
+    # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      # TODO improve handling of the email argument at the rocketchat provider side
       user.email = auth.info.email || auth.extra.raw_info.emails.first.address
-      # Although this app uses omniauth only, a password is generated
-      # because it is required for devise features like :rememberable
+      # Although this application uses only omniauth, a password is generated
+      # because it is required for devise features such as :rememberable
       user.password = Devise.friendly_token[0, 20]
+      # Real name
       user.name = auth.info.name
       user.username = auth.info.username
-      user.avatar_url = auth.info.image
+      # TODO We might need to store the etag, too
+      user.avatar_url = auth.info.avatar.url
       user.role = determine_role(auth)
-      # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     end
   end
 
@@ -57,9 +58,19 @@ class User < ApplicationRecord
 
   private
 
-  def self.determine_role(email)
-    return :admin if ENV["ADMIN_EMAIL"]&.downcase == email.downcase
+  # Determines the role of a user based on the authentication data and the
+  # current state of the database.
+  #
+  # If there are no users with the :admin role in the database, the first user
+  # to log in with the "admin" role in the authentication data will be assigned
+  # :admin. Otherwise, the user will be assigned the role of :user.
+  #
+  # @param auth [OmniAuth::AuthHash] The authentication hash containing user information.
+  # @return [Symbol] The role of the user, either :user or :admin.
+  def self.determine_role(auth)
+    return :user if User.where(role: :admin).count > 0
+    return :admin if auth.roles&.include?("admin")
 
-    User.count == 0 ? :admin : :user
+    :user
   end
 end
