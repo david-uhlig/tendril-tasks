@@ -52,7 +52,7 @@ gem "tailwind_merge"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component", "~> 3.18"
+gem "view_component", "~> 3.21"
 
 # Authorization
 gem "cancancan"
