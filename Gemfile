@@ -41,8 +41,7 @@ gem "thruster", require: false
 gem "devise"
 gem "omniauth"
 gem "omniauth-rails_csrf_protection"
-# TODO Move to .gemspec as a dependency for the eventual omniauth-rocketchat gem
-gem "omniauth-oauth2"
+gem "omniauth-rocketchat"
 
 gem "dotenv-rails"
 

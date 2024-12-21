@@ -152,13 +152,13 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    hotwire-spark (0.1.4)
+    hotwire-spark (0.1.8)
       listen
       rails (>= 8.0.0)
       zeitwerk
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.0.3)
+    importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -207,7 +207,7 @@ GEM
       bigdecimal (~> 3.1)
     net-http (0.6.0)
       uri
-    net-imap (0.5.2)
+    net-imap (0.5.3)
       date
       net-protocol
     net-pop (0.1.2)
@@ -251,6 +251,10 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
+    omniauth-rocketchat (0.1.2)
+      oauth2 (~> 2.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
     parallel (1.26.3)
@@ -483,7 +487,6 @@ PLATFORMS
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
-  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -502,8 +505,8 @@ DEPENDENCIES
   jbuilder
   kamal
   omniauth
-  omniauth-oauth2
   omniauth-rails_csrf_protection
+  omniauth-rocketchat
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.0)
@@ -525,4 +528,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.5.22
+   2.6.1

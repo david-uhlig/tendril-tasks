@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# Import the RocketChat omniauth strategy
-# TODO remove this later when the omniauth-rocketchat gem is available
-require Rails.root.join("lib/omniauth/strategies/rocketchat")
-
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -276,13 +272,6 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  # TODO supply example `.env` file that explains the required `ENV` variables
-  config.omniauth :rocketchat, ENV["ROCKETCHAT_CLIENT_ID"], ENV["ROCKETCHAT_CLIENT_SECRET"], scope: "user",
-                  client_options: {
-                    site: ENV["ROCKETCHAT_WORKSPACE_URL"],
-                    authorize_url: ENV["ROCKETCHAT_AUTHORIZATION_URL"],
-                    token_url: ENV["ROCKETCHAT_ACCESS_TOKEN_URL"]
-                  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
