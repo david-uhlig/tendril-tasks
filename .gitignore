@@ -50,3 +50,4 @@
 /compose.yaml
 /app/assets/images/brand/custom/
 /.rubycritic.yml
+/lib/tasks/llm_review.rake
