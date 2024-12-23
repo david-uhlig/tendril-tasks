@@ -17,7 +17,7 @@
   <%# Update application entry %>
   <turbo-stream action="prepend" target="task-applications-list">
     <template>
-      <%= render TaskApplicationComponent.new(@application) %>
+      <%= render TendrilTasks::Tasks::Application.new(@application) %>
     </template>
   </turbo-stream>
 <% end %>

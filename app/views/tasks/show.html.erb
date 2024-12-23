@@ -115,7 +115,7 @@
       <% if @task_applications.size > 0 %>
         <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5" id="task-applications-list">
           <% @task_applications.each do |application| %>
-            <%= render TaskApplicationComponent.new(application) %>
+            <%= render TendrilTasks::Tasks::Application.new(application) %>
           <% end %>
         </ol>
       <% else %>

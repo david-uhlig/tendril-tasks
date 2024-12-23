@@ -1,11 +1,11 @@
 <%# Application for taking over a task %>
 <li class="mb-10 ms-8" id="task-application-<%= @application.user.id %>">
   <span class="absolute flex items-center justify-center bg-gray-100 rounded-full -start-5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
-    <%= render AvatarComponent.new(@application.user) %>
+    <%= render ::AvatarComponent.new(@application.user) %>
   </span>
   <div class="flex flex-row">
     <div>
-      <%= render HeadingComponent
+      <%= render ::HeadingComponent
                    .new(tag: :h4,
                         scheme: :senary,
                         class: "mb-1 whitespace-nowrap") do %>
@@ -15,7 +15,7 @@
           <%= @application.user.name %>
         <% end %>
         <%# New application badge %>
-        <%= render BadgeComponent.new(t("badges.new"),
+        <%= render ::BadgeComponent.new(t("badges.new"),
                                       scheme: :green,
                                       size: :small,
                                       class: "ms-2 align-text-top") if is_new?
@@ -33,7 +33,7 @@
       <% end %>
     </div>
     <div class="grow text-end">
-      <%= render TaskApplication::StatusComponent.new(@application) %>
+      <%= render ::TaskApplication::StatusComponent.new(@application) %>
     </div>
   </div>
   <%# User comment %>
@@ -42,7 +42,7 @@
               class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
     %>
   <% end %>
-  <%= render ContactButtonComponent.new(@application.user,
+  <%= render ::ContactButtonComponent.new(@application.user,
                                         is_responsive: false)
   %>
 </li>
