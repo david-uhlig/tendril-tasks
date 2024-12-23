@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base class for application config classes
-class ApplicationConfig < Anyway::Config
+class BaseConfig < Anyway::Config
   class << self
     # Make it possible to access a singleton config instance
     # via class methods (i.e., without explicitly calling `instance`)

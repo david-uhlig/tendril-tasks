@@ -494,7 +494,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  anyway_config
+  anyway_config (~> 2.0)
   bootsnap
   brakeman
   bullet

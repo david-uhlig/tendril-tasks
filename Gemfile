@@ -55,7 +55,7 @@ gem "view_component", "~> 3.18"
 gem "cancancan"
 
 # Configuration
-gem "anyway_config"
+gem "anyway_config", "~> 2.0"
 gem "dotenv-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
