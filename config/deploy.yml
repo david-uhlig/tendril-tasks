@@ -33,7 +33,48 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - ROCKET_CHAT_CLIENT_ID
+    - ROCKET_CHAT_CLIENT_SECRET
   clear:
+    # Configure Tendril Tasks --------------------------------------------------
+    # Display a text badge right to the brand logo in the navigation bar.
+    # APP_BRAND_BADGE: "Tendril Tasks"
+
+    # Default HTML title for the application. Defaults to a localized version of
+    # this example.
+    # APP_TITLE: "TendrilTasks - growing beyond ourselves together"
+
+    # Default locale for the application. Defaults to "en".
+    # Available locales: en, de
+    # APP_DEFAULT_LOCALE: "en"
+
+    # Default time zone for the application. Defaults to "UTC".
+    # Available time zones: https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+    # APP_TIME_ZONE: "UTC"
+
+    # Configure the Database -------------------------------------------------------
+    # Nothing here. We only support SQLite for now. If you would like to add
+    # additional PG support, a PR would be most welcome! Happy to discuss the
+    # required steps upfront.
+
+    # Configure Rocket Chat ----------------------------------------------------
+    # Rocket Chat server URL (aka workspace), e.g. "https://chat.example.com".
+    # Make sure you also pass in `ROCKET_CHAT_CLIENT_ID` and
+    # `ROCKET_CHAT_CLIENT_SECRET` through `.kamal/secrets`.
+    # ROCKET_CHAT_HOST: "https://chat.example.com"
+
+    # Rocket Chat endpoints for OAuth2 authorization and token exchange.
+    # You only need to change these if you modified the Rocket Chat's settings.
+    # Relative and absolute URLs are supported.
+    # ROCKET_CHAT_AUTHORIZE_URL: "/oauth/authorize"
+    # ROCKET_CHAT_TOKEN_URL: "/oauth/token"
+
+    # How should we refer to Rocket Chat in descriptions and on buttons,
+    # e.g. "Tendril Chat"?
+    # Keep it reasonably short, as it appears on buttons.
+    # ROCKET_CHAT_BRANDING: "Rocket.Chat"
+
+    # Configure Rails ----------------------------------------------------------
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
     SOLID_QUEUE_IN_PUMA: true

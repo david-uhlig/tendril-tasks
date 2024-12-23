@@ -10,6 +10,7 @@
 # Ignore all environment files.
 /.env*
 /secrets.env
+!/.env.sample
 
 # Ignore all logfiles and tempfiles.
 /log/*
