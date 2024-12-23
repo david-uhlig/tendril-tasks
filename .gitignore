@@ -51,3 +51,6 @@
 /app/assets/images/brand/custom/
 /.rubycritic.yml
 /lib/tasks/llm_review.rake
+
+/config/*.local.yml
+/config/credentials/local.*

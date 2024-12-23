@@ -43,8 +43,6 @@ gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-rocketchat"
 
-gem "dotenv-rails"
-
 # TailwindCSS framework
 gem "tailwindcss-rails"
 gem "tailwind_merge", "~> 0.14"
@@ -55,6 +53,10 @@ gem "view_component", "~> 3.18"
 
 # Authorization
 gem "cancancan"
+
+# Configuration
+gem "anyway_config"
+gem "dotenv-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
