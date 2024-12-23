@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 Devise.setup do |config|
   config.omniauth :rocketchat,
-                  ENV["ROCKETCHAT_CLIENT_ID"],
-                  ENV["ROCKETCHAT_CLIENT_SECRET"],
+                  RocketChatConfig.client_id,
+                  RocketChatConfig.client_secret,
                   client_options: {
-                    site: ENV["ROCKETCHAT_WORKSPACE_URL"]
+                    site: RocketChatConfig.host
                   }
 end

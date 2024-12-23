@@ -5,7 +5,7 @@
                     class: "text-center")
                .with_content(t ".welcome_back")
   %>
-  <%= tag.p t(".content", brand: t("rocketchat.brand")),
+  <%= tag.p t(".content", brand: RocketChatConfig.branding),
             class: "mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
   %>
   <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "text-center" do %>
@@ -19,7 +19,7 @@
       class: "mt-4",
       data: { turbo: false }) do |login_button| %>
       <% login_button.with_leading_visual("rocketchat/icon-white.svg") %>
-      <%= t(".login_with_rocket_chat_button", brand: t("rocketchat.brand")) %>
+      <%= t(".login_with_rocket_chat_button", brand: RocketChatConfig.branding) %>
     <% end %>
   <% end %>
 <% end %>

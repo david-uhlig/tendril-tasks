@@ -2,12 +2,13 @@
 
 module RocketChatHelper
   ROCKET_CHAT_PROTOCOL = "rocketchat://"
-  ROCKET_CHAT_HOST = "rcbchat.de"
+  ROCKET_CHAT_HOST = RocketChatConfig.host.starts_with?("http://", "https://") ?
+                       RocketChatConfig.host : "https://" + RocketChatConfig.host
 
   def rocketchat_link(to:)
     return "#" unless to.is_a?(User)
 
-    "https://#{ROCKET_CHAT_HOST}/direct/#{to.username}"
+    "#{ROCKET_CHAT_HOST}/direct/#{to.username}"
   end
 
   def rocketchat_applink(to:)
