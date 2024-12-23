@@ -1,8 +1,8 @@
 <%# User profile %>
 <%= render ContentComponent.new(width: :large) do %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(t "breadcrumbs.profile") %>
+    <% breadcrumb.item(t "breadcrumbs.profile") %>
   <% end %>
 
   <%# Profile header %>

@@ -1,10 +1,10 @@
 <%= render ContentComponent.new(width: :large) do %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Task.model_name.human(count: 2), href: tasks_path) %>
-    <% breadcrumb.section(@task_form.project.title,
+    <% breadcrumb.item(Task.model_name.human(count: 2), href: tasks_path) %>
+    <% breadcrumb.item(@task_form.project.title,
                           href: project_path(@task_form.project)) if @task_form.project.present? %>
-    <% breadcrumb.section(t("breadcrumbs.new")) %>
+    <% breadcrumb.item(t("breadcrumbs.new")) %>
   <% end %>
 
   <%= render HeadingComponent.new(tag: :h1, scheme: :secondary)

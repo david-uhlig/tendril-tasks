@@ -100,5 +100,14 @@ RSpec.describe "Tasks", type: :request do
       get "/projects/#{project.id}/tasks"
       expect(response).to have_http_status(:success)
     end
+
+    context "when user is coordinator" do
+      let(:task) { create(:task, coordinators: [ user ]) }
+
+      it "can access task edit page" do
+        get edit_task_path(task)
+        expect(response).to have_http_status(:success)
+      end
+    end
   end
 end

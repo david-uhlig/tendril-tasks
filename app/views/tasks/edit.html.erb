@@ -1,9 +1,9 @@
 <%= render ContentComponent.new(width: :large) do %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Task.model_name.human(count: 2), href: tasks_path) %>
-    <% breadcrumb.section(@task_form.title, href: task_path(@task_form.task)) %>
-    <% breadcrumb.section(t("breadcrumbs.edit")) %>
+    <% breadcrumb.item(Task.model_name.human(count: 2), href: tasks_path) %>
+    <% breadcrumb.item(@task_form.title, href: task_path(@task_form.task)) %>
+    <% breadcrumb.item(t("breadcrumbs.edit")) %>
   <% end %>
 
   <%= render HeadingComponent.new(tag: :h1, scheme: :secondary).with_content(t(".edit_task")) %>

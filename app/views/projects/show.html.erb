@@ -1,9 +1,9 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%# Breadcrumb navigation %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Project.model_name.human(count: 2), href: projects_path) %>
-    <% breadcrumb.section(@project.title) %>
+    <% breadcrumb.item(Project.model_name.human(count: 2), href: projects_path) %>
+    <% breadcrumb.item(@project.title) %>
   <% end %>
 
   <%#
