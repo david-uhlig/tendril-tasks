@@ -33,7 +33,7 @@
       <% end %>
     </div>
     <div class="grow text-end">
-      <%= render ::TaskApplication::StatusComponent.new(@application) %>
+      <%= render TendrilTasks::Tasks::ApplicationStatus.new(@application) %>
     </div>
   </div>
   <%# User comment %>
