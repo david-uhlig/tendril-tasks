@@ -38,6 +38,7 @@ env:
   clear:
     # Configure Tendril Tasks --------------------------------------------------
     # Display a text badge right to the brand logo in the navigation bar.
+    # Defaults to "Tendril Tasks". You can set it to an empty string to hide it.
     # APP_BRAND_BADGE: "Tendril Tasks"
 
     # Default HTML title for the application. Defaults to a localized version of
