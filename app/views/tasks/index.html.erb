@@ -42,7 +42,7 @@
   <%# Tasks displayed as cards in a grid %>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <% @tasks.each do |task| %>
-      <%= render TaskCardComponent.new(task) %>
+      <%= render TendrilTasks::Tasks::Card.new(task) %>
     <% end %>
   </div>
   <%= render HorizontalLineComponent.new %>

@@ -3,7 +3,7 @@
   <%# Updates the task card %>
   <turbo-stream action="replace" method="morph" target="task-card-<%= @task.id %>">
     <template>
-      <%= render TaskCardComponent.new(@task) %>
+      <%= render TendrilTasks::Tasks::Card.new(@task) %>
     </template>
   </turbo-stream>
 
