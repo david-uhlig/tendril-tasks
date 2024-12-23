@@ -4,7 +4,7 @@ module Navigation
   class BrandComponent < ApplicationComponent
     def initialize
       @src = brand_logo
-      @badge = ENV["BRAND_BADGE"] || "Tendril Tasks"
+      @badge = AppConfig.brand_badge
     end
 
     private

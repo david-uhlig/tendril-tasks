@@ -27,7 +27,7 @@ module TendrilTasks
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
-    config.i18n.default_locale = :de
+    config.i18n.default_locale = AppConfig.default_locale
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -39,7 +39,7 @@ module TendrilTasks
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = ENV.fetch("TIME_ZONE", "UTC")
+    config.time_zone = AppConfig.time_zone
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
