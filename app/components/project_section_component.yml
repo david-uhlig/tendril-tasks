@@ -1,14 +1,14 @@
 en:
   contacts: "Contacts"
   modal:
-    title: "Your contacts"
+    title: "Your Contacts"
     content: |
       Here you will find the contact people for this initiative. If you have any questions, need support or just want some information, you can contact them directly.
-    close_button: "Close window"
-  more_button: "Read more"
+    close_button: "Close Window"
+  more_button: "Read More"
   tasks_button:
-    one: "%{count} task"
-    other: "%{count} tasks"
+    one: "%{count} Task"
+    other: "%{count} Tasks"
 
 de:
   contacts: "Kontakte"

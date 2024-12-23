@@ -4,7 +4,7 @@ module DeleteConfirm
   class ModalComponent < ApplicationComponent
     attr_reader :id
 
-    renders_one :heading_slot, ->(text = "Wirklich löschen?") do
+    renders_one :heading_slot, ->(text = t(".title")) do
       tag.h3 class: "text-xl font-semibold text-gray-900 dark:text-white" do
         text
       end
@@ -23,13 +23,13 @@ module DeleteConfirm
     alias element with_body_element_element
     alias section with_body_element_element
 
-    renders_one :abort_button_slot, ->(text = "Abbrechen") do
+    renders_one :abort_button_slot, ->(text = t(".abort")) do
       ::ButtonComponent.new(scheme: :light, class: "w-full lg:w-auto", "data-modal-hide": @id, type: :reset)
         .with_content(text)
     end
     alias abort_button with_abort_button_slot
 
-    renders_one :confirm_button_slot, ->(text = "Endgültig löschen") do
+    renders_one :confirm_button_slot, ->(text = t(".delete_permanently")) do
       ::ButtonComponent.new(
           type: :submit,
           scheme: :red,

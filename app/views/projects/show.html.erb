@@ -2,7 +2,7 @@
   <%# Breadcrumb navigation %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Project.model_name.human(count: 10), href: projects_path) %>
+    <% breadcrumb.section(Project.model_name.human(count: 2), href: projects_path) %>
     <% breadcrumb.section(@project.title) %>
   <% end %>
 
@@ -156,7 +156,7 @@
   <%= render HeadingComponent
                .new(tag: :h3,
                     scheme: :tertiary)
-               .with_content(Task.model_name.human(count: @tasks.size))
+               .with_content(t(".task_section_headline", initiative_title: @project.title).html_safe)
   %>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <% @tasks.each do |task| %>

@@ -1,9 +1,19 @@
 en:
-  read_more: "Read more"
+  contacts: "Contacts"
+  your_contact_people: "Your Contact People"
+  contact_people_description: |
+    Here you will find the contact people for this initiative. If you have any questions, need support or just want some information, you can contact them directly.
+  close_window: "Close Window"
+  read_more: "Read More"
   applied_for_task_button: "Applied!"
-  express_interest_button: "Express interest"
+  express_interest_button: "Express Interest"
 
 de:
+  contacts: "Kontakte"
+  your_contact_people: "Deine Ansprechpersonen"
+  contact_people_description: |
+    Hier findest du die Ansprechpersonen für dieses Thema. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
+  close_window: "Fenster schließen"
   read_more: "Mehr erfahren"
   applied_for_task_button: "Gemeldet!"
   express_interest_button: "Interesse bekunden"

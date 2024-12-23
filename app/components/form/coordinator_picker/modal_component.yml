@@ -1,9 +1,9 @@
 en:
-  title: "Edit contact persons"
-  select_additional_contacts: "Select additional contact persons"
+  title: "Edit Contact People"
+  select_additional_contacts: "Select additional contact people"
   search_by_name_or_username: "Search by name or username"
-  selected_contacts: "Selected contacts"
-  submit: "Apply selection"
+  selected_contacts: "Selected contact people"
+  submit: "Apply Selection"
 
 de:
   title: "Ansprechpersonen bearbeiten"

@@ -131,6 +131,7 @@ de:
       contact_persons_explainer: |
         Hier findest du die Ansprechpersonen für dieses Thema. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
       goto_initiatives_overview: "Zur Themenübersicht"
+      task_section_headline: "Aufgaben in %{initiative_title}"
 
   tasks:
     index:
@@ -211,6 +212,10 @@ de:
       properties: "Eigenschaften:"
       initiative_was_published: "Thema veröffentlicht"
       task_was_published: "Aufgabe veröffentlicht"
+    edit:
+      edit_task: "Aufgabe bearbeiten"
+    new:
+      title: "Aufgabe anlegen"
 
   admin:
     users:
@@ -218,6 +223,9 @@ de:
         cannot_change_current_user:
           cannot_remove_last_administrator: "Der letzte Administrator kann nicht entfernt werden."
           cannot_change_own_permissions: "Du kannst deine eigenen Rechte nicht bearbeiten."
+    index:
+      title: "Administration"
+      role_management: "Rechteverwaltung"
 
   users:
     profile:

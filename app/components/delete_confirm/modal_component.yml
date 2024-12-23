@@ -1,0 +1,9 @@
+en:
+  title: "Are you sure?"
+  delete_permanently: "Delete Permanently"
+  abort: "Abort"
+
+de:
+  title: "Wirklich löschen?"
+  delete_permanently: "Endgültig löschen"
+  abort: "Abbrechen"

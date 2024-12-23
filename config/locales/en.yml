@@ -23,8 +23,8 @@ en:
         A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
       cta_when_signed_in:
         view_now: "View now:"
-        interesting_initiatives: "Interesting initiatives"
-        variety_of_tasks: "A variety of tasks"
+        interesting_initiatives: "Interesting Initiatives"
+        variety_of_tasks: "A Variety of Tasks"
       cta_when_signed_out:
         login_to_see_initiatives_and_tasks: |
           Log in now to see initiatives and tasks:
@@ -48,16 +48,16 @@ en:
       visible: "Visible"
       hidden: "Hidden"
     new:
-      title: "New initiative"
+      title: "New Initiative"
     edit:
-      title: "Edit initiative"
+      title: "Edit Initiative"
     form:
       visibility: "State"
       private: "Draft"
       public: "Published"
-      save_and_create_task: "Create & new task"
+      save_and_create_task: "Create & New Task"
       delete_confirm_modal:
-        heading: "Delete initiative?"
+        heading: "Delete Initiative?"
         content: |
           Are you sure you want to delete this initiative? This action cannot be undone.
           All tasks that have been assigned to this initiative will also be irrevocably deleted.
@@ -73,8 +73,8 @@ en:
         other: "initiatives"
       no_initiatives: |
         Our hard-working members have taken on all the tasks. Yay! Check back later.
-      goto_tasks_button: "Tasks overview"
-      create_initiative_button: "Create initiative"
+      goto_tasks_button: "Tasks Overview"
+      create_initiative_button: "Create Initiative"
     show:
       visible_for_everyone: "Visible for everyone"
       visible_for_coordinators: "Only visible for coordinators"
@@ -83,10 +83,11 @@ en:
       at_least_one_published_task: "1+ published tasks"
       add_task: "+Task"
       add_initiative: "+Initiative"
-      contact_persons: "Contact persons"
+      contact_persons: "Contact People"
       contact_persons_explainer: |
-        Here you will find the contact persons for this project. If you have any questions, need support or just want some information, you can contact them directly.
-      goto_initiatives_overview: "View all initiatives"
+        Here you will find the contact people for this project. If you have any questions, need support or just want some information, you can contact them directly.
+      goto_initiatives_overview: "Back to Initiatives Overview"
+      task_section_headline: "Tasks in %{initiative_title}"
 
   # Tasks
   tasks:
@@ -105,11 +106,11 @@ en:
           other: "%{count} tasks in %{initiative}"
       filter_by_project:
         show_all: "All"
-      view_all_tasks: "View all tasks"
-      goto_initiatives: "View initiatives"
-      create_task: "Create task"
+      view_all_tasks: "View all Tasks"
+      goto_initiatives: "View Initiatives"
+      create_task: "Create Task"
     form:
-      choose_initiative: "Choose initiative"
+      choose_initiative: "Choose Initiative"
       visibility: "State"
       private: "Draft"
       public: "Published"
@@ -125,10 +126,10 @@ en:
       section_title:
         applications: "Applications"
       this_task_hasnt_received_applications: "This task hasn't received any applications so far."
-      contact_people: "Contact people"
+      contact_people: "Contact People"
       contact_people_content: "Still undecided? Here you will find the contact people for this task. If you have any questions in advance, need support or just want some information, you can contact them directly."
-      goto_tasks_button: "To the task overview"
-      goto_initiative: "To the initiative"
+      goto_tasks_button: "To the Task Overview"
+      goto_initiative: "To the Initiative"
       action_button:
         edit: "Edit"
         add_task: "+Task"
@@ -139,17 +140,17 @@ en:
         next_steps_within_grace_period: |
           We'll get back to you soon to discuss the next steps. If you would like to edit your comment, you can easily do so here.
         next_steps_outside_of_grace_period: |
-          We'll get back to you soon to discuss the next steps. The contact persons have already been notified.
+          We'll get back to you soon to discuss the next steps. The contact people have already been notified.
         you_applied_without_a_comment: "You applied without the optional comment."
-        update_application: "Update application"
-        withdraw_application: "Withdraw application"
+        update_application: "Update Application"
+        withdraw_application: "Withdraw Application"
         delete_confirm:
           modal:
-            title: "Withdraw application?"
+            title: "Withdraw Application?"
             content: |
               Are you sure that you are no longer interested in this task?
-              We will inform the contact persons of your decision.
-            withdraw_application: "Withdraw application"
+              We will inform the contact people of your decision.
+            withdraw_application: "Withdraw Application"
       form_when_user_has_not_applied_to_task:
         apply_here: "Interested? Get in touch here!"
         procedure_and_motivation: |
@@ -168,6 +169,10 @@ en:
       properties: "Properties:"
       initiative_was_published: "Initiative published"
       task_was_published: "Task published"
+    edit:
+      edit_task: "Edit Task"
+    new:
+      title: "Create Task"
 
   # Admin
   admin:
@@ -176,23 +181,26 @@ en:
         cannot_change_current_user:
           cannot_remove_last_administrator: "The last administrator cannot be removed."
           cannot_change_own_permissions: "You cannot modify your own permissions."
+    index:
+      title: "Administration"
+      role_management: "Role Management"
 
   # Users
   users:
     profile:
       edit:
         your_email_address: "Your e-mail-address"
-        your_rocket_chat_username: "Your %{brand} username"
+        your_rocket_chat_username: "Your %{brand} Username"
         data_sync_info: |
           We take over your data from %{brand} and synchronize it automatically when changes are made. If you delete your %{brand} account, your account here will also be deleted.
         delete_confirm:
-          delete_my_account_button: "Delete my account"
+          delete_my_account_button: "Delete my Account"
           modal:
-            title: "Delete account?"
+            title: "Delete Account?"
             content: |
               Are you sure you want to permanently delete your account? This step cannot be undone. All your data will be irrevocably deleted.
               Your %{brand} account is not affected by the deletion.
-            confirm_button: "Delete account"
+            confirm_button: "Delete my Account Permanently"
       destroy:
         success: "Your account was deleted!"
         failure: "We couldn't delete your account. Please try again!"
@@ -204,9 +212,9 @@ en:
   devise:
     sessions:
       new:
-        welcome_back: "Welcome back"
+        welcome_back: "Welcome back!"
         content: |
-          You're just one click away from getting started! Once you've logged in, you can discover all our exciting projects and tasks that are waiting for you. It's simple: just log in with your %{brand} account. We look forward to seeing you! 🚴‍♂️✨
+          You're just one click away from getting started! Once you've logged in, you can discover all our exciting initiatives and tasks that are waiting for you. It's simple: just log in with your %{brand} account. We look forward to seeing you! 🚴‍♂️✨
         click_here_to_start: "Simply click here and get started right away:"
         login_with_rocket_chat_button: "Login with %{brand}"
 
@@ -214,11 +222,14 @@ en:
   dashboard:
     index:
       title: "Dashboard"
-      create_initiative_button: "Create initiative"
+      create_initiative_button: "Create Initiative"
 
   # ActiveRecord Attributes
   activerecord:
     models:
+      task:
+        one: "Task"
+        other: "Tasks"
       project:
         one: "Initiative"
         other: "Initiatives"
@@ -228,9 +239,9 @@ en:
     attributes:
       task:
         project: "Initiative"
-        coordinators: "Contact people"
+        coordinators: "Contact People"
       project:
-        coordinators: "Contact people"
+        coordinators: "Contact People"
     errors:
       models:
         task:
@@ -258,7 +269,7 @@ en:
 
   components:
     coordinator_picker:
-      edit_contacts: "Edit contacts"
+      edit_contacts: "Edit Contacts"
 
   rocketchat:
     brand: "Rocket.Chat"

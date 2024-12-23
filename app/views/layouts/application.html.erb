@@ -40,10 +40,10 @@
       <% navigation.link(name: t("navigation.home"),
                          href: root_path)
       %>
-      <% navigation.link(name: Project.model_name.human(count: 10),
+      <% navigation.link(name: Project.model_name.human(count: 2),
                          href: projects_path)
       %>
-      <% navigation.link(name: Task.model_name.human(count: 10),
+      <% navigation.link(name: Task.model_name.human(count: 2),
                          href: tasks_path)
       %>
       <% navigation.with_login_button(scheme: :duotone_purple_to_blue,

@@ -1,14 +1,14 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section("Aufgaben", href: tasks_path) %>
+    <% breadcrumb.section(Task.model_name.human(count: 2), href: tasks_path) %>
     <% breadcrumb.section(@task_form.project.title,
                           href: project_path(@task_form.project)) if @task_form.project.present? %>
-    <% breadcrumb.section("Anlegen") %>
+    <% breadcrumb.section(t("breadcrumbs.new")) %>
   <% end %>
 
   <%= render HeadingComponent.new(tag: :h1, scheme: :secondary)
-               .with_content("Aufgabe anlegen") %>
+               .with_content(t(".title")) %>
 
   <%= render 'form', form_object: @task_form %>
 <% end %>

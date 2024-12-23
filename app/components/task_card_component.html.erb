@@ -24,7 +24,7 @@
                                                 size: :none,
                                                 modal_id: "task-contacts-#{@task.id}",
                                                 class: "inline-flex items-center max-w-full py-1 px-1 pr-2 my-4 mx-0 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do %>
-      <span class="flex-shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3">Kontakte</span>
+      <%= tag.span t(".contacts"), class: "flex-shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3" %>
       <span class="flex gap-2 overflow-hidden flex-shrink truncate">
         <% @task.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
@@ -69,14 +69,12 @@
 <%# Modal for viewing coordinators %>
 <%= content_for :modal do %>
   <%= render Modal::DialogComponent.new("task-contacts-#{@task.id}") do |modal| %>
-    <% modal.heading("Deine Ansprechpersonen") %>
-    <%= render Modal::ParagraphComponent.new do %>
-      Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
-    <% end %>
+    <% modal.heading(t(".your_contact_people")) %>
+    <%= render Modal::ParagraphComponent.new
+                 .with_content(t(".contact_people_description"))
+    %>
     <%= render Modal::ContactListComponent.new(@task.coordinators) %>
-    <% modal.button(scheme: :light, type: :reset) do %>
-      Fenster schließen
-    <% end %>
+    <% modal.button(scheme: :light, type: :reset).with_content(t(".close_window")) %>
   <% end %>
 <% end %>
 <%# End of modal for coordinators %>

@@ -10,9 +10,9 @@
                                class: "m-0") do |contact_button| %>
   <% contact_button.with_leading_visual("rocketchat/icon-white.svg") %>
   <% if responsive? %>
-    <span class="hidden sm:inline">Kontaktieren</span>
-    <span class="sm:hidden">PN</span>
+    <%= tag.span t(".contact.long"), class: "hidden sm:inline" %>
+    <%= tag.span t(".contact.abbr"), class: "sm:hidden" %>
   <% else %>
-    <span>Kontaktieren</span>
+    <%= tag.span t(".contact.long") %>
   <% end %>
 <% end %>

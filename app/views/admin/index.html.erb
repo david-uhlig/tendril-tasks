@@ -1,17 +1,17 @@
 <%= render ContentComponent.new(width: :large) do %>
   <%= render BreadcrumbComponent.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section("Administration") %>
+    <% breadcrumb.section(t("breadcrumbs.admin")) %>
   <% end %>
 
   <%= render HeadingComponent
                .new(tag: :h1, scheme: :secondary)
-               .with_content("Administration")
+               .with_content(t(".title"))
   %>
   <%= render HorizontalLineComponent.new %>
   <%= render HeadingComponent
                .new(tag: :h2, scheme: :tertiary)
-               .with_content("Rechteverwaltung") %>
+               .with_content(t(".role_management")) %>
 
   <ul class="my-4 space-y-3">
     <%# TODO this should only list users with roles > user. Regular users can then get permissions through a search box %>
