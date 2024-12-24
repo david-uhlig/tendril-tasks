@@ -45,7 +45,7 @@
       <%= render TendrilTasks::Tasks::Card.new(task) %>
     <% end %>
   </div>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%= render ButtonGridComponent.new(orientation: :vertical, size: :large) do |grid| %>
     <%# Link to all tasks when filter is applied %>

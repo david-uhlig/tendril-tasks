@@ -102,7 +102,7 @@
     <% end %>
   </div>
 
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Applications %>
   <% if can?(:coordinate, @task) %>
@@ -124,21 +124,21 @@
         %>
       <% end %>
     </div>
-    <%= render HorizontalLineComponent.new %>
+    <%= render TendrilTasks::HorizontalLine.new %>
   <% end %>
 
   <%# Apply to task %>
   <%= render "tasks/applications/form",
              task: @task
   %>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Contacts %>
   <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary)
                .with_content(t(".contact_people")) %>
   <%= tag.p t(".contact_people_content") %>
   <%= render Modal::ContactListComponent.new(@task.coordinators) %>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 justify-center text-center gap-2">
     <%= render ButtonComponent.new(tag: :a,

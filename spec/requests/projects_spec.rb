@@ -5,6 +5,11 @@ RSpec.describe "Projects", type: :request do
     let(:user) { create(:user) }
     before(:each) { login_as(user, scope: :user) }
 
+    it "can access the projects index page" do
+      get projects_path
+      expect(response).to have_http_status(:success)
+    end
+
     it "can access published project with published tasks" do
       project = create(:project, :published, :with_published_tasks)
       get project_path(project)

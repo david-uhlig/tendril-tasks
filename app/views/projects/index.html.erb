@@ -11,7 +11,7 @@
     %>
   <% end %>
 
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <% case projects_size %>
   <% when 0 %>
@@ -22,7 +22,7 @@
     <% end %>
   <% end %>
 
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
     <%# Link to tasks for convenience %>
