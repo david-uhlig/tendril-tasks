@@ -15,9 +15,9 @@
           <%= @application.user.name %>
         <% end %>
         <%# New application badge %>
-        <%= render ::BadgeComponent.new(t("badges.new"),
+        <%= render Gustwave::Badge.new(t("badges.new"),
                                       scheme: :green,
-                                      size: :small,
+                                      size: :sm,
                                       class: "ms-2 align-text-top") if is_new?
         %>
       <% end %>

@@ -10,7 +10,7 @@ class RoleBadgeComponent < ApplicationComponent
     user: :default
   }
   ROLE_SCHEME_OPTIONS = ROLE_SCHEME_MAPPINGS.keys
-  DEFAULT_SIZE = :small
+  DEFAULT_SIZE = :sm
   DEFAULT_BORDER = true
 
   def initialize(user, **options)

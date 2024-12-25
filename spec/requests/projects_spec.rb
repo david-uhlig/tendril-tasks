@@ -25,5 +25,11 @@ RSpec.describe "Projects", type: :request do
       get new_project_path
       expect(response).to have_http_status(:success)
     end
+
+    it "can access the projects detail page" do
+      project = create(:project, coordinators: [ editor ])
+      get project_path(project)
+      expect(response).to have_http_status(:success)
+    end
   end
 end

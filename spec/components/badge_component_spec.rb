@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe BadgeComponent, type: :component do
+RSpec.describe Gustwave::Badge, type: :component do
   context "with default options" do
     before(:each) do
       render_inline(described_class.new)
@@ -53,7 +53,7 @@ RSpec.describe BadgeComponent, type: :component do
 
   context "with size" do
     it "renders size classes" do
-      render_inline(described_class.new(size: :large))
+      render_inline(described_class.new(size: :lg))
       expect(page).to have_selector("span.text-lg.font-semibold")
     end
   end

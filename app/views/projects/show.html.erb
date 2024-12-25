@@ -19,22 +19,22 @@
       <% if can?(:coordinate, @project) %>
         <div class="whitespace-nowrap my-auto">
           <% if @project.published? %>
-            <%= render BadgeComponent.new(t("projects.status.published"),
+            <%= render Gustwave::Badge.new(t("projects.status.published"),
                                           scheme: :green,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% else %>
-            <%= render BadgeComponent.new(t("projects.status.private"),
+            <%= render Gustwave::Badge.new(t("projects.status.private"),
                                           scheme: :dark,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% end %>
           <% if @project.visible? %>
-            <%= render BadgeComponent.new(t("projects.visibility.visible"),
+            <%= render Gustwave::Badge.new(t("projects.visibility.visible"),
                                           scheme: :green,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% else %>
-            <%= render BadgeComponent.new(t("projects.visibility.hidden"),
+            <%= render Gustwave::Badge.new(t("projects.visibility.hidden"),
                                           scheme: :dark,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% end %>
 
           <%# Visibility explainer icon %>

@@ -17,22 +17,22 @@
       <% if can?(:coordinate, @task) %>
         <div class="whitespace-nowrap my-auto">
           <% if @task.published? %>
-            <%= render BadgeComponent.new("Veröffentlicht",
+            <%= render Gustwave::Badge.new("Veröffentlicht",
                                           scheme: :green,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% else %>
-            <%= render BadgeComponent.new("Entwurf",
+            <%= render Gustwave::Badge.new("Entwurf",
                                           scheme: :dark,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% end %>
           <% if @task.visible? %>
-            <%= render BadgeComponent.new("Sichtbar",
+            <%= render Gustwave::Badge.new("Sichtbar",
                                           scheme: :green,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% else %>
-            <%= render BadgeComponent.new("Unsichtbar",
+            <%= render Gustwave::Badge.new("Unsichtbar",
                                           scheme: :dark,
-                                          size: :medium) %>
+                                          size: :md) %>
           <% end %>
 
           <%# Visibility explainer icon %>
@@ -91,7 +91,7 @@
   <div>
     <%# Project badge %>
     <%= link_to project_path(@task.project) do %>
-      <%= render BadgeComponent.new(@task.project.title, scheme: BadgeComponent.scheme_by_id(@task.project.id), size: :large) %>
+      <%= render Gustwave::Badge.new(@task.project.title, scheme: badge_scheme_by_id(@task.project.id), size: :lg) %>
     <% end %>
     <%# Task name %>
     <%= render HeadingComponent.new(tag: :h2, scheme: :secondary, class: "mt-2")

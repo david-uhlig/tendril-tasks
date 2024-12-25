@@ -13,7 +13,7 @@ module TendrilTasks
     #
     class Card < ApplicationComponent
       # Available badge schemes.
-      SCHEME_OPTIONS = ::BadgeComponent::SCHEME_OPTIONS
+      SCHEME_OPTIONS = Gustwave::Badge::SCHEME_OPTIONS
       SCHEME_SIZE = SCHEME_OPTIONS.size
 
       # Initializes a new Card component.
@@ -43,7 +43,7 @@ module TendrilTasks
         options
       end
 
-      # Determines the badge scheme for the initiative deterministicly based
+      # Determines the badge scheme for the initiative deterministically based
       # on the initiatives' id.
       #
       # @param task [Task] the task for which to determine the badge scheme

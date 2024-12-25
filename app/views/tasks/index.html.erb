@@ -19,9 +19,9 @@
     <ul class="flex flex-wrap gap-2">
       <%= link_to tasks_path do %>
         <li>
-          <%= render BadgeComponent
+          <%= render Gustwave::Badge
                        .new(t(".filter_by_project.show_all"),
-                              size: :extra_large,
+                              size: :xl,
                               border: !params[:project_id].present?)
           %>
         </li>
@@ -29,9 +29,9 @@
       <% @projects.each do |project| %>
         <li>
           <%= link_to project_tasks_path(project) do %>
-            <%= render BadgeComponent.new(project.title,
-                                          size: :extra_large,
-                                          scheme: BadgeComponent.scheme_by_id(project.id),
+            <%= render Gustwave::Badge.new(project.title,
+                                          size: :xl,
+                                          scheme: badge_scheme_by_id(project.id),
                                           border: (project.id.to_s == params[:project_id])) %>
           <% end %>
         </li>
