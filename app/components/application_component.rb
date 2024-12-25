@@ -10,7 +10,7 @@
 #   `AvatarComponent` instead of `UserComponent`
 #
 # @see https://viewcomponent.org/guide/getting-started.html#conventions
-class ApplicationComponent < ViewComponent::Base
+class ApplicationComponent < Gustwave::Component
   include Primer::FetchOrFallbackHelper
   include TailwindHelper
 
