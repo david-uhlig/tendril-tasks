@@ -21,9 +21,7 @@
       <%= render ProjectSectionComponent.new(project) %>
     <% end %>
   <% end %>
-
-  <%= render TendrilTasks::HorizontalLine.new %>
-
+  
   <%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
     <%# Link to tasks for convenience %>
     <% grid.button(tag: :a,
