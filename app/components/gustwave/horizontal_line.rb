@@ -103,20 +103,20 @@ module Gustwave
       return tag.hr(**@options) unless content.present? || visual?
 
       visual_or_content = case
-                          # SVG and text already have enclosing elements
-                          when visual?
-                            visual
-                          # Everything besides pure text
-                          when content.is_a?(ActiveSupport::SafeBuffer)
-                            tag.div(class: CONTENT_BLOCK_CLASSES) do
-                              content
-                            end
-                          # Pure text
-                          else
-                            tag.span(content, class: CONTENT_TEXT_CLASSES) do
-                              content
-                            end
-                          end
+      # SVG and text already have enclosing elements
+      when visual?
+        visual
+      # Everything besides pure text
+      when content.is_a?(ActiveSupport::SafeBuffer)
+        tag.div(class: CONTENT_BLOCK_CLASSES) do
+          content
+        end
+      # Pure text
+      else
+        tag.span(content, class: CONTENT_TEXT_CLASSES) do
+          content
+        end
+      end
 
       tag.div(class: "inline-flex items-center justify-center w-full") do
         concat tag.hr(**@options)

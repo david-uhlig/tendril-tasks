@@ -10,7 +10,7 @@ module Gustwave
       normalized_options = {}
 
       options.each do |key, value|
-        normalized_key = key.to_s.downcase.gsub('_', '-')
+        normalized_key = key.to_s.downcase.gsub("_", "-")
 
         if %w[aria data].include?(key) && value.is_a?(Hash)
           value.each do |sub_key, sub_value|
