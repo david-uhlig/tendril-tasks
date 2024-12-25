@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Renders roles badges depending on the given users role.
-class RoleBadgeComponent < ApplicationComponent
+class TendrilTasks::RoleBadge < ApplicationComponent
   DEFAULT_ROLE_SCHEME = :user
   # Maps user role to badge scheme
   ROLE_SCHEME_MAPPINGS = {
