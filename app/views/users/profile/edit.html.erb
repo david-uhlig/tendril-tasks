@@ -7,8 +7,8 @@
 
   <%# Profile header %>
   <div class="flex flex-nowrap gap-2">
-    <%= render AvatarComponent.new(@user,
-                                   size: :large,
+    <%= render TendrilTasks::Avatar.new(@user,
+                                   size: "2xl",
                                    class: "ms-2")
     %>
     <div class="ms-2 mt-2 mb-4">

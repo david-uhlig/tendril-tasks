@@ -2,12 +2,12 @@
 
 require "rails_helper"
 
-RSpec.describe AvatarComponent, type: :component do
+RSpec.describe TendrilTasks::Avatar, type: :component do
   let(:user) { build_stubbed(:user) }
 
   context "with default options" do
     before(:each) do
-      user = build_stubbed(:user, avatar_url: "https://example.com/test.png")
+      user = build_stubbed(:user, avatar_url: "https://loremflickr.com/300/300")
       render_inline(described_class.new(user)) { "content" }
     end
 
@@ -16,7 +16,7 @@ RSpec.describe AvatarComponent, type: :component do
     end
 
     it "renders an avatar image" do
-      expect(page).to have_selector("img[src='https://example.com/test.png']")
+      expect(page).to have_selector("img[src='https://loremflickr.com/300/300']")
     end
 
     it "renders the default scheme classes" do
@@ -52,7 +52,7 @@ RSpec.describe AvatarComponent, type: :component do
     it "renders the size classes" do
       render_inline(described_class.new(
         user,
-        size: :extra_small
+        size: :xs
       ))
       expect(page).to have_selector("img.w-6.h-6")
     end

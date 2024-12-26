@@ -1,7 +1,7 @@
 <%# Application for taking over a task %>
 <li class="mb-10 ms-8" id="task-application-<%= @application.user.id %>">
   <span class="absolute flex items-center justify-center bg-gray-100 rounded-full -start-5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
-    <%= render ::AvatarComponent.new(@application.user) %>
+    <%= render TendrilTasks::Avatar.new(@application.user) %>
   </span>
   <div class="flex flex-row">
     <div>

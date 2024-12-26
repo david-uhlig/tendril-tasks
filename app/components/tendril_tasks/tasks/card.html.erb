@@ -32,7 +32,7 @@
       <span class="flex gap-2 overflow-hidden flex-shrink truncate">
         <% @task.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
-            <%= render ::AvatarComponent.new(coordinator, size: :extra_small) %>
+            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs) %>
             <%= tag.span coordinator.name, class: "dark:text-white truncate" %>
           </span>
         <% end %>
