@@ -9,7 +9,11 @@
   </div>
 
   <%= link_to task_path(@task) do %>
-    <%= render HeadingComponent.new(tag: :h2, scheme: :none, class: "mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white overflow-hidden").with_content(@task.title) %>
+    <%= render TendrilTasks::Heading
+                 .new(tag: :h2,
+                      scheme: :none,
+                      class: "mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white overflow-hidden")
+                 .with_content(@task.title) %>
   <% end %>
 
   <div class="flex-grow">

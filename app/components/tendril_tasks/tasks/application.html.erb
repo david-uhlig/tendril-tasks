@@ -5,9 +5,9 @@
   </span>
   <div class="flex flex-row">
     <div>
-      <%= render ::HeadingComponent
+      <%= render TendrilTasks::Heading
                    .new(tag: :h4,
-                        scheme: :senary,
+                        scheme: :level6,
                         class: "mb-1 whitespace-nowrap") do %>
         <%# Applicant's name %>
         <% withdrawal_visual = @application.withdrawn? ? "line-through" : "" %>

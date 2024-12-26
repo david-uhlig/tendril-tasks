@@ -129,9 +129,9 @@
   <% end %>
 
   <%# Project name %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h2,
-                    scheme: :secondary)
+                    scheme: :level2)
                .with_content(@project.title)
   %>
   <%# Project description %>
@@ -141,9 +141,9 @@
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Contact persons %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h3,
-                    scheme: :tertiary)
+                    scheme: :level3)
                .with_content(t ".contact_persons")
   %>
   <%= tag.p t(".contact_persons_explainer"),
@@ -153,9 +153,9 @@
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Tasks %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h3,
-                    scheme: :tertiary)
+                    scheme: :level3)
                .with_content(t(".task_section_headline", initiative_title: @project.title).html_safe)
   %>
   <%# TODO build responsive grid component %>

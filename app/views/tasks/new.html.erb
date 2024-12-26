@@ -7,8 +7,10 @@
     <% breadcrumb.item(t("breadcrumbs.new")) %>
   <% end %>
 
-  <%= render HeadingComponent.new(tag: :h1, scheme: :secondary)
-               .with_content(t(".title")) %>
+  <%= render TendrilTasks::Heading
+               .new(tag: :h1)
+               .with_content(t(".title"))
+  %>
 
   <%= render 'form', form_object: @task_form %>
 <% end %>

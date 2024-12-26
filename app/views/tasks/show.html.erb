@@ -94,8 +94,12 @@
       <%= render Gustwave::Badge.new(@task.project.title, scheme: badge_scheme_by_id(@task.project.id), size: :lg) %>
     <% end %>
     <%# Task name %>
-    <%= render HeadingComponent.new(tag: :h2, scheme: :secondary, class: "mt-2")
-                 .with_content(@task.title) %>
+    <%= render TendrilTasks::Heading
+                 .new(tag: :h2,
+                      scheme: :level2,
+                      class: "mt-2")
+                 .with_content(@task.title)
+    %>
     <%# Task description %>
     <% paragraphize(@task.description).each do |paragraph| %>
       <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
@@ -106,9 +110,9 @@
 
   <%# Applications %>
   <% if can?(:coordinate, @task) %>
-    <%= render HeadingComponent
+    <%= render TendrilTasks::Heading
                  .new(tag: :h3,
-                      scheme: :tertiary)
+                      scheme: :level3)
                  .with_content(t(".section_title.applications"))
     %>
     <div>
@@ -134,8 +138,11 @@
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Contacts %>
-  <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary)
-               .with_content(t(".contact_people")) %>
+  <%= render TendrilTasks::Heading
+               .new(tag: :h3,
+                    scheme: :level3)
+               .with_content(t(".contact_people"))
+  %>
   <%= tag.p t(".contact_people_content") %>
   <%= render Modal::ContactListComponent.new(@task.coordinators) %>
   <%= render TendrilTasks::HorizontalLine.new %>

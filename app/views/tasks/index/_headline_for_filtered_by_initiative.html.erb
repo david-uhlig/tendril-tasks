@@ -1,7 +1,7 @@
 <%# Renders the headline when no filter is applied on the index page %>
-<%= render HeadingComponent.new(tag: :h1,
-                                scheme: :tertiary,
-                                class: "font-extrabold text-center") do
+<%= render TendrilTasks::Heading.new(tag: :h1,
+                                     scheme: :level3,
+                                     class: "font-extrabold text-center") do
 %>
   <%= render ::Text::Highlight::GradientComponent
                .new(t(".title",

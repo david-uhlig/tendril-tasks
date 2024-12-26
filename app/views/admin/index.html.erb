@@ -4,13 +4,13 @@
     <% breadcrumb.item(t("breadcrumbs.admin")) %>
   <% end %>
 
-  <%= render HeadingComponent
-               .new(tag: :h1, scheme: :secondary)
+  <%= render TendrilTasks::Heading
+               .new(tag: :h1, scheme: :level2)
                .with_content(t(".title"))
   %>
   <%= render TendrilTasks::HorizontalLine.new %>
-  <%= render HeadingComponent
-               .new(tag: :h2, scheme: :tertiary)
+  <%= render TendrilTasks::Heading
+               .new(tag: :h2, scheme: :level3)
                .with_content(t(".role_management")) %>
 
   <ul class="my-4 space-y-3">

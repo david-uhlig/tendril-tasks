@@ -1,7 +1,6 @@
 <%= render ContentComponent.new do %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h1,
-                    schema: :secondary,
                     class: "text-center")
                .with_content(t ".welcome_back")
   %>
