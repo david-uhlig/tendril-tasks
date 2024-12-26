@@ -23,7 +23,7 @@ module Form
     # - `id`: The checkbox ID is dynamically generated based on the coordinator's ID to ensure unique accessibility.
     # - `data-action`: The checkbox has a `data-action` attribute for handling changes (e.g., `list-mover#toggle`).
     # - `peer` CSS classes are used for styling interactions when the checkbox is focused or selected.
-    class SelectionItemComponent < ApplicationComponent
+    class SelectionItemComponent < TendrilTasks::Component
       def initialize(coordinator, is_checked: false)
         @coordinator = coordinator
         @is_checked = is_checked

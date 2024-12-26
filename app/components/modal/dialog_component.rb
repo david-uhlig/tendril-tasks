@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Modal::DialogComponent < ApplicationComponent
+class Modal::DialogComponent < TendrilTasks::Component
   attr_reader :id
 
   DEFAULT_HEADER_CLASS = "text-xl font-semibold text-gray-900 dark:text-white"

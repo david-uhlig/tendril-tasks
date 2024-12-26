@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Navigation
-  class BrandComponent < ApplicationComponent
+  class BrandComponent < TendrilTasks::Component
     def initialize
       @src = brand_logo
       @badge = AppConfig.brand_badge

@@ -27,7 +27,7 @@
 #
 module Navigation
   module UserDropdown
-    class AvatarComponent < ApplicationComponent
+    class AvatarComponent < TendrilTasks::Component
       # Initialize the AvatarComponent for use in the user dropdown button.
       #
       # @param user [User] The user for whom the avatar is shown.

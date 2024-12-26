@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DeleteConfirm
-  class ModalComponent < ApplicationComponent
+  class ModalComponent < TendrilTasks::Component
     attr_reader :id
 
     renders_one :heading_slot, ->(text = t(".title")) do

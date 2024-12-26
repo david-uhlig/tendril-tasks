@@ -2,7 +2,7 @@
 
 module TendrilTasks
   module Projects
-    class Section < ApplicationComponent
+    class Section < TendrilTasks::Component
       with_collection_parameter :collection_item
 
       def initialize(project = nil, **options)

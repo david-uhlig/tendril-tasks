@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TurboStream
-  class NotificationComponent < ApplicationComponent
+  class NotificationComponent < TendrilTasks::Component
     CONTAINER_ID = "notifications"
 
     def initialize(message)

@@ -4,7 +4,7 @@
 #
 # The buttons stack vertically on mobile viewports and horizontally on
 # larger viewports.
-class ButtonGridComponent < ApplicationComponent
+class ButtonGridComponent < TendrilTasks::Component
   GRID_DEFAULT_CLASS = "gap-2 grid text-center"
 
   # Determines the orientation of the button grid

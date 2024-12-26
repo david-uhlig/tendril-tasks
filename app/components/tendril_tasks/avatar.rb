@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  class Avatar < ApplicationComponent
+  class Avatar < TendrilTasks::Component
     DEFAULT_SCHEME = Gustwave::Avatar::DEFAULT_SCHEME
     DEFAULT_SIZE = Gustwave::Avatar::DEFAULT_SIZE
 

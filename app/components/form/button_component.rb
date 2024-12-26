@@ -2,7 +2,7 @@
 
 module Form
   # Render a full-width large submit button in forms
-  class ButtonComponent < ApplicationComponent
+  class ButtonComponent < TendrilTasks::Component
     DEFAULT_CLASS = "w-full"
     TAG = :button
     TYPE = :submit

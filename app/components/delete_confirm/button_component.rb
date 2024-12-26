@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DeleteConfirm
-  class ButtonComponent < ApplicationComponent
+  class ButtonComponent < TendrilTasks::Component
     attr_reader :target_modal_id
 
     def initialize(text:, target_modal_id: nil, **options)

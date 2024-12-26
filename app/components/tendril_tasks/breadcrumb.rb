@@ -14,7 +14,7 @@ module TendrilTasks
   #     <% breadcrumb.item "Subsection", href: subsection_path %>
   #   <% end %>
   #
-  class Breadcrumb < ApplicationComponent
+  class Breadcrumb < TendrilTasks::Component
     # Default title for the home link.
     DEFAULT_HOME_TITLE = t(".home")
 

@@ -8,7 +8,7 @@ module TendrilTasks
     #
     #   <%= render TendrilTasks::Tasks::Application.new(application) %>
     #
-    class Application < ApplicationComponent
+    class Application < TendrilTasks::Component
       # Duration for which an application is considered new.
       NEW_FOR = 1.week
 

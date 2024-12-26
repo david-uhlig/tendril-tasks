@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  class HorizontalLine < ApplicationComponent
+  class HorizontalLine < TendrilTasks::Component
     DEFAULT_HIDDEN_BREAKPOINT = :sm
     HIDDEN_BREAKPOINT_OPTIONS = %i[sm md lg xl 2xl]
 

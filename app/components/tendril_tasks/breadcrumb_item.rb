@@ -9,7 +9,7 @@ module TendrilTasks
   # @example Rendering a breadcrumb item prepended with a separator icon
   #
   #  <%= render TendrilTasks::BreadcrumbItem.new("Section", href: section_path, icon: :separator) %>
-  class BreadcrumbItem < ApplicationComponent
+  class BreadcrumbItem < TendrilTasks::Component
     # CSS class for the breadcrumb link.
     LINK_CLASS = "text-sm font-medium text-gray-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white"
 

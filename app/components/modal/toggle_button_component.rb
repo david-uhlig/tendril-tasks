@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Modal
-  class ToggleButtonComponent < ApplicationComponent
+  class ToggleButtonComponent < TendrilTasks::Component
     attr_reader :modal_id
 
     def initialize(text = nil, modal_id:, **options)

@@ -2,7 +2,7 @@
 
 module Text
   module Highlight
-    class GradientComponent < ApplicationComponent
+    class GradientComponent < TendrilTasks::Component
       DEFAULT_SCHEME = :sky_to_emerald
       SCHEME_MAPPINGS = {
         none: "",

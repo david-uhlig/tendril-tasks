@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Toast
-  class NotificationComponent < ApplicationComponent
+  class NotificationComponent < TendrilTasks::Component
     DEFAULT_TYPE = :success
 
     def initialize(message = nil, type: DEFAULT_TYPE)

@@ -6,7 +6,7 @@ module Form
     # e.g. a task or a project.
     #
     # The list is immutable. It can only be changed by user input through the CoordinatorAssignment::ModalComponent.
-    class AssigneeComponent < ApplicationComponent
+    class AssigneeComponent < TendrilTasks::Component
       def initialize(assignees)
         @assignees = assignees
       end

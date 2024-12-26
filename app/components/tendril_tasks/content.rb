@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  class Content < ApplicationComponent
+  class Content < TendrilTasks::Component
     DEFAULT_WIDTH = :full
     WIDTH_MAPPINGS = {
       full: "",

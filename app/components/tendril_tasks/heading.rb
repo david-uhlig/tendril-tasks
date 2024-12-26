@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  class Heading < ApplicationComponent
+  class Heading < TendrilTasks::Component
     DEFAULT_CLASSES = "group leading-none tracking-tight"
 
     TAG_SCHEME_MAPPINGS = {

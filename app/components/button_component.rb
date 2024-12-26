@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Use `ButtonComponent` for actions (e.g. in forms). Use links for destinations, or moving from one page to another.
-class ButtonComponent < ApplicationComponent
+class ButtonComponent < TendrilTasks::Component
   DEFAULT_SCHEME = :default
   SCHEME_MAPPINGS = {
     :none => "",

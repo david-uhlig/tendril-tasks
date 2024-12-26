@@ -11,7 +11,7 @@ module TendrilTasks
     #
     #   <%= render TendrilTasks::Tasks::Card.new(task) %>
     #
-    class Card < ApplicationComponent
+    class Card < TendrilTasks::Component
       # Available badge schemes.
       SCHEME_OPTIONS = Gustwave::Badge::SCHEME_OPTIONS
       SCHEME_SIZE = SCHEME_OPTIONS.size

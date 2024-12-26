@@ -11,7 +11,7 @@ module Form
   # Within a Rails view, you can render the component with:
   #
   #   <%= render Form::CoordinatorPickerComponent.new(form, :coordinators, "Coordinators", { class: "custom-class" })) %>
-  class CoordinatorPickerComponent < ApplicationComponent
+  class CoordinatorPickerComponent < TendrilTasks::Component
     def initialize(form, attribute, label = nil, options = {})
       @form = form
       @attribute = attribute

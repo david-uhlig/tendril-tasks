@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ContactButtonComponent < ApplicationComponent
+class ContactButtonComponent < TendrilTasks::Component
   def initialize(user, is_responsive: true)
     @user = user
     @is_responsive = is_responsive
