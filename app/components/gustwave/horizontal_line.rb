@@ -50,35 +50,40 @@ module Gustwave
   #  <% end %>
   #
   class HorizontalLine < Gustwave::Component
-    DEFAULT_SCHEME = :default
-    SCHEME_MAPPINGS = {
+    style_layer :scheme, {
       none: "",
       default: "mx-auto border-0 rounded w-full h-px my-8 bg-gray-200 dark:bg-gray-700",
       trimmed: "mx-auto border-0 rounded w-48 h-1 my-4 bg-gray-100 md:my-10 dark:bg-gray-700",
       squared: "mx-auto border-0 rounded w-8 h-8 my-8 bg-gray-200 md:my-12 dark:bg-gray-700"
-    }
-    SCHEME_OPTIONS = SCHEME_MAPPINGS.keys
+    }, default: :default
 
-    DEFAULT_VISUAL_TEXT_CLASSES = "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
-    DEFAULT_VISUAL_SVG_CLASSES = "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
-    CONTENT_TEXT_CLASSES = DEFAULT_VISUAL_TEXT_CLASSES
-    CONTENT_BLOCK_CLASSES = "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
+    style_layer :visual_text, {
+      on: "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
+    }, default: :on
+
+    style_layer :visual_svg, {
+      on: "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
+    }, default: :on
+
+    style_layer :content_text, {
+      on: "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
+    }, default: :on
+
+    style_layer :content_block, {
+      on: "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
+    }, default: :on
 
     renders_one :visual, types: {
       text: ->(text, **options) {
         options.deep_symbolize_keys!
-        options[:class] = class_merge(
-          DEFAULT_VISUAL_TEXT_CLASSES,
-          options.delete(:class)
-        )
+        options[:class] = merge_layers(visual_text: true,
+                                       custom: options.delete(:class))
         tag.span(text, **options)
       },
       svg: ->(**options, &block) {
         options = normalize_keys(options)
-        options[:class] = class_merge(
-          DEFAULT_VISUAL_SVG_CLASSES,
-          options.delete(:class)
-        )
+        options[:class] = merge_layers(visual_svg: true,
+                                       custom: options.delete(:class))
         options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
 
         tag.div(block.call, **options)
@@ -91,9 +96,12 @@ module Gustwave
     #
     # @param scheme [Symbol] the scheme to be used for styling the horizontal line.
     # @param options [Hash] additional HTML options to be applied to the +<hr>+ element.
-    def initialize(scheme: DEFAULT_SCHEME, **options)
-      @scheme = fetch_or_fallback(SCHEME_OPTIONS, scheme, DEFAULT_SCHEME)
-      @options = build_options(options)
+    def initialize(scheme: default_layer_state(:scheme),
+                   **options)
+      options.symbolize_keys!
+      options[:class] = merge_layers(scheme: scheme,
+                                     custom: options.delete(:class))
+      @options = options
     end
 
     # Renders the horizontal line `<hr>` with the specified options.
@@ -102,38 +110,27 @@ module Gustwave
     def call
       return tag.hr(**@options) unless content.present? || visual?
 
-      visual_or_content = case
-      # SVG and text already have enclosing elements
-      when visual?
-        visual
-      # Everything besides pure text
-      when content.is_a?(ActiveSupport::SafeBuffer)
-        tag.div(class: CONTENT_BLOCK_CLASSES) do
-          content
+      visual_or_content =
+        case
+        # SVG and text already have enclosing elements
+        when visual?
+          visual
+        # Everything besides pure text
+        when content.is_a?(ActiveSupport::SafeBuffer)
+          tag.div(class: merge_layers(content_block: true)) do
+            content
+          end
+        # Pure text
+        else
+          tag.span(content, class: merge_layers(content_text: true)) do
+            content
+          end
         end
-      # Pure text
-      else
-        tag.span(content, class: CONTENT_TEXT_CLASSES) do
-          content
-        end
-      end
 
       tag.div(class: "inline-flex items-center justify-center w-full") do
         concat tag.hr(**@options)
         concat visual_or_content
       end
-    end
-
-    private
-
-    # Builds the options hash for the `<hr>` element, merging the scheme's CSS classes.
-    #
-    # @param options [Hash] the initial options hash.
-    # @return [Hash] the modified options hash with the scheme's CSS classes.
-    def build_options(options)
-      options.deep_symbolize_keys!
-      options[:class] = class_merge(SCHEME_MAPPINGS[@scheme], options.delete(:class))
-      options
     end
   end
 end

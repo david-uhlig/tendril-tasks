@@ -27,17 +27,12 @@ module TendrilTasks
       </svg>
     HTML
 
-    # Default icon type.
     DEFAULT_ICON = :separator
-
-    # Mapping of icon types to their corresponding SVG HTML.
     ICON_MAPPINGS = {
       separator: SEPARATOR_ICON,
       home: HOME_ICON,
       none: ""
     }
-
-    # Available icon options.
     ICON_OPTIONS = ICON_MAPPINGS.keys
 
     # Initializes a new BreadcrumbItem.

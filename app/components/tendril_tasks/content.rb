@@ -2,15 +2,18 @@
 
 module TendrilTasks
   class Content < TendrilTasks::Component
-    DEFAULT_WIDTH = :full
-    WIDTH_MAPPINGS = {
+    style_layer :width, {
       full: "",
       large: "mx-auto sm:px-16 xl:px-24 space-y-6"
-    }
-    WIDTH_OPTIONS = WIDTH_MAPPINGS.keys
+    }, default: :full
 
-    def initialize(width: DEFAULT_WIDTH, **options)
-      @options = build_options(width, options)
+    def initialize(width: default_layer_state(:width), **options)
+      options.symbolize_keys!
+      options[:class] = merge_layers(
+        width: width,
+        custom: options.delete(:class)
+      ).presence
+      @options = options
     end
 
     def call

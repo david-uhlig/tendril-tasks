@@ -2,10 +2,14 @@
 
 module TendrilTasks
   class Avatar < TendrilTasks::Component
-    DEFAULT_SCHEME = Gustwave::Avatar::DEFAULT_SCHEME
-    DEFAULT_SIZE = Gustwave::Avatar::DEFAULT_SIZE
+    DEFAULT_SCHEME = :round
+    DEFAULT_SIZE = :md
 
-    def initialize(user, scheme: DEFAULT_SCHEME, size: DEFAULT_SIZE, border: false, **options)
+    def initialize(user,
+                   scheme: DEFAULT_SCHEME,
+                   size: DEFAULT_SIZE,
+                   border: false,
+                   **options)
       @src = user.avatar_url
 
       options ||= {}

@@ -2,7 +2,20 @@
 
 module TendrilTasks
   class Heading < TendrilTasks::Component
-    DEFAULT_CLASSES = "group leading-none tracking-tight"
+    style_layer :base, {
+      on: "group leading-none tracking-tight",
+      off: ""
+    }, default: :on
+
+    style_layer :scheme, {
+      none: "",
+      level1: "mb-4",
+      level2: "mb-4",
+      level3: "mb-4",
+      level4: "mb-4",
+      level5: "mb-2",
+      level6: "mb-2"
+    }, default: :level1
 
     TAG_SCHEME_MAPPINGS = {
       h1: :level2,
@@ -11,16 +24,6 @@ module TendrilTasks
       h4: :level5,
       h5: :level6,
       h6: :level6
-    }
-
-    SCHEME_MAPPINGS = {
-      none: "",
-      level1: "mb-4",
-      level2: "mb-4",
-      level3: "mb-4",
-      level4: "mb-4",
-      level5: "mb-2",
-      level6: "mb-2"
     }
 
     def initialize(text = nil,
@@ -34,20 +37,16 @@ module TendrilTasks
                               tag,
                               Gustwave::Heading::DEFAULT_TAG)
 
+      # Derive scheme from the tag if not provided
       scheme ||= TAG_SCHEME_MAPPINGS[tag]
-      scheme = fetch_or_fallback(Gustwave::Heading::SCHEME_OPTIONS,
-                                 scheme,
-                                 Gustwave::Heading::DEFAULT_SCHEME)
 
-      @options ||= {}
+      @options = options.deep_symbolize_keys
       @options[:tag] ||= tag
       @options[:scheme] ||= scheme
       @options[:responsive] ||= responsive
-      @options[:class] = class_merge(
-        DEFAULT_CLASSES,
-        SCHEME_MAPPINGS[scheme],
-        options.delete(:class)
-      )
+      @options[:class] = merge_layers(base: true,
+                                      scheme: scheme,
+                                      custom: @options.delete(:class))
     end
 
     def call

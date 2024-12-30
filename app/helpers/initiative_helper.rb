@@ -1,6 +1,6 @@
 module InitiativeHelper
   SCHEME_OPTIONS = Gustwave::Badge::SCHEME_OPTIONS
-  SCHEME_SIZE = Gustwave::Badge::SCHEME_OPTIONS.size
+  SCHEME_SIZE = SCHEME_OPTIONS.size
 
   def badge_scheme_by_id(id)
     SCHEME_OPTIONS.fetch(id % SCHEME_SIZE)

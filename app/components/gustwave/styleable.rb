@@ -207,7 +207,14 @@ module Gustwave
       #
       # @param layer [Symbol] the name of the style layer.
       def default_layer_state(layer)
-        __style_layers.dig(layer, :default)
+        __style_layers.dig(layer, :default).dup
+      end
+
+      # Returns the states of a style layer.
+      #
+      # @param layer [Symbol] the name of the style layer.
+      def layer_states(layer)
+        __style_layers.dig(layer, :states).dup
       end
     end
 
