@@ -3,6 +3,7 @@
 module Gustwave
   class Component < ViewComponent::Base
     include Primer::FetchOrFallbackHelper
+    include Gustwave::Styleable
     include TailwindHelper
 
     protected
