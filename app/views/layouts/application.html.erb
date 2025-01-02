@@ -46,7 +46,8 @@
       <% navigation.link(name: Task.model_name.human(count: 2),
                          href: tasks_path)
       %>
-      <% navigation.with_login_button(scheme: :duotone_purple_to_blue,
+      <% navigation.with_login_button(theme: :gradient_duotone,
+                                      scheme: :purple_to_blue,
                                       data: { turbo: false },
                                       class: "hidden sm:inline-flex") do |login_button|
       %>

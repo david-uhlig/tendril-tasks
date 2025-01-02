@@ -11,7 +11,8 @@
             <% User.roles.each do |role_name, role_id| %>
               <% if role_name == @user.role %>
                 <% grid.button(
-                     scheme: :duotone_purple_to_blue,
+                     theme: :gradient_duotone,
+                     scheme: :purple_to_blue,
                      disabled: true
                    ).with_content(role_name.capitalize) %>
               <% else %>

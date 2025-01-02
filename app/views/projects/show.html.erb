@@ -47,32 +47,35 @@
         <ul class="grow text-start sm:text-end whitespace-nowrap">
           <% if can? :update, @project %>
             <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
+              <%= render Gustwave::Button.new(tag: :a,
                                              href: edit_project_path(@project),
                                              scheme: :default,
-                                             size: :small) do %>
+                                             size: :sm) do
+              %>
                 <%= tag.span t("forms.edit") %>
               <% end %>
             </li>
           <% end %>
           <% if can? :create, Task %>
             <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_task_with_preset_path(
-                                               project_id: @project.id,
-                                               coordinator_ids: @project.coordinator_ids.join("-")),
-                                             scheme: :default,
-                                             size: :small) do %>
+              <%= render Gustwave::Button.new(tag: :a,
+                                              href: new_task_with_preset_path(
+                                                project_id: @project.id,
+                                                coordinator_ids: @project.coordinator_ids.join("-")),
+                                              scheme: :default,
+                                              size: :sm) do
+              %>
                 <%= tag.span t(".add_task") %>
               <% end %>
             </li>
           <% end %>
           <% if can? :create, Project %>
             <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_project_path,
-                                             scheme: :default,
-                                             size: :small) do %>
+              <%= render Gustwave::Button.new(tag: :a,
+                                              href: new_project_path,
+                                              scheme: :default,
+                                              size: :sm) do
+              %>
                 <%= tag.span t(".add_initiative") %>
               <% end %>
             </li>
@@ -167,11 +170,11 @@
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <div class="grid grid-cols-1 justify-center text-center">
-    <%= render ButtonComponent
+    <%= render Gustwave::Button
                  .new(tag: :a,
                       href: projects_path,
                       scheme: :alternative,
-                      size: :large)
+                      size: :lg)
                  .with_content(t ".goto_initiatives_overview")
     %>
   </div>

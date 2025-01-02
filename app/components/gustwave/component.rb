@@ -4,9 +4,9 @@ module Gustwave
   class Component < ViewComponent::Base
     include Primer::FetchOrFallbackHelper
     include Gustwave::Styleable
+    include Gustwave::Themeable
     include TailwindHelper
 
-    protected
     def normalize_keys(options)
       normalized_options = {}
 
@@ -23,6 +23,12 @@ module Gustwave
       end
 
       normalized_options.deep_symbolize_keys!
+    end
+
+    def lightswitch_cast(value)
+      return value if [ :on, :off ].include?(value)
+      return value.to_sym if %w[on off].include?(value)
+      fetch_or_fallback_boolean(value, false)
     end
   end
 end

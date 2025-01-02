@@ -47,10 +47,10 @@
         <ul class="grow text-start sm:text-end whitespace-nowrap">
           <% if can? :update, @task %>
             <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: edit_task_path(@task),
-                                             scheme: :default,
-                                             size: :small) do
+              <%= render Gustwave::Button.new(tag: :a,
+                                              href: edit_task_path(@task),
+                                              scheme: :default,
+                                              size: :sm) do
               %>
                 <%= tag.span t(".action_button.edit") %>
               <% end %>
@@ -58,12 +58,12 @@
           <% end %>
           <% if can? :create, Task %>
             <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_task_with_preset_path(
-                                               project_id: @task.project.id,
-                                               coordinator_ids: @task.project.coordinator_ids.join("-")),
-                                             scheme: :default,
-                                             size: :small) do
+              <%= render Gustwave::Button.new(tag: :a,
+                                              href: new_task_with_preset_path(
+                                                project_id: @task.project.id,
+                                                coordinator_ids: @task.project.coordinator_ids.join("-")),
+                                              scheme: :default,
+                                              size: :sm) do
               %>
                 <%= tag.span t(".action_button.add_task") %>
               <% end %>
@@ -71,10 +71,10 @@
           <% end %>
           <% if can? :create, Project %>
             <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_project_path,
-                                             scheme: :default,
-                                             size: :small) do
+              <%= render Gustwave::Button.new(tag: :a,
+                                              href: new_project_path,
+                                              scheme: :default,
+                                              size: :sm) do
               %>
                 <%= tag.span t(".action_button.add_initiative") %>
               <% end %>
@@ -148,13 +148,19 @@
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 justify-center text-center gap-2">
-    <%= render ButtonComponent.new(tag: :a,
-                                   href: tasks_path,
-                                   scheme: :alternative,
-                                   size: :large).with_content(t(".goto_tasks_button")) %>
-    <%= render ButtonComponent.new(tag: :a,
-                                   href: project_path(@task.project),
-                                   scheme: :alternative,
-                                   size: :large).with_content(t(".goto_initiative")) %>
+    <%= render Gustwave::Button
+                 .new(tag: :a,
+                      href: tasks_path,
+                      scheme: :alternative,
+                      size: :lg)
+                 .with_content(t(".goto_tasks_button"))
+    %>
+    <%= render Gustwave::Button
+                 .new(tag: :a,
+                      href: project_path(@task.project),
+                      scheme: :alternative,
+                      size: :lg)
+                 .with_content(t(".goto_initiative"))
+    %>
   </div>
 <% end %>

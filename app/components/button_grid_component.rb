@@ -25,7 +25,7 @@ class ButtonGridComponent < TendrilTasks::Component
 
   renders_many :buttons, ->(**options) {
     options = parse_button_options(options)
-    ::ButtonComponent.new(**options)
+    Gustwave::Button.new(**options)
   }
   alias button with_button
 

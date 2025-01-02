@@ -47,7 +47,7 @@
   </div>
   <%= render TendrilTasks::HorizontalLine.new %>
 
-  <%= render ButtonGridComponent.new(orientation: :vertical, size: :large) do |grid| %>
+  <%= render ButtonGridComponent.new(orientation: :vertical, size: :lg) do |grid| %>
     <%# Link to all tasks when filter is applied %>
     <% grid
          .button(tag: :a,
