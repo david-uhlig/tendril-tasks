@@ -2,20 +2,20 @@
 
 module TendrilTasks
   class Heading < TendrilTasks::Component
-    style_layer :base, {
-      on: "group leading-none tracking-tight",
-      off: ""
-    }, default: :on
+    style :base,
+          "group leading-none tracking-tight"
 
-    style_layer :scheme, {
-      none: "",
-      level1: "mb-4",
-      level2: "mb-4",
-      level3: "mb-4",
-      level4: "mb-4",
-      level5: "mb-2",
-      level6: "mb-2"
-    }, default: :level1
+    style :scheme,
+          default: :level1,
+          states: {
+            none: "",
+            level1: "mb-4",
+            level2: "mb-4",
+            level3: "mb-4",
+            level4: "mb-4",
+            level5: "mb-2",
+            level6: "mb-2"
+          }
 
     TAG_SCHEME_MAPPINGS = {
       h1: :level2,
@@ -44,7 +44,7 @@ module TendrilTasks
       @options[:tag] ||= tag
       @options[:scheme] ||= scheme
       @options[:responsive] ||= responsive
-      @options[:class] = merge_layers(base: true,
+      @options[:class] = styles(base: true,
                                       scheme: scheme,
                                       custom: @options.delete(:class))
     end

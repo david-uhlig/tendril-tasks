@@ -2,14 +2,16 @@
 
 module TendrilTasks
   class Content < TendrilTasks::Component
-    style_layer :width, {
-      full: "",
-      large: "mx-auto sm:px-16 xl:px-24 space-y-6"
-    }, default: :full
+    style :width,
+          default: :full,
+          states: {
+            full: "",
+            large: "mx-auto sm:px-16 xl:px-24 space-y-6"
+          }
 
     def initialize(width: default_layer_state(:width), **options)
       options.symbolize_keys!
-      options[:class] = merge_layers(
+      options[:class] = styles(
         width: width,
         custom: options.delete(:class)
       ).presence

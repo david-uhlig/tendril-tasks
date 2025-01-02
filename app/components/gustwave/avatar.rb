@@ -2,37 +2,43 @@
 
 module Gustwave
   class Avatar < Gustwave::Component
-    style_layer :scheme, {
-      none: "",
-      round: "rounded-full",
-      square: "rounded"
-    }, default: :round
+    style :scheme,
+          default: :round,
+          states: {
+            none: "",
+            round: "rounded-full",
+            square: "rounded"
+          }
 
-    style_layer :size, {
-      none: "",
-      original: "",
-      xs: "w-6 h-6",
-      sm: "w-8 h-8",
-      md: "w-10 h-10",
-      lg: "w-12 h-12",
-      xl: "w-16 h-16",
-      "2xl": "w-20 h-20",
-      "3xl": "w-28 h-28",
-      "4xl": "w-36 h-36"
-    }, default: :md
+    style :size,
+          default: :md,
+          states: {
+            none: "",
+            original: "",
+            xs: "w-6 h-6",
+            sm: "w-8 h-8",
+            md: "w-10 h-10",
+            lg: "w-12 h-12",
+            xl: "w-16 h-16",
+            "2xl": "w-20 h-20",
+            "3xl": "w-28 h-28",
+            "4xl": "w-36 h-36"
+          }
 
-    style_layer :border, {
-      none: "ring-1 ring-gray-300 dark:ring-gray-500",
-      original: "ring-1 ring-gray-300 dark:ring-gray-500",
-      xs: "ring-0 ring-gray-300 dark:ring-gray-500",
-      sm: "ring-1 ring-gray-300 dark:ring-gray-500",
-      md: "ring-2 ring-gray-300 dark:ring-gray-500",
-      lg: "ring ring-gray-300 dark:ring-gray-500",
-      xl: "ring ring-gray-300 dark:ring-gray-500",
-      "2xl": "ring-4 ring-gray-300 dark:ring-gray-500",
-      "3xl": "ring-4 ring-gray-300 dark:ring-gray-500",
-      "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"
-    }, default: :md
+    style :border,
+          default: :md,
+          states: {
+            none: "ring-1 ring-gray-300 dark:ring-gray-500",
+            original: "ring-1 ring-gray-300 dark:ring-gray-500",
+            xs: "ring-0 ring-gray-300 dark:ring-gray-500",
+            sm: "ring-1 ring-gray-300 dark:ring-gray-500",
+            md: "ring-2 ring-gray-300 dark:ring-gray-500",
+            lg: "ring ring-gray-300 dark:ring-gray-500",
+            xl: "ring ring-gray-300 dark:ring-gray-500",
+            "2xl": "ring-4 ring-gray-300 dark:ring-gray-500",
+            "3xl": "ring-4 ring-gray-300 dark:ring-gray-500",
+            "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"
+          }
 
     def initialize(src:,
                    alt: nil,
@@ -50,7 +56,7 @@ module Gustwave
       layers[:custom] = options.delete(:class)
 
       options[:alt] ||= alt
-      options[:class] = merge_layers(**layers)
+      options[:class] = styles(**layers)
       options[:role] ||= "img"
       @options = options
     end

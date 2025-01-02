@@ -50,40 +50,41 @@ module Gustwave
   #  <% end %>
   #
   class HorizontalLine < Gustwave::Component
-    style_layer :scheme, {
-      none: "",
-      default: "mx-auto border-0 rounded w-full h-px my-8 bg-gray-200 dark:bg-gray-700",
-      trimmed: "mx-auto border-0 rounded w-48 h-1 my-4 bg-gray-100 md:my-10 dark:bg-gray-700",
-      squared: "mx-auto border-0 rounded w-8 h-8 my-8 bg-gray-200 md:my-12 dark:bg-gray-700"
-    }, default: :default
+    style :base,
+          "mx-auto border-0 rounded dark:bg-gray-700"
 
-    style_layer :visual_text, {
-      on: "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
-    }, default: :on
+    style :scheme,
+          default: :default,
+          states: {
+            none: "",
+            default: "w-full h-px my-8 bg-gray-200",
+            trimmed: "w-48 h-1 my-4 bg-gray-100 md:my-10",
+            squared: "w-8 h-8 my-8 bg-gray-200 md:my-12"
+          }
 
-    style_layer :visual_svg, {
-      on: "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
-    }, default: :on
+    style :visual_text,
+          "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
 
-    style_layer :content_text, {
-      on: "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
-    }, default: :on
+    style :visual_svg,
+          "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
 
-    style_layer :content_block, {
-      on: "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
-    }, default: :on
+    style :content_text,
+          "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
+
+    style :content_block,
+          "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
 
     renders_one :visual, types: {
       text: ->(text, **options) {
         options.deep_symbolize_keys!
-        options[:class] = merge_layers(visual_text: true,
-                                       custom: options.delete(:class))
+        options[:class] = styles(visual_text: true,
+                                 custom: options.delete(:class))
         tag.span(text, **options)
       },
       svg: ->(**options, &block) {
         options = normalize_keys(options)
-        options[:class] = merge_layers(visual_svg: true,
-                                       custom: options.delete(:class))
+        options[:class] = styles(visual_svg: true,
+                                 custom: options.delete(:class))
         options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
 
         tag.div(block.call, **options)
@@ -99,8 +100,12 @@ module Gustwave
     def initialize(scheme: default_layer_state(:scheme),
                    **options)
       options.symbolize_keys!
-      options[:class] = merge_layers(scheme: scheme,
-                                     custom: options.delete(:class))
+      layers = {}
+      layers[:base] = :on unless scheme == :none
+      layers[:scheme] = scheme
+      layers[:custom] = options.delete(:class)
+
+      options[:class] = styles(**layers)
       @options = options
     end
 
@@ -117,12 +122,12 @@ module Gustwave
           visual
         # Everything besides pure text
         when content.is_a?(ActiveSupport::SafeBuffer)
-          tag.div(class: merge_layers(content_block: true)) do
+          tag.div(class: styles(content_block: true)) do
             content
           end
         # Pure text
         else
-          tag.span(content, class: merge_layers(content_text: true)) do
+          tag.span(content, class: styles(content_text: true)) do
             content
           end
         end
