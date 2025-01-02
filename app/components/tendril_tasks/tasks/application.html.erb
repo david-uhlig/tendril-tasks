@@ -42,7 +42,7 @@
               class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
     %>
   <% end %>
-  <%= render ::ContactButtonComponent.new(@application.user,
-                                        is_responsive: false)
+  <%= render TendrilTasks::ContactButton.new(@application.user,
+                                             is_responsive: false)
   %>
 </li>

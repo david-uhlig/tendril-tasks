@@ -7,7 +7,7 @@
     <%= render TendrilTasks::Avatar.new(@coordinator) %>
     <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= @coordinator.name %></span>
     <span class="inline-flex items-center justify-center">
-      <%= render ContactButtonComponent.new(@coordinator) %>
+      <%= render TendrilTasks::ContactButton.new(@coordinator) %>
     </span>
   </span>
 </li>
