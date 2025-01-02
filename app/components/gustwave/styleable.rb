@@ -189,6 +189,21 @@ module Gustwave
           end
 
           self.__style_layers[layer] = merged_layer
+        # TODO document this strategy
+        when :combine
+          if default.blank? && self.__style_layers[layer].blank?
+            raise ArgumentError, "A default must be specified for the merge strategy"
+          end
+
+          merged_layer = self.__style_layers.dig(layer) || { states: {}, default: nil }
+          merged_layer[:states].merge!(states) { |_, old, new| MERGER.merge([ old, new ]) }
+          merged_layer[:default] = default if default.present?
+
+          if default.present? && !merged_layer[:states].key?(default)
+            raise ArgumentError, "Default must be one of the states keys"
+          end
+
+          self.__style_layers[layer] = merged_layer
         when :replace
           raise ArgumentError, "Default must be specified for replace strategy" unless default.present?
           raise ArgumentError, "Default must be one of the states keys" unless states.key?(default)
@@ -201,6 +216,23 @@ module Gustwave
         end
 
         nil
+      end
+
+      def style(layer, state_or_states = nil, states: nil, default: nil, strategy: :merge)
+        case state_or_states
+        when Hash
+          states = state_or_states
+        when String
+          states = {
+            on: state_or_states,
+            off: ""
+          }
+          default = :on
+        else
+          states ||= state_or_states
+        end
+
+        style_layer(layer, states, default: default&.to_sym, strategy: strategy)
       end
 
       # Returns the default state key for a style layer.
@@ -298,6 +330,7 @@ module Gustwave
 
       MERGER.merge(applied_classes.compact)
     end
+    alias styles merge_layers
 
     private
 
