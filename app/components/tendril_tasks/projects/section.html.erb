@@ -41,7 +41,7 @@
       <% end %>
     <% end %>
 
-    <%= render ButtonGridComponent.new(tag: :a, size: :lg) do |grid| %>
+    <%= render TendrilTasks::ButtonGrid.new(tag: :a, size: :lg) do |grid| %>
       <% grid.button(href: project_path(@project),
                      scheme: :alternative)
              .with_content(t(".more_button"))
