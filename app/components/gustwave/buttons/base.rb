@@ -10,7 +10,7 @@ module Gustwave
       TYPE_OPTIONS = [ :button, :reset, :submit ].freeze
 
       style :base,
-            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed disabled:opacity-80"
+            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
 
       # General appearance of the buttons
       #
@@ -51,24 +51,17 @@ module Gustwave
       style :has_visual,
             "inline-flex items-center align-bottom"
 
-      style :leading_visual_size,
+      # Adjusts the visual's size based on the +text-*+ class of the
+      # +style :size+ states.
+      style :visual_size,
             default: default_layer_state(:size),
             states: {
-              xs: "h-4 me-1",
-              sm: "h-5 me-1.5",
-              md: "h-5 me-1.5",
-              lg: "h-6 me-2",
-              xl: "h-6 me-2"
-            }
-
-      style :trailing_visual_size,
-            default: default_layer_state(:size),
-            states: {
-              xs: "h-4 ms-1",
-              sm: "h-5 ms-1.5",
-              md: "h-5 ms-1.5",
-              lg: "h-6 ms-2",
-              xl: "h-6 ms-2"
+              none: "",
+              xs: "h-4 w-auto",
+              sm: "h-5 w-auto",
+              md: "h-5 w-auto",
+              lg: "h-6 w-auto",
+              xl: "h-6 w-auto"
             }
 
       # Renders an image or visual element to appear to the left of the button text.
@@ -97,41 +90,43 @@ module Gustwave
       #   as it is usually decorative and doesn't convey critical information.
       #
       renders_one :leading_visual, types: {
-        image: ->(src, **options) {
-          options.deep_symbolize_keys!
-          options[:class] = styles(leading_visual_size: @size,
-                                   custom: options.delete(:class))
-          options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
-          image_tag src, options
+        icon: ->(name, theme: :outline, **options) {
+          options = build_visual_options(position: :leading, **options)
+          Gustwave::Icon.new(name,
+                             theme: theme,
+                             position: :leading,
+                             **options)
         },
-        svg: ->(**options, &block) {
-          options.deep_symbolize_keys!
-          options[:class] = styles(leading_visual_size: @size,
-                                   custom: options.delete(:class))
-          options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
-          content_tag :svg, **options, &block
+        image: ->(src, **options) {
+          options = build_visual_options(position: :leading, **options)
+          image_tag src, **options
+        },
+        svg: ->(src = nil, **options, &block) {
+          options = build_visual_options(position: :leading, **options)
+          Gustwave::Svg.new(src, **options, &block)
         }
       }
-      alias with_leading_visual with_leading_visual_image
+      alias leading_icon with_leading_visual_icon
       alias leading_image with_leading_visual_image
       alias leading_svg with_leading_visual_svg
 
       renders_one :trailing_visual, types: {
+        icon: ->(name, theme: :outline, **options) {
+          options = build_visual_options(position: :trailing, **options)
+          Gustwave::Icon.new(name,
+                             theme: theme,
+                             **options)
+        },
         image: ->(src, **options) {
-          options.deep_symbolize_keys!
-          options[:class] = styles(trailing_visual_size: @size,
-                                   custom: options.delete(:class))
-          options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
+          options = build_visual_options(position: :trailing, **options)
           image_tag src, options
         },
-        svg: ->(**options, &block) {
-          options.deep_symbolize_keys!
-          options[:class] = styles(trailing_visual_size: @size,
-                                   custom: options.delete(:class))
-          options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
-          content_tag :svg, **options, &block
+        svg: ->(src = nil, **options, &block) {
+          options = build_visual_options(position: :trailing, **options)
+          Gustwave::Svg.new(src, **options, &block)
         }
       }
+      alias trailing_icon with_trailing_visual_icon
       alias trailing_image with_trailing_visual_image
       alias trailing_svg with_trailing_visual_svg
 
@@ -167,12 +162,28 @@ module Gustwave
 
         content_tag @tag, @options do
           concat(leading_visual) if leading_visual?
-          concat(@text || content)
+          concat(@text)
+          concat(content)
           concat(trailing_visual) if trailing_visual?
         end
       end
 
       private
+
+      def build_visual_options(position: :leading, **options)
+        margin =
+          if position == :leading
+            "me-1.5"
+          else
+            "ms-1.5"
+          end
+        options.deep_symbolize_keys!
+        options[:class] = styles(visual_size: @size,
+                                 custom_margin: margin,
+                                 custom_class: options.delete(:class))
+        options[:"aria-hidden"] ||= "true"
+        options
+      end
 
       def lightswitch_cast(value)
         return value if [ :on, :off ].include?(value)

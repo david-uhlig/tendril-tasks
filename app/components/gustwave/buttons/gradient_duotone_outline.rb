@@ -2,14 +2,15 @@
 
 module Gustwave
   module Buttons
-    class GradientDuotoneOutline < Gustwave::Component
+    class GradientDuotoneOutline < Gustwave::Buttons::Base
       theme_for Gustwave::Button
 
       style :base,
-            "set-by-gradient-duotone-outline relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-gradient-to-br dark:text-white"
+            "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-gradient-to-br dark:text-white"
 
       style :scheme,
             default: :purple_to_blue,
+            strategy: :replace,
             states: {
               none: "",
               base: "",
@@ -42,6 +43,7 @@ module Gustwave
                      size: default_layer_state(:size),
                      **options)
         @text = text
+        @size = size
 
         options.symbolize_keys!
         layers = {}
@@ -53,18 +55,31 @@ module Gustwave
 
         layers = {}
         layers[:base_inner] = true
-        layers[:size_inner] = size
+        layers[:size_inner] = @size
 
         @inner_options = {}
         @inner_options[:class] = styles(**layers)
       end
 
       def call
-        render Gustwave::Buttons::Base.new(scheme: :base, **@options) do
+        if leading_visual? || trailing_visual?
+          @inner_options[:class] = styles(custom: @inner_options.delete(:class),
+                                          has_visual: true)
+        end
+
+        render base_button do
           tag.span **@inner_options do
-            @text || content
+            concat(leading_visual) if leading_visual?
+            concat @text || content
+            concat(trailing_visual) if trailing_visual?
           end
         end
+      end
+
+      private
+
+      def base_button
+        @base_button ||= Gustwave::Buttons::Base.new(scheme: :base, **@options)
       end
     end
   end

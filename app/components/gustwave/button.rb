@@ -62,8 +62,8 @@ module Gustwave
   #   render Gustwave::Button.new("Click me", theme: :monochrome_button)
   #
   class Button < Gustwave::Component
-    delegate_missing_to :themed_button
     with_default_theme :default
+    delegate_missing_to :themed_button
 
     DEFAULT_TAG = Gustwave::Buttons::Base::DEFAULT_TAG
     DEFAULT_TYPE = Gustwave::Buttons::Base::DEFAULT_TYPE
@@ -115,14 +115,14 @@ module Gustwave
 
     def call
       render themed_button do
-        @text || content
+        content
       end
     end
 
     private
 
     def themed_button
-      @themed_button ||= themed_component(@theme).new(**@options)
+      @themed_button ||= themed_component(@theme).new(@text, **@options)
     end
   end
 end

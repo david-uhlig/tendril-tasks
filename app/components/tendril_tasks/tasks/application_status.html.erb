@@ -3,7 +3,7 @@
         data-dropdown-toggle="dropdown-status-info-<%= @application.user.id %>"
         class="<%= CLASS_MAPPINGS[@application.status.to_sym] %> focus:ring-4 focus:outline-none focus:ring-slate-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2"
 >
-  <%= ICON_MAPPINGS[@application.status.to_sym]&.html_safe %>
+  <%= render ICON_MAPPINGS[@application.status.to_sym] %>
   <span class="ms-1 hidden sm:inline-flex"><%= t("activerecord.attributes.task_application.status.#{@application.status}") %></span>
   <% unless @application.withdrawn? %>
     <svg class="w-2.5 h-2.5 ms-2 me-1 hidden sm:inline-flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -29,11 +29,13 @@
     <div class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-status-info-<%= @application.user.id %>">
       <% @statuses.each do |status, id| %>
         <% next if status == "withdrawn" %>
-          <label class="block w-full text-start px-4 py-2 hover:bg-gray-100">
-            <span class="inline-flex align-bottom"><%= ICON_MAPPINGS[status.to_sym]&.html_safe %></span>
-            <%= t("activerecord.attributes.task_application.status.#{status}") %>
-            <%= f.radio_button :status, status, checked: (@application.status == status), data: { action: "change->auto-submit#immediately" }, class: "hidden" %>
-          </label>
+        <label class="block w-full text-start px-4 py-2 hover:bg-gray-100">
+          <span class="inline-flex align-bottom">
+            <%= render ICON_MAPPINGS[status.to_sym] %>
+          </span>
+          <%= t("activerecord.attributes.task_application.status.#{status}") %>
+          <%= f.radio_button :status, status, checked: (@application.status == status), data: { action: "change->auto-submit#immediately" }, class: "hidden" %>
+        </label>
       <% end %>
     </div>
     <%= f.submit "Submit", data: { "auto-submit-target": "submit" }, class: "hidden" %>

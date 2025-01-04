@@ -67,7 +67,7 @@ RSpec.describe Gustwave::Button, type: :component do
     let(:with_default_options) do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(@test_image_path)
+        c.leading_image(@test_image_path)
       end
     end
 
@@ -99,7 +99,7 @@ RSpec.describe Gustwave::Button, type: :component do
     it "renders alt text" do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(@test_image_path, alt: "alt text")
+        c.leading_image(@test_image_path, alt: "alt text")
       end
       expect(page).to have_selector("img[alt='alt text']")
     end
@@ -107,7 +107,7 @@ RSpec.describe Gustwave::Button, type: :component do
     it "renders additional css classes" do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(@test_image_path, class: "my-class some-other-class")
+        c.leading_image(@test_image_path, class: "my-class some-other-class")
       end
       expect(page).to have_selector("img.my-class.some-other-class")
     end
