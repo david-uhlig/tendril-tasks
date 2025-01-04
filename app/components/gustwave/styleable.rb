@@ -40,9 +40,9 @@ module Gustwave
       #
       # === Reserved keywords
       #
-      # The :custom keyword is a reserved layer name that cannot be used as a
-      # style layer name. It is used to apply custom classes to the component in
-      # the +merge_layers+ method.
+      # All keywords starting with +custom*+ are reserved layer names that
+      # cannot be used as style layer names. They are used to apply custom
+      # classes to the component in the +styles+ method.
       #
       # Boolean values are mapped to the :on and :off state in the +merge_layers+
       # method. This is useful for style layers that have a binary state, like
@@ -310,7 +310,7 @@ module Gustwave
       applied_classes = []
 
       layers.each do |layer, state|
-        if layer == :custom
+        if layer.to_s.start_with?("custom")
           applied_classes << state.to_s
           next
         end
@@ -336,7 +336,7 @@ module Gustwave
 
     def validate_layers(layers)
       layers.each do |layer, state|
-        next if layer == :custom
+        next if layer.to_s.start_with?("custom")
 
         unless self.class.__style_layers.include?(layer)
           raise ArgumentError, <<~MSG
