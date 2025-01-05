@@ -3,7 +3,7 @@
 module Gustwave
   class Badge < Gustwave::Component
     style :base,
-          "px-2.5 py-0.5 rounded whitespace-nowrap"
+          "px-2.5 py-0.5 rounded whitespace-nowrap inline-flex"
 
     style :scheme,
           default: :default,
@@ -49,6 +49,35 @@ module Gustwave
           "rounded-full",
           default: :off
 
+    # This is added to the badge's HTML element when a leading or trailing
+    # visual is present
+    style :has_visual,
+          "inline-flex items-center align-bottom"
+
+    # Adjusts the visual's size based on the +text-*+ class of the
+    # +style :size+ states.
+    style :visual_size,
+          default: default_layer_state(:size),
+          states: {
+            none: "",
+            xs: "h-4 w-auto",
+            sm: "h-5 w-auto",
+            md: "h-6 w-auto",
+            lg: "h-7 w-auto",
+            xl: "h-7 w-auto"
+          }
+
+    renders_one :leading_visual, types: {
+      icon: ->(name, theme: :outline, **options) {
+        options = build_visual_options(position: :leading, **options)
+        Gustwave::Icon.new(name,
+                           theme: theme,
+                           position: :leading,
+                           **options)
+      }
+    }
+    alias leading_icon with_leading_visual_icon
+
     # @param text [String, nil] Optional text to display within the badge.
     # @param tag [Symbol] The HTML tag to use for the badge. Defaults to `:span`.
     # @param scheme [Symbol] The color scheme for the badge. Defaults to `:default`.
@@ -65,6 +94,7 @@ module Gustwave
                    **options)
       @text = text
       @tag = tag
+      @size = size
 
       scheme = scheme.to_sym
 
@@ -75,16 +105,40 @@ module Gustwave
       layers[:scheme] = scheme
       layers[:border] = scheme if fetch_or_fallback_boolean(border, false)
       layers[:pill] = fetch_or_fallback_boolean(pill, false)
-      layers[:size] = size
+      layers[:size] = @size
       layers[:custom] = options.delete(:class)
 
       @options[:class] = styles(**layers)
     end
 
     def call
-      content_tag @tag, @options do
-        @text || content
+      if leading_visual?
+        @options[:class] = styles(custom: @options.delete(:class),
+                                  has_visual: true)
       end
+
+      content_tag @tag, @options do
+        concat leading_visual if leading_visual.present?
+        concat @text
+        concat content
+      end
+    end
+
+    private
+
+    def build_visual_options(position: :leading, **options)
+      margin =
+        if position == :leading
+          "me-1.5"
+        else
+          "ms-1.5"
+        end
+      options.deep_symbolize_keys!
+      options[:class] = styles(visual_size: @size,
+                               custom_margin: margin,
+                               custom_class: options.delete(:class))
+      options[:"aria-hidden"] ||= "true"
+      options
     end
   end
 end
