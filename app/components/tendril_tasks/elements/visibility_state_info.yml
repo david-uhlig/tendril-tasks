@@ -1,0 +1,9 @@
+en:
+  states:
+    visible: "Visible"
+    hidden: "Hidden"
+
+de:
+  states:
+    visible: "Sichtbar"
+    hidden: "Versteckt"

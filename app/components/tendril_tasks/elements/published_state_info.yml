@@ -1,0 +1,9 @@
+en:
+  states:
+    draft: "Draft"
+    published: "Published"
+
+de:
+  states:
+    draft: "Entwurf"
+    published: "Veröffentlicht"
