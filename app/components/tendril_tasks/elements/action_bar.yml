@@ -1,0 +1,9 @@
+en:
+  edit_button: "Edit"
+  add_project_button: "Initiative"
+  add_task_button: "Task"
+
+de:
+  edit_button: "Bearbeiten"
+  add_project_button: "Thema"
+  add_task_button: "Aufgabe"

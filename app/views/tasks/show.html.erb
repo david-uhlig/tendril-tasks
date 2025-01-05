@@ -9,82 +9,19 @@
 
   <%#
     Info and action bar for editors and coordinators
-    Displays publised status and action buttons: edit, create task, and
+    Displays published status and action buttons: edit, create task, and
     create project
   %>
-  <% if can?(:coordinate, @task) || can?(:update, @task) || can?(:create, Project) || can?(:create, Task) %>
+  <% if can?(:coordinate, @task) ||
+        can?(:update, @task) ||
+        can?(:create, Project) ||
+        can?(:create, Task)
+  %>
     <div class="flex flex-row flex-wrap-reverse gap-4">
-      <% if can?(:coordinate, @task) %>
-        <div class="whitespace-nowrap my-auto">
-          <% if @task.published? %>
-            <%= render Gustwave::Badge.new("Veröffentlicht",
-                                          scheme: :green,
-                                          size: :md) %>
-          <% else %>
-            <%= render Gustwave::Badge.new("Entwurf",
-                                          scheme: :dark,
-                                          size: :md) %>
-          <% end %>
-          <% if @task.visible? %>
-            <%= render Gustwave::Badge.new("Sichtbar",
-                                          scheme: :green,
-                                          size: :md) %>
-          <% else %>
-            <%= render Gustwave::Badge.new("Unsichtbar",
-                                          scheme: :dark,
-                                          size: :md) %>
-          <% end %>
-
-          <%# Visibility explainer icon %>
-          <svg class="w-5 h-5 mb-0.5 text-gray-800 dark:text-white inline align-center" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" data-popover-target="popover-visibility-info">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-          </svg>
-        </div>
-      <% end %>
-
+      <%# Visibility badges %>
+      <%= render TendrilTasks::Elements::VisibilityInfoBar.new(@task) %>
       <%# Action buttons %>
-      <% if can?(:update, @task) || can?(:create, Task) || can?(:create, Project) %>
-        <ul class="grow text-start sm:text-end whitespace-nowrap">
-          <% if can? :update, @task %>
-            <li class="inline-flex">
-              <%= render Gustwave::Button.new(tag: :a,
-                                              href: edit_task_path(@task),
-                                              scheme: :default,
-                                              size: :sm) do
-              %>
-                <%= tag.span t(".action_button.edit") %>
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :create, Task %>
-            <li class="inline-flex">
-              <%= render Gustwave::Button.new(tag: :a,
-                                              href: new_task_with_preset_path(
-                                                project_id: @task.project.id,
-                                                coordinator_ids: @task.project.coordinator_ids.join("-")),
-                                              scheme: :default,
-                                              size: :sm) do
-              %>
-                <%= tag.span t(".action_button.add_task") %>
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :create, Project %>
-            <li class="inline-flex">
-              <%= render Gustwave::Button.new(tag: :a,
-                                              href: new_project_path,
-                                              scheme: :default,
-                                              size: :sm) do
-              %>
-                <%= tag.span t(".action_button.add_initiative") %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-
-      <%# Visibility explainer popover %>
-      <%= render 'visibility_explainer', task: @task %>
+      <%= render TendrilTasks::Elements::ActionBar.new(@task) %>
     </div>
   <% end %>
 
@@ -156,11 +93,13 @@
                  .with_content(t(".goto_tasks_button"))
     %>
     <%= render Gustwave::Button
-                 .new(tag: :a,
+                 .new(@task.project.title,
+                      tag: :a,
                       href: project_path(@task.project),
                       scheme: :alternative,
-                      size: :lg)
-                 .with_content(t(".goto_initiative"))
+                      size: :lg, class: "text-center justify-center") do |button|
     %>
+      <% button.trailing_icon(:arrow_right) %>
+    <% end %>
   </div>
 <% end %>
