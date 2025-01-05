@@ -1,0 +1,19 @@
+<%= tag.div **@toast_options do
+%>
+  <%= tag.div **@options do %>
+    <%= render Gustwave::Icon.new(@icon, position: :standalone) %>
+    <span class="sr-only"><%= @scheme.to_s %> icon</span>
+  <% end %>
+  <div class="ms-3 text-sm font-normal"><%= @text || content %></div>
+  <% if @dismissible %>
+    <%= render Gustwave::Button.new(scheme: :none,
+                             data: { dismiss_target: "##{@id}" },
+                             aria: { label: "Close" },
+                             class: "ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700") do
+    %>
+      <span class="sr-only">Close</span>
+      <%= render Gustwave::Icon.new(:close, position: :standalone, size: :md) %>
+    <% end %>
+  <% end %>
+<% end %>
+
