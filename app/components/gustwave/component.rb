@@ -30,5 +30,26 @@ module Gustwave
       return value.to_sym if %w[on off].include?(value)
       fetch_or_fallback_boolean(value, false)
     end
+
+    def random_id(prefix: nil, postfix: nil, length: 5)
+      [ prefix, SecureRandom.alphanumeric(length).downcase, postfix ]
+        .compact
+        .join("-")
+    end
+
+    # Returns the provided text, @text or the component's content (block).
+    # If `eval_content` is true, evaluates the content to ensure slots are
+    # rendered.
+    #
+    # @param text [String, nil] the text to return if provided
+    # @param eval_content [Boolean] whether to evaluate the content (block)
+    # @return [String] text takes precedent over @text, over the content (block)
+    def text_or_content(text: nil, eval_content: true)
+      # We must eval content when the component defines a slot, otherwise the
+      # slots are not rendered.
+      content if eval_content
+
+      text.presence || @text.presence || content
+    end
   end
 end
