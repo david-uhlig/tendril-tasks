@@ -9,7 +9,6 @@ class RocketChatConfig < BaseConfig
               token_url: "/oauth/token",
               branding: "Rocket.Chat"
 
-  required :host,
-           :client_id,
-           :client_secret
+  required :host, :client_id, :client_secret,
+           env: %w[production development]
 end
