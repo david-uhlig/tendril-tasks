@@ -2,7 +2,7 @@
 
 module RocketChatHelper
   ROCKET_CHAT_PROTOCOL = "rocketchat://"
-  ROCKET_CHAT_HOST = RocketChatConfig.host.starts_with?("http://", "https://") ?
+  ROCKET_CHAT_HOST = RocketChatConfig.host&.starts_with?("http://", "https://") ?
                        RocketChatConfig.host : "https://" + RocketChatConfig.host
 
   def rocketchat_link(to:)
