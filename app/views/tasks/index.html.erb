@@ -1,4 +1,4 @@
-<%= render ContentComponent.new do %>
+<%= render TendrilTasks::Content.new do %>
   <%# Headline %>
   <% case @type %>
   <% when :all_published_tasks %>
@@ -19,9 +19,9 @@
     <ul class="flex flex-wrap gap-2">
       <%= link_to tasks_path do %>
         <li>
-          <%= render BadgeComponent
+          <%= render Gustwave::Badge
                        .new(t(".filter_by_project.show_all"),
-                              size: :extra_large,
+                              size: :xl,
                               border: !params[:project_id].present?)
           %>
         </li>
@@ -29,9 +29,9 @@
       <% @projects.each do |project| %>
         <li>
           <%= link_to project_tasks_path(project) do %>
-            <%= render BadgeComponent.new(project.title,
-                                          size: :extra_large,
-                                          scheme: BadgeComponent.scheme_by_id(project.id),
+            <%= render Gustwave::Badge.new(project.title,
+                                          size: :xl,
+                                          scheme: badge_scheme_by_id(project.id),
                                           border: (project.id.to_s == params[:project_id])) %>
           <% end %>
         </li>
@@ -42,12 +42,12 @@
   <%# Tasks displayed as cards in a grid %>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <% @tasks.each do |task| %>
-      <%= render TaskCardComponent.new(task) %>
+      <%= render TendrilTasks::Tasks::Card.new(task) %>
     <% end %>
   </div>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
-  <%= render ButtonGridComponent.new(orientation: :vertical, size: :large) do |grid| %>
+  <%= render TendrilTasks::ButtonGrid.new(orientation: :vertical, size: :lg) do |grid| %>
     <%# Link to all tasks when filter is applied %>
     <% grid
          .button(tag: :a,
@@ -64,13 +64,7 @@
                  scheme: :alternative,
                  class: "w-full justify-center") do |button|
     %>
-      <% button.leading_svg xmlns: "http://www.w3.org/2000/svg",
-                            fill: "none",
-                            viewBox: "0 0 14 10",
-                            class: "rotate-180 mt-0.5" do
-      %>
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-      <% end %>
+      <% button.leading_icon(:arrow_left, size: :lg) %>
       <% t ".goto_initiatives" %>
     <% end %>
 

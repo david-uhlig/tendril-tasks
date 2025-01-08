@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Form
-  class SubmitButtonGroupComponent < ApplicationComponent
+  class SubmitButtonGroupComponent < TendrilTasks::Component
     renders_many :buttons, types: {
       regular: ->(text, **options) {
         options = build_options(options)

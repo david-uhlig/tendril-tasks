@@ -2,19 +2,23 @@
 
 module Form
   # Render a full-width large submit button in forms
-  class ButtonComponent < ApplicationComponent
+  class ButtonComponent < TendrilTasks::Component
     DEFAULT_CLASS = "w-full"
+    DEFAULT_SCHEME = :default
     TAG = :button
     TYPE = :submit
 
-    def initialize(scheme: ::ButtonComponent::DEFAULT_SCHEME, size: :large, **options)
+    def initialize(scheme: DEFAULT_SCHEME, size: :lg, **options)
       @scheme = scheme
       @size = size
       @options = build_options(options)
     end
 
     def call
-      render ::ButtonComponent.new(tag: TAG, type: TYPE, scheme: @scheme, size: @size, **@options) do
+      render Gustwave::Button.new(tag: TAG,
+                                  type: TYPE,
+                                  scheme: @scheme,
+                                  size: @size, **@options) do
         content
       end
     end

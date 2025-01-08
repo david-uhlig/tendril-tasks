@@ -1,121 +1,62 @@
-<%= render ContentComponent.new(width: :large) do %>
+<%= render TendrilTasks::Content.new(width: :large) do %>
   <%# Breadcrumb navigation %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Task.model_name.human(count: 2), href: tasks_path) %>
-    <% breadcrumb.section(@task.project.title, href: project_path(@task.project)) %>
-    <% breadcrumb.section(@task.title) %>
+    <% breadcrumb.item(Task.model_name.human(count: 2), href: tasks_path) %>
+    <% breadcrumb.item(@task.project.title, href: project_path(@task.project)) %>
+    <% breadcrumb.item(@task.title) %>
   <% end %>
 
   <%#
     Info and action bar for editors and coordinators
-    Displays publised status and action buttons: edit, create task, and
+    Displays published status and action buttons: edit, create task, and
     create project
   %>
-  <% if can?(:coordinate, @task) || can?(:update, @task) || can?(:create, Project) || can?(:create, Task) %>
+  <% if can?(:coordinate, @task) ||
+        can?(:update, @task) ||
+        can?(:create, Project) ||
+        can?(:create, Task)
+  %>
     <div class="flex flex-row flex-wrap-reverse gap-4">
-      <% if can?(:coordinate, @task) %>
-        <div class="whitespace-nowrap my-auto">
-          <% if @task.published? %>
-            <%= render BadgeComponent.new("Veröffentlicht",
-                                          scheme: :green,
-                                          size: :medium) %>
-          <% else %>
-            <%= render BadgeComponent.new("Entwurf",
-                                          scheme: :dark,
-                                          size: :medium) %>
-          <% end %>
-          <% if @task.visible? %>
-            <%= render BadgeComponent.new("Sichtbar",
-                                          scheme: :green,
-                                          size: :medium) %>
-          <% else %>
-            <%= render BadgeComponent.new("Unsichtbar",
-                                          scheme: :dark,
-                                          size: :medium) %>
-          <% end %>
-
-          <%# Visibility explainer icon %>
-          <svg class="w-5 h-5 mb-0.5 text-gray-800 dark:text-white inline align-center" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" data-popover-target="popover-visibility-info">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-          </svg>
-        </div>
-      <% end %>
-
+      <%# Visibility badges %>
+      <%= render TendrilTasks::Elements::VisibilityInfoBar.new(@task) %>
       <%# Action buttons %>
-      <% if can?(:update, @task) || can?(:create, Task) || can?(:create, Project) %>
-        <ul class="grow text-start sm:text-end whitespace-nowrap">
-          <% if can? :update, @task %>
-            <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: edit_task_path(@task),
-                                             scheme: :default,
-                                             size: :small) do
-              %>
-                <%= tag.span t(".action_button.edit") %>
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :create, Task %>
-            <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_task_with_preset_path(
-                                               project_id: @task.project.id,
-                                               coordinator_ids: @task.project.coordinator_ids.join("-")),
-                                             scheme: :default,
-                                             size: :small) do
-              %>
-                <%= tag.span t(".action_button.add_task") %>
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :create, Project %>
-            <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_project_path,
-                                             scheme: :default,
-                                             size: :small) do
-              %>
-                <%= tag.span t(".action_button.add_initiative") %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-
-      <%# Visibility explainer popover %>
-      <%= render 'visibility_explainer', task: @task %>
+      <%= render TendrilTasks::Elements::ActionBar.new(@task) %>
     </div>
   <% end %>
 
   <div>
     <%# Project badge %>
     <%= link_to project_path(@task.project) do %>
-      <%= render BadgeComponent.new(@task.project.title, scheme: BadgeComponent.scheme_by_id(@task.project.id), size: :large) %>
+      <%= render Gustwave::Badge.new(@task.project.title, scheme: badge_scheme_by_id(@task.project.id), size: :lg) %>
     <% end %>
     <%# Task name %>
-    <%= render HeadingComponent.new(tag: :h2, scheme: :secondary, class: "mt-2")
-                 .with_content(@task.title) %>
+    <%= render TendrilTasks::Heading
+                 .new(tag: :h2,
+                      scheme: :level2,
+                      class: "mt-2")
+                 .with_content(@task.title)
+    %>
     <%# Task description %>
     <% paragraphize(@task.description).each do |paragraph| %>
       <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
     <% end %>
   </div>
 
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Applications %>
   <% if can?(:coordinate, @task) %>
-    <%= render HeadingComponent
+    <%= render TendrilTasks::Heading
                  .new(tag: :h3,
-                      scheme: :tertiary)
+                      scheme: :level3)
                  .with_content(t(".section_title.applications"))
     %>
     <div>
       <% if @task_applications.size > 0 %>
         <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5" id="task-applications-list">
           <% @task_applications.each do |application| %>
-            <%= render TaskApplicationComponent.new(application) %>
+            <%= render TendrilTasks::Tasks::Application.new(application) %>
           <% end %>
         </ol>
       <% else %>
@@ -124,30 +65,41 @@
         %>
       <% end %>
     </div>
-    <%= render HorizontalLineComponent.new %>
+    <%= render TendrilTasks::HorizontalLine.new %>
   <% end %>
 
   <%# Apply to task %>
   <%= render "tasks/applications/form",
              task: @task
   %>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Contacts %>
-  <%= render HeadingComponent.new(tag: :h3, scheme: :tertiary)
-               .with_content(t(".contact_people")) %>
+  <%= render TendrilTasks::Heading
+               .new(tag: :h3,
+                    scheme: :level3)
+               .with_content(t(".contact_people"))
+  %>
   <%= tag.p t(".contact_people_content") %>
   <%= render Modal::ContactListComponent.new(@task.coordinators) %>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 justify-center text-center gap-2">
-    <%= render ButtonComponent.new(tag: :a,
-                                   href: tasks_path,
-                                   scheme: :alternative,
-                                   size: :large).with_content(t(".goto_tasks_button")) %>
-    <%= render ButtonComponent.new(tag: :a,
-                                   href: project_path(@task.project),
-                                   scheme: :alternative,
-                                   size: :large).with_content(t(".goto_initiative")) %>
+    <%= render Gustwave::Button
+                 .new(tag: :a,
+                      href: tasks_path,
+                      scheme: :alternative,
+                      size: :lg)
+                 .with_content(t(".goto_tasks_button"))
+    %>
+    <%= render Gustwave::Button
+                 .new(@task.project.title,
+                      tag: :a,
+                      href: project_path(@task.project),
+                      scheme: :alternative,
+                      size: :lg, class: "text-center justify-center") do |button|
+    %>
+      <% button.trailing_icon(:arrow_right) %>
+    <% end %>
   </div>
 <% end %>

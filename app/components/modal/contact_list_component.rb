@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Modal
-  class ContactListComponent < ApplicationComponent
+  class ContactListComponent < TendrilTasks::Component
     DEFAULT_CLASS = "my-4 space-y-3"
 
     def initialize(coordinators, **options)

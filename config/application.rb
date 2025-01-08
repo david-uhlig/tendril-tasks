@@ -47,5 +47,8 @@ module TendrilTasks
 
     # Prevent the default `<div class="field_with_errors"></div>`
     config.action_view.field_error_proc = Proc.new { |html_tag, _| html_tag }
+
+    # Set up previews for ViewComponents with RSpec
+    config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
   end
 end

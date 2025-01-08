@@ -55,3 +55,5 @@
 
 /config/*.local.yml
 /config/credentials/local.*
+
+/app/views/pages/preview.html.erb

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TurboStream
-  class NotificationComponent < ApplicationComponent
+  class NotificationComponent < TendrilTasks::Component
     CONTAINER_ID = "notifications"
 
     def initialize(message)
@@ -10,7 +10,7 @@ module TurboStream
 
     def call
       turbo_stream.append CONTAINER_ID do
-        render Toast::NotificationComponent.new(@message)
+        render Gustwave::IconToast.new(@message)
       end
     end
   end

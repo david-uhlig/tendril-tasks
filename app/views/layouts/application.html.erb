@@ -46,11 +46,12 @@
       <% navigation.link(name: Task.model_name.human(count: 2),
                          href: tasks_path)
       %>
-      <% navigation.with_login_button(scheme: :duotone_purple_to_blue,
+      <% navigation.with_login_button(theme: :gradient_duotone,
+                                      scheme: :purple_to_blue,
                                       data: { turbo: false },
                                       class: "hidden sm:inline-flex") do |login_button|
       %>
-        <% login_button.with_leading_visual("rocketchat/icon-white.svg") %>
+        <% login_button.leading_svg("rocketchat/icon-white.svg") %>
         <%= t "rocketchat.sign_in_button.short" %>
       <% end %>
     <% end %>
@@ -64,7 +65,7 @@
     <%= yield :modal %>
 
     <%# Toast %>
-    <div id="notifications">
+    <div id="notifications" class="grid grid-cols-1 absolute bottom-5 right-5 gap-2">
       <% flash.each do |type, message| %>
         <%= render Toast::NotificationComponent.new(message, type: type) %>
       <% end %>

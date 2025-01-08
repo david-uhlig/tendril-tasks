@@ -1,12 +1,14 @@
-<%= render ContentComponent.new(width: :large) do %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+<%= render TendrilTasks::Content.new(width: :large) do %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Project.model_name.human(count: 2), href: projects_path) %>
-    <% breadcrumb.section(t "breadcrumbs.create") %>
+    <% breadcrumb.item(Project.model_name.human(count: 2), href: projects_path) %>
+    <% breadcrumb.item(t "breadcrumbs.create") %>
   <% end %>
 
-  <%= render HeadingComponent.new(tag: :h1, scheme: :secondary)
-               .with_content(t '.title') %>
+  <%= render TendrilTasks::Heading
+               .new(tag: :h1)
+               .with_content(t '.title')
+  %>
 
   <%= render 'form', form_object: @project_form %>
 <% end %>

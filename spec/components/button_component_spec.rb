@@ -2,18 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe ButtonComponent, type: :component do
+RSpec.describe Gustwave::Button, type: :component do
   context "with default options" do
     before(:each) do
       render_inline(described_class.new)
     end
 
-    it "renders default label" do
-      expect(page).to have_text(described_class::DEFAULT_LABEL)
-    end
-
     it "renders button tag with scheme" do
-      expect(page).to have_selector("button.btn-default")
+      expect(page).to have_selector("button.font-medium.text-sm.bg-blue-700.text-white")
     end
 
     it "renders button tag with size css classes" do
@@ -45,20 +41,20 @@ RSpec.describe ButtonComponent, type: :component do
     end
 
     it "renders default scheme" do
-      expect(page).to have_selector("button.btn-default")
+      expect(page).to have_selector("button.text-sm.font-medium.bg-blue-700.text-white")
     end
   end
 
   context "with scheme" do
     it "renders css classes mapping to the scheme" do
       render_inline(described_class.new(scheme: :yellow)) { "content" }
-      expect(page).to have_selector("button.btn-yellow")
+      expect(page).to have_selector("button.bg-yellow-400.text-white")
     end
   end
 
   context "with size" do
     it "renders css classes mapping to the size" do
-      render_inline(described_class.new(size: :large)) { "content" }
+      render_inline(described_class.new(size: :lg)) { "content" }
       expect(page).to have_selector("button.px-5.py-3.text-base.font-medium")
     end
   end
@@ -71,7 +67,7 @@ RSpec.describe ButtonComponent, type: :component do
     let(:with_default_options) do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(@test_image_path)
+        c.leading_image(@test_image_path)
       end
     end
 
@@ -92,7 +88,7 @@ RSpec.describe ButtonComponent, type: :component do
 
     it "renders default css classes" do
       with_default_options
-      expect(page).to have_selector("img.w-5.h-5.me-2")
+      expect(page).to have_selector('img.h-5.me-1\.5')
     end
 
     it "renders button with inline-flex" do
@@ -103,7 +99,7 @@ RSpec.describe ButtonComponent, type: :component do
     it "renders alt text" do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(@test_image_path, alt: "alt text")
+        c.leading_image(@test_image_path, alt: "alt text")
       end
       expect(page).to have_selector("img[alt='alt text']")
     end
@@ -111,7 +107,7 @@ RSpec.describe ButtonComponent, type: :component do
     it "renders additional css classes" do
       component = described_class.new { "content" }
       render_inline(component) do |c|
-        c.with_leading_visual(@test_image_path, class: "my-class some-other-class")
+        c.leading_image(@test_image_path, class: "my-class some-other-class")
       end
       expect(page).to have_selector("img.my-class.some-other-class")
     end

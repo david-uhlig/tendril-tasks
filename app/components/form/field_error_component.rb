@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Form
-  class FieldErrorComponent < ApplicationComponent
+  class FieldErrorComponent < TendrilTasks::Component
     def initialize(obj_with_errors = nil, error_field = nil)
       @errors = obj_with_errors&.errors
       @error_field = error_field

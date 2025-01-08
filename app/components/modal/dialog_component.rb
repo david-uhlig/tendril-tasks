@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Modal::DialogComponent < ApplicationComponent
+class Modal::DialogComponent < TendrilTasks::Component
   attr_reader :id
 
   DEFAULT_HEADER_CLASS = "text-xl font-semibold text-gray-900 dark:text-white"
@@ -14,7 +14,7 @@ class Modal::DialogComponent < ApplicationComponent
   alias heading with_heading_slot
 
   renders_many :buttons, ->(**options) {
-    ::ButtonComponent.new(data: { "modal-hide": id }, **options) do
+    Gustwave::Button.new(data: { "modal-hide": id }, **options) do
       content
     end
   }

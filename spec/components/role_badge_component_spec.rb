@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe RoleBadgeComponent, type: :component do
+RSpec.describe TendrilTasks::RoleBadge, type: :component do
   context "with regular user" do
     it "does not render" do
       user = build_stubbed(:user, role: :user)

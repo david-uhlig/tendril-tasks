@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Form
-  class LabelComponent < ApplicationComponent
+  class LabelComponent < TendrilTasks::Component
     def initialize(form, attribute, text = nil)
       @form = form
       @attribute = attribute

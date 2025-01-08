@@ -3,7 +3,7 @@
 module Form
   module CoordinatorPicker
     # Renders a modal to assign, unassign and search for coordinators.
-    class ModalComponent < ApplicationComponent
+    class ModalComponent < TendrilTasks::Component
       ID = "coordinator-picker-modal"
 
       def initialize(assigned:, suggestions:)

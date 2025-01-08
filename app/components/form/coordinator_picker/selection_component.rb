@@ -31,7 +31,7 @@ module Form
     # - By default, `is_checked` is set to `false`, allowing customization of the list’s initial state.
     # - The list is rendered only if `coordinators` is not empty.
     #
-    class SelectionComponent < ApplicationComponent
+    class SelectionComponent < TendrilTasks::Component
       def initialize(id, coordinators, is_checked: false)
         @coordinators = coordinators
         @is_checked = is_checked

@@ -130,10 +130,6 @@ en:
       contact_people_content: "Still undecided? Here you will find the contact people for this task. If you have any questions in advance, need support or just want some information, you can contact them directly."
       goto_tasks_button: "To the Task Overview"
       goto_initiative: "To the Initiative"
-      action_button:
-        edit: "Edit"
-        add_task: "+Task"
-        add_initiative: "+Initiative"
     applications:
       form_when_user_has_applied_to_task:
         thanks_for_your_application: "Thanks for your application!"

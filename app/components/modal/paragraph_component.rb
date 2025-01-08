@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Modal::ParagraphComponent < ApplicationComponent
+class Modal::ParagraphComponent < TendrilTasks::Component
   DEFAULT_CLASS = "text-base leading-relaxed text-gray-500 dark:text-gray-400"
 
   def initialize(text = nil, **options)

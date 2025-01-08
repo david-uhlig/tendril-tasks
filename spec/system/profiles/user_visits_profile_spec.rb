@@ -5,7 +5,7 @@ RSpec.describe "User visits profile page", type: :system do
     it "redirects to the login page" do
       visit profile_path
       expect(page).to have_content("Willkommen zurück")
-      expect(page).to have_content("Anmelden mit RCB Chat")
+      expect(page).to have_content("Anmelden mit Rocket.Chat")
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe "User visits profile page", type: :system do
 
       visit profile_path
       expect(page).to have_content("Deine E-Mail-Adresse")
-      expect(page).to have_content("Dein RCB Chat Benutzername")
+      expect(page).to have_content("Dein Rocket.Chat Benutzername")
     end
   end
 end

@@ -1,8 +1,8 @@
-<%= render ContentComponent.new do %>
+<%= render TendrilTasks::Content.new do %>
   <% projects_size = @projects.size %>
-  <%= render HeadingComponent.new(tag: :h1,
-                                  scheme: :primary,
-                                  class: "text-center") do
+  <%= render TendrilTasks::Heading.new(tag: :h1,
+                                       scheme: :level1,
+                                       class: "text-center") do
   %>
     <%= render ::Text::Highlight::GradientComponent.new(t(".title", count: projects_size),
                                                         highlight: t(".title_highlight",
@@ -11,33 +11,32 @@
     %>
   <% end %>
 
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <% case projects_size %>
   <% when 0 %>
     <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"><%= t ".no_initiatives" %></p>
   <% else %>
-    <% @projects.each do |project| %>
-      <%= render ProjectSectionComponent.new(project) %>
-    <% end %>
+    <%= render TendrilTasks::Projects::Section
+                 .with_collection(@projects, spacer_component: TendrilTasks::HorizontalLine.new) %>
   <% end %>
 
-  <%= render HorizontalLineComponent.new %>
-
-  <%= render ButtonGridComponent.new(orientation: :vertical, grid_options: { class: "gap-2 text-center" }, size: :large) do |grid| %>
+  <%= render TendrilTasks::HorizontalLine.new %>
+  
+  <%= render TendrilTasks::ButtonGrid.new(orientation: :vertical,
+                                          grid_options: {
+                                            class: "gap-2 text-center"
+                                          },
+                                          size: :lg) do |grid|
+  %>
     <%# Link to tasks for convenience %>
     <% grid.button(tag: :a,
                    href: tasks_path,
                    scheme: :alternative,
                    class: "w-full justify-center") do |button|
     %>
-      <% button.trailing_svg(xmlns: "http://www.w3.org/2000/svg",
-                             fill: "none",
-                             viewBox: "0 0 14 10") do
-      %>
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-      <% end %>
       <span><%= t ".goto_tasks_button" %></span>
+      <% button.trailing_icon(:arrow_right, size: :lg) %>
     <% end %>
 
     <%# Link to create project %>

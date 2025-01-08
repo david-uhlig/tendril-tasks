@@ -27,7 +27,7 @@
 #
 module Navigation
   module UserDropdown
-    class AvatarComponent < ApplicationComponent
+    class AvatarComponent < TendrilTasks::Component
       # Initialize the AvatarComponent for use in the user dropdown button.
       #
       # @param user [User] The user for whom the avatar is shown.
@@ -35,7 +35,7 @@ module Navigation
       # @param size [Symbol] The size of the avatar (optional, default: AvatarComponent::DEFAULT_SIZE).
       # @param options [Hash, nil] Additional HTML options for the button and avatar (optional).
       #   - This includes ensuring an "id" of "avatarButton" and adding dropdown-specific data attributes.
-      def initialize(user, scheme: ::AvatarComponent::DEFAULT_SCHEME, size: ::AvatarComponent::DEFAULT_SIZE, **options)
+      def initialize(user, scheme: TendrilTasks::Avatar::DEFAULT_SCHEME, size: TendrilTasks::Avatar::DEFAULT_SIZE, **options)
         @user = user
         @scheme = scheme
         @size = size
@@ -46,7 +46,7 @@ module Navigation
       #
       # @return [String] HTML-safe string representing the avatar image within the button element.
       def call
-        render ::AvatarComponent.new(@user, scheme: @scheme, size: @size, **@options)
+        render TendrilTasks::Avatar.new(@user, scheme: @scheme, size: @size, **@options)
       end
 
       private

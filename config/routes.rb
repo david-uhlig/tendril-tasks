@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
+  get "/preview", to: "pages#preview" if Rails.env.development?
+
   # Authenticate through devise and omniauth
   devise_for :users,
              controllers: { omniauth_callbacks: "users/omniauth_callbacks" },

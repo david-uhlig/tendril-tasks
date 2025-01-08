@@ -1,6 +1,6 @@
 <%= render Form::BaseFieldComponent.new(@form, @attribute, @label, **@options) do %>
   <%= render Form::CoordinatorPicker::AssigneeComponent.new(@form.object.coordinators) %>
-  <%= render ButtonComponent.new(
+  <%= render Gustwave::Button.new(
         scheme: :alternative,
         id: "edit-coordinator-assignment",
         data: {
@@ -8,7 +8,8 @@
           "modal-show": Form::CoordinatorPicker::ModalComponent::ID
         },
         class: "w-full",
-        type: :button).with_content(t "components.coordinator_picker.edit_contacts") %>
+        type: :button).with_content(t "components.coordinator_picker.edit_contacts")
+  %>
 <% end %>
 
 <%= content_for :modal do %>

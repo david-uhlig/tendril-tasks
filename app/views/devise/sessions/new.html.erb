@@ -1,7 +1,6 @@
-<%= render ContentComponent.new do %>
-  <%= render HeadingComponent
+<%= render TendrilTasks::Content.new do %>
+  <%= render TendrilTasks::Heading
                .new(tag: :h1,
-                    schema: :secondary,
                     class: "text-center")
                .with_content(t ".welcome_back")
   %>
@@ -10,15 +9,17 @@
   %>
   <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "text-center" do %>
     <%= tag.span t(".click_here_to_start"),
-                 class: "font-mono pe-5"
+                 class: "font-mono pb-3 pe-5 inline-flex"
     %>
-    <%= render ButtonComponent.new(
+    <%= render Gustwave::Button.new(
       type: :submit,
-      scheme: :duotone_purple_to_blue,
-      size: :extra_large,
+      theme: :gradient_duotone,
+      scheme: :purple_to_blue,
+      size: :xl,
       class: "mt-4",
-      data: { turbo: false }) do |login_button| %>
-      <% login_button.with_leading_visual("rocketchat/icon-white.svg") %>
+      data: { turbo: false }) do |login_button|
+    %>
+      <% login_button.leading_svg("rocketchat/icon-white.svg") %>
       <%= t(".login_with_rocket_chat_button", brand: RocketChatConfig.branding) %>
     <% end %>
   <% end %>

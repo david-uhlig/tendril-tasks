@@ -10,7 +10,7 @@ module Form
   #   <%= render Form::BaseFieldComponent.new(form, :email, "Email Address", class: "custom-class") do %>
   #     <%= form.text_field :email %>
   #   <% end %>
-  class BaseFieldComponent < ApplicationComponent
+  class BaseFieldComponent < TendrilTasks::Component
     # @param form [Object] Form object (typically a `form_with` or `form_for` object) used for generating fields.
     # @param attribute [Symbol] The attribute from the model associated with the form field (e.g., :email).
     # @param label [String, nil, false] The label text for the field. Pass `nil` to use the default label, or `false` to omit the label entirely.

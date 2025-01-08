@@ -1,9 +1,9 @@
-<%= render ContentComponent.new(width: :large) do %>
+<%= render TendrilTasks::Content.new(width: :large) do %>
   <%# Breadcrumb navigation %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(Project.model_name.human(count: 2), href: projects_path) %>
-    <% breadcrumb.section(@project.title) %>
+    <% breadcrumb.item(Project.model_name.human(count: 2), href: projects_path) %>
+    <% breadcrumb.item(@project.title) %>
   <% end %>
 
   <%#
@@ -16,161 +16,57 @@
         can?(:create, Task)
   %>
     <div class="flex flex-row flex-wrap-reverse gap-4">
-      <% if can?(:coordinate, @project) %>
-        <div class="whitespace-nowrap my-auto">
-          <% if @project.published? %>
-            <%= render BadgeComponent.new(t("projects.status.published"),
-                                          scheme: :green,
-                                          size: :medium) %>
-          <% else %>
-            <%= render BadgeComponent.new(t("projects.status.private"),
-                                          scheme: :dark,
-                                          size: :medium) %>
-          <% end %>
-          <% if @project.visible? %>
-            <%= render BadgeComponent.new(t("projects.visibility.visible"),
-                                          scheme: :green,
-                                          size: :medium) %>
-          <% else %>
-            <%= render BadgeComponent.new(t("projects.visibility.hidden"),
-                                          scheme: :dark,
-                                          size: :medium) %>
-          <% end %>
-
-          <%# Visibility explainer icon %>
-          <%= render 'visibility_explainer_icon' %>
-        </div>
-      <% end %>
-
+      <%# Visibility badges %>
+      <%= render TendrilTasks::Elements::VisibilityInfoBar.new(@project) %>
       <%# Action buttons %>
-      <% if can?(:update, @project) || can?(:create, Task) || can?(:create, Project) %>
-        <ul class="grow text-start sm:text-end whitespace-nowrap">
-          <% if can? :update, @project %>
-            <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: edit_project_path(@project),
-                                             scheme: :default,
-                                             size: :small) do %>
-                <%= tag.span t("forms.edit") %>
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :create, Task %>
-            <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_task_with_preset_path(
-                                               project_id: @project.id,
-                                               coordinator_ids: @project.coordinator_ids.join("-")),
-                                             scheme: :default,
-                                             size: :small) do %>
-                <%= tag.span t(".add_task") %>
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :create, Project %>
-            <li class="inline-flex">
-              <%= render ButtonComponent.new(tag: :a,
-                                             href: new_project_path,
-                                             scheme: :default,
-                                             size: :small) do %>
-                <%= tag.span t(".add_initiative") %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-
-      <%# Visibility explainer popover %>
-      <% if @project.visible? %>
-        <% headline = t ".visible_for_everyone" %>
-      <% else %>
-        <% headline = t ".visible_for_coordinators" %>
-      <% end %>
-      <div data-popover id="popover-visibility-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 left-48">
-        <div class="p-3 space-y-2">
-          <h3 class="font-semibold text-gray-900 dark:text-white"><%= headline %></h3>
-          <div class="grid grid-cols-2 gap-2">
-            <% bg_color = @project.published? ? "bg-green-300 dark:bg-green-400" : "bg-gray-200 dark:bg-gray-600" %>
-            <div class="h-1 <%= bg_color %>"></div>
-            <% bg_color = (@project.tasks.present? && @project.tasks.any?(&:published?)) ? "bg-green-300 dark:bg-green-400" : "bg-gray-200 dark:bg-gray-600" %>
-            <div class="h-1 <%= bg_color %>"></div>
-          </div>
-          <%= tag.p t(".properties") %>
-          <ul>
-            <li class="flex items-center mb-1">
-              <% if @project.published? %>
-                <svg class="w-3.5 h-3.5 me-2 text-green-400 dark:text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                </svg>
-              <% else %>
-                <svg class="w-3 h-3 me-2.5 text-gray-300 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-              <% end %>
-              <%= t ".initiative_was_published" %>
-            </li>
-            <li class="flex items-center">
-              <% if @project.tasks.present? && @project.tasks.any?(&:published?) %>
-                <svg class="w-3.5 h-3.5 me-2 text-green-400 dark:text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                </svg>
-              <% else %>
-                <svg class="w-3 h-3 me-2.5 text-gray-300 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-              <% end %>
-              <%= t ".at_least_one_published_task" %>
-            </li>
-          </ul>
-        </div>
-        <div data-popper-arrow></div>
-      </div>
+      <%= render TendrilTasks::Elements::ActionBar.new(@project) %>
     </div>
   <% end %>
 
   <%# Project name %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h2,
-                    scheme: :secondary)
+                    scheme: :level2)
                .with_content(@project.title)
   %>
   <%# Project description %>
   <% paragraphize(@project.description).each do |paragraph| %>
     <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
   <% end %>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Contact persons %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h3,
-                    scheme: :tertiary)
+                    scheme: :level3)
                .with_content(t ".contact_persons")
   %>
   <%= tag.p t(".contact_persons_explainer"),
             class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
   %>
   <%= render Modal::ContactListComponent.new(@project.coordinators) %>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <%# Tasks %>
-  <%= render HeadingComponent
+  <%= render TendrilTasks::Heading
                .new(tag: :h3,
-                    scheme: :tertiary)
+                    scheme: :level3)
                .with_content(t(".task_section_headline", initiative_title: @project.title).html_safe)
   %>
+  <%# TODO build responsive grid component %>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <% @tasks.each do |task| %>
-      <%= render TaskCardComponent.new(task) %>
+      <%= render TendrilTasks::Tasks::Card.new(task) %>
     <% end %>
   </div>
-  <%= render HorizontalLineComponent.new %>
+  <%= render TendrilTasks::HorizontalLine.new %>
 
   <div class="grid grid-cols-1 justify-center text-center">
-    <%= render ButtonComponent
+    <%= render Gustwave::Button
                  .new(tag: :a,
                       href: projects_path,
                       scheme: :alternative,
-                      size: :large)
+                      size: :lg)
                  .with_content(t ".goto_initiatives_overview")
     %>
   </div>

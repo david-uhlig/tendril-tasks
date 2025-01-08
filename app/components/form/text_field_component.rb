@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Form
-  class TextFieldComponent < ApplicationComponent
+  class TextFieldComponent < TendrilTasks::Component
     def initialize(form, attribute, label = nil)
       @form = form
       @attribute = attribute

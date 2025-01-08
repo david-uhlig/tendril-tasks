@@ -1,0 +1,84 @@
+<section class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col" id="task-card-<%= @task.id %>">
+  <div class="inline text-left mb-2">
+    <%= link_to project_path(@task.project) do %>
+      <%= render Gustwave::Badge.new(@task.project.title, scheme: @badge_scheme) %>
+    <% end %>
+    <%= render Gustwave::Badge.new(t("badges.new"),
+                                  scheme: :green) if is_new?
+    %>
+  </div>
+
+  <%= link_to task_path(@task) do %>
+    <%= render TendrilTasks::Heading
+                 .new(tag: :h2,
+                      scheme: :none,
+                      class: "mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white overflow-hidden")
+                 .with_content(@task.title) %>
+  <% end %>
+
+  <div class="flex-grow">
+    <p class="text-start mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
+      <%= @task.description.split("\n").first %>
+    </p>
+  </div>
+
+  <div>
+    <%# Coordinators %>
+    <%= render ::Modal::ToggleButtonComponent.new(scheme: :none,
+                                                  modal_id: "task-contacts-#{@task.id}",
+                                                  class: "inline-flex items-center max-w-full py-1 px-1 pr-2 my-4 mx-0 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do
+    %>
+      <%= tag.span t(".contacts"), class: "flex-shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3" %>
+      <span class="flex gap-2 overflow-hidden flex-shrink truncate">
+        <% @task.coordinators.each do |coordinator| %>
+          <span class="flex items-center gap-2 text-sm font-medium">
+            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs) %>
+            <%= tag.span coordinator.name, class: "dark:text-white truncate" %>
+          </span>
+        <% end %>
+      </span>
+      <svg class="flex-shrink-0 ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+      </svg>
+    <% end %>
+  </div>
+
+  <%# Action buttons %>
+  <%= render TendrilTasks::ButtonGrid.new(tag: :a,
+                                       size: :md,
+                                       orientation: :vertical) do |grid|
+  %>
+    <% grid.button(href: task_path(@task),
+                   scheme: :alternative)
+           .with_content(t(".read_more")) %>
+    <% if @task.applicant?(current_user) %>
+      <% grid.button(tag: :a,
+                     href: task_path(@task, anchor: "apply-now"),
+                     size: :md,
+                     scheme: :green,
+                     class: "w-full")
+             .with_content(t(".applied_for_task_button"))
+      %>
+    <% else %>
+      <% grid.button(tag: :a,
+                        href: task_path(@task, anchor: "apply-now"),
+                        size: :md,
+                        class: "w-full")
+             .with_content(t(".express_interest_button"))
+      %>
+    <% end %>
+  <% end %>
+</section>
+
+<%# Modal for viewing coordinators %>
+<%= content_for :modal do %>
+  <%= render ::Modal::DialogComponent.new("task-contacts-#{@task.id}") do |modal| %>
+    <% modal.heading(t(".your_contact_people")) %>
+    <%= render ::Modal::ParagraphComponent.new
+                 .with_content(t(".contact_people_description"))
+    %>
+    <%= render ::Modal::ContactListComponent.new(@task.coordinators) %>
+    <% modal.button(scheme: :light, type: :reset).with_content(t(".close_window")) %>
+  <% end %>
+<% end %>
+<%# End of modal for coordinators %>

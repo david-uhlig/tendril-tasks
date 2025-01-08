@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DeleteConfirm
-  class ButtonComponent < ApplicationComponent
+  class ButtonComponent < TendrilTasks::Component
     attr_reader :target_modal_id
 
     def initialize(text:, target_modal_id: nil, **options)
@@ -11,7 +11,7 @@ module DeleteConfirm
     end
 
     def call
-      render ::ButtonComponent.new(**@options).with_content(@text)
+      render Gustwave::Button.new(**@options).with_content(@text)
     end
 
     private
@@ -19,7 +19,7 @@ module DeleteConfirm
     def build_options(options)
       options.deep_symbolize_keys!
       options[:scheme] ||= :red
-      options[:size] ||= :large
+      options[:size] ||= :lg
       options[:class] ||= "w-full"
       options[:type] ||= :button
       options[:data] = { "modal-target": @target_modal_id, "modal-toggle": @target_modal_id }.merge(options.delete("data") || {})

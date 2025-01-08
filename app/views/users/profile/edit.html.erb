@@ -1,19 +1,19 @@
 <%# User profile %>
-<%= render ContentComponent.new(width: :large) do %>
-  <%= render BreadcrumbComponent.new do |breadcrumb| %>
+<%= render TendrilTasks::Content.new(width: :large) do %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
-    <% breadcrumb.section(t "breadcrumbs.profile") %>
+    <% breadcrumb.item(t "breadcrumbs.profile") %>
   <% end %>
 
   <%# Profile header %>
   <div class="flex flex-nowrap gap-2">
-    <%= render AvatarComponent.new(@user,
-                                   size: :large,
+    <%= render TendrilTasks::Avatar.new(@user,
+                                   size: "2xl",
                                    class: "ms-2")
     %>
     <div class="ms-2 mt-2 mb-4">
       <h2 class="mb-1 text-2xl md:text-2xl lg:text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white"><%= @user.name %></h2>
-      <%= render RoleBadgeComponent.new(current_user) %>
+      <%= render TendrilTasks::RoleBadge.new(current_user) %>
     </div>
   </div>
 

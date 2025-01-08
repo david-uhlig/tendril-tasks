@@ -11,7 +11,7 @@
 # @name [String] The name of the link. Optional. If no block content is provided, this will be displayed.
 # @href [String] The URL the link points to. Defaults to "#".
 # @active [Boolean] Marks the link as active if `true`. If not provided, the current page check is used.
-class Navigation::LinkComponent < ApplicationComponent
+class Navigation::LinkComponent < TendrilTasks::Component
   # Initializes the link component.
   #
   # @param name [String, nil] The name of the link. If no block content is provided, this will be used.
