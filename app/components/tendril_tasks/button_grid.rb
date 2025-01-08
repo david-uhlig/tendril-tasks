@@ -50,11 +50,11 @@ module TendrilTasks
     def call
       return unless buttons?
 
-      @grid_options[:class] = class_merge(
-        horizontal_cols,
-        responsive_cols,
-        @grid_options.delete(:class),
-        )
+      @grid_options[:class] = styles(
+        custom_horizontal: horizontal_cols,
+        custom_responsive: responsive_cols,
+        custom_grid_options: @grid_options.delete(:class)
+      )
 
       content_tag :div, @grid_options do
         buttons.each do |button|
@@ -93,17 +93,29 @@ module TendrilTasks
     # Returns the responsive tailwind class so that all buttons fit on one
     # horizontal grid row (up to 4)
     def responsive_cols
-      return "" unless responsive? && buttons.size > 1
-      return "sm:grid-cols-4" if buttons.size >= 4
-      "sm:grid-cols-#{buttons.size}"
+      return nil unless responsive? && button_count > 1
+      # Some bug prevents 3 from working when it is dynamically set
+      return "sm:grid-cols-3" if button_count == 3
+      return "sm:grid-cols-4" if button_count >= 4
+
+      "sm:grid-cols-#{button_count}"
     end
 
     # Returns the responsive tailwind class so that all buttons fit on one
     # horizontal grid row (up to 8)
     def horizontal_cols
-      return "" unless horizontal?
-      return "grid-cols-8" if buttons.size >= 8
-      "grid-cols-#{buttons.size}"
+      return nil unless horizontal?
+      # Some bug prevents 3, 5, 6 from working when they are dynamically set
+      return "grid-cols-3" if button_count == 3
+      return "grid-cols-5" if button_count == 5
+      return "grid-cols-6" if button_count == 6
+      return "grid-cols-8" if button_count >= 8
+
+      "grid-cols-#{button_count}"
+    end
+
+    def button_count
+      @button_count ||= buttons.size
     end
   end
 end
