@@ -1,4 +1,5 @@
-# app/models/concerns/themeable.rb
+# frozen_string_literal: true
+
 module Gustwave
   module Themeable
     extend ActiveSupport::Concern
