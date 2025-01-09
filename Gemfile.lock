@@ -160,6 +160,9 @@ GEM
       zeitwerk
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -205,6 +208,7 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     minitest (5.25.4)
@@ -389,6 +393,9 @@ GEM
       rubocop-rails
     ruby-next-core (1.0.3)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.4.1)
     securerandom (0.4.1)
     selenium-webdriver (4.27.0)
@@ -518,6 +525,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   hotwire-spark
+  image_processing (~> 1.2)
   importmap-rails
   inline_svg
   jbuilder

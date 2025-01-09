@@ -12,3 +12,6 @@ window.document.addEventListener("turbo:render", (_event) => {
     window.initFlowbite();
 });
 
+
+import "trix"
+import "@rails/actiontext"
