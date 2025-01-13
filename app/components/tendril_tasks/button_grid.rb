@@ -94,10 +94,10 @@ module TendrilTasks
     # horizontal grid row (up to 4)
     def responsive_cols
       return nil unless responsive? && button_count > 1
-      # Some bug prevents 3 from working when it is dynamically set
-      return "sm:grid-cols-3" if button_count == 3
       return "sm:grid-cols-4" if button_count >= 4
 
+      # List of possible outcomes, so Tailwind picks them up:
+      # sm:grid-cols-1 sm:grid-cols-2 sm:grid-cols-3
       "sm:grid-cols-#{button_count}"
     end
 
@@ -105,12 +105,11 @@ module TendrilTasks
     # horizontal grid row (up to 8)
     def horizontal_cols
       return nil unless horizontal?
-      # Some bug prevents 3, 5, 6 from working when they are dynamically set
-      return "grid-cols-3" if button_count == 3
-      return "grid-cols-5" if button_count == 5
-      return "grid-cols-6" if button_count == 6
       return "grid-cols-8" if button_count >= 8
 
+      # List of possible outcomes, so Tailwind picks them up:
+      # grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6
+      # grid-cols-7
       "grid-cols-#{button_count}"
     end
 
