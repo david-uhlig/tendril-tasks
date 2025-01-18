@@ -25,6 +25,7 @@ module Form
       @label = label ||
         form.object.class.human_attribute_name(attribute).presence ||
         attribute.to_s.humanize
+      @label = false if label == false
       @options = options
     end
   end
