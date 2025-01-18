@@ -31,6 +31,20 @@ module Gustwave
       fetch_or_fallback_boolean(value, false)
     end
 
+    # Generates a random ID with an optional prefix, postfix, and customizable
+    # length.
+    #
+    # This can be useful when you want to automatically generate a default value
+    # for the HTML id attribute.
+    #
+    # === Example
+    #   random_id(prefix: "user", length: 8)
+    #   # => "user-x3f9gk2j"
+    #
+    # @param prefix [String, nil] Optional string to prepend to the ID.
+    # @param postfix [String, nil] Optional string to append to the ID.
+    # @param length [Integer] The length of the random alphanumeric string. Default is 5.
+    # @return [String] A random ID in the format: "prefix-randomstring-postfix".
     def random_id(prefix: nil, postfix: nil, length: 5)
       [ prefix, SecureRandom.alphanumeric(length).downcase, postfix ]
         .compact
