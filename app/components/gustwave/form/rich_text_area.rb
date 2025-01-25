@@ -43,7 +43,7 @@ module Gustwave
       end
 
       def default_toolbar
-        render Gustwave::Form::TrixToolbar.new(@form, **@toolbar_options)
+        render Gustwave::Form::RichText::Trix::Toolbar.new(@form, **@toolbar_options)
       end
 
       def default_editor
