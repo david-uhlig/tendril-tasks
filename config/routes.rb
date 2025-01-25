@@ -41,6 +41,10 @@ Rails.application.routes.draw do
   resources :admin, only: %i[ index ]
   namespace :admin do
     resources :legal, only: %i[ index ]
+    resource :footer, only: %i[ edit ], controller: :footer
+    namespace :footer do
+      resource :sitemap, only: %i[ update destroy ], controller: :sitemap
+    end
     namespace :users do
       resources :roles, only: %i[ update ]
     end

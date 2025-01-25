@@ -1,0 +1,33 @@
+<%= fields_for "categories[][links][]", item do |link_form| %>
+  <ol class="flex flex-nowrap space-x-4 mt-4 ms-2 lg:ms-4">
+    <%# Title %>
+    <li class="grow">
+      <%= render Form::TextFieldComponent.new(link_form,
+                                              :title,
+                                              false,
+                                              placeholder: t(".link.input.placeholder"))
+      %>
+    </li>
+    <%# Link href %>
+    <li class="grow">
+      <%= render Form::TextFieldComponent.new(link_form,
+                                              :href,
+                                              false,
+                                              placeholder: "https://example.com")
+      %>
+    </li>
+    <%# Remove button %>
+    <li>
+      <%= render Gustwave::Button.new(theme: :outline,
+                                      scheme: :red,
+                                      data: {
+                                        "action": "click->remove#ancestor",
+                                        "remove-selector": "ol"
+                                      }) do |button|
+      %>
+        <% button.leading_icon(:close, class: "m-0 md:me-2") %>
+        <span class="sr-only md:not-sr-only"><%= t(".link.button.remove") %></span>
+      <% end %>
+    </li>
+  </ol>
+<% end %>

@@ -1,0 +1,13 @@
+<%= fields_for "categories[]", category do |category_form| %>
+  <div data-controller="remove template"
+       data-template-target="receiver"
+       class="sitemap-category"
+  >
+    <%# Category heading %>
+    <%= render 'admin/footer/sitemap_category_heading', form: category_form %>
+    <%# Category links %>
+    <% category.links.each do |link| %>
+      <%= render 'admin/footer/sitemap_link', item: link %>
+    <% end %>
+  </div>
+<% end %>

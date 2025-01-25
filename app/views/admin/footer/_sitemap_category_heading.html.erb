@@ -1,0 +1,35 @@
+<ol class="flex flex-nowrap space-x-4">
+  <%# Heading text %>
+  <li class="grow">
+    <%= render Form::TextFieldComponent.new(form,
+                                            :title,
+                                            t(".category.input.label"),
+                                            placeholder: "Name")
+    %>
+  </li>
+  <%# Add new link %>
+  <li class="content-end">
+    <%= render Gustwave::Button.new(theme: :outline,
+                                    data: {
+                                      action: "click->template#append",
+                                      "template-selector": "#sitemap-link-template"
+                                    }) do |button|
+    %>
+      <% button.leading_icon(:plus, class: "m-0 md:me-2") %>
+      <span class="sr-only md:not-sr-only"><%= t(".category.add_link") %></span>
+    <% end %>
+  </li>
+  <%# Remove category %>
+  <li class="content-end">
+    <%= render Gustwave::Button.new(theme: :outline,
+                                    scheme: :red,
+                                    data: {
+                                      action: "click->template#replace",
+                                      "template-selector": "#sitemap-category-template",
+                                      "template-receiver": ".sitemap-category"
+                                    }) do |button| %>
+      <% button.leading_icon(:close, class: "m-0 md:me-2") %>
+      <span class="sr-only md:not-sr-only"><%= t(".category.reset") %></span>
+    <% end %>
+  </li>
+</ol>
