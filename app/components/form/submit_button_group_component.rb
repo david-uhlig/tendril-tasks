@@ -7,8 +7,10 @@ module Form
         options = build_options(options)
         Form::ButtonComponent.new(**options).with_content(text)
       },
-      delete: ->(text, target_modal_id:) {
-        DeleteConfirm::ButtonComponent.new(text: text, target_modal_id: target_modal_id)
+      delete: ->(text, target_modal_id:, **options) {
+        DeleteConfirm::ButtonComponent.new(text: text,
+                                           target_modal_id: target_modal_id,
+                                           **options)
       }
     }
     alias button with_button_regular
