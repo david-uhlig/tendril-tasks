@@ -1,8 +1,21 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern if Rails.env.production?
+  before_action :set_footer_data
 
-  protected
+  private
+
+  def set_footer_data
+    @footer_data = Rails.cache.fetch("footer_data") do
+      data = {}
+      data[:legal] = Page.where(slug: Admin::LegalController::LEGAL_PAGES)
+                         .pluck(:slug)
+      data[:footer_sitemap] = Setting.footer_sitemap.fetch("categories", {})
+      data
+    end
+  end
 
   def access_denied_handler(exception)
     unless current_user.present?
