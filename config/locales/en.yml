@@ -16,25 +16,40 @@ en:
       application_title: "TendrilTasks - growing beyond ourselves together"
 
   pages:
-    home:
-      title: "Get actively involved in the RCB!"
-      title_highlight: "actively"
-      hero: |
-        A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
-      cta_when_signed_in:
-        view_now: "View now:"
-        interesting_initiatives: "Interesting Initiatives"
-        variety_of_tasks: "A Variety of Tasks"
-      cta_when_signed_out:
-        login_to_see_initiatives_and_tasks: |
-          Log in now to see initiatives and tasks:
-
+    static:
+      home:
+        title: "Get actively involved in the RCB!"
+        title_highlight: "actively"
+        hero: |
+          A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
+        cta_when_signed_in:
+          view_now: "View now:"
+          interesting_initiatives: "Interesting Initiatives"
+          variety_of_tasks: "A Variety of Tasks"
+        cta_when_signed_out:
+          login_to_see_initiatives_and_tasks: |
+            Log in now to see initiatives and tasks:
+    imprint:
+      title: "Imprint"
+    privacy_policy:
+      title: "Privacy Policy"
+    terms_of_service:
+      title: "Terms of Service"
+    edit:
+      title: "Edit %{title}"
+      delete_confirm:
+        modal:
+          title: "Delete %{title}?"
   forms:
+    headings:
+      new: "New %{thing}"
+      edit: "Edit %{thing}"
     create: "Create"
     edit: "Edit"
     delete: "Delete"
     update: "Update"
     search: "Search"
+    save: "Save"
 
   badges:
     new: "New"
@@ -180,6 +195,41 @@ en:
     index:
       title: "Administration"
       role_management: "Role Management"
+    legal:
+      index:
+        title: "Legal Documents"
+        description: |
+          Here you can store legal documents. They will automatically appear in the website footer in the “Legal” section
+        edit: "Edit"
+        create: "Create"
+    footer:
+      edit:
+        title: "Footer"
+        description: "Configure website links, a copyright notice, and social media links in the footer."
+        links:
+          title: "Links"
+        sitemap:
+          title: "Sitemap Links"
+          explainer: |
+            Here you can set up up to 2 columns with links for the footer. These appear next to the links in the "Legal" section. Relative and absolute URLs are permitted.
+          delete_confirm:
+            modal:
+              title: Delete sitemap links?
+              content: |
+                Are you sure you want to delete the links? This step cannot be undone.
+              confirm_button: Delete links
+      sitemap_link:
+        link:
+          button:
+            remove: "Remove"
+          input:
+            placeholder: "Name, e.g. Homepage..."
+      sitemap_category_heading:
+        category:
+          reset: "Reset"
+          add_link: "Link"
+          input:
+            label: "Section"
 
   # Users
   users:
@@ -262,6 +312,10 @@ en:
               too_short: "The description must be at least 10 characters long."
             coordinators:
               blank: "Please select at least one contact person."
+        page:
+          attributes:
+            content:
+              blank: "Please provide content."
 
   components:
     coordinator_picker:
@@ -272,3 +326,6 @@ en:
     sign_in_button:
       short: "Login"
       long: "Login with %{brand}"
+  footer:
+    link_sections:
+      legal: "Legal"

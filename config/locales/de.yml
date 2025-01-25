@@ -61,25 +61,42 @@ de:
       application_title: "TendrilTasks - gemeinsam über uns hinauswachsen"
 
   pages:
-    home:
-      title: "Bring dich aktiv beim RCB ein!"
-      title_highlight: "aktiv"
-      hero: |
-        Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren. Jede Hilfe, ob groß oder klein, trägt dazu bei, den Verein voranzubringen und eine aktive Gemeinschaft zu erhalten. Gemeinsam können wir so die Ziele des Vereins erreichen und ein Umfeld schaffen, in dem sich alle gut aufgehoben fühlen.
-      cta_when_signed_in:
-        view_now: "Jetzt ansehen:"
-        interesting_initiatives: "Spannende Themen"
-        variety_of_tasks: "Abwechslungsreiche Aufgaben"
-      cta_when_signed_out:
-        login_to_see_initiatives_and_tasks: |
-          Jetzt einloggen, um Themen und Aufgaben zu sehen:
-
+    static:
+      home:
+        title: "Bring dich aktiv beim RCB ein!"
+        title_highlight: "aktiv"
+        hero: |
+          Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren. Jede Hilfe, ob groß oder klein, trägt dazu bei, den Verein voranzubringen und eine aktive Gemeinschaft zu erhalten. Gemeinsam können wir so die Ziele des Vereins erreichen und ein Umfeld schaffen, in dem sich alle gut aufgehoben fühlen.
+        cta_when_signed_in:
+          view_now: "Jetzt ansehen:"
+          interesting_initiatives: "Spannende Themen"
+          variety_of_tasks: "Abwechslungsreiche Aufgaben"
+        cta_when_signed_out:
+          login_to_see_initiatives_and_tasks: |
+            Jetzt einloggen, um Themen und Aufgaben zu sehen:
+    imprint:
+      title: "Impressum"
+    privacy-policy:
+      title: "Datenschutzerklärung"
+    terms-of-service:
+      title: "Nutzungsbedingungen"
+    edit:
+      title: "%{title} bearbeiten"
+      delete_confirm:
+        modal:
+          title: "%{title} löschen?"
+          content: |
+            Bist du sicher, dass du diese Seite löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
   forms:
+    headings:
+      new: "%{thing} anlegen"
+      edit: "%{thing} bearbeiten"
     create: "Speichern"
     edit: "Bearbeiten"
     update: "Speichern"
     delete: "Löschen"
     search: "Suchen"
+    save: "Speichern"
 
   badges:
     new: "Neu"
@@ -222,6 +239,41 @@ de:
     index:
       title: "Administration"
       role_management: "Rechteverwaltung"
+    legal:
+      index:
+        title: "Rechtliche Dokumente"
+        description: | 
+          Hier kannst du rechtliche Dokumente hinterlegen. Sie erscheinen automatisch im Webseiten-Footer in der Kategorie "Rechtliches"
+        edit: "Bearbeiten"
+        create: "Erstellen"
+    footer:
+      edit:
+        title: "Footer"
+        description: "Hier konfigurierst du Website-Links, den Copyright-Hinweis und Links zu sozialen Medien im Footer."
+        links:
+          title: "Links"
+        sitemap:
+          title: "Sitemap Links"
+          explainer: |
+            Hier kannst du bis zu 2 Spalten mit Links für den Footer angeben. Diese erscheinen neben den Links der "Rechtliches" Kategorie. Es sind relative und absolute URLs gestattet.
+          delete_confirm:
+            modal:
+              title: Sitemap Links löschen?
+              content: |
+                Bist du sicher, dass du die Links löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden.
+              confirm_button: Links löschen
+      sitemap_link:
+        link:
+          button:
+            remove: "Entfernen"
+          input:
+            placeholder: "Name, z. B. Homepage..."
+      sitemap_category_heading:
+        category:
+          reset: "Zurücksetzen"
+          add_link: "Link"
+          input:
+            label: "Kategorie"
 
   users:
     profile:
@@ -260,6 +312,20 @@ de:
     index:
       title: "Dashboard"
       create_initiative_button: "Thema anlegen"
+
+  activemodel:
+    errors:
+      models:
+        footer/category:
+          attributes:
+            title:
+              blank: "Bitte gib der Kategorie einen Namen."
+        footer/link:
+          attributes:
+            title:
+              blank: "Bitte gib dem Link einen Namen."
+            href:
+              blank: "Bitte gib einen Link an, z. B. 'https://example.com' oder '/imprint'."
 
   activerecord:
     models:
@@ -323,6 +389,10 @@ de:
               too_short: "Die Beschreibung muss mindestens 10 Zeichen lang sein."
             coordinators:
               blank: "Bitte wähle mindestens eine Ansprechperson aus."
+        page:
+          attributes:
+            content:
+              blank: "Bitte gib etwas ein."
 
   components:
     coordinator_picker:
@@ -333,3 +403,6 @@ de:
     sign_in_button:
       short: "Anmelden"
       long: "Anmelden mit %{brand}"
+  footer:
+    link_sections:
+      legal: "Rechtliches"

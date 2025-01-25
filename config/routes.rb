@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   # Defines the root path route ("/")
-  root "pages#home"
-
-  get "/preview", to: "pages#preview" if Rails.env.development?
+  root "pages#show", slug: "home"
 
   # Authenticate through devise and omniauth
   devise_for :users,
@@ -42,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :admin, only: %i[ index ]
   namespace :admin do
+    resources :legal, only: %i[ index ]
     namespace :users do
       resources :roles, only: %i[ update ]
     end
@@ -54,7 +53,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "/:slug", to: "pages#show", as: :page
+  resources :pages, path: "/", param: :slug, only: %i[ show edit update destroy ]
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

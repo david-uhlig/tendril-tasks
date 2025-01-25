@@ -14,9 +14,9 @@
 
   <% if user_signed_in? %>
     <%# CTA to projects and tasks %>
-    <%= render "pages/home/cta_when_signed_in" %>
+    <%= render "pages/static/home/cta_when_signed_in" %>
   <% else %>
     <%# CTA with login button %>
-    <%= render "pages/home/cta_when_signed_out" %>
+    <%= render "pages/static/home/cta_when_signed_out" %>
   <% end %>
 <% end %>

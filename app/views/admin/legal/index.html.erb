@@ -1,0 +1,49 @@
+<%= render TendrilTasks::Content.new(width: :large) do %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
+    <% breadcrumb.home %>
+    <% breadcrumb.item t("breadcrumbs.admin"), href: admin_index_path %>
+    <% breadcrumb.item t(".title") %>
+  <% end %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h1) do %>
+    <%= t(".title") %>
+  <% end %>
+
+  <div>
+    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= t(".description") %></p>
+  </div>
+
+  <ul class="my-4 space-y-3">
+    <% Admin::LegalController::LEGAL_PAGES.each do |slug| %>
+      <% if slug.in?(@pages) %>
+        <li>
+          <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate">
+              <%= link_to page_path(slug), class: "hover:underline" do %>
+                <%= t("pages.#{slug}.title") %>
+              <% end %>
+            </span>
+            <%= render Gustwave::Button.new(t(".edit"),
+                                            tag: :a,
+                                            href: edit_page_path(slug)) do |button| %>
+              <% button.leading_icon :edit %>
+            <% end %>
+          </span>
+        </li>
+      <% else %>
+        <li>
+          <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate">
+              <%= t("pages.#{slug}.title") %>
+            </span>
+            <%= render Gustwave::Button.new(t(".create"),
+                                            tag: :a,
+                                            href: edit_page_path(slug)) do |button| %>
+              <% button.leading_icon :plus %>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

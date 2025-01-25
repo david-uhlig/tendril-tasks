@@ -23,7 +23,7 @@ trix-toolbar {
     }
 }
 
-trix-editor {
+trix-editor, .trix-content {
     h1, h2, h3, h4, h5, h6 {
         @apply text-gray-900 dark:text-white my-4;
     }

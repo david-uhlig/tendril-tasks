@@ -5,6 +5,7 @@ class Ability
 
   def initialize(user)
     # ----- Guest -----
+    can :read, Page
 
     # ----- User -----
     return unless user.present?
@@ -42,11 +43,9 @@ class Ability
     # ----- Admin -----
     return unless user.admin?
 
+    # Manage semi-static pages, e.g. imprint, privacy policy, terms of service.
+    can :manage, Page
     can :manage, :admin_settings
     can :manage, :user_roles
-
-    # Can assign user roles
-
-    # Can delete user accounts
   end
 end
