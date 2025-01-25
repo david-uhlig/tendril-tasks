@@ -11,10 +11,10 @@ class PagesController < ApplicationController
     return render :show if @page.present?
 
     template = case params[:slug]
-               when "home" then "pages/static/home"
-               else
-                 raise ActionController::RoutingError, "Not Found"
-               end
+    when "home" then "pages/static/home"
+    else
+      raise ActionController::RoutingError, "Not Found"
+    end
 
     render template
   end
