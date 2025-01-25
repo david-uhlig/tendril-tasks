@@ -8,11 +8,15 @@ class PagesController < ApplicationController
   before_action :set_editable_page, only: %i[ edit update ]
 
   def show
-    if @page.present?
-      render :show
-    else
-      render "pages/static/#{params[:slug]}"
-    end
+    return render :show if @page.present?
+
+    template = case params[:slug]
+               when "home" then "pages/static/home"
+               else
+                 raise ActionController::RoutingError, "Not Found"
+               end
+
+    render template
   end
 
   def edit; end
