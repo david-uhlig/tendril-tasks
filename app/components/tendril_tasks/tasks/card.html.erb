@@ -11,8 +11,9 @@
   <%= link_to task_path(@task) do %>
     <%= render TendrilTasks::Heading
                  .new(tag: :h2,
-                      scheme: :none,
-                      class: "mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white overflow-hidden")
+                      scheme: :level5,
+                      responsive: false,
+                      class: "overflow-hidden")
                  .with_content(@task.title) %>
   <% end %>
 
