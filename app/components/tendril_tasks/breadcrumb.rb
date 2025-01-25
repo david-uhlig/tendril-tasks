@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  # Displays page hierarchy.
+  # Use `Breadcrumb` to display page hierarchy.
   #
   # This component allows you to render a breadcrumb navigation with a home link
   # and multiple breadcrumb items.
   #
-  # @example Rendering a breadcrumb navigation
+  # === Rendering a breadcrumb navigation
+  #
+  # This example renders a breadcrumb navigation with a home link and two
+  # breadcrumb items.
   #
   #   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
   #     <% breadcrumb.home "Home", href: root_path, icon: :home %>
   #     <% breadcrumb.item "Section", href: section_path %>
   #     <% breadcrumb.item "Subsection", href: subsection_path %>
   #   <% end %>
-  #
   class Breadcrumb < TendrilTasks::Component
     # Default title for the home link.
     DEFAULT_HOME_TITLE = t(".home")
