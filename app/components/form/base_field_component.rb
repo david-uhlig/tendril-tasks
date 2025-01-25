@@ -23,10 +23,18 @@ module Form
       @attribute = attribute
       @error_field_attribute = error_field_attribute || attribute
       @label = label ||
-        form.object.class.human_attribute_name(attribute).presence ||
+        active_model_translation ||
         attribute.to_s.humanize
       @label = false if label == false
       @options = options
+    end
+
+    private
+
+    def active_model_translation
+      return unless @form.object.class < ActiveModel::Model
+
+      @form.object.class.human_attribute_name(@attribute).presence
     end
   end
 end
