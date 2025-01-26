@@ -14,7 +14,7 @@ module Navigation
         Rails.root.join("app", "assets", "images", "brand", "custom", "logo.svg")
       )
 
-      "brand/default_logo.svg"
+      "brand/logo.svg"
     end
   end
 end
