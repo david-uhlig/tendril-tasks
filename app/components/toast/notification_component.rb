@@ -9,5 +9,9 @@ module Toast
       # TODO type has no effect yet, implement other types
       @type = type
     end
+
+    def call
+      render Gustwave::IconToast.new(@message, scheme: @type.to_sym)
+    end
   end
 end
