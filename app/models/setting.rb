@@ -36,6 +36,16 @@ class Setting < ApplicationRecord
     Setting.set("footer_sitemap", value)
   end
 
+  def self.footer_copyright
+    Setting.get("footer_copyright")
+  end
+
+  def self.footer_copyright=(value)
+    return self.delete("footer_copyright") if value.blank?
+
+    Setting.set("footer_copyright", value)
+  end
+
   private
 
   def self.expire_cache

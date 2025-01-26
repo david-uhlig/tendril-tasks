@@ -6,6 +6,7 @@ module Admin
       authorize! :edit, :admin_settings
 
       @sitemap = ::Footer::Sitemap.new(Setting.footer_sitemap)
+      @copyright = Setting.footer_copyright
     end
   end
 end

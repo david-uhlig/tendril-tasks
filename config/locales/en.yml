@@ -218,6 +218,9 @@ en:
               content: |
                 Are you sure you want to delete the links? This step cannot be undone.
               confirm_button: Delete links
+        copyright:
+          explainer: "This copyright notice appears in the footer at the bottom left of the page. It is optional, so you can also leave it blank."
+          title: "Copyright Notice"
       sitemap_link:
         link:
           button:
@@ -232,6 +235,10 @@ en:
             label: "Section"
       sitemap:
         destroyed: "Sitemap links have been reset."
+      copyright:
+        update:
+          update:
+            notice: "Copyright notice updated."
 
   # Users
   users:

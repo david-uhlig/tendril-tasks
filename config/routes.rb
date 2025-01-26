@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     resources :legal, only: %i[ index ]
     resource :footer, only: %i[ edit ], controller: :footer
     namespace :footer do
+      resource :copyright, only: %i[ update ], controller: :copyright
       resource :sitemap, only: %i[ update destroy ], controller: :sitemap
     end
     namespace :users do

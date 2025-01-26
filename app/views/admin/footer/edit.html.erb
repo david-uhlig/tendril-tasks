@@ -5,14 +5,48 @@
     <% breadcrumb.item t(".title") %>
   <% end %>
 
+  <%# Main heading %>
   <%= render TendrilTasks::Heading.new(tag: :h1) do %>
     <%= t(".title") %>
   <% end %>
-
   <%= render TendrilTasks::Paragraph.new do %>
     <%= t(".description") %>
   <% end %>
 
+  <%= render TendrilTasks::HorizontalLine.new %>
+
+  <%# Copyright %>
+  <%= render TendrilTasks::Heading.new(tag: :h2) do %>
+    <%= t(".copyright.title") %>
+  <% end %>
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".copyright.explainer") %>
+  <% end %>
+
+  <%= form_with id: "copyright-form",
+                url: admin_footer_copyright_path,
+                method: :put,
+                class: "space-y-6" do |form|
+  %>
+    <ol class="flex flex-nowrap space-x-4">
+      <li class="grow">
+        <%= render Form::TextFieldComponent.new(form,
+                                                :copyright_notice,
+                                                "Copyright",
+                                                value: @copyright,
+                                                placeholder: "© 2025 Example Corp")  %>
+      </li>
+      <li class="content-end">
+        <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
+          <%= t("forms.save") %>
+        <% end %>
+      </li>
+    </ol>
+  <% end %>
+
+  <%= render TendrilTasks::HorizontalLine.new %>
+
+  <%# Sitemap Links %>
   <%= render TendrilTasks::Heading.new(tag: :h2) do %>
     <%= t(".sitemap.title") %>
   <% end %>

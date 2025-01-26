@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
       data = {}
       data[:legal] = Page.where(slug: Admin::LegalController::LEGAL_PAGES)
                          .pluck(:slug)
-      data[:footer_sitemap] = Setting.footer_sitemap.fetch("categories", {})
+      data[:sitemap] = Setting.footer_sitemap.fetch("categories", {})
+      data[:copyright] = Setting.footer_copyright
       data
     end
   end
@@ -23,8 +24,8 @@ class ApplicationController < ActionController::Base
       # Returning 302 is the de-facto standard for "user is unauthenticated"
       # redirects. Used by Google, Facebook, and Microsoft.
       # @see https://stackoverflow.com/a/72395961/9261925
-      redirect_to new_user_session_path,
-                 status: :found
+      redirect_to new_user_session_path, status: :found
+
       return
     end
 

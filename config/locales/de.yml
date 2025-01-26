@@ -262,6 +262,9 @@ de:
               content: |
                 Bist du sicher, dass du die Links löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden.
               confirm_button: Links löschen
+        copyright:
+          explainer: "Dieser Copyright Hinweis erscheint im Footer unten links auf der Seite. Er ist optional, du kannst ihn also auch leer lassen."
+          title: "Copyright Hinweis"
       sitemap_link:
         link:
           button:
@@ -276,6 +279,10 @@ de:
             label: "Kategorie"
       sitemap:
         destroyed: "Sitemap Links wurden zurückgesetzt."
+      copyright:
+        update:
+          update:
+            notice: "Copyright Hinweis wurde gespeichert."
 
   users:
     profile:
