@@ -230,6 +230,8 @@ en:
           add_link: "Link"
           input:
             label: "Section"
+      sitemap:
+        destroyed: "Sitemap links have been reset."
 
   # Users
   users:

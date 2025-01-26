@@ -35,7 +35,7 @@
       filler_categories = (@sitemap.categories.count...2).map { category_blueprint }
     %>
     <% (@sitemap.categories + filler_categories).each do |category| %>
-      <%= render 'sitemap_category', category: category %>
+      <%= render 'admin/footer/sitemap_category', category: category %>
     <% end %>
 
     <template id="sitemap-link-template">

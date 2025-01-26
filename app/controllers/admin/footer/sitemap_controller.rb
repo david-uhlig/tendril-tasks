@@ -14,7 +14,9 @@ module Admin
       def destroy
         @sitemap = ::Footer::Sitemap.new(Setting.footer_sitemap)
         @sitemap.destroy
-        redirect_to admin_footer_index_path
+
+        flash[:success] = t("admin.footer.sitemap.destroyed")
+        redirect_to edit_admin_footer_path
       end
 
       private

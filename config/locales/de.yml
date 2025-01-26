@@ -274,6 +274,8 @@ de:
           add_link: "Link"
           input:
             label: "Kategorie"
+      sitemap:
+        destroyed: "Sitemap Links wurden zurückgesetzt."
 
   users:
     profile:

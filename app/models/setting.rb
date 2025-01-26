@@ -18,6 +18,7 @@ class Setting < ApplicationRecord
   end
 
   def self.delete(key)
+    expire_cache
     Setting.delete_by(key: key)
   end
 
@@ -36,6 +37,10 @@ class Setting < ApplicationRecord
   end
 
   private
+
+  def self.expire_cache
+    Rails.cache.delete("footer_data")
+  end
 
   def expire_cache
     Rails.cache.delete("footer_data")
