@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Pages", type: :request do
+RSpec.describe "Legal", type: :request do
   context "when not logged in" do
     before(:each) {
       page = Page.new(slug: :imprint, content: "Hello, World!")
@@ -8,13 +8,13 @@ RSpec.describe "Pages", type: :request do
     }
 
     it "can access legal pages" do
-      get page_path(:imprint)
+      get legal_path(:imprint)
       expect(response).to have_http_status(:success)
     end
 
     it "can not edit legal pages" do
       expect {
-        get edit_page_path(:imprint)
+        get edit_legal_path(:imprint)
       }.to raise_error(CanCan::AccessDenied)
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe "Pages", type: :request do
     before(:each) { login_as(user) }
 
     it "can create legal page" do
-      get edit_page_path(:imprint)
+      get edit_legal_path(:imprint)
       expect(response).to have_http_status(:success)
     end
 
@@ -32,7 +32,7 @@ RSpec.describe "Pages", type: :request do
       page = Page.new(slug: :imprint, content: "Hello!")
       page.save!
 
-      get edit_page_path(:imprint)
+      get edit_legal_path(:imprint)
       expect(response).to have_http_status(:success)
     end
   end

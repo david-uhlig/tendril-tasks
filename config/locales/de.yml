@@ -61,32 +61,32 @@ de:
       application_title: "TendrilTasks - gemeinsam über uns hinauswachsen"
 
   pages:
-    static:
-      home:
-        title: "Bring dich aktiv beim RCB ein!"
-        title_highlight: "aktiv"
-        hero: |
-          Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren. Jede Hilfe, ob groß oder klein, trägt dazu bei, den Verein voranzubringen und eine aktive Gemeinschaft zu erhalten. Gemeinsam können wir so die Ziele des Vereins erreichen und ein Umfeld schaffen, in dem sich alle gut aufgehoben fühlen.
-        cta_when_signed_in:
-          view_now: "Jetzt ansehen:"
-          interesting_initiatives: "Spannende Themen"
-          variety_of_tasks: "Abwechslungsreiche Aufgaben"
-        cta_when_signed_out:
-          login_to_see_initiatives_and_tasks: |
-            Jetzt einloggen, um Themen und Aufgaben zu sehen:
+    home:
+      title: "Bring dich aktiv beim RCB ein!"
+      title_highlight: "aktiv"
+      hero: |
+        Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren. Jede Hilfe, ob groß oder klein, trägt dazu bei, den Verein voranzubringen und eine aktive Gemeinschaft zu erhalten. Gemeinsam können wir so die Ziele des Vereins erreichen und ein Umfeld schaffen, in dem sich alle gut aufgehoben fühlen.
+      cta_when_signed_in:
+        view_now: "Jetzt ansehen:"
+        interesting_initiatives: "Spannende Themen"
+        variety_of_tasks: "Abwechslungsreiche Aufgaben"
+      cta_when_signed_out:
+        login_to_see_initiatives_and_tasks: |
+          Jetzt einloggen, um Themen und Aufgaben zu sehen:
     imprint:
       title: "Impressum"
     privacy-policy:
       title: "Datenschutzerklärung"
     terms-of-service:
       title: "Nutzungsbedingungen"
-    edit:
-      title: "%{title} bearbeiten"
-      delete_confirm:
-        modal:
-          title: "%{title} löschen?"
-          content: |
-            Bist du sicher, dass du diese Seite löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+    legal:
+      edit:
+        title: "%{title} bearbeiten"
+        delete_confirm:
+          modal:
+            title: "%{title} löschen?"
+            content: |
+              Bist du sicher, dass du diese Seite löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
   forms:
     headings:
       new: "%{thing} anlegen"

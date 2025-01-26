@@ -16,25 +16,32 @@ en:
       application_title: "TendrilTasks - growing beyond ourselves together"
 
   pages:
-    static:
-      home:
-        title: "Get actively involved in the RCB!"
-        title_highlight: "actively"
-        hero: |
-          A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
-        cta_when_signed_in:
-          view_now: "View now:"
-          interesting_initiatives: "Interesting Initiatives"
-          variety_of_tasks: "A Variety of Tasks"
-        cta_when_signed_out:
-          login_to_see_initiatives_and_tasks: |
-            Log in now to see initiatives and tasks:
+    home:
+      title: "Get actively involved in the RCB!"
+      title_highlight: "actively"
+      hero: |
+        A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
+      cta_when_signed_in:
+        view_now: "View now:"
+        interesting_initiatives: "Interesting Initiatives"
+        variety_of_tasks: "A Variety of Tasks"
+      cta_when_signed_out:
+        login_to_see_initiatives_and_tasks: |
+          Log in now to see initiatives and tasks:
     imprint:
       title: "Imprint"
     privacy_policy:
       title: "Privacy Policy"
     terms_of_service:
       title: "Terms of Service"
+    legal:
+      edit:
+        title: "Edit %{title}"
+        delete_confirm:
+          modal:
+            title: "Delete %{title}?"
+            content: |
+              Are you sure you want to delete this page? This action cannot be undone.
     edit:
       title: "Edit %{title}"
       delete_confirm:

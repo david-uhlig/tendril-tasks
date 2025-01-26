@@ -19,13 +19,13 @@
         <li>
           <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
             <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate">
-              <%= link_to page_path(slug), class: "hover:underline" do %>
+              <%= link_to legal_path(slug), class: "hover:underline" do %>
                 <%= t("pages.#{slug}.title") %>
               <% end %>
             </span>
             <%= render Gustwave::Button.new(t(".edit"),
                                             tag: :a,
-                                            href: edit_page_path(slug)) do |button| %>
+                                            href: edit_legal_path(slug)) do |button| %>
               <% button.leading_icon :edit %>
             <% end %>
           </span>
@@ -38,7 +38,7 @@
             </span>
             <%= render Gustwave::Button.new(t(".create"),
                                             tag: :a,
-                                            href: edit_page_path(slug)) do |button| %>
+                                            href: edit_legal_path(slug)) do |button| %>
               <% button.leading_icon :plus %>
             <% end %>
           </span>

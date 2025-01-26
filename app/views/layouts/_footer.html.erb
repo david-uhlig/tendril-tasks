@@ -27,7 +27,7 @@
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
               <% data[:legal].each do |slug| %>
                 <li class="mb-4 overflow-hidden truncate">
-                  <%= link_to page_path(slug), class: "hover:underline" do %>
+                  <%= link_to legal_path(slug), class: "hover:underline" do %>
                     <%= t("pages.#{slug}.title") %>
                   <% end %>
                 </li>
