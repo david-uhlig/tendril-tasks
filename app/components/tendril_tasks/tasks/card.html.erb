@@ -13,14 +13,16 @@
                  .new(tag: :h2,
                       scheme: :level5,
                       responsive: false,
-                      class: "overflow-hidden")
+                      class: "overflow-hidden pb-0.5")
                  .with_content(@task.title) %>
   <% end %>
 
   <div class="flex-grow">
-    <p class="text-start mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-      <%= @task.description.split("\n").first %>
-    </p>
+    <% @task.description.truncate_words(20).split("\n").each do |paragraph| %>
+      <p class="text-start mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
+        <%= paragraph %>
+      </p>
+    <% end %>
   </div>
 
   <div>
