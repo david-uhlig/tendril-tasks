@@ -12,8 +12,18 @@ RSpec.describe Task, type: :model do
       expect(task).to be_valid
     end
 
+    it "is valid with a title of a single character" do
+      task = build(:task, title: "a")
+      expect(task).to be_valid
+    end
+
     it "is valid with a description of 10+ characters" do
       task = build(:task, description: "a" * 10)
+      expect(task).to be_valid
+    end
+
+    it "is valid with a description of a single character" do
+      task = build(:task, description: "a")
       expect(task).to be_valid
     end
 
@@ -29,18 +39,8 @@ RSpec.describe Task, type: :model do
       expect(task).not_to be_valid
     end
 
-    it "is invalid with a title of less than 10 characters" do
-      task = build(:task, title: "a" * 9)
-      expect(task).not_to be_valid
-    end
-
     it "is invalid without a description" do
       task = build(:task, description: nil)
-      expect(task).not_to be_valid
-    end
-
-    it "is invalid with a description of less than 10 characters" do
-      task = build(:task, description: "a" * 9)
       expect(task).not_to be_valid
     end
 

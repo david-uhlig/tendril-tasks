@@ -6,8 +6,8 @@ class Project < ApplicationRecord
                           association_foreign_key: "user_id",
                           foreign_key: "project_id"
 
-  validates :title, presence: true, length: { minimum: 10 }
-  validates :description, presence: true, length: { minimum: 10 }
+  validates :title, presence: true
+  validates :description, presence: true
   validates :coordinators, presence: true
 
   scope :published, -> {

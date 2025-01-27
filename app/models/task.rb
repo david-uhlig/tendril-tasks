@@ -9,8 +9,8 @@ class Task < ApplicationRecord
   has_many :task_applications, dependent: :destroy
   has_many :applicants, through: :task_applications, source: :user
 
-  validates :title, presence: true, length: { minimum: 10 }
-  validates :description, presence: true, length: { minimum: 10 }
+  validates :title, presence: true
+  validates :description, presence: true
   validates :coordinators, presence: true
 
   scope :is_published, -> {

@@ -9,18 +9,8 @@ RSpec.describe Project, type: :model do
   end
 
   describe "with invalid attributes" do
-    it "is invalid with a title of less than 10 characters" do
-      project = build(:project, title: "h" * 9)
-      expect(project).not_to be_valid
-    end
-
     it "is invalid without a title" do
       project = build(:project, title: nil)
-      expect(project).not_to be_valid
-    end
-
-    it "is invalid with a description of less than 10 characters" do
-      project = build(:project, description: "h" * 9)
       expect(project).not_to be_valid
     end
 
