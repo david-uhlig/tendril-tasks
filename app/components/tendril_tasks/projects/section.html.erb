@@ -3,11 +3,13 @@
     <%= render TendrilTasks::Heading.new(tag: :h2, scheme: :level2) do %>
       <%= link_to @project.title, project_path(@project) %>
     <% end %>
-    <p class="text-start mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-      <%= link_to project_path(@project) do %>
-        <%= @project.description.split("\n").first %>
-      <% end %>
-    </p>
+    <% paragraphize(@project.description.truncate_words(80), delimiter: "\n\n").each do |paragraph| %>
+      <p class="text-start mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+        <%= link_to project_path(@project) do %>
+          <%= paragraph.split("\n").join("<br>").html_safe %>
+        <% end %>
+      </p>
+    <% end %>
 
     <%= render Modal::ToggleButtonComponent.new(scheme: :none,
                                                 modal_id: "project-contacts-#{@project.id}",

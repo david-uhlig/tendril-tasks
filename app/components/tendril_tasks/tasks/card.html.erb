@@ -18,9 +18,9 @@
   <% end %>
 
   <div class="flex-grow">
-    <% @task.description.truncate_words(20).split("\n").each do |paragraph| %>
+    <% paragraphize(@task.description.truncate_words(20), delimiter: "\n\n").each do |paragraph| %>
       <p class="text-start mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-        <%= paragraph %>
+        <%= paragraph.split("\n").join("<br>").html_safe %>
       </p>
     <% end %>
   </div>
