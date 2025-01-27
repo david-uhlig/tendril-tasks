@@ -1,4 +1,4 @@
-<%= render TendrilTasks::Content.new(width: :large) do %>
+<%= render TendrilTasks::Content.new(width: :large, class: "space-y-6") do %>
   <%# Breadcrumb navigation %>
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
@@ -38,8 +38,10 @@
                  .with_content(@task.title)
     %>
     <%# Task description %>
-    <% paragraphize(@task.description).each do |paragraph| %>
-      <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
+    <% paragraphize(@task.description, delimiter: "\n\n").each do |paragraph| %>
+      <%= render TendrilTasks::Paragraph.new(class: "mb-6") do %>
+        <%= paragraph.split("\n").join("<br>").html_safe %>
+      <% end %>
     <% end %>
   </div>
 
@@ -80,7 +82,9 @@
                     scheme: :level3)
                .with_content(t(".contact_people"))
   %>
-  <%= tag.p t(".contact_people_content") %>
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".contact_people_content") %>
+  <% end %>
   <%= render Modal::ContactListComponent.new(@task.coordinators) %>
   <%= render TendrilTasks::HorizontalLine.new %>
 

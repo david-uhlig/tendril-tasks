@@ -5,13 +5,13 @@
              .with_content(t ".thanks_for_your_application")
 %>
 <% if application.editable? %>
-  <%= tag.p t(".next_steps_within_grace_period"),
-            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
-  %>
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".next_steps_within_grace_period") %>
+  <% end %>
 <% else %>
-  <%= tag.p t(".next_steps_outside_of_grace_period"),
-            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
-  %>
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".next_steps_outside_of_grace_period") %>
+  <% end %>
 <% end %>
 <%= form_with model: application,
               method: :patch,
@@ -20,11 +20,13 @@
   <% if application.editable? %>
     <%= render Form::TextAreaComponent.new(f,
                                            :comment,
+                                           t("activerecord.attributes.task_application.comment"),
                                            rows: 8)
     %>
   <% else %>
     <%= render Form::TextAreaComponent.new(f,
                                            :comment,
+                                           t("activerecord.attributes.task_application.comment"),
                                            rows: 8,
                                            disabled: true,
                                            placeholder: t(".you_applied_without_a_comment"))

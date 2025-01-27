@@ -30,8 +30,10 @@
                .with_content(@project.title)
   %>
   <%# Project description %>
-  <% paragraphize(@project.description).each do |paragraph| %>
-    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= paragraph %></p>
+  <% paragraphize(@project.description, delimiter: "\n\n").each do |paragraph| %>
+    <%= render TendrilTasks::Paragraph.new do %>
+      <%= paragraph.split("\n").join("<br>").html_safe %>
+    <% end %>
   <% end %>
   <%= render TendrilTasks::HorizontalLine.new %>
 

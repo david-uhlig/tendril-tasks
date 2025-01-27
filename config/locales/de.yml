@@ -197,7 +197,7 @@ de:
           Wir melden uns bald bei dir, um die nächsten Schritte zu besprechen. Falls du deinen Kommentar noch bearbeiten möchtest, kannst du das hier ganz einfach tun.
         next_steps_outside_of_grace_period: |
           Wir melden uns bald bei dir, um die nächsten Schritte zu besprechen. Die Ansprechpersonen wurden bereits benachrichtigt.
-        you_applied_without_a_comment: "Du hast dich ohne den optionalen Kommentar gemeldet."
+        you_applied_without_a_comment: "Du hast uns keine Nachricht zu deiner Meldung hinterlassen."
         update_application: "Meldung bearbeiten"
         withdraw_application: "Meldung zurückziehen"
         delete_confirm:
@@ -351,7 +351,6 @@ de:
       task_applications:
         one: "Bewerbung"
         other: "Bewerbungen"
-
     attributes:
       task:
         project: "Thema"
@@ -360,7 +359,7 @@ de:
         coordinators: "Ansprechpersonen"
         applicants: "Bewerber"
       task_application:
-        comment: "Kommentar"
+        comment: "Deine Nachricht an uns (optional)"
         status:
           received: "Eingegangen"
           under_review: "In Prüfung"
