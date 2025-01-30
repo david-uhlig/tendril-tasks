@@ -14,10 +14,6 @@ class Project < ApplicationRecord
     where(published_at: ...Time.zone.now)
   }
 
-  scope :has_published_task, -> {
-    joins(:tasks).merge(Task.is_published).distinct
-  }
-
   def visible?
     published? && tasks.present? && tasks.any?(&:published?)
   end
