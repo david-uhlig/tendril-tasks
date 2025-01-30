@@ -1,58 +1,47 @@
 class Setting < ApplicationRecord
   serialize :value, coder: JSON
 
+  has_many_attached :attachments
+
   validates :key, presence: true, uniqueness: true
-  validates :value, presence: true
 
-  after_save :expire_cache
-  after_destroy :expire_cache
-
-  def self.get(key)
-    find_by_key(key).try(:value)
-  end
-
-  def self.set(key, value)
-    setting = Setting.find_or_initialize_by(key: key)
-    setting.value = value
-    setting.save
-  end
-
-  def self.delete(key)
-    expire_cache
-    Setting.delete_by(key: key)
-  end
-
-  def self.to_h
-    all.each_with_object({}) do |setting, hash|
-      hash[setting.key] = setting.value
+  class << self
+    def remove(key)
+      find_by(key: key)&.destroy
     end
-  end
 
-  def self.footer_sitemap
-    Setting.get("footer_sitemap") || {}
-  end
+    def to_h
+      pluck(:key, :value).to_h
+    end
 
-  def self.footer_sitemap=(value)
-    Setting.set("footer_sitemap", value)
-  end
+    def footer_sitemap
+      get("footer_sitemap")&.value || {}
+    end
 
-  def self.footer_copyright
-    Setting.get("footer_copyright")
-  end
+    def footer_sitemap=(value)
+      set("footer_sitemap", value: value)
+    end
 
-  def self.footer_copyright=(value)
-    return self.delete("footer_copyright") if value.blank?
+    def footer_copyright
+      get("footer_copyright")&.value || ""
+    end
 
-    Setting.set("footer_copyright", value)
-  end
+    def footer_copyright=(value)
+      set("footer_copyright", value: value)
+    end
 
-  private
+    private
 
-  def self.expire_cache
-    Rails.cache.delete("footer_data")
-  end
+    def get(key)
+      find_by(key: key)
+    end
 
-  def expire_cache
-    Rails.cache.delete("footer_data")
+    def set(key, value: nil, attachment: nil)
+      setting = find_or_initialize_by(key: key)
+
+      setting.value = value
+      setting.attachments.attach(attachment) if attachment.present?
+      setting.save
+    end
   end
 end

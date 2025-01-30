@@ -21,11 +21,11 @@
       <%# Sitemap links %>
       <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3" dir="rtl">
         <%# Legal link block %>
-        <% if data[:legal].present? %>
+        <% if data.legal.present? %>
           <div dir="ltr">
             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"><%= t("footer.link_sections.legal") %></h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
-              <% data[:legal].each do |slug| %>
+              <% data.legal.each do |slug| %>
                 <li class="mb-4 overflow-hidden truncate">
                   <%= link_to legal_path(slug), class: "hover:underline" do %>
                     <%= t("pages.#{slug}.title") %>
@@ -35,7 +35,7 @@
             </ul>
           </div>
         <% end %>
-        <% data[:sitemap].each do |category| %>
+        <% data.sitemap.each do |category| %>
           <div dir="ltr">
             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"><%= category["title"] %></h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium space-y-4">
@@ -52,14 +52,14 @@
         <% end %>
       </div>
     </div>
-    <% if @copyright.present? || @social_media_links.present? %>
+    <% if data.copyright.present? || @social_media_links.present? %>
       <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-              <%= @copyright %>
+              <%= data.copyright %>
             </span>
-        <div class="flex mt-4 sm:justify-center sm:mt-0">...
-        </div>
+        <%# TODO configurable social media icons with links %>
+        <div class="flex mt-4 sm:justify-center sm:mt-0">&nbsp;</div>
       </div>
     <% end %>
   </div>

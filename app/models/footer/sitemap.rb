@@ -23,7 +23,7 @@ module Footer
     end
 
     def destroy
-      Setting.delete("footer_sitemap")
+      Setting.remove("footer_sitemap")
     end
 
     def attributes

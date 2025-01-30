@@ -75,6 +75,8 @@
 
 
   <%# Footer %>
-  <%= render partial: 'layouts/footer', locals: { data: @footer_data } %>
+  <% cache ["footer", @footer.updated_at] do %>
+    <%= render partial: 'layouts/footer', locals: { data: @footer } %>
+  <% end %>
   </body>
 </html>
