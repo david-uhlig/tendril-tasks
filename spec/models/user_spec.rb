@@ -61,4 +61,37 @@ RSpec.describe User, type: :model do
       expect(authenticated_user).to be_falsey
     end
   end
+
+  describe ".search" do
+    let!(:user1) { create(:user, name: "First User", username: "some one") }
+    let!(:user2) { create(:user, name: "Second Person", username: "some two") }
+    let!(:user3) { create(:user, name: "Third User", username: "other three") }
+    let!(:user4) { create(:user, name: "Nobody", username: "dummy") }
+
+    it "returns users with matching names" do
+      expect(User.search("User")).to contain_exactly(user1, user3)
+    end
+
+    it "accepts a case-insensitive search term" do
+      expect(User.search("user")).to contain_exactly(user1, user3)
+    end
+
+    it "returns users with matching usernames" do
+      expect(User.search("some")).to contain_exactly(user1, user2)
+    end
+
+    it "returns users with matching names or usernames" do
+      max = create(:user, name: "Max Mustermann", username: "max.mustermann")
+      john = create(:user, name: "John Doe", username: "john.mustermann")
+      expect(User.search("Mustermann")).to contain_exactly(max, john)
+    end
+
+    it "returns an empty array when no users match the search" do
+      expect(User.search("Foo")).to be_empty
+    end
+
+    it "returns all users when the search term is blank" do
+      expect(User.search("")).to contain_exactly(user1, user2, user3, user4)
+    end
+  end
 end
