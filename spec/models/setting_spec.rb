@@ -107,4 +107,73 @@ RSpec.describe Setting, type: :model do
       end
     end
   end
+
+  describe "brand" do
+    context ".brand_logo" do
+      it "returns nil when there is no brand logo" do
+        expect(Setting.brand_logo).to be_nil
+      end
+
+      it "returns the brand logo" do
+        file = File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt'))
+        setting = create(:setting, key: "brand_logo")
+        setting.attachments.attach(io: file, filename: 'example.txt', content_type: 'text/plain')
+        expect(Setting.brand_logo).to eq(setting.attachments.first)
+      end
+    end
+
+    context ".brand_logo=" do
+      it "creates a new setting with the brand logo" do
+        file = File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt'))
+        Setting.brand_logo = file
+        expect(Setting.brand_logo).to eq(ActiveStorage::Attachment.last)
+      end
+    end
+
+    context ".display_brand_name?" do
+      it "returns true when display brand name is not set" do
+        expect(Setting.display_brand_name?).to be_truthy
+      end
+
+      it "returns false when display brand name is set to false" do
+        create(:setting, key: "display_brand_name", value: false)
+        expect(Setting.display_brand_name?).to be_falsey
+      end
+
+      it "returns true when display brand name is set to true" do
+        create(:setting, key: "display_brand_name", value: true)
+        expect(Setting.display_brand_name?).to be_truthy
+      end
+    end
+
+    context ".display_brand_name=" do
+      it "creates a new setting to hide the brand name" do
+        Setting.display_brand_name = false
+        expect(Setting.display_brand_name?).to be_falsey
+      end
+
+      it "creates a new setting to show the brand name" do
+        Setting.display_brand_name = true
+        expect(Setting.display_brand_name?).to be_truthy
+      end
+    end
+
+    context ".brand_name" do
+      it "returns nil when there is no brand name" do
+        expect(Setting.brand_name).to be_nil
+      end
+
+      it "returns the brand name" do
+        create(:setting, key: "brand_name", value: "Example")
+        expect(Setting.brand_name).to eq("Example")
+      end
+    end
+
+    context ".brand_name=" do
+      it "creates a new setting with the brand name" do
+        Setting.brand_name = "Example"
+        expect(Setting.brand_name).to eq("Example")
+      end
+    end
+  end
 end

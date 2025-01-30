@@ -30,6 +30,32 @@ class Setting < ApplicationRecord
       set("footer_copyright", value: value)
     end
 
+    def brand_logo
+      get("brand_logo")&.attachments&.first
+    end
+
+    def brand_logo=(attachment)
+      get("brand_logo")&.attachments&.each(&:purge)
+      set("brand_logo", attachment: attachment)
+    end
+
+    def display_brand_name?
+      value = get("display_brand_name")&.value
+      value.nil? || ActiveRecord::Type::Boolean.new.cast(value)
+    end
+
+    def display_brand_name=(value)
+      set("display_brand_name", value: value)
+    end
+
+    def brand_name
+      get("brand_name")&.value
+    end
+
+    def brand_name=(value)
+      set("brand_name", value: value)
+    end
+
     private
 
     def get(key)
