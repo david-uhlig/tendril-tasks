@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Brand, type: :model do
-  let(:logo) { File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt')) }
+  let(:logo) { File.open(Rails.root.join('spec', 'assets', 'images', 'for-tests.jpg')) }
   let(:brand) { Brand.new }
   let!(:setting) { create(:setting) }
 
@@ -20,8 +20,8 @@ RSpec.describe Brand, type: :model do
     end
 
     context 'when brand logo is not set' do
-      it 'returns the default logo' do
-        expect(brand.logo).to eq('brand/logo.svg')
+      it 'returns nil' do
+        expect(brand.logo).to be_nil
       end
     end
   end
@@ -35,8 +35,8 @@ RSpec.describe Brand, type: :model do
     end
 
     context 'when brand name is not set' do
-      it 'returns the default name' do
-        expect(brand.name).to eq('Tendril Tasks')
+      it 'returns nil' do
+        expect(brand.name).to be_nil
       end
     end
   end

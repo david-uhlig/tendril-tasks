@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Setting, type: :model do
   let(:setting) { create(:setting) }
 
+  def attach_image
+    setting.attachment.attach(io: File.open(Rails.root.join('spec', 'assets', 'images', 'for-tests.jpg')), filename: 'for-tests.jpg', content_type: 'image/jpg')
+  end
+
   describe "with valid attributes" do
     it "is valid with default values" do
       expect(setting).to be_valid
@@ -19,19 +23,19 @@ RSpec.describe Setting, type: :model do
     end
 
     it "is valid with one attachment" do
-      setting.attachments.attach(io: File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt')), filename: 'example.txt', content_type: 'text/plain')
+      attach_image
       expect(setting).to be_valid
     end
 
     it "is valid with multiple attachments" do
-      setting.attachments.attach(io: File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt')), filename: 'example.txt', content_type: 'text/plain')
-      setting.attachments.attach(io: File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt')), filename: 'example.txt', content_type: 'text/plain')
+      attach_image
+      attach_image
       expect(setting).to be_valid
     end
 
     it "is valid with a value and an attachment" do
       setting.value = "value"
-      setting.attachments.attach(io: File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt')), filename: 'example.txt', content_type: 'text/plain')
+      attach_image
       expect(setting).to be_valid
     end
   end
@@ -115,16 +119,16 @@ RSpec.describe Setting, type: :model do
       end
 
       it "returns the brand logo" do
-        file = File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt'))
+        file = File.open(Rails.root.join('spec', 'assets', 'images', 'for-tests.jpg'))
         setting = create(:setting, key: "brand_logo")
-        setting.attachments.attach(io: file, filename: 'example.txt', content_type: 'text/plain')
-        expect(Setting.brand_logo).to eq(setting.attachments.first)
+        setting.attachment.attach(io: file, filename: 'for-tests.jpg', content_type: 'image/jpg')
+        expect(Setting.brand_logo).to eq(setting.attachment.attachment)
       end
     end
 
     context ".brand_logo=" do
       it "creates a new setting with the brand logo" do
-        file = File.open(Rails.root.join('spec', 'assets', 'files', 'example.txt'))
+        file = File.open(Rails.root.join('spec', 'assets', 'images', 'for-tests.jpg'))
         Setting.brand_logo = file
         expect(Setting.brand_logo).to eq(ActiveStorage::Attachment.last)
       end
