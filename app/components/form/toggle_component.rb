@@ -23,6 +23,8 @@ module Form
       @form = form
       @attribute = attribute
       @label = label
+      @check_box_options = { class: "sr-only peer" }
+      @check_box_options[:checked] = options.delete(:checked) if options.key?(:checked)
       @options = build_options(options)
     end
 
