@@ -37,9 +37,8 @@ class Ability
     # ----- Editor -----
     return unless user.editor? || user.admin?
 
-    can :manage, Project
-    can :coordinate, Project
-    can [ :create ], [ Project, Task ]
+    can :manage, [ Project, Task ]
+    can :coordinate, [ Project, Task ]
 
     # ----- Admin -----
     return unless user.admin?
