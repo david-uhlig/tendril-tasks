@@ -554,7 +554,7 @@ DEPENDENCIES
   sqlite3 (>= 2.1)
   stimulus-rails
   tailwind_merge (~> 0.14)
-  tailwindcss-rails
+  tailwindcss-rails (~> 3.0)
   thruster
   turbo-rails
   tzinfo-data
