@@ -1,9 +1,14 @@
 class Setting < ApplicationRecord
+  include SvgSanitizable
+
   serialize :value, coder: JSON
 
-  has_many_attached :attachments
+  has_one_attached :attachment
 
   validates :key, presence: true, uniqueness: true
+  validates :attachment,
+            content_type: %i[png jpg jpeg svg],
+            size: { less_than: 500.kilobytes }
 
   class << self
     def remove(key)
@@ -31,12 +36,11 @@ class Setting < ApplicationRecord
     end
 
     def brand_logo
-      get("brand_logo")&.attachments&.first
+      get("brand_logo")&.attachment&.attachment
     end
 
-    def brand_logo=(attachment)
-      get("brand_logo")&.attachments&.each(&:purge)
-      set("brand_logo", attachment: attachment)
+    def brand_logo=(uploaded_file)
+      set("brand_logo", attachment: uploaded_file)
     end
 
     def display_brand_name?
@@ -66,7 +70,10 @@ class Setting < ApplicationRecord
       setting = find_or_initialize_by(key: key)
 
       setting.value = value
-      setting.attachments.attach(attachment) if attachment.present?
+      if attachment.present?
+        sanitized_file = Setting.new.sanitize_svg(attachment)
+        setting.attachment.attach(sanitized_file)
+      end
       setting.save
     end
   end
