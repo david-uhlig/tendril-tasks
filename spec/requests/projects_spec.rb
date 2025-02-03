@@ -1,49 +1,289 @@
 require 'rails_helper'
 
 RSpec.describe "Projects", type: :request do
-  context "when logged in as user" do
-    let(:user) { create(:user) }
-    let(:published_project) { create(:project, :published, :with_published_tasks) }
+  let(:user) { create(:user) }
+  let(:editor) { create(:user, :editor) }
+  let(:admin) { create(:user, :admin) }
 
-    before(:each) {
-      login_as(user, scope: :user)
-      published_project
-    }
-
-    it "can access the projects index page" do
-      get projects_path
-      expect(response).to have_http_status(:success)
+  describe "GET /projects" do
+    context "as a visitor" do
+      it "redirects to the login page" do
+        get projects_path
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
-    it "can access published project with published tasks" do
-      get project_path(published_project)
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  context "when logged in as an editor" do
-    let(:editor) { create(:user, :editor) }
-    before(:each) { login_as(editor, scope: :user) }
-
-    it "can access new project page" do
-      get new_project_path
-      expect(response).to have_http_status(:success)
+    context "as a user" do
+      it "loads the projects index page" do
+        login_as(user)
+        get projects_path
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
-  context "when assigned as a coordinator" do
-    let(:coordinator) { create(:user) }
-    let(:project) { create(:project, coordinators: [ coordinator ]) }
-    before(:each) { login_as(coordinator, scope: :user) }
+  describe "GET /projects/:id" do
+    context "published project with published tasks" do
+      let!(:published_project) { create(:project, :published, :with_published_tasks) }
 
-    it "can access the projects detail page" do
-      get project_path(project)
-      expect(response).to have_http_status(:success)
+      context "as a visitor" do
+        it "redirects to the login page" do
+          get project_path(published_project)
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+
+      context "as a user" do
+        it "loads the project detail page" do
+          login_as(user)
+          get project_path(published_project)
+          expect(response).to have_http_status(:success)
+        end
+      end
     end
 
-    it "can access the projects edit page" do
-      get edit_project_path(project)
-      expect(response).to have_http_status(:success)
+    context "published project - no published tasks" do
+      let!(:published_project) { create(:project, :published) }
+
+      context "as a visitor" do
+        it "redirects to the login page" do
+          get project_path(published_project)
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+
+      context "as a user" do
+        it "responds with a 404" do
+          login_as(user)
+          get project_path(published_project)
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "as a coordinator" do
+        let(:coordinator) { create(:user) }
+        let(:project) { create(:project, coordinators: [ coordinator ]) }
+
+        it "loads the project detail page" do
+          login_as(coordinator)
+          get project_path(project)
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context "as an editor" do
+        it "loads the project detail page" do
+          login_as(editor)
+          get project_path(published_project)
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+
+    context "unpublished project" do
+      let!(:unpublished_project) { create(:project) }
+
+      context "as a visitor" do
+        it "redirects to the login page" do
+          get project_path(unpublished_project)
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+
+      context "as a user" do
+        it "responds with a 404" do
+          login_as(user)
+          get project_path(unpublished_project)
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "as a coordinator" do
+        let(:coordinator) { create(:user) }
+        let(:project) { create(:project, coordinators: [ coordinator ]) }
+
+        it "loads the project detail page" do
+          login_as(coordinator)
+          get project_path(project)
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context "as an editor" do
+        it "loads the project detail page" do
+          login_as(editor)
+          get project_path(unpublished_project)
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+  end
+
+  describe "GET /projects/new" do
+    context "as a visitor" do
+      it "redirects to the login page" do
+        get new_project_path
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "as a user" do
+      it "redirects to the projects index" do
+        login_as(user)
+        get new_project_path
+        expect(response).to redirect_to(projects_path)
+      end
+    end
+
+    context "as an editor" do
+      it "loads the new project page" do
+        login_as(editor)
+        get new_project_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "GET /projects/:id/edit" do
+    let(:project) { create(:project) }
+
+    context "as a visitor" do
+      it "redirects to the login page" do
+        get edit_project_path(project)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "as a user" do
+      it "redirects to the projects index" do
+        login_as(user)
+        get edit_project_path(project)
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context "as a coordinator" do
+      let(:coordinator) { create(:user) }
+      let(:project) { create(:project, coordinators: [ coordinator ]) }
+
+      it "loads the edit project page" do
+        login_as(coordinator)
+        get edit_project_path(project)
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "as an editor" do
+      it "loads the edit project page" do
+        login_as(editor)
+        get edit_project_path(project)
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "POST /projects" do
+    context "as a visitor" do
+      it "redirects to the login page" do
+        post projects_path
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "as a user" do
+      it "redirects to the projects index" do
+        login_as(user)
+        post projects_path
+        expect(response).to redirect_to(projects_path)
+      end
+    end
+
+    context "as an editor" do
+      it "creates a new project" do
+        login_as(editor)
+        post projects_path, params: { project_form: attributes_for(:project) }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe "PATCH /projects/:id" do
+    let(:project) { create(:project) }
+
+    context "as a visitor" do
+      it "redirects to the login page" do
+        patch project_path(project)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "as a user" do
+      it "responds with not found" do
+        login_as(user)
+        patch project_path(project)
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context "as a coordinator" do
+      let(:coordinator) { create(:user) }
+      let(:project) { create(:project, coordinators: [ coordinator ]) }
+
+      it "updates the project" do
+        login_as(coordinator)
+        patch project_path(project), params: { project_form: attributes_for(:project) }
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(project_path(project))
+      end
+    end
+
+    context "as an editor" do
+      it "updates the project" do
+        login_as(editor)
+        patch project_path(project), params: { project_form: attributes_for(:project) }
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(project_path(project))
+      end
+    end
+  end
+
+  describe "DELETE /projects/:id" do
+    let(:project) { create(:project) }
+
+    context "as a visitor" do
+      it "redirects to the login page" do
+        delete project_path(project)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "as a user" do
+      it "responds with not found" do
+        login_as(user)
+        delete project_path(project)
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context "as a coordinator" do
+      let(:coordinator) { create(:user) }
+      let(:project) { create(:project, coordinators: [ coordinator ]) }
+
+      it "deletes the project" do
+        login_as(coordinator)
+        delete project_path(project)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(projects_path)
+      end
+    end
+
+    context "as an editor" do
+      it "deletes the project" do
+        login_as(editor)
+        delete project_path(project)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(projects_path)
+      end
     end
   end
 end
