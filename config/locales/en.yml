@@ -57,6 +57,7 @@ en:
     update: "Update"
     search: "Search"
     save: "Save"
+    reset: "Reset"
 
   badges:
     new: "New"
@@ -246,6 +247,21 @@ en:
         update:
           update:
             notice: "Copyright notice updated."
+    brand:
+      edit:
+        title: "Branding"
+        explainer: "Here you can customize the logo and the name of the application. Both are displayed in the navigation bar at the top left."
+        logo:
+          title: "Logo"
+          file_field:
+            label: "Select new logo"
+            helper_text: "Format: SVG, PNG, JPEG (max 500kb)"
+        name:
+          title: "Application Name"
+          text_field:
+            label: "Name"
+          toggle:
+            label: "Displayed?"
 
   # Users
   users:
@@ -345,3 +361,5 @@ en:
   footer:
     link_sections:
       legal: "Legal"
+  notification:
+    saved: "Saved"

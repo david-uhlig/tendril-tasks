@@ -97,6 +97,7 @@ de:
     delete: "Löschen"
     search: "Suchen"
     save: "Speichern"
+    reset: "Zurücksetzen"
 
   badges:
     new: "Neu"
@@ -283,6 +284,21 @@ de:
         update:
           update:
             notice: "Copyright Hinweis wurde gespeichert."
+    brand:
+      edit:
+        title: "Branding"
+        explainer: "Hier kannst du das Logo und den Namen der Anwendung anpassen. Beides wird in der Navigation oben links angezeigt."
+        logo:
+          title: "Logo"
+          file_field:
+            label: "Neues Logo auswählen"
+            helper_text: "Format: SVG, PNG, JPEG (max 500kb)"
+        name:
+          title: "Anwendungsname"
+          text_field:
+            label: "Name"
+          toggle:
+            label: "Anzeigen?"
 
   users:
     profile:
@@ -414,3 +430,5 @@ de:
   footer:
     link_sections:
       legal: "Rechtliches"
+  notification:
+    saved: "Gespeichert"

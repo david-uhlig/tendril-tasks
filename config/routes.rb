@@ -46,6 +46,11 @@ Rails.application.routes.draw do
       resource :copyright, only: %i[ update ], controller: :copyright
       resource :sitemap, only: %i[ update destroy ], controller: :sitemap
     end
+    resource :brand, only: %i[ edit ], controller: :brand
+    namespace :brand do
+      resource :name, only: %i[ update ], controller: :name
+      resource :logo, only: %i[ update destroy ], controller: :logo
+    end
     namespace :users do
       resources :roles, only: %i[ update ]
     end
