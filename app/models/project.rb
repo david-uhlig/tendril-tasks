@@ -19,6 +19,18 @@ class Project < ApplicationRecord
     where(published_at: ...Time.zone.now)
   }
 
+  # Projects without coordinators
+  #
+  # This happens when a user is deleted and the project is not reassigned to
+  # another user.
+  scope :orphaned, -> {
+    left_outer_joins(:coordinators).where(project_coordinators: { user_id: nil }).distinct
+  }
+
+  def orphaned?
+    coordinators.empty?
+  end
+
   def visible?
     published? && tasks.present? && tasks.any?(&:published?)
   end

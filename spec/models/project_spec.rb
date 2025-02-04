@@ -25,6 +25,39 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  describe ".orphaned" do
+    let(:user) { create(:user) }
+
+    it "returns projects without coordinators" do
+      project_without_coordinator = create(
+        :project, coordinators: [ user ]
+      )
+      create(:project)
+      user.destroy
+      expect(Project.orphaned.to_a).to eq([ project_without_coordinator ])
+    end
+  end
+
+  describe "#orphaned?" do
+    let(:user) { create(:user) }
+
+    context "when project has coordinators" do
+      it "is not orphaned" do
+        project = build(:project)
+        expect(project).not_to be_orphaned
+      end
+    end
+
+    context "when project has no coordinators" do
+      it "is orphaned" do
+        project = create(:project, coordinators: [ user ])
+        user.destroy
+        project.reload
+        expect(project).to be_orphaned
+      end
+    end
+  end
+
   describe "#published?" do
     context "with default values" do
       it "is not published" do

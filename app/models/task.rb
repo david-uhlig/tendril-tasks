@@ -22,6 +22,19 @@ class Task < ApplicationRecord
     where(published_at: ...Time.zone.now)
   }
 
+  # Tasks without coordinators
+  #
+  # This happens when a user is deleted and the task is not reassigned to
+  # another user.
+  scope :orphaned, -> {
+    left_outer_joins(:coordinators).where(task_coordinators: { user_id: nil }).distinct
+  }
+
+  # Returns true if the task has no coordinators
+  def orphaned?
+    coordinators.empty?
+  end
+
   def applicant?(user)
     applicants.include?(user) &&
       !task_applications.find_by(user_id: user.id).withdrawn?

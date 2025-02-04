@@ -55,6 +55,39 @@ RSpec.describe Task, type: :model do
     end
   end
 
+  describe ".orphaned" do
+    let(:user) { create(:user) }
+
+    it "returns tasks without coordinators" do
+      task_without_coordinator = create(
+        :task, title: "Task without coordinators", coordinators: [ user ]
+      )
+      create(:task)
+      user.destroy
+      expect(Task.orphaned.to_a).to eq([ task_without_coordinator ])
+    end
+  end
+
+  describe "#orphaned?" do
+    let(:user) { create(:user) }
+
+    context "when task has coordinators" do
+      it "is not orphaned" do
+        task = build(:task)
+        expect(task).not_to be_orphaned
+      end
+    end
+
+    context "when task has no coordinators" do
+      it "is orphaned" do
+        task = create(:task, coordinators: [ user ])
+        user.destroy
+        task.reload
+        expect(task).to be_orphaned
+      end
+    end
+  end
+
   describe "#publicly_visible" do
     it "returns published tasks with published projects" do
       published_task_with_published_project = create(:task, :published, :with_published_project)
