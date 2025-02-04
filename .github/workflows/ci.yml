@@ -3,11 +3,6 @@ name: CI
 on:
   pull_request:
   push:
-    branches:
-      - main
-      - 'ci/*'
-      - 'feature/*'
-      - 'fix/*'
 
 jobs:
   scan_ruby:
