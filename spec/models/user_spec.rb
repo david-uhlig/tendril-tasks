@@ -1,6 +1,48 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe "#destroy" do
+    let(:user) { create(:user) }
+
+    it "deletes the user's task applications" do
+      task_application = create(:task_application, user: user)
+      user.destroy
+
+      expect(
+        TaskApplication.find_by(task: task_application.task,
+                                user: task_application.user)
+      ).to be_nil
+    end
+
+    it "keeps the projects the user is a coordinator of" do
+      project = create(:project, coordinators: [ user ])
+      user.destroy
+
+      expect(Project.find_by(id: project.id)).to be_present
+    end
+
+    it "keeps the tasks the user is a coordinator of" do
+      task = create(:task, coordinators: [ user ])
+      user.destroy
+
+      expect(Task.find_by(id: task.id)).to be_present
+    end
+
+    it "removes the user from the projects coordinators" do
+      project = create(:project, coordinators: [ user ])
+      user.destroy
+
+      expect(Project.find_by(id: project.id).coordinators).to be_empty
+    end
+
+    it "removes the user from the tasks coordinators" do
+      task = create(:task, coordinators: [ user ])
+      user.destroy
+
+      expect(Task.find_by(id: task.id).coordinators).to be_empty
+    end
+  end
+
   describe ".from_omniauth" do
     let(:auth) do
       OmniAuth::AuthHash.new(
