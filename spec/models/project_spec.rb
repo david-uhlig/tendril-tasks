@@ -27,37 +27,37 @@ RSpec.describe Project, type: :model do
 
   describe "#published?" do
     context "with default values" do
-      it "returns false" do
+      it "is not published" do
         project = build(:project)
         expect(project).not_to be_published
       end
     end
 
-    context "when published_at date is now" do
-      it "returns true" do
-        project = build(:project, published_at: Time.zone.now)
-        expect(project).to be_published
+    context "when published_at is unspecified" do
+      it "is not published" do
+        project = build(:project, published_at: nil)
+        expect(project).not_to be_published
       end
     end
 
-    context "when published_at date is tomorrow" do
-      it "return false" do
+    context "when published in the future" do
+      it "is not published" do
         project = build(:project, published_at: Time.zone.tomorrow)
         expect(project).not_to be_published
       end
     end
 
-    context "when published_at date is yesterday" do
-      it "returns true" do
-        project = build(:project, published_at: Time.zone.yesterday)
+    context "when published right now" do
+      it "is published" do
+        project = build(:project, published_at: Time.zone.now)
         expect(project).to be_published
       end
     end
 
-    context "when published_at date is nil" do
-      it "returns false" do
-        project = build(:project, :not_published)
-        expect(project).not_to be_published
+    context "when published in the past" do
+      it "is published" do
+        project = build(:project, published_at: Time.zone.yesterday)
+        expect(project).to be_published
       end
     end
   end
@@ -74,6 +74,17 @@ RSpec.describe Project, type: :model do
       project.publish
       expect(project.published_at).to be >= Time.zone.now - 10.seconds
       expect(project.published_at).to be <= Time.zone.now + 10.seconds
+    end
+  end
+
+  describe "#publicly_visible" do
+    it "returns published projects with published tasks" do
+      published_project_with_published_task = create(
+        :project, :published, :with_published_tasks
+      )
+      create(:project, :published, :with_unpublished_tasks)
+      create(:project, :not_published)
+      expect(Project.publicly_visible).to eq([ published_project_with_published_task ])
     end
   end
 
