@@ -10,11 +10,10 @@ class TasksController < ApplicationController
     @type = :all_published_tasks
 
     @projects = Project.select(:id, :title)
-                       .accessible_by(current_ability)
-                       .published
+                       .publicly_visible
                        .order(:updated_at)
 
-    @tasks = Task.accessible_by(current_ability)
+    @tasks = Task.publicly_visible
                  .includes(:coordinators, :project, :applicants)
 
     # Apply filters

@@ -13,6 +13,11 @@ class Task < ApplicationRecord
   validates :description, presence: true
   validates :coordinators, presence: true
 
+  scope :publicly_visible, -> {
+    is_published.includes(:project)
+                .where(project: { published_at: ...Time.zone.now })
+  }
+
   scope :is_published, -> {
     where(published_at: ...Time.zone.now)
   }

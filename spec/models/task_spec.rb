@@ -55,6 +55,23 @@ RSpec.describe Task, type: :model do
     end
   end
 
+  describe "#publicly_visible" do
+    it "returns published tasks with published projects" do
+      published_task_with_published_project = create(:task, :published, :with_published_project)
+      create(:task, :published)
+      create(:task, :not_published)
+      expect(Task.publicly_visible).to eq([ published_task_with_published_project ])
+    end
+  end
+
+  describe "#is_published" do
+    it "returns published tasks" do
+      published_task = create(:task, :published)
+      create(:task, :not_published)
+      expect(Task.is_published).to eq([ published_task ])
+    end
+  end
+
   describe "#published?" do
     context "when published_at date is now" do
       it "returns true" do
