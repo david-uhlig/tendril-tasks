@@ -290,11 +290,14 @@ en:
   devise:
     sessions:
       new:
-        welcome_back: "Welcome back!"
         content: |
           You're just one click away from getting started! Once you've logged in, you can discover all our exciting initiatives and tasks that are waiting for you. It's simple: just log in with your %{brand} account. We look forward to seeing you! 🚴‍♂️✨
         click_here_to_start: "Simply click here and get started right away:"
         login_with_rocket_chat_button: "Login with %{brand}"
+        create_account:
+          prompt: "Don't have an account yet?"
+          link_title: "Register now"
+        title: "Welcome - Here we go!"
 
   # Dashboard
   dashboard:

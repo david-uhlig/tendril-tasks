@@ -5,7 +5,7 @@ RSpec.describe 'User Sessions', type: :request do
     it 'renders the sign-in page' do
       get new_user_session_path
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('Willkommen zurück')
+      expect(response.body).to include('Willkommen')
     end
   end
 

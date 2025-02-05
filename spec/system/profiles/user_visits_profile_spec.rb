@@ -4,7 +4,7 @@ RSpec.describe "User visits profile page", type: :system do
   context "when unauthorized" do
     it "redirects to the login page" do
       visit profile_path
-      expect(page).to have_content("Willkommen zurück")
+      expect(page).to have_content("Willkommen")
       expect(page).to have_content("Anmelden mit Rocket.Chat")
     end
   end

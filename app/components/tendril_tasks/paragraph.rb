@@ -3,10 +3,11 @@
 module TendrilTasks
   class Paragraph < TendrilTasks::Component
     style :base,
-          "text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"
+          "text-gray-500 dark:text-gray-400"
 
     style :size,
           states: {
+            sm: "text-sm front-normal lg:text-base",
             lg: "text-lg font-normal lg:text-xl"
           },
           default: :lg
@@ -16,6 +17,7 @@ module TendrilTasks
 
       options.symbolize_keys!
       options[:class] = styles(base: true,
+                               size: size,
                                custom: options.delete(:class))
       @options = options
     end
