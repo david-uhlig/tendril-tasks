@@ -200,6 +200,8 @@ en:
         cannot_change_current_user:
           cannot_remove_last_administrator: "The last administrator cannot be removed."
           cannot_change_own_permissions: "You cannot modify your own permissions."
+        index:
+          title: "Permissions"
     index:
       title: "Administration"
       role_management: "Role Management"

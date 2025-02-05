@@ -52,7 +52,7 @@ Rails.application.routes.draw do
       resource :logo, only: %i[ update destroy ], controller: :logo
     end
     namespace :users do
-      resources :roles, only: %i[ update ]
+      resources :roles, only: %i[ index update ]
     end
   end
 

@@ -8,43 +8,4 @@
                .new(tag: :h1, scheme: :level2)
                .with_content(t(".title"))
   %>
-  <%= render TendrilTasks::HorizontalLine.new %>
-  <%= render TendrilTasks::Heading
-               .new(tag: :h2, scheme: :level3)
-               .with_content(t(".role_management")) %>
-
-  <ul class="my-4 space-y-3">
-    <%# TODO this should only list users with roles > user. Regular users can then get permissions through a search box %>
-    <% @users.each do |user| %>
-      <li id="user-role-<%= user.id %>">
-        <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-          <%= render TendrilTasks::Avatar.new(user) %>
-          <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= user.name %></span>
-          <%= form_with url: admin_users_role_path(user), method: :patch do |f| %>
-            <%# TODO this should become a selectbox %>
-            <%= render TendrilTasks::ButtonGrid.new(orientation: :horizontal, size: :sm) do |grid| %>
-              <% User.roles.each do |role_name, role_id| %>
-                <%# Currently selected role %>
-                <% if role_name == user.role %>
-                  <% grid.button(
-                       theme: :gradient_duotone,
-                       scheme: :purple_to_blue,
-                       disabled: true
-                     ).with_content(role_name.capitalize) %>
-                <%# Other roles %>
-                <% else %>
-                  <% grid.button(
-                       scheme: :alternative,
-                       type: :submit,
-                       name: :role,
-                       disabled: user.id == current_user.id,
-                       value: role_name).with_content(role_name.capitalize) %>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </span>
-      </li>
-    <% end %>
-  </ul>
 <% end %>

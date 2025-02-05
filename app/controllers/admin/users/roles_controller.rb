@@ -2,7 +2,12 @@ module Admin
   module Users
     class RolesController < ApplicationController
       before_action :set_user, only: [ :update ]
-      # TODO add authorization
+
+      def index
+        authorize! :show, :admin_settings
+        @users = User.order(role: :desc, name: :asc)
+      end
+
       def update
         authorize! :update, :user_roles
 

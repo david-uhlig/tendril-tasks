@@ -237,6 +237,8 @@ de:
         cannot_change_current_user:
           cannot_remove_last_administrator: "Der letzte Administrator kann nicht entfernt werden."
           cannot_change_own_permissions: "Du kannst deine eigenen Rechte nicht bearbeiten."
+        index:
+          title: "Rechteverwaltung"
     index:
       title: "Administration"
       role_management: "Rechteverwaltung"
