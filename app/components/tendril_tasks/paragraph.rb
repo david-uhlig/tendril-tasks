@@ -12,13 +12,18 @@ module TendrilTasks
           },
           default: :lg
 
-    def initialize(text = nil, size: default_layer_state(:size), **options)
+    style :hyphens,
+          "hyphens-auto"
+
+    def initialize(text = nil, size: default_layer_state(:size), hyphenated: true, **options)
       @text = text
 
       options.symbolize_keys!
       options[:class] = styles(base: true,
                                size: size,
+                               hyphens: hyphenated,
                                custom: options.delete(:class))
+      options[:lang] ||= I18n.locale if hyphenated
       @options = options
     end
 

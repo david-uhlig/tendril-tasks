@@ -17,6 +17,9 @@ module TendrilTasks
             level6: "mb-2"
           }
 
+    style :hyphens,
+          "hyphens-auto"
+
     TAG_SCHEME_MAPPINGS = {
       h1: :level2,
       h2: :level3,
@@ -30,6 +33,7 @@ module TendrilTasks
                    tag:,
                    scheme: nil,
                    responsive: true,
+                   hyphenated: true,
                    **options)
       @text = text
 
@@ -45,8 +49,10 @@ module TendrilTasks
       @options[:scheme] ||= scheme
       @options[:responsive] ||= responsive
       @options[:class] = styles(base: true,
-                                      scheme: scheme,
-                                      custom: @options.delete(:class))
+                                hyphens: hyphenated,
+                                scheme: scheme,
+                                custom: @options.delete(:class))
+      @options[:lang] ||= I18n.locale if hyphenated
     end
 
     def call
