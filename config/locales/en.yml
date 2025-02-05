@@ -197,24 +197,25 @@ en:
   admin:
     users:
       roles:
+        title: "Role Management"
         cannot_change_current_user:
           cannot_remove_last_administrator: "The last administrator cannot be removed."
           cannot_change_own_permissions: "You cannot modify your own permissions."
-        index:
-          title: "Permissions"
+        description: "Define which users should have special access rights."
     index:
       title: "Administration"
       role_management: "Role Management"
     legal:
       index:
-        title: "Legal Documents"
         description: |
           Here you can store legal documents. They will automatically appear in the website footer in the “Legal” section
         edit: "Edit"
         create: "Create"
+      title: "Legal Documents"
+      description: "Provide legal documents for the website: Imprint, privacy policy, terms of use."
     footer:
+      title: "Footer"
       edit:
-        title: "Footer"
         description: "Configure website links, a copyright notice, and social media links in the footer."
         links:
           title: "Links"
@@ -249,9 +250,10 @@ en:
         update:
           update:
             notice: "Copyright notice updated."
+      description: "Customize the copyright notice and the sitemap links of the application."
     brand:
+      title: "Branding"
       edit:
-        title: "Branding"
         explainer: "Here you can customize the logo and the name of the application. Both are displayed in the navigation bar at the top left."
         logo:
           title: "Logo"
@@ -264,6 +266,10 @@ en:
             label: "Name"
           toggle:
             label: "Displayed?"
+      description: "Customize the logo and the name of the application."
+    settings:
+      title: "Settings"
+
 
   # Users
   users:

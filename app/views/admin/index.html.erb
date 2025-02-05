@@ -6,6 +6,45 @@
 
   <%= render TendrilTasks::Heading
                .new(tag: :h1, scheme: :level2)
-               .with_content(t(".title"))
+               .with_content(t("admin.title"))
   %>
+
+  <%= render Gustwave::HorizontalLine.new %>
+
+  <%= render TendrilTasks::Heading
+               .new(tag: :h2)
+               .with_content(t("admin.settings.title")) %>
+
+  <ol class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <%= render TendrilTasks::Admin::Card
+                 .new(href: admin_users_roles_path) do |card|
+    %>
+      <% card.heading t("admin.users.roles.title") %>
+      <% card.paragraph do %>
+        <%= t("admin.users.roles.description") %>
+      <% end %>
+    <% end %>
+    <%= render TendrilTasks::Admin::Card
+                 .new(href: admin_legal_index_path) do |card|
+    %>
+      <% card.heading t("admin.legal.title") %>
+      <% card.paragraph do %>
+        <%= t("admin.legal.description") %>
+      <% end %>
+    <% end %>
+    <%= render TendrilTasks::Admin::Card
+                 .new(href: edit_admin_brand_path) do |card| %>
+      <% card.heading t("admin.brand.title") %>
+      <% card.paragraph do %>
+        <%= t("admin.brand.description") %>
+      <% end %>
+    <% end %>
+    <%= render TendrilTasks::Admin::Card
+                 .new(href: edit_admin_footer_url) do |card| %>
+      <% card.heading t("admin.footer.title") %>
+      <% card.paragraph do %>
+        <%= t("admin.footer.description") %>
+      <% end %>
+    <% end %>
+  </ol>
 <% end %>

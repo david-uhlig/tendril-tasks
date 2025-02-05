@@ -232,26 +232,27 @@ de:
       title: "Aufgabe anlegen"
 
   admin:
+    title: "Administration"
     users:
       roles:
+        title: "Rollenverwaltung"
         cannot_change_current_user:
           cannot_remove_last_administrator: "Der letzte Administrator kann nicht entfernt werden."
           cannot_change_own_permissions: "Du kannst deine eigenen Rechte nicht bearbeiten."
-        index:
-          title: "Rechteverwaltung"
+        description: "Lege fest welche Benutzer besondere Zugriffsrechte haben sollen."
     index:
       title: "Administration"
-      role_management: "Rechteverwaltung"
     legal:
       index:
-        title: "Rechtliche Dokumente"
         description: | 
           Hier kannst du rechtliche Dokumente hinterlegen. Sie erscheinen automatisch im Webseiten-Footer in der Kategorie "Rechtliches"
         edit: "Bearbeiten"
         create: "Erstellen"
+      title: "Rechtliche Dokumente"
+      description: "Hinterlege rechtliche Dokumente für die Webseite: Impressum, Datenschutzerklärung, Nutzungsbedingungen."
     footer:
+      title: "Fußzeile"
       edit:
-        title: "Footer"
         description: "Hier konfigurierst du Website-Links, den Copyright-Hinweis und Links zu sozialen Medien im Footer."
         links:
           title: "Links"
@@ -286,9 +287,10 @@ de:
         update:
           update:
             notice: "Copyright Hinweis wurde gespeichert."
+      description: "Passe den Copyright-Hinweis und die Sitemap Links der Anwendung an."
     brand:
+      title: "Branding"
       edit:
-        title: "Branding"
         explainer: "Hier kannst du das Logo und den Namen der Anwendung anpassen. Beides wird in der Navigation oben links angezeigt."
         logo:
           title: "Logo"
@@ -301,6 +303,10 @@ de:
             label: "Name"
           toggle:
             label: "Anzeigen?"
+      description: "Passe das Logo und den Namen der Anwendung an."
+    settings:
+      title: "Einstellungen"
+
 
   users:
     profile:
