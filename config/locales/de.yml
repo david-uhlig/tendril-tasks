@@ -306,6 +306,20 @@ de:
       description: "Passe das Logo und den Namen der Anwendung an."
     settings:
       title: "Einstellungen"
+    statistics:
+      title: "Kennzahlen"
+      users:
+        title: "Benutzer"
+        admins: "Admins"
+        editors: "Redaktion"
+      projects:
+        title: "Themen"
+        published: "veröffentlicht"
+      tasks:
+        published: "veröffentlicht"
+        title: "Aufgaben"
+      applications:
+        title: "Meldungen"
 
 
   users:

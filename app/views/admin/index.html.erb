@@ -9,6 +9,32 @@
                .with_content(t("admin.title"))
   %>
 
+  <%= render TendrilTasks::Heading
+               .new(tag: :h2, scheme: :level3)
+               .with_content(t("admin.statistics.title")) %>
+
+  <dl class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+    <%= render TendrilTasks::Admin::StatsItem
+                 .new(t("admin.statistics.users.title"), @stats.users) do
+    %>
+      <%= render Gustwave::Badge.new("#{@stats.users[:admins]} #{t("admin.statistics.users.admins")}", scheme: :purple) %>
+      <%= render Gustwave::Badge.new("#{@stats.users[:editors]} #{t("admin.statistics.users.editors")}", scheme: :indigo) %>
+    <% end %>
+    <%= render TendrilTasks::Admin::StatsItem
+                 .new(t("admin.statistics.projects.title"), @stats.projects) do
+    %>
+      <%= render Gustwave::Badge.new("#{@stats.projects[:active]} #{t("admin.statistics.projects.published")}") %>
+    <% end %>
+    <%= render TendrilTasks::Admin::StatsItem
+                 .new(t("admin.statistics.tasks.title"), @stats.tasks) do
+    %>
+      <%= render Gustwave::Badge.new("#{@stats.tasks[:active]} #{t("admin.statistics.tasks.published")}") %>
+    <% end %>
+    <%= render TendrilTasks::Admin::StatsItem
+                 .new(t("admin.statistics.applications.title"), @stats.applications)
+    %>
+  </dl>
+
   <%= render Gustwave::HorizontalLine.new %>
 
   <%= render TendrilTasks::Heading

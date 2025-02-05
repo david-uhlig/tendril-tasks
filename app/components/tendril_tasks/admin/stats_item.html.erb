@@ -1,0 +1,15 @@
+<div class="flex flex-col items-center justify-center space-y-2">
+  <dt class="text-3xl font-extrabold">
+    <%= @stats[:total] %>
+    <% if @stats[:new] > 0 %>
+      <%= render Gustwave::Badge.new("+#{@stats[:new]}",
+                                     scheme: :green,
+                                     class: "align-super")
+      %>
+    <% end %>
+  </dt>
+  <dd class="text-gray-500 dark:text-gray-400"><%= @title %></dd>
+  <div class="whitespace-nowrap flex-grow">
+    <%= content %>
+  </div>
+</div>

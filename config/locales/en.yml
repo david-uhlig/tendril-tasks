@@ -269,6 +269,20 @@ en:
       description: "Customize the logo and the name of the application."
     settings:
       title: "Settings"
+    statistics:
+      title: "Statistics"
+      users:
+        title: "Users"
+        admins: "Admins"
+        editors: "Editors"
+      projects:
+        title: "Initiatives"
+        published: "published"
+      tasks:
+        published: "published"
+        title: "Tasks"
+      applications:
+        title: "Applications"
 
 
   # Users
