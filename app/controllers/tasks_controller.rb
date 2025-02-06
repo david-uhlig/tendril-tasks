@@ -39,8 +39,8 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task_form = TaskForm.new(preset_params)
-    @task_form.coordinators << current_user unless @task_form.coordinators.present?
+    @task_form = TaskForm.new
+    @task_form.coordinators << current_user
   end
 
   def create
@@ -49,9 +49,9 @@ class TasksController < ApplicationController
     if @task_form.save
       success_msg = "Task was successfully created."
       if @task_form.submit_type == "save_and_new"
-        redirect_to new_task_with_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.project.coordinators.join("-")), notice: success_msg
+        redirect_to new_task_from_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.project.coordinators.join("-")), notice: success_msg
       else
-        redirect_to root_path, notice: success_msg
+        redirect_to task_path(@task_form.task), notice: success_msg
       end
     else
       render :new, status: :unprocessable_entity
@@ -91,14 +91,5 @@ class TasksController < ApplicationController
     params[:task_form][:coordinator_ids] = params[:assigned_coordinator_ids]
     params.require(:task_form)
           .permit(:project_id, :title, :description, :publish, :submit_type, coordinator_ids: [])
-  end
-
-  def preset_params
-    return nil unless params[:project_id].present?
-
-    preset = {}
-    preset[:project_id] = params[:project_id]
-    preset[:coordinator_ids] = params[:coordinator_ids].split("-")
-    preset
   end
 end

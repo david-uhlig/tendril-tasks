@@ -179,7 +179,7 @@ RSpec.describe "Tasks", type: :request do
         project = create(:project)
         coordinator = create(:user)
 
-        get new_task_with_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
+        get new_task_from_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -190,7 +190,7 @@ RSpec.describe "Tasks", type: :request do
         project = create(:project)
         coordinator = create(:user)
 
-        get new_task_with_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
+        get new_task_from_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
         expect(response).to redirect_to(tasks_path)
       end
     end
@@ -201,7 +201,7 @@ RSpec.describe "Tasks", type: :request do
         project = create(:project)
         coordinator = create(:user)
 
-        get new_task_with_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
+        get new_task_from_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
         expect(response).to have_http_status(:success)
       end
     end

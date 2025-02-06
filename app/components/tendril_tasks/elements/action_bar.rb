@@ -49,7 +49,7 @@ module TendrilTasks
 
         tag.li class: "inline-flex" do
           render Gustwave::Button.new(tag: :a,
-                                      href: new_task_with_preset_path(
+                                      href: new_task_from_preset_path(
                                         project_id: @project.id,
                                         coordinator_ids: @project.coordinator_ids.join("-")
                                       ),

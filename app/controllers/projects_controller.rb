@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
     if @project_form.save
       success_msg = "Project successfully created."
       if @project_form.submit_type == "save_and_new_task"
-        redirect_to new_task_with_preset_path(project_id: @project_form.project.id, coordinator_ids: @project_form.project.coordinator_ids.join("-")), notice: success_msg
+        redirect_to new_task_from_preset_path(project_id: @project_form.project.id, coordinator_ids: @project_form.project.coordinator_ids.join("-")), notice: success_msg
       else
         redirect_to project_path(@project_form.project), notice: "Project was successfully created."
       end
