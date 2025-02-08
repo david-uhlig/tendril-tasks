@@ -145,6 +145,7 @@ en:
             Are you sure you want to delete this task? This action cannot be undone.
             All messages from members who have responded to this task will also be irrevocably deleted.
       new_initiative_button: "New"
+      description: "Description"
     show:
       section_title:
         applications: "Applications"

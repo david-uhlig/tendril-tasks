@@ -183,10 +183,11 @@ de:
             Bist du sicher, dass du diese Aufgabe löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
             Auch alle Meldungen von Mitgliedern, die auf diese Aufgabe eingegangen sind, werden unwiderruflich gelöscht.
       new_initiative_button: "Neu"
+      description: "Beschreibung"
     show:
       section_title:
-        applications: "Bewerbungen"
-      this_task_hasnt_received_applications: "Diese Aufgabe hat noch keine Bewerbungen erhalten."
+        applications: "Meldungen"
+      this_task_hasnt_received_applications: "Es hat sich noch niemand für diese Aufgabe gemeldet."
       contact_people: "Ansprechpersonen"
       contact_people_content: "Noch unschlüssig? Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du vorab Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren."
       goto_tasks_button: "Zur Aufgabenübersicht"
@@ -211,7 +212,7 @@ de:
       form_when_user_has_not_applied_to_task:
         apply_here: "Interessiert? Hier melden!"
         procedure_and_motivation: | 
-          Du hast Interesse an dieser Aufgabe? Dann melde dich einfach unverbindlich bei uns, indem du dieses Formular abschickst! Wir besprechen die Details ganz entspannt mit dir. Wenn du uns schon vorab etwas mitteilen möchtest, kannst du gerne einen Kommentar hinterlassen. Wir freuen uns auf dein Engagement!
+          Du hast Interesse an dieser Aufgabe? Dann melde dich einfach unverbindlich bei uns, indem du dieses Formular abschickst! Wir besprechen die Details ganz entspannt mit dir. Wenn du uns schon vorab etwas mitteilen möchtest, kannst du uns gerne eine Nachricht hinterlassen. Wir freuen uns auf dein Engagement!
         submit: "Zählt auf mich!"
       update:
         we_couldnt_update_your_application: "Wir konnten deine Meldung leider nicht mehr aktualisieren."

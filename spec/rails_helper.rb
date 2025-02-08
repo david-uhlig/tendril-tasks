@@ -18,6 +18,9 @@ require "view_component/test_helpers"
 require "view_component/system_test_helpers"
 require "capybara/rspec"
 
+# ActionText helpers
+require "action_text/system_test_helper"
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -46,11 +49,14 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
-  # ViewComponent helper methods
+  # ActionText helpers
+  config.include ActionText::SystemTestHelper, type: :system
+
+  # ViewComponent helpers
   config.include ViewComponent::TestHelpers, type: :component
   config.include ViewComponent::SystemTestHelpers, type: :component
   config.include Capybara::RSpecMatchers, type: :component
-  # Devise’s controller helper methods
+  # Devise’s controller helpers
   config.include Devise::Test::ControllerHelpers, type: :component
   config.before(:each, type: :component) do
     @request = vc_test_controller.request
