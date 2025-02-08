@@ -5,9 +5,7 @@ module Pages
     before_action :set_page, only: %i[ show destroy ]
     before_action :set_editable_page, only: %i[ edit update ]
 
-    def show
-      true
-    end
+    def show; end
 
     def edit
       authorize! :edit, @page

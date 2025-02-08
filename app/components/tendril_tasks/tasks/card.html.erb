@@ -18,7 +18,7 @@
   <% end %>
 
   <div class="flex-grow space-y-4">
-    <% paragraphize(@task.description.truncate_words(20), delimiter: "\n\n").each do |paragraph| %>
+    <% paragraphize(@task.description.to_plain_text.truncate_words(20), delimiter: "\n\n").each do |paragraph| %>
       <%= render TendrilTasks::Paragraph.new(class: "lg:text-lg") do %>
         <%= paragraph.split("\n").join("<br>").html_safe %>
       <% end %>

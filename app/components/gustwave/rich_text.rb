@@ -1,0 +1,24 @@
+# frozen_string_literal: true
+
+module Gustwave
+  # Use to render rich text content
+  class RichText < Gustwave::Component
+    style :base,
+          "trix-content"
+
+    def initialize(text = nil, **options)
+      @text = text
+
+      options.symbolize_keys!
+      options[:class] = styles(base: true,
+                               custom: options.delete(:class))
+      @options = options
+    end
+
+    def call
+      tag.div **@options do
+        text_or_content
+      end
+    end
+  end
+end

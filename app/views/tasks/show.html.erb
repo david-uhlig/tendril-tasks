@@ -38,11 +38,7 @@
                  .with_content(@task.title)
     %>
     <%# Task description %>
-    <% paragraphize(@task.description, delimiter: "\n\n").each do |paragraph| %>
-      <%= render TendrilTasks::Paragraph.new(class: "mb-6") do %>
-        <%= paragraph.split("\n").join("<br>").html_safe %>
-      <% end %>
-    <% end %>
+    <%= render Gustwave::RichText.new(@task.description) %>
   </div>
 
   <%= render TendrilTasks::HorizontalLine.new %>

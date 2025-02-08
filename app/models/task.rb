@@ -9,6 +9,8 @@ class Task < ApplicationRecord
   has_many :task_applications, dependent: :destroy
   has_many :applicants, through: :task_applications, source: :user
 
+  has_rich_text :description
+
   validates :title, presence: true
   validates :description, presence: true
   validates :coordinators, presence: true

@@ -7,14 +7,14 @@ RSpec.describe "Editor creates new task", type: :system, js: true do
     login_as(editor)  # Logging in the user using Warden helpers
     create(:project)
     visit new_task_path
+    page.driver.browser.manage.window.resize_to(800, 1600)  # Set the screen size
   end
 
   context "when visiting the new task resource" do
     it "shows the create task mask" do
       expect(page).to have_content("Aufgabe anlegen")
       expect(page).to have_selector("input")
-      expect(page).to have_selector("textarea")
-      expect(page).to have_selector("button", count: 3)
+      expect(page).to have_selector("trix-editor")
     end
   end
 
@@ -29,16 +29,17 @@ RSpec.describe "Editor creates new task", type: :system, js: true do
     it "saves the task with `Speichern`" do
       select "Project title", from: "task_form_project_id"
       fill_in "Titel", with: "Some lengthy title"
-      fill_in "Beschreibung", with: "Some lengthy description"
+      fill_in_rich_textarea with: "Some lengthy description"
       click_on "Speichern"
 
+      expect(page).to have_content("Some lengthy title")
       expect(page).to have_content("Task was successfully created.")
     end
 
     it "saves the task with `Speichern und Neu`" do
       select "Project title", from: "Thema"
       fill_in "Titel", with: "Some lengthy title"
-      fill_in "Beschreibung", with: "Some lengthy description"
+      fill_in_rich_textarea "Beschreibung", with: "Some lengthy description"
       click_on "Speichern & Neu"
 
       expect(page).to have_content("Aufgabe anlegen")
