@@ -23,7 +23,18 @@ trix-toolbar {
     }
 }
 
+.trix-content {
+    figure .attachment__name,
+    figure .attachment__size {
+        @apply hidden;
+    }
+}
+
 trix-editor, .trix-content {
+    &>:first-child {
+        @apply mt-0;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         @apply text-gray-900 dark:text-white my-4;
     }
@@ -80,11 +91,11 @@ trix-editor, .trix-content {
         @apply ps-5 space-y-1.5 my-1.5;
     }
 
-    div, blockquote, li {
+    p, div, blockquote, li {
         @apply text-start text-lg lg:text-xl font-normal text-gray-500 dark:text-gray-400;
     }
 
-    div {
+    p, div {
         @apply mt-4;
     }
 
@@ -93,11 +104,15 @@ trix-editor, .trix-content {
     }
 
     pre {
-        @apply w-full p-4 my-4 border border-gray-200 bg-gray-50 rounded-xl dark:border-gray-600 dark:bg-gray-700;
+        @apply w-full p-4 my-4 text-sm border border-gray-200 bg-gray-50 rounded-xl dark:border-gray-600 dark:bg-gray-700 overflow-x-auto;
     }
 
     figcaption {
-        @apply mt-2 text-base lg:text-lg text-center text-gray-500 dark:text-gray-400;
+        @apply mt-2 text-sm lg:text-base text-center text-gray-500 dark:text-gray-400;
+    }
+
+    figure {
+        @apply my-4;
     }
 
     figure > img {
