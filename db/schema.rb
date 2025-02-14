@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_13_165256) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_14_124901) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -65,10 +65,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_165256) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description", null: false
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description_plain_text"
     t.index ["published_at"], name: "index_projects_on_published_at"
   end
 

@@ -3,12 +3,16 @@
     <%= render TendrilTasks::Heading.new(tag: :h2, scheme: :level2) do %>
       <%= link_to @project.title, project_path(@project) %>
     <% end %>
-    <% paragraphize(@project.description.truncate_words(80), delimiter: "\n\n").each do |paragraph| %>
-      <p class="text-start mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-        <%= link_to project_path(@project) do %>
-          <%= paragraph.split("\n").join("<br>").html_safe %>
+
+    <%# Plain text description %>
+    <%= tag.div class: "line-clamp-[12] hyphens-auto mb-8", lang: I18n.locale do %>
+      <% paragraphize(@project.description_plain_text&.truncate_words(100), delimiter: "\n\n").each do |paragraph| %>
+        <%= render TendrilTasks::Paragraph.new(class: "text-start font-normal sm:px-16 xl:px-48") do %>
+          <%= link_to project_path(@project) do %>
+            <%= paragraph.split("\n").join("<br>").html_safe %>
+          <% end %>
         <% end %>
-      </p>
+      <% end %>
     <% end %>
 
     <%= render Modal::ToggleButtonComponent.new(scheme: :none,

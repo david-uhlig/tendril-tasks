@@ -1,10 +1,15 @@
 class Project < ApplicationRecord
+  include RichTextSanitizer
+
   has_many :tasks, dependent: :destroy
   has_and_belongs_to_many :coordinators,
                           class_name: "User",
                           join_table: "project_coordinators",
                           association_foreign_key: "user_id",
                           foreign_key: "project_id"
+
+  has_rich_text :description
+  has_sanitized_plain_text :description_plain_text, :description
 
   validates :title, presence: true
   validates :description, presence: true
