@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  include RichTextSanitizer
+
   belongs_to :project
   has_and_belongs_to_many :coordinators,
                           class_name: "User",
@@ -10,6 +12,7 @@ class Task < ApplicationRecord
   has_many :applicants, through: :task_applications, source: :user
 
   has_rich_text :description
+  has_sanitized_plain_text :description_plain_text, :description
 
   validates :title, presence: true
   validates :description, presence: true
