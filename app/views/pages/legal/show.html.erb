@@ -4,5 +4,5 @@
     <%= breadcrumb.item t("pages.#{@page.slug}.title") %>
   <% end %>
 
-  <%= @page.content.to_s %>
+  <%= render Gustwave::RichText.new(@page.content) %>
 <% end %>
