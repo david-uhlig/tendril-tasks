@@ -15,6 +15,10 @@ class Coordinators::SearchesController < ApplicationController
 
   # Saves the dialog by replacing the coordinator list in the parent form through a turbo_stream request
   def create
-    @coordinators = User.find(params[:coordinator_ids])
+    if params[:coordinator_ids].present?
+      @coordinators = User.find(params[:coordinator_ids])
+    else
+      @coordinators = [ current_user ]
+    end
   end
 end
