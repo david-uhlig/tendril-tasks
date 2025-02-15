@@ -458,3 +458,16 @@ de:
       legal: "Rechtliches"
   notification:
     saved: "Gespeichert"
+  toast_notification:
+    resource:
+      fallback_name: "Eintrag"
+    fallback:
+      success: "Erledigt."
+    create:
+      success: "%{resource} wurde erfolgreich erstellt."
+    update:
+      success: "%{resource} wurde erfolgreich aktualisiert."
+    destroy:
+      success: "%{resource} wurde erfolgreich gelöscht."
+    login_required: "Bitte melde dich zunächst an."
+    access_denied: "Das darfst du nicht!"

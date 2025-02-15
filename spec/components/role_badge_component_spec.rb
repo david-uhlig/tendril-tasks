@@ -16,7 +16,7 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
       user = build_stubbed(:user, role: :editor)
       render_inline(described_class.new(user, id: "role-badge"))
       expect(page).to have_selector("span#role-badge")
-      expect(page).to have_content("Redakteur")
+      expect(page).to have_content("Redaktion")
     end
   end
 

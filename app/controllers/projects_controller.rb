@@ -25,11 +25,14 @@ class ProjectsController < ApplicationController
     @project_form = ProjectForm.new(project_form_params)
 
     if @project_form.save
-      success_msg = "Project successfully created."
+      success_msg = toast_message_for(@project_form.project, :create)
       if @project_form.submit_type == "save_and_new_task"
-        redirect_to new_task_from_preset_path(project_id: @project_form.project.id, coordinator_ids: @project_form.project.coordinator_ids.join("-")), notice: success_msg
+        redirect_to new_task_from_preset_path(
+                      project_id: @project_form.project.id,
+                      coordinator_ids: @project_form.project.coordinator_ids.join("-")),
+                    notice: success_msg
       else
-        redirect_to project_path(@project_form.project), notice: "Project was successfully created."
+        redirect_to project_path(@project_form.project), notice: success_msg
       end
     else
       render :new, status: :unprocessable_entity
@@ -43,17 +46,18 @@ class ProjectsController < ApplicationController
     project_has_changed = @project_form.changed?
 
     if @project_form.save
-      flash[:notice] = "Project #{@project_form.title} was updated." if project_has_changed
-      redirect_to project_path(@project_form.project)
+      update_msg = toast_message_for(@project_form.project, :update) if project_has_changed
+      redirect_to project_path(@project_form.project), notice: update_msg
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    flash[:notice] = "Project #{@project.title} was deleted."
     @project.destroy
-    redirect_to projects_path
+
+    destroy_msg = toast_message_for(@project, :destroy)
+    redirect_to projects_path, notice: destroy_msg
   end
 
   private
@@ -70,12 +74,5 @@ class ProjectsController < ApplicationController
 
   def set_project_form
     @project_form = ProjectForm.new(@project)
-  end
-
-  # TODO replace with pundit
-  def check_permission
-    unless @project.coordinators.include?(current_user)
-      redirect_to projects_path, alert: "Das darfst du nicht."
-    end
   end
 end

@@ -389,3 +389,16 @@ en:
       legal: "Legal"
   notification:
     saved: "Saved"
+  toast_notification:
+    resource:
+      fallback_name: "Item"
+    fallback:
+      success: "Done."
+    create:
+      success: "%{resource} successfully created."
+    update:
+      success: "%{resource} successfully updated."
+    destroy:
+      success: "%{resource} successfully deleted."
+    login_required: "Please log in first."
+    access_denied: "You're not authorized to do that!"

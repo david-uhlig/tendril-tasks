@@ -33,7 +33,7 @@ RSpec.describe "Editor creates new task", type: :system, js: true do
       click_on "Speichern"
 
       expect(page).to have_content("Some lengthy title")
-      expect(page).to have_content("Task was successfully created.")
+      expect(page).to have_content("Aufgabe wurde erfolgreich erstellt.")
     end
 
     it "saves the task with `Speichern und Neu`" do

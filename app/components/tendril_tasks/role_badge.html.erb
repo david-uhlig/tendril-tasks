@@ -1,8 +1,8 @@
 <% if @user.admin? %>
-  <%= render Gustwave::Badge.new("Admin", **@options) %>
+  <%= render Gustwave::Badge.new(t(".role.admin"), **@options) %>
 <% end %>
 <% if @user.editor? %>
-  <%= render Gustwave::Badge.new("Redakteur", **@options) %>
+  <%= render Gustwave::Badge.new(t(".role.editor"), **@options) %>
 <% end %>
 
 <%# TODO add permissions explainer modal for @user.admin? || @user.editor? %>

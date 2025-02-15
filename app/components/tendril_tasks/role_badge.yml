@@ -1,0 +1,9 @@
+en:
+  role:
+    admin: Admin
+    editor: Editor
+
+de:
+  role:
+    admin: Admin
+    editor: Redaktion

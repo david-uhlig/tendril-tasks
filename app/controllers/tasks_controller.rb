@@ -47,7 +47,7 @@ class TasksController < ApplicationController
     @task_form = TaskForm.new(task_form_params)
 
     if @task_form.save
-      success_msg = "Task was successfully created."
+      success_msg = toast_message_for(@task_form.task, :create)
       if @task_form.submit_type == "save_and_new"
         redirect_to new_task_from_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.project.coordinators.join("-")), notice: success_msg
       else
@@ -65,8 +65,8 @@ class TasksController < ApplicationController
     task_has_changed = @task_form.changed?
 
     if @task_form.save
-      flash[:notice] = "Task #{@task_form.title} was updated." if task_has_changed
-      redirect_to task_path(@task_form.task)
+      update_msg = toast_message_for(@task_form.task, :update) if task_has_changed
+      redirect_to task_path(@task_form.task), notice: update_msg
     else
       render :edit, status: :unprocessable_entity
     end
@@ -74,7 +74,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path
+    redirect_to tasks_path, notice: toast_message_for(@task, :destroy)
   end
 
   private

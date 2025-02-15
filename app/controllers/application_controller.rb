@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include ToastNotificationsHelper
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern if Rails.env.production?
   before_action :set_footer
@@ -25,11 +27,11 @@ class ApplicationController < ActionController::Base
     case exception.action
     when :index
       redirect_back_or_to root_path,
-                          notice: "Bitte melde dich zunächst an.",
+                          notice: t("toast_notification.login_required"),
                           status: :found
     when :new, :create
       redirect_to exception.subject || root_path,
-                  notice: "Das darfst du nicht!",
+                  notice: t("toast_notification.access_denied"),
                   status: :found
       nil
     when :show, :edit, :update, :destroy
