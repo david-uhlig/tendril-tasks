@@ -55,7 +55,7 @@ gem "view_component", "~> 3.18"
 gem "cancancan"
 
 # Configuration
-gem "anyway_config", "~> 2.0"
+gem "anyway_config", "~> 2.7"
 gem "dotenv-rails"
 
 # Add support for inline SVGs
