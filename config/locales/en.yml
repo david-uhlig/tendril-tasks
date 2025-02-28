@@ -331,6 +331,8 @@ en:
     index:
       title: "Dashboard"
       create_initiative_button: "Create Initiative"
+      my_applications: "My Applications"
+      applications_placeholder: "This is where the tasks that you have signed up for will be displayed. You haven't applied to any task, yet. Take a look at the tasks overview - maybe there's something exciting for you!"
 
   # ActiveRecord Attributes
   activerecord:

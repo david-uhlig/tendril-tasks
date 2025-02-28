@@ -367,6 +367,8 @@ de:
     index:
       title: "Dashboard"
       create_initiative_button: "Thema anlegen"
+      my_applications: "Meine Meldungen"
+      applications_placeholder: "Hier werden die Aufgaben angezeigt, für die du dich angemeldet hast. Derzeit hast du noch keine Aufgabe übernommen. Schau doch in der Aufgabenübersicht vorbei – vielleicht ist etwas Spannendes für dich dabei!"
 
   activemodel:
     errors:
