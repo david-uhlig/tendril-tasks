@@ -12,10 +12,6 @@ module TendrilTasks
     #   <%= render TendrilTasks::Tasks::Card.new(task) %>
     #
     class Card < TendrilTasks::Component
-      # Available badge schemes.
-      SCHEME_OPTIONS = Gustwave::Badge::SCHEME_OPTIONS
-      SCHEME_SIZE = SCHEME_OPTIONS.size
-
       # Initializes a new Card component.
       #
       # @param task [Task] the task to be displayed
@@ -23,7 +19,6 @@ module TendrilTasks
       def initialize(task, **options)
         @task = task
         @options = build_options(options)
-        @badge_scheme = badge_scheme(task)
       end
 
       # Checks if the task is new.
@@ -41,15 +36,6 @@ module TendrilTasks
       # @return [Hash] the built options
       def build_options(options)
         options
-      end
-
-      # Determines the badge scheme for the initiative deterministically based
-      # on the initiatives' id.
-      #
-      # @param task [Task] the task for which to determine the badge scheme
-      # @return [String] the badge scheme for the task
-      def badge_scheme(task)
-        SCHEME_OPTIONS[task.project.id % SCHEME_SIZE]
       end
     end
   end
