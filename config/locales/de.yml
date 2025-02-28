@@ -53,6 +53,10 @@ de:
     edit: "Bearbeiten"
     create: "Anlegen"
 
+  task_applications:
+    applied_on_date: "Gemeldet am %{date}"
+    withdrawn_on_date: "Zurückgezogen am %{date}"
+
   navigation:
     home: "Start"
 

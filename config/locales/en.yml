@@ -8,6 +8,10 @@ en:
     edit: "Edit"
     create: "Create"
 
+  task_applications:
+    applied_on_date: "Applied on %{date}"
+    withdrawn_on_date: "Withdrawn on %{date}"
+
   navigation:
     home: "Home"
 

@@ -1,8 +1,0 @@
-en:
-  applied_on_date: "Applied on %{date}"
-  withdrawn_on_date: "Withdrawn on %{date}"
-
-
-de:
-  applied_on_date: "Beworben am %{date}"
-  withdrawn_on_date: "Zurückgezogen am %{date}"
