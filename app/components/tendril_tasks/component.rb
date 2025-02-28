@@ -20,5 +20,6 @@ module TendrilTasks
     delegate :current_user, :user_signed_in?, to: :view_context
     delegate :can?, :cannot?, to: :view_context
     delegate :turbo_stream, to: :view_context
+    delegate :optional_link_to_if, to: :view_context
   end
 end
