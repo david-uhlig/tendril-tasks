@@ -19,7 +19,9 @@
   <%= tag.div class: "flex-grow my-2 line-clamp-6 hyphens-auto", lang: I18n.locale do %>
     <% paragraphize(@task.description_plain_text&.truncate_words(50), delimiter: "\n\n").each do |paragraph| %>
       <%= render TendrilTasks::Paragraph.new(class: "lg:text-lg") do %>
-        <%= paragraph.split("\n").join("<br>").html_safe %>
+        <%= link_to task_path(@task) do %>
+          <%= paragraph.split("\n").join("<br>").html_safe %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
