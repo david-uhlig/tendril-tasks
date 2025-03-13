@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
 
   def show
     @tasks = Task.publicly_visible
+                 .where(project: @project)
                  .includes(:coordinators, :project, :applicants)
   end
 
