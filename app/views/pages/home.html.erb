@@ -8,9 +8,11 @@
       highlight: t(".title_highlight")
     ) %>
   <% end %>
-  <%= tag.p t(".hero"),
-              class: "mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
-  %>
+  <% paragraphize(t(".hero")).each do |paragraph| %>
+    <%= render TendrilTasks::Paragraph.new(class: "mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400") do %>
+      <%= paragraph %>
+    <% end %>
+  <% end %>
 
   <% if user_signed_in? %>
     <%# CTA to projects and tasks %>
