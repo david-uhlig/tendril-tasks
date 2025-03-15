@@ -1,17 +1,16 @@
-<button type="button"
-        id="dropdown-status-button-<%= @application.user.id %>"
-        data-dropdown-toggle="dropdown-status-info-<%= @application.user.id %>"
-        class="<%= CLASS_MAPPINGS[@application.status.to_sym] %> focus:ring-4 focus:outline-none focus:ring-slate-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2"
->
-  <%= render ICON_MAPPINGS[@application.status.to_sym] %>
+<%# Dropdown button %>
+<%= button_tag type: "button",
+               id: "dropdown-status-button-#{@application.user.id}",
+               "data-dropdown-toggle": "dropdown-status-info-#{@application.user.id}",
+               class: "#{color_scheme_for(@application.status)} focus:ring-4 focus:outline-none focus:ring-slate-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2" do
+%>
+  <%= render_icon_for(@application.status) %>
   <span class="ms-1 hidden sm:inline-flex"><%= t("activerecord.attributes.task_application.status.#{@application.status}") %></span>
-  <% unless @application.withdrawn? %>
-    <svg class="w-2.5 h-2.5 ms-2 me-1 hidden sm:inline-flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-    </svg>
-  <% end %>
-</button>
+  <%# Arrow down icon %>
+  <%= render Gustwave::Icon.new(:chevron_down, class: "hidden sm:inline-flex me-0") unless @application.withdrawn? %>
+<% end %>
 
+<%# Dropdown options %>
 <% unless @application.withdrawn? %>
   <%= form_with url: task_application_status_path(@application.task, @application.user),
                 method: :patch,
@@ -27,11 +26,11 @@
       %>
     </div>
     <div class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-status-info-<%= @application.user.id %>">
-      <% @statuses.each do |status, id| %>
+      <% @statuses.each do |status, _| %>
         <% next if status == "withdrawn" %>
-        <label class="block w-full text-start px-4 py-2 hover:bg-gray-100">
+        <label class="block w-full text-start px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <span class="inline-flex align-bottom">
-            <%= render ICON_MAPPINGS[status.to_sym] %>
+            <%= render_icon_for(status) %>
           </span>
           <%= t("activerecord.attributes.task_application.status.#{status}") %>
           <%= f.radio_button :status, status, checked: (@application.status == status), data: { action: "change->auto-submit#immediately" }, class: "hidden" %>

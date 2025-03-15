@@ -12,22 +12,22 @@ module TendrilTasks
     #   <%= render TendrilTasks::Tasks::ApplicationStatus.new(application) %>
     #
     class ApplicationStatus < TendrilTasks::Component
-      # Mapping of status to their corresponding SVG icons.
+      # Maps status code to SVG icon identifier.
       ICON_MAPPINGS = {
-        received: Gustwave::Icon.new(:inbox, position: :trailing),
-        under_review: Gustwave::Icon.new(:file_search, position: :trailing),
-        interviewing: Gustwave::Icon.new(:messages, position: :trailing),
-        on_hold: Gustwave::Icon.new(:clock, position: :trailing),
-        accepted: Gustwave::Icon.new(:badge_check, position: :trailing),
-        rejected: Gustwave::Icon.new(:close_circle, position: :trailing),
-        withdrawn: Gustwave::Icon.new(:ban, position: :trailing)
+        received: :inbox,
+        under_review: :file_search,
+        interviewing: :messages,
+        on_hold: :clock,
+        accepted: :badge_check,
+        rejected: :close_circle,
+        withdrawn: :ban
       }.freeze
       ICON_OPTIONS = ICON_MAPPINGS.keys
 
-      # Mapping of status to their corresponding CSS classes.
+      # Maps status code to color scheme.
       CLASS_MAPPINGS = {
         received: "bg-gray-100 text-gray-800",
-        under_review: "bg-blue-100 text-blue-800",
+        under_review: "bg-cyan-100 text-cyan-800",
         interviewing: "bg-blue-100 text-blue-800",
         on_hold: "bg-yellow-100 text-yellow-800",
         accepted: "bg-green-100 text-green-800",
@@ -41,6 +41,17 @@ module TendrilTasks
       def initialize(application)
         @application = application
         @statuses = TaskApplication.statuses
+      end
+
+      private
+
+      def render_icon_for(status)
+        icon = ICON_MAPPINGS[status.to_sym]
+        render Gustwave::Icon.new(icon, position: :standalone)
+      end
+
+      def color_scheme_for(status)
+        CLASS_MAPPINGS[status.to_sym]
       end
     end
   end
