@@ -4,6 +4,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     @user = User.from_omniauth(auth)
 
     if @user.persisted?
+      @user.remember_me = true
       sign_in @user, event: :authentication
       back_or_root = session.delete(:redirect_back_to) || root_path
       redirect_to back_or_root
