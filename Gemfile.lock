@@ -258,6 +258,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.4-x86_64-linux-musl)
       racc (~> 1.4)
+    noticed (2.6.0)
+      rails (>= 6.1.0)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
@@ -542,6 +544,7 @@ DEPENDENCIES
   inline_svg
   jbuilder
   kamal
+  noticed (~> 2.6)
   omniauth
   omniauth-rails_csrf_protection
   omniauth-rocketchat
