@@ -37,9 +37,11 @@ env:
     - ROCKET_CHAT_CLIENT_SECRET
   clear:
     # Configure Tendril Tasks --------------------------------------------------
-    # Display a text badge right to the brand logo in the navigation bar.
-    # Defaults to "Tendril Tasks". You can set it to an empty string to hide it.
-    # APP_BRAND_BADGE: "Tendril Tasks"
+    # Application host, e.g. "example.com".
+    # Used to configure:
+    # - `Rails.application.routes.default_url_options[:host]`
+    # - `Rails.application.action_mailer.default_url_options[:host]`
+    # APP_HOST: ""
 
     # Default HTML title for the application. Defaults to a localized version of
     # this example.
