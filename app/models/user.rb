@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   enum :role, { user: 0, editor: 1, admin: 99 }
 
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,

@@ -1,12 +1,4 @@
 class Tasks::ApplicationsController < ApplicationController
-  # Amount of time that must elapse after the application is submitted before
-  # a notification is sent. Provides applicants an opportunity to review, edit,
-  # or withdraw the application before the notification is dispatched to
-  # coordinators.
-  NOTIFICATION_DELAY = 30.minutes
-  # Amount of time in that the application is editable by the applicant.
-  GRACE_PERIOD = NOTIFICATION_DELAY
-
   before_action :set_task, only: [ :create, :destroy, :update ]
   before_action :set_origin, only: [ :create, :destroy ]
 
@@ -28,7 +20,12 @@ class Tasks::ApplicationsController < ApplicationController
       )
       @application.save!
     end
-    # TODO generate notification
+
+    if @application.persisted?
+      NewTaskApplicationNotifier
+        .with(record: @application, delay: TaskApplication::NOTIFICATION_DELAY)
+        .deliver
+    end
   end
 
   def update
@@ -54,11 +51,13 @@ class Tasks::ApplicationsController < ApplicationController
       user_id: current_user.id
     )
 
+    # Within the grace period, just delete the application. Coordinators have
     if @application.editable?
       @application.destroy!
     else
       @application.withdraw
       @application.save!
+      # TODO send notification
     end
   end
 
