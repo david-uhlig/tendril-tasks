@@ -33,8 +33,17 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    # Your Rocket Chat server's third-party login credentials. For instructions
+    # on how to obtain these, please refer to:
+    # https://github.com/david-uhlig/omniauth-rocketchat?tab=readme-ov-file#rocket-chat-setup
     - ROCKET_CHAT_CLIENT_ID
     - ROCKET_CHAT_CLIENT_SECRET
+    # (Optional)
+    # Rocket Chat API authentication token and user ID for the user that will
+    # send the notifications. You can obtain a PAT (Personal Access Token) for
+    # this instance by going to `https://example.com/account/tokens`
+    # - ROCKET_CHAT_NOTIFIER_USER_ID
+    # - ROCKET_CHAT_NOTIFIER_AUTH_TOKEN
   clear:
     # Configure Tendril Tasks --------------------------------------------------
     # Application host, e.g. "example.com".
@@ -76,6 +85,16 @@ env:
     # e.g. "Tendril Chat"?
     # Keep it reasonably short, as it appears on buttons.
     # ROCKET_CHAT_BRANDING: "Rocket.Chat"
+
+    # Configure Rocket.Chat Notifications (Optional) -------------------------------
+    # Send notifications to Rocket.Chat users. Notifications will only be sent
+    # if you specify `ROCKET_CHAT_NOTIFIER_HOST`, `ROCKET_CHAT_NOTIFIER_USER_ID`
+    # and `ROCKET_CHAT_NOTIFIER_AUTH_TOKEN`.
+
+    # Rocket Chat server URL (aka workspace), e.g. "https://chat.example.com"
+    # Make sure you also pass in `ROCKET_CHAT_NOTIFIER_USER_ID` and
+    # `ROCKET_CHAT_NOTIFIER_AUTH_TOKEN` through `.kamal/secrets`.
+    # ROCKET_CHAT_NOTIFIER_HOST = "https://chat.example.com"
 
     # Configure Rails ----------------------------------------------------------
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
