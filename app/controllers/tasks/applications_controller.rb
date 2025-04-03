@@ -51,13 +51,17 @@ class Tasks::ApplicationsController < ApplicationController
       user_id: current_user.id
     )
 
-    # Within the grace period, just delete the application. Coordinators have
+    # Within the grace period, just delete the application. Coordinators haven't
+    # been notified yet.
     if @application.editable?
       @application.destroy!
+    # After the grace period, set the application to withdrawn. The application
+    # will be still shown to the coordinators with the withdrawn status, until
+    # the user reapplies.
     else
       @application.withdraw
       @application.save!
-      # TODO send notification
+      WithdrawnTaskApplicationNotifier.with(record: @application).deliver
     end
   end
 

@@ -412,6 +412,8 @@ en:
   notifiers:
     new_task_application_notifier:
       notification:
-        markdown_message: "New application from @%{applicant} for [%{initiative_title}](%{initiative_url}) > [%{task_title}](%{task_url})."
         markdown_message: "👋🏻 *Application received*\n\n@%{applicant} has applied for [%{task_title}](%{task_url}) on the initiative [%{initiative_title}](%{initiative_url})"
         markdown_comment: " with the following message:\n\n%{comment}"
+    withdrawn_task_application_notifier:
+      notification:
+        markdown_message: "❌ *Application withdrawn*\n\n@%{applicant} withdrew their application for [%{task_title}](%{task_url}) on the initiative [%{initiative_title}](%{initiative_url})"

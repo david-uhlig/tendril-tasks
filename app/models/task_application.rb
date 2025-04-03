@@ -43,8 +43,8 @@ class TaskApplication < ApplicationRecord
   #   after the `NOTIFICATION_DELAY` passes.
   # - No notification is sent when the user updates or withdraws the application
   #   within the grace period.
-  # - TODO: Coordinators are notified when the application is withdrawn after
-  #   the grace period has passed.
+  # - Coordinators receive a notification when the user withdraws the
+  #   application after the grace period passes.
   has_many :noticed_events, as: :record, dependent: :destroy, class_name: "Noticed::Event"
   has_many :notifications, through: :noticed_events, class_name: "Noticed::Notification"
 

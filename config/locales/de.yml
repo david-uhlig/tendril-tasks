@@ -482,6 +482,8 @@ de:
   notifiers:
     new_task_application_notifier:
       notification:
-        markdown_message: "Neue Meldung von @%{applicant} für [%{initiative_title}](%{initiative_url}) > [%{task_title}](%{task_url})."
         markdown_message: "👋🏻 *Meldung eingegangen*\n\n@%{applicant} hat sich gemeldet für [%{task_title}](%{task_url}) beim Thema [%{initiative_title}](%{initiative_url})"
         markdown_comment: " mit der Nachricht:\n\n%{comment}"
+    withdrawn_task_application_notifier:
+      notification:
+        markdown_message: "❌ *Meldung zurückgezogen*\n\n@%{applicant} hat die Meldung für [%{task_title}](%{task_url}) beim Thema [%{initiative_title}](%{initiative_url}) zurückgezogen."
