@@ -35,6 +35,8 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
+        env:
+          ANYWAY_SUPPRESS_VALIDATIONS: true
         run: bin/importmap audit
 
   lint:
