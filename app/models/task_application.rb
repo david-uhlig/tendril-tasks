@@ -6,9 +6,6 @@
 # The application can be edited by the user until the grace period has passed.
 # After that, the application is set to `status: :withdrawn` and is no longer
 # editable. The application can be at any time.
-#
-# TODO: Send a delayed notification when the application is submitted
-# TODO: Send a notification when the application is withdrawn after the grace period
 class TaskApplication < ApplicationRecord
   # Amount of time in that the application is editable by the applicant.
   # Within this timeframe the application will be deleted if the user withdraws,
@@ -21,7 +18,7 @@ class TaskApplication < ApplicationRecord
   # or withdraw the application before the notification is dispatched to
   # coordinators. Should be equal to or greater than the grace period in most
   # cases.
-  NOTIFICATION_DELAY = GRACE_PERIOD + 5.minutes
+  NOTIFICATION_DELAY = GRACE_PERIOD
 
   belongs_to :task
   belongs_to :user
@@ -51,6 +48,9 @@ class TaskApplication < ApplicationRecord
   validates :task, presence: true, uniqueness: { scope: :user }
   validates :user, presence: true
 
+  after_create_commit :notify_coordinators_about_new_application
+  after_update_commit :notify_coordinators_about_withdrawn_application, if: -> { withdrawn? }
+
   def withdraw
     self.withdrawn_at = Time.zone.now
     self.status = :withdrawn
@@ -63,5 +63,19 @@ class TaskApplication < ApplicationRecord
 
   def coordinators
     @coordinators ||= task.coordinators
+  end
+
+  private
+
+  def notify_coordinators_about_new_application
+    NewTaskApplicationNotifier
+      .with(record: self, delay: NOTIFICATION_DELAY)
+      .deliver
+  end
+
+  def notify_coordinators_about_withdrawn_application
+    WithdrawnTaskApplicationNotifier
+      .with(record: self)
+      .deliver
   end
 end

@@ -19,12 +19,6 @@ class Tasks::ApplicationsController < ApplicationController
       )
       @application.save!
     end
-
-    if @application.persisted?
-      NewTaskApplicationNotifier
-        .with(record: @application, delay: TaskApplication::NOTIFICATION_DELAY)
-        .deliver
-    end
   end
 
   def update
@@ -60,7 +54,6 @@ class Tasks::ApplicationsController < ApplicationController
     else
       @application.withdraw
       @application.save!
-      WithdrawnTaskApplicationNotifier.with(record: @application).deliver
     end
   end
 
