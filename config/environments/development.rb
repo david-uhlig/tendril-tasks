@@ -10,6 +10,8 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
+  config.mission_control.jobs.http_basic_auth_enabled = false
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Make code changes take effect immediately without server restart.
