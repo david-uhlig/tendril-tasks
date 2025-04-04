@@ -1,6 +1,5 @@
 class Tasks::ApplicationsController < ApplicationController
   before_action :set_task, only: [ :create, :destroy, :update ]
-  before_action :set_origin, only: [ :create, :destroy ]
 
   def create
     authorize! :read, @task
@@ -69,14 +68,5 @@ class Tasks::ApplicationsController < ApplicationController
 
   def set_task
     @task = Task.find(params[:task_id])
-  end
-
-  def set_origin
-    case
-    when request.referer.include?("tasks/#{@task.id}")
-      @origin = :show
-    else
-      @origin = :index
-    end
   end
 end
