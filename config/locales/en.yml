@@ -288,6 +288,12 @@ en:
         title: "Tasks"
       applications:
         title: "Applications"
+    monitoring:
+      title: "Monitoring"
+      jobs:
+        title: "Background Jobs"
+        description: "Inspect job queues and jobs currently waiting. Inspect, retry or discard failed jobs."
+        view: "Show"
 
 
   # Users

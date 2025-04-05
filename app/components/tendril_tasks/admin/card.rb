@@ -9,6 +9,9 @@ module TendrilTasks
       style :hyphens,
             "hyphens-auto"
 
+      style :button,
+            "w-full justify-center"
+
       renders_one :heading_slot, ->(text = nil, **options, &block) do
         options.symbolize_keys!
         options[:tag] ||= :h2
@@ -35,9 +38,19 @@ module TendrilTasks
       end
       alias paragraph with_paragraph
 
-      def initialize(href:)
-        @href = href
+      renders_many :buttons, ->(href:, **options, &block) do
+        options.symbolize_keys!
+        options[:href] = href
+        options[:tag] ||= :a
+        options[:size] ||= :lg
+        options[:class] = styles(button: true,
+                                 custom: options[:class])
+
+        Gustwave::Button.new(**options) do
+          capture(&block)
+        end
       end
+      alias button with_button
     end
   end
 end

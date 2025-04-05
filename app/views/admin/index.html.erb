@@ -9,6 +9,7 @@
                .with_content(t("admin.title"))
   %>
 
+  <%# Statistics %>
   <%= render TendrilTasks::Heading
                .new(tag: :h2, scheme: :level3)
                .with_content(t("admin.statistics.title")) %>
@@ -37,39 +38,66 @@
 
   <%= render Gustwave::HorizontalLine.new %>
 
+  <%# General Settings %>
   <%= render TendrilTasks::Heading
                .new(tag: :h2)
                .with_content(t("admin.settings.title")) %>
 
   <ol class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <%= render TendrilTasks::Admin::Card
-                 .new(href: admin_users_roles_path) do |card|
-    %>
+    <%= render TendrilTasks::Admin::Card.new do |card| %>
       <% card.heading t("admin.users.roles.title") %>
       <% card.paragraph do %>
         <%= t("admin.users.roles.description") %>
       <% end %>
+      <% card.button href: admin_users_roles_path do %>
+        <%= t("forms.edit") %>
+      <% end %>
     <% end %>
-    <%= render TendrilTasks::Admin::Card
-                 .new(href: admin_legal_index_path) do |card|
-    %>
+    <%= render TendrilTasks::Admin::Card.new do |card| %>
       <% card.heading t("admin.legal.title") %>
       <% card.paragraph do %>
         <%= t("admin.legal.description") %>
       <% end %>
+      <% card.button href: admin_legal_index_path do %>
+        <%= t("forms.edit") %>
+      <% end %>
     <% end %>
-    <%= render TendrilTasks::Admin::Card
-                 .new(href: edit_admin_brand_path) do |card| %>
+    <%= render TendrilTasks::Admin::Card.new do |card| %>
       <% card.heading t("admin.brand.title") %>
       <% card.paragraph do %>
         <%= t("admin.brand.description") %>
       <% end %>
+      <% card.button href: edit_admin_brand_path do %>
+        <%= t("forms.edit") %>
+      <% end %>
     <% end %>
-    <%= render TendrilTasks::Admin::Card
-                 .new(href: edit_admin_footer_url) do |card| %>
+    <%= render TendrilTasks::Admin::Card.new do |card| %>
       <% card.heading t("admin.footer.title") %>
       <% card.paragraph do %>
         <%= t("admin.footer.description") %>
+      <% end %>
+      <% card.button href: edit_admin_footer_url do %>
+        <%= t("forms.edit") %>
+      <% end %>
+    <% end %>
+  </ol>
+
+  <%= render Gustwave::HorizontalLine.new %>
+
+  <%# Monitoring %>
+  <%= render TendrilTasks::Heading
+               .new(tag: :h2)
+               .with_content(t("admin.monitoring.title")) %>
+
+  <ol class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <%= render TendrilTasks::Admin::Card.new do |card|
+    %>
+      <% card.heading t("admin.monitoring.jobs.title") %>
+      <% card.paragraph do %>
+        <%= t("admin.monitoring.jobs.description") %>
+      <% end %>
+      <% card.button href: mission_control_jobs_path do %>
+        <%= t("admin.monitoring.jobs.view") %>
       <% end %>
     <% end %>
   </ol>

@@ -326,6 +326,12 @@ de:
         title: "Aufgaben"
       applications:
         title: "Meldungen"
+    monitoring:
+      title: "Systemüberwachung"
+      jobs:
+        title: "Hintergrundprozesse"
+        description: "Überprüfe die Warteschlange und derzeit wartende Hintergrundprozesse. Prüfe fehlgeschlagene Prozesse, starte sie neu oder verwerfe sie."
+        view: "Ansehen"
 
 
   users:

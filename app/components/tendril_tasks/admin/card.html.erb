@@ -9,13 +9,8 @@
       <%= content %>
     </div>
     <div class="grid grid-cols-1">
-      <%= render Gustwave::Button.new(
-        tag: :a,
-        href: @href,
-        size: :lg,
-        class: "w-full justify-center") do |button|
-      %>
-        <span>Bearbeiten</span>
+      <% buttons.each do |button_slot| %>
+        <%= button_slot %>
       <% end %>
     </div>
   </div>

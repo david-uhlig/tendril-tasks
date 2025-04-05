@@ -70,6 +70,6 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   authenticate :user, ->(user) { user.admin? } do
-    mount MissionControl::Jobs::Engine, at: "/admin/job-dashboard"
+    mount MissionControl::Jobs::Engine, at: "/admin/monitoring/jobs"
   end
 end
