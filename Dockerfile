@@ -42,8 +42,6 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
-RUN echo $(git rev-parse --short HEAD) > COMMIT_HASH
-
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 

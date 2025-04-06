@@ -89,7 +89,11 @@
     <%= t("admin.monitoring.title") %>
     <%= render Gustwave::Badge.new(scheme: :dark, size: :md, pill: true, class: "align-top") do |badge| %>
       <%= link_to TendrilTasks::VERSION, "https://github.com/david-uhlig/tendril-tasks/releases" %>
-      <span class="opacity-70 ms-0.5">(<%= link_to GIT_COMMIT, "https://github.com/david-uhlig/tendril-tasks/commit/#{GIT_COMMIT}" %>)</span>
+      <span class="opacity-70 ms-0.5">
+        <% if AppConfig.git_commit.present? %>
+          (<%= link_to AppConfig.git_commit, "https://github.com/david-uhlig/tendril-tasks/commit/#{AppConfig.git_commit}" %>)
+        <% end %>
+      </span>
     <% end %>
   <% end %>
 

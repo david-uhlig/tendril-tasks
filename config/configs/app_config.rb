@@ -3,6 +3,7 @@
 class AppConfig < BaseConfig
   config_name :app
   attr_config :host,
+              :git_commit,
               port: 3000,
               title: I18n.t("layouts.application.application_title"),
               time_zone: "UTC",

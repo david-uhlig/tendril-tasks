@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Fix git commit hash not showing in Kamal deployments
 * Fix Dockerfile not building due to missing `libyaml-dev` dependency
 
 ## 0.2.4

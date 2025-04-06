@@ -44,6 +44,9 @@ env:
     # this instance by going to `https://example.com/account/tokens`
     # - ROCKET_CHAT_NOTIFIER_USER_ID
     # - ROCKET_CHAT_NOTIFIER_AUTH_TOKEN
+    # (Optional)
+    # Displays the git commit hash on the admin panel
+    - APP_GIT_COMMIT
   clear:
     # Configure Tendril Tasks --------------------------------------------------
     # Application host, e.g. "example.com".
