@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Fix footer caching
+
 ## 0.2.5
 
 * Fix git commit hash not showing in Kamal deployments
