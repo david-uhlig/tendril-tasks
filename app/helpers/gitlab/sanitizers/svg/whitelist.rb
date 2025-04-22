@@ -2,11 +2,13 @@
 
 # Original Source: https://gitlab.com/gitlab-org/gitlab-foss/-/blob/a650a676a3f20c5b5b80b7eca25f028487921beb/lib/gitlab/sanitizers/svg/whitelist.rb
 #
-# no modifications made
+# No modifications made.
 #
 # Generated from:
 # SVG element list: https://www.w3.org/TR/SVG/eltindex.html
 # SVG Attribute list: https://www.w3.org/TR/SVG/attindex.html
+#
+# :nocov:
 module Gitlab
   module Sanitizers
     module Svg

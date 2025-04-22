@@ -23,6 +23,8 @@ module TailwindHelper
   # @param prefix [String, nil] An optional prefix to be added to each class name.
   # @param postfix [String, nil] An optional postfix to be added to each class name.
   # @return [String] The processed class names as a single string.
+  #
+  # :nocov:
   def construct_class_names(classes, prefix: nil, postfix: nil)
     error_msg = <<~MSG
       This method cannot be used in production. Please do not use this method to

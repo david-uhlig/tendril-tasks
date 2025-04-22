@@ -2,7 +2,9 @@
 
 # Original source: https://gitlab.com/gitlab-org/gitlab-foss/-/blob/a650a676a3f20c5b5b80b7eca25f028487921beb/lib/gitlab/sanitizers/svg.rb
 #
-# no modifications made
+# No modifications made.
+#
+# :nocov:
 module Gitlab
   module Sanitizers
     module Svg
