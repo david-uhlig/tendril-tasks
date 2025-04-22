@@ -1,6 +1,9 @@
 ## Unreleased
 
 * Fix footer caching
+* Add general-purpose avatar components
+* Add application-specific AvatarGroup component
+* Extend TendrilTasks::Avatar with collection parameter
 
 ## 0.2.5
 
