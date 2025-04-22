@@ -1,6 +1,38 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Use Avatar to render a user's avatar image.
+  #
+  # The avatar can be either passed in with the +src+ attribute or in a block.
+  # If both are present, the +src+ attribute takes precedence. The block is
+  # wrapped in a +div+ element to provide consistent styling.
+  #
+  # === Basic Usage
+  #
+  #  <%= render Gustwave::Avatar.new(src: "https://example.com/avatar.png") %>
+  #
+  # === Passing in a Block
+  #
+  #  <%= render Gustwave::Avatar.new do %>
+  #    <img src="https://example.com/avatar.png" alt="Avatar" />
+  #  <% end %>
+  #
+  # You can customize the avatar's appearance using the +scheme+, +size+ and
+  # +border+ options. The +scheme+ option determines the avatar's shape, the
+  # +size+ option determines the avatar's size, and the +border+ option
+  # determines whether the avatar has a border or not. The +border+ is
+  # automatically scaled based on the +size+ option.
+  #
+  # @param src [String] The URL of the avatar image.
+  # @param alt [String] The alt text for the avatar image.
+  # @param scheme [Symbol] The scheme of the avatar, one of :round, :square.
+  # @param size [Symbol] The size of the avatar, one of :xs, :sm, :md, :lg, :xl, :2xl, :3xl, :4xl.
+  # @param border [Boolean] Whether the avatar should have a border.
+  # @param options [Hash] HTML attributes passed to the img element.
+  #
+  # @see Gustwave::AvatarGroup
+  # @see Gustwave::AvatarText
+  # @see Gustwave::AvatarPlaceholder
   class Avatar < Gustwave::Component
     style :scheme,
           default: :round,
@@ -40,29 +72,37 @@ module Gustwave
             "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"
           }
 
-    def initialize(src:,
+    def initialize(src: nil,
                    alt: nil,
-                   scheme: style_variant_default(:scheme),
-                   size: style_variant_default(:size),
+                   scheme: :round,
+                   size: :md,
                    border: false,
                    **options)
-      @src = src
-
       options.deep_symbolize_keys!
-      layers = {}
-      layers[:scheme] = scheme
-      layers[:size] = size
-      layers[:border] = size if border
-      layers[:custom] = options.delete(:class)
 
-      options[:alt] ||= alt
-      options[:class] = styles(**layers)
-      options[:role] ||= "img"
+      config = {
+        scheme: scheme,
+        size: size,
+        border: (size if border),
+        custom: options.delete(:class)
+      }.compact_blank
+
+      if src.present?
+        options[:alt] ||= alt
+        options[:role] ||= "img"
+      end
+      options[:class] = styles(**config)
+
+      @src = src
       @options = options
     end
 
     def call
-      image_tag(@src, **@options)
+      src.present? ? image_tag(src, **options) : content_tag(:div, **options) { content }
     end
+
+    private
+
+    attr_reader :src, :options
   end
 end
