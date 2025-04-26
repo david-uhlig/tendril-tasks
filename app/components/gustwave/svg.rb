@@ -12,6 +12,7 @@ module Gustwave
     end
 
     private
+    attr_reader :options
 
     def processed_svg
       @svg ||= process_from_content || process_from_source
@@ -20,20 +21,17 @@ module Gustwave
     def process_from_content
       return unless content.present?
 
-      options = @options.deep_stringify_keys
-
       svg_html = content
       doc = Nokogiri::HTML::DocumentFragment.parse(svg_html)
       svg = doc.at_css("svg")
-      options.each do |key, value|
+      options.deep_stringify_keys.each do |key, value|
         svg[key] = value
       end
       doc.to_html.html_safe
     end
 
     def process_from_source
-      options = @options.deep_symbolize_keys
-      inline_svg_tag(@source, options)
+      inline_svg_tag(@source, options.deep_symbolize_keys)
     end
   end
 end
