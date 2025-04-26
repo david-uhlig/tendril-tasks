@@ -10,6 +10,19 @@ module Gustwave
     SVG_STROKE_WIDTH = 1.5
     DEFAULT_STROKE_WIDTH = SVG_STROKE_WIDTH
 
+    style :stroke_width,
+          default: "1.5",
+          states: {
+            "0": "*:stroke-0",
+            "0.5": "*:stroke-[0.5px]",
+            "1": "*:stroke-1",
+            "1.5": "",
+            "2": "*:stroke-2",
+            "2.5": "*:stroke-[2.5px]",
+            "3": "*:stroke-[3px]",
+            "4": "*:stroke-[4px]"
+          }
+
     style :scheme,
           default: :none,
           states: {
@@ -60,13 +73,13 @@ module Gustwave
                    **options)
       @name = name.to_s.gsub("_", "-")
       @theme = fetch_or_fallback(ICON_THEME_OPTIONS, theme, DEFAULT_ICON_THEME)
-      @stroke_width = stroke_width if @theme == :outline && stroke_width != SVG_STROKE_WIDTH
 
       options.stringify_keys!
       layers = {}
       layers[:scheme] = scheme
       layers[:size] = size
       layers[:position] = position
+      layers[:stroke_width] = stroke_width.to_s
       layers[:custom] = options.delete("class")
       options["class"] = styles(**layers)
       @options = options
@@ -77,13 +90,14 @@ module Gustwave
     end
 
     private
+    attr_reader :options, :theme, :name
 
     def svg_component
-      @svg_component ||= Gustwave::Svg.new(icon_path, **@options)
+      @svg_component ||= Gustwave::Svg.new(icon_path, **options)
     end
 
     def icon_path
-      File.join(ICON_PATH, @theme.to_s, "#{@name}.svg")
+      File.join(ICON_PATH, theme.to_s, "#{name}.svg")
     end
   end
 end
