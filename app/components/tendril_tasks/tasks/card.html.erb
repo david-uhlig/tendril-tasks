@@ -1,12 +1,7 @@
 <section class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col" id="task-card-<%= @task.id %>">
   <div class="inline text-left mb-2">
     <%= render TendrilTasks::ProjectBadge.new(@task.project) %>
-    <%= render Gustwave::Badge.new(t("badges.new"),
-                                   scheme: :green,
-                                   pill: true,
-                                   border: true,
-                                   class: "opacity-80") if is_new?
-    %>
+    <%= render TendrilTasks::NewItemBadge.new if is_new? %>
   </div>
 
   <%= link_to task_path(@task) do %>

@@ -15,12 +15,7 @@
           <%= @application.user.name %>
         <% end %>
         <%# New application badge %>
-        <%= render Gustwave::Badge.new(t("badges.new"),
-                                       scheme: :green,
-                                       pill: true,
-                                       border: true,
-                                       class: "ms-1 align-text-top opacity-80") if is_new?
-        %>
+        <%= render TendrilTasks::NewItemBadge.new(class: "ms-1 align-text-top") if is_new? %>
       <% end %>
       <%# Submission date %>
       <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
