@@ -7,6 +7,40 @@ module Gustwave
     include Gustwave::Themeable
     include TailwindHelper
 
+    # Returns safe joined slots and content.
+    #
+    # @param slots [Array<Object>] slots to render
+    # @param append_content [Boolean] whether to append the component's content (block) to the end of the slots. Defaults to true. Customize where and if the content block appears by passing it in the +slots+ array and setting +append_content+ to false.
+    # @return [String] the safe joined slots and content (block)
+    def slots_and_content(*slots, append_content: true)
+      slots = slots.append(content) if append_content
+      safe_join(slots.compact)
+    end
+
+    # Returns the configured HTML attributes for the component.
+    #
+    # Merges +overwrite_attrs+ into +default_attrs+ so that +overwrite_attrs+ take
+    # precedent. Exception: If the +class+ key is present in both hashes, the
+    # contents are fused together semantically with TailwindMerge.
+    #
+    # @param overwrite_attrs [Hash] HTML attributes to be added or overridden.
+    # @param overwrite_class_attr [Boolean] Whether to overwrite the CSS classes or merge them semantically. When +false+, the CSS classes of both hashes are fused together with TailwindMerge. Otherwise, the default Ruby merge strategy applies.
+    # @param default_attrs [Hash] Default HTML attribute configuration for the component.
+    # @return [Hash] The configured HTML default_attrs.
+    def configure_html_attributes(overwrite_attrs = {}, overwrite_class_attr: false, **default_attrs)
+      return default_attrs if overwrite_attrs.blank?
+
+      overwrite_attrs = overwrite_attrs.deep_symbolize_keys
+      if !overwrite_class_attr && overwrite_attrs.dig(:class).present?
+        overwrite_attrs[:class] = styles(
+          custom_attribute_classes: default_attrs.dig(:class),
+          custom_override_classes: overwrite_attrs.dig(:class)
+        )
+      end
+
+      default_attrs.merge(overwrite_attrs)
+    end
+
     def normalize_keys(options)
       normalized_options = {}
 
