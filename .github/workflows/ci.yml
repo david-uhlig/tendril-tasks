@@ -4,6 +4,12 @@ on:
   pull_request:
   push:
 
+permissions:
+  contents: read
+  actions: read
+  packages: read
+  id-token: write
+
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
