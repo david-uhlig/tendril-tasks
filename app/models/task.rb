@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
   include RichTextSanitizer
 
+  NEW_TASK_THRESHOLD = 2.weeks
+
   belongs_to :project
   has_and_belongs_to_many :coordinators,
                           class_name: "User",
@@ -34,6 +36,11 @@ class Task < ApplicationRecord
   scope :orphaned, -> {
     left_outer_joins(:coordinators).where(task_coordinators: { user_id: nil }).distinct
   }
+
+  # Returns true if the task is considered as new
+  def new?
+    created_at > NEW_TASK_THRESHOLD.ago
+  end
 
   # Returns true if the task has no coordinators
   def orphaned?
