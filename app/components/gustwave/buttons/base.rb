@@ -10,7 +10,7 @@ module Gustwave
       TYPE_OPTIONS = [ :button, :reset, :submit ].freeze
 
       style :base,
-            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
+            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed gap-1.5"
 
       # General appearance of the buttons
       #
@@ -21,10 +21,8 @@ module Gustwave
       #         default: :red,
       #         states: {
       #           red: "bg-red-500 hover:bg-red-600 focus:ring-red-300",
-      #         green: "bg-green-500 hover:bg-green-600 focus:ring-green-300"
+      #           green: "bg-green-500 hover:bg-green-600 focus:ring-green-300"
       #         }
-      #   DEFAULT_SCHEME = default_layer_state(:scheme)
-      #
       style :scheme,
             default: :base,
             states: {
@@ -41,6 +39,18 @@ module Gustwave
               md: "px-5 py-2.5 text-sm font-medium",
               lg: "px-5 py-3 text-base font-medium",
               xl: "px-6 py-3.5 text-base font-medium"
+            }
+
+      # Render a square button when no text or content block was given
+      style :size_overwrite_if_visual_only,
+            default: default_layer_state(:size),
+            states: {
+              none: "",
+              xs: "p-2",
+              sm: "p-2",
+              md: "p-2.5",
+              lg: "p-3",
+              xl: "p-3.5"
             }
 
       style :pill,
@@ -64,46 +74,42 @@ module Gustwave
               xl: "h-6 w-auto"
             }
 
-      # Renders an image or visual element to appear to the left of the button text.
-      # This is typically used for icons or decorative visuals accompanying the button label.
+      # Renders a visual element to appear to the left of the button text.
       #
-      # @param src [String] The source URL or path to the image file to display.
-      # @param alt [String, nil] The alternative text for the image, useful for accessibility.
-      #   If not provided, the image will have no `alt` text.
-      # @param classes [String] A string of CSS classes for controlling the image size and appearance.
-      #   Defaults to "w-5 h-5 me-2", which applies width and height of 5 units and a margin-end of 2 units
-      #   (based on Tailwind CSS utility classes).
+      # Typically used for icons or decorative visuals going with the button
+      # label.
       #
-      # @example Basic usage
-      #   render(ButtonComponent.new) do |button|
-      #     button.leading_visual src: "icon.svg", alt: "Icon description"
+      # +aria-hidden="true"+ is automatically applied to hide the image from
+      # screen readers, as it is usually decorative and doesn't convey critical
+      # information.
+      #
+      # === Basic usage
+      #   render Gustwave::Buttons::Base.new do |button|
+      #     button.leading_image src: "icon.svg", alt: "Icon description"
       #     "Submit"
       #   end
       #
-      # @example Custom classes
-      #   render(ButtonComponent.new) do |button|
-      #     button.leading_visual src: "icon.svg", alt: "Icon description", classes: "w-10 h-10 me-4"
+      # === With custom options
+      #   render Gustwave::Buttons::Base.new do |button|
+      #     button.leading_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
       #     "Submit"
       #   end
-      #
-      # @note The `aria-hidden="true"` attribute is automatically applied to hide the image from screen readers,
-      #   as it is usually decorative and doesn't convey critical information.
-      #
       renders_one :leading_visual, types: {
         icon: ->(name, theme: :outline, **options) {
-          options = build_visual_options(position: :leading, **options)
-          Gustwave::Icon.new(name,
-                             theme: theme,
-                             position: :leading,
-                             **options)
+          config = configure_visual_html_attributes(
+            options,
+            theme:,
+            position: :standalone,
+          )
+          Gustwave::Icon.new(name, **config)
         },
         image: ->(src, **options) {
-          options = build_visual_options(position: :leading, **options)
-          image_tag src, **options
+          config = configure_visual_html_attributes(options)
+          image_tag src, **config
         },
         svg: ->(src = nil, **options, &block) {
-          options = build_visual_options(position: :leading, **options)
-          Gustwave::Svg.new(src, **options, &block)
+          config = configure_visual_html_attributes(options)
+          Gustwave::Svg.new(src, **config, &block)
         }
       }
       alias leading_icon with_leading_visual_icon
@@ -112,18 +118,20 @@ module Gustwave
 
       renders_one :trailing_visual, types: {
         icon: ->(name, theme: :outline, **options) {
-          options = build_visual_options(position: :trailing, **options)
-          Gustwave::Icon.new(name,
-                             theme: theme,
-                             **options)
+          config = configure_visual_html_attributes(
+            options,
+            theme:,
+            position: :standalone
+          )
+          Gustwave::Icon.new(name, **config)
         },
         image: ->(src, **options) {
-          options = build_visual_options(position: :trailing, **options)
-          image_tag src, options
+          config = configure_visual_html_attributes(**options)
+          image_tag src, config
         },
         svg: ->(src = nil, **options, &block) {
-          options = build_visual_options(position: :trailing, **options)
-          Gustwave::Svg.new(src, **options, &block)
+          config = configure_visual_html_attributes(**options)
+          Gustwave::Svg.new(src, **config, &block)
         }
       }
       alias trailing_icon with_trailing_visual_icon
@@ -138,57 +146,61 @@ module Gustwave
                      pill: false,
                      **options)
         @text = text
-        @tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
-        @size = size
-
-        options.symbolize_keys!
-        layers = {}
-        layers[:base] = true unless scheme == :none
-        layers[:scheme] = scheme
-        layers[:size] = @size
-        layers[:pill] = lightswitch_cast(pill)
-        layers[:custom] = options.delete(:class)
-
-        options[:class] = styles(**layers)
-        options[:type] = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if @tag == :button
+        @size = size # Required for leading/trailing slots
+        @scheme = scheme
+        @html_tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
         @options = options
+
+        @kwargs = {
+          type: (fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if @html_tag == :button),
+          scheme:,
+          size:,
+          pill: lightswitch_cast(pill)
+        }
+      end
+
+      def before_render
+        # Must build config here to know whether block content was passed
+        @config = configure_html_attributes(
+          @options,
+          type: @kwargs.delete(:type),
+          class: styles(
+            base: render_base_styles?,
+            **@kwargs,
+            has_visual: has_visual?,
+            size_overwrite_if_visual_only: (@size unless has_content?)
+          )
+        )
       end
 
       def call
-        if leading_visual? || trailing_visual?
-          @options[:class] = styles(custom: @options.delete(:class),
-                                    has_visual: true)
-        end
-
-        content_tag @tag, @options do
-          concat(leading_visual) if leading_visual?
-          concat(@text)
-          concat(content)
-          concat(trailing_visual) if trailing_visual?
+        content_tag html_tag, config do
+          slots_and_content(leading_visual, text_or_content, trailing_visual, append_content: false)
         end
       end
 
       private
+      attr_reader :html_tag, :config, :scheme
 
-      def build_visual_options(position: :leading, **options)
-        margin =
-          if position == :leading
-            "me-1.5"
-          else
-            "ms-1.5"
-          end
-        options.deep_symbolize_keys!
-        options[:class] = styles(visual_size: @size,
-                                 custom_margin: margin,
-                                 custom_class: options.delete(:class))
-        options[:"aria-hidden"] ||= "true"
-        options
+      def has_visual?
+        @has_visual ||= leading_visual? || trailing_visual?
       end
 
-      def lightswitch_cast(value)
-        return value if [ :on, :off ].include?(value)
-        return value.to_sym if %w[on off].include?(value)
-        fetch_or_fallback_boolean(value, false)
+      def has_content?
+        @has_content ||= text_or_content.present?
+      end
+
+      def render_base_styles?
+        @render_base_styles ||= !scheme.eql?(:none)
+      end
+
+      def configure_visual_html_attributes(overwrite_attrs = {}, **default_attrs)
+        configure_html_attributes(
+          overwrite_attrs,
+          aria: { hidden: true },
+          class: styles(visual_size: @size),
+          **default_attrs
+        )
       end
     end
   end

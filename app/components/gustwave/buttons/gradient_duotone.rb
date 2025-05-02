@@ -16,7 +16,6 @@ module Gustwave
               teal_to_lime: "text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-lime-200 dark:focus:ring-teal-700",
               red_to_yellow: "text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-red-100 dark:focus:ring-red-400"
             }
-      SCHEME_OPTIONS = layer_states(:scheme).keys
     end
   end
 end

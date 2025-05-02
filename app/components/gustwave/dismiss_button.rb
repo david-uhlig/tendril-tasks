@@ -7,11 +7,6 @@ module Gustwave
   # element with the HTML id attribute that matches the target parameter. The
   # target element doesn't require any additional markup.
   #
-  # @param target [String] the target selector to dismiss
-  # @param size [Symbol] the size of the button. One of :xs, :sm, :md, :lg, :xl.
-  # @param label [String] the aria label for the button
-  # @param options [Hash] optional HTML options for the button
-  #
   # @example
   #   render Gustwave::DismissButton.new("my-modal", size: :lg)
   #
@@ -30,7 +25,10 @@ module Gustwave
             xl: "h-10 w-10"
           }
 
-
+    # @param target [String] the target selector to dismiss
+    # @param size [Symbol] the size of the button. One of :xs, :sm, :md, :lg, :xl.
+    # @param label [String] the aria label for the button
+    # @param options [Hash] optional HTML options for the button
     def initialize(target,
                    size: default_layer_state(:size),
                    label: nil,
@@ -55,18 +53,24 @@ module Gustwave
 
     def call
       render Gustwave::Button.new(scheme: :none,
-                                  data: {
-                                    dismiss_target: "##{@target}"
-                                  },
-                                  aria: {
-                                    label: @label
-                                  },
-                                  **@options) do
-        concat tag.span @label, class: "sr-only"
-        concat render(Gustwave::Icon.new(:close,
-                                         position: :standalone,
-                                         size: :md))
+                                  data: { dismiss_target: "##{target}" },
+                                  aria: { label: label },
+                                  **options) do
+        safe_join([ screenreader_label, close_icon ])
       end
+    end
+
+    private
+    attr_reader :options, :target, :label
+
+    def screenreader_label
+      tag.span label, class: "sr-only"
+    end
+
+    def close_icon
+      render Gustwave::Icon.new(:close,
+                         position: :standalone,
+                         size: :md)
     end
   end
 end

@@ -17,7 +17,6 @@ module Gustwave
               pink: "text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-pink-300 dark:focus:ring-pink-800",
               purple: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-purple-300 dark:focus:ring-purple-800"
             }
-      SCHEME_OPTIONS = layer_states(:scheme).keys
     end
   end
 end
