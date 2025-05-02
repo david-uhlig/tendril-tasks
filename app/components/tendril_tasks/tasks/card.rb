@@ -25,7 +25,7 @@ module TendrilTasks
       #
       # @return [Boolean] true if the task was created within the last 2 weeks, false otherwise
       def is_new?
-        @task.created_at > 2.weeks.ago
+        @task.new?
       end
 
       private
