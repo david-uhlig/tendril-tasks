@@ -22,10 +22,9 @@ module Gustwave
               teal_to_lime: "from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:hover:text-gray-900 focus:ring-lime-200 dark:focus:ring-lime-800",
               red_to_yellow: "from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:hover:text-gray-900 focus:ring-red-100 dark:focus:ring-red-400"
             }
-      SCHEME_OPTIONS = layer_states(:scheme).keys
 
       style :base_inner,
-            "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+            "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 gap-1.5"
 
       style :size_inner,
             default: :md,
@@ -44,34 +43,34 @@ module Gustwave
                      **options)
         @text = text
         @size = size
-
-        options.symbolize_keys!
-        layers = {}
-        layers[:base] = true unless scheme == :none
-        layers[:scheme] = scheme
-
-        options[:class] = styles(**layers)
+        @scheme = scheme
         @options = options
+        @kwargs = { scheme:, size: }
+      end
 
-        layers = {}
-        layers[:base_inner] = true
-        layers[:size_inner] = @size
+      def before_render
+        @config = configure_html_attributes(
+          @options,
+          class: styles(
+            base: render_base_styles?,
+            scheme:
+          )
+        )
 
-        @inner_options = {}
-        @inner_options[:class] = styles(**layers)
+        @inner_config = {
+          class: styles(
+            base_inner: true,
+            size_inner: @size,
+            has_visual: has_visual?,
+            size_overwrite_if_visual_only: (@size unless has_content?)
+          )
+        }
       end
 
       def call
-        if leading_visual? || trailing_visual?
-          @inner_options[:class] = styles(custom: @inner_options.delete(:class),
-                                          has_visual: true)
-        end
-
         render base_button do
-          tag.span **@inner_options do
-            concat(leading_visual) if leading_visual?
-            concat @text || content
-            concat(trailing_visual) if trailing_visual?
+          tag.span **@inner_config do
+            slots_and_content(leading_visual, text_or_content, trailing_visual, append_content: false)
           end
         end
       end
@@ -79,7 +78,7 @@ module Gustwave
       private
 
       def base_button
-        @base_button ||= Gustwave::Buttons::Base.new(scheme: :base, **@options)
+        @base_button ||= Gustwave::Buttons::Base.new(scheme: :base, **@config)
       end
     end
   end

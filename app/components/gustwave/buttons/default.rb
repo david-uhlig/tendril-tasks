@@ -18,7 +18,6 @@ module Gustwave
               yellow: "text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 dark:focus:ring-yellow-900",
               purple: "text-white bg-purple-700 hover:bg-purple-800 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             }
-      SCHEME_OPTIONS = layer_states(:scheme).keys
     end
   end
 end
