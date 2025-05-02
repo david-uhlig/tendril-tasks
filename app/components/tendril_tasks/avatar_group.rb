@@ -48,6 +48,10 @@ module TendrilTasks
       @max_hidden_count = max_hidden_count
     end
 
+    def render?
+      users.present? && users.size > 0
+    end
+
     def call
       displayed_users = users.first(number_of_avatars_visible)
 
