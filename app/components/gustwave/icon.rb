@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Use Icon to render an SVG icon.
+  #
+  # The icon is rendered as an +<svg>+ element. The +name+ parameter is used
+  # to determine the icon's filename. The +theme+ parameter determines the
+  # icon's theme, either +:outline+ or +:solid+, i.e. the path where it's found.
+  # Several other parameters can be passed to customize the icon's appearance.
   class Icon < Gustwave::Component
     ICON_PATH = File.join("icons").freeze
 
@@ -10,6 +16,7 @@ module Gustwave
     SVG_STROKE_WIDTH = 1.5
     DEFAULT_STROKE_WIDTH = SVG_STROKE_WIDTH
 
+    # Modifies the icon's stroke width. Supply custom values by passing +class: "*:stroke-[10px]"+ through the +options+ hash, where +10px+ is your chosen stroke width.
     style :stroke_width,
           default: "1.5",
           states: {
@@ -20,9 +27,11 @@ module Gustwave
             "2": "*:stroke-2",
             "2.5": "*:stroke-[2.5px]",
             "3": "*:stroke-[3px]",
+            "3.5": "*:stroke-[3.5px]",
             "4": "*:stroke-[4px]"
           }
 
+    # Modifies the icon's stroke color.
     style :scheme,
           default: :none,
           states: {
@@ -55,6 +64,8 @@ module Gustwave
             "9xl": "h-32 w-32"
           }
 
+    # Modifies the icon's position. To achieve responsive behavior pass e.g. +class: "ms-0 sm:ms-1.5"+ to the +options+ hash.
+    # TODO refactor default to :standalone. Margins are often less flexible than gap utilities on the surround container. Components should default to not display any margin.
     style :position,
           default: :leading,
           states: {
@@ -64,6 +75,13 @@ module Gustwave
             standalone: ""
           }
 
+    # @param name [Symbol] the icon's identifier. Corresponds to the icons filename, underscores +_+ in the identifier are replaced with dashes +-+, e.g. +:arrow_up+ loads +arrow-up.svg+ in the +ICON_PATH/theme/+ directory.
+    # @param theme [Symbol] either +:outline+ or +:solid+.
+    # @param scheme [Symbol] +:light+, +:dark+, or +:none+ (default). Color scheme of the SVG's outline.
+    # @param size [Symbol] +:xs+, +:sm+, +:md+, +:lg+, +:xl+, +:2xl+, +:3xl+, +:4xl+, +:5xl+, +:6xl+, +:7xl+, +:8xl+, or +:9xl+. Size of the SVG.
+    # @param position [Symbol] +:leading+ (default) adds margin after the icon. +:trailing+ adds margin before the icon. +:inline+ adds margin on both sides. +:standalone+ removes margin.
+    # @param stroke_width [String] changes the stroke width of the SVG. Supported values are +0+, +0.5+, +1+, +1.5+, +2+, +2.5+, +3+, +3.5+, and +4+. Set custom values by overwriting +stroke_width+ with the +class: "*:stroke-[10px]"+ argument.
+    # @param options [Hash] additional HTML attributes passed to the SVG element, e.g. +class+ or +id+.
     def initialize(name,
                    theme: DEFAULT_ICON_THEME,
                    scheme: :none,
