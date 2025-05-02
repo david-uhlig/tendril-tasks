@@ -31,7 +31,7 @@ module Gustwave
       return default_attrs if overwrite_attrs.blank?
 
       overwrite_attrs = overwrite_attrs.deep_symbolize_keys
-      if !overwrite_class_attr && overwrite_attrs.dig(:class).present?
+      if !overwrite_class_attr && !overwrite_attrs.dig(:class).nil?
         overwrite_attrs[:class] = styles(
           custom_attribute_classes: default_attrs.dig(:class),
           custom_override_classes: overwrite_attrs.dig(:class)
