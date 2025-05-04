@@ -110,11 +110,20 @@ module Gustwave
         svg: ->(src = nil, **options, &block) {
           config = configure_visual_html_attributes(options)
           Gustwave::Svg.new(src, **config, &block)
+        },
+        indicator: ->(text = nil, **options, &block) {
+          config = configure_html_attributes(
+            options,
+            aria: { hidden: true },
+            size: :auto,
+            )
+          Gustwave::Indicator.new(text, **config, &block)
         }
       }
       alias leading_icon with_leading_visual_icon
       alias leading_image with_leading_visual_image
       alias leading_svg with_leading_visual_svg
+      alias leading_indicator with_leading_visual_indicator
 
       renders_many :trailing_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
@@ -132,11 +141,20 @@ module Gustwave
         svg: ->(src = nil, **options, &block) {
           config = configure_visual_html_attributes(**options)
           Gustwave::Svg.new(src, **config, &block)
+        },
+        indicator: ->(text = nil, **options, &block) {
+          config = configure_html_attributes(
+            options,
+            aria: { hidden: true },
+            size: :auto,
+          )
+          Gustwave::Indicator.new(text, **config, &block)
         }
       }
       alias trailing_icon with_trailing_visual_icon
       alias trailing_image with_trailing_visual_image
       alias trailing_svg with_trailing_visual_svg
+      alias trailing_indicator with_trailing_visual_indicator
 
       def initialize(text = nil,
                      tag: DEFAULT_TAG,
