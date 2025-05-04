@@ -74,7 +74,7 @@ module Gustwave
               xl: "h-6 w-auto"
             }
 
-      # Renders a visual element to appear to the left of the button text.
+      # Renders visual elements to appear to the left of the button text.
       #
       # Typically used for icons or decorative visuals going with the button
       # label.
@@ -94,7 +94,7 @@ module Gustwave
       #     button.leading_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
       #     "Submit"
       #   end
-      renders_one :leading_visual, types: {
+      renders_many :leading_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
             options,
@@ -116,7 +116,7 @@ module Gustwave
       alias leading_image with_leading_visual_image
       alias leading_svg with_leading_visual_svg
 
-      renders_one :trailing_visual, types: {
+      renders_many :trailing_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
             options,
@@ -175,7 +175,7 @@ module Gustwave
 
       def call
         content_tag html_tag, config do
-          slots_and_content(leading_visual, text_or_content, trailing_visual, append_content: false)
+          slots_and_content(leading_visuals, text_or_content, trailing_visuals, append_content: false)
         end
       end
 
@@ -183,7 +183,7 @@ module Gustwave
       attr_reader :html_tag, :config, :scheme
 
       def has_visual?
-        @has_visual ||= leading_visual? || trailing_visual?
+        @has_visual ||= leading_visuals? || trailing_visuals?
       end
 
       def has_content?
