@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.2.7
+
+* Fix CVE-2025-46727 and CVE-2025-46336
+
 ## 0.2.6
 
 * Fix footer caching
