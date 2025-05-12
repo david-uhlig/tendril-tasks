@@ -10,7 +10,7 @@ module Gustwave
       TYPE_OPTIONS = [ :button, :reset, :submit ].freeze
 
       style :base,
-            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed gap-1.5"
+            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
 
       # General appearance of the buttons
       #
@@ -59,7 +59,7 @@ module Gustwave
       # This is added to the button's HTML element when a leading or trailing
       # visual is present
       style :has_visual,
-            "inline-flex items-center align-bottom"
+            "inline-flex items-center align-bottom gap-1.5"
 
       # Adjusts the visual's size based on the +text-*+ class of the
       # +style :size+ states.
@@ -187,7 +187,7 @@ module Gustwave
             **@kwargs,
             has_visual: has_visual?,
             size_overwrite_if_visual_only: (@size unless has_content?)
-          )
+          ).presence
         )
       end
 
