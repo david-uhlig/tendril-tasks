@@ -17,15 +17,16 @@ module Gustwave
       safe_join(slots.compact)
     end
 
-    # Returns the configured HTML attributes for the component.
+    # Returns configured HTML attributes and component settings for the
+    # component or slot.
     #
-    # Merges +overwrite_attrs+ into +default_attrs+ so that +overwrite_attrs+ take
-    # precedent. Exception: If the +class+ key is present in both hashes, the
-    # contents are fused together semantically with TailwindMerge.
+    # Merges +overwrite_attrs+ into +default_attrs+ so that +overwrite_attrs+
+    # takes precedence. With special handling for the +class+ attribute to apply
+    # semantic CSS merging with TailwindMerge.
     #
-    # @param overwrite_attrs [Hash] HTML attributes to be added or overridden.
-    # @param overwrite_class_attr [Boolean] Whether to overwrite the CSS classes or merge them semantically. When +false+, the CSS classes of both hashes are fused together with TailwindMerge. Otherwise, the default Ruby merge strategy applies.
-    # @param default_attrs [Hash] Default HTML attribute configuration for the component.
+    # @param overwrite_attrs [Hash] HTML attributes and component arguments to be added or overridden if present in +default_attrs+.
+    # @param overwrite_class_attr [Boolean] How to handle the +class+ attribute. When set to +false+, the CSS classes of +overwrite_attrs+ and +default_attrs+ are fused semantically with TailwindMerge. CSS classes in +overwrite_attrs+ take precedence. When set to +true+, the default Ruby merging strategy applies, replacing +default_attrs+ CSS classes with +overwrite_attrs+ CSS classes.
+    # @param default_attrs [Hash] Default HTML attribute and component configuration for the component or slot.
     # @return [Hash] The configured HTML default_attrs.
     def configure_html_attributes(overwrite_attrs = {}, overwrite_class_attr: false, **default_attrs)
       return default_attrs if overwrite_attrs.blank?
@@ -40,6 +41,7 @@ module Gustwave
 
       default_attrs.merge(overwrite_attrs)
     end
+    alias configure_component configure_html_attributes
 
     def normalize_keys(options)
       normalized_options = {}
