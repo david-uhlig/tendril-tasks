@@ -12,7 +12,7 @@ module Gustwave
   # adjust the size of the text based on the size of the avatar. All other
   # attributes are passed to the Avatar component.
   #
-  #   render Gustwave::AvatarText.new(text: "AB", size: :lg)
+  #   render Gustwave::AvatarText.new("AB", size: :lg)
   #
   # === Custom Usage
   #
@@ -53,7 +53,7 @@ module Gustwave
             "4xl": "text-4xl"
           }
 
-    def initialize(text: nil,
+    def initialize(text = nil,
                    scheme: nil,
                    size: :md,
                    border: nil,

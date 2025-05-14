@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::TableCaption, type: :component do
+  it_behaves_like "a component with configurable html attributes", selector: "caption"
+
   context "with default options" do
     before(:each) do
       render_inline(described_class.new) { "content" }

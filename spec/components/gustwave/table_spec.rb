@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Table, type: :component do
+  it_behaves_like "a component with configurable html attributes", selector: "table"
+
   context "with default options" do
     before(:each) do
       render_inline(described_class.new) { "content" }
@@ -12,26 +14,6 @@ RSpec.describe Gustwave::Table, type: :component do
 
     it "renders block content" do
       expect(rendered_content).to have_content("content")
-    end
-  end
-
-  context "with custom classes" do
-    it "merges additional classes with base styles" do
-      render_inline(described_class.new(class: "custom-class")) { "content" }
-      expect(rendered_content).to have_selector("table.w-full.text-sm.text-left.text-gray-500.custom-class")
-    end
-
-    it "overrides base styles with additional classes" do
-      render_inline(described_class.new(class: "text-red-200")) { "content" }
-      expect(rendered_content).to have_selector("table.w-full.text-sm.text-left.text-red-200")
-      expect(rendered_content).not_to have_selector("table.text-gray-500")
-    end
-  end
-
-  context "with custom HTML attributes" do
-    it "adds additional attributes to the HTML tag" do
-      render_inline(described_class.new(id: "table4911")) { "content" }
-      expect(rendered_content).to have_selector("table[id='table4911']")
     end
   end
 

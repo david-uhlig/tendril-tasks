@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::AvatarPlaceholder, type: :component do
+  it_behaves_like "a component with configurable html attributes", selector: "div"
+
   context "with default options" do
     before(:each) do
       render_inline(described_class.new)

@@ -1,6 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Buttons::Base, type: :component do
+  with_options selector: "button[type='button']" do
+    it_behaves_like "a text and block content renderer"
+    it_behaves_like "a component with configurable html attributes"
+  end
+
   context "with default options" do
     before(:context) do
       render_inline(described_class.new) { "content" }
@@ -25,13 +30,9 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     it "renders no leading/trailing visual styling" do
       expect(rendered_content).not_to have_selector("button.inline-flex.items-center.align-bottom")
     end
-
-    it "renders block content" do
-      expect(rendered_content).to have_content("content")
-    end
   end
 
-  context "with anchor tag :a" do
+  context "with tag argument" do
     before(:context) do
       render_inline(described_class.new(tag: :a)) { "anchor_content" }
     end
@@ -45,10 +46,12 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
-  context "with custom scheme" do
+  context "with scheme argument" do
     it "renders no base styling when scheme is set to :none" do
       render_inline(described_class.new(scheme: :none)) { "content" }
-      expect(rendered_content).not_to have_selector("button.rounded-lg.text-center.overflow-hidden.whitespace-nowrap.align-bottom")
+      expect(rendered_content).not_to have_selector("button.rounded-lg")
+      expect(rendered_content).not_to have_selector("button.text-center")
+      expect(rendered_content).not_to have_selector("button.overflow-hidden")
     end
 
     it "renders base styling when scheme is set to :base" do
@@ -57,37 +60,17 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
-  context "with custom size" do
+  context "with size argument" do
     it "renders custom size styling" do
       render_inline(described_class.new(size: :xl)) { "content" }
       expect(rendered_content).to have_selector("button.px-6.text-base.font-medium")
     end
   end
 
-  context "with pill" do
+  context "with pill argument" do
     it "renders pill styling" do
       render_inline(described_class.new(pill: true)) { "content" }
       expect(rendered_content).to have_selector("button.rounded-full")
-    end
-  end
-
-  context "with custom options" do
-    it "adds additional attributes to the HTML tag" do
-      render_inline(described_class.new(name: "button1234", id: "button1234", class: "bg-white")) { "content" }
-      expect(rendered_content).to have_selector("button[name='button1234'][id='button1234'].bg-white")
-    end
-  end
-
-  context "with text" do
-    it "renders text" do
-      render_inline(described_class.new("button_text"))
-      expect(rendered_content).to have_content("button_text")
-    end
-
-    it "renders text when block content and text are given" do
-      render_inline(described_class.new("button_text")) { "content_text" }
-      expect(rendered_content).to have_content("button_text")
-      expect(rendered_content).not_to have_content("content_text")
     end
   end
 

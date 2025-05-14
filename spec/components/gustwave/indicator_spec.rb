@@ -1,6 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Indicator, type: :component do
+  with_options selector: "span" do
+    it_behaves_like "a text and block content renderer"
+    it_behaves_like "a component with configurable html attributes"
+  end
+
   context "with default options" do
     before(:context) do
       render_inline(described_class.new)
@@ -47,20 +52,6 @@ RSpec.describe Gustwave::Indicator, type: :component do
     end
   end
 
-  context "with text" do
-    before(:context) do
-      render_inline(described_class.new("text"))
-    end
-
-    it "renders text styling" do
-      expect(rendered_content).to have_selector("span.aspect-auto.items-center.justify-center.text-white")
-    end
-
-    it "renders text" do
-      expect(rendered_content).to have_selector("span", text: "text")
-    end
-  end
-
   context "with block content" do
     before(:context) do
       render_inline(described_class.new) { "content" }
@@ -68,18 +59,6 @@ RSpec.describe Gustwave::Indicator, type: :component do
 
     it "renders text styling" do
       expect(rendered_content).to have_selector("span.aspect-auto.items-center.justify-center.text-white")
-    end
-
-    it "renders content" do
-      expect(rendered_content).to have_selector("span", text: "content")
-    end
-  end
-
-  context "with text and block content" do
-    it "renders text over content" do
-      render_inline(described_class.new("text")) { "content" }
-      expect(rendered_content).to have_selector("span", text: "text")
-      expect(rendered_content).not_to have_selector("span", text: "content")
     end
   end
 
@@ -97,13 +76,6 @@ RSpec.describe Gustwave::Indicator, type: :component do
 
     it "renders legend styling" do
       expect(rendered_content).to have_selector("span.flex.items-center.text-sm.font-medium")
-    end
-  end
-
-  context "with custom HTML attributes" do
-    it "adds attributes to the HTML tag" do
-      render_inline(described_class.new(id: "indicator1234", class: "bg-white"))
-      expect(rendered_content).to have_selector("span[id='indicator1234'].bg-white")
     end
   end
 end

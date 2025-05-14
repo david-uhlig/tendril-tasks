@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::TableBody, type: :component do
+  it_behaves_like "a component with configurable html attributes", selector: "tbody"
+
   context "with default options" do
     before(:each) do
       render_inline(described_class.new) { "content" }
@@ -12,13 +14,6 @@ RSpec.describe Gustwave::TableBody, type: :component do
 
     it "renders block content" do
       expect(rendered_content).to have_content("content")
-    end
-  end
-
-  context "with custom HTML attributes" do
-    it "adds attributes to the HTML tag" do
-      render_inline(described_class.new(id: "body1234", class: "bg-white")) { "content" }
-      expect(rendered_content).to have_selector("tbody[id='body1234'].bg-white")
     end
   end
 
