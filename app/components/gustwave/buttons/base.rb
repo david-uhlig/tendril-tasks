@@ -2,12 +2,22 @@
 
 module Gustwave
   module Buttons
+    # Use Base as a building block for button themes
     class Base < Gustwave::Component
       DEFAULT_TAG = :button
       TAG_OPTIONS = [ :button, :a ].freeze
 
       DEFAULT_TYPE = :button
       TYPE_OPTIONS = [ :button, :reset, :submit ].freeze
+
+      SIZE_INDICATOR_MAPPINGS = {
+        none: :none,
+        xs: :sm,
+        sm: :sm,
+        md: :md,
+        lg: :md,
+        xl: :lg
+      }.freeze
 
       style :base,
             "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
@@ -34,11 +44,12 @@ module Gustwave
             default: :md,
             states: {
               none: "",
-              xs: "px-3 py-2 text-xs font-medium",
-              sm: "px-3 py-2 text-sm font-medium",
-              md: "px-5 py-2.5 text-sm font-medium",
-              lg: "px-5 py-3 text-base font-medium",
-              xl: "px-6 py-3.5 text-base font-medium"
+              xs: "h-8 px-3 py-2 text-xs font-medium",
+              sm: "h-9 px-3 py-2 text-sm font-medium",
+              md: "h-10 px-5 py-2.5 text-sm font-medium",
+              lg: "h-12 px-5 py-3 text-base font-medium",
+              # TODO revert to h-13 (52px) when migrated to Tailwind 4
+              xl: "h-14 px-6 py-3.5 text-base font-medium"
             }
 
       # Render a square button when no text or content block was given
@@ -71,7 +82,7 @@ module Gustwave
               sm: "h-5 w-auto",
               md: "h-5 w-auto",
               lg: "h-6 w-auto",
-              xl: "h-6 w-auto"
+              xl: "h-7 w-auto"
             }
 
       # Renders visual elements to appear to the left of the button text.
@@ -115,7 +126,7 @@ module Gustwave
           config = configure_html_attributes(
             options,
             aria: { hidden: true },
-            size: :auto,
+            size: SIZE_INDICATOR_MAPPINGS[@size],
             )
           Gustwave::Indicator.new(text, **config, &block)
         }
@@ -146,7 +157,7 @@ module Gustwave
           config = configure_html_attributes(
             options,
             aria: { hidden: true },
-            size: :auto,
+            size: SIZE_INDICATOR_MAPPINGS[@size],
           )
           Gustwave::Indicator.new(text, **config, &block)
         }
@@ -156,6 +167,13 @@ module Gustwave
       alias trailing_svg with_trailing_visual_svg
       alias trailing_indicator with_trailing_visual_indicator
 
+      # @param text [String, nil] text to display on the button. Takes precedence over block content.
+      # @param tag [Symbol] The HTML tag to use for the button. Options: :a and :button. Defaults to :button.
+      # @param type [Symbol] The type of button. Options: :button, :reset, :submit. Defaults to :button.
+      # @param scheme [Symbol] The color scheme of the button. Options: :none and :base.
+      # @param size [Symbol] The size of the button. Options: :none, :xs, :sm, :md, :lg, :xl.
+      # @param pill [Boolean] Whether to render the button in pill shape.
+      # @param options [Hash] HTML attributes to be applied to the button.
       def initialize(text = nil,
                      tag: DEFAULT_TAG,
                      type: DEFAULT_TYPE,
