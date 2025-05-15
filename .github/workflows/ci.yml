@@ -62,6 +62,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
 
     steps:
       - name: Install packages
@@ -88,3 +89,5 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/capybara
           if-no-files-found: ignore
+
+
