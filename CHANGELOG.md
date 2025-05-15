@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Add menu icons to avatar menu
+
 ## 0.2.7
 
 * Fix CVE-2025-46727 and CVE-2025-46336

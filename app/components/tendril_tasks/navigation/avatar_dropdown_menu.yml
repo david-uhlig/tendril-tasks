@@ -1,0 +1,11 @@
+en:
+  profile: "Profile"
+  dashboard: "Dashboard"
+  administration: "Administration"
+  logout: "Logout"
+
+de:
+  profile: "Profil"
+  dashboard: "Dashboard"
+  administration: "Administration"
+  logout: "Abmelden"

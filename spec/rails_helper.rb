@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.include ActionText::SystemTestHelper, type: :system
 
   # ViewComponent helpers
+  config.include ComponentTestHelpers, type: :component
   config.include ViewComponent::TestHelpers, type: :component
   config.include ViewComponent::SystemTestHelpers, type: :component
   config.include Capybara::RSpecMatchers, type: :component

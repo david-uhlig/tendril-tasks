@@ -46,15 +46,6 @@
       <% navigation.link(name: Task.model_name.human(count: 2),
                          href: tasks_path)
       %>
-      <% navigation.with_login_button(theme: :gradient_duotone,
-                                      scheme: :purple_to_blue,
-                                      size: :xs,
-                                      data: { turbo: false },
-                                      class: "hidden mt-1 sm:mt-0 sm:inline-flex sm:px-5 sm:py-2.5 sm:text-sm sm:font-medium") do |login_button|
-      %>
-        <% login_button.leading_svg("rocketchat/icon-white.svg") %>
-      <span class="sr-only min-[400px]:not-sr-only"><%= t "rocketchat.sign_in_button.short" %></span>
-      <% end %>
     <% end %>
 
     <%# Content %>

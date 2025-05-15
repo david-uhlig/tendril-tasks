@@ -38,17 +38,4 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_selector("a[href='https://example.com/2']", text: "test_link2")
     end
   end
-
-  context "with login button" do
-    it "renders the login button" do
-      render_inline(described_class.new) do |component|
-        component.with_login_button do
-          "login_with_this_button"
-        end
-      end
-      expect(page).to have_button("login_with_this_button")
-    end
-
-    it "doesn't render the login button if user is signed in"
-  end
 end
