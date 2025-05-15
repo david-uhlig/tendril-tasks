@@ -15,6 +15,8 @@ module Gustwave
   #     <%= render Gustwave::Indicator.new(position: :top_right, scheme: :blue) %>
   #   <% end %>
   class Indicator < Gustwave::Component
+    include Gustwave::Positionable
+
     style :base, "flex rounded-full aspect-square"
 
     style :text, "aspect-auto px-1 items-center justify-center text-white border-white"
@@ -48,21 +50,6 @@ module Gustwave
             yellow: "bg-yellow-300",
             teal: "bg-teal-500",
             white: "bg-white"
-          }
-
-    style :position,
-          default: :none,
-          states: {
-            none: "",
-            top_left: "absolute -translate-y-1/2 -translate-x-1/2 right-auto top-0 left-0",
-            top_center: "absolute -translate-y-1/2 translate-x-1/2 right-1/2",
-            top_right: "absolute -translate-y-1/2 translate-x-1/2 left-auto top-0 right-0",
-            middle_left: "absolute -translate-y-1/2 -translate-x-1/2 right-auto left-0 top-2/4",
-            middle_center: "absolute -translate-y-1/2 -translate-x-1/2 top-2/4 left-1/2",
-            middle_right: "absolute -translate-y-1/2 translate-x-1/2 left-auto right-0 top-2/4",
-            bottom_left: "absolute translate-y-1/2 -translate-x-1/2 right-auto bottom-0 left-0",
-            bottom_center: "absolute translate-y-1/2 translate-x-1/2 bottom-0 right-1/2",
-            bottom_right: "absolute translate-y-1/2 translate-x-1/2 left-auto bottom-0 right-0"
           }
 
     renders_one :legend_slot, ->(text = nil, **options, &block) {
