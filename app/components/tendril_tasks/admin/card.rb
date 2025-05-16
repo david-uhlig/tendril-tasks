@@ -26,6 +26,18 @@ module TendrilTasks
       end
       alias heading with_heading_slot
 
+      renders_many :badges, ->(text = nil, icon: nil, **options, &block) do
+        config = configure_component(
+          options,
+          pill: true,
+          lang: I18n.locale
+        )
+        component = Gustwave::Badge.new(text, **config, &block)
+        component.leading_icon(icon, class: "me-0.5") if icon
+        component
+      end
+      alias badge with_badge
+
       renders_many :paragraphs, ->(**options, &block) do
         options.symbolize_keys!
         options[:size] ||= :sm

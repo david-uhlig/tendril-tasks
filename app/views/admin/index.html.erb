@@ -98,13 +98,58 @@
   <% end %>
 
   <ol class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <%= render TendrilTasks::Admin::Card.new do |card|
-    %>
+    <%= render TendrilTasks::Admin::Card.new do |card| %>
       <% card.heading t("admin.monitoring.jobs.title") %>
+
+      <% if @stats.active_job.fetch(:failed, 0) > 0 %>
+        <% card.badge scheme: :red, icon: :ban do %>
+          <%= t("admin.monitoring.jobs.failed", count: @stats.active_job.fetch(:failed)) %>
+        <% end %>
+      <% end %>
+
+      <% if @stats.active_job.fetch(:scheduled, 0) > 0 %>
+        <% card.badge scheme: :yellow, icon: :layers do %>
+          <%= t("admin.monitoring.jobs.scheduled", count: @stats.active_job.fetch(:scheduled)) %>
+        <% end %>
+      <% end %>
+
+      <% if @stats.active_job.fetch(:in_progress, 0) > 0 %>
+        <% card.badge scheme: :indigo, icon: :hourglas do %>
+          <%= t("admin.monitoring.jobs.in_progress", count: @stats.active_job.fetch(:in_progress)) %>
+        <% end %>
+      <% end %>
+
+      <% if @stats.active_job.fetch(:finished, 0) > 0 %>
+        <% card.badge scheme: :green, icon: :check do %>
+          <%= t("admin.monitoring.jobs.finished", count: @stats.active_job.fetch(:finished)) %>
+        <% end %>
+      <% end %>
+
       <% card.paragraph do %>
         <%= t("admin.monitoring.jobs.description") %>
       <% end %>
       <% card.button href: mission_control_jobs_path do %>
+        <%= t("admin.monitoring.jobs.view") %>
+      <% end %>
+    <% end %>
+    <%= render TendrilTasks::Admin::Card.new do |card| %>
+      <% card.heading t("admin.monitoring.storage.title") %>
+      <% card.badge scheme: :green do %>
+        <% it.leading_icon :paper_clip, class: "me-0.5" %>
+        <%= t("admin.monitoring.storage.attachments", count: @stats.active_storage.fetch(:files)) %>
+      <% end %>
+      <% card.badge scheme: :yellow do %>
+        <% it.leading_icon :file_code, class: "me-0.5" %>
+        <% t("admin.monitoring.storage.blobs", count: @stats.active_storage.fetch(:blobs)) %>
+      <% end %>
+      <% card.badge do %>
+        <% it.leading_icon :database, class: "me-0.5" %>
+        <%= number_to_human_size(@stats.active_storage.fetch(:size)) %>
+      <% end %>
+      <% card.paragraph do %>
+        <%= t("admin.monitoring.storage.description") %>
+      <% end %>
+      <% card.button href: active_storage_dashboard_path do %>
         <%= t("admin.monitoring.jobs.view") %>
       <% end %>
     <% end %>

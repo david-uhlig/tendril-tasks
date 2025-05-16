@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.3.0
+
+* Introduce storage monitoring through the [Active Storage Dashboard](https://github.com/giovapanasiti/active_storage_dashboard) gem
 * Add menu icons to avatar menu
 
 ## 0.2.7

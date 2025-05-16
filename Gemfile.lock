@@ -44,6 +44,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_storage_dashboard (0.1.4)
+      rails (>= 5.2.0)
     active_storage_validations (2.0.3)
       activejob (>= 6.1.4)
       activemodel (>= 6.1.4)
@@ -202,7 +204,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    loofah (2.24.0)
+    loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -217,7 +219,7 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     minitest (5.25.5)
     mission_control-jobs (1.0.2)
       actioncable (>= 7.1)
@@ -306,7 +308,7 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
-    psych (5.2.4)
+    psych (5.2.6)
       date
       stringio
     public_suffix (6.0.2)
@@ -539,6 +541,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_storage_dashboard
   active_storage_validations (~> 2.0)
   anyway_config (~> 2.0)
   bootsnap

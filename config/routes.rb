@@ -71,5 +71,6 @@ Rails.application.routes.draw do
 
   authenticate :user, ->(user) { user.admin? } do
     mount MissionControl::Jobs::Engine, at: "/admin/monitoring/jobs"
+    mount ActiveStorageDashboard::Engine, at: "/admin/monitoring/storage"
   end
 end

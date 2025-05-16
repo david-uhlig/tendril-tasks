@@ -331,7 +331,20 @@ de:
       jobs:
         title: "Hintergrundprozesse"
         description: "Überprüfe die Warteschlange und derzeit wartende Hintergrundprozesse. Prüfe fehlgeschlagene Prozesse, starte sie neu oder verwerfe sie."
+        failed: "%{count} Fehlgeschlagen"
+        scheduled: "%{count} Geplant"
+        in_progress: "%{count} Laufend"
+        finished: "%{count} Beendet"
         view: "Ansehen"
+      storage:
+        title: "Medien"
+        description: "Zeige Nutzungsstatistiken hochgeladener Medien. Durchsuche Blobs, Anhänge und Variantendatensätze. Zeige Metadaten, Dateidetails und Beziehungen zwischen den Dateien an."
+        attachments:
+          one: "%{count} Anhang"
+          other: "%{count} Anhänge"
+        blobs:
+          one: "%{count} Blob"
+          other: "%{count} Blobs"
 
 
   users:

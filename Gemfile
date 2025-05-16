@@ -72,6 +72,8 @@ gem "noticed", "~> 2.6"
 
 # ActiveJob Dashboard [https://github.com/rails/mission_control-jobs]
 gem "mission_control-jobs"
+# ActiveStorage Dashboard [https://github.com/giovapanasiti/active_storage_dashboard]
+gem "active_storage_dashboard"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -293,7 +293,20 @@ en:
       jobs:
         title: "Background Jobs"
         description: "Inspect job queues and jobs currently waiting. Inspect, retry or discard failed jobs."
+        failed: "%{count} Failed"
+        scheduled: "%{count} Scheduled"
+        in_progress: "%{count} in Progress"
+        finished: "%{count} Finished"
         view: "Show"
+      storage:
+        title: "Storage"
+        description: "Show usage statistics of uploaded media. Search blobs, attachments and variant records. View metadata, file details and relationships between files."
+        attachments:
+          one: "%{count} Attachment"
+          other: "%{count} Attachments"
+        blobs:
+          one: "%{count} Blob"
+          other: "%{count} Blobs"
 
 
   # Users
