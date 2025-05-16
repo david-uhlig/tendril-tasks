@@ -5,16 +5,37 @@ module Gustwave
     module MenuItems
       # Use LinkButton to render a Gustwave::Button element as an anchor
       #
-      # Takes the same arguments as Gustwave::Button
+      # Accepts the same parameters as Gustwave::Button and supports using
+      # Gustwave::Button slots. The +icon+ and +trailing_icon+ parameters come
+      # with preformated styling. When using the +leading_*+ and +trailing_*+
+      # slots directly, you must apply the styling yourself.
       #
-      # Note: When providing block content, you must apply grow (flex)
-      # yourself. When using the +text+ argument, the text content automatically
-      # grows so that the trailing icon is right aligned.
+      # === Right aligned trailing icon
+      #
+      # Calling the component with the +trailing_icon+ parameter:
+      #
+      #   <%= render Gustwave::Dropdown.new "Dropdown" do |dropdown| %>
+      #     <% dropdown.menu do |menu| %>
+      #       <% menu.link "Menu Item", trailing_icon: :check, href: "#" %>
+      #     <% end %>
+      #   <% end %>
+      #
+      # Is equivalent to:
+      #
+      #   <%= render Gustwave::Dropdown.new "Dropdown" do |dropdown| %>
+      #     <% dropdown.menu do |menu| %>
+      #       <% menu.link "Menu Item", href: "#" do |link| %>
+      #         <% link.trailing_icon :check, class: "ms-auto h-[1.5em]" %>
+      #       <% end %>
+      #     <% end %>
+      #   <% end %>
+      #
+      # @see Gustwave::Button
       class LinkButton < Gustwave::Dropdowns::MenuItems::Base
         delegate_missing_to :button_component
 
         style :leading_icon, "h-[1.5em]"
-        style :trailing_icon, "h-[1.5em]"
+        style :trailing_icon, "ms-auto h-[1.5em]"
 
         # @param text [String, nil] the text to appear on the dropdown button. Takes precedent over block content.
         # @param href [String] the URL to link to.
@@ -47,7 +68,7 @@ module Gustwave
           render button_component do
             it.leading_icon(icon, class: styles(leading_icon: true)) if icon
             it.trailing_icon(trailing_icon, class: styles(trailing_icon: true)) if trailing_icon
-            text_or_content(text: flex_grow(text))
+            text_or_content
           end
         end
 

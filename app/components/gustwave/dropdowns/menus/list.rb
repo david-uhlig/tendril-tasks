@@ -3,6 +3,18 @@
 module Gustwave
   module Dropdowns
     module Menus
+      # Use List to render a menu list with a header, links, dividers, dropdowns, and a footer
+      #
+      # Slot structure (all optional)
+      # - +header+ (any HTML markup)
+      # - \List items:
+      #   - +item+ (LinkButton), alias: +link+
+      #   - +generic+ (any HTML markup)
+      #   - +divider+ (Divider)
+      #   - +dropdown+ (Dropdown)
+      # - +footer+ (any HTML markup)
+      #
+      # Block content gets ignored.
       class List < Gustwave::Dropdowns::Menus::Base
         style :list_base, "py-2 text-sm text-gray-700 dark:text-gray-200"
 
@@ -15,6 +27,7 @@ module Gustwave
           dropdown: Gustwave::Dropdowns::MenuItems::Dropdown
         }
         alias item with_item_item
+        alias link with_item_item
         alias generic_item with_item_generic
         alias divider with_item_divider
         alias dropdown with_item_dropdown

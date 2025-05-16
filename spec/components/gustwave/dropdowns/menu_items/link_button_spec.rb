@@ -20,13 +20,6 @@ RSpec.describe Gustwave::Dropdowns::MenuItems::LinkButton, type: :component do
     end
   end
 
-  context "with text argument" do
-    it "wraps text in a span with flex grow styling" do
-      render_inline(described_class.new("text"))
-      expect(rendered_content).to have_selector("a>span.flex-grow.text-left")
-    end
-  end
-
   context "with icon argument" do
     before(:context) do
       render_inline(described_class.new(icon: :check))
@@ -51,7 +44,7 @@ RSpec.describe Gustwave::Dropdowns::MenuItems::LinkButton, type: :component do
     end
 
     it "renders icon styling" do
-      expect(rendered_content).to have_selector('a>svg.h-\[1\.5em\]')
+      expect(rendered_content).to have_selector('a>svg.h-\[1\.5em\].ms-auto')
     end
   end
 
