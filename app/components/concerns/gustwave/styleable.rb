@@ -8,6 +8,12 @@ module Gustwave
   module Styleable
     extend ActiveSupport::Concern
 
+    # Raised when an invalid key is used in +styles+
+    class InvalidStyleDefinitionError < Gustwave::Error; end
+
+    # Raised when an invalid state is used for a style definition
+    class InvalidStyleError < Gustwave::Error; end
+
     # Defined here to benefit from TailwindMerge's caching mechanism.
     MERGER = TailwindMerge::Merger.new
 
@@ -331,7 +337,8 @@ module Gustwave
         selected_classes = states[state] || states[default_layer_state(layer)]
 
         if selected_classes.nil? && !Rails.env.production?
-          raise ArgumentError, "Invalid option #{state.inspect} for variant #{layer.inspect}"
+          raise InvalidStyleDefinitionError,
+                "Invalid option #{state.inspect} for style definition #{layer.inspect}"
         end
 
         applied_classes << selected_classes if selected_classes
@@ -348,8 +355,8 @@ module Gustwave
         next if layer.to_s.start_with?("custom")
 
         unless self.class.__style_layers.include?(layer)
-          raise ArgumentError, <<~MSG
-            Invalid style layer provided.
+          raise InvalidStyleDefinitionError, <<~MSG
+            Invalid style definition provided.
 
             Expected one of: #{self.class.__style_layers.keys.inspect}
             Got: #{layer.inspect}
@@ -362,8 +369,8 @@ module Gustwave
         states = self.class.__style_layers.dig(layer, :states) || {}
         next if states.key?(state)
 
-        raise ArgumentError, <<~MSG
-          Invalid option provided for style layer #{layer.inspect}.
+        raise InvalidStyleError, <<~MSG
+          Invalid option provided for style definition #{layer.inspect}.
 
           Expected one of: #{states.keys.inspect}
           Got: #{state.inspect}

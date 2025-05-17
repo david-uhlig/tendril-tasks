@@ -16,6 +16,8 @@ module Gustwave
   #
   #   # app/components/ui/positionable_example.rb
   #   class Ui::PositionableExample < Gustwave::Component
+  #     include Gustwave::Positionable
+  #
   #     def initialize(position: :none)
   #       @position = position
   #     end
