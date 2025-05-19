@@ -270,7 +270,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
-    noticed (2.6.1)
+    noticed (2.7.0)
       rails (>= 6.1.0)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -316,7 +316,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.14)
+    rack (3.1.15)
     rack-protection (4.1.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -560,7 +560,7 @@ DEPENDENCIES
   jbuilder
   kamal
   mission_control-jobs
-  noticed (~> 2.6)
+  noticed (~> 2.7)
   omniauth
   omniauth-rails_csrf_protection
   omniauth-rocketchat
