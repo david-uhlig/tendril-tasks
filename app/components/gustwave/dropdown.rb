@@ -111,7 +111,7 @@ module Gustwave
       inline: false,
       **options
     )
-      @menu_id = menu_id || random_id(prefix: "dropdown")
+      @menu_id = menu_id || generate_random_id(prefix: "dropdown")
       @text = text
       @inline = inline
       @trigger_config = {

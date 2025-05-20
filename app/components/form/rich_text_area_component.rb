@@ -12,7 +12,7 @@ module Form
       @label = label
 
       @toolbar = {}
-      @toolbar[:id] = random_id(prefix: "toolbar")
+      @toolbar[:id] = generate_random_id(prefix: "toolbar")
 
       @options = options
     end

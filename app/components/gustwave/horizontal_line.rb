@@ -82,7 +82,7 @@ module Gustwave
         tag.span(text, **options)
       },
       svg: ->(**options, &block) {
-        options = normalize_keys(options)
+        options = normalize_html_attributes(options)
         options[:class] = styles(visual_svg: true,
                                  custom: options.delete(:class))
         options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"

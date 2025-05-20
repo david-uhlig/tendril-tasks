@@ -18,7 +18,7 @@ module Gustwave
           "absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
 
     def initialize(text = nil, id: nil, arrow: true, **options)
-      @id = id || random_id(prefix: "popover")
+      @id = id || generate_random_id(prefix: "popover")
       @arrow = fetch_or_fallback_boolean(arrow, true)
       @text = text
 

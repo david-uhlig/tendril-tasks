@@ -23,7 +23,7 @@ module Gustwave
                    dismissible: true,
                    **options)
       @text = text
-      @id = id.presence || random_id(prefix: "toast")
+      @id = id.presence || generate_random_id(prefix: "toast")
       @dismissible = fetch_or_fallback_boolean(dismissible, true)
 
       options.deep_symbolize_keys!

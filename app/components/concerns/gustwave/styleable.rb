@@ -5,6 +5,7 @@ require "active_support/concern"
 require "active_support/core_ext/class/attribute"
 
 module Gustwave
+  # TODO rename elements: style_layer -> group (?), styles -> build_design (?)
   module Styleable
     extend ActiveSupport::Concern
 
@@ -229,7 +230,7 @@ module Gustwave
       # @param group [Symbol] the name of the style group. This is the name that will be used to reference the group in the component.
       # @param state_or_states [Hash, String] a +String+ or +Hash+ of CSS classes that will be applied when the group is used. When a +String+ is passed, it will be automatically converted to a hash with a :on state and an empty :off state. When a +Hash+ is passed, the keys in the hash are the group's states, and the values are the CSS classes that will be applied when the state is used. Takes precedence over the +states+ argument.
       # @param states [Hash, nil] a hash of CSS classes that will be applied when the group is used. The keys in the hash are the group's states, and the values are the CSS classes that will be applied when the state is used.
-      # @param default [Symbol, nil] the default state for the group. Must be one of the keys of the +states+ hash.
+      # @param default [Symbol, nil] the default state for the group. Must be one of the keys of the +states+ hash. Used as the fallback state in production when an undefined state is specified.
       # @param strategy [Symbol] determines how to handle the state hash when same +group+ key was already defined previously. Chose one of :merge, :replace, and :clear. The :merge strategy is equivalent to the default Ruby merge, e.g. if a state exists from a previous call and in the current call, the new state will overwrite the old state. The :replace strategy will replace the whole state hash, allowing you to reset the state hash. The :clear strategy will remove the style layer without replacement.
       #
       # @see #style_layer
@@ -330,8 +331,7 @@ module Gustwave
           next
         end
 
-        state = normalize_layer_state(state)
-
+        state = normalize_state(state)
 
         states = self.class.__style_layers.dig(layer, :states) || {}
         selected_classes = states[state] || states[default_layer_state(layer)]
@@ -347,6 +347,19 @@ module Gustwave
       MERGER.merge(applied_classes.compact)
     end
     alias styles merge_layers
+
+    # Normalizes key to access a style layer
+    #
+    # Convert boolean values to :on and :off. Symbolize all other values.
+    #
+    # @param key [Object] The key to normalize.
+    # @return [Symbol] The normalized state key.
+    def normalize_state(key)
+      return :on if key == true
+      return :off if key == false
+      key.to_sym
+    end
+    alias lightswitch_cast normalize_state
 
     private
 
@@ -365,7 +378,7 @@ module Gustwave
           MSG
         end
 
-        state = normalize_layer_state(state)
+        state = normalize_state(state)
         states = self.class.__style_layers.dig(layer, :states) || {}
         next if states.key?(state)
 
@@ -378,12 +391,6 @@ module Gustwave
           This will not raise in production, but will instead fallback to: #{default_layer_state(layer).inspect}
         MSG
       end
-    end
-
-    def normalize_layer_state(value)
-      return :on if value == true
-      return :off if value == false
-      value.to_sym
     end
   end
 end

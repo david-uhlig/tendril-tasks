@@ -24,7 +24,7 @@ module Gustwave
         @form = form
         @attribute = attribute
         @toolbar_options = {
-          id: toolbar_id.presence || random_id(prefix: "toolbar")
+          id: toolbar_id.presence || generate_random_id(prefix: "toolbar")
         }
         @toolbar_container_options = {
           class: styles(toolbar_container_base: true,
