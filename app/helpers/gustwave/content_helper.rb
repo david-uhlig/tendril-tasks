@@ -3,6 +3,18 @@
 module Gustwave
   # Manage and render content and slots in components.
   module ContentHelper
+    # Returns a span with the provided text as its content and the +sr-only+
+    # class.
+    #
+    # If +text+ is not present, returns nil.
+    #
+    # @param text [String] the text to render.
+    def sr_only(text)
+      return unless text.present?
+
+      tag.span text, class: "sr-only"
+    end
+
     # Returns a safely joined string of rendered slots and appends the content
     # block.
     #

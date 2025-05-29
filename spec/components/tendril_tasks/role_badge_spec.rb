@@ -7,7 +7,7 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
     it "does not render" do
       user = build_stubbed(:user, role: :user)
       render_inline(described_class.new(user, id: "role-badge"))
-      expect(page).not_to have_selector("span#role-badge")
+      expect(rendered_content).not_to have_selector("a")
     end
   end
 
@@ -15,8 +15,7 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
     it "renders editor badge" do
       user = build_stubbed(:user, role: :editor)
       render_inline(described_class.new(user, id: "role-badge"))
-      expect(page).to have_selector("span#role-badge")
-      expect(page).to have_content("Redaktion")
+      expect(rendered_content).to have_selector("a[href]", text: "Redaktion")
     end
   end
 
@@ -24,8 +23,7 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
     it "renders admin badge" do
       user = build_stubbed(:user, role: :admin)
       render_inline(described_class.new(user, id: "role-badge"))
-      expect(page).to have_selector("span#role-badge")
-      expect(page).to have_content("Admin")
+      expect(rendered_content).to have_selector("a[href]", text: "Admin")
     end
   end
 
@@ -33,7 +31,7 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
     it "renders custom css class" do
       user = build_stubbed(:user, role: :admin)
       render_inline(described_class.new(user, id: "role-badge", class: "custom-class"))
-      expect(page).to have_selector("span.custom-class")
+      expect(rendered_content).to have_selector("a.custom-class", text: "Admin")
     end
   end
 end

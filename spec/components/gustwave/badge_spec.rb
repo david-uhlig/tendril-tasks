@@ -5,11 +5,11 @@ require "rails_helper"
 RSpec.describe Gustwave::Badge, type: :component do
   context "with default options" do
     before(:each) do
-      render_inline(described_class.new)
+      render_inline(described_class.new) { "content" }
     end
 
-    it "renders default scheme classes" do
-      expect(page).to have_selector("span.bg-blue-100.text-blue-800.rounded")
+    it "renders default styles" do
+      expect(rendered_content).to have_selector("span.rounded.whitespace-nowrap.inline-flex")
     end
 
     it "renders default size classes" do
@@ -73,8 +73,8 @@ RSpec.describe Gustwave::Badge, type: :component do
 
     it "renders html attributes" do
       render_inline(described_class.new(id: "some-id", lang: "de"))
-      expect(page).to have_selector("span[id='some-id']")
-      expect(page).to have_selector("span[lang='de']")
+      expect(rendered_content).to have_selector("span[id='some-id']")
+      expect(rendered_content).to have_selector("span[lang='de']")
     end
   end
 end

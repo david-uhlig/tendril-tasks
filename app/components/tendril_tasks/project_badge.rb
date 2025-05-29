@@ -12,26 +12,26 @@ module TendrilTasks
     attr_reader :has_link
 
     # @param project [Project] the project to be displayed
-    # @param has_link [Boolean] whether the badge should have a link
+    # @param has_link [Boolean] whether the badge should link to the project or to the href
     # @param href [String] the URL to link to. When not provided, the project's detail page is linked.
     def initialize(project, has_link: true, href: nil)
       @project = project
+      @tag = has_link ? :a : :span
       @has_link = has_link
-      @href = href
+      @href_arg = href
+    end
+
+    def before_render
+      @href = (@href_arg || project_path(project)) if has_link
+      @scheme = helpers.badge_scheme_by_id(project.id)
     end
 
     def call
-      scheme = helpers.badge_scheme_by_id(@project.id)
-      badge_link_if has_link do
-        render Gustwave::Badge.new(@project.title, scheme: scheme)
-      end
+      render Gustwave::Badge.new(project.title, scheme:, tag:, href:)
     end
 
     private
 
-    def badge_link_if(condition, &block)
-      url = @href.presence || project_path(@project)
-      optional_link_to_if(condition, url, &block)
-    end
+    attr_reader :project, :scheme, :tag, :href, :has_link
   end
 end

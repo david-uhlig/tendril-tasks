@@ -2,29 +2,46 @@
 
 # Renders roles badges depending on the given users role.
 class TendrilTasks::RoleBadge < TendrilTasks::Component
-  DEFAULT_ROLE_SCHEME = :user
-  # Maps user role to badge scheme
-  ROLE_SCHEME_MAPPINGS = {
+  mapping :role_to_scheme, {
     admin: :purple,
     editor: :default,
     user: :default
-  }
-  ROLE_SCHEME_OPTIONS = ROLE_SCHEME_MAPPINGS.keys
-  DEFAULT_SIZE = :sm
-  DEFAULT_BORDER = true
+  }, fallback: :user
 
-  def initialize(user, **options)
+  def initialize(user, size: :sm, border: true, **options)
     @user = user
-    @options = build_options(options, user)
+    @role = user.role.to_sym
+    @config = configure_component(
+      options,
+      tag: :a,
+      scheme: role_to_scheme_mapping(role),
+      size:,
+      border:
+    )
+  end
+
+  def before_render
+    @config[:href] ||= role_to_path
+  end
+
+  def call
+    if user.admin?
+      render Gustwave::Badge.new(t(".role.admin"), **config)
+    elsif user.editor?
+      render Gustwave::Badge.new(t(".role.editor"), **config)
+    end
   end
 
   private
 
-  def build_options(options, user)
-    options.deep_symbolize_keys!
-    options[:scheme] ||= ROLE_SCHEME_MAPPINGS[fetch_or_fallback(ROLE_SCHEME_OPTIONS, user.role.to_sym, DEFAULT_ROLE_SCHEME)]
-    options[:size] ||= DEFAULT_SIZE
-    options[:border] ||= DEFAULT_BORDER
-    options
+  attr_reader :user, :config, :role
+
+  def role_to_path
+    case role
+    when :admin
+      admin_index_path
+    else
+      profile_path
+    end
   end
 end
