@@ -2,23 +2,23 @@
 
 module TendrilTasks
   class Heading < TendrilTasks::Component
-    style :base,
+    styling :base,
           "group leading-none tracking-tight"
 
-    style :scheme,
-          default: :level1,
-          states: {
-            none: "",
-            level1: "mb-4",
-            level2: "mb-4",
-            level3: "mb-4",
-            level4: "mb-4",
-            level5: "mb-2",
-            level6: "mb-2"
-          }
+    styling :scheme,
+            default: :level1,
+            variations: {
+              none: "",
+              level1: "mb-4",
+              level2: "mb-4",
+              level3: "mb-4",
+              level4: "mb-4",
+              level5: "mb-2",
+              level6: "mb-2"
+            }
 
-    style :hyphens,
-          "hyphens-auto"
+    styling :hyphens,
+            "hyphens-auto"
 
     TAG_SCHEME_MAPPINGS = {
       h1: :level2,
@@ -29,12 +29,14 @@ module TendrilTasks
       h6: :level6
     }
 
-    def initialize(text = nil,
-                   tag:,
-                   scheme: nil,
-                   responsive: true,
-                   hyphenated: true,
-                   **options)
+    def initialize(
+      text = nil,
+      tag:,
+      scheme: nil,
+      responsive: true,
+      hyphenated: true,
+      **options
+    )
       @text = text
 
       tag = fetch_or_fallback(Gustwave::Heading::TAG_OPTIONS,
@@ -44,21 +46,28 @@ module TendrilTasks
       # Derive scheme from the tag if not provided
       scheme ||= TAG_SCHEME_MAPPINGS[tag]
 
-      @options = options.deep_symbolize_keys
-      @options[:tag] ||= tag
-      @options[:scheme] ||= scheme
-      @options[:responsive] ||= responsive
-      @options[:class] = styles(base: true,
-                                hyphens: hyphenated,
-                                scheme: scheme,
-                                custom: @options.delete(:class))
-      @options[:lang] ||= I18n.locale if hyphenated
+      @config = configure_component(
+        options,
+        tag:,
+        scheme:,
+        responsive:,
+        lang: (I18n.locale if hyphenated),
+        class: compose_design(
+          base: true,
+          hyphens: hyphenated,
+          scheme:
+        )
+      )
     end
 
     def call
-      render Gustwave::Heading.new(**@options) do
-        @text || content
+      render Gustwave::Heading.new(**config) do
+        text_or_content
       end
     end
+
+    private
+
+    attr_reader :text, :config
   end
 end
