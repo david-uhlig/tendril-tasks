@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.3.1
+
 * Minor visual changes on badges
 
 ## 0.3.0
