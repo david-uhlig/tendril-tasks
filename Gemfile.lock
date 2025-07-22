@@ -46,7 +46,7 @@ GEM
       rails-html-sanitizer (~> 1.6)
     active_storage_dashboard (0.1.8)
       rails (>= 5.2.0)
-    active_storage_validations (2.0.4)
+    active_storage_validations (3.0.1)
       activejob (>= 6.1.4)
       activemodel (>= 6.1.4)
       activestorage (>= 6.1.4)
@@ -543,7 +543,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_dashboard
-  active_storage_validations (~> 2.0)
+  active_storage_validations (~> 3.0)
   anyway_config (~> 2.0)
   bootsnap
   brakeman
