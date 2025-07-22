@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.3.2
+
+* Fix [GHSA-353f-x4gh-cqq8](https://github.com/advisories/GHSA-353f-x4gh-cqq8) and CVE-2025-49007
+
 ## 0.3.1
 
 * Minor visual changes on badges
