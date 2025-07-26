@@ -3,6 +3,7 @@
 class RocketChatConfig < BaseConfig
   config_name :rocket_chat
   attr_config :host,
+              :auth_host,
               :client_id,
               :client_secret,
               authorize_url: "/oauth/authorize",
