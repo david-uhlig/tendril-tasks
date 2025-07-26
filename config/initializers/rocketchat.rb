@@ -5,6 +5,6 @@ Devise.setup do |config|
                   RocketChatConfig.client_id,
                   RocketChatConfig.client_secret,
                   client_options: {
-                    site: RocketChatConfig.host
+                    site: RocketChatConfig.omniauth_host
                   }
 end

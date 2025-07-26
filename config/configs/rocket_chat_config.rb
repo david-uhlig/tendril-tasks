@@ -12,6 +12,10 @@ class RocketChatConfig < BaseConfig
   required :host, :client_id, :client_secret,
            env: %w[production development]
 
+  def omniauth_host
+    auth_host || host
+  end
+
   def http_host
     if Rails.env == "test"
       "http://example.com"
