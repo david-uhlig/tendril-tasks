@@ -54,7 +54,7 @@ class TasksController < ApplicationController
         redirect_to task_path(@task_form.task), notice: success_msg
       end
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -68,7 +68,7 @@ class TasksController < ApplicationController
       update_msg = toast_message_for(@task_form.task, :update) if task_has_changed
       redirect_to task_path(@task_form.task), notice: update_msg
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

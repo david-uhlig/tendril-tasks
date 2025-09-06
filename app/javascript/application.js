@@ -8,7 +8,7 @@ import "flowbite"
 import "controllers"
 
 /**
- * Reattach Flowbite Turbo after events like 422 Unprocessable Entity
+ * Reattach Flowbite Turbo after events like 422 Unprocessable Content
  *
  * see: https://github.com/themesberg/flowbite/issues/88#issuecomment-1962238351
  */

@@ -202,7 +202,7 @@ RSpec.describe "Projects", type: :request do
       it "creates a new project" do
         login_as(editor)
         post projects_path, params: { project_form: attributes_for(:project) }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

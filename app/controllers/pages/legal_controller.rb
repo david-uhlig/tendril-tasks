@@ -18,7 +18,7 @@ module Pages
         flash[:notice] = "Page was successfully updated."
         redirect_to legal_path(@page.slug)
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

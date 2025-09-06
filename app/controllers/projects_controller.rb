@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
         redirect_to project_path(@project_form.project), notice: success_msg
       end
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
       update_msg = toast_message_for(@project_form.project, :update) if project_has_changed
       redirect_to project_path(@project_form.project), notice: update_msg
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

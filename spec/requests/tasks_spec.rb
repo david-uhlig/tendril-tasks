@@ -227,7 +227,7 @@ RSpec.describe "Tasks", type: :request do
       it "loads the new task page" do
         login_as(editor)
         post tasks_path, params: { task_form: attributes_for(:task) }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

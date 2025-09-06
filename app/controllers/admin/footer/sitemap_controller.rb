@@ -6,7 +6,7 @@ module Admin
       def update
         @sitemap = ::Footer::Sitemap.new(sitemap_params)
         unless @sitemap.save
-          render "admin/footer/edit", status: :unprocessable_entity
+          render "admin/footer/edit", status: :unprocessable_content
           nil
         end
       end
