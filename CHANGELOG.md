@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.4.0
+
 * Remove `node_modules` directory from repository in favor of rebuilding npm packages on demand with `npm ci`. The change is reflected in the `Dockerfile`.
 * Fix CVE-2025-24293 and CVE-2025-55193
 * Update Ruby to 3.4.5
