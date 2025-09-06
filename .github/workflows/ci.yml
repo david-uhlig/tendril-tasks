@@ -45,6 +45,9 @@ jobs:
           ANYWAY_SUPPRESS_VALIDATIONS: true
         run: bin/importmap audit
 
+      - name: Run security audit on npm package dependencies
+        run: npm audit
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -69,13 +72,21 @@ jobs:
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client libpq-dev
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          cache: npm
+
+      - name: Install npm package dependencies
+        run: npm ci
 
       - name: Run tests
         env:
@@ -89,5 +100,3 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/capybara
           if-no-files-found: ignore
-
-

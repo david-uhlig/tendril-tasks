@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Remove `node_modules` directory from repository in favor of rebuilding npm packages on demand with `npm ci`. The change is reflected in the `Dockerfile`.  
+
 ## 0.3.2
 
 * Fix [GHSA-353f-x4gh-cqq8](https://github.com/advisories/GHSA-353f-x4gh-cqq8) and CVE-2025-49007
