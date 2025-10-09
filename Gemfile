@@ -68,7 +68,7 @@ gem "image_processing", "~> 1.2"
 gem "active_storage_validations", "~> 2.0"
 
 # Notifications
-gem "noticed", "~> 2.6"
+gem "noticed", "~> 2.9"
 
 # ActiveJob Dashboard [https://github.com/rails/mission_control-jobs]
 gem "mission_control-jobs"
