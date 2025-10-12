@@ -10,14 +10,14 @@ module TendrilTasks
           pill: true,
           class: "align-top"
         ) do
-          safe_join([ link_to_version, link_to_commit ])
+          safe_join([ link_to_version, " ", link_to_commit ]).strip.html_safe
         end
       end
 
       private
 
       def link_to_version
-        link_to TendrilTasks::VERSION, "https://github.com/david-uhlig/tendril-tasks/releases"
+        link_to TendrilTasks::VERSION, "https://github.com/david-uhlig/tendril-tasks/releases/tag/v#{TendrilTasks::VERSION}"
       end
 
       def link_to_commit
