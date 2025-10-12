@@ -65,7 +65,7 @@ gem "inline_svg"
 gem "image_processing", "~> 1.2"
 
 # Active Storage validations
-gem "active_storage_validations", "~> 2.0"
+gem "active_storage_validations", "~> 3.0"
 
 # Notifications
 gem "noticed", "~> 2.6"
