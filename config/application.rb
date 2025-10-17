@@ -51,6 +51,6 @@ module TendrilTasks
     config.action_view.field_error_proc = Proc.new { |html_tag, _| html_tag }
 
     # Set up previews for ViewComponents with RSpec
-    config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
+    config.view_component.previews.paths << "#{Rails.root}/spec/components/previews"
   end
 end

@@ -2,6 +2,8 @@
 
 module Gustwave
   class Svg < Gustwave::Component
+    include InlineSvg::ActionView::Helpers
+
     def initialize(source = nil, **options)
       @source = source&.to_s
       @options = options
