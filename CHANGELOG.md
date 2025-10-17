@@ -1,5 +1,8 @@
 ## Unreleased
 
+* Order initiatives by the latest published task on `/projects` and `/tasks` pages
+* Order initiatives alphabetically on create and edit forms
+
 ## 0.4.2
 
 * Fix CVE-2025-61919 and CVE-2025-61780

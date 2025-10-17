@@ -110,6 +110,35 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  describe "#order_by_most_recently_published_task" do
+    it "returns an empty array when there are no projects" do
+      expect(Project.order_by_most_recently_published_task).to eq([])
+    end
+
+    it "returns an empty array when there are no published tasks" do
+      create(:project, :published)
+      create(:project, :published)
+      expect(Project.order_by_most_recently_published_task).to eq([])
+    end
+
+    it "returns projects ordered by the most recently published task" do
+      oldest_project = create(:project, :published, title: "Oldest Project")
+      newest_project = create(:project, :published, title: "Newest Project")
+      create(:task, :published, project: newest_project)
+      create(:task, :published, project: oldest_project)
+      expect(Project.order_by_most_recently_published_task).to eq([ oldest_project, newest_project ])
+    end
+
+    it "unpublished tasks do not affect the order" do
+      oldest_project = create(:project, :published, title: "Oldest Project")
+      newest_project = create(:project, :published, title: "Newest Project")
+      create(:task, :published, project: newest_project)
+      create(:task, :published, project: oldest_project)
+      create(:task, :not_published, project: newest_project)
+      expect(Project.order_by_most_recently_published_task).to eq([ oldest_project, newest_project ])
+    end
+  end
+
   describe "#publicly_visible" do
     it "returns published projects with published tasks" do
       published_project_with_published_task = create(

@@ -15,13 +15,19 @@ class Project < ApplicationRecord
   validates :description, presence: true
   validates :coordinators, presence: true
 
+  # Published projects with published tasks
   scope :publicly_visible, -> {
     published.includes(:tasks)
              .where(tasks: { published_at: ...Time.zone.now })
   }
 
+  # Published projects
   scope :published, -> {
     where(published_at: ...Time.zone.now)
+  }
+
+  scope :order_by_most_recently_published_task, -> {
+    joins(:tasks).order(tasks: { published_at: :desc }).distinct
   }
 
   # Projects without coordinators

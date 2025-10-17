@@ -42,7 +42,11 @@ class TaskForm
   end
 
   def project_options
-    @project_options ||= Project.select(:id, :title).all.presence || []
+    @project_options ||= Project.select(:id, :title)
+                                .order(:title)
+                                .all
+                                .presence
+    @project_options ||= []
   end
 
   def coordinator_options

@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.publicly_visible
+                       .order_by_most_recently_published_task
                        .includes(:coordinators)
   end
 

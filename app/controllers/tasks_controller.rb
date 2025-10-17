@@ -11,7 +11,7 @@ class TasksController < ApplicationController
 
     @projects = Project.select(:id, :title)
                        .publicly_visible
-                       .order(:updated_at)
+                       .order_by_most_recently_published_task
 
     @tasks = Task.publicly_visible
                  .includes(:coordinators, :project, :applicants)
