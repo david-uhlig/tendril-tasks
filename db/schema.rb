@@ -10,36 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_31_120856) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_23_093660) do
   create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
     t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
+    t.string "content_type"
     t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -50,32 +50,32 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_31_120856) do
   end
 
   create_table "noticed_events", force: :cascade do |t|
-    t.string "type"
-    t.string "record_type"
-    t.bigint "record_id"
-    t.json "params"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "notifications_count"
+    t.json "params"
+    t.bigint "record_id"
+    t.string "record_type"
+    t.string "type"
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id"], name: "index_noticed_events_on_record"
   end
 
   create_table "noticed_notifications", force: :cascade do |t|
-    t.string "type"
-    t.bigint "event_id", null: false
-    t.string "recipient_type", null: false
-    t.bigint "recipient_id", null: false
-    t.datetime "read_at", precision: nil
-    t.datetime "seen_at", precision: nil
     t.datetime "created_at", null: false
+    t.bigint "event_id", null: false
+    t.datetime "read_at", precision: nil
+    t.bigint "recipient_id", null: false
+    t.string "recipient_type", null: false
+    t.datetime "seen_at", precision: nil
+    t.string "type"
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_noticed_notifications_on_event_id"
     t.index ["recipient_type", "recipient_id"], name: "index_noticed_notifications_on_recipient"
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string "slug"
     t.datetime "created_at", null: false
+    t.string "slug"
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_pages_on_slug"
   end
@@ -88,29 +88,29 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_31_120856) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "title", null: false
-    t.datetime "published_at"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "description_plain_text"
+    t.datetime "published_at"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
     t.index ["published_at"], name: "index_projects_on_published_at"
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string "key", null: false
-    t.text "value"
     t.datetime "created_at", null: false
+    t.string "key", null: false
     t.datetime "updated_at", null: false
+    t.text "value"
     t.index ["key"], name: "index_settings_on_key", unique: true
   end
 
   create_table "task_applications", force: :cascade do |t|
-    t.integer "task_id", null: false
-    t.integer "user_id", null: false
     t.text "comment"
-    t.integer "status", default: 0
     t.datetime "created_at", null: false
+    t.integer "status", default: 0
+    t.integer "task_id", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.datetime "withdrawn_at"
     t.index ["task_id", "user_id"], name: "index_task_applications_on_task_id_and_user_id", unique: true
     t.index ["task_id"], name: "index_task_applications_on_task_id"
@@ -125,28 +125,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_31_120856) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "title", null: false
-    t.datetime "published_at"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "project_id", null: false
     t.text "description_plain_text"
+    t.integer "project_id", null: false
+    t.datetime "published_at"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["published_at"], name: "index_tasks_on_published_at"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "avatar_url", default: "", null: false
+    t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "provider", default: "", null: false
-    t.string "uid", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "name", default: "", null: false
-    t.string "username", default: "", null: false
-    t.string "avatar_url", default: "", null: false
-    t.integer "role", default: 0
+    t.string "provider", default: "", null: false
     t.datetime "remember_created_at"
+    t.integer "role", default: 0
+    t.string "uid", default: "", null: false
+    t.datetime "updated_at", null: false
+    t.string "username", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end

@@ -25,9 +25,9 @@ module TendrilTasks
     # Configure the path for configuration classes that should be used before initialization
     # NOTE: path should be relative to the project root (Rails.root)
     # config.anyway_config.autoload_static_config_path = "config/configs"
-    #
+
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     config.i18n.default_locale = AppConfig.default_locale
 
