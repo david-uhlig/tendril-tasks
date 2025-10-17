@@ -1,7 +1,7 @@
 source "https://gem.coop"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.0"
+gem "rails", github: "rails/rails", branch: "8-1-stable"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -97,7 +97,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   # Help to kill N+1 queries and unused eager loading [https://github.com/flyerhzm/bullet]
-  gem "bullet"
+  # gem "bullet"
   # Hot reloading
   gem "hotwire-spark"
 end
