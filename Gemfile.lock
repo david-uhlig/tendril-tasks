@@ -548,7 +548,7 @@ PLATFORMS
 DEPENDENCIES
   active_storage_dashboard
   active_storage_validations (~> 3.0)
-  anyway_config (~> 2.0)
+  anyway_config (~> 2.7)
   bootsnap
   brakeman
   bullet
