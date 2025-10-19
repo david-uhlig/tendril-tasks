@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User withdraws application", js: true do
+RSpec.describe "User withdraws application", type: :system, js: true do
   let(:user) { create(:user) }
 
   before do

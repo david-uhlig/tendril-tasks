@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User edits application", js: true do
+RSpec.describe "User edits application", type: :system, js: true do
   let(:user) { create(:user) }
 
   before do

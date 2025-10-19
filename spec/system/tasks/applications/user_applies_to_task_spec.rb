@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User applies to task", js: true do
+RSpec.describe "User applies to task", type: :system, js: true do
   let(:user) { create(:user) }
 
   before do
