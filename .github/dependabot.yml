@@ -1,12 +1,25 @@
+# Configure dependabot alerts and version updates
+# For supported ecosystems, see https://docs.github.com/en/code-security/dependabot/ecosystems-supported-by-dependabot/supported-ecosystems-and-repositories
 version: 2
 updates:
-- package-ecosystem: bundler
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: github-actions
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
+  # Enable version updates for Ruby gems
+  # Monitor `Gemfile` and `Gemfile.lock` in the `root` directory
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+  # Enable version updates for npm packages
+  # Monitor `package.json` and `package-lock.json` in the `root` directory
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+  # Enable version updates for GitHub Actions
+  # Monitor `.github/workflows/ci.yml` in the `root` directory
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
