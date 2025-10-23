@@ -49,7 +49,7 @@ gem "tailwind_merge", "~> 0.14"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component", "~> 4.0"
+gem "view_component", "~> 4.1"
 
 # Authorization
 gem "cancancan"
