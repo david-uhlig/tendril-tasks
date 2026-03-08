@@ -51,11 +51,8 @@ RSpec.describe User, type: :model do
         info: {
           name: "John Doe",
           email: "john.doe@example.com",
-          username: "john.doe",
-          avatar: {
-            url: "https://example.com/avatar/john.doe",
-            etag: "55577fgdD"
-          }
+          nickname: "john.doe",
+          image: "https://example.com/avatar/john.doe"
         }
       )
     end

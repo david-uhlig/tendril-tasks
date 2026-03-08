@@ -33,15 +33,13 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email || auth.extra.raw_info.emails.first.address
       # Although this application uses only omniauth, a password is generated
       # because it is required for devise features such as :rememberable
       user.password = Devise.friendly_token[0, 20]
-      # Real name
-      user.name = auth.info.name
-      user.username = auth.info.username
-      # TODO We might need to store the etag, too
-      user.avatar_url = auth.info.avatar.url
+      user.name = auth.dig(:info, :name)
+      user.email = auth.dig(:info, :email)
+      user.username = auth.dig(:info, :nickname)
+      user.avatar_url = auth.dig(:info, :image)
       user.role = determine_role(auth)
     end
   end
@@ -72,7 +70,7 @@ class User < ApplicationRecord
   # @return [Symbol] The role of the user, either :user or :admin.
   def self.determine_role(auth)
     return :user if User.where(role: :admin).count > 0
-    return :admin if auth.roles&.include?("admin")
+    return :admin if auth.dig(:extra, :raw_info, :roles)&.include?("admin")
 
     :user
   end
