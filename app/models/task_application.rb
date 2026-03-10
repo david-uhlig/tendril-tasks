@@ -68,13 +68,13 @@ class TaskApplication < ApplicationRecord
   private
 
   def notify_coordinators_about_new_application
-    NewTaskApplicationNotifier
+    TaskApplicationReceivedNotification
       .with(record: self, delay: NOTIFICATION_DELAY)
       .deliver
   end
 
   def notify_coordinators_about_withdrawn_application
-    WithdrawnTaskApplicationNotifier
+    TaskApplicationWithdrawnNotification
       .with(record: self)
       .deliver
   end

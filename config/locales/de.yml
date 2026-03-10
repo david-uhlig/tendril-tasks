@@ -499,10 +499,16 @@ de:
     access_denied: "Das darfst du nicht!"
 
   notifiers:
-    new_task_application_notifier:
+    task_application:
+      summary:
+        markdown: |
+          * Thema: %{project_link}
+          * Meldungen: %{count}
+    task_application_received_notification:
       notification:
-        markdown_message: "👋🏻 *Meldung eingegangen*\n\n@%{applicant} hat sich gemeldet für [%{task_title}](%{task_url}) beim Thema [%{initiative_title}](%{initiative_url})"
-        markdown_comment: " mit der Nachricht:\n\n%{comment}"
-    withdrawn_task_application_notifier:
+        markdown:
+          message: "@%{applicant} hat sich zu %{task_link} gemeldet! 👋🏻"
+    task_application_withdrawn_notification:
       notification:
-        markdown_message: "❌ *Meldung zurückgezogen*\n\n@%{applicant} hat die Meldung für [%{task_title}](%{task_url}) beim Thema [%{initiative_title}](%{initiative_url}) zurückgezogen."
+        markdown:
+          message: "@%{applicant} hat sich von %{task_link} abgemeldet! ❌"

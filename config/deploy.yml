@@ -40,10 +40,10 @@ env:
     - ROCKET_CHAT_CLIENT_SECRET
     # (Optional)
     # Rocket Chat API authentication token and user ID for the user that will
-    # send the notifications. You can obtain a PAT (Personal Access Token) for
-    # this instance by going to `https://example.com/account/tokens`
-    # - ROCKET_CHAT_NOTIFIER_USER_ID
-    # - ROCKET_CHAT_NOTIFIER_AUTH_TOKEN
+    # make API request. You can obtain a PAT (Personal Access Token) for this
+    # instance by going to `https://example.com/account/tokens`
+    # - ROCKET_CHAT_API_USER_ID
+    # - ROCKET_CHAT_API_AUTH_TOKEN
     # (Optional)
     # Displays the git commit hash on the admin panel
     - APP_GIT_COMMIT
@@ -89,15 +89,17 @@ env:
     # Keep it reasonably short, as it appears on buttons.
     # ROCKET_CHAT_BRANDING: "Rocket.Chat"
 
-    # Configure Rocket.Chat Notifications (Optional) -------------------------------
-    # Send notifications to Rocket.Chat users. Notifications will only be sent
-    # if you specify `ROCKET_CHAT_NOTIFIER_HOST`, `ROCKET_CHAT_NOTIFIER_USER_ID`
-    # and `ROCKET_CHAT_NOTIFIER_AUTH_TOKEN`.
-
-    # Rocket Chat server URL (aka workspace), e.g. "https://chat.example.com"
+    # Configure the Rocket.Chat API (Optional) ---------------------------------
+    # Used to send notifications to Rocket.Chat users.
+    #
+    # The following environment variables must be specified:
+    # - `ROCKET_CHAT_API_HOST`: Rocket.Chat workspace URL, e.g. `https://chat.example.com`
+    # - `ROCKET_CHAT_API_USER_ID`: The user that is making the API requests. Obtained by requesting a personal access token (PAT).
+    # - `ROCKET_CHAT_API_AUTH_TOKEN`: The PAT.
+    #
     # Make sure you also pass in `ROCKET_CHAT_NOTIFIER_USER_ID` and
     # `ROCKET_CHAT_NOTIFIER_AUTH_TOKEN` through `.kamal/secrets`.
-    # ROCKET_CHAT_NOTIFIER_HOST = "https://chat.example.com"
+    # ROCKET_CHAT_API_HOST: "https://chat.example.com"
 
     # Configure Rails ----------------------------------------------------------
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.

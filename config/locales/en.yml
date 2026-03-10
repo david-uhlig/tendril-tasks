@@ -429,10 +429,16 @@ en:
     access_denied: "You're not authorized to do that!"
 
   notifiers:
-    new_task_application_notifier:
+    task_application:
+      summary:
+        markdown: |
+          * Project: %{project_link}
+          * Applications: %{count}
+    task_application_received_notification:
       notification:
-        markdown_message: "👋🏻 *Application received*\n\n@%{applicant} has applied for [%{task_title}](%{task_url}) on the initiative [%{initiative_title}](%{initiative_url})"
-        markdown_comment: " with the following message:\n\n%{comment}"
-    withdrawn_task_application_notifier:
+        markdown:
+          message: "@%{applicant} has signed up for %{task_link} 👋🏻"
+    task_application_withdrawn_notification:
       notification:
-        markdown_message: "❌ *Application withdrawn*\n\n@%{applicant} withdrew their application for [%{task_title}](%{task_url}) on the initiative [%{initiative_title}](%{initiative_url})"
+        markdown:
+          message: "@%{applicant} has withdrawn from %{task_link} ❌"

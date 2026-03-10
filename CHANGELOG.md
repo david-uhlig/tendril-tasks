@@ -1,7 +1,10 @@
 ## Unreleased
 
-* Order initiatives by the latest published task on `/projects` and `/tasks` pages
-* Order initiatives alphabetically on create and edit forms
+[Breaking] `ROCKET_CHAT_NOTIFIER_*` env vars have been renamed to `ROCKET_CHAT_API_*`. If you're sending notifications to Rocket Chat please update your `config/deploy.yml` and `.kamal/secrets`.
+
+* Order projects by the latest published task on `/projects` and `/tasks` pages
+* Order projects alphabetically on creation and edit forms
+* Update dependencies
 
 ## 0.4.2
 
