@@ -1,7 +1,7 @@
 <div id="brand">
   <%# cache ["brand", @brand.updated_at] do %>
     <div class="flex items-center space-x-3 rtl:space-x-reverse">
-      <%= render TendrilTasks::Logo.new %>
+      <a class="rounded whitespace-nowrap inline-flex" href="/"><%= render TendrilTasks::Logo.new %></a>
       <%= render TendrilTasks::Navigation::BrandBadge.new(@brand) %>
     </div>
   <%# end %>
