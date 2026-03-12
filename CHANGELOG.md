@@ -2,6 +2,8 @@
 
 [Breaking] `ROCKET_CHAT_NOTIFIER_*` env vars have been renamed to `ROCKET_CHAT_API_*`. If you're sending notifications to Rocket Chat please update your `config/deploy.yml` and `.kamal/secrets`.
 
+[Breaking] The project transitioned to the source-available "O'Saasy License Agreement." The commercial rights to offer the software as a service (SaaS) are now exclusively reserved for the copyright holder, while other MIT license freedoms remain unchanged.
+
 * Order projects by the latest published task on `/projects` and `/tasks` pages
 * Order projects alphabetically on creation and edit forms
 * Update dependencies

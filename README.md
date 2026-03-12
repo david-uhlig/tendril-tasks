@@ -1,5 +1,6 @@
 [license]: LICENSE.md
 [contributing]: CODE_OF_CONDUCT.md
+[release]: https://github.com/david-uhlig/tendril-tasks/releases
 
 # <img src="app/assets/images/brand/logo.svg" height="28"> Tendril Tasks
 
@@ -7,8 +8,9 @@ _Together, individual efforts intertwine, sparking growth that allows the entire
 
 ## About
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)][license]
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)][contributing]
+[![Static Badge](https://img.shields.io/badge/License-O'Saasy-gold)][license]
+[![GitHub Release](https://img.shields.io/github/v/release/david-uhlig/tendril-tasks)][release]
+[![CI](https://github.com/david-uhlig/tendril-tasks/actions/workflows/ci.yml/badge.svg)](https://github.com/david-uhlig/tendril-tasks/actions/workflows/ci.yml)
 
 Tendril Tasks is a task distribution application that allows collectives and organizations to communicate areas of need and efficiently distribute tasks to their members. It comes with a beautiful, intuitive and responsive interface that makes it easy to manage tasks.
 
@@ -19,7 +21,7 @@ It was developed with the needs of [Radtreff Campus Bonn e.V.](https://www.radtr
 
 ## Technology
 
-Tendril Tasks is built with a vanilla [Ruby on Rails 8](https://rubyonrails.org/) stack, featuring quick, SPA-like interactions through the [Hotwire](https://hotwired.dev/) framework. It is styled with [Tailwind CSS](https://v3.tailwindcss.com/), leveraging the [Flowbite UI](https://flowbite.com/) library, implemented in [ViewComponents](https://viewcomponent.org/) and uses Stimulus for interactivity. The application is tested with RSpec and Capybara. Data is stored in a SQLite database, [which is plenty](https://youtu.be/wFUy120Fts8?si=759l-1K_5amTP_MV&t=729).
+Tendril Tasks is built with a vanilla [Ruby on Rails 8](https://rubyonrails.org/) stack, featuring quick, SPA-like interactions through the [Hotwire](https://hotwired.dev/) framework. It is styled with [Tailwind CSS](https://v3.tailwindcss.com/), leveraging the [Flowbite UI](https://flowbite.com/) library, implemented in [ViewComponents](https://viewcomponent.org/) and uses Stimulus for interactivity. The application is tested with RSpec and Capybara. Data is stored in an SQLite database, [which is plenty](https://youtu.be/wFUy120Fts8?si=759l-1K_5amTP_MV&t=729).
 
 The application runs in a single Docker container and can be deployed easily with [Kamal](https://kamal-deploy.org/).
 
@@ -29,10 +31,8 @@ This library aims to adhere to [Semantic Versioning 2.0.0](http://semver.org/). 
 
 ## Contributing
 
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-Bug reports and pull requests are welcome on the [GitHub project page](https://github.com/david-uhlig/tendril-tasks).
+Bug reports and pull requests are welcome on GitHub at https://github.com/david-uhlig/tendril-tasks. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/david-uhlig/sqinky/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
-Tendril Tasks is release under the MIT License. See [LICENSE] for details.
+Tendril Tasks is released under the [O'Sassy License][LICENSE].

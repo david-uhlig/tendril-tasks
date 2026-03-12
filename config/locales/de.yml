@@ -63,6 +63,8 @@ de:
   layouts:
     application:
       application_title: "TendrilTasks - gemeinsam über uns hinauswachsen"
+    footer:
+      attribution: "mit ⌨️ entwickelt von"
 
   pages:
     home:

@@ -18,6 +18,8 @@ en:
   layouts:
     application:
       application_title: "TendrilTasks - growing beyond ourselves together"
+    footer:
+      attribution: "made with a ⌨️ by"
 
   pages:
     home:

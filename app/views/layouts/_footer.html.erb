@@ -10,12 +10,10 @@
           </a>
         </div>
         <div class="ms-1.5 me-2 text-gray-500 dark:text-gray-400 font-medium">
-          <%= render Gustwave::Icon.new(:github,
-                                        theme: :solid,
-                                        size: :sm,
-                                        position: :standalone,
-                                        class: "inline-flex align-center") %>
-          <a href="https://github.com/david-uhlig/tendril-tasks" class="hover:underline">Open-Source-Software</a> mit ❤️ entwickelt von <a href="https://bsky.app/profile/duhlig.bsky.social" class="hover:underline whitespace-nowrap">David Uhlig</a>
+          <%= render Gustwave::Icon.new(:github, theme: :solid, size: :sm, position: :standalone, class: "inline-flex align-center") %>
+          <a href="https://github.com/david-uhlig/tendril-tasks" class="hover:underline">Fair-Source-Software</a>
+          <%= t(".attribution") %>
+          <a href="https://github.com/david-uhlig/tendril-tasks" class="hover:underline whitespace-nowrap">David Uhlig</a>
         </div>
       </div>
       <%# Sitemap links %>
