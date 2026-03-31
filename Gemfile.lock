@@ -91,7 +91,7 @@ GEM
     base64 (0.3.0)
     bcrypt (3.1.22)
     bcrypt_pbkdf (1.1.2)
-    bigdecimal (4.0.1)
+    bigdecimal (4.1.0)
     bindex (0.8.1)
     bootsnap (1.23.0)
       msgpack (~> 1.2)
@@ -192,7 +192,7 @@ GEM
     jbuilder (2.14.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    json (2.19.2)
+    json (2.19.3)
     jwt (3.1.2)
       base64
     kamal (2.11.0)
@@ -518,7 +518,7 @@ GEM
     uri (1.1.1)
     useragent (0.16.11)
     version_gem (1.1.9)
-    view_component (4.5.0)
+    view_component (4.6.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
@@ -594,7 +594,7 @@ DEPENDENCIES
   thruster
   turbo-rails
   tzinfo-data
-  view_component (~> 4.0)
+  view_component (~> 4.6)
   web-console
 
 BUNDLED WITH
