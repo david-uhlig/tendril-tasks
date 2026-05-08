@@ -489,15 +489,16 @@ GEM
     stringio (3.2.0)
     tailwind_merge (0.16.0)
       sin_lru_redux (~> 2.5)
-    tailwindcss-rails (3.3.2)
+    tailwindcss-rails (4.4.0)
       railties (>= 7.0.0)
-      tailwindcss-ruby (~> 3.0)
-    tailwindcss-ruby (3.4.19)
-    tailwindcss-ruby (3.4.19-aarch64-linux)
-    tailwindcss-ruby (3.4.19-arm-linux)
-    tailwindcss-ruby (3.4.19-arm64-darwin)
-    tailwindcss-ruby (3.4.19-x86_64-darwin)
-    tailwindcss-ruby (3.4.19-x86_64-linux)
+      tailwindcss-ruby (~> 4.0)
+    tailwindcss-ruby (4.2.0)
+    tailwindcss-ruby (4.2.0-aarch64-linux-gnu)
+    tailwindcss-ruby (4.2.0-aarch64-linux-musl)
+    tailwindcss-ruby (4.2.0-arm64-darwin)
+    tailwindcss-ruby (4.2.0-x86_64-darwin)
+    tailwindcss-ruby (4.2.0-x86_64-linux-gnu)
+    tailwindcss-ruby (4.2.0-x86_64-linux-musl)
     thor (1.5.0)
     thruster (0.1.20)
     thruster (0.1.20-aarch64-linux)
@@ -590,7 +591,7 @@ DEPENDENCIES
   sqlite3 (>= 2.1)
   stimulus-rails
   tailwind_merge (~> 0.14)
-  tailwindcss-rails (~> 3.3.1)
+  tailwindcss-rails (~> 4.4.0)
   thruster
   turbo-rails
   tzinfo-data
