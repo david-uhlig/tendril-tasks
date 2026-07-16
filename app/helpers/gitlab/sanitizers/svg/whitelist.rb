@@ -8,7 +8,7 @@
 # SVG element list: https://www.w3.org/TR/SVG/eltindex.html
 # SVG Attribute list: https://www.w3.org/TR/SVG/attindex.html
 #
-# :nocov:
+# simplecov:disable
 module Gitlab
   module Sanitizers
     module Svg

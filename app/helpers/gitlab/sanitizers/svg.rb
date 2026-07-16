@@ -4,7 +4,7 @@
 #
 # No modifications made.
 #
-# :nocov:
+# simplecov:disable
 module Gitlab
   module Sanitizers
     module Svg
