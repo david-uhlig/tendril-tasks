@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.5.1
+
+* Update dependencies. Fixes various upstream security vulnerabilities.
+
 ## 0.5.0
 
 [Breaking] `ROCKET_CHAT_NOTIFIER_*` env vars have been renamed to `ROCKET_CHAT_API_*`. If you're sending notifications to Rocket Chat please update your `config/deploy.yml` and `.kamal/secrets`.
