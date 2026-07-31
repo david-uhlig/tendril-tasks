@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Update Ruby to 3.4.10.
+
 ## 0.5.1
 
 * Update dependencies. Fixes various upstream security vulnerabilities.
