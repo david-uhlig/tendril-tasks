@@ -176,9 +176,7 @@ GEM
       zeitwerk
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    image_processing (1.14.0)
-      mini_magick (>= 4.9.5, < 6)
-      ruby-vips (>= 2.0.17, < 3)
+    image_processing (2.0.2)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -227,8 +225,6 @@ GEM
       net-smtp
     marcel (1.2.1)
     matrix (0.4.3)
-    mini_magick (5.3.2)
-      logger
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (6.0.6)
@@ -568,7 +564,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   hotwire-spark
-  image_processing (~> 1.2)
+  image_processing (~> 2.0)
   importmap-rails
   inline_svg
   jbuilder
@@ -583,6 +579,7 @@ DEPENDENCIES
   rails (~> 8.1.2)
   rspec-rails (~> 8.0)
   rubocop-rails-omakase
+  ruby-vips (~> 2.0)
   selenium-webdriver
   simplecov
   solid_cable

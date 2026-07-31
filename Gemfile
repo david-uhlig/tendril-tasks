@@ -62,7 +62,8 @@ gem "dotenv-rails"
 gem "inline_svg"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.0"
+gem "ruby-vips", "~> 2.0"
 
 # Active Storage validations
 gem "active_storage_validations", "~> 3.0"
