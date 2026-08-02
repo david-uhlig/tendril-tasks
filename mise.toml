@@ -3,6 +3,7 @@
 node = "24"
 npm = "latest"
 ruby = "3.4.10"
+zizmor = "latest"
 
 [tasks."ci"]
 description = "Run continuous integration suite."
@@ -35,6 +36,10 @@ run = "bin/importmap audit"
 description = "Security: Javascript dependencies audit"
 run = "npm audit"
 
+[tasks."audit:ci"]
+description = "Security: GitHub actions workflow audit"
+depends = ["zizmor"]
+
 [tasks."brakeman"]
 description = "Security: Brakeman code analysis"
 run = "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
@@ -58,9 +63,17 @@ run = [
 ]
 
 [tasks."update:gems"]
-description = "Run bundle update --all"
+description = "Run bundle update --all."
 run = "bundle update --all"
 
 [tasks."update:npm"]
 description = "Run npm update"
 run = "npm update"
+
+[tasks."zizmor"]
+description = "Run zizmor security audit. Static analysis for GitHub Actions."
+run = "zizmor ./.github"
+
+[tasks."zizmor:fix"]
+description = "Run zizmor and auto fix."
+run = "zizmor --fix ./.github"
