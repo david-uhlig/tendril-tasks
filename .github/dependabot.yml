@@ -26,8 +26,8 @@ updates:
       default-days: 7
       semver-major-days: 14
 
-  # Enable version updates for npm packages
-  # Monitor `package.json` and `package-lock.json` in the `root` directory
+  # Enables version updates for npm packages.
+  # Monitors `package.json` and `package-lock.json` in the `root` directory.
   - package-ecosystem: npm
     directory: "/"
     schedule:
@@ -40,8 +40,8 @@ updates:
     cooldown:
       default-days: 7
 
-  # Enable version updates for GitHub Actions
-  # Monitor `.github/workflows/ci.yml` in the `root` directory
+  # Enables version updates for GitHub Actions.
+  # Monitors `.github/workflows/ci.yml` in the `root` directory.
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
