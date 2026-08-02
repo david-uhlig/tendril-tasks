@@ -1,25 +1,55 @@
-# Configure dependabot alerts and version updates
+# Configures dependabot alerts and version updates.
 # For supported ecosystems, see https://docs.github.com/en/code-security/dependabot/ecosystems-supported-by-dependabot/supported-ecosystems-and-repositories
 version: 2
 updates:
-  # Enable version updates for Ruby gems
-  # Monitor `Gemfile` and `Gemfile.lock` in the `root` directory
+  # Enables version updates for Ruby gems.
+  # Monitors `Gemfile` and `Gemfile.lock` in the `root` directory.
   - package-ecosystem: bundler
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 10
-  # Enable version updates for npm packages
-  # Monitor `package.json` and `package-lock.json` in the `root` directory
+    # Note: creates individual PRs for non-matching dependencies. First match wins.
+    groups:
+      # Temporarily group tailwind updates. Remove once updated to v4.
+      tailwind:
+        patterns:
+          - "tailwind*"
+      production-dependencies:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      development-dependencies:
+        dependency-type: development
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+
+  # Enables version updates for npm packages.
+  # Monitors `package.json` and `package-lock.json` in the `root` directory.
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 10
-  # Enable version updates for GitHub Actions
-  # Monitor `.github/workflows/ci.yml` in the `root` directory
+    groups:
+      javascript:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
+
+  # Enables version updates for GitHub Actions.
+  # Monitors `.github/workflows/ci.yml` in the `root` directory.
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
