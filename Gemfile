@@ -66,7 +66,7 @@ gem "image_processing", "~> 2.0"
 gem "ruby-vips", "~> 2.0"
 
 # Active Storage validations
-gem "active_storage_validations", "~> 3.0"
+gem "active_storage_validations", "~> 4.0"
 
 # Notifications
 gem "noticed", "~> 3.0"
