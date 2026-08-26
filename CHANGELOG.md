@@ -1,5 +1,11 @@
 ## Unreleased
 
+### Security
+
+* Require admin authorization for footer settings updates and deletion.
+
+### Misc
+
 * Update Ruby to 3.4.10.
 
 ## 0.5.1

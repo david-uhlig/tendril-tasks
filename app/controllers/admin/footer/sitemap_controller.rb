@@ -4,6 +4,8 @@ module Admin
   module Footer
     class SitemapController < ApplicationController
       def update
+        authorize! :update, :admin_settings
+
         @sitemap = ::Footer::Sitemap.new(sitemap_params)
         unless @sitemap.save
           render "admin/footer/edit", status: :unprocessable_content
@@ -12,6 +14,8 @@ module Admin
       end
 
       def destroy
+        authorize! :destroy, :admin_settings
+
         @sitemap = ::Footer::Sitemap.new(Setting.footer_sitemap)
         @sitemap.destroy
 
