@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern if Rails.env.production?
+  before_action :store_user_location, if: :storable_location?
   before_action :set_footer
 
   private
@@ -13,9 +14,22 @@ class ApplicationController < ActionController::Base
     @footer = Footer::Data.new
   end
 
+  def store_user_location
+    store_location_for(:user, request.fullpath)
+  end
+
+  # Determine whether the location can be safely stored in the session.
+  # That is when the request method is GET (idempotent), the request is not
+  # handled by a Devise controller (possibly causing an infinite loop), and the
+  # request is not an AJAX request.
+  #
+  # @return [Boolean]
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
   def access_denied_handler(exception)
     unless current_user.present?
-      session[:redirect_back_to] = request.fullpath
       # Returning 302 is the de-facto standard for "user is unauthenticated"
       # redirects. Used by Google, Facebook, and Microsoft.
       # @see https://stackoverflow.com/a/72395961/9261925
