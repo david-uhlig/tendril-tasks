@@ -69,6 +69,9 @@ RSpec.configure do |config|
   config.after(type: :system) { Warden.test_reset! }  # Clean up after each test
   config.after(type: :request) { Warden.test_reset! }
 
+  # Custom request helpers
+  config.include RequestHelpers, type: :request
+
   # System tests
   config.before(:each, type: :system) do
     # This doesn't take any screenshots on failed tests, so we might

@@ -1,10 +1,5 @@
 require "rails_helper"
 
-def require_authentication_for(&block)
-  block.call if block_given?
-  expect(response).to redirect_to(new_user_session_path)
-end
-
 RSpec.describe "Profile", type: :request do
   let(:user) { create(:user) }
 
