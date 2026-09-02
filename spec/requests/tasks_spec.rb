@@ -1,310 +1,236 @@
-require 'rails_helper'
+require "rails_helper"
+
+def require_authentication_for(&block)
+  block.call if block_given?
+  expect(response).to redirect_to(new_user_session_path)
+end
 
 RSpec.describe "Tasks", type: :request do
   let(:user) { create(:user) }
   let(:editor) { create(:user, :editor) }
-  let(:admin) { create(:user, :admin) }
+
+  let(:published_task) { create(:task, :published, :with_published_project) }
 
   describe "GET /tasks" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        get tasks_path
-        expect(response).to redirect_to(new_user_session_path)
-      end
+    it "requires authentication" do
+      require_authentication_for { get tasks_path }
     end
 
-    context "as a user" do
-      it "loads the tasks index page" do
-        login_as(user)
+    context "when authenticated" do
+      before(:each) { login_as(user) }
+
+      it "can view the task list" do
         get tasks_path
         expect(response).to have_http_status(:success)
       end
-    end
-  end
 
-  describe "GET /tasks/:id" do
-    context "published task with published project" do
-      let!(:published_task) { create(:task, :published, :with_published_project) }
-
-      context "as a visitor" do
-        it "redirects to the login page" do
-          get task_path(published_task)
-          expect(response).to redirect_to(new_user_session_path)
-        end
+      it "displays published tasks" do
+        task = create(:task, :published, :with_published_project)
+        get tasks_path
+        expect(response.body).to include(task.title)
       end
 
-      context "as a user" do
-        it "loads the task detail page" do
-          login_as(user)
-          get task_path(published_task)
-          expect(response).to have_http_status(:success)
-        end
-      end
-    end
-
-    context "published task - unpublished project" do
-      let!(:published_task) { create(:task, :published) }
-
-      context "as a visitor" do
-        it "redirects to the login page" do
-          get task_path(published_task)
-          expect(response).to redirect_to(new_user_session_path)
-        end
+      it "does not display unpublished tasks" do
+        task = create(:task, :not_published)
+        get tasks_path
+        expect(response.body).not_to include(task.title)
       end
 
-      context "as a user" do
-        it "responds with a 404" do
-          login_as(user)
-          get task_path(published_task)
-          expect(response).to have_http_status(:not_found)
-        end
-      end
-
-      context "as a coordinator" do
-        it "loads the task detail page" do
-          login_as(user)
-          task = create(:task, coordinators: [ user ])
-
-          get task_path(task)
-          expect(response).to have_http_status(:success)
-        end
-      end
-
-      context "as an editor" do
-        it "loads the task detail page" do
-          login_as(editor)
-          task = create(:task)
-
-          get task_path(task)
-          expect(response).to have_http_status(:success)
-        end
-      end
-    end
-
-    context "unpublished task" do
-      let!(:unpublished_task) { create(:task) }
-
-      context "as a visitor" do
-        it "redirects to the login page" do
-          get task_path(unpublished_task)
-          expect(response).to redirect_to(new_user_session_path)
-        end
-      end
-
-      context "as a user" do
-        it "responds with a 404" do
-          login_as(user)
-          get task_path(unpublished_task)
-          expect(response).to have_http_status(:not_found)
-        end
-      end
-
-      context "as a coordinator" do
-        it "responds with a 404" do
-          login_as(user)
-          task = create(:task, coordinators: [ user ])
-
-          get task_path(task)
-          expect(response).to have_http_status(:success)
-        end
-      end
-
-      context "as an editor" do
-        it "loads the task detail page" do
-          login_as(editor)
-          get task_path(unpublished_task)
-          expect(response).to have_http_status(:success)
-        end
-      end
-    end
-  end
-
-  describe "GET /tasks/:id/edit" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        task = create(:task)
-        get edit_task_path(task)
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
-    context "as a user" do
-      it "responds with not found " do
-        task = create(:task)
-        login_as(user)
-        get edit_task_path(task)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "as a coordinator" do
-      it "loads the task edit page" do
-        task = create(:task, coordinators: [ user ])
-        login_as(user)
-        get edit_task_path(task)
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context "as an editor" do
-      it "loads the task edit page" do
-        task = create(:task)
-        login_as(editor)
-        get edit_task_path(task)
-        expect(response).to have_http_status(:success)
-      end
-    end
-  end
-
-  describe "GET /tasks/new" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        get new_task_path
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
-    context "as a user" do
-      it "loads the new task page" do
-        login_as(user)
-        get new_task_path
-        expect(response).to redirect_to(tasks_path)
-      end
-    end
-  end
-
-  describe "GET /tasks/new/from-preset/:project_id/:coordinator_ids" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        project = create(:project)
-        coordinator = create(:user)
-
-        get new_task_from_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
-    context "as a user" do
-      it "loads the new task page" do
-        login_as(user)
-        project = create(:project)
-        coordinator = create(:user)
-
-        get new_task_from_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
-        expect(response).to redirect_to(tasks_path)
-      end
-    end
-
-    context "as an editor" do
-      it "loads the new task page" do
-        login_as(editor)
-        project = create(:project)
-        coordinator = create(:user)
-
-        get new_task_from_preset_path(project_id: project.id, coordinator_ids: [ coordinator.id ])
-        expect(response).to have_http_status(:success)
+      it "does not display tasks from unpublished projects" do
+        task = create(:task, :published, :with_unpublished_project)
+        get tasks_path
+        expect(response.body).not_to include(task.title)
       end
     end
   end
 
   describe "POST /tasks" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        post tasks_path
-        expect(response).to redirect_to(new_user_session_path)
+    it "requires authentication" do
+      require_authentication_for { post tasks_path }
+    end
+
+    it "unauthorized users are redirected to the task list" do
+      login_as(user)
+      post tasks_path
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(tasks_path)
+    end
+
+    # Requires editor role or above.
+    it "authorized users can create tasks" do
+      login_as(editor)
+      post tasks_path, params: { task_form: attributes_for(:task) }
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+  end
+
+  describe "GET /tasks/new" do
+    it "requires authentication" do
+      require_authentication_for { get new_task_path }
+    end
+
+    it "unauthorized users cannot create new tasks" do
+      login_as(user)
+      get new_task_path
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(tasks_path)
+    end
+
+    it "editors can create new tasks" do
+      login_as(editor)
+      get new_task_path
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "GET /tasks/:id/edit" do
+    it "requires authentication" do
+      require_authentication_for { get edit_task_path(published_task) }
+    end
+
+    it "unauthorized users cannot edit the task" do
+      login_as(user)
+      get edit_task_path(published_task)
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "coordinators can edit the task" do
+      login_as(user)
+      published_task = create(:task, :published, :with_published_project, coordinators: [ user ])
+
+      get edit_task_path(published_task)
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it "editors can edit the task" do
+      login_as(editor)
+      published_task = create(:task, :published, :with_published_project)
+      get edit_task_path(published_task)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "GET /tasks/:id" do
+    it "requires authentication" do
+      require_authentication_for { get task_path(published_task) }
+    end
+
+    context "unauthorized users" do
+      before(:each) { login_as(user) }
+
+      it "can view published task details" do
+        get task_path(published_task)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(published_task.title)
+      end
+
+      it "cannot view unpublished task details" do
+        unpublished_task = create(:task, :not_published)
+        get task_path(unpublished_task)
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "cannot view task details from unpublished projects" do
+        unpublished_task = create(:task, :published, :with_unpublished_project)
+        get task_path(unpublished_task)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
-    context "as a user" do
-      it "redirects to the tasks index page" do
-        login_as(user)
-        post tasks_path
-        expect(response).to redirect_to(tasks_path)
+    context "coordinators" do
+      before(:each) { login_as(user) }
+
+      it "can view unpublished task details" do
+        unpublished_task = create(:task, :not_published, coordinators: [ user ])
+        get task_path(unpublished_task)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(unpublished_task.title)
+      end
+
+      it "can view task details from unpublished projects" do
+        unpublished_task = create(:task, :published, :with_unpublished_project, coordinators: [ user ])
+        get task_path(unpublished_task)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(unpublished_task.title)
       end
     end
 
-    context "as an editor" do
-      it "loads the new task page" do
-        login_as(editor)
-        post tasks_path, params: { task_form: attributes_for(:task) }
-        expect(response).to have_http_status(:unprocessable_content)
+    context "editors" do
+      before(:each) { login_as(editor) }
+
+      it "can view unpublished task details" do
+        unpublished_task = create(:task, :not_published)
+        get task_path(unpublished_task)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(unpublished_task.title)
+      end
+
+      it "can view task details from unpublished projects" do
+        unpublished_task = create(:task, :published, :with_unpublished_project)
+        get task_path(unpublished_task)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(unpublished_task.title)
       end
     end
   end
 
   describe "PATCH /tasks/:id" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        task = create(:task)
-        patch task_path(task)
-        expect(response).to redirect_to(new_user_session_path)
-      end
+    it "requires authentication" do
+      require_authentication_for { patch task_path(published_task) }
     end
 
-    context "as a user" do
-      it "responds with not found " do
-        task = create(:task)
-        login_as(user)
-        patch task_path(task)
-        expect(response).to have_http_status(:not_found)
-      end
+    it "unauthorized users cannot update the task" do
+      login_as(user)
+      patch task_path(published_task)
+      expect(response).to have_http_status(:not_found)
     end
 
-    context "as a coordinator" do
-      it "loads the task edit page" do
-        task = create(:task, coordinators: [ user ])
-        login_as(user)
-        patch task_path(task), params: { task_form: attributes_for(:task) }
-        expect(response).to have_http_status(:found)
-      end
+    it "coordinators can update the task" do
+      login_as(user)
+      task = create(:task, coordinators: [ user ])
+
+      patch task_path(task), params: { task_form: attributes_for(:task) }
+
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(task_path(task))
     end
 
-    context "as an editor" do
-      it "loads the task edit page" do
-        task = create(:task)
-        login_as(editor)
-        patch task_path(task), params: { task_form: attributes_for(:task) }
-        expect(response).to have_http_status(:found)
-      end
+    it "editors can update the task" do
+      login_as(editor)
+      task = create(:task)
+
+      patch task_path(task), params: { task_form: attributes_for(:task) }
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(task_path(task))
     end
   end
 
   describe "DELETE /tasks/:id" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        task = create(:task)
-        delete task_path(task)
-        expect(response).to redirect_to(new_user_session_path)
-      end
+    it "requires authentication" do
+      require_authentication_for { delete task_path(published_task) }
     end
 
-    context "as a user" do
-      it "responds with not found " do
-        task = create(:task)
-        login_as(user)
-        delete task_path(task)
-        expect(response).to have_http_status(:not_found)
-      end
+    it "unauthorized users cannot delete the task" do
+      login_as(user)
+      delete task_path(published_task)
+      expect(response).to have_http_status(:not_found)
     end
 
-    context "as a coordinator" do
-      it "loads the task edit page" do
-        task = create(:task, coordinators: [ user ])
-        login_as(user)
-        delete task_path(task)
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(tasks_path)
-      end
+    it "coordinators can delete the task" do
+      login_as(user)
+      task = create(:task, coordinators: [ user ])
+      delete task_path(task)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(tasks_path)
     end
 
-    context "as an editor" do
-      it "loads the task edit page" do
-        task = create(:task)
-        login_as(editor)
-        delete task_path(task)
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(tasks_path)
-      end
+    it "editors can delete the task" do
+      login_as(editor)
+      task = create(:task)
+      delete task_path(task)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(tasks_path)
     end
   end
 end

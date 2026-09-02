@@ -7,40 +7,6 @@ RSpec.describe "Coordinator views index page", type: :system do
     login_as(editor)
   end
 
-  context "task visibility" do
-    context "unpublished task" do
-      it "is not shown" do
-        create(:task,
-               :not_published,
-               title: "Unpublished Task")
-        visit tasks_path
-        expect(page).not_to have_content("Unpublished Task")
-      end
-    end
-
-    context "published task with unpublished project" do
-      it "is not shown" do
-        create(:task,
-               :published,
-               :with_unpublished_project,
-               title: "Published Task with unpublished project")
-        visit tasks_path
-        expect(page).not_to have_content("Published Task with unpublished project")
-      end
-    end
-
-    context "published task with published project" do
-      it "is shown" do
-        create(:task,
-               :published,
-               :with_published_project,
-               title: "Published Task with published project")
-        visit tasks_path
-        expect(page).to have_content("Published Task with published project")
-      end
-    end
-  end
-
   context "project filter options" do
     context "published project with published tasks" do
       it "is shown" do
