@@ -35,9 +35,9 @@ class Ability
     can [ :update, :destroy ], User, { id: user.id }
 
     # ----- Editor -----
-    return unless user.editor? || user.admin?
+    return unless user.admin? || user.editor?
 
-    can :manage, [ Project, Task ]
+                  can :manage, [ Project, Task ]
     can :coordinate, [ Project, Task ]
 
     # ----- Admin -----
