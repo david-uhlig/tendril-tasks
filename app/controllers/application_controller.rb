@@ -29,15 +29,6 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied_handler(exception)
-    unless current_user.present?
-      # Returning 302 is the de-facto standard for "user is unauthenticated"
-      # redirects. Used by Google, Facebook, and Microsoft.
-      # @see https://stackoverflow.com/a/72395961/9261925
-      redirect_to new_user_session_path, status: :found
-
-      return
-    end
-
     case exception.action
     when :index
       redirect_back_or_to root_path,

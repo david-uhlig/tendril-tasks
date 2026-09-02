@@ -1,8 +1,6 @@
 class Coordinators::SearchesController < ApplicationController
   NUM_SEARCH_RESULTS = 12
 
-  before_action :authenticate_user!
-
   # Displays search results in the dialog
   def index
     if params[:search].present?
