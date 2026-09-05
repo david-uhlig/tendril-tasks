@@ -5,15 +5,14 @@ module Pages
     before_action :set_page, only: %i[ show destroy ]
     before_action :set_editable_page, only: %i[ edit update ]
 
+    authorize_resource class: Page
+    rescue_from CanCan::AccessDenied, with: :access_denied_handler
+
     def show; end
 
-    def edit
-      authorize! :edit, @page
-    end
+    def edit; end
 
     def update
-      authorize! :update, @page
-
       if @page.update(page_params)
         flash[:notice] = "Page was successfully updated."
         redirect_to legal_path(@page.slug)
@@ -23,8 +22,6 @@ module Pages
     end
 
     def destroy
-      authorize! :destroy, @page
-
       @page.destroy if @page.present?
       flash[:notice] = "Page was successfully deleted."
       redirect_to root_path
@@ -35,7 +32,7 @@ module Pages
     def set_page
       raise ActionController::RoutingError, "Not Found" unless is_legal_page
 
-      @page = Page.find_by(slug: params[:slug])
+      @page = Page.find_by!(slug: params[:slug])
     end
 
     def set_editable_page
@@ -44,12 +41,12 @@ module Pages
       @page = Page.find_or_initialize_by(slug: params[:slug])
     end
 
-    def page_params
-      params.require(:page).permit(:content)
-    end
-
     def is_legal_page
       params[:slug].in?(LEGAL_PAGES)
+    end
+
+    def page_params
+      params.require(:page).permit(:content)
     end
   end
 end

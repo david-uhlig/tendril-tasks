@@ -28,6 +28,13 @@ class ApplicationController < ActionController::Base
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
 
+  # Handle unauthorized requests to sensible resources.
+  #
+  # ### Usage:
+  #   rescue_from CanCan::AccessDenied, with: :access_denied_handler
+  #
+  # @param [CanCan::AccessDenied] exception The exception that was raised when an unauthorized request was made.
+  # @see https://github.com/CanCanCommunity/cancancan/blob/develop/docs/handling_access_denied.md#danger-of-exposing-sensible-information
   def access_denied_handler(exception)
     case exception.action
     when :index
@@ -40,14 +47,19 @@ class ApplicationController < ActionController::Base
                   status: :found
       nil
     when :show, :edit, :update, :destroy
-      # Don't expose whether a resource exists
-      not_found!
+      not_found! # Don't expose it whether a resource exists
     else
       not_found!
     end
   end
 
+  # Raises a routing error for unauthorized resource access.
+  #
+  # @return [void]
   def not_found!
-    raise ActionController::RoutingError.new("Not Found")
+    respond_to do |format|
+      format.turbo_stream { render body: nil, status: :not_found }
+      format.html { raise ActionController::RoutingError.new("Not Found") }
+    end
   end
 end
