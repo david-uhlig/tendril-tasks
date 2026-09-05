@@ -36,6 +36,92 @@ RSpec.describe "Tasks", type: :request do
         get tasks_path
         expect(response.body).not_to include(task.title)
       end
+
+      it "shows projects with published tasks in the project filter" do
+        create(
+          :project,
+          :published,
+          :with_published_tasks,
+          title: "Published Project with published tasks"
+        )
+
+        get tasks_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Published Project with published tasks")
+      end
+
+      it "does not show projects with unpublished tasks" do
+        create(
+          :project,
+          :published,
+          :with_unpublished_tasks,
+          title: "Published Project with unpublished tasks"
+        )
+
+        get tasks_path
+
+        expect(response.body).not_to include("Published Project with unpublished tasks")
+      end
+
+      it "does not show unpublished projects" do
+        create(:project, :not_published, title: "Unpublished Project")
+
+        get tasks_path
+
+        expect(response.body).not_to include("Unpublished Project")
+      end
+
+      it "does not show the new task link" do
+        get tasks_path
+
+        expect(response.body).not_to include("Aufgabe anlegen")
+      end
+    end
+
+    context "when authorized as an editor" do
+      before(:each) { login_as(editor) }
+
+      it "shows projects with published tasks in the project filter" do
+        create(
+          :project,
+          :published,
+          :with_published_tasks,
+          title: "Published Project with published tasks"
+        )
+
+        get tasks_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Published Project with published tasks")
+      end
+
+      it "does not show projects with unpublished tasks" do
+        create(
+          :project,
+          :published,
+          :with_unpublished_tasks,
+          title: "Published Project with unpublished tasks"
+        )
+
+        get tasks_path
+
+        expect(response.body).not_to include("Published Project with unpublished tasks")
+      end
+
+      it "does not show unpublished projects" do
+        create(:project, :not_published, title: "Unpublished Project")
+
+        get tasks_path
+
+        expect(response.body).not_to include("Unpublished Project")
+      end
+
+      it "shows the new task link" do
+        get tasks_path
+
+        expect(response.body).to include("Aufgabe anlegen")
+      end
     end
   end
 
