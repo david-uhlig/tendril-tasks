@@ -18,11 +18,11 @@ RSpec.describe "Admin::Footer settings", type: :request do
       require_authentication_for { get edit_admin_footer_path }
     end
 
-    it "raises CanCan::AccessDenied when unauthorized" do
+    it "rejects unauthorized access" do
       login_as(editor)
-      expect {
-        get edit_admin_footer_path
-      }.to raise_error(CanCan::AccessDenied)
+
+      get edit_admin_footer_path
+      expect(response).to have_http_status(:not_found)
     end
 
     it "displays the footer edit page when authorized" do
