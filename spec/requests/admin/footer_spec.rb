@@ -49,10 +49,9 @@ RSpec.describe "Admin::Footer settings", type: :request do
       Setting.footer_copyright = "original"
 
       login_as(editor)
-      expect {
-        patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
-      }.to raise_error(CanCan::AccessDenied)
+      patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
 
+      expect(response).to have_http_status(:not_found)
       expect(Setting.footer_copyright).to eq("original")
     end
 
@@ -76,10 +75,8 @@ RSpec.describe "Admin::Footer settings", type: :request do
     it "denies unauthorized changes" do
       login_as(editor)
 
-      expect {
-        patch admin_footer_sitemap_path, params: valid_sitemap_params
-      }.to raise_error(CanCan::AccessDenied)
-
+      patch admin_footer_sitemap_path, params: valid_sitemap_params, as: :turbo_stream
+      expect(response).to have_http_status(:not_found)
       expect(Setting.footer_sitemap).to eq({})
     end
 
@@ -106,10 +103,9 @@ RSpec.describe "Admin::Footer settings", type: :request do
       Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
 
       login_as(editor)
-      expect {
-        delete admin_footer_sitemap_path
-      }.to raise_error(CanCan::AccessDenied)
+      delete admin_footer_sitemap_path
 
+      expect(response).to have_http_status(:not_found)
       expect(Setting.footer_sitemap).not_to eq({})
     end
 
