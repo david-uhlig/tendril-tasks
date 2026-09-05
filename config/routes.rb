@@ -45,8 +45,9 @@ Rails.application.routes.draw do
 
   # Admin routes. Authorization is handled separately via CanCanCan abilities.
   authenticate :user do
-    resources :admin, only: %i[ index ]
     namespace :admin do
+      root to: "dashboard#index"
+
       resource :brand, only: %i[ edit ], controller: :brand
       namespace :brand do
         resource :name, only: %i[ update ], controller: :name
