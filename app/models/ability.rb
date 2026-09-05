@@ -46,6 +46,5 @@ class Ability
     # Manage semi-static pages, e.g. imprint, privacy policy, terms of service.
     can :manage, Page
     can :manage, :admin_settings
-    can :manage, :user_roles
   end
 end
