@@ -1,12 +1,13 @@
 module Pages
   class LegalController < ApplicationController
+    include AccessDeniedHandlers::SensibleResources
+
     LEGAL_PAGES = %w[ imprint privacy-policy terms-of-service ]
 
     before_action :set_page, only: %i[ show destroy ]
     before_action :set_editable_page, only: %i[ edit update ]
 
     authorize_resource class: Page
-    rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
     def show; end
 
