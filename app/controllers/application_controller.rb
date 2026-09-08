@@ -1,31 +1,16 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include ToastNotificationsHelper
+  include ToastNotificationsHelper, UserReturnLocation
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern if Rails.env.production?
-  before_action :store_user_location, if: :storable_location?
   before_action :set_footer
 
   private
 
   def set_footer
     @footer = Footer::Data.new
-  end
-
-  def store_user_location
-    store_location_for(:user, request.fullpath)
-  end
-
-  # Determine whether the location can be safely stored in the session.
-  # That is when the request method is GET (idempotent), the request is not
-  # handled by a Devise controller (possibly causing an infinite loop), and the
-  # request is not an AJAX request.
-  #
-  # @return [Boolean]
-  def storable_location?
-    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
 
   # Handle unauthorized requests to sensible resources.
