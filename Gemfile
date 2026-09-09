@@ -49,7 +49,7 @@ gem "tailwind_merge", "~> 0.14"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component", "~> 4.0"
+gem "view_component", "~> 4.15"
 
 # Authorization
 gem "cancancan"
@@ -66,7 +66,7 @@ gem "image_processing", "~> 2.0"
 gem "ruby-vips", "~> 2.0"
 
 # Active Storage validations
-gem "active_storage_validations", "~> 4.0"
+gem "active_storage_validations", "~> 4.1"
 
 # Notifications
 gem "noticed", "~> 3.0"
