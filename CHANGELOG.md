@@ -2,6 +2,7 @@
 
 ### Security
 
+* Tighten authentication and authorization safeguards.
 * Require admin authorization for footer settings updates and deletion.
 
 ### Misc
