@@ -46,7 +46,7 @@ RSpec.describe Footer::Sitemap, type: :model do
           "links" => [
             {
               "title" => "Example",
-              "href" => "https://example.com"
+              "href" => "https://example.com/"
             }
           ]
         }

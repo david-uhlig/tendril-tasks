@@ -404,6 +404,7 @@ de:
               blank: "Bitte gib dem Link einen Namen."
             href:
               blank: "Bitte gib einen Link an, z. B. 'https://example.com' oder '/imprint'."
+              untrustable: "Bitte gib eine gültige URL (`https://example.com`) oder einen relativen Pfad (`/imprint`) ein."
 
   activerecord:
     models:

@@ -31,8 +31,15 @@ RSpec.describe Footer::Category, type: :model do
 
   describe "#attributes" do
     it "returns correct attributes" do
-      expected_attributes = { "title" => "Example",
-                              "links" => [ { "title" => "Link1", "href" => "http://example.com" } ] }
+      expected_attributes = {
+        "title" => "Example",
+        "links" => [
+          {
+            "title" => "Link1",
+            "href" => "http://example.com/"
+          }
+        ]
+      }
       expect(category.attributes).to eq(expected_attributes)
     end
   end
