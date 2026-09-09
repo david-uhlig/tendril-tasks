@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
+  include AccessDeniedHandlers::SensibleResources
+
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
   authorize_resource
   before_action :set_task_form, only: [ :edit, :update ]
-
-  rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
   def index
     filter = params.permit(:project_id)

@@ -15,8 +15,8 @@ RSpec.describe "User deletes their profile", type: :system, js: true do
     expect(page).to have_content("Bist du sicher, dass du dein Konto endgültig löschen möchtest?")
   end
 
-  context "when the user confirms the profile deletion" do
-    it "redirects them to the page root" do
+  context "when the user confirms the dialog" do
+    it "deletes the account and redirects them to the page root" do
       click_button "Mein Konto löschen"
 
       # Click on the "Konto löschen" button inside the modal
@@ -27,10 +27,11 @@ RSpec.describe "User deletes their profile", type: :system, js: true do
       # Ensure the user is redirected to the root path after profile deletion
       expect(page).to have_current_path(root_path)
       expect(page).to have_button("Anmelden")
+      expect(User.find_by(id: user.id)).to be_nil
     end
   end
 
-  context "when the user aborts the profile deletion" do
+  context "when the user aborts the dialog" do
     it "closes the confirmation dialog" do
       click_button "Mein Konto löschen"
 
@@ -42,6 +43,7 @@ RSpec.describe "User deletes their profile", type: :system, js: true do
       # Dialog header should disappear
       expect(page).not_to have_content("Konto löschen?")
       expect(page).to have_current_path(profile_path)
+      expect(User.find_by(id: user.id)).to eq(user)
     end
   end
 end

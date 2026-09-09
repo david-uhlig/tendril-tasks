@@ -57,6 +57,10 @@ class User < ApplicationRecord
       .or(where(users[:username].matches(terms)))
   end
 
+  def coordinator?
+    projects_as_coordinator.exists? || tasks_as_coordinator.exists?
+  end
+
   private
 
   # Determines the role of a user based on the authentication data and the

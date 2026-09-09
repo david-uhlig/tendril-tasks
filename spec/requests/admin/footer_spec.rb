@@ -1,14 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
-# Regression coverage for the footer settings endpoints. These mutate global,
-# site-wide state (rendered on every page) and must never be reachable without
-# admin rights. Prior to this spec, `PATCH /admin/footer/copyright` and the
-# sitemap update/destroy actions had no authorization check at all.
-#
-# Like the other admin controllers (see admin_spec.rb), these do not rescue
-# CanCan::AccessDenied, so an unauthorized request raises rather than redirects.
 RSpec.describe "Admin::Footer settings", type: :request do
   let(:user) { create(:user) }
+  let(:editor) { create(:user, :editor) }
   let(:admin) { create(:user, :admin) }
 
   let(:valid_sitemap_params) do
@@ -19,102 +13,108 @@ RSpec.describe "Admin::Footer settings", type: :request do
     }
   end
 
+  describe "GET /admin/footer" do
+    it "requires authentication" do
+      require_authentication_for { get edit_admin_footer_path }
+    end
+
+    it "rejects unauthorized access" do
+      login_as(editor)
+
+      get edit_admin_footer_path
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "displays the footer edit page when authorized" do
+      login_as(admin)
+      get edit_admin_footer_path
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include("Copyright")
+      expect(response.body).to include("Sitemap")
+    end
+  end
+
   describe "PATCH /admin/footer/copyright" do
-    context "as a visitor" do
-      it "is denied and does not change the copyright" do
-        Setting.footer_copyright = "original"
+    it "requires authentication" do
+      Setting.footer_copyright = "original"
 
-        expect {
-          patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
-        }.to raise_error(CanCan::AccessDenied)
-
-        expect(Setting.footer_copyright).to eq("original")
+      require_authentication_for do
+        patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
       end
+
+      expect(Setting.footer_copyright).to eq("original")
     end
 
-    context "as a user" do
-      before(:each) { login_as(user) }
+    it "denies unauthorized changes" do
+      Setting.footer_copyright = "original"
 
-      it "is denied and does not change the copyright" do
-        Setting.footer_copyright = "original"
+      login_as(editor)
+      patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
 
-        expect {
-          patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
-        }.to raise_error(CanCan::AccessDenied)
-
-        expect(Setting.footer_copyright).to eq("original")
-      end
+      expect(response).to have_http_status(:not_found)
+      expect(Setting.footer_copyright).to eq("original")
     end
 
-    context "as an admin" do
-      before(:each) { login_as(admin) }
-
-      it "updates the copyright" do
-        patch admin_footer_copyright_path, params: { copyright_notice: "© Example e.V." }
-
-        expect(Setting.footer_copyright).to eq("© Example e.V.")
-      end
+    it "updates the copyright notice when authorized" do
+      login_as(admin)
+      patch admin_footer_copyright_path, params: { copyright_notice: "© Example e.V." }
+      expect(response).to have_http_status(:found)
+      expect(Setting.footer_copyright).to eq("© Example e.V.")
     end
   end
 
   describe "PATCH /admin/footer/sitemap" do
-    context "as a visitor" do
-      it "is denied and does not change the sitemap" do
-        expect {
-          patch admin_footer_sitemap_path, params: valid_sitemap_params
-        }.to raise_error(CanCan::AccessDenied)
-
-        expect(Setting.footer_sitemap).to eq({})
+    it "requires authentication" do
+      require_authentication_for do
+        patch admin_footer_sitemap_path, params: valid_sitemap_params
       end
+
+      expect(Setting.footer_sitemap).to eq({})
     end
 
-    context "as a user" do
-      before(:each) { login_as(user) }
+    it "denies unauthorized changes" do
+      login_as(editor)
 
-      it "is denied" do
-        expect {
-          patch admin_footer_sitemap_path, params: valid_sitemap_params
-        }.to raise_error(CanCan::AccessDenied)
-
-        expect(Setting.footer_sitemap).to eq({})
-      end
+      patch admin_footer_sitemap_path, params: valid_sitemap_params, as: :turbo_stream
+      expect(response).to have_http_status(:not_found)
+      expect(Setting.footer_sitemap).to eq({})
     end
 
-    context "as an admin" do
-      before(:each) { login_as(admin) }
+    it "updates the sitemap when authorized" do
+      login_as(admin)
+      patch admin_footer_sitemap_path, params: valid_sitemap_params, as: :turbo_stream
 
-      it "stores the sitemap" do
-        patch admin_footer_sitemap_path, params: valid_sitemap_params, as: :turbo_stream
-
-        categories = Setting.footer_sitemap.fetch("categories")
-        expect(categories.first["title"]).to eq("Community")
-      end
+      expect(response).to have_http_status(:success)
+      categories = Setting.footer_sitemap.fetch("categories")
+      expect(categories.first["title"]).to eq("Community")
     end
   end
 
   describe "DELETE /admin/footer/sitemap" do
-    context "as a visitor" do
-      it "is denied and does not remove the sitemap" do
-        Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
+    it "requires authentication" do
+      Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
 
-        expect {
-          delete admin_footer_sitemap_path
-        }.to raise_error(CanCan::AccessDenied)
+      require_authentication_for { delete admin_footer_sitemap_path }
 
-        expect(Setting.footer_sitemap).not_to eq({})
-      end
+      expect(Setting.footer_sitemap).not_to eq({})
     end
 
-    context "as an admin" do
-      before(:each) { login_as(admin) }
+    it "denies unauthorized deletions" do
+      Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
 
-      it "removes the sitemap" do
-        Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
+      login_as(editor)
+      delete admin_footer_sitemap_path
 
-        delete admin_footer_sitemap_path
+      expect(response).to have_http_status(:not_found)
+      expect(Setting.footer_sitemap).not_to eq({})
+    end
 
-        expect(Setting.footer_sitemap).to eq({})
-      end
+    it "deletes the sitemap when authorized" do
+      login_as(admin)
+      Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
+      delete admin_footer_sitemap_path
+      expect(response).to have_http_status(:found)
+      expect(Setting.footer_sitemap).to eq({})
     end
   end
 end
