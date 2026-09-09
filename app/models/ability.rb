@@ -35,9 +35,9 @@ class Ability
     can [ :update, :destroy ], User, { id: user.id }
 
     # ----- Editor -----
-    return unless user.editor? || user.admin?
+    return unless user.admin? || user.editor?
 
-    can :manage, [ Project, Task ]
+                  can :manage, [ Project, Task ]
     can :coordinate, [ Project, Task ]
 
     # ----- Admin -----
@@ -46,6 +46,5 @@ class Ability
     # Manage semi-static pages, e.g. imprint, privacy policy, terms of service.
     can :manage, Page
     can :manage, :admin_settings
-    can :manage, :user_roles
   end
 end

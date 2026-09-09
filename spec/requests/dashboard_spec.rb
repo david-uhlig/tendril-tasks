@@ -1,13 +1,21 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Dashboard", type: :request do
-  context "when logged in as user" do
-    let(:user) { create(:user) }
-    before(:each) { login_as(user) }
+  let(:user) { create(:user) }
 
-    it "can access dashboard page" do
-      get dashboard_index_path
-      expect(response).to have_http_status(:success)
+  describe "GET /dashboard" do
+    it "requires authentication" do
+      require_authentication_for { get dashboard_index_path }
+    end
+
+    context "when authenticated" do
+      before(:each) { login_as(user) }
+
+      it "displays the user's dashboard" do
+        get dashboard_index_path
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Dashboard")
+      end
     end
   end
 end

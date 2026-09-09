@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
+  include AccessDeniedHandlers::SensibleResources
+
   before_action :set_project, only: [ :show, :edit, :update, :destroy ]
   authorize_resource
   before_action :set_project_form, only: [ :edit, :update ]
-
-  rescue_from CanCan::AccessDenied, with: :access_denied_handler
 
   def index
     @projects = Project.publicly_visible

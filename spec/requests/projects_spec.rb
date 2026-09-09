@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Projects", type: :request do
   let(:user) { create(:user) }
@@ -6,18 +6,94 @@ RSpec.describe "Projects", type: :request do
   let(:admin) { create(:user, :admin) }
 
   describe "GET /projects" do
-    context "as a visitor" do
-      it "redirects to the login page" do
-        get projects_path
-        expect(response).to redirect_to(new_user_session_path)
+    context "requires authentication" do
+      it "redirects unauthenticated users to the login page" do
+        require_authentication_for { get projects_path }
       end
     end
 
-    context "as a user" do
-      it "loads the projects index page" do
-        login_as(user)
+    context "authenticated users" do
+      before(:each) { login_as(user) }
+
+      it "can access the projects overview" do
         get projects_path
         expect(response).to have_http_status(:success)
+      end
+
+      it "does not show unpublished projects to users" do
+        create(:project, :not_published, title: "Unpublished Project")
+
+        get projects_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).not_to include("Unpublished Project")
+      end
+
+      it "does not show published projects without published tasks to users" do
+        create(
+          :project,
+          :published,
+          :with_unpublished_tasks,
+          title: "Published Project with unpublished tasks"
+        )
+
+        get projects_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).not_to include("Published Project with unpublished tasks")
+      end
+
+      it "shows published projects with published tasks to users" do
+        create(
+          :project,
+          :published,
+          :with_published_tasks,
+          title: "Published Project with published tasks"
+        )
+
+        get projects_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Published Project with published tasks")
+      end
+
+      it "does not show the new project link to regular users" do
+        get projects_path
+
+        expect(response.body).not_to include("Thema anlegen")
+      end
+    end
+
+    context "authorized users" do
+      before do
+        login_as(editor)
+      end
+
+      it "does not show unpublished projects" do
+        create(:project, :not_published, title: "Unpublished Project")
+
+        get projects_path
+
+        expect(response.body).not_to include("Unpublished Project")
+      end
+
+      it "does not show published projects without published tasks" do
+        create(
+          :project,
+          :published,
+          :with_unpublished_tasks,
+          title: "Published Project with unpublished tasks"
+        )
+
+        get projects_path
+
+        expect(response.body).not_to include("Published Project with unpublished tasks")
+      end
+
+      it "shows the new project link" do
+        get projects_path
+
+        expect(response.body).to include("Thema anlegen")
       end
     end
   end

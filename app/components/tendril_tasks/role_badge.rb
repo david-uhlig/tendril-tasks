@@ -39,7 +39,7 @@ class TendrilTasks::RoleBadge < TendrilTasks::Component
   def role_to_path
     case role
     when :admin
-      admin_index_path
+      admin_root_path
     else
       profile_path
     end

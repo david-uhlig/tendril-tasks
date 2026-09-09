@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include ToastNotificationsHelper
+  include ToastNotificationsHelper, UserReturnLocation
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern if Rails.env.production?
@@ -11,38 +11,5 @@ class ApplicationController < ActionController::Base
 
   def set_footer
     @footer = Footer::Data.new
-  end
-
-  def access_denied_handler(exception)
-    unless current_user.present?
-      session[:redirect_back_to] = request.fullpath
-      # Returning 302 is the de-facto standard for "user is unauthenticated"
-      # redirects. Used by Google, Facebook, and Microsoft.
-      # @see https://stackoverflow.com/a/72395961/9261925
-      redirect_to new_user_session_path, status: :found
-
-      return
-    end
-
-    case exception.action
-    when :index
-      redirect_back_or_to root_path,
-                          notice: t("toast_notification.login_required"),
-                          status: :found
-    when :new, :create
-      redirect_to exception.subject || root_path,
-                  notice: t("toast_notification.access_denied"),
-                  status: :found
-      nil
-    when :show, :edit, :update, :destroy
-      # Don't expose whether a resource exists
-      not_found!
-    else
-      not_found!
-    end
-  end
-
-  def not_found!
-    raise ActionController::RoutingError.new("Not Found")
   end
 end
