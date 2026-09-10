@@ -99,6 +99,9 @@ group :development do
 
   # Hot reloading [https://github.com/hotwired/spark]
   gem "hotwire-spark"
+
+  # Find and manage missing and unused translations [https://github.com/glebm/i18n-tasks]
+  gem "i18n-tasks", "~> 1.0"
 end
 
 group :test do
