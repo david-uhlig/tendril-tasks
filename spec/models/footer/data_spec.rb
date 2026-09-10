@@ -66,21 +66,8 @@ RSpec.describe Footer::Data, type: :model do
   end
 
   describe "#sitemap" do
-    it "returns an empty hash when there is no footer sitemap" do
-      expect(data.sitemap).to eq({})
-    end
-
-    it "returns the categories of the footer sitemap" do
-      sitemap = { "categories" =>
-                   [ { "title" => "Gehe zu", "links" => [ { "title" => "Start", "href" => "/" }, { "title" => "Themen", "href" => "/projects" }, { "title" => "Aufgaben", "href" => "/tasks" } ] },
-                    { "title" => "Example Apps",
-                     "links" => [ { "title" => "Chat", "href" => "https://example.com" }, { "title" => "Homepage", "href" => "https://example.com/home" }, { "title" => "Terminplaner", "href" => "https://example.com/calendar" } ] } ] }
-      categories = [ { "title" => "Gehe zu", "links" => [ { "title" => "Start", "href" => "/" }, { "title" => "Themen", "href" => "/projects" }, { "title" => "Aufgaben", "href" => "/tasks" } ] },
-                    { "title" => "Example Apps",
-                     "links" => [ { "title" => "Chat", "href" => "https://example.com" }, { "title" => "Homepage", "href" => "https://example.com/home" }, { "title" => "Terminplaner", "href" => "https://example.com/calendar" } ] } ]
-      create(:setting, key: "footer_sitemap", value: sitemap)
-
-      expect(data.sitemap).to eq(categories)
+    it "returns a Footer::Sitemap object" do
+      expect(data.sitemap).to be_a(Footer::Sitemap)
     end
   end
 

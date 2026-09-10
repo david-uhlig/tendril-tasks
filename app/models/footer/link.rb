@@ -9,7 +9,7 @@ module Footer
 
     validates :title, presence: true
     validates :href, presence: true
-    validate :href_must_be_trustable
+    validate :href_must_be_safe
 
     def title=(value)
       @title = value&.strip
@@ -17,6 +17,14 @@ module Footer
 
     def href=(value)
       @href = normalize_href(value)
+    end
+
+    def safe_href
+      if href_safe?
+        href
+      else
+        "/"
+      end
     end
 
     # Returns the attribute hash for serialization.
@@ -44,7 +52,7 @@ module Footer
       nil
     end
 
-    def href_trustable?
+    def href_safe?
       uri = URI.parse(href).normalize
       if uri.scheme
         %w[http https].include?(uri.scheme) && uri.host.present? && uri.userinfo.nil?
@@ -53,10 +61,10 @@ module Footer
       end
     end
 
-    def href_must_be_trustable
+    def href_must_be_safe
       return if href.blank?
 
-      errors.add(:href, :untrustable) unless href_trustable?
+      errors.add(:href, :unsafe) unless href_safe?
     end
   end
 end

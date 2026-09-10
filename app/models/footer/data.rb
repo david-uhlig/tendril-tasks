@@ -8,11 +8,11 @@ module Footer
 
     def legal
       @legal ||= Page.where(slug: Admin::LegalController::LEGAL_PAGES)
-                      .pluck(:slug)
+                     .pluck(:slug)
     end
 
     def sitemap
-      @sitemap ||= Setting.footer_sitemap.fetch("categories", {})
+      @sitemap ||= Sitemap.load
     end
 
     def copyright

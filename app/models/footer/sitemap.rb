@@ -10,6 +10,12 @@ module Footer
     validates :categories, presence: true
     validate :categories_valid?
 
+    class << self
+      def load
+        new(Setting.footer_sitemap)
+      end
+    end
+
     def initialize(attributes = {})
       super
 

@@ -361,7 +361,7 @@ en:
         footer/link:
           attributes:
             href:
-              untrustable: "Please provide a valid URL (`https://example.com`) or a relative path (`/imprint`)."
+              unsafe: "Please provide a valid URL (`https://example.com`) or a relative path (`/imprint`)."
 
   # ActiveRecord Attributes
   activerecord:
