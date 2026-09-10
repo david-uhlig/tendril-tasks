@@ -72,7 +72,7 @@ de:
       title_highlight: "aktiv"
       hero: |
         Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren.
-        Wir haben alle anstehenden Aufgaben in einer Liste zusammengestellt - sucht euch die für euch interessanten Aufgaben aus und meldet euch. Für einen besseren Überblick haben wir die Aufgaben in Themenbereiche strukturiert.
+        Wir haben alle anstehenden Aufgaben in einer Liste zusammengestellt – sucht euch die für euch interessanten Aufgaben aus und meldet euch. Für einen besseren Überblick haben wir die Aufgaben in Themenbereiche strukturiert.
       cta_when_signed_in:
         view_now: "Jetzt ansehen:"
         interesting_initiatives: "Spannende Themen"
@@ -141,7 +141,7 @@ de:
         one: "Thema"
         other: "Themen"
       no_initiatives: |
-        Unsere fleißigen Mitglieder haben sich aller Aufgaben angenommen. Juhu! Schau doch später wieder vorbei.
+        Aktuell sind keine Themen verfügbar. Schau doch später wieder vorbei.
       goto_tasks_button: "Zu den Aufgaben"
       create_initiative_button: "Thema anlegen"
     show:
@@ -188,7 +188,7 @@ de:
           title: "Aufgabe löschen?"
           content: |
             Bist du sicher, dass du diese Aufgabe löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
-            Auch alle Meldungen von Mitgliedern, die auf diese Aufgabe eingegangen sind, werden unwiderruflich gelöscht.
+            Auch alle Meldungen von Mitgliedern zu dieser Aufgabe werden unwiderruflich gelöscht.
       new_initiative_button: "Neu"
       description: "Beschreibung"
     show:
@@ -220,14 +220,15 @@ de:
         apply_here: "Interessiert? Hier melden!"
         procedure_and_motivation: | 
           Du hast Interesse an dieser Aufgabe? Dann melde dich einfach unverbindlich bei uns, indem du dieses Formular abschickst! Wir besprechen die Details ganz entspannt mit dir. Wenn du uns schon vorab etwas mitteilen möchtest, kannst du uns gerne eine Nachricht hinterlassen. Wir freuen uns auf dein Engagement!
-        submit: "Zählt auf mich!"
+        submit: "Meldung absenden"
       update:
         we_couldnt_update_your_application: "Wir konnten deine Meldung leider nicht mehr aktualisieren."
         we_updated_your_message: "Vielen Dank! Wir haben deine Meldung aktualisiert."
       create:
         we_received_your_application: "Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt."
       destroy:
-        application_successfully_removed: "Deine Meldung für %{task_title} wurde entfernt."
+        application_successfully_removed: |
+          Deine Meldung zur Aufgabe "%{task_title}" wurde zurückgezogen.
     visibility_explainer:
       visible_for_everyone: "Für alle sichtbar"
       visible_for_coordinators: "Nur für Ansprechpersonen sichtbar"
@@ -245,37 +246,38 @@ de:
       roles:
         title: "Rollenverwaltung"
         cannot_change_current_user:
-          cannot_change_own_permissions: "Du kannst deine eigenen Rechte nicht bearbeiten."
-        description: "Lege fest welche Benutzer besondere Zugriffsrechte haben sollen."
+          cannot_change_own_permissions: "Du kannst deine eigenen Berechtigungen nicht ändern."
+        description: "Lege fest, welche Benutzer besondere Zugriffsrechte haben sollen."
     index:
       title: "Administration"
     legal:
       index:
         description: | 
-          Hier kannst du rechtliche Dokumente hinterlegen. Sie erscheinen automatisch im Webseiten-Footer in der Kategorie "Rechtliches"
+          Hier kannst du rechtliche Dokumente hinterlegen. Sie erscheinen automatisch im Footer unter der Kategorie "Rechtliches".
         edit: "Bearbeiten"
         create: "Erstellen"
       title: "Rechtliche Dokumente"
-      description: "Hinterlege rechtliche Dokumente für die Webseite: Impressum, Datenschutzerklärung, Nutzungsbedingungen."
+      description: "Hinterlege rechtliche Dokumente für die Website: Impressum, Datenschutzerklärung, Nutzungsbedingungen."
     footer:
-      title: "Fußzeile"
+      title: "Footer"
       edit:
         description: "Hier konfigurierst du Website-Links, den Copyright-Hinweis und Links zu sozialen Medien im Footer."
         links:
           title: "Links"
         sitemap:
-          title: "Sitemap Links"
+          title: "Sitemap-Links"
           explainer: |
-            Hier kannst du bis zu 2 Spalten mit Links für den Footer angeben. Diese erscheinen neben den Links der "Rechtliches" Kategorie. Es sind relative und absolute URLs gestattet.
+            Hier kannst du bis zu zwei Spalten mit Links für den Footer angeben. Diese erscheinen neben den Links der Kategorie "Rechtliches". Relative und absolute URLs sind zulässig.
           delete_confirm:
             modal:
-              title: Sitemap Links löschen?
+              title: Sitemap-Links löschen?
               content: |
-                Bist du sicher, dass du die Links löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden.
-              confirm_button: Links löschen
+                Bist du sicher, dass du die Sitemap-Links löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden.
+              confirm_button: Sitemap-Links löschen
         copyright:
-          explainer: "Dieser Copyright Hinweis erscheint im Footer unten links auf der Seite. Er ist optional, du kannst ihn also auch leer lassen."
-          title: "Copyright Hinweis"
+          explainer: |
+            Dieser Copyright-Hinweis erscheint unten links im Footer. Er ist optional, du kannst ihn also auch leer lassen.
+          title: "Copyright-Hinweis"
       sitemap_link:
         link:
           button:
@@ -289,12 +291,12 @@ de:
           input:
             label: "Kategorie"
       sitemap:
-        destroyed: "Sitemap Links wurden zurückgesetzt."
+        destroyed: "Sitemap-Links wurden zurückgesetzt."
       copyright:
         update:
           update:
-            notice: "Copyright Hinweis wurde gespeichert."
-      description: "Passe den Copyright-Hinweis und die Sitemap Links der Anwendung an."
+            notice: "Copyright-Hinweis wurde gespeichert."
+      description: "Passe den Copyright-Hinweis und die Sitemap-Links der Anwendung an."
     brand:
       title: "Branding"
       edit:
@@ -303,7 +305,7 @@ de:
           title: "Logo"
           file_field:
             label: "Neues Logo auswählen"
-            helper_text: "Format: SVG, PNG, JPEG (max 500kb)"
+            helper_text: "Format: SVG, PNG oder JPEG (max 500 KB)"
         name:
           title: "Anwendungsname"
           text_field:
@@ -321,9 +323,9 @@ de:
         editors: "Redaktion"
       projects:
         title: "Themen"
-        published: "veröffentlicht"
+        published: "Veröffentlicht"
       tasks:
-        published: "veröffentlicht"
+        published: "Veröffentlicht"
         title: "Aufgaben"
       applications:
         title: "Meldungen"
@@ -331,15 +333,17 @@ de:
       title: "Systemüberwachung"
       jobs:
         title: "Hintergrundprozesse"
-        description: "Überprüfe die Warteschlange und derzeit wartende Hintergrundprozesse. Prüfe fehlgeschlagene Prozesse, starte sie neu oder verwerfe sie."
-        failed: "%{count} Fehlgeschlagen"
-        scheduled: "%{count} Geplant"
-        in_progress: "%{count} Laufend"
-        finished: "%{count} Beendet"
+        description: |
+          Überprüfe die Warteschlange und die ausstehenden Hintergrundprozesse. Prüfe fehlgeschlagene Prozesse, starte sie neu oder verwerfe sie.
+        failed: "Fehlgeschlagen: %{count}"
+        scheduled: "Geplant: %{count}"
+        in_progress: "Laufend: %{count}"
+        finished: "Beendet: %{count}"
         view: "Ansehen"
       storage:
         title: "Medien"
-        description: "Zeige Nutzungsstatistiken hochgeladener Medien. Durchsuche Blobs, Anhänge und Variantendatensätze. Zeige Metadaten, Dateidetails und Beziehungen zwischen den Dateien an."
+        description: |
+          Zeige Nutzungsstatistiken zu hochgeladenen Medien an. Durchsuche Blobs, Anhänge und Variantendatensätze und sieh dir Metadaten, Dateidetails sowie Beziehungen zwischen Dateien an.
         attachments:
           one: "%{count} Anhang"
           other: "%{count} Anhänge"
@@ -347,25 +351,24 @@ de:
           one: "%{count} Blob"
           other: "%{count} Blobs"
 
-
   users:
     profile:
       edit:
         your_email_address: "Deine E-Mail-Adresse"
-        your_rocket_chat_username: "Dein %{brand} Benutzername"
+        your_rocket_chat_username: "Dein %{brand}-Benutzername"
         data_sync_info: |
-          Wir übernehmen deine Daten aus dem %{brand} und synchronisieren sie automatisch bei Änderungen. Löschst du deinen %{brand}-Account, wird auch dein Konto hier gelöscht.
+          Wir übernehmen deine Daten aus %{brand} und synchronisieren sie automatisch bei Änderungen. Löschst du deinen %{brand}-Account, wird auch dein Konto hier gelöscht.
         delete_confirm:
           delete_my_account_button: "Mein Konto löschen"
           modal:
             title: "Konto löschen?"
             content: |
               Bist du sicher, dass du dein Konto endgültig löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden. Alle deine Daten werden unwiderruflich gelöscht.
-              Dein %{brand} Konto ist von der Löschung nicht betroffen.
+              Dein %{brand}-Konto ist von der Löschung nicht betroffen.
             confirm_button: "Konto löschen"
       destroy:
         success: "Dein Konto wurde gelöscht!"
-        failure: "Wir konnten dein Konto nicht löschen. Bitte versuche es nochmals!"
+        failure: "Wir konnten dein Konto nicht löschen. Bitte versuche es erneut."
     omniauth_callbacks:
       failure:
         failure: "Fehler. Bitte versuche es erneut."
@@ -374,22 +377,23 @@ de:
     sessions:
       new:
         content: |
-          Du bist nur einen Klick davon entfernt, loszulegen! Sobald du dich eingeloggt hast, kannst du alle unsere spannenden Themen und Aufgaben entdecken, die auf dich warten. Es ist ganz einfach: Melde dich unkompliziert mit deinem %{brand} Account an. Wir freuen uns auf dich! 🚴‍♂️✨
+          Du bist nur einen Klick davon entfernt, loszulegen! Sobald du dich eingeloggt hast, kannst du alle unsere spannenden Themen und Aufgaben entdecken, die auf dich warten. Es ist ganz einfach: Melde dich unkompliziert mit deinem %{brand}-Konto an. Wir freuen uns auf dich! 🚴‍♂️✨
         click_here_to_start: "Einfach hier klicken und gleich loslegen:"
         login_with_rocket_chat_button: "Anmelden mit %{brand}"
         create_account:
           prompt: "Du hast noch keinen Account?"
           link_title: "Jetzt anmelden"
-        title: "Willkommen – Los geht`s!"
+        title: "Willkommen – los geht’s!"
       user:
-        signed_out: "Du wurdest erfolgreich abgemeldet"
+        signed_out: "Du wurdest erfolgreich abgemeldet."
 
   dashboard:
     index:
       title: "Dashboard"
       create_initiative_button: "Thema anlegen"
       my_applications: "Meine Meldungen"
-      applications_placeholder: "Hier werden die Aufgaben angezeigt, für die du dich angemeldet hast. Derzeit hast du noch keine Aufgabe übernommen. Schau doch in der Aufgabenübersicht vorbei – vielleicht ist etwas Spannendes für dich dabei!"
+      applications_placeholder: |
+        Hier werden die Aufgaben angezeigt, für die du dich gemeldet hast. Derzeit hast du dich noch für keine Aufgabe gemeldet. Schau doch in der Aufgabenübersicht vorbei – vielleicht ist etwas Spannendes für dich dabei!
 
   activemodel:
     errors:
@@ -418,16 +422,16 @@ de:
       user:
         one: "Benutzer"
         other: "Benutzer"
-      task_applications:
-        one: "Bewerbung"
-        other: "Bewerbungen"
+      task_application:
+        one: "Meldung"
+        other: "Meldungen"
     attributes:
       task:
         project: "Thema"
         title: "Titel"
         description: "Beschreibung"
         coordinators: "Ansprechpersonen"
-        applicants: "Bewerber"
+        applicants: "Interessenten"
       task_application:
         comment: "Deine Nachricht an uns (optional)"
         status:
@@ -509,8 +513,8 @@ de:
     task_application_received_notification:
       notification:
         markdown:
-          message: "@%{applicant} hat sich zu %{task_link} gemeldet! 👋🏻"
+          message: "@%{applicant} hat sich für %{task_link} gemeldet! 👋🏻"
     task_application_withdrawn_notification:
       notification:
         markdown:
-          message: "@%{applicant} hat sich von %{task_link} abgemeldet! ❌"
+          message: "@%{applicant} die Meldung für %{task_link} zurückgezogen! ❌"

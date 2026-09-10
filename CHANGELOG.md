@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade dependencies: Ruby 3.4.10, ViewComponent 4.15, etc.
+- Improve German translations for consistency and clarity.
 
 ### Removed
 - Unused English translations.

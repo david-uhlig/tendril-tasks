@@ -16,7 +16,7 @@ RSpec.describe "Task application state", type: :request do
 
         expect(response).to have_http_status(:success)
         expect(response.body).to include("Interessiert? Hier melden!")
-        expect(response.body).to include("Zählt auf mich!")
+        expect(response.body).to include("Meldung absenden")
         expect(response.body).to include("task_application_comment")
       end
     end

@@ -31,14 +31,14 @@ RSpec.describe "User withdraws application", type: :system, js: true do
       within("#task-application") do
         expect(page).to have_content("Interessiert? Hier melden!")
         expect(page).to have_selector("textarea")
-        expect(page).to have_button("Zählt auf mich!")
+        expect(page).to have_button("Meldung absenden")
       end
     end
 
-    it "displays notification" do
+    it "displays the notification" do
       within("#notifications") do
         expect(page).to have_content("Deine Meldung")
-        expect(page).to have_content("wurde entfernt")
+        expect(page).to have_content("wurde zurückgezogen")
       end
     end
   end

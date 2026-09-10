@@ -27,7 +27,7 @@ RSpec.describe "User withdraws application after grace period and reapplies",
   context "when reapplying" do
     before do
       within("#task-application") do
-        click_button "Zählt auf mich!"
+        click_button "Meldung absenden"
       end
     end
 

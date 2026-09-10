@@ -13,7 +13,7 @@ RSpec.describe "User applies to task", type: :system, js: true do
     before do
       within("#task-application") do
         fill_in "task_application_comment", with: "My comment for the coordinators"
-        click_button "Zählt auf mich!"
+        click_button "Meldung absenden"
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe "User applies to task", type: :system, js: true do
   context "when applying without a comment" do
     before do
       within("#task-application") do
-        click_button "Zählt auf mich!"
+        click_button "Meldung absenden"
       end
     end
 

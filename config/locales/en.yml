@@ -210,7 +210,6 @@ en:
         description: "Define which users should have special access rights."
     index:
       title: "Administration"
-      role_management: "Role Management"
     legal:
       index:
         description: |
