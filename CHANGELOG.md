@@ -12,8 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix an authorization flaw that allowed footer settings to be updated or deleted without administrator privileges.
 - Prevent unsafe footer links from being added and displayed to prevent XSS attacks.
 
+### Added
+- German translations in authorization flows (devise).
+
 ### Changed
 - Upgrade dependencies: Ruby 3.4.10, ViewComponent 4.15, etc.
+
+### Removed
+- Unused English translations.
 
 ## [0.5.1] - 2026-07-30
 

@@ -1,3 +1,4 @@
+# Devise 5.0.4
 # Additional translations at https://github.com/heartcombo/devise/wiki/I18n
 
 en:
@@ -63,7 +64,3 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
-  admin:
-    statistics:
-      users:
-        title: ""
