@@ -7,13 +7,20 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore installed npm packages - install with `npm ci`
+# Ignore installed npm packages - install with `npm ci`.
 /node_modules/*
 
 # Ignore all environment files.
 /.env*
 /secrets.env
 !/.env.sample
+
+# Ignore Kamal configuration files and secrets.
+/config/deploy.yml
+/config/deploy.*.yml
+!/config/deploy.yml.sample
+/.kamal/secrets
+!/config/secrets.sample
 
 # Ignore all logfiles and tempfiles.
 /log/*

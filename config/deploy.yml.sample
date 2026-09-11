@@ -1,3 +1,14 @@
+# Kamal deploy example configuration file.
+#
+# Copy this file to `config/deploy.yml` and customize it for your needs.
+# See: https://kamal-deploy.org/docs/configuration/overview/
+#
+# If you plan to deploy this app without Kamal or for local development to
+# contribute to the project, you need to configure `.env` instead!
+#
+# We use the `anyway_config` gem, so you can use any supported method to set the
+# values. See: https://github.com/palkan/anyway_config
+
 # Name of your application. Used to uniquely configure containers.
 service: tendril-tasks
 
