@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix an authorization flaw that allowed footer settings to be updated or deleted without administrator privileges.
 - Prevent unsafe footer links from being added and displayed to prevent XSS attacks.
 
+### Fixed
+- Fix configuration examples. Rename removed `ROCKET_CHAT_NOTIFIER_*` configuration variables to `ROCKET_CHAT_API_*`. See `0.5.0` notes.
+
 ### Added
 - German translations in authorization flows (devise).
 

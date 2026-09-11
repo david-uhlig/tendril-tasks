@@ -97,8 +97,8 @@ env:
     # - `ROCKET_CHAT_API_USER_ID`: The user that is making the API requests. Obtained by requesting a personal access token (PAT).
     # - `ROCKET_CHAT_API_AUTH_TOKEN`: The PAT.
     #
-    # Make sure you also pass in `ROCKET_CHAT_NOTIFIER_USER_ID` and
-    # `ROCKET_CHAT_NOTIFIER_AUTH_TOKEN` through `.kamal/secrets`.
+    # Make sure you also pass in `ROCKET_CHAT_API_USER_ID` and
+    # `ROCKET_CHAT_API_AUTH_TOKEN` through `.kamal/secrets`.
     # ROCKET_CHAT_API_HOST: "https://chat.example.com"
 
     # Configure Rails ----------------------------------------------------------
