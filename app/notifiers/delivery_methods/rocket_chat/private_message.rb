@@ -33,11 +33,22 @@ class DeliveryMethods::RocketChat::PrivateMessage < ApplicationDeliveryMethod
     @response = post_request(private_message_endpoint, headers:, json: payload)
 
     if raise_if_not_ok? && !response_http_ok?
-      raise ::Noticed::ResponseUnsuccessful.new(@response, private_message_endpoint, { headers:, json: payload })
+      # Prevent accidentally exposing sensitive headers like `X-Auth-Token`,
+      # although the current `Noticed::ResponseUnsuccessful` implementation does
+      # not include these args in its message. Consider using ActiveSupport::ParameterFilter
+      # if less restrictive filtering becomes necessary.
+      exception_args = {
+        headers: headers.transform_values { "[FILTERED]" },
+        json: payload
+      }
+
+      raise ::Noticed::ResponseUnsuccessful.new(@response, private_message_endpoint, exception_args)
     end
 
     @response
   end
+
+  private
 
   def raise_if_not_ok?
     option = evaluate_option(:raise_if_not_ok)
