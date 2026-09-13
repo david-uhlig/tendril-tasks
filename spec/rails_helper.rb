@@ -63,6 +63,10 @@ RSpec.configure do |config|
     @request = vc_test_controller.request
   end
 
+  # Devise sign-in helpers
+  # https://github.com/heartcombo/devise#integration-tests
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
   # Warden test helpers
   config.include Warden::Test::Helpers, type: :system
   config.include Warden::Test::Helpers, type: :request
