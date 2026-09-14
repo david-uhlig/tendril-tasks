@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Breaking Changes
+- Add the PKCE configuration option `ROCKET_CHAT_PKCE` (default: `false`). This change disables PKCE by default because Rocket.Chat `>= 7.4.0` introduced a bug that breaks third-party OAuth integrations. A partial fix is available for Rocket.Chat `>= 8.0.0`, but PCKE flows remain affected. To enable PKCE once Rocket.Chat fixes the bug, set `ROCKET_CHAT_PKCE = "true"` in the `.env` or Kamal `deploy.yml` file.
+
 ### Security
 - Improve authentication and authorization safeguards.
 - Fix an authorization flaw that allowed footer settings to be updated or deleted without administrator privileges.

@@ -95,6 +95,11 @@ env:
     # ROCKET_CHAT_AUTHORIZE_URL: "/oauth/authorize"
     # ROCKET_CHAT_TOKEN_URL: "/oauth/token"
 
+    # Should we use PKCE (Proof Key for Code Exchange) for OAuth2?
+    # Currently PKCE is not supported in Rocket.Chat due to a bug, see:
+    # https://github.com/david-uhlig/omniauth-rocketchat#compatibility
+    # ROCKET_CHAT_PKCE: "false"
+
     # How should we refer to Rocket Chat in descriptions and on buttons,
     # e.g. "Tendril Chat"?
     # Keep it reasonably short, as it appears on buttons.
