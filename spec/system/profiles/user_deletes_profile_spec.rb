@@ -21,7 +21,7 @@ RSpec.describe "User deletes their profile", type: :system, js: true do
 
       # Click on the "Konto löschen" button inside the modal
       within('#confirm-account-deletion') do
-        click_button 'Konto löschen'
+        click_button 'Konto endgültig löschen'
       end
 
       # Ensure the user is redirected to the root path after profile deletion

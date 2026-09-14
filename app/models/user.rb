@@ -96,4 +96,16 @@ class User < ApplicationRecord
 
     update(session_token: SecureRandom.hex)
   end
+
+  # Invalidates all remember me tokens.
+  #
+  # Expires the remember me tokens regardless of devise's
+  # `expire_all_remember_me_on_sign_out` setting. Useful to allow users to sign
+  # out individual sessions or all active sessions on a case-by-case basis.
+  def expire_all_remember_me!
+    return unless persisted?
+
+    self.remember_created_at = nil
+    forget_me!
+  end
 end

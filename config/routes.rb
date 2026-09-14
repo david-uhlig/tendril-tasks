@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }, skip: [ :sessions ]
   # Disable username/password logins (`POST "/users/sign_in"`) since we only support OmniAuth.
   devise_scope :user do
-    get "/users/sign_in", to: "devise/sessions#new", as: :new_user_session
-    delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
+    get "/users/sign-in", to: "users/sessions#new", as: :new_user_session
+    delete "/users/sign-out", to: "users/sessions#destroy", as: :destroy_user_session
   end
 
   # User-specific routes.

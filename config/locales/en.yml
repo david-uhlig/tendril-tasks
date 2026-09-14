@@ -313,18 +313,28 @@ en:
   users:
     profile:
       edit:
-        your_email_address: "Your e-mail-address"
-        your_rocket_chat_username: "Your %{brand} Username"
+        title: "User profile"
+        personal_data: "Personal information"
+        info: "Information"
+        browser_sessions: "Browser sessions"
+        user_account: "User account"
+        sign_out_all_sessions: "Sign out of all sessions"
+        sign_out_all_sessions_description: |
+          For your security, sign out of all open sessions. This will sign you out on this device and on every other device where your account is currently open. You will then need to sign in again with your credentials on any devices you want to continue using.
+        delete_account_description: |
+          Remove your user account and delete all your data. You will be signed out and will not be able to restore your account afterwards. You can create a new account at any time.
+        your_email_address: "Your email address"
+        your_rocket_chat_username: "Your %{brand} username"
         data_sync_info: |
-          We take over your data from %{brand} and synchronize it automatically when changes are made. If you delete your %{brand} account, your account here will also be deleted.
+          We import your data from %{brand} and automatically synchronize it whenever changes are made. If you delete your %{brand} account, your account with us will be deleted as well.
         delete_confirm:
-          delete_my_account_button: "Delete my Account"
+          delete_my_account_button: "Delete my account"
           modal:
-            title: "Delete Account?"
+            title: "Delete account?"
             content: |
-              Are you sure you want to permanently delete your account? This step cannot be undone. All your data will be irrevocably deleted.
-              Your %{brand} account is not affected by the deletion.
-            confirm_button: "Delete my Account Permanently"
+              Are you sure you want to permanently delete your account? This cannot be undone. All your data will be permanently deleted.
+              Your %{brand} account will not be affected.
+            confirm_button: "Permanently delete account"
       destroy:
         success: "Your account was deleted!"
         failure: "We couldn't delete your account. Please try again!"

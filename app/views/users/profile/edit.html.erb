@@ -5,14 +5,17 @@
     <% breadcrumb.item(t "breadcrumbs.profile") %>
   <% end %>
 
-  <%# Profile header %>
+  <%= render TendrilTasks::Heading.new(t(".title"), tag: :h1) %>
+
+  <%= render TendrilTasks::HorizontalLine.new %>
+
+  <%# Personal data %>
+  <%= render TendrilTasks::Heading.new(t(".personal_data"), tag: :h2, class: "sr-only") %>
+
   <div class="flex flex-nowrap gap-2">
-    <%= render TendrilTasks::Avatar.new(@user,
-                                   size: "2xl",
-                                   class: "ms-2")
-    %>
+    <%= render TendrilTasks::Avatar.new(@user, size: "2xl", class: "ms-2") %>
     <div class="ms-2 mt-2 mb-4">
-      <h2 class="mb-1 text-2xl md:text-2xl lg:text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white"><%= @user.name %></h2>
+      <h3 class="mb-1 text-2xl md:text-2xl lg:text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white"><%= @user.name %></h3>
       <%= render TendrilTasks::RoleBadge.new(current_user) %>
     </div>
   </div>
@@ -75,15 +78,38 @@
         class: "flex-shrink-0 inline w-4 h-4 me-3"
       )
     %>
-    <span class="sr-only">Info</span>
+    <%= tag.span t(".info"), class: "sr-only" %>
     <%= tag.div t(".data_sync_info", brand: RocketChatConfig.branding) %>
   </div>
 
-  <%= render DeleteConfirm::ButtonComponent
-               .new(text: t(".delete_confirm.delete_my_account_button"),
-                    target_modal_id: "confirm-account-deletion")
+  <%= render TendrilTasks::HorizontalLine.new %>
+  <%= render TendrilTasks::Heading.new(t(".browser_sessions"), tag: :h2) %>
+  <%=
+    form_with(
+      id: "sign-out-from-all-sessions-form",
+      url: destroy_user_session_path,
+      method: :delete,
+      class: "space-y-4"
+    ) do |f|
   %>
-<% end # of ContentComponent %>
+    <%= render TendrilTasks::Paragraph.new(t(".sign_out_all_sessions_description")) %>
+    <%= render Form::TextFieldComponent.new(f, :expire_all_remember_me_tokens, false, value: true, class: "hidden") %>
+    <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
+      <% button_group.button(t(".sign_out_all_sessions")) %>
+    <% end %>
+  <% end %>
+
+  <%= render TendrilTasks::HorizontalLine.new %>
+  <%= render TendrilTasks::Heading.new(t(".user_account"), tag: :h2) %>
+  <%= render TendrilTasks::Paragraph.new(t(".delete_account_description")) %>
+  <%# Delete account button  %>
+  <%=
+    render DeleteConfirm::ButtonComponent.new(
+      text: t(".delete_confirm.delete_my_account_button"),
+      target_modal_id: "confirm-account-deletion"
+    )
+  %>
+<% end %>
 
 <%= content_for :modal do %>
   <%= render DeleteConfirm::ModalComponent.new(id: "confirm-account-deletion", delete_path: profile_path) do |modal| %>

@@ -173,4 +173,24 @@ RSpec.describe User, type: :model do
       expect(user.authenticatable_salt).to eq(original_salt)
     end
   end
+
+  describe "#expire_all_remember_me!" do
+    it "does nothing when the record is not persisted" do
+      user = User.new
+      user.remember_created_at = Time.now.utc
+
+      expect {
+        user.expire_all_remember_me!
+      }.not_to change { user.remember_created_at }
+    end
+
+    it "sets the remember_created_at attribute to nil when the record is persisted" do
+      user = create(:user)
+      user.remember_me!
+
+      expect {
+        user.expire_all_remember_me!
+      }.to change { user.remember_created_at }.from(anything).to(nil)
+    end
+  end
 end

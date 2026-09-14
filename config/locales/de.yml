@@ -354,18 +354,28 @@ de:
   users:
     profile:
       edit:
+        title: "Benutzerprofil"
+        personal_data: "Persönliche Daten"
+        info: "Info"
+        browser_sessions: "Browsersitzungen"
+        user_account: "Benutzerkonto"
+        sign_out_all_sessions: "Von allen Sitzungen abmelden"
+        sign_out_all_sessions_description: |
+          Melde dich zu deiner Sicherheit von allen offenen Sitzungen ab. Dadurch wirst du auf diesem Gerät sowie auf allen anderen Geräten abgemeldet, auf denen dein Konto derzeit geöffnet ist. Anschließend musst du dich auf den Geräten, die du weiterhin verwenden möchtest, erneut mit deinen Zugangsdaten anmelden.
+        delete_account_description: |
+          Entferne dein Benutzerkonto und lösche alle deine Daten. Du wirst abgemeldet und kannst dein Konto anschließend nicht wiederherstellen. Du kannst jederzeit ein neues Konto erstellen.
         your_email_address: "Deine E-Mail-Adresse"
         your_rocket_chat_username: "Dein %{brand}-Benutzername"
         data_sync_info: |
-          Wir übernehmen deine Daten aus %{brand} und synchronisieren sie automatisch bei Änderungen. Löschst du deinen %{brand}-Account, wird auch dein Konto hier gelöscht.
+          Wir übernehmen deine Daten von %{brand} und synchronisieren sie automatisch, sobald Änderungen vorgenommen werden. Wenn du dein %{brand}-Konto löschst, wird auch dein Konto bei uns gelöscht.
         delete_confirm:
           delete_my_account_button: "Mein Konto löschen"
           modal:
             title: "Konto löschen?"
             content: |
-              Bist du sicher, dass du dein Konto endgültig löschen möchtest? Dieser Schritt kann nicht rückgängig gemacht werden. Alle deine Daten werden unwiderruflich gelöscht.
+              Bist du sicher, dass du dein Konto endgültig löschen möchtest? Dies kann nicht rückgängig gemacht werden. Alle deine Daten werden unwiderruflich gelöscht.
               Dein %{brand}-Konto ist von der Löschung nicht betroffen.
-            confirm_button: "Konto löschen"
+            confirm_button: "Konto endgültig löschen"
       destroy:
         success: "Dein Konto wurde gelöscht!"
         failure: "Wir konnten dein Konto nicht löschen. Bitte versuche es erneut."

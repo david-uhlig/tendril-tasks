@@ -51,7 +51,7 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
     end
 
     it "renders the logout link" do
-      expect(rendered_content).to have_selector("a[href='/users/sign_out']")
+      expect(rendered_content).to have_selector("a[href='/users/sign-out']")
     end
   end
 
@@ -84,7 +84,7 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
     end
 
     it "renders the logout link" do
-      expect(rendered_content).to have_selector("a[href='/users/sign_out']")
+      expect(rendered_content).to have_selector("a[href='/users/sign-out']")
     end
   end
 
@@ -117,7 +117,7 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
     end
 
     it "renders the logout link" do
-      expect(rendered_content).to have_selector("a[href='/users/sign_out']")
+      expect(rendered_content).to have_selector("a[href='/users/sign-out']")
     end
   end
 end
