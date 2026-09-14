@@ -1,48 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  describe "#destroy" do
-    let(:user) { create(:user) }
-
-    it "deletes the user's task applications" do
-      task_application = create(:task_application, user: user)
-      user.destroy
-
-      expect(
-        TaskApplication.find_by(task: task_application.task,
-                                user: task_application.user)
-      ).to be_nil
-    end
-
-    it "keeps the projects the user is a coordinator of" do
-      project = create(:project, coordinators: [ user ])
-      user.destroy
-
-      expect(Project.find_by(id: project.id)).to be_present
-    end
-
-    it "keeps the tasks the user is a coordinator of" do
-      task = create(:task, coordinators: [ user ])
-      user.destroy
-
-      expect(Task.find_by(id: task.id)).to be_present
-    end
-
-    it "removes the user from the projects coordinators" do
-      project = create(:project, coordinators: [ user ])
-      user.destroy
-
-      expect(Project.find_by(id: project.id).coordinators).to be_empty
-    end
-
-    it "removes the user from the tasks coordinators" do
-      task = create(:task, coordinators: [ user ])
-      user.destroy
-
-      expect(Task.find_by(id: task.id).coordinators).to be_empty
-    end
-  end
-
   describe ".from_omniauth" do
     let(:auth) do
       OmniAuth::AuthHash.new(
@@ -131,6 +89,88 @@ RSpec.describe User, type: :model do
 
     it "returns all users when the search term is blank" do
       expect(User.search("")).to contain_exactly(user1, user2, user3, user4)
+    end
+  end
+
+  describe "#authenticatable_salt" do
+    let(:user) { build(:user) }
+
+    it "returns a string" do
+      expect(user.authenticatable_salt).to be_a(String)
+    end
+
+    it "changes when the session token changes" do
+      original_salt = user.authenticatable_salt
+
+      user.session_token = "changed"
+      expect(user.authenticatable_salt).not_to eq(original_salt)
+    end
+
+    context "when `session_token` is blank" do
+      it "is not blank" do
+        user.session_token = nil
+        expect(user.authenticatable_salt).not_to be_blank
+      end
+    end
+  end
+
+  describe "#destroy" do
+    let(:user) { create(:user) }
+
+    it "deletes the user's task applications" do
+      task_application = create(:task_application, user: user)
+      user.destroy
+
+      expect(
+        TaskApplication.find_by(task: task_application.task,
+                                user: task_application.user)
+      ).to be_nil
+    end
+
+    it "keeps the projects the user is a coordinator of" do
+      project = create(:project, coordinators: [ user ])
+      user.destroy
+
+      expect(Project.find_by(id: project.id)).to be_present
+    end
+
+    it "keeps the tasks the user is a coordinator of" do
+      task = create(:task, coordinators: [ user ])
+      user.destroy
+
+      expect(Task.find_by(id: task.id)).to be_present
+    end
+
+    it "removes the user from the projects coordinators" do
+      project = create(:project, coordinators: [ user ])
+      user.destroy
+
+      expect(Project.find_by(id: project.id).coordinators).to be_empty
+    end
+
+    it "removes the user from the tasks coordinators" do
+      task = create(:task, coordinators: [ user ])
+      user.destroy
+
+      expect(Task.find_by(id: task.id).coordinators).to be_empty
+    end
+  end
+
+  describe "#expire_all_sessions!" do
+    it "changes the authenticatable salt" do
+      user = create(:user)
+      original_salt = user.authenticatable_salt
+      user.expire_all_sessions!
+
+      expect(user.reload.authenticatable_salt).not_to eq(original_salt)
+    end
+
+    it "does nothing if the user record isn't persisted" do
+      user = User.new
+      original_salt = user.authenticatable_salt
+      user.expire_all_sessions!
+
+      expect(user.authenticatable_salt).to eq(original_salt)
     end
   end
 end

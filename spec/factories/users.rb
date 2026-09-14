@@ -1,6 +1,7 @@
 FactoryBot.define do
   sequence(:email) { |n| "user#{n}@example.com" }
   sequence(:uid) { |n| "uid#{n}" }
+  sequence(:session_token) { |n| SecureRandom.hex }
 
   factory :user do
     email
@@ -11,6 +12,7 @@ FactoryBot.define do
     username { "john.smith" }
     avatar_url { "https://example.com/john_smith.svg" }
     role { :user }
+    session_token
 
     trait :admin do
       role { :admin }
