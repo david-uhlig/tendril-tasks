@@ -6,7 +6,15 @@ ruby = "3.4.10"
 zizmor = "latest"
 
 [tasks."ci"]
-description = "Run continuous integration suite."
+description = "Run the continuous integration suite in parallel."
+run = [
+    { task = "ci:setup" },
+    { tasks = ["audit", "brakeman", "rubocop", "test:rspec"] },
+    { task = "test:seeds" }
+]
+
+[tasks."ci:sequential"]
+description = "Run the continuous integration suite."
 run = [
     { task = "ci:setup" },
     { task = "audit" },
