@@ -233,7 +233,7 @@ de:
         we_received_your_application: "Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt."
       destroy:
         application_successfully_removed: |
-          Deine Meldung zur Aufgabe "%{task_title}" wurde zurückgezogen.
+          Deine Meldung wurde zurückgezogen.
     visibility_explainer:
       visible_for_everyone: "Für alle sichtbar"
       visible_for_coordinators: "Nur für Ansprechpersonen sichtbar"

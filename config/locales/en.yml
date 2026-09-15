@@ -188,7 +188,7 @@ en:
       create:
         we_received_your_application: "Thank you very much! We have received your application and will get in touch with you."
       destroy:
-        application_successfully_removed: "Your application for %{task_title} has been removed."
+        application_successfully_removed: "Your application has been removed."
     visibility_explainer:
       visible_for_everyone: "Visible to everyone"
       visible_for_coordinators: "Only visible to contact people"
