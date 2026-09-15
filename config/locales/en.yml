@@ -357,8 +357,8 @@ en:
         title: "Welcome - Here we go!"
 
   # Dashboard
-  dashboard:
-    index:
+  dashboards:
+    show:
       title: "Dashboard"
       create_initiative_button: "Create Initiative"
       my_applications: "My Applications"

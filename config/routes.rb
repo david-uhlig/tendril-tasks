@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get "profile", to: "users/profile#edit"
     delete "profile", to: "users/profile#destroy"
 
-    resources :dashboard, only: %i[ index ]
+    resource :dashboard, only: %i[ show ]
   end
 
   # Project and task routes.
