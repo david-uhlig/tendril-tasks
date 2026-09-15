@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 module Tasks
-  module Applications
-    class StatusesController < ApplicationController
+  module Application
+    class StatusController < ApplicationController
+      include AccessDeniedHandlers::SensibleResources
+
       before_action :set_task_application, only: [ :update ]
 
       def update
         authorize! :coordinate, @task_application.task
-        unless @task_application.withdrawn?
-          @task_application.update!(status_params)
+        @task_application.with_lock do
+          @task_application.update!(status_params) unless @task_application.withdrawn?
         end
+      rescue ActiveRecord::RecordInvalid
+        head :unprocessable_content
       end
 
       private
@@ -21,7 +25,7 @@ module Tasks
       def set_task_application
         @task_application = TaskApplication
                               .includes(:task)
-                              .find_by(
+                              .find_by!(
                                 task_id: params[:task_id],
                                 user_id: params[:user_id])
       end

@@ -28,11 +28,11 @@ Rails.application.routes.draw do
       resource :application,
                controller: "tasks/application",
                only: [ :create, :destroy, :update ]
-      patch "/applications/:user_id/status",
-            to: "tasks/applications/statuses#update",
+      patch "/application/:user_id/status",
+            to: "tasks/application/status#update",
             as: :application_status
-      put "/applications/:user_id/status",
-          to: "tasks/applications/statuses#update",
+      put "/application/:user_id/status",
+          to: "tasks/application/status#update",
           as: nil
     end
     get "/tasks/new/from-preset/:project_id/:coordinator_ids", to: "tasks/from_preset#new", as: :new_task_from_preset
