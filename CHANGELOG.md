@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix configuration examples. Rename removed `ROCKET_CHAT_NOTIFIER_*` configuration variables to `ROCKET_CHAT_API_*`. See `0.5.0` notes.
+- Fix missing translations.
 
 ### Added
 - Allow users to sign out from all sessions and reset all remember me tokens through their profile page.

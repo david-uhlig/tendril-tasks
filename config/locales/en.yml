@@ -36,9 +36,9 @@ en:
           Log in now to see initiatives and tasks:
     imprint:
       title: "Imprint"
-    privacy_policy:
+    privacy-policy:
       title: "Privacy Policy"
-    terms_of_service:
+    terms-of-service:
       title: "Terms of Service"
     legal:
       edit:
@@ -307,6 +307,7 @@ en:
         blobs:
           one: "%{count} Blob"
           other: "%{count} Blobs"
+    title: "Administration"
 
 
   # Users
@@ -388,6 +389,16 @@ en:
       task:
         project: "Initiative"
         coordinators: "Contact People"
+      task_application:
+        comment: "Your message to us (optional)"
+        status:
+          received: “Received”
+          under_review: “Under review”
+          interviewing: “Being interviewed”
+          on_hold: “On hold”
+          accepted: “Accepted”
+          rejected: “Rejected”
+          withdrawn: “Withdrawn”
       project:
         coordinators: "Contact People"
     errors:

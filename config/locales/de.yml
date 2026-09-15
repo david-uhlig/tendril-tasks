@@ -1,4 +1,9 @@
 de:
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " und "
+      last_word_connector: " und "
   date:
     month_names:
       - ~              # Placeholder for index 0, since months are 1-based in Ruby
@@ -458,6 +463,8 @@ de:
         coordinators: "Ansprechpersonen"
         applicants: "Bewerber"
     errors:
+      messages:
+        record_invalid: "Validierungsfehler: %{errors}"
       models:
         task:
           attributes:
