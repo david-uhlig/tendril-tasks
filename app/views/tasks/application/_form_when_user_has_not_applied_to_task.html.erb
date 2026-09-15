@@ -8,7 +8,7 @@
   <%= t(".procedure_and_motivation") %>
 <% end %>
 <%= form_with model: TaskApplication.new,
-              url: task_applications_path(task),
+              url: task_application_path(task),
               class: "mx-auto space-y-4" do |f| %>
   <%= render Form::TextAreaComponent.new(f,
                                          :comment,

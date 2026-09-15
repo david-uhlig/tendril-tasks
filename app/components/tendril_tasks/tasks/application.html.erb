@@ -19,14 +19,14 @@
       <% end %>
       <%# Submission date %>
       <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
-        <%= t "task_applications.applied_on_date",
+        <%= t "task_application.applied_on_date",
               date: l(@application.created_at, format: :long)
         %>
       </time>
       <%# Withdrawal date %>
       <% if @application.withdrawn_at.present? %>
         <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
-          <%= t "task_applications.withdrawn_on_date",
+          <%= t "task_application.withdrawn_on_date",
                 date: l(@application.withdrawn_at, format: :long)
           %>
         </time>

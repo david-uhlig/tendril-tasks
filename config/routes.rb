@@ -25,10 +25,9 @@ Rails.application.routes.draw do
     end
 
     resources :tasks do
-      resources :applications,
-                controller: "tasks/applications",
-                only: [ :create, :destroy, :update ],
-                param: :user_id
+      resource :application,
+               controller: "tasks/application",
+               only: [ :create, :destroy, :update ]
       patch "/applications/:user_id/status",
             to: "tasks/applications/statuses#update",
             as: :application_status

@@ -58,7 +58,7 @@ de:
     edit: "Bearbeiten"
     create: "Anlegen"
 
-  task_applications:
+  task_application:
     applied_on_date: "Gemeldet am %{date}"
     withdrawn_on_date: "Zurückgezogen am %{date}"
 
@@ -204,7 +204,7 @@ de:
       contact_people_content: "Noch unschlüssig? Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du vorab Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren."
       goto_tasks_button: "Zur Aufgabenübersicht"
       goto_initiative: "Zum Thema"
-    applications:
+    application:
       form_when_user_has_applied_to_task:
         thanks_for_your_application: "Vielen Dank für deine Meldung!"
         next_steps_within_grace_period: |

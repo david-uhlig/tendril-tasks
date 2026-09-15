@@ -1,4 +1,4 @@
-class Tasks::ApplicationsController < ApplicationController
+class Tasks::ApplicationController < ApplicationController
   before_action :set_task, only: [ :create, :destroy, :update ]
 
   def create

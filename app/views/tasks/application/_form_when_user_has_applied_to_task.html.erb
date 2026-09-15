@@ -15,7 +15,7 @@
 <% end %>
 <%= form_with model: application,
               method: :patch,
-              url: task_application_path(task_id: task.id, user_id: current_user.id),
+              url: task_application_path(task),
               class: "mx-auto space-y-4" do |f| %>
   <% if application.editable? %>
     <%= render Form::TextAreaComponent.new(f,
@@ -47,7 +47,7 @@
 <% if task.applicant?(current_user) %>
   <%= render DeleteConfirm::ModalComponent.new(
     id: "confirm-application-withdrawal-#{task.id}",
-    delete_path: task_application_path(task, current_user)) do |modal| %>
+    delete_path: task_application_path(task)) do |modal| %>
     <% modal.heading(t ".delete_confirm.modal.title") %>
     <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
       <%= modal.paragraph(text) %>

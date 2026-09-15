@@ -8,7 +8,7 @@ en:
     edit: "Edit"
     create: "Create"
 
-  task_applications:
+  task_application:
     applied_on_date: "Applied on %{date}"
     withdrawn_on_date: "Withdrawn on %{date}"
 
@@ -160,7 +160,7 @@ en:
       contact_people_content: "Still undecided? Here you will find the contact people for this task. If you have any questions in advance, need support or just want some information, you can contact them directly."
       goto_tasks_button: "To the Task Overview"
       goto_initiative: "To the Initiative"
-    applications:
+    application:
       form_when_user_has_applied_to_task:
         thanks_for_your_application: "Thanks for your application!"
         next_steps_within_grace_period: |
