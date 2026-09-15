@@ -49,23 +49,46 @@ class TaskApplication < ApplicationRecord
   validates :user, presence: true
 
   after_create_commit :notify_coordinators_about_new_application
-  after_update_commit :notify_coordinators_about_withdrawn_application, if: -> { withdrawn? }
-
-  def withdraw
-    self.withdrawn_at = Time.zone.now
-    self.status = :withdrawn
-  end
+  after_update_commit :notify_coordinators_about_withdrawn_application, if: -> { withdrawn? && saved_change_to_status? }
 
   def editable?
-    # Making sure the result is consistent during a request
-    @_editable ||= self.created_at > GRACE_PERIOD.ago
+    return @_editable unless @_editable.nil?
+
+    # Making sure the result is consistent during a request.
+    @_editable = created_at > GRACE_PERIOD.ago
   end
 
   def coordinators
     @coordinators ||= task.coordinators
   end
 
+  def update_if_editable(attributes)
+    return false unless editable?
+    update(attributes)
+  end
+
+  def destroy_or_withdraw!
+    # Within the grace period, delete the application. Coordinators haven't been
+    # notified yet.
+    if editable?
+      destroy!
+    # After the grace period, set the application to withdrawn. The application
+    # will be still shown to the coordinators with the withdrawn status, until
+    # the user reapplies.
+    else
+      withdraw
+    end
+  end
+
   private
+
+  def withdraw
+    return if withdrawn?
+
+    self.withdrawn_at = Time.zone.now
+    self.status = :withdrawn
+    save!
+  end
 
   def notify_coordinators_about_new_application
     TaskApplicationReceivedNotification

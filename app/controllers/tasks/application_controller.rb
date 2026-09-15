@@ -1,4 +1,6 @@
 class Tasks::ApplicationController < ApplicationController
+  include AccessDeniedHandlers::SensibleResources
+
   before_action :set_task, only: [ :create, :destroy, :update ]
 
   def create
@@ -24,37 +26,23 @@ class Tasks::ApplicationController < ApplicationController
   def update
     authorize! :read, @task
 
-    @updated = false
-    @application = TaskApplication.find_by(
+    @application = TaskApplication.find_by!(
       task_id: params[:task_id],
       user_id: current_user.id
     )
-    if @application.editable?
-      @application.comment = params[:task_application][:comment].presence
-      @application.save!
-      @updated = true
-    end
+    @updated = @application.update_if_editable(
+      comment: params[:task_application][:comment].presence
+    )
   end
 
   def destroy
     authorize! :read, @task
 
-    @application = TaskApplication.find_by(
+    @application = TaskApplication.find_by!(
       task_id: @task.id,
       user_id: current_user.id
     )
-
-    # Within the grace period, just delete the application. Coordinators haven't
-    # been notified yet.
-    if @application.editable?
-      @application.destroy!
-    # After the grace period, set the application to withdrawn. The application
-    # will be still shown to the coordinators with the withdrawn status, until
-    # the user reapplies.
-    else
-      @application.withdraw
-      @application.save!
-    end
+    @application.destroy_or_withdraw!
   end
 
   private
