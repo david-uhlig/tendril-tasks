@@ -4,6 +4,12 @@
 /.git/
 /.gitignore
 
+# Ignore IDE files.
+/.idea
+
+# Ignore user-specific files.
+/.duhlig
+
 # Ignore bundler config.
 /.bundle
 
@@ -46,3 +52,6 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+
+# Ignore test files.
+/spec

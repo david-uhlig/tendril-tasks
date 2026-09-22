@@ -17,13 +17,15 @@ WORKDIR /rails
 # Install base packages
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
+    ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Set production environment
+# Set production environment variables and enable jemalloc for reduced memory usage and latency.
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development:test" \
+    LD_PRELOAD="/usr/local/lib/libjemalloc.so"
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -50,22 +52,30 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-#
-RUN rm -rf node_modules
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile && \
+    rm -rf node_modules
 
 # Final stage for app image
 FROM base
 
-# Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
+# Create the non-root runtime user before copying user-owned directories.
 RUN groupadd --system --gid 1000 rails && \
-    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash
+
+# Keep gems and application source root-owned.
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build \
+    --exclude=db \
+    --exclude=log \
+    --exclude=storage \
+    --exclude=tmp \
+    /rails /rails
+
+# Copy only runtime-writable directories with ownership already applied.
+COPY --from=build --chown=1000:1000 /rails/db /rails/db
+COPY --from=build --chown=1000:1000 /rails/log /rails/log
+COPY --from=build --chown=1000:1000 /rails/storage /rails/storage
+COPY --from=build --chown=1000:1000 /rails/tmp /rails/tmp
 USER 1000:1000
 
 # Entrypoint prepares the database.
