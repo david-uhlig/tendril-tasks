@@ -65,17 +65,22 @@ description = "Tests: Seeds"
 run = "env RAILS_ENV=test bin/rails db:seed:replant"
 
 [tasks."update"]
-description = "Update gems and npm packages"
+description = "Update Ruby, Ruby gems and npm packages."
 run = [
+    { task = "update:ruby" },
     { tasks = ["update:gems", "update:npm"] }
 ]
 
+[tasks."update:ruby"]
+description = "Update Ruby to the latest patch version."
+run = "bin/update-ruby -y"
+
 [tasks."update:gems"]
-description = "Run bundle update --all."
+description = "Update Ruby gems: `bundle update --all`."
 run = "bundle update --all"
 
 [tasks."update:npm"]
-description = "Run npm update"
+description = "Update npm packages: `npm update`."
 run = "npm update"
 
 [tasks."zizmor"]

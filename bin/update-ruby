@@ -1,0 +1,242 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "open3"
+
+class RubyVersionUpdater
+  ANSI = {
+    bold: "\e[1m",
+    dim: "\e[2m",
+    cyan: "\e[36m",
+    green: "\e[32m",
+    yellow: "\e[33m",
+    magenta: "\e[35m",
+    reset: "\e[0m"
+  }.freeze
+
+  def initialize(args)
+    @yes = false
+    @version_arg = nil
+    parse_args(args)
+    @color = $stdout.tty?
+  end
+
+  def run
+    Dir.chdir(project_root)
+    current = read_current_version
+    target = @version_arg || select_remote_version(current)
+
+    if (version_parts(target) <=> version_parts(current)).negative?
+      warn paint(:yellow, "Warning: Ruby #{target} is older than the current version #{current}.")
+      exit(0) unless confirm("Continue with this downgrade?", default: false)
+    end
+
+    if target == current
+      puts "Already using Ruby #{current}; nothing to change."
+      return
+    end
+
+    puts "\n#{paint(:bold, "Ruby")} #{current} → #{paint(:cyan, target)}"
+    updated = update_matching_files(current, target)
+
+    puts "\n#{paint(:green, "Updated #{updated} file(s).")}"
+    return unless updated.positive?
+
+    run_install("mise use ruby@#{target}") { system("mise", "use", "ruby@#{target}") }
+    run_install("mise exec ruby@#{target} -- bundle install") { system("mise", "exec", "ruby@#{target}", "--", "bundle", "install") }
+  end
+
+  private
+
+  def project_root
+    File.expand_path("..", __dir__)
+  end
+
+  def parse_args(args)
+    args.each do |arg|
+      case arg
+      when "-y", "--yes"
+        @yes = true
+      when "-h", "--help"
+        puts "Usage: bin/update-ruby [-y|--yes] [VERSION]"
+        exit
+      else
+        abort "Unknown option: #{arg}" if arg.start_with?("-")
+        abort "Only one version may be specified." if @version_arg
+
+        @version_arg = arg
+      end
+    end
+
+    return unless @version_arg
+    return if valid_version?(@version_arg)
+
+    abort "Invalid Ruby version: #{@version_arg} (expected major.minor.patch)"
+  end
+
+  def valid_version?(version)
+    /\A\d+\.\d+\.\d+\z/.match?(version)
+  end
+
+  def version_parts(version)
+    version.split(".").map(&:to_i)
+  end
+
+  def read_current_version
+    path = File.join(project_root, ".ruby-version")
+    abort "Missing .ruby-version" unless File.file?(path)
+
+    version = File.read(path).strip
+    abort "Expected a major.minor.patch version in .ruby-version" unless valid_version?(version)
+
+    version
+  end
+
+  def select_remote_version(current)
+    abort "mise is required to look up Ruby versions; pass a version explicitly instead." unless
+      system("mise", "--version", out: File::NULL, err: File::NULL)
+
+    puts paint(:bold, "Checking available Ruby versions…")
+    output, status = Open3.capture2("mise", "ls-remote", "ruby")
+    abort "Could not retrieve Ruby versions from mise." unless status.success?
+
+    choices = latest_patch_versions(output, current)
+    current_minor = version_parts(current)[0, 2]
+    default = choices.find { |version| version_parts(version)[0, 2] == current_minor }
+
+    if @yes
+      return default if default
+
+      if choices.empty?
+        puts "No newer stable Ruby versions found."
+      else
+        newest = choices.max_by { |version| version_parts(version) }
+        puts paint(:yellow, "No newer patch version for Ruby #{current} available.")
+        puts "Newest available: Ruby #{newest}."
+      end
+      exit(0)
+    end
+
+    # Show the current version if its minor has no newer patch.
+    choices.unshift(current) unless default
+
+    puts "\n#{paint(:bold, "Current Ruby:")} #{current}"
+    choices.each_with_index do |version, index|
+      label = version == default ? " #{paint(:green, "(default)")}" : ""
+      label += " #{paint(:green, "(already up to date)")}" if version == current
+      puts format("  %d) %s%s", index + 1, version, label)
+    end
+    puts "  0) Abort"
+
+    loop do
+      prompt = default ? "Choose a version [1] (0 to abort)" : "Choose a version [0 to abort]"
+      print "#{paint(:yellow, prompt)}: "
+      answer = $stdin.gets&.strip
+      abort "No selection provided." unless answer
+
+      exit(0) if answer == "0" || (answer.empty? && !default)
+      return default if answer.empty? && default
+      return choices[answer.to_i - 1] if answer.match?(/\A\d+\z/) && answer.to_i.between?(1, choices.length)
+
+      puts "Please choose a listed number."
+    end
+  end
+
+  def latest_patch_versions(output, current)
+    current_parts = version_parts(current)
+    latest_by_minor = {}
+
+    output.each_line do |line|
+      version = line.strip
+      next unless valid_version?(version)
+
+      parts = version_parts(version)
+      next unless (parts <=> current_parts).positive?
+
+      minor = parts[0, 2]
+      existing = latest_by_minor[minor]
+      latest_by_minor[minor] = parts if !existing || (parts <=> existing).positive?
+    end
+
+    choices = latest_by_minor.values.sort.reverse
+    same_minor = choices.find { |parts| parts[0, 2] == current_parts[0, 2] }
+    choices.unshift(choices.delete(same_minor)) if same_minor
+    choices.map { |parts| parts.join(".") }
+  end
+
+  def update_matching_files(current, target)
+    count = 0
+    hints = []
+    files_to_check = %w[mise.toml .ruby-version Dockerfile]
+
+    Dir.glob(File.join(project_root, "*"), File::FNM_DOTMATCH).each do |path|
+      next unless File.file?(path)
+
+      filename = File.basename(path)
+      contents = File.binread(path)
+      next unless contents.valid_encoding? && contents.include?(current)
+
+      unless files_to_check.include?(filename)
+        hints << filename
+        next
+      end
+
+      puts "\n#{paint(:cyan, filename)}"
+      show_context(contents, current)
+
+      next unless confirm("Replace #{current} with #{target} in #{filename}?")
+
+      File.binwrite(path, contents.gsub(current, target))
+      puts paint(:dim, "Updated.")
+      count += 1
+    end
+
+    puts "" unless hints.empty?
+    hints.each do |filename|
+      puts "#{paint(:dim, "Hint:")} #{filename} contains Ruby #{current}, but is skipped."
+    end
+
+    count
+  end
+
+  def show_context(contents, version)
+    lines = contents.lines
+    lines.each_with_index do |line, index|
+      next unless line.include?(version)
+
+      from = [index - 5, 0].max
+      to = [index + 5, lines.length - 1].min
+      (from..to).each do |line_number|
+        marker = line_number == index ? paint(:yellow, ">") : " "
+        puts format("%s %4d | %s", marker, line_number + 1, lines[line_number].chomp)
+      end
+      puts paint(:dim, "  …") if to < lines.length - 1
+    end
+  end
+
+  def confirm(message, default: true)
+    return true if @yes
+
+    prompt_options = default ? "[Y/n]" : "[y/N]"
+    print "#{paint(:yellow, message)} #{prompt_options} "
+    answer = $stdin.gets
+    return default if answer.nil? || answer.strip.empty?
+
+    %w[y yes].include?(answer.strip.downcase)
+  end
+
+  def run_install(label, default: true)
+    return unless confirm("Run #{label}?", default: default)
+
+    puts paint(:magenta, "Running #{label}…")
+    abort "#{label} failed." unless yield
+  end
+
+  def paint(color, text)
+    return text unless @color
+
+    "#{ANSI.fetch(color)}#{text}#{ANSI[:reset]}"
+  end
+end
+
+RubyVersionUpdater.new(ARGV).run
