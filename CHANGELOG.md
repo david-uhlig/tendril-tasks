@@ -34,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve German translations for consistency and clarity.
 - Replace inline SVG with permanent icon assets on the user's profile page.
 - Reduce Docker image size by ~30%.
-- Upgrade dependencies: Ruby 3.4.10, ViewComponent 4.15, etc.
+- Upgrade dependencies: Ruby 3.4.11, ViewComponent 4.15, etc.
 
 ### Removed
 - Unused English translations.
