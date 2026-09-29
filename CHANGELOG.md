@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Improve authentication and authorization safeguards.
 - Fix an authorization flaw that allowed footer settings to be updated or deleted without administrator privileges.
+- Configure an extendable base Content Security Policy (CSP) to mitigate XSS attacks.
 - Prevent unsafe footer links from being added and displayed to prevent XSS attacks.
 
 ### Fixed
