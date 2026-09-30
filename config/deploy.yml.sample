@@ -60,11 +60,14 @@ env:
     - APP_GIT_COMMIT
   clear:
     # Configure Tendril Tasks --------------------------------------------------
-    # Application host, e.g. "example.com".
-    # Used to configure:
-    # - `Rails.application.routes.default_url_options[:host]`
-    # - `Rails.application.action_mailer.default_url_options[:host]`
-    # APP_HOST: ""
+    # (Required)
+    # Base URL for links in emails and other external references,
+    # e.g. "https://example.com". Optionally with a port, e.g. "http://localhost:3000"
+    #
+    # Configures:
+    # - `Rails.application.routes.default_url_options`
+    # - `Rails.application.action_mailer.default_url_options`
+    # APP_BASE_URL=""
 
     # Default HTML title for the application. Defaults to a localized version of
     # this example.

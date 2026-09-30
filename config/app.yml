@@ -1,0 +1,21 @@
+# Application setting defaults.
+#
+# Defaults for `config/configs/app_config.rb`.
+#
+# Note: This file might be overridden in future releases. Instead of editing
+# this file, set the values in Rails credentials under the `app:` key or
+# through environment variables, e.g. `APP_DEFAULT_LOCALE="de"`.
+default: &default
+  time_zone: "UTC"
+  default_locale: "en"
+
+development:
+  <<: *default
+  base_url: "http://localhost:3000"
+
+test:
+  <<: *default
+  base_url: "http://example.com"
+  time_zone: "Berlin"
+  default_locale: "de"
+

@@ -59,8 +59,10 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: AppConfig.http_host }
+  # Base URL for links in emails and other external references.
+  # Set APP_BASE_URL to your instance's public URL (e.g. https://example.com)
+  routes.default_url_options = AppConfig.default_url_options
+  config.action_mailer.default_url_options = AppConfig.default_url_options
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   # config.action_mailer.smtp_settings = {
@@ -90,6 +92,3 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
-
-# Set the default URL options for the `noticed` gem.
-Rails.application.routes.default_url_options = { host: AppConfig.http_host }

@@ -6,7 +6,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.i18n.default_locale = :de
+  config.i18n.default_locale = AppConfig.default_locale
 
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
@@ -39,7 +39,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = AppConfig.default_url_options
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

@@ -70,3 +70,7 @@
 /config/credentials/local.*
 
 /app/views/pages/preview.html.erb
+
+# Ignore key files for decrypting credentials and more.
+/config/credentials/*.key
+

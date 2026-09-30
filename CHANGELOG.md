@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Rename Kamal configuration and secrets example files to carry the `.sample` extension (i.e. `config/deploy.yml.sample` and `.kamal/secrets.sample`). The regular config files are now ignored via `.gitignore` to prevent accidental repository check-in. 
+- Replace `APP_HOST` and `APP_PORT` with `APP_BASE_URL`. Continues accepting the legacy variables for now; emits a deprecation warning; support will be removed in a future release.
 - Improve German translations for consistency and clarity.
 - Replace inline SVG with permanent icon assets on the user's profile page.
 - Reduce Docker image size by ~30%.
