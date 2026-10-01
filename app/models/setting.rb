@@ -1,13 +1,11 @@
 class Setting < ApplicationRecord
-  include SvgSanitizable
-
   serialize :value, coder: JSON
 
   has_one_attached :attachment
 
   validates :key, presence: true, uniqueness: true
   validates :attachment,
-            content_type: %i[png jpg jpeg svg],
+            content_type: %i[png jpg jpeg],
             size: { less_than: 500.kilobytes }
 
   class << self
@@ -71,8 +69,7 @@ class Setting < ApplicationRecord
 
       setting.value = value
       if attachment.present?
-        sanitized_file = Setting.new.sanitize_svg(attachment)
-        setting.attachment.attach(sanitized_file)
+        setting.attachment.attach(attachment)
       end
       setting.save
     end

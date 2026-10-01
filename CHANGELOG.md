@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 - Add the PKCE configuration option `ROCKET_CHAT_PKCE` (default: `false`). This change disables PKCE by default because Rocket.Chat `>= 7.4.0` introduced a bug that breaks third-party OAuth integrations. A partial fix is available for Rocket.Chat `>= 8.0.0`, but PCKE flows remain affected. To enable PKCE once Rocket.Chat fixes the bug, set `ROCKET_CHAT_PKCE = "true"` in the `.env` or Kamal `deploy.yml` file.
+- SVG brand logos are no longer supported for security reasons. Please reupload your brand logo in one of the supported formats. 
 
 ### Security
 - Improve authentication and authorization safeguards.

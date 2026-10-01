@@ -132,6 +132,21 @@ RSpec.describe Setting, type: :model do
         Setting.brand_logo = file
         expect(Setting.brand_logo).to eq(ActiveStorage::Attachment.last)
       end
+
+      it "rejects SVG uploads" do
+        Tempfile.open([ "brand-logo", ".svg" ]) do |file|
+          file.write('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>')
+          file.rewind
+          upload = ActionDispatch::Http::UploadedFile.new(
+            tempfile: file,
+            filename: "brand-logo.svg",
+            type: "image/svg+xml"
+          )
+
+          Setting.brand_logo = upload
+          expect(Setting.brand_logo).to be_nil
+        end
+      end
     end
 
     context ".display_brand_name?" do

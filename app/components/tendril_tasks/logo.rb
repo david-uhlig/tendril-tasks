@@ -40,19 +40,30 @@ module TendrilTasks
     private
 
     def build_logo
-      # Default logo if none was uploaded
-      return image_tag("brand/logo.svg") unless @brand.logo.present?
+      logo = @brand.logo
 
-      case @brand.logo.content_type
-      when "image/svg+xml"
-        # Render binary data as HTML. SVG logos are sanitized on upload.
-        @brand.logo.download.html_safe
-      else
-        # Render all other logos as images
-        image_tag rails_storage_proxy_path(
-                    @brand.logo.variant(resize_to_fit: [ @resize_to, nil ])
-                  )
+      if logo_missing? || deprecated_svg_logo?
+        return default_logo
       end
+
+      image_tag rails_storage_proxy_path(
+        logo.variant(resize_to_fit: [ nil, @resize_to ], format: :png)
+      )
+    end
+
+    def logo_missing?
+      !@brand.logo.present?
+    end
+
+    def deprecated_svg_logo?
+      !logo_missing? && (
+        @brand.logo.content_type == "image/svg+xml" ||
+        @brand.logo.filename.to_s.downcase.end_with?(".svg")
+      )
+    end
+
+    def default_logo
+      image_tag("brand/logo.svg")
     end
   end
 end
