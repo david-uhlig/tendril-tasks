@@ -14,7 +14,7 @@ RSpec.describe Brand, type: :model do
   describe '#logo' do
     context 'when brand logo is set' do
       it 'returns the brand logo' do
-        Setting.brand_logo = logo
+        Setting.save_brand_logo(logo)
         expect(brand.logo).to eq(Setting.brand_logo)
       end
     end

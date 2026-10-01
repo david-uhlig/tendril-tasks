@@ -264,7 +264,7 @@ en:
           title: "Logo"
           file_field:
             label: "Select new logo"
-            helper_text: "Format: SVG, PNG, JPEG (max 500kb)"
+            helper_text: "Format: PNG or JPEG (max 500kb)"
         name:
           title: "Application Name"
           text_field:

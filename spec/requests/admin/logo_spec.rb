@@ -9,7 +9,7 @@ RSpec.describe "Admin Brand Logo", type: :request do
 
     context "requires admin authorization" do
       it "redirects unauthenticated users to the login page" do
-        patch admin_brand_logo_path, params: { logo: logo }, as: :turbo_stream
+        patch admin_brand_logo_path, params: { setting: { attachment: logo } }, as: :turbo_stream
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -21,14 +21,15 @@ RSpec.describe "Admin Brand Logo", type: :request do
         expect(response).to have_http_status(:not_found)
       end
 
-      it "updates the brand logo for authorized users" do
+      it "displays validation errors for an invalid logo upload" do
         login_as(admin)
-        allow(Setting).to receive(:brand_logo=)
+        invalid_logo = Rack::Test::UploadedFile.new(logo.path, "application/pdf")
 
-        patch admin_brand_logo_path, params: { logo: logo }, as: :turbo_stream
+        patch admin_brand_logo_path, params: { setting: { attachment: invalid_logo } }, as: :turbo_stream
 
-        expect(response).to have_http_status(:success)
-        expect(Setting).to have_received(:brand_logo=)
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(response.body).to include("error-message-for-attachment")
+        expect(response.body).not_to include('target="current-brand-logo"')
       end
     end
   end

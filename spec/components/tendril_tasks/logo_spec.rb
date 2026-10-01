@@ -11,7 +11,7 @@ RSpec.describe TendrilTasks::Logo, type: :component do
 
   context "when the uploaded logo is a JPEG" do
     it "renders the logo as a PNG" do
-      Setting.brand_logo = File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg"))
+      Setting.save_brand_logo File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg"))
 
       render_inline(described_class.new)
 

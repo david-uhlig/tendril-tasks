@@ -310,7 +310,7 @@ de:
           title: "Logo"
           file_field:
             label: "Neues Logo auswählen"
-            helper_text: "Format: SVG, PNG oder JPEG (max 500 KB)"
+            helper_text: "Format: PNG oder JPEG (max 500 KB)"
         name:
           title: "Anwendungsname"
           text_field:

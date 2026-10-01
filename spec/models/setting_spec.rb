@@ -129,7 +129,7 @@ RSpec.describe Setting, type: :model do
     context ".brand_logo=" do
       it "creates a new setting with the brand logo" do
         file = File.open(Rails.root.join('spec', 'assets', 'images', 'for-tests.jpg'))
-        Setting.brand_logo = file
+        Setting.save_brand_logo(file)
         expect(Setting.brand_logo).to eq(ActiveStorage::Attachment.last)
       end
 
@@ -143,7 +143,7 @@ RSpec.describe Setting, type: :model do
             type: "image/svg+xml"
           )
 
-          Setting.brand_logo = upload
+          Setting.save_brand_logo(upload)
           expect(Setting.brand_logo).to be_nil
         end
       end

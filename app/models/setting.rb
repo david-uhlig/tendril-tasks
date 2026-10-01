@@ -5,8 +5,9 @@ class Setting < ApplicationRecord
 
   validates :key, presence: true, uniqueness: true
   validates :attachment,
-            content_type: %i[png jpg jpeg],
-            size: { less_than: 500.kilobytes }
+            content_type: %i[png jpg],
+            size: { less_than: 500.kilobytes },
+            dimension: { min: 1..1, max: 2048..2048 }
 
   class << self
     def remove(key)
@@ -37,8 +38,11 @@ class Setting < ApplicationRecord
       get("brand_logo")&.attachment&.attachment
     end
 
-    def brand_logo=(uploaded_file)
-      set("brand_logo", attachment: uploaded_file)
+    def save_brand_logo(uploaded_file)
+      setting = find_or_initialize_by(key: "brand_logo")
+      setting.attachment.attach(uploaded_file)
+      setting.save
+      setting
     end
 
     def display_brand_name?
@@ -64,13 +68,9 @@ class Setting < ApplicationRecord
       find_by(key: key)
     end
 
-    def set(key, value: nil, attachment: nil)
+    def set(key, value: nil)
       setting = find_or_initialize_by(key: key)
-
       setting.value = value
-      if attachment.present?
-        setting.attachment.attach(attachment)
-      end
       setting.save
     end
   end

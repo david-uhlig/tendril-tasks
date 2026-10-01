@@ -3,8 +3,7 @@
 module Form
   class FieldErrorComponent < TendrilTasks::Component
     def initialize(obj_with_errors = nil, error_field = nil)
-      @errors = []
-      @errors = obj_with_errors&.errors if obj_with_errors.class < ActiveModel::Model
+      @errors = obj_with_errors.try(:errors) || []
       @error_field = error_field
     end
 
