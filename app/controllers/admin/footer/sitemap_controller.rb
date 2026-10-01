@@ -28,16 +28,18 @@ module Admin
       end
 
       def discard_empty_links_and_categories(params)
-        params["categories"].each do |category|
+        categories = params["categories"] || []
+        categories.each do |category|
           next unless category["links"].present?
 
           category["links"].reject! do |link|
             link["href"].empty? && link["title"].empty?
           end
         end
-        params["categories"].reject! do |category|
+        categories.reject! do |category|
           category["title"].empty? && (category["links"].nil? || category["links"].empty?)
         end
+        params["categories"] = categories
         params
       end
     end

@@ -88,6 +88,14 @@ RSpec.describe "Admin::Footer settings", type: :request do
       categories = Setting.footer_sitemap.fetch("categories")
       expect(categories.first["title"]).to eq("Community")
     end
+
+    it "handles missing categories" do
+      login_as(admin)
+      patch admin_footer_sitemap_path, as: :turbo_stream
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(Setting.footer_sitemap).to eq({})
+    end
   end
 
   describe "DELETE /admin/footer/sitemap" do
