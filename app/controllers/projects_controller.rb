@@ -64,8 +64,9 @@ class ProjectsController < ApplicationController
   private
 
   def project_form_params
-    params[:project_form][:coordinator_ids] = params.delete(:assigned_coordinator_ids)
-    params.require(:project_form)
+    project_form = params.require(:project_form)
+    project_form[:coordinator_ids] = params.delete(:assigned_coordinator_ids)
+    project_form
           .permit(:title, :description, :publish, :submit_type, coordinator_ids: [])
   end
 

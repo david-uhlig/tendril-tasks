@@ -280,6 +280,13 @@ RSpec.describe "Projects", type: :request do
         post projects_path, params: { project_form: attributes_for(:project) }
         expect(response).to have_http_status(:unprocessable_content)
       end
+
+      it "responds with bad request when the project form is missing" do
+        login_as(editor)
+        post projects_path
+
+        expect(response).to have_http_status(:bad_request)
+      end
     end
   end
 
@@ -319,6 +326,13 @@ RSpec.describe "Projects", type: :request do
         patch project_path(project), params: { project_form: attributes_for(:project) }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(project_path(project))
+      end
+
+      it "responds with bad request when the project form is missing" do
+        login_as(editor)
+        patch project_path(project)
+
+        expect(response).to have_http_status(:bad_request)
       end
     end
   end

@@ -143,6 +143,13 @@ RSpec.describe "Tasks", type: :request do
       post tasks_path, params: { task_form: attributes_for(:task) }
       expect(response).to have_http_status(:unprocessable_content)
     end
+
+    it "responds with bad request when the task form is missing" do
+      login_as(editor)
+      post tasks_path
+
+      expect(response).to have_http_status(:bad_request)
+    end
   end
 
   describe "GET /tasks/new" do
@@ -284,6 +291,15 @@ RSpec.describe "Tasks", type: :request do
       patch task_path(task), params: { task_form: attributes_for(:task) }
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(task_path(task))
+    end
+
+    it "responds with bad request when the task form is missing" do
+      login_as(editor)
+      task = create(:task)
+
+      patch task_path(task)
+
+      expect(response).to have_http_status(:bad_request)
     end
   end
 

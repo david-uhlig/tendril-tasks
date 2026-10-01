@@ -88,8 +88,8 @@ class TasksController < ApplicationController
   end
 
   def task_form_params
-    params[:task_form][:coordinator_ids] = params[:assigned_coordinator_ids]
-    params.require(:task_form)
-          .permit(:project_id, :title, :description, :publish, :submit_type, coordinator_ids: [])
+    task_form = params.require(:task_form)
+    task_form[:coordinator_ids] = params[:assigned_coordinator_ids]
+    task_form.permit(:project_id, :title, :description, :publish, :submit_type, coordinator_ids: [])
   end
 end
