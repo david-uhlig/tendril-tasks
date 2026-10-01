@@ -67,6 +67,15 @@ RSpec.describe "Admin User Roles", type: :request do
         expect(response).to have_http_status(:success)
         expect(admin.reload.role).to eq("admin")
       end
+
+      it "rejects an invalid role" do
+        expect {
+          patch admin_users_role_path(user), params: { role: "invalid" }, as: :turbo_stream
+        }.not_to raise_error
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(user.reload.role).to eq("editor")
+      end
     end
   end
 end

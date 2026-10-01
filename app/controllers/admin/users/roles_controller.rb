@@ -14,8 +14,10 @@ module Admin
           return
         end
 
-        @user.role = params[:role]
-        @user.save
+        role = params[:role].to_s
+        return head :unprocessable_content unless User.roles.key?(role)
+
+        @user.update!(role: role)
       end
 
       private
