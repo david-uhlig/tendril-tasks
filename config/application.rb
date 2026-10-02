@@ -50,9 +50,6 @@ module TendrilTasks
     # Prevent the default `<div class="field_with_errors"></div>`
     config.action_view.field_error_proc = Proc.new { |html_tag, _| html_tag }
 
-    # Keep Trix as the default Action Text editor while migrating to Lexxy
-    config.lexxy.override_action_text_defaults = false
-
     # Set up previews for ViewComponents with RSpec
     config.view_component.previews.paths << "#{Rails.root}/spec/components/previews"
     config.view_component.previews.default_layout = "component_preview"

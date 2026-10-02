@@ -17,7 +17,7 @@
   <% end %>
   <%= render Form::TextFieldComponent.new(f, :title) %>
   <%= render Form::RichTextAreaComponent.new(f, :description) do |with| %>
-    <% with.disabled_buttons(:heading1, :heading2, :heading3) %>
+    <% with.disabled_buttons(:heading2, :heading3) %>
   <% end %>
   <%= render Form::CoordinatorPickerComponent.new(f, :coordinators) %>
   <%= render Form::ToggleComponent.new(f, :publish, t(".visibility")) do |toggle| %>

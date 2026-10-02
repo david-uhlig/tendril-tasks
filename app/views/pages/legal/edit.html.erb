@@ -19,7 +19,7 @@
     <%= render Form::BaseFieldComponent.new(form, :content, false) do %>
       <%= render Gustwave::Form::RichTextArea.new(form,
                                                   :content,
-                                                  toolbar_id: "trix-toolbar")
+                                                  toolbar_id: "legal-page-toolbar")
       %>
     <% end %>
     <%= render Form::SubmitButtonGroupComponent.new(form) do |button_group| %>
