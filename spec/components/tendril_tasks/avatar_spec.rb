@@ -44,7 +44,7 @@ RSpec.describe TendrilTasks::Avatar, type: :component do
         user,
         scheme: :square)
       )
-      expect(page).to have_selector("img.rounded")
+      expect(page).to have_selector("img.rounded-sm")
     end
   end
 

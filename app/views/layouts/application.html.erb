@@ -19,8 +19,7 @@
     <%= favicon_link_tag asset_path("brand/logo.png"), type: "image/png" %>
     <%= favicon_link_tag asset_path("brand/logo.png"), rel: "apple-touch-icon", type: "image/png" %>
 
-    <%# Includes all stylesheet files in app/views/stylesheets %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%# Includes all stylesheet files in app/assets/stylesheets and app/assets/builds %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
@@ -28,12 +27,12 @@
   <body class="min-w-[320px] dark:bg-gray-900 antialiased flex flex-col min-h-screen">
     <%# Background gradients %>
     <%# -- Bottom right %>
-    <div class="fixed inset-0 pointer-events-none -z-[100]">
-      <div class="absolute bottom-0 right-0 w-full h-full bg-gradient-to-br from-transparent from-70% via-blue-200 via-90% to-fuchsia-100"></div>
+    <div class="fixed inset-0 pointer-events-none -z-100">
+      <div class="absolute bottom-0 right-0 w-full h-full bg-linear-to-br from-transparent from-70% via-blue-200 via-90% to-fuchsia-100"></div>
     </div>
     <%# -- Top left %>
-    <div class="fixed inset-0 pointer-events-none -z-[99]">
-      <div class="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-transparent from-80% via-blue-200 via-95% to-fuchsia-100"></div>
+    <div class="fixed inset-0 pointer-events-none -z-99">
+      <div class="absolute bottom-0 right-0 w-full h-full bg-linear-to-tl from-transparent from-80% via-blue-200 via-95% to-fuchsia-100"></div>
     </div>
     <%# Navigation %>
     <%= render NavigationComponent.new do |navigation| %>
@@ -49,7 +48,7 @@
     <% end %>
 
     <%# Content %>
-    <main id="main-content" class="container mx-auto mt-10 mb-32 px-5 max-w-screen-lg space-y-6">
+    <main id="main-content" class="container mx-auto mt-10 mb-32 px-5 max-w-(--breakpoint-lg) space-y-6">
       <%= yield %>
     </main>
 

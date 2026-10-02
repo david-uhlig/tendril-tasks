@@ -14,7 +14,7 @@ module Gustwave
     TYPE_OPTIONS = [ nil, :button, :submit, :reset ].freeze
 
     style :base,
-          "rounded whitespace-nowrap inline-flex"
+          "rounded-sm whitespace-nowrap inline-flex"
 
     style :scheme,
           default: :default,

@@ -3,7 +3,7 @@
 module Gustwave
   class IconToast < Gustwave::Component
     style :base,
-          "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg"
+          "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"
 
     style :scheme,
           default: :info,

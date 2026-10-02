@@ -62,7 +62,7 @@ module Gustwave
       # TODO The dismiss cross renders too small, fix later
       dismiss_button = <<~HTML
         Default
-        <button type="button" class="inline-flex items-center p-1 ms-2 text-sm text-indigo-400 bg-transparent rounded-sm hover:bg-indigo-200 hover:text-indigo-900 dark:hover:bg-indigo-800 dark:hover:text-indigo-300" data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
+        <button type="button" class="inline-flex items-center p-1 ms-2 text-sm text-indigo-400 bg-transparent rounded-xs hover:bg-indigo-200 hover:text-indigo-900 dark:hover:bg-indigo-800 dark:hover:text-indigo-300" data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
           <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
@@ -71,7 +71,7 @@ module Gustwave
       HTML
 
       render Gustwave::Badge.new(id: "badge-dismiss-default",
-                                 class: "inline-flex items-center justify-center px-2 py-1 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300",
+                                 class: "inline-flex items-center justify-center px-2 py-1 text-sm font-medium text-indigo-800 bg-indigo-100 rounded-sm dark:bg-indigo-900 dark:text-indigo-300",
                                  scheme: :none) do
         dismiss_button.html_safe
       end

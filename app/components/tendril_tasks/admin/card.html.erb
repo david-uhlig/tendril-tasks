@@ -1,6 +1,6 @@
 <%# Admin Menu Card %>
 <li class="w-full border border-gray-200 bg-white rounded-lg shadow-md dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-  <div class="p-6 space-y-4 md:space-y-6 sm:p-8 flex flex-col h-full">
+  <div class="p-6 gap-4 md:gap-6 sm:p-8 flex flex-col h-full">
     <div class="space-y-1">
       <%= heading_slot %>
       <% if badges? %>
@@ -11,7 +11,7 @@
         </ul>
       <% end %>
     </div>
-    <div class="flex-grow">
+    <div class="grow">
       <% paragraphs.each do |paragraph_slot| %>
         <%= paragraph_slot %>
       <% end %>

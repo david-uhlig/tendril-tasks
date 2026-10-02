@@ -2,7 +2,7 @@
 <%= button_tag type: "button",
                id: "dropdown-status-button-#{@application.user.id}",
                "data-dropdown-toggle": "dropdown-status-info-#{@application.user.id}",
-               class: "#{color_scheme_for(@application.status)} focus:ring-4 focus:outline-none focus:ring-slate-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2" do
+               class: "#{color_scheme_for(@application.status)} focus:ring-4 focus:outline-hidden focus:ring-slate-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2" do
 %>
   <%= render_icon_for(@application.status) %>
   <span class="ms-1 hidden sm:inline-flex"><%= t("activerecord.attributes.task_application.status.#{@application.status}") %></span>
@@ -18,7 +18,7 @@
                 data: {
                   controller: "auto-submit"
                 },
-                class: "z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 text-start" do |f| %>
+                class: "z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 text-start" do |f| %>
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
       <%= tag.div t(".selectbox.title") %>
       <%= tag.div t(".selectbox.undertitle"),
