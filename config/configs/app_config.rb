@@ -12,7 +12,12 @@ class AppConfig < BaseConfig
     :git_commit,
     :host, # deprecated
     :port, # deprecated
-    title: I18n.t("layouts.application.application_title")
+    title: I18n.t("layouts.application.application_title"),
+    # Seconds the confirm button of delete confirmation modals stays disabled
+    # after the modal is shown, to prevent accidental deletions.
+    delete_confirm_cooldown: 3
+
+  coerce_types delete_confirm_cooldown: :integer
 
   on_load :ensure_base_url_is_present
 

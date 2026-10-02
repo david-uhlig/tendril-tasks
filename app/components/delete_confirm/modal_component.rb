@@ -37,15 +37,18 @@ module DeleteConfirm
       Gustwave::Button
         .new(type: :submit,
              scheme: :red,
-             class: "w-full lg:w-auto",
-             data: { "modal-hide": @id })
-        .with_content(text)
+             class: "w-full lg:w-auto disabled:opacity-50",
+             data: { "modal-hide": @id, "cooldown-target": "button" })
+        .with_content(tag.span(text, data: { "cooldown-target": "label" }))
     end
     alias confirm_button with_confirm_button_slot
 
-    def initialize(id: nil, delete_path:)
+    # @param cooldown [Integer] seconds the confirm button stays disabled after
+    #   the modal is shown, to prevent accidental clicks. 0 disables it.
+    def initialize(id: nil, delete_path:, cooldown: AppConfig.delete_confirm_cooldown)
       @id = id.presence || "delete-confirm-#{SecureRandom.alphanumeric(5)}"
       @delete_path = delete_path
+      @cooldown = cooldown.to_i
     end
   end
 end

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Celebrate a user's contribution with a short fireworks animation when they sign up for a task.
+- Delete confirmation dialogs briefly disable the delete button to prevent accidental deletions.
 
 ## [0.6.0] - 2026-10-02
 
