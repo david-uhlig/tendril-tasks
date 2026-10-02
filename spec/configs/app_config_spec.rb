@@ -33,4 +33,16 @@ RSpec.describe AppConfig, type: :config do
       end
     end
   end
+
+  describe "#delete_confirm_cooldown" do
+    it "is disabled in the test environment" do
+      expect(config.delete_confirm_cooldown).to eq(0)
+    end
+
+    it "can be configured through the environment" do
+      with_env("APP_DELETE_CONFIRM_COOLDOWN" => "5") do
+        expect(described_class.new.delete_confirm_cooldown).to eq(5)
+      end
+    end
+  end
 end

@@ -1,6 +1,6 @@
 <%# Modal: confirm account deletion %>
 <%= tag.section id: @id,
-            data: { "modal-backdrop": "static" },
+            data: { "modal-backdrop": "static", controller: "cooldown", "cooldown-seconds-value": @cooldown },
             tabindex: "-1",
             aria_hidden: "true",
             class: "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" do %>
