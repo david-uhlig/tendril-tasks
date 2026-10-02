@@ -37,42 +37,16 @@ files:
 linter:
   enabled: true
 
-  # Rules with existing offenses, disabled by `herb-lint --disable-failing`.
-  # Fix the offenses and re-enable the rules one by one.
   rules:
-    erb-closing-tag-indent:
-      enabled: false
+    # False positives on ViewComponent slot setters called on objects yielded
+    # by nested blocks or `it`, e.g. `<% menu.item ... %>`. Only direct block
+    # arguments of `render` and `with_*` calls are recognized as slot setters.
     erb-no-unused-expressions:
       enabled: false
-    html-no-space-in-tag:
-      enabled: false
-    erb-require-trailing-newline:
-      enabled: false
-    erb-no-extra-newline:
-      enabled: false
+
+    # False positives on forms inside component blocks: any `form_with` inside
+    # `<%= render Component.new do %>` is reported as nested.
     html-no-nested-forms:
-      enabled: false
-    actionview-prefer-collection-render:
-      enabled: false
-    erb-no-extra-whitespace-inside-tags:
-      enabled: false
-    erb-no-unsafe-raw:
-      enabled: false
-    erb-no-unused-block-argument:
-      enabled: false
-    erb-no-trailing-whitespace:
-      enabled: false
-    html-anchor-require-href:
-      enabled: false
-    erb-no-interpolated-class-names:
-      enabled: false
-    html-img-require-alt:
-      enabled: false
-    erb-no-instance-variables-in-partials:
-      enabled: false
-    html-no-self-closing:
-      enabled: false
-    html-input-require-autocomplete:
       enabled: false
 
   # # Exit with error code when diagnostics of this severity or higher are present

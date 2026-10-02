@@ -67,9 +67,9 @@
       category_blueprint.links << ::Footer::Link.new
       filler_categories = (@sitemap.categories.count...2).map { category_blueprint }
     %>
-    <% (@sitemap.categories + filler_categories).each do |category| %>
-      <%= render 'admin/footer/sitemap_category', category: category %>
-    <% end %>
+    <%= render partial: "admin/footer/sitemap_category",
+               collection: @sitemap.categories + filler_categories,
+               as: :category %>
 
     <template id="sitemap-link-template">
       <%= render 'admin/footer/sitemap_link', item: ::Footer::Link.new %>

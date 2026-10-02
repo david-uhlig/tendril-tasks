@@ -128,7 +128,7 @@
       <% end %>
       <% card.badge scheme: :yellow do %>
         <% it.leading_icon :file_code, class: "me-0.5" %>
-        <% t("admin.monitoring.storage.blobs", count: @stats.active_storage.fetch(:blobs)) %>
+        <%= t("admin.monitoring.storage.blobs", count: @stats.active_storage.fetch(:blobs)) %>
       <% end %>
       <% card.badge do %>
         <% it.leading_icon :database, class: "me-0.5" %>

@@ -6,8 +6,6 @@
     <%# Category heading %>
     <%= render 'admin/footer/sitemap_category_heading', form: category_form %>
     <%# Category links %>
-    <% category.links.each do |link| %>
-      <%= render 'admin/footer/sitemap_link', item: link %>
-    <% end %>
+    <%= render partial: "admin/footer/sitemap_link", collection: category.links, as: :item %>
   </div>
 <% end %>
