@@ -15,7 +15,7 @@ module TendrilTasks
     include Primer::FetchOrFallbackHelper
     include TailwindHelper
 
-    delegate :paragraphize, to: :view_context
+    delegate :paragraphize, :simple_line_breaks, to: :view_context
     delegate :rocketchat_applink, :rocketchat_link, to: :view_context
     delegate :current_user, :user_signed_in?, to: :view_context
     delegate :can?, :cannot?, to: :view_context

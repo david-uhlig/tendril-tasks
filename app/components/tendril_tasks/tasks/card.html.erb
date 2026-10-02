@@ -18,7 +18,7 @@
     <% paragraphize(@task.description_plain_text&.truncate_words(50), delimiter: "\n\n").each do |paragraph| %>
       <%= render TendrilTasks::Paragraph.new(class: "lg:text-lg") do %>
         <%= link_to task_path(@task) do %>
-          <%= paragraph.split("\n").join("<br>").html_safe %>
+          <%= simple_line_breaks(paragraph) %>
         <% end %>
       <% end %>
     <% end %>
