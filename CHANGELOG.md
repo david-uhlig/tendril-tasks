@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to three levels (H2–H4); existing H1, H5, and H6 headings are still displayed.
 
+### Security
+- Escape the project title in the task section headline on the project page to prevent XSS attacks.
+
 ## [0.6.1] - 2026-10-03
 
 ### Security

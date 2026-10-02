@@ -115,6 +115,14 @@ RSpec.describe "Projects", type: :request do
           get project_path(published_project)
           expect(response).to have_http_status(:success)
         end
+
+        it "escapes the project title in the task section headline" do
+          published_project.update!(title: "<script>alert(1)</script>")
+          login_as(user)
+          get project_path(published_project)
+          expect(response.body).not_to include("<script>alert(1)</script>")
+          expect(response.body).to include("&lt;script&gt;alert(1)&lt;/script&gt;")
+        end
       end
     end
 

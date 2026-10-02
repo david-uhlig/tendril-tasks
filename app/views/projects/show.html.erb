@@ -45,7 +45,7 @@
   <%= render TendrilTasks::Heading
                .new(tag: :h3,
                     scheme: :level3)
-               .with_content(t(".task_section_headline", initiative_title: @project.title).html_safe) %>
+               .with_content(t(".task_section_headline", initiative_title: @project.title)) %>
   <%# TODO build responsive grid component %>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <% @tasks.each do |task| %>
