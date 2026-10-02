@@ -2,32 +2,42 @@ import { Controller } from "@hotwired/stimulus"
 
 /**
  * Plays a short, dependency-free fireworks animation on a full-viewport canvas
- * over a dimmed backdrop. The backdrop fades in before the animation starts and
- * fades out after it has finished; then the element is removed.
+ * over a dimmed backdrop. The backdrop fades in before the animation starts.
+ * Toward the end of the animation, i.e. once the last rocket has launched, the
+ * optional modal fades in and stays visible for `modalDuration`. Once both the
+ * animation and the modal are done, the backdrop fades out and the element is
+ * removed.
  *
  * Connects to:
  *   <div data-controller="fireworks" class="opacity-0 bg-gray-900/50 ...">
  *     <canvas data-fireworks-target="canvas"></canvas>
+ *     <div data-fireworks-target="modal" class="opacity-0 ...">...</div>
  *   </div>
  *
- * The element should start out with `opacity-0` and carry the backdrop styles.
- * The controller removes `opacity-0` to fade in and adds it back to fade out.
+ * The element and the modal should start out with `opacity-0`. The controller
+ * removes `opacity-0` to fade them in and adds it back to fade them out.
  *
  * Users who prefer reduced motion won't see the animation; the element is
  * removed right away.
  *
+ * ### Actions:
+ * - `stop`: Ends the animation early and fades out, e.g. through a key press:
+ *   `keydown.esc@window->fireworks#stop`
+ *
  * ### Targets:
  * - `canvas`: The canvas to draw the fireworks on.
+ * - `modal` (optional): Shown toward the end of the animation.
  *
  * ### Values:
  * - `rockets` (Number): Number of rockets to launch. Default: 5.
  * - `launchInterval` (Number): Delay in milliseconds between launches. Default: 250.
  * - `particles` (Number): Number of sparks per explosion. Default: 60.
  * - `colors` (Array): Spark colors. Default: a set of festive colors.
- * - `fadeDuration` (Number): Duration in milliseconds of the backdrop fade in and out. Default: 400.
+ * - `fadeDuration` (Number): Duration in milliseconds of the backdrop and modal fades. Default: 500.
+ * - `modalDuration` (Number): Time in milliseconds the modal stays fully visible. Default: 5000.
  */
 export default class extends Controller {
-  static targets = ["canvas"]
+  static targets = ["canvas", "modal"]
   static values = {
     rockets: { type: Number, default: 5 },
     launchInterval: { type: Number, default: 250 },
@@ -36,7 +46,8 @@ export default class extends Controller {
       type: Array,
       default: ["#f43f5e", "#f59e0b", "#10b981", "#3b82f6", "#a855f7", "#ec4899", "#facc15"]
     },
-    fadeDuration: { type: Number, default: 500 }
+    fadeDuration: { type: Number, default: 500 },
+    modalDuration: { type: Number, default: 5000 }
   }
 
   static GRAVITY = 0.06
@@ -59,11 +70,12 @@ export default class extends Controller {
     this.resize()
     window.addEventListener("resize", this.resize)
 
-    this.fadeIn(() => this.start())
+    this.fadeIn(this.element, () => this.start())
   }
 
   disconnect() {
     clearTimeout(this.fadeTimer)
+    clearTimeout(this.modalTimer)
     clearInterval(this.launchTimer)
     cancelAnimationFrame(this.frame)
     window.removeEventListener("resize", this.resize)
@@ -80,18 +92,47 @@ export default class extends Controller {
 
   // Uses timeouts rather than `transitionend`, which never fires when
   // transitions are disabled, e.g. in tests.
-  fadeIn(callback) {
-    this.element.style.transitionProperty = "opacity"
-    this.element.style.transitionDuration = `${this.fadeDurationValue}ms`
+  fadeIn(element, callback) {
+    element.style.transitionProperty = "opacity"
+    element.style.transitionDuration = `${this.fadeDurationValue}ms`
     // Force a reflow, so the browser registers the initial opacity before it changes
-    this.element.offsetHeight
-    this.element.classList.remove(this.constructor.HIDDEN_CLASS)
-    this.fadeTimer = setTimeout(callback, this.fadeDurationValue)
+    element.offsetHeight
+    element.classList.remove(this.constructor.HIDDEN_CLASS)
+    return setTimeout(callback, this.fadeDurationValue)
   }
 
-  fadeOut(callback) {
-    this.element.classList.add(this.constructor.HIDDEN_CLASS)
-    this.fadeTimer = setTimeout(callback, this.fadeDurationValue)
+  fadeOut(element, callback) {
+    element.classList.add(this.constructor.HIDDEN_CLASS)
+    return setTimeout(callback, this.fadeDurationValue)
+  }
+
+  stop() {
+    if (this.stopping) return
+    this.stopping = true
+
+    clearTimeout(this.fadeTimer)
+    clearTimeout(this.modalTimer)
+    clearInterval(this.launchTimer)
+    cancelAnimationFrame(this.frame)
+    this.fadeTimer = this.fadeOut(this.element, () => this.element.remove())
+  }
+
+  showModal() {
+    if (!this.hasModalTarget) {
+      this.modalDone = true
+      return
+    }
+
+    this.modalTimer = this.fadeIn(this.modalTarget, () => {
+      this.modalTimer = setTimeout(() => {
+        this.modalDone = true
+        this.stopWhenDone()
+      }, this.modalDurationValue)
+    })
+  }
+
+  stopWhenDone() {
+    if (this.animationDone && this.modalDone) this.stop()
   }
 
   start() {
@@ -101,11 +142,13 @@ export default class extends Controller {
   }
 
   launch() {
-    if (this.launched >= this.rocketsValue) {
-      clearInterval(this.launchTimer)
-      return
-    }
+    if (this.launched >= this.rocketsValue) return
     this.launched++
+
+    if (this.launched === this.rocketsValue) {
+      clearInterval(this.launchTimer)
+      this.showModal()
+    }
 
     const x = this.width * (0.2 + Math.random() * 0.6)
     const targetY = this.height * (0.15 + Math.random() * 0.3)
@@ -165,7 +208,8 @@ export default class extends Controller {
 
     const done = this.launched >= this.rocketsValue && this.rockets.length === 0 && this.sparks.length === 0
     if (done) {
-      this.fadeOut(() => this.element.remove())
+      this.animationDone = true
+      this.stopWhenDone()
     } else {
       this.frame = requestAnimationFrame(this.tick)
     }

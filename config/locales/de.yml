@@ -234,6 +234,9 @@ de:
       destroy:
         application_successfully_removed: |
           Deine Meldung wurde zurückgezogen.
+      fireworks:
+        thanks_for_your_commitment: "Danke für dein Engagement!"
+        well_get_in_touch: "Wir melden uns in Kürze bei dir. Falls du nichts von uns hörst, wende dich gerne direkt an die Ansprechpersonen dieser Aufgabe."
     visibility_explainer:
       visible_for_everyone: "Für alle sichtbar"
       visible_for_coordinators: "Nur für Ansprechpersonen sichtbar"
