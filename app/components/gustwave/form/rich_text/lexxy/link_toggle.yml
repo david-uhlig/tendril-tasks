@@ -1,0 +1,9 @@
+en:
+  link: "Link"
+  unlink: "Unlink"
+  placeholder: "Enter a URL…"
+
+de:
+  link: "Verlinken"
+  unlink: "Link entfernen"
+  placeholder: "URL eingeben…"

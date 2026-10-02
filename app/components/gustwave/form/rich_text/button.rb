@@ -5,20 +5,24 @@ module Gustwave
     module RichText
       class Button < Gustwave::Component
         ATTRIBUTE_OPTIONS = %w[
-          bold italic strike bullet number quote code href heading1 heading2
-          heading3 heading4 heading5 heading6 increase_nesting
-          decrease_nesting undo redo attach_files
+          bold italic strike underline highlight bullet number quote code href
+          link heading1 heading2 heading3 heading4 heading5 heading6
+          increase_nesting decrease_nesting table horizontal_rule undo redo
+          attach_files
         ].freeze
 
         ATTRIBUTE_VISUAL_MAPPINGS = {
           bold: :letter_bold,
           italic: :letter_italic,
           strike: :text_slash, # Text strikethrough
+          underline: :letter_underline,
+          highlight: :font_highlight, # Text color highlight
           bullet: :list, # Unordered list
           number: :ordered_list, # Ordered list
           quote: :quote, # Citation
           code: :code,
           href: :link,
+          link: :link,
           heading1: "H1",
           heading2: "H2",
           heading3: "H3",
@@ -27,6 +31,8 @@ module Gustwave
           heading6: "H6",
           increase_nesting: :indent,
           decrease_nesting: :outdent,
+          table: :insert_table,
+          horizontal_rule: :minus,
           undo: :undo,
           redo: :redo,
           attach_files: :paper_clip
