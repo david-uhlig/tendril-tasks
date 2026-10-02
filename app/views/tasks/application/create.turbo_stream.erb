@@ -15,3 +15,15 @@
 <%# Issue a toast notification %>
 <%= render TurboStream::NotificationComponent
              .new(t ".we_received_your_application") %>
+
+<%# Celebrate the user's contribution %>
+<turbo-stream action="append" target="notifications">
+  <template>
+    <div data-controller="fireworks"
+         data-fireworks-rockets-value="50"
+         class="fixed inset-0 z-50 pointer-events-none opacity-0 bg-gray-900/80 dark:bg-gray-900/80"
+         aria-hidden="true">
+      <canvas data-fireworks-target="canvas" class="w-screen h-screen"></canvas>
+    </div>
+  </template>
+</turbo-stream>

@@ -23,6 +23,13 @@ RSpec.describe "Tasks::Application", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
+      it "celebrates the application with fireworks" do
+        post task_application_path(task),
+          params: { task_application: { comment: "comment" } },
+          as: :turbo_stream
+        expect(response.body).to include('data-controller="fireworks"')
+      end
+
       context "and the the task doesn't exist" do
         it "returns a not found status" do
           post task_application_path(999),
@@ -62,6 +69,14 @@ RSpec.describe "Tasks::Application", type: :request do
                     as: :turbo_stream
             }.to change { application.reload.comment }.to("edited comment")
             expect(response).to have_http_status(:ok)
+          end
+
+          it "doesn't celebrate the application with fireworks" do
+            create(:task_application, task: task, user: user)
+            patch task_application_path(task),
+                  params: { task_application: { comment: "edited comment" } },
+                  as: :turbo_stream
+            expect(response.body).not_to include('data-controller="fireworks"')
           end
         end
 
