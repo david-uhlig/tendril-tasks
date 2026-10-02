@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.6.0] - 2026-10-02
 
 ### Breaking Changes
 - Add the PKCE configuration option `ROCKET_CHAT_PKCE` (default: `false`). This change disables PKCE by default because Rocket.Chat `>= 7.4.0` introduced a bug that breaks third-party OAuth integrations. A partial fix is available for Rocket.Chat `>= 8.0.0`, but PCKE flows remain affected. To enable PKCE once Rocket.Chat fixes the bug, set `ROCKET_CHAT_PKCE = "true"` in the `.env` or Kamal `deploy.yml` file.
@@ -114,7 +114,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.1...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.4.1...v0.4.2
