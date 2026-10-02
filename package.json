@@ -1,5 +1,6 @@
 {
   "name": "tendril-tasks",
+  "private": true,
   "dependencies": {
     "flowbite": "^3.1.2"
   },
