@@ -26,7 +26,20 @@ class AppConfig < BaseConfig
     url_options
   end
 
+  # In development, falls back to the checked out commit, so it doesn't need to
+  # be configured. In production it is set during deployment.
+  def git_commit
+    super.presence || (local_git_commit if Rails.env.development?)
+  end
+
   private
+
+  def local_git_commit
+    commit = IO.popen(%w[git rev-parse --short HEAD], chdir: Rails.root, err: File::NULL, &:read)
+    commit.strip.presence if $?.success?
+  rescue SystemCallError
+    nil
+  end
 
   def ensure_base_url_is_present
     self.base_url ||= if host.present?
