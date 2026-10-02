@@ -7,6 +7,16 @@
 */
 @import './actiontext.css' layer(components);
 
+/*
+  Default Lexxy editor styles. Imported into the components layer, so that
+  Tailwind utilities take precedence over them. The files are imported
+  individually, because Tailwind does not inline `lexxy.css`'s `@import url()`.
+  The nested `@import url("lexxy-variables.css")` they contain is ignored.
+*/
+@import '../../../node_modules/@37signals/lexxy/dist/stylesheets/lexxy-variables.css' layer(components);
+@import '../../../node_modules/@37signals/lexxy/dist/stylesheets/lexxy-content.css' layer(components);
+@import '../../../node_modules/@37signals/lexxy/dist/stylesheets/lexxy-editor.css' layer(components);
+
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @plugin 'flowbite/plugin';

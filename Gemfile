@@ -47,6 +47,9 @@ gem "omniauth-rocketchat"
 gem "tailwindcss-rails", "~> 4.6"
 gem "tailwind_merge", "~> 1.5"
 
+# Rich text editor for Action Text [https://lexxy.dev]
+gem "lexxy", "~> 1.0"
+
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
 gem "view_component", "~> 4.15"

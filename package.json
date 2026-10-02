@@ -2,6 +2,7 @@
   "name": "tendril-tasks",
   "private": true,
   "dependencies": {
+    "@37signals/lexxy": "1.0.0",
     "flowbite": "^3.1.2"
   },
   "scripts": {
