@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Compares two sets of screenshots taken with `spec/visual/screenshots_spec.rb`
+# and writes an HTML report with side-by-side images and diff highlights.
+# Requires ImageMagick (`compare` and `convert`).
+#
+# Usage:
+#   bin/visual-diff <before-label> <after-label> [--fuzz=1%]
+#
+# Example:
+#   VISUAL_LABEL=before bundle exec rspec spec/visual
+#   VISUAL_LABEL=after bundle exec rspec spec/visual
+#   bin/visual-diff before after
+
+require "cgi"
+require "fileutils"
+require "open3"
+
+fuzz = ARGV.find { |arg| arg.start_with?("--fuzz=") }&.delete_prefix("--fuzz=") || "1%"
+before_label, after_label = ARGV.reject { |arg| arg.start_with?("--") }
+abort "Usage: bin/visual-diff <before-label> <after-label> [--fuzz=1%]" unless before_label && after_label
+
+root = File.expand_path("../tmp/visual", __dir__)
+before_dir = File.join(root, before_label)
+after_dir = File.join(root, after_label)
+[ before_dir, after_dir ].each { |dir| abort "Missing directory: #{dir}" unless Dir.exist?(dir) }
+
+report_dir = File.join(root, "diff--#{before_label}--#{after_label}")
+FileUtils.rm_rf(report_dir)
+FileUtils.mkdir_p(report_dir)
+
+def dimensions(path)
+  out, = Open3.capture2("identify", "-format", "%w %h", path)
+  out.split.map(&:to_i)
+end
+
+names = (Dir.children(before_dir) | Dir.children(after_dir)).grep(/\.png\z/).sort
+results = names.map do |name|
+  before = File.join(before_dir, name)
+  after = File.join(after_dir, name)
+  next { name:, status: :missing_before } unless File.exist?(before)
+  next { name:, status: :missing_after } unless File.exist?(after)
+
+  # Pad both images to the same size, so that pages with different heights can be compared.
+  bw, bh = dimensions(before)
+  aw, ah = dimensions(after)
+  size = "#{[ bw, aw ].max}x#{[ bh, ah ].max}"
+  padded_before = File.join(report_dir, "before--#{name}")
+  padded_after = File.join(report_dir, "after--#{name}")
+  [ [ before, padded_before ], [ after, padded_after ] ].each do |src, dest|
+    system("convert", src, "-background", "magenta", "-gravity", "northwest", "-extent", size, dest, exception: true)
+  end
+
+  diff = File.join(report_dir, "diff--#{name}")
+  _, err, = Open3.capture3("compare", "-metric", "AE", "-fuzz", fuzz, padded_before, padded_after, diff)
+  pixels = err.to_f.to_i
+  { name:, status: pixels.zero? && [ bw, bh ] == [ aw, ah ] ? :same : :changed, pixels:,
+    size_change: [ bw, bh ] == [ aw, ah ] ? nil : "#{bw}x#{bh} → #{aw}x#{ah}" }
+end
+
+changed = results.reject { |result| result[:status] == :same }.sort_by { |result| -(result[:pixels] || Float::INFINITY) }
+same = results.select { |result| result[:status] == :same }
+
+rows = changed.map do |result|
+  name = CGI.escapeHTML(result[:name])
+  details = case result[:status]
+  when :missing_before then "only in #{after_label}"
+  when :missing_after then "only in #{before_label}"
+  else [ "#{result[:pixels]} px changed", result[:size_change] ].compact.join(", ")
+  end
+  images = if result[:status] == :changed
+    %w[before diff after].map { |kind| %(<a href="#{kind}--#{name}"><img src="#{kind}--#{name}" loading="lazy"></a>) }.join
+  end
+  %(<section><h2>#{name}</h2><p>#{CGI.escapeHTML(details)}</p><div class="images">#{images}</div></section>)
+end
+
+File.write(File.join(report_dir, "index.html"), <<~HTML)
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Visual diff: #{CGI.escapeHTML(before_label)} → #{CGI.escapeHTML(after_label)}</title>
+      <style>
+        body { font-family: sans-serif; margin: 1rem; }
+        .images { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; align-items: start; }
+        .images img { width: 100%; border: 1px solid #ccc; }
+        section { margin-bottom: 2rem; }
+      </style>
+    </head>
+    <body>
+      <h1>#{CGI.escapeHTML(before_label)} → #{CGI.escapeHTML(after_label)}</h1>
+      <p>#{changed.size} changed, #{same.size} unchanged (fuzz #{CGI.escapeHTML(fuzz)}). Columns: before, diff, after.</p>
+      #{rows.join("\n")}
+      <details><summary>Unchanged</summary><ul>#{same.map { |result| "<li>#{CGI.escapeHTML(result[:name])}</li>" }.join}</ul></details>
+    </body>
+  </html>
+HTML
+
+changed.each do |result|
+  puts format("%-60s %s", result[:name], result[:status] == :changed ? "#{result[:pixels]} px #{result[:size_change]}" : result[:status])
+end
+puts "#{changed.size} changed, #{same.size} unchanged"
+puts "Report: #{File.join(report_dir, 'index.html')}"

@@ -6,7 +6,7 @@ module Gustwave
       class Base < Gustwave::Component
         style :base, "flex items-center gap-1.5 w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white whitespace-nowrap"
 
-        style :flex_grow, "flex-grow text-left"
+        style :flex_grow, "grow text-left"
 
         private
 

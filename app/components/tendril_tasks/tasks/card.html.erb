@@ -9,12 +9,12 @@
                  .new(tag: :h2,
                       scheme: :level5,
                       responsive: false,
-                      class: "overflow-hidden pb-0.5 flex-grow")
+                      class: "overflow-hidden pb-0.5 grow")
                  .with_content(@task.title) %>
   <% end %>
 
   <%# Plain text description %>
-  <%= tag.div class: "flex-grow my-2 line-clamp-6 hyphens-auto", lang: I18n.locale do %>
+  <%= tag.div class: "grow my-2 line-clamp-6 hyphens-auto", lang: I18n.locale do %>
     <% paragraphize(@task.description_plain_text&.truncate_words(50), delimiter: "\n\n").each do |paragraph| %>
       <%= render TendrilTasks::Paragraph.new(class: "lg:text-lg") do %>
         <%= link_to task_path(@task) do %>
@@ -30,8 +30,8 @@
                                                   modal_id: "task-contacts-#{@task.id}",
                                                   class: "inline-flex items-center max-w-full py-1 px-1 pr-2 my-4 mx-0 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do
     %>
-      <%= tag.span t(".contacts"), class: "flex-shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3" %>
-      <span class="flex gap-2 overflow-hidden flex-shrink truncate">
+      <%= tag.span t(".contacts"), class: "shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3" %>
+      <span class="flex gap-2 overflow-hidden shrink truncate">
         <% @task.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
             <%= render TendrilTasks::Avatar.new(coordinator, size: :xs) %>
@@ -39,7 +39,7 @@
           </span>
         <% end %>
       </span>
-      <svg class="flex-shrink-0 ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <svg class="shrink-0 ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a 1 0 01-1.414 0z" clip-rule="evenodd"></path>
       </svg>
     <% end %>

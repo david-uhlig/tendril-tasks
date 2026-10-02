@@ -20,7 +20,7 @@ module Gustwave
       }.freeze
 
       style :base,
-            "rounded-lg focus:outline-none focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
+            "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
 
       # General appearance of the buttons
       #

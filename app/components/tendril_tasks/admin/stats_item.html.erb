@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center space-y-2">
+<div class="flex flex-col items-center justify-center gap-2">
   <dt class="text-3xl font-extrabold">
     <%= @stats[:total] %>
     <% if @stats[:new] > 0 %>
@@ -9,7 +9,7 @@
     <% end %>
   </dt>
   <dd class="text-gray-500 dark:text-gray-400"><%= @title %></dd>
-  <div class="whitespace-nowrap flex-grow">
+  <div class="whitespace-nowrap grow">
     <%= content %>
   </div>
 </div>

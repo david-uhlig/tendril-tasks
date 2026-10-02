@@ -44,8 +44,8 @@ gem "omniauth-rails_csrf_protection"
 gem "omniauth-rocketchat"
 
 # TailwindCSS framework
-gem "tailwindcss-rails", "~> 3.3.1"
-gem "tailwind_merge", "~> 0.14"
+gem "tailwindcss-rails", "~> 4.6"
+gem "tailwind_merge", "~> 1.5"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/

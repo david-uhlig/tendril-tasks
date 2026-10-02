@@ -33,13 +33,13 @@ module Gustwave
         }.freeze
 
         style :base,
-              "p-1.5 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+              "p-1.5 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
 
         style :icon,
               "m-0 w-5 h-5"
 
         style :disabled,
-              "disabled:text-gray-400 disabled:dark:text-gray-500 disabled:cursor-not-allowed"
+              "disabled:text-gray-400 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
 
         def initialize(attribute,
                        icon_or_text: nil,

@@ -6,7 +6,7 @@ module Text
       DEFAULT_SCHEME = :sky_to_emerald
       SCHEME_MAPPINGS = {
         none: "",
-        sky_to_emerald: "text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
+        sky_to_emerald: "text-transparent bg-clip-text bg-linear-to-r to-emerald-600 from-sky-400"
       }
       SCHEME_OPTIONS = SCHEME_MAPPINGS.keys
 

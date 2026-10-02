@@ -39,7 +39,7 @@ module Gustwave
           states: {
             none: "",
             round: "rounded-full",
-            square: "rounded"
+            square: "rounded-sm"
           }
 
     style :size,
@@ -65,8 +65,8 @@ module Gustwave
             xs: "ring-0 ring-gray-300 dark:ring-gray-500",
             sm: "ring-1 ring-gray-300 dark:ring-gray-500",
             md: "ring-2 ring-gray-300 dark:ring-gray-500",
-            lg: "ring ring-gray-300 dark:ring-gray-500",
-            xl: "ring ring-gray-300 dark:ring-gray-500",
+            lg: "ring-3 ring-gray-300 dark:ring-gray-500",
+            xl: "ring-3 ring-gray-300 dark:ring-gray-500",
             "2xl": "ring-4 ring-gray-300 dark:ring-gray-500",
             "3xl": "ring-4 ring-gray-300 dark:ring-gray-500",
             "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"

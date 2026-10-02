@@ -14,8 +14,8 @@ module TendrilTasks
 
     style :size,
           states: {
-            sm: "[&_img]:h-8 [&_img]:sm:h-11 [&_svg]:h-8 [&_svg]:sm:h-11",
-            lg: "[&_img]:h-12 [&_img]:sm:h-16 [&_svg]:h-12 [&_svg]:sm:h-16"
+            sm: "[&_img]:h-8 sm:[&_img]:h-11 [&_svg]:h-8 sm:[&_svg]:h-11",
+            lg: "[&_img]:h-12 sm:[&_img]:h-16 [&_svg]:h-12 sm:[&_svg]:h-16"
           },
           default: :sm
 

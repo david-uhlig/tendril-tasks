@@ -51,7 +51,7 @@ module Gustwave
   #
   class HorizontalLine < Gustwave::Component
     style :base,
-          "mx-auto border-0 rounded dark:bg-gray-700"
+          "mx-auto border-0 rounded-sm dark:bg-gray-700"
 
     style :scheme,
           default: :default,

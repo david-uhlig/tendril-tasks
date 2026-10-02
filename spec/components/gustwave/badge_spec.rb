@@ -9,7 +9,7 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
 
     it "renders default styles" do
-      expect(rendered_content).to have_selector("span.rounded.whitespace-nowrap.inline-flex")
+      expect(rendered_content).to have_selector("span.rounded-sm.whitespace-nowrap.inline-flex")
     end
 
     it "renders default size classes" do
