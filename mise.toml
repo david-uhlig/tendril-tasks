@@ -9,7 +9,7 @@ zizmor = "latest"
 description = "Run the continuous integration suite in parallel."
 run = [
     { task = "ci:setup" },
-    { tasks = ["audit", "brakeman", "rubocop", "test:rspec"] },
+    { tasks = ["audit", "brakeman", "rubocop", "herb", "test:rspec"] },
     { task = "test:seeds" }
 ]
 
@@ -20,6 +20,7 @@ run = [
     { task = "audit" },
     { task = "brakeman" },
     { task = "rubocop" },
+    { task = "herb" },
     { task = "test:rspec" },
     { task = "test:seeds" }
 ]
@@ -55,6 +56,14 @@ run = "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
 [tasks."rubocop"]
 description = "Style: Ruby"
 run = "bin/rubocop -a"
+
+[tasks."herb"]
+description = "Style: ERB"
+run = "npx herb-lint"
+
+[tasks."herb:fix"]
+description = "Style: ERB (auto fix)"
+run = "npx herb-lint --fix"
 
 [tasks.rff]
 description = "Alias for `test:rspec:ff`"

@@ -13,6 +13,7 @@ CI.run do
 
   # Linting
   step "Style: Ruby", "bin/rubocop"
+  step "Style: ERB", "npx herb-lint"
 
   # Tests
   step "Tests: RSpec", "env RAILS_ENV=test bin/rails db:setup spec"
