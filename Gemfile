@@ -88,6 +88,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # HTML+ERB parser, linter and formatter [https://herb-tools.dev]
+  gem "herb", "~> 0.11.0", require: false
 end
 
 group :development do
