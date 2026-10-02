@@ -101,7 +101,7 @@ group :development do
   gem "hotwire-spark"
 
   # Find and manage missing and unused translations [https://github.com/glebm/i18n-tasks]
-  gem "i18n-tasks", "~> 1.0"
+  gem "i18n-tasks", "~> 1.0", require: false
 end
 
 group :test do
@@ -111,4 +111,5 @@ group :test do
   gem "simplecov"
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rspec-ai-formatter", require: false
 end
