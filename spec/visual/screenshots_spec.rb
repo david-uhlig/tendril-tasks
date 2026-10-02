@@ -47,18 +47,18 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
   end
 
   let!(:project) do
-    create(:project, :published, title: "Community garden", description: rich_text,
+    create(:project, published_at: 1.day.ago, title: "Community garden", description: rich_text,
                                  coordinators: [ admin, editor ])
   end
   let!(:draft_project) do
     create(:project, :not_published, title: "Draft project", coordinators: [ editor ])
   end
   let!(:task) do
-    create(:task, :published, project:, title: "Water the plants", description: rich_text,
+    create(:task, published_at: 1.day.ago, project:, title: "Water the plants", description: rich_text,
                               coordinators: [ admin, editor ])
   end
   let!(:other_task) do
-    create(:task, :published, project:, title: "Build a compost bin", coordinators: [ editor ])
+    create(:task, published_at: 2.days.ago, project:, title: "Build a compost bin", coordinators: [ editor ])
   end
   let!(:draft_task) do
     create(:task, :not_published, project: draft_project, title: "Draft task", coordinators: [ editor ])
@@ -125,6 +125,8 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
     "task_show_coordinator" => [ :admin, -> { task_path(task) } ],
     "task_application_status_dropdown" => [ :admin, -> { task_path(task) },
                                             -> { first("[data-dropdown-toggle^='dropdown-status-info-']").click } ],
+    "task_visibility_popover" => [ :admin, -> { task_path(task) },
+                                   -> { first("[data-popover-target]").hover && find("[data-popover]", visible: true) } ],
     "task_new" => [ :admin, -> { new_task_path } ],
     "task_edit" => [ :admin, -> { edit_task_path(task) } ],
     "admin_dashboard" => [ :admin, -> { admin_root_path } ],
