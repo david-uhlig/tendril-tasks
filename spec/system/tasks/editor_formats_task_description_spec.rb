@@ -81,6 +81,18 @@ RSpec.describe "Editor formats task description", type: :system, js: true do
     expect(toolbar).to have_css("lexxy-highlight-dropdown .lexxy-highlight-colors button", minimum: 1)
   end
 
+  it "uploads an attached image" do
+    type_in_editor("Image")
+
+    toolbar.find("button[name='file']").click
+    # Lexxy briefly appends the file input to the editor
+    find("lexxy-editor input[type='file']", visible: :all)
+      .attach_file(Rails.root.join("spec/assets/images/for-tests.jpg"), make_visible: true)
+
+    expect(content_element).to have_css("img[src*='for-tests']")
+    expect(ActiveStorage::Blob.last.filename.to_s).to eq("for-tests.jpg")
+  end
+
   it "saves the formatted description" do
     select "Project title", from: "task_form_project_id"
     fill_in "Titel", with: "Formatted task"
