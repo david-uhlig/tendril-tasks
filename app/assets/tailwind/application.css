@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'flowbite/src/themes/default';
 
 /*
   Default Trix editor styles. Imported into the components layer, so that
