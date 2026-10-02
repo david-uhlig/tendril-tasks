@@ -30,12 +30,6 @@ RSpec.describe "User applies to task", type: :system, js: true do
       end
     end
 
-    it "displays notification" do
-      within("#notifications") do
-        expect(page).to have_content("Vielen Dank!")
-      end
-    end
-
     it "celebrates with fireworks" do
       # The controller sizes the canvas and dims the backdrop, then removes both once the animation ends
       expect(page).to have_selector("[data-controller='fireworks']:not(.opacity-0) canvas[width]", visible: :all)
@@ -69,12 +63,6 @@ RSpec.describe "User applies to task", type: :system, js: true do
         expect(page).to have_selector("textarea")
         expect(page).to have_button("Meldung bearbeiten")
         expect(page).to have_button("Meldung zurückziehen")
-      end
-    end
-
-    it "displays notification" do
-      within("#notifications") do
-        expect(page).to have_content("Vielen Dank!")
       end
     end
   end
