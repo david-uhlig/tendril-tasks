@@ -84,6 +84,10 @@ RSpec.configure do |config|
     # driven_by :selenium_chrome_headless
   end
 
+  # Visual snapshots only run when a label for the screenshots is given,
+  # see `spec/visual/screenshots_spec.rb`.
+  config.filter_run_excluding visual: true unless ENV["VISUAL_LABEL"]
+
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless # selenium when we need javascript
     # to be used when debugging tests

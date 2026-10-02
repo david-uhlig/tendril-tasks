@@ -52,5 +52,6 @@ module TendrilTasks
 
     # Set up previews for ViewComponents with RSpec
     config.view_component.previews.paths << "#{Rails.root}/spec/components/previews"
+    config.view_component.previews.default_layout = "component_preview"
   end
 end
