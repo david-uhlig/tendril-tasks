@@ -21,4 +21,19 @@ module DescriptionHelper
   def paragraphize(text, delimiter: "\n")
     text&.split(delimiter)
   end
+
+  # Joins the lines of `text` with `<br>` tags, escaping each line.
+  #
+  # Sanitized plain text (see RichTextSanitizer) is stored entity-encoded, so
+  # entities are decoded first to avoid double-escaping. Escaping happens here
+  # at render time, so the output is safe regardless of what was stored.
+  #
+  # @param text [String, nil] The text to render.
+  #
+  # @example
+  #   simple_line_breaks("Tom &amp; Jerry\n<b>hi</b>")
+  #   # => "Tom &amp; Jerry<br>&lt;b&gt;hi&lt;/b&gt;"
+  def simple_line_breaks(text)
+    safe_join(CGI.unescapeHTML(text.to_s).split("\n"), tag.br)
+  end
 end

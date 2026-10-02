@@ -49,7 +49,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 # Install npm packages and vendorize Flowbite's turbo library.
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --omit=dev
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile && \

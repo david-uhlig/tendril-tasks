@@ -9,7 +9,7 @@
       <% paragraphize(@project.description_plain_text&.truncate_words(100), delimiter: "\n\n").each do |paragraph| %>
         <%= render TendrilTasks::Paragraph.new(class: "text-start font-normal sm:px-16 xl:px-48") do %>
           <%= link_to project_path(@project) do %>
-            <%= paragraph.split("\n").join("<br>").html_safe %>
+            <%= simple_line_breaks(paragraph) %>
           <% end %>
         <% end %>
       <% end %>

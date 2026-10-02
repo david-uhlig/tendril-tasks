@@ -34,6 +34,10 @@ updates:
       interval: weekly
     open-pull-requests-limit: 10
     groups:
+      # Herb updates may require bumping `version` in `.herb.yml`.
+      herb:
+        patterns:
+          - "@herb-tools/*"
       javascript:
         patterns:
           - "*"
