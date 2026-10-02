@@ -12,6 +12,9 @@
   </template>
 </turbo-stream>
 
-<%# Issue a toast notification %>
-<%= render TurboStream::NotificationComponent
-             .new(t ".we_received_your_application") %>
+<%# Celebrate the user's contribution instead of a notification %>
+<turbo-stream action="append" target="notifications">
+  <template>
+    <%= render partial: "tasks/application/fireworks" %>
+  </template>
+</turbo-stream>

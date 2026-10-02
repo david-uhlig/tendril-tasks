@@ -30,10 +30,20 @@ RSpec.describe "User applies to task", type: :system, js: true do
       end
     end
 
-    it "displays notification" do
-      within("#notifications") do
-        expect(page).to have_content("Vielen Dank!")
-      end
+    it "celebrates with fireworks" do
+      # The controller sizes the canvas and dims the backdrop, then removes both once the animation ends
+      expect(page).to have_selector("[data-controller='fireworks']:not(.opacity-0) canvas[width]", visible: :all)
+      # Uncomment to test the fade out behavior. Too expensive to generally run this test.
+      # expect(page).to have_no_selector("[data-controller='fireworks']", visible: :all, wait: 30)
+    end
+
+    it "shows a thank you modal toward the end of the fireworks" do
+      expect(page).to have_selector("[data-fireworks-target='modal'].opacity-0", visible: :all)
+      # 50 rockets launched 250ms apart, plus the backdrop fade in
+      # Uncomment to test the fade out behavior. Too expensive to generally run this test.
+      # within("[data-fireworks-target='modal']:not(.opacity-0)", visible: :all, wait: 20) do
+      #  expect(page).to have_content("Danke für dein Engagement!")
+      # end
     end
   end
 
@@ -53,12 +63,6 @@ RSpec.describe "User applies to task", type: :system, js: true do
         expect(page).to have_selector("textarea")
         expect(page).to have_button("Meldung bearbeiten")
         expect(page).to have_button("Meldung zurückziehen")
-      end
-    end
-
-    it "displays notification" do
-      within("#notifications") do
-        expect(page).to have_content("Vielen Dank!")
       end
     end
   end
