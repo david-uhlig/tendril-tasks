@@ -2,10 +2,14 @@
 @import 'flowbite/src/themes/default';
 
 /*
-  Default Trix editor styles. Imported into the components layer, so that
-  Tailwind utilities take precedence over them.
+  Default Lexxy editor styles. Imported into the components layer, so that
+  Tailwind utilities take precedence over them. The files are imported
+  individually, because Tailwind does not inline `lexxy.css`'s `@import url()`.
+  The nested `@import url("lexxy-variables.css")` they contain is ignored.
 */
-@import './actiontext.css' layer(components);
+@import '../../../node_modules/@37signals/lexxy/dist/stylesheets/lexxy-variables.css' layer(components);
+@import '../../../node_modules/@37signals/lexxy/dist/stylesheets/lexxy-content.css' layer(components);
+@import '../../../node_modules/@37signals/lexxy/dist/stylesheets/lexxy-editor.css' layer(components);
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
@@ -108,31 +112,60 @@
 }
 
 /*
-  Trix injects unlayered default styles at runtime, e.g. `trix-toolbar { display: block; }`,
-  which take precedence over Tailwind's layered utilities.
+  Match Lexxy's colors and fonts to the Flowbite theme. The variables are
+  unlayered, so they override Lexxy's defaults in the components layer.
 */
-trix-toolbar.flex {
-    display: flex;
+:root {
+    --lexxy-color-ink: var(--color-gray-900);
+    --lexxy-color-ink-medium: var(--color-gray-500);
+    --lexxy-color-ink-light: var(--color-gray-400);
+    --lexxy-color-ink-lighter: var(--color-gray-200);
+    --lexxy-color-ink-lightest: var(--color-gray-50);
+    --lexxy-color-ink-inverted: var(--color-white);
+
+    --lexxy-color-accent-dark: var(--color-blue-700);
+    --lexxy-color-accent-medium: var(--color-blue-500);
+    --lexxy-color-accent-light: var(--color-blue-200);
+    --lexxy-color-accent-lightest: var(--color-blue-100);
+    --lexxy-color-link: var(--color-blue-600);
+
+    --lexxy-font-base: var(--font-sans);
+    --lexxy-font-mono: var(--font-mono);
+    --lexxy-radius: var(--radius-sm);
 }
 
-trix-toolbar {
-    button.trix-active:not(
-        [data-trix-action="undo"],
-        [data-trix-action="redo"],
-        [data-trix-action="attachFiles"]
-    ) {
+/*
+  Lexxy defines the toolbar variables on `lexxy-editor`. Our toolbars are
+  rendered outside of the editor, so they need their own, e.g. to size the
+  highlight menu.
+*/
+lexxy-toolbar {
+    --lexxy-toolbar-gap: 2px;
+    --lexxy-toolbar-spacing: 0.5ch;
+    --lexxy-toolbar-padding: 2px;
+    --lexxy-toolbar-border-size: 1px;
+
+    button[aria-pressed="true"] {
         @apply text-white bg-blue-700 hover:bg-blue-800 hover:text-white focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+    }
+
+    button[aria-disabled="true"] {
+        @apply text-gray-400 hover:text-gray-400 hover:bg-transparent cursor-not-allowed dark:text-gray-500;
     }
 }
 
-.trix-content {
+.lexxy-content {
     figure .attachment__name,
     figure .attachment__size {
         @apply hidden;
     }
 }
 
-trix-editor, .trix-content {
+/*
+  Content styles for the editor and rendered rich text. Trix stored paragraphs
+  as `div` elements without classes, so existing content still contains them.
+*/
+lexxy-editor .lexxy-editor__content, .lexxy-content:not(lexxy-editor) {
     &>:first-child {
         @apply mt-0;
     }
@@ -193,12 +226,12 @@ trix-editor, .trix-content {
         @apply ps-5 space-y-1.5 my-1.5;
     }
 
-    p, div, blockquote, li {
+    p, div:not([class]), blockquote, li, td, th {
         @apply text-start text-lg lg:text-xl font-normal text-gray-500 dark:text-gray-400;
     }
 
-    p, div {
-        @apply mt-4;
+    p, div:not([class]) {
+        @apply mt-4 mb-0;
     }
 
     blockquote {
@@ -207,6 +240,20 @@ trix-editor, .trix-content {
 
     pre {
         @apply w-full p-4 my-4 text-sm border border-gray-200 bg-gray-50 rounded-xl dark:border-gray-600 dark:bg-gray-700 overflow-x-auto;
+    }
+
+    th, td.lexxy-content__table-cell--header {
+        @apply font-semibold text-gray-900 dark:text-white;
+    }
+
+    td, th {
+        &>* {
+            @apply my-0;
+        }
+    }
+
+    hr {
+        @apply w-full border-gray-200 dark:border-gray-700;
     }
 
     figcaption {
@@ -221,4 +268,3 @@ trix-editor, .trix-content {
         @apply h-auto max-w-full rounded-lg;
     }
 }
-

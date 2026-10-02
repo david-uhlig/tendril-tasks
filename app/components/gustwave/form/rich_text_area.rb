@@ -43,13 +43,13 @@ module Gustwave
       end
 
       def default_toolbar
-        render Gustwave::Form::RichText::Trix::Toolbar.new(@form, **@toolbar_options)
+        render Gustwave::Form::RichText::Lexxy::Toolbar.new(@form, **@toolbar_options)
       end
 
       def default_editor
         @form.rich_textarea @attribute,
                             toolbar: @toolbar_options[:id],
-                            class: "block w-full text-sm px-0 text-gray-800 border-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 w-full min-h-80 focus:outline-hidden",
+                            class: "lexxy-content block w-full text-sm px-0 text-gray-800 border-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 w-full min-h-80 focus:outline-hidden",
                             spellcheck: false
       end
     end

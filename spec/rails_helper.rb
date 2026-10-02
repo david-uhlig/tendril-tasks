@@ -51,6 +51,7 @@ RSpec.configure do |config|
 
   # ActionText helpers
   config.include ActionText::SystemTestHelper, type: :system
+  config.include LexxySystemTestHelper, type: :system
 
   # ViewComponent helpers
   config.include ComponentTestHelpers, type: :component

@@ -45,6 +45,36 @@ RSpec.describe RichTextSanitizer, type: :concern do
       end
     end
 
+    context "when content contains paragraphs" do
+      let(:content) { "<h2>Agenda</h2><p>First paragraph</p><p>Second paragraph</p>" }
+
+      it "separates the paragraphs with blank lines" do
+        test_model.save!
+        expect(test_model.content_plain_text).to eq("Agenda\n\nFirst paragraph\n\nSecond paragraph")
+      end
+    end
+
+    context "when content contains a table" do
+      let(:content) do
+        "<p>Before</p><table><tbody><tr><th>Name</th><th>Value</th></tr>" \
+          "<tr><td><p>Water</p></td><td>1</td></tr></tbody></table><p>After</p>"
+      end
+
+      it "stores each row as a paragraph with the cells separated by spaces" do
+        test_model.save!
+        expect(test_model.content_plain_text).to eq("Before\n\nName Value\n\nWater 1\n\nAfter")
+      end
+    end
+
+    context "when content contains highlighted text" do
+      let(:content) { "<p>Some <mark style=\"color: var(--highlight-3);\">colored</mark> text</p>" }
+
+      it "stores the text without the highlight" do
+        test_model.save!
+        expect(test_model.content_plain_text).to eq("Some colored text")
+      end
+    end
+
     context "when content is blank" do
       let(:content) { "" }
 

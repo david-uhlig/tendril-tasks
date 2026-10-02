@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Celebrate a user's contribution with a short fireworks animation when they sign up for a task.
 - Delete confirmation dialogs briefly disable the delete button to prevent accidental deletions.
+- Underline, color highlight, tables and dividers in descriptions and legal pages.
+
+### Changed
+- Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to three levels (H2–H4); existing H1, H5 and H6 headings are still displayed.
 
 ## [0.6.0] - 2026-10-02
 

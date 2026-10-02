@@ -47,7 +47,24 @@ module RichTextSanitizer
     text = rich_text.gsub(/<h[2-6]>(.*?)<\/h[2-6]>/i, '<h1>\1</h1>')
                     .gsub(/<action-text-attachment\b[^>]*>.*?<\/action-text-attachment>/mi, "")
 
-    plain_text = ActionText::Content.new(text).to_plain_text.strip
+    plain_text = ActionText::Content.new(flatten_tables(text)).to_plain_text.strip
     ActionText::ContentHelper.sanitizer.sanitize(plain_text)
+  end
+
+  # Replaces each table with a paragraph per row, because
+  # ActionText::Content#to_plain_text joins the text of all cells without
+  # separators.
+  def flatten_tables(html)
+    return html unless html.match?(/<table\b/i)
+
+    fragment = Nokogiri::HTML5.fragment(html)
+    fragment.css("table").each do |table|
+      rows = table.css("tr").map do |row|
+        cells = row.css("th, td").map { |cell| cell.text.squish }.compact_blank
+        "<p>#{ERB::Util.html_escape(cells.join(" "))}</p>"
+      end
+      table.replace(Nokogiri::HTML5.fragment(rows.join))
+    end
+    fragment.to_html
   end
 end

@@ -14,7 +14,7 @@ RSpec.describe "Editor creates new task", type: :system, js: true do
     it "shows the create task mask" do
       expect(page).to have_content("Aufgabe anlegen")
       expect(page).to have_selector("input")
-      expect(page).to have_selector("trix-editor")
+      expect(page).to have_selector("lexxy-editor")
     end
   end
 

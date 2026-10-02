@@ -38,7 +38,7 @@ module Form
                                                 sticky_toolbar: true,
                                                 **@options) do |rich_text|
           rich_text.toolbar do
-            render Gustwave::Form::RichText::Trix::Toolbar.new(@form, **@toolbar)
+            render Gustwave::Form::RichText::Lexxy::Toolbar.new(@form, **@toolbar)
           end
         end
       end

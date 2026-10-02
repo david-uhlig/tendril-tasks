@@ -22,6 +22,11 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
     <ol><li>Numbered item</li><li>Another numbered item</li></ol>
     <blockquote>A quote that stands out.</blockquote>
     <pre>preformatted code block</pre>
+    <h4>Heading four</h4>
+    <p>A paragraph with <mark style="color: var(--highlight-3); background-color: var(--highlight-bg-3);">highlighted</mark> text.</p>
+    <table><tbody><tr><th>Name</th><th>Value</th></tr><tr><td>Water</td><td>10 l</td></tr></tbody></table>
+    <hr>
+    <div>A paragraph stored by Trix.</div>
   HTML
 
   include ActiveSupport::Testing::TimeHelpers
