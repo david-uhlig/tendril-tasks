@@ -1,7 +1,6 @@
 <%= tag.div **@options do %>
   <%= render Gustwave::Form::RichText::Toolbar.new(tag: :"trix-toolbar",
-                                                   id: @id) do
-  %>
+                                                   id: @id) do %>
     <% @actions.each do |action| %>
       <% case action %>
       <% when :divider %>

@@ -2,8 +2,7 @@
              .new(tag: :h3,
                   scheme: :level3,
                   id: "apply-now")
-             .with_content(t ".apply_here")
-%>
+             .with_content(t ".apply_here") %>
 <%= render TendrilTasks::Paragraph.new do %>
   <%= t(".procedure_and_motivation") %>
 <% end %>
@@ -13,8 +12,7 @@
   <%= render Form::TextAreaComponent.new(f,
                                          :comment,
                                          t("activerecord.attributes.task_application.comment"),
-                                         rows: 8)
-  %>
+                                         rows: 8) %>
   <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
     <% button_group.button(t(".submit"), value: "save") %>
   <% end %>

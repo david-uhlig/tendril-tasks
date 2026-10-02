@@ -3,15 +3,13 @@
   <% case @type %>
   <% when :all_published_tasks %>
     <%= render 'tasks/index/headline_for_all_published_tasks',
-               count: @tasks.size
-    %>
+               count: @tasks.size %>
   <% else %>
     <%= render partial: 'tasks/index/headline_for_filtered_by_initiative',
                locals: {
                  count: @tasks.size,
                  project: @selected_project
-               }
-    %>
+               } %>
   <% end %>
 
   <%# Filter by projects %>
@@ -25,8 +23,7 @@
           href: (tasks_path unless is_selected),
           size: :sm,
           outline: is_selected,
-          class: "md:text-lg md:font-semibold")
-        %>
+          class: "md:text-lg md:font-semibold") %>
       </li>
       <% @projects.each do |project| %>
         <% is_selected = current_page?(project_tasks_path(project)) %>
@@ -38,8 +35,7 @@
             size: :sm,
             scheme: badge_scheme_by_id(project.id),
             outline: is_selected,
-            class: "md:text-lg md:font-semibold")
-          %>
+            class: "md:text-lg md:font-semibold") %>
         </li>
       <% end %>
     </ul>
@@ -60,16 +56,14 @@
                  href: tasks_path,
                  scheme: :alternative,
                  class: "w-full text-center")
-         .with_content(t ".view_all_tasks") if @type != :all_published_tasks
-    %>
+         .with_content(t ".view_all_tasks") if @type != :all_published_tasks %>
 
     <%# Link to projects for convenience %>
     <% grid
          .button(tag: :a,
                  href: projects_path,
                  scheme: :alternative,
-                 class: "w-full justify-center") do |button|
-    %>
+                 class: "w-full justify-center") do |button| %>
       <% button.leading_icon(:arrow_left, size: :lg) %>
       <% t ".goto_initiatives" %>
     <% end %>

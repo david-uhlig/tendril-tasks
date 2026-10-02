@@ -7,8 +7,7 @@
 
   <%= render TendrilTasks::Heading
                .new(tag: :h1)
-               .with_content(t '.title')
-  %>
+               .with_content(t '.title') %>
 
   <%= render 'form', form_object: @project_form %>
 <% end %>

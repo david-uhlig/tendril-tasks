@@ -8,8 +8,7 @@
 
   <%= render TendrilTasks::Heading
                .new(tag: :h1)
-               .with_content(t(".edit_task"))
-  %>
+               .with_content(t(".edit_task")) %>
 
   <%= render 'form', form_object: @task_form %>
 <% end %>

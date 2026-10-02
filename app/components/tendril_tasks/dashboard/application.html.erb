@@ -10,13 +10,11 @@
     <%= task_title_heading_with_link_if_visible %>
     <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
       <%= t "task_application.applied_on_date",
-            date: l(@application.created_at, format: :long)
-      %>
+            date: l(@application.created_at, format: :long) %>
     </time>
     <% paragraphize(@application.comment)&.each do |paragraph| %>
       <%= tag.p paragraph,
-                class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
-      %>
+                class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400" %>
     <% end %>
   </div>
   <% if @application.task.visible? %>
@@ -24,8 +22,7 @@
                                   tag: :a,
                                   href: task_path(@application.task, anchor: "apply-now"),
                                   theme: :outline,
-                                  class: "justify-center sm:self-start w-full sm:w-auto sm:ms-4") do |button|
-    %>
+                                  class: "justify-center sm:self-start w-full sm:w-auto sm:ms-4") do |button| %>
       <% button.leading_icon(:edit, size: :lg) %>
     <% end %>
   <% end %>

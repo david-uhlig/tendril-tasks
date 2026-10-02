@@ -19,8 +19,7 @@
                                                 modal_id: "project-contacts-#{@project.id}",
                                                 class: "inline-flex items-center max-w-full md:max-w-lg lg:max-w-2xl py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do %>
       <%= tag.span t(".contacts"),
-                   class: "shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3"
-      %>
+                   class: "shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3" %>
       <span class="flex gap-2 overflow-hidden shrink truncate">
         <% @project.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
@@ -41,7 +40,7 @@
           <%= t ".modal.content" %>
         <% end %>
         <%= render Modal::ContactListComponent.new(@project.coordinators) %>
-        <% modal.button(scheme: :light, type: :reset) do  %>
+        <% modal.button(scheme: :light, type: :reset) do %>
           <%= t ".modal.close_button" %>
         <% end %>
       <% end %>
@@ -50,8 +49,7 @@
     <%= render TendrilTasks::ButtonGrid.new(tag: :a, size: :lg) do |grid| %>
       <% grid.button(href: project_path(@project),
                      scheme: :alternative)
-             .with_content(t(".more_button"))
-      %>
+             .with_content(t(".more_button")) %>
       <% grid.button(href: project_tasks_path(@project))
              .with_content(t(".tasks_button", count: @project.tasks.is_published.size)) %>
     <% end %>

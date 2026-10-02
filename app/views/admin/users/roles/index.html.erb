@@ -7,8 +7,7 @@
 
   <%= render TendrilTasks::Heading
                .new(tag: :h1, scheme: :level2)
-               .with_content(t("admin.users.roles.title"))
-  %>
+               .with_content(t("admin.users.roles.title")) %>
 
   <ul class="my-4 space-y-3">
     <%# TODO this should only list users with roles > user. Regular users can then get permissions through a search box %>

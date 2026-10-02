@@ -21,8 +21,7 @@
                 id: "branding-logo-form",
                 url: admin_brand_logo_path,
                 method: :put,
-                class: "space-y-6" do |form|
-  %>
+                class: "space-y-6" do |form| %>
     <%= render TendrilTasks::Logo.new(id: "current-brand-logo", size: :lg) %>
     <ol class="flex flex-wrap space-x-0">
       <li class="grow">
@@ -32,13 +31,11 @@
         <%= render Gustwave::Button.new(type: :submit,
                                         size: :md,
                                         scheme: :red,
-                                        form: "reset-brand-logo") do
-        %>
+                                        form: "reset-brand-logo") do %>
           <%= t("forms.reset") %>
         <% end %>
         <%= render Gustwave::Button.new(type: :submit,
-                                        size: :md) do
-        %>
+                                        size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
       </li>
@@ -60,24 +57,21 @@
   <%= form_with id: "branding-name-form",
                 url: admin_brand_name_path,
                 method: :put,
-                class: "space-y-6" do |form|
-  %>
+                class: "space-y-6" do |form| %>
     <ol class="flex flex-nowrap space-x-4">
       <li class="grow">
         <%= render Form::TextFieldComponent.new(form,
                                                 :name,
                                                 t(".name.text_field.label"),
                                                 value: @brand.name,
-                                                placeholder: "Tendril Tasks")
-        %>
+                                                placeholder: "Tendril Tasks") %>
       </li>
       <li class="text-center">
         <%= render Form::ToggleComponent.new(form,
                                              :display_name,
                                              t(".name.toggle.label"),
                                              checked: @brand.display_name?,
-                                             class: "mt-2.5")
-        %>
+                                             class: "mt-2.5") %>
       </li>
       <li class="content-end">
         <%= render Gustwave::Button.new(type: :submit, size: :md) do %>

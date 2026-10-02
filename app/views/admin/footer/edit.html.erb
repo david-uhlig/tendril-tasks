@@ -26,8 +26,7 @@
   <%= form_with id: "copyright-form",
                 url: admin_footer_copyright_path,
                 method: :put,
-                class: "space-y-6" do |form|
-  %>
+                class: "space-y-6" do |form| %>
     <ol class="flex flex-nowrap space-x-4">
       <li class="grow">
         <%= render Form::TextFieldComponent.new(form,
