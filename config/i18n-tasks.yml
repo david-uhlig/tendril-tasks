@@ -19,6 +19,8 @@ data:
     # - config/locales/%{locale}.yml
     ## More files:
     # - config/locales/**/*.%{locale}.yml
+    - config/locales/%{locale}.yml
+    - config/locales/devise.%{locale}.yml
 
   # Locale files to write new keys to, based on a list of key pattern => file rules. Matched from top to bottom:
   # `i18n-tasks normalize -p` will force move the keys according to these rules
@@ -154,6 +156,29 @@ search:
 # ignore_missing:
 # - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
 # - '{devise,simple_form}.*'
+ignore_missing:
+  # ViewComponent sidecar translations (app/components/**/*.yml) aren't read by i18n-tasks.
+  # Add a pattern here for each new component with a sidecar file.
+  - 'delete_confirm.modal_component.*'
+  - 'form.coordinator_picker.modal_component.*'
+  - 'gustwave.dismiss_button.*'
+  - 'gustwave.spinner.*'
+  - 'tendril_tasks.breadcrumb.*'
+  - 'tendril_tasks.contact_button.*'
+  - 'tendril_tasks.dashboard.application.*'
+  - 'tendril_tasks.elements.action_bar.*'
+  - 'tendril_tasks.elements.published_state_info.*'
+  - 'tendril_tasks.elements.visibility_explainer.*'
+  - 'tendril_tasks.elements.visibility_state_info.*'
+  - 'tendril_tasks.navigation.avatar_dropdown_menu.*'
+  - 'tendril_tasks.projects.section.*'
+  - 'tendril_tasks.role_badge.*'
+  - 'tendril_tasks.tasks.application_status.*'
+  - 'tendril_tasks.tasks.card.*'
+  # Noticed notifiers resolve relative keys to `notifiers.<notifier>.notification.*`,
+  # which i18n-tasks can't infer from `notification_methods` blocks.
+  - 'task_application_received_notification.markdown_message.*'
+  - 'task_application_withdrawn_notification.markdown_message.*'
 
 ## Consider these keys used:
 # ignore_unused:
@@ -162,6 +187,17 @@ search:
 # - 'simple_form.{yes,no}'
 # - 'simple_form.{placeholders,hints,labels}.*'
 # - 'simple_form.{error_notification,required}.:'
+ignore_unused:
+  # Looked up by Rails conventions (model names, attribute labels, validation
+  # errors, date and time formatting)
+  - 'activerecord.*'
+  - 'activemodel.*'
+  - 'errors.messages.*'
+  - '{date,time,support}.*'
+  # Looked up by devise
+  - 'devise.*'
+  # Looked up by Noticed notifiers through relative keys
+  - 'notifiers.*.notification.*'
 
 ## Exclude these keys from the `i18n-tasks eq-base' report:
 # ignore_eq_base:

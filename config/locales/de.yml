@@ -229,8 +229,6 @@ de:
       update:
         we_couldnt_update_your_application: "Wir konnten deine Meldung leider nicht mehr aktualisieren."
         we_updated_your_message: "Vielen Dank! Wir haben deine Meldung aktualisiert."
-      create:
-        we_received_your_application: "Vielen Dank! Wir haben deine Meldung erhalten und setzen uns mit dir in Kontakt."
       destroy:
         application_successfully_removed: |
           Deine Meldung wurde zurückgezogen.
