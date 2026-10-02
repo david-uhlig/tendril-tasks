@@ -5,8 +5,7 @@
   <%= tag.div role: "menu",
               "aria-label": t(".highlight"),
               hidden: true,
-              data: { "dropdown-panel": true },
-              class: "p-2" do %>
+              data: { "dropdown-panel": true } do %>
     <div class="lexxy-highlight-colors"></div>
     <%= render Gustwave::Button.new(t(".remove_highlight"),
                                     role: "menuitem",
