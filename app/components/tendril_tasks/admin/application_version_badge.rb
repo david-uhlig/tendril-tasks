@@ -8,9 +8,10 @@ module TendrilTasks
           scheme: :dark,
           size: :md,
           pill: true,
-          class: "align-top"
+          # The badge is a flex container, which drops whitespace between the links
+          class: "align-top gap-1"
         ) do
-          safe_join([ link_to_version, " ", link_to_commit ]).strip.html_safe
+          safe_join([ link_to_version, link_to_commit ].compact, " ")
         end
       end
 
@@ -21,9 +22,13 @@ module TendrilTasks
       end
 
       def link_to_commit
-        return nil unless AppConfig.git_commit.present?
+        commit = AppConfig.git_commit
+        return nil if commit.blank?
 
-        link_to AppConfig.git_commit, "https://github.com/david-uhlig/tendril-tasks/commit/#{AppConfig.git_commit}"
+        # Wrapped, so the badge's flex gap doesn't space out the parentheses
+        tag.span do
+          safe_join([ "(", link_to(commit, "https://github.com/david-uhlig/tendril-tasks/commit/#{commit}"), ")" ])
+        end
       end
     end
   end
