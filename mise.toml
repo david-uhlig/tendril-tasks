@@ -65,6 +65,12 @@ run = ["npx herb-lint", "npx herb-format --check"]
 description = "Style: ERB (auto fix and format)"
 run = ["npx herb-lint --fix", "npx herb-format"]
 
+# Not part of CI: partials rendered by Rails and Devise internally, e.g.
+# `active_storage/blobs/_blob`, are always reported as unused.
+[tasks."herb:check"]
+description = "Check that ERB render calls resolve to existing partials"
+run = "bundle exec herb actionview check ."
+
 [tasks.rff]
 description = "Alias for `test:rspec:ff`"
 depends = ["test:rspec:ff"]
