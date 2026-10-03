@@ -390,6 +390,9 @@ de:
     omniauth_callbacks:
       failure:
         failure: "Fehler. Bitte versuche es erneut."
+    dev_sessions:
+      create:
+        failure: "Benutzer nicht gefunden."
 
   devise:
     sessions:
@@ -402,6 +405,11 @@ de:
           prompt: "Du hast noch keinen Account?"
           link_title: "Jetzt anmelden"
         title: "Willkommen – los geht’s!"
+      dev_sign_in:
+        hint: "Nur in der Entwicklung: Als beliebiger registrierter Benutzer ohne Rocket.Chat anmelden."
+        user_label: "Benutzer"
+        choose_user: "Benutzer auswählen"
+        submit_button: "Als Benutzer anmelden"
       user:
         signed_out: "Du wurdest erfolgreich abgemeldet."
 

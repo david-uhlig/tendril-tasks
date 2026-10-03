@@ -45,6 +45,8 @@
               <% end %>
             </p>
           <% end %>
+
+          <%= render "devise/sessions/dev_sign_in" if Rails.env.development? %>
         </div>
       </div>
     </div>
