@@ -2,7 +2,7 @@
   <%# Update the application section %>
   <turbo-stream action="replace" method="morph" target="task-application">
     <template>
-      <%= render partial: "tasks/application/form", locals: { task: @application.task } %>
+      <%= render partial: "tasks/application/form", locals: { task: @application.task, application: @application } %>
     </template>
   </turbo-stream>
 
