@@ -70,7 +70,7 @@
     <%= yield :modal %>
 
     <%# Toast %>
-    <div id="notifications" class="grid grid-cols-1 absolute bottom-5 right-5 gap-2">
+    <div id="notifications" class="grid grid-cols-1 fixed bottom-5 right-5 z-50 gap-2">
       <% flash.each do |type, message| %>
         <%= render Toast::NotificationComponent.new(message, type: type) %>
       <% end %>

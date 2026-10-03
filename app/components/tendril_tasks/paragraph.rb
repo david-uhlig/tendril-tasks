@@ -7,7 +7,7 @@ module TendrilTasks
 
     style :size,
           states: {
-            sm: "text-sm front-normal lg:text-base",
+            sm: "text-sm font-normal lg:text-base",
             lg: "text-lg font-normal lg:text-xl"
           },
           default: :lg

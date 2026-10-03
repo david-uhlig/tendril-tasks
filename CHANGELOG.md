@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to three levels (H2–H4); existing H1, H5, and H6 headings are still displayed.
 
+### Fixed
+- Notifications stay visible after scrolling down the page.
+- Coordinators can change an application's status with the keyboard.
+- The arrow icon on project and task contact buttons is drawn completely.
+
 ### Security
 - Escape the project title in the task section headline on the project page to prevent XSS attacks.
 - Limit comments on task applications to 2,000 characters.
