@@ -10,6 +10,13 @@ Rails.application.routes.draw do
     delete "/users/sign-out", to: "users/sessions#destroy", as: :destroy_user_session
   end
 
+  # Restrict Active Storage direct uploads (used by Lexxy). Shadows the
+  # unauthenticated route drawn by Active Storage, so it must keep the same path.
+  # `rails_direct_uploads_url` keeps pointing here; redefining that name fails at boot.
+  scope ActiveStorage.routes_prefix do
+    post "/direct_uploads", to: "restricted_direct_uploads#create", as: nil
+  end
+
   # User-specific routes.
   authenticate :user do
     get "profile", to: "users/profile#edit"

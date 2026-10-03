@@ -13,7 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Underline, color highlight, tables and dividers in descriptions and legal pages.
 
 ### Changed
-- Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to three levels (H2–H4); existing H1, H5 and H6 headings are still displayed.
+- Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to three levels (H2–H4); existing H1, H5, and H6 headings are still displayed.
+
+### Security
+- Only signed-in editors, admins, and coordinators can upload files. Uploads are limited to images, videos, audio files, and PDFs of up to 10 MB each; SVG images are not allowed. Uploaded files that are never attached are deleted after two days.
 
 ## [0.6.0] - 2026-10-02
 
