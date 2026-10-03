@@ -71,7 +71,8 @@
 
   <%# Apply to task %>
   <%= render "tasks/application/form",
-             task: @task %>
+             task: @task,
+             application: @application %>
 
   <%= render TendrilTasks::HorizontalLine.new %>
 

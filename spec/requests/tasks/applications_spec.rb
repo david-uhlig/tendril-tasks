@@ -177,18 +177,19 @@ RSpec.describe "Tasks::Application", type: :request do
       context "and the task exists" do
         context "and the application exists" do
           it "destroys the application within the grace period and returns ok" do
-            application = create(:task_application, task: task, user: user)
+            application = create(:task_application, task: task, user: user, comment: "Count me in!")
 
             expect {
               delete task_application_path(task), as: :turbo_stream
             }.to change(TaskApplication, :count).by(-1)
 
             expect(response).to have_http_status(:ok)
+            expect(Nokogiri::HTML(response.body).at_css("turbo-stream[target=task-application]").to_html).not_to include("Count me in!")
             expect { application.reload }.to raise_error(ActiveRecord::RecordNotFound)
           end
 
           it "withdraws the application after the grace period and returns ok" do
-            application = create(:task_application, task: task, user: user)
+            application = create(:task_application, task: task, user: user, comment: "Count me in!")
             application.update_column(:created_at, 31.minutes.ago)
 
             expect {
@@ -196,6 +197,7 @@ RSpec.describe "Tasks::Application", type: :request do
             }.not_to change(TaskApplication, :count)
 
             expect(response).to have_http_status(:ok)
+            expect(Nokogiri::HTML(response.body).at_css("turbo-stream[target=task-application]").to_html).not_to include("Count me in!")
             expect(application.reload).to be_withdrawn
           end
         end
