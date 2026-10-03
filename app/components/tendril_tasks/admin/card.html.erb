@@ -1,8 +1,14 @@
 <%# Admin Menu Card %>
-<li class="w-full border border-gray-200 bg-white rounded-lg shadow-md dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+<li
+  class="
+    w-full border border-gray-200 bg-white rounded-lg shadow-md dark:border md:mt-0 sm:max-w-md xl:p-0
+    dark:bg-gray-800 dark:border-gray-700
+  "
+>
   <div class="p-6 gap-4 md:gap-6 sm:p-8 flex flex-col h-full">
     <div class="space-y-1">
       <%= heading_slot %>
+
       <% if badges? %>
         <ul class="flex flex-wrap gap-y-0.5 gap-x-1">
           <% badges.each do |badge| %>
@@ -11,12 +17,15 @@
         </ul>
       <% end %>
     </div>
+
     <div class="grow">
       <% paragraphs.each do |paragraph_slot| %>
         <%= paragraph_slot %>
       <% end %>
+
       <%= content %>
     </div>
+
     <div class="grid grid-cols-1">
       <% buttons.each do |button_slot| %>
         <%= button_slot %>

@@ -5,15 +5,23 @@
         <%= render TendrilTasks::Logo.new(size: :sm, class: "me-3") %>
         <%= Brand.new.name %>
       </div>
-      <div class="w-full border border-gray-200 bg-white rounded-lg shadow-lg dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+
+      <div
+        class="
+          w-full border border-gray-200 bg-white rounded-lg shadow-lg dark:border md:mt-0 sm:max-w-md xl:p-0
+          dark:bg-gray-800 dark:border-gray-700
+        "
+      >
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <%= render TendrilTasks::Heading.new(tag: :h1,
                                                scheme: :level4) do %>
             <%= t(".title") %>
           <% end %>
+
           <%= render TendrilTasks::Paragraph.new(size: :sm) do %>
             <%= t(".content", brand: RocketChatConfig.branding) %>
           <% end %>
+
           <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "space-y-4" do %>
             <%= render Gustwave::Button.new(
               type: :submit,
@@ -25,8 +33,10 @@
               <% login_button.leading_svg("rocketchat/icon-white.svg") %>
               <%= t(".login_with_rocket_chat_button", brand: RocketChatConfig.branding) %>
             <% end %>
+
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               <%= t(".create_account.prompt") %>
+
               <%= render Gustwave::Button.new(scheme: :none,
                                               type: :submit,
                                               data: { turbo: false },

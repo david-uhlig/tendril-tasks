@@ -7,6 +7,7 @@
   <%= render TendrilTasks::Heading
                .new(tag: :h1)
                .with_content(t ".title") %>
+
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <%= render TendrilTasks::Heading
@@ -22,7 +23,7 @@
       <% grid.button(href: tasks_path)
              .with_content("Zur Aufgabenübersicht") %>
     <% end %>
-  <%# Show applications %>
+    <%# Show applications %>
   <% else %>
     <ol class="space-y-4">
       <% @applications.each do |application| %>

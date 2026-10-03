@@ -1,4 +1,5 @@
 <% form_object = TaskForm.new if false %>
+
 <%= form_with model: form_object,
               url: form_object.form_path,
               method: form_object.form_method,
@@ -13,11 +14,15 @@
       selected: form_object.project&.id) do |project_select| %>
     <% project_select.trailing_button(tag: :a, href: new_project_path).with_content(t(".new_initiative_button")) %>
   <% end %>
+
   <%= render Form::TextFieldComponent.new(f, :title) %>
+
   <%= render Form::RichTextAreaComponent.new(f, :description) do |with| %>
     <% with.disabled_buttons(:heading2, :heading3) %>
   <% end %>
+
   <%= render Form::CoordinatorPickerComponent.new(f, :coordinators) %>
+
   <%= render Form::ToggleComponent.new(f, :publish, t(".visibility")) do |toggle| %>
     <% toggle.checked_state_text(t(".private")) %>
     <% toggle.unchecked_state_text(t(".public")) %>
@@ -41,6 +46,7 @@
       id: "confirm-task-delete",
       delete_path: form_object.form_path) do |modal| %>
     <% modal.heading(t(".delete_confirm.modal.title")) %>
+
     <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
       <%= modal.paragraph(text) %>
     <% end %>

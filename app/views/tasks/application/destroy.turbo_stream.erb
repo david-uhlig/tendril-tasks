@@ -14,8 +14,7 @@
   </turbo-stream>
 <% else %>
   <%# Remove the application entry %>
-  <turbo-stream action="remove" target="task-application-<%= @application.user.id %>">
-  </turbo-stream>
+  <turbo-stream action="remove" target="task-application-<%= @application.user.id %>"></turbo-stream>
 <% end %>
 
 

@@ -9,6 +9,7 @@
   <%= render TendrilTasks::Heading.new(tag: :h1) do %>
     <%= t("admin.footer.title") %>
   <% end %>
+
   <%= render TendrilTasks::Paragraph.new do %>
     <%= t(".description") %>
   <% end %>
@@ -19,6 +20,7 @@
   <%= render TendrilTasks::Heading.new(tag: :h2) do %>
     <%= t(".copyright.title") %>
   <% end %>
+
   <%= render TendrilTasks::Paragraph.new do %>
     <%= t(".copyright.explainer") %>
   <% end %>
@@ -33,8 +35,9 @@
                                                 :copyright_notice,
                                                 "Copyright",
                                                 value: @copyright,
-                                                placeholder: "© 2025 Example Corp")  %>
+                                                placeholder: "© 2025 Example Corp") %>
       </li>
+
       <li class="content-end">
         <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
@@ -59,7 +62,6 @@
                 url: admin_footer_sitemap_path,
                 method: :put,
                 class: "space-y-6" do |form| %>
-
     <%
       # Build empty categories, so that there are always elements for exactly
       # two categories.
@@ -67,6 +69,7 @@
       category_blueprint.links << ::Footer::Link.new
       filler_categories = (@sitemap.categories.count...2).map { category_blueprint }
     %>
+
     <%= render partial: "admin/footer/sitemap_category",
                collection: @sitemap.categories + filler_categories,
                as: :category %>
@@ -81,8 +84,8 @@
 
     <%= render Form::SubmitButtonGroupComponent.new(form) do |button_group| %>
       <% button_group.delete_button(t("forms.delete"),
-                                    target_modal_id: "confirm-sitemap-links-deletion")
-      %>
+                                    target_modal_id: "confirm-sitemap-links-deletion") %>
+
       <% button_group.button(t("forms.save"), type: :submit) %>
     <% end %>
   <% end %>
@@ -92,12 +95,14 @@
   <%= render DeleteConfirm::ModalComponent.new(id: "confirm-sitemap-links-deletion",
                                                delete_path: admin_footer_sitemap_path) do |modal| %>
     <% modal.heading(t ".sitemap.delete_confirm.modal.title") %>
+
     <% content = t(".sitemap.delete_confirm.modal.content",
-                   brand: RocketChatConfig.branding)
-    %>
+                   brand: RocketChatConfig.branding) %>
+
     <% paragraphize(content).each do |text| %>
       <% modal.paragraph(text) %>
     <% end %>
+
     <% modal.confirm_button(t(".sitemap.delete_confirm.modal.confirm_button")) %>
   <% end %>
 <% end %>

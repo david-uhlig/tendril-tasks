@@ -25,8 +25,10 @@
           outline: is_selected,
           class: "md:text-lg md:font-semibold") %>
       </li>
+
       <% @projects.each do |project| %>
         <% is_selected = current_page?(project_tasks_path(project)) %>
+
         <li>
           <%= render Gustwave::Badge.new(
             project.title,
@@ -47,6 +49,7 @@
       <%= render TendrilTasks::Tasks::Card.new(task) %>
     <% end %>
   </div>
+
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <%= render TendrilTasks::ButtonGrid.new(orientation: :vertical, size: :lg) do |grid| %>
