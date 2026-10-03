@@ -1,0 +1,17 @@
+en:
+  info: "Information"
+  notice: "Notice"
+  success: "Success"
+  error: "Error"
+  failure: "Error"
+  warning: "Warning"
+  alert: "Warning"
+
+de:
+  info: "Information"
+  notice: "Hinweis"
+  success: "Erfolg"
+  error: "Fehler"
+  failure: "Fehler"
+  warning: "Warnung"
+  alert: "Warnung"

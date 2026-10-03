@@ -11,7 +11,10 @@
 
     <%= task_title_heading_with_link_if_visible %>
 
-    <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
+    <time
+      datetime="<%= @application.created_at.iso8601 %>"
+      class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400"
+    >
       <%= t "task_application.applied_on_date",
             date: l(@application.created_at, format: :long) %>
     </time>

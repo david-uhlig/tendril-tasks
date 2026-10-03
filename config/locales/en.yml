@@ -244,6 +244,8 @@ en:
             remove: "Remove"
           input:
             placeholder: "Name, e.g. Homepage..."
+            title_label: "Link name"
+            href_label: "Link address"
       sitemap_category_heading:
         category:
           reset: "Reset"
@@ -363,6 +365,7 @@ en:
       title: "Dashboard"
       create_initiative_button: "Create Initiative"
       my_applications: "My Applications"
+      goto_tasks_button: "Go to Tasks Overview"
       applications_placeholder: "This is where the tasks that you have signed up for will be displayed. You haven't applied to any task, yet. Take a look at the tasks overview - maybe there's something exciting for you!"
 
   # ActiveModel

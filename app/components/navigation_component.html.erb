@@ -36,7 +36,7 @@
         aria-controls="navbar-cta"
         aria-expanded="false"
       >
-        <span class="sr-only">Open main menu</span>
+        <span class="sr-only"><%= t(".open_main_menu") %></span>
 
         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
           <path
@@ -65,9 +65,9 @@
           <%# Login/Logout buttons in hamburger menu %>
           <li class="md:hidden">
             <% if user_signed_in? %>
-              <%= button_to "Abmelden", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete, class: "nav-link" %>
             <% else %>
-              <%= button_to "Anmelden", user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %>
+              <%= button_to t("rocketchat.sign_in_button.short"), user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %>
             <% end %>
           </li>
         </ul>

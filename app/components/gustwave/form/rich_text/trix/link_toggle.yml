@@ -1,11 +1,9 @@
 en:
-  link: "Link"
-  unlink: "Unlink"
+  save: "Save"
   placeholder: "Enter a URL…"
   url: "URL"
 
 de:
-  link: "Verlinken"
-  unlink: "Link entfernen"
+  save: "Speichern"
   placeholder: "URL eingeben…"
   url: "URL"

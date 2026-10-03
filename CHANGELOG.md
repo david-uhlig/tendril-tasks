@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Notifications stay visible after scrolling down the page.
 - Coordinators can change an application's status with the keyboard.
 - The arrow icon on project and task contact buttons is drawn completely.
+- Screen readers announce the page language, the close buttons of all dialogs, link address fields and footer link fields in the configured language.
+- The email address and username on the profile page are shown as readable values instead of faint placeholders.
+- Menu entries, buttons and notifications that were always shown in German or English follow the configured language.
 
 ### Security
 - Escape the project title in the task section headline on the project page to prevent XSS attacks.

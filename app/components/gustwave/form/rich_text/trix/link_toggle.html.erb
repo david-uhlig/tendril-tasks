@@ -6,7 +6,8 @@
       type="url"
       autocomplete="url"
       name="href"
-      placeholder="Enter a URL..."
+      placeholder="<%= t(".placeholder") %>"
+      aria-label="<%= t(".url") %>"
       data-trix-input
       class="
         bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
@@ -15,10 +16,9 @@
       "
     >
 
-    <%= render Gustwave::Button.new("Speichern",
+    <%= render Gustwave::Button.new(t(".save"),
                                     data: {
                                       "trix-method": "setAttribute"
-                                    },
-                                    class: "") %>
+                                    }) %>
   </div>
 <% end %>
