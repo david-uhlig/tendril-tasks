@@ -15,10 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to three levels (H2–H4); existing H1, H5, and H6 headings are still displayed.
 
-### Security
-- Only signed-in editors, admins, and coordinators can upload files. Uploads are limited to images, videos, audio files, and PDFs of up to 10 MB each; SVG images are not allowed. Uploaded files that are never attached are deleted after two days.
+## [0.6.1] - 2026-10-03
 
 ### Security
+- Only signed-in editors, admins, and coordinators can upload files. Uploads are limited to images, videos, audio files, and PDFs of up to 10 MB each; SVG images are not allowed. Uploaded files that are never attached are deleted after two days.
 - Coordinators can no longer set an application's status to "withdrawn".
 
 ## [0.6.0] - 2026-10-02
@@ -130,7 +130,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.0...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.4.2...v0.5.0
