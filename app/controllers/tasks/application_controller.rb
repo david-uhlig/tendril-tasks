@@ -8,15 +8,11 @@ class Tasks::ApplicationController < ApplicationController
 
     TaskApplication.transaction do
       # Clear out any old application
-      @application = TaskApplication.destroy_by(
-        task_id: params[:task_id],
-        user_id: current_user.id
-      )
+      current_user.task_applications.destroy_by(task: @task)
 
       # Create new entry
-      @application = TaskApplication.new(
-        task_id: params[:task_id],
-        user_id: current_user.id,
+      @application = current_user.task_applications.build(
+        task: @task,
         comment: params[:task_application][:comment].presence
       )
       # Keep any old application if the new one is invalid
@@ -29,10 +25,7 @@ class Tasks::ApplicationController < ApplicationController
   def update
     authorize! :read, @task
 
-    @application = TaskApplication.find_by!(
-      task_id: params[:task_id],
-      user_id: current_user.id
-    )
+    @application = current_user.task_applications.find_by!(task: @task)
     @updated = @application.update_if_editable(
       comment: params[:task_application][:comment].presence
     )
@@ -43,10 +36,7 @@ class Tasks::ApplicationController < ApplicationController
   def destroy
     authorize! :read, @task
 
-    @application = TaskApplication.find_by!(
-      task_id: @task.id,
-      user_id: current_user.id
-    )
+    @application = current_user.task_applications.find_by!(task: @task)
     @application.destroy_or_withdraw!
   end
 

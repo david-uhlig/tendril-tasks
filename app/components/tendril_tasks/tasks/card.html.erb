@@ -61,7 +61,7 @@
                    scheme: :alternative)
            .with_content(t(".read_more")) %>
 
-    <% if @task.applicant?(current_user) %>
+    <% if current_user.applied_to?(@task) %>
       <% grid.button(tag: :a,
                      href: task_path(@task, anchor: "apply-now"),
                      size: :md,

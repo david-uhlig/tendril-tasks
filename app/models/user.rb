@@ -81,6 +81,19 @@ class User < ApplicationRecord
     projects_as_coordinator.exists? || tasks_as_coordinator.exists?
   end
 
+  # Returns the user's application for the task, including a withdrawn one, or
+  # `nil` if the user hasn't applied.
+  def application_for(task)
+    task_applications.find_by(task: task)
+  end
+
+  # Returns true if the user has applied to the task and hasn't withdrawn.
+  #
+  # Unlike `tasks_applied`, this excludes withdrawn applications.
+  def applied_to?(task)
+    application_for(task)&.withdrawn? == false
+  end
+
   # Returns the salt for the user's session token.
   #
   # Extends Devise's `authenticatable_salt` with a session token. Change the

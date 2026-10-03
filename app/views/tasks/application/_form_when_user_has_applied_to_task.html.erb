@@ -47,16 +47,14 @@
   would not render.
 %>
 
-<% if task.applicant?(current_user) %>
-  <%= render DeleteConfirm::ModalComponent.new(
-    id: "confirm-application-withdrawal-#{task.id}",
-    delete_path: task_application_path(task)) do |modal| %>
-    <% modal.heading(t ".delete_confirm.modal.title") %>
+<%= render DeleteConfirm::ModalComponent.new(
+  id: "confirm-application-withdrawal-#{task.id}",
+  delete_path: task_application_path(task)) do |modal| %>
+  <% modal.heading(t ".delete_confirm.modal.title") %>
 
-    <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
-      <%= modal.paragraph(text) %>
-    <% end %>
-
-    <% modal.confirm_button(t(".delete_confirm.modal.withdraw_application")) %>
+  <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
+    <%= modal.paragraph(text) %>
   <% end %>
+
+  <% modal.confirm_button(t(".delete_confirm.modal.withdraw_application")) %>
 <% end %>
