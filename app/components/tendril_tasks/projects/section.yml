@@ -1,5 +1,4 @@
 en:
-  contacts: "Contacts"
   modal:
     title: "Your Contacts"
     content: |
@@ -11,7 +10,6 @@ en:
     other: "%{count} Tasks"
 
 de:
-  contacts: "Kontakte"
   modal:
     title: "Deine Ansprechpersonen"
     content: |

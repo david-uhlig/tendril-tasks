@@ -9,9 +9,7 @@
     <%= t("admin.legal.title") %>
   <% end %>
 
-  <div>
-    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><%= t(".description") %></p>
-  </div>
+  <%= render TendrilTasks::Paragraph.new(t(".description"), class: "mb-6") %>
 
   <ul class="my-4 space-y-3">
     <% Admin::LegalController::LEGAL_PAGES.each do |slug| %>
