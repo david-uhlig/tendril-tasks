@@ -4,11 +4,8 @@ module DeleteConfirm
   class ModalComponent < TendrilTasks::Component
     attr_reader :id
 
-    renders_one :heading_slot, ->(text = t(".title")) do
-      tag.h3 class: "text-xl font-semibold text-gray-900 dark:text-white" do
-        text
-      end
-    end
+    # The heading's text, rendered by Modal::ShellComponent
+    renders_one :heading_slot, ->(text = t(".title")) { text }
     alias heading with_heading_slot
 
     renders_many :body_elements, types: {
@@ -49,6 +46,12 @@ module DeleteConfirm
       @id = id.presence || "delete-confirm-#{SecureRandom.alphanumeric(5)}"
       @delete_path = delete_path
       @cooldown = cooldown.to_i
+    end
+
+    def before_render
+      heading unless heading_slot?
+      abort_button unless abort_button_slot?
+      confirm_button unless confirm_button_slot?
     end
   end
 end
