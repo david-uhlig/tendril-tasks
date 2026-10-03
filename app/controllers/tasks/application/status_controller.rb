@@ -9,6 +9,8 @@ module Tasks
 
       def update
         authorize! :coordinate, @task_application.task
+        return head :unprocessable_content unless params[:status].in?(TaskApplication::COORDINATOR_STATUSES)
+
         @task_application.with_lock do
           @task_application.update!(status_params) unless @task_application.withdrawn?
         end
