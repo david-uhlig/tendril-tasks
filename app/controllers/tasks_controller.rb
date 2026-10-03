@@ -30,6 +30,8 @@ class TasksController < ApplicationController
   end
 
   def show
+    @application = @task.task_applications.find_by(user: current_user)
+
     if can?(:coordinate, @task)
       @task_applications = TaskApplication
                              .where(task: @task)

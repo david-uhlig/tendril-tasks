@@ -1,5 +1,8 @@
-<%# An unsaved application can be passed in to show its validation errors %>
-<%# locals: (task:, application: task.task_applications.find_by(user_id: current_user.id)) %>
+<%#
+  The current user's application for the task, or `nil` if they haven't applied.
+  An unsaved application shows its validation errors.
+%>
+<%# locals: (task:, application:) %>
 <div id="task-application">
   <%#
     User has applied
