@@ -29,6 +29,40 @@ RSpec.describe TaskApplication, type: :model do
 
       expect(duplicate).not_to be_valid
     end
+
+    it "is valid without a comment" do
+      expect(build(:task_application, task: task, user: user, comment: nil)).to be_valid
+    end
+
+    it "is valid with a comment of the maximum length" do
+      comment = "a" * TaskApplication::COMMENT_MAX_LENGTH
+      expect(build(:task_application, task: task, user: user, comment: comment)).to be_valid
+    end
+
+    it "is invalid with a comment exceeding the maximum length" do
+      comment = "a" * (TaskApplication::COMMENT_MAX_LENGTH + 1)
+      application = build(:task_application, task: task, user: user, comment: comment)
+
+      expect(application).not_to be_valid
+      expect(application.errors[:comment]).to include(
+        I18n.t("activerecord.errors.models.task_application.attributes.comment.too_long",
+               count: TaskApplication::COMMENT_MAX_LENGTH)
+      )
+    end
+  end
+
+  describe "comment normalization" do
+    it "converts CRLF line breaks to LF" do
+      application = build(:task_application, comment: "first\r\nsecond")
+
+      expect(application.comment).to eq("first\nsecond")
+    end
+
+    it "counts CRLF line breaks as a single character" do
+      comment = "#{"a" * (TaskApplication::COMMENT_MAX_LENGTH - 2)}\r\n\r\n"
+
+      expect(build(:task_application, task: task, user: user, comment: comment)).to be_valid
+    end
   end
 
   describe "#editable?" do

@@ -19,6 +19,9 @@ class TaskApplication < ApplicationRecord
   # coordinators. Should be equal to or greater than the grace period in most
   # cases.
   NOTIFICATION_DELAY = GRACE_PERIOD
+  # Maximum number of characters of the applicant's comment. The comment is
+  # shown to coordinators and included in Rocket.Chat notifications.
+  COMMENT_MAX_LENGTH = 2000
 
   belongs_to :task
   belongs_to :user
@@ -50,6 +53,11 @@ class TaskApplication < ApplicationRecord
 
   validates :task, presence: true, uniqueness: { scope: :user }
   validates :user, presence: true
+  validates :comment, length: { maximum: COMMENT_MAX_LENGTH }
+
+  # Browsers submit line breaks in text areas as CRLF but count them as a
+  # single character for `maxlength`. Normalizing keeps both limits in sync.
+  normalizes :comment, with: ->(comment) { comment.gsub("\r\n", "\n") }
 
   after_create_commit :notify_coordinators_about_new_application
   after_update_commit :notify_coordinators_about_withdrawn_application, if: -> { withdrawn? && saved_change_to_status? }

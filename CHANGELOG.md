@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - Escape the project title in the task section headline on the project page to prevent XSS attacks.
+- Limit comments on task applications to 2,000 characters.
 
 ## [0.6.1] - 2026-10-03
 

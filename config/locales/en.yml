@@ -454,6 +454,10 @@ en:
           attributes:
             content:
               blank: "Please provide content."
+        task_application:
+          attributes:
+            comment:
+              too_long: "Your message must be at most %{count} characters long."
 
   components:
     coordinator_picker:

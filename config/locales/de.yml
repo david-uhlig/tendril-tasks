@@ -493,6 +493,10 @@ de:
           attributes:
             content:
               blank: "Bitte gib etwas ein."
+        task_application:
+          attributes:
+            comment:
+              too_long: "Deine Nachricht darf höchstens %{count} Zeichen lang sein."
 
   components:
     coordinator_picker:

@@ -19,8 +19,11 @@ class Tasks::ApplicationController < ApplicationController
         user_id: current_user.id,
         comment: params[:task_application][:comment].presence
       )
-      @application.save!
+      # Keep any old application if the new one is invalid
+      raise ActiveRecord::Rollback unless @application.save
     end
+
+    render status: :unprocessable_content unless @application.persisted?
   end
 
   def update
@@ -33,6 +36,8 @@ class Tasks::ApplicationController < ApplicationController
     @updated = @application.update_if_editable(
       comment: params[:task_application][:comment].presence
     )
+
+    render status: :unprocessable_content if @application.errors.any?
   end
 
   def destroy
