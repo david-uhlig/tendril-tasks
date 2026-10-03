@@ -50,6 +50,26 @@ RSpec.describe "Tasks::Application::StatusController", type: :request do
 
           expect(response).to have_http_status(:ok)
         end
+
+        it "does not allow coordinators to withdraw the application" do
+          expect {
+            patch status_path(task, applicant),
+                  params: { status: "withdrawn" },
+                  as: :turbo_stream
+          }.not_to change { application.reload.status }
+
+          expect(response).to have_http_status(:unprocessable_content)
+        end
+
+        it "rejects unknown statuses" do
+          expect {
+            patch status_path(task, applicant),
+                  params: { status: "bogus" },
+                  as: :turbo_stream
+          }.not_to change { application.reload.status }
+
+          expect(response).to have_http_status(:unprocessable_content)
+        end
       end
 
       context "when the application does not exist" do

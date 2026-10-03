@@ -35,6 +35,9 @@ class TaskApplication < ApplicationRecord
     withdrawn: 92
   }
 
+  # Statuses coordinators may assign. `withdrawn` is reserved for applicants.
+  COORDINATOR_STATUSES = (statuses.keys - %w[withdrawn]).freeze
+
   # Notifications associated with the applications.
   # - Coordinators receive a notification when a user submits a new application
   #   after the `NOTIFICATION_DELAY` passes.
