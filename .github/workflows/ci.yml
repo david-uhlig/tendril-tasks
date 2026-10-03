@@ -90,6 +90,9 @@ jobs:
       - name: Lint ERB templates
         run: npx herb-lint --github
 
+      - name: Check ERB template formatting
+        run: npx herb-format --check
+
   test:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')
     runs-on: ubuntu-latest
