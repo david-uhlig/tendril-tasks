@@ -53,7 +53,7 @@
   <% modal.heading(t ".delete_confirm.modal.title") %>
 
   <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
-    <%= modal.paragraph(text) %>
+    <% modal.paragraph(text) %>
   <% end %>
 
   <% modal.confirm_button(t(".delete_confirm.modal.withdraw_application")) %>

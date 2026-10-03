@@ -1,5 +1,4 @@
-<% form_object = TaskForm.new if false %>
-
+<%# locals: (form_object:) %>
 <%= form_with model: form_object,
               url: form_object.form_path,
               method: form_object.form_method,
@@ -48,7 +47,7 @@
     <% modal.heading(t(".delete_confirm.modal.title")) %>
 
     <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
-      <%= modal.paragraph(text) %>
+      <% modal.paragraph(text) %>
     <% end %>
   <% end %>
 <% end %>

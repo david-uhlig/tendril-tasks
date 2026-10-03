@@ -140,7 +140,7 @@
       class: "space-y-4"
     ) do |f| %>
     <%= render TendrilTasks::Paragraph.new(t(".sign_out_all_sessions_description")) %>
-    <%= render Form::TextFieldComponent.new(f, :expire_all_remember_me_tokens, false, value: true, class: "hidden") %>
+    <%= f.hidden_field :expire_all_remember_me_tokens, value: true %>
 
     <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
       <% button_group.button(t(".sign_out_all_sessions")) %>
