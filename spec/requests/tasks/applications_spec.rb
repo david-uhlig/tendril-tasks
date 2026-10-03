@@ -30,6 +30,42 @@ RSpec.describe "Tasks::Application", type: :request do
         expect(response.body).to include('data-controller="fireworks"')
       end
 
+      it "limits the comment length in the form" do
+        post task_application_path(task),
+          params: { task_application: { comment: "comment" } },
+          as: :turbo_stream
+        expect(response.body).to include(%(maxlength="#{TaskApplication::COMMENT_MAX_LENGTH}"))
+      end
+
+      context "and the comment is too long" do
+        let(:comment) { "a" * (TaskApplication::COMMENT_MAX_LENGTH + 1) }
+
+        it "doesn't save the application and shows the error" do
+          expect {
+            post task_application_path(task),
+              params: { task_application: { comment: comment } },
+              as: :turbo_stream
+          }.not_to change(TaskApplication, :count)
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(response.body).to include(
+            I18n.t("activerecord.errors.models.task_application.attributes.comment.too_long",
+                   count: TaskApplication::COMMENT_MAX_LENGTH)
+          )
+          expect(response.body).to include(comment)
+          expect(response.body).not_to include('data-controller="fireworks"')
+        end
+
+        it "keeps a previously withdrawn application" do
+          application = create(:task_application, :grace_period_expired, task: task, user: user)
+          application.destroy_or_withdraw!
+
+          post task_application_path(task),
+            params: { task_application: { comment: comment } },
+            as: :turbo_stream
+          expect(application.reload).to be_withdrawn
+        end
+      end
+
       context "and the the task doesn't exist" do
         it "returns a not found status" do
           post task_application_path(999),
@@ -77,6 +113,25 @@ RSpec.describe "Tasks::Application", type: :request do
                   params: { task_application: { comment: "edited comment" } },
                   as: :turbo_stream
             expect(response.body).not_to include('data-controller="fireworks"')
+          end
+
+          context "and the comment is too long" do
+            let(:comment) { "a" * (TaskApplication::COMMENT_MAX_LENGTH + 1) }
+
+            it "doesn't update the application and shows the error" do
+              application = create(:task_application, task: task, user: user)
+              expect {
+                patch task_application_path(task),
+                      params: { task_application: { comment: comment } },
+                      as: :turbo_stream
+              }.not_to change { application.reload.comment }
+              expect(response).to have_http_status(:unprocessable_content)
+              expect(response.body).to include(
+                I18n.t("activerecord.errors.models.task_application.attributes.comment.too_long",
+                       count: TaskApplication::COMMENT_MAX_LENGTH)
+              )
+              expect(response.body).not_to include(%(target="task-application-#{user.id}"))
+            end
           end
         end
 
