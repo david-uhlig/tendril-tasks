@@ -3,13 +3,14 @@
   Rocket Chat
 %>
 
-<li>
-  <div class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 dark:bg-gray-600 dark:text-white">
+<%= render TendrilTasks::ListRow.new do |row| %>
+  <% row.leading do %>
     <%= render TendrilTasks::Avatar.new(@coordinator) %>
-    <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"><%= @coordinator.name %></span>
+  <% end %>
 
-    <span class="inline-flex items-center justify-center">
-      <%= render TendrilTasks::ContactButton.new(@coordinator) %>
-    </span>
-  </div>
-</li>
+  <% row.title @coordinator.name %>
+
+  <span class="inline-flex items-center justify-center">
+    <%= render TendrilTasks::ContactButton.new(@coordinator) %>
+  </span>
+<% end %>
