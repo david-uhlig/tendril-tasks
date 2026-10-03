@@ -1,6 +1,6 @@
 <%= tag.section **@options do %>
   <div class="block sm:flex-1">
-    <div class="inline text-left mb-2">
+    <div class="inline">
       <%= render TendrilTasks::ProjectBadge
                    .new(@application.task.project,
                         has_link: @application.task.project.visible?) %>

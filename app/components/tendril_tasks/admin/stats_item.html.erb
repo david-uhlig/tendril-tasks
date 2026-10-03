@@ -1,5 +1,8 @@
-<div class="flex flex-col items-center justify-center gap-2">
-  <dt class="text-3xl font-extrabold">
+<%# The number is shown above its label, but follows it in the markup as a definition list requires %>
+<div class="flex flex-col items-center justify-start gap-2">
+  <dt class="order-2 text-gray-500 dark:text-gray-400"><%= @title %></dt>
+
+  <dd class="order-1 text-3xl font-extrabold">
     <%= @stats[:total] %>
 
     <% if @stats[:new] > 0 %>
@@ -7,11 +10,11 @@
                                      scheme: :green,
                                      class: "align-super") %>
     <% end %>
-  </dt>
+  </dd>
 
-  <dd class="text-gray-500 dark:text-gray-400"><%= @title %></dd>
-
-  <div class="whitespace-nowrap grow">
-    <%= content %>
-  </div>
+  <% if content? %>
+    <dd class="order-3 whitespace-nowrap grow">
+      <%= content %>
+    </dd>
+  <% end %>
 </div>

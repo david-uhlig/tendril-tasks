@@ -5,7 +5,8 @@ module Gustwave
   #
   # The avatar can be either passed in with the +src+ attribute or in a block.
   # If both are present, the +src+ attribute takes precedence. The block is
-  # wrapped in a +div+ element to provide consistent styling.
+  # wrapped in a +div+ element, or the element given by +tag+, to provide
+  # consistent styling.
   #
   # === Basic Usage
   #
@@ -28,6 +29,7 @@ module Gustwave
   # @param scheme [Symbol] The scheme of the avatar, one of :round, :square.
   # @param size [Symbol] The size of the avatar, one of :xs, :sm, :md, :lg, :xl, :2xl, :3xl, :4xl.
   # @param border [Boolean] Whether the avatar should have a border.
+  # @param tag [Symbol] The element wrapping the block when there is no +src+, e.g. +:span+ inside a button.
   # @param options [Hash] HTML attributes passed to the img element.
   #
   # @see Gustwave::AvatarGroup
@@ -77,6 +79,7 @@ module Gustwave
                    scheme: :round,
                    size: :md,
                    border: false,
+                   tag: :div,
                    **options)
       options.deep_symbolize_keys!
 
@@ -94,15 +97,16 @@ module Gustwave
       options[:class] = styles(**config)
 
       @src = src
+      @wrapper_tag = tag
       @options = options
     end
 
     def call
-      src.present? ? image_tag(src, **options) : content_tag(:div, **options) { content }
+      src.present? ? image_tag(src, **options) : content_tag(wrapper_tag, **options) { content }
     end
 
     private
 
-    attr_reader :src, :options
+    attr_reader :src, :wrapper_tag, :options
   end
 end
