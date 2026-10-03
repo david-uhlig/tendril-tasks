@@ -1,0 +1,5 @@
+# Commits ignored by `git blame`. GitHub picks this file up automatically.
+# Locally, run: git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# Format ERB templates with herb-format
+6fd34672d39ac541ac1fa5990c9a074b0901aaa8

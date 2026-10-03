@@ -59,11 +59,11 @@ run = "bin/rubocop -a"
 
 [tasks."herb"]
 description = "Style: ERB"
-run = "npx herb-lint"
+run = ["npx herb-lint", "npx herb-format --check"]
 
 [tasks."herb:fix"]
-description = "Style: ERB (auto fix)"
-run = "npx herb-lint --fix"
+description = "Style: ERB (auto fix and format)"
+run = ["npx herb-lint --fix", "npx herb-format"]
 
 [tasks.rff]
 description = "Alias for `test:rspec:ff`"
