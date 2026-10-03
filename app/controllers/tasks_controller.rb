@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @application = @task.task_applications.find_by(user: current_user)
+    @application = current_user.application_for(@task)
 
     if can?(:coordinate, @task)
       @task_applications = TaskApplication

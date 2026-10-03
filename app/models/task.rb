@@ -47,11 +47,6 @@ class Task < ApplicationRecord
     coordinators.empty?
   end
 
-  def applicant?(user)
-    applicants.include?(user) &&
-      !task_applications.find_by(user_id: user.id).withdrawn?
-  end
-
   def visible?
     published? && self.project.published?
   end
