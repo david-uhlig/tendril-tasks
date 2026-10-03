@@ -2,7 +2,7 @@
 <%= button_tag type: "button",
                id: "dropdown-status-button-#{@application.user.id}",
                "data-dropdown-toggle": "dropdown-status-info-#{@application.user.id}",
-               class: "#{color_scheme_for(@application.status)} focus:ring-4 focus:outline-hidden focus:ring-slate-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2" do %>
+               class: "#{color_scheme_for(@application.status)} focus:ring-4 focus:outline-hidden focus:ring-gray-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2" do %>
   <%= render_icon_for(@application.status) %>
   <span class="ms-1 hidden sm:inline-flex"><%= t("activerecord.attributes.task_application.status.#{@application.status}") %></span>
 
@@ -26,15 +26,15 @@
                   class: "font-medium truncate" %>
     </div>
 
-    <div class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-status-info-<%= @application.user.id %>">
+    <div class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-status-button-<%= @application.user.id %>">
       <% TaskApplication::COORDINATOR_STATUSES.each do |status| %>
-        <label class="block w-full text-start px-4 py-2 hover:bg-gray-100 cursor-pointer">
+        <label class="block w-full text-start px-4 py-2 hover:bg-gray-100 has-focus-visible:bg-gray-100 cursor-pointer">
           <span class="inline-flex align-bottom">
             <%= render_icon_for(status) %>
           </span>
 
           <%= t("activerecord.attributes.task_application.status.#{status}") %>
-          <%= f.radio_button :status, status, checked: (@application.status == status), data: { action: "change->auto-submit#immediately" }, class: "hidden" %>
+          <%= f.radio_button :status, status, checked: (@application.status == status), data: { action: "change->auto-submit#immediately" }, class: "sr-only" %>
         </label>
       <% end %>
     </div>
