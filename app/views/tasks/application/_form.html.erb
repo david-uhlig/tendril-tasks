@@ -1,7 +1,6 @@
+<%# An unsaved application can be passed in to show its validation errors %>
+<%# locals: (task:, application: task.task_applications.find_by(user_id: current_user.id)) %>
 <div id="task-application">
-  <%# An unsaved application can be passed in to show its validation errors %>
-  <% application = local_assigns.fetch(:application) { task.task_applications.find_by(user_id: current_user.id) } %>
-
   <%#
     User has applied
     - within the grace period they can edit their entry
