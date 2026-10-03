@@ -34,11 +34,18 @@ class Ability
 
     can [ :update, :destroy ], User, { id: user.id }
 
+    # Can upload rich text attachments when they are coordinators. Evaluated
+    # lazily, since checking for coordinatorships queries the database.
+    can :create, :direct_upload do
+      user.coordinator?
+    end
+
     # ----- Editor -----
     return unless user.admin? || user.editor?
 
                   can :manage, [ Project, Task ]
     can :coordinate, [ Project, Task ]
+    can :create, :direct_upload
 
     # ----- Admin -----
     return unless user.admin?

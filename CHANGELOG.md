@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Security
+- Only signed-in editors, admins, and coordinators can upload files. Uploads are limited to images, videos, audio files, and PDFs of up to 10 MB each; SVG images are not allowed. Uploaded files that are never attached are deleted after two days.
 - Coordinators can no longer set an application's status to "withdrawn".
 
 ## [0.6.0] - 2026-10-02
