@@ -1,8 +1,7 @@
 <%= form_with model: form_object,
               url: form_object.form_path,
               method: form_object.form_method,
-              class: "mx-auto space-y-4" do |f|
-%>
+              class: "mx-auto space-y-4" do |f| %>
   <%= render Form::TextFieldComponent.new(f, :title) %>
   <%= render Form::RichTextAreaComponent.new(f, :description) do |with| %>
     <% with.disabled_buttons(:heading1, :heading2, :heading3) %>

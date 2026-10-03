@@ -15,8 +15,7 @@
             size: :xs,
             data: { turbo: false },
             type: :submit,
-            class: "mt-1 sm:mt-0 sm:inline-flex sm:px-5 sm:py-2.5 sm:text-sm sm:font-medium") do
-          %>
+            class: "mt-1 sm:mt-0 sm:inline-flex sm:px-5 sm:py-2.5 sm:text-sm sm:font-medium") do %>
             <% it.leading_svg("rocketchat/icon-white.svg") %>
             <span class="sr-only min-[400px]:not-sr-only"><%= t "rocketchat.sign_in_button.short" %></span>
           <% end %>
@@ -26,7 +25,7 @@
       <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
         </svg>
       </button>
     </div>
@@ -37,11 +36,13 @@
             <li><%= link %></li>
           <% end %>
           <%# Login/Logout buttons in hamburger menu %>
-          <% if user_signed_in? %>
-            <li class="md:hidden"><%= button_to "Abmelden", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-          <% else %>
-            <li class="md:hidden"><%= button_to "Anmelden", user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %></li>
-          <% end %>
+          <li class="md:hidden">
+            <% if user_signed_in? %>
+              <%= button_to "Abmelden", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            <% else %>
+              <%= button_to "Anmelden", user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %>
+            <% end %>
+          </li>
         </ul>
       </div>
     <% end %>

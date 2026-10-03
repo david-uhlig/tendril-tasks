@@ -15,8 +15,8 @@
 
   <ul class="my-4 space-y-3">
     <% Admin::LegalController::LEGAL_PAGES.each do |slug| %>
-      <% if slug.in?(@pages) %>
-        <li>
+      <li>
+        <% if slug.in?(@pages) %>
           <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow-sm dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
             <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate">
               <%= link_to legal_path(slug), class: "hover:underline" do %>
@@ -29,9 +29,7 @@
               <% button.leading_icon :edit %>
             <% end %>
           </span>
-        </li>
-      <% else %>
-        <li>
+        <% else %>
           <span class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow-sm dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
             <span class="flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate">
               <%= t("pages.#{slug}.title") %>
@@ -42,8 +40,8 @@
               <% button.leading_icon :plus %>
             <% end %>
           </span>
-        </li>
-      <% end %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% end %>

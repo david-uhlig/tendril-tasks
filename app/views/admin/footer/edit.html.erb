@@ -26,8 +26,7 @@
   <%= form_with id: "copyright-form",
                 url: admin_footer_copyright_path,
                 method: :put,
-                class: "space-y-6" do |form|
-  %>
+                class: "space-y-6" do |form| %>
     <ol class="flex flex-nowrap space-x-4">
       <li class="grow">
         <%= render Form::TextFieldComponent.new(form,
@@ -68,9 +67,9 @@
       category_blueprint.links << ::Footer::Link.new
       filler_categories = (@sitemap.categories.count...2).map { category_blueprint }
     %>
-    <% (@sitemap.categories + filler_categories).each do |category| %>
-      <%= render 'admin/footer/sitemap_category', category: category %>
-    <% end %>
+    <%= render partial: "admin/footer/sitemap_category",
+               collection: @sitemap.categories + filler_categories,
+               as: :category %>
 
     <template id="sitemap-link-template">
       <%= render 'admin/footer/sitemap_link', item: ::Footer::Link.new %>

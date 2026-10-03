@@ -20,15 +20,13 @@
       <%# Submission date %>
       <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
         <%= t "task_application.applied_on_date",
-              date: l(@application.created_at, format: :long)
-        %>
+              date: l(@application.created_at, format: :long) %>
       </time>
       <%# Withdrawal date %>
       <% if @application.withdrawn_at.present? %>
         <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
           <%= t "task_application.withdrawn_on_date",
-                date: l(@application.withdrawn_at, format: :long)
-          %>
+                date: l(@application.withdrawn_at, format: :long) %>
         </time>
       <% end %>
     </div>
@@ -39,10 +37,8 @@
   <%# User comment %>
   <% paragraphize(@application.comment)&.each do |paragraph| %>
     <%= tag.p paragraph,
-              class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
-    %>
+              class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400" %>
   <% end %>
   <%= render TendrilTasks::ContactButton.new(@application.user,
-                                             is_responsive: false)
-  %>
+                                             is_responsive: false) %>
 </li>

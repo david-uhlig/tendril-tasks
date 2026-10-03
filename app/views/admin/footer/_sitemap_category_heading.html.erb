@@ -4,8 +4,7 @@
     <%= render Form::TextFieldComponent.new(form,
                                             :title,
                                             t(".category.input.label"),
-                                            placeholder: "Name")
-    %>
+                                            placeholder: "Name") %>
   </li>
   <%# Add new link %>
   <li class="content-end">
@@ -13,8 +12,7 @@
                                     data: {
                                       action: "click->template#append",
                                       "template-selector": "#sitemap-link-template"
-                                    }) do |button|
-    %>
+                                    }) do |button| %>
       <% button.leading_icon(:plus, class: "m-0 md:me-2") %>
       <span class="sr-only md:not-sr-only"><%= t(".category.add_link") %></span>
     <% end %>

@@ -13,8 +13,7 @@
   <% if can?(:coordinate, @project) ||
         can?(:update, @project) ||
         can?(:create, Project) ||
-        can?(:create, Task)
-  %>
+        can?(:create, Task) %>
     <div class="flex flex-row flex-wrap-reverse gap-4">
       <%# Visibility badges %>
       <%= render TendrilTasks::Elements::VisibilityInfoBar.new(@project) %>
@@ -27,8 +26,7 @@
   <%= render TendrilTasks::Heading
                .new(tag: :h2,
                     scheme: :level2)
-               .with_content(@project.title)
-  %>
+               .with_content(@project.title) %>
   <%# Project description %>
   <%= render Gustwave::RichText.new(@project.description) %>
   <%= render TendrilTasks::HorizontalLine.new %>
@@ -37,11 +35,9 @@
   <%= render TendrilTasks::Heading
                .new(tag: :h3,
                     scheme: :level3)
-               .with_content(t ".contact_persons")
-  %>
+               .with_content(t ".contact_persons") %>
   <%= tag.p t(".contact_persons_explainer"),
-            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400"
-  %>
+            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400" %>
   <%= render Modal::ContactListComponent.new(@project.coordinators) %>
   <%= render TendrilTasks::HorizontalLine.new %>
 
@@ -49,8 +45,7 @@
   <%= render TendrilTasks::Heading
                .new(tag: :h3,
                     scheme: :level3)
-               .with_content(t(".task_section_headline", initiative_title: @project.title).html_safe)
-  %>
+               .with_content(t(".task_section_headline", initiative_title: @project.title)) %>
   <%# TODO build responsive grid component %>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <% @tasks.each do |task| %>
@@ -65,7 +60,6 @@
                       href: projects_path,
                       scheme: :alternative,
                       size: :lg)
-                 .with_content(t ".goto_initiatives_overview")
-    %>
+                 .with_content(t ".goto_initiatives_overview") %>
   </div>
 <% end %>

@@ -5,16 +5,14 @@
       <%= render Form::TextFieldComponent.new(link_form,
                                               :title,
                                               false,
-                                              placeholder: t(".link.input.placeholder"))
-      %>
+                                              placeholder: t(".link.input.placeholder")) %>
     </li>
     <%# Link href %>
     <li class="grow">
       <%= render Form::TextFieldComponent.new(link_form,
                                               :href,
                                               false,
-                                              placeholder: "https://example.com")
-      %>
+                                              placeholder: "https://example.com") %>
     </li>
     <%# Remove button %>
     <li>
@@ -23,8 +21,7 @@
                                       data: {
                                         "action": "click->remove#ancestor",
                                         "remove-selector": "ol"
-                                      }) do |button|
-      %>
+                                      }) do |button| %>
         <% button.leading_icon(:close, class: "m-0 md:me-2") %>
         <span class="sr-only md:not-sr-only"><%= t(".link.button.remove") %></span>
       <% end %>

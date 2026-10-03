@@ -32,6 +32,16 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(response.body).to include("Copyright")
       expect(response.body).to include("Sitemap")
     end
+
+    it "renders the sitemap categories, a filler category and the templates" do
+      Setting.footer_sitemap = { "categories" => [ { "title" => "Community", "links" => [ { "title" => "Chat", "href" => "https://example.com" } ] } ] }
+      login_as(admin)
+      get edit_admin_footer_path
+
+      expect(response.body).to include('value="Community"', 'value="Chat"')
+      expect(response.body.scan('class="sitemap-category"').size).to eq(3)
+      expect(response.body.scan('name="categories[][links][][title]"').size).to eq(4)
+    end
   end
 
   describe "PATCH /admin/footer/copyright" do
