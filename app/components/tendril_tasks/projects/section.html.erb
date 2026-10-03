@@ -1,5 +1,5 @@
 <section class="bg-white sm:bg-transparent border rounded-xl sm:border-0 shadow-md sm:shadow-none dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto max-w-(--breakpoint-xl) text-center lg:px-12">
+  <div class="py-8 px-4 text-center lg:px-12">
     <%= render TendrilTasks::Heading.new(tag: :h2, scheme: :level2) do %>
       <%= link_to @project.title, project_path(@project) %>
     <% end %>
@@ -24,7 +24,7 @@
       <span class="flex gap-2 overflow-hidden shrink truncate">
         <% @project.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
-            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs) %>
+            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs, tag: :span) %>
             <%= tag.span coordinator.name, class: "dark:text-white truncate" %>
           </span>
         <% end %>

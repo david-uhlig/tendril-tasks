@@ -2,7 +2,7 @@
   class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col"
   id="task-card-<%= @task.id %>"
 >
-  <div class="inline text-left mb-2">
+  <div class="inline">
     <%= render TendrilTasks::ProjectBadge.new(@task.project) %>
     <%= render TendrilTasks::NewItemBadge.new if is_new? %>
   </div>
@@ -12,7 +12,7 @@
                  .new(tag: :h2,
                       scheme: :level5,
                       responsive: false,
-                      class: "overflow-hidden pb-0.5 grow")
+                      class: "overflow-hidden pb-0.5")
                  .with_content(@task.title) %>
   <% end %>
 
@@ -37,7 +37,7 @@
       <span class="flex gap-2 overflow-hidden shrink truncate">
         <% @task.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
-            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs) %>
+            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs, tag: :span) %>
             <%= tag.span coordinator.name, class: "dark:text-white truncate" %>
           </span>
         <% end %>

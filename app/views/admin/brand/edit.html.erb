@@ -26,7 +26,7 @@
                 class: "space-y-6" do |form| %>
     <%= render TendrilTasks::Logo.new(id: "current-brand-logo", size: :lg) %>
 
-    <ol class="flex flex-wrap space-x-0">
+    <ol class="flex flex-wrap">
       <li class="grow">
         <%= render "admin/brand/logo_file_field", form: form %>
       </li>
