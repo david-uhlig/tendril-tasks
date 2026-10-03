@@ -40,8 +40,9 @@
                     scheme: :level3)
                .with_content(t ".contact_persons") %>
 
-  <%= tag.p t(".contact_persons_explainer"),
-            class: "mb-6 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400" %>
+  <%= render TendrilTasks::Paragraph.new(t(".contact_persons_explainer"),
+                                         size: :md,
+                                         class: "mb-6") %>
 
   <%= render Modal::ContactListComponent.new(@project.coordinators) %>
   <%= render TendrilTasks::HorizontalLine.new %>

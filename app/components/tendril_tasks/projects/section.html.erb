@@ -15,29 +15,9 @@
       <% end %>
     <% end %>
 
-    <%= render Modal::ToggleButtonComponent.new(scheme: :none,
-                                                modal_id: "project-contacts-#{@project.id}",
-                                                class: "inline-flex items-center max-w-full md:max-w-lg lg:max-w-2xl py-1 px-1 pe-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do %>
-      <%= tag.span t(".contacts"),
-                   class: "shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 me-3" %>
-
-      <span class="flex gap-2 overflow-hidden shrink truncate">
-        <% @project.coordinators.each do |coordinator| %>
-          <span class="flex items-center gap-2 text-sm font-medium">
-            <%= render TendrilTasks::Avatar.new(coordinator, size: :xs, tag: :span) %>
-            <%= tag.span coordinator.name, class: "dark:text-white truncate" %>
-          </span>
-        <% end %>
-      </span>
-
-      <svg class="shrink-0 ms-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path
-          fill-rule="evenodd"
-          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
-    <% end %>
+    <%= render TendrilTasks::ContactsPill.new(@project.coordinators,
+                                              modal_id: "project-contacts-#{@project.id}",
+                                              class: "md:max-w-lg lg:max-w-2xl mb-7") %>
 
     <%= content_for :modal do %>
       <%= render Modal::DialogComponent.new("project-contacts-#{@project.id}") do |modal| %>

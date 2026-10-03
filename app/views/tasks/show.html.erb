@@ -62,8 +62,8 @@
           <% end %>
         </ol>
       <% else %>
-        <%= tag.p t(".this_task_hasnt_received_applications"),
-                  class: "mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400" %>
+        <%= render TendrilTasks::Paragraph.new(t(".this_task_hasnt_received_applications"),
+                                               class: "mb-6") %>
       <% end %>
     </div>
     <%= render TendrilTasks::HorizontalLine.new %>

@@ -54,8 +54,7 @@
 
   <%# User comment %>
   <% paragraphize(@application.comment)&.each do |paragraph| %>
-    <%= tag.p paragraph,
-              class: "mb-2 text-base font-normal text-gray-500 lg:text-lg dark:text-gray-400" %>
+    <%= render TendrilTasks::Paragraph.new(paragraph, size: :md, class: "mb-2") %>
   <% end %>
 
   <%= render TendrilTasks::ContactButton.new(@application.user,
