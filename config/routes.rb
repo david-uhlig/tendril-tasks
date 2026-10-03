@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/sign-in", to: "users/sessions#new", as: :new_user_session
     delete "/users/sign-out", to: "users/sessions#destroy", as: :destroy_user_session
+
+    # Sign in as any registered user without Rocket.Chat. Never drawn in production.
+    if Rails.env.local?
+      post "/users/dev-sign-in", to: "users/dev_sessions#create", as: :dev_user_session
+    end
   end
 
   # Restrict Active Storage direct uploads (used by Lexxy). Shadows the

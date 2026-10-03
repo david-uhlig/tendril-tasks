@@ -345,6 +345,9 @@ en:
     omniauth_callbacks:
       failure:
         failure: "Failure. Please try again."
+    dev_sessions:
+      create:
+        failure: "User not found."
 
   # Authentication
   devise:
@@ -358,6 +361,11 @@ en:
           prompt: "Don't have an account yet?"
           link_title: "Register now"
         title: "Welcome - Here we go!"
+      dev_sign_in:
+        hint: "Development only: sign in as any registered user without Rocket.Chat."
+        user_label: "User"
+        choose_user: "Choose a user"
+        submit_button: "Sign in as user"
 
   # Dashboard
   dashboards:
