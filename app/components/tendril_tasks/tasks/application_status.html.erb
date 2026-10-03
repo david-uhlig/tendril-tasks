@@ -26,8 +26,7 @@
       %>
     </div>
     <div class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-status-info-<%= @application.user.id %>">
-      <% @statuses.each do |status, _| %>
-        <% next if status == "withdrawn" %>
+      <% TaskApplication::COORDINATOR_STATUSES.each do |status| %>
         <label class="block w-full text-start px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <span class="inline-flex align-bottom">
             <%= render_icon_for(status) %>
