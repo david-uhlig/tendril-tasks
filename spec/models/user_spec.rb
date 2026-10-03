@@ -193,4 +193,64 @@ RSpec.describe User, type: :model do
       }.to change { user.remember_created_at }.from(anything).to(nil)
     end
   end
+
+  describe "#application_for" do
+    let(:user) { create(:user) }
+    let(:task) { create(:task, :published, :with_published_project) }
+
+    it "returns the user's application for the task" do
+      application = create(:task_application, task: task, user: user)
+
+      expect(user.application_for(task)).to eq(application)
+    end
+
+    it "returns a withdrawn application" do
+      application = create(:task_application, task: task, user: user, status: :withdrawn)
+
+      expect(user.application_for(task)).to eq(application)
+    end
+
+    it "returns nil when the user hasn't applied" do
+      expect(user.application_for(task)).to be_nil
+    end
+
+    it "doesn't return another user's application for the task" do
+      create(:task_application, task: task)
+
+      expect(user.application_for(task)).to be_nil
+    end
+
+    it "doesn't return the user's application for another task" do
+      create(:task_application, user: user)
+
+      expect(user.application_for(task)).to be_nil
+    end
+  end
+
+  describe "#applied_to?" do
+    let(:user) { create(:user) }
+    let(:task) { create(:task, :published, :with_published_project) }
+
+    it "is true when the user has applied to the task" do
+      create(:task_application, task: task, user: user)
+
+      expect(user.applied_to?(task)).to be(true)
+    end
+
+    it "is false when the user has withdrawn the application" do
+      create(:task_application, task: task, user: user, status: :withdrawn)
+
+      expect(user.applied_to?(task)).to be(false)
+    end
+
+    it "is false when the user hasn't applied" do
+      expect(user.applied_to?(task)).to be(false)
+    end
+
+    it "is false when only another user has applied" do
+      create(:task_application, task: task)
+
+      expect(user.applied_to?(task)).to be(false)
+    end
+  end
 end

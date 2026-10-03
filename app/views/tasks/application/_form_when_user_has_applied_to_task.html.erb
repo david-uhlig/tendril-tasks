@@ -47,7 +47,7 @@
   would not render.
 %>
 
-<% if task.applicant?(current_user) %>
+<% if current_user.applied_to?(task) %>
   <%= render DeleteConfirm::ModalComponent.new(
     id: "confirm-application-withdrawal-#{task.id}",
     delete_path: task_application_path(task)) do |modal| %>
