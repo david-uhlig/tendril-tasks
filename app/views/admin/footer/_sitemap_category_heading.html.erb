@@ -6,6 +6,7 @@
                                             t(".category.input.label"),
                                             placeholder: "Name") %>
   </li>
+
   <%# Add new link %>
   <li class="content-end">
     <%= render Gustwave::Button.new(theme: :outline,
@@ -17,6 +18,7 @@
       <span class="sr-only md:not-sr-only"><%= t(".category.add_link") %></span>
     <% end %>
   </li>
+
   <%# Remove category %>
   <li class="content-end">
     <%= render Gustwave::Button.new(theme: :outline,

@@ -10,6 +10,7 @@
                                },
                                class: "m-0") do |contact_button| %>
   <% contact_button.leading_image("rocketchat/icon-white.svg") %>
+
   <% if responsive? %>
     <%= tag.span t(".contact.long"), class: "hidden sm:inline" %>
     <%= tag.span t(".contact.abbr"), class: "sm:hidden" %>

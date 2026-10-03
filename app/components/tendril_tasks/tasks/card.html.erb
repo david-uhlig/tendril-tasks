@@ -1,4 +1,7 @@
-<section class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col" id="task-card-<%= @task.id %>">
+<section
+  class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col"
+  id="task-card-<%= @task.id %>"
+>
   <div class="inline text-left mb-2">
     <%= render TendrilTasks::ProjectBadge.new(@task.project) %>
     <%= render TendrilTasks::NewItemBadge.new if is_new? %>
@@ -30,6 +33,7 @@
                                                   modal_id: "task-contacts-#{@task.id}",
                                                   class: "inline-flex items-center max-w-full py-1 px-1 pr-2 my-4 mx-0 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700") do %>
       <%= tag.span t(".contacts"), class: "shrink-0 text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3" %>
+
       <span class="flex gap-2 overflow-hidden shrink truncate">
         <% @task.coordinators.each do |coordinator| %>
           <span class="flex items-center gap-2 text-sm font-medium">
@@ -38,8 +42,13 @@
           </span>
         <% end %>
       </span>
+
       <svg class="shrink-0 ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        ></path>
       </svg>
     <% end %>
   </div>
@@ -51,6 +60,7 @@
     <% grid.button(href: task_path(@task),
                    scheme: :alternative)
            .with_content(t(".read_more")) %>
+
     <% if @task.applicant?(current_user) %>
       <% grid.button(tag: :a,
                      href: task_path(@task, anchor: "apply-now"),
@@ -72,8 +82,10 @@
 <%= content_for :modal do %>
   <%= render ::Modal::DialogComponent.new("task-contacts-#{@task.id}") do |modal| %>
     <% modal.heading(t(".your_contact_people")) %>
+
     <%= render ::Modal::ParagraphComponent.new
                  .with_content(t(".contact_people_description")) %>
+
     <%= render ::Modal::ContactListComponent.new(@task.coordinators) %>
     <% modal.button(scheme: :light, type: :reset).with_content(t(".close_window")) %>
   <% end %>

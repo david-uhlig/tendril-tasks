@@ -5,5 +5,6 @@
     <%= render Gustwave::Icon.new(@icon, position: :standalone) %>
     <%= tag.span "#{@scheme.to_s} icon", class: "sr-only" %>
   <% end %>
+
   <div class="ms-3 text-sm font-normal"><%= text_or_content %></div>
 <% end %>

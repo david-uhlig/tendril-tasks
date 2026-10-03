@@ -8,6 +8,7 @@
   <%= render TendrilTasks::Heading.new(tag: :h1) do %>
     <%= t("admin.brand.title") %>
   <% end %>
+
   <%= render TendrilTasks::Paragraph.new do %>
     <%= t(".explainer") %>
   <% end %>
@@ -17,16 +18,19 @@
   <%= render TendrilTasks::Heading.new(tag: :h2) do %>
     <%= t(".logo.title") %>
   <% end %>
+
   <%= form_with model: @setting,
                 id: "branding-logo-form",
                 url: admin_brand_logo_path,
                 method: :put,
                 class: "space-y-6" do |form| %>
     <%= render TendrilTasks::Logo.new(id: "current-brand-logo", size: :lg) %>
+
     <ol class="flex flex-wrap space-x-0">
       <li class="grow">
         <%= render "admin/brand/logo_file_field", form: form %>
       </li>
+
       <li class="whitespace-nowrap space-x-2 pe-3 pb-6 pt-4 w-full [&_button]:w-1/2">
         <%= render Gustwave::Button.new(type: :submit,
                                         size: :md,
@@ -34,6 +38,7 @@
                                         form: "reset-brand-logo") do %>
           <%= t("forms.reset") %>
         <% end %>
+
         <%= render Gustwave::Button.new(type: :submit,
                                         size: :md) do %>
           <%= t("forms.save") %>
@@ -43,9 +48,10 @@
   <% end %>
 
   <%#
-       Clear Logo Form
-       Triggered by the reset button in the form above
+    Clear Logo Form
+    Triggered by the reset button in the form above
   %>
+
   <%= form_with url: admin_brand_logo_path,
                 method: :delete, id: "reset-brand-logo",
                 class: "hidden" do %>
@@ -54,6 +60,7 @@
   <%= render TendrilTasks::Heading.new(tag: :h2) do %>
     <%= t(".name.title") %>
   <% end %>
+
   <%= form_with id: "branding-name-form",
                 url: admin_brand_name_path,
                 method: :put,
@@ -66,6 +73,7 @@
                                                 value: @brand.name,
                                                 placeholder: "Tendril Tasks") %>
       </li>
+
       <li class="text-center">
         <%= render Form::ToggleComponent.new(form,
                                              :display_name,
@@ -73,6 +81,7 @@
                                              checked: @brand.display_name?,
                                              class: "mt-2.5") %>
       </li>
+
       <li class="content-end">
         <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>

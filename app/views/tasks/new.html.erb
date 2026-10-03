@@ -2,8 +2,10 @@
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <% breadcrumb.home %>
     <% breadcrumb.item(Task.model_name.human(count: 2), href: tasks_path) %>
+
     <% breadcrumb.item(@task_form.project.title,
                           href: project_path(@task_form.project)) if @task_form.project.present? %>
+
     <% breadcrumb.item(t("breadcrumbs.new")) %>
   <% end %>
 

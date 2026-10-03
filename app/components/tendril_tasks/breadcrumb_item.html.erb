@@ -1,6 +1,7 @@
 <%= content_tag :li, **@li_options do %>
   <div class="flex items-center">
     <%= @icon[:html] %>
+
     <% if @href.present? %>
       <%= content_tag :a, href: @href, **@link_options do %>
         <%= @title %>

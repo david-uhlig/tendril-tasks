@@ -3,6 +3,7 @@
                   scheme: :level3,
                   id: "apply-now")
              .with_content(t ".thanks_for_your_application") %>
+
 <% if application.editable? %>
   <%= render TendrilTasks::Paragraph.new do %>
     <%= t(".next_steps_within_grace_period") %>
@@ -12,6 +13,7 @@
     <%= t(".next_steps_outside_of_grace_period") %>
   <% end %>
 <% end %>
+
 <%= form_with model: application,
               method: :patch,
               url: task_application_path(task),
@@ -30,6 +32,7 @@
                                            disabled: true,
                                            placeholder: t(".you_applied_without_a_comment")) %>
   <% end %>
+
   <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
     <% button_group.button(t(".update_application"), value: "save") if application.editable? %>
     <% button_group.delete_button(t(".withdraw_application"), target_modal_id: "confirm-application-withdrawal-#{task.id}") %>
@@ -37,19 +40,22 @@
 <% end %>
 
 <%#
-      Modal for withdrawing the application for the task
-      The card is re-rendered in turbo-stream requests, so the modal has to appear
-      here, instead of in the appropriate `content_for :modal` area. Otherwise it
-      would not render.
-    %>
+  Modal for withdrawing the application for the task
+  The card is re-rendered in turbo-stream requests, so the modal has to appear
+  here, instead of in the appropriate `content_for :modal` area. Otherwise it
+  would not render.
+%>
+
 <% if task.applicant?(current_user) %>
   <%= render DeleteConfirm::ModalComponent.new(
     id: "confirm-application-withdrawal-#{task.id}",
     delete_path: task_application_path(task)) do |modal| %>
     <% modal.heading(t ".delete_confirm.modal.title") %>
+
     <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
       <%= modal.paragraph(text) %>
     <% end %>
+
     <% modal.confirm_button(t(".delete_confirm.modal.withdraw_application")) %>
   <% end %>
 <% end %>

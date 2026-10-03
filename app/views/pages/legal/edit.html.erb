@@ -3,9 +3,12 @@
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
     <%= breadcrumb.home %>
     <%= breadcrumb.item t("breadcrumbs.admin"), href: admin_root_path %>
+
     <% options = { href: legal_path(@page.slug) } if @page.persisted? %>
+
     <%= breadcrumb.item t("pages.#{@page.slug}.title"),
                         **options %>
+
     <%= breadcrumb.item t("breadcrumbs.edit") %>
   <% end %>
 
@@ -20,11 +23,13 @@
                                                   :content,
                                                   toolbar_id: "legal-page-toolbar") %>
     <% end %>
+
     <%= render Form::SubmitButtonGroupComponent.new(form) do |button_group| %>
       <% button_group.delete_button(t("forms.delete"),
                                     target_modal_id: "confirm-page-delete",
                                     disabled: !@page.persisted?,
                                     class: "disabled:opacity-60") %>
+
       <% button_group.button(t("forms.update")) %>
     <% end %>
   <% end %>
@@ -35,6 +40,7 @@
     id: "confirm-page-delete",
     delete_path: legal_path(@page.slug)) do |modal| %>
     <% modal.heading(t(".delete_confirm.modal.title", title: t("pages.#{@page.slug}.title"))) %>
+
     <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
       <%= modal.paragraph(text) %>
     <% end %>

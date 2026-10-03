@@ -1,5 +1,6 @@
 <%= tag.div **@options do %>
   <%= render Form::LabelComponent.new(@form, @attribute, @label) unless @label == false %>
+
   <%= render Form::FieldErrorComponent.new(@form.object, @error_field_attribute) do %>
     <%= content %>
   <% end %>

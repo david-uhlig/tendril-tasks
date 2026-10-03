@@ -9,6 +9,7 @@
             <%= render Gustwave::Badge.new(TendrilTasks::VERSION, scheme: :dark, size: :sm, pill: true, class: "ms-2") %>
           </a>
         </div>
+
         <div class="ms-1.5 me-2 text-gray-500 dark:text-gray-400 font-medium">
           <%= render Gustwave::Icon.new(:github, theme: :solid, size: :sm, position: :standalone, class: "inline-flex align-center") %>
           <a href="https://github.com/david-uhlig/tendril-tasks" class="hover:underline">Fair-Source-Software</a>
@@ -16,12 +17,16 @@
           <a href="https://github.com/david-uhlig/tendril-tasks" class="hover:underline whitespace-nowrap">David Uhlig</a>
         </div>
       </div>
+
       <%# Sitemap links %>
       <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3" dir="rtl">
         <%# Legal link block %>
         <% if data.legal.present? %>
           <div dir="ltr">
-            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"><%= t("footer.link_sections.legal") %></h2>
+            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <%= t("footer.link_sections.legal") %>
+            </h2>
+
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
               <% data.legal.each do |slug| %>
                 <li class="mb-4 overflow-hidden truncate">
@@ -33,9 +38,11 @@
             </ul>
           </div>
         <% end %>
+
         <% data.sitemap.categories.each do |category| %>
           <div dir="ltr">
             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"><%= category.title %></h2>
+
             <ul class="text-gray-500 dark:text-gray-400 font-medium space-y-4">
               <% category.links.each do |link| %>
                 <li><%= link_to link.title, link.safe_href, class: "hover:underline" %></li>
@@ -45,12 +52,14 @@
         <% end %>
       </div>
     </div>
+
     <% if data.copyright.present? %>
       <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
       <div class="sm:flex sm:items-center sm:justify-between">
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           <%= data.copyright %>
         </span>
+
         <%# TODO configurable social media icons with links %>
         <div class="flex mt-4 sm:justify-center sm:mt-0">&nbsp;</div>
       </div>
