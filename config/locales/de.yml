@@ -290,6 +290,8 @@ de:
             remove: "Entfernen"
           input:
             placeholder: "Name, z. B. Homepage..."
+            title_label: "Name des Links"
+            href_label: "Adresse des Links"
       sitemap_category_heading:
         category:
           reset: "Zurücksetzen"
@@ -408,6 +410,7 @@ de:
       title: "Dashboard"
       create_initiative_button: "Thema anlegen"
       my_applications: "Meine Meldungen"
+      goto_tasks_button: "Zur Aufgabenübersicht"
       applications_placeholder: |
         Hier werden die Aufgaben angezeigt, für die du dich gemeldet hast. Derzeit hast du dich noch für keine Aufgabe gemeldet. Schau doch in der Aufgabenübersicht vorbei – vielleicht ist etwas Spannendes für dich dabei!
 

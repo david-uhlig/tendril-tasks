@@ -6,7 +6,8 @@
       <%= render Form::TextFieldComponent.new(link_form,
                                               :title,
                                               false,
-                                              placeholder: t(".link.input.placeholder")) %>
+                                              placeholder: t(".link.input.placeholder"),
+                                              aria: { label: t(".link.input.title_label") }) %>
     </li>
 
     <%# Link href %>
@@ -14,7 +15,8 @@
       <%= render Form::TextFieldComponent.new(link_form,
                                               :href,
                                               false,
-                                              placeholder: "https://example.com") %>
+                                              placeholder: "https://example.com",
+                                              aria: { label: t(".link.input.href_label") }) %>
     </li>
 
     <%# Remove button %>
