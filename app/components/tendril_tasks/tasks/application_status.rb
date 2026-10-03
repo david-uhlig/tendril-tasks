@@ -40,7 +40,6 @@ module TendrilTasks
       # @param application [TaskApplication] the application whose status is to be displayed
       def initialize(application)
         @application = application
-        @statuses = TaskApplication.statuses
       end
 
       private
