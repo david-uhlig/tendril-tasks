@@ -357,6 +357,7 @@ en:
           You're just one click away from getting started! Once you've logged in, you can discover all our exciting initiatives and tasks that are waiting for you. It's simple: just log in with your %{brand} account. We look forward to seeing you! 🚴‍♂️✨
         click_here_to_start: "Simply click here and get started right away:"
         login_with_rocket_chat_button: "Login with %{brand}"
+        rocket_chat_not_configured: "Sign in with %{brand} is not configured. Set ROCKET_CHAT_HOST, ROCKET_CHAT_CLIENT_ID and ROCKET_CHAT_CLIENT_SECRET in your .env file to enable it."
         create_account:
           prompt: "Don't have an account yet?"
           link_title: "Register now"

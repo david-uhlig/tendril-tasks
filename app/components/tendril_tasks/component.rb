@@ -17,6 +17,7 @@ module TendrilTasks
 
     delegate :paragraphize, :simple_line_breaks, to: :view_context
     delegate :rocketchat_applink, :rocketchat_link, to: :view_context
+    delegate :rocketchat_sign_in_path, :rocketchat_sign_in_method, to: :view_context
     delegate :current_user, :user_signed_in?, to: :view_context
     delegate :can?, :cannot?, to: :view_context
     delegate :turbo_stream, to: :view_context

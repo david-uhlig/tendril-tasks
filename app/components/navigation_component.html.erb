@@ -10,7 +10,7 @@
 
       <%# Login button %>
       <% unless user_signed_in? %>
-        <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post do %>
+        <%= form_tag rocketchat_sign_in_path, method: rocketchat_sign_in_method do %>
           <%= render Gustwave::Button.new(
             theme: :gradient_duotone,
             scheme: :purple_to_blue,
@@ -67,7 +67,7 @@
             <% if user_signed_in? %>
               <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete, class: "nav-link" %>
             <% else %>
-              <%= button_to t("rocketchat.sign_in_button.short"), user_rocketchat_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "nav-link" %>
+              <%= button_to t("rocketchat.sign_in_button.short"), rocketchat_sign_in_path, method: rocketchat_sign_in_method, data: { turbo: false }, class: "nav-link" %>
             <% end %>
           </li>
         </ul>

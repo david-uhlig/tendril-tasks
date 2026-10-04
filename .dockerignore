@@ -43,6 +43,12 @@
 !/app/assets/builds/.keep
 /public/assets
 
+# Avatars of the development seed users.
+/public/seeds
+
+# Images of the development seed initiatives and tasks.
+/db/seeds/images
+
 # Ignore CI service files.
 /.github
 

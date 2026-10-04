@@ -22,28 +22,34 @@
             <%= t(".content", brand: RocketChatConfig.branding) %>
           <% end %>
 
-          <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "space-y-4" do %>
-            <%= render Gustwave::Button.new(
-              type: :submit,
-              theme: :gradient_duotone,
-              scheme: :purple_to_blue,
-              size: :xl,
-              class: "w-full justify-center",
-              data: { turbo: false }) do |login_button| %>
-              <% login_button.leading_svg("rocketchat/icon-white.svg") %>
-              <%= t(".login_with_rocket_chat_button", brand: RocketChatConfig.branding) %>
-            <% end %>
-
-            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              <%= t(".create_account.prompt") %>
-
-              <%= render Gustwave::Button.new(scheme: :none,
-                                              type: :submit,
-                                              data: { turbo: false },
-                                              class: "p-0 font-medium text-blue-600 hover:underline dark:text-blue-500") do %>
-                <%= t(".create_account.link_title") %>
+          <% if RocketChatConfig.configured? %>
+            <%= form_tag user_rocketchat_omniauth_authorize_path, method: :post, class: "space-y-4" do %>
+              <%= render Gustwave::Button.new(
+                type: :submit,
+                theme: :gradient_duotone,
+                scheme: :purple_to_blue,
+                size: :xl,
+                class: "w-full justify-center",
+                data: { turbo: false }) do |login_button| %>
+                <% login_button.leading_svg("rocketchat/icon-white.svg") %>
+                <%= t(".login_with_rocket_chat_button", brand: RocketChatConfig.branding) %>
               <% end %>
-            </p>
+
+              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                <%= t(".create_account.prompt") %>
+
+                <%= render Gustwave::Button.new(scheme: :none,
+                                                type: :submit,
+                                                data: { turbo: false },
+                                                class: "p-0 font-medium text-blue-600 hover:underline dark:text-blue-500") do %>
+                  <%= t(".create_account.link_title") %>
+                <% end %>
+              </p>
+            <% end %>
+          <% else %>
+            <%= render TendrilTasks::Paragraph.new(size: :sm) do %>
+              <%= t(".rocket_chat_not_configured", brand: RocketChatConfig.branding) %>
+            <% end %>
           <% end %>
 
           <%= render "devise/sessions/dev_sign_in" if Rails.env.development? %>

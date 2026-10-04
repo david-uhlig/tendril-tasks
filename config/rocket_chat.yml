@@ -1,0 +1,12 @@
+# Rocket.Chat setting defaults.
+#
+# Defaults for `config/configs/rocket_chat_config.rb`.
+#
+# Note: This file might be overridden in future releases. Instead of editing
+# this file, set the values through environment variables, e.g.
+# `ROCKET_CHAT_HOST="https://chat.example.com"`.
+test:
+  # Placeholder credentials, so the sign in with Rocket.Chat is shown in tests.
+  host: "https://chat.example.com"
+  client_id: "test-client-id"
+  client_secret: "test-client-secret"
