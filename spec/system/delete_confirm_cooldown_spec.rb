@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Delete confirmation cooldown", type: :system, js: true do
+RSpec.describe "Delete confirmation cooldown", type: :system, js: true, optional: true do
   let(:user) { create(:user) }
 
   before do

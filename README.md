@@ -55,6 +55,7 @@ Rocket.Chat is optional in development. Sign in as any seeded user through the d
 ```shell
 mise run ci    # Security audits, linters and the full test suite, as on CI
 mise run rff   # RSpec only, stops at the first failure
+mise run test:rspec:optional  # Optional specs skipped by default, e.g. UI polish and third-party widgets
 mise tasks     # List all tasks
 ```
 

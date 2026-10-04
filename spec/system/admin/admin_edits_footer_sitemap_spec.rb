@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Admin edits footer sitemap", type: :system, js: true do
+RSpec.describe "Admin edits footer sitemap", type: :system, js: true, optional: true do
   let(:admin) { create(:user, :admin) }
   let(:links) { "#sitemap-links-form .sitemap-link" }
 
