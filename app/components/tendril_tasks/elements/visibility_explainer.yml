@@ -2,7 +2,7 @@ en:
   visible_for_everyone: "Visible to everyone"
   visible_for_coordinators: "Only visible to contact people"
   properties: "Properties:"
-  element_was_published: "%(element) published"
+  element_was_published: "%{element} published"
   initiative_was_published: "Initiative published"
   at_least_one_published_task: "1+ published tasks"
 
