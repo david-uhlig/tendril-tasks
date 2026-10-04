@@ -29,21 +29,21 @@
                 url: admin_footer_copyright_path,
                 method: :put,
                 class: "space-y-6" do |form| %>
-    <ol class="flex flex-nowrap space-x-4">
-      <li class="grow">
+    <div class="flex flex-nowrap space-x-4">
+      <div class="grow">
         <%= render Form::TextFieldComponent.new(form,
                                                 :copyright_notice,
                                                 "Copyright",
                                                 value: @copyright,
                                                 placeholder: "© 2025 Example Corp") %>
-      </li>
+      </div>
 
-      <li class="content-end">
+      <div class="content-end">
         <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
-      </li>
-    </ol>
+      </div>
+    </div>
   <% end %>
 
   <%= render TendrilTasks::HorizontalLine.new %>
