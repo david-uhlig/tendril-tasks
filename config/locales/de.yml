@@ -401,6 +401,7 @@ de:
           Du bist nur einen Klick davon entfernt, loszulegen! Sobald du dich eingeloggt hast, kannst du alle unsere spannenden Themen und Aufgaben entdecken, die auf dich warten. Es ist ganz einfach: Melde dich unkompliziert mit deinem %{brand}-Konto an. Wir freuen uns auf dich! 🚴‍♂️✨
         click_here_to_start: "Einfach hier klicken und gleich loslegen:"
         login_with_rocket_chat_button: "Anmelden mit %{brand}"
+        rocket_chat_not_configured: "Die Anmeldung mit %{brand} ist nicht eingerichtet. Setze ROCKET_CHAT_HOST, ROCKET_CHAT_CLIENT_ID und ROCKET_CHAT_CLIENT_SECRET in deiner .env-Datei, um sie zu aktivieren."
         create_account:
           prompt: "Du hast noch keinen Account?"
           link_title: "Jetzt anmelden"

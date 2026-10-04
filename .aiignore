@@ -1,0 +1,6 @@
+# Files AI assistants must not read, e.g. JetBrains AI Assistant and Junie.
+# Uses the .gitignore syntax.
+
+# Environment files contain secrets. The sample holds no secrets.
+.env*
+!.env.sample

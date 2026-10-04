@@ -13,6 +13,23 @@ RSpec.describe "Users::Sessions", type: :request do
       end
     end
 
+    context "when Rocket.Chat is configured" do
+      it "offers the sign in with Rocket.Chat" do
+        get new_user_session_path
+        expect(response.body).to include(user_rocketchat_omniauth_authorize_path)
+      end
+    end
+
+    context "when Rocket.Chat is not configured" do
+      before { allow(RocketChatConfig).to receive(:configured?).and_return(false) }
+
+      it "explains how to configure it instead of offering the sign in" do
+        get new_user_session_path
+        expect(response.body).not_to include(user_rocketchat_omniauth_authorize_path)
+        expect(response.body).to include("ROCKET_CHAT_CLIENT_ID")
+      end
+    end
+
     context "when authenticated" do
       before { sign_in(user) }
 
