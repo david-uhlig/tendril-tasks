@@ -1,9 +1,16 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# This Dockerfile is designed for production, not development. Use with Kamal,
+# Docker Compose (see `.self-hosting/README.md`) or build'n'run by hand:
 # docker build -t tendril_tasks .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name tendril_tasks tendril_tasks
+# docker run -d -p 80:80 -v tendril_tasks_storage:/rails/storage \
+#   -e SECRET_KEY_BASE=<value from `openssl rand -hex 64`> \
+#   -e APP_BASE_URL=<e.g. https://tasks.example.com> \
+#   -e ROCKET_CHAT_HOST=<...> -e ROCKET_CHAT_CLIENT_ID=<...> -e ROCKET_CHAT_CLIENT_SECRET=<...> \
+#   -e SOLID_QUEUE_IN_PUMA=true --name tendril_tasks tendril_tasks
+#
+# See `.env.sample` for all configuration options.
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
