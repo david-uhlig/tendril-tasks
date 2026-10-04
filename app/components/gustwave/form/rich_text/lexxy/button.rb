@@ -14,6 +14,7 @@ module Gustwave
             italic: "italic",
             strike: "strikethrough",
             underline: "underline",
+            heading1: "applyHeadingFormat",
             heading2: "applyHeadingFormat",
             heading3: "applyHeadingFormat",
             heading4: "applyHeadingFormat",
@@ -38,6 +39,7 @@ module Gustwave
           }.freeze
 
           ATTRIBUTE_PAYLOAD_MAPPINGS = {
+            heading1: "h1",
             heading2: "h2",
             heading3: "h3",
             heading4: "h4"

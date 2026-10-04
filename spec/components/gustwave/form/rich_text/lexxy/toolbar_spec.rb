@@ -29,7 +29,8 @@ RSpec.describe Gustwave::Form::RichText::Lexxy::Toolbar, type: :component do
     end
 
     it "renders the heading buttons as targets of the heading controller" do
-      expect(toolbar).to have_css("button[data-lexxy-heading-target='button']", count: 3)
+      expect(toolbar).to have_css("button[data-lexxy-heading-target='button']", count: 4)
+      expect(toolbar).to have_css("button[data-payload='h1']")
       expect(toolbar).to have_css("button[data-payload='h2']")
       expect(toolbar).to have_css("button[data-payload='h4']")
     end

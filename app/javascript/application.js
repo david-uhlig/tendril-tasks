@@ -9,7 +9,7 @@ import "controllers"
 // Configure Lexxy synchronously after the import, before the editors are registered
 Lexxy.configure({
     default: {
-        headings: [ "h2", "h3", "h4" ]
+        headings: [ "h1", "h2", "h3", "h4" ]
     }
 });
 
