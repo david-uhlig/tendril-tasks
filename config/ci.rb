@@ -17,7 +17,7 @@ CI.run do
   step "Style: ERB formatting", "npx herb-format --check"
 
   # Tests
-  step "Tests: RSpec", "env RAILS_ENV=test bin/rails db:setup spec"
+  step "Tests: RSpec", "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup parallel:spec"
   step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"
 
   # Optional: set a green GitHub commit status to unblock PR merge.

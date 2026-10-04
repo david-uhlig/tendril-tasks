@@ -43,6 +43,10 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+# Devise defines helpers like `user_signed_in?` when the routes load. Rails
+# loads routes lazily, so component specs would fail when they run first in a
+# process, e.g. with parallel_tests.
+Rails.application.reload_routes_unless_loaded
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [

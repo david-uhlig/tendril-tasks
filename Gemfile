@@ -94,6 +94,9 @@ group :development, :test do
 
   # HTML+ERB parser, linter and formatter [https://herb-tools.dev]
   gem "herb", "~> 0.11.0", require: false
+
+  # Runs the specs in parallel processes [https://github.com/grosser/parallel_tests]
+  gem "parallel_tests"
 end
 
 group :development do

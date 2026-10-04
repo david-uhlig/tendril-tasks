@@ -1,4 +1,6 @@
 require "simplecov"
+# Each parallel_tests process writes its own result, which SimpleCov merges.
+SimpleCov.command_name "RSpec#{ENV["TEST_ENV_NUMBER"]}" if ENV["TEST_ENV_NUMBER"]
 SimpleCov.start "rails" do
   group "Components", "app/components"
   group "Gustwave", "app/components/gustwave"
