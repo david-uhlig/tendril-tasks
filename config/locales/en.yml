@@ -405,13 +405,13 @@ en:
       task_application:
         comment: "Your message to us (optional)"
         status:
-          received: “Received”
-          under_review: “Under review”
-          interviewing: “Being interviewed”
-          on_hold: “On hold”
-          accepted: “Accepted”
-          rejected: “Rejected”
-          withdrawn: “Withdrawn”
+          received: "Received"
+          under_review: "Under review"
+          interviewing: "Being interviewed"
+          on_hold: "On hold"
+          accepted: "Accepted"
+          rejected: "Rejected"
+          withdrawn: "Withdrawn"
       project:
         coordinators: "Contact People"
       user:
