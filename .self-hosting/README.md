@@ -11,7 +11,7 @@ cp .self-hosting/compose.yaml.sample compose.yaml
 cp .env.sample .env.docker
 ```
 
-In `.env.docker`, set at least `APP_BASE_URL`, `SECRET_KEY_BASE` (generate one with `openssl rand -hex 64`), `ROCKET_CHAT_HOST`, `ROCKET_CHAT_CLIENT_ID` and `ROCKET_CHAT_CLIENT_SECRET`. Sign-in works exclusively through Rocket.Chat, so you need a Rocket.Chat workspace with a [third-party login app](https://github.com/david-uhlig/omniauth-rocketchat?tab=readme-ov-file#rocket-chat-setup) whose redirect URI is `<APP_BASE_URL>/users/auth/rocketchat/callback`. Then start the app:
+In `.env.docker`, uncomment and set at least `APP_BASE_URL`, `SECRET_KEY_BASE` (generate one with `openssl rand -hex 64`), `ROCKET_CHAT_HOST`, `ROCKET_CHAT_CLIENT_ID` and `ROCKET_CHAT_CLIENT_SECRET`. Sign-in works exclusively through Rocket.Chat, so you need a Rocket.Chat workspace with a [third-party login app](https://github.com/david-uhlig/omniauth-rocketchat?tab=readme-ov-file#rocket-chat-setup) whose redirect URI is `<APP_BASE_URL>/users/auth/rocketchat/callback`. Then start the app:
 
 ```sh
 docker compose up --build
