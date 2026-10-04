@@ -16,9 +16,12 @@ module Modal
   # Open the modal with a toggle carrying +data-modal-target+ and
   # +data-modal-show+ set to the modal's +id+.
   #
+  # Keyboard focus is trapped within the modal while it is shown.
+  #
   # @param id [String] the modal's id, targeted by its toggles.
   # @param options [Hash] HTML attributes passed to the +section+ element. Data
-  #   attributes are merged with the modal's own.
+  #   attributes are merged with the modal's own, Stimulus controllers are added
+  #   to the modal's.
   class ShellComponent < TendrilTasks::Component
     HEADING_CLASS = "text-xl font-semibold text-gray-900 dark:text-white"
     # Classes for the modal's footer, rendered by the caller below the body
@@ -41,7 +44,9 @@ module Modal
       @id = id
 
       options.deep_symbolize_keys!
-      options[:data] = { "modal-backdrop": "static" }.merge(options.fetch(:data, {}))
+      data = options.fetch(:data, {})
+      controller = [ "focus-trap", data[:controller] ].compact_blank.join(" ")
+      options[:data] = { "modal-backdrop": "static" }.merge(data, controller: controller)
       @options = options
     end
   end
