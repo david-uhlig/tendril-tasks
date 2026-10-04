@@ -89,6 +89,11 @@ RSpec.configure do |config|
   # see `spec/visual/screenshots_spec.rb`.
   config.filter_run_excluding visual: true unless ENV["VISUAL_LABEL"]
 
+  # Optional specs cover UI polish and third-party widgets rather than core
+  # flows. To keep the default run fast, they only run with `OPTIONAL_SPECS=1`,
+  # e.g. `mise run test:rspec:optional`.
+  config.filter_run_excluding optional: true unless ENV["OPTIONAL_SPECS"]
+
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless # selenium when we need javascript
     # to be used when debugging tests

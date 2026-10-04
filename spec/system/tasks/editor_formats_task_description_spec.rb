@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Editor formats task description", type: :system, js: true do
+RSpec.describe "Editor formats task description", type: :system, js: true, optional: true do
   let(:editor) { create(:user, :editor) }
 
   before do

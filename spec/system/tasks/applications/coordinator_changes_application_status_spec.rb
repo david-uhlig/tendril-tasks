@@ -21,7 +21,7 @@ RSpec.describe "Coordinator changes application status", type: :system, js: true
     visit task_path(task)
   end
 
-  context "with the keyboard" do
+  context "with the keyboard", optional: true do
     before do
       find(trigger_selector).send_keys(:enter)
     end
@@ -92,7 +92,7 @@ RSpec.describe "Coordinator changes application status", type: :system, js: true
       expect(application.reload.status).to eq("accepted")
     end
 
-    it "closes the menu with Escape" do
+    it "closes the menu with Escape", optional: true do
       expect(page).to have_selector(menu_selector, visible: true)
       find(trigger_selector).send_keys(:escape)
 
