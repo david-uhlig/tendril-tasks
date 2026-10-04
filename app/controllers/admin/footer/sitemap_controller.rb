@@ -39,7 +39,9 @@ module Admin
         categories.reject! do |category|
           category["title"].empty? && (category["links"].nil? || category["links"].empty?)
         end
-        params["categories"] = categories
+        # The form lists categories in the footer's left-to-right order, which
+        # is the reverse of the stored order.
+        params["categories"] = categories.reverse
         params
       end
     end
