@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Screen readers announce the page language, the close buttons of all dialogs, link address fields and footer link fields in the configured language.
 - The email address and username on the profile page are shown as readable values instead of faint placeholders.
 - Menu entries, buttons and notifications that were always shown in German or English follow the configured language.
+- The footer link categories in the admin area are listed in the same order as they appear in the footer.
 
 ### Security
 - Escape the project title in the task section headline on the project page to prevent XSS attacks.

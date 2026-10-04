@@ -42,6 +42,17 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(response.body.scan('class="sitemap-category"').size).to eq(3)
       expect(response.body.scan('name="categories[][links][][title]"').size).to eq(4)
     end
+
+    it "renders the sitemap categories in the footer's left-to-right order" do
+      Setting.footer_sitemap = { "categories" => [
+        { "title" => "First", "links" => [ { "title" => "A", "href" => "https://example.com/a" } ] },
+        { "title" => "Second", "links" => [ { "title" => "B", "href" => "https://example.com/b" } ] }
+      ] }
+      login_as(admin)
+      get edit_admin_footer_path
+
+      expect(response.body.index('value="Second"')).to be < response.body.index('value="First"')
+    end
   end
 
   describe "PATCH /admin/footer/copyright" do
@@ -97,6 +108,19 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(response).to have_http_status(:success)
       categories = Setting.footer_sitemap.fetch("categories")
       expect(categories.first["title"]).to eq("Community")
+    end
+
+    it "stores the categories in reverse of the form order" do
+      login_as(admin)
+      patch admin_footer_sitemap_path, params: {
+        categories: [
+          { title: "Left", links: [ { title: "A", href: "https://example.com/a" } ] },
+          { title: "Right", links: [ { title: "B", href: "https://example.com/b" } ] }
+        ]
+      }, as: :turbo_stream
+
+      titles = Setting.footer_sitemap.fetch("categories").map { it["title"] }
+      expect(titles).to eq(%w[Right Left])
     end
 
     it "handles missing categories" do

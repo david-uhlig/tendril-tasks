@@ -68,10 +68,16 @@
       category_blueprint = ::Footer::Category.new
       category_blueprint.links << ::Footer::Link.new
       filler_categories = (@sitemap.categories.count...2).map { category_blueprint }
+
+      # The footer lays out categories right-to-left, so show them reversed to
+      # match its left-to-right reading order. Fillers go first, as that is
+      # where new categories appear in the footer. The controller reverses the
+      # submitted order back.
+      categories = filler_categories + @sitemap.categories.reverse
     %>
 
     <%= render partial: "admin/footer/sitemap_category",
-               collection: @sitemap.categories + filler_categories,
+               collection: categories,
                as: :category %>
 
     <template id="sitemap-link-template">
