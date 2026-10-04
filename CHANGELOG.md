@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Menu entries, buttons and notifications that were always shown in German or English follow the configured language.
 - The footer link categories in the admin area are listed in the same order as they appear in the footer.
 - Application statuses in English are shown without quotation marks.
+- The visibility explainer names the published task or initiative in English instead of showing a raw placeholder.
 
 ### Security
 - Escape the project title in the task section headline on the project page to prevent XSS attacks.
