@@ -2,7 +2,7 @@
   class="bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-start flex flex-col"
   id="task-card-<%= @task.id %>"
 >
-  <div class="inline">
+  <div class="mb-2">
     <%= render TendrilTasks::ProjectBadge.new(@task.project) %>
     <%= render TendrilTasks::NewItemBadge.new if is_new? %>
   </div>
