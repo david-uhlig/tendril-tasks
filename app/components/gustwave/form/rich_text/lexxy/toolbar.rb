@@ -11,7 +11,7 @@ module Gustwave
         class Toolbar < Gustwave::Component
           ACTION_GROUPS = [
             %i[bold italic strike underline highlight link],
-            %i[heading2 heading3 heading4],
+            %i[heading1 heading2 heading3 heading4],
             %i[quote code bullet number],
             %i[table horizontal_rule],
             %i[attach_files],
@@ -19,7 +19,7 @@ module Gustwave
           ].freeze
           ACTION_OPTIONS = ACTION_GROUPS.flatten.freeze
 
-          HEADING_ACTIONS = %i[heading2 heading3 heading4].freeze
+          HEADING_ACTIONS = %i[heading1 heading2 heading3 heading4].freeze
 
           def initialize(form = nil, id: "custom-toolbar", hidden: [], disabled: [], **options)
             @id = id

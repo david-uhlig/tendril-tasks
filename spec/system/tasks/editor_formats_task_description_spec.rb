@@ -37,6 +37,7 @@ RSpec.describe "Editor formats task description", type: :system, js: true do
   end
 
   it "disables the headings excluded on the task form" do
+    expect(toolbar).to have_css("button[name='heading1'][disabled]")
     expect(toolbar).to have_css("button[name='heading2'][disabled]")
     expect(toolbar).to have_css("button[name='heading3'][disabled]")
   end
