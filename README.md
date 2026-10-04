@@ -25,6 +25,10 @@ Tendril Tasks is built with a vanilla [Ruby on Rails 8](https://rubyonrails.org/
 
 The application runs in a single Docker container and can be deployed easily with [Kamal](https://kamal-deploy.org/).
 
+## Self-hosting
+
+You can deploy Tendril Tasks with [Kamal](https://kamal-deploy.org/) or run it with Docker Compose. See [Self-hosting Tendril Tasks](.self-hosting/README.md) for instructions.
+
 ## Development
 
 ### Prerequisites

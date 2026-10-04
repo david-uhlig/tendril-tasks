@@ -1,0 +1,29 @@
+# Docker Compose example configuration file.
+#
+# Copy this file to `compose.yaml` in the project root, copy `.env.sample` to
+# `.env.docker`, and customize both for your needs. Then build and start the
+# app with:
+#
+#   docker compose up --build
+#
+# See `.self-hosting/README.md` for details.
+#
+# If you plan to deploy this app with Kamal, you need to configure
+# `.kamal/secrets` and `config/deploy.yml` instead!
+services:
+  web:
+    build: .
+    ports:
+      - "3000:80"
+    volumes:
+      # Persist the SQLite databases and uploaded files.
+      - storage:/rails/storage
+    env_file:
+      - .env.docker
+    environment:
+      # Run the Solid Queue supervisor inside the web server's Puma process to
+      # process background jobs, e.g. Rocket.Chat notifications.
+      SOLID_QUEUE_IN_PUMA: "true"
+
+volumes:
+  storage:
