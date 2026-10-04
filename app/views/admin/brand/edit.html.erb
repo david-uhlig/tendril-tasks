@@ -26,12 +26,12 @@
                 class: "space-y-6" do |form| %>
     <%= render TendrilTasks::Logo.new(id: "current-brand-logo", size: :lg) %>
 
-    <ol class="flex flex-wrap">
-      <li class="grow">
+    <div class="flex flex-wrap">
+      <div class="grow">
         <%= render "admin/brand/logo_file_field", form: form %>
-      </li>
+      </div>
 
-      <li class="whitespace-nowrap space-x-2 pe-3 pb-6 pt-4 w-full [&_button]:w-1/2">
+      <div class="whitespace-nowrap space-x-2 pe-3 pb-6 pt-4 w-full [&_button]:w-1/2">
         <%= render Gustwave::Button.new(type: :submit,
                                         size: :md,
                                         scheme: :red,
@@ -43,8 +43,8 @@
                                         size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
-      </li>
-    </ol>
+      </div>
+    </div>
   <% end %>
 
   <%#
@@ -65,28 +65,28 @@
                 url: admin_brand_name_path,
                 method: :put,
                 class: "space-y-6" do |form| %>
-    <ol class="flex flex-nowrap space-x-4">
-      <li class="grow">
+    <div class="flex flex-nowrap space-x-4">
+      <div class="grow">
         <%= render Form::TextFieldComponent.new(form,
                                                 :name,
                                                 t(".name.text_field.label"),
                                                 value: @brand.name,
                                                 placeholder: "Tendril Tasks") %>
-      </li>
+      </div>
 
-      <li class="text-center">
+      <div class="text-center">
         <%= render Form::ToggleComponent.new(form,
                                              :display_name,
                                              t(".name.toggle.label"),
                                              checked: @brand.display_name?,
                                              class: "mt-2.5") %>
-      </li>
+      </div>
 
-      <li class="content-end">
+      <div class="content-end">
         <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
-      </li>
-    </ol>
+      </div>
+    </div>
   <% end %>
 <% end %>

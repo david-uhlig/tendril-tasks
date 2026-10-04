@@ -1,15 +1,15 @@
 <%# locals: (form:) %>
-<ol class="flex flex-nowrap space-x-4">
+<div class="flex flex-nowrap space-x-4">
   <%# Heading text %>
-  <li class="grow">
+  <div class="grow">
     <%= render Form::TextFieldComponent.new(form,
                                             :title,
                                             t(".category.input.label"),
                                             placeholder: "Name") %>
-  </li>
+  </div>
 
   <%# Add new link %>
-  <li class="content-end">
+  <div class="content-end">
     <%= render Gustwave::Button.new(theme: :outline,
                                     data: {
                                       action: "click->template#append",
@@ -18,10 +18,10 @@
       <% button.leading_icon(:plus, class: "m-0 md:me-2") %>
       <span class="sr-only md:not-sr-only"><%= t(".category.add_link") %></span>
     <% end %>
-  </li>
+  </div>
 
   <%# Remove category %>
-  <li class="content-end">
+  <div class="content-end">
     <%= render Gustwave::Button.new(theme: :outline,
                                     scheme: :red,
                                     data: {
@@ -32,5 +32,5 @@
       <% button.leading_icon(:close, class: "m-0 md:me-2") %>
       <span class="sr-only md:not-sr-only"><%= t(".category.reset") %></span>
     <% end %>
-  </li>
-</ol>
+  </div>
+</div>
