@@ -31,11 +31,9 @@ RSpec.describe "User withdraws application after grace period and reapplies",
       end
     end
 
-    it "replaces the headline" do
+    it "replaces the headline and allows the user to scroll the page", :aggregate_failures do
       expect(page).to have_content("Vielen Dank für deine Meldung")
-    end
 
-    it "allows the user to scroll the page" do
       initial_scroll_position = page.evaluate_script("window.scrollY")
       page.scroll_to :bottom
       new_scroll_position = page.evaluate_script("window.scrollY")

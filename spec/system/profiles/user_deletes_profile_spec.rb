@@ -8,16 +8,12 @@ RSpec.describe "User deletes their profile", type: :system, js: true do
     visit profile_path
   end
 
-  it "shows a confirmation dialog" do
-    click_button "Mein Konto löschen"
-    # Ensure the confirmation modal appears with the expected text
-    expect(page).to have_content('Konto löschen?')
-    expect(page).to have_content("Bist du sicher, dass du dein Konto endgültig löschen möchtest?")
-  end
-
   context "when the user confirms the dialog" do
-    it "deletes the account and redirects them to the page root" do
+    it "deletes the account and redirects them to the page root", :aggregate_failures do
       click_button "Mein Konto löschen"
+      # Ensure the confirmation modal appears with the expected text
+      expect(page).to have_content('Konto löschen?')
+      expect(page).to have_content("Bist du sicher, dass du dein Konto endgültig löschen möchtest?")
 
       # Click on the "Konto löschen" button inside the modal
       within('#confirm-account-deletion') do

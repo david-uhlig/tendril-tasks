@@ -5,33 +5,27 @@ require "rails_helper"
 RSpec.describe "Development seeds" do
   subject(:load_seeds) { load Rails.root.join("db/seeds/development.rb") }
 
-  it "creates users of every role, projects, tasks and applications" do
+  # Loading the seeds is slow, so one example checks everything they create.
+  it "creates the users, projects, tasks, applications, branding, footer and legal pages",
+     :aggregate_failures do
     load_seeds
 
+    # Users of every role, projects, tasks and applications
     expect(User.distinct.pluck(:role)).to contain_exactly("admin", "editor", "user")
     expect(Project.count).to eq(8)
     expect(Task.count).to eq(23)
     expect(TaskApplication.count).to eq(11)
-  end
 
-  it "gives every user an existing avatar image" do
-    load_seeds
-
+    # Every user has an existing avatar image
     User.pluck(:avatar_url).each do |avatar_url|
       expect(Rails.public_path.join(avatar_url.delete_prefix("/"))).to exist
     end
-  end
 
-  it "embeds images in the descriptions" do
-    load_seeds
-
+    # Images are embedded in the descriptions
     project = Project.find_by!(title: "Cargo Bike Sharing")
     expect(project.description.body.attachables).to contain_exactly(an_instance_of(ActiveStorage::Blob))
-  end
 
-  it "seeds the branding, the footer and the legal pages" do
-    load_seeds
-
+    # Branding, footer and legal pages
     expect(Setting.brand_name).to eq("Campus Bike Collective")
     expect(Setting.brand_logo).to be_present
     expect(Setting.footer_copyright).to include("Campus Bike Collective")

@@ -17,16 +17,14 @@ RSpec.describe "User edits application", type: :system, js: true do
       end
     end
 
-    it "displays the edited comment" do
+    it "displays the edited comment and a notification", :aggregate_failures do
       within("#task-application") do
         expect(page).to have_selector("textarea")
         expect(page).to have_content("My edited comment")
         expect(page).to have_button("Meldung bearbeiten")
         expect(page).to have_button("Meldung zurückziehen")
       end
-    end
 
-    it "displays notification" do
       within("#notifications") do
         expect(page).to have_content("Vielen Dank!")
       end

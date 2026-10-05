@@ -17,11 +17,9 @@ RSpec.describe "User applies to task", type: :system, js: true do
       end
     end
 
-    it "replaces the headline" do
+    it "replaces the headline and displays the edit form", :aggregate_failures do
       expect(page).to have_content("Vielen Dank für deine Meldung!")
-    end
 
-    it "displays the edit form" do
       within("#task-application") do
         expect(page).to have_selector("textarea")
         expect(page).to have_content("My comment for the coordinators")
@@ -54,11 +52,9 @@ RSpec.describe "User applies to task", type: :system, js: true do
       end
     end
 
-    it "replaces the headline" do
+    it "replaces the headline and displays the edit form", :aggregate_failures do
       expect(page).to have_content("Vielen Dank für deine Meldung!")
-    end
 
-    it "displays the edit form" do
       within("#task-application") do
         expect(page).to have_selector("textarea")
         expect(page).to have_button("Meldung bearbeiten")
