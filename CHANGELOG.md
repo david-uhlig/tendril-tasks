@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Celebrate a user's contribution with a short fireworks animation when they sign up for a task.
 - Delete confirmation dialogs briefly disable the delete button to prevent accidental deletions.
 - Underline, color highlight, tables and dividers in descriptions and legal pages.
+- The Kamal and Docker Compose sample configurations include a health check for the web container, so deploys wait until the app is up.
 
 ### Changed
 - Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to four levels (H1–H4); existing H5 and H6 headings are still displayed.

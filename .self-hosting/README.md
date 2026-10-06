@@ -19,4 +19,6 @@ docker compose up --build
 
 The app is now available at http://localhost:3000. The database is created on first start and persisted, together with uploaded files, in the `storage` volume.
 
+The container reports as healthy in `docker compose ps` once the app answers on `/up`. Both sample configurations define this health check for the web server only. If you run background jobs in a separate container with `bin/jobs`, don't add the health check there, because that container never answers on `/up`.
+
 The app expects HTTPS in production. It sends HSTS headers and only issues secure cookies, which browsers accept on `localhost`. On any other host, put the container behind a reverse proxy that terminates TLS.

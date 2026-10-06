@@ -24,6 +24,14 @@ services:
       # Run the Solid Queue supervisor inside the web server's Puma process to
       # process background jobs, e.g. Rocket.Chat notifications.
       SOLID_QUEUE_IN_PUMA: "true"
+    # Mark the container healthy once the app answers on /up. Leave this out
+    # for services that only run `bin/jobs`, as they never answer on /up.
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost/up"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
 
 volumes:
   storage:

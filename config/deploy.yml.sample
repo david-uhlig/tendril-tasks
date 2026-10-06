@@ -18,7 +18,17 @@ image: your-user/tendril-tasks
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    hosts:
+      - 192.168.0.1
+    # Mark the container healthy once the app answers on /up. Kamal waits for
+    # this before stopping the old container. Only add this to roles that run
+    # the web server; a `bin/jobs` container never answers on /up.
+    options:
+      health-cmd: "curl -fsS http://localhost/up || exit 1"
+      health-interval: 30s
+      health-timeout: 5s
+      health-start-period: 30s
+      health-retries: 3
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -167,6 +177,10 @@ volumes:
 # hitting 404 on in-flight requests. Combines all files from new and old
 # version inside the asset_path.
 asset_path: /rails/public/assets
+
+# How long to wait for a new container to become healthy, default 30. Database
+# migrations run before the server starts, so increase this if they take long.
+# deploy_timeout: 60
 
 # Configure the image builder.
 builder:
