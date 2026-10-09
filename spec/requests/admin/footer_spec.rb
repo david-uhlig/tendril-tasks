@@ -13,7 +13,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
     }
   end
 
-  describe "GET /admin/footer" do
+  describe "GET /admin/footer/edit" do
     it "requires authentication" do
       require_authentication_for { get edit_admin_footer_path }
     end
@@ -31,7 +31,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
       get edit_admin_footer_path
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include("Copyright", "Sitemap")
+      expect(response.body).to include(I18n.t("admin.footer.edit.copyright.title"), I18n.t("admin.footer.edit.sitemap.title"))
       expect(response.body).to include('value="Community"', 'value="Chat"')
       expect(response.body.scan('class="sitemap-category"').size).to eq(3)
       expect(response.body.scan('name="categories[][links][][title]"').size).to eq(4)

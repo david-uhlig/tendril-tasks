@@ -22,14 +22,14 @@ RSpec.describe "Active Storage direct uploads", type: :request do
   end
 
   it "forbids users who cannot edit rich text" do
-    sign_in create(:user)
+    login_as(create(:user))
 
     expect { upload }.not_to change(ActiveStorage::Blob, :count)
     expect(response).to have_http_status(:forbidden)
   end
 
   it "allows editors" do
-    sign_in create(:user, :editor)
+    login_as(create(:user, :editor))
 
     expect { upload }.to change(ActiveStorage::Blob, :count).by(1)
     expect(response).to have_http_status(:ok)
@@ -38,14 +38,14 @@ RSpec.describe "Active Storage direct uploads", type: :request do
   it "allows coordinators" do
     coordinator = create(:user)
     create(:task).coordinators << coordinator
-    sign_in coordinator
+    login_as(coordinator)
 
     expect { upload }.to change(ActiveStorage::Blob, :count).by(1)
     expect(response).to have_http_status(:ok)
   end
 
   it "rejects files larger than the limit" do
-    sign_in create(:user, :admin)
+    login_as(create(:user, :admin))
 
     expect { upload(byte_size: RestrictedDirectUploadsController::MAX_BYTE_SIZE + 1) }
       .not_to change(ActiveStorage::Blob, :count)
@@ -53,7 +53,7 @@ RSpec.describe "Active Storage direct uploads", type: :request do
   end
 
   it "allows images, videos, audio files and PDFs" do
-    sign_in create(:user, :editor)
+    login_as(create(:user, :editor))
 
     %w[ image/jpeg video/mp4 audio/mpeg application/pdf ].each do |content_type|
       expect { upload(content_type:) }.to change(ActiveStorage::Blob, :count).by(1)
@@ -62,7 +62,7 @@ RSpec.describe "Active Storage direct uploads", type: :request do
   end
 
   it "rejects other file types, including SVGs" do
-    sign_in create(:user, :editor)
+    login_as(create(:user, :editor))
 
     [ "text/html", "image/svg+xml", "image/tiff", "application/zip", "" ].each do |content_type|
       expect { upload(content_type:) }.not_to change(ActiveStorage::Blob, :count)

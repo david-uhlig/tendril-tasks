@@ -25,7 +25,7 @@ RSpec.describe "Users::Sessions", type: :request do
     end
 
     context "when authenticated" do
-      before { sign_in(user) }
+      before { login_as(user) }
 
       it "redirects to the root path" do
         get new_user_session_path
@@ -55,7 +55,7 @@ RSpec.describe "Users::Sessions", type: :request do
 
     context "when authenticated" do
       it "signs the user out" do
-        sign_in(user)
+        login_as(user)
         delete destroy_user_session_path
         expect(response).to have_http_status(:see_other)
         expect(response).to redirect_to(root_path)

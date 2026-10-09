@@ -5,7 +5,7 @@ require "digest"
 
 RSpec.describe "Active Storage Dashboard CSP", type: :request do
   let(:admin) { create(:user, :admin) }
-  before { sign_in admin }
+  before { login_as(admin) }
 
   # Once this spec fails, remove the ActiveStorageDashboard script-src's from
   # `initializers/content_security_policy.rb`.
