@@ -26,4 +26,62 @@ RSpec.describe ProjectForm do
       expect(form).to be_changed
     end
   end
+
+  describe "#coordinator_ids=" do
+    let(:coordinator) { create(:user) }
+    let(:project) { create(:project, coordinators: [ coordinator ]) }
+    let(:form) { described_class.new(project) }
+
+    it "ignores ids of users that no longer exist" do
+      other = create(:user)
+      form.coordinator_ids = [ other.id.to_s, "0" ]
+
+      expect(form.coordinators).to eq([ other ])
+    end
+
+    it "doesn't treat ids of users that no longer exist as a change" do
+      form.coordinator_ids = [ coordinator.id.to_s, "0" ]
+
+      expect(form).not_to be_changed
+    end
+  end
+
+  describe "#save" do
+    let(:coordinator) { create(:user) }
+    let(:project) { create(:project, coordinators: [ coordinator ]) }
+    let(:form) { described_class.new(project) }
+
+    it "fails validation when all coordinators are removed" do
+      form.coordinator_ids = []
+
+      expect(form.save).to be(false)
+      expect(form.errors).to include(:coordinators)
+      expect(project.reload.coordinators).to eq([ coordinator ])
+    end
+
+    it "fails validation when only ids of users that no longer exist are submitted" do
+      form.coordinator_ids = [ "0" ]
+
+      expect(form.save).to be(false)
+      expect(form.errors).to include(:coordinators)
+      expect(project.reload.coordinators).to eq([ coordinator ])
+    end
+
+    it "keeps the submitted coordinators after a failed save" do
+      other = create(:user)
+      form.assign_attributes(title: "", coordinator_ids: [ other.id.to_s ])
+
+      expect(form.save).to be(false)
+      expect(form.coordinators).to eq([ other ])
+      expect(project.reload.coordinators).to eq([ coordinator ])
+    end
+
+    it "replaces the coordinators" do
+      other = create(:user)
+      form.coordinator_ids = [ other.id.to_s ]
+
+      expect(form.save).to be(true)
+      expect(project.reload.coordinators).to eq([ other ])
+    end
+  end
 end

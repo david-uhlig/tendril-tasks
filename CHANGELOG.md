@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
 - "Save & New" on the task form preselects the topic and the coordinators of the task just saved in the next task form.
 - Saving a task or project without changes no longer shows an "updated" message.
+- Saving a task or project, or the contact people dialog, no longer fails with a "not found" page when a selected contact person was deleted in the meantime.
+- Saving a task or project without any contact people shows a validation error instead of silently keeping the previous contact people.
 
 ## [0.7.0] - 2026-10-09
 

@@ -21,11 +21,9 @@ class Coordinators::SearchesController < ApplicationController
   def create
     authorize! :assign, :coordinator_selections
 
-    if params[:coordinator_ids].present?
-      @coordinators = User.find(params[:coordinator_ids])
-    else
-      @coordinators = [ current_user ]
-    end
+    # Ignores ids of users that no longer exist, e.g. when a user was deleted
+    # while the dialog was open.
+    @coordinators = User.where(id: params[:coordinator_ids]).presence || [ current_user ]
   end
 
   private
