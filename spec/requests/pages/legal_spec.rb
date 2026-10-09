@@ -74,7 +74,6 @@ RSpec.describe "Legal Pages", type: :request do
     context "requires admin authorization" do
       it "rejects unauthenticated users" do
         page
-        expect(page.content.body.to_s).to include("Hello, World!")
         patch legal_path(:imprint), params: { page: page_attributes }
         expect(response).to have_http_status(:not_found)
         expect(page.reload.content.body.to_s).to include("Hello, World!")
@@ -83,7 +82,6 @@ RSpec.describe "Legal Pages", type: :request do
       it "rejects unauthorized users" do
         login_as(editor)
         page
-        expect(page.content.body.to_s).to include("Hello, World!")
         patch legal_path(:imprint), params: { page: page_attributes }
         expect(response).to have_http_status(:not_found)
         expect(page.reload.content.body.to_s).to include("Hello, World!")
@@ -95,7 +93,6 @@ RSpec.describe "Legal Pages", type: :request do
 
       it "allows updating existing legal pages" do
         page
-        expect(page.content.body.to_s).to include("Hello, World!")
         patch legal_path(:imprint), params: { page: page_attributes }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(legal_path(:imprint))

@@ -14,62 +14,29 @@ RSpec.describe "Tasks", type: :request do
     context "when authenticated" do
       before(:each) { login_as(user) }
 
-      it "can view the task list" do
-        get tasks_path
-        expect(response).to have_http_status(:success)
-      end
-
-      it "displays published tasks" do
-        task = create(:task, :published, :with_published_project)
-        get tasks_path
-        expect(response.body).to include(task.title)
-      end
-
-      it "does not display unpublished tasks" do
-        task = create(:task, :not_published)
-        get tasks_path
-        expect(response.body).not_to include(task.title)
-      end
-
-      it "does not display tasks from unpublished projects" do
-        task = create(:task, :published, :with_unpublished_project)
-        get tasks_path
-        expect(response.body).not_to include(task.title)
-      end
-
-      it "shows projects with published tasks in the project filter" do
-        create(
-          :project,
-          :published,
-          :with_published_tasks,
-          title: "Published Project with published tasks"
-        )
+      it "lists and links published tasks from published projects only", :aggregate_failures do
+        task = create(:task, :published, :with_published_project, title: "Published task")
+        create(:task, :not_published, :with_published_project, title: "Unpublished task")
+        create(:task, :published, :with_unpublished_project, title: "Task from an unpublished project")
 
         get tasks_path
 
         expect(response).to have_http_status(:success)
-        expect(response.body).to include("Published Project with published tasks")
+        expect(response.body).to include("Published task", %(href="#{task_path(task)}"))
+        expect(response.body).not_to include("Unpublished task")
+        expect(response.body).not_to include("Task from an unpublished project")
       end
 
-      it "does not show projects with unpublished tasks" do
-        create(
-          :project,
-          :published,
-          :with_unpublished_tasks,
-          title: "Published Project with unpublished tasks"
-        )
+      it "offers only published projects with published tasks in the project filter", :aggregate_failures do
+        create(:project, :published, :with_published_tasks, title: "Project with published tasks")
+        create(:project, :published, :with_unpublished_tasks, title: "Project with unpublished tasks")
+        create(:project, :not_published, title: "Unpublished project")
 
         get tasks_path
 
-        expect(response.body).not_to include("Published Project with unpublished tasks")
-      end
-
-      it "does not show unpublished projects" do
-        create(:project, :not_published, title: "Unpublished Project")
-
-        get tasks_path
-
-        expect(response.body).not_to include("Unpublished Project")
+        expect(response.body).to include("Project with published tasks")
+        expect(response.body).not_to include("Project with unpublished tasks")
+        expect(response.body).not_to include("Unpublished project")
       end
 
       it "does not show the new task link" do
@@ -81,41 +48,6 @@ RSpec.describe "Tasks", type: :request do
 
     context "when authorized as an editor" do
       before(:each) { login_as(editor) }
-
-      it "shows projects with published tasks in the project filter" do
-        create(
-          :project,
-          :published,
-          :with_published_tasks,
-          title: "Published Project with published tasks"
-        )
-
-        get tasks_path
-
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include("Published Project with published tasks")
-      end
-
-      it "does not show projects with unpublished tasks" do
-        create(
-          :project,
-          :published,
-          :with_unpublished_tasks,
-          title: "Published Project with unpublished tasks"
-        )
-
-        get tasks_path
-
-        expect(response.body).not_to include("Published Project with unpublished tasks")
-      end
-
-      it "does not show unpublished projects" do
-        create(:project, :not_published, title: "Unpublished Project")
-
-        get tasks_path
-
-        expect(response.body).not_to include("Unpublished Project")
-      end
 
       it "shows the new task link" do
         get tasks_path
@@ -140,7 +72,26 @@ RSpec.describe "Tasks", type: :request do
     # Requires editor role or above.
     it "authorized users can create tasks" do
       login_as(editor)
-      post tasks_path, params: { task_form: attributes_for(:task) }
+      project = create(:project)
+
+      expect {
+        post tasks_path, params: {
+          task_form: { project_id: project.id, title: "New task", description: "A new task description" },
+          assigned_coordinator_ids: [ editor.id ]
+        }
+      }.to change(Task, :count).by(1)
+
+      task = Task.last
+      expect(response).to redirect_to(task_path(task))
+      expect(task).to have_attributes(title: "New task", project: project, coordinators: [ editor ])
+    end
+
+    it "rejects invalid tasks" do
+      login_as(editor)
+
+      expect {
+        post tasks_path, params: { task_form: attributes_for(:task) }
+      }.not_to change(Task, :count)
       expect(response).to have_http_status(:unprocessable_content)
     end
 
@@ -316,19 +267,21 @@ RSpec.describe "Tasks", type: :request do
       login_as(user)
       task = create(:task, coordinators: [ user ])
 
-      patch task_path(task), params: { task_form: attributes_for(:task) }
+      patch task_path(task), params: { task_form: { title: "Updated title" } }
 
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(task_path(task))
+      expect(task.reload.title).to eq("Updated title")
     end
 
     it "editors can update the task" do
       login_as(editor)
       task = create(:task)
 
-      patch task_path(task), params: { task_form: attributes_for(:task) }
+      patch task_path(task), params: { task_form: { title: "Updated title" } }
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(task_path(task))
+      expect(task.reload.title).to eq("Updated title")
     end
 
     it "shows a notice when the task changed" do
@@ -368,6 +321,7 @@ RSpec.describe "Tasks", type: :request do
       login_as(user)
       delete task_path(published_task)
       expect(response).to have_http_status(:not_found)
+      expect(Task.exists?(published_task.id)).to be(true)
     end
 
     it "coordinators can delete the task" do
@@ -376,6 +330,7 @@ RSpec.describe "Tasks", type: :request do
       delete task_path(task)
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(tasks_path)
+      expect(Task.exists?(task.id)).to be(false)
     end
 
     it "editors can delete the task" do
@@ -384,6 +339,7 @@ RSpec.describe "Tasks", type: :request do
       delete task_path(task)
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(tasks_path)
+      expect(Task.exists?(task.id)).to be(false)
     end
   end
 end

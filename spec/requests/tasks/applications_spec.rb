@@ -14,26 +14,14 @@ RSpec.describe "Tasks::Application", type: :request do
     context "when authenticated" do
       before { sign_in user }
 
-      it "saves the application and returns ok" do
+      it "saves the application, celebrates it with fireworks and limits the comment length in the form", :aggregate_failures do
         expect {
           post task_application_path(task),
             params: { task_application: { comment: "comment" } },
             as: :turbo_stream
         }.to change(TaskApplication, :count).by(1)
         expect(response).to have_http_status(:ok)
-      end
-
-      it "celebrates the application with fireworks" do
-        post task_application_path(task),
-          params: { task_application: { comment: "comment" } },
-          as: :turbo_stream
         expect(response.body).to include('data-controller="fireworks"')
-      end
-
-      it "limits the comment length in the form" do
-        post task_application_path(task),
-          params: { task_application: { comment: "comment" } },
-          as: :turbo_stream
         expect(response.body).to include(%(maxlength="#{TaskApplication::COMMENT_MAX_LENGTH}"))
       end
 
@@ -97,7 +85,7 @@ RSpec.describe "Tasks::Application", type: :request do
 
       context "and the task exists" do
         context "and the application exists" do
-          it "updates the application and returns found" do
+          it "updates the application without celebrating it with fireworks", :aggregate_failures do
             application = create(:task_application, task: task, user: user)
             expect {
               patch task_application_path(task),
@@ -105,13 +93,6 @@ RSpec.describe "Tasks::Application", type: :request do
                     as: :turbo_stream
             }.to change { application.reload.comment }.to("edited comment")
             expect(response).to have_http_status(:ok)
-          end
-
-          it "doesn't celebrate the application with fireworks" do
-            create(:task_application, task: task, user: user)
-            patch task_application_path(task),
-                  params: { task_application: { comment: "edited comment" } },
-                  as: :turbo_stream
             expect(response.body).not_to include('data-controller="fireworks"')
           end
 

@@ -40,7 +40,6 @@ RSpec.describe "Admin User Roles", type: :request do
 
       it "rejects unauthorized users" do
         login_as(editor)
-        expect(user.role).to eq("editor")
 
         patch admin_users_role_path(user), params: { role: "admin" }, as: :turbo_stream
 
@@ -61,7 +60,6 @@ RSpec.describe "Admin User Roles", type: :request do
       end
 
       it "refuses to change the current user's role" do
-        expect(admin.role).to eq("admin")
         patch admin_users_role_path(admin), params: { role: "editor" }, as: :turbo_stream
 
         expect(response).to have_http_status(:success)
@@ -69,9 +67,7 @@ RSpec.describe "Admin User Roles", type: :request do
       end
 
       it "rejects an invalid role" do
-        expect {
-          patch admin_users_role_path(user), params: { role: "invalid" }, as: :turbo_stream
-        }.not_to raise_error
+        patch admin_users_role_path(user), params: { role: "invalid" }, as: :turbo_stream
 
         expect(response).to have_http_status(:unprocessable_content)
         expect(user.reload.role).to eq("editor")

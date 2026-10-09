@@ -41,20 +41,17 @@ class UnskippedUserReturnLocationController < ActionController::Base
 end
 
 RSpec.describe UserReturnLocation, type: :request do
-  before do
-    Rails.application.routes.disable_clear_and_finalize = true
-    Rails.application.routes.clear!
+  around do |example|
+    with_routing do |routes|
+      routes.draw do
+        root to: "user_return_location#index"
+        resources :user_return_location, only: [ :index, :create, :update, :destroy ]
+        resources :skip_user_return_location, only: [ :index ]
+        resources :unskipped_user_return_location, only: [ :index ]
+      end
 
-    Rails.application.routes.draw do
-      root to: "user_return_location#index"
-      resources :user_return_location, only: [ :index, :create, :update, :destroy ]
-      resources :skip_user_return_location, only: [ :index ]
-      resources :unskipped_user_return_location, only: [ :index ]
+      example.run
     end
-  end
-
-  after do
-    Rails.application.reload_routes!
   end
 
   describe "when requesting a resource" do
@@ -66,24 +63,17 @@ RSpec.describe UserReturnLocation, type: :request do
     end
 
     context "with other requests" do
-      it "does not store the user's request location for POST requests" do
-        post user_return_location_index_path
-        expect(session[:user_return_to]).to be_nil
-      end
-
-      it "does not store the user's request location for PATCH requests" do
-        patch user_return_location_index_path
-        expect(session[:user_return_to]).to be_nil
-      end
-
-      it "does not store the user's request location for PUT requests" do
-        put user_return_location_index_path
-        expect(session[:user_return_to]).to be_nil
-      end
-
-      it "does not store the user's request location for DELETE requests" do
-        delete user_return_location_index_path
-        expect(session[:user_return_to]).to be_nil
+      it "does not store the user's request location", :aggregate_failures do
+        {
+          post: user_return_location_index_path,
+          patch: user_return_location_path(1),
+          put: user_return_location_path(1),
+          delete: user_return_location_path(1)
+        }.each do |method, path|
+          public_send(method, path)
+          expect(response).to have_http_status(:ok)
+          expect(session[:user_return_to]).to be_nil, "expected no location stored for #{method.upcase}"
+        end
       end
     end
 

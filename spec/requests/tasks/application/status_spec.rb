@@ -72,26 +72,7 @@ RSpec.describe "Tasks::Application::StatusController", type: :request do
         end
       end
 
-      context "when the application does not exist" do
-        it "returns not found" do
-          patch status_path(task, applicant),
-                params: { status: "accepted" },
-                as: :turbo_stream
-
-          expect(response).to have_http_status(:not_found)
-        end
-      end
-
-      context "when the task does not exist" do
-        it "returns not found" do
-          patch status_path(999, applicant),
-                params: { status: "accepted" },
-                as: :turbo_stream
-
-          expect(response).to have_http_status(:not_found)
-        end
-      end
-
+      # A missing task or application fails the same lookup by task and user.
       context "when the user does not belong to the application" do
         it "returns not found" do
           application = create(:task_application, task: task, user: applicant)

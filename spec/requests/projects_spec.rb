@@ -15,46 +15,17 @@ RSpec.describe "Projects", type: :request do
     context "authenticated users" do
       before(:each) { login_as(user) }
 
-      it "can access the projects overview" do
-        get projects_path
-        expect(response).to have_http_status(:success)
-      end
-
-      it "does not show unpublished projects to users" do
-        create(:project, :not_published, title: "Unpublished Project")
+      it "shows published projects with published tasks only", :aggregate_failures do
+        create(:project, :published, :with_published_tasks, title: "Project with published tasks")
+        create(:project, :published, :with_unpublished_tasks, title: "Project with unpublished tasks")
+        create(:project, :not_published, title: "Unpublished project")
 
         get projects_path
 
         expect(response).to have_http_status(:success)
-        expect(response.body).not_to include("Unpublished Project")
-      end
-
-      it "does not show published projects without published tasks to users" do
-        create(
-          :project,
-          :published,
-          :with_unpublished_tasks,
-          title: "Published Project with unpublished tasks"
-        )
-
-        get projects_path
-
-        expect(response).to have_http_status(:success)
-        expect(response.body).not_to include("Published Project with unpublished tasks")
-      end
-
-      it "shows published projects with published tasks to users" do
-        create(
-          :project,
-          :published,
-          :with_published_tasks,
-          title: "Published Project with published tasks"
-        )
-
-        get projects_path
-
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include("Published Project with published tasks")
+        expect(response.body).to include("Project with published tasks")
+        expect(response.body).not_to include("Project with unpublished tasks")
+        expect(response.body).not_to include("Unpublished project")
       end
 
       it "does not show the new project link to regular users" do
@@ -69,27 +40,6 @@ RSpec.describe "Projects", type: :request do
         login_as(editor)
       end
 
-      it "does not show unpublished projects" do
-        create(:project, :not_published, title: "Unpublished Project")
-
-        get projects_path
-
-        expect(response.body).not_to include("Unpublished Project")
-      end
-
-      it "does not show published projects without published tasks" do
-        create(
-          :project,
-          :published,
-          :with_unpublished_tasks,
-          title: "Published Project with unpublished tasks"
-        )
-
-        get projects_path
-
-        expect(response.body).not_to include("Published Project with unpublished tasks")
-      end
-
       it "shows the new project link" do
         get projects_path
 
@@ -99,15 +49,13 @@ RSpec.describe "Projects", type: :request do
   end
 
   describe "GET /projects/:id" do
+    it "redirects visitors to the login page" do
+      get project_path(create(:project, :published, :with_published_tasks))
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
     context "published project with published tasks" do
       let!(:published_project) { create(:project, :published, :with_published_tasks) }
-
-      context "as a visitor" do
-        it "redirects to the login page" do
-          get project_path(published_project)
-          expect(response).to redirect_to(new_user_session_path)
-        end
-      end
 
       context "as a user" do
         it "loads the project detail page" do
@@ -129,13 +77,6 @@ RSpec.describe "Projects", type: :request do
     context "published project - no published tasks" do
       let!(:published_project) { create(:project, :published) }
 
-      context "as a visitor" do
-        it "redirects to the login page" do
-          get project_path(published_project)
-          expect(response).to redirect_to(new_user_session_path)
-        end
-      end
-
       context "as a user" do
         it "responds with a 404" do
           login_as(user)
@@ -146,7 +87,7 @@ RSpec.describe "Projects", type: :request do
 
       context "as a coordinator" do
         let(:coordinator) { create(:user) }
-        let(:project) { create(:project, coordinators: [ coordinator ]) }
+        let(:project) { create(:project, :published, coordinators: [ coordinator ]) }
 
         it "loads the project detail page" do
           login_as(coordinator)
@@ -166,13 +107,6 @@ RSpec.describe "Projects", type: :request do
 
     context "unpublished project" do
       let!(:unpublished_project) { create(:project) }
-
-      context "as a visitor" do
-        it "redirects to the login page" do
-          get project_path(unpublished_project)
-          expect(response).to redirect_to(new_user_session_path)
-        end
-      end
 
       context "as a user" do
         it "responds with a 404" do
@@ -239,7 +173,7 @@ RSpec.describe "Projects", type: :request do
     end
 
     context "as a user" do
-      it "redirects to the projects index" do
+      it "responds with not found" do
         login_as(user)
         get edit_project_path(project)
         expect(response).to have_http_status(:not_found)
@@ -285,7 +219,25 @@ RSpec.describe "Projects", type: :request do
     context "as an editor" do
       it "creates a new project" do
         login_as(editor)
-        post projects_path, params: { project_form: attributes_for(:project) }
+
+        expect {
+          post projects_path, params: {
+            project_form: { title: "New project", description: "A new project description" },
+            assigned_coordinator_ids: [ editor.id ]
+          }
+        }.to change(Project, :count).by(1)
+
+        project = Project.last
+        expect(response).to redirect_to(project_path(project))
+        expect(project).to have_attributes(title: "New project", coordinators: [ editor ])
+      end
+
+      it "rejects invalid projects" do
+        login_as(editor)
+
+        expect {
+          post projects_path, params: { project_form: attributes_for(:project) }
+        }.not_to change(Project, :count)
         expect(response).to have_http_status(:unprocessable_content)
       end
 
@@ -322,18 +274,20 @@ RSpec.describe "Projects", type: :request do
 
       it "updates the project" do
         login_as(coordinator)
-        patch project_path(project), params: { project_form: attributes_for(:project) }
+        patch project_path(project), params: { project_form: { title: "Updated title" } }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(project_path(project))
+        expect(project.reload.title).to eq("Updated title")
       end
     end
 
     context "as an editor" do
       it "updates the project" do
         login_as(editor)
-        patch project_path(project), params: { project_form: attributes_for(:project) }
+        patch project_path(project), params: { project_form: { title: "Updated title" } }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(project_path(project))
+        expect(project.reload.title).to eq("Updated title")
       end
 
       it "shows a notice when the project changed" do
@@ -374,6 +328,7 @@ RSpec.describe "Projects", type: :request do
         login_as(user)
         delete project_path(project)
         expect(response).to have_http_status(:not_found)
+        expect(Project.exists?(project.id)).to be(true)
       end
     end
 
@@ -386,6 +341,7 @@ RSpec.describe "Projects", type: :request do
         delete project_path(project)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(projects_path)
+        expect(Project.exists?(project.id)).to be(false)
       end
     end
 
@@ -395,6 +351,7 @@ RSpec.describe "Projects", type: :request do
         delete project_path(project)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(projects_path)
+        expect(Project.exists?(project.id)).to be(false)
       end
     end
   end
