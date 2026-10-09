@@ -97,12 +97,56 @@ RSpec.describe ProjectForm do
       expect(form).not_to be_saved_changes
     end
 
+    it "records no changes after a failed save" do
+      form.title = "A changed title"
+      form.save
+      form.title = ""
+
+      expect(form.save).to be(false)
+      expect(form).not_to be_saved_changes
+    end
+
     it "replaces the coordinators" do
       other = create(:user)
       form.coordinator_ids = [ other.id.to_s ]
 
       expect(form.save).to be(true)
       expect(project.reload.coordinators).to eq([ other ])
+    end
+  end
+
+  describe "#publish=" do
+    it "publishes an unpublished project" do
+      form = described_class.new(create(:project, :not_published))
+
+      form.publish = "1"
+
+      expect(form.project).to be_published
+    end
+
+    it "keeps the publication date of a published project" do
+      project = create(:project, :published)
+      form = described_class.new(project)
+
+      expect { form.publish = "1" }.not_to change(project, :published_at)
+    end
+
+    it "unpublishes a published project" do
+      form = described_class.new(create(:project, :published))
+
+      form.publish = "0"
+
+      expect(form.project).not_to be_published
+    end
+  end
+
+  describe "#publish" do
+    it "is true for a published project" do
+      expect(described_class.new(create(:project, :published)).publish).to be(true)
+    end
+
+    it "is false for an unpublished project" do
+      expect(described_class.new(create(:project, :not_published)).publish).to be(false)
     end
   end
 end
