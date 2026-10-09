@@ -150,6 +150,44 @@ RSpec.describe "Tasks", type: :request do
 
       expect(response).to have_http_status(:bad_request)
     end
+
+    context "when saving and creating a new task" do
+      let(:project) { create(:project, coordinators: [ create(:user, name: "Project Coordinator") ]) }
+      let(:task_coordinator) { create(:user, name: "Task Coordinator") }
+      let(:params) do
+        {
+          task_form: {
+            project_id: project.id,
+            title: "Task title",
+            description: "Some task description that is long enough!",
+            submit_type: "save_and_new"
+          },
+          assigned_coordinator_ids: [ editor.id, task_coordinator.id ]
+        }
+      end
+
+      before { login_as(editor) }
+
+      it "redirects to a new task preset with the project and the task's coordinators" do
+        post tasks_path, params: params
+
+        expect(response).to redirect_to(
+          new_task_from_preset_path(
+            project_id: project.id,
+            coordinator_ids: Task.last.coordinator_ids.join("-")
+          )
+        )
+        expect(Task.last.coordinator_ids).to contain_exactly(editor.id, task_coordinator.id)
+      end
+
+      it "renders the preset form with the task's coordinators" do
+        post tasks_path, params: params
+        follow_redirect!
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Task Coordinator")
+      end
+    end
   end
 
   describe "GET /tasks/new" do
