@@ -39,6 +39,24 @@ RSpec.describe User, type: :model do
         expect(user.avatar_url).to eq("https://example.com/avatar/john.doe")
       end
     end
+
+    context "when assigning the role" do
+      let(:rocketchat_admin_auth) { auth.merge(extra: { raw_info: { roles: [ "admin" ] } }) }
+
+      it "makes the first Rocket.Chat admin an admin" do
+        expect(User.from_omniauth(rocketchat_admin_auth)).to be_admin
+      end
+
+      it "makes Rocket.Chat admins regular users once an admin exists" do
+        create(:user, :admin)
+
+        expect(User.from_omniauth(rocketchat_admin_auth)).to be_user
+      end
+
+      it "makes other users regular users" do
+        expect(User.from_omniauth(auth)).to be_user
+      end
+    end
   end
 
   describe "devise modules" do
