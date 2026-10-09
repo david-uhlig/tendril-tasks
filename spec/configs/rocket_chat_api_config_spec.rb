@@ -5,6 +5,10 @@ require "rails_helper"
 RSpec.describe RocketChatApiConfig, type: :config do
   subject(:config) { described_class.new }
 
+  describe "#host" do
+    it_behaves_like "a config with a Rocket.Chat host"
+  end
+
   describe "#url" do
     it "returns a well-formed URL with https by default" do
       config.host = "example.com"

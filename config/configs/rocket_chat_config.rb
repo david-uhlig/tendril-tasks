@@ -23,15 +23,13 @@ class RocketChatConfig < BaseConfig
     [ host, client_id, client_secret ].all?(&:present?)
   end
 
-  def http_host
-    if Rails.env == "test"
-      "http://example.com"
-    elsif host.blank?
-      nil
-    elsif host.starts_with?("http://", "https://")
-      host
-    else
-      "https://#{host}"
-    end
+  # Returns the workspace URL, e.g. "https://chat.example.com". Adds `https://`
+  # when the host was configured without a scheme.
+  def host
+    value = super
+    return value if value.blank?
+
+    value = value.delete_suffix("/")
+    value.match?(%r{\Ahttps?://}i) ? value : "https://#{value}"
   end
 end

@@ -9,6 +9,10 @@ RSpec.describe RocketChatConfig, type: :config do
                         client_secret: "client-secret")
   end
 
+  describe "#host" do
+    it_behaves_like "a config with a Rocket.Chat host"
+  end
+
   describe "#configured?" do
     it "returns true when host, client ID and client secret are present" do
       expect(config).to be_configured
