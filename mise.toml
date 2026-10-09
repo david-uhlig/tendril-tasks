@@ -9,7 +9,7 @@ zizmor = "latest"
 description = "Run the continuous integration suite in parallel."
 run = [
     { task = "ci:setup" },
-    { tasks = ["audit", "brakeman", "rubocop", "herb", "test:rspec"] },
+    { tasks = ["audit", "brakeman", "rubocop", "herb", "versions", "test:rspec"] },
     { task = "test:seeds" }
 ]
 
@@ -21,6 +21,7 @@ run = [
     { task = "brakeman" },
     { task = "rubocop" },
     { task = "herb" },
+    { task = "versions" },
     { task = "test:rspec" },
     { task = "test:seeds" }
 ]
@@ -60,6 +61,10 @@ run = "bin/rubocop -a"
 [tasks."herb"]
 description = "Style: ERB"
 run = ["npx herb-lint", "npx herb-format --check"]
+
+[tasks."versions"]
+description = "Check that gems and their npm packages are locked to the same version"
+run = "bin/check-gem-npm-versions"
 
 [tasks."herb:fix"]
 description = "Style: ERB (auto fix and format)"
