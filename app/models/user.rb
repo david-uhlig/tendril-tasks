@@ -70,7 +70,7 @@ class User < ApplicationRecord
     # @param auth [OmniAuth::AuthHash] The authentication hash containing user information.
     # @return [Symbol] The role of the user, either :user or :admin.
     def determine_role(auth)
-      return :user if User.where(role: :admin).count > 0
+      return :user if User.admin.exists?
       return :admin if auth.dig(:extra, :raw_info, :roles)&.include?("admin")
 
       :user

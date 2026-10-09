@@ -48,8 +48,7 @@ module Gustwave
               sm: "h-9 px-3 py-2 text-sm font-medium",
               md: "h-10 px-5 py-2.5 text-sm font-medium",
               lg: "h-12 px-5 py-3 text-base font-medium",
-              # TODO revert to h-13 (52px) when migrated to Tailwind 4
-              xl: "h-14 px-6 py-3.5 text-base font-medium"
+              xl: "h-13 px-6 py-3.5 text-base font-medium"
             }
 
       # Render a square button when no text or content block was given
