@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Saving a task or project, or the contact people dialog, no longer fails with a "not found" page when a selected contact person was deleted in the meantime.
 - Saving a task or project without any contact people shows a validation error instead of silently keeping the previous contact people.
 - Topics are listed by their most recently published task. Tasks scheduled for later no longer move their topic to the top.
+- Content Security Policy sources set in `config.x.content_security_policy` are applied, and space-separated sources are split into separate sources.
 
 ## [0.7.0] - 2026-10-09
 
