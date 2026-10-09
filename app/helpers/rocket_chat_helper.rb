@@ -2,7 +2,6 @@
 
 module RocketChatHelper
   ROCKET_CHAT_PROTOCOL = "rocketchat://"
-  ROCKET_CHAT_HOST = RocketChatConfig.http_host
 
   # Sign in buttons start the Rocket.Chat login when it is configured.
   # Otherwise, they lead to the sign in page, which offers the development sign
@@ -18,7 +17,7 @@ module RocketChatHelper
   def rocketchat_link(to:)
     return "#" unless to.is_a?(User)
 
-    "#{ROCKET_CHAT_HOST}/direct/#{to.username}"
+    "#{RocketChatConfig.host}/direct/#{to.username}"
   end
 
   def rocketchat_applink(to:)
@@ -26,6 +25,6 @@ module RocketChatHelper
 
     room_id = [ to.uid, current_user.uid ].sort.join("")
 
-    "#{ROCKET_CHAT_PROTOCOL}room?host=#{ROCKET_CHAT_HOST}&rid=#{room_id}&path=direct/#{to.username}"
+    "#{ROCKET_CHAT_PROTOCOL}room?host=#{RocketChatConfig.host}&rid=#{room_id}&path=direct/#{to.username}"
   end
 end
