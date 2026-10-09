@@ -70,6 +70,20 @@ RSpec.describe "Coordinator Searches", type: :request do
         expect(response).to have_http_status(:success)
         expect(response.body).to include(user.name)
       end
+
+      it "ignores ids of users that no longer exist" do
+        login_as(editor)
+        post coordinators_searches_path, params: { coordinator_ids: [ user.id, 0 ] }, as: :turbo_stream
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(user.name)
+      end
+
+      it "assigns the current user when no coordinator is selected" do
+        login_as(editor)
+        post coordinators_searches_path, params: { coordinator_ids: [ 0 ] }, as: :turbo_stream
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(editor.name)
+      end
     end
   end
 end
