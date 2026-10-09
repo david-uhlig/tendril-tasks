@@ -16,7 +16,7 @@ class ProjectForm
   end
 
   def coordinator_ids=(ids)
-    ids = Array(ids).compact_blank
+    ids = Array(ids).compact_blank.map(&:to_i)
     unless project.coordinator_ids.sort == ids.sort
       @unsaved_coordinators = User.find(ids)
     end
@@ -67,7 +67,8 @@ class ProjectForm
   end
 
   def changed?
-    project.changed? || @unsaved_coordinators.present?
+    # Rich text changes aren't tracked by `changed?` of the parent record.
+    project.changed? || project.description&.changed? || @unsaved_coordinators.present?
   end
 
   def valid?

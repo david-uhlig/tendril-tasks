@@ -17,7 +17,7 @@ class TaskForm
   end
 
   def coordinator_ids=(ids)
-    ids = Array(ids).compact_blank
+    ids = Array(ids).compact_blank.map(&:to_i)
     unless task.coordinator_ids.sort == ids.sort
       @unsaved_coordinators = User.find(ids)
     end
@@ -76,7 +76,8 @@ class TaskForm
   end
 
   def changed?
-    task.changed? || @unsaved_coordinators.present?
+    # Rich text changes aren't tracked by `changed?` of the parent record.
+    task.changed? || task.description&.changed? || @unsaved_coordinators.present?
   end
 
   def valid?
