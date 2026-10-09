@@ -148,6 +148,13 @@ RSpec.describe Task, type: :model do
       expect(task.published_at).to be >= Time.zone.now - 10.seconds
       expect(task.published_at).to be <= Time.zone.now + 10.seconds
     end
+
+    it "keeps the publication date of a published task" do
+      published_at = 1.week.ago.change(usec: 0)
+      task = build(:task, published_at: published_at)
+      task.publish
+      expect(task.published_at).to eq(published_at)
+    end
   end
 
   describe "#unpublish" do
