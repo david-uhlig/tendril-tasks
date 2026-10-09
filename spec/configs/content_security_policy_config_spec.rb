@@ -37,6 +37,40 @@ describe ContentSecurityPolicyConfig, type: :config do
     end
   end
 
+  context "when configured through `config.x.content_security_policy`" do
+    before do
+      allow(Rails.application.config.x).to receive(:content_security_policy).and_return(
+        ActiveSupport::OrderedOptions[script_src: "https://x.example.com"]
+      )
+    end
+
+    it "reads the directives" do
+      expect(subject.script_src).to eq([ "https://x.example.com" ])
+    end
+
+    it "prefers credentials" do
+      allow(Rails.application.credentials).to receive(:config).and_return(
+        content_security_policy: { script_src: "https://credentials.example.com" }
+      )
+      expect(subject.script_src).to eq([ "https://credentials.example.com" ])
+    end
+
+    it "prefers ENV-vars" do
+      with_env("CSP_SCRIPT_SRC" => "https://env.example.com") do
+        expect(described_class.new.script_src).to eq([ "https://env.example.com" ])
+      end
+    end
+  end
+
+  context "when configured through credentials" do
+    it "reads the directives from the `content_security_policy` key" do
+      allow(Rails.application.credentials).to receive(:config).and_return(
+        content_security_policy: { script_src: "https://credentials.example.com" }
+      )
+      expect(subject.script_src).to eq([ "https://credentials.example.com" ])
+    end
+  end
+
   describe "#sources" do
     context "when the directive's value is nil" do
       it "returns an empty array" do
@@ -51,13 +85,19 @@ describe ContentSecurityPolicyConfig, type: :config do
         config.default_src = [ "https://one.example.com", "https://two.example.com" ]
         expect(config.sources(:default_src)).to eq([ "https://one.example.com", "https://two.example.com" ])
       end
+
+      it "splits space-separated sources" do
+        config = described_class.new
+        config.default_src = [ "https://one.example.com https://two.example.com" ]
+        expect(config.sources(:default_src)).to eq([ "https://one.example.com", "https://two.example.com" ])
+      end
     end
 
     context "when the directive's value is a String" do
-      it "returns the string" do
+      it "returns the space-separated sources" do
         config = described_class.new
-        config.default_src = "https://one.example.com"
-        expect(config.sources(:default_src)).to eq("https://one.example.com")
+        config.default_src = "https://one.example.com https://two.example.com"
+        expect(config.sources(:default_src)).to eq([ "https://one.example.com", "https://two.example.com" ])
       end
     end
 
