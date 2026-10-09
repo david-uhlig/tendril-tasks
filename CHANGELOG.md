@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.7.0] - 2026-10-09
 
 ### Added
 - Celebrate a user's contribution with a short fireworks animation when they sign up for a task.
@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Replace the Trix rich text editor with Lexxy. Existing content stays as it is. Headings are limited to four levels (H1–H4); existing H5 and H6 headings are still displayed.
+- Upgrade dependencies: Tailwind CSS 4, tailwind_merge 1.5, Flowbite 3.1, Lexxy 1.0.
 
 ### Fixed
 - Notifications stay visible after scrolling down the page.
@@ -146,7 +147,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.0...v0.5.1
