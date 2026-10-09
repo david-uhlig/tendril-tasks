@@ -331,6 +331,24 @@ RSpec.describe "Tasks", type: :request do
       expect(response).to redirect_to(task_path(task))
     end
 
+    it "shows a notice when the task changed" do
+      login_as(editor)
+      task = create(:task)
+
+      patch task_path(task), params: { task_form: { title: "A changed title" } }
+
+      expect(flash[:notice]).to be_present
+    end
+
+    it "shows no notice when the task didn't change" do
+      login_as(editor)
+      task = create(:task)
+
+      patch task_path(task), params: { task_form: { title: task.title } }
+
+      expect(flash[:notice]).to be_blank
+    end
+
     it "responds with bad request when the task form is missing" do
       login_as(editor)
       task = create(:task)

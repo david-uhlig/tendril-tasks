@@ -4,7 +4,6 @@ class ProjectForm
   include ActiveModel::Model
 
   attr_reader :project
-  attr_accessor :submit_type
 
   delegate :title, :title=,
            :description, :description=,
@@ -50,16 +49,18 @@ class ProjectForm
     @coordinator_options ||= User.select(:id, :name, :avatar_url)
                                  .excluding(coordinators)
                                  .limit(Coordinators::SearchesController::NUM_SEARCH_RESULTS)
-                                 .presence
-    @coordinator_options ||= []
+                                 .to_a
   end
 
   def save
+    has_changes = changed?
+
     Project.transaction do
       # Update association records first so validations on them on the parent model have an effect
       project.coordinators = @unsaved_coordinators if coordinators_changed?
       project.save!
       @unsaved_coordinators = nil
+      @saved_changes = has_changes
 
       true
     end
@@ -75,6 +76,12 @@ class ProjectForm
   def changed?
     # Rich text changes aren't tracked by `changed?` of the parent record.
     project.changed? || project.description&.changed? || coordinators_changed?
+  end
+
+  # True when the last `save` changed the record, its rich text or its
+  # coordinators.
+  def saved_changes?
+    @saved_changes == true
   end
 
   def valid?

@@ -336,6 +336,20 @@ RSpec.describe "Projects", type: :request do
         expect(response).to redirect_to(project_path(project))
       end
 
+      it "shows a notice when the project changed" do
+        login_as(editor)
+        patch project_path(project), params: { project_form: { title: "A changed title" } }
+
+        expect(flash[:notice]).to be_present
+      end
+
+      it "shows no notice when the project didn't change" do
+        login_as(editor)
+        patch project_path(project), params: { project_form: { title: project.title } }
+
+        expect(flash[:notice]).to be_blank
+      end
+
       it "responds with bad request when the project form is missing" do
         login_as(editor)
         patch project_path(project)

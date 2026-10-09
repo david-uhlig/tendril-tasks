@@ -76,6 +76,27 @@ RSpec.describe TaskForm do
       expect(task.reload.coordinators).to eq([ coordinator ])
     end
 
+    it "records changes to the attributes" do
+      form.title = "A changed title"
+
+      expect(form.save).to be(true)
+      expect(form).to be_saved_changes
+    end
+
+    it "records changes to the coordinators" do
+      form.coordinator_ids = [ create(:user).id.to_s ]
+
+      expect(form.save).to be(true)
+      expect(form).to be_saved_changes
+    end
+
+    it "records no changes when nothing changed" do
+      form.assign_attributes(title: task.title, coordinator_ids: [ coordinator.id.to_s ])
+
+      expect(form.save).to be(true)
+      expect(form).not_to be_saved_changes
+    end
+
     it "replaces the coordinators" do
       other = create(:user)
       form.coordinator_ids = [ other.id.to_s ]
