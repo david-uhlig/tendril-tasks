@@ -96,7 +96,7 @@ RSpec.describe Project, type: :model do
   end
 
   describe "#publish" do
-    it "publishes the task" do
+    it "publishes the project" do
       project = build(:project, :not_published)
       project.publish
       expect(project).to be_published
@@ -107,6 +107,13 @@ RSpec.describe Project, type: :model do
       project.publish
       expect(project.published_at).to be >= Time.zone.now - 10.seconds
       expect(project.published_at).to be <= Time.zone.now + 10.seconds
+    end
+
+    it "keeps the publication date of a published project" do
+      published_at = 1.week.ago.change(usec: 0)
+      project = build(:project, published_at: published_at)
+      project.publish
+      expect(project.published_at).to eq(published_at)
     end
   end
 
@@ -151,7 +158,7 @@ RSpec.describe Project, type: :model do
   end
 
   describe "#unpublish" do
-    it "unpublishes the task" do
+    it "unpublishes the project" do
       project = build(:project, :published)
       project.unpublish
       expect(project).not_to be_published

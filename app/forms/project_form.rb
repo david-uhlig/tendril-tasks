@@ -30,7 +30,7 @@ class ProjectForm
     should_publish = ActiveModel::Type::Boolean.new.cast(checkbox_value)
 
     if should_publish
-      project.publish unless project.published?
+      project.publish
     else
       project.unpublish
     end

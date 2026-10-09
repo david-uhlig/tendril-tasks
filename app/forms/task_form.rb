@@ -31,7 +31,7 @@ class TaskForm
     should_publish = ActiveModel::Type::Boolean.new.cast(checkbox_value)
 
     if should_publish
-      task.publish unless task.published?
+      task.publish
     else
       task.unpublish
     end
