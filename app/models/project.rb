@@ -26,8 +26,19 @@ class Project < ApplicationRecord
     where(published_at: ...Time.zone.now)
   }
 
+  # Projects with published tasks, ordered by their most recently published task
+  #
+  # Orders by a correlated subquery instead of joining the tasks, which would
+  # require `DISTINCT` combined with ordering by a column outside the select
+  # list. Only SQLite accepts that.
   scope :order_by_most_recently_published_task, -> {
-    joins(:tasks).order(tasks: { published_at: :desc }).distinct
+    tasks = Task.arel_table
+    latest_published_at = Task.is_published
+                              .where(tasks[:project_id].eq(arel_table[:id]))
+                              .select(tasks[:published_at].maximum)
+
+    where(id: Task.is_published.select(:project_id))
+      .order(Arel::Nodes::Grouping.new(latest_published_at.arel).desc)
   }
 
   # Projects without coordinators
