@@ -51,7 +51,7 @@ class TasksController < ApplicationController
     if @task_form.save
       success_msg = toast_message_for(@task_form.task, :create)
       if @task_form.submit_type == "save_and_new"
-        redirect_to new_task_from_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.project.coordinators.join("-")), notice: success_msg
+        redirect_to new_task_from_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.task.coordinator_ids.join("-")), notice: success_msg
       else
         redirect_to task_path(@task_form.task), notice: success_msg
       end
