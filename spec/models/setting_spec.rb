@@ -78,6 +78,11 @@ RSpec.describe Setting, type: :model do
         expect(Setting.footer_sitemap).to eq({})
       end
 
+      it "returns a fresh default each time" do
+        Setting.footer_sitemap["categories"] = []
+        expect(Setting.footer_sitemap).to eq({})
+      end
+
       it "returns the footer sitemap" do
         create(:setting, key: "footer_sitemap", value: sitemap)
         expect(Setting.footer_sitemap).to eq(sitemap)
@@ -182,6 +187,14 @@ RSpec.describe Setting, type: :model do
         Setting.display_brand_name = true
         expect(Setting.display_brand_name?).to be_truthy
       end
+
+      it "casts form values to booleans" do
+        Setting.display_brand_name = "0"
+        expect(Setting.display_brand_name?).to be(false)
+
+        Setting.display_brand_name = "1"
+        expect(Setting.display_brand_name?).to be(true)
+      end
     end
 
     context ".brand_name" do
@@ -199,6 +212,11 @@ RSpec.describe Setting, type: :model do
       it "creates a new setting with the brand name" do
         Setting.brand_name = "Example"
         expect(Setting.brand_name).to eq("Example")
+      end
+
+      it "casts the brand name to a string" do
+        Setting.brand_name = 42
+        expect(Setting.brand_name).to eq("42")
       end
 
       it "accepts a brand name of up to 100 characters" do

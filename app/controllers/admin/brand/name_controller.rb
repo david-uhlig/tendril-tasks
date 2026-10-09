@@ -6,7 +6,7 @@ module Admin
       def update
         Setting.transaction do
           Setting.brand_name = params[:name]
-          Setting.display_brand_name = ActiveModel::Type::Boolean.new.cast(params[:display_name])
+          Setting.display_brand_name = params[:display_name]
         end
       rescue ActiveRecord::RecordInvalid => error
         @errors = error.record.errors
