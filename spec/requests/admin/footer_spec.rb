@@ -76,6 +76,18 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(response).to have_http_status(:found)
       expect(Setting.footer_copyright).to eq("© Example e.V.")
     end
+
+    it "keeps the copyright notice and shows an error when it is too long" do
+      Setting.footer_copyright = "original"
+
+      login_as(admin)
+      patch admin_footer_copyright_path, params: { copyright_notice: "a" * 256 }
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(response.body).to include(I18n.t("activerecord.errors.models.setting.attributes.value.footer_copyright_too_long", count: 255))
+      expect(response.body).not_to include(I18n.t("admin.footer.copyright.update.update.notice"))
+      expect(Setting.footer_copyright).to eq("original")
+    end
   end
 
   describe "PATCH /admin/footer/sitemap" do

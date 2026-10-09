@@ -37,5 +37,26 @@ RSpec.describe "Admin Brand Name", type: :request do
         expect(Setting.display_brand_name?).to be(false)
       end
     end
+
+    context "when the brand name is too long" do
+      before do
+        Setting.brand_name = "Acme"
+        login_as(admin)
+        patch admin_brand_name_path,
+          params: { name: "a" * 101, display_name: "0" },
+          as: :turbo_stream
+      end
+
+      it "responds with an error" do
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(response.body).to include(I18n.t("activerecord.errors.models.setting.attributes.value.brand_name_too_long", count: 100))
+        expect(response.body).not_to include(I18n.t("notification.saved"))
+      end
+
+      it "keeps the brand name and the display preference" do
+        expect(Setting.brand_name).to eq("Acme")
+        expect(Setting.display_brand_name?).to be(true)
+      end
+    end
   end
 end

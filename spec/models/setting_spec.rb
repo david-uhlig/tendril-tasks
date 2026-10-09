@@ -109,6 +109,13 @@ RSpec.describe Setting, type: :model do
         Setting.footer_copyright = "© 2021 Example"
         expect(Setting.footer_copyright).to eq("© 2021 Example")
       end
+
+      it "raises and keeps the footer copyright when it is too long" do
+        Setting.footer_copyright = "© 2021 Example"
+
+        expect { Setting.footer_copyright = "a" * 256 }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(Setting.footer_copyright).to eq("© 2021 Example")
+      end
     end
   end
 
@@ -191,6 +198,18 @@ RSpec.describe Setting, type: :model do
     context ".brand_name=" do
       it "creates a new setting with the brand name" do
         Setting.brand_name = "Example"
+        expect(Setting.brand_name).to eq("Example")
+      end
+
+      it "accepts a brand name of up to 100 characters" do
+        Setting.brand_name = "a" * 100
+        expect(Setting.brand_name).to eq("a" * 100)
+      end
+
+      it "raises and keeps the brand name when it is too long" do
+        Setting.brand_name = "Example"
+
+        expect { Setting.brand_name = "a" * 101 }.to raise_error(ActiveRecord::RecordInvalid)
         expect(Setting.brand_name).to eq("Example")
       end
     end
