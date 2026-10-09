@@ -8,10 +8,6 @@ class Setting < ApplicationRecord
             content_type: %i[png jpg],
             size: { less_than: 500.kilobytes },
             dimension: { min: 1..1, max: 2048..2048 }
-  validates :value, length: { maximum: 100, too_long: :brand_name_too_long },
-            if: -> { key == "brand_name" }
-  validates :value, length: { maximum: 255, too_long: :footer_copyright_too_long },
-            if: -> { key == "footer_copyright" }
 
   class << self
     def remove(key)
@@ -20,22 +16,6 @@ class Setting < ApplicationRecord
 
     def to_h
       pluck(:key, :value).to_h
-    end
-
-    def footer_sitemap
-      get("footer_sitemap")&.value || {}
-    end
-
-    def footer_sitemap=(value)
-      set("footer_sitemap", value: value)
-    end
-
-    def footer_copyright
-      get("footer_copyright")&.value || ""
-    end
-
-    def footer_copyright=(value)
-      set("footer_copyright", value: value)
     end
 
     def brand_logo
@@ -49,24 +29,40 @@ class Setting < ApplicationRecord
       setting
     end
 
-    def display_brand_name?
-      value = get("display_brand_name")&.value
-      value.nil? || ActiveRecord::Type::Boolean.new.cast(value)
-    end
-
-    def display_brand_name=(value)
-      set("display_brand_name", value: value)
-    end
-
-    def brand_name
-      get("brand_name")&.value
-    end
-
-    def brand_name=(value)
-      set("brand_name", value: value)
-    end
-
     private
+
+    # Declares a setting with a reader and a writer, e.g. `Setting.brand_name`
+    # and `Setting.brand_name = "Acme"`. Boolean settings also get a predicate,
+    # e.g. `Setting.display_brand_name?`.
+    #
+    # @param key [Symbol] The setting's key.
+    # @param type [Symbol, nil] ActiveModel type the value is cast to when it is
+    #   read and written. Pass `nil` to store the value as is, e.g. a Hash.
+    # @param default [Object] Returned when the setting has no value.
+    # @param maximum_length [Integer, nil] Maximum length of the value. Its error
+    #   message is translated under `<key>_too_long`.
+    def setting(key, type: :string, default: nil, maximum_length: nil)
+      key = key.to_s
+      caster = ActiveModel::Type.lookup(type) if type
+
+      define_singleton_method(key) do
+        value = get(key)&.value
+        value = caster.cast(value) if caster
+        value.nil? ? default.deep_dup : value
+      end
+
+      define_singleton_method(:"#{key}=") do |value|
+        set(key, value: caster ? caster.cast(value) : value)
+      end
+
+      singleton_class.alias_method(:"#{key}?", key) if type == :boolean
+
+      if maximum_length
+        validates :value,
+                  length: { maximum: maximum_length, too_long: :"#{key}_too_long" },
+                  if: -> { self.key == key }
+      end
+    end
 
     def get(key)
       find_by(key: key)
@@ -80,4 +76,9 @@ class Setting < ApplicationRecord
       setting.save!
     end
   end
+
+  setting :brand_name, maximum_length: 100
+  setting :display_brand_name, type: :boolean, default: true
+  setting :footer_copyright, default: "", maximum_length: 255
+  setting :footer_sitemap, type: nil, default: {}
 end
