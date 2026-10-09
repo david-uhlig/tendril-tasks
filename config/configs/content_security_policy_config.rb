@@ -4,12 +4,12 @@ require "uri"
 
 # Configures and extends the base policy without duplicating it.
 #
-# Directives are configurable via `CSP_` ENV-vars and
-# `config.x.content_security_policy.` settings with fallback to environment
-# variables. This allows deployments to extend the base policy without
-# duplicating it.
+# Directives are configurable via `config.x.content_security_policy` settings,
+# Rails credentials under `content_security_policy`, and `CSP_` ENV-vars, in
+# increasing order of precedence. This allows deployments to extend the base
+# policy without duplicating it.
 #
-# config.x.content_security_policy.* (string, space-separated string, or array):
+# config.x.content_security_policy.* and credentials (string, space-separated string, or array):
 #   default_src, script_src, style_src, connect_src, frame_src, img_src, font_src, media_src,
 #   worker_src, frame_ancestors, form_action, report_uri, report_only, disabled
 #
@@ -19,8 +19,8 @@ require "uri"
 #   CSP_FORM_ACTION, CSP_REPORT_URI, CSP_REPORT_ONLY, CSP_DISABLED
 class ContentSecurityPolicyConfig < BaseConfig
   config_name :content_security_policy
-  # Extends the base policy via credentials without duplicating it.
-  loader_options credentials_namespace: "x.content_security_policy"
+  # Extends the base policy via `config.x.content_security_policy`.
+  loader_options rails_config_x: true
   # Accepts ENV variables with the prefix `CSP_`, e.g. `CSP_DEFAULT_SRC`.
   env_prefix :csp
 
@@ -57,8 +57,8 @@ class ContentSecurityPolicyConfig < BaseConfig
 
     case value
     when nil then []
-    when Array then value
-    when String then value
+    when Array then value.flat_map(&:split)
+    when String then value.split
     else []
     end
   end
