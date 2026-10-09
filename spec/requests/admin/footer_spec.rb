@@ -25,19 +25,13 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(response).to have_http_status(:not_found)
     end
 
-    it "displays the footer edit page when authorized" do
-      login_as(admin)
-      get edit_admin_footer_path
-      expect(response).to have_http_status(:success)
-      expect(response.body).to include("Copyright")
-      expect(response.body).to include("Sitemap")
-    end
-
-    it "renders the sitemap categories, a filler category and the templates" do
+    it "renders the copyright and sitemap forms with a filler category and the templates when authorized", :aggregate_failures do
       Setting.footer_sitemap = { "categories" => [ { "title" => "Community", "links" => [ { "title" => "Chat", "href" => "https://example.com" } ] } ] }
       login_as(admin)
       get edit_admin_footer_path
 
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include("Copyright", "Sitemap")
       expect(response.body).to include('value="Community"', 'value="Chat"')
       expect(response.body.scan('class="sitemap-category"').size).to eq(3)
       expect(response.body.scan('name="categories[][links][][title]"').size).to eq(4)
@@ -101,16 +95,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(Setting.footer_sitemap).to eq({})
     end
 
-    it "updates the sitemap when authorized" do
-      login_as(admin)
-      patch admin_footer_sitemap_path, params: valid_sitemap_params, as: :turbo_stream
-
-      expect(response).to have_http_status(:success)
-      categories = Setting.footer_sitemap.fetch("categories")
-      expect(categories.first["title"]).to eq("Community")
-    end
-
-    it "stores the categories in reverse of the form order" do
+    it "updates the sitemap, storing the categories in reverse of the form order, when authorized" do
       login_as(admin)
       patch admin_footer_sitemap_path, params: {
         categories: [
@@ -119,6 +104,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
         ]
       }, as: :turbo_stream
 
+      expect(response).to have_http_status(:success)
       titles = Setting.footer_sitemap.fetch("categories").map { it["title"] }
       expect(titles).to eq(%w[Right Left])
     end

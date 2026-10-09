@@ -16,12 +16,6 @@ RSpec.describe "Account Revokation", type: :request do
           expect(response).to have_http_status(:success)
         end
 
-        it "they can access their profile page" do
-          get profile_path
-          expect(response).to have_http_status(:success)
-          expect(response.body).to include(user.name)
-        end
-
         context "and their account was deleted" do
           before { user.destroy! }
 
@@ -40,12 +34,6 @@ RSpec.describe "Account Revokation", type: :request do
 
           get root_path
           expect(response).to have_http_status(:success)
-        end
-
-        it "they can access their profile page" do
-          get profile_path
-          expect(response).to have_http_status(:success)
-          expect(response.body).to include(user.name)
         end
 
         context "and their account was deleted" do

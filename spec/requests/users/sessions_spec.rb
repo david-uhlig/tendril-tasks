@@ -6,16 +6,10 @@ RSpec.describe "Users::Sessions", type: :request do
   let(:user) { create(:user) }
 
   describe "GET /users/sign-in" do
-    context "when unauthenticated" do
-      it "returns a successful response" do
-        get new_user_session_path
-        expect(response).to have_http_status(:ok)
-      end
-    end
-
     context "when Rocket.Chat is configured" do
       it "offers the sign in with Rocket.Chat" do
         get new_user_session_path
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include(user_rocketchat_omniauth_authorize_path)
       end
     end
