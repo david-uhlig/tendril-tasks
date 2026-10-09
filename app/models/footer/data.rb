@@ -2,13 +2,13 @@
 
 module Footer
   class Data
-    def updated_at
-      @updated_at ||= [ Setting.updated_at, Page.maximum(:updated_at) ].compact.max
+    # Changes whenever a setting or a legal page is added, changed or removed.
+    def cache_key
+      @cache_key ||= "footer/#{Setting.cache_version}/#{legal_pages.cache_version}"
     end
 
     def legal
-      @legal ||= Page.where(slug: Admin::LegalController::LEGAL_PAGES)
-                     .pluck(:slug)
+      @legal ||= legal_pages.pluck(:slug)
     end
 
     def sitemap
@@ -17,6 +17,12 @@ module Footer
 
     def copyright
       @copyright ||= Setting.footer_copyright
+    end
+
+    private
+
+    def legal_pages
+      Page.where(slug: Admin::LegalController::LEGAL_PAGES)
     end
   end
 end

@@ -74,7 +74,7 @@
     </div>
 
     <%# Footer %>
-    <% cache ["footer", TendrilTasks::VERSION, @footer.updated_at] do %>
+    <% cache ["footer", TendrilTasks::VERSION, @footer.cache_key] do %>
       <%= render partial: 'layouts/footer', locals: { data: @footer } %>
     <% end %>
   </body>
