@@ -470,6 +470,11 @@ en:
           attributes:
             comment:
               too_long: "Your message must be at most %{count} characters long."
+        setting:
+          attributes:
+            value:
+              brand_name_too_long: "The name must be at most %{count} characters long."
+              footer_copyright_too_long: "The copyright notice must be at most %{count} characters long."
 
   components:
     coordinator_picker:

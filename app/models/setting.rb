@@ -8,6 +8,10 @@ class Setting < ApplicationRecord
             content_type: %i[png jpg],
             size: { less_than: 500.kilobytes },
             dimension: { min: 1..1, max: 2048..2048 }
+  validates :value, length: { maximum: 100, too_long: :brand_name_too_long },
+            if: -> { key == "brand_name" }
+  validates :value, length: { maximum: 255, too_long: :footer_copyright_too_long },
+            if: -> { key == "footer_copyright" }
 
   class << self
     def remove(key)
@@ -68,10 +72,12 @@ class Setting < ApplicationRecord
       find_by(key: key)
     end
 
+    # Raises ActiveRecord::RecordInvalid when the value is invalid, since the
+    # result of a setter method can't be checked.
     def set(key, value: nil)
       setting = find_or_initialize_by(key: key)
       setting.value = value
-      setting.save
+      setting.save!
     end
   end
 end

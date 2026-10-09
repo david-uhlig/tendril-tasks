@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Topics are listed by their most recently published task. Tasks scheduled for later no longer move their topic to the top.
 - Content Security Policy sources set in `config.x.content_security_policy` are applied, and space-separated sources are split into separate sources.
 - Sign in with Rocket.Chat works when `ROCKET_CHAT_HOST` is set without `https://` or with a trailing slash.
+- Saving the brand name or the copyright notice shows an error instead of a success message when it can't be saved. The brand name is limited to 100 characters and the copyright notice to 255.
 
 ## [0.7.0] - 2026-10-09
 
