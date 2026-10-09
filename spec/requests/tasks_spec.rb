@@ -42,7 +42,7 @@ RSpec.describe "Tasks", type: :request do
       it "does not show the new task link" do
         get tasks_path
 
-        expect(response.body).not_to include("Aufgabe anlegen")
+        expect(response.body).not_to include(I18n.t("tasks.index.create_task"))
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe "Tasks", type: :request do
       it "shows the new task link" do
         get tasks_path
 
-        expect(response.body).to include("Aufgabe anlegen")
+        expect(response.body).to include(I18n.t("tasks.index.create_task"))
       end
     end
   end

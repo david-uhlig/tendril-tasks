@@ -6,13 +6,13 @@ RSpec.describe "Tasks::Application", type: :request do
   let(:user) { create(:user) }
   let(:task) { create(:task, :published, :with_published_project) }
 
-  describe "POST /user/tasks/:task_id/application" do
+  describe "POST /tasks/:task_id/application" do
     it "requires authentication" do
       require_authentication_for { post task_application_path(task) }
     end
 
     context "when authenticated" do
-      before { sign_in user }
+      before { login_as(user) }
 
       it "saves the application, celebrates it with fireworks and limits the comment length in the form", :aggregate_failures do
         expect {
@@ -75,13 +75,13 @@ RSpec.describe "Tasks::Application", type: :request do
     end
   end
 
-  describe "PATCH /user/tasks/:task_id/application" do
+  describe "PATCH /tasks/:task_id/application" do
     it "requires authentication" do
       require_authentication_for { patch task_application_path(task) }
     end
 
     context "when authenticated" do
-      before { sign_in user }
+      before { login_as(user) }
 
       context "and the task exists" do
         context "and the application exists" do
@@ -147,13 +147,13 @@ RSpec.describe "Tasks::Application", type: :request do
     end
   end
 
-  describe "DELETE /user/tasks/:task_id/application" do
+  describe "DELETE /tasks/:task_id/application" do
     it "requires authentication" do
       require_authentication_for { delete task_application_path(task) }
     end
 
     context "when authenticated" do
-      before { sign_in user }
+      before { login_as(user) }
 
       context "and the task exists" do
         context "and the application exists" do

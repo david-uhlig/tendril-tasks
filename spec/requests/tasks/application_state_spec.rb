@@ -7,6 +7,14 @@ RSpec.describe "Task application state", type: :request do
     login_as(user)
   end
 
+  def not_applied_t(key)
+    I18n.t("tasks.application.form_when_user_has_not_applied_to_task.#{key}")
+  end
+
+  def applied_t(key)
+    I18n.t("tasks.application.form_when_user_has_applied_to_task.#{key}")
+  end
+
   describe "GET /tasks/:id" do
     context "when the user has not applied" do
       let!(:task) { create(:task, :published, :with_published_project) }
@@ -15,8 +23,8 @@ RSpec.describe "Task application state", type: :request do
         get task_path(task)
 
         expect(response).to have_http_status(:success)
-        expect(response.body).to include("Interessiert? Hier melden!")
-        expect(response.body).to include("Meldung absenden")
+        expect(response.body).to include(not_applied_t(:apply_here))
+        expect(response.body).to include(not_applied_t(:submit))
         expect(response.body).to include("task_application_comment")
       end
     end
@@ -36,10 +44,10 @@ RSpec.describe "Task application state", type: :request do
         get task_path(task)
 
         expect(response).to have_http_status(:success)
-        expect(response.body).to include("Vielen Dank für deine Meldung!")
+        expect(response.body).to include(applied_t(:thanks_for_your_application))
         expect(response.body).to include("Ein toller Kommentar ist das.")
-        expect(response.body).to include("Meldung bearbeiten")
-        expect(response.body).to include("Meldung zurückziehen")
+        expect(response.body).to include(applied_t(:update_application))
+        expect(response.body).to include(applied_t(:withdraw_application))
       end
     end
 
@@ -59,10 +67,10 @@ RSpec.describe "Task application state", type: :request do
         get task_path(task)
 
         expect(response).to have_http_status(:success)
-        expect(response.body).to include("Vielen Dank für deine Meldung!")
+        expect(response.body).to include(applied_t(:thanks_for_your_application))
         expect(response.body).to include("Comment create before grace period")
-        expect(response.body).to include("Meldung zurückziehen")
-        expect(response.body).not_to include("Meldung bearbeiten")
+        expect(response.body).to include(applied_t(:withdraw_application))
+        expect(response.body).not_to include(applied_t(:update_application))
         expect(response.body).to include('disabled="disabled"')
       end
     end

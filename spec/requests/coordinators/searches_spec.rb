@@ -4,7 +4,7 @@ RSpec.describe "Coordinator Searches", type: :request do
   let(:user) { create(:user) }
   let(:editor) { create(:user, :editor) }
 
-  describe "GET /coordinators/search" do
+  describe "GET /coordinators/searches" do
     it "requires authentication" do
       require_authentication_for {
         get coordinators_searches_path, as: :turbo_stream
@@ -20,14 +20,14 @@ RSpec.describe "Coordinator Searches", type: :request do
 
       it "project coordinators can view search results" do
         login_as(user)
-        project = create(:project, coordinators: [ user ])
+        create(:project, coordinators: [ user ])
         get coordinators_searches_path, as: :turbo_stream
         expect(response).to have_http_status(:success)
       end
 
       it "task coordinators can view search results" do
         login_as(user)
-        task = create(:task, coordinators: [ user ])
+        create(:task, coordinators: [ user ])
         get coordinators_searches_path, as: :turbo_stream
         expect(response).to have_http_status(:success)
       end
@@ -41,7 +41,7 @@ RSpec.describe "Coordinator Searches", type: :request do
     end
   end
 
-  describe "POST /coordinators/search" do
+  describe "POST /coordinators/searches" do
     it "requires authentication" do
       require_authentication_for {
         post coordinators_searches_path, as: :turbo_stream
@@ -57,7 +57,7 @@ RSpec.describe "Coordinator Searches", type: :request do
 
       it "project coordinators can assign the coordinator selection" do
         login_as(user)
-        project = create(:project, coordinators: [ user ])
+        create(:project, coordinators: [ user ])
         post coordinators_searches_path, params: { coordinator_ids: [ user.id ] }, as: :turbo_stream
         expect(response).to have_http_status(:success)
         expect(response.body).to include(user.name)
