@@ -16,6 +16,9 @@ CI.run do
   step "Style: ERB", "npx herb-lint"
   step "Style: ERB formatting", "npx herb-format --check"
 
+  # Dependencies
+  step "Dependencies: Gem and npm package versions match", "bin/check-gem-npm-versions"
+
   # Tests
   step "Tests: RSpec", "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup parallel:spec"
   step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"

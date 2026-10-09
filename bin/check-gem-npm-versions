@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Checks that gems shipping a companion npm package are locked to the same
+# version in Gemfile.lock and package-lock.json. Lexxy's JavaScript comes from
+# the gem while its stylesheets come from the npm package, and Herb's Ruby and
+# npm tools should lint and format alike.
+
+require "bundler"
+require "json"
+
+ROOT = File.expand_path("..", __dir__)
+
+PAIRS = {
+  "lexxy" => [ "@37signals/lexxy" ],
+  "herb" => [ "@herb-tools/formatter", "@herb-tools/linter" ]
+}.freeze
+
+lockfile = Bundler::LockfileParser.new(File.read(File.join(ROOT, "Gemfile.lock")))
+gem_versions = lockfile.specs.to_h { |spec| [ spec.name, spec.version.to_s ] }
+npm_packages = JSON.parse(File.read(File.join(ROOT, "package-lock.json"))).fetch("packages")
+
+mismatches = PAIRS.flat_map do |gem_name, package_names|
+  gem_version = gem_versions.fetch(gem_name) { abort "#{gem_name} is missing from Gemfile.lock" }
+
+  package_names.filter_map do |package_name|
+    package = npm_packages.fetch("node_modules/#{package_name}") { abort "#{package_name} is missing from package-lock.json" }
+    next if package["version"] == gem_version
+
+    "#{gem_name} #{gem_version} (Gemfile.lock) != #{package_name} #{package["version"]} (package-lock.json)"
+  end
+end
+
+if mismatches.empty?
+  puts "Gem and npm package versions match."
+else
+  warn mismatches
+  warn "Update both sides to the same version, e.g. with `mise run update:project`."
+  exit 1
+end
