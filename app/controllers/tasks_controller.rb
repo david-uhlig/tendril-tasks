@@ -41,8 +41,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task_form = TaskForm.new
-    @task_form.coordinators << current_user
+    @task_form = TaskForm.new(coordinator_ids: [ current_user.id ])
   end
 
   def create
@@ -50,7 +49,7 @@ class TasksController < ApplicationController
 
     if @task_form.save
       success_msg = toast_message_for(@task_form.task, :create)
-      if @task_form.submit_type == "save_and_new"
+      if submit_type == "save_and_new"
         redirect_to new_task_from_preset_path(project_id: @task_form.project.id, coordinator_ids: @task_form.task.coordinator_ids.join("-")), notice: success_msg
       else
         redirect_to task_path(@task_form.task), notice: success_msg
@@ -64,10 +63,9 @@ class TasksController < ApplicationController
 
   def update
     @task_form.assign_attributes(task_form_params)
-    task_has_changed = @task_form.changed?
 
     if @task_form.save
-      update_msg = toast_message_for(@task_form.task, :update) if task_has_changed
+      update_msg = toast_message_for(@task_form.task, :update) if @task_form.saved_changes?
       redirect_to task_path(@task_form.task), notice: update_msg
     else
       render :edit, status: :unprocessable_content
@@ -92,6 +90,11 @@ class TasksController < ApplicationController
   def task_form_params
     task_form = params.require(:task_form)
     task_form[:coordinator_ids] = params[:assigned_coordinator_ids]
-    task_form.permit(:project_id, :title, :description, :publish, :submit_type, coordinator_ids: [])
+    task_form.permit(:project_id, :title, :description, :publish, coordinator_ids: [])
+  end
+
+  # Which submit button was used, e.g. "save_and_new".
+  def submit_type
+    params.dig(:task_form, :submit_type)
   end
 end

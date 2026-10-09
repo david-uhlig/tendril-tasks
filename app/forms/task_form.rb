@@ -4,9 +4,8 @@ class TaskForm
   include ActiveModel::Model
 
   attr_reader :task
-  attr_accessor :submit_type
 
-  delegate :project, :project_id=,
+  delegate :project, :project_id, :project_id=,
            :title, :title=,
            :description, :description=,
            to: :task
@@ -50,25 +49,25 @@ class TaskForm
   def project_options
     @project_options ||= Project.select(:id, :title)
                                 .order(:title)
-                                .all
-                                .presence
-    @project_options ||= []
+                                .to_a
   end
 
   def coordinator_options
     @coordinator_options ||= User.select(:id, :name, :avatar_url)
                                  .excluding(coordinators)
                                  .limit(Coordinators::SearchesController::NUM_SEARCH_RESULTS)
-                                 .presence
-    @coordinator_options ||= []
+                                 .to_a
   end
 
   def save
+    has_changes = changed?
+
     Task.transaction do
       # Update association records first so validations on them on the parent model have an effect
       task.coordinators = @unsaved_coordinators if coordinators_changed?
       task.save!
       @unsaved_coordinators = nil
+      @saved_changes = has_changes
 
       true
     end
@@ -84,6 +83,12 @@ class TaskForm
   def changed?
     # Rich text changes aren't tracked by `changed?` of the parent record.
     task.changed? || task.description&.changed? || coordinators_changed?
+  end
+
+  # True when the last `save` changed the record, its rich text or its
+  # coordinators.
+  def saved_changes?
+    @saved_changes == true
   end
 
   def valid?

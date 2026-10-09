@@ -18,8 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project_form = ProjectForm.new
-    @project_form.coordinators << current_user
+    @project_form = ProjectForm.new(coordinator_ids: [ current_user.id ])
   end
 
   def create
@@ -27,7 +26,7 @@ class ProjectsController < ApplicationController
 
     if @project_form.save
       success_msg = toast_message_for(@project_form.project, :create)
-      if @project_form.submit_type == "save_and_new_task"
+      if submit_type == "save_and_new_task"
         redirect_to new_task_from_preset_path(
                       project_id: @project_form.project.id,
                       coordinator_ids: @project_form.project.coordinator_ids.join("-")),
@@ -44,10 +43,9 @@ class ProjectsController < ApplicationController
 
   def update
     @project_form.assign_attributes(project_form_params)
-    project_has_changed = @project_form.changed?
 
     if @project_form.save
-      update_msg = toast_message_for(@project_form.project, :update) if project_has_changed
+      update_msg = toast_message_for(@project_form.project, :update) if @project_form.saved_changes?
       redirect_to project_path(@project_form.project), notice: update_msg
     else
       render :edit, status: :unprocessable_content
@@ -67,7 +65,12 @@ class ProjectsController < ApplicationController
     project_form = params.require(:project_form)
     project_form[:coordinator_ids] = params.delete(:assigned_coordinator_ids)
     project_form
-          .permit(:title, :description, :publish, :submit_type, coordinator_ids: [])
+          .permit(:title, :description, :publish, coordinator_ids: [])
+  end
+
+  # Which submit button was used, e.g. "save_and_new_task".
+  def submit_type
+    params.dig(:project_form, :submit_type)
   end
 
   def set_project
