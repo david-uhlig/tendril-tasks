@@ -144,6 +144,38 @@ RSpec.describe Project, type: :model do
       create(:task, :not_published, project: newest_project)
       expect(Project.order_by_most_recently_published_task).to eq([ oldest_project, newest_project ])
     end
+
+    it "orders by the latest published task of each project" do
+      project_a = create(:project, :published)
+      project_b = create(:project, :published)
+      create(:task, project: project_a, published_at: 3.days.ago)
+      create(:task, project: project_b, published_at: 2.days.ago)
+      create(:task, project: project_a, published_at: 1.day.ago)
+      expect(Project.order_by_most_recently_published_task).to eq([ project_a, project_b ])
+    end
+
+    it "scheduled tasks do not affect the order" do
+      project_a = create(:project, :published)
+      project_b = create(:project, :published)
+      create(:task, project: project_a, published_at: 1.day.ago)
+      create(:task, project: project_b, published_at: 2.days.ago)
+      create(:task, project: project_b, published_at: 1.day.from_now)
+      expect(Project.order_by_most_recently_published_task).to eq([ project_a, project_b ])
+    end
+
+    it "returns each project once" do
+      project = create(:project, :published, :with_published_tasks)
+      expect(Project.order_by_most_recently_published_task).to eq([ project ])
+    end
+
+    it "combines with publicly_visible" do
+      project_a = create(:project, :published)
+      project_b = create(:project, :published)
+      create(:task, project: project_a, published_at: 2.days.ago)
+      create(:task, project: project_b, published_at: 1.day.ago)
+      projects = Project.publicly_visible.order_by_most_recently_published_task
+      expect(projects).to eq([ project_b, project_a ])
+    end
   end
 
   describe "#publicly_visible" do
