@@ -16,9 +16,19 @@ class RocketChatApiConfig < BaseConfig
   # Obtain by generating a personal access token (PAT) in RC for the user accessing the API, e.g. at https://<your-rocket-chat-workspace.com>/account/tokens after signing in.
   attr_config :auth_token, :user_id
 
+  # Returns the workspace URL, e.g. "https://example.com". Adds `https://` when
+  # the host was configured without a scheme.
+  def host
+    value = super
+    return value if value.blank?
+
+    value = value.delete_suffix("/")
+    value.match?(%r{\Ahttps?://}i) ? value : "https://#{value}"
+  end
+
   # Returns the api URL, e.g. "https://example.com/api/v1"
   def url
-    "#{ensure_http_scheme}#{path}"
+    "#{host}#{path}"
   end
 
   # Returns the authentication headers required for most RC API endpoints.
@@ -36,11 +46,5 @@ class RocketChatApiConfig < BaseConfig
   # @return [Boolean]
   def configured?
     @configured ||= [ host, user_id, auth_token ].all?(&:present?)
-  end
-
-  private
-
-  def ensure_http_scheme
-    host.start_with?(%r{^https?://}i) ? host : "https://#{host}"
   end
 end
