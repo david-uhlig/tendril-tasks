@@ -43,7 +43,7 @@ class Ability
     # ----- Editor -----
     return unless user.admin? || user.editor?
 
-                  can :manage, [ Project, Task ]
+    can :manage, [ Project, Task ]
     can :coordinate, [ Project, Task ]
     can :create, :direct_upload
 

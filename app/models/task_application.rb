@@ -3,11 +3,11 @@
 # Application for a task by a user.
 #
 # The application is created when the user submits the task application form.
-# The application can be edited by the user until the grace period has passed.
-# After that, the application is set to `status: :withdrawn` and is no longer
-# editable. The application can be at any time.
+# The applicant can edit the application until the grace period has passed.
+# The applicant can withdraw the application at any time: within the grace
+# period it is deleted, afterward it is set to `status: :withdrawn`.
 class TaskApplication < ApplicationRecord
-  # Amount of time in that the application is editable by the applicant.
+  # Amount of time during which the application is editable by the applicant.
   # Within this timeframe the application will be deleted if the user withdraws,
   # afterward it will be set to `status: :withdrawn`. If set to `0.minutes` the
   # application is not editable.
@@ -51,8 +51,7 @@ class TaskApplication < ApplicationRecord
   has_many :noticed_events, as: :record, dependent: :destroy, class_name: "Noticed::Event"
   has_many :notifications, through: :noticed_events, class_name: "Noticed::Notification"
 
-  validates :task, presence: true, uniqueness: { scope: :user }
-  validates :user, presence: true
+  validates :task, uniqueness: { scope: :user }
   validates :comment, length: { maximum: COMMENT_MAX_LENGTH }
 
   # Browsers submit line breaks in text areas as CRLF but count them as a
