@@ -232,4 +232,47 @@ RSpec.describe Setting, type: :model do
       end
     end
   end
+
+  describe "caching" do
+    def count_queries(&)
+      count = 0
+      counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+      ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+      count
+    end
+
+    before do
+      Setting.brand_name = "Example"
+      Setting.footer_copyright = "© Example"
+      Current.reset
+    end
+
+    it "reads all settings with a single query" do
+      queries = count_queries do
+        Setting.brand_name
+        Setting.display_brand_name?
+        Setting.footer_copyright
+        Setting.footer_sitemap
+        Setting.updated_at
+      end
+
+      expect(queries).to eq(1)
+    end
+
+    it "reads a changed setting" do
+      Setting.brand_name
+      Setting.brand_name = "Changed"
+      expect(Setting.brand_name).to eq("Changed")
+    end
+
+    it "reads a removed setting" do
+      Setting.brand_name
+      Setting.remove("brand_name")
+      expect(Setting.brand_name).to be_nil
+    end
+
+    it "returns when a setting was last updated" do
+      expect(Setting.updated_at).to eq(Setting.maximum(:updated_at))
+    end
+  end
 end
