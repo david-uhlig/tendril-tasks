@@ -31,7 +31,7 @@ RSpec.describe "Projects", type: :request do
       it "does not show the new project link to regular users" do
         get projects_path
 
-        expect(response.body).not_to include("Thema anlegen")
+        expect(response.body).not_to include(I18n.t("projects.index.create_initiative_button"))
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe "Projects", type: :request do
       it "shows the new project link" do
         get projects_path
 
-        expect(response.body).to include("Thema anlegen")
+        expect(response.body).to include(I18n.t("projects.index.create_initiative_button"))
       end
     end
   end

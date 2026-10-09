@@ -14,7 +14,7 @@ RSpec.describe "User Dashboard", type: :request do
       it "displays the user's dashboard" do
         get dashboard_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include("Dashboard")
+        expect(response.body).to include(I18n.t("dashboards.show.title"))
       end
     end
   end

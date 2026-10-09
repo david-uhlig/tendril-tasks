@@ -11,7 +11,7 @@ RSpec.describe "Account Revokation", type: :request do
     context "when a user is authenticated" do
       context "without a remember me token" do
         before(:each) do
-          sign_in(user)
+          login_as(user)
           get root_path
           expect(response).to have_http_status(:success)
         end
@@ -30,7 +30,7 @@ RSpec.describe "Account Revokation", type: :request do
       context "with a remember me token" do
         before(:each) do
           user.remember_me = true
-          sign_in(user)
+          login_as(user)
 
           get root_path
           expect(response).to have_http_status(:success)

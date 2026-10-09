@@ -25,17 +25,16 @@ RSpec.describe "Admin Brand Name", type: :request do
 
       it "updates the brand name and display preference for authorized users" do
         login_as(admin)
-        allow(Setting).to receive(:brand_name=)
-        allow(Setting).to receive(:display_brand_name=)
 
+        # The brand name is displayed by default, so hiding it shows the change.
         patch admin_brand_name_path,
-          params: { name: "Acme", display_name: "1" },
+          params: { name: "Acme", display_name: "0" },
           as: :turbo_stream
 
         expect(response).to have_http_status(:success)
         expect(response.media_type).to eq("text/vnd.turbo-stream.html")
-        expect(Setting).to have_received(:brand_name=).with("Acme")
-        expect(Setting).to have_received(:display_brand_name=).with(true)
+        expect(Setting.brand_name).to eq("Acme")
+        expect(Setting.display_brand_name?).to be(false)
       end
     end
   end

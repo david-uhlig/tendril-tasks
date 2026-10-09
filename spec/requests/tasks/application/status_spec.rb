@@ -11,7 +11,7 @@ RSpec.describe "Tasks::Application::StatusController", type: :request do
     task_application_status_path(task_id: task, user_id: user)
   end
 
-  describe "PATCH /tasks/:task_id/applications/:user_id/status" do
+  describe "PATCH /tasks/:task_id/application/:user_id/status" do
     it "requires authentication" do
       require_authentication_for do
         patch status_path(task, applicant), params: { status: "accepted" }
@@ -20,7 +20,7 @@ RSpec.describe "Tasks::Application::StatusController", type: :request do
 
     context "when authenticated" do
       before do
-        sign_in coordinator
+        login_as(coordinator)
         task.coordinators << coordinator
       end
 
@@ -108,7 +108,7 @@ RSpec.describe "Tasks::Application::StatusController", type: :request do
     end
 
     context "when the user is not authorized to coordinate the task" do
-      before { sign_in applicant }
+      before { login_as(applicant) }
 
       it "returns not found" do
         create(:task_application, task: task, user: applicant)
