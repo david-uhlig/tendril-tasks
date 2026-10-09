@@ -15,15 +15,21 @@ class ProjectForm
     super(project_or_params.is_a?(Project) ? {} : project_or_params)
   end
 
+  # Stages the coordinators until the form is saved. Ignores ids of users that
+  # no longer exist, e.g. when a user was deleted while the form was open. An
+  # empty list removes all coordinators, which fails validation on save.
   def coordinator_ids=(ids)
-    ids = Array(ids).compact_blank.map(&:to_i)
-    unless project.coordinator_ids.sort == ids.sort
-      @unsaved_coordinators = User.find(ids)
-    end
+    users = User.where(id: Array(ids).compact_blank).to_a
+    @unsaved_coordinators =
+      if users.map(&:id).sort == project.coordinator_ids.sort
+        nil
+      else
+        users
+      end
   end
 
   def coordinators
-    @unsaved_coordinators.presence || project.coordinators
+    @unsaved_coordinators || project.coordinators
   end
 
   def publish=(checkbox_value)
@@ -51,7 +57,7 @@ class ProjectForm
   def save
     Project.transaction do
       # Update association records first so validations on them on the parent model have an effect
-      project.coordinator_ids = @unsaved_coordinators.pluck(:id) if @unsaved_coordinators.present?
+      project.coordinators = @unsaved_coordinators if coordinators_changed?
       project.save!
       @unsaved_coordinators = nil
 
@@ -68,7 +74,7 @@ class ProjectForm
 
   def changed?
     # Rich text changes aren't tracked by `changed?` of the parent record.
-    project.changed? || project.description&.changed? || @unsaved_coordinators.present?
+    project.changed? || project.description&.changed? || coordinators_changed?
   end
 
   def valid?
@@ -91,6 +97,11 @@ class ProjectForm
   end
 
   private
+
+  # True when coordinators other than the current ones are staged for saving.
+  def coordinators_changed?
+    !@unsaved_coordinators.nil?
+  end
 
   def validate_project
     project_valid = project.valid?
