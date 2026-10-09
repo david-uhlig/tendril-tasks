@@ -54,6 +54,7 @@ class ProjectForm
 
   def save
     has_changes = changed?
+    @saved_changes = false
 
     Project.transaction do
       # Update association records first so validations on them on the parent model have an effect
