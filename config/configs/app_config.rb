@@ -43,11 +43,16 @@ class AppConfig < BaseConfig
 
   private
 
+  # Memoized, including a missing commit, so git isn't run again on every call.
   def local_git_commit
-    commit = IO.popen(%w[git rev-parse --short HEAD], chdir: Rails.root, err: File::NULL, &:read)
-    commit.strip.presence if $?.success?
-  rescue SystemCallError
-    nil
+    return @local_git_commit if defined?(@local_git_commit)
+
+    @local_git_commit = begin
+      commit = IO.popen(%w[git rev-parse --short HEAD], chdir: Rails.root, err: File::NULL, &:read)
+      commit.strip.presence if $?.success?
+    rescue SystemCallError
+      nil
+    end
   end
 
   def ensure_base_url_is_present
