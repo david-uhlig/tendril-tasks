@@ -71,5 +71,10 @@ RSpec.describe RocketChatApiConfig, type: :config do
       config.auth_token = nil
       expect(config.configured?).to be false
     end
+
+    it "returns false when the host was not configured" do
+      unconfigured = described_class.new(user_id: "my-id", auth_token: "my-token")
+      expect(unconfigured.configured?).to be false
+    end
   end
 end
