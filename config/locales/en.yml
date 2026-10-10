@@ -472,6 +472,8 @@ en:
               too_long: "Your message must be at most %{count} characters long."
         setting:
           attributes:
+            key:
+              taken: "The key has already been taken."
             value:
               brand_name_too_long: "The name must be at most %{count} characters long."
               footer_copyright_too_long: "The copyright notice must be at most %{count} characters long."

@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Saving the brand name or the copyright notice shows an error instead of a success message when it can't be saved. The brand name is limited to 100 characters and the copyright notice to 255.
 - The footer is updated when its links or a legal page are deleted, instead of still showing them.
 - The footer is shown in the current language after the default language changes, instead of the previously cached one.
+- Saving a brand name, copyright notice or footer sitemap no longer fails when it's saved twice at the same time.
 
 ## [0.7.0] - 2026-10-09
 

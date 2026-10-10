@@ -275,4 +275,47 @@ RSpec.describe Setting, type: :model do
       expect(Setting.updated_at).to eq(Setting.maximum(:updated_at))
     end
   end
+
+  describe "concurrent saves" do
+    # Simulates another request creating the setting after this one looked it
+    # up: the first lookup returns a new record instead of the existing row.
+    def stale_first_lookup(record)
+      lookups = 0
+      allow(Setting).to receive(:find_or_initialize_by).and_wrap_original do |original, **attributes|
+        lookups += 1
+        lookups == 1 ? record : original.call(**attributes)
+      end
+    end
+
+    before do
+      Setting.brand_name = "Acme"
+      Current.reset
+    end
+
+    it "saves when the uniqueness validation finds the other request's setting" do
+      stale_first_lookup(Setting.new(key: "brand_name"))
+
+      Setting.brand_name = "Changed"
+
+      expect(Setting.brand_name).to eq("Changed")
+      expect(Setting.where(key: "brand_name").count).to eq(1)
+    end
+
+    it "saves when the insert hits the unique index" do
+      stale_record = Setting.new(key: "brand_name")
+      allow(stale_record).to receive(:save!).and_raise(ActiveRecord::RecordNotUnique)
+      stale_first_lookup(stale_record)
+
+      Setting.brand_name = "Changed"
+
+      expect(Setting.brand_name).to eq("Changed")
+      expect(Setting.where(key: "brand_name").count).to eq(1)
+    end
+
+    it "raises when the setting keeps failing to save" do
+      allow(Setting).to receive(:find_or_initialize_by).and_return(Setting.new(key: "brand_name"))
+
+      expect { Setting.brand_name = "Changed" }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
 end
