@@ -24,6 +24,9 @@ services:
       # Run the Solid Queue supervisor inside the web server's Puma process to
       # process background jobs, e.g. Rocket.Chat notifications.
       SOLID_QUEUE_IN_PUMA: "true"
+      # Set to `async` to run it in threads of the Puma process, which saves
+      # memory, instead of in separate processes (`fork`, default).
+      # SOLID_QUEUE_MODE: "async"
     # Mark the container healthy once the app answers on /up. Leave this out
     # for services that only run `bin/jobs`, as they never answer on /up.
     healthcheck:

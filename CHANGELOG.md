@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Set `SOLID_QUEUE_MODE=async` together with `SOLID_QUEUE_IN_PUMA` to run background jobs in threads of the web server's process instead of four separate processes, which reduces memory use. The queue database then uses a pool of 10 connections, configurable with `SOLID_QUEUE_DB_POOL`.
+
 ### Fixed
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
 - "Save & New" on the task form preselects the topic and the coordinators of the task just saved in the next task form.

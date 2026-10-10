@@ -33,6 +33,10 @@ production:
     migrations_paths: db/cache_migrate
   queue:
     <<: *default
+    # See `SolidQueueConfig#queue_database_pool`.
+    <% if (pool = SolidQueueConfig.queue_database_pool) %>
+    pool: <%= pool %>
+    <% end %>
     database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate
   cable:

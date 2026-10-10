@@ -35,7 +35,15 @@ port ENV.fetch("PORT", 3000)
 plugin :tmp_restart
 
 # Run the Solid Queue supervisor inside of Puma for single-server deployments.
-plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
+# See `config/configs/solid_queue_config.rb` for the options. Loading the
+# application makes the config available when Puma isn't started through
+# `bin/rails server`, which already loaded it.
+require_relative "application"
+
+if SolidQueueConfig.in_puma
+  plugin :solid_queue
+  solid_queue_mode SolidQueueConfig.mode.to_sym
+end
 
 # Running `rails server` will run the Tailwind watch process in the background
 plugin :tailwindcss if ENV.fetch("RAILS_ENV", "development") == "development"
