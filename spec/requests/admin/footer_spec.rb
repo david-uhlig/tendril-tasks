@@ -142,6 +142,37 @@ RSpec.describe "Admin::Footer settings", type: :request do
       expect(response).to have_http_status(:unprocessable_content)
       expect(Setting.footer_sitemap).to eq({})
     end
+
+    it "shows a validation error for a link without an href field" do
+      login_as(admin)
+      patch admin_footer_sitemap_path, params: {
+        categories: [ { title: "Community", links: [ { title: "Chat" } ] } ]
+      }, as: :turbo_stream
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(Setting.footer_sitemap).to eq({})
+    end
+
+    it "shows a validation error for a category without a title field" do
+      login_as(admin)
+      patch admin_footer_sitemap_path, params: {
+        categories: [ { links: [ { title: "Chat", href: "https://example.com" } ] } ]
+      }, as: :turbo_stream
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(Setting.footer_sitemap).to eq({})
+    end
+
+    it "keeps the copyright notice in the form when the sitemap is invalid" do
+      Setting.footer_copyright = "© Example e.V."
+      login_as(admin)
+      patch admin_footer_sitemap_path, params: {
+        categories: [ { title: "", links: [ { title: "Chat", href: "https://example.com" } ] } ]
+      }, as: :turbo_stream
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(response.body).to include('value="© Example e.V."')
+    end
   end
 
   describe "DELETE /admin/footer/sitemap" do
