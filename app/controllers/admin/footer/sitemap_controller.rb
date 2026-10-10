@@ -6,6 +6,7 @@ module Admin
       def update
         @sitemap = ::Footer::Sitemap.new(sitemap_params)
         unless @sitemap.save
+          @copyright = Setting.footer_copyright
           render "admin/footer/edit", status: :unprocessable_content
           nil
         end
@@ -33,11 +34,11 @@ module Admin
           next unless category["links"].present?
 
           category["links"].reject! do |link|
-            link["href"].empty? && link["title"].empty?
+            link["href"].blank? && link["title"].blank?
           end
         end
         categories.reject! do |category|
-          category["title"].empty? && (category["links"].nil? || category["links"].empty?)
+          category["title"].blank? && category["links"].blank?
         end
         # The form lists categories in the footer's left-to-right order, which
         # is the reverse of the stored order.
