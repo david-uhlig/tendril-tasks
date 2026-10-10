@@ -22,6 +22,12 @@ RSpec.describe AppConfig, type: :config do
         expect(config.git_commit).to eq(`git rev-parse --short HEAD`.strip)
       end
 
+      it "runs git only once" do
+        allow(IO).to receive(:popen).and_call_original
+        2.times { config.git_commit }
+        expect(IO).to have_received(:popen).once
+      end
+
       it "prefers the configured commit" do
         config.git_commit = "abc1234"
         expect(config.git_commit).to eq("abc1234")
