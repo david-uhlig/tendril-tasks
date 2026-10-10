@@ -145,7 +145,18 @@ env:
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
     SOLID_QUEUE_IN_PUMA: true
 
-    # Set number of processes dedicated to Solid Queue (default: 1)
+    # How Solid Queue runs inside Puma (default: fork). `fork` runs it in
+    # separate processes, isolated from the web server. `async` runs it in
+    # threads of the Puma process, which saves around 70 MB of memory per
+    # process.
+    # SOLID_QUEUE_MODE: async
+
+    # Set the connection pool size of the queue database (default: 10 with
+    # `SOLID_QUEUE_MODE: async`, otherwise the same as the other databases).
+    # SOLID_QUEUE_DB_POOL: 10
+
+    # Set number of processes dedicated to Solid Queue (default: 1). Only
+    # applies to `SOLID_QUEUE_MODE: fork`.
     # JOB_CONCURRENCY: 3
 
     # Set number of cores available to the application on each server (default: 1).
