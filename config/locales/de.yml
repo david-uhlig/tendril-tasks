@@ -511,6 +511,8 @@ de:
               too_long: "Deine Nachricht darf höchstens %{count} Zeichen lang sein."
         setting:
           attributes:
+            key:
+              taken: "Der Schlüssel ist bereits vergeben."
             value:
               brand_name_too_long: "Der Name darf höchstens %{count} Zeichen lang sein."
               footer_copyright_too_long: "Der Copyright-Hinweis darf höchstens %{count} Zeichen lang sein."

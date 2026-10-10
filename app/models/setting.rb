@@ -89,10 +89,16 @@ class Setting < ApplicationRecord
 
     # Raises ActiveRecord::RecordInvalid when the value is invalid, since the
     # result of a setter method can't be checked.
-    def set(key, value: nil)
+    def set(key, value: nil, retried: false)
       setting = find_or_initialize_by(key: key)
       setting.value = value
       setting.save!
+    rescue ActiveRecord::RecordNotUnique, ActiveRecord::RecordInvalid
+      # Another request may have created the setting after it was looked up.
+      # Retry once, which then updates that setting.
+      raise if retried
+
+      set(key, value: value, retried: true)
     end
   end
 
