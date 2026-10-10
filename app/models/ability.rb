@@ -10,10 +10,11 @@ class Ability
     # ----- User -----
     return unless user.present?
 
-    # Can read published projects with 1+ published tasks
+    # Can read published projects with 1+ published tasks. Must match
+    # `Project.publicly_visible`, which lists them.
     can :read, Project, {
-      published_at: ..Time.zone.now,
-      tasks: { published_at: ..Time.zone.now }
+      published_at: ...Time.zone.now,
+      tasks: { published_at: ...Time.zone.now }
     }
 
     # Can show, coordinate, update, and destroy projects when they are coordinators
@@ -21,10 +22,11 @@ class Ability
       coordinators: { id: user.id }
     }
 
-    # Can read published tasks from published projects
+    # Can read published tasks from published projects. Must match
+    # `Task.publicly_visible`, which lists them.
     can :read, Task, {
-      published_at: ..Time.zone.now,
-      project: { published_at: ..Time.zone.now }
+      published_at: ...Time.zone.now,
+      project: { published_at: ...Time.zone.now }
     }
 
     # Can show, coordinate, update and destroy tasks where they are coordinators
