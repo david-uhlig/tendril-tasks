@@ -3,42 +3,53 @@ require 'rails_helper'
 RSpec.describe Footer::Data, type: :model do
   let(:data) { described_class.new }
 
-  describe "#updated_at" do
-    context "when there are no settings and pages" do
-      it "returns nil" do
-        expect(data.updated_at).to be_nil
-      end
+  describe "#cache_key" do
+    include ActiveSupport::Testing::TimeHelpers
+
+    let!(:imprint_page) { create(:page, slug: "imprint") }
+
+    before do
+      Setting.footer_copyright = "© Example"
+      Setting.footer_sitemap = { "categories" => [] }
+      travel 1.minute
     end
 
-    context "when there are settings and no pages" do
-      let(:setting1) { create(:setting) }
-      let(:setting2) { create(:setting) }
-
-      it "returns the maximum updated_at of Setting" do
-        latest_update = [ setting1.updated_at, setting2.updated_at ].max
-        expect(data.updated_at).to eq(latest_update)
-      end
+    def cache_key
+      Current.reset
+      described_class.new.cache_key
     end
 
-    context "when there are pages and no settings" do
-      let(:imprint_page) { create(:page, slug: "imprint") }
-      let(:other_page) { create(:page, slug: "other") }
-
-      it "returns the maximum updated_at of Page" do
-        latest_update = [ imprint_page.updated_at, other_page.updated_at ].max
-        expect(data.updated_at).to eq(latest_update)
-      end
+    it "stays the same without changes" do
+      expect(cache_key).to eq(cache_key)
     end
 
-    context "when there are pages and settings" do
-      let(:setting1) { create(:setting) }
-      let(:imprint_page) { create(:page, slug: "imprint") }
-      let(:other_page) { create(:page, slug: "other") }
+    it "changes when a setting changes" do
+      expect { Setting.footer_copyright = "© Changed" }.to change { cache_key }
+    end
 
-      it "returns the maximum updated_at of Setting and Page" do
-        latest_update = [ setting1.updated_at, imprint_page.updated_at, other_page.updated_at ].max
-        expect(data.updated_at).to eq(latest_update)
-      end
+    it "doesn't return to the key of an earlier footer when a setting is removed" do
+      Setting.footer_copyright = "© Changed"
+      key_with_sitemap = cache_key
+      travel 1.minute
+      Setting.footer_sitemap = { "categories" => [ { "title" => "Newer", "links" => [] } ] }
+
+      Setting.remove("footer_sitemap")
+
+      expect(cache_key).not_to eq(key_with_sitemap)
+    end
+
+    it "changes when a legal page changes" do
+      expect { imprint_page.update!(content: "Changed") }.to change { cache_key }
+    end
+
+    it "changes when a legal page is deleted" do
+      expect { imprint_page.destroy }.to change { cache_key }
+    end
+
+    it "stays the same when another page changes" do
+      other_page = create(:page, slug: "other")
+      travel 1.minute
+      expect { other_page.update!(content: "Changed") }.not_to change { cache_key }
     end
   end
 
