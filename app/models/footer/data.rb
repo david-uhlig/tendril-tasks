@@ -2,9 +2,10 @@
 
 module Footer
   class Data
-    # Changes whenever a setting or a legal page is added, changed or removed.
+    # Changes whenever a setting or a legal page is added, changed or removed,
+    # and when the locale changes, since the footer's text is translated.
     def cache_key
-      @cache_key ||= "footer/#{Setting.cache_version}/#{legal_pages.cache_version}"
+      @cache_key ||= "footer/#{I18n.locale}/#{Setting.cache_version}/#{legal_pages.cache_version}"
     end
 
     def legal
