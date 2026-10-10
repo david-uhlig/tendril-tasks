@@ -23,6 +23,13 @@ RSpec.describe Footer::Data, type: :model do
       expect(cache_key).to eq(cache_key)
     end
 
+    it "changes when the locale changes" do
+      key = I18n.with_locale(:en) { cache_key }
+      other_key = I18n.with_locale(:de) { cache_key }
+
+      expect(other_key).not_to eq(key)
+    end
+
     it "changes when a setting changes" do
       expect { Setting.footer_copyright = "© Changed" }.to change { cache_key }
     end
