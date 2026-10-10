@@ -6,9 +6,9 @@
 class RocketChatApiConfig < BaseConfig
   config_name :rocket_chat_api
 
-  # RC workspace URL, e.g. `example.com`. Use the `url` method to receive a well-formed url
+  # RC workspace URL, e.g. `chat.example.com`. Use the `url` method to receive a well-formed url
   # including a scheme, host, and api_path.
-  attr_config host: "example.com"
+  attr_config :host
   # RC api path, e.g. `/api/v1`.
   attr_config path: "/api/v1"
   # RC API authentication token and user id.
@@ -45,6 +45,6 @@ class RocketChatApiConfig < BaseConfig
   #
   # @return [Boolean]
   def configured?
-    @configured ||= [ host, user_id, auth_token ].all?(&:present?)
+    [ host, user_id, auth_token ].all?(&:present?)
   end
 end

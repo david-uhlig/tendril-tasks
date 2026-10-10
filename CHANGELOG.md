@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Topics are listed by their most recently published task. Tasks scheduled for later no longer move their topic to the top.
 - Content Security Policy sources set in `config.x.content_security_policy` are applied, and space-separated sources are split into separate sources.
 - Sign in with Rocket.Chat works when `ROCKET_CHAT_HOST` is set without `https://` or with a trailing slash.
+- Rocket.Chat notifications are only sent when `ROCKET_CHAT_API_HOST` is set, instead of being sent to `example.com` when only the user ID and token are set.
 - Saving the brand name or the copyright notice shows an error instead of a success message when it can't be saved. The brand name is limited to 100 characters and the copyright notice to 255.
 - The footer is updated when its links or a legal page are deleted, instead of still showing them.
 - The footer is shown in the current language after the default language changes, instead of the previously cached one.
