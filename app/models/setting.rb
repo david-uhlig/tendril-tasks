@@ -18,6 +18,12 @@ class Setting < ApplicationRecord
       find_by(key: key)&.destroy
     end
 
+    # Changes whenever a setting is added, changed or removed. Removing a
+    # setting can make `updated_at` go back, so the count is part of it.
+    def cache_version
+      "#{count}-#{maximum(:updated_at)&.utc&.to_fs(:usec)}"
+    end
+
     def to_h
       pluck(:key, :value).to_h
     end
