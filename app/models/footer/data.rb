@@ -3,7 +3,7 @@
 module Footer
   class Data
     def updated_at
-      @updated_at ||= [ Setting.maximum(:updated_at), Page.maximum(:updated_at) ].compact.max
+      @updated_at ||= [ Setting.updated_at, Page.maximum(:updated_at) ].compact.max
     end
 
     def legal

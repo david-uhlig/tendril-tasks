@@ -2,7 +2,7 @@
 
 class Brand
   def updated_at
-    @updated_at ||= Setting.maximum(:updated_at)
+    @updated_at ||= Setting.updated_at
   end
 
   def logo

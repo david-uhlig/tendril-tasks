@@ -72,6 +72,8 @@ RSpec.describe "Admin Brand Logo", type: :request do
 
         expect(response).to have_http_status(:success)
         expect(Setting.brand_logo).to be_nil
+        expect(response.body).to include("brand/logo")
+        expect(response.body).not_to include("active_storage")
       end
     end
   end

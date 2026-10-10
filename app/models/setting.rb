@@ -9,9 +9,17 @@ class Setting < ApplicationRecord
             size: { less_than: 500.kilobytes },
             dimension: { min: 1..1, max: 2048..2048 }
 
+  # Purging the brand logo touches its setting, so this also runs then.
+  after_commit { Current.settings = nil }
+
   class << self
     def remove(key)
       find_by(key: key)&.destroy
+    end
+
+    # Returns when a setting was last changed.
+    def updated_at
+      cached.each_value.map(&:updated_at).max
     end
 
     def to_h
@@ -65,7 +73,12 @@ class Setting < ApplicationRecord
     end
 
     def get(key)
-      find_by(key: key)
+      cached[key]
+    end
+
+    # Loads all settings once per request, as most pages read several of them.
+    def cached
+      Current.settings ||= all.index_by(&:key)
     end
 
     # Raises ActiveRecord::RecordInvalid when the value is invalid, since the
