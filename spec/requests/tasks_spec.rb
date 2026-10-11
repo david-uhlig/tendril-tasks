@@ -39,6 +39,26 @@ RSpec.describe "Tasks", type: :request do
         expect(response.body).not_to include("Unpublished project")
       end
 
+      it "filters the task list by project", :aggregate_failures do
+        project = create(:project, :published, title: "Filtered project")
+        create(:task, :published, project: project, title: "Task in filtered project")
+        create(:task, :published, :with_published_project, title: "Task in other project")
+
+        get tasks_path(project_id: project.id)
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Task in filtered project")
+        expect(response.body).not_to include("Task in other project")
+      end
+
+      it "responds with not found when filtering by an unpublished project" do
+        project = create(:project, :not_published)
+
+        get tasks_path(project_id: project.id)
+
+        expect(response).to have_http_status(:not_found)
+      end
+
       it "does not show the new task link" do
         get tasks_path
 
@@ -309,6 +329,16 @@ RSpec.describe "Tasks", type: :request do
       patch task_path(task)
 
       expect(response).to have_http_status(:bad_request)
+    end
+
+    it "rejects invalid updates" do
+      login_as(editor)
+      task = create(:task, title: "Original title")
+
+      patch task_path(task), params: { task_form: { title: "" } }
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(task.reload.title).to eq("Original title")
     end
   end
 

@@ -64,6 +64,26 @@ RSpec.describe "Users::Sessions", type: :request do
         follow_redirect!
         expect(controller.current_user).to be_nil
       end
+
+      it "expires all sessions and remember me tokens when requested" do
+        user.update!(remember_created_at: Time.zone.now)
+        login_as(user)
+
+        expect {
+          delete destroy_user_session_path, params: { expire_all_remember_me_tokens: true }
+        }.to change { user.reload.session_token }
+          .and change { user.reload.remember_created_at }.to(nil)
+      end
+
+      it "keeps sessions and remember me tokens when not requested" do
+        user.update!(remember_created_at: Time.zone.now)
+        login_as(user)
+
+        expect {
+          delete destroy_user_session_path
+        }.not_to change { user.reload.session_token }
+        expect(user.reload.remember_created_at).to be_present
+      end
     end
   end
 end

@@ -91,6 +91,13 @@ RSpec.describe "Legal Pages", type: :request do
     context "with admin authorization" do
       before(:each) { login_as(admin) }
 
+      it "rejects updates with empty content" do
+        page
+        patch legal_path(:imprint), params: { page: { content: "" } }
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(page.reload.content.body.to_s).to include("Hello, World!")
+      end
+
       it "allows updating existing legal pages" do
         page
         patch legal_path(:imprint), params: { page: page_attributes }

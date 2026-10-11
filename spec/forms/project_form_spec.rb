@@ -46,6 +46,20 @@ RSpec.describe ProjectForm do
     end
   end
 
+  describe "#valid?" do
+    it "is true when the project is valid" do
+      expect(described_class.new(create(:project)).valid?).to be(true)
+    end
+
+    it "is false and reports the project's errors when the project is invalid" do
+      form = described_class.new(create(:project))
+      form.title = ""
+
+      expect(form.valid?).to be(false)
+      expect(form.errors[:title]).to be_present
+    end
+  end
+
   describe "#save" do
     let(:coordinator) { create(:user) }
     let(:project) { create(:project, coordinators: [ coordinator ]) }
