@@ -139,7 +139,7 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
     "task_coordinator_picker_modal" => [ :admin, -> { edit_task_path(task) },
                                          -> { find("#edit-coordinator-assignment").click } ],
     "admin_dashboard" => [ :admin, -> { admin_root_path } ],
-    "admin_brand" => [ :admin, -> { edit_admin_brand_path } ],
+    "admin_site" => [ :admin, -> { edit_admin_site_path } ],
     "admin_footer" => [ :admin, -> { edit_admin_footer_path } ],
     "admin_legal" => [ :admin, -> { admin_legal_index_path } ],
     "admin_user_roles" => [ :admin, -> { admin_users_roles_path } ],

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_11_120100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_11_140100) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -111,6 +111,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_11_120100) do
     t.datetime "updated_at", null: false
     t.text "value"
     t.index ["key"], name: "index_settings_on_key", unique: true
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.string "name", default: "Tendril Tasks", null: false
+    t.string "tagline"
+    t.string "navigation_label"
+    t.boolean "display_navigation_label", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.check_constraint "id = 1", name: "sites_single_row"
   end
 
   create_table "task_applications", force: :cascade do |t|

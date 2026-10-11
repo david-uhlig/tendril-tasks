@@ -305,22 +305,26 @@ de:
           update:
             notice: "Copyright-Hinweis wurde gespeichert."
       description: "Passe den Copyright-Hinweis und die Sitemap-Links der Anwendung an."
-    brand:
-      title: "Branding"
+    site:
+      title: "Website"
       edit:
-        explainer: "Hier kannst du das Logo und den Namen der Anwendung anpassen. Beides wird in der Navigation oben links angezeigt."
-        logo:
-          title: "Logo"
-          file_field:
-            label: "Neues Logo auswählen"
-            helper_text: "Format: PNG oder JPEG (max 500 KB)"
-        name:
-          title: "Anwendungsname"
-          text_field:
+        explainer: "Hier kannst du den Namen der Website sowie das Logo und die Beschriftung oben links in der Navigation anpassen."
+        identity:
+          title: "Name der Website"
+          name:
             label: "Name"
+        navigation:
+          title: "Navigation"
+          explainer: "Das Logo und die Beschriftung oben links in der Navigation. Lässt du die Beschriftung leer, wird der Name der Website angezeigt."
+          logo:
+            file_field:
+              label: "Neues Logo auswählen"
+              helper_text: "Format: PNG oder JPEG (max 500 KB)"
+          label:
+            label: "Beschriftung"
           toggle:
             label: "Anzeigen?"
-      description: "Passe das Logo und den Namen der Anwendung an."
+      description: "Passe den Namen der Website sowie das Logo und die Beschriftung in der Navigation an."
     settings:
       title: "Einstellungen"
     statistics:
@@ -513,12 +517,15 @@ de:
           attributes:
             copyright:
               too_long: "Der Copyright-Hinweis darf höchstens %{count} Zeichen lang sein."
-        setting:
+        site:
           attributes:
-            key:
-              taken: "Der Schlüssel ist bereits vergeben."
-            value:
-              brand_name_too_long: "Der Name darf höchstens %{count} Zeichen lang sein."
+            name:
+              blank: "Bitte gib einen Namen ein."
+              too_long: "Der Name darf höchstens %{count} Zeichen lang sein."
+            tagline:
+              too_long: "Der Slogan darf höchstens %{count} Zeichen lang sein."
+            navigation_label:
+              too_long: "Die Beschriftung darf höchstens %{count} Zeichen lang sein."
 
   components:
     coordinator_picker:

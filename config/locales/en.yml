@@ -259,22 +259,26 @@ en:
           update:
             notice: "Copyright notice updated."
       description: "Customize the copyright notice and the sitemap links of the application."
-    brand:
-      title: "Branding"
+    site:
+      title: "Site"
       edit:
-        explainer: "Here you can customize the logo and the name of the application. Both are displayed in the navigation bar at the top left."
-        logo:
-          title: "Logo"
-          file_field:
-            label: "Select new logo"
-            helper_text: "Format: PNG or JPEG (max 500kb)"
-        name:
-          title: "Application Name"
-          text_field:
+        explainer: "Here you can customize the name of the site, and the logo and label at the top left of the navigation bar."
+        identity:
+          title: "Site Name"
+          name:
             label: "Name"
+        navigation:
+          title: "Navigation"
+          explainer: "The logo and the label at the top left of the navigation bar. Leave the label blank to show the site name."
+          logo:
+            file_field:
+              label: "Select new logo"
+              helper_text: "Format: PNG or JPEG (max 500kb)"
+          label:
+            label: "Label"
           toggle:
             label: "Displayed?"
-      description: "Customize the logo and the name of the application."
+      description: "Customize the name of the site, and the logo and label in the navigation."
     settings:
       title: "Settings"
     statistics:
@@ -474,12 +478,15 @@ en:
           attributes:
             copyright:
               too_long: "The copyright notice must be at most %{count} characters long."
-        setting:
+        site:
           attributes:
-            key:
-              taken: "The key has already been taken."
-            value:
-              brand_name_too_long: "The name must be at most %{count} characters long."
+            name:
+              blank: "Please enter a name."
+              too_long: "The name must be at most %{count} characters long."
+            tagline:
+              too_long: "The tagline must be at most %{count} characters long."
+            navigation_label:
+              too_long: "The label must be at most %{count} characters long."
 
   components:
     coordinator_picker:

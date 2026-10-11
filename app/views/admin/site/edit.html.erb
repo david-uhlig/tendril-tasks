@@ -1,0 +1,124 @@
+<%= render TendrilTasks::Content.new(width: :large) do %>
+  <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
+    <% breadcrumb.home %>
+    <% breadcrumb.item t("breadcrumbs.admin"), href: admin_root_path %>
+    <% breadcrumb.item t("admin.site.title") %>
+  <% end %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h1) do %>
+    <%= t("admin.site.title") %>
+  <% end %>
+
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".explainer") %>
+  <% end %>
+
+  <%= render TendrilTasks::HorizontalLine.new %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h2) do %>
+    <%= t(".identity.title") %>
+  <% end %>
+
+  <%= form_with model: @site,
+                id: "site-identity-form",
+                url: admin_site_identity_path,
+                method: :put,
+                class: "space-y-6 pb-6" do |form| %>
+    <div class="flex flex-nowrap space-x-4">
+      <div class="grow">
+        <%= render Form::TextFieldComponent.new(form,
+                                                :name,
+                                                t(".identity.name.label"),
+                                                placeholder: "Tendril Tasks") %>
+      </div>
+
+      <div class="content-end">
+        <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
+          <%= t("forms.save") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h2) do %>
+    <%= t(".navigation.title") %>
+  <% end %>
+
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".navigation.explainer") %>
+  <% end %>
+
+  <%= form_with model: @site,
+                id: "site-logo-form",
+                url: admin_site_logo_path,
+                method: :put,
+                class: "space-y-6" do |form| %>
+    <%# Shows the file field next to the logo, or below a logo too wide for both. %>
+    <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+      <%# Wraps the logo, as uploading or resetting it replaces the logo. %>
+      <div class="max-w-full [&_img]:max-w-full [&_img]:object-contain">
+        <%= render TendrilTasks::Logo.new(id: "current-brand-logo", size: :lg) %>
+      </div>
+
+      <div class="grow basis-56 min-w-0">
+        <%= render "admin/site/logo_file_field", form: form %>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap">
+      <div class="whitespace-nowrap space-x-2 pe-3 pb-6 w-full [&_button]:w-1/2">
+        <%= render Gustwave::Button.new(type: :submit,
+                                        size: :md,
+                                        scheme: :red,
+                                        form: "reset-site-logo") do %>
+          <%= t("forms.reset") %>
+        <% end %>
+
+        <%= render Gustwave::Button.new(type: :submit,
+                                        size: :md) do %>
+          <%= t("forms.save") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%#
+    Clear Logo Form
+    Triggered by the reset button in the form above
+  %>
+
+  <%= form_with url: admin_site_logo_path,
+                method: :delete, id: "reset-site-logo",
+                class: "hidden" do %>
+  <% end %>
+
+  <%= form_with model: @site,
+                id: "site-navigation-form",
+                url: admin_site_navigation_path,
+                method: :put,
+                class: "space-y-6" do |form| %>
+    <div class="flex flex-nowrap space-x-4">
+      <div class="grow">
+        <%# Shows the stored label only, as the site name is its default. %>
+        <%= render Form::TextFieldComponent.new(form,
+                                                :navigation_label,
+                                                t(".navigation.label.label"),
+                                                value: @site[:navigation_label],
+                                                placeholder: @site.name) %>
+      </div>
+
+      <div class="text-center">
+        <%= render Form::ToggleComponent.new(form,
+                                             :display_navigation_label,
+                                             t(".navigation.toggle.label"),
+                                             class: "mt-2.5") %>
+      </div>
+
+      <div class="content-end">
+        <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
+          <%= t("forms.save") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

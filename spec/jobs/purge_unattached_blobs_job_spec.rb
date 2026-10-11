@@ -29,7 +29,7 @@ RSpec.describe PurgeUnattachedBlobsJob, type: :job do
 
   it "keeps attached blobs" do
     attached_blob = create_blob(created_at: 3.days.ago)
-    ActiveStorage::Attachment.create!(name: "attachment", record: Setting.create!(key: "test"), blob: attached_blob)
+    ActiveStorage::Attachment.create!(name: "logo", record: Site.find_or_create_instance, blob: attached_blob)
 
     perform_enqueued_jobs { described_class.perform_now }
 

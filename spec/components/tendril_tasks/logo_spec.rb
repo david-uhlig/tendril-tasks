@@ -11,7 +11,7 @@ RSpec.describe TendrilTasks::Logo, type: :component do
 
   context "when the uploaded logo is a JPEG" do
     it "renders the logo as a PNG" do
-      Setting.save_brand_logo File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg"))
+      Site.find_or_create_instance.logo.attach(io: File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg")), filename: "for-tests.jpg")
 
       render_inline(described_class.new)
 
@@ -24,13 +24,12 @@ RSpec.describe TendrilTasks::Logo, type: :component do
 
   context "when the stored logo is a legacy SVG" do
     it "uses the default logo instead of processing the SVG" do
-      setting = Setting.create!(key: "brand_logo")
       blob = ActiveStorage::Blob.create_and_upload!(
         io: StringIO.new('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>'),
         filename: "legacy.svg",
         content_type: "image/svg+xml"
       )
-      ActiveStorage::Attachment.create!(record: setting, name: "attachment", blob: blob)
+      ActiveStorage::Attachment.create!(record: Site.find_or_create_instance, name: "logo", blob: blob)
 
       render_inline(described_class.new)
 

@@ -383,17 +383,14 @@ end
   end
 end
 
-# Branding and footer, only set when missing to keep changes made in the admin.
-{
-  "brand_name" => -> { Setting.brand_name = "Campus Bike Collective" },
-  "display_brand_name" => -> { Setting.display_brand_name = true },
-  "brand_logo" => lambda do
-    Setting.save_brand_logo(io: Rails.root.join("db/seeds/images/brand-logo.png").open,
-                            filename: "brand-logo.png",
-                            content_type: "image/png")
-  end
-}.each do |key, seed|
-  seed.call unless Setting.exists?(key: key)
+# Site and footer, only set when missing to keep changes made in the admin.
+unless Site.exists?
+  Site.create!(
+    name: "Campus Bike Collective",
+    logo: { io: Rails.root.join("db/seeds/images/brand-logo.png").open,
+            filename: "brand-logo.png",
+            content_type: "image/png" }
+  )
 end
 
 unless Footer.exists?
