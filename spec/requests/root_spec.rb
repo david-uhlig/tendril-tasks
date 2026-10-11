@@ -8,6 +8,14 @@ RSpec.describe "Root path", type: :request do
 
         expect(response).to have_http_status(:success)
       end
+
+      it "shows the site name and tagline as the title" do
+        Site.create!(name: "Acme", tagline: "for everyone")
+
+        get root_path
+
+        expect(Nokogiri::HTML(response.body).at_css("title").text).to eq("Acme - for everyone")
+      end
     end
 
     context "as a user" do

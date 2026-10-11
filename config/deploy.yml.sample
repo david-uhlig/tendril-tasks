@@ -79,8 +79,8 @@ env:
     # - `Rails.application.action_mailer.default_url_options`
     # APP_BASE_URL=""
 
-    # Default HTML title for the application. Defaults to a localized version of
-    # this example.
+    # Deprecated: set the site name and tagline under Admin → Site instead.
+    # Replaces the title of pages without a title of their own.
     # APP_TITLE: "TendrilTasks - growing beyond ourselves together"
 
     # Default locale for the application. Defaults to "en".

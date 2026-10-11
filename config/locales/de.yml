@@ -67,7 +67,9 @@ de:
 
   layouts:
     application:
-      application_title: "TendrilTasks - gemeinsam über uns hinauswachsen"
+      page_title_html: "%{page} - %{site}"
+      site_title_html: "%{site} - %{tagline}"
+      default_tagline: "gemeinsam über uns hinauswachsen"
     footer:
       attribution: "mit ⌨️ entwickelt von"
 
@@ -308,11 +310,14 @@ de:
     site:
       title: "Website"
       edit:
-        explainer: "Hier kannst du den Namen der Website sowie das Logo und die Beschriftung oben links in der Navigation anpassen."
+        explainer: "Hier kannst du den Namen und den Slogan der Website sowie das Logo und die Beschriftung oben links in der Navigation anpassen."
         identity:
-          title: "Name der Website"
+          title: "Name und Slogan"
+          explainer: "Im Browser-Tab steht der Name, gefolgt vom Slogan, z. B. „Tendril Tasks - gemeinsam über uns hinauswachsen“. Der Slogan wird in allen Sprachen angezeigt. Lässt du ihn leer, wird ein Standard-Slogan in der Sprache der Seite angezeigt."
           name:
             label: "Name"
+          tagline:
+            label: "Slogan"
         navigation:
           title: "Navigation"
           explainer: "Das Logo und die Beschriftung oben links in der Navigation. Lässt du die Beschriftung leer, wird der Name der Website angezeigt."
@@ -324,7 +329,7 @@ de:
             label: "Beschriftung"
           toggle:
             label: "Anzeigen?"
-      description: "Passe den Namen der Website sowie das Logo und die Beschriftung in der Navigation an."
+      description: "Passe den Namen und den Slogan der Website sowie das Logo und die Beschriftung in der Navigation an."
     settings:
       title: "Einstellungen"
     statistics:

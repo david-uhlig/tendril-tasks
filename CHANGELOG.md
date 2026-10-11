@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Deprecated
+- `APP_TITLE`. Set the site name and tagline under Admin → Site instead, then remove `APP_TITLE`. Until then, it still replaces the title, and a warning is logged on start.
+
 ### Added
 - Set `SOLID_QUEUE_MODE=async` together with `SOLID_QUEUE_IN_PUMA` to run background jobs in threads of the web server's process instead of four separate processes, which reduces memory use. The queue database then uses a pool of 10 connections, configurable with `SOLID_QUEUE_DB_POOL`.
 - Set a label for the navigation that differs from the site name, e.g. a short name next to the logo. Leave it blank to show the site name.
+- Set a tagline for the site under Admin → Site. Leave it blank to show the default tagline in the language of the page.
 
 ### Changed
 - The admin page "Branding" is now called "Site". It sets the site name separately from the logo and the label in the navigation. The site name is required now. Existing names, logos and settings are kept.
+- The browser tab shows the site name and tagline, e.g. "Tendril Tasks - growing beyond ourselves together", instead of "TendrilTasks - growing beyond ourselves together".
 
 ### Fixed
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.

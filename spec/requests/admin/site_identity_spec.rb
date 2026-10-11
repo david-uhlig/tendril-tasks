@@ -35,6 +35,24 @@ RSpec.describe "Admin Site Identity", type: :request do
       end
     end
 
+    it "updates the tagline" do
+      login_as(admin)
+      put admin_site_identity_path, params: { site: { name: "Acme", tagline: "for everyone" } }, as: :turbo_stream
+
+      expect(response).to have_http_status(:success)
+      expect(site.tagline).to eq("for everyone")
+    end
+
+    it "removes the tagline when it is cleared, so the default tagline is shown" do
+      Site.create!(name: "Acme", tagline: "for everyone")
+      login_as(admin)
+
+      put admin_site_identity_path, params: { site: { name: "Acme", tagline: "" } }, as: :turbo_stream
+
+      expect(response).to have_http_status(:success)
+      expect(site.tagline).to be_nil
+    end
+
     it "updates the navigation label that falls back to the site name" do
       login_as(admin)
       put admin_site_identity_path, params: { site: { name: "Acme" } }, as: :turbo_stream
@@ -63,6 +81,14 @@ RSpec.describe "Admin Site Identity", type: :request do
         expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include(I18n.t("activerecord.errors.models.site.attributes.name.too_long", count: 100))
         expect(site.name).to eq("Acme")
+      end
+
+      it "responds with an error and keeps the tagline when it is too long" do
+        put admin_site_identity_path, params: { site: { name: "Acme", tagline: "a" * 101 } }, as: :turbo_stream
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(response.body).to include(I18n.t("activerecord.errors.models.site.attributes.tagline.too_long", count: 100))
+        expect(site.tagline).to be_nil
       end
     end
   end

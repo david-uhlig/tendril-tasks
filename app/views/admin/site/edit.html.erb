@@ -19,20 +19,31 @@
     <%= t(".identity.title") %>
   <% end %>
 
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".identity.explainer") %>
+  <% end %>
+
   <%= form_with model: @site,
                 id: "site-identity-form",
                 url: admin_site_identity_path,
                 method: :put,
                 class: "space-y-6 pb-6" do |form| %>
-    <div class="flex flex-nowrap space-x-4">
-      <div class="grow">
+    <%# Shows the save button below the tagline on mobile, next to it otherwise. %>
+    <div class="flex flex-col gap-6 sm:flex-row sm:gap-4">
+      <div class="grow space-y-6">
         <%= render Form::TextFieldComponent.new(form,
                                                 :name,
                                                 t(".identity.name.label"),
                                                 placeholder: "Tendril Tasks") %>
+
+        <%# Shows the default tagline in the admin's language when none is set. %>
+        <%= render Form::TextFieldComponent.new(form,
+                                                :tagline,
+                                                t(".identity.tagline.label"),
+                                                placeholder: t("layouts.application.default_tagline")) %>
       </div>
 
-      <div class="content-end">
+      <div class="content-end [&_button]:w-full sm:[&_button]:w-auto">
         <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
         <% end %>

@@ -17,7 +17,9 @@ en:
 
   layouts:
     application:
-      application_title: "TendrilTasks - growing beyond ourselves together"
+      page_title_html: "%{page} - %{site}"
+      site_title_html: "%{site} - %{tagline}"
+      default_tagline: "growing beyond ourselves together"
     footer:
       attribution: "made with a ⌨️ by"
 
@@ -262,11 +264,14 @@ en:
     site:
       title: "Site"
       edit:
-        explainer: "Here you can customize the name of the site, and the logo and label at the top left of the navigation bar."
+        explainer: "Here you can customize the name and tagline of the site, and the logo and label at the top left of the navigation bar."
         identity:
-          title: "Site Name"
+          title: "Name and Tagline"
+          explainer: "The browser tab shows the name followed by the tagline, e.g. \"Tendril Tasks - growing beyond ourselves together\". The tagline is shown in all languages. Leave it blank to show a default tagline in the language of the page."
           name:
             label: "Name"
+          tagline:
+            label: "Tagline"
         navigation:
           title: "Navigation"
           explainer: "The logo and the label at the top left of the navigation bar. Leave the label blank to show the site name."
@@ -278,7 +283,7 @@ en:
             label: "Label"
           toggle:
             label: "Displayed?"
-      description: "Customize the name of the site, and the logo and label in the navigation."
+      description: "Customize the name and tagline of the site, and the logo and label in the navigation."
     settings:
       title: "Settings"
     statistics:

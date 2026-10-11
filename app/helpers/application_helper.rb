@@ -15,4 +15,21 @@ module ApplicationHelper
       "" # Return empty string if no block is given
     end
   end
+
+  # Returns the title of the document, e.g. for the browser tab: "Page - Site",
+  # or "Site - Tagline" when the page sets no +:title+ of its own.
+  #
+  # @return [String] the title, safe to output as HTML
+  def document_title
+    site = Site.instance
+
+    if content_for?(:title)
+      t("layouts.application.page_title_html", page: content_for(:title), site: site.name)
+    else
+      AppConfig.title.presence ||
+        t("layouts.application.site_title_html",
+          site: site.name,
+          tagline: site.tagline || t("layouts.application.default_tagline"))
+    end
+  end
 end

@@ -11,7 +11,7 @@ module Admin
       private
 
       def identity_params
-        params.require(:site).permit(:name)
+        params.require(:site).permit(:name, :tagline)
       end
     end
   end
