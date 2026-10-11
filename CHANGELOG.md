@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Deprecated
-- `APP_TITLE`. Set the site name and tagline under Admin → Site instead, then remove `APP_TITLE`. Until then, it still replaces the title, and a warning is logged on start.
+- `APP_TITLE`. Set the site name and tagline under Admin → Site instead, then remove `APP_TITLE`. Until then, it still replaces the title of the home page, and a warning is logged on start.
 
 ### Added
 - Set `SOLID_QUEUE_MODE=async` together with `SOLID_QUEUE_IN_PUMA` to run background jobs in threads of the web server's process instead of four separate processes, which reduces memory use. The queue database then uses a pool of 10 connections, configurable with `SOLID_QUEUE_DB_POOL`.
@@ -17,9 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - The admin page "Branding" is now called "Site". It sets the site name separately from the logo and the label in the navigation. The site name is required now. Existing names, logos and settings are kept.
-- The browser tab shows the site name and tagline, e.g. "Tendril Tasks - growing beyond ourselves together", instead of "TendrilTasks - growing beyond ourselves together".
+- The browser tab shows the title of the page and the site name, e.g. "Water the plants - Tendril Tasks", or the site name and tagline on the home page, e.g. "Tendril Tasks - growing beyond ourselves together". Before, every page showed "TendrilTasks - growing beyond ourselves together".
 
 ### Fixed
+- Editing an existing legal page, e.g. the imprint, shows "Edit Imprint" as the heading instead of "Create Imprint".
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
 - "Save & New" on the task form preselects the topic and the coordinators of the task just saved in the next task form.
 - Saving a task or project without changes no longer shows an "updated" message.

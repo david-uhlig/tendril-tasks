@@ -123,6 +123,7 @@ en:
   # Tasks
   tasks:
     index:
+      page_title_for_initiative: "Tasks in %{initiative}"
       headline_for_all_published_tasks:
         title:
           zero: "There are currently no tasks to be assigned"
@@ -371,6 +372,7 @@ en:
           prompt: "Don't have an account yet?"
           link_title: "Register now"
         title: "Welcome - Here we go!"
+        page_title: "Sign in"
       dev_sign_in:
         hint: "Development only: sign in as any registered user without Rocket.Chat."
         user_label: "User"

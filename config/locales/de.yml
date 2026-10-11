@@ -167,6 +167,7 @@ de:
 
   tasks:
     index:
+      page_title_for_initiative: "Aufgaben in %{initiative}"
       headline_for_all_published_tasks:
         title:
           zero: "Aktuell sind keine Aufgaben zu vergeben"
@@ -415,6 +416,7 @@ de:
           prompt: "Du hast noch keinen Account?"
           link_title: "Jetzt anmelden"
         title: "Willkommen – los geht’s!"
+        page_title: "Anmelden"
       dev_sign_in:
         hint: "Nur in der Entwicklung: Als beliebiger registrierter Benutzer ohne Rocket.Chat anmelden."
         user_label: "Benutzer"
