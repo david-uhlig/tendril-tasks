@@ -5,6 +5,10 @@ RSpec.describe "Admin::Footer settings", type: :request do
   let(:editor) { create(:user, :editor) }
   let(:admin) { create(:user, :admin) }
 
+  # Read from the database, as the requests change the footer.
+  def copyright = Footer.find_or_create_instance.copyright
+  def sitemap = Footer.find_or_create_instance.sitemap
+
   let(:valid_sitemap_params) do
     {
       categories: [
@@ -26,7 +30,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
     end
 
     it "renders the copyright and sitemap forms with a filler category and the templates when authorized", :aggregate_failures do
-      Setting.footer_sitemap = { "categories" => [ { "title" => "Community", "links" => [ { "title" => "Chat", "href" => "https://example.com" } ] } ] }
+      Footer.find_or_create_instance.update!(sitemap: { "categories" => [ { "title" => "Community", "links" => [ { "title" => "Chat", "href" => "https://example.com" } ] } ] })
       login_as(admin)
       get edit_admin_footer_path
 
@@ -38,10 +42,10 @@ RSpec.describe "Admin::Footer settings", type: :request do
     end
 
     it "renders the sitemap categories in the footer's left-to-right order" do
-      Setting.footer_sitemap = { "categories" => [
+      Footer.find_or_create_instance.update!(sitemap: { "categories" => [
         { "title" => "First", "links" => [ { "title" => "A", "href" => "https://example.com/a" } ] },
         { "title" => "Second", "links" => [ { "title" => "B", "href" => "https://example.com/b" } ] }
-      ] }
+      ] })
       login_as(admin)
       get edit_admin_footer_path
 
@@ -51,42 +55,42 @@ RSpec.describe "Admin::Footer settings", type: :request do
 
   describe "PATCH /admin/footer/copyright" do
     it "requires authentication" do
-      Setting.footer_copyright = "original"
+      Footer.find_or_create_instance.update!(copyright: "original")
 
       require_authentication_for do
         patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
       end
 
-      expect(Setting.footer_copyright).to eq("original")
+      expect(copyright).to eq("original")
     end
 
     it "denies unauthorized changes" do
-      Setting.footer_copyright = "original"
+      Footer.find_or_create_instance.update!(copyright: "original")
 
       login_as(editor)
       patch admin_footer_copyright_path, params: { copyright_notice: "defaced" }
 
       expect(response).to have_http_status(:not_found)
-      expect(Setting.footer_copyright).to eq("original")
+      expect(copyright).to eq("original")
     end
 
     it "updates the copyright notice when authorized" do
       login_as(admin)
       patch admin_footer_copyright_path, params: { copyright_notice: "© Example e.V." }
       expect(response).to have_http_status(:found)
-      expect(Setting.footer_copyright).to eq("© Example e.V.")
+      expect(copyright).to eq("© Example e.V.")
     end
 
     it "keeps the copyright notice and shows an error when it is too long" do
-      Setting.footer_copyright = "original"
+      Footer.find_or_create_instance.update!(copyright: "original")
 
       login_as(admin)
       patch admin_footer_copyright_path, params: { copyright_notice: "a" * 256 }
 
       expect(response).to have_http_status(:unprocessable_content)
-      expect(response.body).to include(I18n.t("activerecord.errors.models.setting.attributes.value.footer_copyright_too_long", count: 255))
+      expect(response.body).to include(I18n.t("activerecord.errors.models.footer.attributes.copyright.too_long", count: 255))
       expect(response.body).not_to include(I18n.t("admin.footer.copyright.update.update.notice"))
-      expect(Setting.footer_copyright).to eq("original")
+      expect(copyright).to eq("original")
     end
   end
 
@@ -96,7 +100,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
         patch admin_footer_sitemap_path, params: valid_sitemap_params
       end
 
-      expect(Setting.footer_sitemap).to eq({})
+      expect(sitemap).to eq({})
     end
 
     it "denies unauthorized changes" do
@@ -104,7 +108,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
 
       patch admin_footer_sitemap_path, params: valid_sitemap_params, as: :turbo_stream
       expect(response).to have_http_status(:not_found)
-      expect(Setting.footer_sitemap).to eq({})
+      expect(sitemap).to eq({})
     end
 
     it "updates the sitemap, storing the categories in reverse of the form order, when authorized" do
@@ -117,7 +121,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
       }, as: :turbo_stream
 
       expect(response).to have_http_status(:success)
-      titles = Setting.footer_sitemap.fetch("categories").map { it["title"] }
+      titles = sitemap.fetch("categories").map { it["title"] }
       expect(titles).to eq(%w[Right Left])
     end
 
@@ -126,7 +130,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
       patch admin_footer_sitemap_path, as: :turbo_stream
 
       expect(response).to have_http_status(:unprocessable_content)
-      expect(Setting.footer_sitemap).to eq({})
+      expect(sitemap).to eq({})
     end
 
     it "shows a validation error for a link without an href field" do
@@ -136,7 +140,7 @@ RSpec.describe "Admin::Footer settings", type: :request do
       }, as: :turbo_stream
 
       expect(response).to have_http_status(:unprocessable_content)
-      expect(Setting.footer_sitemap).to eq({})
+      expect(sitemap).to eq({})
     end
 
     it "shows a validation error for a category without a title field" do
@@ -146,11 +150,11 @@ RSpec.describe "Admin::Footer settings", type: :request do
       }, as: :turbo_stream
 
       expect(response).to have_http_status(:unprocessable_content)
-      expect(Setting.footer_sitemap).to eq({})
+      expect(sitemap).to eq({})
     end
 
     it "keeps the copyright notice in the form when the sitemap is invalid" do
-      Setting.footer_copyright = "© Example e.V."
+      Footer.find_or_create_instance.update!(copyright: "© Example e.V.")
       login_as(admin)
       patch admin_footer_sitemap_path, params: {
         categories: [ { title: "", links: [ { title: "Chat", href: "https://example.com" } ] } ]
@@ -163,29 +167,29 @@ RSpec.describe "Admin::Footer settings", type: :request do
 
   describe "DELETE /admin/footer/sitemap" do
     it "requires authentication" do
-      Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
+      Footer.find_or_create_instance.update!(sitemap: { "categories" => [ { "title" => "Keep", "links" => [] } ] })
 
       require_authentication_for { delete admin_footer_sitemap_path }
 
-      expect(Setting.footer_sitemap).not_to eq({})
+      expect(sitemap).not_to eq({})
     end
 
     it "denies unauthorized deletions" do
-      Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
+      Footer.find_or_create_instance.update!(sitemap: { "categories" => [ { "title" => "Keep", "links" => [] } ] })
 
       login_as(editor)
       delete admin_footer_sitemap_path
 
       expect(response).to have_http_status(:not_found)
-      expect(Setting.footer_sitemap).not_to eq({})
+      expect(sitemap).not_to eq({})
     end
 
     it "deletes the sitemap when authorized" do
       login_as(admin)
-      Setting.footer_sitemap = { "categories" => [ { "title" => "Keep", "links" => [] } ] }
+      Footer.find_or_create_instance.update!(sitemap: { "categories" => [ { "title" => "Keep", "links" => [] } ] })
       delete admin_footer_sitemap_path
       expect(response).to have_http_status(:found)
-      expect(Setting.footer_sitemap).to eq({})
+      expect(sitemap).to eq({})
     end
   end
 end

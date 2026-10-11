@@ -39,7 +39,7 @@ RSpec.describe Footer::Sitemap, type: :model do
   end
 
   describe ".load" do
-    context "when the sitemap exists in the settings table" do
+    context "when the footer has links" do
       it "loads it" do
         sitemap = described_class.new
         sitemap.categories << Footer::Category.new(title: "Test Category")
@@ -52,7 +52,7 @@ RSpec.describe Footer::Sitemap, type: :model do
       end
     end
 
-    context "when the sitemap does not exist in the settings table" do
+    context "when the footer has no links" do
       it "returns an empty sitemap" do
         expect(described_class.load).to be_a(described_class)
         expect(described_class.load.categories).to be_empty
@@ -61,17 +61,30 @@ RSpec.describe Footer::Sitemap, type: :model do
   end
 
   describe "#save" do
-    it "saves the sitemap to the settings table" do
+    it "saves the links to the footer" do
+      sitemap.categories << Footer::Category.new(title: "Test Category")
       allow(sitemap).to receive(:valid?).and_return(true)
-      expect { sitemap.save }.to change(Setting, :count).by(1)
+
+      sitemap.save
+
+      expect(Footer.instance.sitemap).to eq(sitemap.attributes)
+    end
+
+    it "doesn't save invalid links" do
+      expect(sitemap.save).to be(false)
+      expect(Footer.count).to eq(0)
     end
   end
 
   describe "#destroy" do
-    it "destroys the sitemap" do
+    it "removes the links from the footer" do
+      sitemap.categories << Footer::Category.new(title: "Test Category")
       allow(sitemap).to receive(:valid?).and_return(true)
       sitemap.save
-      expect { sitemap.destroy }.to change(Setting, :count).by(-1)
+
+      sitemap.destroy
+
+      expect(Footer.instance.sitemap).to eq({})
     end
   end
 end

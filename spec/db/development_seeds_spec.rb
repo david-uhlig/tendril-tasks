@@ -28,9 +28,9 @@ RSpec.describe "Development seeds" do
     # Branding, footer and legal pages
     expect(Setting.brand_name).to eq("Campus Bike Collective")
     expect(Setting.brand_logo).to be_present
-    expect(Setting.footer_copyright).to include("Campus Bike Collective")
+    expect(Footer.instance.copyright).to include("Campus Bike Collective")
     expect(Footer::Sitemap.load).to be_valid
-    expect(Page.pluck(:slug)).to match_array(Admin::LegalController::LEGAL_PAGES)
+    expect(Page.pluck(:slug)).to match_array(Page::LEGAL_SLUGS)
   end
 
   it "keeps settings changed in the admin" do
@@ -41,12 +41,20 @@ RSpec.describe "Development seeds" do
     expect(Setting.brand_name).to eq("Changed")
   end
 
+  it "keeps the footer changed in the admin" do
+    Footer.create!(copyright: "© Changed")
+
+    load_seeds
+
+    expect(Footer.find_or_create_instance.copyright).to eq("© Changed")
+  end
+
   it "is idempotent" do
     load_seeds
 
     expect { load_seeds }.not_to change {
       [ User.count, Project.count, Task.count, TaskApplication.count, ActiveStorage::Blob.count,
-        Setting.count, Page.count ]
+        Setting.count, Footer.count, Page.count ]
     }
   end
 end

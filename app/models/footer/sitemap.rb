@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Footer
+class Footer
   class Sitemap
     include ActiveModel::Model
     include ActiveModel::Serialization
@@ -12,7 +12,7 @@ module Footer
 
     class << self
       def load
-        new(Setting.footer_sitemap)
+        new(Footer.instance.sitemap)
       end
     end
 
@@ -25,11 +25,11 @@ module Footer
     def save
       return false unless valid?
 
-      Setting.footer_sitemap = attributes
+      Footer.find_or_create_instance.update!(sitemap: attributes)
     end
 
     def destroy
-      Setting.remove("footer_sitemap")
+      Footer.find_or_create_instance.update!(sitemap: {})
     end
 
     def attributes

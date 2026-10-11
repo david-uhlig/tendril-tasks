@@ -9,8 +9,7 @@ RSpec.describe Footer::Data, type: :model do
     let!(:imprint_page) { create(:page, slug: "imprint") }
 
     before do
-      Setting.footer_copyright = "© Example"
-      Setting.footer_sitemap = { "categories" => [] }
+      Footer.create!(copyright: "© Example", sitemap: { "categories" => [ { "title" => "Community", "links" => [] } ] })
       travel 1.minute
     end
 
@@ -30,19 +29,12 @@ RSpec.describe Footer::Data, type: :model do
       expect(other_key).not_to eq(key)
     end
 
-    it "changes when a setting changes" do
-      expect { Setting.footer_copyright = "© Changed" }.to change { cache_key }
+    it "changes when the copyright notice changes" do
+      expect { Footer.find_or_create_instance.update!(copyright: "© Changed") }.to change { cache_key }
     end
 
-    it "doesn't return to the key of an earlier footer when a setting is removed" do
-      Setting.footer_copyright = "© Changed"
-      key_with_sitemap = cache_key
-      travel 1.minute
-      Setting.footer_sitemap = { "categories" => [ { "title" => "Newer", "links" => [] } ] }
-
-      Setting.remove("footer_sitemap")
-
-      expect(cache_key).not_to eq(key_with_sitemap)
+    it "changes when the links are deleted" do
+      expect { Footer::Sitemap.load.destroy }.to change { cache_key }
     end
 
     it "changes when a legal page changes" do
@@ -95,7 +87,7 @@ RSpec.describe Footer::Data, type: :model do
     end
 
     it "returns the footer copyright" do
-      create(:setting, key: "footer_copyright", value: "© 2021 Example")
+      Footer.create!(copyright: "© 2021 Example")
 
       expect(data.copyright).to eq("© 2021 Example")
     end

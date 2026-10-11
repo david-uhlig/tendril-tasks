@@ -2,8 +2,6 @@ module Pages
   class LegalController < ApplicationController
     include AccessDeniedHandlers::SensibleResources
 
-    LEGAL_PAGES = %w[ imprint privacy-policy terms-of-service ]
-
     before_action :set_page, only: %i[ show destroy ]
     before_action :set_editable_page, only: %i[ edit update ]
 
@@ -43,7 +41,7 @@ module Pages
     end
 
     def is_legal_page
-      params[:slug].in?(LEGAL_PAGES)
+      params[:slug].in?(Page::LEGAL_SLUGS)
     end
 
     def page_params
