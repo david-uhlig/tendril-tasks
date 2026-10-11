@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Footer
+class Footer
   class Link
     include ActiveModel::Model
     include ActiveModel::Serialization

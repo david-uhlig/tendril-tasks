@@ -6,14 +6,14 @@ module Admin
       def update
         @sitemap = ::Footer::Sitemap.new(sitemap_params)
         unless @sitemap.save
-          @copyright = Setting.footer_copyright
+          @copyright = ::Footer.instance.copyright
           render "admin/footer/edit", status: :unprocessable_content
           nil
         end
       end
 
       def destroy
-        @sitemap = ::Footer::Sitemap.new(Setting.footer_sitemap)
+        @sitemap = ::Footer::Sitemap.load
         @sitemap.destroy
 
         flash[:success] = t("admin.footer.sitemap.destroyed")

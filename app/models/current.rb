@@ -4,4 +4,6 @@
 class Current < ActiveSupport::CurrentAttributes
   # All settings by key, see `Setting.cached`.
   attribute :settings
+  # Single-row records by class name, see `SingletonRecord.instance`.
+  attribute :singleton_records
 end

@@ -22,12 +22,6 @@ class Setting < ApplicationRecord
       cached.each_value.map(&:updated_at).max
     end
 
-    # Changes whenever a setting is added, changed or removed. Removing a
-    # setting can make `updated_at` go back, so the count is part of it.
-    def cache_version
-      "#{cached.size}-#{updated_at&.utc&.to_fs(:usec)}"
-    end
-
     def to_h
       pluck(:key, :value).to_h
     end
@@ -104,6 +98,4 @@ class Setting < ApplicationRecord
 
   setting :brand_name, maximum_length: 100
   setting :display_brand_name, type: :boolean, default: true
-  setting :footer_copyright, default: "", maximum_length: 255
-  setting :footer_sitemap, type: nil, default: {}
 end

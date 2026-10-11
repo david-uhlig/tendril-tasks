@@ -66,64 +66,6 @@ RSpec.describe Setting, type: :model do
     end
   end
 
-  describe "sitemap" do
-    let(:sitemap) { { "categories" =>
-                        [ { "title" => "Gehe zu", "links" => [ { "title" => "Start", "href" => "/" }, { "title" => "Themen", "href" => "/projects" }, { "title" => "Aufgaben", "href" => "/tasks" } ] },
-                          { "title" => "Example Apps",
-                            "links" => [ { "title" => "Chat", "href" => "https://example.com" }, { "title" => "Homepage", "href" => "https://example.com/home" }, { "title" => "Terminplaner", "href" => "https://example.com/calendar" } ] } ] }
-    }
-
-    context ".footer_sitemap" do
-      it "returns an empty hash when there is no footer sitemap" do
-        expect(Setting.footer_sitemap).to eq({})
-      end
-
-      it "returns a fresh default each time" do
-        Setting.footer_sitemap["categories"] = []
-        expect(Setting.footer_sitemap).to eq({})
-      end
-
-      it "returns the footer sitemap" do
-        create(:setting, key: "footer_sitemap", value: sitemap)
-        expect(Setting.footer_sitemap).to eq(sitemap)
-      end
-    end
-
-    context ".footer_sitemap=" do
-      it "creates a new setting with the footer sitemap" do
-        Setting.footer_sitemap = sitemap
-        expect(Setting.footer_sitemap).to eq(sitemap)
-      end
-    end
-  end
-
-  describe "copyright" do
-    context ".footer_copyright" do
-      it "returns an empty string when there is no footer copyright" do
-        expect(Setting.footer_copyright).to eq("")
-      end
-
-      it "returns the footer copyright" do
-        create(:setting, key: "footer_copyright", value: "© 2021 Example")
-        expect(Setting.footer_copyright).to eq("© 2021 Example")
-      end
-    end
-
-    context ".footer_copyright=" do
-      it "creates a new setting with the footer copyright" do
-        Setting.footer_copyright = "© 2021 Example"
-        expect(Setting.footer_copyright).to eq("© 2021 Example")
-      end
-
-      it "raises and keeps the footer copyright when it is too long" do
-        Setting.footer_copyright = "© 2021 Example"
-
-        expect { Setting.footer_copyright = "a" * 256 }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(Setting.footer_copyright).to eq("© 2021 Example")
-      end
-    end
-  end
-
   describe "brand" do
     context ".brand_logo" do
       it "returns nil when there is no brand logo" do
@@ -243,7 +185,6 @@ RSpec.describe Setting, type: :model do
 
     before do
       Setting.brand_name = "Example"
-      Setting.footer_copyright = "© Example"
       Current.reset
     end
 
@@ -251,8 +192,6 @@ RSpec.describe Setting, type: :model do
       queries = count_queries do
         Setting.brand_name
         Setting.display_brand_name?
-        Setting.footer_copyright
-        Setting.footer_sitemap
         Setting.updated_at
       end
 

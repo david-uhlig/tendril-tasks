@@ -391,10 +391,15 @@ end
     Setting.save_brand_logo(io: Rails.root.join("db/seeds/images/brand-logo.png").open,
                             filename: "brand-logo.png",
                             content_type: "image/png")
-  end,
-  "footer_copyright" => -> { Setting.footer_copyright = "© #{Date.current.year} Campus Bike Collective e.V." },
-  "footer_sitemap" => lambda do
-    Setting.footer_sitemap = {
+  end
+}.each do |key, seed|
+  seed.call unless Setting.exists?(key: key)
+end
+
+unless Footer.exists?
+  Footer.create!(
+    copyright: "© #{Date.current.year} Campus Bike Collective e.V.",
+    sitemap: {
       "categories" => [
         {
           "title" => "Collective",
@@ -414,9 +419,7 @@ end
         }
       ]
     }
-  end
-}.each do |key, seed|
-  seed.call unless Setting.exists?(key: key)
+  )
 end
 
 # Sample legal pages of a fictional association, not legal advice.

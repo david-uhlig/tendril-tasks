@@ -3,8 +3,8 @@
 module Admin
   class FooterController < AdminController
     def edit
-      @sitemap = ::Footer::Sitemap.new(Setting.footer_sitemap)
-      @copyright = Setting.footer_copyright
+      @sitemap = ::Footer::Sitemap.load
+      @copyright = ::Footer.instance.copyright
     end
   end
 end

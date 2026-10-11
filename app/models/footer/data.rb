@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Footer
+class Footer
   class Data
-    # Changes whenever a setting or a legal page is added, changed or removed,
-    # and when the locale changes, since the footer's text is translated.
+    # Changes whenever the footer changes, a legal page is added, changed or
+    # removed, or the locale changes, since the footer's text is translated.
     def cache_key
-      @cache_key ||= "footer/#{I18n.locale}/#{Setting.cache_version}/#{legal_pages.cache_version}"
+      @cache_key ||= "footer/#{I18n.locale}/#{footer.cache_key_with_version}/#{legal_pages.cache_version}"
     end
 
     def legal
@@ -17,13 +17,17 @@ module Footer
     end
 
     def copyright
-      @copyright ||= Setting.footer_copyright
+      footer.copyright
     end
 
     private
 
+    def footer
+      Footer.instance
+    end
+
     def legal_pages
-      Page.where(slug: Admin::LegalController::LEGAL_PAGES)
+      Page.legal
     end
   end
 end
