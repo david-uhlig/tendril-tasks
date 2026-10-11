@@ -232,6 +232,18 @@ RSpec.describe "Projects", type: :request do
         expect(project).to have_attributes(title: "New project", coordinators: [ editor ])
       end
 
+      it "redirects to a new task preset when saving and creating a task" do
+        login_as(editor)
+
+        post projects_path, params: {
+          project_form: { title: "New project", description: "A description", submit_type: "save_and_new_task" },
+          assigned_coordinator_ids: [ editor.id ]
+        }
+
+        project = Project.find_by!(title: "New project")
+        expect(response).to redirect_to(new_task_from_preset_path(project_id: project.id, coordinator_ids: editor.id.to_s))
+      end
+
       it "rejects invalid projects" do
         login_as(editor)
 
@@ -288,6 +300,16 @@ RSpec.describe "Projects", type: :request do
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(project_path(project))
         expect(project.reload.title).to eq("Updated title")
+      end
+
+      it "rejects invalid updates" do
+        login_as(editor)
+        project_title = project.title
+
+        patch project_path(project), params: { project_form: { title: "" } }
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(project.reload.title).to eq(project_title)
       end
 
       it "shows a notice when the project changed" do

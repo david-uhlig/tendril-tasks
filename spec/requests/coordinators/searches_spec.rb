@@ -18,6 +18,18 @@ RSpec.describe "Coordinator Searches", type: :request do
         expect(response).to have_http_status(:forbidden)
       end
 
+      it "excludes the given coordinators from the search results" do
+        login_as(user)
+        create(:project, coordinators: [ user ])
+        excluded = create(:user, name: "Searchable Excluded", username: "searchable.excluded")
+        create(:user, name: "Searchable Included", username: "searchable.included")
+
+        get coordinators_searches_path(search: "Searchable", coordinator_ids: [ excluded.id ]), as: :turbo_stream
+
+        expect(response.body).to include("Searchable Included")
+        expect(response.body).not_to include("Searchable Excluded")
+      end
+
       it "project coordinators can view search results" do
         login_as(user)
         create(:project, coordinators: [ user ])

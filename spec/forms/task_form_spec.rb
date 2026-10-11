@@ -115,6 +115,20 @@ RSpec.describe TaskForm do
     end
   end
 
+  describe "#valid?" do
+    it "is true when the task is valid" do
+      expect(described_class.new(create(:task)).valid?).to be(true)
+    end
+
+    it "is false and reports the task's errors when the task is invalid" do
+      form = described_class.new(create(:task))
+      form.title = ""
+
+      expect(form.valid?).to be(false)
+      expect(form.errors[:title]).to be_present
+    end
+  end
+
   describe "#publish=" do
     it "publishes an unpublished task" do
       form = described_class.new(create(:task, :not_published))
