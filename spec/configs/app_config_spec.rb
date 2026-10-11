@@ -40,6 +40,22 @@ RSpec.describe AppConfig, type: :config do
     end
   end
 
+  describe "#title" do
+    it "is blank when not configured" do
+      expect(config.title).to be_nil
+    end
+
+    it "warns that it is deprecated when configured" do
+      with_env("APP_TITLE" => "Acme - for everyone") do
+        expect { described_class.new }.to output(/\[DEPRECATION\].*`title`.*Admin → Site/).to_stderr
+      end
+    end
+
+    it "doesn't warn when not configured" do
+      expect { described_class.new }.not_to output.to_stderr
+    end
+  end
+
   describe "#delete_confirm_cooldown" do
     it "is disabled in the test environment" do
       expect(config.delete_confirm_cooldown).to eq(0)

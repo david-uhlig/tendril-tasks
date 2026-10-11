@@ -38,6 +38,26 @@ RSpec.describe "Admin Site", type: :request do
       expect(field["placeholder"]).to eq("Acme")
     end
 
+    it "shows the default tagline as the placeholder of the tagline" do
+      Site.create!(name: "Acme")
+      login_as(admin)
+
+      get edit_admin_site_path
+
+      field = Nokogiri::HTML(response.body).at_css("#site_tagline")
+      expect(field["value"]).to be_nil
+      expect(field["placeholder"]).to eq(I18n.t("layouts.application.default_tagline"))
+    end
+
+    it "shows a tagline of its own" do
+      Site.create!(name: "Acme", tagline: "for everyone")
+      login_as(admin)
+
+      get edit_admin_site_path
+
+      expect(Nokogiri::HTML(response.body).at_css("#site_tagline")["value"]).to eq("for everyone")
+    end
+
     it "shows a label of its own" do
       Site.create!(name: "Acme", navigation_label: "ACME")
       login_as(admin)
