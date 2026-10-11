@@ -1,6 +1,7 @@
 <%# Edit page, e.g. imprint, terms-of-service, privacy-policy %>
 <% heading = t(@page.persisted? ? "forms.headings.edit" : "forms.headings.new",
                 thing: t("pages.#{@page.slug}.title")) %>
+
 <% content_for :title, heading %>
 
 <%= render TendrilTasks::Content.new(width: :large) do %>
