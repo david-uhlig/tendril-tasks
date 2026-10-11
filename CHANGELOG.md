@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Editing an existing legal page, e.g. the imprint, shows "Edit Imprint" as the heading instead of "Create Imprint".
+- On phones, the navigation shows only the logo, without the label, so the user menu stays on the same line instead of wrapping below a wide logo or a long label.
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
 - "Save & New" on the task form preselects the topic and the coordinators of the task just saved in the next task form.
 - Saving a task or project without changes no longer shows an "updated" message.

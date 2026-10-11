@@ -9,7 +9,8 @@ module TendrilTasks
           options,
           tag: :a,
           size: "2xl",
-          class: "text-md sm:text-2xl font-normal sm:font-extrabold dark:bg-blue-200 dark:text-blue-800 truncate overflow-hidden",
+          # Hidden while the menu is collapsed, leaving room for the logo.
+          class: "hidden md:inline-flex text-2xl font-extrabold dark:bg-blue-200 dark:text-blue-800 truncate overflow-hidden",
         )
       end
 
