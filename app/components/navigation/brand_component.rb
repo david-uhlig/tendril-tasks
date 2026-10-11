@@ -3,7 +3,7 @@
 module Navigation
   class BrandComponent < TendrilTasks::Component
     def initialize
-      @brand = Brand.new
+      @site = Site.instance
     end
   end
 end

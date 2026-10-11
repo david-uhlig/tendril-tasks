@@ -3,8 +3,8 @@
 module TendrilTasks
   module Navigation
     class BrandBadge < TendrilTasks::Component
-      def initialize(brand, **options)
-        @brand = brand
+      def initialize(site, **options)
+        @site = site
         @config = configure_component(
           options,
           tag: :a,
@@ -19,21 +19,17 @@ module TendrilTasks
 
       def call
         render Gustwave::Badge.new(**config) do
-          brand_name
+          site.navigation_label
         end
       end
 
       def render?
-        brand.display_name?
+        site.display_navigation_label?
       end
 
       private
 
-      attr_reader :brand, :config
-
-      def brand_name
-        brand.name.presence || "Tendril Tasks"
-      end
+      attr_reader :site, :config
     end
   end
 end

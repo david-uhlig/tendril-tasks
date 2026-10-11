@@ -1,5 +1,6 @@
-<% if @errors %>
-  <%= render TurboStream::NotificationComponent.new(@errors.map(&:message).to_sentence, scheme: :alert) %>
+<%# locals: (site:) %>
+<% if site.errors.any? %>
+  <%= render TurboStream::NotificationComponent.new(site.errors.map(&:message).to_sentence, scheme: :alert) %>
 <% else %>
   <%= render TurboStream::NotificationComponent.new(t("notification.saved")) %>
 

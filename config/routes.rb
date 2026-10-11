@@ -59,9 +59,10 @@ Rails.application.routes.draw do
     namespace :admin do
       root to: "dashboard#index"
 
-      resource :brand, only: %i[ edit ], controller: :brand
-      namespace :brand do
-        resource :name, only: %i[ update ], controller: :name
+      resource :site, only: %i[ edit ], controller: :site
+      namespace :site do
+        resource :identity, only: %i[ update ], controller: :identity
+        resource :navigation, only: %i[ update ], controller: :navigation
         resource :logo, only: %i[ update destroy ], controller: :logo
       end
 

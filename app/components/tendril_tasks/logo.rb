@@ -20,7 +20,7 @@ module TendrilTasks
           default: :sm
 
     def initialize(id: "brand-logo", size: :sm, **options)
-      @brand = Brand.new
+      @site = Site.instance
 
       options.symbolize_keys!
       options[:id] ||= id
@@ -40,7 +40,7 @@ module TendrilTasks
     private
 
     def build_logo
-      logo = @brand.logo
+      logo = @site.logo
 
       if logo_missing? || deprecated_svg_logo?
         return default_logo
@@ -52,13 +52,13 @@ module TendrilTasks
     end
 
     def logo_missing?
-      !@brand.logo.present?
+      !@site.logo.attached?
     end
 
     def deprecated_svg_logo?
       !logo_missing? && (
-        @brand.logo.content_type == "image/svg+xml" ||
-        @brand.logo.filename.to_s.downcase.end_with?(".svg")
+        @site.logo.content_type == "image/svg+xml" ||
+        @site.logo.filename.to_s.downcase.end_with?(".svg")
       )
     end
 
