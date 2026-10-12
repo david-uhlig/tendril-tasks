@@ -19,6 +19,12 @@ RSpec.describe TendrilTasks::Tasks::CompactCard, type: :component do
     expect(page).to have_link("Water the plants", href: "/tasks/#{task.id}")
   end
 
+  it "limits the title to 2 lines" do
+    render_inline(described_class.new(task))
+
+    expect(page).to have_selector("h3.line-clamp-2", text: "Water the plants")
+  end
+
   it "shows the initiative and that the task is new" do
     render_inline(described_class.new(task))
 
