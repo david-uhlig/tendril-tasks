@@ -6,7 +6,12 @@
      { key: :new_tasks, count: new_tasks_count, href: tasks_path, color: "text-emerald-700 dark:text-emerald-400" }
    ] %>
 
-<section id="home-stats" aria-label="<%= t(".label") %>">
+<section id="home-stats" class="space-y-4">
+  <%= render TendrilTasks::Heading.new(tag: :h2,
+                                       scheme: :level3,
+                                       class: "mb-0")
+                                  .with_content(t(".title")) %>
+
   <ul class="grid grid-cols-1 sm:grid-cols-3 gap-4">
     <% stats.each do |stat| %>
       <li>

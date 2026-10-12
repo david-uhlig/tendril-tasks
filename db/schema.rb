@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_11_140100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_12_150000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -120,6 +120,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_11_140100) do
     t.boolean "display_navigation_label", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "home_title"
+    t.string "home_title_highlight"
+    t.text "home_introduction"
     t.check_constraint "id = 1", name: "sites_single_row"
   end
 

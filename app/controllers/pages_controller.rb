@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   RECENT_TASKS_LIMIT = 3
 
   def home
+    @site = Site.instance
+
     # Count what the tasks and initiatives pages list, so the numbers match
     # what visitors find after clicking through.
     @open_tasks_count = Task.publicly_visible.count

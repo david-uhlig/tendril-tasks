@@ -75,12 +75,12 @@ de:
 
   pages:
     home:
-      title: "Bring dich aktiv beim RCB ein!"
+      title: "Bring dich aktiv ein!"
       title_highlight: "aktiv"
       hero: |
-        Ein Verein lebt von den Leuten, die sich engagieren. Such dir eine Aufgabe, die zu dir passt – ob groß oder klein, jede Hilfe bringt den Verein voran.
+        Gemeinsam schaffen wir mehr. Such dir eine Aufgabe, die zu dir passt – ob groß oder klein, jede Hilfe bringt uns voran.
       stats:
-        label: "Aktivität im Verein"
+        title: "Auf einen Blick"
         open_tasks:
           label:
             one: "offene Aufgabe"
@@ -93,8 +93,8 @@ de:
             one: "Thema"
             other: "Themen"
           description:
-            one: "an dem der Verein gerade arbeitet"
-            other: "an denen der Verein gerade arbeitet"
+            one: "an dem gerade gearbeitet wird"
+            other: "an denen gerade gearbeitet wird"
         new_tasks:
           label:
             one: "neu in den letzten zwei Wochen"
@@ -112,7 +112,7 @@ de:
         step: "Schritt %{number}"
         browse:
           title: "Themen entdecken"
-          description: "Sieh dir an, woran der Verein gerade arbeitet – nach Themen sortiert."
+          description: "Sieh dir an, woran gerade gearbeitet wird – nach Themen sortiert."
         pick:
           title: "Aufgabe aussuchen"
           description: "Finde etwas, das zu deiner Zeit und deinen Fähigkeiten passt."
@@ -126,6 +126,8 @@ de:
       cta_when_signed_out:
         login_to_see_initiatives_and_tasks: |
           Jetzt einloggen, um Themen und Aufgaben zu sehen:
+      photo_hero:
+        credit_html: "Foto von %{photographer} auf %{unsplash}"
     imprint:
       title: "Impressum"
     privacy-policy:
@@ -350,7 +352,7 @@ de:
     site:
       title: "Website"
       edit:
-        explainer: "Hier kannst du den Namen und den Slogan der Website sowie das Logo und die Beschriftung oben links in der Navigation anpassen."
+        explainer: "Hier kannst du den Namen und den Slogan der Website, das Logo und die Beschriftung oben links in der Navigation sowie Text und Bild der Startseite anpassen."
         identity:
           title: "Name und Slogan"
           explainer: "Im Browser-Tab steht der Name, gefolgt vom Slogan, z. B. „Tendril Tasks - gemeinsam über uns hinauswachsen“. Der Slogan wird in allen Sprachen angezeigt. Lässt du ihn leer, wird ein Standard-Slogan in der Sprache der Seite angezeigt."
@@ -369,7 +371,30 @@ de:
             label: "Beschriftung"
           toggle:
             label: "Anzeigen?"
-      description: "Passe den Namen und den Slogan der Website sowie das Logo und die Beschriftung in der Navigation an."
+        home_page:
+          title: "Startseite"
+          explainer: "Das sehen Besucher als Erstes: eine Überschrift und eine Einleitung auf einem Bild."
+          text:
+            heading: "Überschrift und Einleitung"
+            explainer: "Lässt du ein Feld leer, wird der Standardtext in der Sprache der Besucher angezeigt."
+            title:
+              label: "Überschrift"
+            title_highlight:
+              label: "Hervorgehobenes Wort"
+              helper_text: "Ein Teil der Überschrift, der farbig erscheint."
+            introduction:
+              label: "Einleitung"
+              helper_text: "Leere Zeilen trennen Absätze."
+          hero_image:
+            heading: "Bild"
+            explainer: "Das Bild hinter der Einleitung, z. B. ein Foto von euch in Aktion. Es wird abgedunkelt, damit der Text darauf lesbar bleibt, ein Querformat passt am besten. Setzt du es zurück, wird wieder das Standardfoto angezeigt."
+            alt: "Aktuelles Bild auf der Startseite"
+            default: "Standardfoto von Anna Schroeder auf Unsplash"
+            show_text: "Mit dem Text der Startseite zeigen"
+            file_field:
+              label: "Neues Bild auswählen"
+              helper_text: "Format: PNG, JPEG oder WebP, mindestens 400 × 300 Pixel (max 5 MB)"
+      description: "Passe den Namen und den Slogan der Website, das Logo und die Beschriftung in der Navigation sowie Text und Bild der Startseite an."
     settings:
       title: "Einstellungen"
     statistics:
@@ -572,6 +597,13 @@ de:
               too_long: "Der Slogan darf höchstens %{count} Zeichen lang sein."
             navigation_label:
               too_long: "Die Beschriftung darf höchstens %{count} Zeichen lang sein."
+            home_title:
+              too_long: "Die Überschrift darf höchstens %{count} Zeichen lang sein."
+            home_title_highlight:
+              too_long: "Das hervorgehobene Wort darf höchstens %{count} Zeichen lang sein."
+              not_in_home_title: "Das hervorgehobene Wort muss in der Überschrift vorkommen."
+            home_introduction:
+              too_long: "Die Einleitung darf höchstens %{count} Zeichen lang sein."
 
   components:
     coordinator_picker:

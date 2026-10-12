@@ -33,6 +33,12 @@ RSpec.describe "Root path", type: :request do
       expect(stat("new-tasks")).to eq("1")
     end
 
+    it "shows a headline above the counts" do
+      get root_path
+
+      expect(page.at_css("#home-stats h2").text.squish).to eq("Auf einen Blick")
+    end
+
     it "explains how it works" do
       get root_path
 
@@ -57,6 +63,54 @@ RSpec.describe "Root path", type: :request do
       end
 
       include_examples "shows the counts of visible tasks and initiatives"
+
+      it "shows the introduction on the default photo with its credit" do
+        get root_path
+
+        hero = page.at_css("#home-hero")
+        expect(hero.at_css("img")["src"]).to include("brand/hero")
+        expect(hero.at_css("img")["alt"]).to eq("")
+        expect(hero.at_css("h1")).to be_present
+        expect(page.at_css("#home-hero-credit").text.squish).to eq("Foto von Anna Schroeder auf Unsplash")
+        expect(page.css("#home-hero-credit a").map { |link| link["href"] }).to all(include("utm_source=tendril_tasks"))
+      end
+
+      it "shows the default headline and introduction" do
+        get root_path
+
+        hero = page.at_css("#home-hero")
+        expect(hero.at_css("h1").text.squish).to eq("Bring dich aktiv ein!")
+        expect(hero.at_css("h1 span").text).to eq("aktiv")
+        expect(hero.text).to include("Gemeinsam schaffen wir mehr.")
+      end
+
+      it "shows the headline and introduction set by admins, escaped" do
+        Site.find_or_create_instance.update!(
+          home_title: "Ride with the <b>RCB</b>!",
+          home_title_highlight: "Ride",
+          home_introduction: "First paragraph.\n\nSecond paragraph."
+        )
+
+        get root_path
+
+        hero = page.at_css("#home-hero")
+        expect(hero.at_css("h1").text.squish).to eq("Ride with the <b>RCB</b>!")
+        expect(hero.at_css("h1 b")).to be_nil
+        expect(hero.at_css("h1 span").text).to eq("Ride")
+        expect(hero.css("p").map { |paragraph| paragraph.text.squish }).to include("First paragraph.", "Second paragraph.")
+      end
+
+      it "shows the uploaded picture without the credit" do
+        Site.find_or_create_instance.update!(
+          hero_image: Rack::Test::UploadedFile.new(Rails.root.join("spec", "assets", "images", "for-tests.jpg"), "image/jpeg")
+        )
+
+        get root_path
+
+        hero = page.at_css("#home-hero")
+        expect(hero.at_css("img")["src"]).not_to include("brand/hero")
+        expect(page.at_css("#home-hero-credit")).to be_nil
+      end
 
       it "doesn't link the counts" do
         get root_path

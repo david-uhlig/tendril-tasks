@@ -64,6 +64,8 @@ Rails.application.routes.draw do
         resource :identity, only: %i[ update ], controller: :identity
         resource :navigation, only: %i[ update ], controller: :navigation
         resource :logo, only: %i[ update destroy ], controller: :logo
+        resource :hero_image, only: %i[ update destroy ], controller: :hero_image
+        resource :home_text, only: %i[ update destroy ], controller: :home_text
       end
 
       resource :footer, only: %i[ edit ], controller: :footer
