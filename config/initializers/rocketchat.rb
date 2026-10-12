@@ -7,7 +7,9 @@ Devise.setup do |config|
     RocketChatConfig.client_secret,
     pkce: RocketChatConfig.pkce,
     client_options: {
-      site: RocketChatConfig.host
+      site: RocketChatConfig.host,
+      authorize_url: RocketChatConfig.authorize_url,
+      token_url: RocketChatConfig.token_url
     }
   )
 end

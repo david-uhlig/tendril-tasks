@@ -33,13 +33,14 @@ class RocketChatConfig < BaseConfig
     value.match?(%r{\Ahttps?://}i) ? value : "https://#{value}"
   end
 
-  # Returns the scheme, host and port of the workspace, e.g.
-  # "https://chat.example.com", without any path.
+  # Returns the scheme, host and port that signing in redirects to, e.g.
+  # "https://chat.example.com", without any path. That's the workspace, unless
+  # the authorize URL is an absolute URL on another host.
   #
   # @return [String, nil]
-  def origin
+  def authorize_origin
     return if host.blank?
 
-    URI.join(host, "/").to_s.delete_suffix("/")
+    URI.join("#{host}/", authorize_url.to_s, "/").to_s.delete_suffix("/")
   end
 end

@@ -13,19 +13,24 @@ RSpec.describe RocketChatConfig, type: :config do
     it_behaves_like "a config with a Rocket.Chat host"
   end
 
-  describe "#origin" do
+  describe "#authorize_origin" do
     it "returns the scheme and host of the workspace" do
-      expect(config.origin).to eq("https://chat.example.com")
+      expect(config.authorize_origin).to eq("https://chat.example.com")
     end
 
     it "drops the path and keeps a non-default port" do
       config.host = "http://localhost:5000/chat/"
-      expect(config.origin).to eq("http://localhost:5000")
+      expect(config.authorize_origin).to eq("http://localhost:5000")
+    end
+
+    it "returns the scheme and host of an absolute authorize URL on another host" do
+      config.authorize_url = "https://auth.example.com:8443/oauth/authorize"
+      expect(config.authorize_origin).to eq("https://auth.example.com:8443")
     end
 
     it "returns nil when the host is blank" do
       config.host = ""
-      expect(config.origin).to be_nil
+      expect(config.authorize_origin).to be_nil
     end
   end
 
