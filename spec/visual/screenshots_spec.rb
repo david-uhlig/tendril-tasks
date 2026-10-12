@@ -35,20 +35,20 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
   before { travel_to Time.zone.local(2026, 1, 15, 10, 0, 0) }
 
   let(:admin) do
-    create(:user, :admin, name: "Ada Admin", username: "ada.admin", email: "ada@example.com",
-                          uid: "visual-admin", avatar_url: "/icon.png")
+    create(:user, :admin, :with_avatar, name: "Ada Admin", username: "ada.admin", email: "ada@example.com",
+                          uid: "visual-admin")
   end
   let(:editor) do
     create(:user, :editor, name: "Eddie Editor", username: "eddie.editor", email: "eddie@example.com",
-                           uid: "visual-editor", avatar_url: "/icon.svg")
+                           uid: "visual-editor")
   end
   let(:volunteer) do
-    create(:user, name: "Vera Volunteer", username: "vera.volunteer", email: "vera@example.com",
-                  uid: "visual-volunteer", avatar_url: "/icon.png")
+    create(:user, :with_avatar, name: "Vera Volunteer", username: "vera.volunteer", email: "vera@example.com",
+                  uid: "visual-volunteer")
   end
   let(:applicant) do
     create(:user, name: "Arne Applicant", username: "arne.applicant", email: "arne@example.com",
-                  uid: "visual-applicant", avatar_url: "/icon.svg")
+                  uid: "visual-applicant")
   end
 
   let!(:project) do

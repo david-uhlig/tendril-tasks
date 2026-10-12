@@ -2,3 +2,6 @@ production:
   purge_unattached_blobs:
     class: PurgeUnattachedBlobsJob
     schedule: every day at 4:45am
+  refresh_avatars:
+    class: RefreshAvatarsJob
+    schedule: every day at 4:15am

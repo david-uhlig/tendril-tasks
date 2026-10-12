@@ -23,6 +23,14 @@ users = {
     user.email = "#{attributes[:username]}@example.com"
     user.avatar_url = "/seeds/avatars/#{attributes[:username]}.jpg"
     user.password = Devise.friendly_token[0, 20]
+  end.tap do |user|
+    # Stores a copy like DownloadAvatarJob does in production, which can't
+    # download avatars from local paths.
+    next if user.avatar.attached?
+
+    user.avatar.attach(io: Rails.public_path.join(user.avatar_url.delete_prefix("/")).open,
+                       filename: "#{attributes[:username]}.jpg",
+                       content_type: "image/jpeg")
   end
 end
 

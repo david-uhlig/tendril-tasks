@@ -10,10 +10,10 @@ class Coordinators::SearchesController < ApplicationController
     authorize! :read, :coordinator_search_results
 
     if params[:search].present?
-      @coordinators = User.search(params[:search]).exclude_ids(params[:coordinator_ids]).limit(NUM_SEARCH_RESULTS)
+      @coordinators = User.includes(avatar_attachment: :blob).search(params[:search]).exclude_ids(params[:coordinator_ids]).limit(NUM_SEARCH_RESULTS)
     else
       # TODO return smarter default choices
-      @coordinators = User.exclude_ids(params[:coordinator_ids]).limit(NUM_SEARCH_RESULTS)
+      @coordinators = User.includes(avatar_attachment: :blob).exclude_ids(params[:coordinator_ids]).limit(NUM_SEARCH_RESULTS)
     end
   end
 
@@ -23,7 +23,7 @@ class Coordinators::SearchesController < ApplicationController
 
     # Ignores ids of users that no longer exist, e.g. when a user was deleted
     # while the dialog was open.
-    @coordinators = User.where(id: params[:coordinator_ids]).presence || [ current_user ]
+    @coordinators = User.includes(avatar_attachment: :blob).where(id: params[:coordinator_ids]).presence || [ current_user ]
   end
 
   private

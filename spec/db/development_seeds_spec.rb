@@ -16,10 +16,8 @@ RSpec.describe "Development seeds" do
     expect(Task.count).to eq(23)
     expect(TaskApplication.count).to eq(11)
 
-    # Every user has an existing avatar image
-    User.pluck(:avatar_url).each do |avatar_url|
-      expect(Rails.public_path.join(avatar_url.delete_prefix("/"))).to exist
-    end
+    # Every user has an avatar
+    expect(User.all).to all(satisfy { |user| user.avatar.attached? })
 
     # Images are embedded in the descriptions
     project = Project.find_by!(title: "Cargo Bike Sharing")

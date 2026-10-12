@@ -67,7 +67,7 @@ To work on the Rocket.Chat login or notifications, run Rocket.Chat locally with 
 2. Complete the setup wizard. The first account you create is a Rocket.Chat admin. The first Rocket.Chat admin who signs in to Tendril Tasks becomes its admin.
 3. Create a third-party login app as described in the [omniauth-rocketchat setup](https://github.com/david-uhlig/omniauth-rocketchat?tab=readme-ov-file#rocket-chat-setup) with the redirect URI `http://localhost:3000/users/auth/rocketchat/callback`.
 4. Set `ROCKET_CHAT_HOST`, `ROCKET_CHAT_CLIENT_ID`, and `ROCKET_CHAT_CLIENT_SECRET` in your `.env` and restart the server.
-5. Optional: To send notifications, create a personal access token in Rocket.Chat and set `ROCKET_CHAT_API_HOST`, `ROCKET_CHAT_API_USER_ID`, and `ROCKET_CHAT_API_AUTH_TOKEN`.
+5. Optional: To send notifications, create a personal access token in Rocket.Chat and set `ROCKET_CHAT_API_HOST`, `ROCKET_CHAT_API_USER_ID`, and `ROCKET_CHAT_API_AUTH_TOKEN`. The token also downloads profile photos when Rocket.Chat blocks unauthenticated access to avatars.
 
 ## Versioning
 

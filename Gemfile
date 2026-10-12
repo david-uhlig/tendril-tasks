@@ -121,4 +121,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "rspec-ai-formatter", require: false
+  # Stub HTTP requests, e.g. avatar downloads [https://github.com/bblimke/webmock]
+  gem "webmock", require: false
 end

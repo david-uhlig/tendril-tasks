@@ -8,13 +8,13 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.publicly_visible
                        .order_by_most_recently_published_task
-                       .includes(:coordinators)
+                       .includes(coordinators: { avatar_attachment: :blob })
   end
 
   def show
     @tasks = Task.publicly_visible
                  .where(project: @project)
-                 .includes(:coordinators, :project, :applicants)
+                 .includes(:project, :applicants, coordinators: { avatar_attachment: :blob })
   end
 
   def new
@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.includes(:coordinators).find(params[:id])
+    @project = Project.includes(coordinators: { avatar_attachment: :blob }).find(params[:id])
   end
 
   def set_project_form

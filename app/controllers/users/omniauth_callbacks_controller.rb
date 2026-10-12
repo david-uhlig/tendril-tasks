@@ -9,6 +9,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     if @user.persisted?
       @user.remember_me = true
       sign_in @user, event: :authentication
+      DownloadAvatarJob.perform_later(@user)
       redirect_to_stored_location
     else
       session["devise.rocketchat_data"] = auth.except(:extra)

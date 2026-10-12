@@ -6,7 +6,7 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
   end
 
   let(:user) do
-    build_stubbed(:user)
+    create(:user, :with_avatar)
   end
 
   context "as a visitor" do
@@ -30,7 +30,7 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
     end
 
     it "renders the user's avatar" do
-      expect(rendered_content).to have_selector("img[src='#{user.avatar_url}']")
+      expect(rendered_content).to have_selector("img[src='#{Rails.application.routes.url_helpers.rails_storage_proxy_path(user.avatar, only_path: true)}']")
     end
 
     it "renders the toggle trigger" do
@@ -56,14 +56,15 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
   end
 
   context "as an editor" do
+    let(:user) { create(:user, :editor, :with_avatar) }
+
     before(:each) do
-      user = build_stubbed(:user, :editor)
       as(user)
       render_inline(described_class.new)
     end
 
     it "renders the user's avatar" do
-      expect(rendered_content).to have_selector("img[src='#{user.avatar_url}']")
+      expect(rendered_content).to have_selector("img[src='#{Rails.application.routes.url_helpers.rails_storage_proxy_path(user.avatar, only_path: true)}']")
     end
 
     it "renders the toggle trigger" do
@@ -89,14 +90,15 @@ RSpec.describe TendrilTasks::Navigation::AvatarDropdownMenu, type: :component do
   end
 
   context "as an admin" do
+    let(:user) { create(:user, :admin, :with_avatar) }
+
     before(:each) do
-      user = build_stubbed(:user, :admin)
       as(user)
       render_inline(described_class.new)
     end
 
     it "renders the user's avatar" do
-      expect(rendered_content).to have_selector("img[src='#{user.avatar_url}']")
+      expect(rendered_content).to have_selector("img[src='#{Rails.application.routes.url_helpers.rails_storage_proxy_path(user.avatar, only_path: true)}']")
     end
 
     it "renders the toggle trigger" do

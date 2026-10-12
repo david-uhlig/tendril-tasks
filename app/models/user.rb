@@ -18,6 +18,9 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 
+  # A copy of the image at `avatar_url`, see DownloadAvatarJob.
+  has_one_attached :avatar
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -32,7 +35,7 @@ class User < ApplicationRecord
 
   class << self
     def from_omniauth(auth)
-      # TODO refresh email, name, avatar-url etc. when they are updated at the omniauth provider
+      # TODO refresh email, name etc. when they are updated at the omniauth provider
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         # Although this application uses only omniauth, a password is generated
         # because it is required for devise features such as :rememberable
@@ -42,6 +45,9 @@ class User < ApplicationRecord
         user.username = auth.dig(:info, :nickname)
         user.avatar_url = auth.dig(:info, :image)
         user.role = determine_role(auth)
+      end.tap do |user|
+        # Picks up a changed avatar URL, see DownloadAvatarJob.
+        user.update(avatar_url: auth.dig(:info, :image).to_s) if user.persisted?
       end
     end
 

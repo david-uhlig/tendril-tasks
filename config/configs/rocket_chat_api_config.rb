@@ -41,6 +41,29 @@ class RocketChatApiConfig < BaseConfig
     }
   end
 
+  # Returns the authentication cookies for requests to the workspace outside
+  # the API, e.g. for avatars when Rocket.Chat blocks unauthenticated access to
+  # them.
+  #
+  # @return [String, nil] Cookie header, or nil when API access isn't configured.
+  def auth_cookie
+    return unless configured?
+
+    "rc_uid=#{user_id}; rc_token=#{auth_token}"
+  end
+
+  # Returns whether the URI points to the workspace, i.e. has the same scheme,
+  # host and port. Use it to send credentials only to the workspace.
+  #
+  # @param uri [URI::Generic]
+  # @return [Boolean]
+  def workspace?(uri)
+    return false unless configured?
+
+    workspace = URI.parse(host)
+    [ uri.scheme, uri.host&.downcase, uri.port ] == [ workspace.scheme, workspace.host&.downcase, workspace.port ]
+  end
+
   # Returns whether API access was configured.
   #
   # @return [Boolean]

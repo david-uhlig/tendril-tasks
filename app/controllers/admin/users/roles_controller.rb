@@ -4,7 +4,7 @@ module Admin
       before_action :set_user, only: [ :update ]
 
       def index
-        @users = User.order(role: :desc, name: :asc)
+        @users = User.includes(avatar_attachment: :blob).order(role: :desc, name: :asc)
       end
 
       def update

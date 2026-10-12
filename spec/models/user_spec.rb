@@ -23,6 +23,14 @@ RSpec.describe User, type: :model do
 
         expect(user).to eq(existing_user)
       end
+
+      it "updates the avatar URL" do
+        existing_user = create(:user, provider: "rocketchat", uid: "123456", avatar_url: "https://example.com/old")
+
+        User.from_omniauth(auth)
+
+        expect(existing_user.reload.avatar_url).to eq("https://example.com/avatar/john.doe")
+      end
     end
 
     context "when user does not exist" do

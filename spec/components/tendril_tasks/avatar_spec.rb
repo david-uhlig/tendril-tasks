@@ -3,11 +3,10 @@
 require "rails_helper"
 
 RSpec.describe TendrilTasks::Avatar, type: :component do
-  let(:user) { build_stubbed(:user) }
+  let(:user) { create(:user, :with_avatar) }
 
   context "with default options" do
     before(:each) do
-      user = build_stubbed(:user, avatar_url: "https://loremflickr.com/300/300")
       render_inline(described_class.new(user)) { "content" }
     end
 
@@ -15,8 +14,12 @@ RSpec.describe TendrilTasks::Avatar, type: :component do
       expect(page).not_to have_content("content")
     end
 
-    it "renders an avatar image" do
-      expect(page).to have_selector("img[src='https://loremflickr.com/300/300']")
+    it "renders the avatar stored by the app" do
+      expect(page).to have_selector("img[src='#{Rails.application.routes.url_helpers.rails_storage_proxy_path(user.avatar, only_path: true)}']")
+    end
+
+    it "doesn't render the avatar URL" do
+      expect(page).not_to have_selector("img[src='#{user.avatar_url}']")
     end
 
     it "renders the default scheme classes" do
@@ -25,6 +28,17 @@ RSpec.describe TendrilTasks::Avatar, type: :component do
 
     it "renders the default size classes" do
       expect(page).to have_selector("img.w-10.h-10")
+    end
+  end
+
+  context "without a stored avatar" do
+    before(:each) do
+      render_inline(described_class.new(build_stubbed(:user), size: :xs, class: "custom"))
+    end
+
+    it "renders a placeholder" do
+      expect(page).not_to have_selector("img")
+      expect(page).to have_selector("div.w-6.h-6.rounded-full.custom svg")
     end
   end
 
