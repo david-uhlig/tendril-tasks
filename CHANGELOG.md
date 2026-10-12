@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 - `ROCKET_CHAT_AUTHORIZE_URL` and `ROCKET_CHAT_TOKEN_URL` are applied to sign in with Rocket.Chat. Before, they were ignored and the default endpoints were always used. If you set either one, check that it points to your Rocket.Chat workspace's endpoints before upgrading, or remove it to keep the defaults. Otherwise, sign in with Rocket.Chat stops working.
+- Profile photos are downloaded from Rocket.Chat and served by Tendril Tasks, so browsers no longer load them from the Rocket.Chat workspace. Photos are downloaded on sign in and refreshed every night, so existing users get theirs within a day of upgrading. Until then, and for users whose photo can't be downloaded, a placeholder is shown. If your Rocket.Chat workspace blocks unauthenticated access to avatars, set `ROCKET_CHAT_API_HOST`, `ROCKET_CHAT_API_USER_ID` and `ROCKET_CHAT_API_AUTH_TOKEN` before upgrading, the same personal access token as for notifications. Otherwise, everyone sees the placeholder instead of profile photos.
 
 ### Deprecated
 - `APP_TITLE`. Set the site name and tagline under Admin → Site instead, then remove `APP_TITLE`. Until then, it still replaces the title of the home page, and a warning is logged on start.
@@ -23,7 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set your own headline and introduction for the home page under Admin → Site, including the part of the headline shown in color. Leave them blank to show the default text in the language of the page.
 
 ### Changed
-- Profile photos are downloaded from Rocket.Chat and served by Tendril Tasks, so browsers no longer load them from the Rocket.Chat workspace. Photos are downloaded on sign in and refreshed every night, so existing users get theirs within a day of upgrading. If Rocket.Chat blocks unauthenticated access to avatars, set `ROCKET_CHAT_API_HOST`, `ROCKET_CHAT_API_USER_ID` and `ROCKET_CHAT_API_AUTH_TOKEN`, the same personal access token as for notifications, to download them. Until a photo is downloaded, and for users whose photo can't be downloaded, a placeholder is shown.
 - Upgrade to Ruby 4.0.7. If you run the app outside the Docker image, install Ruby 4.0.7 first, e.g. with `mise install`.
 - The admin page "Branding" is now called "Site". It sets the site name separately from the logo and the label in the navigation. The site name is required now. Existing names, logos and settings are kept.
 - The browser tab shows the title of the page and the site name, e.g. "Water the plants - Tendril Tasks", or the site name and tagline on the home page, e.g. "Tendril Tasks - growing beyond ourselves together". Before, every page showed "TendrilTasks - growing beyond ourselves together".
