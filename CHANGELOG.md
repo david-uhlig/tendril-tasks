@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Breaking Changes
+- `ROCKET_CHAT_AUTHORIZE_URL` and `ROCKET_CHAT_TOKEN_URL` are applied to sign in with Rocket.Chat. Before, they were ignored and the default endpoints were always used. If you set either one, check that it points to your Rocket.Chat workspace's endpoints before upgrading, or remove it to keep the defaults. Otherwise, sign in with Rocket.Chat stops working.
+
 ### Deprecated
 - `APP_TITLE`. Set the site name and tagline under Admin → Site instead, then remove `APP_TITLE`. Until then, it still replaces the title of the home page, and a warning is logged on start.
 
@@ -21,7 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Sign in with Rocket.Chat works again in Chrome and other Chromium-based browsers. The Content Security Policy blocked the redirect to the Rocket.Chat workspace since 0.6.0.
-- `ROCKET_CHAT_AUTHORIZE_URL` and `ROCKET_CHAT_TOKEN_URL` are applied to sign in with Rocket.Chat. Before, they were ignored and the default endpoints were always used. If you set either one, check that it points to your Rocket.Chat workspace's endpoints before upgrading, or remove it to keep the defaults. Otherwise, sign in with Rocket.Chat stops working.
 - Editing an existing legal page, e.g. the imprint, shows "Edit Imprint" as the heading instead of "Create Imprint".
 - On phones, the navigation shows only the logo, without the label, so the user menu stays on the same line instead of wrapping below a wide logo or a long label.
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
