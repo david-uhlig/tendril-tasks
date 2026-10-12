@@ -70,12 +70,12 @@ en:
           title: "Express interest"
           description: "The task's contact people get in touch with you on %{brand}."
       cta_when_signed_in:
-        view_now: "View now:"
-        interesting_initiatives: "Interesting Initiatives"
-        variety_of_tasks: "A Variety of Tasks"
+        find_task: "Find a task"
+        browse_initiatives: "Browse initiatives"
+        my_applications: "My applications"
       cta_when_signed_out:
-        login_to_see_initiatives_and_tasks: |
-          Log in now to see initiatives and tasks:
+        how_it_works: "How it works"
+        hint: "Sign in to see all initiatives and tasks."
       photo_hero:
         credit_html: "Photo by %{photographer} on %{unsplash}"
     imprint:

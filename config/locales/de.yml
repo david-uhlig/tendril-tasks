@@ -120,12 +120,12 @@ de:
           title: "Interesse zeigen"
           description: "Die Ansprechpersonen der Aufgabe melden sich bei dir über %{brand}."
       cta_when_signed_in:
-        view_now: "Jetzt ansehen:"
-        interesting_initiatives: "Spannende Themen"
-        variety_of_tasks: "Abwechslungsreiche Aufgaben"
+        find_task: "Aufgabe finden"
+        browse_initiatives: "Themen entdecken"
+        my_applications: "Meine Meldungen"
       cta_when_signed_out:
-        login_to_see_initiatives_and_tasks: |
-          Jetzt einloggen, um Themen und Aufgaben zu sehen:
+        how_it_works: "So funktioniert's"
+        hint: "Nach der Anmeldung siehst du alle Themen und Aufgaben."
       photo_hero:
         credit_html: "Foto von %{photographer} auf %{unsplash}"
     imprint:

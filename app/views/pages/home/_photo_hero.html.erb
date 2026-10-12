@@ -1,4 +1,4 @@
-<%# locals: (site:) %>
+<%# locals: (site:, applied: false) %>
 <%# The introduction in white on the uploaded picture, or the default photo with its credit for Unsplash %>
 <section id="home-hero" class="relative isolate overflow-hidden bg-gray-900">
   <% if site.hero_image.attached? %>
@@ -41,7 +41,7 @@
 
       <% if user_signed_in? %>
         <%# CTA to projects and tasks %>
-        <%= render "pages/home/cta_when_signed_in" %>
+        <%= render "pages/home/cta_when_signed_in", applied: %>
       <% else %>
         <%# CTA with login button %>
         <%= render "pages/home/cta_when_signed_out" %>

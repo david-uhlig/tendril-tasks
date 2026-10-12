@@ -16,6 +16,8 @@ class PagesController < ApplicationController
 
     # Task cards need a signed in user, like the tasks page
     if user_signed_in?
+      # Like the dashboard, which lists these applications
+      @applied = current_user.task_applications.where.not(status: :withdrawn).exists?
       @recent_tasks = Task.publicly_visible
                           .includes(:coordinators, :project, :applicants)
                           .order(published_at: :desc)

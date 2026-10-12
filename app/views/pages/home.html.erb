@@ -1,6 +1,6 @@
 <%# Full width above the content, so the picture reaches the edges %>
 <% content_for :hero do %>
-  <%= render "pages/home/photo_hero", site: @site %>
+  <%= render "pages/home/photo_hero", site: @site, applied: @applied %>
 <% end %>
 
 <%= render TendrilTasks::Content.new(class: "space-y-16") do %>

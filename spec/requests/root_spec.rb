@@ -112,6 +112,15 @@ RSpec.describe "Root path", type: :request do
         expect(page.at_css("#home-hero-credit")).to be_nil
       end
 
+      it "asks to sign in and links to how it works" do
+        get root_path
+
+        hero = page.at_css("#home-hero")
+        expect(hero.at_css("button[type=submit]").text.squish).to start_with("Anmelden mit")
+        expect(hero.at_css("a[href='#home-how-it-works']").text.squish).to eq("So funktioniert's")
+        expect(hero.text).to include("Nach der Anmeldung siehst du alle Themen und Aufgaben.")
+      end
+
       it "doesn't link the counts" do
         get root_path
 
@@ -137,6 +146,30 @@ RSpec.describe "Root path", type: :request do
       end
 
       include_examples "shows the counts of visible tasks and initiatives"
+
+      it "links to the tasks and the initiatives" do
+        get root_path
+
+        links = page.css("#home-hero [role=group] a").to_h { |link| [ link.text.squish, link["href"] ] }
+        expect(links).to eq("Aufgabe finden" => tasks_path, "Themen entdecken" => projects_path)
+      end
+
+      it "links to the tasks and the user's applications after applying" do
+        create(:task_application, user:, task: new_task)
+
+        get root_path
+
+        links = page.css("#home-hero [role=group] a").to_h { |link| [ link.text.squish, link["href"] ] }
+        expect(links).to eq("Aufgabe finden" => tasks_path, "Meine Meldungen" => dashboard_path)
+      end
+
+      it "doesn't link to withdrawn applications" do
+        create(:task_application, user:, task: new_task, status: :withdrawn)
+
+        get root_path
+
+        expect(page.css("#home-hero [role=group] a").map { |link| link.text.squish }).to include("Themen entdecken")
+      end
 
       it "links the counts to the lists" do
         get root_path
