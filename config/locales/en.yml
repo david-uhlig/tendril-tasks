@@ -25,17 +25,59 @@ en:
 
   pages:
     home:
-      title: "Get actively involved in the RCB!"
+      title: "Get actively involved!"
       title_highlight: "actively"
       hero: |
-        A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
+        We get more done together. Find a task that fits you – big or small, every bit of help moves us forward.
+      stats:
+        title: "At a glance"
+        open_tasks:
+          label:
+            one: "open task"
+            other: "open tasks"
+          description:
+            one: "waiting for someone like you"
+            other: "waiting for people like you"
+        initiatives:
+          label:
+            one: "initiative"
+            other: "initiatives"
+          description:
+            one: "being worked on right now"
+            other: "being worked on right now"
+        new_tasks:
+          label:
+            one: "new in the last two weeks"
+            other: "new in the last two weeks"
+          description:
+            one: "fresh task to look at"
+            other: "fresh tasks to look at"
+      recent_tasks:
+        title: "Recently published"
+        view_all:
+          one: "View the task →"
+          other: "View all %{count} tasks →"
+      how_it_works:
+        title: "How it works"
+        step: "Step %{number}"
+        browse:
+          title: "Browse initiatives"
+          description: "See what is being worked on, grouped into topics."
+        pick:
+          title: "Pick a task"
+          description: "Find something that fits your time and skills."
+        express_interest:
+          title: "Express interest"
+          description: "The task's contact people get in touch with you on %{brand}."
       cta_when_signed_in:
-        view_now: "View now:"
-        interesting_initiatives: "Interesting Initiatives"
-        variety_of_tasks: "A Variety of Tasks"
+        find_task: "Find a task"
+        browse_initiatives: "Browse initiatives"
+        my_applications: "My applications"
       cta_when_signed_out:
-        login_to_see_initiatives_and_tasks: |
-          Log in now to see initiatives and tasks:
+        how_it_works: "How it works"
+        hint: "Sign in to see all initiatives and tasks."
+      photo_hero:
+        credit_html: "Photo by %{photographer} on %{unsplash}"
     imprint:
       title: "Imprint"
     privacy-policy:
@@ -265,7 +307,7 @@ en:
     site:
       title: "Site"
       edit:
-        explainer: "Here you can customize the name and tagline of the site, and the logo and label at the top left of the navigation bar."
+        explainer: "Here you can customize the name and tagline of the site, the logo and label at the top left of the navigation bar, and the text and picture on the home page."
         identity:
           title: "Name and Tagline"
           explainer: "The browser tab shows the name followed by the tagline, e.g. \"Tendril Tasks - growing beyond ourselves together\". The tagline is shown in all languages. Leave it blank to show a default tagline in the language of the page."
@@ -284,7 +326,30 @@ en:
             label: "Label"
           toggle:
             label: "Displayed?"
-      description: "Customize the name and tagline of the site, and the logo and label in the navigation."
+        home_page:
+          title: "Home Page"
+          explainer: "What visitors see first: a headline and an introduction on a picture."
+          text:
+            heading: "Headline and introduction"
+            explainer: "Leave a field blank to show the default text in the visitor's language."
+            title:
+              label: "Headline"
+            title_highlight:
+              label: "Highlighted word"
+              helper_text: "A part of the headline shown in color."
+            introduction:
+              label: "Introduction"
+              helper_text: "Blank lines separate paragraphs."
+          hero_image:
+            heading: "Picture"
+            explainer: "The picture behind the introduction, e.g. a photo of your people in action. It is darkened so the text on it stays readable, and landscape pictures fit best. Reset it to show the default photo again."
+            alt: "Current picture on the home page"
+            default: "Default photo by Anna Schroeder on Unsplash"
+            show_text: "Show with the home page text"
+            file_field:
+              label: "Select new picture"
+              helper_text: "Format: PNG, JPEG or WebP, at least 400 × 300 pixels (max 5 MB)"
+      description: "Customize the name and tagline of the site, the logo and label in the navigation, and the text and picture on the home page."
     settings:
       title: "Settings"
     statistics:
@@ -494,6 +559,13 @@ en:
               too_long: "The tagline must be at most %{count} characters long."
             navigation_label:
               too_long: "The label must be at most %{count} characters long."
+            home_title:
+              too_long: "The headline must be at most %{count} characters long."
+            home_title_highlight:
+              too_long: "The highlighted word must be at most %{count} characters long."
+              not_in_home_title: "The highlighted word must be part of the headline."
+            home_introduction:
+              too_long: "The introduction must be at most %{count} characters long."
 
   components:
     coordinator_picker:

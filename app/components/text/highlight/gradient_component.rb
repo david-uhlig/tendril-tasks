@@ -16,10 +16,14 @@ module Text
         @options = build_options(options, scheme)
       end
 
+      # Escapes the text, as admins can enter it, e.g. the headline on the home
+      # page. Shows the text as is without a highlight.
       def call
-        text = @text || content
-        text.gsub(@highlight) do |match|
-          tag.span match, **@options
+        text = ERB::Util.html_escape(@text || content).to_str
+        return text.html_safe if @highlight.blank?
+
+        text.gsub(ERB::Util.html_escape(@highlight).to_str) do |match|
+          tag.span match.html_safe, **@options
         end.html_safe
       end
 

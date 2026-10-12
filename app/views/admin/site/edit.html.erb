@@ -53,6 +53,8 @@
     </div>
   <% end %>
 
+  <%= render TendrilTasks::HorizontalLine.new %>
+
   <%= render TendrilTasks::Heading.new(tag: :h2) do %>
     <%= t(".navigation.title") %>
   <% end %>
@@ -109,7 +111,7 @@
                 id: "site-navigation-form",
                 url: admin_site_navigation_path,
                 method: :put,
-                class: "space-y-6" do |form| %>
+                class: "space-y-6 pb-6" do |form| %>
     <div class="flex flex-nowrap space-x-4">
       <div class="grow">
         <%# Shows the stored label only, as the site name is its default. %>
@@ -133,5 +135,80 @@
         <% end %>
       </div>
     </div>
+  <% end %>
+
+  <%= render TendrilTasks::HorizontalLine.new %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h2) do %>
+    <%= t(".home_page.title") %>
+  <% end %>
+
+  <%= render TendrilTasks::Paragraph.new do %>
+    <%= t(".home_page.explainer") %>
+  <% end %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h3, class: "pt-4") do %>
+    <%= t(".home_page.text.heading") %>
+  <% end %>
+
+  <%= render TendrilTasks::Paragraph.new(size: :md) do %>
+    <%= t(".home_page.text.explainer") %>
+  <% end %>
+
+  <%= render "admin/site/home_text_form", site: @site %>
+
+  <%#
+    Reset Home Page Text Form
+    Triggered by the reset button in the form above
+  %>
+
+  <%= form_with url: admin_site_home_text_path,
+                method: :delete, id: "reset-site-home-text",
+                class: "hidden" do %>
+  <% end %>
+
+  <%= render TendrilTasks::Heading.new(tag: :h3, class: "pt-4") do %>
+    <%= t(".home_page.hero_image.heading") %>
+  <% end %>
+
+  <%= render TendrilTasks::Paragraph.new(size: :md) do %>
+    <%= t(".home_page.hero_image.explainer") %>
+  <% end %>
+
+  <%= form_with model: @site,
+                id: "site-hero-image-form",
+                url: admin_site_hero_image_path,
+                method: :put,
+                class: "space-y-6" do |form| %>
+    <%# Shows the picture wide like on the home page, with the file field below it %>
+    <%= render "admin/site/hero_image_preview", site: @site %>
+
+    <%= render "admin/site/hero_image_file_field", form: form %>
+
+    <div class="flex flex-wrap">
+      <div class="whitespace-nowrap space-x-2 pe-3 pb-6 w-full [&_button]:w-1/2">
+        <%= render Gustwave::Button.new(type: :submit,
+                                        size: :md,
+                                        scheme: :red,
+                                        form: "reset-site-hero-image") do %>
+          <%= t("forms.reset") %>
+        <% end %>
+
+        <%= render Gustwave::Button.new(type: :submit,
+                                        size: :md) do %>
+          <%= t("forms.save") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%#
+    Clear Home Page Picture Form
+    Triggered by the reset button in the form above
+  %>
+
+  <%= form_with url: admin_site_hero_image_path,
+                method: :delete, id: "reset-site-hero-image",
+                class: "hidden" do %>
   <% end %>
 <% end %>

@@ -80,3 +80,5 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/david-
 ## License
 
 Tendril Tasks is released under the [O'Sassy License][LICENSE].
+
+The default photo on the home page, `app/assets/images/brand/hero.webp`, is by [Anna Schroeder](https://unsplash.com/@annatherphoto) on [Unsplash](https://unsplash.com/photos/yg9VZyUbpT8) and used under the [Unsplash License](https://unsplash.com/license). It isn't covered by the O'Sassy License.
