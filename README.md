@@ -71,7 +71,7 @@ To work on the Rocket.Chat login or notifications, run Rocket.Chat locally with 
 
 ## Versioning
 
-This library aims to adhere to [Semantic Versioning 2.0.0](http://semver.org/). Violations of this scheme should be reported as bugs.
+This library aims to adhere to [Semantic Versioning 2.0.0](http://semver.org/). Violations of this scheme should be reported as bugs. Patch releases only contain fixes and are always safe to install. While at `0.x`, minor releases may contain breaking changes, each with an upgrade note in the [changelog](CHANGELOG.md). Only the latest minor version receives fixes. See [RELEASING.md](RELEASING.md) for the release policy and process.
 
 ## Contributing
 

@@ -22,10 +22,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The admin page "Branding" is now called "Site". It sets the site name separately from the logo and the label in the navigation. The site name is required now. Existing names, logos and settings are kept.
 - The browser tab shows the title of the page and the site name, e.g. "Water the plants - Tendril Tasks", or the site name and tagline on the home page, e.g. "Tendril Tasks - growing beyond ourselves together". Before, every page showed "TendrilTasks - growing beyond ourselves together".
 
+## [0.7.2] - 2026-10-12
+
 ### Fixed
 - Sign in with Rocket.Chat works again in Chrome and other Chromium-based browsers. The Content Security Policy blocked the redirect to the Rocket.Chat workspace since 0.6.0.
 - Editing an existing legal page, e.g. the imprint, shows "Edit Imprint" as the heading instead of "Create Imprint".
-- On phones, the navigation shows only the logo, without the label, so the user menu stays on the same line instead of wrapping below a wide logo or a long label.
+- On phones, the navigation shows only the logo, without the brand name, so the user menu stays on the same line instead of wrapping below a long brand name.
+
+## [0.7.1] - 2026-10-10
+
+### Fixed
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
 - "Save & New" on the task form preselects the topic and the coordinators of the task just saved in the next task form.
 - Saving a task or project without changes no longer shows an "updated" message.
@@ -184,6 +190,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade dependencies: Ruby 3.4.2.
 
 [unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...HEAD
+[0.7.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...v0.7.2
+[0.7.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.5.1...v0.6.0
