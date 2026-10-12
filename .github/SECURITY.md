@@ -3,13 +3,13 @@
 ## Supported Versions
 
 Tendril Tasks is in active `0.x` development. Security fixes are only released
-for the latest minor version. Please upgrade to the latest release before
-reporting an issue.
+for the latest minor version, e.g. `0.7.x` until `0.8.0` is out. Please upgrade
+to the latest release before reporting an issue.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.6.x   | :white_check_mark: |
-| < 0.6   | :x:                |
+When the latest minor version contains breaking changes, a fix for a critical or
+high severity vulnerability is also released for the previous minor version, so
+you can stay secure without a breaking upgrade. This is a single patch release,
+not continued support. See [RELEASING.md](../RELEASING.md) for the full policy.
 
 ## Reporting a Vulnerability
 

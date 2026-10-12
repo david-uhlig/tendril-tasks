@@ -19,6 +19,24 @@ RSpec.describe TendrilTasks::Admin::ApplicationVersionBadge, type: :component do
     end
   end
 
+  context "with a released version" do
+    before { stub_const("TendrilTasks::VERSION", "0.7.2") }
+
+    it "links the version to its release" do
+      render_inline(described_class.new)
+      expect(page).to have_link("0.7.2", href: "https://github.com/david-uhlig/tendril-tasks/releases/tag/v0.7.2")
+    end
+  end
+
+  context "with a development version" do
+    before { stub_const("TendrilTasks::VERSION", "0.8.0.dev") }
+
+    it "links the version to the list of releases" do
+      render_inline(described_class.new)
+      expect(page).to have_link("0.8.0.dev", href: "https://github.com/david-uhlig/tendril-tasks/releases")
+    end
+  end
+
   context "without a git commit" do
     before { allow(AppConfig).to receive(:git_commit).and_return(nil) }
 

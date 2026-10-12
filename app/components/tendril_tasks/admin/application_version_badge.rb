@@ -18,6 +18,9 @@ module TendrilTasks
       private
 
       def link_to_version
+        # Development versions, e.g. 0.8.0.dev on main, have no release yet
+        return link_to TendrilTasks::VERSION, "https://github.com/david-uhlig/tendril-tasks/releases" if Gem::Version.new(TendrilTasks::VERSION).prerelease?
+
         link_to TendrilTasks::VERSION, "https://github.com/david-uhlig/tendril-tasks/releases/tag/v#{TendrilTasks::VERSION}"
       end
 
