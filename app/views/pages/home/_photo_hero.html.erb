@@ -25,30 +25,35 @@
 
   <div class="w-full mx-auto px-5 pt-40 pb-16 lg:py-28 max-w-(--breakpoint-lg)">
     <div class="max-w-2xl text-center lg:text-start">
-      <%= render TendrilTasks::Heading.new(
-                   tag: :h1,
-                   scheme: :level1,
-                   class: "text-white dark:text-white") do %>
-        <%= render ::Text::Highlight::GradientComponent.new(
-          site.home_title,
-          highlight: site.home_title_highlight,
-          class: "from-sky-300 to-emerald-400"
-        ) %>
-      <% end %>
-
-      <% site.home_introduction_paragraphs.each do |paragraph| %>
-        <%= render TendrilTasks::Paragraph.new(class: "mb-6 text-gray-100 dark:text-gray-100") do %>
-          <%= paragraph %>
+      <%# Fades in on top of the picture, then the buttons follow. Not for those who prefer reduced motion %>
+      <div class="motion-safe:animate-fade-up">
+        <%= render TendrilTasks::Heading.new(
+                     tag: :h1,
+                     scheme: :level1,
+                     class: "text-white dark:text-white") do %>
+          <%= render ::Text::Highlight::GradientComponent.new(
+            site.home_title,
+            highlight: site.home_title_highlight,
+            class: "from-sky-300 to-emerald-400"
+          ) %>
         <% end %>
-      <% end %>
 
-      <% if user_signed_in? %>
-        <%# CTA to projects and tasks %>
-        <%= render "pages/home/cta_when_signed_in", applied: %>
-      <% else %>
-        <%# CTA with login button %>
-        <%= render "pages/home/cta_when_signed_out" %>
-      <% end %>
+        <% site.home_introduction_paragraphs.each do |paragraph| %>
+          <%= render TendrilTasks::Paragraph.new(class: "mb-6 text-gray-100 dark:text-gray-100") do %>
+            <%= paragraph %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="motion-safe:animate-fade-up motion-safe:[animation-delay:150ms]">
+        <% if user_signed_in? %>
+          <%# CTA to projects and tasks %>
+          <%= render "pages/home/cta_when_signed_in", applied: %>
+        <% else %>
+          <%# CTA with login button %>
+          <%= render "pages/home/cta_when_signed_out" %>
+        <% end %>
+      </div>
     </div>
   </div>
 

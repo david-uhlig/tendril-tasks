@@ -34,6 +34,16 @@
   --font-sans:
     Inter var, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* A short entrance, e.g. for the introduction on the home page */
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+  }
 }
 
 /*
