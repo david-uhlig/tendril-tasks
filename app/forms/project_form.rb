@@ -18,7 +18,7 @@ class ProjectForm
   # no longer exist, e.g. when a user was deleted while the form was open. An
   # empty list removes all coordinators, which fails validation on save.
   def coordinator_ids=(ids)
-    users = User.where(id: Array(ids).compact_blank).to_a
+    users = User.includes(avatar_attachment: :blob).where(id: Array(ids).compact_blank).to_a
     @unsaved_coordinators =
       if users.map(&:id).sort == project.coordinator_ids.sort
         nil
@@ -46,7 +46,8 @@ class ProjectForm
   end
 
   def coordinator_options
-    @coordinator_options ||= User.select(:id, :name, :avatar_url)
+    @coordinator_options ||= User.select(:id, :name)
+                                 .includes(avatar_attachment: :blob)
                                  .excluding(coordinators)
                                  .limit(Coordinators::SearchesController::NUM_SEARCH_RESULTS)
                                  .to_a

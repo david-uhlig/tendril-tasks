@@ -14,7 +14,7 @@ class TasksController < ApplicationController
                        .order_by_most_recently_published_task
 
     @tasks = Task.publicly_visible
-                 .includes(:coordinators, :project, :applicants)
+                 .includes(:project, :applicants, coordinators: { avatar_attachment: :blob })
 
     # Apply filters
     if filter[:project_id].present?
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     if can?(:coordinate, @task)
       @task_applications = TaskApplication
                              .where(task: @task)
-                             .includes(:user, :task)
+                             .includes(:task, user: { avatar_attachment: :blob })
                              .order(created_at: :desc)
     end
   end

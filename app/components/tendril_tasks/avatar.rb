@@ -13,18 +13,23 @@ module TendrilTasks
                    border: false,
                    **options)
       user ||= options.delete(:collection_item)
-      @src = user.avatar_url
+      @avatar = user.avatar
 
       options.deep_symbolize_keys!
       kwargs = { scheme:, size:, border: }.compact
       @options = kwargs.merge!(options.except!(:collection_item))
     end
 
-    # Renders the avatar as an HTML <img> tag with the appropriate options.
+    # Renders the avatar stored by this app as an HTML <img> tag with the
+    # appropriate options, or a placeholder until it has been downloaded.
     #
-    # @return [String] HTML-safe string representing the <img> tag for the avatar.
+    # @return [String] HTML-safe string representing the avatar.
     def call
-      render Gustwave::Avatar.new(src: @src, **@options)
+      if @avatar.attached?
+        render Gustwave::Avatar.new(src: rails_storage_proxy_path(@avatar), **@options)
+      else
+        render Gustwave::AvatarPlaceholder.new(**@options)
+      end
     end
   end
 end

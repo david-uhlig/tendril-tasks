@@ -21,5 +21,9 @@ FactoryBot.define do
     trait :editor do
       role { :editor }
     end
+
+    trait :with_avatar do
+      avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/files/avatar.png"), "image/png") }
+    end
   end
 end
