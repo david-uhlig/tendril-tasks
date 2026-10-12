@@ -2,23 +2,39 @@
 
 module TendrilTasks
   module Tasks
-    # Display a short task summary, e.g. on the home page.
+    # Display a short task summary in overviews, e.g. on the home page.
     #
-    # Unlike +TendrilTasks::Tasks::Card+, it shows only the first lines of the
-    # description, the contact people's avatars and a single button to express
-    # interest.
+    # It shows only the first lines of the description, the contact people's
+    # avatars and a single button to express interest. Pass +detailed: true+
+    # to show more of the description, e.g. on the task overview page.
     #
     # Example usage:
     #
     #   <%= render TendrilTasks::Tasks::CompactCard.new(task) %>
+    #   <%= render TendrilTasks::Tasks::CompactCard.new(task, detailed: true) %>
     #
     class CompactCard < TendrilTasks::Component
       VISIBLE_CONTACTS = 3
       NAMED_CONTACTS = 2
+      DESCRIPTION_WORDS = 30
+      DETAILED_DESCRIPTION_WORDS = 50
 
       # @param task [Task] the task to be displayed
-      def initialize(task)
+      # @param detailed [Boolean] show more of the description
+      def initialize(task, detailed: false)
         @task = task
+        @detailed = detailed
+      end
+
+      # @return [String, nil] the beginning of the plain text description
+      def description
+        words = @detailed ? DETAILED_DESCRIPTION_WORDS : DESCRIPTION_WORDS
+        @task.description_plain_text&.truncate_words(words)
+      end
+
+      # @return [String] the CSS class limiting the visible description lines
+      def description_clamp
+        @detailed ? "line-clamp-5" : "line-clamp-3"
       end
 
       # @return [Boolean] true if the task was created within the last 2 weeks

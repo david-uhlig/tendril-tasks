@@ -174,7 +174,6 @@ ignore_missing:
   - 'tendril_tasks.projects.section.*'
   - 'tendril_tasks.role_badge.*'
   - 'tendril_tasks.tasks.application_status.*'
-  - 'tendril_tasks.tasks.card.*'
   # Noticed notifiers resolve relative keys to `notifiers.<notifier>.notification.*`,
   # which i18n-tasks can't infer from `notification_methods` blocks.
   - 'task_application_received_notification.markdown_message.*'

@@ -18,9 +18,9 @@
 
   <%# First lines of the plain text description %>
   <%= link_to task_path(@task), class: "grow" do %>
-    <%= render TendrilTasks::Paragraph.new(@task.description_plain_text&.truncate_words(30),
+    <%= render TendrilTasks::Paragraph.new(description,
                                            size: :md,
-                                           class: "line-clamp-3") %>
+                                           class: description_clamp) %>
   <% end %>
 
   <%# Contact people as a pill as wide as the button, e.g. "Help Pete and Igor" %>

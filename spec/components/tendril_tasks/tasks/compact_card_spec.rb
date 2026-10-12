@@ -78,4 +78,24 @@ RSpec.describe TendrilTasks::Tasks::CompactCard, type: :component do
 
     expect(page).to have_link("Angemeldet!", href: "/tasks/#{task.id}#apply-now")
   end
+
+  describe "description" do
+    let(:long_text) { (1..60).map { |i| "word#{i}" }.join(" ") }
+
+    before { task.update!(description: long_text) }
+
+    it "shows the first 30 words and 3 lines" do
+      render_inline(described_class.new(task))
+
+      expect(page).to have_selector("p.line-clamp-3", text: /word30\b/)
+      expect(page).to have_no_text("word31")
+    end
+
+    it "shows the first 50 words and 5 lines when detailed" do
+      render_inline(described_class.new(task, detailed: true))
+
+      expect(page).to have_selector("p.line-clamp-5", text: /word50\b/)
+      expect(page).to have_no_text("word51")
+    end
+  end
 end

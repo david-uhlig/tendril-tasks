@@ -135,7 +135,7 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
     "task_new" => [ :admin, -> { new_task_path } ],
     "task_edit" => [ :admin, -> { edit_task_path(task) } ],
     "task_contacts_modal" => [ :admin, -> { tasks_path },
-                               -> { first("[data-modal-toggle^='task-contacts-']").click } ],
+                               -> { first("[data-modal-toggle^='task-compact-card-contacts-']").click } ],
     "task_coordinator_picker_modal" => [ :admin, -> { edit_task_path(task) },
                                          -> { find("#edit-coordinator-assignment").click } ],
     "admin_dashboard" => [ :admin, -> { admin_root_path } ],
