@@ -13,7 +13,7 @@
   <% end %>
 
   <%= render TendrilTasks::Heading.new(tag: :h1) do %>
-    <%= t("forms.headings.new",
+    <%= t(@page.persisted? ? "forms.headings.edit" : "forms.headings.new",
           thing: t("pages.#{@page.slug}.title")) %>
   <% end %>
 

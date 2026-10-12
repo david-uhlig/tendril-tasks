@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.2] - 2026-10-12
+
+### Fixed
+- Sign in with Rocket.Chat works again in Chrome and other Chromium-based browsers. The Content Security Policy blocked the redirect to the Rocket.Chat workspace since 0.6.0.
+- Editing an existing legal page, e.g. the imprint, shows "Edit Imprint" as the heading instead of "Create Imprint".
+- On phones, the navigation shows only the logo, without the brand name, so the user menu stays on the same line instead of wrapping below a long brand name.
+
 ## [0.7.1] - 2026-10-10
 
 ### Fixed
@@ -167,7 +174,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.2...HEAD
+[0.7.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.0...v0.6.1

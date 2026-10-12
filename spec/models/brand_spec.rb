@@ -41,6 +41,25 @@ RSpec.describe Brand, type: :model do
     end
   end
 
+  describe 'memoization' do
+    it 'reads a false display name only once' do
+      Setting.display_brand_name = false
+      allow(Setting).to receive(:display_brand_name?).and_call_original
+
+      2.times { brand.display_name? }
+
+      expect(Setting).to have_received(:display_brand_name?).once
+    end
+
+    it 'reads a missing brand name only once' do
+      allow(Setting).to receive(:brand_name).and_call_original
+
+      2.times { brand.name }
+
+      expect(Setting).to have_received(:brand_name).once
+    end
+  end
+
   describe '#display_name?' do
     context "when display brand name is not set" do
       it 'returns true' do

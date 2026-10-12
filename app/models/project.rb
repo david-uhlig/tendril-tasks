@@ -62,7 +62,7 @@ class Project < ApplicationRecord
   end
 
   def publish
-    self.published_at = Time.zone.now
+    self.published_at = Time.zone.now unless published?
   end
 
   def unpublish

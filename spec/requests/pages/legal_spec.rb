@@ -50,9 +50,24 @@ RSpec.describe "Legal Pages", type: :request do
         expect(response).to have_http_status(:success)
       end
 
+      it "shows the edit heading for an existing legal page" do
+        page
+        get edit_legal_path(:imprint)
+
+        heading = I18n.t("forms.headings.edit", thing: I18n.t("pages.imprint.title"))
+        expect(Nokogiri::HTML(response.body).at_css("h1").text.strip).to eq(heading)
+      end
+
       it "allows creating new legal pages" do
         get edit_legal_path(:imprint)
         expect(response).to have_http_status(:success)
+      end
+
+      it "shows the new heading for a legal page that doesn't exist yet" do
+        get edit_legal_path(:imprint)
+
+        heading = I18n.t("forms.headings.new", thing: I18n.t("pages.imprint.title"))
+        expect(Nokogiri::HTML(response.body).at_css("h1").text.strip).to eq(heading)
       end
 
       it "rejects editing non-legal pages" do
