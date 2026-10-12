@@ -24,11 +24,11 @@
   <figure class="space-y-1">
     <div class="@container relative overflow-hidden rounded-lg">
       <% if site.hero_image.attached? %>
-        <%= image_tag site.hero_image.variant(:hero),
+        <%= image_tag rails_storage_proxy_path(site.hero_image.variant(:hero)),
                       alt: t("admin.site.edit.home_page.hero_image.alt"),
                       class: "w-full aspect-21/9 object-cover object-[70%_60%]" %>
       <% else %>
-        <%= image_tag "brand/hero.jpg",
+        <%= image_tag "brand/hero.webp",
                       alt: t("admin.site.edit.home_page.hero_image.alt"),
                       class: "w-full aspect-21/9 object-cover object-[70%_60%]" %>
       <% end %>

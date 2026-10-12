@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set a tagline for the site under Admin → Site. Leave it blank to show the default tagline in the language of the page.
 - The home page shows how many tasks are open, how many initiatives there are and how many tasks are new in the last two weeks. Signed in users also see the three most recently published tasks. A "How it works" section explains the steps from browsing initiatives to expressing interest in a task.
 - The window listing a task's contact people has a button to go to the task.
-- The home page shows the introduction on a full-width picture, darkened so the text stays readable on light pictures too. By default, it's a photo by Anna Schroeder on Unsplash, credited in its corner. Upload your own picture under Admin → Site, e.g. a photo of your people in action.
+- The home page shows the introduction on a full-width picture, darkened so the text stays readable on light pictures too. By default, it's a photo by Anna Schroeder on Unsplash, credited in its corner. Upload your own picture under Admin → Site, e.g. a photo of your people in action. It's scaled down and saved as WebP, so the home page loads fast also with photos straight from the camera.
 - Set your own headline and introduction for the home page under Admin → Site, including the part of the headline shown in color. Leave them blank to show the default text in the language of the page.
 
 ### Changed

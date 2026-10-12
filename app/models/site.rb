@@ -8,9 +8,15 @@ class Site < ApplicationRecord
   has_one_attached :logo
 
   # Shown behind the introduction on the home page. Scaled down, as clubs
-  # upload photos straight from the camera.
+  # upload photos straight from the camera, and saved as WebP to load fast.
+  # The dark overlay on the home page hides the lower quality. Created after
+  # the upload, so the first visitor doesn't wait for it.
   has_one_attached :hero_image do |attachable|
-    attachable.variant :hero, resize_to_limit: [ 1200, 1200 ]
+    attachable.variant :hero,
+                       resize_to_limit: [ 1200, 1200 ],
+                       format: :webp,
+                       saver: { quality: 65, strip: true },
+                       preprocessed: true
   end
 
   # Blank means the default, see the readers below.

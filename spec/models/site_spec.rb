@@ -179,6 +179,12 @@ RSpec.describe Site, type: :model do
 
       expect(site).not_to be_valid
     end
+
+    it "is shown as a WebP, which loads faster" do
+      site.update!(hero_image: image)
+
+      expect(site.hero_image.variant(:hero).processed.image.content_type).to eq("image/webp")
+    end
   end
 
   it "can't have a second row" do

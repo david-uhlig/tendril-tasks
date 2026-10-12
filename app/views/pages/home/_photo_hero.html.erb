@@ -1,13 +1,16 @@
 <%# locals: (site:, applied: false) %>
 <%# The introduction in white on the uploaded picture, or the default photo with its credit for Unsplash %>
 <section id="home-hero" class="relative isolate overflow-hidden bg-gray-900">
+  <%# The largest element on the page, so the browser fetches it first. Proxied, like the logo, which saves a redirect and lets browsers cache it %>
   <% if site.hero_image.attached? %>
-    <%= image_tag site.hero_image.variant(:hero),
+    <%= image_tag rails_storage_proxy_path(site.hero_image.variant(:hero)),
                   alt: "",
+                  fetchpriority: "high",
                   class: "absolute inset-0 -z-10 size-full object-cover object-[70%_60%]" %>
   <% else %>
-    <%= image_tag "brand/hero.jpg",
+    <%= image_tag "brand/hero.webp",
                   alt: "",
+                  fetchpriority: "high",
                   class: "absolute inset-0 -z-10 size-full object-cover object-[70%_60%]" %>
   <% end %>
 

@@ -68,7 +68,8 @@ RSpec.describe "Root path", type: :request do
         get root_path
 
         hero = page.at_css("#home-hero")
-        expect(hero.at_css("img")["src"]).to include("brand/hero")
+        expect(hero.at_css("img")["src"]).to match(%r{brand/hero-\h+\.webp})
+        expect(hero.at_css("img")["fetchpriority"]).to eq("high")
         expect(hero.at_css("img")["alt"]).to eq("")
         expect(hero.at_css("h1")).to be_present
         expect(page.at_css("#home-hero-credit").text.squish).to eq("Foto von Anna Schroeder auf Unsplash")
@@ -108,7 +109,8 @@ RSpec.describe "Root path", type: :request do
         get root_path
 
         hero = page.at_css("#home-hero")
-        expect(hero.at_css("img")["src"]).not_to include("brand/hero")
+        expect(hero.at_css("img")["src"]).to start_with("/rails/active_storage/representations/proxy/")
+        expect(hero.at_css("img")["fetchpriority"]).to eq("high")
         expect(page.at_css("#home-hero-credit")).to be_nil
       end
 
