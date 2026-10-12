@@ -8,6 +8,10 @@
 # metadata. An unchanged image is not stored again. SVG images are skipped,
 # because Active Storage blocks loading them for security, so Rocket.Chat is
 # asked to render its default letter avatars as PNG.
+#
+# When Rocket.Chat blocks unauthenticated access to avatars, the personal
+# access token of the Rocket.Chat API config authenticates the download. It is
+# only sent to the workspace, not to other hosts the download redirects to.
 class DownloadAvatarJob < ApplicationJob
   class DownloadError < StandardError; end
 
@@ -71,7 +75,7 @@ class DownloadAvatarJob < ApplicationJob
                     use_ssl: uri.scheme == "https",
                     open_timeout: TIMEOUT,
                     read_timeout: TIMEOUT) do |http|
-      http.request(Net::HTTP::Get.new(uri)) do |response|
+      http.request(get_request(uri)) do |response|
         case response
         when Net::HTTPSuccess
           return read_body(response)
@@ -89,6 +93,12 @@ class DownloadAvatarJob < ApplicationJob
           return
         end
       end
+    end
+  end
+
+  def get_request(uri)
+    Net::HTTP::Get.new(uri).tap do |request|
+      request["Cookie"] = RocketChatApiConfig.auth_cookie if RocketChatApiConfig.workspace?(uri)
     end
   end
 

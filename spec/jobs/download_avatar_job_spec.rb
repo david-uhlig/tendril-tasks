@@ -66,6 +66,44 @@ RSpec.describe DownloadAvatarJob, :webmock, type: :job do
     expect { described_class.perform_now(user) }.to change { user.reload.avatar.blob.id }
   end
 
+  context "when the Rocket.Chat API is configured" do
+    let(:cookie) { "rc_uid=my-id; rc_token=my-token" }
+
+    before do
+      config = RocketChatApiConfig.new(host: "https://chat.example.com", user_id: "my-id", auth_token: "my-token")
+      allow(RocketChatApiConfig).to receive(:instance).and_return(config)
+    end
+
+    it "authenticates the download from the workspace, e.g. when avatars are protected" do
+      stub_request(:get, request_url).with(headers: { "Cookie" => cookie })
+                                     .to_return(status: 200, body: png, headers: { "Content-Type" => "image/png" })
+
+      described_class.perform_now(user)
+
+      expect(user.avatar).to be_attached
+    end
+
+    it "doesn't send the credentials to other hosts" do
+      other_url = "https://files.example.com/avatar.png"
+      stub_request(:get, request_url).to_return(status: 302, headers: { "Location" => other_url })
+      stub_avatar(other_url)
+
+      described_class.perform_now(user)
+
+      expect(a_request(:get, request_url).with(headers: { "Cookie" => cookie })).to have_been_made
+      expect(a_request(:get, other_url).with { |request| request.headers.key?("Cookie") }).not_to have_been_made
+      expect(user.avatar).to be_attached
+    end
+  end
+
+  it "doesn't send credentials when the Rocket.Chat API isn't configured" do
+    stub_avatar
+
+    described_class.perform_now(user)
+
+    expect(a_request(:get, request_url).with { |request| request.headers.key?("Cookie") }).not_to have_been_made
+  end
+
   it "skips avatars that don't exist" do
     stub_avatar(status: 404, body: "")
 

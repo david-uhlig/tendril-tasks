@@ -46,6 +46,38 @@ RSpec.describe RocketChatApiConfig, type: :config do
     end
   end
 
+  describe "#auth_cookie" do
+    it "returns the cookies that authenticate the user" do
+      config = described_class.new(host: "chat.example.com", user_id: "my-id", auth_token: "my-token")
+
+      expect(config.auth_cookie).to eq("rc_uid=my-id; rc_token=my-token")
+    end
+
+    it "returns nil when API access isn't configured" do
+      expect(described_class.new(host: "chat.example.com").auth_cookie).to be_nil
+    end
+  end
+
+  describe "#workspace?" do
+    subject(:config) { described_class.new(host: "chat.example.com", user_id: "my-id", auth_token: "my-token") }
+
+    it "returns true for URLs on the workspace" do
+      expect(config.workspace?(URI("https://Chat.example.com/avatar/john"))).to be true
+    end
+
+    it "returns false for URLs on other hosts, schemes or ports" do
+      expect(config.workspace?(URI("https://files.example.com/avatar/john"))).to be false
+      expect(config.workspace?(URI("http://chat.example.com/avatar/john"))).to be false
+      expect(config.workspace?(URI("https://chat.example.com:8443/avatar/john"))).to be false
+    end
+
+    it "returns false when API access isn't configured" do
+      config.auth_token = nil
+
+      expect(config.workspace?(URI("https://chat.example.com/avatar/john"))).to be false
+    end
+  end
+
   describe "#configured?" do
     before do
       config.host = "example.com"
