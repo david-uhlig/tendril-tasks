@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Breaking Changes
+- `ROCKET_CHAT_AUTHORIZE_URL` and `ROCKET_CHAT_TOKEN_URL` are applied to sign in with Rocket.Chat. Before, they were ignored and the default endpoints were always used. If you set either one, check that it points to your Rocket.Chat workspace's endpoints before upgrading, or remove it to keep the defaults. Otherwise, sign in with Rocket.Chat stops working.
+
 ### Deprecated
 - `APP_TITLE`. Set the site name and tagline under Admin → Site instead, then remove `APP_TITLE`. Until then, it still replaces the title of the home page, and a warning is logged on start.
 

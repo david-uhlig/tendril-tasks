@@ -29,9 +29,9 @@ Rails.application.configure do
     policy.object_src :none
     policy.base_uri :none
 
-    # Signing in with Rocket.Chat posts a form that redirects to the Rocket.Chat
-    # workspace, and browsers check form-action against every redirect.
-    policy.form_action :self, *RocketChatConfig.origin, *CSP.sources(:form_action)
+    # Signing in with Rocket.Chat posts a form that redirects to its authorize
+    # URL, and browsers check form-action against every redirect.
+    policy.form_action :self, *RocketChatConfig.authorize_origin, *CSP.sources(:form_action)
     policy.frame_ancestors :self, *CSP.sources(:frame_ancestors)
 
     # Specify URI for violation reports
