@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The browser tab shows the title of the page and the site name, e.g. "Water the plants - Tendril Tasks", or the site name and tagline on the home page, e.g. "Tendril Tasks - growing beyond ourselves together". Before, every page showed "TendrilTasks - growing beyond ourselves together".
 - The introduction on the home page is shorter.
 - The default headline and introduction on the home page no longer mention the RCB or a club. To keep the previous text, enter it under Admin → Site.
-- The task overview and the initiative pages show tasks in the same compact cards as the home page. On the task overview, the cards show a longer part of the description. The "Read More" button is gone, because the whole card links to the task.
+- The task overview and the initiative pages show tasks in the same compact cards as the home page. On the task overview, the cards show a longer part of the description. The "Read More" button is gone, because the title, description and button already lead to the task.
 - The buttons below the introduction on the home page lead to the next step. Signed in users go to "Find a task" and, once they applied for a task, to "My applications", otherwise to the initiatives. Visitors sign in or read how it works first.
 - The navigation is calmer. The label next to the logo is plain bold text behind a thin divider, also on the sign in page. The links sit next to the user menu or the login button, and the user's picture has a white ring with a soft shadow instead of a colored one.
 
