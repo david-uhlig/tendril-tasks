@@ -32,4 +32,14 @@ class RocketChatConfig < BaseConfig
     value = value.delete_suffix("/")
     value.match?(%r{\Ahttps?://}i) ? value : "https://#{value}"
   end
+
+  # Returns the scheme, host and port of the workspace, e.g.
+  # "https://chat.example.com", without any path.
+  #
+  # @return [String, nil]
+  def origin
+    return if host.blank?
+
+    URI.join(host, "/").to_s.delete_suffix("/")
+  end
 end

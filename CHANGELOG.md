@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The browser tab shows the title of the page and the site name, e.g. "Water the plants - Tendril Tasks", or the site name and tagline on the home page, e.g. "Tendril Tasks - growing beyond ourselves together". Before, every page showed "TendrilTasks - growing beyond ourselves together".
 
 ### Fixed
+- Sign in with Rocket.Chat works again in Chrome and other Chromium-based browsers. The Content Security Policy blocked the redirect to the Rocket.Chat workspace since 0.6.0.
 - Editing an existing legal page, e.g. the imprint, shows "Edit Imprint" as the heading instead of "Create Imprint".
 - On phones, the navigation shows only the logo, without the label, so the user menu stays on the same line instead of wrapping below a wide logo or a long label.
 - Keyboard navigation stays within an open dialog and returns to where it was once the dialog closes.
