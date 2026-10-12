@@ -78,8 +78,47 @@ de:
       title: "Bring dich aktiv beim RCB ein!"
       title_highlight: "aktiv"
       hero: |
-        Ein Verein lebt von den Leuten, die sich engagieren. Ob bei der Organisation von Veranstaltungen, der Übernahme von Aufgaben oder dem Einbringen von Ideen – nur mit eurer Unterstützung kann das Vereinsleben funktionieren.
-        Wir haben alle anstehenden Aufgaben in einer Liste zusammengestellt – sucht euch die für euch interessanten Aufgaben aus und meldet euch. Für einen besseren Überblick haben wir die Aufgaben in Themenbereiche strukturiert.
+        Ein Verein lebt von den Leuten, die sich engagieren. Such dir eine Aufgabe, die zu dir passt – ob groß oder klein, jede Hilfe bringt den Verein voran.
+      stats:
+        label: "Aktivität im Verein"
+        open_tasks:
+          label:
+            one: "offene Aufgabe"
+            other: "offene Aufgaben"
+          description:
+            one: "wartet auf jemanden wie dich"
+            other: "warten auf Leute wie dich"
+        initiatives:
+          label:
+            one: "Thema"
+            other: "Themen"
+          description:
+            one: "an dem der Verein gerade arbeitet"
+            other: "an denen der Verein gerade arbeitet"
+        new_tasks:
+          label:
+            one: "neu in den letzten zwei Wochen"
+            other: "neu in den letzten zwei Wochen"
+          description:
+            one: "frische Aufgabe zum Anschauen"
+            other: "frische Aufgaben zum Anschauen"
+      recent_tasks:
+        title: "Neu veröffentlicht"
+        view_all:
+          one: "Zur Aufgabe →"
+          other: "Alle %{count} Aufgaben ansehen →"
+      how_it_works:
+        title: "So funktioniert's"
+        step: "Schritt %{number}"
+        browse:
+          title: "Themen entdecken"
+          description: "Sieh dir an, woran der Verein gerade arbeitet – nach Themen sortiert."
+        pick:
+          title: "Aufgabe aussuchen"
+          description: "Finde etwas, das zu deiner Zeit und deinen Fähigkeiten passt – ob groß oder klein."
+        express_interest:
+          title: "Melde dich"
+          description: "Die Ansprechpersonen der Aufgabe melden sich bei dir über %{brand}."
       cta_when_signed_in:
         view_now: "Jetzt ansehen:"
         interesting_initiatives: "Spannende Themen"

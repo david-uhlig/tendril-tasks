@@ -28,7 +28,47 @@ en:
       title: "Get actively involved in the RCB!"
       title_highlight: "actively"
       hero: |
-        A club lives from the people who get involved. Whether it's organizing events, taking on tasks or contributing ideas - club life can only function with your support. Any help, big or small, helps to move the club forward and maintain an active community. Together, we can achieve the goals of the club and create an environment in which everyone feels comfortable.
+        A club lives from the people who get involved. Find a task that fits you – big or small, every bit of help moves the club forward.
+      stats:
+        label: "Club activity"
+        open_tasks:
+          label:
+            one: "open task"
+            other: "open tasks"
+          description:
+            one: "waiting for someone like you"
+            other: "waiting for people like you"
+        initiatives:
+          label:
+            one: "initiative"
+            other: "initiatives"
+          description:
+            one: "the club is working on right now"
+            other: "the club is working on right now"
+        new_tasks:
+          label:
+            one: "new in the last two weeks"
+            other: "new in the last two weeks"
+          description:
+            one: "fresh task to look at"
+            other: "fresh tasks to look at"
+      recent_tasks:
+        title: "Recently published"
+        view_all:
+          one: "View the task →"
+          other: "View all %{count} tasks →"
+      how_it_works:
+        title: "How it works"
+        step: "Step %{number}"
+        browse:
+          title: "Browse initiatives"
+          description: "See what the club is working on, grouped into topics."
+        pick:
+          title: "Pick a task"
+          description: "Find something that fits your time and skills – big or small."
+        express_interest:
+          title: "Express interest"
+          description: "The task's contact people get in touch with you on %{brand}."
       cta_when_signed_in:
         view_now: "View now:"
         interesting_initiatives: "Interesting Initiatives"
