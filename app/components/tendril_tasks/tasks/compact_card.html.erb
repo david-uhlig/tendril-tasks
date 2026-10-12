@@ -12,15 +12,15 @@
                  .new(tag: :h3,
                       scheme: :level5,
                       responsive: false,
-                      class: "overflow-hidden pb-0.5 mb-0")
+                      class: "line-clamp-2 pb-0.5 mb-0")
                  .with_content(@task.title) %>
   <% end %>
 
   <%# First lines of the plain text description %>
   <%= link_to task_path(@task), class: "grow" do %>
-    <%= render TendrilTasks::Paragraph.new(@task.description_plain_text&.truncate_words(30),
+    <%= render TendrilTasks::Paragraph.new(description,
                                            size: :md,
-                                           class: "line-clamp-3") %>
+                                           class: description_clamp) %>
   <% end %>
 
   <%# Contact people as a pill as wide as the button, e.g. "Help Pete and Igor" %>

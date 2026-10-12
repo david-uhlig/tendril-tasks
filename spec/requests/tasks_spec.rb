@@ -64,7 +64,7 @@ RSpec.describe "Tasks", type: :request do
 
         get tasks_path
 
-        modal = Nokogiri::HTML(response.body).at_css("#task-contacts-#{task.id}")
+        modal = Nokogiri::HTML(response.body).at_css("#task-compact-card-contacts-#{task.id}")
         expect(modal.at_css("a[href='#{task_path(task)}']").text.squish).to eq("Zur Aufgabe")
       end
 
