@@ -24,6 +24,26 @@ RSpec.describe "Users::Sessions", type: :request do
       end
     end
 
+    it "shows the logo and the label with a divider, like the navigation" do
+      Site.create!(name: "Acme", navigation_label: "ACME")
+
+      get new_user_session_path
+
+      header = Nokogiri::HTML(response.body).at_css("main #brand-logo").parent
+      expect(header.at_css("span[aria-hidden='true']")).to be_present
+      expect(header.text.squish).to eq("ACME")
+    end
+
+    it "shows only the logo when the label is turned off" do
+      Site.create!(name: "Acme", display_navigation_label: false)
+
+      get new_user_session_path
+
+      header = Nokogiri::HTML(response.body).at_css("main #brand-logo").parent
+      expect(header.at_css("span[aria-hidden='true']")).to be_nil
+      expect(header.text.squish).to be_empty
+    end
+
     context "when authenticated" do
       before { login_as(user) }
 
