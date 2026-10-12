@@ -19,7 +19,7 @@ class PagesController < ApplicationController
       # Like the dashboard, which lists these applications
       @applied = current_user.task_applications.where.not(status: :withdrawn).exists?
       @recent_tasks = Task.publicly_visible
-                          .includes(:coordinators, :project, :applicants)
+                          .includes(:project, :applicants, coordinators: { avatar_attachment: :blob })
                           .order(published_at: :desc)
                           .limit(RECENT_TASKS_LIMIT)
     end
