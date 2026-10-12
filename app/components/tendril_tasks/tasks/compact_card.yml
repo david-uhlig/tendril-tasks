@@ -1,0 +1,25 @@
+en:
+  help: "Help %{names}"
+  others:
+    one: "1 more"
+    other: "%{count} more"
+  your_contact_people: "Your Contact People"
+  contact_people_description: |
+    Here you will find the contact people for this task. If you have any questions, need support or just want some information, you can contact them directly.
+  close_window: "Close Window"
+  go_to_task: "Go to Task"
+  applied_for_task_button: "Applied!"
+  express_interest_button: "Express Interest"
+
+de:
+  help: "Hilf %{names}"
+  others:
+    one: "einer weiteren Person"
+    other: "%{count} weiteren"
+  your_contact_people: "Deine Ansprechpersonen"
+  contact_people_description: |
+    Hier findest du die Ansprechpersonen für diese Aufgabe. Wenn du Fragen hast, Unterstützung brauchst oder einfach nur ein paar Infos möchtest, kannst du sie direkt kontaktieren.
+  close_window: "Fenster schließen"
+  go_to_task: "Zur Aufgabe"
+  applied_for_task_button: "Angemeldet!"
+  express_interest_button: "Jetzt melden!"

@@ -59,6 +59,15 @@ RSpec.describe "Tasks", type: :request do
         expect(response).to have_http_status(:not_found)
       end
 
+      it "links to the task from the contact people modal" do
+        task = published_task
+
+        get tasks_path
+
+        modal = Nokogiri::HTML(response.body).at_css("#task-contacts-#{task.id}")
+        expect(modal.at_css("a[href='#{task_path(task)}']").text.squish).to eq("Zur Aufgabe")
+      end
+
       it "does not show the new task link" do
         get tasks_path
 

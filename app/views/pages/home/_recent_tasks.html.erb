@@ -14,7 +14,7 @@
   <%# Same grid as the tasks page %>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <% tasks.each do |task| %>
-      <%= render TendrilTasks::Tasks::Card.new(task) %>
+      <%= render TendrilTasks::Tasks::CompactCard.new(task) %>
     <% end %>
   </div>
 </section>

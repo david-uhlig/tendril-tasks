@@ -94,8 +94,17 @@ RSpec.describe "Root path", type: :request do
       it "shows the most recently published visible tasks first" do
         get root_path
 
-        card_ids = page.css("#home-recent-tasks section[id^='task-card-']").map { |card| card["id"] }
-        expect(card_ids).to eq([ "task-card-#{new_task.id}", "task-card-#{old_task.id}" ])
+        card_ids = page.css("#home-recent-tasks section[id^='task-compact-card-']").map { |card| card["id"] }
+        expect(card_ids).to eq([ "task-compact-card-#{new_task.id}", "task-compact-card-#{old_task.id}" ])
+      end
+
+      it "lists the contact people of each task in a modal" do
+        get root_path
+
+        modal = page.at_css("#task-compact-card-contacts-#{new_task.id}")
+        expect(modal).to be_present
+        expect(modal.text).to include(new_task.coordinators.first.name)
+        expect(modal.at_css("a[href='#{task_path(new_task)}']").text.squish).to eq("Zur Aufgabe")
       end
 
       it "shows at most three tasks" do
@@ -103,7 +112,7 @@ RSpec.describe "Root path", type: :request do
 
         get root_path
 
-        expect(page.css("#home-recent-tasks section[id^='task-card-']").size).to eq(3)
+        expect(page.css("#home-recent-tasks section[id^='task-compact-card-']").size).to eq(3)
       end
     end
 

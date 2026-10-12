@@ -115,9 +115,9 @@ de:
           description: "Sieh dir an, woran der Verein gerade arbeitet – nach Themen sortiert."
         pick:
           title: "Aufgabe aussuchen"
-          description: "Finde etwas, das zu deiner Zeit und deinen Fähigkeiten passt – ob groß oder klein."
+          description: "Finde etwas, das zu deiner Zeit und deinen Fähigkeiten passt."
         express_interest:
-          title: "Melde dich"
+          title: "Interesse zeigen"
           description: "Die Ansprechpersonen der Aufgabe melden sich bei dir über %{brand}."
       cta_when_signed_in:
         view_now: "Jetzt ansehen:"

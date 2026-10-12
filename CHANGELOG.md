@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set a label for the navigation that differs from the site name, e.g. a short name next to the logo. Leave it blank to show the site name.
 - Set a tagline for the site under Admin → Site. Leave it blank to show the default tagline in the language of the page.
 - The home page shows how many tasks are open, how many initiatives there are and how many tasks are new in the last two weeks. Signed in users also see the three most recently published tasks. A "How it works" section explains the steps from browsing initiatives to expressing interest in a task.
+- The window listing a task's contact people has a button to go to the task.
 
 ### Changed
 - Upgrade to Ruby 4.0.7. If you run the app outside the Docker image, install Ruby 4.0.7 first, e.g. with `mise install`.

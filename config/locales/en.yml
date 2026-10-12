@@ -65,7 +65,7 @@ en:
           description: "See what the club is working on, grouped into topics."
         pick:
           title: "Pick a task"
-          description: "Find something that fits your time and skills – big or small."
+          description: "Find something that fits your time and skills."
         express_interest:
           title: "Express interest"
           description: "The task's contact people get in touch with you on %{brand}."
