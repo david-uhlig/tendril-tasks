@@ -59,7 +59,6 @@ gem "cancancan"
 
 # Configuration
 gem "anyway_config", "~> 2.7"
-gem "dotenv-rails"
 
 # Add support for inline SVGs
 gem "inline_svg"
@@ -100,6 +99,10 @@ group :development, :test do
 end
 
 group :development do
+  # Load configuration from `.env` files [https://github.com/bkeepers/dotenv]
+  # Development only, so local configuration doesn't leak into the tests.
+  gem "dotenv-rails"
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
