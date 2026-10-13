@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'flowbite/src/themes/default';
+@import '../builds/tailwind/gustwave';
 
 /*
   Default Lexxy editor styles. Imported into the components layer, so that

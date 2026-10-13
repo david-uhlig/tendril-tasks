@@ -9,7 +9,7 @@ zizmor = "latest"
 description = "Run the continuous integration suite in parallel."
 run = [
     { task = "ci:setup" },
-    { tasks = ["audit", "brakeman", "rubocop", "herb", "versions", "test:rspec"] },
+    { tasks = ["audit", "brakeman", "rubocop", "herb", "versions", "test:rspec", "test:rspec:gustwave"] },
     { task = "test:seeds" }
 ]
 
@@ -23,6 +23,7 @@ run = [
     { task = "herb" },
     { task = "versions" },
     { task = "test:rspec" },
+    { task = "test:rspec:gustwave" },
     { task = "test:seeds" }
 ]
 
@@ -88,6 +89,11 @@ run = "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup parallel:sp
 description = "Tests: RSpec (fail fast; no coverage)"
 run = "env RAILS_ENV=test SKIP_COVERAGE=1 bundle exec rspec --format RSpec::AiFormatter::Formatter --fail-fast"
 quiet = true
+
+[tasks."test:rspec:gustwave"]
+description = "Tests: RSpec for the Gustwave gem in gems/gustwave"
+dir = "gems/gustwave"
+run = "bundle exec rspec"
 
 [tasks."test:rspec:optional"]
 description = "Tests: RSpec, only the optional specs excluded by default"

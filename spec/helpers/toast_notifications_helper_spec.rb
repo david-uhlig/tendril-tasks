@@ -19,10 +19,10 @@ RSpec.describe ToastNotificationsHelper, type: :helper do
     end
 
     context 'when action is invalid' do
-      it 'raises an Primer::FetchOrFallbackHelper::InvalidValueError' do
+      it 'raises a Gustwave::FetchOrFallbackHelper::InvalidValueError' do
         expect {
           helper.toast_message_for(resource, :invalid_action)
-        }.to raise_error(Primer::FetchOrFallbackHelper::InvalidValueError)
+        }.to raise_error(Gustwave::FetchOrFallbackHelper::InvalidValueError)
       end
     end
 

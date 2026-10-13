@@ -45,7 +45,6 @@ gem "omniauth-rocketchat"
 
 # TailwindCSS framework
 gem "tailwindcss-rails", "~> 4.6"
-gem "tailwind_merge", "~> 1.5"
 
 # Rich text editor for Action Text [https://lexxy.dev]
 gem "lexxy", "~> 1.0"
@@ -54,14 +53,14 @@ gem "lexxy", "~> 1.0"
 # See https://viewcomponent.org/
 gem "view_component", "~> 4.15"
 
+# Flowbite components built with ViewComponent
+gem "gustwave", path: "gems/gustwave"
+
 # Authorization
 gem "cancancan"
 
 # Configuration
 gem "anyway_config", "~> 2.7"
-
-# Add support for inline SVGs
-gem "inline_svg"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 2.0"

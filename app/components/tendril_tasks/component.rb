@@ -12,9 +12,6 @@ module TendrilTasks
   #
   # @see https://viewcomponent.org/guide/getting-started.html#conventions
   class Component < Gustwave::Component
-    include Primer::FetchOrFallbackHelper
-    include TailwindHelper
-
     delegate :paragraphize, :simple_line_breaks, to: :view_context
     delegate :rocketchat_applink, :rocketchat_link, to: :view_context
     delegate :rocketchat_sign_in_path, :rocketchat_sign_in_method, to: :view_context
