@@ -84,8 +84,34 @@ RSpec.describe Release::Changelog do
   end
 
   describe "#notes" do
-    it "returns the body of a section" do
-      expect(changelog.notes("0.7.0")).to eq("### Fixed\n- Old fix.")
+    it "returns the section under What's Changed with a link that compares it to the previous release" do
+      changelog.release("0.8.0")
+
+      expect(changelog.notes("0.8.0")).to eq(<<~MARKDOWN.chomp)
+        ## What's Changed
+
+        ### Added
+        - A feature.
+
+        ### Fixed
+        - Fix one.
+        - Fix two,
+          continued.
+
+        **Full Changelog**: #{repository}/compare/v0.7.0...v0.8.0
+      MARKDOWN
+    end
+
+    it "compares to the latest patch release of the previous minor version" do
+      changelog = described_class.parse(text.sub("## [0.7.0]", "## [0.7.1] - 2026-10-10\n\n### Fixed\n- Patch fix.\n\n## [0.7.0]"))
+      changelog.release("0.8.0")
+
+      expect(changelog.notes("0.8.0")).to end_with("compare/v0.7.1...v0.8.0")
+      expect(changelog.notes("0.7.1")).to end_with("compare/v0.7.0...v0.7.1")
+    end
+
+    it "leaves out the comparison for the first release in the changelog" do
+      expect(changelog.notes("0.7.0")).to eq("## What's Changed\n\n### Fixed\n- Old fix.")
     end
   end
 

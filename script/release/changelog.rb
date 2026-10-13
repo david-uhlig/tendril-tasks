@@ -52,8 +52,14 @@ module Release
 
     def versions = @sections.filter_map(&:version)
 
-    # The body of a section, e.g. for the GitHub release notes
-    def notes(version) = fetch(version).body.join("\n")
+    # The GitHub release notes of a version: its section under "What's Changed"
+    # and a link that compares it to the previous release
+    def notes(version)
+      lines = [ "## What's Changed", "", *fetch(version).body ]
+      previous = versions.select { |existing| existing < Gem::Version.new(version) }.max
+      lines.push("", "**Full Changelog**: #{REPOSITORY}/compare/v#{previous}...v#{version}") if previous
+      lines.join("\n")
+    end
 
     # The entries of a section by subsection, e.g. { "Fixed" => ["- Fix ..."] }.
     # Lines indented below a `- ` line belong to its entry. Repeated
