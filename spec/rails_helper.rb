@@ -68,6 +68,18 @@ RSpec.configure do |config|
     @request = vc_test_controller.request
   end
 
+  # The test adapter keeps enqueued and performed jobs across examples. Clear
+  # them, so that matchers like `have_been_enqueued` only see the jobs of the
+  # current example. Records of previous examples may share ids with the
+  # current ones, because the transactions are rolled back.
+  config.before do
+    adapter = ActiveJob::Base.queue_adapter
+    if adapter.respond_to?(:enqueued_jobs)
+      adapter.enqueued_jobs.clear
+      adapter.performed_jobs.clear
+    end
+  end
+
   # Devise sign-in helpers
   # https://github.com/heartcombo/devise#integration-tests
   config.include Devise::Test::IntegrationHelpers, type: :request
