@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-10-13
+
 ### Breaking Changes
 - `ROCKET_CHAT_AUTHORIZE_URL` and `ROCKET_CHAT_TOKEN_URL` are applied to sign in with Rocket.Chat. Before, they were ignored and the default endpoints were always used. If you set either one, check that it points to your Rocket.Chat workspace's endpoints before upgrading, or remove it to keep the defaults. Otherwise, sign in with Rocket.Chat stops working.
 - Profile photos are downloaded from Rocket.Chat and served by Tendril Tasks, so browsers no longer load them from the Rocket.Chat workspace. Photos are downloaded on sign in and refreshed every night, so existing users get theirs within a day of upgrading. Until then, and for users whose photo can't be downloaded, a placeholder is shown. If your Rocket.Chat workspace blocks unauthenticated access to avatars, set `ROCKET_CHAT_API_HOST`, `ROCKET_CHAT_API_USER_ID` and `ROCKET_CHAT_API_AUTH_TOKEN` before upgrading, the same personal access token as for notifications. Otherwise, everyone sees the placeholder instead of profile photos.
@@ -200,7 +202,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.8.0
 [0.7.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...v0.7.0
