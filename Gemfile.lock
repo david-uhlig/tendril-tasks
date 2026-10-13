@@ -1,3 +1,13 @@
+PATH
+  remote: gems/gustwave
+  specs:
+    gustwave (0.1.0)
+      inline_svg
+      nokogiri
+      railties (>= 8.0)
+      tailwind_merge (~> 1.5)
+      view_component (~> 4.0)
+
 GEM
   remote: https://gem.coop/
   specs:
@@ -607,12 +617,12 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_bot_rails
+  gustwave!
   herb (~> 0.11.0)
   hotwire-spark
   i18n-tasks (~> 1.0)
   image_processing (~> 2.0)
   importmap-rails
-  inline_svg
   jbuilder
   kamal (~> 2.8)
   lexxy (~> 1.0)
@@ -636,7 +646,6 @@ DEPENDENCIES
   solid_queue
   sqlite3 (>= 2.1)
   stimulus-rails
-  tailwind_merge (~> 1.5)
   tailwindcss-rails (~> 4.6)
   thruster
   turbo-rails

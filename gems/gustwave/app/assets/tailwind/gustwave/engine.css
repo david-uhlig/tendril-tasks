@@ -1,0 +1,7 @@
+/*
+  Entry point for tailwindcss-rails' engine support. Import it in the host
+  application's `app/assets/tailwind/application.css` with
+  `@import "../builds/tailwind/gustwave";`, so that Tailwind CSS picks up the
+  classes used in Gustwave's components and helpers.
+*/
+@source "../../..";

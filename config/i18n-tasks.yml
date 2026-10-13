@@ -161,8 +161,6 @@ ignore_missing:
   # Add a pattern here for each new component with a sidecar file.
   - 'delete_confirm.modal_component.*'
   - 'form.coordinator_picker.modal_component.*'
-  - 'gustwave.dismiss_button.*'
-  - 'gustwave.spinner.*'
   - 'tendril_tasks.breadcrumb.*'
   - 'tendril_tasks.contact_button.*'
   - 'tendril_tasks.dashboard.application.*'

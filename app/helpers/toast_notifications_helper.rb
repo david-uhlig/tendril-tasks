@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ToastNotificationsHelper
-  include Primer::FetchOrFallbackHelper
+  include Gustwave::FetchOrFallbackHelper
 
   ACTION_OPTIONS = [ :create, :update, :destroy ].freeze
   STATUS_OPTIONS = [ :success ].freeze

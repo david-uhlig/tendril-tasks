@@ -44,6 +44,9 @@ RUN apt-get update -qq && \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
+# Path gems: Bundler only needs their gemspec and version to install
+COPY gems/gustwave/gustwave.gemspec gems/gustwave/
+COPY gems/gustwave/lib/gustwave/version.rb gems/gustwave/lib/gustwave/
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
