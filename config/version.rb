@@ -1,3 +1,3 @@
 module TendrilTasks
-  VERSION = "0.8.0.dev".freeze
+  VERSION = "0.8.0".freeze
 end
