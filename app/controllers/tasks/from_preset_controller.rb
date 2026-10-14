@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Tasks
-  class FromPresetController < ApplicationController
-    rescue_from CanCan::AccessDenied, with: :access_denied_handler
+  class FromPresetController < ::ApplicationController
+    include AccessDeniedHandlers::SensibleResources
 
     def new
       authorize! :create, Task
