@@ -240,6 +240,14 @@ de:
             Auch alle Meldungen von Mitgliedern zu dieser Aufgabe werden unwiderruflich gelöscht.
       new_initiative_button: "Neu"
       description: "Beschreibung"
+    projects:
+      modal:
+        title: "Thema anlegen"
+      form:
+        explainer: "Ein Thema bündelt zusammengehörige Aufgaben, zum Beispiel für ein Projekt oder eine Veranstaltung. Mitglieder finden die Aufgaben nach Themen sortiert. Deine Aufgabe wird dem neuen Thema zugeordnet."
+        visibility: "Status"
+        private: "Entwurf"
+        public: "Veröffentlicht"
     show:
       section_title:
         applications: "Meldungen"
