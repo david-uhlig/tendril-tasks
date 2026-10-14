@@ -10,7 +10,10 @@
       form_object.project_options, :id, :title,
       error_field_attribute: :project,
       prompt: t(".choose_initiative")) do |project_select| %>
-    <% project_select.trailing_button(tag: :a, href: new_project_path).with_content(t(".new_initiative_button")) %>
+    <%# Creates the initiative in a modal, so the entries of this form are kept %>
+    <% project_select.trailing_button(
+         id: "new-project-button",
+         data: { "modal-target": "new-project-modal", "modal-show": "new-project-modal" }).with_content(t(".new_initiative_button")) if can?(:create, Project) %>
   <% end %>
 
   <%= render Form::TextFieldComponent.new(f, :title) %>
@@ -36,6 +39,12 @@
       <% button_group.button(t("forms.create"), value: "save") %>
       <% button_group.button(t(".save_and_new"), value: "save_and_new") %>
     <% end %>
+  <% end %>
+<% end %>
+
+<% if can?(:create, Project) %>
+  <%= content_for :modal do %>
+    <%= render "tasks/projects/modal", project_form: ProjectForm.new(publish: true) %>
   <% end %>
 <% end %>
 

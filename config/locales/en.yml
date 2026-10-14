@@ -197,6 +197,14 @@ en:
             All messages from members who have responded to this task will also be irrevocably deleted.
       new_initiative_button: "New"
       description: "Description"
+    projects:
+      modal:
+        title: "New Initiative"
+      form:
+        explainer: "An initiative groups related tasks, for example for a project or an event. Members find the tasks sorted by initiative. Your task will be assigned to the new initiative."
+        visibility: "State"
+        private: "Draft"
+        public: "Published"
     show:
       section_title:
         applications: "Applications"

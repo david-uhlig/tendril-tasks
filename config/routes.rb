@@ -49,6 +49,10 @@ Rails.application.routes.draw do
     end
     get "/tasks/new/from-preset/:project_id/:coordinator_ids", to: "tasks/from_preset#new", as: :new_task_from_preset
 
+    namespace :tasks do
+      resources :projects, only: %i[ create ]
+    end
+
     namespace :coordinators do
       resources :searches, only: %i[ index create ]
     end
