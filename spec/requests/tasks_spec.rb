@@ -189,6 +189,29 @@ RSpec.describe "Tasks", type: :request do
     end
   end
 
+  describe "GET /tasks/new/from-preset/:project_id/:coordinator_ids" do
+    let(:project) { create(:project) }
+
+    it "requires authentication" do
+      require_authentication_for {
+        get new_task_from_preset_path(project_id: project.id, coordinator_ids: editor.id)
+      }
+    end
+
+    it "unauthorized users cannot create new tasks" do
+      login_as(user)
+      get new_task_from_preset_path(project_id: project.id, coordinator_ids: user.id)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(tasks_path)
+    end
+
+    it "editors can create new tasks" do
+      login_as(editor)
+      get new_task_from_preset_path(project_id: project.id, coordinator_ids: editor.id)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "GET /tasks/:id/edit" do
     it "requires authentication" do
       require_authentication_for { get edit_task_path(published_task) }
