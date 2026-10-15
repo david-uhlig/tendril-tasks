@@ -26,6 +26,10 @@ FileUtils.chdir APP_ROOT do
   system("bundle check") || system!("bundle install")
   system!("npm install")
 
+  # System specs need the compiled CSS; bin/dev only builds it while running.
+  puts "\n== Building CSS =="
+  system! "bin/rails tailwindcss:build"
+
   puts "\n== Copying sample files =="
   if File.exist?(".env")
     puts ".env exists, skipping."

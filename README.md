@@ -46,7 +46,7 @@ mise install
 bin/setup
 ```
 
-`bin/setup` installs the dependencies, creates `.env` from `.env.sample`, creates and seeds the database, and starts the development server at http://localhost:3000. Run it again at any time to update your environment, add `--reset` to recreate the database, or `--skip-server` to skip starting the server. Afterward, start the server with `bin/dev`.
+`bin/setup` installs the dependencies, builds the CSS, creates `.env` from `.env.sample`, creates and seeds the database, and starts the development server at http://localhost:3000. Run it again at any time to update your environment, add `--reset` to recreate the database, or `--skip-server` to skip starting the server. Afterward, start the server with `bin/dev`.
 
 Rocket.Chat is optional in development. Sign in as any seeded user through the development sign in on the sign in page. The seeds include an admin, two editors, and seven users, along with sample initiatives, tasks, branding, footer links, and legal pages.
 
