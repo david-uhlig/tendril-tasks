@@ -188,11 +188,11 @@ module Gustwave
           Gustwave::Icon.new(name, **config)
         },
         image: ->(src, **options) {
-          config = configure_visual_html_attributes(**options)
-          image_tag src, config
+          config = configure_visual_html_attributes(options)
+          image_tag src, **config
         },
         svg: ->(src = nil, **options, &block) {
-          config = configure_visual_html_attributes(**options)
+          config = configure_visual_html_attributes(options)
           Gustwave::Svg.new(src, **config, &block)
         },
         indicator: ->(text = nil, **options, &block) {

@@ -134,6 +134,24 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
+  %i[leading trailing].each do |position|
+    context "with a custom class on a #{position} visual" do
+      it "merges it with the visual size classes on images" do
+        render_inline(described_class.new) do |component|
+          component.public_send(:"#{position}_image", "https://example.com/image.png", class: "custom")
+        end
+        expect(rendered_content).to have_selector("button>img.h-5.w-auto.custom[aria-hidden='true']")
+      end
+
+      it "merges it with the visual size classes on svgs" do
+        render_inline(described_class.new) do |component|
+          component.public_send(:"#{position}_svg", "gustwave/icons/outline/arrow-left.svg", class: "custom")
+        end
+        expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom")
+      end
+    end
+  end
+
   context "with leading visual without content" do
     it "overwrites padding" do
       render_inline(described_class.new) do |component|
