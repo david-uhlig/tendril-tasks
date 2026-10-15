@@ -4,9 +4,6 @@ module Gustwave
   # Use `Button` for actions (e.g. in forms). Use links for destinations, or moving from one page to another.
   module Buttons
     class GradientMonochromeColoredShadow < Gustwave::Buttons::Base
-      theme_for Gustwave::Button
-      theme_for Gustwave::Button, as: :colored_shadow
-
       style :scheme,
             default: :blue,
             states: {
