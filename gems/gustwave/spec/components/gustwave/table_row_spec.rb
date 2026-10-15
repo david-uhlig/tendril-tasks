@@ -49,6 +49,30 @@ RSpec.describe Gustwave::TableRow, type: :component do
     end
   end
 
+  context "with cell text" do
+    it "renders the text of a td cell" do
+      render_inline(described_class.new) do |component|
+        component.td "cell_text", class: "custom"
+      end
+      expect(rendered_content).to have_selector("td.px-6.py-4.custom", text: "cell_text")
+    end
+
+    it "renders the text of a th cell" do
+      render_inline(described_class.new) do |component|
+        component.th "head_text"
+      end
+      expect(rendered_content).to have_selector("th.px-6.py-4[scope='row']", text: "head_text")
+    end
+
+    it "prefers the text over block content" do
+      render_inline(described_class.new) do |component|
+        component.td("cell_text") { "block_text" }
+      end
+      expect(rendered_content).to have_selector("td", text: "cell_text")
+      expect(rendered_content).not_to have_content("block_text")
+    end
+  end
+
   context "with cell slot and block content" do
     it "appends block content after the cell slot content" do
       render_inline(described_class.new) do |component|
