@@ -1,0 +1,7 @@
+<div class="flex flex-wrap items-center gap-4">
+  <% schemes.each do |scheme| %>
+    <%= render Gustwave::Indicator.new(scheme:, size: :md) do |indicator| %>
+      <% indicator.legend scheme.to_s.humanize %>
+    <% end %>
+  <% end %>
+</div>

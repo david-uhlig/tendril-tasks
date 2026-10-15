@@ -21,5 +21,6 @@ module Dummy
     config.active_storage.service = :test
     config.i18n.available_locales = %i[en de]
     config.i18n.default_locale = :en
+    config.view_component.previews.paths << File.expand_path("../../../previews", __dir__)
   end
 end

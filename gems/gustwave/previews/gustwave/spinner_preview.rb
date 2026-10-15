@@ -1,0 +1,21 @@
+module Gustwave
+  class SpinnerPreview < ViewComponent::Preview
+    # http://localhost:3030/rails/view_components/gustwave/spinner/default
+    def default
+      render Gustwave::Spinner.new
+    end
+
+    def schemes
+      render_with_template(locals: { schemes: Gustwave::Spinner.variant_values(:scheme).excluding(:none) })
+    end
+
+    def sizes
+      render_with_template(locals: { sizes: %i[xs sm md lg xl 2xl] })
+    end
+
+    # The spinner centered on a +relative+ parent, e.g. while a card loads.
+    def positioned
+      render_with_template
+    end
+  end
+end

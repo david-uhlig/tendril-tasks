@@ -1,0 +1,13 @@
+<%= render Gustwave::Dropdown.new("Projects") do |dropdown| %>
+  <% dropdown.menu do |menu| %>
+    <% menu.item "All projects", href: "#" %>
+
+    <% menu.dropdown do |submenu| %>
+      Recent
+      <% submenu.menu do |items| %>
+        <% items.item "Garden", href: "#" %>
+        <% items.item "Library", href: "#" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

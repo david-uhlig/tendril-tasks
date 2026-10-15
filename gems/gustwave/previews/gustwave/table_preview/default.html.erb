@@ -1,0 +1,22 @@
+<%= render Gustwave::Table.new do |table| %>
+  <% table.caption do |caption| %>
+    <% caption.title "Supplies" %>
+    <% caption.description "What we have in stock and where to find it." %>
+  <% end %>
+
+  <% table.head do |head| %>
+    <% head.column "Item" %>
+    <% head.column "Amount" %>
+    <% head.column "Location" %>
+  <% end %>
+
+  <% table.body do |body| %>
+    <% rows.each do |item, amount, location| %>
+      <% body.row do |row| %>
+        <% row.th item %>
+        <% row.td amount %>
+        <% row.td location %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
