@@ -17,6 +17,13 @@ RSpec.describe Text::Highlight::GradientComponent, type: :component do
     expect(page).not_to have_css("span")
   end
 
+  it "highlights without the gradient for scheme none" do
+    render_inline(described_class.new("Get actively involved!", highlight: "actively", scheme: :none, class: "font-bold"))
+
+    expect(page).to have_css("span.font-bold", text: "actively", exact_text: true)
+    expect(page).not_to have_css("span.bg-clip-text")
+  end
+
   it "escapes the text and the highlight" do
     render_inline(described_class.new("<b>Fish & Chips</b>", highlight: "& Chips"))
 

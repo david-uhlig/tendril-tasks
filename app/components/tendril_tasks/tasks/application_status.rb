@@ -12,20 +12,10 @@ module TendrilTasks
     #   <%= render TendrilTasks::Tasks::ApplicationStatus.new(application) %>
     #
     class ApplicationStatus < TendrilTasks::Component
-      # Maps status code to SVG icon identifier.
-      ICON_MAPPINGS = {
-        received: :inbox,
-        under_review: :file_search,
-        interviewing: :messages,
-        on_hold: :clock,
-        accepted: :badge_check,
-        rejected: :close_circle,
-        withdrawn: :ban
-      }.freeze
-      ICON_OPTIONS = ICON_MAPPINGS.keys
+      # The dropdown button showing the current status
+      part :trigger, "focus:ring-4 focus:outline-hidden focus:ring-gray-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2"
 
-      # Maps status code to color scheme.
-      CLASS_MAPPINGS = {
+      variant :status, part: :trigger, default: :received, values: {
         received: "bg-gray-100 text-gray-800",
         under_review: "bg-cyan-100 text-cyan-800",
         interviewing: "bg-blue-100 text-blue-800",
@@ -35,22 +25,28 @@ module TendrilTasks
         withdrawn: "bg-indigo-100 text-indigo-800"
       }
 
+      derive :icon, from: :status, values: {
+        received: :inbox,
+        under_review: :file_search,
+        interviewing: :messages,
+        on_hold: :clock,
+        accepted: :badge_check,
+        rejected: :close_circle,
+        withdrawn: :ban
+      }
+
       # Initializes a new ApplicationStatus component.
       #
       # @param application [TaskApplication] the application whose status is to be displayed
       def initialize(application)
         @application = application
+        style_with(status: application.status)
       end
 
       private
 
       def render_icon_for(status)
-        icon = ICON_MAPPINGS[status.to_sym]
-        render Gustwave::Icon.new(icon, position: :standalone)
-      end
-
-      def color_scheme_for(status)
-        CLASS_MAPPINGS[status.to_sym]
+        render Gustwave::Icon.new(derived_value(:icon, status:), position: :standalone)
       end
     end
   end
