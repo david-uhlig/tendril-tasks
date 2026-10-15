@@ -21,8 +21,8 @@ module Gustwave
 
           HEADING_ACTIONS = %i[heading1 heading2 heading3 heading4].freeze
 
-          def initialize(form = nil, id: "custom-toolbar", hidden: [], disabled: [], **options)
-            @id = id
+          def initialize(form = nil, id: nil, hidden: [], disabled: [], **options)
+            @id = id.presence || generate_random_id(prefix: "toolbar")
             @form = form
             @hidden = [ hidden ].flatten.compact
             @disabled = [ disabled ].flatten.compact

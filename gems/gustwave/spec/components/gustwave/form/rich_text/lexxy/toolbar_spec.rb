@@ -90,4 +90,16 @@ RSpec.describe Gustwave::Form::RichText::Lexxy::Toolbar, type: :component do
       expect(toolbar).to have_css("button[name='heading3']:not([disabled])")
     end
   end
+
+  context "without an id" do
+    it "generates a unique id for each toolbar" do
+      ids = 2.times.map do
+        render_inline(described_class.new)
+        toolbar["id"]
+      end
+
+      expect(ids).to all(start_with("toolbar-"))
+      expect(ids.uniq.size).to eq(2)
+    end
+  end
 end
