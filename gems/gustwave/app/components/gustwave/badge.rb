@@ -167,11 +167,7 @@ module Gustwave
       @id = options.delete(:id)
       @html_tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
       @type = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE)
-      style_with(
-        border: fetch_or_fallback_boolean(border, false),
-        outline: fetch_or_fallback_boolean(outline, false),
-        hover: tag.in?(HOVER_TAGS)
-      )
+      style_with(border:, outline:, hover: tag.in?(HOVER_TAGS))
     end
 
     def before_render

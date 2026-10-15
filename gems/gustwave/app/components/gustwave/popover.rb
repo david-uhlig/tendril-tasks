@@ -18,7 +18,7 @@ module Gustwave
 
     def initialize(text = nil, id: nil, arrow: true, **options)
       @id = id || generate_random_id(prefix: "popover")
-      @arrow = fetch_or_fallback_boolean(arrow, true)
+      @arrow = ActiveModel::Type::Boolean.new.cast(arrow) != false
       @text = text
 
       options.symbolize_keys!
