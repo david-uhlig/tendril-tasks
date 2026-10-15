@@ -34,8 +34,11 @@ module Gustwave
         "Gustwave::Buttons::GradientDuotoneOutline" => %i[none base purple_to_blue cyan_to_blue green_to_blue purple_to_pink
                                                           pink_to_orange teal_to_lime red_to_yellow],
         "Gustwave::Buttons::GradientMonochrome" => %i[none base blue green cyan teal lime red pink purple],
-        "Gustwave::Buttons::GradientMonochromeColoredShadow" => %i[none base blue green cyan teal lime red pink purple]
+        "Gustwave::Buttons::GradientMonochromeColoredShadow" => %i[none base blue green cyan teal lime red pink purple],
+        "Gustwave::Buttons::Inline" => %i[none base blue dark red green yellow indigo purple pink]
       }.freeze
+      # Themes with sizes beyond BUTTON_SIZES
+      EXTRA_BUTTON_SIZES = { "Gustwave::Buttons::Inline" => %i[3xs 2xs] }.freeze
       ALL_VISUALS = ->(button) do
         button.leading_icon :check
         button.leading_image "https://example.com/avatar.png", alt: ""
@@ -59,13 +62,14 @@ RSpec.describe "Style snapshots", type: :component do
   { "Gustwave::Buttons::Base" => %i[none base], **specs::BUTTON_THEMES }.each do |name, schemes|
     style_snapshot name do
       button = name.constantize
+      sizes = specs::BUTTON_SIZES + specs::EXTRA_BUTTON_SIZES.fetch(name, [])
       group :scheme, content: "Label", scheme: schemes, pill: [ false, true ], tag: %i[button a] do |**args|
         button.new(**args)
       end
-      group :size, content: "Label", size: specs::BUTTON_SIZES, class: specs::CUSTOM_CLASS do |**args|
+      group :size, content: "Label", size: sizes, class: specs::CUSTOM_CLASS do |**args|
         button.new(**args)
       end
-      group :visual_only, slots: ->(b) { b.leading_icon :check }, size: specs::BUTTON_SIZES, scheme: [ schemes[2] || :base, :none ] do |**args|
+      group :visual_only, slots: ->(b) { b.leading_icon :check }, size: sizes, scheme: [ schemes[2] || :base, :none ] do |**args|
         button.new(**args)
       end
       group :visuals, content: "Label", slots: specs::ALL_VISUALS, size: specs::BUTTON_SIZES do |**args|
@@ -100,8 +104,9 @@ RSpec.describe "Style snapshots", type: :component do
     group :visuals, content: "New", slots: ->(b) { b.leading_icon :check }, size: sizes do |**args|
       Gustwave::Badge.new(**args)
     end
-    # The dismiss button isn't snapshotted: it requests the unregistered
-    # button theme :inline, which raises outside production.
+    group :dismiss, content: "New", slots: ->(b) { b.dismiss_button }, size: sizes - [ :none ], scheme: schemes do |**args|
+      Gustwave::Badge.new(**args)
+    end
   end
 
   style_snapshot "Gustwave::Avatar" do

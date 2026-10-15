@@ -15,6 +15,7 @@ module Gustwave
   # - :gradient_monochrome_colored_shadow == :colored_shadow
   # - :gradient_duotone
   # - :gradient_duotone_outline
+  # - :inline
   #
   # === Picking a Different Default Theme
   #
@@ -76,6 +77,7 @@ module Gustwave
     register_theme :colored_shadow, "Gustwave::Buttons::GradientMonochromeColoredShadow"
     register_theme :gradient_duotone, "Gustwave::Buttons::GradientDuotone"
     register_theme :gradient_duotone_outline, "Gustwave::Buttons::GradientDuotoneOutline"
+    register_theme :inline, "Gustwave::Buttons::Inline"
     with_default_theme :default
     delegate_missing_to :themed_button
 
@@ -90,7 +92,7 @@ module Gustwave
     # @param [String, nil] text The text to display on the button. Takes precedent over the block content.
     # @param [Symbol] tag The HTML tag to render the button as. Available options depend on the theme. Gustwave::Buttons allow :button and :a tags, and default to :button.
     # @param [Symbol] type The type of the button. Available options depend on the theme. Gustwave::Buttons allows :button, :submit, and :reset. Defaults to :button. Only relevant for +tag+ == :button.
-    # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, and :gradient_duotone_outline. See all available themes by running
+    # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, :gradient_duotone_outline, and :inline. See all available themes by running
     #   Gustwave::Button.themes! Defaults to :default.
     # @param [Symbol] scheme One of the theme's appearance options, e.g. :red, :blue, :green, :purple, etc.
     # @param [Symbol] size One of the theme's size options. Usually :none, :xs, :sm, :md, :lg, or :xl.
