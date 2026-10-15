@@ -62,6 +62,9 @@ module Gustwave
       "2xl": :"xs"
     }
 
+    # Indicators scale with the text at :"2xl"
+    extend_lookup :indicator_size, values: { "2xl": :auto }
+
     # Render a round badge when no text or content block was given
     extend_toggle :visual_only, values: {
       xs: "rounded-full px-0.5",
