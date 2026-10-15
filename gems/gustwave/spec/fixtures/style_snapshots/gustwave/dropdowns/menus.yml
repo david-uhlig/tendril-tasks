@@ -1,6 +1,7 @@
 ---
 generic class=nil:
-- div id="menu"
+- 'div id="menu": bg-white dark:bg-gray-700 divide-gray-100 divide-y hidden rounded-lg
+  shadow-md w-auto z-10'
 - 'header: dark:text-white px-4 py-2 text-gray-900 text-sm'
 - 'footer: dark:text-white px-4 py-2 text-gray-900 text-sm'
 generic class="px-0 bg-black text-white":
@@ -9,7 +10,8 @@ generic class="px-0 bg-black text-white":
 - 'header: dark:text-white px-4 py-2 text-gray-900 text-sm'
 - 'footer: dark:text-white px-4 py-2 text-gray-900 text-sm'
 list class=nil:
-- div id="menu"
+- 'div id="menu": bg-white dark:bg-gray-700 divide-gray-100 divide-y hidden rounded-lg
+  shadow-md w-auto z-10'
 - 'ul: dark:text-gray-200 py-2 text-gray-700 text-sm'
 - li
 - 'a href="#" tabindex="-1": dark:hover:bg-gray-600 dark:hover:text-white flex gap-1.5

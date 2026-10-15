@@ -1,14 +1,15 @@
 ---
 generic tag=:div class=nil:
-- div data-dropdown-toggle="menu"
+- 'div data-dropdown-toggle="menu": cursor-pointer inline-flex'
 generic tag=:div class="px-0 bg-black text-white":
 - 'div data-dropdown-toggle="menu": bg-black cursor-pointer inline-flex px-0 text-white'
 generic tag=:span class=nil:
-- span data-dropdown-toggle="menu"
+- 'span data-dropdown-toggle="menu": cursor-pointer inline-flex'
 generic tag=:span class="px-0 bg-black text-white":
 - 'span data-dropdown-toggle="menu": bg-black cursor-pointer inline-flex px-0 text-white'
 inline_button class=nil:
-- button data-dropdown-toggle="menu" type="button"
+- 'button data-dropdown-toggle="menu" type="button": align-baseline gap-0 inline-flex
+  items-center'
 - 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
   xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-auto'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"

@@ -1,9 +1,9 @@
 ---
 cell tag=:td class=nil:
-- td
+- 'td: px-6 py-4'
 cell tag=:td class="px-0 bg-black text-white":
 - 'td: bg-black px-0 py-4 text-white'
 cell tag=:th class=nil:
-- th
+- 'th: px-6 py-4'
 cell tag=:th class="px-0 bg-black text-white":
 - 'th: bg-black px-0 py-4 text-white'

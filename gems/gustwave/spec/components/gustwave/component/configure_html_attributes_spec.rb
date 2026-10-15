@@ -62,6 +62,17 @@ RSpec.describe Gustwave::Component, type: :component do
         expect(result).to eq({ class: "bg-white text-gray-800" })
       end
 
+      it "keeps the default_attrs class when overwrite_attrs class is nil" do
+        default_attrs = { class: "bg-white text-gray-800" }
+        overwrite_attrs = { id: "overwrite_id", class: nil }
+        result = component.configure_html_attributes(
+          overwrite_attrs,
+          overwrite_class_attr: false,
+          **default_attrs
+        )
+        expect(result).to eq({ id: "overwrite_id", class: "bg-white text-gray-800" })
+      end
+
       it "default_attrs class can be empty" do
         default_attrs = { class: "" }
         overwrite_attrs = { class: "bg-red-500 some-custom-class" }
