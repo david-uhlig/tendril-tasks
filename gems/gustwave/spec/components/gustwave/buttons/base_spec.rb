@@ -149,6 +149,15 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
         end
         expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom")
       end
+
+      it "merges it with the visual size classes on block svgs" do
+        render_inline(described_class.new) do |component|
+          component.public_send(:"#{position}_svg", class: "custom") do
+            '<svg xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1"/></svg>'.html_safe
+          end
+        end
+        expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom[aria-hidden='true']>rect")
+      end
     end
   end
 
