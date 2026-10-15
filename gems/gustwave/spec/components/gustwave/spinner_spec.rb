@@ -55,7 +55,7 @@ RSpec.describe Gustwave::Spinner, type: :component do
   context "with position argument" do
     it "renders the position styling" do
       render_inline(described_class.new(position: :top_left))
-      expect(rendered_content).to have_selector("div.absolute.right-auto.top-0.left-0")
+      expect(rendered_content).to have_selector("div.absolute.top-0.left-0")
     end
   end
 

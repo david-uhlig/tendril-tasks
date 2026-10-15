@@ -4,13 +4,20 @@ module Gustwave
   # Provides consistent style definitions for Positionable components
   #
   # Position the Positionable component on the edges of an enclosing +relative+
-  # container.
+  # container. The component is centered on the chosen edge or corner, i.e.
+  # half of it sticks out of the container, like a notification dot on an
+  # avatar.
   #
-  # Including the concern declares the +position+ variant. You must handle the
-  # positioning yourself, e.g., how the component receives the position
-  # argument. In most cases the Positionable component will be rendered inside
-  # another component or an HTML container element. The surrounding element
-  # must have the +relative+ Tailwind class.
+  # Including the concern declares the +position+ variant. Each position
+  # combines a vertical anchor (+top+, +middle+, +bottom+) with a horizontal
+  # anchor (+left+, +center+, +right+), e.g. +:top_left+ or +:middle_center+.
+  # +:top+, +:middle+, +:center+, and +:bottom+ are aliases for the centered
+  # positions. +:none+ (the default) adds no classes.
+  #
+  # You must handle the positioning yourself, e.g., how the component receives
+  # the position argument. In most cases the Positionable component will be
+  # rendered inside another component or an HTML container element. The
+  # surrounding element must have the +relative+ Tailwind class.
   #
   # === Basic Usage
   #
@@ -35,26 +42,34 @@ module Gustwave
   # @see Gustwave::Indicator as an example implementation
   module Positionable
     extend ActiveSupport::Concern
+    include Gustwave::Styling
+
+    VERTICAL = {
+      top: "top-0 -translate-y-1/2",
+      middle: "top-1/2 -translate-y-1/2",
+      bottom: "bottom-0 translate-y-1/2"
+    }.freeze
+
+    HORIZONTAL = {
+      left: "left-0 -translate-x-1/2",
+      center: "left-1/2 -translate-x-1/2",
+      right: "right-0 translate-x-1/2"
+    }.freeze
+
+    ALIASES = {
+      top: :top_center,
+      middle: :middle_center,
+      center: :middle_center,
+      bottom: :bottom_center
+    }.freeze
+
+    POSITIONS = VERTICAL.keys.product(HORIZONTAL.keys)
+                        .to_h { |vertical, horizontal| [ :"#{vertical}_#{horizontal}", "absolute #{VERTICAL[vertical]} #{HORIZONTAL[horizontal]}" ] }
+                        .then { |positions| positions.merge(ALIASES.transform_values(&positions)) }
+                        .freeze
 
     included do
-      variant :position, default: :none, values: {
-        top_left: "absolute -translate-y-1/2 -translate-x-1/2 right-auto top-0 left-0",
-        # alias for top_center
-        top: "absolute -translate-y-1/2 translate-x-1/2 top-0 right-1/2",
-        top_center: "absolute -translate-y-1/2 translate-x-1/2 top-0 right-1/2",
-        top_right: "absolute -translate-y-1/2 translate-x-1/2 left-auto top-0 right-0",
-        middle_left: "absolute -translate-y-1/2 -translate-x-1/2 right-auto left-0 top-2/4",
-        # aliases for middle_center
-        center: "absolute -translate-y-1/2 -translate-x-1/2 top-2/4 left-1/2",
-        middle: "absolute -translate-y-1/2 -translate-x-1/2 top-2/4 left-1/2",
-        middle_center: "absolute -translate-y-1/2 -translate-x-1/2 top-2/4 left-1/2",
-        middle_right: "absolute -translate-y-1/2 translate-x-1/2 left-auto right-0 top-2/4",
-        bottom_left: "absolute translate-y-1/2 -translate-x-1/2 right-auto bottom-0 left-0",
-        # alias for bottom_center
-        bottom: "absolute translate-y-1/2 translate-x-1/2 bottom-0 right-1/2",
-        bottom_center: "absolute translate-y-1/2 translate-x-1/2 bottom-0 right-1/2",
-        bottom_right: "absolute translate-y-1/2 translate-x-1/2 left-auto bottom-0 right-0"
-      }
+      variant :position, default: :none, values: POSITIONS
     end
   end
 end
