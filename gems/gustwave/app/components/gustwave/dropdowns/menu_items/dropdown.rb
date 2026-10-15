@@ -28,16 +28,8 @@ module Gustwave
         )
           kwargs = { href:, placement:, trigger_event:, icon:, trailing_icon: }
           @text = text
-          @config = configure_component(
-            options,
-            **kwargs,
-            tag: :a,
-            role: :button,
-            scheme: :none,
-            size: :none,
-            tabindex: "-1",
-            class: styles(base: true),
-          )
+          @config = { **kwargs, tag: :a, role: :button, scheme: :none, size: :none, tabindex: "-1" }
+                      .merge(attributes_for(options))
         end
 
         def call

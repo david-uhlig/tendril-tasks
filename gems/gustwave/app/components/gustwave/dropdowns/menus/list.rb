@@ -16,9 +16,9 @@ module Gustwave
       #
       # Block content gets ignored.
       class List < Gustwave::Dropdowns::Menus::Base
-        style :list_base, "py-2 text-sm text-gray-700 dark:text-gray-200"
+        part :list, "py-2 text-sm text-gray-700 dark:text-gray-200"
 
-        style :list_item_base, "flex items-center gap-1.5 w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white whitespace-nowrap"
+        part :list_item, "flex items-center gap-1.5 w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white whitespace-nowrap"
 
         renders_many_extensible :items, types: {
           generic: ->(&block) { capture(&block) },
@@ -55,10 +55,7 @@ module Gustwave
         # @param options [Hash] additional HTML attributes passed to the list element.
         def configure_list(tag: :ul, **options)
           @list_tag = tag
-          @list_config = configure_html_attributes(
-            options,
-            class: styles(list_base: true)
-          )
+          @list_config = attributes_for(:list, options)
         end
 
         private

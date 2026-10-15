@@ -2,23 +2,21 @@
 
 module Gustwave
   class IconToast < Gustwave::Component
-    style :base,
-          "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"
+    base "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg", unless: { scheme: :none }
 
-    style :scheme,
-          default: :info,
-          states: {
-            none: "",
-            info: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
+    # The default is also the fallback for unknown schemes, while new toasts
+    # default to :success.
+    variant :scheme, default: :info, values: {
+      info: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
             notice: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
             success: "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200",
             error: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200",
             failure: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200",
             warning: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200",
-            alert: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200"
-          }
+      alert: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200"
+    }
 
-    DEFAULT_ICON = default_layer_state(:scheme)
+    DEFAULT_ICON = variant_default(:scheme)
     SCHEME_ICON_MAPPINGS = {
       none: nil,
       info: :info_circle,
@@ -47,13 +45,8 @@ module Gustwave
       @icon = icon.presence || fetch_icon_by(scheme: scheme)
       @scheme = scheme
 
-      options.deep_symbolize_keys!
-      layers = {}
-      layers[:base] = :on unless scheme == :none
-      layers[:scheme] = scheme
-      layers[:custom] = options.delete(:class)
-      options[:class] = styles(**layers)
-      @options = options
+      style_with(scheme:)
+      @options = attributes_for(options)
     end
 
     private

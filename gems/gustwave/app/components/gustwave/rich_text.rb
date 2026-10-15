@@ -3,7 +3,7 @@
 module Gustwave
   # Use this component to render rich text content.
   class RichText < Gustwave::Component
-    style :base, "*:hyphens-auto"
+    base "*:hyphens-auto"
 
     # @param rich_text [ActionText::RichText, String] The rich text content to render. Strings will be converted to ActionText::Content.
     # @param options [Hash] Additional html attributes to pass to the enclosing div tag.
@@ -11,12 +11,8 @@ module Gustwave
       @text = rich_text
 
       options.symbolize_keys!
-      options[:class] = styles(
-        base: true,
-        custom: options.delete(:class)
-      )
       options[:lang] ||= I18n.default_locale
-      @options = options
+      @options = attributes_for(options)
     end
 
     def call

@@ -36,12 +36,11 @@ module Gustwave
   # 	  <p>Description text</p>
   #   <% end %>
   class TableCaption < Gustwave::Component
-    style :scheme,
-          default: :standard,
-          states: {
-            none: "",
-            standard: "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
-          }
+    variant :scheme, default: :standard, values: {
+      standard: "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
+    }
+
+    part :description, "mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"
 
     renders_one_extensible :title_slot, ->(text = nil, &block) {
       text || block.call
@@ -49,12 +48,7 @@ module Gustwave
     alias title with_title_slot
 
     renders_one_extensible :description_slot, ->(text = nil, **options, &block) {
-      config = configure_html_attributes(
-        options,
-        class: "mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"
-      )
-
-      tag.p **config do
+      tag.p(**attributes_for(:description, options)) do
         text || block.call
       end
     }
@@ -62,11 +56,9 @@ module Gustwave
 
     # @param scheme [Symbol] the styles for the table caption. Pass in :none to define your own styles.
     # @param options [Hash] additional options for the HTML tag, like class.
-    def initialize(scheme: :standard, **options)
-      @config = configure_html_attributes(
-        options,
-        class: styles(scheme: scheme)
-      )
+    def initialize(scheme: DEFAULT, **options)
+      style_with(scheme:)
+      @config = attributes_for(options)
     end
 
     def call

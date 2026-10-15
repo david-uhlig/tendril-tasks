@@ -26,25 +26,18 @@ module Gustwave
   #     <td>Software Engineer</td>
   #   <% end %>
   class TableRow < Gustwave::Component
-    style :scheme,
-          default: :standard,
-          states: {
-            none: "",
-            standard: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
-          }
+    variant :scheme, default: :standard, values: {
+      standard: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+    }
+
+    part :header_cell, "font-medium text-gray-900 dark:text-white whitespace-nowrap"
 
     renders_many_extensible :cells, types: {
       td: ->(text = nil, **options) {
         Gustwave::TableCell.new(text, tag: :td, **options)
       },
       th: ->(text = nil, **options) {
-        config = configure_html_attributes(
-          options,
-          tag: :th,
-          scope: "row",
-          class: "font-medium text-gray-900 dark:text-white whitespace-nowrap"
-        )
-
+        config = { tag: :th, scope: "row" }.merge(attributes_for(:header_cell, options))
         Gustwave::TableCell.new(text, **config)
       }
     }
@@ -55,11 +48,9 @@ module Gustwave
 
     # @param scheme [Symbol] the base styles for the table row. Pass in :none to define your own styles.
     # @param options [Hash] additional options for the HTML tag.
-    def initialize(scheme: :standard, **options)
-      @config = configure_html_attributes(
-        options,
-        class: styles(scheme: scheme)
-      )
+    def initialize(scheme: DEFAULT, **options)
+      style_with(scheme:)
+      @config = attributes_for(options)
     end
 
     def call

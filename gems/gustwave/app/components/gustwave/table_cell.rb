@@ -21,7 +21,7 @@ module Gustwave
   #   <% end %>
   #   # => <td class="px-6 py-4"><span>John Doe</span></td>
   class TableCell < Gustwave::Component
-    style :base, "px-6 py-4"
+    base "px-6 py-4"
 
     # @param text [String] text to display inside the cell. Takes precedent over block content.
     # @param tag [Symbol] HTML tag for the table cell, usually :td or :th.
@@ -29,10 +29,7 @@ module Gustwave
     def initialize(text = nil, tag: :td, **options)
       @tag = tag
       @text = text
-      @config = configure_html_attributes(
-        options,
-        class: styles(base: true)
-      )
+      @config = attributes_for(options)
     end
 
     def call

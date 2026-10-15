@@ -45,8 +45,7 @@ module Gustwave
       <svg class="absolute text-gray-400 -bottom-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
     SVG
 
-    style :base,
-          "relative overflow-hidden bg-gray-100 dark:bg-gray-600"
+    base "relative overflow-hidden bg-gray-100 dark:bg-gray-600"
 
     def initialize(src: nil,
                    alt: nil,
@@ -54,11 +53,7 @@ module Gustwave
                    size: nil,
                    border: nil,
                    **options)
-      options.deep_symbolize_keys!
-      options[:class] = styles(base: true, custom: options.delete(:class))
-      kwargs = { src:, alt:, scheme:, size:, border: }.compact
-
-      @options = kwargs.merge!(options)
+      @options = { src:, alt:, scheme:, size:, border: }.compact.merge!(attributes_for(options))
     end
 
     def call

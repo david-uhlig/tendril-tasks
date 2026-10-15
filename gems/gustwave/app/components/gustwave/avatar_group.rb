@@ -18,19 +18,10 @@ module Gustwave
   #
   # @param options [Hash] HTML attributes passed to the div element.
   class AvatarGroup < Gustwave::Component
-    style :base,
-          "flex -space-x-4 rtl:space-x-reverse"
+    base "flex -space-x-4 rtl:space-x-reverse"
 
     def initialize(**options)
-      options.deep_symbolize_keys!
-
-      config = {
-        base: true,
-        custom: options.delete(:class)
-      }.compact_blank
-
-      options[:class] = styles(**config)
-      @options = options
+      @options = attributes_for(options)
     end
 
     def call
