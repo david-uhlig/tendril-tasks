@@ -19,70 +19,45 @@ module Gustwave
         xl: :lg
       }.freeze
 
-      style :base,
-            "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
+      base "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed",
+           unless: { scheme: :none }
 
-      # General appearance of the buttons
+      # General appearance of the buttons. +:none+ also skips the base styles,
+      # +:base+ renders only them.
       #
-      # Merge with your own states when inheriting from this class
+      # Extend it with your own values when inheriting from this class:
       #
-      #   style :scheme,
-      #         strategy: :merge,
-      #         default: :red,
-      #         states: {
-      #           red: "bg-red-500 hover:bg-red-600 focus:ring-red-300",
-      #           green: "bg-green-500 hover:bg-green-600 focus:ring-green-300"
-      #         }
-      style :scheme,
-            default: :base,
-            states: {
-              none: "", # Also excludes the `base` style
-              base: "" # Includes the `base` style
-            }
+      #   extend_variant :scheme, default: :red, values: {
+      #     red: "bg-red-500 hover:bg-red-600 focus:ring-red-300",
+      #     green: "bg-green-500 hover:bg-green-600 focus:ring-green-300"
+      #   }
+      variant :scheme, default: :base, values: { base: "" }
 
-      style :size,
-            default: :md,
-            states: {
-              none: "",
-              xs: "h-8 px-3 py-2 text-xs font-medium",
-              sm: "h-9 px-3 py-2 text-sm font-medium",
-              md: "h-10 px-5 py-2.5 text-sm font-medium",
-              lg: "h-12 px-5 py-3 text-base font-medium",
-              xl: "h-13 px-6 py-3.5 text-base font-medium"
-            }
+      # The +visual+ part sizes leading and trailing visuals to match the
+      # +text-*+ class of the button.
+      variant :size, default: :md, values: {
+        xs: { root: "h-8 px-3 py-2 text-xs font-medium", visual: "h-4 w-auto" },
+        sm: { root: "h-9 px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
+        md: { root: "h-10 px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
+        lg: { root: "h-12 px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
+        xl: { root: "h-13 px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+      }
 
-      # Render a square button when no text or content block was given
-      style :size_overwrite_if_visual_only,
-            default: default_layer_state(:size),
-            states: {
-              none: "",
-              xs: "p-2",
-              sm: "p-2",
-              md: "p-2.5",
-              lg: "p-3",
-              xl: "p-3.5"
-            }
+      toggle :pill, "rounded-full"
 
-      style :pill,
-            "rounded-full"
+      # Set when a leading or trailing visual is present
+      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5"
 
-      # This is added to the button's HTML element when a leading or trailing
-      # visual is present
-      style :has_visual,
-            "inline-flex items-center align-bottom gap-1.5"
+      # Set when no text or content block was given, to render a square button
+      toggle :visual_only, per: :size, values: {
+        xs: "p-2",
+        sm: "p-2",
+        md: "p-2.5",
+        lg: "p-3",
+        xl: "p-3.5"
+      }
 
-      # Adjusts the visual's size based on the +text-*+ class of the
-      # +style :size+ states.
-      style :visual_size,
-            default: default_layer_state(:size),
-            states: {
-              none: "",
-              xs: "h-4 w-auto",
-              sm: "h-5 w-auto",
-              md: "h-5 w-auto",
-              lg: "h-6 w-auto",
-              xl: "h-7 w-auto"
-            }
+      part :visual
 
       # Renders visual elements to appear to the left of the button text.
       #
@@ -224,36 +199,24 @@ module Gustwave
       def initialize(text = nil,
                      tag: DEFAULT_TAG,
                      type: DEFAULT_TYPE,
-                     scheme: default_layer_state(:scheme),
-                     size: default_layer_state(:size),
+                     scheme: DEFAULT,
+                     size: DEFAULT,
                      pill: false,
                      **options)
         @text = text
-        @size = size # Required for leading/trailing slots
-        @scheme = scheme
         @html_tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
+        @type = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if @html_tag == :button
         @options = options
 
-        @kwargs = {
-          type: (fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if @html_tag == :button),
-          scheme:,
-          size:,
-          pill: lightswitch_cast(pill)
-        }
+        style_with(scheme:, size:, pill:)
+        @scheme = style_value(:scheme)
+        @size = style_value(:size) # Required for leading/trailing slots
       end
 
       def before_render
         # Must build config here to know whether block content was passed
-        @config = configure_html_attributes(
-          @options,
-          type: @kwargs.delete(:type),
-          class: styles(
-            base: render_base_styles?,
-            **@kwargs,
-            has_visual: has_visual?,
-            size_overwrite_if_visual_only: (@size unless has_content?)
-          ).presence
-        )
+        style_with(has_visual: has_visual?, visual_only: !has_content?)
+        @config = { type: @type }.merge(attributes_for(@options))
       end
 
       def call
@@ -273,10 +236,6 @@ module Gustwave
         @has_content ||= text_or_content.present?
       end
 
-      def render_base_styles?
-        @render_base_styles ||= !scheme.eql?(:none)
-      end
-
       # Context for components passed to the +renderable+ visual type that
       # implement +apply_slot_context+. Documented at +leading_visuals+ under
       # "Custom visual components"; keep both in sync.
@@ -288,7 +247,7 @@ module Gustwave
         configure_html_attributes(
           overwrite_attrs,
           aria: { hidden: true },
-          class: styles(visual_size: @size),
+          class: classes(:visual),
           **default_attrs
         )
       end

@@ -36,69 +36,53 @@ module Gustwave
   # @see Gustwave::AvatarText
   # @see Gustwave::AvatarPlaceholder
   class Avatar < Gustwave::Component
-    style :scheme,
-          default: :round,
-          states: {
-            none: "",
-            round: "rounded-full",
-            square: "rounded-sm"
-          }
+    variant :scheme, default: :round, values: {
+      round: "rounded-full",
+      square: "rounded-sm"
+    }
 
-    style :size,
-          default: :md,
-          states: {
-            none: "",
-            original: "",
-            xs: "w-6 h-6",
-            sm: "w-8 h-8",
-            md: "w-10 h-10",
-            lg: "w-12 h-12",
-            xl: "w-16 h-16",
-            "2xl": "w-20 h-20",
-            "3xl": "w-28 h-28",
-            "4xl": "w-36 h-36"
-          }
+    variant :size, default: :md, values: {
+      original: "",
+      xs: "w-6 h-6",
+      sm: "w-8 h-8",
+      md: "w-10 h-10",
+      lg: "w-12 h-12",
+      xl: "w-16 h-16",
+      "2xl": "w-20 h-20",
+      "3xl": "w-28 h-28",
+      "4xl": "w-36 h-36"
+    }
 
-    style :border,
-          default: :md,
-          states: {
-            none: "ring-1 ring-gray-300 dark:ring-gray-500",
-            original: "ring-1 ring-gray-300 dark:ring-gray-500",
-            xs: "ring-0 ring-gray-300 dark:ring-gray-500",
-            sm: "ring-1 ring-gray-300 dark:ring-gray-500",
-            md: "ring-2 ring-gray-300 dark:ring-gray-500",
-            lg: "ring-3 ring-gray-300 dark:ring-gray-500",
-            xl: "ring-3 ring-gray-300 dark:ring-gray-500",
-            "2xl": "ring-4 ring-gray-300 dark:ring-gray-500",
-            "3xl": "ring-4 ring-gray-300 dark:ring-gray-500",
-            "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"
-          }
+    toggle :border, per: :size, values: {
+      none: "ring-1 ring-gray-300 dark:ring-gray-500",
+      original: "ring-1 ring-gray-300 dark:ring-gray-500",
+      xs: "ring-0 ring-gray-300 dark:ring-gray-500",
+      sm: "ring-1 ring-gray-300 dark:ring-gray-500",
+      md: "ring-2 ring-gray-300 dark:ring-gray-500",
+      lg: "ring-3 ring-gray-300 dark:ring-gray-500",
+      xl: "ring-3 ring-gray-300 dark:ring-gray-500",
+      "2xl": "ring-4 ring-gray-300 dark:ring-gray-500",
+      "3xl": "ring-4 ring-gray-300 dark:ring-gray-500",
+      "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"
+    }
 
     def initialize(src: nil,
                    alt: nil,
-                   scheme: :round,
-                   size: :md,
+                   scheme: DEFAULT,
+                   size: DEFAULT,
                    border: false,
                    tag: :div,
                    **options)
       options.deep_symbolize_keys!
-
-      config = {
-        scheme: scheme,
-        size: size,
-        border: (size if border),
-        custom: options.delete(:class)
-      }.compact_blank
-
       if src.present?
         options[:alt] ||= alt
         options[:role] ||= "img"
       end
-      options[:class] = styles(**config)
+      style_with(scheme:, size:, border:)
 
       @src = src
       @wrapper_tag = tag
-      @options = options
+      @options = attributes_for(options)
     end
 
     def call

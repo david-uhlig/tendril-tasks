@@ -3,66 +3,65 @@
 module Gustwave
   module Buttons
     class GradientDuotoneOutline < Gustwave::Buttons::Base
-      style :base,
-            "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white"
+      # The root element is the gradient border; the inner span holds the
+      # label and visuals, so it takes the size styles.
+      base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white",
+           unless: { scheme: :none }
 
-      style :scheme,
-            default: :purple_to_blue,
-            strategy: :replace,
-            states: {
-              none: "",
-              base: "",
-              purple_to_blue: "from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-blue-300 dark:focus:ring-blue-800",
-              cyan_to_blue: "from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200 dark:focus:ring-cyan-800",
-              green_to_blue: "from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-green-200 dark:focus:ring-green-800",
-              purple_to_pink: "from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white focus:ring-purple-200 dark:focus:ring-purple-800",
-              pink_to_orange: "from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-pink-200 dark:focus:ring-pink-800",
-              teal_to_lime: "from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:hover:text-gray-900 focus:ring-lime-200 dark:focus:ring-lime-800",
-              red_to_yellow: "from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:hover:text-gray-900 focus:ring-red-100 dark:focus:ring-red-400"
-            }
+      variant :scheme, default: :purple_to_blue, values: {
+        base: "",
+        purple_to_blue: "from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-blue-300 dark:focus:ring-blue-800",
+        cyan_to_blue: "from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200 dark:focus:ring-cyan-800",
+        green_to_blue: "from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-green-200 dark:focus:ring-green-800",
+        purple_to_pink: "from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white focus:ring-purple-200 dark:focus:ring-purple-800",
+        pink_to_orange: "from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-pink-200 dark:focus:ring-pink-800",
+        teal_to_lime: "from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:hover:text-gray-900 focus:ring-lime-200 dark:focus:ring-lime-800",
+        red_to_yellow: "from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:hover:text-gray-900 focus:ring-red-100 dark:focus:ring-red-400"
+      }
 
-      style :base_inner,
-            "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-1.5"
+      # Declared again after the inner part, so the size styles win its
+      # conflicts and the visual-only padding wins theirs. Changes to these on
+      # Buttons::Base don't reach this theme; extend it separately, e.g.
+      #
+      #   extend_variant :size, values: { "2xl": { inner: "…", visual: "…" } }
+      #   extend_toggle :visual_only, part: :inner, values: { "2xl": "…" }
+      remove_variant :size
+      remove_toggle :has_visual
+      remove_toggle :visual_only
 
-      style :size_inner,
-            default: :md,
-            states: {
-              none: "",
-              xs: "px-2.5 py-2 text-xs font-medium",
-              sm: "px-3 py-2 text-sm font-medium",
-              md: "px-5 py-2.5 text-sm font-medium",
-              lg: "px-5 py-3 text-base font-medium",
-              xl: "px-6 py-3.5 text-base font-medium"
-            }
+      part :inner,
+           "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-1.5"
 
-      def initialize(text = nil,
-                     scheme: default_layer_state(:scheme),
-                     size: default_layer_state(:size),
-                     **options)
+      variant :size, default: :md, values: {
+        xs: { inner: "px-2.5 py-2 text-xs font-medium", visual: "h-4 w-auto" },
+        sm: { inner: "px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
+        md: { inner: "px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
+        lg: { inner: "px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
+        xl: { inner: "px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+      }
+
+      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5", part: :inner
+
+      toggle :visual_only, per: :size, part: :inner, values: {
+        xs: "p-2",
+        sm: "p-2",
+        md: "p-2.5",
+        lg: "p-3",
+        xl: "p-3.5"
+      }
+
+      def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, **options)
         @text = text
-        @size = size
-        @scheme = scheme
         @options = options
-        @kwargs = { scheme:, size: }
+        style_with(scheme:, size:)
+        @scheme = style_value(:scheme)
+        @size = style_value(:size)
       end
 
       def before_render
-        @config = configure_html_attributes(
-          @options,
-          class: styles(
-            base: render_base_styles?,
-            scheme:
-          )
-        )
-
-        @inner_config = {
-          class: styles(
-            base_inner: true,
-            size_inner: @size,
-            has_visual: has_visual?,
-            size_overwrite_if_visual_only: (@size unless has_content?)
-          )
-        }
+        style_with(has_visual: has_visual?, visual_only: !has_content?)
+        @config = attributes_for(@options)
+        @inner_config = { class: classes(:inner) }
       end
 
       def call
