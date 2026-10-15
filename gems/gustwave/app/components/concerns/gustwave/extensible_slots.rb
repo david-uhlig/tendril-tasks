@@ -26,7 +26,7 @@ module Gustwave
   #
   # and additionally:
   # - +with_leading_visual(type, ...)+ to set any type by name
-  # - private +build_leading_visual_icon+ and +build_leading_visual_image+
+  # - private +build_slot_leading_visual_icon+ and +build_slot_leading_visual_image+
   #   holding each type's lambda
   #
   # === Extending a slot in a subclass
@@ -39,7 +39,7 @@ module Gustwave
   #
   #   button.with_leading_visual_avatar("me.png")
   #
-  # Defining +build_leading_visual_avatar+ directly works too, but only
+  # Defining +build_slot_leading_visual_avatar+ directly works too, but only
   # +extend_slot+ generates the +with_leading_visual_avatar+ setter.
   #
   # To extend a Gustwave component itself, and with it every subclass, call
@@ -80,13 +80,13 @@ module Gustwave
   #
   #   indicator.with_legend_slot("New")
   #
-  # Override the private +build_legend_slot+ in a subclass to wrap it, or
+  # Override the private +build_slot_legend_slot+ in a subclass to wrap it, or
   # pass +extend_slot+ a new lambda to replace it:
   #
   #   class BoldIndicator < Gustwave::Indicator
   #     private
   #
-  #     def build_legend_slot(text = nil, **options, &block)
+  #     def build_slot_legend_slot(text = nil, **options, &block)
   #       super(text, class: "font-bold", **options, &block)
   #     end
   #   end
@@ -169,11 +169,15 @@ module Gustwave
         end
       end
 
+      # The +build_slot_+ prefix keeps builders apart from ordinary helpers
+      # such as +build_options+, which would otherwise silently replace the
+      # builder of an +options+ slot.
+      #
       # @return [String] the builder method name for a slot type, or for a
       #   single-type slot if +type+ is +nil+.
       def slot_builder_name(slot_name, type = nil)
         singular = __gustwave_slot_singular(slot_name)
-        type ? :"build_#{singular}_#{type}" : :"build_#{singular}"
+        type ? :"build_slot_#{singular}_#{type}" : :"build_slot_#{singular}"
       end
 
       private

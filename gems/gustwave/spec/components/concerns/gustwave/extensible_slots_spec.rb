@@ -80,8 +80,8 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
     end
 
     it "keeps the builders private" do
-      expect(list_component.private_method_defined?(:build_entry_text)).to be(true)
-      expect(list_component.private_method_defined?(:build_title_slot_text)).to be(true)
+      expect(list_component.private_method_defined?(:build_slot_entry_text)).to be(true)
+      expect(list_component.private_method_defined?(:build_slot_title_slot_text)).to be(true)
     end
 
     it "registers the slots and their types" do
@@ -96,7 +96,7 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
     # builder stubbed.
     it "raises like ViewComponent when a renders_one slot is set twice" do
       component = list_component.new
-      allow(component).to receive(:build_title_slot_text).and_return("built")
+      allow(component).to receive(:build_slot_title_slot_text).and_return("built")
       component.send(:__gustwave_build_slot, :title_slot, :text, "one")
 
       expect {
@@ -106,19 +106,19 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
 
     it "does not count a renders_one slot as set when its builder raises" do
       component = list_component.new
-      allow(component).to receive(:build_title_slot_text).and_raise(ArgumentError, "bad text")
+      allow(component).to receive(:build_slot_title_slot_text).and_raise(ArgumentError, "bad text")
 
       expect {
         component.send(:__gustwave_build_slot, :title_slot, :text, "one")
       }.to raise_error(ArgumentError, "bad text")
 
-      allow(component).to receive(:build_title_slot_text).and_return("built")
+      allow(component).to receive(:build_slot_title_slot_text).and_return("built")
       expect(component.send(:__gustwave_build_slot, :title_slot, :text, "retry")).to eq("built")
     end
 
     it "does not count a renders_one slot as set for unknown types" do
       component = list_component.new
-      allow(component).to receive(:build_title_slot_text).and_return("built")
+      allow(component).to receive(:build_slot_title_slot_text).and_return("built")
 
       expect {
         component.send(:__gustwave_build_slot, :title_slot, :missing)
@@ -128,7 +128,7 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
 
     it "allows setting renders_many slots repeatedly" do
       component = list_component.new
-      allow(component).to receive(:build_entry_text).and_return("built")
+      allow(component).to receive(:build_slot_entry_text).and_return("built")
 
       expect {
         2.times { component.send(:__gustwave_build_slot, :entries, :text, "entry") }
@@ -205,7 +205,7 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
 
     it "accepts builder methods defined directly" do
       subclass = stub_const("ExtensibleSlotsDefList", Class.new(list_component) {
-        private def build_entry_avatar(src) = tag.img(src:)
+        private def build_slot_entry_avatar(src) = tag.img(src:)
       })
 
       render_inline(subclass.new) { |list| list.with_entry(:avatar, "me.png") }
@@ -281,9 +281,9 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
     end
 
     it "names the private builders after the singular slot name" do
-      expect(card_component.private_method_defined?(:build_heading_slot)).to be(true)
-      expect(card_component.private_method_defined?(:build_tag)).to be(true)
-      expect(card_component.private_method_defined?(:build_note)).to be(true)
+      expect(card_component.private_method_defined?(:build_slot_heading_slot)).to be(true)
+      expect(card_component.private_method_defined?(:build_slot_tag)).to be(true)
+      expect(card_component.private_method_defined?(:build_slot_note)).to be(true)
     end
 
     it "registers the slots without types" do
@@ -308,7 +308,7 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
       subclass = stub_const("ExtensibleSlotsBoldCard", Class.new(card_component) {
         private
 
-        def build_heading_slot(text = nil, **options, &block)
+        def build_slot_heading_slot(text = nil, **options, &block)
           super(text&.upcase, class: "bold", **options, &block)
         end
       })
@@ -316,6 +316,18 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
       render_inline(subclass.new) { |card| card.with_heading_slot("title") }
 
       expect(rendered_content).to have_selector("h1.bold", text: "TITLE")
+    end
+
+    it "keeps builders apart from helpers named after the slot" do
+      subclass = stub_const("ExtensibleSlotsHelperCard", Class.new(card_component) {
+        private
+
+        def build_tag(*) = raise("helper called instead of the slot builder")
+      })
+
+      render_inline(subclass.new) { |card| card.with_tag("tagged") }
+
+      expect(rendered_content).to have_selector("mark", text: "tagged")
     end
 
     it "replaces the builder with extend_slot" do
