@@ -5,7 +5,7 @@ module TendrilTasks
   #
   # Renders a green, pill-shaped badge with the i18n text "New" by default.
   class NewItemBadge < TendrilTasks::Component
-    style :base, "opacity-80"
+    base "opacity-80"
 
     def initialize(text = nil,
                    scheme: :green,
@@ -13,12 +13,8 @@ module TendrilTasks
                    pill: true,
                    border: true,
                    **options)
-      options.symbolize_keys!
-      options[:class] = styles(base: true, custom: options.delete(:class))
-      kwargs = { scheme:, size:, pill:, border: }.compact
-
       @text = text
-      @options = kwargs.merge!(options)
+      @options = { scheme:, size:, pill:, border: }.compact.merge!(attributes_for(options))
     end
 
     def before_render

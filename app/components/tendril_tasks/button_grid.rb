@@ -6,7 +6,7 @@ module TendrilTasks
   # The buttons stack vertically on mobile viewports and horizontally on
   # larger viewports.
   class ButtonGrid < TendrilTasks::Component
-    style :base, "gap-2 grid text-center"
+    base "gap-2 grid text-center"
 
     # Determines the orientation of the button grid
     #
@@ -18,13 +18,11 @@ module TendrilTasks
     DEFAULT_ORIENTATION = :responsive
     ORIENTATION_OPTIONS = [ :responsive, :vertical, :horizontal ].freeze
 
-    style :grid_orientation,
-          default: DEFAULT_ORIENTATION,
-          states: {
-            responsive: "grid-cols-1",
-            vertical: "grid-cols-1",
-            horizontal: ""
-          }
+    variant :orientation, default: DEFAULT_ORIENTATION, values: {
+      responsive: "grid-cols-1",
+      vertical: "grid-cols-1",
+      horizontal: ""
+    }
 
     renders_many :buttons, ->(**options) {
       options = parse_button_options(options)
@@ -39,7 +37,8 @@ module TendrilTasks
     # @param options [Hash] General options applied to all buttons.
     def initialize(orientation: DEFAULT_ORIENTATION, grid_options: {}, **options)
       @orientation = fetch_or_fallback(ORIENTATION_OPTIONS, orientation, DEFAULT_ORIENTATION)
-      @grid_options = parse_grid_options(grid_options)
+      style_with(orientation: @orientation)
+      @grid_options = grid_options.deep_symbolize_keys
       @general_button_options = options.deep_symbolize_keys
     end
 
@@ -50,11 +49,7 @@ module TendrilTasks
     def call
       return unless buttons?
 
-      @grid_options[:class] = styles(
-        custom_horizontal: horizontal_cols,
-        custom_responsive: responsive_cols,
-        custom_grid_options: @grid_options.delete(:class)
-      )
+      @grid_options[:class] = classes(class: [ horizontal_cols, responsive_cols, @grid_options[:class] ])
 
       content_tag :div, @grid_options do
         buttons.each do |button|
@@ -72,16 +67,6 @@ module TendrilTasks
 
     def horizontal?
       @orientation == :horizontal
-    end
-
-    def parse_grid_options(options)
-      options.deep_symbolize_keys!
-      options[:class] = styles(
-        base: true,
-        grid_orientation: @orientation,
-        custom: options.delete(:class)
-      )
-      options
     end
 
     def parse_button_options(options)

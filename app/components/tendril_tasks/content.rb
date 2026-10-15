@@ -2,20 +2,14 @@
 
 module TendrilTasks
   class Content < TendrilTasks::Component
-    style :width,
-          default: :full,
-          states: {
-            full: "",
-            large: "mx-auto sm:px-16 xl:px-24 space-y-6"
-          }
+    variant :width, default: :full, values: {
+      full: "",
+      large: "mx-auto sm:px-16 xl:px-24 space-y-6"
+    }
 
-    def initialize(width: default_layer_state(:width), **options)
-      options.symbolize_keys!
-      options[:class] = styles(
-        width: width,
-        custom: options.delete(:class)
-      ).presence
-      @options = options
+    def initialize(width: DEFAULT, **options)
+      style_with(width:)
+      @options = attributes_for(options)
     end
 
     def call

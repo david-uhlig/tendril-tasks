@@ -9,26 +9,20 @@ module TendrilTasks
     }
     SIZE_RESIZE_OPTIONS = SIZE_RESIZE_MAPPINGS.keys
 
-    style :base,
-          "[&_svg]:w-auto [&_img]:w-auto"
+    base "[&_svg]:w-auto [&_img]:w-auto"
 
-    style :size,
-          states: {
-            sm: "[&_img]:h-8 sm:[&_img]:h-11 [&_svg]:h-8 sm:[&_svg]:h-11",
-            lg: "[&_img]:h-12 sm:[&_img]:h-16 [&_svg]:h-12 sm:[&_svg]:h-16"
-          },
-          default: :sm
+    variant :size, default: :sm, values: {
+      sm: "[&_img]:h-8 sm:[&_img]:h-11 [&_svg]:h-8 sm:[&_svg]:h-11",
+      lg: "[&_img]:h-12 sm:[&_img]:h-16 [&_svg]:h-12 sm:[&_svg]:h-16"
+    }
 
-    def initialize(id: "brand-logo", size: :sm, **options)
+    def initialize(id: "brand-logo", size: DEFAULT, **options)
       @site = Site.instance
 
-      options.symbolize_keys!
-      options[:id] ||= id
-      options[:class] = styles(base: true,
-                               size: size,
-                               custom: options.delete(:class))
-      @options = options
-      @resize_to = SIZE_RESIZE_MAPPINGS[fetch_or_fallback(SIZE_RESIZE_OPTIONS, size,  DEFAULT_SIZE_RESIZE)]
+      style_with(size:)
+      @options = attributes_for(options)
+      @options[:id] ||= id
+      @resize_to = SIZE_RESIZE_MAPPINGS[fetch_or_fallback(SIZE_RESIZE_OPTIONS, style_value(:size), DEFAULT_SIZE_RESIZE)]
     end
 
     def call

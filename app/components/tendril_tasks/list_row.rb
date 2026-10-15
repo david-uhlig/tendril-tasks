@@ -18,11 +18,11 @@ module TendrilTasks
   #
   # @param options [Hash] HTML attributes passed to the +li+ element.
   class ListRow < TendrilTasks::Component
-    style :row,
-          "flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 dark:bg-gray-600 dark:text-white"
+    part :row,
+         "flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 dark:bg-gray-600 dark:text-white"
 
-    style :title,
-          "flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"
+    part :title,
+         "flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"
 
     # Use the +leading+ slot for a visual in front of the title, e.g. an avatar.
     renders_one :leading_slot
@@ -33,9 +33,7 @@ module TendrilTasks
     # @param text [String] the title, unless given as a block.
     # @param options [Hash] HTML attributes passed to the +span+ element.
     renders_one :title_slot, ->(text = nil, **options, &block) do
-      options.symbolize_keys!
-      options[:class] = styles(title: true, custom: options.delete(:class))
-      tag.span(block ? capture(&block) : text, **options)
+      tag.span(block ? capture(&block) : text, **attributes_for(:title, options))
     end
     alias title with_title_slot
 
