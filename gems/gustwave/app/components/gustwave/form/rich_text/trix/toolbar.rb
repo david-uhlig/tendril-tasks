@@ -14,11 +14,12 @@ module Gustwave
           ].freeze
           ACTION_OPTIONS = ACTION_GROUPS.flatten.freeze
 
-          def initialize(form, id: "custom-toolbar", hidden: [], disabled: [], **options)
-            @id = id
+          def initialize(form, id: nil, hidden: [], disabled: [], **options)
+            @id = id.presence || generate_random_id(prefix: "toolbar")
             @form = form
             @hidden = [ hidden ].flatten.compact
             @disabled = [ disabled ].flatten.compact
+            @options = options
             @actions = build_actions
           end
 
