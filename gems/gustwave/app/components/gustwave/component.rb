@@ -5,7 +5,6 @@ module Gustwave
     include Gustwave::ContentHelper
     include Gustwave::HtmlAttributesHelper
     include Gustwave::Styling
-    include Gustwave::Mapping
     include Gustwave::Themeable
     include Gustwave::ExtensibleSlots
     include Gustwave::FetchOrFallbackHelper
