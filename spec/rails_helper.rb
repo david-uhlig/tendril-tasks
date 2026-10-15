@@ -16,6 +16,8 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # ViewComponent helpers
 require "view_component/test_helpers"
 require "view_component/system_test_helpers"
+require "gustwave/test/single_set_slots"
+ViewComponent::Base.prepend(Gustwave::Test::SingleSetSlots)
 require "capybara/rspec"
 
 # ActionText helpers
