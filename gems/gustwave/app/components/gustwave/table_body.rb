@@ -29,7 +29,7 @@ module Gustwave
   #     </tr>
   #   <% end %>
   class TableBody < Gustwave::Component
-    renders_many :rows, Gustwave::TableRow
+    renders_many_extensible :rows, Gustwave::TableRow
     alias row with_row
     alias tr with_row
 

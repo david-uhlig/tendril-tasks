@@ -49,7 +49,7 @@ module Gustwave
             standard: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           }
 
-    renders_many :columns, "Column"
+    renders_many_extensible :columns, "Column"
     alias th with_column
     alias column with_column
     alias col with_column

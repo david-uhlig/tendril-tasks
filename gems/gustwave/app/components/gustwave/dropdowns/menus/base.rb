@@ -29,7 +29,7 @@ module Gustwave
         # @param text [String, nil] the text to appear in the header. Takes precedent over block content.
         # @param tag [Symbol] HTML tag to use for the header. Default: +header+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
-        renders_one :header_slot, ->(text = nil, tag: :header, **options, &block) do
+        renders_one_extensible :header_slot, ->(text = nil, tag: :header, **options, &block) do
           config = configure_html_attributes(options, class: styles(header: true))
           content_tag tag, **config do
             text || capture(&block)
@@ -44,7 +44,7 @@ module Gustwave
         # @param text [String, nil] the text to appear in the footer. Takes precedent over block content.
         # @param tag [Symbol] HTML tag to use for the footer. Default: +footer+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
-        renders_one :footer_slot, ->(text = nil, tag: :footer, **options, &block) do
+        renders_one_extensible :footer_slot, ->(text = nil, tag: :footer, **options, &block) do
           config = configure_html_attributes(options, class: styles(footer: true))
           content_tag tag, **config do
             text || capture(&block)
