@@ -12,6 +12,26 @@ module Gustwave
     # The id of the menu element shown when the trigger is activated
     attr_reader :menu_id
 
+    # The component class rendered by the +menu+ slot, as a class or class name.
+    #
+    # Set it to a subclass of Gustwave::Dropdowns::Menus::List to add item
+    # types without subclassing Dropdown. Use a class name in initializers, so
+    # code reloading picks up changes:
+    #
+    #   class MyList < Gustwave::Dropdowns::Menus::List
+    #     extend_slot :items, types: { avatar: MyAvatarItem }
+    #   end
+    #
+    #   Gustwave::Dropdown.list_menu_class = "MyList" # every dropdown
+    #
+    #   class MyDropdown < Gustwave::Dropdown
+    #     self.list_menu_class = "MyList" # only this subclass
+    #   end
+    class_attribute :list_menu_class,
+                    instance_writer: false,
+                    instance_predicate: false,
+                    default: "Gustwave::Dropdowns::Menus::List"
+
     # Use the +trigger+ or +trigger_component+ slot to fully customize the
     # visual appearance of the trigger element
     #
@@ -71,11 +91,12 @@ module Gustwave
     # * +generic+: renders a generic menu with an optional header, any block content, and an optional footer.
     #
     # @see Gustwave::Dropdowns::Menus::List
+    # @see list_menu_class
     # @see Gustwave::Dropdowns::Menus::Generic
     renders_one_extensible :menu_slot, types: {
       list: ->(content_for: nil, list_options: {}, **options) {
         config = configure_component(options, content_for:, id: menu_id)
-        component = Gustwave::Dropdowns::Menus::List.new(**config)
+        component = list_menu_class.to_s.constantize.new(**config)
         component.configure_list(**list_options) if list_options.present?
         component
       },
