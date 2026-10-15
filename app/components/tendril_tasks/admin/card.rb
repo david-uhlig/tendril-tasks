@@ -21,7 +21,7 @@ module TendrilTasks
       alias heading with_heading_slot
 
       renders_many :badges, ->(text = nil, icon: nil, **options, &block) do
-        config = configure_component(
+        config = configure_html_attributes(
           options,
           pill: true,
           lang: I18n.locale
