@@ -419,3 +419,681 @@ visuals size=:"2xl":
 - 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
   xmlns="http://www.w3.org/2000/svg": h-8 w-auto'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+dismiss size=:xs scheme=:none:
+- 'span id="badge-r0000001": font-medium px-2.5 py-0.5 text-xs'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-1 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:base:
+- 'span id="badge-r0000001": font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs
+  whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-1 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-1 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-1 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-1 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xs scheme=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-1 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:none:
+- 'span id="badge-r0000001": font-medium px-2.5 py-0.5 text-sm'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-1 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:base:
+- 'span id="badge-r0000001": font-medium inline-flex px-2.5 py-0.5 rounded-sm text-sm
+  whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-1 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-1 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-red-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-1 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-1 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-sm text-yellow-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:sm scheme=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-sm whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-1 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:none:
+- 'span id="badge-r0000001": font-semibold px-2.5 py-0.5 text-base'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-1 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:base:
+- 'span id="badge-r0000001": font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-base
+  whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-1 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-base text-blue-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-base text-gray-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-1 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-base text-red-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-1 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-base text-green-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-1 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-base text-yellow-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-base text-indigo-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-base text-purple-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:md scheme=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-base text-pink-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-1 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:none:
+- 'span id="badge-r0000001": font-semibold px-2.5 py-0.5 text-lg'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-1.5 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:base:
+- 'span id="badge-r0000001": font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-lg
+  whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-1.5 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-lg whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1.5 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-lg whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-lg text-red-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-1.5 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-lg whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-1.5 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-lg text-yellow-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-1.5 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-lg whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-1.5 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-semibold inline-flex px-2.5 py-0.5 rounded-sm text-lg text-purple-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-1.5 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:lg scheme=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-lg text-pink-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-1.5 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:none:
+- 'span id="badge-r0000001": font-bold px-2.5 py-0.5 text-xl'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-1.5 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:base:
+- 'span id="badge-r0000001": font-bold inline-flex px-2.5 py-0.5 rounded-sm text-xl
+  whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-1.5 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1.5 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-bold
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-bold
+  inline-flex px-2.5 py-0.5 rounded-sm text-red-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-1.5 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-bold
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-1.5 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-bold inline-flex px-2.5 py-0.5 rounded-sm text-xl text-yellow-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-1.5 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-bold inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-1.5 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-bold inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-1.5 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:xl scheme=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-bold
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-xl whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-1.5 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:none:
+- 'span id="badge-r0000001": font-extrabold px-2.5 py-0.5 text-2xl'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-2 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:base:
+- 'span id="badge-r0000001": font-extrabold inline-flex px-2.5 py-0.5 rounded-sm text-2xl
+  whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-2 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold
+  inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-blue-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-2 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-extrabold
+  inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-gray-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-2 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-extrabold
+  inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-red-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-2 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-extrabold
+  inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-green-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-2 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-extrabold inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-yellow-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-2 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-extrabold inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-indigo-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-2 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-extrabold inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-purple-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-2 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss size=:"2xl" scheme=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-extrabold
+  inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-pink-800 whitespace-nowrap'
+- 'button aria-label="remove" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-2 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
