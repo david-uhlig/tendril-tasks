@@ -42,6 +42,15 @@ module Gustwave
   # Defining +build_leading_visual_avatar+ directly works too, but only
   # +extend_slot+ generates the +with_leading_visual_avatar+ setter.
   #
+  # To extend a Gustwave component itself, and with it every subclass, call
+  # +extend_slot+ whenever the component loads. A one-off call in an
+  # initializer is lost on the first code reload:
+  #
+  #   # config/initializers/gustwave.rb
+  #   Rails.autoloaders.main.on_load("Gustwave::Buttons::Base") do |base, _abspath|
+  #     base.extend_slot :leading_visuals, types: { ... }
+  #   end
+  #
   # === Accepting any component
   #
   # Pass +renderable:+ to add a +renderable+ type that accepts any component

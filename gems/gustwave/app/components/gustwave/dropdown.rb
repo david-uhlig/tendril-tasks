@@ -15,14 +15,17 @@ module Gustwave
     # The component class rendered by the +menu+ slot, as a class or class name.
     #
     # Set it to a subclass of Gustwave::Dropdowns::Menus::List to add item
-    # types without subclassing Dropdown. Use a class name in initializers, so
-    # code reloading picks up changes:
+    # types without subclassing Dropdown. Set it whenever Dropdown loads, and
+    # use a class name, so both survive code reloading:
     #
     #   class MyList < Gustwave::Dropdowns::Menus::List
     #     extend_slot :items, types: { avatar: MyAvatarItem }
     #   end
     #
-    #   Gustwave::Dropdown.list_menu_class = "MyList" # every dropdown
+    #   # config/initializers/gustwave.rb, for every dropdown
+    #   Rails.autoloaders.main.on_load("Gustwave::Dropdown") do |dropdown, _abspath|
+    #     dropdown.list_menu_class = "MyList"
+    #   end
     #
     #   class MyDropdown < Gustwave::Dropdown
     #     self.list_menu_class = "MyList" # only this subclass
