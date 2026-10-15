@@ -63,8 +63,19 @@ module Gustwave
   # A subclass that redefines the variant instead of extending it doesn't see
   # the extension. Mistakes such as an unknown part, a missing default or a
   # +per:+ toggle that doesn't cover every value raise a DefinitionError when
-  # the definition is resolved, in every environment. So does a +per:+ toggle
-  # or lookup that an extension of its variant leaves without a value.
+  # the definition is resolved, in every environment.
+  #
+  # So does a +per:+ toggle or lookup in a subclass that the extension leaves
+  # without a value. Gustwave::Badge inherits the scheme above and styles its
+  # border, outline, hover and dismiss button per scheme, so extend those in
+  # the same hook:
+  #
+  #   Rails.autoloaders.main.on_load("Gustwave::Badge") do |badge, _abspath|
+  #     badge.extend_toggle :border, values: { brand: "border border-brand-400" }
+  #     badge.extend_toggle :outline, values: { brand: "outline outline-1 outline-brand-400" }
+  #     badge.extend_toggle :hover, values: { brand: "hover:bg-brand-700" }
+  #     badge.extend_lookup :dismiss_button_scheme, values: { brand: :base }
+  #   end
   #
   # === Using styles in a component
   #
