@@ -29,7 +29,7 @@ module Gustwave
     SCHEME_OPTIONS = variant_values(:scheme).excluding(:none, :base).freeze
 
     # The scheme of the dismiss button per badge scheme
-    lookup :dismiss_button_scheme, per: :scheme, values: {
+    derive :dismiss_button_scheme, from: :scheme, values: {
       none: :none,
       base: :base,
       default: :blue,
@@ -53,7 +53,7 @@ module Gustwave
     }
 
     # The size of the dismiss button per badge size
-    lookup :dismiss_button_size, per: :size, values: {
+    derive :dismiss_button_size, from: :size, values: {
       xs: :"3xs",
       sm: :"3xs",
       md: :"3xs",
@@ -63,7 +63,7 @@ module Gustwave
     }
 
     # Indicators scale with the text at :"2xl"
-    extend_lookup :indicator_size, values: { "2xl": :auto }
+    extend_derived :indicator_size, values: { "2xl": :auto }
 
     # Render a round badge when no text or content block was given
     extend_toggle :visual_only, values: {
@@ -130,8 +130,8 @@ module Gustwave
       a11y_text = sr_only(text) || (capture(&block) if block.present?) || sr_only("Dismiss")
       config = {
         theme: :inline,
-        scheme: style_lookup(:dismiss_button_scheme),
-        size: style_lookup(:dismiss_button_size),
+        scheme: derived_value(:dismiss_button_scheme),
+        size: derived_value(:dismiss_button_size),
         aria: { label: :remove },
         data: { dismiss_target: "##{@id}" }
       }.merge(attributes_for(:dismiss_button, options))

@@ -29,11 +29,11 @@ module Gustwave
   #   A variant without a +:none+ value gets one that adds no classes.
   # * +toggle+ is an on/off option, off by default. It can style both states
   #   (+on:+ / +off:+) or depend on a variant (+per:+).
-  # * +lookup+ holds a value per value of a variant that isn't a class, e.g.
-  #   the size to pass on to a child component. Read it with +style_lookup+.
+  # * +derive+ derives a value that isn't a class from a variant, e.g. the
+  #   size to pass on to a child component. Read it with +derived_value+.
   #
-  #     lookup :icon_size, per: :size, values: { sm: :xs, md: :sm }
-  #     style_lookup(:icon_size) # => :sm for size :md
+  #     derive :icon_size, from: :size, values: { sm: :xs, md: :sm }
+  #     derived_value(:icon_size) # => :sm for size :md
   #
   # A plain string targets the root element, or the part named by +part:+. A
   # hash targets parts by name: <tt>{ root: "…", icon: "…" }</tt>. Every
@@ -48,8 +48,8 @@ module Gustwave
   # Subclasses inherit every declaration. Declaring a name again replaces it
   # in place; nothing merges implicitly. To change an inherited declaration
   # partially, use +extend_base+, +extend_part+, +extend_variant+,
-  # +extend_toggle+ or +extend_lookup+, which merge per value and per part.
-  # +remove_part+, +remove_variant+, +remove_toggle+ and +remove_lookup+
+  # +extend_toggle+ or +extend_derived+, which merge per value and per part.
+  # +remove_part+, +remove_variant+, +remove_toggle+ and +remove_derived+
   # delete one.
   #
   # Definitions are resolved on first use and again after any declaration, so
@@ -65,16 +65,16 @@ module Gustwave
   # +per:+ toggle that doesn't cover every value raise a DefinitionError when
   # the definition is resolved, in every environment.
   #
-  # So does a +per:+ toggle or lookup in a subclass that the extension leaves
-  # without a value. Gustwave::Badge inherits the scheme above and styles its
-  # border, outline, hover and dismiss button per scheme, so extend those in
-  # the same hook:
+  # So does a +per:+ toggle or derived value in a subclass that the extension
+  # leaves without a value. Gustwave::Badge inherits the scheme above and
+  # styles its border, outline, hover and dismiss button per scheme, so extend
+  # those in the same hook:
   #
   #   Rails.autoloaders.main.on_load("Gustwave::Badge") do |badge, _abspath|
   #     badge.extend_toggle :border, values: { brand: "border border-brand-400" }
   #     badge.extend_toggle :outline, values: { brand: "outline outline-1 outline-brand-400" }
   #     badge.extend_toggle :hover, values: { brand: "hover:bg-brand-700" }
-  #     badge.extend_lookup :dismiss_button_scheme, values: { brand: :base }
+  #     badge.extend_derived :dismiss_button_scheme, values: { brand: :base }
   #   end
   #
   # === Using styles in a component
@@ -133,10 +133,10 @@ module Gustwave
       end
     end
 
-    # Raised for a lookup the component doesn't declare.
-    class UnknownLookupError < Gustwave::Error
+    # Raised for a derived value the component doesn't declare.
+    class UnknownDerivedValueError < Gustwave::Error
       def initialize(component, given:, expected:)
-        super(Styling.suggest("#{component} has no lookup #{given.inspect}", given, expected))
+        super(Styling.suggest("#{component} has no derived value #{given.inspect}", given, expected))
       end
     end
 
@@ -226,19 +226,19 @@ module Gustwave
                                         values: style_values(values, part), unless: style_unless(options, keep: true))
       end
 
-      # Declares a lookup: a value per value of a variant, for anything that
-      # isn't a class. Needs a value for every value of the variant; one for
-      # an implicit +:none+ is optional.
+      # Derives a value from a variant, for anything that isn't a class. Needs
+      # a value for every value of the variant; one for an implicit +:none+ is
+      # optional.
       #
-      #   lookup :icon_size, per: :size, values: { sm: :xs, md: :sm }
-      def lookup(name, per:, values:)
-        declare_styling(:lookup, name: name.to_sym, per: per.to_sym, values: lookup_values(values))
+      #   derive :icon_size, from: :size, values: { sm: :xs, md: :sm }
+      def derive(name, from:, values:)
+        declare_styling(:derive, name: name.to_sym, from: from.to_sym, values: normalize_derived_values(values))
       end
 
-      # Merges values into an inherited lookup, e.g. for values an extension
-      # adds to its variant.
-      def extend_lookup(name, values:)
-        declare_styling(:extend_lookup, name: name.to_sym, values: lookup_values(values))
+      # Merges values into an inherited derived value, e.g. for values an
+      # extension adds to its variant.
+      def extend_derived(name, values:)
+        declare_styling(:extend_derived, name: name.to_sym, values: normalize_derived_values(values))
       end
 
       def remove_part(name)
@@ -253,8 +253,8 @@ module Gustwave
         declare_styling(:remove_toggle, name: name.to_sym)
       end
 
-      def remove_lookup(name)
-        declare_styling(:remove_lookup, name: name.to_sym)
+      def remove_derived(name)
+        declare_styling(:remove_derived, name: name.to_sym)
       end
 
       # Sets or returns the TailwindMerge instance that merges this
@@ -314,7 +314,7 @@ module Gustwave
         values.to_h { |value, classes| [ Styling.normalize_value(value), style_targets(classes, target) ] }
       end
 
-      def lookup_values(values)
+      def normalize_derived_values(values)
         values.to_h { |value, result| [ Styling.normalize_value(value), result ] }.freeze
       end
 
@@ -347,20 +347,20 @@ module Gustwave
       raise UnknownOptionError.new(style_component_name, given: name, expected: values.keys)
     end
 
-    # Returns a lookup's value for the value its variant has in effect, or
-    # +nil+ for an implicit +:none+ the lookup doesn't cover. Options given
-    # here override the selection for this call.
+    # Returns a derived value for the value its variant has in effect, or
+    # +nil+ for an implicit +:none+ it doesn't cover. Options given here
+    # override the selection for this call.
     #
-    #   style_lookup(:icon_size)
-    #   style_lookup(:icon_size, size: :sm)
+    #   derived_value(:icon_size)
+    #   derived_value(:icon_size, size: :sm)
     #
-    # @raise [UnknownLookupError] if the component declares no such lookup.
-    def style_lookup(name, **overrides)
+    # @raise [UnknownDerivedValueError] if the component derives no such value.
+    def derived_value(name, **overrides)
       definition = self.class.style_definition
-      lookup = definition.lookup(name.to_sym) ||
-        raise(UnknownLookupError.new(style_component_name, given: name.to_sym, expected: definition.lookups.keys))
+      derived = definition.derived(name.to_sym) ||
+        raise(UnknownDerivedValueError.new(style_component_name, given: name.to_sym, expected: definition.derived_values.keys))
 
-      lookup.values[style_values_for(overrides)[lookup.per]]
+      derived.values[style_values_for(overrides)[derived.from]]
     end
 
     # Returns the classes of the root element or a part, or +nil+ if there are

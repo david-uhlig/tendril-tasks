@@ -36,7 +36,7 @@ module Gustwave
 
       # The size of leading and trailing indicators per button size. Extend it
       # along with +size+, e.g. with +:auto+ to scale with the button text.
-      lookup :indicator_size, per: :size, values: {
+      derive :indicator_size, from: :size, values: {
         none: :none,
         xs: :sm,
         sm: :sm,
@@ -148,7 +148,7 @@ module Gustwave
           config = configure_html_attributes(
             options,
             aria: { hidden: true },
-            size: style_lookup(:indicator_size),
+            size: derived_value(:indicator_size),
             )
           Gustwave::Indicator.new(text, **config, &block)
         }
@@ -180,7 +180,7 @@ module Gustwave
           config = configure_html_attributes(
             options,
             aria: { hidden: true },
-            size: style_lookup(:indicator_size),
+            size: derived_value(:indicator_size),
           )
           Gustwave::Indicator.new(text, **config, &block)
         }

@@ -189,48 +189,48 @@ RSpec.describe Gustwave::Styling do
     end
   end
 
-  describe "lookups" do
+  describe "derived values" do
     let(:sized) do
       component do
         variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
-        lookup :icon_size, per: :size, values: { sm: :xs, md: :sm }
+        derive :icon_size, from: :size, values: { sm: :xs, md: :sm }
       end
     end
 
     it "returns the value for the variant's value in effect" do
-      expect(sized.new.style_lookup(:icon_size)).to eq :sm
-      expect(sized.new.style_with(size: :sm).style_lookup("icon_size")).to eq :xs
+      expect(sized.new.derived_value(:icon_size)).to eq :sm
+      expect(sized.new.style_with(size: :sm).derived_value("icon_size")).to eq :xs
     end
 
     it "takes overrides for one call" do
-      expect(sized.new.style_lookup(:icon_size, size: :sm)).to eq :xs
+      expect(sized.new.derived_value(:icon_size, size: :sm)).to eq :xs
     end
 
     it "returns nil for an implicit :none it doesn't cover" do
-      expect(sized.new.style_with(size: :none).style_lookup(:icon_size)).to be_nil
+      expect(sized.new.style_with(size: :none).derived_value(:icon_size)).to be_nil
     end
 
     it "adds no classes" do
       expect(sized.new.classes).to eq "text-base"
     end
 
-    it "raises for unknown lookups, also in production" do
+    it "raises for unknown derived values, also in production" do
       allow(Rails.env).to receive(:production?).and_return(true)
 
-      expect { sized.new.style_lookup(:icon_sise) }
-        .to raise_error(Gustwave::Styling::UnknownLookupError, /no lookup :icon_sise. Did you mean :icon_size\?/)
+      expect { sized.new.derived_value(:icon_sise) }
+        .to raise_error(Gustwave::Styling::UnknownDerivedValueError, /no derived value :icon_sise. Did you mean :icon_size\?/)
     end
 
     it "is extended and removed in subclasses without changing the parent" do
       child = component(sized) do
         extend_variant :size, values: { lg: "text-lg" }
-        extend_lookup :icon_size, values: { lg: :md }
+        extend_derived :icon_size, values: { lg: :md }
       end
-      removed = component(sized) { remove_lookup :icon_size }
+      removed = component(sized) { remove_derived :icon_size }
 
-      expect(child.new.style_with(size: :lg).style_lookup(:icon_size)).to eq :md
-      expect { removed.new.style_lookup(:icon_size) }.to raise_error(Gustwave::Styling::UnknownLookupError)
-      expect(sized.style_definition.lookups[:icon_size].values.keys).to eq %i[sm md]
+      expect(child.new.style_with(size: :lg).derived_value(:icon_size)).to eq :md
+      expect { removed.new.derived_value(:icon_size) }.to raise_error(Gustwave::Styling::UnknownDerivedValueError)
+      expect(sized.style_definition.derived_values[:icon_size].values.keys).to eq %i[sm md]
     end
   end
 
@@ -388,24 +388,24 @@ RSpec.describe Gustwave::Styling do
         .to raise_error(Gustwave::Styling::DefinitionError, /per :size, which isn't a variant/)
     end
 
-    it "is raised for lookups that don't cover the variant" do
+    it "is raised for derived values that don't cover the variant" do
       expect do
         resolve do
           variant :size, default: :md, values: { sm: "", md: "" }
-          lookup :icon_size, per: :size, values: { md: :sm, xl: :lg }
+          derive :icon_size, from: :size, values: { md: :sm, xl: :lg }
         end
-      end.to raise_error(Gustwave::Styling::DefinitionError, /lookup :icon_size has no values for :size \[:sm\].*unknown :size \[:xl\]/m)
+      end.to raise_error(Gustwave::Styling::DefinitionError, /derived :icon_size has no values for :size \[:sm\].*unknown :size \[:xl\]/m)
     end
 
-    it "is raised for lookups per something that isn't a variant" do
-      expect { resolve { toggle :pill; lookup :radius, per: :pill, values: {} } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /lookup :radius is per :pill, which isn't a variant/)
+    it "is raised for values derived from something that isn't a variant" do
+      expect { resolve { toggle :pill; derive :radius, from: :pill, values: {} } }
+        .to raise_error(Gustwave::Styling::DefinitionError, /derived :radius is from :pill, which isn't a variant/)
     end
 
-    it "is raised when an extension of the variant isn't covered by its lookups" do
+    it "is raised when an extension of the variant isn't covered by its derived values" do
       parent = component do
         variant :size, default: :md, values: { md: "" }
-        lookup :icon_size, per: :size, values: { md: :sm }
+        derive :icon_size, from: :size, values: { md: :sm }
       end
       child = component(parent)
       parent.style_definition
@@ -414,7 +414,7 @@ RSpec.describe Gustwave::Styling do
       parent.extend_variant :size, values: { xl: "" }
 
       expect { child.style_definition }
-        .to raise_error(Gustwave::Styling::DefinitionError, /lookup :icon_size has no values for :size \[:xl\]/)
+        .to raise_error(Gustwave::Styling::DefinitionError, /derived :icon_size has no values for :size \[:xl\]/)
     end
 
     it "is raised for unknown unless: options and values" do
@@ -460,10 +460,10 @@ RSpec.describe Gustwave::Styling do
         parts: %i[root icon],
         variants: { scheme: { default: :blue, values: %i[blue red none] }, size: { default: :md, values: %i[sm md none] } },
         toggles: [ :pill ],
-        lookups: {}
+        derived: {}
       )
-      expect(component(button) { lookup :icon_size, per: :size, values: { sm: :xs, md: :sm } }.style_definition.to_h[:lookups])
-        .to eq(icon_size: { per: :size, values: %i[sm md] })
+      expect(component(button) { derive :icon_size, from: :size, values: { sm: :xs, md: :sm } }.style_definition.to_h[:derived])
+        .to eq(icon_size: { from: :size, values: %i[sm md] })
     end
 
     it "raises for unknown variants" do

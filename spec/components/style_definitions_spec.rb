@@ -6,7 +6,7 @@ require "rails_helper"
 #
 # Gustwave's components are resolved too: the app may extend them, e.g. from
 # an on_load hook, and an extension can leave an inherited per: toggle or
-# lookup without a value, which would otherwise only raise on render.
+# derived value without a value, which would otherwise only raise on render.
 RSpec.describe "Styling definitions" do
   Rails.autoloaders.main.eager_load_dir(Rails.root.join("app/components"))
   Rails.autoloaders.main.eager_load_dir(Gustwave::Engine.root.join("app/components"))
