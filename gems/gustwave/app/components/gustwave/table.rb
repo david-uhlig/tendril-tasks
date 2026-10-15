@@ -13,12 +13,9 @@ module Gustwave
   #
   # TODO implement foot slot
   class Table < Gustwave::Component
-    style :scheme,
-          default: :standard,
-          states: {
-            none: "",
-            standard: "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-          }
+    variant :scheme, default: :standard, values: {
+      standard: "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    }
 
     renders_one_extensible :caption_slot, Gustwave::TableCaption
     alias caption with_caption_slot
@@ -33,11 +30,9 @@ module Gustwave
 
     # @param scheme [Symbol] the styles for the table. Pass in :none to define your own styles.
     # @param options [Hash] additional options for the HTML tag.
-    def initialize(scheme: :standard, **options)
-      @config = configure_html_attributes(
-        options,
-        class: styles(scheme: scheme)
-      )
+    def initialize(scheme: DEFAULT, **options)
+      style_with(scheme:)
+      @config = attributes_for(options)
     end
 
     def call

@@ -6,30 +6,25 @@ module Gustwave
     # horizontally on mobile device viewports and wraps its elements on larger
     # viewports.
     class ResponsiveHorizontalScroll < Gustwave::Component
-      style :base, "flex flex-nowrap overflow-x-auto touch-pan-x gap-2 pb-2"
+      base "flex flex-nowrap overflow-x-auto touch-pan-x gap-2 pb-2"
 
       # Use Tailwind CSS mobile breakpoints to determine when to wrap the items
       # instead of scrolling them horizontally.
-      style :breakpoint,
-            default: :md,
-            states: {
-              sm: "sm:flex-wrap sm:overflow-visible sm:py-0",
-              md: "md:flex-wrap md:overflow-visible md:py-0",
-              lg: "lg:flex-wrap lg:overflow-visible lg:py-0",
-              xl: "xl:flex-wrap xl:overflow-visible xl:py-0",
-              "2xl": "2xl:flex-wrap 2xl:overflow-visible 2xl:py-0"
-            }
+      variant :breakpoint, default: :md, values: {
+        sm: "sm:flex-wrap sm:overflow-visible sm:py-0",
+        md: "md:flex-wrap md:overflow-visible md:py-0",
+        lg: "lg:flex-wrap lg:overflow-visible lg:py-0",
+        xl: "xl:flex-wrap xl:overflow-visible xl:py-0",
+        "2xl": "2xl:flex-wrap 2xl:overflow-visible 2xl:py-0"
+      }
 
       # Use snap to control the scrolling behavior on mobile devices.
       # @see https://v3.tailwindcss.com/docs/scroll-snap-align
-      style :snap,
-            default: :none,
-            states: {
-              none: "",
-              start: "snap-x snap-start",
-              center: "snap-x snap-center",
-              end: "snap-x snap-end"
-            }
+      variant :snap, default: :none, values: {
+        start: "snap-x snap-start",
+        center: "snap-x snap-center",
+        end: "snap-x snap-end"
+      }
 
       # Use the +item+ slot to provide items for the container
       #
@@ -71,12 +66,10 @@ module Gustwave
       # @param breakpoint [Symbol] the breakpoint at and above which the container wraps its items. Use t-shirt sizes from :sm to +:"2xl"+
       # @param snap [Symbol] the scroll snap behavior on mobile devices. Use +:none+, +:start+, +:center+, or +:end+. See: https://v3.tailwindcss.com/docs/scroll-snap-align
       # @param options [Hash] additional options for the HTML tag.
-      def initialize(tag: :div, breakpoint: :md, snap: :none,  **options)
+      def initialize(tag: :div, breakpoint: DEFAULT, snap: DEFAULT, **options)
         @tag = tag
-        @config = configure_html_attributes(
-          options,
-          class: styles(base: true, breakpoint:, snap:)
-        )
+        style_with(breakpoint:, snap:)
+        @config = attributes_for(options)
       end
 
       def call

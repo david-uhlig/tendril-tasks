@@ -16,11 +16,11 @@ module Gustwave
       # For consistency, do not use this class directly in the UI. Instead, use
       # Gustwave::Dropdowns::Menus::Generic
       class Base < Gustwave::Component
-        style :base, "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-md w-auto dark:bg-gray-700 hidden"
+        base "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-md w-auto dark:bg-gray-700 hidden"
 
-        style :header, "px-4 py-2 text-sm text-gray-900 dark:text-white"
+        part :header, "px-4 py-2 text-sm text-gray-900 dark:text-white"
 
-        style :footer, "px-4 py-2 text-sm text-gray-900 dark:text-white"
+        part :footer, "px-4 py-2 text-sm text-gray-900 dark:text-white"
 
         # Use the +header+ slot to customize the header of the dropdown menu
         #
@@ -30,8 +30,7 @@ module Gustwave
         # @param tag [Symbol] HTML tag to use for the header. Default: +header+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
         renders_one_extensible :header_slot, ->(text = nil, tag: :header, **options, &block) do
-          config = configure_html_attributes(options, class: styles(header: true))
-          content_tag tag, **config do
+          content_tag tag, **attributes_for(:header, options) do
             text || capture(&block)
           end
         end
@@ -45,8 +44,7 @@ module Gustwave
         # @param tag [Symbol] HTML tag to use for the footer. Default: +footer+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
         renders_one_extensible :footer_slot, ->(text = nil, tag: :footer, **options, &block) do
-          config = configure_html_attributes(options, class: styles(footer: true))
-          content_tag tag, **config do
+          content_tag tag, **attributes_for(:footer, options) do
             text || capture(&block)
           end
         end
@@ -60,11 +58,7 @@ module Gustwave
         def initialize(text = nil, id:, content_for: nil, tag: :div, **options)
           @text = text
           @menu_tag = tag
-          @config = configure_component(
-            options,
-            id:,
-            class: styles(base: true)
-          )
+          @config = { id: }.merge(attributes_for(options))
           @content_for_name = content_for
         end
 

@@ -2,23 +2,19 @@
 
 module Gustwave
   class Toast < Gustwave::Component
-    style :base,
-          "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800"
+    base "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800"
 
-    style :position,
-          default: :none,
-          states: {
-            none: "",
-            top_left: "fixed top-5 left-5",
-            top_center: "fixed top-5 left-1/2 transform -translate-x-1/2",
-            top_right: "fixed top-5 right-5",
-            bottom_left: "fixed bottom-5 left-5",
-            bottom_center: "fixed bottom-5 left-1/2 transform -translate-x-1/2",
-            bottom_right: "fixed bottom-5 right-5"
-          }
+    variant :position, default: :none, values: {
+      top_left: "fixed top-5 left-5",
+      top_center: "fixed top-5 left-1/2 transform -translate-x-1/2",
+      top_right: "fixed top-5 right-5",
+      bottom_left: "fixed bottom-5 left-5",
+      bottom_center: "fixed bottom-5 left-1/2 transform -translate-x-1/2",
+      bottom_right: "fixed bottom-5 right-5"
+    }
 
     def initialize(text = nil,
-                   position: :none,
+                   position: DEFAULT,
                    id: nil,
                    dismissible: true,
                    **options)
@@ -29,9 +25,8 @@ module Gustwave
       options.deep_symbolize_keys!
       @options = {}
       @options[:id] = @id
-      @options[:class] = styles(base: true,
-                                position: position,
-                                custom: options.delete(:class))
+      style_with(position:)
+      @options[:class] = classes(class: options.delete(:class))
       @options[:role] = "alert"
       @options.merge!(animate_and_remove_options(options))
     end

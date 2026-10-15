@@ -34,8 +34,8 @@ module Gustwave
       class LinkButton < Gustwave::Dropdowns::MenuItems::Base
         delegate_missing_to :button_component
 
-        style :leading_icon, "h-[1.5em]"
-        style :trailing_icon, "ms-auto h-[1.5em]"
+        part :leading_icon, "h-[1.5em]"
+        part :trailing_icon, "ms-auto h-[1.5em]"
 
         # @param text [String, nil] the text to appear on the dropdown button. Takes precedent over block content.
         # @param href [String] the URL to link to.
@@ -53,21 +53,14 @@ module Gustwave
           @text = text
           @icon = icon
           @trailing_icon = trailing_icon
-          @config = configure_component(
-            options,
-            **kwargs,
-            scheme: :none,
-            size: :none,
-            tag: :a,
-            tabindex: "-1",
-            class: styles(base: true),
-            )
+          @config = { **kwargs, scheme: :none, size: :none, tag: :a, tabindex: "-1" }
+                      .merge(attributes_for(options))
         end
 
         def call
           render button_component do
-            it.leading_icon(icon, class: styles(leading_icon: true)) if icon
-            it.trailing_icon(trailing_icon, class: styles(trailing_icon: true)) if trailing_icon
+            it.leading_icon(icon, class: classes(:leading_icon)) if icon
+            it.trailing_icon(trailing_icon, class: classes(:trailing_icon)) if trailing_icon
             text_or_content
           end
         end

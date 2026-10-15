@@ -42,12 +42,9 @@ module Gustwave
   #     </tr>
   #   <% end %>
   class TableHead < Gustwave::Component
-    style :scheme,
-          default: :standard,
-          states: {
-            none: "",
-            standard: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-          }
+    variant :scheme, default: :standard, values: {
+      standard: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    }
 
     renders_many_extensible :columns, "Column"
     alias th with_column
@@ -56,11 +53,9 @@ module Gustwave
 
     # @param scheme [Symbol] the styles for the table head. Pass in :none to define your own styles
     # @param options [Hash] additional options for the HTML tag, like class
-    def initialize(scheme: :standard, **options)
-      @config = configure_html_attributes(
-        options,
-        class: styles(scheme: scheme)
-      )
+    def initialize(scheme: DEFAULT, **options)
+      style_with(scheme:)
+      @config = attributes_for(options)
     end
 
     def call
@@ -77,16 +72,11 @@ module Gustwave
     end
 
     class Column < Gustwave::Component
-      style :base, "px-6 py-3"
+      base "px-6 py-3"
 
       def initialize(text = nil, **options)
         @text = text
-        @config = configure_html_attributes(
-          options,
-          tag: :th,
-          scope: "col",
-          class: styles(base: true)
-        )
+        @config = { tag: :th, scope: "col" }.merge(attributes_for(options))
       end
 
       def call
