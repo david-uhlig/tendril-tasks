@@ -43,12 +43,12 @@ module Gustwave
             standard: "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
           }
 
-    renders_one :title_slot, ->(text = nil, &block) {
+    renders_one_extensible :title_slot, ->(text = nil, &block) {
       text || block.call
     }
     alias title with_title_slot
 
-    renders_one :description_slot, ->(text = nil, **options, &block) {
+    renders_one_extensible :description_slot, ->(text = nil, **options, &block) {
       config = configure_html_attributes(
         options,
         class: "mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"

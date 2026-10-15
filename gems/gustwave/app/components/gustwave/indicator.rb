@@ -52,7 +52,7 @@ module Gustwave
             white: "bg-white"
           }
 
-    renders_one :legend_slot, ->(text = nil, **options, &block) {
+    renders_one_extensible :legend_slot, ->(text = nil, **options, &block) {
       @legend_config = configure_html_attributes(
         options,
         class: "flex items-center text-sm font-medium text-gray-900 dark:text-white gap-1.5"

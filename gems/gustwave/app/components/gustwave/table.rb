@@ -20,14 +20,14 @@ module Gustwave
             standard: "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
           }
 
-    renders_one :caption_slot, Gustwave::TableCaption
+    renders_one_extensible :caption_slot, Gustwave::TableCaption
     alias caption with_caption_slot
 
-    renders_one :head_slot, Gustwave::TableHead
+    renders_one_extensible :head_slot, Gustwave::TableHead
     alias head with_head_slot
     alias thead with_head_slot
 
-    renders_one :body_slot, Gustwave::TableBody
+    renders_one_extensible :body_slot, Gustwave::TableBody
     alias body with_body_slot
     alias tbody with_body_slot
 

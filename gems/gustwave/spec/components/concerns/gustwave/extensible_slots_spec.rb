@@ -220,6 +220,154 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
     end
   end
 
+  context "when declaring a single-type slot" do
+    let(:card_component) do
+      item = item_component
+      stub_const("ExtensibleSlotsCard", Class.new(Gustwave::Component) {
+        renders_one_extensible :heading_slot, ->(text = nil, **options, &block) {
+          tag.h1(text || block&.call, **options)
+        }
+        renders_many_extensible :tags, ->(text) { tag.mark(text) }
+        renders_one_extensible :footer_slot, item
+        renders_many_extensible :notes, "ExtensibleSlotsItem"
+
+        def call = tag.div { safe_join([ heading_slot, *tags, footer_slot, *notes ]) }
+      })
+    end
+
+    it "renders lambda slots through ViewComponent's setters" do
+      render_inline(card_component.new) do |card|
+        card.with_heading_slot("Title", class: "x")
+        card.with_tag("one")
+        card.with_tag("two")
+      end
+
+      expect(rendered_content).to have_selector("h1.x", text: "Title")
+      expect(rendered_content).to have_selector("mark", count: 2)
+    end
+
+    it "passes blocks to lambda slots" do
+      render_inline(card_component.new) { |card| card.with_heading_slot { "captured" } }
+
+      expect(rendered_content).to have_selector("h1", text: "captured")
+    end
+
+    it "keeps ViewComponent's content setter" do
+      render_inline(card_component.new) { |card| card.with_heading_slot_content("content") }
+
+      expect(rendered_content).to have_selector("h1", text: "content")
+    end
+
+    it "sets renders_many slots from a collection" do
+      render_inline(card_component.new) { |card| card.with_tags(%w[a b c]) }
+
+      expect(rendered_content).to have_selector("mark", count: 3)
+    end
+
+    it "instantiates component classes and class names with the arguments" do
+      render_inline(card_component.new) do |card|
+        card.with_footer_slot("footer", class: "y")
+        card.with_note("note")
+      end
+
+      expect(rendered_content).to have_selector("em.y", text: "footer")
+      expect(rendered_content).to have_selector("em", text: "note")
+    end
+
+    it "passes the block to component classes as content" do
+      render_inline(card_component.new) { |card| card.with_footer_slot { "block content" } }
+
+      expect(rendered_content).to have_selector("em", text: "block content")
+    end
+
+    it "names the private builders after the singular slot name" do
+      expect(card_component.private_method_defined?(:build_heading_slot)).to be(true)
+      expect(card_component.private_method_defined?(:build_tag)).to be(true)
+      expect(card_component.private_method_defined?(:build_note)).to be(true)
+    end
+
+    it "registers the slots without types" do
+      expect(card_component.extensible_slots).to eq(
+        heading_slot: { collection: false },
+        tags: { collection: true },
+        footer_slot: { collection: false },
+        notes: { collection: true }
+      )
+    end
+
+    it "is caught by the single-set spec helper" do
+      expect {
+        render_inline(card_component.new) do |card|
+          card.with_heading_slot("one")
+          card.with_heading_slot("two")
+        end
+      }.to raise_error(Gustwave::Test::SingleSetSlots::SlotAlreadySetError)
+    end
+
+    it "applies builder overrides in subclasses" do
+      subclass = stub_const("ExtensibleSlotsBoldCard", Class.new(card_component) {
+        private
+
+        def build_heading_slot(text = nil, **options, &block)
+          super(text&.upcase, class: "bold", **options, &block)
+        end
+      })
+
+      render_inline(subclass.new) { |card| card.with_heading_slot("title") }
+
+      expect(rendered_content).to have_selector("h1.bold", text: "TITLE")
+    end
+
+    it "replaces the builder with extend_slot" do
+      subclass = stub_const("ExtensibleSlotsStrongCard", Class.new(card_component) {
+        extend_slot :tags, ->(text) { tag.strong(text) }
+      })
+
+      render_inline(subclass.new) { |card| card.with_tag("replaced") }
+
+      expect(rendered_content).to have_selector("strong", text: "replaced")
+      expect(rendered_content).not_to have_selector("mark")
+
+      render_inline(card_component.new) { |card| card.with_tag("parent") }
+
+      expect(rendered_content).to have_selector("mark", text: "parent")
+    end
+
+    it "rejects types: when extending a single-type slot" do
+      expect {
+        Class.new(card_component) { extend_slot :tags, types: { x: ->() { } } }
+      }.to raise_error(ArgumentError, /slot :tags has a single type/)
+    end
+
+    it "rejects a callable when extending a polymorphic slot" do
+      expect {
+        Class.new(list_component) { extend_slot :entries, ->() { } }
+      }.to raise_error(ArgumentError, /slot :entries is polymorphic/)
+    end
+
+    it "requires either a callable or types:" do
+      expect {
+        Class.new(Gustwave::Component) { renders_one_extensible :thing }
+      }.to raise_error(ArgumentError, /needs either a callable or types:/)
+
+      expect {
+        Class.new(Gustwave::Component) { renders_one_extensible :thing, ->() { }, types: {} }
+      }.to raise_error(ArgumentError, /needs either a callable or types:/)
+    end
+
+    it "rejects renderable: without types:" do
+      expect {
+        Class.new(Gustwave::Component) { renders_many_extensible :things, ->() { }, renderable: true }
+      }.to raise_error(ArgumentError, /renderable: needs types:/)
+    end
+
+    it "rejects callables that are not lambdas, classes or class names" do
+      expect {
+        Class.new(Gustwave::Component) { renders_one_extensible :thing, 42 }
+      }.to raise_error(ArgumentError, /must be a lambda, class or class name/)
+    end
+  end
+
   context "when accepting any renderable" do
     let(:aware_component) do
       stub_const("ExtensibleSlotsAware", Class.new(Gustwave::Component) {

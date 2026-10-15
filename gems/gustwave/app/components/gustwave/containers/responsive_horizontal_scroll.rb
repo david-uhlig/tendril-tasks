@@ -58,7 +58,7 @@ module Gustwave
       # @param text [String] the text to display inside the item. Takes precedent over block content.
       # @param tag [Symbol] the HTML tag for the item. Resolved automatically based on the container tag if not provided.
       # @param options [Hash] additional options for the HTML tag.
-      renders_many :items, ->(text = nil, tag: nil, **options, &block) do
+      renders_many_extensible :items, ->(text = nil, tag: nil, **options, &block) do
         item_tag = tag || resolve_item_tag_by_container_tag
         config = configure_html_attributes(options)
         content_tag item_tag, config do
