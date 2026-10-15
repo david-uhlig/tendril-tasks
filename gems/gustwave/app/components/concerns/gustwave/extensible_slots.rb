@@ -203,7 +203,7 @@ module Gustwave
               "#{self.class.name} slot #{slot_name.inspect} has no type #{type.inspect} (known: #{known})"
       end
 
-      send(builder_name, ...)
+      send(builder_name, ...).tap { __gustwave_mark_slot_set(slot_name) }
     end
 
     def __gustwave_apply_slot_context(slot_name, component, context_method)
@@ -221,13 +221,21 @@ module Gustwave
 
     # ViewComponent raises when a polymorphic +renders_one+ slot is set twice;
     # a plain lambda slot would silently replace it instead.
+    #
+    # The slot only counts as set once its builder succeeded, so a failed
+    # attempt can be retried. The flag is never reset: ViewComponent raises
+    # +ReusedInstanceError+ before a component instance renders twice.
     def __gustwave_guard_single_set(slot_name)
       return if extensible_slots[slot_name][:collection]
+      return unless defined?(@__gustwave_set_slots) && @__gustwave_set_slots.include?(slot_name)
 
-      @__gustwave_set_slots ||= Set.new
-      unless @__gustwave_set_slots.add?(slot_name)
-        raise ViewComponent::ContentAlreadySetForPolymorphicSlotError.new(slot_name)
-      end
+      raise ViewComponent::ContentAlreadySetForPolymorphicSlotError.new(slot_name)
+    end
+
+    def __gustwave_mark_slot_set(slot_name)
+      return if extensible_slots[slot_name][:collection]
+
+      (@__gustwave_set_slots ||= Set.new) << slot_name
     end
   end
 end

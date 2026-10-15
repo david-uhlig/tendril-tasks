@@ -92,22 +92,58 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
     end
 
     # Specs prepend Gustwave::Test::SingleSetSlots, which raises before the
-    # slot's own guard runs, so the guard is exercised directly.
+    # slot's own guard runs, so the dispatcher is exercised directly with the
+    # builder stubbed.
     it "raises like ViewComponent when a renders_one slot is set twice" do
       component = list_component.new
-      component.send(:__gustwave_guard_single_set, :title_slot)
+      allow(component).to receive(:build_title_slot_text).and_return("built")
+      component.send(:__gustwave_build_slot, :title_slot, :text, "one")
 
       expect {
-        component.send(:__gustwave_guard_single_set, :title_slot)
+        component.send(:__gustwave_build_slot, :title_slot, :text, "two")
       }.to raise_error(ViewComponent::ContentAlreadySetForPolymorphicSlotError)
+    end
+
+    it "does not count a renders_one slot as set when its builder raises" do
+      component = list_component.new
+      allow(component).to receive(:build_title_slot_text).and_raise(ArgumentError, "bad text")
+
+      expect {
+        component.send(:__gustwave_build_slot, :title_slot, :text, "one")
+      }.to raise_error(ArgumentError, "bad text")
+
+      allow(component).to receive(:build_title_slot_text).and_return("built")
+      expect(component.send(:__gustwave_build_slot, :title_slot, :text, "retry")).to eq("built")
+    end
+
+    it "does not count a renders_one slot as set for unknown types" do
+      component = list_component.new
+      allow(component).to receive(:build_title_slot_text).and_return("built")
+
+      expect {
+        component.send(:__gustwave_build_slot, :title_slot, :missing)
+      }.to raise_error(Gustwave::ExtensibleSlots::UnknownSlotTypeError)
+      expect(component.send(:__gustwave_build_slot, :title_slot, :text, "retry")).to eq("built")
     end
 
     it "allows setting renders_many slots repeatedly" do
       component = list_component.new
+      allow(component).to receive(:build_entry_text).and_return("built")
 
       expect {
-        2.times { component.send(:__gustwave_guard_single_set, :entries) }
+        2.times { component.send(:__gustwave_build_slot, :entries, :text, "entry") }
       }.not_to raise_error
+    end
+
+    # The set-slot flag is never reset, which relies on ViewComponent refusing
+    # to render an instance twice.
+    it "relies on ViewComponent refusing to render an instance twice" do
+      component = list_component.new
+      render_inline(component) { |list| list.with_title_slot_text("one") }
+
+      expect {
+        render_inline(component) { |list| list.with_title_slot_text("one") }
+      }.to raise_error(ViewComponent::ReusedInstanceError)
     end
 
     it "is caught by the single-set spec helper" do
