@@ -61,6 +61,26 @@ jobs:
       - name: Run security audit on npm package dependencies
         run: npm audit
 
+  scan_secrets:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install gitleaks
+        uses: jdx/mise-action@08ae2a091c038e1e05ec6f5115dc5c69d5a2a6b8 # v5.1.2
+        with:
+          install_args: gitleaks
+          cache: false
+
+      - name: Scan the git history for committed secrets
+        run: gitleaks git --no-banner --redact
+
   lint:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')
     runs-on: ubuntu-latest
