@@ -3,22 +3,16 @@
 module TendrilTasks
   module Admin
     class Card < TendrilTasks::Component
-      style :heading,
-            "mb-0"
+      part :heading, "mb-0 hyphens-auto"
 
-      style :hyphens,
-            "hyphens-auto"
+      part :paragraph, "hyphens-auto"
 
-      style :button,
-            "w-full justify-center"
+      part :button, "w-full justify-center"
 
       renders_one :heading_slot, ->(text = nil, **options, &block) do
-        options.symbolize_keys!
+        options = attributes_for(:heading, options)
         options[:tag] ||= :h2
         options[:scheme] ||= :level4
-        options[:class] = styles(heading: true,
-                                 hyphens: true,
-                                 custom: options[:class])
         options[:lang] ||= I18n.locale
         TendrilTasks::Heading.new(text, **options) do
           capture(&block)
@@ -39,10 +33,8 @@ module TendrilTasks
       alias badge with_badge
 
       renders_many :paragraphs, ->(**options, &block) do
-        options.symbolize_keys!
+        options = attributes_for(:paragraph, options)
         options[:size] ||= :sm
-        options[:class] = styles(hyphens: true,
-                                 custom: options[:class])
         options[:lang] ||= I18n.locale
         TendrilTasks::Paragraph.new(**options) do
           capture(&block)
@@ -51,12 +43,10 @@ module TendrilTasks
       alias paragraph with_paragraph
 
       renders_many :buttons, ->(href:, **options, &block) do
-        options.symbolize_keys!
+        options = attributes_for(:button, options)
         options[:href] = href
         options[:tag] ||= :a
         options[:size] ||= :lg
-        options[:class] = styles(button: true,
-                                 custom: options[:class])
 
         Gustwave::Button.new(**options) do
           capture(&block)

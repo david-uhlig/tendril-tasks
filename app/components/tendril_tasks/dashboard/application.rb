@@ -3,18 +3,15 @@
 module TendrilTasks
   module Dashboard
     class Application < TendrilTasks::Component
-      style :base,
-            "bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col sm:flex-row"
+      base "bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col sm:flex-row"
 
-      style :disabled,
-            "grayscale opacity-70"
+      toggle :disabled, "grayscale opacity-70"
 
       def initialize(application, **options)
         @application = application
 
-        options.symbolize_keys!
-        options[:class] = styles(base: true, disabled: !@application.task.visible?)
-        @options = options
+        style_with(disabled: !@application.task.visible?)
+        @options = attributes_for(options)
       end
 
       private

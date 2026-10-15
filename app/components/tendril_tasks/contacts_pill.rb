@@ -13,16 +13,13 @@ module TendrilTasks
   # @param options [Hash] HTML attributes passed to the button. Classes are
   #   merged with the pill's own, e.g. to change its margins.
   class ContactsPill < TendrilTasks::Component
-    style :base,
-          "inline-flex items-center max-w-full py-1 px-1 pe-4 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+    base "inline-flex items-center max-w-full py-1 px-1 pe-4 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
 
     def initialize(coordinators, modal_id:, **options)
       @coordinators = coordinators
       @modal_id = modal_id
 
-      options.symbolize_keys!
-      options[:class] = styles(base: true, custom: options.delete(:class))
-      @options = options
+      @options = attributes_for(options)
     end
   end
 end

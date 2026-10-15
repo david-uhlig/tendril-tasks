@@ -2,30 +2,22 @@
 
 module TendrilTasks
   class Paragraph < TendrilTasks::Component
-    style :base,
-          "text-gray-500 dark:text-gray-400"
+    base "text-gray-500 dark:text-gray-400"
 
-    style :size,
-          states: {
-            sm: "text-sm font-normal lg:text-base",
-            md: "text-base font-normal lg:text-lg",
-            lg: "text-lg font-normal lg:text-xl"
-          },
-          default: :lg
+    variant :size, default: :lg, values: {
+      sm: "text-sm font-normal lg:text-base",
+      md: "text-base font-normal lg:text-lg",
+      lg: "text-lg font-normal lg:text-xl"
+    }
 
-    style :hyphens,
-          "hyphens-auto"
+    toggle :hyphenated, "hyphens-auto"
 
-    def initialize(text = nil, size: default_layer_state(:size), hyphenated: true, **options)
+    def initialize(text = nil, size: DEFAULT, hyphenated: true, **options)
       @text = text
 
-      options.symbolize_keys!
-      options[:class] = styles(base: true,
-                               size: size,
-                               hyphens: hyphenated,
-                               custom: options.delete(:class))
-      options[:lang] ||= I18n.locale if hyphenated
-      @options = options
+      style_with(size:, hyphenated:)
+      @options = attributes_for(options)
+      @options[:lang] ||= I18n.locale if hyphenated
     end
 
     def call

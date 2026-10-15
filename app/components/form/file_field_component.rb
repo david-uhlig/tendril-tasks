@@ -2,11 +2,10 @@
 
 module Form
   class FileFieldComponent < TendrilTasks::Component
-    style :base,
-          "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-hidden dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+    base "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-hidden dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
 
-    style :helper_text,
-          "mt-1 text-sm text-gray-500 dark:text-gray-300"
+    part :helper_text,
+         "mt-1 text-sm text-gray-500 dark:text-gray-300"
 
     # Renders a helper text below the input field
     #
@@ -15,11 +14,7 @@ module Form
     # @param text [String] the helper text to display
     # @param options [Hash] additional options to pass to the helper text paragraph
     renders_one :helper_text_slot, ->(text, **options) do
-      options.symbolize_keys!
-      options[:class] = styles(helper_text: true,
-                               custom: options.delete(:class))
-
-      tag.p text, **options
+      tag.p text, **attributes_for(:helper_text, options)
     end
     # Alias for helper_text_slot
     alias helper_text with_helper_text_slot
@@ -29,9 +24,7 @@ module Form
       @attribute = attribute
       @label = label
 
-      options.symbolize_keys!
-      options[:class] = styles(base: true, custom: options.delete(:class))
-      @options = options
+      @options = attributes_for(options)
     end
 
     def call
