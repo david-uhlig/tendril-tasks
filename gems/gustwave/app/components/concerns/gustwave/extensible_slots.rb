@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Polymorphic slots that subclasses can extend with new types.
+  # Slots that subclasses can extend or override.
   #
-  # ViewComponent's polymorphic slots (+renders_one :name, types: {...}+) are
-  # closed: a subclass can neither add a type nor redeclare the slot. The
-  # macros in this concern take the same +types:+ hash, but declare the slot
-  # with a single lambda that dispatches to one private builder method per
-  # type. Subclasses add or replace types through ordinary method overrides.
+  # ViewComponent's slots are closed: a subclass can neither add a type to a
+  # polymorphic slot (+renders_one :name, types: {...}+) nor change what a
+  # lambda or component slot builds, and redeclaring the slot raises. The
+  # macros in this concern take the same arguments, but declare the slot with
+  # a single lambda that dispatches to a private builder method. Subclasses
+  # add or replace types through ordinary method overrides.
   #
   # === Declaring a slot
   #
@@ -58,6 +59,36 @@ module Gustwave
   #
   #   button.with_leading_visual_renderable(MyAvatar.new("me.png"))
   #
+  # === Single-type slots
+  #
+  # Pass a lambda, component class or class name instead of +types:+ for a
+  # slot with a single type. The setters are ViewComponent's, and the builder
+  # is named after the slot alone:
+  #
+  #   class Gustwave::Indicator < Gustwave::Component
+  #     renders_one_extensible :legend_slot, ->(text = nil, **options) { ... }
+  #   end
+  #
+  #   indicator.with_legend_slot("New")
+  #
+  # Override the private +build_legend_slot+ in a subclass to wrap it, or
+  # pass +extend_slot+ a new lambda to replace it:
+  #
+  #   class BoldIndicator < Gustwave::Indicator
+  #     private
+  #
+  #     def build_legend_slot(text = nil, **options, &block)
+  #       super(text, class: "font-bold", **options, &block)
+  #     end
+  #   end
+  #
+  #   class BadgeIndicator < Gustwave::Indicator
+  #     extend_slot :legend_slot, ->(text) { Gustwave::Badge.new(text) }
+  #   end
+  #
+  # Unlike polymorphic slots, setting a single-type +renders_one+ slot twice
+  # replaces the first value, as with ViewComponent.
+  #
   # Types may be lambdas, component classes or class names, or a hash with
   # +renders:+ and +as:+ to rename the setter, as with ViewComponent. Component
   # classes receive the slot's block as their content, not as a constructor
@@ -72,8 +103,8 @@ module Gustwave
     class NotExtensibleSlotError < Gustwave::Error; end
 
     included do
-      # Extensible slots, keyed by slot name, with +collection+ and the
-      # registered +types+.
+      # Extensible slots, keyed by slot name, with +collection+ and, for
+      # polymorphic slots, the registered +types+.
       class_attribute :extensible_slots,
                       instance_writer: false,
                       instance_predicate: false,
@@ -81,44 +112,91 @@ module Gustwave
     end
 
     class_methods do
-      # Declares an extensible polymorphic +renders_one+ slot.
+      # Declares an extensible +renders_one+ slot, either with a single
+      # +callable+ or polymorphic with +types:+.
       #
       # @param slot_name [Symbol] the slot name.
-      # @param types [Hash] the slot types, as for ViewComponent's +types:+.
-      # @param renderable [Symbol, true, nil] adds a +renderable+ type accepting any component. A symbol names the parent method returning the slot context; +true+ passes no context.
-      def renders_one_extensible(slot_name, types:, renderable: nil)
-        __gustwave_renders_extensible(slot_name, types:, renderable:, collection: false)
+      # @param callable [Proc, Class, String, nil] the slot's lambda, component class or class name, as for ViewComponent.
+      # @param types [Hash, nil] the slot types, as for ViewComponent's +types:+.
+      # @param renderable [Symbol, true, nil] adds a +renderable+ type accepting any component. A symbol names the parent method returning the slot context; +true+ passes no context. Polymorphic slots only.
+      def renders_one_extensible(slot_name, callable = nil, types: nil, renderable: nil)
+        __gustwave_renders_extensible(slot_name, callable, types:, renderable:, collection: false)
       end
 
-      # Declares an extensible polymorphic +renders_many+ slot.
+      # Declares an extensible +renders_many+ slot, either with a single
+      # +callable+ or polymorphic with +types:+.
       #
       # @param slot_name [Symbol] the plural slot name.
-      # @param types [Hash] the slot types, as for ViewComponent's +types:+.
-      # @param renderable [Symbol, true, nil] adds a +renderable+ type accepting any component. A symbol names the parent method returning the slot context; +true+ passes no context.
-      def renders_many_extensible(slot_name, types:, renderable: nil)
-        __gustwave_renders_extensible(slot_name, types:, renderable:, collection: true)
+      # @param callable [Proc, Class, String, nil] the slot's lambda, component class or class name, as for ViewComponent.
+      # @param types [Hash, nil] the slot types, as for ViewComponent's +types:+.
+      # @param renderable [Symbol, true, nil] adds a +renderable+ type accepting any component. A symbol names the parent method returning the slot context; +true+ passes no context. Polymorphic slots only.
+      def renders_many_extensible(slot_name, callable = nil, types: nil, renderable: nil)
+        __gustwave_renders_extensible(slot_name, callable, types:, renderable:, collection: true)
       end
 
-      # Adds types to, or replaces types of, an inherited extensible slot.
+      # Replaces the builder of an inherited single-type slot, or adds types
+      # to, or replaces types of, an inherited polymorphic slot.
       #
       # @param slot_name [Symbol] the slot name.
-      # @param types [Hash] the slot types, as for ViewComponent's +types:+.
-      def extend_slot(slot_name, types:)
+      # @param callable [Proc, Class, String, nil] the new lambda, component class or class name of a single-type slot.
+      # @param types [Hash, nil] the types of a polymorphic slot, as for ViewComponent's +types:+.
+      def extend_slot(slot_name, callable = nil, types: nil)
         unless extensible_slots.key?(slot_name)
           raise NotExtensibleSlotError, "#{name} has no extensible slot #{slot_name.inspect}"
         end
 
-        __gustwave_define_slot_types(slot_name, types)
+        if extensible_slots[slot_name].key?(:types)
+          if callable || types.nil?
+            raise ArgumentError, "#{name} slot #{slot_name.inspect} is polymorphic, pass types: to extend it"
+          end
+
+          __gustwave_define_slot_types(slot_name, types)
+        else
+          if types || callable.nil?
+            raise ArgumentError, "#{name} slot #{slot_name.inspect} has a single type, pass a callable to replace it"
+          end
+
+          __gustwave_define_builder(slot_builder_name(slot_name), callable)
+        end
       end
 
-      # @return [String] the builder method name for a slot type.
-      def slot_builder_name(slot_name, type)
-        :"build_#{__gustwave_slot_singular(slot_name)}_#{type}"
+      # @return [String] the builder method name for a slot type, or for a
+      #   single-type slot if +type+ is +nil+.
+      def slot_builder_name(slot_name, type = nil)
+        singular = __gustwave_slot_singular(slot_name)
+        type ? :"build_#{singular}_#{type}" : :"build_#{singular}"
       end
 
       private
 
-      def __gustwave_renders_extensible(slot_name, types:, renderable:, collection:)
+      def __gustwave_renders_extensible(slot_name, callable, types:, renderable:, collection:)
+        if callable.nil? == types.nil?
+          raise ArgumentError, "#{name} slot #{slot_name.inspect} needs either a callable or types:"
+        end
+
+        if callable
+          __gustwave_renders_single(slot_name, callable, renderable:, collection:)
+        else
+          __gustwave_renders_polymorphic(slot_name, types:, renderable:, collection:)
+        end
+      end
+
+      def __gustwave_renders_single(slot_name, callable, renderable:, collection:)
+        if renderable
+          raise ArgumentError, "#{name} slot #{slot_name.inspect} has a single type, renderable: needs types:"
+        end
+
+        self.extensible_slots = extensible_slots.merge(slot_name => { collection: })
+        builder_name = slot_builder_name(slot_name)
+
+        # Dispatch at call time, so subclass overrides of the builder apply.
+        dispatcher = ->(*args, **options, &block) { send(builder_name, *args, **options, &block) }
+        collection ? renders_many(slot_name, dispatcher) : renders_one(slot_name, dispatcher)
+
+        __gustwave_define_builder(builder_name, callable)
+      end
+
+      def __gustwave_renders_polymorphic(slot_name, types:, renderable:, collection:)
         self.extensible_slots = extensible_slots.merge(slot_name => { collection:, types: [] })
 
         dispatcher = ->(type, *args, **options, &block) {
@@ -146,9 +224,7 @@ module Gustwave
           renderable, setter_name = renderable.values_at(:renders, :as) if renderable.is_a?(Hash)
           setter_name = :"with_#{setter_name || "#{singular}_#{type}"}"
 
-          builder_name = slot_builder_name(slot_name, type)
-          define_method(builder_name, __gustwave_builder(renderable))
-          private builder_name
+          __gustwave_define_builder(slot_builder_name(slot_name, type), renderable)
 
           define_method(setter_name) do |*args, **options, &block|
             public_send(:"with_#{singular}", type, *args, **options, &block)
@@ -165,6 +241,11 @@ module Gustwave
         self.extensible_slots = extensible_slots.merge(
           slot_name => slot.merge(types: slot[:types] | types.keys)
         )
+      end
+
+      def __gustwave_define_builder(builder_name, renderable)
+        define_method(builder_name, __gustwave_builder(renderable))
+        private builder_name
       end
 
       # Matches ViewComponent: component classes are instantiated with the
