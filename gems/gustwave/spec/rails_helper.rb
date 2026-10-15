@@ -5,10 +5,13 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "dummy/config/environment"
 require "rspec/rails"
 require "view_component/test_helpers"
+require "gustwave/test/single_set_slots"
 require "capybara/rspec"
 
 ActiveRecord::Migration.verbose = false
 load File.join(__dir__, "dummy/db/schema.rb")
+
+ViewComponent::Base.prepend(Gustwave::Test::SingleSetSlots)
 
 Dir[File.join(__dir__, "support/**/*.rb")].each { |f| require f }
 
