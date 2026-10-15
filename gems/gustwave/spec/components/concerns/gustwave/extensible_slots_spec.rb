@@ -80,8 +80,8 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
     end
 
     it "keeps the builders private" do
-      expect(list_component.private_method_defined?(:build_text_entry)).to be(true)
-      expect(list_component.private_method_defined?(:build_text_title_slot)).to be(true)
+      expect(list_component.private_method_defined?(:build_entry_text)).to be(true)
+      expect(list_component.private_method_defined?(:build_title_slot_text)).to be(true)
     end
 
     it "registers the slots and their types" do
@@ -169,7 +169,7 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
 
     it "accepts builder methods defined directly" do
       subclass = stub_const("ExtensibleSlotsDefList", Class.new(list_component) {
-        private def build_avatar_entry(src) = tag.img(src:)
+        private def build_entry_avatar(src) = tag.img(src:)
       })
 
       render_inline(subclass.new) { |list| list.with_entry(:avatar, "me.png") }

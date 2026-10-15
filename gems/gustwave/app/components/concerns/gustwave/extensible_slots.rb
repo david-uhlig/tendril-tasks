@@ -25,7 +25,7 @@ module Gustwave
   #
   # and additionally:
   # - +with_leading_visual(type, ...)+ to set any type by name
-  # - private +build_icon_leading_visual+ and +build_image_leading_visual+
+  # - private +build_leading_visual_icon+ and +build_leading_visual_image+
   #   holding each type's lambda
   #
   # === Extending a slot in a subclass
@@ -38,7 +38,7 @@ module Gustwave
   #
   #   button.with_leading_visual_avatar("me.png")
   #
-  # Defining +build_avatar_leading_visual+ directly works too, but only
+  # Defining +build_leading_visual_avatar+ directly works too, but only
   # +extend_slot+ generates the +with_leading_visual_avatar+ setter.
   #
   # === Accepting any component
@@ -113,7 +113,7 @@ module Gustwave
 
       # @return [String] the builder method name for a slot type.
       def slot_builder_name(slot_name, type)
-        :"build_#{type}_#{__gustwave_slot_singular(slot_name)}"
+        :"build_#{__gustwave_slot_singular(slot_name)}_#{type}"
       end
 
       private
