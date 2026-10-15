@@ -27,6 +27,23 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
     end
   end
 
+  describe "scheme" do
+    def badge_classes
+      Nokogiri::HTML.fragment(rendered_content).at_css("a")["class"]
+    end
+
+    { admin: :purple, editor: :default }.each do |role, scheme|
+      it "is #{scheme} for #{role}" do
+        render_inline(Gustwave::Badge.new("Badge", tag: :a, scheme:, size: :sm, border: true))
+        expected = badge_classes
+
+        render_inline(described_class.new(build_stubbed(:user, role:)))
+
+        expect(badge_classes).to eq expected
+      end
+    end
+  end
+
   context "with custom options" do
     it "renders custom css class" do
       user = build_stubbed(:user, role: :admin)

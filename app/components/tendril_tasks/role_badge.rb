@@ -2,11 +2,11 @@
 
 # Renders roles badges depending on the given users role.
 class TendrilTasks::RoleBadge < TendrilTasks::Component
-  mapping :role_to_scheme, {
+  ROLE_SCHEMES = {
     admin: :purple,
     editor: :default,
     user: :default
-  }, fallback: :user
+  }.freeze
 
   def initialize(user, size: :sm, border: true, **options)
     @user = user
@@ -14,7 +14,7 @@ class TendrilTasks::RoleBadge < TendrilTasks::Component
     @config = configure_component(
       options,
       tag: :a,
-      scheme: role_to_scheme_mapping(role),
+      scheme: ROLE_SCHEMES.fetch(role, :default),
       size:,
       border:
     )
