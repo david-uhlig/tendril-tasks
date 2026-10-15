@@ -6,7 +6,6 @@ module Gustwave
     include Gustwave::HtmlAttributesHelper
     include Gustwave::Styling
     include Gustwave::Mapping
-    include Gustwave::Styleable
     include Gustwave::Themeable
     include Gustwave::ExtensibleSlots
     include Gustwave::FetchOrFallbackHelper
@@ -32,10 +31,7 @@ module Gustwave
         # replacing the defaults.
         overwrite_attrs.delete(:class) if overwrite_attrs[:class].nil?
         if overwrite_attrs.key?(:class)
-          overwrite_attrs[:class] = styles(
-            custom_attribute_classes: default_attrs.dig(:class),
-            custom_override_classes: overwrite_attrs.dig(:class)
-          )
+          overwrite_attrs[:class] = merge_classes(default_attrs[:class], overwrite_attrs[:class])
         end
       end
 

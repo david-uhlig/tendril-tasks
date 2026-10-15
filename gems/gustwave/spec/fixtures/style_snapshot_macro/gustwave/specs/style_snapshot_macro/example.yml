@@ -1,0 +1,12 @@
+---
+look size=:sm pill=false:
+- 'div id="example-r0000001": inline-flex text-sm'
+look size=:sm pill=true:
+- 'div id="example-r0000001": inline-flex rounded-full text-sm'
+look size=:md pill=false:
+- 'div id="example-r0000001": inline-flex text-base'
+look size=:md pill=true:
+- 'div id="example-r0000001": inline-flex rounded-full text-base'
+content:
+- 'div id="example-r0000001": inline-flex text-base'
+- 'span: font-medium'
