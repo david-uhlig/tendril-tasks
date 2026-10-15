@@ -1,0 +1,10 @@
+<%= render Gustwave::Dropdown.new do |dropdown| %>
+  <% dropdown.trigger do %>
+    <%= render Gustwave::Badge.new("Open", scheme: :green, tag: :button) %>
+  <% end %>
+
+  <% dropdown.menu do |menu| %>
+    <% menu.item "Open", href: "#" %>
+    <% menu.item "Closed", href: "#" %>
+  <% end %>
+<% end %>

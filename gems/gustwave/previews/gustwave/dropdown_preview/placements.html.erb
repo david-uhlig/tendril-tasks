@@ -1,0 +1,10 @@
+<div class="flex flex-wrap items-center justify-center gap-4 py-32">
+  <% placements.each do |placement| %>
+    <%= render Gustwave::Dropdown.new(placement.to_s.humanize, placement:) do |dropdown| %>
+      <% dropdown.menu do |menu| %>
+        <% menu.item "First", href: "#" %>
+        <% menu.item "Second", href: "#" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

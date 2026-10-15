@@ -1,0 +1,5 @@
+<div class="flex flex-wrap items-center gap-2">
+  <% schemes.each do |scheme| %>
+    <%= render Gustwave::Badge.new(scheme.to_s.humanize, scheme:) %>
+  <% end %>
+</div>

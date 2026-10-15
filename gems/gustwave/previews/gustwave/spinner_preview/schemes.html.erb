@@ -1,0 +1,5 @@
+<div class="flex flex-wrap items-center gap-4">
+  <% schemes.each do |scheme| %>
+    <%= render Gustwave::Spinner.new(scheme:) %>
+  <% end %>
+</div>

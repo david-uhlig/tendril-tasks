@@ -2,6 +2,7 @@
   <% themes.each do |theme, schemes| %>
     <section class="space-y-2">
       <h2 class="text-sm font-semibold text-gray-900 dark:text-white"><%= theme %></h2>
+
       <div class="flex flex-wrap items-center gap-2">
         <% schemes.each do |scheme| %>
           <%= render Gustwave::Button.new(scheme.to_s.humanize, theme:, scheme:) %>

@@ -4,5 +4,22 @@ module Gustwave
     def with_border(size: :lg)
       render Gustwave::Avatar.new(src: "/icon.png", size: size, border: true)
     end
+
+    def sizes
+      render_with_template(locals: { sizes: Gustwave::Avatar.variant_values(:size).excluding(:none, :original) })
+    end
+
+    def square
+      render Gustwave::Avatar.new(src: "/icon.png", scheme: :square, size: :lg)
+    end
+
+    # Placeholder and initials, for users without a picture
+    def placeholder_and_text
+      render_with_template
+    end
+
+    def group
+      render_with_template
+    end
   end
 end
