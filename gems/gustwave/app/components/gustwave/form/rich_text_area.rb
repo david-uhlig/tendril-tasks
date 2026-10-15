@@ -3,10 +3,10 @@
 module Gustwave
   module Form
     class RichTextArea < Gustwave::Component
-      style :toolbar_container_base,
-            "px-3 py-2 border-b dark:border-gray-600 flex flex-wrap items-center bg-gray-50 rounded-t-lg border-t-red-200 dark:bg-gray-700"
-      style :sticky_toolbar_container,
-            "group-focus-within:sticky group-hover:sticky top-0 z-10"
+      part :toolbar_container,
+           "px-3 py-2 border-b dark:border-gray-600 flex flex-wrap items-center bg-gray-50 rounded-t-lg border-t-red-200 dark:bg-gray-700"
+      toggle :sticky_toolbar, part: :toolbar_container,
+                              on: "group-focus-within:sticky group-hover:sticky top-0 z-10"
 
       renders_one_extensible :toolbar_slot, ->(&block) { block&.call }
       alias with_toolbar with_toolbar_slot
@@ -26,10 +26,8 @@ module Gustwave
         @toolbar_options = {
           id: toolbar_id.presence || generate_random_id(prefix: "toolbar")
         }
-        @toolbar_container_options = {
-          class: styles(toolbar_container_base: true,
-                        sticky_toolbar_container: sticky_toolbar)
-        }
+        style_with(sticky_toolbar:)
+        @toolbar_container_options = { class: classes(:toolbar_container) }
       end
 
       private

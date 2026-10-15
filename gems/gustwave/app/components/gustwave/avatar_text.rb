@@ -34,37 +34,31 @@ module Gustwave
   # @param border [Symbol] Whether the avatar should have a border. Default is
   #  +Gustwave::Avatar+'s default.
   class AvatarText < Gustwave::Component
-    style :base,
-          "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
+    base "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
 
-    style :text_base,
-          "font-medium text-gray-600"
+    part :text, "font-medium text-gray-600"
 
-    style :text_size,
-          default: :md,
-          states: {
-            xs: "text-xs",
-            sm: "text-sm",
-            md: "text-md",
-            lg: "text-lg",
-            xl: "text-xl",
-            "2xl": "text-2xl",
-            "3xl": "text-3xl",
-            "4xl": "text-4xl"
-          }
+    # Also passed to Gustwave::Avatar.
+    variant :size, part: :text, default: :md, values: {
+      xs: "text-xs",
+      sm: "text-sm",
+      md: "text-md",
+      lg: "text-lg",
+      xl: "text-xl",
+      "2xl": "text-2xl",
+      "3xl": "text-3xl",
+      "4xl": "text-4xl"
+    }
 
     def initialize(text = nil,
                    scheme: nil,
-                   size: :md,
+                   size: DEFAULT,
                    border: nil,
                    **options)
-      options.deep_symbolize_keys!
-      options[:class] = styles(base: true, custom: options.delete(:class))
-      kwargs = { scheme:, size:, border: }.compact
-
+      style_with(size:)
       @text = text
-      @text_options = { class: styles(text_base: true, text_size: size) }
-      @options = kwargs.merge!(options)
+      @text_options = { class: classes(:text) }
+      @options = { scheme:, size: style_value(:size), border: }.compact.merge!(attributes_for(options))
     end
 
     def before_render

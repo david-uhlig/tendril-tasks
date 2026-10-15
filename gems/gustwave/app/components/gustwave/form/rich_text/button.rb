@@ -38,14 +38,11 @@ module Gustwave
           attach_files: :paper_clip
         }.freeze
 
-        style :base,
-              "p-1.5 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+        base "p-1.5 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 " \
+             "dark:hover:text-white dark:hover:bg-gray-600 " \
+             "disabled:text-gray-400 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
 
-        style :icon,
-              "m-0 w-5 h-5"
-
-        style :disabled,
-              "disabled:text-gray-400 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
+        part :icon, "m-0 w-5 h-5"
 
         def initialize(attribute,
                        icon_or_text: nil,
@@ -58,11 +55,8 @@ module Gustwave
           options[:scheme] ||= :none
           options[:tabindex] ||= -1
           options[:disabled] = disabled.present? ? disabled : nil
-          options[:class] = styles(base: true,
-                                   disabled: true,
-                                   custom: options.delete(:class))
           @icon_or_text = icon_or_text
-          @options = options
+          @options = attributes_for(options)
         end
 
         def call
@@ -71,7 +65,7 @@ module Gustwave
               concat @icon_or_text
               concat content
             else
-              concat render(Gustwave::Icon.new(@icon_or_text, class: styles(icon: true)))
+              concat render(Gustwave::Icon.new(@icon_or_text, class: classes(:icon)))
               concat content
             end
           end
