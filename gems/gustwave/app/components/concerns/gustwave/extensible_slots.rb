@@ -41,6 +41,23 @@ module Gustwave
   # Defining +build_avatar_leading_visual+ directly works too, but only
   # +extend_slot+ generates the +with_leading_visual_avatar+ setter.
   #
+  # === Accepting any component
+  #
+  # Pass +renderable:+ to add a +renderable+ type that accepts any component
+  # instead of a fixed list. The option names a parent method returning the
+  # slot context; components that implement +apply_slot_context+ receive it,
+  # others render unchanged.
+  #
+  #   renders_many_extensible :leading_visuals, types: {...}, renderable: :visual_context
+  #
+  #   class MyAvatar < Gustwave::Component
+  #     def apply_slot_context(slot:, size:, **)
+  #       @size = size
+  #     end
+  #   end
+  #
+  #   button.with_leading_visual_renderable(MyAvatar.new("me.png"))
+  #
   # Types may be lambdas, component classes or class names, or a hash with
   # +renders:+ and +as:+ to rename the setter, as with ViewComponent. Component
   # classes receive the slot's block as their content, not as a constructor
@@ -68,16 +85,18 @@ module Gustwave
       #
       # @param slot_name [Symbol] the slot name.
       # @param types [Hash] the slot types, as for ViewComponent's +types:+.
-      def renders_one_extensible(slot_name, types:)
-        __gustwave_renders_extensible(slot_name, types:, collection: false)
+      # @param renderable [Symbol, true, nil] adds a +renderable+ type accepting any component. A symbol names the parent method returning the slot context; +true+ passes no context.
+      def renders_one_extensible(slot_name, types:, renderable: nil)
+        __gustwave_renders_extensible(slot_name, types:, renderable:, collection: false)
       end
 
       # Declares an extensible polymorphic +renders_many+ slot.
       #
       # @param slot_name [Symbol] the plural slot name.
       # @param types [Hash] the slot types, as for ViewComponent's +types:+.
-      def renders_many_extensible(slot_name, types:)
-        __gustwave_renders_extensible(slot_name, types:, collection: true)
+      # @param renderable [Symbol, true, nil] adds a +renderable+ type accepting any component. A symbol names the parent method returning the slot context; +true+ passes no context.
+      def renders_many_extensible(slot_name, types:, renderable: nil)
+        __gustwave_renders_extensible(slot_name, types:, renderable:, collection: true)
       end
 
       # Adds types to, or replaces types of, an inherited extensible slot.
@@ -99,7 +118,7 @@ module Gustwave
 
       private
 
-      def __gustwave_renders_extensible(slot_name, types:, collection:)
+      def __gustwave_renders_extensible(slot_name, types:, renderable:, collection:)
         self.extensible_slots = extensible_slots.merge(slot_name => { collection:, types: [] })
 
         dispatcher = ->(type, *args, **options, &block) {
@@ -108,6 +127,15 @@ module Gustwave
         collection ? renders_many(slot_name, dispatcher) : renders_one(slot_name, dispatcher)
 
         __gustwave_define_slot_types(slot_name, types)
+        __gustwave_define_renderable_type(slot_name, renderable) if renderable
+      end
+
+      def __gustwave_define_renderable_type(slot_name, context_method)
+        context_method = nil if context_method == true
+
+        __gustwave_define_slot_types(slot_name, renderable: ->(component) {
+          __gustwave_apply_slot_context(slot_name, component, context_method)
+        })
       end
 
       def __gustwave_define_slot_types(slot_name, types)
@@ -176,6 +204,19 @@ module Gustwave
       end
 
       send(builder_name, ...)
+    end
+
+    def __gustwave_apply_slot_context(slot_name, component, context_method)
+      unless component.respond_to?(:render_in)
+        raise ArgumentError, "#{self.class.name} slot #{slot_name.inspect} expects a renderable, got #{component.inspect}"
+      end
+
+      if component.respond_to?(:apply_slot_context)
+        context = context_method ? send(context_method) : {}
+        component.apply_slot_context(slot: slot_name, **context)
+      end
+
+      component
     end
 
     # ViewComponent raises when a polymorphic +renders_one+ slot is set twice;

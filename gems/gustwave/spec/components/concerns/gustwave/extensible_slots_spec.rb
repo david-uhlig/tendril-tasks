@@ -183,4 +183,73 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
       }.to raise_error(Gustwave::ExtensibleSlots::NotExtensibleSlotError)
     end
   end
+
+  context "when accepting any renderable" do
+    let(:aware_component) do
+      stub_const("ExtensibleSlotsAware", Class.new(Gustwave::Component) {
+        attr_reader :context
+
+        def initialize(label = nil) = @label = label
+        def apply_slot_context(**context) = @context = context
+        def call = tag.i(@label || content, data: { tone: context&.dig(:tone), slot: context&.dig(:slot) })
+      })
+    end
+
+    let(:host_component) do
+      stub_const("ExtensibleSlotsHost", Class.new(Gustwave::Component) {
+        renders_many_extensible :entries, types: {
+          text: ->(text) { tag.span(text) }
+        }, renderable: :entry_context
+
+        renders_one_extensible :footer_slot, types: {}, renderable: true
+
+        def call = tag.div { safe_join([ *entries, footer_slot ]) }
+
+        private def entry_context = { tone: :loud }
+      })
+    end
+
+    it "registers a renderable type next to the declared ones" do
+      expect(host_component.extensible_slots[:entries][:types]).to eq(%i[text renderable])
+    end
+
+    it "passes the slot context to components implementing the protocol" do
+      render_inline(host_component.new) do |host|
+        host.with_entry_renderable(aware_component.new("aware"))
+      end
+
+      expect(rendered_content).to have_selector("i[data-tone='loud'][data-slot='entries']", text: "aware")
+    end
+
+    it "renders components without the protocol unchanged" do
+      render_inline(host_component.new) do |host|
+        host.with_entry_renderable(item_component.new("plain"))
+        host.with_entry_text("text")
+      end
+
+      expect(rendered_content).to have_selector("em", text: "plain")
+      expect(rendered_content).to have_selector("span", text: "text")
+    end
+
+    it "passes the slot's block to the component as content" do
+      render_inline(host_component.new) do |host|
+        host.with_entry_renderable(aware_component.new) { "from block" }
+      end
+
+      expect(rendered_content).to have_selector("i", text: "from block")
+    end
+
+    it "passes only the slot name when no context method is given" do
+      component = aware_component.new
+      render_inline(host_component.new) { |host| host.with_footer_slot_renderable(component) }
+
+      expect(component.context).to eq(slot: :footer_slot)
+    end
+
+    it "rejects objects that cannot be rendered" do
+      expect {
+        render_inline(host_component.new) { |host| host.with_entry_renderable("a string") }
+      }.to raise_error(ArgumentError, /slot :entries expects a renderable/)
+    end
+  end
 end

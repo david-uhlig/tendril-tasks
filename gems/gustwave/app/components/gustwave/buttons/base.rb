@@ -129,11 +129,12 @@ module Gustwave
             )
           Gustwave::Indicator.new(text, **config, &block)
         }
-      }
+      }, renderable: :visual_context
       alias leading_icon with_leading_visual_icon
       alias leading_image with_leading_visual_image
       alias leading_svg with_leading_visual_svg
       alias leading_indicator with_leading_visual_indicator
+      alias leading_renderable with_leading_visual_renderable
 
       renders_many_extensible :trailing_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
@@ -160,11 +161,12 @@ module Gustwave
           )
           Gustwave::Indicator.new(text, **config, &block)
         }
-      }
+      }, renderable: :visual_context
       alias trailing_icon with_trailing_visual_icon
       alias trailing_image with_trailing_visual_image
       alias trailing_svg with_trailing_visual_svg
       alias trailing_indicator with_trailing_visual_indicator
+      alias trailing_renderable with_trailing_visual_renderable
 
       # @param text [String, nil] text to display on the button. Takes precedence over block content.
       # @param tag [Symbol] The HTML tag to use for the button. Options: :a and :button. Defaults to :button.
@@ -227,6 +229,12 @@ module Gustwave
 
       def render_base_styles?
         @render_base_styles ||= !scheme.eql?(:none)
+      end
+
+      # Context for components passed to the +renderable+ visual type that
+      # implement +apply_slot_context+.
+      def visual_context
+        { size: @size, html_attributes: configure_visual_html_attributes }
       end
 
       def configure_visual_html_attributes(overwrite_attrs = {}, **default_attrs)

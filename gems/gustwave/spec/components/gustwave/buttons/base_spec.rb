@@ -142,4 +142,50 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
       expect(rendered_content).to have_selector('button.p-2\.5')
     end
   end
+
+  context "with a renderable visual" do
+    let(:consumer_avatar) do
+      stub_const("ConsumerAvatar", Class.new(Gustwave::Component) {
+        def initialize(src) = @src = src
+
+        def apply_slot_context(size:, html_attributes:, **)
+          @size = size
+          @html_attributes = html_attributes
+        end
+
+        def call
+          image_tag @src, **configure_html_attributes({ class: "rounded-full" }, **@html_attributes.to_h), data: { size: @size }
+        end
+      })
+    end
+
+    %i[leading trailing].each do |position|
+      it "applies the button's visual context to a #{position} component" do
+        render_inline(described_class.new("Me", size: :lg)) do |component|
+          component.public_send(:"#{position}_renderable", consumer_avatar.new("https://example.com/me.png"))
+        end
+
+        expect(rendered_content).to have_selector(
+          "button>img.h-6.w-auto.rounded-full[aria-hidden='true'][data-size='lg'][src='https://example.com/me.png']"
+        )
+        expect(rendered_content).to have_selector("button.inline-flex.items-center.align-bottom")
+      end
+    end
+
+    it "works on every theme through Gustwave::Button" do
+      render_inline(Gustwave::Button.new("Me", theme: :gradient_duotone, size: :sm)) do |button|
+        button.leading_renderable(consumer_avatar.new("https://example.com/me.png"))
+      end
+
+      expect(rendered_content).to have_selector("button>img.h-5.w-auto[data-size='sm']")
+    end
+
+    it "renders components without the protocol unchanged" do
+      render_inline(described_class.new("Me")) do |component|
+        component.leading_renderable(Gustwave::Avatar.new(src: "https://example.com/me.png", size: :xs))
+      end
+
+      expect(rendered_content).to have_selector("button img[src='https://example.com/me.png']")
+    end
+  end
 end
