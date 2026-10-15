@@ -31,6 +31,9 @@ module Gustwave
         xl: "p-2 text-base"
       }
 
+      # Indicators scale with the text below :xs
+      extend_lookup :indicator_size, values: { "3xs": :auto, "2xs": :auto }
+
       # Inline buttons are already compact, with or without text
       extend_toggle :visual_only, values: {
         "3xs": "",

@@ -10,15 +10,6 @@ module Gustwave
       DEFAULT_TYPE = :button
       TYPE_OPTIONS = [ :button, :reset, :submit ].freeze
 
-      SIZE_INDICATOR_MAPPINGS = {
-        none: :none,
-        xs: :sm,
-        sm: :sm,
-        md: :md,
-        lg: :md,
-        xl: :lg
-      }.freeze
-
       base "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed",
            unless: { scheme: :none }
 
@@ -41,6 +32,17 @@ module Gustwave
         md: { root: "h-10 px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
         lg: { root: "h-12 px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
         xl: { root: "h-13 px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+      }
+
+      # The size of leading and trailing indicators per button size. Extend it
+      # along with +size+, e.g. with +:auto+ to scale with the button text.
+      lookup :indicator_size, per: :size, values: {
+        none: :none,
+        xs: :sm,
+        sm: :sm,
+        md: :md,
+        lg: :md,
+        xl: :lg
       }
 
       toggle :pill, "rounded-full"
@@ -146,7 +148,7 @@ module Gustwave
           config = configure_html_attributes(
             options,
             aria: { hidden: true },
-            size: SIZE_INDICATOR_MAPPINGS[@size],
+            size: style_lookup(:indicator_size),
             )
           Gustwave::Indicator.new(text, **config, &block)
         }
@@ -178,7 +180,7 @@ module Gustwave
           config = configure_html_attributes(
             options,
             aria: { hidden: true },
-            size: SIZE_INDICATOR_MAPPINGS[@size],
+            size: style_lookup(:indicator_size),
           )
           Gustwave::Indicator.new(text, **config, &block)
         }

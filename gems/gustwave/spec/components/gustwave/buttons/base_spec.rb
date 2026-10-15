@@ -161,6 +161,21 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
+  context "with an indicator" do
+    {
+      [ described_class, :xs ] => "h-3",
+      [ described_class, :xl ] => "h-6",
+      [ Gustwave::Buttons::Inline, :"3xs" ] => "h-\\[1em\\]",
+      [ Gustwave::Badge, :"2xl" ] => "h-\\[1em\\]"
+    }.each do |(component, size), height|
+      it "sizes it for a #{size} #{component.name.demodulize}" do
+        render_inline(component.new("Text", size:)) { |button| button.trailing_indicator "3" }
+
+        expect(rendered_content).to have_selector("span.#{height}[aria-hidden='true']", text: "3")
+      end
+    end
+  end
+
   context "with leading visual without content" do
     it "overwrites padding" do
       render_inline(described_class.new) do |component|
