@@ -3,8 +3,6 @@
 module Gustwave
   module Buttons
     class GradientDuotoneOutline < Gustwave::Buttons::Base
-      theme_for Gustwave::Button
-
       style :base,
             "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white"
 

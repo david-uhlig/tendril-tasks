@@ -8,31 +8,32 @@ module Gustwave
         include Gustwave::Themeable
       end
 
+      # A theme for the ThemeableButton component
+      #
+      # Note: The theme does not have to inherit from ThemeableButton
+      class DefaultTheme < Base; end
+
+      # Another theme for the ThemeableButton component
+      class SpecialTheme < Base; end
+
       # A component acting as a proxy for themed components
       #
       # Does not specify a default theme.
-      class ThemeableButton < Base; end
+      class ThemeableButton < Base
+        register_theme :default_theme, "Gustwave::Specs::Themeable::DefaultTheme"
+        register_theme :default_theme_alias, "Gustwave::Specs::Themeable::DefaultTheme"
+        register_theme :special_theme, "Gustwave::Specs::Themeable::SpecialTheme"
+      end
 
       class ThemeableButtonWithCustomDefault < Base
-        with_default_theme :any_theme_that_might_not_exist
+        register_theme :default_theme, "Gustwave::Specs::Themeable::DefaultTheme"
+        register_theme :special_theme, "Gustwave::Specs::Themeable::SpecialTheme"
+        with_default_theme :special_theme
       end
 
-      # A theme for the ThemeableButton component
-      #
-      # Registers itself by specifying the class of the component it is for.
-      #
-      # Note: The theme does not have to inherit from ThemeableButton
-      class DefaultTheme < Base
-        theme_for(ThemeableButton)
-        theme_for(ThemeableButton, as: :default_theme_alias)
-      end
-
-      # A theme for the ThemeableButton component
-      #
-      # Registers itself to it's parent class.
-      class SpecialTheme < ThemeableButton
-        theme_for_parent
-        theme_for_parent(as: :special_theme_on_parent_alias)
+      # Inherits the themes of ThemeableButton and adds its own
+      class ExtendedThemeableButton < ThemeableButton
+        register_theme :extended_theme, "Gustwave::Specs::Themeable::SpecialTheme"
       end
     end
   end
@@ -41,73 +42,82 @@ end
 RSpec.describe Gustwave::Themeable do
   let(:base) { Gustwave::Specs::Themeable::Base.new }
   let(:themeable_button) { Gustwave::Specs::Themeable::ThemeableButton.new }
-  let(:themeable_button_with_custom_default) do Gustwave::Specs::Themeable::ThemeableButtonWithCustomDefault.new
-  end
-  let(:default_theme) { Gustwave::Specs::Themeable::DefaultTheme.new }
+  let(:themeable_button_with_custom_default) { Gustwave::Specs::Themeable::ThemeableButtonWithCustomDefault.new }
+  let(:extended_themeable_button) { Gustwave::Specs::Themeable::ExtendedThemeableButton.new }
 
-  describe "#theme_for" do
-    it "registers DefaultTheme as default_theme on Button" do
+  describe ".register_theme" do
+    it "registers the theme under its name" do
       expect(themeable_button.themed_component(:default_theme)).to eq(Gustwave::Specs::Themeable::DefaultTheme)
     end
 
-    it "registers DefaultTheme as default_theme_alias on Button" do
+    it "registers the same theme under several names" do
       expect(themeable_button.themed_component(:default_theme_alias)).to eq(Gustwave::Specs::Themeable::DefaultTheme)
     end
 
-    it "registers default_theme as default theme" do
-      # Because it is the first theme registered with the class
+    it "resolves the class name when the theme is requested" do
+      klass = Class.new(Gustwave::Specs::Themeable::Base) do
+        register_theme :not_yet_defined, "Gustwave::Specs::Themeable::NotYetDefinedTheme"
+      end
+      stub_const("Gustwave::Specs::Themeable::NotYetDefinedTheme", Class.new)
+
+      expect(klass.new.themed_component(:not_yet_defined)).to eq(Gustwave::Specs::Themeable::NotYetDefinedTheme)
+    end
+
+    it "inherits the themes of the parent class" do
+      expect(extended_themeable_button.themed_component(:default_theme)).to eq(Gustwave::Specs::Themeable::DefaultTheme)
+      expect(extended_themeable_button.themed_component(:extended_theme)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
+    end
+
+    it "does not leak themes to the parent class" do
+      expect(Gustwave::Specs::Themeable::ThemeableButton.themes).not_to have_key(:extended_theme)
+      expect(Gustwave::Specs::Themeable::Base.themes).to be_empty
+    end
+  end
+
+  describe ".themes" do
+    it "returns the theme classes by name" do
+      expect(Gustwave::Specs::Themeable::ThemeableButton.themes).to eq(
+        default_theme: Gustwave::Specs::Themeable::DefaultTheme,
+        default_theme_alias: Gustwave::Specs::Themeable::DefaultTheme,
+        special_theme: Gustwave::Specs::Themeable::SpecialTheme
+      )
+    end
+  end
+
+  describe "#default_theme" do
+    it "defaults to the first registered theme" do
       expect(themeable_button.default_theme).to eq(:default_theme)
     end
 
-    it "does not leak data to parent components" do
-      expect(base.themes).to be_empty
+    it "is set by .with_default_theme" do
+      expect(themeable_button_with_custom_default.default_theme).to eq(:special_theme)
+    end
+
+    it "is nil without registered themes" do
       expect(base.default_theme).to be_nil
     end
-
-    it "does not leak data to child components" do
-      expect(default_theme.themes).to be_empty
-      expect(default_theme.default_theme).to be_nil
-    end
   end
 
-  describe "#theme_for_parent" do
-    it "registers SpecialTheme as special_theme on Button" do
-      expect(themeable_button.themed_component(:special_theme)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
-    end
-
-    it "registers SpecialTheme as special_theme_on_parent_alias on Button" do
-      expect(themeable_button.themed_component(:special_theme_on_parent_alias)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
-    end
-  end
-
-  describe "#with_default_theme" do
-    it "sets the default theme" do
-      expect(themeable_button_with_custom_default.default_theme).to eq(:any_theme_that_might_not_exist)
-    end
-
-    it "is not required that the theme exists" do
-      expect {
-        themeable_button_with_custom_default.themed_component(:any_theme_that_might_not_exist)
-      }.to raise_error(Gustwave::Themeable::ThemeNotFoundError)
-    end
-  end
-
-  describe ".themed_component" do
-    it "returns the theme component when it exists" do
-      expect(themeable_button.default_theme).not_to eq(:special_theme_on_parent_alias)
-      expect(themeable_button.themed_component(:special_theme_on_parent_alias)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
+  describe "#themed_component" do
+    it "returns the default theme for nil" do
+      expect(themeable_button_with_custom_default.themed_component(nil)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
     end
 
     context "when the theme does not exist" do
-      it "raises an ArgumentError outside of production" do
+      it "raises a ThemeNotFoundError outside of production" do
         expect {
           themeable_button.themed_component(:some_non_existent_theme)
-        }.to raise_error(Gustwave::Themeable::ThemeNotFoundError)
+        }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /Expected one of: \[:default_theme, :default_theme_alias, :special_theme\]/)
       end
 
-      it "returns the default theme component in production" do
+      it "returns the default theme in production" do
         allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
-        expect(themeable_button.themed_component(:some_non_existent_theme)).to eq(Gustwave::Specs::Themeable::DefaultTheme)
+        expect(themeable_button_with_custom_default.themed_component(:some_non_existent_theme)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
+      end
+
+      it "raises a ThemeNotFoundError in production without registered themes" do
+        allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
+        expect { base.themed_component(:some_non_existent_theme) }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /No themes registered/)
       end
     end
   end

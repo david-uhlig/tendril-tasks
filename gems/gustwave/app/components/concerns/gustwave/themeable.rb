@@ -5,42 +5,42 @@ module Gustwave
   # centralized component.
   #
   # This is a specialization of the Strategy pattern where the +subject+ class
-  # acts as the strategy and the +theme+ classes provide the concrete
-  # implementation.
+  # delegates to one of its registered +theme+ classes.
   #
-  # The concern provides functionality for both, the +subject+ class and the
-  # +theme+ classes.
-  #
-  # On the theme classes:
-  # - Use +theme_for+ and +theme_for_parent+ to register the +theme+ at the +subject+ class.
+  # The subject declares its themes by class name. Class names are resolved
+  # when a theme is requested, so themes are loaded by the autoloader on
+  # demand and survive code reloading.
   #
   # On the subject class:
-  # - Use +with_default_theme+ to set the default +theme+. (Optional)
-  # - Use +themed_component+ to access the +theme+ class.
+  # - Use +register_theme+ to register a theme.
+  # - Use +with_default_theme+ to set the default theme. (Optional)
+  # - Use +themed_component+ to access the theme class.
   #
   # === Benefits
   #
   # This can lead to much cleaner frontend code, e.g. instead of calling
   #   <%= render Gustwave::Buttons::GradientDuotone.new %>
   #   <%= render Ui::Buttons::Funky.new %>
-  #   <%= render Extension::SupercoolButtonComponent.new %>
   # you can access all themes through a centralized component
   #   <%= render Gustwave::Button.new(theme: :gradient_duotone) %>
   #   <%= render Gustwave::Button.new(theme: :funky) %>
-  #   <%= render Gustwave::Button.new(theme: :supercool) %>
   #
   # === Reference Implementation
   #
   # This is a reference implementation for a central +Button+ component allowing
-  # you to call different themes through a single component.
+  # you to call different themes through a single component. Theme and subject
+  # do not have to share a common ancestor.
   #
   #   class Gustwave::Button < Gustwave::Component
   #     include Gustwave::Themeable # Usually already included by Gustwave::Component
   #
+  #     register_theme :outline, "Ui::Buttons::Outline"
+  #     register_theme :funky, "Ui::Buttons::Funky"
+  #     # Optional, defaults to the first registered theme
+  #     with_default_theme :outline
+  #
   #     # Allow the caller to access themed_button methods and slots
   #     delegate_missing_to :themed_button
-  #     # Optional
-  #     with_default_theme :outline
   #
   #     def initialize(theme: :outline, **options)
   #       @theme = theme
@@ -60,23 +60,15 @@ module Gustwave
   #     end
   #   end
   #
-  # This is a reference implementation for an outline theme. Theme and subject
-  # do not have to share a common ancestor.
+  # === Registering themes from the outside
   #
-  #   class Ui::Buttons::Outline < Gustwave::Component
-  #     include Gustwave::Themeable # Usually already included by Gustwave::Component
+  # Applications can add themes to a subject they don't own. Register them in
+  # +to_prepare+, so that they are registered again when the subject class is
+  # reloaded in development:
   #
-  #     theme_for Gustwave::Button
-  #
-  #     def initialize(**options)
-  #       @options = options
-  #     end
-  #
-  #     def call
-  #       content_tag :button, @options do
-  #         content
-  #       end
-  #     end
+  #   # config/initializers/gustwave.rb
+  #   Rails.application.config.to_prepare do
+  #     Gustwave::Button.register_theme :funky, "Ui::Buttons::Funky"
   #   end
   module Themeable
     extend ActiveSupport::Concern
@@ -85,146 +77,103 @@ module Gustwave
     class ThemeNotFoundError < Gustwave::Error; end
 
     included do
-      # Registered themes.
-      #
-      # The key is the theme name, the value is the theme class. Instead of
-      # accessing this hash directly, use +themed_component+ instead.
-      class_attribute :themes,
-                      instance_writer: false,
+      # Registered theme class names by theme name. Use +themes+ or
+      # +themed_component+ instead of accessing this hash directly.
+      class_attribute :__themes,
+                      instance_accessor: false,
                       instance_predicate: false,
                       default: {}
 
-      # The default theme.
+      # The default theme name.
       #
-      # Set this through +with_default_theme+. If not set, the first theme that
-      # registers itself through +theme_for+ or +theme_for_parent+ is used.
-      #
-      # Safe to access directly.
+      # Set this through +with_default_theme+. Safe to access directly.
       class_attribute :default_theme,
-                      instance_writer: false,
+                      instance_accessor: false,
+                      instance_predicate: false,
                       default: nil
     end
 
     class_methods do
-      # Registers the calling class as a theme for the subject class.
+      # Registers a theme for the calling class.
+      #
+      # Register the same class under several names to provide aliases.
       #
       # === Examples
-      # Registers +Gustwave::Buttons::GradientDuotone+ as a theme for
-      # +Gustwave::Button+. Note: Usually, +Gustwave::Themeable+ is already
-      # included through +Gustwave::Component+.
+      #
+      #   class Gustwave::Button < Gustwave::Component
+      #     register_theme :default_outline, "Gustwave::Buttons::DefaultOutline"
+      #     register_theme :outline, "Gustwave::Buttons::DefaultOutline"
+      #   end
       #
       # +Gustwave::Button+ can access the theme by calling
-      # +themed_component(:gradient_duotone)+.
+      # +themed_component(:default_outline)+ or +themed_component(:outline)+.
       #
-      #   class Gustwave::Buttons::GradientDuotone < Gustwave::Component
-      #     include Gustwave::Themeable
-      #
-      #     theme_for Gustwave::Button
-      #   end
-      #
-      # Registers +Gustwave::Buttons::GradientDuotone+ with the theme name
-      # +duotone+ for +Gustwave::Button+.
-      #
-      # +Gustwave::Button+ can access the theme by calling
-      # +themed_component(:duotone)+, but not by calling +themed_component(:gradient_duotone)+.
-      #
-      #   class Gustwave::Buttons::GradientDuotone < Gustwave::Component
-      #     include Gustwave::Themeable
-      #
-      #     theme_for Gustwave::Button, as: :duotone
-      #   end
-      #
-      # You can use this behavior to provide aliases for the theme name. This
-      # example makes the component accessible through +duotone+ and +gradient_duotone+.
-      #
-      #   class Gustwave::Buttons::GradientDuotone < Gustwave::Component
-      #     include Gustwave::Themeable
-      #
-      #     theme_for Gustwave::Button
-      #     theme_for Gustwave::Button, as: :duotone
-      #   end
-      #
-      # @param subject [Class] The class being themed.
-      # @param as [Symbol] The name of the theme. Defines how it is accessed in the subject class, e.g. through a +theme+ argument in the constructor. Defaults to an underscored version of the class name, without modules, e.g. +Gustwave::GradientDuotone+ becomes +gradient_duotone+.
-      def theme_for(subject, as: nil)
-        theme_name = as&.to_sym || infer_theme_name
-        subject.themes = subject.themes.merge(theme_name => self)
-        subject.default_theme ||= theme_name
-        theme_name
+      # @param name [Symbol] The name of the theme. Defines how it is accessed in the subject class, e.g. through a +theme+ argument in the constructor.
+      # @param class_name [String] The name of the theme class. Resolved when the theme is requested.
+      def register_theme(name, class_name)
+        self.__themes = __themes.merge(name.to_sym => class_name.to_s)
+        nil
       end
 
-      # Registers the calling class as a theme for the direct ancestor.
+      # Sets the default theme of the calling class.
       #
-      # @param as [Symbol] The name of the theme. Defines how it is accessed in the subject class, e.g. through a +theme+ argument in the constructor. Defaults to an underscored version of the class name, without modules, e.g. +Gustwave::GradientDuotone+ becomes
-      # @see +theme_for+
-      def theme_for_parent(as: nil)
-        parent_class = ancestors[1] # Get the direct parent class
-        theme_for(parent_class, as:)
-      end
-
-      # Determines the default theme on the calling class.
-      #
-      # This theme class acts as a fallback theme when the theme name is not
-      # found when calling +themed_component+. If not specified, the first class
-      # registered through +theme_for+ or +theme_for_parent+ is used.
-      #
-      # Note: There are no validations for the theme name because class loading
-      # order is not guaranteed.
+      # This theme acts as a fallback in production when the theme name is not
+      # found when calling +themed_component+. If not specified, the first
+      # registered theme is used.
       #
       # @param theme_name [Symbol] The name of the theme.
       def with_default_theme(theme_name)
         self.default_theme = theme_name&.to_sym
       end
 
-      private
-
-      # Infers the theme name from the class name
+      # Returns the registered theme classes by theme name.
       #
-      # === Examples
-      #   Gustwave::Buttons::GradientDuotone
-      #   # => gradient_duotone
-      #   Button
-      #   # => button
-      def infer_theme_name
-        name.demodulize.underscore.to_sym
+      # @return [Hash{Symbol => Class}]
+      def themes
+        __themes.transform_values(&:constantize)
       end
+    end
+
+    # Returns the default theme name, or the first registered theme name if
+    # none is set.
+    def default_theme
+      self.class.default_theme || self.class.__themes.keys.first
     end
 
     # Fetches the theme class for the given +theme+ name.
     #
-    # The advantage of this method over accessing the +themes+ hash directly
-    # is that it raises a +ThemeNotFoundError+ outside of production, letting
-    # the developer know that the supplied theme name is invalid and what their
+    # Raises a +ThemeNotFoundError+ outside of production, letting the
+    # developer know that the supplied theme name is invalid and what their
     # options are.
     #
-    # In production, it falls back to the default theme or the first theme in
-    # the +themes+ hash. If everything fails, raises a +ThemeNotFoundError+.
+    # In production, it falls back to the default theme. If no theme is
+    # registered, raises a +ThemeNotFoundError+.
     #
-    # @param theme [Symbol] The name of the theme.
+    # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+.
     # @return [Class] The theme class.
     def themed_component(theme)
-      resolve_theme_class(theme)
+      resolve_theme_class_name(theme.presence&.to_sym || default_theme).constantize
     end
 
     private
 
-    # :nodoc:
-    #
-    # @see +themed_component+
-    def resolve_theme_class(theme_name)
-      klass = self.class.themes.dig(theme_name.to_sym)
-      if klass.nil? && !Rails.env.production?
+    def resolve_theme_class_name(theme_name)
+      themes = self.class.__themes
+      class_name = themes[theme_name]
+      return class_name if class_name
+
+      unless Rails.env.production?
         raise ThemeNotFoundError, <<~MSG
           Invalid theme for #{self.class.name}.
 
-          Expected one of: #{self.class.themes.keys.inspect}
-          Got: #{theme_name.to_sym}
+          Expected one of: #{themes.keys.inspect}
+          Got: #{theme_name.inspect}
 
-          This will not raise in production, but will instead fallback to #{self.class.default_theme}.
+          This will not raise in production, but will instead fallback to #{default_theme.inspect}.
         MSG
       end
 
-      klass || self.class.themes.dig(self.class.default_theme) || self.class.themes.values.first || raise(ThemeNotFoundError, "No themes registered for #{self.class.name}")
+      themes[default_theme] || raise(ThemeNotFoundError, "No themes registered for #{self.class.name}")
     end
   end
 end

@@ -7,8 +7,8 @@ module Gustwave
   # === Available Themes
   #
   # This component acts as a delegator to the themed button components. You can
-  # view all registered themes by running `Gustwave::Buttons.themes` at
-  # *runtime*. By default, Gustwave registers the following themes:
+  # view all registered themes by running `Gustwave::Button.themes`. By default,
+  # Gustwave registers the following themes:
   # - :default
   # - :default_outline == :outline
   # - :gradient_monochrome
@@ -44,8 +44,6 @@ module Gustwave
   # Gustwave::Buttons::Base. For example:
   #
   #   class Ui::MonochromeButton < Gustwave::Buttons::Base
-  #     theme_for Gustwave::Button
-  #
   #     style :scheme,
   #           default: :dark,
   #           states: {
@@ -54,14 +52,30 @@ module Gustwave
   #           }
   #   end
   #
-  # This defines a very simple monochrome button scheme and registers it with
-  # Gustwave::Button as :monochrome_button. By default, the style method merges
-  # the parents style layer (here :scheme) with the new states. Under the hood
-  # it uses Hash#merge. You can now use this theme by calling:
+  # This defines a very simple monochrome button scheme. By default, the style
+  # method merges the parents style layer (here :scheme) with the new states.
+  # Under the hood it uses Hash#merge. Register it with Gustwave::Button in
+  # +to_prepare+, so that it is registered again when Gustwave::Button is
+  # reloaded in development:
+  #
+  #   # config/initializers/gustwave.rb
+  #   Rails.application.config.to_prepare do
+  #     Gustwave::Button.register_theme :monochrome_button, "Ui::MonochromeButton"
+  #   end
+  #
+  # You can now use this theme by calling:
   #
   #   render Gustwave::Button.new("Click me", theme: :monochrome_button)
   #
   class Button < Gustwave::Component
+    register_theme :default, "Gustwave::Buttons::Default"
+    register_theme :default_outline, "Gustwave::Buttons::DefaultOutline"
+    register_theme :outline, "Gustwave::Buttons::DefaultOutline"
+    register_theme :gradient_monochrome, "Gustwave::Buttons::GradientMonochrome"
+    register_theme :gradient_monochrome_colored_shadow, "Gustwave::Buttons::GradientMonochromeColoredShadow"
+    register_theme :colored_shadow, "Gustwave::Buttons::GradientMonochromeColoredShadow"
+    register_theme :gradient_duotone, "Gustwave::Buttons::GradientDuotone"
+    register_theme :gradient_duotone_outline, "Gustwave::Buttons::GradientDuotoneOutline"
     with_default_theme :default
     delegate_missing_to :themed_button
 
@@ -77,7 +91,7 @@ module Gustwave
     # @param [Symbol] tag The HTML tag to render the button as. Available options depend on the theme. Gustwave::Buttons allow :button and :a tags, and default to :button.
     # @param [Symbol] type The type of the button. Available options depend on the theme. Gustwave::Buttons allows :button, :submit, and :reset. Defaults to :button. Only relevant for +tag+ == :button.
     # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, and :gradient_duotone_outline. See all available themes by running
-    #   Gustwave::Buttons.themes at runtime! Defaults to :default.
+    #   Gustwave::Button.themes! Defaults to :default.
     # @param [Symbol] scheme One of the theme's appearance options, e.g. :red, :blue, :green, :purple, etc.
     # @param [Symbol] size One of the theme's size options. Usually :none, :xs, :sm, :md, :lg, or :xl.
     # @param [Boolean] pill Whether the button should be pill-shaped. Defaults to false.

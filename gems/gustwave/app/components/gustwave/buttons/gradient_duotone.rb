@@ -3,8 +3,6 @@
 module Gustwave
   module Buttons
     class GradientDuotone < Gustwave::Buttons::Base
-      theme_for Gustwave::Button
-
       style :scheme,
             default: :purple_to_blue,
             states: {

@@ -4,9 +4,6 @@ module Gustwave
   # Use `Button` for actions (e.g. in forms). Use links for destinations, or moving from one page to another.
   module Buttons
     class DefaultOutline < Gustwave::Buttons::Base
-      theme_for Gustwave::Button, as: :outline
-      theme_for Gustwave::Button, as: :default_outline
-
       style :scheme,
             default: :default,
             states: {
