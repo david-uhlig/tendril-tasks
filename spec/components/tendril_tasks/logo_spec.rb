@@ -9,6 +9,14 @@ RSpec.describe TendrilTasks::Logo, type: :component do
     session.response || raise("Expected the logo request to return a response")
   end
 
+  describe "resize height" do
+    { sm: 44, lg: 64, none: 44 }.each do |size, height|
+      it "is #{height}px for size #{size}" do
+        expect(described_class.new(size:).derived_value(:resize_height)).to eq height
+      end
+    end
+  end
+
   context "when the uploaded logo is a JPEG" do
     it "renders the logo as a PNG" do
       Site.find_or_create_instance.logo.attach(io: File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg")), filename: "for-tests.jpg")

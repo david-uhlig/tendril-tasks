@@ -13,6 +13,33 @@ RSpec.describe Gustwave::IconToast, type: :component do
     expect(rendered_content).to have_selector("span.sr-only", text: "Error")
   end
 
+  describe "icon" do
+    def icon_paths(selector = "svg")
+      Nokogiri::HTML.fragment(rendered_content).at_css(selector).css("path").map { _1["d"] }
+    end
+
+    def paths_of(icon)
+      render_inline(Gustwave::Icon.new(icon))
+      icon_paths
+    end
+
+    { success: :check_circle, failure: :close_circle, warning: :exclamation_circle, notice: :info_circle }.each do |scheme, icon|
+      it "shows #{icon} for #{scheme}" do
+        expected = paths_of(icon)
+        render_inline(described_class.new("Hi", scheme:))
+
+        expect(icon_paths("div.shrink-0 svg")).to eq expected
+      end
+    end
+
+    it "shows a given icon instead" do
+      expected = paths_of(:bell)
+      render_inline(described_class.new("Hi", scheme: :success, icon: :bell))
+
+      expect(icon_paths("div.shrink-0 svg")).to eq expected
+    end
+  end
+
   it "renders an empty label without a scheme" do
     render_inline(described_class.new("Plain", scheme: :none))
 
