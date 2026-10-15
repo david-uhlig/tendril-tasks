@@ -184,7 +184,11 @@ scheme scheme=:white pill=true tag=:a:
   focus:ring-4 focus:ring-gray-500 font-medium h-10 hover:bg-white hover:text-gray-900
   overflow-hidden px-5 py-2.5 rounded-full text-center text-sm text-white whitespace-nowrap'
 size size=:none class=nil:
-- button type="button"
+- 'button type="button": align-bottom border border-blue-700 dark:border-blue-500
+  dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  hover:bg-blue-800 hover:text-white overflow-hidden rounded-lg text-blue-700 text-center
+  whitespace-nowrap'
 size size=:none class="px-0 bg-black text-white":
 - 'button type="button": align-bottom bg-black border border-blue-700 dark:border-blue-500
   dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
@@ -192,7 +196,11 @@ size size=:none class="px-0 bg-black text-white":
   hover:bg-blue-800 hover:text-white overflow-hidden px-0 rounded-lg text-center text-white
   whitespace-nowrap'
 size size=:xs class=nil:
-- button type="button"
+- 'button type="button": align-bottom border border-blue-700 dark:border-blue-500
+  dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium h-8 hover:bg-blue-800 hover:text-white overflow-hidden px-3 py-2 rounded-lg
+  text-blue-700 text-center text-xs whitespace-nowrap'
 size size=:xs class="px-0 bg-black text-white":
 - 'button type="button": align-bottom bg-black border border-blue-700 dark:border-blue-500
   dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
@@ -200,7 +208,11 @@ size size=:xs class="px-0 bg-black text-white":
   font-medium h-8 hover:bg-blue-800 hover:text-white overflow-hidden px-0 py-2 rounded-lg
   text-center text-white text-xs whitespace-nowrap'
 size size=:sm class=nil:
-- button type="button"
+- 'button type="button": align-bottom border border-blue-700 dark:border-blue-500
+  dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium h-9 hover:bg-blue-800 hover:text-white overflow-hidden px-3 py-2 rounded-lg
+  text-blue-700 text-center text-sm whitespace-nowrap'
 size size=:sm class="px-0 bg-black text-white":
 - 'button type="button": align-bottom bg-black border border-blue-700 dark:border-blue-500
   dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
@@ -208,7 +220,11 @@ size size=:sm class="px-0 bg-black text-white":
   font-medium h-9 hover:bg-blue-800 hover:text-white overflow-hidden px-0 py-2 rounded-lg
   text-center text-sm text-white whitespace-nowrap'
 size size=:md class=nil:
-- button type="button"
+- 'button type="button": align-bottom border border-blue-700 dark:border-blue-500
+  dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium h-10 hover:bg-blue-800 hover:text-white overflow-hidden px-5 py-2.5
+  rounded-lg text-blue-700 text-center text-sm whitespace-nowrap'
 size size=:md class="px-0 bg-black text-white":
 - 'button type="button": align-bottom bg-black border border-blue-700 dark:border-blue-500
   dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
@@ -216,7 +232,11 @@ size size=:md class="px-0 bg-black text-white":
   font-medium h-10 hover:bg-blue-800 hover:text-white overflow-hidden px-0 py-2.5
   rounded-lg text-center text-sm text-white whitespace-nowrap'
 size size=:lg class=nil:
-- button type="button"
+- 'button type="button": align-bottom border border-blue-700 dark:border-blue-500
+  dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium h-12 hover:bg-blue-800 hover:text-white overflow-hidden px-5 py-3 rounded-lg
+  text-base text-blue-700 text-center whitespace-nowrap'
 size size=:lg class="px-0 bg-black text-white":
 - 'button type="button": align-bottom bg-black border border-blue-700 dark:border-blue-500
   dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
@@ -224,7 +244,11 @@ size size=:lg class="px-0 bg-black text-white":
   font-medium h-12 hover:bg-blue-800 hover:text-white overflow-hidden px-0 py-3 rounded-lg
   text-base text-center text-white whitespace-nowrap'
 size size=:xl class=nil:
-- button type="button"
+- 'button type="button": align-bottom border border-blue-700 dark:border-blue-500
+  dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium h-13 hover:bg-blue-800 hover:text-white overflow-hidden px-6 py-3.5
+  rounded-lg text-base text-blue-700 text-center whitespace-nowrap'
 size size=:xl class="px-0 bg-black text-white":
 - 'button type="button": align-bottom bg-black border border-blue-700 dark:border-blue-500
   dark:focus:ring-blue-700 dark:hover:bg-blue-500 dark:hover:text-white dark:text-blue-500

@@ -256,72 +256,86 @@ scheme scheme=:pink border=true outline=true tag=:a:
   hover:bg-pink-200 inline-flex outline-1 outline-pink-400 px-2.5 py-0.5 rounded-sm
   text-pink-800 text-xs whitespace-nowrap'
 size size=:none pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 inline-flex rounded-sm text-blue-800
+  whitespace-nowrap'
 size size=:none pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 inline-flex px-0 rounded-sm
   text-white whitespace-nowrap'
 size size=:none pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 inline-flex rounded-full
+  text-blue-800 whitespace-nowrap'
 size size=:none pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 inline-flex px-0 rounded-full
   text-white whitespace-nowrap'
 size size=:xs pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
 size size=:xs pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-0
   py-0.5 rounded-sm text-white text-xs whitespace-nowrap'
 size size=:xs pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-full text-blue-800 text-xs whitespace-nowrap'
 size size=:xs pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-0
   py-0.5 rounded-full text-white text-xs whitespace-nowrap'
 size size=:sm pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-sm whitespace-nowrap'
 size size=:sm pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-0
   py-0.5 rounded-sm text-sm text-white whitespace-nowrap'
 size size=:sm pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-full text-blue-800 text-sm whitespace-nowrap'
 size size=:sm pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-0
   py-0.5 rounded-full text-sm text-white whitespace-nowrap'
 size size=:md pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex
+  px-2.5 py-0.5 rounded-sm text-base text-blue-800 whitespace-nowrap'
 size size=:md pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex px-0
   py-0.5 rounded-sm text-base text-white whitespace-nowrap'
 size size=:md pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex
+  px-2.5 py-0.5 rounded-full text-base text-blue-800 whitespace-nowrap'
 size size=:md pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex px-0
   py-0.5 rounded-full text-base text-white whitespace-nowrap'
 size size=:lg pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex
+  px-2.5 py-0.5 rounded-sm text-blue-800 text-lg whitespace-nowrap'
 size size=:lg pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex px-0
   py-0.5 rounded-sm text-lg text-white whitespace-nowrap'
 size size=:lg pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex
+  px-2.5 py-0.5 rounded-full text-blue-800 text-lg whitespace-nowrap'
 size size=:lg pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-semibold inline-flex px-0
   py-0.5 rounded-full text-lg text-white whitespace-nowrap'
 size size=:xl pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-xl whitespace-nowrap'
 size size=:xl pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-bold inline-flex px-0 py-0.5
   rounded-sm text-white text-xl whitespace-nowrap'
 size size=:xl pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold inline-flex px-2.5
+  py-0.5 rounded-full text-blue-800 text-xl whitespace-nowrap'
 size size=:xl pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-bold inline-flex px-0 py-0.5
   rounded-full text-white text-xl whitespace-nowrap'
 size size=:"2xl" pill=false class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold inline-flex
+  px-2.5 py-0.5 rounded-sm text-2xl text-blue-800 whitespace-nowrap'
 size size=:"2xl" pill=false class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-extrabold inline-flex px-0
   py-0.5 rounded-sm text-2xl text-white whitespace-nowrap'
 size size=:"2xl" pill=true class=nil:
-- span
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold inline-flex
+  px-2.5 py-0.5 rounded-full text-2xl text-blue-800 whitespace-nowrap'
 size size=:"2xl" pill=true class="px-0 bg-black text-white":
 - 'span: bg-black dark:bg-blue-900 dark:text-blue-300 font-extrabold inline-flex px-0
   py-0.5 rounded-full text-2xl text-white whitespace-nowrap'

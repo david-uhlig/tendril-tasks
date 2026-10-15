@@ -111,6 +111,6 @@ heading tag=:h6 scheme=:level6 responsive=false:
 heading tag=:h6 scheme=:level6 responsive=true:
 - 'h6 id="title": dark:text-white font-semibold lg:text-xl md:text-lg text-base text-gray-900'
 custom tag=:h2 class=nil:
-- h2 id="title"
+- 'h2 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
 custom tag=:h2 class="px-0 bg-black text-white":
 - 'h2 id="title": bg-black dark:text-white font-extrabold px-0 text-6xl text-white'

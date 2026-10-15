@@ -399,156 +399,188 @@ look scheme=:white size=:xl text="3":
 - 'span: aspect-auto bg-white border-white flex font-bold h-8 items-center justify-center
   min-w-8 px-1 rounded-full text-md text-white'
 position position=:none pulse=false class=nil:
-- span
+- 'span: aspect-square bg-gray-200 flex font-semibold h-[1em] min-w-[1em] rounded-full
+  text-[0.8em]'
 position position=:none pulse=false class="px-0 bg-black text-white":
 - 'span: aspect-square bg-black flex font-semibold h-[1em] min-w-[1em] px-0 rounded-full
   text-[0.8em] text-white'
 position position=:none pulse=true class=nil:
-- span
+- 'span: animate-pulse aspect-square bg-gray-200 flex font-semibold h-[1em] min-w-[1em]
+  rounded-full text-[0.8em]'
 position position=:none pulse=true class="px-0 bg-black text-white":
 - 'span: animate-pulse aspect-square bg-black flex font-semibold h-[1em] min-w-[1em]
   px-0 rounded-full text-[0.8em] text-white'
 position position=:top_left pulse=false class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-gray-200 flex
+  font-semibold h-[1em] left-0 min-w-[1em] right-auto rounded-full text-[0.8em] top-0'
 position position=:top_left pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-black flex font-semibold
   h-[1em] left-0 min-w-[1em] px-0 right-auto rounded-full text-[0.8em] text-white
   top-0'
 position position=:top_left pulse=true class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200
+  flex font-semibold h-[1em] left-0 min-w-[1em] right-auto rounded-full text-[0.8em]
+  top-0'
 position position=:top_left pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-black
   flex font-semibold h-[1em] left-0 min-w-[1em] px-0 right-auto rounded-full text-[0.8em]
   text-white top-0'
 position position=:top pulse=false class=nil:
-- span
+- 'span: -translate-y-1/2 absolute aspect-square bg-gray-200 flex font-semibold h-[1em]
+  min-w-[1em] right-1/2 rounded-full text-[0.8em] translate-x-1/2'
 position position=:top pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute aspect-square bg-black flex font-semibold h-[1em]
   min-w-[1em] px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2'
 position position=:top pulse=true class=nil:
-- span
+- 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200 flex font-semibold
+  h-[1em] min-w-[1em] right-1/2 rounded-full text-[0.8em] translate-x-1/2'
 position position=:top pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-black flex font-semibold
   h-[1em] min-w-[1em] px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2'
 position position=:top_center pulse=false class=nil:
-- span
+- 'span: -translate-y-1/2 absolute aspect-square bg-gray-200 flex font-semibold h-[1em]
+  min-w-[1em] right-1/2 rounded-full text-[0.8em] translate-x-1/2'
 position position=:top_center pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute aspect-square bg-black flex font-semibold h-[1em]
   min-w-[1em] px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2'
 position position=:top_center pulse=true class=nil:
-- span
+- 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200 flex font-semibold
+  h-[1em] min-w-[1em] right-1/2 rounded-full text-[0.8em] translate-x-1/2'
 position position=:top_center pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-black flex font-semibold
   h-[1em] min-w-[1em] px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2'
 position position=:top_right pulse=false class=nil:
-- span
+- 'span: -translate-y-1/2 absolute aspect-square bg-gray-200 flex font-semibold h-[1em]
+  left-auto min-w-[1em] right-0 rounded-full text-[0.8em] top-0 translate-x-1/2'
 position position=:top_right pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute aspect-square bg-black flex font-semibold h-[1em]
   left-auto min-w-[1em] px-0 right-0 rounded-full text-[0.8em] text-white top-0 translate-x-1/2'
 position position=:top_right pulse=true class=nil:
-- span
+- 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200 flex font-semibold
+  h-[1em] left-auto min-w-[1em] right-0 rounded-full text-[0.8em] top-0 translate-x-1/2'
 position position=:top_right pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-black flex font-semibold
   h-[1em] left-auto min-w-[1em] px-0 right-0 rounded-full text-[0.8em] text-white
   top-0 translate-x-1/2'
 position position=:middle_left pulse=false class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-gray-200 flex
+  font-semibold h-[1em] left-0 min-w-[1em] right-auto rounded-full text-[0.8em] top-2/4'
 position position=:middle_left pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-black flex font-semibold
   h-[1em] left-0 min-w-[1em] px-0 right-auto rounded-full text-[0.8em] text-white
   top-2/4'
 position position=:middle_left pulse=true class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200
+  flex font-semibold h-[1em] left-0 min-w-[1em] right-auto rounded-full text-[0.8em]
+  top-2/4'
 position position=:middle_left pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-black
   flex font-semibold h-[1em] left-0 min-w-[1em] px-0 right-auto rounded-full text-[0.8em]
   text-white top-2/4'
 position position=:center pulse=false class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-gray-200 flex
+  font-semibold h-[1em] left-1/2 min-w-[1em] rounded-full text-[0.8em] top-2/4'
 position position=:center pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-black flex font-semibold
   h-[1em] left-1/2 min-w-[1em] px-0 rounded-full text-[0.8em] text-white top-2/4'
 position position=:center pulse=true class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200
+  flex font-semibold h-[1em] left-1/2 min-w-[1em] rounded-full text-[0.8em] top-2/4'
 position position=:center pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-black
   flex font-semibold h-[1em] left-1/2 min-w-[1em] px-0 rounded-full text-[0.8em] text-white
   top-2/4'
 position position=:middle pulse=false class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-gray-200 flex
+  font-semibold h-[1em] left-1/2 min-w-[1em] rounded-full text-[0.8em] top-2/4'
 position position=:middle pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-black flex font-semibold
   h-[1em] left-1/2 min-w-[1em] px-0 rounded-full text-[0.8em] text-white top-2/4'
 position position=:middle pulse=true class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200
+  flex font-semibold h-[1em] left-1/2 min-w-[1em] rounded-full text-[0.8em] top-2/4'
 position position=:middle pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-black
   flex font-semibold h-[1em] left-1/2 min-w-[1em] px-0 rounded-full text-[0.8em] text-white
   top-2/4'
 position position=:middle_center pulse=false class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-gray-200 flex
+  font-semibold h-[1em] left-1/2 min-w-[1em] rounded-full text-[0.8em] top-2/4'
 position position=:middle_center pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute aspect-square bg-black flex font-semibold
   h-[1em] left-1/2 min-w-[1em] px-0 rounded-full text-[0.8em] text-white top-2/4'
 position position=:middle_center pulse=true class=nil:
-- span
+- 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200
+  flex font-semibold h-[1em] left-1/2 min-w-[1em] rounded-full text-[0.8em] top-2/4'
 position position=:middle_center pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 -translate-y-1/2 absolute animate-pulse aspect-square bg-black
   flex font-semibold h-[1em] left-1/2 min-w-[1em] px-0 rounded-full text-[0.8em] text-white
   top-2/4'
 position position=:middle_right pulse=false class=nil:
-- span
+- 'span: -translate-y-1/2 absolute aspect-square bg-gray-200 flex font-semibold h-[1em]
+  left-auto min-w-[1em] right-0 rounded-full text-[0.8em] top-2/4 translate-x-1/2'
 position position=:middle_right pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute aspect-square bg-black flex font-semibold h-[1em]
   left-auto min-w-[1em] px-0 right-0 rounded-full text-[0.8em] text-white top-2/4
   translate-x-1/2'
 position position=:middle_right pulse=true class=nil:
-- span
+- 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-gray-200 flex font-semibold
+  h-[1em] left-auto min-w-[1em] right-0 rounded-full text-[0.8em] top-2/4 translate-x-1/2'
 position position=:middle_right pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-y-1/2 absolute animate-pulse aspect-square bg-black flex font-semibold
   h-[1em] left-auto min-w-[1em] px-0 right-0 rounded-full text-[0.8em] text-white
   top-2/4 translate-x-1/2'
 position position=:bottom_left pulse=false class=nil:
-- span
+- 'span: -translate-x-1/2 absolute aspect-square bg-gray-200 bottom-0 flex font-semibold
+  h-[1em] left-0 min-w-[1em] right-auto rounded-full text-[0.8em] translate-y-1/2'
 position position=:bottom_left pulse=false class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 absolute aspect-square bg-black bottom-0 flex font-semibold
   h-[1em] left-0 min-w-[1em] px-0 right-auto rounded-full text-[0.8em] text-white
   translate-y-1/2'
 position position=:bottom_left pulse=true class=nil:
-- span
+- 'span: -translate-x-1/2 absolute animate-pulse aspect-square bg-gray-200 bottom-0
+  flex font-semibold h-[1em] left-0 min-w-[1em] right-auto rounded-full text-[0.8em]
+  translate-y-1/2'
 position position=:bottom_left pulse=true class="px-0 bg-black text-white":
 - 'span: -translate-x-1/2 absolute animate-pulse aspect-square bg-black bottom-0 flex
   font-semibold h-[1em] left-0 min-w-[1em] px-0 right-auto rounded-full text-[0.8em]
   text-white translate-y-1/2'
 position position=:bottom pulse=false class=nil:
-- span
+- 'span: absolute aspect-square bg-gray-200 bottom-0 flex font-semibold h-[1em] min-w-[1em]
+  right-1/2 rounded-full text-[0.8em] translate-x-1/2 translate-y-1/2'
 position position=:bottom pulse=false class="px-0 bg-black text-white":
 - 'span: absolute aspect-square bg-black bottom-0 flex font-semibold h-[1em] min-w-[1em]
   px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2 translate-y-1/2'
 position position=:bottom pulse=true class=nil:
-- span
+- 'span: absolute animate-pulse aspect-square bg-gray-200 bottom-0 flex font-semibold
+  h-[1em] min-w-[1em] right-1/2 rounded-full text-[0.8em] translate-x-1/2 translate-y-1/2'
 position position=:bottom pulse=true class="px-0 bg-black text-white":
 - 'span: absolute animate-pulse aspect-square bg-black bottom-0 flex font-semibold
   h-[1em] min-w-[1em] px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2
   translate-y-1/2'
 position position=:bottom_center pulse=false class=nil:
-- span
+- 'span: absolute aspect-square bg-gray-200 bottom-0 flex font-semibold h-[1em] min-w-[1em]
+  right-1/2 rounded-full text-[0.8em] translate-x-1/2 translate-y-1/2'
 position position=:bottom_center pulse=false class="px-0 bg-black text-white":
 - 'span: absolute aspect-square bg-black bottom-0 flex font-semibold h-[1em] min-w-[1em]
   px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2 translate-y-1/2'
 position position=:bottom_center pulse=true class=nil:
-- span
+- 'span: absolute animate-pulse aspect-square bg-gray-200 bottom-0 flex font-semibold
+  h-[1em] min-w-[1em] right-1/2 rounded-full text-[0.8em] translate-x-1/2 translate-y-1/2'
 position position=:bottom_center pulse=true class="px-0 bg-black text-white":
 - 'span: absolute animate-pulse aspect-square bg-black bottom-0 flex font-semibold
   h-[1em] min-w-[1em] px-0 right-1/2 rounded-full text-[0.8em] text-white translate-x-1/2
   translate-y-1/2'
 position position=:bottom_right pulse=false class=nil:
-- span
+- 'span: absolute aspect-square bg-gray-200 bottom-0 flex font-semibold h-[1em] left-auto
+  min-w-[1em] right-0 rounded-full text-[0.8em] translate-x-1/2 translate-y-1/2'
 position position=:bottom_right pulse=false class="px-0 bg-black text-white":
 - 'span: absolute aspect-square bg-black bottom-0 flex font-semibold h-[1em] left-auto
   min-w-[1em] px-0 right-0 rounded-full text-[0.8em] text-white translate-x-1/2 translate-y-1/2'
 position position=:bottom_right pulse=true class=nil:
-- span
+- 'span: absolute animate-pulse aspect-square bg-gray-200 bottom-0 flex font-semibold
+  h-[1em] left-auto min-w-[1em] right-0 rounded-full text-[0.8em] translate-x-1/2
+  translate-y-1/2'
 position position=:bottom_right pulse=true class="px-0 bg-black text-white":
 - 'span: absolute animate-pulse aspect-square bg-black bottom-0 flex font-semibold
   h-[1em] left-auto min-w-[1em] px-0 right-0 rounded-full text-[0.8em] text-white

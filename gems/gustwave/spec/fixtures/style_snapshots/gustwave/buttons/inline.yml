@@ -164,56 +164,80 @@ scheme scheme=:pink pill=true tag=:a:
   focus:outline-hidden focus:ring-2 focus:ring-pink-300 hover:bg-pink-200 hover:text-pink-900
   inline-flex items-center justify-center p-1 rounded-full text-pink-400 text-xs'
 size size=:none class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center rounded-xs
+  text-blue-400'
 size size=:none class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center px-0
   rounded-xs text-white'
 size size=:xs class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1
+  rounded-xs text-blue-400 text-xs'
 size size=:xs class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1
   px-0 rounded-xs text-white text-xs'
 size size=:sm class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1.5
+  rounded-xs text-blue-400 text-sm'
 size size=:sm class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1.5
   px-0 rounded-xs text-sm text-white'
 size size=:md class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1.5
+  rounded-xs text-blue-400 text-sm'
 size size=:md class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1.5
   px-0 rounded-xs text-sm text-white'
 size size=:lg class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-2
+  rounded-xs text-base text-blue-400'
 size size=:lg class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-2
   px-0 rounded-xs text-base text-white'
 size size=:xl class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-2
+  rounded-xs text-base text-blue-400'
 size size=:xl class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-2
   px-0 rounded-xs text-base text-white'
 size size=:"3xs" class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-0.5
+  rounded-xs text-blue-400 text-xs'
 size size=:"3xs" class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
   hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-0.5
   px-0 rounded-xs text-white text-xs'
 size size=:"2xs" class=nil:
-- button type="button"
+- 'button type="button": bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300
+  hover:bg-blue-200 hover:text-blue-900 inline-flex items-center justify-center p-1
+  rounded-xs text-blue-400 text-xs'
 size size=:"2xs" class="px-0 bg-black text-white":
 - 'button type="button": bg-black dark:hover:bg-blue-800 dark:hover:text-blue-300
   disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-blue-300

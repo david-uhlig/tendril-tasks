@@ -206,7 +206,8 @@ layout align=:none position=:none class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:top_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  top-0'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -221,7 +222,7 @@ layout align=:none position=:top_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:top class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -236,7 +237,7 @@ layout align=:none position=:top class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:top_center class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -251,7 +252,7 @@ layout align=:none position=:top_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:top_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 top-0 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -266,7 +267,8 @@ layout align=:none position=:top_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:middle_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -281,7 +283,7 @@ layout align=:none position=:middle_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -296,7 +298,7 @@ layout align=:none position=:center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:middle class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -311,7 +313,7 @@ layout align=:none position=:middle class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:middle_center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -326,7 +328,7 @@ layout align=:none position=:middle_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:middle_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 top-2/4 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -341,7 +343,7 @@ layout align=:none position=:middle_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:bottom_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 absolute bottom-0 left-0 right-auto translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -356,7 +358,7 @@ layout align=:none position=:bottom_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:bottom class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -371,7 +373,7 @@ layout align=:none position=:bottom class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:bottom_center class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -386,7 +388,7 @@ layout align=:none position=:bottom_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:none position=:bottom_right class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 left-auto right-0 translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -401,7 +403,7 @@ layout align=:none position=:bottom_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:none class=nil:
-- div role="status"
+- 'div role="status": rtl:text-right text-left'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -415,7 +417,8 @@ layout align=:left position=:none class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:top_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  rtl:text-right text-left top-0'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -430,7 +433,8 @@ layout align=:left position=:top_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:top class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 rtl:text-right text-left
+  translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -445,7 +449,8 @@ layout align=:left position=:top class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:top_center class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 rtl:text-right text-left
+  translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -460,7 +465,8 @@ layout align=:left position=:top_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:top_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 rtl:text-right text-left
+  top-0 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -475,7 +481,8 @@ layout align=:left position=:top_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:middle_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  rtl:text-right text-left top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -490,7 +497,8 @@ layout align=:left position=:middle_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 rtl:text-right
+  text-left top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -505,7 +513,8 @@ layout align=:left position=:center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:middle class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 rtl:text-right
+  text-left top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -520,7 +529,8 @@ layout align=:left position=:middle class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:middle_center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 rtl:text-right
+  text-left top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -535,7 +545,8 @@ layout align=:left position=:middle_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:middle_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 rtl:text-right text-left
+  top-2/4 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -550,7 +561,8 @@ layout align=:left position=:middle_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:bottom_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 absolute bottom-0 left-0 right-auto rtl:text-right
+  text-left translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -565,7 +577,8 @@ layout align=:left position=:bottom_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:bottom class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 rtl:text-right text-left translate-x-1/2
+  translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -580,7 +593,8 @@ layout align=:left position=:bottom class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:bottom_center class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 rtl:text-right text-left translate-x-1/2
+  translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -595,7 +609,8 @@ layout align=:left position=:bottom_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:left position=:bottom_right class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 left-auto right-0 rtl:text-right text-left
+  translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -610,7 +625,7 @@ layout align=:left position=:bottom_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:none class=nil:
-- div role="status"
+- 'div role="status": text-center'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -624,7 +639,8 @@ layout align=:center position=:none class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:top_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  text-center top-0'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -639,7 +655,7 @@ layout align=:center position=:top_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:top class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 text-center translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -654,7 +670,7 @@ layout align=:center position=:top class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:top_center class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 text-center translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -669,7 +685,8 @@ layout align=:center position=:top_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:top_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 text-center top-0
+  translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -684,7 +701,8 @@ layout align=:center position=:top_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:middle_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  text-center top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -699,7 +717,8 @@ layout align=:center position=:middle_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 text-center
+  top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -714,7 +733,8 @@ layout align=:center position=:center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:middle class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 text-center
+  top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -729,7 +749,8 @@ layout align=:center position=:middle class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:middle_center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 text-center
+  top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -744,7 +765,8 @@ layout align=:center position=:middle_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:middle_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 text-center top-2/4
+  translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -759,7 +781,8 @@ layout align=:center position=:middle_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:bottom_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 absolute bottom-0 left-0 right-auto text-center
+  translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -774,7 +797,7 @@ layout align=:center position=:bottom_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:bottom class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 text-center translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -789,7 +812,7 @@ layout align=:center position=:bottom class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:bottom_center class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 text-center translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -804,7 +827,8 @@ layout align=:center position=:bottom_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:center position=:bottom_right class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 left-auto right-0 text-center translate-x-1/2
+  translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -819,7 +843,7 @@ layout align=:center position=:bottom_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:none class=nil:
-- div role="status"
+- 'div role="status": rtl:text-left text-right'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -833,7 +857,8 @@ layout align=:right position=:none class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:top_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  rtl:text-left text-right top-0'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -848,7 +873,8 @@ layout align=:right position=:top_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:top class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 rtl:text-left text-right
+  translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -863,7 +889,8 @@ layout align=:right position=:top class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:top_center class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute right-1/2 rtl:text-left text-right
+  translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -878,7 +905,8 @@ layout align=:right position=:top_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:top_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 rtl:text-left text-right
+  top-0 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -893,7 +921,8 @@ layout align=:right position=:top_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:middle_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-0 right-auto
+  rtl:text-left text-right top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -908,7 +937,8 @@ layout align=:right position=:middle_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 rtl:text-left
+  text-right top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -923,7 +953,8 @@ layout align=:right position=:center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:middle class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 rtl:text-left
+  text-right top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -938,7 +969,8 @@ layout align=:right position=:middle class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:middle_center class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 -translate-y-1/2 absolute left-1/2 rtl:text-left
+  text-right top-2/4'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -953,7 +985,8 @@ layout align=:right position=:middle_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:middle_right class=nil:
-- div role="status"
+- 'div role="status": -translate-y-1/2 absolute left-auto right-0 rtl:text-left text-right
+  top-2/4 translate-x-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -968,7 +1001,8 @@ layout align=:right position=:middle_right class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:bottom_left class=nil:
-- div role="status"
+- 'div role="status": -translate-x-1/2 absolute bottom-0 left-0 right-auto rtl:text-left
+  text-right translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -983,7 +1017,8 @@ layout align=:right position=:bottom_left class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:bottom class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 rtl:text-left text-right translate-x-1/2
+  translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -998,7 +1033,8 @@ layout align=:right position=:bottom class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:bottom_center class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 right-1/2 rtl:text-left text-right translate-x-1/2
+  translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"
@@ -1013,7 +1049,8 @@ layout align=:right position=:bottom_center class="px-0 bg-black text-white":
 - path fill="currentFill"
 - 'span: sr-only'
 layout align=:right position=:bottom_right class=nil:
-- div role="status"
+- 'div role="status": absolute bottom-0 left-auto right-0 rtl:text-left text-right
+  translate-x-1/2 translate-y-1/2'
 - 'svg aria-hidden="true" fill="none" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg":
   animate-spin dark:text-gray-600 fill-blue-600 h-6 inline text-gray-200 w-6'
 - path fill="currentColor"

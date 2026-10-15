@@ -60,7 +60,8 @@ scroll breakpoint=:"2xl" snap=:end:
 - 'div: 2xl:flex-wrap 2xl:overflow-visible 2xl:py-0 flex flex-nowrap gap-2 overflow-x-auto
   pb-2 snap-end snap-x touch-pan-x'
 custom class=nil:
-- div
+- 'div: flex flex-nowrap gap-2 md:flex-wrap md:overflow-visible md:py-0 overflow-x-auto
+  pb-2 touch-pan-x'
 custom class="px-0 bg-black text-white":
 - 'div: bg-black flex flex-nowrap gap-2 md:flex-wrap md:overflow-visible md:py-0 overflow-x-auto
   pb-2 px-0 text-white touch-pan-x'
