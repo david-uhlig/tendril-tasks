@@ -3,6 +3,8 @@
 module Gustwave
   # Renders leading and trailing visuals, see Gustwave::Visuals.
   class Badge < Gustwave::Component
+    include Gustwave::Visuals
+
     attr_reader :id
 
     DEFAULT_TAG = :span
@@ -80,11 +82,6 @@ module Gustwave
     }
 
     toggle :pill, "rounded-full"
-
-    # Declares the +has_visual+ toggle, the +visual+ part and the visual
-    # slots. Included here to keep its styles between +pill+ and
-    # +visual_only+.
-    include Gustwave::Visuals
 
     # Render a round badge when no text or content block was given
     toggle :visual_only, per: :size, values: {

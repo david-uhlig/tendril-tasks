@@ -6,6 +6,8 @@ module Gustwave
     #
     # Renders leading and trailing visuals, see Gustwave::Visuals.
     class Base < Gustwave::Component
+      include Gustwave::Visuals
+
       DEFAULT_TAG = :button
       TAG_OPTIONS = [ :button, :a ].freeze
 
@@ -48,11 +50,6 @@ module Gustwave
       }
 
       toggle :pill, "rounded-full"
-
-      # Declares the +has_visual+ toggle, the +visual+ part and the visual
-      # slots. Included here to keep its styles between +pill+ and
-      # +visual_only+.
-      include Gustwave::Visuals
 
       # Set when no text or content block was given, to render a square button
       toggle :visual_only, per: :size, values: {
