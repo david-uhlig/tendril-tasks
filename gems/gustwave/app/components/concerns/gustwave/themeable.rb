@@ -32,7 +32,7 @@ module Gustwave
   # do not have to share a common ancestor.
   #
   #   class Gustwave::Button < Gustwave::Component
-  #     include Gustwave::Themeable # Usually already included by Gustwave::Component
+  #     include Gustwave::Themeable
   #
   #     register_theme :outline, "Ui::Buttons::Outline"
   #     register_theme :funky, "Ui::Buttons::Funky"
