@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Gustwave
-  class Badge < Gustwave::Buttons::Base
+  # Renders leading and trailing visuals, see Gustwave::Visuals.
+  class Badge < Gustwave::Component
     attr_reader :id
 
     DEFAULT_TAG = :span
@@ -15,7 +16,9 @@ module Gustwave
 
     base "rounded-sm whitespace-nowrap inline-flex", unless: { scheme: :none }
 
-    extend_variant :scheme, default: :default, values: {
+    # +:none+ also skips the base styles, +:base+ renders only them.
+    variant :scheme, default: :default, values: {
+      base: "",
       default: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
       dark: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
       red: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
@@ -42,13 +45,15 @@ module Gustwave
       pink: :pink
     }
 
-    # The dismiss_button part pads the dismiss button per size.
-    extend_variant :size, default: :xs, values: {
-      xs: { root: "px-2.5 py-0.5 text-xs font-medium", dismiss_button: "p-1" },
-      sm: { root: "px-2.5 py-0.5 text-sm font-medium", dismiss_button: "p-1" },
-      md: { root: "px-2.5 py-0.5 text-base font-semibold", dismiss_button: "p-1" },
-      lg: { root: "px-2.5 py-0.5 text-lg font-semibold", dismiss_button: "p-1.5" },
-      xl: { root: "px-2.5 py-0.5 text-xl font-bold", dismiss_button: "p-1.5" },
+    # The +visual+ part sizes leading and trailing visuals to match the
+    # +text-*+ class of the badge. The dismiss_button part pads the dismiss
+    # button per size.
+    variant :size, default: :xs, values: {
+      xs: { root: "px-2.5 py-0.5 text-xs font-medium", visual: "h-4 w-auto", dismiss_button: "p-1" },
+      sm: { root: "px-2.5 py-0.5 text-sm font-medium", visual: "h-5 w-auto", dismiss_button: "p-1" },
+      md: { root: "px-2.5 py-0.5 text-base font-semibold", visual: "h-5 w-auto", dismiss_button: "p-1" },
+      lg: { root: "px-2.5 py-0.5 text-lg font-semibold", visual: "h-6 w-auto", dismiss_button: "p-1.5" },
+      xl: { root: "px-2.5 py-0.5 text-xl font-bold", visual: "h-7 w-auto", dismiss_button: "p-1.5" },
       "2xl": { root: "px-2.5 py-0.5 text-2xl font-extrabold", visual: "h-8 w-auto", dismiss_button: "p-2" }
     }
 
@@ -62,11 +67,27 @@ module Gustwave
       "2xl": :"xs"
     }
 
-    # Indicators scale with the text at :"2xl"
-    extend_derived :indicator_size, values: { "2xl": :auto }
+    # The size of leading and trailing indicators per badge size. Indicators
+    # scale with the text at :"2xl".
+    derive :indicator_size, from: :size, values: {
+      none: :none,
+      xs: :sm,
+      sm: :sm,
+      md: :md,
+      lg: :md,
+      xl: :lg,
+      "2xl": :auto
+    }
+
+    toggle :pill, "rounded-full"
+
+    # Declares the +has_visual+ toggle, the +visual+ part and the visual
+    # slots. Included here to keep its styles between +pill+ and
+    # +visual_only+.
+    include Gustwave::Visuals
 
     # Render a round badge when no text or content block was given
-    extend_toggle :visual_only, values: {
+    toggle :visual_only, per: :size, values: {
       xs: "rounded-full px-0.5",
       sm: "rounded-full px-0.5",
       md: "rounded-full px-0.5",
@@ -162,16 +183,19 @@ module Gustwave
       outline: false,
       **options
     )
-      super(text, scheme:, size:, pill:, **options)
-
+      @text = text
       @id = options.delete(:id)
+      @options = options
       @html_tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
       @type = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE)
-      style_with(border:, outline:, hover: tag.in?(HOVER_TAGS))
+
+      style_with(scheme:, size:, pill:, border:, outline:, hover: tag.in?(HOVER_TAGS))
     end
 
     def before_render
-      super
+      # Must build config here to know whether block content was passed
+      style_with(has_visual: has_visual?, visual_only: !has_content?)
+      @config = { type: @type }.merge(attributes_for(@options))
       @config[:id] = id
     end
 
@@ -188,5 +212,10 @@ module Gustwave
     end
 
     private
+    attr_reader :html_tag, :config
+
+    def has_content?
+      @has_content ||= text_or_content.present?
+    end
   end
 end
