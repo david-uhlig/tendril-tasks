@@ -70,7 +70,7 @@ module Gustwave
       def call
         render base_button do
           tag.span **@inner_config do
-            slots_and_content(leading_visual, text_or_content, trailing_visual, append_content: false)
+            slots_and_content(leading_visuals, text_or_content, trailing_visuals, append_content: false)
           end
         end
       end
