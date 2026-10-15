@@ -20,7 +20,7 @@ module Gustwave
                    **options)
       @text = text
       @id = id.presence || generate_random_id(prefix: "toast")
-      @dismissible = fetch_or_fallback_boolean(dismissible, true)
+      @dismissible = ActiveModel::Type::Boolean.new.cast(dismissible) != false
 
       options.deep_symbolize_keys!
       @options = {}

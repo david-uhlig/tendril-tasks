@@ -1,65 +1,28 @@
 # frozen_string_literal: true
 
-# Original source: primer_view_components gem (v0.35.1), Primer::FetchOrFallbackHelper
-# Modifications: Removed deprecated_values functionality. Moved to the Gustwave
-# namespace.
-#
-# Gustwave::FetchOrFallbackHelper
-# A little helper to enable graceful fallbacks
-#
-# Use this helper to quietly ensure a value is
-# one that you expect:
-#
-# allowed_values    - allowed options for *value*
-# given_value       - input being coerced
-# fallback          - returned if *given_value* is not included in *allowed_values*
-#
-# fetch_or_fallback([1,2,3], 5, 2) => 2
-# fetch_or_fallback([1,2,3], 1, 2) => 1
-# fetch_or_fallback([1,2,3], nil, 2) => 2
 module Gustwave
-  # :nodoc:
+  # Validates an option that isn't a style, e.g. an HTML tag or a data
+  # attribute value, against a fixed list. Style options are validated by
+  # Gustwave::Styling instead.
+  #
+  # Follows the same policy as Gustwave::Styling: an unknown value raises
+  # outside production, and falls back in production.
+  #
+  #   fetch_or_fallback([1, 2, 3], 5, 2) # => raises InvalidValueError, or 2 in production
+  #   fetch_or_fallback([1, 2, 3], 1, 2) # => 1
   module FetchOrFallbackHelper
-    mattr_accessor :fallback_raises, default: true
-
-    InvalidValueError = Class.new(StandardError)
+    # Raised outside production for a value that isn't allowed.
+    class InvalidValueError < Gustwave::Error; end
 
     def fetch_or_fallback(allowed_values, given_value, fallback = nil)
-      if allowed_values.include?(given_value)
-        given_value
-      else
-        if fallback_raises && ENV["RAILS_ENV"] != "production"
-          raise InvalidValueError, <<~MSG
-            fetch_or_fallback was called with an invalid value.
+      return given_value if allowed_values.include?(given_value)
 
-            Expected one of: #{allowed_values.inspect}
-            Got: #{given_value.inspect}
-
-            This will not raise in production, but will instead fallback to: #{fallback.inspect}
-          MSG
-        end
-
-        fallback
+      if Styling.strict?
+        message = Styling.suggest("Unknown value #{given_value.inspect}", given_value, allowed_values)
+        raise InvalidValueError, "#{message}\nIn production, this falls back to #{fallback.inspect}."
       end
-    end
 
-    def fetch_or_fallback_boolean(given_value, fallback = false)
-      if [ true, false ].include?(given_value)
-        given_value
-      else
-        if fallback_raises && ENV["RAILS_ENV"] != "production"
-          raise InvalidValueError, <<~MSG
-            fetch_or_fallback_boolean was called with an invalid value.
-
-            Expected one of: #{[ true, false ].inspect}
-            Got: #{given_value.inspect}
-
-            This will not raise in production, but will instead fallback to: #{fallback.inspect}
-          MSG
-        end
-
-        fallback
-      end
+      fallback
     end
   end
 end

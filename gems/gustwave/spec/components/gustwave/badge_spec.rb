@@ -63,6 +63,12 @@ RSpec.describe Gustwave::Badge, type: :component do
       render_inline(described_class.new(border: true))
       expect(page).to have_selector("span.border.border-blue-400")
     end
+
+    it "casts a string to a boolean" do
+      render_inline(described_class.new(border: "true", outline: "false"))
+      expect(page).to have_selector("span.border.border-blue-400")
+      expect(page).not_to have_selector("span.outline")
+    end
   end
 
   context "with options" do
