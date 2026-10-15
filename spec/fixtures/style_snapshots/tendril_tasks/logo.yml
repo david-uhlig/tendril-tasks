@@ -1,0 +1,17 @@
+---
+logo size=:sm class=nil:
+- 'div id="brand-logo": [&_img]:h-8 [&_img]:w-auto [&_svg]:h-8 [&_svg]:w-auto sm:[&_img]:h-11
+  sm:[&_svg]:h-11'
+- img src="/assets/brand/logo-8f0c6c27.svg"
+logo size=:sm class="px-0 bg-black text-white":
+- 'div id="brand-logo": [&_img]:h-8 [&_img]:w-auto [&_svg]:h-8 [&_svg]:w-auto bg-black
+  px-0 sm:[&_img]:h-11 sm:[&_svg]:h-11 text-white'
+- img src="/assets/brand/logo-8f0c6c27.svg"
+logo size=:lg class=nil:
+- 'div id="brand-logo": [&_img]:h-12 [&_img]:w-auto [&_svg]:h-12 [&_svg]:w-auto sm:[&_img]:h-16
+  sm:[&_svg]:h-16'
+- img src="/assets/brand/logo-8f0c6c27.svg"
+logo size=:lg class="px-0 bg-black text-white":
+- 'div id="brand-logo": [&_img]:h-12 [&_img]:w-auto [&_svg]:h-12 [&_svg]:w-auto bg-black
+  px-0 sm:[&_img]:h-16 sm:[&_svg]:h-16 text-white'
+- img src="/assets/brand/logo-8f0c6c27.svg"

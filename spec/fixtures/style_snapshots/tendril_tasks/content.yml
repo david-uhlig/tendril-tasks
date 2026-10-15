@@ -1,0 +1,11 @@
+---
+content width=nil class=nil: []
+content width=nil class="px-0 bg-black text-white":
+- 'div: bg-black px-0 text-white'
+content width=:full class=nil: []
+content width=:full class="px-0 bg-black text-white":
+- 'div: bg-black px-0 text-white'
+content width=:large class=nil:
+- 'div: mx-auto sm:px-16 space-y-6 xl:px-24'
+content width=:large class="px-0 bg-black text-white":
+- 'div: bg-black mx-auto px-0 sm:px-16 space-y-6 text-white xl:px-24'

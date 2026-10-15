@@ -1,0 +1,9 @@
+---
+scheme scheme=:none class=nil:
+- thead
+scheme scheme=:none class="px-0 bg-black text-white":
+- 'thead: bg-black px-0 text-white'
+scheme scheme=:standard class=nil:
+- thead
+scheme scheme=:standard class="px-0 bg-black text-white":
+- 'thead: bg-black dark:bg-gray-700 dark:text-gray-400 px-0 text-white text-xs uppercase'

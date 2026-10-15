@@ -1,0 +1,53 @@
+---
+link_button icon=nil trailing_icon=nil class=nil:
+- a href="#" tabindex="-1"
+link_button icon=nil trailing_icon=nil class="px-0 bg-black text-white":
+- 'a href="#" tabindex="-1": bg-black dark:hover:bg-gray-600 dark:hover:text-white
+  flex gap-1.5 hover:bg-gray-100 items-center px-0 py-2 text-white w-full whitespace-nowrap'
+link_button icon=nil trailing_icon=:check class=nil:
+- 'a href="#" tabindex="-1": align-bottom gap-1.5 inline-flex items-center'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] ms-auto w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+link_button icon=nil trailing_icon=:check class="px-0 bg-black text-white":
+- 'a href="#" tabindex="-1": align-bottom bg-black dark:hover:bg-gray-600 dark:hover:text-white
+  flex gap-1.5 hover:bg-gray-100 items-center px-0 py-2 text-white w-full whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] ms-auto w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+link_button icon=:check trailing_icon=nil class=nil:
+- 'a href="#" tabindex="-1": align-bottom gap-1.5 inline-flex items-center'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+link_button icon=:check trailing_icon=nil class="px-0 bg-black text-white":
+- 'a href="#" tabindex="-1": align-bottom bg-black dark:hover:bg-gray-600 dark:hover:text-white
+  flex gap-1.5 hover:bg-gray-100 items-center px-0 py-2 text-white w-full whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+link_button icon=:check trailing_icon=:check class=nil:
+- 'a href="#" tabindex="-1": align-bottom gap-1.5 inline-flex items-center'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] ms-auto w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+link_button icon=:check trailing_icon=:check class="px-0 bg-black text-white":
+- 'a href="#" tabindex="-1": align-bottom bg-black dark:hover:bg-gray-600 dark:hover:text-white
+  flex gap-1.5 hover:bg-gray-100 items-center px-0 py-2 text-white w-full whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] ms-auto w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+divider tag=:div class=nil:
+- div
+divider tag=:div class="px-0 bg-black text-white":
+- 'div: bg-black dark:bg-gray-700 h-px my-1 px-0 text-white w-full'
+divider tag=:li class=nil:
+- li
+divider tag=:li class="px-0 bg-black text-white":
+- 'li: bg-black dark:bg-gray-700 h-px my-1 px-0 text-white w-full'

@@ -1,0 +1,67 @@
+---
+plain scheme=:none class=nil:
+- hr
+plain scheme=:none class="px-0 bg-black text-white":
+- 'hr: bg-black px-0 text-white'
+plain scheme=:default class=nil:
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-px mx-auto my-8 rounded-sm w-full'
+plain scheme=:default class="px-0 bg-black text-white":
+- 'hr: bg-black border-0 dark:bg-gray-700 h-px mx-auto my-8 px-0 rounded-sm text-white
+  w-full'
+plain scheme=:trimmed class=nil:
+- 'hr: bg-gray-100 border-0 dark:bg-gray-700 h-1 md:my-10 mx-auto my-4 rounded-sm
+  w-48'
+plain scheme=:trimmed class="px-0 bg-black text-white":
+- 'hr: bg-black border-0 dark:bg-gray-700 h-1 md:my-10 mx-auto my-4 px-0 rounded-sm
+  text-white w-48'
+plain scheme=:squared class=nil:
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-8 md:my-12 mx-auto my-8 rounded-sm
+  w-8'
+plain scheme=:squared class="px-0 bg-black text-white":
+- 'hr: bg-black border-0 dark:bg-gray-700 h-8 md:my-12 mx-auto my-8 px-0 rounded-sm
+  text-white w-8'
+content scheme=:none:
+- 'div: inline-flex items-center justify-center w-full'
+- hr
+- 'div: -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2 px-4'
+content scheme=:default:
+- 'div: inline-flex items-center justify-center w-full'
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-px mx-auto my-8 rounded-sm w-full'
+- 'div: -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2 px-4'
+content scheme=:trimmed:
+- 'div: inline-flex items-center justify-center w-full'
+- 'hr: bg-gray-100 border-0 dark:bg-gray-700 h-1 md:my-10 mx-auto my-4 rounded-sm
+  w-48'
+- 'div: -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2 px-4'
+content scheme=:squared:
+- 'div: inline-flex items-center justify-center w-full'
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-8 md:my-12 mx-auto my-8 rounded-sm
+  w-8'
+- 'div: -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2 px-4'
+block_content scheme=:default:
+- 'div: inline-flex items-center justify-center w-full'
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-px mx-auto my-8 rounded-sm w-full'
+- 'div: -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2 px-4'
+- b
+visual_text scheme=:none:
+- 'div: inline-flex items-center justify-center w-full'
+- hr
+- 'span: -translate-x-1/2 absolute bg-white dark:bg-gray-900 dark:text-white font-medium
+  left-1/2 px-0 text-gray-900'
+visual_text scheme=:default:
+- 'div: inline-flex items-center justify-center w-full'
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-px mx-auto my-8 rounded-sm w-full'
+- 'span: -translate-x-1/2 absolute bg-white dark:bg-gray-900 dark:text-white font-medium
+  left-1/2 px-0 text-gray-900'
+visual_svg scheme=:none:
+- 'div: inline-flex items-center justify-center w-full'
+- hr
+- 'div aria-hidden="true": -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2
+  px-4'
+- svg
+visual_svg scheme=:default:
+- 'div: inline-flex items-center justify-center w-full'
+- 'hr: bg-gray-200 border-0 dark:bg-gray-700 h-px mx-auto my-8 rounded-sm w-full'
+- 'div aria-hidden="true": -translate-x-1/2 absolute bg-white dark:bg-gray-900 left-1/2
+  px-4'
+- svg

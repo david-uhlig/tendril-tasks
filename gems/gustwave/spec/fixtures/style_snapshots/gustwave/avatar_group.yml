@@ -1,0 +1,5 @@
+---
+group class=nil:
+- 'div: -space-x-4 flex rtl:space-x-reverse'
+group class="px-0 bg-black text-white":
+- 'div: -space-x-4 bg-black flex px-0 rtl:space-x-reverse text-white'

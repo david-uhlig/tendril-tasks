@@ -1,0 +1,10 @@
+---
+scheme scheme=:none class=nil:
+- tr
+scheme scheme=:none class="px-0 bg-black text-white":
+- 'tr: bg-black px-0 text-white'
+scheme scheme=:standard class=nil:
+- tr
+scheme scheme=:standard class="px-0 bg-black text-white":
+- 'tr: bg-black border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 px-0
+  text-white'
