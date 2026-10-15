@@ -28,7 +28,8 @@ module Gustwave
     # TODO remove this
     SCHEME_OPTIONS = variant_values(:scheme).excluding(:none, :base).freeze
 
-    mapping :scheme_to_dismiss_button_scheme, {
+    # The scheme of the dismiss button per badge scheme
+    lookup :dismiss_button_scheme, per: :scheme, values: {
       none: :none,
       base: :base,
       default: :blue,
@@ -51,7 +52,8 @@ module Gustwave
       "2xl": { root: "px-2.5 py-0.5 text-2xl font-extrabold", visual: "h-8 w-auto", dismiss_button: "p-2" }
     }
 
-    mapping :size_to_dismiss_button_size, {
+    # The size of the dismiss button per badge size
+    lookup :dismiss_button_size, per: :size, values: {
       xs: :"3xs",
       sm: :"3xs",
       md: :"3xs",
@@ -125,8 +127,8 @@ module Gustwave
       a11y_text = sr_only(text) || (capture(&block) if block.present?) || sr_only("Dismiss")
       config = {
         theme: :inline,
-        scheme: scheme_to_dismiss_button_scheme_mapping(@scheme),
-        size: size_to_dismiss_button_size_mapping(@size),
+        scheme: style_lookup(:dismiss_button_scheme),
+        size: style_lookup(:dismiss_button_size),
         aria: { label: :remove },
         data: { dismiss_target: "##{@id}" }
       }.merge(attributes_for(:dismiss_button, options))
