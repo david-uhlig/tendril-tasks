@@ -136,11 +136,15 @@ module Gustwave
       #   button.leading_renderable(MyAvatar.new("me.png", class: "rounded-full"))
       #
       # === Adding a visual type to every theme
-      # Extend this class, e.g. in an initializer. Every theme inherits the type:
+      # Extend this class whenever it loads, so the type survives code
+      # reloading. Every theme inherits it:
       #
-      #   Gustwave::Buttons::Base.extend_slot :leading_visuals, types: {
-      #     badge: ->(text) { tag.mark(text, **configure_visual_html_attributes({ class: "badge" })) }
-      #   }
+      #   # config/initializers/gustwave.rb
+      #   Rails.autoloaders.main.on_load("Gustwave::Buttons::Base") do |base, _abspath|
+      #     base.extend_slot :leading_visuals, types: {
+      #       badge: ->(text) { tag.mark(text, **configure_visual_html_attributes({ class: "badge" })) }
+      #     }
+      #   end
       #
       #   button.with_leading_visual_badge("new")
       #
