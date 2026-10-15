@@ -21,17 +21,5 @@ module TendrilTasks
         end
       end
     end
-
-    private
-
-    def build_options(width, options)
-      options.deep_symbolize_keys!
-      options[:class] = class_merge(
-        WIDTH_MAPPINGS[fetch_or_fallback(WIDTH_OPTIONS, width, DEFAULT_WIDTH)],
-        options.delete(:class)
-      )
-      options[:class] = nil if options[:class].empty?
-      options
-    end
   end
 end
