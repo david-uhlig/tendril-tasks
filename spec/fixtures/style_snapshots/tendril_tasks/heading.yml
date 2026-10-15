@@ -189,7 +189,8 @@ heading tag=:h3 scheme=:level6 responsive=false hyphenated=false:
 - 'h3 id="title": dark:text-white font-semibold group leading-none mb-2 text-gray-900
   text-xl tracking-tight'
 custom tag=:h2 class=nil:
-- h2 id="title" lang="de"
+- 'h2 id="title" lang="de": dark:text-white font-bold group hyphens-auto leading-none
+  lg:leading-10 lg:text-4xl mb-4 md:leading-9 md:text-3xl text-2xl text-gray-900 tracking-tight'
 custom tag=:h2 class="px-0 bg-black text-white":
 - 'h2 id="title" lang="de": bg-black dark:text-white font-bold group hyphens-auto
   leading-none lg:leading-10 lg:text-4xl mb-4 md:leading-9 md:text-3xl px-0 text-2xl
