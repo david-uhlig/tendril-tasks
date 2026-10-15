@@ -104,6 +104,48 @@ module Gustwave
       #     button.leading_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
       #     "Submit"
       #   end
+      #
+      # === Custom visual components
+      # Pass any component with +leading_renderable+ or +trailing_renderable+.
+      # If it implements +apply_slot_context+, the button calls it when the slot
+      # is set, with:
+      # - +slot:+ [Symbol] +:leading_visuals+ or +:trailing_visuals+.
+      # - +size:+ [Symbol] the button's size: +:none+, +:xs+, +:sm+, +:md+, +:lg+ or +:xl+.
+      # - +html_attributes:+ [Hash] the attributes the built-in visuals get:
+      #   +aria: { hidden: true }+ and the size classes for +size+, e.g.
+      #   +h-6 w-auto+ for +:lg+.
+      # The button may add keys later, so accept unknown ones with +**+.
+      # Components without +apply_slot_context+ render unchanged.
+      #
+      #   class MyAvatar < Gustwave::Component
+      #     def initialize(src, **options)
+      #       @src = src
+      #       @options = options
+      #     end
+      #
+      #     def apply_slot_context(html_attributes:, **)
+      #       # The caller's own options take precedence over the button's.
+      #       @options = configure_html_attributes(@options, **html_attributes)
+      #     end
+      #
+      #     def call
+      #       image_tag @src, **@options
+      #     end
+      #   end
+      #
+      #   button.leading_renderable(MyAvatar.new("me.png", class: "rounded-full"))
+      #
+      # === Adding a visual type to every theme
+      # Extend this class, e.g. in an initializer. Every theme inherits the type:
+      #
+      #   Gustwave::Buttons::Base.extend_slot :leading_visuals, types: {
+      #     badge: ->(text) { tag.mark(text, **configure_visual_html_attributes({ class: "badge" })) }
+      #   }
+      #
+      #   button.with_leading_visual_badge("new")
+      #
+      # Pass your own attributes to +configure_visual_html_attributes+ as a hash,
+      # not as keywords: keywords count as defaults and replace the size classes.
       renders_many_extensible :leading_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
@@ -232,7 +274,8 @@ module Gustwave
       end
 
       # Context for components passed to the +renderable+ visual type that
-      # implement +apply_slot_context+.
+      # implement +apply_slot_context+. Documented at +leading_visuals+ under
+      # "Custom visual components"; keep both in sync.
       def visual_context
         { size: @size, html_attributes: configure_visual_html_attributes }
       end
