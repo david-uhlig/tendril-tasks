@@ -33,7 +33,7 @@ module Gustwave
             standard: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
           }
 
-    renders_many :cells, types: {
+    renders_many_extensible :cells, types: {
       td: ->(text = nil, **options, &block) {
         Gustwave::TableCell.new(tag: :td, **options) do
           text || block.call

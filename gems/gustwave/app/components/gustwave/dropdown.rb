@@ -40,7 +40,7 @@ module Gustwave
     #
     # @param tag [Symbol] the tag of the surrounding HTML attribute.
     # @param options [Hash] additional HTML attributes passed to the +div+ element.
-    renders_one :trigger_slot, types: {
+    renders_one_extensible :trigger_slot, types: {
       generic: ->(tag: :div, **options) {
         config = configure_component(options, **trigger_config)
         Gustwave::Dropdowns::Triggers::Generic.new(tag:, **config)
@@ -72,7 +72,7 @@ module Gustwave
     #
     # @see Gustwave::Dropdowns::Menus::List
     # @see Gustwave::Dropdowns::Menus::Generic
-    renders_one :menu_slot, types: {
+    renders_one_extensible :menu_slot, types: {
       list: ->(content_for: nil, list_options: {}, **options) {
         config = configure_component(options, content_for:, id: menu_id)
         component = Gustwave::Dropdowns::Menus::List.new(**config)

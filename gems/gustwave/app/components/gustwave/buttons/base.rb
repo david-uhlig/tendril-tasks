@@ -104,7 +104,7 @@ module Gustwave
       #     button.leading_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
       #     "Submit"
       #   end
-      renders_many :leading_visuals, types: {
+      renders_many_extensible :leading_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
             options,
@@ -135,7 +135,7 @@ module Gustwave
       alias leading_svg with_leading_visual_svg
       alias leading_indicator with_leading_visual_indicator
 
-      renders_many :trailing_visuals, types: {
+      renders_many_extensible :trailing_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
             options,

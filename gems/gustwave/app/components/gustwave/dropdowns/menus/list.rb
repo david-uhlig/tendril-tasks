@@ -20,7 +20,7 @@ module Gustwave
 
         style :list_item_base, "flex items-center gap-1.5 w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white whitespace-nowrap"
 
-        renders_many :items, types: {
+        renders_many_extensible :items, types: {
           generic: ->(&block) { capture(&block) },
           item: Gustwave::Dropdowns::MenuItems::LinkButton,
           divider: Gustwave::Dropdowns::MenuItems::Divider,
