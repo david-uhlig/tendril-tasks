@@ -34,12 +34,10 @@ module Gustwave
           }
 
     renders_many :cells, types: {
-      td: ->(text = nil, **options, &block) {
-        Gustwave::TableCell.new(tag: :td, **options) do
-          text || block.call
-        end
+      td: ->(text = nil, **options) {
+        Gustwave::TableCell.new(text, tag: :td, **options)
       },
-      th: ->(text = nil, **options, &block) {
+      th: ->(text = nil, **options) {
         config = configure_html_attributes(
           options,
           tag: :th,
@@ -47,9 +45,7 @@ module Gustwave
           class: "font-medium text-gray-900 dark:text-white whitespace-nowrap"
         )
 
-        Gustwave::TableCell.new(**config) do
-          text || block.call
-        end
+        Gustwave::TableCell.new(text, **config)
       }
     }
     alias cell with_cell_td
