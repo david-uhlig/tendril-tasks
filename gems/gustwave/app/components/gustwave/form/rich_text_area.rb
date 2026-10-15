@@ -8,11 +8,11 @@ module Gustwave
       style :sticky_toolbar_container,
             "group-focus-within:sticky group-hover:sticky top-0 z-10"
 
-      renders_one :toolbar_slot
+      renders_one_extensible :toolbar_slot, ->(&block) { block&.call }
       alias with_toolbar with_toolbar_slot
       alias toolbar with_toolbar_slot
 
-      renders_one :editor_slot
+      renders_one_extensible :editor_slot, ->(&block) { block&.call }
       alias with_editor with_editor_slot
       alias editor with_editor_slot
 
