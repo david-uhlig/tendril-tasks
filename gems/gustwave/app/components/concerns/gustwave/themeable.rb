@@ -70,6 +70,16 @@ module Gustwave
   #   Rails.application.config.to_prepare do
   #     Gustwave::Button.register_theme :funky, "Ui::Buttons::Funky"
   #   end
+  #
+  # Don't register them in an initializer outside +to_prepare+: initializers
+  # run once at boot, and the reloaded subject class won't know the theme.
+  #
+  # Alternatively, subclass the subject. Subclasses inherit the registered
+  # themes and are reloaded along with their own registrations:
+  #
+  #   class Ui::Button < Gustwave::Button
+  #     register_theme :funky, "Ui::Buttons::Funky"
+  #   end
   module Themeable
     extend ActiveSupport::Concern
 
