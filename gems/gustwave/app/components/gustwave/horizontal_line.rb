@@ -50,41 +50,32 @@ module Gustwave
   #  <% end %>
   #
   class HorizontalLine < Gustwave::Component
-    style :base,
-          "mx-auto border-0 rounded-sm dark:bg-gray-700"
+    base "mx-auto border-0 rounded-sm dark:bg-gray-700", unless: { scheme: :none }
 
-    style :scheme,
-          default: :default,
-          states: {
-            none: "",
-            default: "w-full h-px my-8 bg-gray-200",
-            trimmed: "w-48 h-1 my-4 bg-gray-100 md:my-10",
-            squared: "w-8 h-8 my-8 bg-gray-200 md:my-12"
-          }
+    variant :scheme, default: :default, values: {
+      default: "w-full h-px my-8 bg-gray-200",
+      trimmed: "w-48 h-1 my-4 bg-gray-100 md:my-10",
+      squared: "w-8 h-8 my-8 bg-gray-200 md:my-12"
+    }
 
-    style :visual_text,
-          "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
+    part :visual_text,
+         "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
 
-    style :visual_svg,
-          "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
+    part :visual_svg,
+         "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
 
-    style :content_text,
-          "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
+    part :content_text,
+         "absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900"
 
-    style :content_block,
-          "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
+    part :content_block,
+         "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
 
     renders_one_extensible :visual, types: {
       text: ->(text, **options) {
-        options.deep_symbolize_keys!
-        options[:class] = styles(visual_text: true,
-                                 custom: options.delete(:class))
-        tag.span(text, **options)
+        tag.span(text, **attributes_for(:visual_text, options))
       },
       svg: ->(**options, &block) {
-        options = normalize_html_attributes(**options)
-        options[:class] = styles(visual_svg: true,
-                                 custom: options.delete(:class))
+        options = attributes_for(:visual_svg, normalize_html_attributes(**options))
         options[:"aria-hidden"] = options.delete(:"aria-hidden") || "true"
 
         tag.div(block.call, **options)
@@ -97,16 +88,9 @@ module Gustwave
     #
     # @param scheme [Symbol] the scheme to be used for styling the horizontal line.
     # @param options [Hash] additional HTML options to be applied to the +<hr>+ element.
-    def initialize(scheme: default_layer_state(:scheme),
-                   **options)
-      options.symbolize_keys!
-      layers = {}
-      layers[:base] = :on unless scheme == :none
-      layers[:scheme] = scheme
-      layers[:custom] = options.delete(:class)
-
-      options[:class] = styles(**layers)
-      @options = options
+    def initialize(scheme: DEFAULT, **options)
+      style_with(scheme:)
+      @options = attributes_for(options)
     end
 
     # Renders the horizontal line `<hr>` with the specified options.
@@ -122,12 +106,12 @@ module Gustwave
           visual
         # Everything besides pure text
         when content.is_a?(ActiveSupport::SafeBuffer)
-          tag.div(class: styles(content_block: true)) do
+          tag.div(class: classes(:content_block)) do
             content
           end
         # Pure text
         else
-          tag.span(content, class: styles(content_text: true)) do
+          tag.span(content, class: classes(:content_text)) do
             content
           end
         end

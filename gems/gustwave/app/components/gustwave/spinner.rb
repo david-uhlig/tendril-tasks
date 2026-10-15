@@ -5,30 +5,24 @@ module Gustwave
   class Spinner < Gustwave::Component
     include Gustwave::Positionable
 
-    style :base, "inline animate-spin"
+    part :icon, "inline animate-spin", unless: { scheme: :none }
 
-    style :scheme,
-          default: :blue,
-          states: {
-            none: "",
-            base: "",
-            blue: "text-gray-200 dark:text-gray-600 fill-blue-600",
-            dark: "text-gray-200 dark:text-gray-600 fill-gray-600 dark:fill-gray-300",
-            green: "text-gray-200 dark:text-gray-600 fill-green-500",
-            red: "text-gray-200 dark:text-gray-600 fill-red-600",
-            yellow: "text-gray-200 dark:text-gray-600 fill-yellow-400",
-            pink: "text-gray-200 dark:text-gray-600 fill-pink-600",
-            purple: "text-gray-200 dark:text-gray-600 fill-purple-600"
-          }
+    variant :scheme, part: :icon, default: :blue, values: {
+      base: "",
+      blue: "text-gray-200 dark:text-gray-600 fill-blue-600",
+      dark: "text-gray-200 dark:text-gray-600 fill-gray-600 dark:fill-gray-300",
+      green: "text-gray-200 dark:text-gray-600 fill-green-500",
+      red: "text-gray-200 dark:text-gray-600 fill-red-600",
+      yellow: "text-gray-200 dark:text-gray-600 fill-yellow-400",
+      pink: "text-gray-200 dark:text-gray-600 fill-pink-600",
+      purple: "text-gray-200 dark:text-gray-600 fill-purple-600"
+    }
 
-    style :align,
-          default: :none,
-          states: {
-            none: "",
-            left: "text-left rtl:text-right",
-            center: "text-center",
-            right: "text-right rtl:text-left"
-          }
+    variant :align, default: :none, values: {
+      left: "text-left rtl:text-right",
+      center: "text-center",
+      right: "text-right rtl:text-left"
+    }
 
     # @param text [String, nil] the text to display to screen readers. Takes precedence over block content. If neither is provided, a i18n version of "Loading..." is used. Block content must render sr-only markup itself, e.g. "<span class='sr-only'>Loading...</span>".
     # @param scheme [Symbol] the color scheme for the spinner. To further customize use `fill-{*}` to change the main colors, use `text-{*}` to change the background by passing these CSS classes through the options hash.
@@ -39,30 +33,18 @@ module Gustwave
     #
     # @see Gustwave::Icon
     # @see Gustwave::Positionable for positioning options
-    def initialize(text = nil, scheme: :blue, size: :md, align: :none, position: :none, **options)
+    def initialize(text = nil, scheme: DEFAULT, size: :md, align: DEFAULT, position: DEFAULT, **options)
       @text = sr_only_text(text)
-      @config = configure_html_attributes(
-        options,
-        role: "status",
-        class: styles(align:, position:)
-      )
+      style_with(scheme:, align:, position:)
+      @config = { role: "status" }.merge(attributes_for(options))
       @size = size
-      @kwargs = {
-        base: (true unless scheme == :none),
-        scheme:
-      }
       configure_icon
     end
 
     # @param options [Hash] additional HTML attributes and component options for the Gustwave::Icon component.
     def configure_icon(**options)
-      @icon_config = configure_component(
-        options,
-        size: @size,
-        position: :standalone,
-        aria_hidden: true,
-        class: styles(**kwargs)
-      )
+      @icon_config = { size: @size, position: :standalone, aria_hidden: true }
+                       .merge(attributes_for(:icon, options))
     end
 
     def before_render
@@ -76,7 +58,7 @@ module Gustwave
     end
 
     private
-    attr_reader :config, :icon_config, :text, :kwargs
+    attr_reader :config, :icon_config, :text
 
     def sr_only_text(text = nil)
       return nil unless text.present?

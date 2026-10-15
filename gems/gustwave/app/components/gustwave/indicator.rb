@@ -17,46 +17,40 @@ module Gustwave
   class Indicator < Gustwave::Component
     include Gustwave::Positionable
 
-    style :base, "flex rounded-full aspect-square"
-
-    style :text, "aspect-auto px-1 items-center justify-center text-white border-white"
-
-    style :pulse, "animate-pulse"
-
-    style :size,
-          default: :auto,
-          states: {
-            none: "",
-            auto: "h-[1em] min-w-[1em] text-[0.8em] font-semibold",
-            xs: "h-2 min-w-2 text-xs font-normal",
-            sm: "h-3 min-w-3 text-xs font-medium",
-            md: "h-4 min-w-4 text-xs font-medium",
-            lg: "h-6 min-w-6 text-sm font-semibold",
-            xl: "h-8 min-w-8 text-md font-bold"
-          }
+    base "flex rounded-full aspect-square", unless: { scheme: :none }
 
     # TODO consistently add a :base style option to all components
-    style :scheme,
-          default: :gray,
-          states: {
-            none: "",
-            gray: "bg-gray-200",
-            dark: "bg-gray-900 dark:bg-gray-700",
-            blue: "bg-blue-600",
-            green: "bg-green-500",
-            red: "bg-red-500",
-            purple: "bg-purple-500",
-            indigo: "bg-indigo-500",
-            yellow: "bg-yellow-300",
-            teal: "bg-teal-500",
-            white: "bg-white"
-          }
+    variant :scheme, default: :gray, values: {
+      gray: "bg-gray-200",
+      dark: "bg-gray-900 dark:bg-gray-700",
+      blue: "bg-blue-600",
+      green: "bg-green-500",
+      red: "bg-red-500",
+      purple: "bg-purple-500",
+      indigo: "bg-indigo-500",
+      yellow: "bg-yellow-300",
+      teal: "bg-teal-500",
+      white: "bg-white"
+    }
+
+    variant :size, default: :auto, values: {
+      auto: "h-[1em] min-w-[1em] text-[0.8em] font-semibold",
+      xs: "h-2 min-w-2 text-xs font-normal",
+      sm: "h-3 min-w-3 text-xs font-medium",
+      md: "h-4 min-w-4 text-xs font-medium",
+      lg: "h-6 min-w-6 text-sm font-semibold",
+      xl: "h-8 min-w-8 text-md font-bold"
+    }
+
+    toggle :pulse, "animate-pulse"
+
+    # Set when the indicator renders text or block content.
+    toggle :text, "aspect-auto px-1 items-center justify-center text-white border-white"
+
+    part :legend, "flex items-center text-sm font-medium text-gray-900 dark:text-white gap-1.5"
 
     renders_one_extensible :legend_slot, ->(text = nil, **options, &block) {
-      @legend_config = configure_html_attributes(
-        options,
-        class: "flex items-center text-sm font-medium text-gray-900 dark:text-white gap-1.5"
-      )
+      @legend_config = attributes_for(:legend, options)
       @legend_content = text || block.call
 
       nil
@@ -70,25 +64,19 @@ module Gustwave
     # @param position [Symbol] positions the indicator on another component. The enclosing component must be +relative+ positioned.
     # @param options [Hash] additional options for the HTML tag, like class.
     def initialize(text = nil,
-                   scheme: :gray,
-                   size: :auto,
+                   scheme: DEFAULT,
+                   size: DEFAULT,
                    pulse: false,
-                   position: :none,
+                   position: DEFAULT,
                    **options)
       @text = text
-      @kwargs = { scheme:, size:, pulse:, position: }
+      style_with(scheme:, size:, pulse:, position:)
       @options = options
     end
 
     def before_render
-      @kwargs.merge!(text: true) if text.present? || content.present?
-      @config = configure_html_attributes(
-        options,
-        class: styles(
-          base: (true unless @kwargs[:scheme] == :none),
-          **kwargs
-        )
-      )
+      style_with(text: true) if text.present? || content.present?
+      @config = attributes_for(options)
     end
 
     def call
@@ -100,7 +88,7 @@ module Gustwave
     end
 
     private
-    attr_reader :config, :legend_config, :legend_content, :options, :kwargs, :text
+    attr_reader :config, :legend_config, :legend_content, :options, :text
 
     def render_legend_wrapper(&block)
       return block.call unless legend_slot?
