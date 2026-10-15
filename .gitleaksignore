@@ -1,0 +1,11 @@
+# Findings in commits that are already part of the history. Fingerprints are
+# `commit:file:rule:line`. New findings still fail `mise run gitleaks` and CI.
+
+# A fake token that only looks like a real one. It appears in the example
+# snippets of three doc comments, committed in April 2025.
+bdad89ef375ace6acc1afc96e8b6c88f102534c2:app/notifiers/delivery_methods/rocket_chat/private_message.rb:generic-api-key:10
+f1f396f3232d04cf57c9c52e78112573623762f7:app/notifiers/delivery_methods/rocket_chat.rb:generic-api-key:14
+411d57344c94fab10d7cdce9d46288be18631504:config/configs/rocket_chat_notifier_config.rb:generic-api-key:25
+
+# The commented-out `config.secret_key` that the Devise generator writes.
+30415b35000ad3c58b1041023254004a481700d2:config/initializers/devise.rb:generic-api-key:17

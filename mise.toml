@@ -1,5 +1,7 @@
 # Run `mise install` to install tools
 [tools]
+gitleaks = "latest"
+lychee = "latest"
 node = "24"
 npm = "latest"
 ruby = "4.0.7"
@@ -9,7 +11,7 @@ zizmor = "latest"
 description = "Run the continuous integration suite in parallel."
 run = [
     { task = "ci:setup" },
-    { tasks = ["audit", "brakeman", "rubocop", "herb", "versions", "test:rspec", "test:rspec:gustwave"] },
+    { tasks = ["audit", "brakeman", "gitleaks", "rubocop", "herb", "versions", "test:rspec", "test:rspec:gustwave"] },
     { task = "test:seeds" }
 ]
 
@@ -19,6 +21,7 @@ run = [
     { task = "ci:setup" },
     { task = "audit" },
     { task = "brakeman" },
+    { task = "gitleaks" },
     { task = "rubocop" },
     { task = "herb" },
     { task = "versions" },
@@ -54,6 +57,16 @@ depends = ["zizmor"]
 [tasks."brakeman"]
 description = "Security: Brakeman code analysis"
 run = "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
+
+[tasks."gitleaks"]
+description = "Security: Scan the git history for committed secrets"
+run = "gitleaks git --no-banner --redact"
+
+# Not part of CI: external sites go down and rate limit, which would fail
+# unrelated builds.
+[tasks."links"]
+description = "Check that links in the Markdown docs resolve"
+run = "lychee --no-progress --exclude-loopback README.md CHANGELOG.md RELEASING.md CODE_OF_CONDUCT.md .self-hosting gems/*/README.md"
 
 [tasks."rubocop"]
 description = "Style: Ruby"
