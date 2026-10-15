@@ -22,7 +22,7 @@ RSpec.describe "Extending Gustwave::Buttons::Base", type: :component do
     example.run
   ensure
     base.extensible_slots = extensible_slots
-    %i[with_leading_visual_badge with_leading_visual_badge_content build_leading_visual_badge].each do |method_name|
+    %i[with_leading_visual_badge with_leading_visual_badge_content build_slot_leading_visual_badge].each do |method_name|
       base.send(:remove_method, method_name)
     end
   end
