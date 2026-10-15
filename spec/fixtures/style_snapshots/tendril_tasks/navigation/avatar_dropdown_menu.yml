@@ -1,10 +1,13 @@
 ---
-menu user=[:with_avatar]:
+menu user=[]:
 - 'div data-dropdown-placement="bottom-start" data-dropdown-toggle="avatar-dropdown-menu":
   cursor-pointer inline-flex'
-- 'img role="img" src="/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--ecbcd42a375a10b1a96989626a4963b3121f2eb8/avatar.png"
-  type="button": border-3 border-white dark:border-gray-900 dark:ring-gray-700 h-10
-  ring-1 ring-gray-200 rounded-full shadow-md sm:h-14 sm:w-14 w-10'
+- 'div type="button": bg-gray-100 border-3 border-white dark:bg-gray-600 dark:border-gray-900
+  dark:ring-gray-700 h-10 overflow-hidden relative ring-1 ring-gray-200 rounded-full
+  shadow-md sm:h-14 sm:w-14 w-10'
+- 'svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg":
+  -bottom-1 absolute text-gray-400'
+- path clip-rule="evenodd" fill-rule="evenodd"
 - 'div id="avatar-dropdown-menu": bg-white dark:bg-gray-700 divide-gray-100 divide-y
   hidden min-w-44 rounded-lg shadow-md w-auto z-10'
 - 'header: dark:text-white px-4 py-2 space-y-1 text-gray-900 text-sm'
@@ -32,12 +35,15 @@ menu user=[:with_avatar]:
 - 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
   xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-6'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-menu user=[:with_avatar, :admin]:
+menu user=[:admin]:
 - 'div data-dropdown-placement="bottom-start" data-dropdown-toggle="avatar-dropdown-menu":
   cursor-pointer inline-flex'
-- 'img role="img" src="/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MiwicHVyIjoiYmxvYl9pZCJ9fQ==--5a8ef011f13a631f039b1a67431d2a950cd29b20/avatar.png"
-  type="button": border-3 border-white dark:border-gray-900 dark:ring-gray-700 h-10
-  ring-1 ring-gray-200 rounded-full shadow-md sm:h-14 sm:w-14 w-10'
+- 'div type="button": bg-gray-100 border-3 border-white dark:bg-gray-600 dark:border-gray-900
+  dark:ring-gray-700 h-10 overflow-hidden relative ring-1 ring-gray-200 rounded-full
+  shadow-md sm:h-14 sm:w-14 w-10'
+- 'svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg":
+  -bottom-1 absolute text-gray-400'
+- path clip-rule="evenodd" fill-rule="evenodd"
 - 'div id="avatar-dropdown-menu": bg-white dark:bg-gray-700 divide-gray-100 divide-y
   hidden min-w-44 rounded-lg shadow-md w-auto z-10'
 - 'header: dark:text-white px-4 py-2 space-y-1 text-gray-900 text-sm'

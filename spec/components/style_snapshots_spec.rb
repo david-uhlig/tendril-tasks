@@ -97,7 +97,9 @@ RSpec.describe "Style snapshots", type: :component do
   end
 
   style_snapshot "TendrilTasks::Navigation::AvatarDropdownMenu" do
-    group :menu, user: [ %i[with_avatar], %i[with_avatar admin] ] do |user:|
+    # Users without an uploaded avatar: an ActiveStorage URL is signed with
+    # secret_key_base and embeds the blob id, so it differs between machines.
+    group :menu, user: [ [], %i[admin] ] do |user:|
       as(create(:user, *user))
       TendrilTasks::Navigation::AvatarDropdownMenu.new
     end
