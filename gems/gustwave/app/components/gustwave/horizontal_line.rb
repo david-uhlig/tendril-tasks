@@ -74,7 +74,7 @@ module Gustwave
     style :content_block,
           "absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900"
 
-    renders_one :visual, types: {
+    renders_one_extensible :visual, types: {
       text: ->(text, **options) {
         options.deep_symbolize_keys!
         options[:class] = styles(visual_text: true,

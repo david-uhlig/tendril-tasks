@@ -8,6 +8,7 @@ module Gustwave
     include Gustwave::Mapping
     include Gustwave::Styleable
     include Gustwave::Themeable
+    include Gustwave::ExtensibleSlots
     include Gustwave::FetchOrFallbackHelper
     include Gustwave::TailwindHelper
 
