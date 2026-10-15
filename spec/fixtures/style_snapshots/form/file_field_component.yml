@@ -1,0 +1,25 @@
+---
+field label=nil class=nil:
+- div
+- 'label for="user_avatar": block dark:text-white font-medium mb-2 text-gray-900 text-sm'
+- 'input id="user_avatar" name="user[avatar]" type="file": bg-gray-50 block border
+  border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+  dark:text-gray-400 focus:outline-hidden rounded-lg text-gray-900 text-sm w-full'
+field label=nil class="px-0 bg-black text-white":
+- div
+- 'label for="user_avatar": block dark:text-white font-medium mb-2 text-gray-900 text-sm'
+- 'input id="user_avatar" name="user[avatar]" type="file": bg-black block border border-gray-300
+  cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400
+  focus:outline-hidden px-0 rounded-lg text-sm text-white w-full'
+field label="Avatar" class=nil:
+- div
+- 'label for="user_avatar": block dark:text-white font-medium mb-2 text-gray-900 text-sm'
+- 'input id="user_avatar" name="user[avatar]" type="file": bg-gray-50 block border
+  border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+  dark:text-gray-400 focus:outline-hidden rounded-lg text-gray-900 text-sm w-full'
+field label="Avatar" class="px-0 bg-black text-white":
+- div
+- 'label for="user_avatar": block dark:text-white font-medium mb-2 text-gray-900 text-sm'
+- 'input id="user_avatar" name="user[avatar]" type="file": bg-black block border border-gray-300
+  cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400
+  focus:outline-hidden px-0 rounded-lg text-sm text-white w-full'

@@ -1,0 +1,101 @@
+---
+badge scheme=:green size=:xs pill=true border=true class=nil:
+- 'span: bg-green-100 border border-green-400 dark:bg-green-900 dark:text-green-300
+  font-medium inline-flex opacity-80 px-2.5 py-0.5 rounded-full text-green-800 text-xs
+  whitespace-nowrap'
+badge scheme=:green size=:xs pill=true border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-green-400 dark:bg-green-900 dark:text-green-300 font-medium
+  inline-flex opacity-80 px-0 py-0.5 rounded-full text-white text-xs whitespace-nowrap'
+badge scheme=:green size=:xs pill=true border=false class=nil:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium inline-flex
+  opacity-80 px-2.5 py-0.5 rounded-full text-green-800 text-xs whitespace-nowrap'
+badge scheme=:green size=:xs pill=true border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-green-900 dark:text-green-300 font-medium inline-flex opacity-80
+  px-0 py-0.5 rounded-full text-white text-xs whitespace-nowrap'
+badge scheme=:green size=:xs pill=false border=true class=nil:
+- 'span: bg-green-100 border border-green-400 dark:bg-green-900 dark:text-green-300
+  font-medium inline-flex opacity-80 px-2.5 py-0.5 rounded-sm text-green-800 text-xs
+  whitespace-nowrap'
+badge scheme=:green size=:xs pill=false border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-green-400 dark:bg-green-900 dark:text-green-300 font-medium
+  inline-flex opacity-80 px-0 py-0.5 rounded-sm text-white text-xs whitespace-nowrap'
+badge scheme=:green size=:xs pill=false border=false class=nil:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium inline-flex
+  opacity-80 px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+badge scheme=:green size=:xs pill=false border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-green-900 dark:text-green-300 font-medium inline-flex opacity-80
+  px-0 py-0.5 rounded-sm text-white text-xs whitespace-nowrap'
+badge scheme=:green size=:lg pill=true border=true class=nil:
+- 'span: bg-green-100 border border-green-400 dark:bg-green-900 dark:text-green-300
+  font-semibold inline-flex opacity-80 px-2.5 py-0.5 rounded-full text-green-800 text-lg
+  whitespace-nowrap'
+badge scheme=:green size=:lg pill=true border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-green-400 dark:bg-green-900 dark:text-green-300 font-semibold
+  inline-flex opacity-80 px-0 py-0.5 rounded-full text-lg text-white whitespace-nowrap'
+badge scheme=:green size=:lg pill=true border=false class=nil:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-semibold inline-flex
+  opacity-80 px-2.5 py-0.5 rounded-full text-green-800 text-lg whitespace-nowrap'
+badge scheme=:green size=:lg pill=true border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-green-900 dark:text-green-300 font-semibold inline-flex
+  opacity-80 px-0 py-0.5 rounded-full text-lg text-white whitespace-nowrap'
+badge scheme=:green size=:lg pill=false border=true class=nil:
+- 'span: bg-green-100 border border-green-400 dark:bg-green-900 dark:text-green-300
+  font-semibold inline-flex opacity-80 px-2.5 py-0.5 rounded-sm text-green-800 text-lg
+  whitespace-nowrap'
+badge scheme=:green size=:lg pill=false border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-green-400 dark:bg-green-900 dark:text-green-300 font-semibold
+  inline-flex opacity-80 px-0 py-0.5 rounded-sm text-lg text-white whitespace-nowrap'
+badge scheme=:green size=:lg pill=false border=false class=nil:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-semibold inline-flex
+  opacity-80 px-2.5 py-0.5 rounded-sm text-green-800 text-lg whitespace-nowrap'
+badge scheme=:green size=:lg pill=false border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-green-900 dark:text-green-300 font-semibold inline-flex
+  opacity-80 px-0 py-0.5 rounded-sm text-lg text-white whitespace-nowrap'
+badge scheme=:red size=:xs pill=true border=true class=nil:
+- 'span: bg-red-100 border border-red-400 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex opacity-80 px-2.5 py-0.5 rounded-full text-red-800 text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=true border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-red-400 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex opacity-80 px-0 py-0.5 rounded-full text-white text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=true border=false class=nil:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium inline-flex opacity-80
+  px-2.5 py-0.5 rounded-full text-red-800 text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=true border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-red-900 dark:text-red-300 font-medium inline-flex opacity-80
+  px-0 py-0.5 rounded-full text-white text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=false border=true class=nil:
+- 'span: bg-red-100 border border-red-400 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex opacity-80 px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=false border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-red-400 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex opacity-80 px-0 py-0.5 rounded-sm text-white text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=false border=false class=nil:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium inline-flex opacity-80
+  px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+badge scheme=:red size=:xs pill=false border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-red-900 dark:text-red-300 font-medium inline-flex opacity-80
+  px-0 py-0.5 rounded-sm text-white text-xs whitespace-nowrap'
+badge scheme=:red size=:lg pill=true border=true class=nil:
+- 'span: bg-red-100 border border-red-400 dark:bg-red-900 dark:text-red-300 font-semibold
+  inline-flex opacity-80 px-2.5 py-0.5 rounded-full text-lg text-red-800 whitespace-nowrap'
+badge scheme=:red size=:lg pill=true border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-red-400 dark:bg-red-900 dark:text-red-300 font-semibold
+  inline-flex opacity-80 px-0 py-0.5 rounded-full text-lg text-white whitespace-nowrap'
+badge scheme=:red size=:lg pill=true border=false class=nil:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-semibold inline-flex opacity-80
+  px-2.5 py-0.5 rounded-full text-lg text-red-800 whitespace-nowrap'
+badge scheme=:red size=:lg pill=true border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-red-900 dark:text-red-300 font-semibold inline-flex opacity-80
+  px-0 py-0.5 rounded-full text-lg text-white whitespace-nowrap'
+badge scheme=:red size=:lg pill=false border=true class=nil:
+- 'span: bg-red-100 border border-red-400 dark:bg-red-900 dark:text-red-300 font-semibold
+  inline-flex opacity-80 px-2.5 py-0.5 rounded-sm text-lg text-red-800 whitespace-nowrap'
+badge scheme=:red size=:lg pill=false border=true class="px-0 bg-black text-white":
+- 'span: bg-black border border-red-400 dark:bg-red-900 dark:text-red-300 font-semibold
+  inline-flex opacity-80 px-0 py-0.5 rounded-sm text-lg text-white whitespace-nowrap'
+badge scheme=:red size=:lg pill=false border=false class=nil:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-semibold inline-flex opacity-80
+  px-2.5 py-0.5 rounded-sm text-lg text-red-800 whitespace-nowrap'
+badge scheme=:red size=:lg pill=false border=false class="px-0 bg-black text-white":
+- 'span: bg-black dark:bg-red-900 dark:text-red-300 font-semibold inline-flex opacity-80
+  px-0 py-0.5 rounded-sm text-lg text-white whitespace-nowrap'

@@ -1,0 +1,9 @@
+---
+rich_text class=nil:
+- 'div lang="en": *:hyphens-auto'
+- 'div: trix-content'
+- p
+rich_text class="px-0 bg-black text-white":
+- 'div lang="en": *:hyphens-auto bg-black px-0 text-white'
+- 'div: trix-content'
+- p

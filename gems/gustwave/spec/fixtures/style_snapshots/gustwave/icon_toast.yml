@@ -1,0 +1,511 @@
+---
+toast scheme=:none dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- div
+- svg
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:none dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- div
+- svg
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:info dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-blue-100 dark:bg-blue-800 dark:text-blue-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-blue-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:info dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-blue-100 dark:bg-blue-800 dark:text-blue-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-blue-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:notice dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-blue-100 dark:bg-blue-800 dark:text-blue-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-blue-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:notice dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-blue-100 dark:bg-blue-800 dark:text-blue-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-blue-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:success dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:success dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:error dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-red-100 dark:bg-red-800 dark:text-red-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-red-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:error dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-red-100 dark:bg-red-800 dark:text-red-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-red-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:failure dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-red-100 dark:bg-red-800 dark:text-red-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-red-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:failure dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-red-100 dark:bg-red-800 dark:text-red-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-red-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:warning dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-orange-100 dark:bg-orange-700 dark:text-orange-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-orange-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:warning dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-orange-100 dark:bg-orange-700 dark:text-orange-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-orange-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+toast scheme=:alert dismissible=true:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-orange-100 dark:bg-orange-700 dark:text-orange-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-orange-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+toast scheme=:alert dismissible=false:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-orange-100 dark:bg-orange-700 dark:text-orange-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-orange-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+layout position=:none icon=nil class=nil:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:none icon=nil class="px-0 bg-black text-white":
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-black dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center px-0 rounded-lg shrink-0 text-white w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:none icon=:check class=nil:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:none icon=:check class="px-0 bg-black text-white":
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 flex items-center max-w-xs p-4 rounded-lg shadow-sm
+  text-gray-500 w-full'
+- 'div: bg-black dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center px-0 rounded-lg shrink-0 text-white w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:top_left icon=nil class=nil:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 fixed flex items-center left-5 max-w-xs p-4
+  rounded-lg shadow-sm text-gray-500 top-5 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:top_left icon=nil class="px-0 bg-black text-white":
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 fixed flex items-center left-5 max-w-xs p-4
+  rounded-lg shadow-sm text-gray-500 top-5 w-full'
+- 'div: bg-black dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center px-0 rounded-lg shrink-0 text-white w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:top_left icon=:check class=nil:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 fixed flex items-center left-5 max-w-xs p-4
+  rounded-lg shadow-sm text-gray-500 top-5 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:top_left icon=:check class="px-0 bg-black text-white":
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  dark:bg-gray-800 dark:text-gray-400 fixed flex items-center left-5 max-w-xs p-4
+  rounded-lg shadow-sm text-gray-500 top-5 w-full'
+- 'div: bg-black dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center px-0 rounded-lg shrink-0 text-white w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:bottom_right icon=nil class=nil:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  bottom-5 dark:bg-gray-800 dark:text-gray-400 fixed flex items-center max-w-xs p-4
+  right-5 rounded-lg shadow-sm text-gray-500 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:bottom_right icon=nil class="px-0 bg-black text-white":
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  bottom-5 dark:bg-gray-800 dark:text-gray-400 fixed flex items-center max-w-xs p-4
+  right-5 rounded-lg shadow-sm text-gray-500 w-full'
+- 'div: bg-black dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center px-0 rounded-lg shrink-0 text-white w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:bottom_right icon=:check class=nil:
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  bottom-5 dark:bg-gray-800 dark:text-gray-400 fixed flex items-center max-w-xs p-4
+  right-5 rounded-lg shadow-sm text-gray-500 w-full'
+- 'div: bg-green-100 dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center rounded-lg shrink-0 text-green-500 w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+layout position=:bottom_right icon=:check class="px-0 bg-black text-white":
+- 'div data-action="mouseover->animate-and-remove#pause mouseout->animate-and-remove#continue"
+  data-controller="animate-and-remove" id="toast-r0000001" role="alert": bg-white
+  bottom-5 dark:bg-gray-800 dark:text-gray-400 fixed flex items-center max-w-xs p-4
+  right-5 rounded-lg shadow-sm text-gray-500 w-full'
+- 'div: bg-black dark:bg-green-800 dark:text-green-200 h-8 inline-flex items-center
+  justify-center px-0 rounded-lg shrink-0 text-white w-8'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div: font-normal ms-3 text-sm'
+- 'button aria-label="Close" data-dismiss-target="#toast-r0000001" type="button":
+  -mx-1.5 -my-1.5 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-500 focus:ring-2 focus:ring-gray-300 font-medium h-8 hover:bg-gray-100
+  hover:text-gray-900 inline-flex items-center justify-center p-1.5 rounded-lg text-gray-400
+  text-sm w-8'
+- 'span: sr-only'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"

@@ -1,0 +1,409 @@
+---
+grid orientation=:responsive buttons=1 grid_options={}:
+- 'div: gap-2 grid grid-cols-1 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=1 grid_options={class: "gap-0"}':
+- 'div: gap-0 grid grid-cols-1 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=2 grid_options={class: "gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=2 grid_options={class: "grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=3 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=3 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=4 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:responsive buttons=4 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=1 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=1 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=2 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=2 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=3 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=3 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=4 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:vertical buttons=4 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=1 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=1 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=2 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=2 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=3 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=3 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=4 grid_options={class: "sm:grid-cols-2 gap-2 grid text-center grid-cols-1"}':
+- 'div: gap-2 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+'grid orientation=:horizontal buttons=4 grid_options={class: "sm:grid-cols-2 grid text-center grid-cols-1 gap-0"}':
+- 'div: gap-0 grid grid-cols-1 sm:grid-cols-2 text-center'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'
+- 'button type="button": align-bottom bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden focus:ring-4
+  focus:ring-gray-100 focus:z-10 font-medium h-12 hover:bg-gray-100 hover:text-blue-700
+  overflow-hidden px-5 py-3 rounded-lg text-base text-center text-gray-900 w-full
+  whitespace-nowrap'

@@ -1,0 +1,683 @@
+---
+scheme scheme=:none pill=false tag=:button:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:none pill=false tag=:a:
+- 'a: align-bottom disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 font-medium
+  h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:none pill=true tag=:button:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-full text-center
+  text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:none pill=true tag=:a:
+- 'a: align-bottom disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 font-medium
+  h-10 overflow-hidden px-5 py-2.5 rounded-full text-center text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:base pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 font-medium group h-10 inline-flex items-center
+  justify-center overflow-hidden p-0.5 relative rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:base pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:text-white disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium group h-10 inline-flex items-center justify-center overflow-hidden
+  p-0.5 relative rounded-lg text-center text-gray-900 text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:base pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 font-medium group h-10 inline-flex items-center
+  justify-center overflow-hidden p-0.5 relative rounded-full text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:base pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:text-white disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium group h-10 inline-flex items-center justify-center overflow-hidden
+  p-0.5 relative rounded-full text-center text-gray-900 text-sm whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_blue pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_blue pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 font-medium from-purple-600
+  group group-hover:from-purple-600 group-hover:to-blue-500 h-10 hover:text-white
+  inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-lg
+  text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_blue pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-full text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_blue pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 font-medium from-purple-600
+  group group-hover:from-purple-600 group-hover:to-blue-500 h-10 hover:text-white
+  inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-full
+  text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:cyan_to_blue pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-cyan-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-cyan-200
+  font-medium from-cyan-500 group group-hover:from-cyan-500 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:cyan_to_blue pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-cyan-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-cyan-200 font-medium from-cyan-500
+  group group-hover:from-cyan-500 group-hover:to-blue-500 h-10 hover:text-white inline-flex
+  items-center justify-center overflow-hidden p-0.5 relative rounded-lg text-center
+  text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:cyan_to_blue pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-cyan-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-cyan-200
+  font-medium from-cyan-500 group group-hover:from-cyan-500 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-full text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:cyan_to_blue pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-cyan-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-cyan-200 font-medium from-cyan-500
+  group group-hover:from-cyan-500 group-hover:to-blue-500 h-10 hover:text-white inline-flex
+  items-center justify-center overflow-hidden p-0.5 relative rounded-full text-center
+  text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:green_to_blue pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-green-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-green-200
+  font-medium from-green-400 group group-hover:from-green-400 group-hover:to-blue-600
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-600 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:green_to_blue pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-green-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-green-200 font-medium from-green-400
+  group group-hover:from-green-400 group-hover:to-blue-600 h-10 hover:text-white inline-flex
+  items-center justify-center overflow-hidden p-0.5 relative rounded-lg text-center
+  text-gray-900 text-sm to-blue-600 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:green_to_blue pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-green-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-green-200
+  font-medium from-green-400 group group-hover:from-green-400 group-hover:to-blue-600
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-full text-center text-gray-900 text-sm to-blue-600 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:green_to_blue pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-green-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-green-200 font-medium from-green-400
+  group group-hover:from-green-400 group-hover:to-blue-600 h-10 hover:text-white inline-flex
+  items-center justify-center overflow-hidden p-0.5 relative rounded-full text-center
+  text-gray-900 text-sm to-blue-600 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_pink pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-purple-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-purple-200
+  font-medium from-purple-500 group group-hover:from-purple-500 group-hover:to-pink-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-pink-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_pink pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-purple-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-purple-200 font-medium from-purple-500
+  group group-hover:from-purple-500 group-hover:to-pink-500 h-10 hover:text-white
+  inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-lg
+  text-center text-gray-900 text-sm to-pink-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_pink pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-purple-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-purple-200
+  font-medium from-purple-500 group group-hover:from-purple-500 group-hover:to-pink-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-full text-center text-gray-900 text-sm to-pink-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:purple_to_pink pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-purple-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-purple-200 font-medium from-purple-500
+  group group-hover:from-purple-500 group-hover:to-pink-500 h-10 hover:text-white
+  inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-full
+  text-center text-gray-900 text-sm to-pink-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:pink_to_orange pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-pink-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-pink-200
+  font-medium from-pink-500 group group-hover:from-pink-500 group-hover:to-orange-400
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-orange-400 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:pink_to_orange pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-pink-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-pink-200 font-medium from-pink-500
+  group group-hover:from-pink-500 group-hover:to-orange-400 h-10 hover:text-white
+  inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-lg
+  text-center text-gray-900 text-sm to-orange-400 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:pink_to_orange pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-pink-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-pink-200
+  font-medium from-pink-500 group group-hover:from-pink-500 group-hover:to-orange-400
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-full text-center text-gray-900 text-sm to-orange-400 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:pink_to_orange pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-pink-800 dark:text-white disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-pink-200 font-medium from-pink-500
+  group group-hover:from-pink-500 group-hover:to-orange-400 h-10 hover:text-white
+  inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-full
+  text-center text-gray-900 text-sm to-orange-400 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:teal_to_lime pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-lime-800 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-lime-200
+  font-medium from-teal-300 group group-hover:from-teal-300 group-hover:to-lime-300
+  h-10 inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-lg
+  text-center text-gray-900 text-sm to-lime-300 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:teal_to_lime pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-lime-800 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-lime-200
+  font-medium from-teal-300 group group-hover:from-teal-300 group-hover:to-lime-300
+  h-10 inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-lg
+  text-center text-gray-900 text-sm to-lime-300 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:teal_to_lime pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-lime-800 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-lime-200
+  font-medium from-teal-300 group group-hover:from-teal-300 group-hover:to-lime-300
+  h-10 inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-full
+  text-center text-gray-900 text-sm to-lime-300 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:teal_to_lime pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-lime-800 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-lime-200
+  font-medium from-teal-300 group group-hover:from-teal-300 group-hover:to-lime-300
+  h-10 inline-flex items-center justify-center overflow-hidden p-0.5 relative rounded-full
+  text-center text-gray-900 text-sm to-lime-300 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:red_to_yellow pill=false tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-red-400 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-red-100
+  font-medium from-red-200 group group-hover:from-red-200 group-hover:to-yellow-200
+  group-hover:via-red-300 h-10 inline-flex items-center justify-center overflow-hidden
+  p-0.5 relative rounded-lg text-center text-gray-900 text-sm to-yellow-200 via-red-300
+  whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:red_to_yellow pill=false tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-red-400 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-red-100
+  font-medium from-red-200 group group-hover:from-red-200 group-hover:to-yellow-200
+  group-hover:via-red-300 h-10 inline-flex items-center justify-center overflow-hidden
+  p-0.5 relative rounded-lg text-center text-gray-900 text-sm to-yellow-200 via-red-300
+  whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:red_to_yellow pill=true tag=:button:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-red-400 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-red-100
+  font-medium from-red-200 group group-hover:from-red-200 group-hover:to-yellow-200
+  group-hover:via-red-300 h-10 inline-flex items-center justify-center overflow-hidden
+  p-0.5 relative rounded-full text-center text-gray-900 text-sm to-yellow-200 via-red-300
+  whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+scheme scheme=:red_to_yellow pill=true tag=:a:
+- 'a: align-bottom bg-linear-to-br dark:focus:ring-red-400 dark:hover:text-gray-900
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-red-100
+  font-medium from-red-200 group group-hover:from-red-200 group-hover:to-yellow-200
+  group-hover:via-red-300 h-10 inline-flex items-center justify-center overflow-hidden
+  p-0.5 relative rounded-full text-center text-gray-900 text-sm to-yellow-200 via-red-300
+  whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+size size=:none class=nil:
+- button type="button"
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md transition-all'
+size size=:none class="px-0 bg-black text-white":
+- 'button type="button": align-bottom bg-black bg-linear-to-br dark:focus:ring-blue-800
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  px-0 relative rounded-lg text-center text-sm text-white to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md transition-all'
+size size=:xs class=nil:
+- button type="button"
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-2.5 py-2 relative rounded-md text-xs
+  transition-all'
+size size=:xs class="px-0 bg-black text-white":
+- 'button type="button": align-bottom bg-black bg-linear-to-br dark:focus:ring-blue-800
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  px-0 relative rounded-lg text-center text-sm text-white to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-2.5 py-2 relative rounded-md text-xs
+  transition-all'
+size size=:sm class=nil:
+- button type="button"
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-3 py-2 relative rounded-md text-sm
+  transition-all'
+size size=:sm class="px-0 bg-black text-white":
+- 'button type="button": align-bottom bg-black bg-linear-to-br dark:focus:ring-blue-800
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  px-0 relative rounded-lg text-center text-sm text-white to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-3 py-2 relative rounded-md text-sm
+  transition-all'
+size size=:md class=nil:
+- button type="button"
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+size size=:md class="px-0 bg-black text-white":
+- 'button type="button": align-bottom bg-black bg-linear-to-br dark:focus:ring-blue-800
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  px-0 relative rounded-lg text-center text-sm text-white to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-2.5 relative rounded-md text-sm
+  transition-all'
+size size=:lg class=nil:
+- button type="button"
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-3 relative rounded-md text-base
+  transition-all'
+size size=:lg class="px-0 bg-black text-white":
+- 'button type="button": align-bottom bg-black bg-linear-to-br dark:focus:ring-blue-800
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  px-0 relative rounded-lg text-center text-sm text-white to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-5 py-3 relative rounded-md text-base
+  transition-all'
+size size=:xl class=nil:
+- button type="button"
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-6 py-3.5 relative rounded-md text-base
+  transition-all'
+size size=:xl class="px-0 bg-black text-white":
+- 'button type="button": align-bottom bg-black bg-linear-to-br dark:focus:ring-blue-800
+  dark:text-white disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  px-0 relative rounded-lg text-center text-sm text-white to-blue-500 whitespace-nowrap'
+- 'span: bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75 ease-in
+  font-medium gap-1.5 group-hover:bg-transparent px-6 py-3.5 relative rounded-md text-base
+  transition-all'
+visual_only size=:none scheme=:purple_to_blue:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in gap-1.5 group-hover:bg-transparent inline-flex items-center px-5 py-2.5
+  relative rounded-md transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:none scheme=:none:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in gap-1.5 group-hover:bg-transparent inline-flex items-center px-5 py-2.5
+  relative rounded-md transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:xs scheme=:purple_to_blue:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-2 relative rounded-md text-xs transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:xs scheme=:none:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-2 relative rounded-md text-xs transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:sm scheme=:purple_to_blue:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-2 relative rounded-md text-sm transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:sm scheme=:none:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-2 relative rounded-md text-sm transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:md scheme=:purple_to_blue:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-2.5 relative rounded-md text-sm transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:md scheme=:none:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-2.5 relative rounded-md text-sm transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:lg scheme=:purple_to_blue:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-3 relative rounded-md text-base transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:lg scheme=:none:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-3 relative rounded-md text-base transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:xl scheme=:purple_to_blue:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-3.5 relative rounded-md text-base transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visual_only size=:xl scheme=:none:
+- 'button type="button": align-bottom disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 font-medium h-10 overflow-hidden px-5 py-2.5 rounded-lg text-center
+  text-sm whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  p-3.5 relative rounded-md text-base transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+visuals size=:none:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in gap-1.5 group-hover:bg-transparent inline-flex items-center px-5 py-2.5
+  relative rounded-md transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- img alt="" aria-hidden="true" src="https://example.com/avatar.png"
+- svg aria-hidden="true"
+- 'span aria-hidden="true": aspect-auto bg-gray-200 border-white flex items-center
+  justify-center px-1 rounded-full text-white'
+visuals size=:xs:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-2.5 py-2 relative rounded-md text-xs transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'img alt="" aria-hidden="true" src="https://example.com/avatar.png": h-4 w-auto'
+- 'svg aria-hidden="true": h-4 w-auto'
+- 'span aria-hidden="true": aspect-auto bg-gray-200 border-white flex font-medium
+  h-3 items-center justify-center min-w-3 px-1 rounded-full text-white text-xs'
+visuals size=:sm:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-3 py-2 relative rounded-md text-sm transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'img alt="" aria-hidden="true" src="https://example.com/avatar.png": h-5 w-auto'
+- 'svg aria-hidden="true": h-5 w-auto'
+- 'span aria-hidden="true": aspect-auto bg-gray-200 border-white flex font-medium
+  h-3 items-center justify-center min-w-3 px-1 rounded-full text-white text-xs'
+visuals size=:md:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-5 py-2.5 relative rounded-md text-sm transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'img alt="" aria-hidden="true" src="https://example.com/avatar.png": h-5 w-auto'
+- 'svg aria-hidden="true": h-5 w-auto'
+- 'span aria-hidden="true": aspect-auto bg-gray-200 border-white flex font-medium
+  h-4 items-center justify-center min-w-4 px-1 rounded-full text-white text-xs'
+visuals size=:lg:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-5 py-3 relative rounded-md text-base transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'img alt="" aria-hidden="true" src="https://example.com/avatar.png": h-6 w-auto'
+- 'svg aria-hidden="true": h-6 w-auto'
+- 'span aria-hidden="true": aspect-auto bg-gray-200 border-white flex font-medium
+  h-4 items-center justify-center min-w-4 px-1 rounded-full text-white text-xs'
+visuals size=:xl:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-6 py-3.5 relative rounded-md text-base transition-all'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'img alt="" aria-hidden="true" src="https://example.com/avatar.png": h-7 w-auto'
+- 'svg aria-hidden="true": h-7 w-auto'
+- 'span aria-hidden="true": aspect-auto bg-gray-200 border-white flex font-semibold
+  h-6 items-center justify-center min-w-6 px-1 rounded-full text-sm text-white'
+renderable size=:none:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in gap-1.5 group-hover:bg-transparent inline-flex items-center px-5 py-2.5
+  relative rounded-md transition-all'
+- 'span aria-hidden="true": context-size-none'
+renderable size=:xs:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-2.5 py-2 relative rounded-md text-xs transition-all'
+- 'span aria-hidden="true": context-size-xs h-4 w-auto'
+renderable size=:sm:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-3 py-2 relative rounded-md text-sm transition-all'
+- 'span aria-hidden="true": context-size-sm h-5 w-auto'
+renderable size=:md:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-5 py-2.5 relative rounded-md text-sm transition-all'
+- 'span aria-hidden="true": context-size-md h-5 w-auto'
+renderable size=:lg:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-5 py-3 relative rounded-md text-base transition-all'
+- 'span aria-hidden="true": context-size-lg h-6 w-auto'
+renderable size=:xl:
+- 'button type="button": align-bottom bg-linear-to-br dark:focus:ring-blue-800 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-blue-300
+  font-medium from-purple-600 group group-hover:from-purple-600 group-hover:to-blue-500
+  h-10 hover:text-white inline-flex items-center justify-center overflow-hidden p-0.5
+  relative rounded-lg text-center text-gray-900 text-sm to-blue-500 whitespace-nowrap'
+- 'span: align-bottom bg-white dark:bg-gray-900 dark:group-hover:bg-transparent duration-75
+  ease-in font-medium gap-1.5 group-hover:bg-transparent inline-flex items-center
+  px-6 py-3.5 relative rounded-md text-base transition-all'
+- 'span aria-hidden="true": context-size-xl h-7 w-auto'

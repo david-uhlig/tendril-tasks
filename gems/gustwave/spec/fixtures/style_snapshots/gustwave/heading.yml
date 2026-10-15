@@ -1,0 +1,116 @@
+---
+heading tag=:h1 scheme=nil responsive=false:
+- 'h1 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
+heading tag=:h1 scheme=nil responsive=true:
+- 'h1 id="title": dark:text-white font-extrabold lg:text-6xl md:text-5xl text-4xl
+  text-gray-900'
+heading tag=:h1 scheme=:none responsive=false:
+- h1 id="title"
+heading tag=:h1 scheme=:none responsive=true:
+- h1 id="title"
+heading tag=:h1 scheme=:level1 responsive=false:
+- 'h1 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
+heading tag=:h1 scheme=:level1 responsive=true:
+- 'h1 id="title": dark:text-white font-extrabold lg:text-6xl md:text-5xl text-4xl
+  text-gray-900'
+heading tag=:h1 scheme=:level2 responsive=false:
+- 'h1 id="title": dark:text-white font-extrabold text-5xl text-gray-900'
+heading tag=:h1 scheme=:level2 responsive=true:
+- 'h1 id="title": dark:text-white font-extrabold lg:text-5xl md:text-4xl text-3xl
+  text-gray-900'
+heading tag=:h1 scheme=:level3 responsive=false:
+- 'h1 id="title": dark:text-white font-bold text-4xl text-gray-900'
+heading tag=:h1 scheme=:level3 responsive=true:
+- 'h1 id="title": dark:text-white font-bold lg:text-4xl md:text-3xl text-2xl text-gray-900'
+heading tag=:h1 scheme=:level4 responsive=false:
+- 'h1 id="title": dark:text-white font-bold text-3xl text-gray-900'
+heading tag=:h1 scheme=:level4 responsive=true:
+- 'h1 id="title": dark:text-white font-bold lg:text-3xl md:text-2xl text-gray-900
+  text-xl'
+heading tag=:h1 scheme=:level5 responsive=false:
+- 'h1 id="title": dark:text-white font-semibold text-2xl text-gray-900'
+heading tag=:h1 scheme=:level5 responsive=true:
+- 'h1 id="title": dark:text-white font-semibold lg:text-2xl md:text-xl text-gray-900
+  text-lg'
+heading tag=:h1 scheme=:level6 responsive=false:
+- 'h1 id="title": dark:text-white font-semibold text-gray-900 text-xl'
+heading tag=:h1 scheme=:level6 responsive=true:
+- 'h1 id="title": dark:text-white font-semibold lg:text-xl md:text-lg text-base text-gray-900'
+heading tag=:h3 scheme=nil responsive=false:
+- 'h3 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
+heading tag=:h3 scheme=nil responsive=true:
+- 'h3 id="title": dark:text-white font-extrabold lg:text-6xl md:text-5xl text-4xl
+  text-gray-900'
+heading tag=:h3 scheme=:none responsive=false:
+- h3 id="title"
+heading tag=:h3 scheme=:none responsive=true:
+- h3 id="title"
+heading tag=:h3 scheme=:level1 responsive=false:
+- 'h3 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
+heading tag=:h3 scheme=:level1 responsive=true:
+- 'h3 id="title": dark:text-white font-extrabold lg:text-6xl md:text-5xl text-4xl
+  text-gray-900'
+heading tag=:h3 scheme=:level2 responsive=false:
+- 'h3 id="title": dark:text-white font-extrabold text-5xl text-gray-900'
+heading tag=:h3 scheme=:level2 responsive=true:
+- 'h3 id="title": dark:text-white font-extrabold lg:text-5xl md:text-4xl text-3xl
+  text-gray-900'
+heading tag=:h3 scheme=:level3 responsive=false:
+- 'h3 id="title": dark:text-white font-bold text-4xl text-gray-900'
+heading tag=:h3 scheme=:level3 responsive=true:
+- 'h3 id="title": dark:text-white font-bold lg:text-4xl md:text-3xl text-2xl text-gray-900'
+heading tag=:h3 scheme=:level4 responsive=false:
+- 'h3 id="title": dark:text-white font-bold text-3xl text-gray-900'
+heading tag=:h3 scheme=:level4 responsive=true:
+- 'h3 id="title": dark:text-white font-bold lg:text-3xl md:text-2xl text-gray-900
+  text-xl'
+heading tag=:h3 scheme=:level5 responsive=false:
+- 'h3 id="title": dark:text-white font-semibold text-2xl text-gray-900'
+heading tag=:h3 scheme=:level5 responsive=true:
+- 'h3 id="title": dark:text-white font-semibold lg:text-2xl md:text-xl text-gray-900
+  text-lg'
+heading tag=:h3 scheme=:level6 responsive=false:
+- 'h3 id="title": dark:text-white font-semibold text-gray-900 text-xl'
+heading tag=:h3 scheme=:level6 responsive=true:
+- 'h3 id="title": dark:text-white font-semibold lg:text-xl md:text-lg text-base text-gray-900'
+heading tag=:h6 scheme=nil responsive=false:
+- 'h6 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
+heading tag=:h6 scheme=nil responsive=true:
+- 'h6 id="title": dark:text-white font-extrabold lg:text-6xl md:text-5xl text-4xl
+  text-gray-900'
+heading tag=:h6 scheme=:none responsive=false:
+- h6 id="title"
+heading tag=:h6 scheme=:none responsive=true:
+- h6 id="title"
+heading tag=:h6 scheme=:level1 responsive=false:
+- 'h6 id="title": dark:text-white font-extrabold text-6xl text-gray-900'
+heading tag=:h6 scheme=:level1 responsive=true:
+- 'h6 id="title": dark:text-white font-extrabold lg:text-6xl md:text-5xl text-4xl
+  text-gray-900'
+heading tag=:h6 scheme=:level2 responsive=false:
+- 'h6 id="title": dark:text-white font-extrabold text-5xl text-gray-900'
+heading tag=:h6 scheme=:level2 responsive=true:
+- 'h6 id="title": dark:text-white font-extrabold lg:text-5xl md:text-4xl text-3xl
+  text-gray-900'
+heading tag=:h6 scheme=:level3 responsive=false:
+- 'h6 id="title": dark:text-white font-bold text-4xl text-gray-900'
+heading tag=:h6 scheme=:level3 responsive=true:
+- 'h6 id="title": dark:text-white font-bold lg:text-4xl md:text-3xl text-2xl text-gray-900'
+heading tag=:h6 scheme=:level4 responsive=false:
+- 'h6 id="title": dark:text-white font-bold text-3xl text-gray-900'
+heading tag=:h6 scheme=:level4 responsive=true:
+- 'h6 id="title": dark:text-white font-bold lg:text-3xl md:text-2xl text-gray-900
+  text-xl'
+heading tag=:h6 scheme=:level5 responsive=false:
+- 'h6 id="title": dark:text-white font-semibold text-2xl text-gray-900'
+heading tag=:h6 scheme=:level5 responsive=true:
+- 'h6 id="title": dark:text-white font-semibold lg:text-2xl md:text-xl text-gray-900
+  text-lg'
+heading tag=:h6 scheme=:level6 responsive=false:
+- 'h6 id="title": dark:text-white font-semibold text-gray-900 text-xl'
+heading tag=:h6 scheme=:level6 responsive=true:
+- 'h6 id="title": dark:text-white font-semibold lg:text-xl md:text-lg text-base text-gray-900'
+custom tag=:h2 class=nil:
+- h2 id="title"
+custom tag=:h2 class="px-0 bg-black text-white":
+- 'h2 id="title": bg-black dark:text-white font-extrabold px-0 text-6xl text-white'

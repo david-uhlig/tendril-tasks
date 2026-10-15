@@ -1,0 +1,104 @@
+---
+generic tag=:div class=nil:
+- div data-dropdown-toggle="menu"
+generic tag=:div class="px-0 bg-black text-white":
+- 'div data-dropdown-toggle="menu": bg-black cursor-pointer inline-flex px-0 text-white'
+generic tag=:span class=nil:
+- span data-dropdown-toggle="menu"
+generic tag=:span class="px-0 bg-black text-white":
+- 'span data-dropdown-toggle="menu": bg-black cursor-pointer inline-flex px-0 text-white'
+inline_button class=nil:
+- button data-dropdown-toggle="menu" type="button"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+inline_button class="px-0 bg-black text-white":
+- 'button data-dropdown-toggle="menu" type="button": align-baseline bg-black gap-0
+  inline-flex items-center px-0 text-white'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-[1.5em] w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=nil trailing_icon=nil class=nil:
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-5 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=nil trailing_icon=nil class="px-0 bg-black text-white":
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-black dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-0 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=nil trailing_icon=:check class=nil:
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-5 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=nil trailing_icon=:check class="px-0 bg-black text-white":
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-black dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-0 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=:check trailing_icon=nil class=nil:
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-5 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=:check trailing_icon=nil class="px-0 bg-black text-white":
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-black dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-0 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=:check trailing_icon=:check class=nil:
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-5 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+button icon=:check trailing_icon=:check class="px-0 bg-black text-white":
+- 'button data-dropdown-toggle="menu" type="button": align-bottom bg-black dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-1.5 h-10 hover:bg-blue-800 inline-flex
+  items-center overflow-hidden px-0 py-2.5 rounded-lg text-center text-sm text-white
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" role="img" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
