@@ -15,6 +15,7 @@ module Gustwave
       Part = Struct.new(:name, :classes, :unless, keyword_init: true)
       Variant = Struct.new(:name, :default, :values, :implicit_none, :unless, keyword_init: true)
       Toggle = Struct.new(:name, :on, :off, :per, :values, :unless, keyword_init: true)
+      Lookup = Struct.new(:name, :per, :values, keyword_init: true)
 
       # Builds the definition of +component+ from +parent+ (a Definition or
       # nil) and the component's own +declarations+, then checks it.
@@ -65,6 +66,14 @@ module Gustwave
         entry if entry.is_a?(Variant)
       end
 
+      def lookups
+        @entries.values.grep(Lookup).index_by(&:name)
+      end
+
+      def lookup(name)
+        @entries[[ :lookup, name ]]
+      end
+
       # @return [Hash{Symbol => Object}] every option's default: a variant's
       #   default value, or +false+ for a toggle.
       def defaults
@@ -76,7 +85,7 @@ module Gustwave
       # @return [Array<String>] the part's classes in declaration order.
       def classes_for(part, values)
         @entries.each_value.filter_map do |entry|
-          next if skipped?(entry, values)
+          next if entry.is_a?(Lookup) || skipped?(entry, values)
 
           case entry
           when Base then entry.classes[part]
@@ -92,7 +101,8 @@ module Gustwave
         {
           parts: parts,
           variants: options.values.grep(Variant).to_h { |v| [ v.name, { default: v.default, values: v.values.keys } ] },
-          toggles: options.values.grep(Toggle).map(&:name)
+          toggles: options.values.grep(Toggle).map(&:name),
+          lookups: lookups.transform_values { |l| { per: l.per, values: l.values.keys } }
         }
       end
 
@@ -119,9 +129,12 @@ module Gustwave
         when :extend_variant then extend_variant(name, **args)
         when :toggle then @entries[[ :option, name ]] = Toggle.new(name:, unless: args.delete(:unless) || {}, **args)
         when :extend_toggle then extend_toggle(name, **args)
+        when :lookup then @entries[[ :lookup, name ]] = Lookup.new(name:, **args)
+        when :extend_lookup then extend_lookup(name, **args)
         when :remove_part then remove(:part, name, Part)
         when :remove_variant then remove(:option, name, Variant)
         when :remove_toggle then remove(:option, name, Toggle)
+        when :remove_lookup then remove(:lookup, name, Lookup)
         end
       end
 
@@ -167,6 +180,13 @@ module Gustwave
         end
       end
 
+      def extend_lookup(name, values:)
+        lookup = existing([ :lookup, name ], Lookup, "lookup #{name.inspect}")
+        @entries[[ :lookup, name ]] = lookup.dup.tap do |entry|
+          entry.values = lookup.values.merge(values).freeze
+        end
+      end
+
       def merge_values(old, new)
         old.merge(new) { |_value, old_parts, new_parts| old_parts.merge(new_parts) }
       end
@@ -189,6 +209,8 @@ module Gustwave
       end
 
       def problems(entry)
+        return per_problems(entry, "values") if entry.is_a?(Lookup)
+
         errors = unless_problems(entry) + part_problems(entry)
         case entry
         when Variant then errors + variant_problems(entry)
@@ -205,17 +227,21 @@ module Gustwave
       end
 
       def toggle_problems(toggle)
-        return [] unless toggle.per
+        toggle.per ? per_problems(toggle, "classes") : []
+      end
 
-        variant = variant(toggle.per)
-        return [ "toggle #{toggle.name.inspect} is per #{toggle.per.inspect}, which isn't a variant" ] unless variant
+      # A +per:+ entry needs a value for every value of its variant, except an
+      # implicit +:none+, and none for values the variant doesn't have.
+      def per_problems(entry, noun)
+        variant = variant(entry.per)
+        return [ "#{label(entry)} is per #{entry.per.inspect}, which isn't a variant" ] unless variant
 
         expected = variant.values.keys - (variant.implicit_none ? [ :none ] : [])
-        missing = expected - toggle.values.keys
-        unknown = toggle.values.keys - variant.values.keys
+        missing = expected - entry.values.keys
+        unknown = entry.values.keys - variant.values.keys
         [
-          ("toggle #{toggle.name.inspect} has no classes for #{toggle.per.inspect} #{missing.inspect}" if missing.any?),
-          ("toggle #{toggle.name.inspect} has classes for unknown #{toggle.per.inspect} #{unknown.inspect}" if unknown.any?)
+          ("#{label(entry)} has no #{noun} for #{entry.per.inspect} #{missing.inspect}" if missing.any?),
+          ("#{label(entry)} has #{noun} for unknown #{entry.per.inspect} #{unknown.inspect}" if unknown.any?)
         ].compact
       end
 
