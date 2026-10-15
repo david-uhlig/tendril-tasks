@@ -28,15 +28,9 @@ module Gustwave
 
     # Returns the provided text argument, instance variable @text, or the component's content (block).
     #
-    # If `eval_content` is true, the content (block) is evaluated to ensure that any defined slots are rendered.
-    #
     # @param text [String, nil] the text to return if provided. Takes precedence over +@text+ and the content (block).
-    # @param eval_content [Boolean] whether to evaluate the content (block) to ensure slots are rendered. Defaults to true.
     # @return [String] The resolved text or content. The precedence is +text+ > +@text+ > content (block).
-    def text_or_content(text: nil, eval_content: true)
-      # Evaluate content to ensure slots are rendered
-      content if eval_content
-
+    def text_or_content(text: nil)
       text.presence || @text.presence || content
     end
   end
