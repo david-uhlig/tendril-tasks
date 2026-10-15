@@ -55,7 +55,6 @@ module Gustwave
         @options = options
         style_with(scheme:, size:)
         @scheme = style_value(:scheme)
-        @size = style_value(:size)
       end
 
       def before_render

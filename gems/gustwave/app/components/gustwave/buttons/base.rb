@@ -3,7 +3,11 @@
 module Gustwave
   module Buttons
     # Use Base as a building block for button themes
+    #
+    # Renders leading and trailing visuals, see Gustwave::Visuals.
     class Base < Gustwave::Component
+      include Gustwave::Visuals
+
       DEFAULT_TAG = :button
       TAG_OPTIONS = [ :button, :a ].freeze
 
@@ -47,9 +51,6 @@ module Gustwave
 
       toggle :pill, "rounded-full"
 
-      # Set when a leading or trailing visual is present
-      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5"
-
       # Set when no text or content block was given, to render a square button
       toggle :visual_only, per: :size, values: {
         xs: "p-2",
@@ -58,138 +59,6 @@ module Gustwave
         lg: "p-3",
         xl: "p-3.5"
       }
-
-      part :visual
-
-      # Renders visual elements to appear to the left of the button text.
-      #
-      # Typically used for icons or decorative visuals going with the button
-      # label.
-      #
-      # +aria-hidden="true"+ is automatically applied to hide the image from
-      # screen readers, as it is usually decorative and doesn't convey critical
-      # information.
-      #
-      # === Basic usage
-      #   render Gustwave::Buttons::Base.new do |button|
-      #     button.leading_image src: "icon.svg", alt: "Icon description"
-      #     "Submit"
-      #   end
-      #
-      # === With custom options
-      #   render Gustwave::Buttons::Base.new do |button|
-      #     button.leading_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
-      #     "Submit"
-      #   end
-      #
-      # === Custom visual components
-      # Pass any component with +leading_renderable+ or +trailing_renderable+.
-      # If it implements +apply_slot_context+, the button calls it when the slot
-      # is set, with:
-      # - +slot:+ [Symbol] +:leading_visuals+ or +:trailing_visuals+.
-      # - +size:+ [Symbol] the button's size: +:none+, +:xs+, +:sm+, +:md+, +:lg+ or +:xl+.
-      # - +html_attributes:+ [Hash] the attributes the built-in visuals get:
-      #   +aria: { hidden: true }+ and the size classes for +size+, e.g.
-      #   +h-6 w-auto+ for +:lg+.
-      # The button may add keys later, so accept unknown ones with +**+.
-      # Components without +apply_slot_context+ render unchanged.
-      #
-      #   class MyAvatar < Gustwave::Component
-      #     def initialize(src, **options)
-      #       @src = src
-      #       @options = options
-      #     end
-      #
-      #     def apply_slot_context(html_attributes:, **)
-      #       # The caller's own options take precedence over the button's.
-      #       @options = configure_html_attributes(@options, **html_attributes)
-      #     end
-      #
-      #     def call
-      #       image_tag @src, **@options
-      #     end
-      #   end
-      #
-      #   button.leading_renderable(MyAvatar.new("me.png", class: "rounded-full"))
-      #
-      # === Adding a visual type to every theme
-      # Extend this class whenever it loads, so the type survives code
-      # reloading. Every theme inherits it:
-      #
-      #   # config/initializers/gustwave.rb
-      #   Rails.autoloaders.main.on_load("Gustwave::Buttons::Base") do |base, _abspath|
-      #     base.extend_slot :leading_visuals, types: {
-      #       badge: ->(text) { tag.mark(text, **configure_visual_html_attributes({ class: "badge" })) }
-      #     }
-      #   end
-      #
-      #   button.with_leading_visual_badge("new")
-      #
-      # Pass your own attributes to +configure_visual_html_attributes+ as a hash,
-      # not as keywords: keywords count as defaults and replace the size classes.
-      renders_many_extensible :leading_visuals, types: {
-        icon: ->(name, theme: :outline, **options) {
-          config = configure_visual_html_attributes(
-            options,
-            theme:,
-            position: :standalone,
-          )
-          Gustwave::Icon.new(name, **config)
-        },
-        image: ->(src, **options) {
-          config = configure_visual_html_attributes(options)
-          image_tag src, **config
-        },
-        svg: ->(src = nil, **options, &block) {
-          config = configure_visual_html_attributes(options)
-          Gustwave::Svg.new(src, **config, &block)
-        },
-        indicator: ->(text = nil, **options, &block) {
-          config = configure_html_attributes(
-            options,
-            aria: { hidden: true },
-            size: derived_value(:indicator_size),
-            )
-          Gustwave::Indicator.new(text, **config, &block)
-        }
-      }, renderable: :visual_context
-      alias leading_icon with_leading_visual_icon
-      alias leading_image with_leading_visual_image
-      alias leading_svg with_leading_visual_svg
-      alias leading_indicator with_leading_visual_indicator
-      alias leading_renderable with_leading_visual_renderable
-
-      renders_many_extensible :trailing_visuals, types: {
-        icon: ->(name, theme: :outline, **options) {
-          config = configure_visual_html_attributes(
-            options,
-            theme:,
-            position: :standalone
-          )
-          Gustwave::Icon.new(name, **config)
-        },
-        image: ->(src, **options) {
-          config = configure_visual_html_attributes(options)
-          image_tag src, **config
-        },
-        svg: ->(src = nil, **options, &block) {
-          config = configure_visual_html_attributes(options)
-          Gustwave::Svg.new(src, **config, &block)
-        },
-        indicator: ->(text = nil, **options, &block) {
-          config = configure_html_attributes(
-            options,
-            aria: { hidden: true },
-            size: derived_value(:indicator_size),
-          )
-          Gustwave::Indicator.new(text, **config, &block)
-        }
-      }, renderable: :visual_context
-      alias trailing_icon with_trailing_visual_icon
-      alias trailing_image with_trailing_visual_image
-      alias trailing_svg with_trailing_visual_svg
-      alias trailing_indicator with_trailing_visual_indicator
-      alias trailing_renderable with_trailing_visual_renderable
 
       # @param text [String, nil] text to display on the button. Takes precedence over block content.
       # @param tag [Symbol] The HTML tag to use for the button. Options: :a and :button. Defaults to :button.
@@ -212,7 +81,6 @@ module Gustwave
 
         style_with(scheme:, size:, pill:)
         @scheme = style_value(:scheme)
-        @size = style_value(:size) # Required for leading/trailing slots
       end
 
       def before_render
@@ -230,28 +98,8 @@ module Gustwave
       private
       attr_reader :html_tag, :config, :scheme
 
-      def has_visual?
-        @has_visual ||= leading_visuals? || trailing_visuals?
-      end
-
       def has_content?
         @has_content ||= text_or_content.present?
-      end
-
-      # Context for components passed to the +renderable+ visual type that
-      # implement +apply_slot_context+. Documented at +leading_visuals+ under
-      # "Custom visual components"; keep both in sync.
-      def visual_context
-        { size: @size, html_attributes: configure_visual_html_attributes }
-      end
-
-      def configure_visual_html_attributes(overwrite_attrs = {}, **default_attrs)
-        configure_html_attributes(
-          overwrite_attrs,
-          aria: { hidden: true },
-          class: classes(:visual),
-          **default_attrs
-        )
       end
     end
   end
