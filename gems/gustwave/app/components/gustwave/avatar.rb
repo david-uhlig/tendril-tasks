@@ -78,7 +78,7 @@ module Gustwave
         options[:alt] ||= alt
         options[:role] ||= "img"
       end
-      style_with(scheme:, size:, border:)
+      select_options(scheme:, size:, border:)
 
       @src = src
       @wrapper_tag = tag

@@ -70,12 +70,12 @@ module Gustwave
                    position: DEFAULT,
                    **options)
       @text = text
-      style_with(scheme:, size:, pulse:, position:)
+      select_options(scheme:, size:, pulse:, position:)
       @options = options
     end
 
     def before_render
-      style_with(text: true) if text.present? || content.present?
+      select_options(text: true) if text.present? || content.present?
       @config = attributes_for(options)
     end
 

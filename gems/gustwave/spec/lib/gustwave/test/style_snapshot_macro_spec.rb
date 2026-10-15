@@ -14,7 +14,7 @@ module Gustwave
         renders_one :label_slot, ->(text) { tag.span(text, class: classes(:label)) }
 
         def initialize(size: DEFAULT, pill: false)
-          style_with(size:, pill:)
+          select_options(size:, pill:)
         end
 
         def call

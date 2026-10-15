@@ -9,12 +9,12 @@ module Gustwave
     def themes
       themes = Gustwave::Button.themes
                                .uniq { |_name, klass| klass }
-                               .to_h { |name, klass| [ name, klass.variant_values(:scheme).excluding(:base, :none) ] }
+                               .to_h { |name, klass| [ name, klass.option_values(:scheme).excluding(:base, :none) ] }
       render_with_template(locals: { themes: })
     end
 
     def sizes
-      render_with_template(locals: { sizes: Gustwave::Buttons::Base.variant_values(:size).excluding(:none) })
+      render_with_template(locals: { sizes: Gustwave::Buttons::Base.option_values(:size).excluding(:none) })
     end
 
     def pill

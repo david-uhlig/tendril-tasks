@@ -68,7 +68,7 @@ module Gustwave
       # @param options [Hash] additional options for the HTML tag.
       def initialize(tag: :div, breakpoint: DEFAULT, snap: DEFAULT, **options)
         @tag = tag
-        style_with(breakpoint:, snap:)
+        select_options(breakpoint:, snap:)
         @config = attributes_for(options)
       end
 

@@ -82,8 +82,6 @@ module Gustwave
     with_default_theme :default
     delegate_missing_to :themed_button
 
-    DEFAULT_TAG = Gustwave::Buttons::Base::DEFAULT_TAG
-    DEFAULT_TYPE = Gustwave::Buttons::Base::DEFAULT_TYPE
     DEFAULT_THEME = :default
 
     THEME_DEFAULT_SCHEME = nil
@@ -100,8 +98,8 @@ module Gustwave
     # @param [Boolean] pill Whether the button should be pill-shaped. Defaults to false.
     # @param [Hash] options Additional HTML attributes to add to the button, e.g. :class to overwrite some of the theme's styles.
     def initialize(text = nil,
-                   tag: DEFAULT_TAG,
-                   type: DEFAULT_TYPE,
+                   tag: nil,
+                   type: nil,
                    theme: DEFAULT_THEME,
                    scheme: THEME_DEFAULT_SCHEME,
                    size: THEME_DEFAULT_SIZE,

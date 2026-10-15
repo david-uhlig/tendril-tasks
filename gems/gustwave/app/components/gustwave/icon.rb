@@ -10,11 +10,11 @@ module Gustwave
   class Icon < Gustwave::Component
     ICON_PATH = File.join("gustwave", "icons").freeze
 
-    DEFAULT_ICON_THEME = :outline
-    ICON_THEME_OPTIONS = [ :outline, :solid ].freeze
-
     SVG_STROKE_WIDTH = 1.5
     DEFAULT_STROKE_WIDTH = SVG_STROKE_WIDTH
+
+    # The folder the icon is loaded from
+    option :theme, default: :outline, values: %i[outline solid]
 
     # Modifies the icon's stroke width. Supply custom values by passing +class: "*:stroke-[10px]"+ through the +options+ hash, where +10px+ is your chosen stroke width.
     variant :stroke_width, default: SVG_STROKE_WIDTH, values: {
@@ -72,16 +72,16 @@ module Gustwave
     # @param stroke_width [String] changes the stroke width of the SVG. Supported values are +0+, +0.5+, +1+, +1.5+, +2+, +2.5+, +3+, +3.5+, and +4+. Set custom values by overwriting +stroke_width+ with the +class: "*:stroke-[10px]"+ argument.
     # @param options [Hash] additional HTML attributes passed to the SVG element, e.g. +class+ or +id+.
     def initialize(name,
-                   theme: DEFAULT_ICON_THEME,
+                   theme: DEFAULT,
                    scheme: DEFAULT,
                    size: DEFAULT,
                    position: DEFAULT,
                    stroke_width: DEFAULT,
                    **options)
       @name = name.to_s.gsub("_", "-")
-      @theme = fetch_or_fallback(ICON_THEME_OPTIONS, theme, DEFAULT_ICON_THEME)
 
-      style_with(scheme:, size:, position:, stroke_width:)
+      select_options(theme:, scheme:, size:, position:, stroke_width:)
+      @theme = option_value(:theme)
       @options = attributes_for(options)
     end
 

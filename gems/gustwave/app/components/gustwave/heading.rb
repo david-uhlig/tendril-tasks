@@ -2,10 +2,10 @@
 
 module Gustwave
   class Heading < Gustwave::Component
-    DEFAULT_TAG = :h2
-    TAG_OPTIONS = [ :h1, :h2, :h3, :h4, :h5, :h6 ].freeze
-
     base "text-gray-900 dark:text-white", unless: { scheme: :none }
+
+    # The HTML tag, i.e. the heading level in the document outline
+    option :tag, default: :h2, values: %i[h1 h2 h3 h4 h5 h6]
 
     variant :scheme, default: :level1, values: {
       level1: "text-6xl font-extrabold",
@@ -34,9 +34,9 @@ module Gustwave
       **options
     )
       @text = text
-      @tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
 
-      style_with(scheme:, responsive:)
+      select_options(tag:, scheme:, responsive:)
+      @tag = option_value(:tag)
       @config = attributes_for(options)
     end
 

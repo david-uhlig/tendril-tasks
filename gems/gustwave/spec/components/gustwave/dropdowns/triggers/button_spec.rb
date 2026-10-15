@@ -53,4 +53,25 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
       expect(rendered_content).to have_selector('button>span.rounded-full.bg-red-500[aria-hidden="true"]')
     end
   end
+
+  context "with a placement and trigger event" do
+    it "omits Flowbite's defaults" do
+      render_inline(described_class.new(menu_id: "menu")) { "content" }
+
+      expect(page).not_to have_selector("button[data-dropdown-trigger], button[data-dropdown-placement]")
+    end
+
+    it "renders them otherwise, converting underscores in the placement" do
+      render_inline(described_class.new(menu_id: "menu", placement: :top_start, trigger_event: :hover)) { "content" }
+
+      expect(page).to have_selector("button[data-dropdown-placement='top-start'][data-dropdown-trigger='hover']")
+    end
+
+    it "raises for an unknown placement or trigger event" do
+      expect { described_class.new(menu_id: "menu", placement: :above) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :above for :placement/)
+      expect { described_class.new(menu_id: "menu", trigger_event: :tap) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :tap for :trigger/)
+    end
+  end
 end

@@ -230,4 +230,26 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
       expect(rendered_content).to have_selector("button img[src='https://example.com/me.png']")
     end
   end
+
+  context "with a tag and type" do
+    it "renders a link without a type" do
+      render_inline(described_class.new(tag: :a, type: :submit, href: "#")) { "content" }
+
+      expect(page).to have_selector("a[href='#']")
+      expect(page).not_to have_selector("[type]")
+    end
+
+    it "renders the given type" do
+      render_inline(described_class.new(type: :submit)) { "content" }
+
+      expect(page).to have_selector("button[type='submit']")
+    end
+
+    it "raises for an unsupported tag or type" do
+      expect { described_class.new(tag: :div) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :div for :tag/)
+      expect { described_class.new(type: :link) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :link for :type/)
+    end
+  end
 end

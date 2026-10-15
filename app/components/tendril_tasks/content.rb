@@ -8,7 +8,7 @@ module TendrilTasks
     }
 
     def initialize(width: DEFAULT, **options)
-      style_with(width:)
+      select_options(width:)
       @options = attributes_for(options)
     end
 

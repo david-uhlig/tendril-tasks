@@ -37,7 +37,7 @@ module TendrilTasks
     # @param options [Hash] General options applied to all buttons.
     def initialize(orientation: DEFAULT_ORIENTATION, grid_options: {}, **options)
       @orientation = fetch_or_fallback(ORIENTATION_OPTIONS, orientation, DEFAULT_ORIENTATION)
-      style_with(orientation: @orientation)
+      select_options(orientation: @orientation)
       @grid_options = grid_options.deep_symbolize_keys
       @general_button_options = options.deep_symbolize_keys
     end

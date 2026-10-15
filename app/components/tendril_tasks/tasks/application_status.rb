@@ -40,7 +40,7 @@ module TendrilTasks
       # @param application [TaskApplication] the application whose status is to be displayed
       def initialize(application)
         @application = application
-        style_with(status: application.status)
+        select_options(status: application.status)
       end
 
       private

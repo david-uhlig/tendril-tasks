@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Validates an option that isn't a style, e.g. an HTML tag or a data
-  # attribute value, against a fixed list. Style options are validated by
-  # Gustwave::Styling instead.
+  # Validates a value against a fixed list where a component's declared
+  # options don't reach, e.g. in a helper. Components declare their options
+  # with Gustwave::Options instead.
   #
-  # Follows the same policy as Gustwave::Styling: an unknown value raises
+  # Follows the same policy as Gustwave::Options: an unknown value raises
   # outside production, and falls back in production.
   #
   #   fetch_or_fallback([1, 2, 3], 5, 2) # => raises InvalidValueError, or 2 in production
@@ -17,8 +17,8 @@ module Gustwave
     def fetch_or_fallback(allowed_values, given_value, fallback = nil)
       return given_value if allowed_values.include?(given_value)
 
-      if Styling.strict?
-        message = Styling.suggest("Unknown value #{given_value.inspect}", given_value, allowed_values)
+      if Options.strict?
+        message = Options.suggest("Unknown value #{given_value.inspect}", given_value, allowed_values)
         raise InvalidValueError, "#{message}\nIn production, this falls back to #{fallback.inspect}."
       end
 

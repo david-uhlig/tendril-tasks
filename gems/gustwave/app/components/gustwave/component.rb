@@ -4,6 +4,7 @@ module Gustwave
   class Component < ViewComponent::Base
     include Gustwave::ContentHelper
     include Gustwave::HtmlAttributesHelper
+    include Gustwave::Options
     include Gustwave::Styling
     include Gustwave::ExtensibleSlots
     include Gustwave::FetchOrFallbackHelper

@@ -26,7 +26,7 @@ module Gustwave
   #     include Gustwave::Positionable
   #
   #     def initialize(position: DEFAULT)
-  #       style_with(position:)
+  #       select_options(position:)
   #     end
   #
   #     def call

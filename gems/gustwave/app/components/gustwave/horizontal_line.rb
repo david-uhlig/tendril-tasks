@@ -89,7 +89,7 @@ module Gustwave
     # @param scheme [Symbol] the scheme to be used for styling the horizontal line.
     # @param options [Hash] additional HTML options to be applied to the +<hr>+ element.
     def initialize(scheme: DEFAULT, **options)
-      style_with(scheme:)
+      select_options(scheme:)
       @options = attributes_for(options)
     end
 

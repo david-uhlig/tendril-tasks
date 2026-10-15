@@ -55,10 +55,10 @@ module Gustwave
                    size: DEFAULT,
                    border: nil,
                    **options)
-      style_with(size:)
+      select_options(size:)
       @text = text
       @text_options = { class: classes(:text) }
-      @options = { scheme:, size: style_value(:size), border: }.compact.merge!(attributes_for(options))
+      @options = { scheme:, size: option_value(:size), border: }.compact.merge!(attributes_for(options))
     end
 
     def before_render

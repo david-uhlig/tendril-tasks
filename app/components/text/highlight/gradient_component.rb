@@ -10,7 +10,7 @@ module Text
       def initialize(text = nil, highlight:, scheme: DEFAULT, **options)
         @text = text
         @highlight = highlight
-        style_with(scheme:)
+        select_options(scheme:)
         @options = attributes_for(options)
       end
 

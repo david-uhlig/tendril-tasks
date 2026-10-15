@@ -20,7 +20,7 @@ module TendrilTasks
     def initialize(id: "brand-logo", size: DEFAULT, **options)
       @site = Site.instance
 
-      style_with(size:)
+      select_options(size:)
       @options = attributes_for(options)
       @options[:id] ||= id
       @resize_to = derived_value(:resize_height)

@@ -15,7 +15,7 @@ module TendrilTasks
     def initialize(text = nil, size: DEFAULT, hyphenated: true, **options)
       @text = text
 
-      style_with(size:, hyphenated:)
+      select_options(size:, hyphenated:)
       @options = attributes_for(options)
       @options[:lang] ||= I18n.locale if hyphenated
     end
