@@ -45,17 +45,16 @@ module Gustwave
   # Gustwave::Buttons::Base. For example:
   #
   #   class Ui::MonochromeButton < Gustwave::Buttons::Base
-  #     style :scheme,
-  #           default: :dark,
-  #           states: {
-  #             dark: "text-white bg-gray-800",
-  #             light: "text-gray-900 bg-white border border-gray-300"
-  #           }
+  #     extend_variant :scheme, default: :dark, values: {
+  #       dark: "text-white bg-gray-800",
+  #       light: "text-gray-900 bg-white border border-gray-300"
+  #     }
   #   end
   #
-  # This defines a very simple monochrome button scheme. By default, the style
-  # method merges the parents style layer (here :scheme) with the new states.
-  # Under the hood it uses Hash#merge. Register it with Gustwave::Button in
+  # This defines a very simple monochrome button scheme. +extend_variant+
+  # adds the new values to the inherited +:scheme+ variant and keeps the
+  # others, e.g. +:none+ and +:base+. See Gustwave::Styling for the other
+  # declarations. Register it with Gustwave::Button in
   # +to_prepare+, so that it is registered again when Gustwave::Button is
   # reloaded in development:
   #
