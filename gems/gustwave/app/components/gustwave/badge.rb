@@ -81,14 +81,7 @@ module Gustwave
     toggle :pill, "rounded-full"
 
     # Render a round badge when no text or content block was given
-    toggle :visual_only, per: :size, values: {
-      xs: "rounded-full px-0.5",
-      sm: "rounded-full px-0.5",
-      md: "rounded-full px-0.5",
-      lg: "rounded-full px-0.5",
-      xl: "rounded-full px-0.5",
-      "2xl": "rounded-full px-0.5"
-    }
+    toggle :visual_only, "rounded-full px-0.5"
 
     part :dismiss_button, "bg-transparent"
 
