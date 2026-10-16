@@ -65,7 +65,7 @@ module Gustwave
     # @param options [Hash] additional HTML attributes passed to the +div+ element.
     renders_one_extensible :trigger_slot, types: {
       generic: ->(tag: :div, **options) {
-        config = configure_component(options, **trigger_config)
+        config = configure_html_attributes(options, **trigger_config)
         Gustwave::Dropdowns::Triggers::Generic.new(tag:, **config)
       },
       # Use the +trigger_component+ slot when want to call a custom trigger
@@ -77,7 +77,7 @@ module Gustwave
       # @param component [Class] the component to render as the trigger. Should be a subclass of Gustwave::Dropdowns::Triggers::Base to handle the trigger's +data-dropdown-*+ attributes.
       # @param options [Hash] additional config options and HTML attributes passed to the component.
       component: ->(*args, component: Gustwave::Dropdowns::Triggers::Button, **options) {
-        config = configure_component(options, **trigger_config)
+        config = configure_html_attributes(options, **trigger_config)
         component.new(*args, **config)
       }
     }
@@ -98,13 +98,13 @@ module Gustwave
     # @see Gustwave::Dropdowns::Menus::Generic
     renders_one_extensible :menu_slot, types: {
       list: ->(content_for: nil, list_options: {}, **options) {
-        config = configure_component(options, content_for:, id: menu_id)
+        config = configure_html_attributes(options, content_for:, id: menu_id)
         component = list_menu_class.to_s.constantize.new(**config)
         component.configure_list(**list_options) if list_options.present?
         component
       },
       generic: ->(text = nil, tag: :div, content_for: nil, **options) {
-        config = configure_component(options, id: menu_id, tag:, content_for:)
+        config = configure_html_attributes(options, id: menu_id, tag:, content_for:)
         Gustwave::Dropdowns::Menus::Generic.new(text, **config)
       }
     }

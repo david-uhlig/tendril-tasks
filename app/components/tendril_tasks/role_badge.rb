@@ -11,7 +11,7 @@ class TendrilTasks::RoleBadge < TendrilTasks::Component
   def initialize(user, size: :sm, border: true, **options)
     @user = user
     @role = user.role.to_sym
-    @config = configure_component(
+    @config = configure_html_attributes(
       options,
       tag: :a,
       scheme: ROLE_SCHEMES.fetch(role, :default),

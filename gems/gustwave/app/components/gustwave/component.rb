@@ -36,6 +36,5 @@ module Gustwave
 
       default_attrs.merge(overwrite_attrs)
     end
-    alias configure_component configure_html_attributes
   end
 end
