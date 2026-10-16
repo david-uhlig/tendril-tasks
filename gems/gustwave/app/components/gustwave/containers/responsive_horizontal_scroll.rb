@@ -8,6 +8,12 @@ module Gustwave
     class ResponsiveHorizontalScroll < Gustwave::Component
       base "flex flex-nowrap overflow-x-auto touch-pan-x gap-2 pb-2"
 
+      # The HTML tag of the container
+      option :tag, default: :div, values: %i[div span ul ol]
+
+      # The HTML tag of the +item+ slot per container tag
+      derive :item_tag, from: :tag, values: { div: :div, span: :span, ul: :li, ol: :li }
+
       # Use Tailwind CSS mobile breakpoints to determine when to wrap the items
       # instead of scrolling them horizontally.
       variant :breakpoint, default: :md, values: {
@@ -54,7 +60,7 @@ module Gustwave
       # @param tag [Symbol] the HTML tag for the item. Resolved automatically based on the container tag if not provided.
       # @param options [Hash] additional options for the HTML tag.
       renders_many_extensible :items, ->(text = nil, tag: nil, **options, &block) do
-        item_tag = tag || resolve_item_tag_by_container_tag
+        item_tag = tag || derived_value(:item_tag)
         config = configure_html_attributes(options)
         content_tag item_tag, config do
           text || capture(&block)
@@ -66,9 +72,9 @@ module Gustwave
       # @param breakpoint [Symbol] the breakpoint at and above which the container wraps its items. Use t-shirt sizes from :sm to +:"2xl"+
       # @param snap [Symbol] the scroll snap behavior on mobile devices. Use +:none+, +:start+, +:center+, or +:end+. See: https://v3.tailwindcss.com/docs/scroll-snap-align
       # @param options [Hash] additional options for the HTML tag.
-      def initialize(tag: :div, breakpoint: DEFAULT, snap: DEFAULT, **options)
-        @tag = tag
-        select_options(breakpoint:, snap:)
+      def initialize(tag: DEFAULT, breakpoint: DEFAULT, snap: DEFAULT, **options)
+        select_options(tag:, breakpoint:, snap:)
+        @tag = option_value(:tag)
         @config = attributes_for(options)
       end
 
@@ -80,13 +86,6 @@ module Gustwave
 
       private
       attr_reader :config, :tag
-
-      def resolve_item_tag_by_container_tag
-        return :li if tag.in?([ :ul, :ol ])
-        return :span if tag == :span
-
-        :div
-      end
     end
   end
 end

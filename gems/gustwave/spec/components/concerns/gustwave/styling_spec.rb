@@ -104,6 +104,14 @@ RSpec.describe Gustwave::Styling do
       expect(button.new.option_value(:pill)).to be false
     end
 
+    it "is on by default with default: true" do
+      sticky = component { toggle :sticky, default: true, on: "sticky", off: "static" }
+
+      expect(sticky.new.option_value(:sticky)).to be true
+      expect(sticky.new.classes).to eq "sticky"
+      expect(sticky.new.select_options(sticky: false).classes).to eq "static"
+    end
+
     it "casts values to booleans" do
       expect(button.new.select_options(pill: "true").option_value(:pill)).to be true
       expect(button.new.select_options(pill: "false").option_value(:pill)).to be false

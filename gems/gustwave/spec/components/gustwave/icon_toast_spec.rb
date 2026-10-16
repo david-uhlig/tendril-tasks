@@ -40,6 +40,12 @@ RSpec.describe Gustwave::IconToast, type: :component do
     end
   end
 
+  it "defaults to the info scheme" do
+    render_inline(described_class.new("Hi"))
+
+    expect(rendered_content).to have_selector("div.shrink-0.text-blue-500")
+  end
+
   it "renders an empty label without a scheme" do
     render_inline(described_class.new("Plain", scheme: :none))
 

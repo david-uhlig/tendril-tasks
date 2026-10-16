@@ -21,6 +21,16 @@ module Gustwave
       level6: "text-xl font-semibold"
     }
 
+    # The scheme per tag, when no scheme is given
+    derive :default_scheme, from: :tag, values: {
+      h1: :level1,
+      h2: :level2,
+      h3: :level3,
+      h4: :level4,
+      h5: :level5,
+      h6: :level6
+    }
+
     # Font sizes that grow with the screen
     toggle :responsive, per: :scheme, values: {
       level1: "text-4xl md:text-5xl lg:text-6xl",
@@ -33,7 +43,7 @@ module Gustwave
 
     def initialize(
       text = nil,
-      tag:,
+      tag: DEFAULT,
       scheme: DEFAULT,
       responsive: false,
       **options
@@ -43,8 +53,7 @@ module Gustwave
       select_options(tag:)
       @tag = option_value(:tag)
 
-      # Derive the scheme from the tag if not given
-      scheme = :"level#{@tag.to_s.delete('h')}" if scheme.nil? || scheme.equal?(DEFAULT)
+      scheme = derived_value(:default_scheme) if scheme.nil? || scheme.equal?(DEFAULT)
       select_options(scheme:, responsive:)
       @config = attributes_for(options)
     end

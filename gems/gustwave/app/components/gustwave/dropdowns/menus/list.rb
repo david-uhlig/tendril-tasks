@@ -16,6 +16,9 @@ module Gustwave
       #
       # Block content gets ignored.
       class List < Gustwave::Dropdowns::Menus::Base
+        # The HTML tag of the list, see +configure_list+
+        option :list_tag, default: :ul, values: %i[ul ol]
+
         part :list, "py-2 text-sm text-gray-700 dark:text-gray-200"
 
         part :list_item, "flex items-center gap-1.5 w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white whitespace-nowrap"
@@ -36,7 +39,7 @@ module Gustwave
         # @param content_for [Symbol, nil] the name of the content area to render the menu. If +nil+, the menu is rendered right after the triggering element.
         # @param tag [Symbol] HTML tag to use for the dropdown menu. Default: +div+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element. Call +configure_list+ to configure the list element (optional).
-        def initialize(id:, content_for: nil, tag: :div, **options)
+        def initialize(id:, content_for: nil, tag: DEFAULT, **options)
           super(text, content_for:, tag:, id:, **options)
           configure_list
         end
@@ -53,8 +56,9 @@ module Gustwave
         #
         # @param tag [Symbol] the tag of the HTML list element, usually +ul+ or +ol+.
         # @param options [Hash] additional HTML attributes passed to the list element.
-        def configure_list(tag: :ul, **options)
-          @list_tag = tag
+        def configure_list(tag: DEFAULT, **options)
+          select_options(list_tag: tag)
+          @list_tag = option_value(:list_tag)
           @list_config = attributes_for(:list, options)
         end
 

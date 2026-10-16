@@ -1,6 +1,34 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Base class of Gustwave's components.
+  #
+  # === Constructor convention
+  #
+  #   def initialize(text = nil, tag: DEFAULT, scheme: DEFAULT, pill: false, **options)
+  #     @text = text
+  #     select_options(tag:, scheme:, pill:)
+  #     @tag = option_value(:tag)
+  #     @options = attributes_for(options)
+  #   end
+  #
+  # * Positional arguments are the component's content or subject, e.g. its
+  #   +text+ or an icon's +name+.
+  # * A keyword argument that picks from a fixed list, e.g. +tag+, +scheme+ or
+  #   +size+, is one of the component's options, declared with +option+,
+  #   +variant+ or +toggle+ under the same name (see Gustwave::Options and
+  #   Gustwave::Styling). It defaults to +DEFAULT+, or to +false+ for a toggle
+  #   that is off by default, goes through +select_options+ and is read back
+  #   with +option_value+. When its default depends on another option, the
+  #   component takes it from a +derive+d value instead, e.g. the scheme per
+  #   tag in Gustwave::Heading.
+  # * A keyword argument forwarded to a child component defaults to +DEFAULT+,
+  #   so the child's default applies, unless the component deliberately picks
+  #   another one for its child. Prefer forwarding through +options+.
+  # * +options+ holds HTML attributes, or the arguments of the component a
+  #   component wraps.
+  #
+  # The gem's specs check every component against this convention.
   class Component < ViewComponent::Base
     include Gustwave::ContentHelper
     include Gustwave::HtmlAttributesHelper

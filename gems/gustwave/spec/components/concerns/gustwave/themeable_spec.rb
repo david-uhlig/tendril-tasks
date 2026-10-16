@@ -103,6 +103,11 @@ RSpec.describe Gustwave::Themeable do
       expect(themeable_button_with_custom_default.themed_component(nil)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
     end
 
+    it "returns the default theme for DEFAULT" do
+      expect(themeable_button_with_custom_default.themed_component(Gustwave::Options::DEFAULT))
+        .to eq(Gustwave::Specs::Themeable::SpecialTheme)
+    end
+
     context "when the theme does not exist" do
       it "raises a ThemeNotFoundError when Gustwave is strict" do
         expect {

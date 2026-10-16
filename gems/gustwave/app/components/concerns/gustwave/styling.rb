@@ -29,9 +29,9 @@ module Gustwave
   # * +variant+ declares an option with a fixed set of values and a
   #   +default:+, and the classes of each value. A variant without a +:none+
   #   value gets one that adds no classes.
-  # * +toggle+ declares an on/off option, off by default, and its classes. It
-  #   can style both states (+on:+ / +off:+) or depend on another option
-  #   (+per:+).
+  # * +toggle+ declares an on/off option, off unless given +default: true+,
+  #   and its classes. It can style both states (+on:+ / +off:+) or depend on
+  #   another option (+per:+).
   #
   # Read the option of a variant or toggle with +option_value+, and derive
   # values from it with +derive+, as for any option; see Gustwave::Options.
@@ -129,14 +129,14 @@ module Gustwave
         declare_styling(:variant, name: name.to_sym, values:, unless: style_unless(options))
       end
 
-      # Declares a toggle: an on/off option that is off by default, and its
-      # classes.
+      # Declares a toggle: an on/off option, off unless given +default: true+,
+      # and its classes.
       #
       #   toggle :pill, "rounded-full"
-      #   toggle :visible, on: "opacity-100", off: "opacity-0"
+      #   toggle :visible, default: true, on: "opacity-100", off: "opacity-0"
       #   toggle :border, per: :size, values: { sm: "ring-1", md: "ring-2" }
-      def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, part: Definition::ROOT, **options)
-        declare_option(:option, name:, kind: :toggle, default: false, values: [ false, true ])
+      def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, part: Definition::ROOT, default: false, **options)
+        declare_option(:option, name:, kind: :toggle, default: default == true, values: [ false, true ])
         declare_styling(:toggle, name: name.to_sym,
                                  on: style_targets(classes || on, part), off: style_targets(off, part),
                                  per: per&.to_sym, values: style_values(values, part), unless: style_unless(options))

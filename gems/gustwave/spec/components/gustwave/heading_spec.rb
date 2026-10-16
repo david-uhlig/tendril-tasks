@@ -10,6 +10,12 @@ RSpec.describe Gustwave::Heading, type: :component do
   end
 
   it "defaults to h2 when no tag is given" do
+    render_inline(described_class.new("Title"))
+
+    expect(page).to have_selector("h2", text: "Title")
+  end
+
+  it "defaults to h2 for a nil tag" do
     render_inline(described_class.new("Title", tag: nil))
 
     expect(page).to have_selector("h2", text: "Title")

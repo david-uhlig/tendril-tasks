@@ -5,7 +5,7 @@ module Gustwave
     class RichTextArea < Gustwave::Component
       part :toolbar_container,
            "px-3 py-2 border-b dark:border-gray-600 flex flex-wrap items-center bg-gray-50 rounded-t-lg border-t-red-200 dark:bg-gray-700"
-      toggle :sticky_toolbar, part: :toolbar_container,
+      toggle :sticky_toolbar, part: :toolbar_container, default: true,
                               on: "group-focus-within:sticky group-hover:sticky top-0 z-10"
 
       renders_one_extensible :toolbar_slot, ->(&block) { block&.call }
@@ -19,7 +19,7 @@ module Gustwave
       def initialize(form = nil,
                      attribute = nil,
                      toolbar_id: nil,
-                     sticky_toolbar: true,
+                     sticky_toolbar: DEFAULT,
                      **options)
         @form = form
         @attribute = attribute

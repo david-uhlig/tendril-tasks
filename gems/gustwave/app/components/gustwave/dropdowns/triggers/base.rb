@@ -23,7 +23,7 @@ module Gustwave
 
         # How the trigger activates
         TRIGGER_FLOWBITE_DEFAULT = :click
-        option :trigger, default: TRIGGER_FLOWBITE_DEFAULT, values: %i[click hover]
+        option :trigger_event, default: TRIGGER_FLOWBITE_DEFAULT, values: %i[click hover]
 
         # Where the dropdown menu appears relative to the trigger
         # See: https://popper.js.org/docs/v2/constructors/#options
@@ -67,7 +67,7 @@ module Gustwave
           @text = text
           @config = configure_trigger_options(
             menu_id: menu_id,
-            trigger: trigger_event,
+            trigger_event:,
             delay:,
             placement: (placement.to_s.tr("_", "-").to_sym unless placement.equal?(DEFAULT)),
             offset_distance:,
@@ -79,9 +79,9 @@ module Gustwave
         private
         attr_reader :config, :text
 
-        def configure_trigger_options(menu_id:, trigger:, delay:, placement:, offset_distance:, offset_skidding:, **options)
-          select_options(trigger:, placement:)
-          trigger = option_value(:trigger)
+        def configure_trigger_options(menu_id:, trigger_event:, delay:, placement:, offset_distance:, offset_skidding:, **options)
+          select_options(trigger_event:, placement:)
+          trigger = option_value(:trigger_event)
           placement = option_value(:placement)
 
           dropdown_config = {

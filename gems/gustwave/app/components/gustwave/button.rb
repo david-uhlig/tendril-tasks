@@ -82,34 +82,14 @@ module Gustwave
     with_default_theme :default
     delegate_missing_to :themed_button
 
-    DEFAULT_THEME = :default
-
-    THEME_DEFAULT_SCHEME = nil
-    THEME_DEFAULT_SIZE = nil
-    THEME_DEFAULT_PILL = nil
-
     # @param [String, nil] text The text to display on the button. Takes precedent over the block content.
-    # @param [Symbol] tag The HTML tag to render the button as. Available options depend on the theme. Gustwave::Buttons allow :button and :a tags, and default to :button.
-    # @param [Symbol] type The type of the button. Available options depend on the theme. Gustwave::Buttons allows :button, :submit, and :reset. Defaults to :button. Only relevant for +tag+ == :button.
     # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, :gradient_duotone_outline, and :inline. See all available themes by running
     #   Gustwave::Button.themes! Defaults to :default.
-    # @param [Symbol] scheme One of the theme's appearance options, e.g. :red, :blue, :green, :purple, etc.
-    # @param [Symbol] size One of the theme's size options. Usually :none, :xs, :sm, :md, :lg, or :xl.
-    # @param [Boolean] pill Whether the button should be pill-shaped. Defaults to false.
-    # @param [Hash] options Additional HTML attributes to add to the button, e.g. :class to overwrite some of the theme's styles.
-    def initialize(text = nil,
-                   tag: nil,
-                   type: nil,
-                   theme: DEFAULT_THEME,
-                   scheme: THEME_DEFAULT_SCHEME,
-                   size: THEME_DEFAULT_SIZE,
-                   pill: THEME_DEFAULT_PILL,
-                   **options)
-      @theme = theme.presence || default_theme
+    # @param [Hash] options The theme's arguments, e.g. +tag+, +type+, +scheme+, +size+ and +pill+ for Gustwave::Buttons::Base, and HTML attributes to add to the button, e.g. :class to overwrite some of the theme's styles.
+    def initialize(text = nil, theme: DEFAULT, **options)
+      @theme = theme
       @text = text
-      @options = { tag:, type:, scheme:, size:, pill: }
-                   .merge!(options.deep_symbolize_keys)
-                   .compact_blank!
+      @options = options
     end
 
     def call

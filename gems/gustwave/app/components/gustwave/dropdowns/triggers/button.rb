@@ -40,7 +40,7 @@ module Gustwave
             if trailing_icon == false
               nil
             else
-              (trailing_icon || icon_by_placement(options.fetch(:placement, :bottom)))
+              (trailing_icon || icon_by_placement(option_value(:placement)))
             end
         end
 

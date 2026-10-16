@@ -44,6 +44,8 @@ end
 
 See `Gustwave::Options` and `Gustwave::Styling` for every declaration and for subclassing.
 
+Every option a component takes as a keyword argument, such as `tag`, `scheme` or `size`, is declared with this DSL and defaults to the declared default, so extending a component's default reaches every caller. `Gustwave::Component` documents the constructor convention, and the specs check every component against it.
+
 ### Strictness
 
 In development and test, an unknown option, value, part or theme raises an error that names the valid ones. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:

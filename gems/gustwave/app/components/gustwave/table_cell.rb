@@ -23,11 +23,14 @@ module Gustwave
   class TableCell < Gustwave::Component
     base "px-6 py-4"
 
+    option :tag, default: :td, values: %i[td th]
+
     # @param text [String] text to display inside the cell. Takes precedent over block content.
     # @param tag [Symbol] HTML tag for the table cell, usually :td or :th.
     # @param options [Hash] additional options for the HTML tag.
-    def initialize(text = nil, tag: :td, **options)
-      @tag = tag
+    def initialize(text = nil, tag: DEFAULT, **options)
+      select_options(tag:)
+      @tag = option_value(:tag)
       @text = text
       @config = attributes_for(options)
     end

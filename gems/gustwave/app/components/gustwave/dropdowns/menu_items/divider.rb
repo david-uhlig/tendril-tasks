@@ -7,8 +7,11 @@ module Gustwave
       class Divider < Gustwave::Dropdowns::MenuItems::Base
         base "my-1 h-px bg-gray-100 dark:bg-gray-700 w-full"
 
-        def initialize(tag: :div, **options)
-          @divider_tag = tag
+        option :tag, default: :div, values: %i[div span]
+
+        def initialize(tag: DEFAULT, **options)
+          select_options(tag:)
+          @divider_tag = option_value(:tag)
           @config = attributes_for(options)
         end
 

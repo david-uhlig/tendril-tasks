@@ -11,14 +11,18 @@ module Gustwave
       class Generic < Gustwave::Dropdowns::Triggers::Base
         base "inline-flex cursor-pointer"
 
+        # The HTML tag wrapping the content
+        option :tag, default: :div, values: %i[div span]
+
         # @param text [String, nil] the text to appear on the generic dropdown. Takes precedent over block content.
         # @param tag [Symbol] HTML tag used to wrap the generic dropdown component in.
         # @param options [Hash] additional options passed to Gustwave::Dropdowns::Triggers::Base component and the wrapping `content_tag`.
         # @see Gustwave::Dropdowns::Triggers::Base
-        def initialize(text = nil, tag: :div, **options)
+        def initialize(text = nil, tag: DEFAULT, **options)
           options = attributes_for(options)
           super(text, **options)
-          @tag = tag
+          select_options(tag:)
+          @tag = option_value(:tag)
         end
 
         def call
