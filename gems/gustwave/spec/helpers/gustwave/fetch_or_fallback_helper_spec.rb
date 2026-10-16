@@ -17,8 +17,8 @@ RSpec.describe Gustwave::FetchOrFallbackHelper, type: :helper do
       .to raise_error(Gustwave::FetchOrFallbackHelper::InvalidValueError, /falls back to :button/)
   end
 
-  context "in production" do
-    before { allow(Rails.env).to receive(:production?).and_return(true) }
+  context "when Gustwave isn't strict" do
+    before { Gustwave.strict = false }
 
     it "returns the fallback for a value that isn't allowed" do
       expect(helper.fetch_or_fallback(%i[button a], :div, :button)).to eq(:button)

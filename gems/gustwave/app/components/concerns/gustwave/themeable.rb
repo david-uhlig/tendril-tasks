@@ -152,8 +152,8 @@ module Gustwave
 
     # Fetches the theme class for the given +theme+ name.
     #
-    # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default outside
-    # production, letting the developer know that the supplied theme name is
+    # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default in
+    # development and test, letting the developer know that the supplied theme name is
     # invalid and what their options are.
     #
     # Otherwise, it falls back to the default theme. If no theme is

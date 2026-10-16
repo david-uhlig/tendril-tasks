@@ -104,33 +104,20 @@ RSpec.describe Gustwave::Themeable do
     end
 
     context "when the theme does not exist" do
-      it "raises a ThemeNotFoundError outside of production" do
+      it "raises a ThemeNotFoundError when Gustwave is strict" do
         expect {
           themeable_button.themed_component(:some_non_existent_theme)
         }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /Expected one of: \[:default_theme, :default_theme_alias, :special_theme\]/)
       end
 
-      it "returns the default theme in production" do
-        allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
-        expect(themeable_button_with_custom_default.themed_component(:some_non_existent_theme)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
-      end
-
-      it "raises a ThemeNotFoundError in production without registered themes" do
-        allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
-        expect { base.themed_component(:some_non_existent_theme) }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /No themes registered/)
-      end
-
-      it "raises a ThemeNotFoundError in production when Gustwave is strict" do
-        allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
-        Gustwave.strict = true
-        expect {
-          themeable_button_with_custom_default.themed_component(:some_non_existent_theme)
-        }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /Expected one of/)
-      end
-
-      it "returns the default theme outside production when Gustwave isn't strict" do
+      it "returns the default theme when Gustwave isn't strict" do
         Gustwave.strict = false
         expect(themeable_button_with_custom_default.themed_component(:some_non_existent_theme)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
+      end
+
+      it "raises a ThemeNotFoundError without registered themes when Gustwave isn't strict" do
+        Gustwave.strict = false
+        expect { base.themed_component(:some_non_existent_theme) }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /No themes registered/)
       end
     end
   end

@@ -4,22 +4,33 @@ require "rails_helper"
 
 RSpec.describe Gustwave do
   describe ".strict?" do
-    it "is strict outside production by default" do
+    def in_env(name)
+      allow(Rails).to receive(:env).and_return(ActiveSupport::EnvironmentInquirer.new(name))
+    end
+
+    it "is strict in development and test by default" do
+      in_env("development")
+      expect(described_class).to be_strict
+
+      in_env("test")
       expect(described_class).to be_strict
     end
 
-    it "isn't strict in production by default" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "isn't strict in production or any other environment by default" do
+      in_env("production")
+      expect(described_class).not_to be_strict
+
+      in_env("staging")
       expect(described_class).not_to be_strict
     end
 
-    it "is strict in production when set" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "is strict in another environment when set" do
+      in_env("staging")
       described_class.strict = true
       expect(described_class).to be_strict
     end
 
-    it "isn't strict outside production when unset" do
+    it "isn't strict in test when unset" do
       described_class.strict = false
       expect(described_class).not_to be_strict
     end

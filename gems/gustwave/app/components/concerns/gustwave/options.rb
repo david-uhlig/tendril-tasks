@@ -56,8 +56,8 @@ module Gustwave
   # even one named like an option. Callers may pass +nil+ for an option to get
   # its default, too.
   #
-  # Unknown options or values raise when Gustwave.strict?, by default outside
-  # production. Otherwise an unknown option is ignored and an unknown value
+  # Unknown options or values raise when Gustwave.strict?, by default in
+  # development and test. Otherwise an unknown option is ignored and an unknown value
   # falls back to the default.
   module Options
     extend ActiveSupport::Concern
@@ -105,7 +105,7 @@ module Gustwave
 
       # Tells what a component falls back to when Gustwave isn't strict.
       def fallback_note(fallback)
-        "When Gustwave isn't strict, e.g. in production, this falls back to #{fallback.inspect}."
+        "When Gustwave isn't strict, e.g. outside development and test, this falls back to #{fallback.inspect}."
       end
 
       # Converts an option value to a symbol: +2+ becomes +:"2"+.
@@ -225,8 +225,8 @@ module Gustwave
     #   the default lives in the DSL, where subclasses and extensions can
     #   change it, instead of in each initializer's signature.
     # * It validates the value against the option's values: unknown options
-    #   or values raise outside production and fall back to the default in
-    #   production.
+    #   or values raise when Gustwave.strict? and fall back to the default
+    #   otherwise.
     # * It normalizes the value: strings and numbers become symbols, e.g.
     #   <tt>"sm"</tt> becomes +:sm+, and a toggle's value becomes +true+ or
     #   +false+.
