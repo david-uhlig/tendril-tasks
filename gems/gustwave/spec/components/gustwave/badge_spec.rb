@@ -96,6 +96,11 @@ RSpec.describe Gustwave::Badge, type: :component do
       render_inline(described_class.new(size: :lg))
       expect(page).to have_selector("span.text-lg.font-semibold")
     end
+
+    it "renders a round badge without text or content at any size" do
+      render_inline(described_class.new(size: :"2xl")) { |badge| badge.with_leading_visual_icon(:check) }
+      expect(page).to have_selector("span.rounded-full.px-0\\.5")
+    end
   end
 
   context "with border" do
