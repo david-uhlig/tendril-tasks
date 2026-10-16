@@ -6,8 +6,15 @@ module Gustwave
   # +aria-describedby+ at the tooltip.
   #
   # Render the tooltip anywhere on the page; it doesn't need to follow its
-  # trigger. The arrow of the light scheme is bordered through the tooltip's
-  # placement, not through its position next to the trigger.
+  # trigger. The arrow is drawn by its +::before+ only: the +::after+ of
+  # Flowbite's arrow would cover the border of the light scheme's arrow, which
+  # is set through the tooltip's placement, not through its position next to
+  # the trigger.
+  #
+  # The +tooltip+ class that Flowbite's CSS positions the arrow by is always
+  # set. With <tt>scheme: :none</tt> callers bring the remaining classes
+  # themselves, including +invisible+, +opacity-0+ and any transition, which
+  # Flowbite's script toggles.
   #
   # Animate the fade-in with a duration class, e.g. <tt>class: "duration-500"</tt>.
   #
@@ -27,8 +34,8 @@ module Gustwave
 
     option :trigger, default: :hover, values: %i[hover click]
 
-    base "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium transition-opacity duration-300 rounded-lg shadow-xs opacity-0 tooltip"
-    part :arrow, "tooltip-arrow"
+    base "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium transition-opacity duration-300 rounded-lg shadow-xs opacity-0"
+    part :arrow, "tooltip-arrow after:hidden"
     unstyled scheme: :none
 
     variant :scheme, default: :dark, values: {
@@ -52,6 +59,7 @@ module Gustwave
       options = options.symbolize_keys
       options[:id] = @id
       options[:role] ||= "tooltip"
+      options[:class] = [ "tooltip", options[:class] ].compact
       @options = attributes_for(options)
     end
 

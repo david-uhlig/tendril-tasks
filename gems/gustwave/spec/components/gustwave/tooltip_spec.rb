@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe Gustwave::Tooltip, type: :component do
   it_behaves_like "a component with trigger options", prefix: "tooltip"
 
+  it_behaves_like "a component with configurable html attributes", selector: "div.tooltip"
+
   it "renders a tooltip with the tooltip class" do
     render_inline(described_class.new("text"))
     expect(page).to have_selector("div.tooltip[role=tooltip]", text: "text", visible: :all)
@@ -70,19 +72,27 @@ RSpec.describe Gustwave::Tooltip, type: :component do
     it "borders the light scheme's arrow by the tooltip's placement" do
       render_inline(described_class.new("text", scheme: :light))
       expect(page).to have_selector("div.tooltip.bg-white.border", visible: :all)
-      expect(page.find("[data-popper-arrow]", visible: :all)[:class].split).to include(
-        "before:border-gray-200",
+      expect(page.find("[data-popper-arrow]", visible: :all)[:class].split).to contain_exactly(
+        "tooltip-arrow", "after:hidden", "before:border-gray-200",
         "[[data-popper-placement^=top]>&]:before:border-b",
         "[[data-popper-placement^=top]>&]:before:border-r",
+        "[[data-popper-placement^=right]>&]:before:border-b",
         "[[data-popper-placement^=right]>&]:before:border-l",
         "[[data-popper-placement^=bottom]>&]:before:border-t",
+        "[[data-popper-placement^=bottom]>&]:before:border-l",
+        "[[data-popper-placement^=left]>&]:before:border-t",
         "[[data-popper-placement^=left]>&]:before:border-r"
       )
     end
 
-    it "drops the base styles with scheme: :none" do
+    it "hides the arrow's ::after in the dark scheme too" do
+      render_inline(described_class.new("text"))
+      expect(page.find("[data-popper-arrow]", visible: :all)[:class].split).to contain_exactly("tooltip-arrow", "after:hidden")
+    end
+
+    it "keeps only the tooltip class with scheme: :none" do
       render_inline(described_class.new("text", scheme: :none))
-      expect(page.find("div[role=tooltip]", visible: :all)[:class]).to be_nil
+      expect(page.find("div[role=tooltip]", visible: :all)[:class]).to eq("tooltip")
     end
   end
 end
