@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2"
 
-  spec.files = Dir["{app,config,lib}/**/*", "LICENSE.txt", "README.md"]
+  spec.files = Dir["{app,config,lib,previews}/**/*", "LICENSE.txt", "README.md"]
 
   spec.add_dependency "inline_svg"
   spec.add_dependency "nokogiri"
