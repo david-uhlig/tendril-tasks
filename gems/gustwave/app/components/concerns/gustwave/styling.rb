@@ -48,8 +48,10 @@ module Gustwave
   # declaration takes +unless:+ to skip it for some option values, e.g.
   # <tt>unless: { scheme: :none }</tt> or <tt>unless: { size: [:xs, :sm] }</tt>.
   #
-  # Classes are emitted in declaration order, inherited declarations first,
-  # and merged with TailwindMerge, so a later declaration wins a conflict.
+  # Base and part classes are emitted first, then those of variants and
+  # toggles, each group in declaration order, inherited declarations first.
+  # They're merged with TailwindMerge, so a later class wins a conflict:
+  # variants and toggles win over base and part classes.
   #
   # === Inheritance and extension
   #

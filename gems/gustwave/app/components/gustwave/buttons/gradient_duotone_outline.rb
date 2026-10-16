@@ -7,6 +7,9 @@ module Gustwave
       # label and visuals, so it takes the size styles.
       base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white"
 
+      part :inner,
+           "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-1.5"
+
       variant :scheme, default: :purple_to_blue, values: {
         base: "",
         purple_to_blue: "from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-blue-300 dark:focus:ring-blue-800",
@@ -24,19 +27,11 @@ module Gustwave
       remove_option :type
       remove_toggle :pill
 
-      # Declared again after the inner part, so the size styles win its
-      # conflicts and the visual-only padding wins theirs. Changes to these on
+      # The size and visual styles target the inner part. Changes to these on
       # Buttons::Base don't reach this theme; extend it separately, e.g.
       #
       #   extend_variant :size, values: { "2xl": { inner: "…", visual: "…" } }
       #   extend_toggle :visual_only, part: :inner, values: { "2xl": "…" }
-      remove_variant :size
-      remove_toggle :has_visual
-      remove_toggle :visual_only
-
-      part :inner,
-           "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-1.5"
-
       variant :size, default: :md, values: {
         xs: { inner: "px-2.5 py-2 text-xs font-medium", visual: "h-4 w-auto" },
         sm: { inner: "px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
