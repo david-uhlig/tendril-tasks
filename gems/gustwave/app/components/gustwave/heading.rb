@@ -4,6 +4,9 @@ module Gustwave
   class Heading < Gustwave::Component
     include ActionView::Helpers::SanitizeHelper
 
+    # The id prefix of a heading whose text yields no id, e.g. one made of symbols
+    FALLBACK_ID_PREFIX = "heading"
+
     base "text-gray-900 dark:text-white", unless: { scheme: :none }
 
     # The HTML tag, i.e. the heading level in the document outline
@@ -37,13 +40,17 @@ module Gustwave
     )
       @text = text
 
-      select_options(tag:, scheme:, responsive:)
+      select_options(tag:)
       @tag = option_value(:tag)
+
+      # Derive the scheme from the tag if not given
+      scheme = :"level#{@tag.to_s.delete('h')}" if scheme.nil? || scheme.equal?(DEFAULT)
+      select_options(scheme:, responsive:)
       @config = attributes_for(options)
     end
 
     def before_render
-      @config[:id] ||= strip_tags(text_or_content).parameterize
+      @config[:id] ||= strip_tags(text_or_content).parameterize.presence || "#{FALLBACK_ID_PREFIX}-#{SecureRandom.hex(4)}"
     end
 
     def call
