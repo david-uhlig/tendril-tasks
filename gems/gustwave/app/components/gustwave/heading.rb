@@ -2,6 +2,8 @@
 
 module Gustwave
   class Heading < Gustwave::Component
+    include ActionView::Helpers::SanitizeHelper
+
     base "text-gray-900 dark:text-white", unless: { scheme: :none }
 
     # The HTML tag, i.e. the heading level in the document outline
@@ -41,7 +43,7 @@ module Gustwave
     end
 
     def before_render
-      @config[:id] ||= helpers.strip_tags(text_or_content).parameterize
+      @config[:id] ||= strip_tags(text_or_content).parameterize
     end
 
     def call
