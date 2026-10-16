@@ -89,8 +89,8 @@ RSpec.describe Gustwave::Heading, type: :component do
       .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :h7 for :tag/)
   end
 
-  it "falls back to h2 for an unknown tag in production" do
-    allow(Rails.env).to receive(:production?).and_return(true)
+  it "falls back to h2 for an unknown tag when Gustwave isn't strict" do
+    Gustwave.strict = false
     render_inline(described_class.new("Title", tag: :h7))
 
     expect(page).to have_selector("h2", text: "Title")

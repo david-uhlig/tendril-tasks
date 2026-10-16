@@ -56,8 +56,9 @@ module Gustwave
   # even one named like an option. Callers may pass +nil+ for an option to get
   # its default, too.
   #
-  # Unknown options or values raise outside production. In production an
-  # unknown option is ignored and an unknown value falls back to the default.
+  # Unknown options or values raise when Gustwave.strict?, by default in
+  # development and test. Otherwise an unknown option is ignored and an unknown value
+  # falls back to the default.
   module Options
     extend ActiveSupport::Concern
 
@@ -68,18 +69,19 @@ module Gustwave
       def default.to_s = "DEFAULT"
     end.freeze
 
-    # Raised outside production for an option the component doesn't declare.
+    # Raised when Gustwave.strict? for an option the component doesn't
+    # declare.
     class UnknownOptionError < Gustwave::Error
       def initialize(component, given:, expected:)
         super(Options.suggest("#{component} has no option #{given.inspect}", given, expected))
       end
     end
 
-    # Raised outside production for a value an option doesn't declare.
+    # Raised when Gustwave.strict? for a value an option doesn't declare.
     class UnknownValueError < Gustwave::Error
       def initialize(component, option, given:, expected:, fallback:)
         message = Options.suggest("Unknown value #{given.inspect} for #{option.inspect} of #{component}", given, expected)
-        super("#{message}\nIn production, this falls back to #{fallback.inspect}.")
+        super("#{message}\n#{Options.fallback_note(fallback)}")
       end
     end
 
@@ -101,8 +103,9 @@ module Gustwave
         @version += 1
       end
 
-      def strict?
-        !Rails.env.production?
+      # Tells what a component falls back to when Gustwave isn't strict.
+      def fallback_note(fallback)
+        "When Gustwave isn't strict, e.g. outside development and test, this falls back to #{fallback.inspect}."
       end
 
       # Converts an option value to a symbol: +2+ becomes +:"2"+.
@@ -222,8 +225,8 @@ module Gustwave
     #   the default lives in the DSL, where subclasses and extensions can
     #   change it, instead of in each initializer's signature.
     # * It validates the value against the option's values: unknown options
-    #   or values raise outside production and fall back to the default in
-    #   production.
+    #   or values raise when Gustwave.strict? and fall back to the default
+    #   otherwise.
     # * It normalizes the value: strings and numbers become symbols, e.g.
     #   <tt>"sm"</tt> becomes +:sm+, and a toggle's value becomes +true+ or
     #   +false+.
@@ -293,7 +296,7 @@ module Gustwave
         name = name.to_sym
         option = definition.option(name)
         unless option
-          raise UnknownOptionError.new(option_component_name, given: name, expected: definition.options.keys) if Options.strict?
+          raise UnknownOptionError.new(option_component_name, given: name, expected: definition.options.keys) if Gustwave.strict?
 
           next
         end
@@ -304,7 +307,7 @@ module Gustwave
         else
           value = Options.normalize_value(value)
           next normalized[name] = value if option.values.include?(value)
-          raise UnknownValueError.new(option_component_name, name, given: value, expected: option.values, fallback: option.default) if Options.strict?
+          raise UnknownValueError.new(option_component_name, name, given: value, expected: option.values, fallback: option.default) if Gustwave.strict?
         end
       end
     end

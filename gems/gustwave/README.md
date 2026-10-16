@@ -44,6 +44,15 @@ end
 
 See `Gustwave::Options` and `Gustwave::Styling` for every declaration and for subclassing.
 
+### Strictness
+
+In development and test, an unknown option, value, part or theme raises an error that names the valid ones. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
+
+```ruby
+# config/environments/staging.rb
+config.gustwave.strict = true
+```
+
 ## Development
 
 The specs run against a minimal Rails application in `spec/dummy`. From the Tendril Tasks root, run `mise run test:rspec:gustwave`, or `bundle exec rspec` in `gems/gustwave`.

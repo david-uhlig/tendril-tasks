@@ -34,4 +34,27 @@ module Gustwave
       super("Invalid declarations of #{component}:\n#{message}")
     end
   end
+
+  class << self
+    # Whether a mistake in using a component raises a Gustwave::Error, e.g.
+    # an unknown option, value, part or theme. When not strict, the component
+    # falls back instead: it ignores an unknown option or part, and uses the
+    # default for an unknown value or theme. Inconsistent declarations raise
+    # either way.
+    #
+    # Strict in development and test by default, and not strict in any other
+    # environment, so a mistake doesn't break a page for the people using a
+    # staging or demo environment. Set +config.gustwave.strict+ to change
+    # that, e.g. to raise in staging or in a CI environment of its own:
+    #
+    #   # config/environments/staging.rb
+    #   config.gustwave.strict = true
+    #
+    # Setting it to +nil+ restores the default.
+    attr_writer :strict
+
+    def strict?
+      @strict.nil? ? Rails.env.local? : @strict
+    end
+  end
 end

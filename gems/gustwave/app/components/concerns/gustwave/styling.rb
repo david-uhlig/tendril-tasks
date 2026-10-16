@@ -95,7 +95,7 @@ module Gustwave
     extend ActiveSupport::Concern
     include Gustwave::Options
 
-    # Raised outside production for a part the component doesn't declare.
+    # Raised when Gustwave.strict? for a part the component doesn't declare.
     class UnknownPartError < Gustwave::Error
       def initialize(component, given:, expected:)
         super(Options.suggest("#{component} has no part #{given.inspect}", given, expected))
@@ -250,7 +250,7 @@ module Gustwave
       part = part.to_sym
 
       unless definition.part?(part)
-        raise UnknownPartError.new(option_component_name, given: part, expected: definition.parts) if Options.strict?
+        raise UnknownPartError.new(option_component_name, given: part, expected: definition.parts) if Gustwave.strict?
 
         return merge_classes(extra)
       end

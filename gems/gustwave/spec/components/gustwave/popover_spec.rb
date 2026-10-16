@@ -41,8 +41,8 @@ RSpec.describe Gustwave::Popover, type: :component do
         .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :above for :placement/)
     end
 
-    it "falls back to the defaults in production" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "falls back to the defaults when Gustwave isn't strict" do
+      Gustwave.strict = false
 
       expect(component.trigger_options(placement: :above, trigger: :tap))
         .to include("data-popover-placement" => :top, "data-popover-trigger" => :hover)

@@ -83,8 +83,8 @@ RSpec.describe Gustwave::Options do
         .to raise_error(Gustwave::Options::UnknownValueError, /Did you mean :button\?.*falls back to :a/m)
     end
 
-    context "in production" do
-      before { allow(Rails.env).to receive(:production?).and_return(true) }
+    context "when Gustwave isn't strict" do
+      before { Gustwave.strict = false }
 
       it "ignores unknown options and falls back to the default for unknown values" do
         instance = linked.new.select_options(tga: :button, tag: :div)
@@ -139,8 +139,8 @@ RSpec.describe Gustwave::Options do
       expect(sized.new.classes).to eq "text-base"
     end
 
-    it "raises for unknown derived values, also in production" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "raises for unknown derived values, also when Gustwave isn't strict" do
+      Gustwave.strict = false
 
       expect { sized.new.derived_value(:icon_sise) }
         .to raise_error(Gustwave::Options::UnknownDerivedValueError, /no derived value :icon_sise. Did you mean :icon_size\?/)
@@ -196,8 +196,8 @@ RSpec.describe Gustwave::Options do
       component(&block).option_definition
     end
 
-    it "is raised when the definition is resolved, also in production" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "is raised when the definition is resolved, also when Gustwave isn't strict" do
+      Gustwave.strict = false
 
       expect { resolve { option :tag, default: :p, values: %i[a] } }
         .to raise_error(Gustwave::DefinitionError, /default :p of option :tag isn't one of its values \[:a\]/)

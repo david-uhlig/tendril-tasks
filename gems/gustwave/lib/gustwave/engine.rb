@@ -4,6 +4,13 @@ module Gustwave
   class Engine < ::Rails::Engine
     engine_name "gustwave"
 
+    config.gustwave = ActiveSupport::OrderedOptions.new
+
+    # See Gustwave.strict?
+    initializer "gustwave.strict" do |app|
+      Gustwave.strict = app.config.gustwave.strict
+    end
+
     # Serve the Stimulus controllers in app/javascript/controllers/gustwave.
     # Apps that eager load their controllers from "controllers" register them
     # as +gustwave--*+, e.g. +gustwave--lexxy-heading+.

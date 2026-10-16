@@ -50,8 +50,8 @@ RSpec.describe Gustwave::Styling do
       expect(component.new.classes).to be_nil
     end
 
-    it "returns only class: for an unknown part in production" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "returns only class: for an unknown part when Gustwave isn't strict" do
+      Gustwave.strict = false
 
       expect(button.new.classes(:label, class: "ms-1")).to eq "ms-1"
     end
@@ -300,8 +300,8 @@ RSpec.describe Gustwave::Styling do
       component(&block).style_definition
     end
 
-    it "is raised when the definition is resolved, also in production" do
-      allow(Rails.env).to receive(:production?).and_return(true)
+    it "is raised when the definition is resolved, also when Gustwave isn't strict" do
+      Gustwave.strict = false
 
       expect { resolve { variant :size, default: :xl, values: { md: "" } } }
         .to raise_error(Gustwave::DefinitionError, /default :xl of variant :size/)
