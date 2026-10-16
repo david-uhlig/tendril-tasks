@@ -14,13 +14,13 @@
         <% if role_name == user.role %>
           <% grid.button(
                theme: :gradient_duotone,
-               scheme: :purple_to_blue,
+               color: :purple_to_blue,
                disabled: true
              ).with_content(role_name.capitalize) %>
           <%# Other roles %>
         <% else %>
           <% grid.button(
-               scheme: :alternative,
+               color: :alternative,
                type: :submit,
                name: :role,
                disabled: user.id == current_user.id,

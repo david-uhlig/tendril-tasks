@@ -21,21 +21,21 @@ RSpec.describe Gustwave::Heading, type: :component do
     expect(page).to have_selector("h2", text: "Title")
   end
 
-  describe "scheme" do
-    it "derives the scheme from the tag" do
+  describe "size" do
+    it "derives the size from the tag" do
       render_inline(described_class.new("Title", tag: :h4))
 
       expect(page).to have_selector("h4.text-3xl")
     end
 
-    it "derives the scheme from the fallback tag" do
+    it "derives the size from the fallback tag" do
       render_inline(described_class.new("Title", tag: nil))
 
       expect(page).to have_selector("h2.text-5xl")
     end
 
-    it "keeps an explicit scheme" do
-      render_inline(described_class.new("Title", tag: :h1, scheme: :level6))
+    it "keeps an explicit size" do
+      render_inline(described_class.new("Title", tag: :h1, size: :xs))
 
       expect(page).to have_selector("h1.text-xl")
     end

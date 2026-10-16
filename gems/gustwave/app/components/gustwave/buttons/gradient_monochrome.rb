@@ -3,7 +3,7 @@
 module Gustwave
   module Buttons
     class GradientMonochrome < Gustwave::Buttons::Base
-      extend_variant :scheme, default: :blue, values: {
+      extend_variant :color, default: :blue, values: {
         blue: "text-white bg-linear-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-linear-to-br focus:ring-blue-300 dark:focus:ring-blue-800",
         green: "text-white bg-linear-to-r from-green-400 via-green-500 to-green-600 hover:bg-linear-to-br focus:ring-green-300 dark:focus:ring-green-800",
         cyan: "text-white bg-linear-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-linear-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800",

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  # Display a badge with the project's title and color scheme.
+  # Display a badge with the project's title and color.
   #
   # By default, the badge links to the project's detail page.
-  # The color scheme is determined by the project's ID.
+  # The color is determined by the project's ID.
   #
   # Example usage:
   #   <%= render TendrilTasks::ProjectBadge.new(project) %>
@@ -23,15 +23,15 @@ module TendrilTasks
 
     def before_render
       @href = (@href_arg || project_path(project)) if has_link
-      @scheme = helpers.badge_scheme_by_id(project.id)
+      @color = helpers.badge_color_by_id(project.id)
     end
 
     def call
-      render Gustwave::Badge.new(project.title, scheme:, tag:, href:)
+      render Gustwave::Badge.new(project.title, color:, tag:, href:)
     end
 
     private
 
-    attr_reader :project, :scheme, :tag, :href, :has_link
+    attr_reader :project, :color, :tag, :href, :has_link
   end
 end

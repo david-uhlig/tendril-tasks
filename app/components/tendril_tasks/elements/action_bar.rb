@@ -36,7 +36,7 @@ module TendrilTasks
         tag.li class: "inline-flex" do
           render Gustwave::Button.new(tag: :a,
                                       href: href,
-                                      scheme: :default,
+                                      color: :default,
                                       size: :sm) do |button|
             button.leading_icon(:edit)
             tag.span t(".edit_button")
@@ -53,7 +53,7 @@ module TendrilTasks
                                         project_id: @project.id,
                                         coordinator_ids: @project.coordinator_ids.join("-")
                                       ),
-                                      scheme: :default,
+                                      color: :default,
                                       size: :sm) do |button|
             button.leading_icon(:plus)
             tag.span(t(".add_task_button"))
@@ -68,7 +68,7 @@ module TendrilTasks
           render Gustwave::Button.new(tag: :a,
                                       href: new_project_path,
                                       theme: :default_outline,
-                                      scheme: :default,
+                                      color: :default,
                                       size: :sm) do |button|
             button.leading_icon(:plus)
             tag.span(t(".add_project_button"))

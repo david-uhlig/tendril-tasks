@@ -12,14 +12,14 @@ module TendrilTasks
       def call
         if published?
           render Gustwave::Badge.new(t(".states.published"),
-                                     scheme: :green,
+                                     color: :green,
                                      size: :md,
                                      class: "me-1") do |badge|
             badge.leading_icon :lock_open
           end
         else
           render Gustwave::Badge.new(t(".states.draft"),
-                                     scheme: :dark,
+                                     color: :dark,
                                      size: :md,
                                      class: "me-1") do |badge|
             badge.leading_icon :lock

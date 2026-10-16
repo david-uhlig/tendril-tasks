@@ -9,10 +9,10 @@ module Gustwave
   #
   #   class Badge < Gustwave::Component
   #     base     "inline-flex items-center rounded-sm"
-  #     unstyled scheme: :none
+  #     unstyled color: :none
   #     part     :icon, "h-3 w-auto"
   #
-  #     variant :scheme, default: :gray, values: {
+  #     variant :color, default: :gray, values: {
   #       gray: "bg-gray-100 text-gray-800",
   #       red:  "bg-red-100 text-red-800"
   #     }
@@ -21,13 +21,13 @@ module Gustwave
   #       md: "text-sm px-2"
   #     }
   #     toggle  :pill, "rounded-full"
-  #     toggle  :border, per: :scheme, values: { gray: "ring-1 ring-gray-300", red: "ring-1 ring-red-300" }
+  #     toggle  :border, per: :color, values: { gray: "ring-1 ring-gray-300", red: "ring-1 ring-red-300" }
   #   end
   #
   # * +base+ styles the root element, or several parts when given a hash.
   # * +unstyled+ names the option values that render the component
   #   unstyled, i.e. without its base styles, so callers can bring their
-  #   own. By convention that's <tt>scheme: :none</tt>. Subclasses inherit it.
+  #   own. By convention that's <tt>color: :none</tt>. Subclasses inherit it.
   # * +part+ declares a named element besides the root, e.g. an icon slot,
   #   optionally with its own classes.
   # * +variant+ declares an option with a fixed set of values and a
@@ -46,7 +46,7 @@ module Gustwave
   # A plain string targets the root element, or the part named by +part:+. A
   # hash targets parts by name: <tt>{ root: "…", icon: "…" }</tt>. Every
   # declaration takes +unless:+ to skip it for some option values, e.g.
-  # <tt>unless: { scheme: :none }</tt> or <tt>unless: { size: [:xs, :sm] }</tt>.
+  # <tt>unless: { color: :none }</tt> or <tt>unless: { size: [:xs, :sm] }</tt>.
   #
   # Base and part classes are emitted first, then those of variants and
   # toggles, each group in declaration order, inherited declarations first.
@@ -66,7 +66,7 @@ module Gustwave
   # subclasses that are already loaded:
   #
   #   Rails.autoloaders.main.on_load("Gustwave::Buttons::Base") do |base, _abspath|
-  #     base.extend_variant :scheme, values: { brand: "bg-brand-600 text-white" }
+  #     base.extend_variant :color, values: { brand: "bg-brand-600 text-white" }
   #   end
   #
   # A subclass that redefines the variant instead of extending it doesn't see
@@ -77,15 +77,15 @@ module Gustwave
   #
   # So does a +per:+ toggle or derived value in a subclass that the extension
   # leaves without a value. Gustwave::Badge styles its border, outline and
-  # hover per scheme, and derives its dismiss button's scheme from it, so
+  # hover per color, and derives its dismiss button's color from it, so
   # extend those in the same hook:
   #
   #   Rails.autoloaders.main.on_load("Gustwave::Badge") do |badge, _abspath|
-  #     badge.extend_variant :scheme, values: { brand: "bg-brand-600 text-white" }
+  #     badge.extend_variant :color, values: { brand: "bg-brand-600 text-white" }
   #     badge.extend_toggle :border, values: { brand: "border border-brand-400" }
   #     badge.extend_toggle :outline, values: { brand: "outline outline-1 outline-brand-400" }
   #     badge.extend_toggle :hover, values: { brand: "hover:bg-brand-700" }
-  #     badge.extend_derived :dismiss_button_scheme, values: { brand: :base }
+  #     badge.extend_derived :dismiss_button_color, values: { brand: :base }
   #   end
   #
   # === Using styles in a component
@@ -93,8 +93,8 @@ module Gustwave
   # Select the options as described in Gustwave::Options, then add the
   # computed classes to the HTML attributes:
   #
-  #   def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, pill: false, **options)
-  #     select_options(scheme:, size:, pill:)
+  #   def initialize(text = nil, color: DEFAULT, size: DEFAULT, pill: false, **options)
+  #     select_options(color:, size:, pill:)
   #     @options = attributes_for(options)
   #   end
   #
@@ -114,7 +114,7 @@ module Gustwave
     class_methods do
       # Styles the root element, or several parts given as a hash.
       #
-      #   base "inline-flex items-center", unless: { scheme: :none }
+      #   base "inline-flex items-center", unless: { color: :none }
       #   base root: "relative", icon: "absolute"
       def base(classes = nil, **parts)
         options = parts.extract!(:unless)
@@ -124,7 +124,7 @@ module Gustwave
       # Skips the base styles for the given option values, rendering the
       # component unstyled. Replaces an inherited declaration.
       #
-      #   unstyled scheme: :none
+      #   unstyled color: :none
       def unstyled(**conditions)
         declare_styling(:unstyled, unless: style_unless({ unless: conditions }))
       end

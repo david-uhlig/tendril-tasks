@@ -3,11 +3,11 @@
 module Gustwave
   class IconToast < Gustwave::Component
     base "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"
-    unstyled scheme: :none
+    unstyled status: :none
 
-    # The default is also the fallback for unknown schemes in production, e.g.
+    # The default is also the fallback for unknown statuses in production, e.g.
     # for an unknown flash type.
-    variant :scheme, default: :info, values: {
+    variant :status, default: :info, values: {
       info: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
             notice: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
             success: "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200",
@@ -17,8 +17,8 @@ module Gustwave
       alert: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200"
     }
 
-    # The icon per scheme, none for :none
-    derive :icon, from: :scheme, values: {
+    # The icon per status, none for :none
+    derive :icon, from: :status, values: {
       info: :info_circle,
       notice: :info_circle,
       success: :check_circle,
@@ -30,7 +30,7 @@ module Gustwave
 
     def initialize(text = nil,
                    id: nil,
-                   scheme: DEFAULT,
+                   status: DEFAULT,
                    position: DEFAULT,
                    dismissible: true,
                    auto_remove: false,
@@ -44,8 +44,8 @@ module Gustwave
 
       @text = text
 
-      select_options(scheme:)
-      @scheme = option_value(:scheme)
+      select_options(status:)
+      @status = option_value(:status)
       @icon = icon.presence || derived_value(:icon)
       @options = attributes_for(options)
     end

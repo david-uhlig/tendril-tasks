@@ -84,9 +84,9 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
   end
 
-  context "with scheme" do
-    it "renders scheme classes" do
-      render_inline(described_class.new(scheme: :purple))
+  context "with color" do
+    it "renders color classes" do
+      render_inline(described_class.new(color: :purple))
       expect(page).to have_selector("span.bg-purple-100.text-purple-800")
     end
   end
@@ -138,8 +138,8 @@ RSpec.describe Gustwave::Badge, type: :component do
       expect(page).to have_selector("button > span.sr-only", text: "Dismiss")
     end
 
-    it "matches the badge's scheme and size" do
-      render_inline(described_class.new("New", scheme: :pink, size: :"2xl"), &:dismiss_button)
+    it "matches the badge's color and size" do
+      render_inline(described_class.new("New", color: :pink, size: :"2xl"), &:dismiss_button)
 
       expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2 > svg.h-4")
     end

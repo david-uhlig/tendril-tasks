@@ -66,7 +66,7 @@ RSpec.describe Gustwave::Dropdowns::Triggers::InlineButton, type: :component do
 
     it "delegates leading_indicator to Gustwave::Button" do
       render_inline(described_class.new(menu_id: "dropdown-menu")) do
-        it.leading_indicator(scheme: :red)
+        it.leading_indicator(color: :red)
       end
       expect(rendered_content).to have_selector('button>span.rounded-full.bg-red-500[aria-hidden="true"]')
     end

@@ -12,7 +12,7 @@ module TendrilTasks
       renders_one :heading_slot, ->(text = nil, **options, &block) do
         options = attributes_for(:heading, options)
         options[:tag] ||= :h2
-        options[:scheme] ||= :level4
+        options[:size] ||= :md
         options[:lang] ||= I18n.locale
         TendrilTasks::Heading.new(text, **options) do
           capture(&block)

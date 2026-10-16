@@ -32,19 +32,19 @@ Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and 
 
 ## Options and styling
 
-Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `scheme` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts. Components that declare `unstyled scheme: :none` skip their base styles for `scheme: :none`, so callers can bring their own.
+Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `color` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts. Components that declare `unstyled color: :none` skip their base styles for `color: :none`, so callers can bring their own.
 
 To restyle a component everywhere, extend it whenever it loads, e.g. in `config/initializers/gustwave.rb`. Subclasses that are already loaded pick up the change:
 
 ```ruby
 Rails.autoloaders.main.on_load("Gustwave::Buttons::Default") do |button, _abspath|
-  button.extend_variant :scheme, values: { brand: "text-white bg-brand-600 hover:bg-brand-700 focus:ring-brand-300" }
+  button.extend_variant :color, values: { brand: "text-white bg-brand-600 hover:bg-brand-700 focus:ring-brand-300" }
 end
 ```
 
 See `Gustwave::Options` and `Gustwave::Styling` for every declaration and for subclassing.
 
-Every option a component takes as a keyword argument, such as `tag`, `scheme` or `size`, is declared with this DSL and defaults to the declared default, so extending a component's default reaches every caller. `Gustwave::Component` documents the constructor convention, and the specs check every component against it.
+Every option a component takes as a keyword argument, such as `tag`, `color` or `size`, is declared with this DSL and defaults to the declared default, so extending a component's default reaches every caller. `Gustwave::Component` documents the constructor convention, and the specs check every component against it.
 
 ### Strictness
 

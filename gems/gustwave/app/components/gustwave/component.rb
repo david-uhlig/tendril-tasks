@@ -5,22 +5,22 @@ module Gustwave
   #
   # === Constructor convention
   #
-  #   def initialize(text = nil, tag: DEFAULT, scheme: DEFAULT, pill: false, **options)
+  #   def initialize(text = nil, tag: DEFAULT, color: DEFAULT, pill: false, **options)
   #     @text = text
-  #     select_options(tag:, scheme:, pill:)
+  #     select_options(tag:, color:, pill:)
   #     @tag = option_value(:tag)
   #     @options = attributes_for(options)
   #   end
   #
   # * Positional arguments are the component's content or subject, e.g. its
   #   +text+ or an icon's +name+.
-  # * A keyword argument that picks from a fixed list, e.g. +tag+, +scheme+ or
+  # * A keyword argument that picks from a fixed list, e.g. +tag+, +color+ or
   #   +size+, is one of the component's options, declared with +option+,
   #   +variant+ or +toggle+ under the same name (see Gustwave::Options and
   #   Gustwave::Styling). It defaults to +DEFAULT+, or to +false+ for a toggle
   #   that is off by default, goes through +select_options+ and is read back
   #   with +option_value+. When its default depends on another option, the
-  #   component takes it from a +derive+d value instead, e.g. the scheme per
+  #   component takes it from a +derive+d value instead, e.g. the color per
   #   tag in Gustwave::Heading.
   # * Callers can pick every option through a keyword argument, except one
   #   marked +internal: true+, which the component selects itself, e.g. from

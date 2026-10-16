@@ -18,7 +18,7 @@ module TendrilTasks
 
       def task_title_heading_with_link_if_visible
         optional_link_to_if(@application.task.visible?, @application.task) do
-          render TendrilTasks::Heading.new(@application.task.title, tag: :h3, scheme: :level5)
+          render TendrilTasks::Heading.new(@application.task.title, tag: :h3, size: :sm)
         end
       end
     end

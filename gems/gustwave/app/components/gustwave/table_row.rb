@@ -26,9 +26,7 @@ module Gustwave
   #     <td>Software Engineer</td>
   #   <% end %>
   class TableRow < Gustwave::Component
-    variant :scheme, default: :standard, values: {
-      standard: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
-    }
+    base "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
 
     part :header_cell, "font-medium text-gray-900 dark:text-white whitespace-nowrap"
 
@@ -46,10 +44,8 @@ module Gustwave
     alias head with_cell_th
     alias th with_cell_th
 
-    # @param scheme [Symbol] the base styles for the table row. Pass in :none to define your own styles.
     # @param options [Hash] additional options for the HTML tag.
-    def initialize(scheme: DEFAULT, **options)
-      select_options(scheme:)
+    def initialize(**options)
       @config = attributes_for(options)
     end
 

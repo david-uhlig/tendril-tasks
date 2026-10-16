@@ -2,7 +2,7 @@
 
 # Renders roles badges depending on the given users role.
 class TendrilTasks::RoleBadge < TendrilTasks::Component
-  ROLE_SCHEMES = {
+  ROLE_COLORS = {
     admin: :purple,
     editor: :default,
     user: :default
@@ -14,7 +14,7 @@ class TendrilTasks::RoleBadge < TendrilTasks::Component
     @config = configure_html_attributes(
       options,
       tag: :a,
-      scheme: ROLE_SCHEMES.fetch(role, :default),
+      color: ROLE_COLORS.fetch(role, :default),
       size:,
       border:
     )

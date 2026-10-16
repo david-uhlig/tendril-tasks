@@ -7,7 +7,7 @@
     <% button.trailing_icon :arrow_right %>
   <% end %>
 
-  <%= render Gustwave::Button.new(scheme: :red, aria: { label: "Delete" }) do |button| %>
+  <%= render Gustwave::Button.new(color: :red, aria: { label: "Delete" }) do |button| %>
     <% button.leading_icon :trash_bin %>
   <% end %>
 </div>

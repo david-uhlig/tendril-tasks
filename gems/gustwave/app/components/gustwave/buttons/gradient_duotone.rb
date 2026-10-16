@@ -3,7 +3,7 @@
 module Gustwave
   module Buttons
     class GradientDuotone < Gustwave::Buttons::Base
-      extend_variant :scheme, default: :purple_to_blue, values: {
+      extend_variant :color, default: :purple_to_blue, values: {
         purple_to_blue: "text-white bg-linear-to-br from-purple-600 to-blue-500 hover:bg-linear-to-bl focus:ring-blue-300 dark:focus:ring-blue-800",
         cyan_to_blue: "text-white bg-linear-to-r from-cyan-500 to-blue-500 hover:bg-linear-to-bl focus:ring-cyan-300 dark:focus:ring-cyan-800",
         green_to_blue: "text-white bg-linear-to-br from-green-400 to-blue-600 hover:bg-linear-to-bl focus:ring-green-200 dark:focus:ring-green-800",

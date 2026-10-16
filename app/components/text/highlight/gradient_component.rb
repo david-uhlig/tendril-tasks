@@ -3,14 +3,14 @@
 module Text
   module Highlight
     class GradientComponent < TendrilTasks::Component
-      variant :scheme, default: :sky_to_emerald, values: {
+      variant :color, default: :sky_to_emerald, values: {
         sky_to_emerald: "text-transparent bg-clip-text bg-linear-to-r to-emerald-600 from-sky-400"
       }
 
-      def initialize(text = nil, highlight:, scheme: DEFAULT, **options)
+      def initialize(text = nil, highlight:, color: DEFAULT, **options)
         @text = text
         @highlight = highlight
-        select_options(scheme:)
+        select_options(color:)
         @options = attributes_for(options)
       end
 

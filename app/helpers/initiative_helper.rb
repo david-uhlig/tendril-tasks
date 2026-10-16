@@ -1,7 +1,7 @@
 module InitiativeHelper
-  SCHEMES = Gustwave::Badge.option_values(:scheme).excluding(:none, :base).freeze
+  COLORS = Gustwave::Badge.option_values(:color).excluding(:none, :base).freeze
 
-  def badge_scheme_by_id(id)
-    SCHEMES.fetch(id % SCHEMES.size)
+  def badge_color_by_id(id)
+    COLORS.fetch(id % COLORS.size)
   end
 end

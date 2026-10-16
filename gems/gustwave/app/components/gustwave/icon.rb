@@ -30,7 +30,7 @@ module Gustwave
     }
 
     # Modifies the icon's stroke color.
-    variant :scheme, default: :none, values: {
+    variant :color, default: :none, values: {
       light: "text-white dark:text-gray-800",
       dark: "text-gray-800 dark:text-white"
     }
@@ -66,21 +66,21 @@ module Gustwave
 
     # @param name [Symbol] the icon's identifier. Corresponds to the icons filename, underscores +_+ in the identifier are replaced with dashes +-+, e.g. +:arrow_up+ loads +arrow-up.svg+ in the +ICON_PATH/theme/+ directory.
     # @param theme [Symbol] either +:outline+ or +:solid+.
-    # @param scheme [Symbol] +:light+, +:dark+, or +:none+ (default). Color scheme of the SVG's outline.
+    # @param color [Symbol] +:light+, +:dark+, or +:none+ (default). Color of the SVG's outline.
     # @param size [Symbol] +:xs+, +:sm+, +:md+, +:lg+, +:xl+, +:2xl+, +:3xl+, +:4xl+, +:5xl+, +:6xl+, +:7xl+, +:8xl+, or +:9xl+. Size of the SVG.
     # @param position [Symbol] +:leading+ (default) adds margin after the icon. +:trailing+ adds margin before the icon. +:inline+ adds margin on both sides. +:standalone+ removes margin.
     # @param stroke_width [String] changes the stroke width of the SVG. Supported values are +0+, +0.5+, +1+, +1.5+, +2+, +2.5+, +3+, +3.5+, and +4+. Set custom values by overwriting +stroke_width+ with the +class: "*:stroke-[10px]"+ argument.
     # @param options [Hash] additional HTML attributes passed to the SVG element, e.g. +class+ or +id+.
     def initialize(name,
                    theme: DEFAULT,
-                   scheme: DEFAULT,
+                   color: DEFAULT,
                    size: DEFAULT,
                    position: DEFAULT,
                    stroke_width: DEFAULT,
                    **options)
       @name = name.to_s.gsub("_", "-")
 
-      select_options(theme:, scheme:, size:, position:, stroke_width:)
+      select_options(theme:, color:, size:, position:, stroke_width:)
       @theme = option_value(:theme)
       @options = attributes_for(options)
     end

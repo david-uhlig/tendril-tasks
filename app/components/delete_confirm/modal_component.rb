@@ -22,7 +22,7 @@ module DeleteConfirm
 
     renders_one :abort_button_slot, ->(text = t(".abort")) do
       Gustwave::Button
-        .new(scheme: :light,
+        .new(color: :light,
              class: "w-full lg:w-auto",
              "data-modal-hide": @id,
              type: :reset)
@@ -33,7 +33,7 @@ module DeleteConfirm
     renders_one :confirm_button_slot, ->(text = t(".delete_permanently")) do
       Gustwave::Button
         .new(type: :submit,
-             scheme: :red,
+             color: :red,
              class: "w-full lg:w-auto disabled:opacity-50",
              data: { "modal-hide": @id, "cooldown-target": "button" })
         .with_content(tag.span(text, data: { "cooldown-target": "label" }))

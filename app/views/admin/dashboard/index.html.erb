@@ -7,19 +7,19 @@
   <% end %>
 
   <%= render TendrilTasks::Heading
-               .new(tag: :h1, scheme: :level2)
+               .new(tag: :h1, size: :xl)
                .with_content(t("admin.title")) %>
 
   <%# Statistics %>
   <%= render TendrilTasks::Heading
-               .new(tag: :h2, scheme: :level3)
+               .new(tag: :h2, size: :lg)
                .with_content(t("admin.statistics.title")) %>
 
   <dl class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
     <%= render TendrilTasks::Admin::StatsItem
                  .new(t("admin.statistics.users.title"), @stats.users) do %>
-      <%= render Gustwave::Badge.new("#{@stats.users[:admins]} #{t("admin.statistics.users.admins")}", scheme: :purple) %>
-      <%= render Gustwave::Badge.new("#{@stats.users[:editors]} #{t("admin.statistics.users.editors")}", scheme: :indigo) %>
+      <%= render Gustwave::Badge.new("#{@stats.users[:admins]} #{t("admin.statistics.users.admins")}", color: :purple) %>
+      <%= render Gustwave::Badge.new("#{@stats.users[:editors]} #{t("admin.statistics.users.editors")}", color: :indigo) %>
     <% end %>
 
     <%= render TendrilTasks::Admin::StatsItem
@@ -106,25 +106,25 @@
       <% card.heading t("admin.monitoring.jobs.title") %>
 
       <% if @stats.active_job.fetch(:failed, 0) > 0 %>
-        <% card.badge scheme: :red, icon: :ban do %>
+        <% card.badge color: :red, icon: :ban do %>
           <%= t("admin.monitoring.jobs.failed", count: @stats.active_job.fetch(:failed)) %>
         <% end %>
       <% end %>
 
       <% if @stats.active_job.fetch(:scheduled, 0) > 0 %>
-        <% card.badge scheme: :yellow, icon: :layers do %>
+        <% card.badge color: :yellow, icon: :layers do %>
           <%= t("admin.monitoring.jobs.scheduled", count: @stats.active_job.fetch(:scheduled)) %>
         <% end %>
       <% end %>
 
       <% if @stats.active_job.fetch(:in_progress, 0) > 0 %>
-        <% card.badge scheme: :indigo, icon: :hourglas do %>
+        <% card.badge color: :indigo, icon: :hourglas do %>
           <%= t("admin.monitoring.jobs.in_progress", count: @stats.active_job.fetch(:in_progress)) %>
         <% end %>
       <% end %>
 
       <% if @stats.active_job.fetch(:finished, 0) > 0 %>
-        <% card.badge scheme: :green, icon: :check do %>
+        <% card.badge color: :green, icon: :check do %>
           <%= t("admin.monitoring.jobs.finished", count: @stats.active_job.fetch(:finished)) %>
         <% end %>
       <% end %>
@@ -141,12 +141,12 @@
     <%= render TendrilTasks::Admin::Card.new do |card| %>
       <% card.heading t("admin.monitoring.storage.title") %>
 
-      <% card.badge scheme: :green do %>
+      <% card.badge color: :green do %>
         <% it.leading_icon :paper_clip, class: "me-0.5" %>
         <%= t("admin.monitoring.storage.attachments", count: @stats.active_storage.fetch(:files)) %>
       <% end %>
 
-      <% card.badge scheme: :yellow do %>
+      <% card.badge color: :yellow do %>
         <% it.leading_icon :file_code, class: "me-0.5" %>
         <%= t("admin.monitoring.storage.blobs", count: @stats.active_storage.fetch(:blobs)) %>
       <% end %>

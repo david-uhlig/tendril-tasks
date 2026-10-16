@@ -29,7 +29,7 @@ RSpec.describe Gustwave::Spinner, type: :component do
       expect(rendered_content).to have_selector("svg.inline.animate-spin")
     end
 
-    it "renders the default scheme" do
+    it "renders the default color" do
       expect(rendered_content).to have_selector("svg.text-gray-200.fill-blue-600")
     end
 
@@ -38,9 +38,9 @@ RSpec.describe Gustwave::Spinner, type: :component do
     end
   end
 
-  context "with scheme argument" do
-    it "renders the scheme styling" do
-      render_inline(described_class.new(scheme: :red))
+  context "with color argument" do
+    it "renders the color styling" do
+      render_inline(described_class.new(color: :red))
       expect(rendered_content).to have_selector("svg.text-gray-200.fill-red-600")
     end
   end

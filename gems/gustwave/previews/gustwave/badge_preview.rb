@@ -11,8 +11,8 @@ module Gustwave
       end
     end
 
-    def schemes
-      render_with_template(locals: { schemes: Gustwave::Badge.option_values(:scheme).excluding(:none, :base) })
+    def colors
+      render_with_template(locals: { colors: Gustwave::Badge.option_values(:color).excluding(:none, :base) })
     end
 
     def sizes
@@ -42,19 +42,19 @@ module Gustwave
     end
 
     def with_icon
-      render Gustwave::Badge.new(scheme: :red, pill: true, aria: { label: "Verified" }) do |badge|
+      render Gustwave::Badge.new(color: :red, pill: true, aria: { label: "Verified" }) do |badge|
         badge.leading_icon :badge_check
       end
     end
 
     def with_indicator
-      render Gustwave::Badge.new("Messages", scheme: :dark) do |badge|
+      render Gustwave::Badge.new("Messages", color: :dark) do |badge|
         badge.trailing_indicator "4"
       end
     end
 
     def dismissible
-      render Gustwave::Badge.new("Default", scheme: :indigo, id: "badge-dismiss-default") do |badge|
+      render Gustwave::Badge.new("Default", color: :indigo, id: "badge-dismiss-default") do |badge|
         badge.dismiss_button
       end
     end

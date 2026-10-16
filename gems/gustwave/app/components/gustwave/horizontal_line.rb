@@ -14,13 +14,13 @@ module Gustwave
   #
   #   <%= render Gustwave::HorizontalLine.new(class: "border-t-2 border-gray-300") %>
   #
-  # Customize the appearance of the line by passing a scheme:
+  # Customize the appearance of the line by passing a shape:
   #
-  #   <%= render Gustwave::HorizontalLine.new(scheme: :trimmed) %>
+  #   <%= render Gustwave::HorizontalLine.new(shape: :trimmed) %>
   #
-  # Reset all styles by passing the +none+ scheme:
+  # Reset all styles by passing the +none+ shape:
   #
-  #   <%= render Gustwave::HorizontalLine.new(scheme: :none) %>
+  #   <%= render Gustwave::HorizontalLine.new(shape: :none) %>
   #
   # You can render text in the middle of the line by passing a block or using
   # the +with_content+ method:
@@ -51,9 +51,9 @@ module Gustwave
   #
   class HorizontalLine < Gustwave::Component
     base "mx-auto border-0 rounded-sm dark:bg-gray-700"
-    unstyled scheme: :none
+    unstyled shape: :none
 
-    variant :scheme, default: :default, values: {
+    variant :shape, default: :default, values: {
       default: "w-full h-px my-8 bg-gray-200",
       trimmed: "w-48 h-1 my-4 bg-gray-100 md:my-10",
       squared: "w-8 h-8 my-8 bg-gray-200 md:my-12"
@@ -87,10 +87,10 @@ module Gustwave
 
     # Initializes a new HorizontalLine component.
     #
-    # @param scheme [Symbol] the scheme to be used for styling the horizontal line.
+    # @param shape [Symbol] the shape to be used for styling the horizontal line.
     # @param options [Hash] additional HTML options to be applied to the +<hr>+ element.
-    def initialize(scheme: DEFAULT, **options)
-      select_options(scheme:)
+    def initialize(shape: DEFAULT, **options)
+      select_options(shape:)
       @options = attributes_for(options)
     end
 

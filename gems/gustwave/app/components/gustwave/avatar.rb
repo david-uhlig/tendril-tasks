@@ -18,15 +18,15 @@ module Gustwave
   #    <img src="https://example.com/avatar.png" alt="Avatar" />
   #  <% end %>
   #
-  # You can customize the avatar's appearance using the +scheme+, +size+ and
-  # +border+ options. The +scheme+ option determines the avatar's shape, the
+  # You can customize the avatar's appearance using the +shape+, +size+ and
+  # +border+ options. The +shape+ option determines the avatar's shape, the
   # +size+ option determines the avatar's size, and the +border+ option
   # determines whether the avatar has a border or not. The +border+ is
   # automatically scaled based on the +size+ option.
   #
   # @param src [String] The URL of the avatar image.
   # @param alt [String] The alt text for the avatar image.
-  # @param scheme [Symbol] The scheme of the avatar, one of :round, :square.
+  # @param shape [Symbol] The shape of the avatar, one of :round, :square.
   # @param size [Symbol] The size of the avatar, one of :xs, :sm, :md, :lg, :xl, :2xl, :3xl, :4xl.
   # @param border [Boolean] Whether the avatar should have a border.
   # @param tag [Symbol] The element wrapping the block when there is no +src+, e.g. +:span+ inside a button.
@@ -39,7 +39,7 @@ module Gustwave
     # The element wrapping the block when there is no +src+
     option :tag, default: :div, values: %i[div span]
 
-    variant :scheme, default: :round, values: {
+    variant :shape, default: :round, values: {
       round: "rounded-full",
       square: "rounded-sm"
     }
@@ -71,7 +71,7 @@ module Gustwave
 
     def initialize(src: nil,
                    alt: nil,
-                   scheme: DEFAULT,
+                   shape: DEFAULT,
                    size: DEFAULT,
                    border: false,
                    tag: DEFAULT,
@@ -81,7 +81,7 @@ module Gustwave
         options[:alt] ||= alt
         options[:role] ||= "img"
       end
-      select_options(tag:, scheme:, size:, border:)
+      select_options(tag:, shape:, size:, border:)
 
       @src = src
       @wrapper_tag = option_value(:tag)

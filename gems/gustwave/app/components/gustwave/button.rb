@@ -45,14 +45,14 @@ module Gustwave
   # Gustwave::Buttons::Base. For example:
   #
   #   class Ui::MonochromeButton < Gustwave::Buttons::Base
-  #     extend_variant :scheme, default: :dark, values: {
+  #     extend_variant :color, default: :dark, values: {
   #       dark: "text-white bg-gray-800",
   #       light: "text-gray-900 bg-white border border-gray-300"
   #     }
   #   end
   #
-  # This defines a very simple monochrome button scheme. +extend_variant+
-  # adds the new values to the inherited +:scheme+ variant and keeps the
+  # This defines a very simple monochrome button color. +extend_variant+
+  # adds the new values to the inherited +:color+ variant and keeps the
   # others, e.g. +:none+ and +:base+. See Gustwave::Styling for the other
   # declarations. Register it with Gustwave::Button in
   # +to_prepare+, so that it is registered again when Gustwave::Button is
@@ -85,7 +85,7 @@ module Gustwave
     # @param [String, nil] text The text to display on the button. Takes precedent over the block content.
     # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, :gradient_duotone_outline, and :inline. See all available themes by running
     #   Gustwave::Button.themes! Defaults to :default.
-    # @param [Hash] options The theme's arguments, e.g. +tag+, +type+, +scheme+, +size+ and +pill+ for Gustwave::Buttons::Base, and HTML attributes to add to the button, e.g. :class to overwrite some of the theme's styles.
+    # @param [Hash] options The theme's arguments, e.g. +tag+, +type+, +color+, +size+ and +pill+ for Gustwave::Buttons::Base, and HTML attributes to add to the button, e.g. :class to overwrite some of the theme's styles.
     def initialize(text = nil, theme: DEFAULT, **options)
       @theme = theme
       @text = text

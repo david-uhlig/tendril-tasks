@@ -8,11 +8,11 @@ require "gustwave/test/styling_sandbox"
 #   through +select_options+.
 # - An option whose default depends on another option takes it from a
 #   +derive+d value, listed in +derived_defaults:+, e.g. Gustwave::Heading's
-#   scheme per tag.
+#   size per tag.
 # - Callers can pick every option through a keyword argument, except an
 #   +internal: true+ one, or one they pick through another method, listed in
 #   +selected_elsewhere:+, e.g. Gustwave::Popover's +trigger_options+.
-# - A keyword argument named like a common option, e.g. +tag+ or +scheme+, is
+# - A keyword argument named like a common option, e.g. +tag+ or +color+, is
 #   one of the component's options, unless the component forwards it to a
 #   child component and lists it in +forwards:+.
 #
@@ -23,7 +23,7 @@ require "gustwave/test/styling_sandbox"
 # @param component_class [Class] component class to test (default `described_class`)
 # @param kwargs [Hash] additional keyword arguments to pass to the component constructor
 RSpec.shared_examples "a component following the constructor convention" do |*args, forwards: [], derived_defaults: {}, selected_elsewhere: [], component_class: described_class, **kwargs|
-  common_options = %i[tag type scheme size position align placement trigger_event]
+  common_options = %i[tag type color size position align placement trigger_event]
 
   keywords = component_class.instance_method(:initialize).parameters
   required_keywords = keywords.filter_map { |type, name| name if type == :keyreq }

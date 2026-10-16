@@ -22,7 +22,7 @@ RSpec.describe TendrilTasks::Avatar, type: :component do
       expect(page).not_to have_selector("img[src='#{user.avatar_url}']")
     end
 
-    it "renders the default scheme classes" do
+    it "renders the default shape classes" do
       expect(page).to have_selector("img.rounded-full")
     end
 
@@ -52,11 +52,11 @@ RSpec.describe TendrilTasks::Avatar, type: :component do
     end
   end
 
-  context "with scheme" do
-    it "renders the scheme classes" do
+  context "with shape" do
+    it "renders the shape classes" do
       render_inline(described_class.new(
         user,
-        scheme: :square)
+        shape: :square)
       )
       expect(page).to have_selector("img.rounded-sm")
     end

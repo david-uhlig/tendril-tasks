@@ -25,7 +25,7 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Form::RichText::Trix::Button => { args: [ :bold ] },
     Gustwave::Form::RichText::Trix::LinkToggle => { args: [ nil ] },
     Gustwave::Form::RichText::Trix::Toolbar => { args: [ nil ] },
-    Gustwave::Heading => { derived_defaults: { scheme: :default_scheme } },
+    Gustwave::Heading => { derived_defaults: { size: :default_size } },
     Gustwave::Icon => { args: [ :close ] },
     Gustwave::IconToast => { forwards: %i[position] },
     Gustwave::Popover => { selected_elsewhere: %i[placement trigger] },

@@ -19,7 +19,7 @@ RSpec.describe Gustwave::Indicator, type: :component do
       expect(rendered_content).to have_selector('span.h-\[1em\].font-semibold')
     end
 
-    it "renders scheme styling" do
+    it "renders color styling" do
       expect(rendered_content).to have_selector("span.bg-gray-200")
     end
   end
@@ -38,9 +38,9 @@ RSpec.describe Gustwave::Indicator, type: :component do
     end
   end
 
-  context "with custom scheme" do
-    it "renders scheme styling" do
-      render_inline(described_class.new(scheme: :red))
+  context "with custom color" do
+    it "renders color styling" do
+      render_inline(described_class.new(color: :red))
       expect(rendered_content).to have_selector("span.bg-red-500")
     end
   end

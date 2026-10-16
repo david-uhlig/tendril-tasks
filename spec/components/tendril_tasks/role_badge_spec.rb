@@ -27,14 +27,14 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
     end
   end
 
-  describe "scheme" do
+  describe "color" do
     def badge_classes
       Nokogiri::HTML.fragment(rendered_content).at_css("a")["class"]
     end
 
-    { admin: :purple, editor: :default }.each do |role, scheme|
-      it "is #{scheme} for #{role}" do
-        render_inline(Gustwave::Badge.new("Badge", tag: :a, scheme:, size: :sm, border: true))
+    { admin: :purple, editor: :default }.each do |role, color|
+      it "is #{color} for #{role}" do
+        render_inline(Gustwave::Badge.new("Badge", tag: :a, color:, size: :sm, border: true))
         expected = badge_classes
 
         render_inline(described_class.new(build_stubbed(:user, role:)))

@@ -1,8 +1,8 @@
 module Gustwave
   class IndicatorPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/indicator/schemes
-    def schemes
-      render_with_template(locals: { schemes: Gustwave::Indicator.option_values(:scheme).excluding(:none) })
+    # http://localhost:3030/rails/view_components/gustwave/indicator/colors
+    def colors
+      render_with_template(locals: { colors: Gustwave::Indicator.option_values(:color).excluding(:none) })
     end
 
     def sizes
@@ -10,15 +10,15 @@ module Gustwave
     end
 
     def pulse
-      render Gustwave::Indicator.new(scheme: :green, size: :md, pulse: true)
+      render Gustwave::Indicator.new(color: :green, size: :md, pulse: true)
     end
 
     def with_text
-      render Gustwave::Indicator.new("12", scheme: :red, size: :lg)
+      render Gustwave::Indicator.new("12", color: :red, size: :lg)
     end
 
     def with_legend
-      render Gustwave::Indicator.new(scheme: :green) do |indicator|
+      render Gustwave::Indicator.new(color: :green) do |indicator|
         indicator.legend "Online"
       end
     end

@@ -6,12 +6,12 @@ module Gustwave
     # block, so a spec can extend a component the way an initializer or
     # +on_load+ hook does without leaking the change into other specs.
     #
-    # @example spec/components/brand_scheme_spec.rb
+    # @example spec/components/brand_color_spec.rb
     #   require "gustwave/test/styling_sandbox"
     #
     #   around do |example|
     #     Gustwave::Test::StylingSandbox.isolate(Gustwave::Buttons::Base) do
-    #       Gustwave::Buttons::Base.extend_variant :scheme, values: { brand: "bg-brand-600" }
+    #       Gustwave::Buttons::Base.extend_variant :color, values: { brand: "bg-brand-600" }
     #       example.run
     #     end
     #   end

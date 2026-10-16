@@ -6,7 +6,7 @@
   <div class="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start" role="group">
     <%= render Gustwave::Button.new(type: :submit,
                                     theme: :gradient_duotone,
-                                    scheme: :purple_to_blue,
+                                    color: :purple_to_blue,
                                     size: :xl,
                                     data: { turbo: false }) do |login_button| %>
       <% login_button.leading_svg("rocketchat/icon-white.svg") %>
@@ -19,7 +19,7 @@
                  .new(tag: :a,
                       href: "#home-how-it-works",
                       theme: :outline,
-                      scheme: :white,
+                      color: :white,
                       size: :xl)
                  .with_content(t(".how_it_works")) %>
   </div>

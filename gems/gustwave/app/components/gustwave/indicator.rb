@@ -12,16 +12,16 @@ module Gustwave
   # Use the +position+ option to position the indicator on other components. Note: The underlying component must be +relative+ positioned.
   #
   #   <%= render Gustwave::Badge.new("Badge", class: "relative") do %>
-  #     <%= render Gustwave::Indicator.new(position: :top_right, scheme: :blue) %>
+  #     <%= render Gustwave::Indicator.new(position: :top_right, color: :blue) %>
   #   <% end %>
   class Indicator < Gustwave::Component
     include Gustwave::Positionable
 
     base "flex rounded-full aspect-square"
-    unstyled scheme: :none
+    unstyled color: :none
 
     # TODO consistently add a :base style option to all components
-    variant :scheme, default: :gray, values: {
+    variant :color, default: :gray, values: {
       gray: "bg-gray-200",
       dark: "bg-gray-900 dark:bg-gray-700",
       blue: "bg-blue-600",
@@ -59,19 +59,19 @@ module Gustwave
     alias legend with_legend_slot
 
     # @param text [String] the text to display in the indicator. Takes precedence over block content.
-    # @param scheme [Symbol] the color scheme for the indicator. Pass in :none to define your own styles.
+    # @param color [Symbol] the color for the indicator. Pass in :none to define your own styles.
     # @param size [Symbol] the size of the indicator. Options: :none, :auto, :xs, :sm, :md, :lg, :xl. When chosing :auto, the indicator matches the line-height.
     # @param pulse [Boolean] whether to apply the pulse animation.
     # @param position [Symbol] positions the indicator on another component. The enclosing component must be +relative+ positioned.
     # @param options [Hash] additional options for the HTML tag, like class.
     def initialize(text = nil,
-                   scheme: DEFAULT,
+                   color: DEFAULT,
                    size: DEFAULT,
                    pulse: false,
                    position: DEFAULT,
                    **options)
       @text = text
-      select_options(scheme:, size:, pulse:, position:)
+      select_options(color:, size:, pulse:, position:)
       @options = options
     end
 

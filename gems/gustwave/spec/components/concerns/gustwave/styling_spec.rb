@@ -8,9 +8,9 @@ RSpec.describe Gustwave::Styling do
   let(:button) do
     component do
       base "inline-flex"
-      unstyled scheme: :none
+      unstyled color: :none
       part :icon, "h-4"
-      variant :scheme, default: :blue, values: { blue: "bg-blue-500", red: "bg-red-500" }
+      variant :color, default: :blue, values: { blue: "bg-blue-500", red: "bg-red-500" }
       variant :size, default: :md, values: {
         sm: { root: "text-sm px-2", icon: "h-3" },
         md: "text-base px-4"
@@ -25,7 +25,7 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "applies the selected values" do
-      expect(button.new.select_options(scheme: :red, size: :sm, pill: true).classes)
+      expect(button.new.select_options(color: :red, size: :sm, pill: true).classes)
         .to eq "inline-flex bg-red-500 text-sm px-2 rounded-full"
     end
 
@@ -37,9 +37,9 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "lets call-time options override the selection" do
-      instance = button.new.select_options(scheme: :red)
+      instance = button.new.select_options(color: :red)
 
-      expect(instance.classes(scheme: :blue)).to eq "inline-flex bg-blue-500 text-base px-4"
+      expect(instance.classes(color: :blue)).to eq "inline-flex bg-blue-500 text-base px-4"
       expect(instance.classes).to eq "inline-flex bg-red-500 text-base px-4"
     end
 
@@ -101,9 +101,9 @@ RSpec.describe Gustwave::Styling do
 
   describe "variants" do
     it "adds a :none value that renders nothing unless one is declared" do
-      instance = button.new.select_options(scheme: :none)
+      instance = button.new.select_options(color: :none)
 
-      expect(button.option_values(:scheme)).to eq %i[blue red none]
+      expect(button.option_values(:color)).to eq %i[blue red none]
       expect(instance.classes).to eq "text-base px-4"
     end
 
@@ -212,7 +212,7 @@ RSpec.describe Gustwave::Styling do
         base "font-medium", unless: { size: [ :xs, :sm ] }
         part :icon, "h-4", unless: { icon: false }
         variant :size, default: :md, values: { xs: "text-xs", sm: "text-sm", md: "text-base" }
-        variant :scheme, default: :blue, values: { blue: "text-blue-500" }, unless: { size: :xs }
+        variant :color, default: :blue, values: { blue: "text-blue-500" }, unless: { size: :xs }
         toggle :icon
         toggle :pill, "rounded-full", unless: { size: :xs }
       end
@@ -232,37 +232,37 @@ RSpec.describe Gustwave::Styling do
 
   describe "unstyled" do
     it "skips the base styles for the given values, and only them" do
-      expect(button.new.select_options(scheme: :none).classes).to eq "text-base px-4"
-      expect(button.new.select_options(scheme: :none, size: :sm).classes(:icon)).to eq "h-3"
-      expect(button.new.select_options(scheme: :red).classes).to eq "inline-flex bg-red-500 text-base px-4"
+      expect(button.new.select_options(color: :none).classes).to eq "text-base px-4"
+      expect(button.new.select_options(color: :none, size: :sm).classes(:icon)).to eq "h-3"
+      expect(button.new.select_options(color: :red).classes).to eq "inline-flex bg-red-500 text-base px-4"
     end
 
     it "skips the base styles of parts" do
       spinner = component do
         base root: "flex", icon: "animate-spin"
-        unstyled scheme: :none
+        unstyled color: :none
         part :icon, "h-4"
-        variant :scheme, default: :blue, values: { blue: "fill-blue-600" }
+        variant :color, default: :blue, values: { blue: "fill-blue-600" }
       end
 
       expect(spinner.new.classes(:icon)).to eq "animate-spin h-4"
-      expect(spinner.new.select_options(scheme: :none).classes(:icon)).to eq "h-4"
+      expect(spinner.new.select_options(color: :none).classes(:icon)).to eq "h-4"
     end
 
     it "takes several options and values" do
-      several = component(button) { unstyled scheme: :none, size: %i[sm] }
+      several = component(button) { unstyled color: :none, size: %i[sm] }
 
       expect(several.new.select_options(size: :sm).classes).to eq "bg-blue-500 text-sm px-2"
-      expect(several.new.select_options(scheme: :none).classes).to eq "text-base px-4"
+      expect(several.new.select_options(color: :none).classes).to eq "text-base px-4"
     end
 
     it "is inherited, reaches a redeclared base, and can be replaced" do
       redeclared = component(button) { base "flex" }
-      replaced = component(button) { unstyled scheme: :red }
+      replaced = component(button) { unstyled color: :red }
 
-      expect(redeclared.new.select_options(scheme: :none).classes).to eq "text-base px-4"
-      expect(replaced.new.select_options(scheme: :none).classes).to eq "inline-flex text-base px-4"
-      expect(replaced.new.select_options(scheme: :red).classes).to eq "bg-red-500 text-base px-4"
+      expect(redeclared.new.select_options(color: :none).classes).to eq "text-base px-4"
+      expect(replaced.new.select_options(color: :none).classes).to eq "inline-flex text-base px-4"
+      expect(replaced.new.select_options(color: :red).classes).to eq "bg-red-500 text-base px-4"
     end
   end
 
@@ -314,11 +314,11 @@ RSpec.describe Gustwave::Styling do
     it "replaces a redeclared name in place" do
       child = component(button) do
         base "flex"
-        variant :scheme, default: :green, values: { green: "bg-green-500" }
+        variant :color, default: :green, values: { green: "bg-green-500" }
       end
 
       expect(child.new.classes).to eq "flex bg-green-500 text-base px-4"
-      expect(child.option_values(:scheme)).to eq %i[green none]
+      expect(child.option_values(:color)).to eq %i[green none]
     end
 
     it "emits a variant redeclared in place after a part the subclass adds" do
@@ -361,20 +361,20 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "doesn't change the parent" do
-      component(button) { extend_variant :scheme, values: { green: "bg-green-500" } }
+      component(button) { extend_variant :color, values: { green: "bg-green-500" } }
 
-      expect(button.option_values(:scheme)).to eq %i[blue red none]
+      expect(button.option_values(:color)).to eq %i[blue red none]
     end
 
     it "reaches loaded subclasses when the parent is extended later" do
       extending = component(button)
-      redefining = component(button) { variant :scheme, default: :gray, values: { gray: "bg-gray-500" } }
+      redefining = component(button) { variant :color, default: :gray, values: { gray: "bg-gray-500" } }
       expect(extending.new.classes).to eq "inline-flex bg-blue-500 text-base px-4"
 
-      button.extend_variant :scheme, values: { brand: "bg-brand" }
+      button.extend_variant :color, values: { brand: "bg-brand" }
 
-      expect(extending.new.select_options(scheme: :brand).classes).to eq "inline-flex bg-brand text-base px-4"
-      expect(redefining.option_values(:scheme)).to eq %i[gray none]
+      expect(extending.new.select_options(color: :brand).classes).to eq "inline-flex bg-brand text-base px-4"
+      expect(redefining.option_values(:color)).to eq %i[gray none]
     end
 
     it "works when included directly into a ViewComponent" do
@@ -388,9 +388,9 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "drops a variant's classes when a subclass redeclares it as a plain option" do
-      child = component(button) { option :scheme, default: :blue, values: %i[blue red none] }
+      child = component(button) { option :color, default: :blue, values: %i[blue red none] }
 
-      expect(child.new.select_options(scheme: :red).classes).to eq "inline-flex text-base px-4"
+      expect(child.new.select_options(color: :red).classes).to eq "inline-flex text-base px-4"
       expect(child.style_definition.to_h[:variants]).to eq [ :size ]
     end
   end
@@ -422,8 +422,8 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "is raised for unknown unless: options and values" do
-      expect { resolve { base "flex", unless: { scheme: :none } } }
-        .to raise_error(Gustwave::DefinitionError, /unless: :scheme/)
+      expect { resolve { base "flex", unless: { color: :none } } }
+        .to raise_error(Gustwave::DefinitionError, /unless: :color/)
       expect do
         resolve do
           variant :size, default: :md, values: { md: "" }
@@ -433,14 +433,14 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "is raised for unknown unstyled options and values" do
-      expect { resolve { unstyled scheme: :none } }
-        .to raise_error(Gustwave::DefinitionError, /unstyled has scheme:, which isn't an option/)
+      expect { resolve { unstyled color: :none } }
+        .to raise_error(Gustwave::DefinitionError, /unstyled has color:, which isn't an option/)
       expect do
         resolve do
-          variant :scheme, default: :blue, values: { blue: "" }
-          unstyled scheme: :brand
+          variant :color, default: :blue, values: { blue: "" }
+          unstyled color: :brand
         end
-      end.to raise_error(Gustwave::DefinitionError, /unstyled has scheme: with unknown values \[:brand\]/)
+      end.to raise_error(Gustwave::DefinitionError, /unstyled has color: with unknown values \[:brand\]/)
     end
 
     it "is raised for unknown parts" do
@@ -474,7 +474,7 @@ RSpec.describe Gustwave::Styling do
 
   describe "readers" do
     it "describes the definition" do
-      expect(button.style_definition.to_h).to eq(parts: %i[root icon], variants: %i[scheme size], toggles: [ :pill ])
+      expect(button.style_definition.to_h).to eq(parts: %i[root icon], variants: %i[color size], toggles: [ :pill ])
     end
   end
 end

@@ -29,7 +29,7 @@ module Gustwave
   #   end
   #
   # @param options [Hash] Arguments and HTML attributes passed to the
-  #  +Gustwave::Avatar+ component, e.g. +src+, +alt+, +scheme+, +size+ and
+  #  +Gustwave::Avatar+ component, e.g. +src+, +alt+, +shape+, +size+ and
   #  +border+.
   class AvatarPlaceholder < Gustwave::Component
     DEFAULT_PLACEHOLDER = <<~SVG

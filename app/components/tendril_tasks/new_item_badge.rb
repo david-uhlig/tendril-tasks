@@ -8,13 +8,13 @@ module TendrilTasks
     base "opacity-80"
 
     def initialize(text = nil,
-                   scheme: :green,
+                   color: :green,
                    size: :xs,
                    pill: true,
                    border: true,
                    **options)
       @text = text
-      @options = { scheme:, size:, pill:, border: }.compact.merge!(attributes_for(options))
+      @options = { color:, size:, pill:, border: }.compact.merge!(attributes_for(options))
     end
 
     def before_render

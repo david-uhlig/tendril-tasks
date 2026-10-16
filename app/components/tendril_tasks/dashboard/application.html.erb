@@ -6,7 +6,7 @@
                         has_link: @application.task.project.visible?) %>
 
       <%= render Gustwave::Badge.new(t(".not_available"),
-                                    scheme: :dark) unless @application.task.visible? %>
+                                    color: :dark) unless @application.task.visible? %>
     </div>
 
     <%= task_title_heading_with_link_if_visible %>

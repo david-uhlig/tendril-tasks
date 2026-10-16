@@ -1,8 +1,8 @@
 module Gustwave
   class HorizontalLinePreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/horizontal_line/schemes
-    def schemes
-      render_with_template(locals: { schemes: Gustwave::HorizontalLine.option_values(:scheme).excluding(:none) })
+    # http://localhost:3030/rails/view_components/gustwave/horizontal_line/shapes
+    def shapes
+      render_with_template(locals: { shapes: Gustwave::HorizontalLine.option_values(:shape).excluding(:none) })
     end
 
     def with_text
