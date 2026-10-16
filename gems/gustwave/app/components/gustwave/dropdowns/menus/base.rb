@@ -18,6 +18,9 @@ module Gustwave
       class Base < Gustwave::Component
         base "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-md w-auto dark:bg-gray-700 hidden"
 
+        # The HTML tag of the menu
+        option :tag, default: :div, values: %i[div nav section]
+
         part :header, "px-4 py-2 text-sm text-gray-900 dark:text-white"
 
         part :footer, "px-4 py-2 text-sm text-gray-900 dark:text-white"
@@ -55,9 +58,10 @@ module Gustwave
         # @param content_for [Symbol, nil] the name of the content area to render the menu. If +nil+, the menu is rendered right after the triggering element.
         # @param tag [Symbol] HTML tag to use for the dropdown menu. Default: +div+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
-        def initialize(text = nil, id:, content_for: nil, tag: :div, **options)
+        def initialize(text = nil, id:, content_for: nil, tag: DEFAULT, **options)
           @text = text
-          @menu_tag = tag
+          select_options(tag:)
+          @menu_tag = option_value(:tag)
           @config = { id: }.merge(attributes_for(options))
           @content_for_name = content_for
         end

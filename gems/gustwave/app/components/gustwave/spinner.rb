@@ -33,7 +33,7 @@ module Gustwave
     #
     # @see Gustwave::Icon
     # @see Gustwave::Positionable for positioning options
-    def initialize(text = nil, scheme: DEFAULT, size: :md, align: DEFAULT, position: DEFAULT, **options)
+    def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, align: DEFAULT, position: DEFAULT, **options)
       @text = sr_only_text(text)
       select_options(scheme:, align:, position:)
       @config = { role: "status" }.merge(attributes_for(options))

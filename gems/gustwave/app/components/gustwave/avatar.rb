@@ -36,6 +36,9 @@ module Gustwave
   # @see Gustwave::AvatarText
   # @see Gustwave::AvatarPlaceholder
   class Avatar < Gustwave::Component
+    # The element wrapping the block when there is no +src+
+    option :tag, default: :div, values: %i[div span]
+
     variant :scheme, default: :round, values: {
       round: "rounded-full",
       square: "rounded-sm"
@@ -71,17 +74,17 @@ module Gustwave
                    scheme: DEFAULT,
                    size: DEFAULT,
                    border: false,
-                   tag: :div,
+                   tag: DEFAULT,
                    **options)
       options.deep_symbolize_keys!
       if src.present?
         options[:alt] ||= alt
         options[:role] ||= "img"
       end
-      select_options(scheme:, size:, border:)
+      select_options(tag:, scheme:, size:, border:)
 
       @src = src
-      @wrapper_tag = tag
+      @wrapper_tag = option_value(:tag)
       @options = attributes_for(options)
     end
 

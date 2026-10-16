@@ -24,6 +24,14 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
     end
   end
 
+  it "points the trailing icon to an underscored placement" do
+    top = render_inline(described_class.new(menu_id: "menu", placement: :top)).css("svg").to_html
+    top_start = render_inline(described_class.new(menu_id: "menu", placement: :top_start)).css("svg").to_html
+
+    expect(top_start).to be_present
+    expect(top_start).to eq(top)
+  end
+
   context "with icon" do
     it "renders icon" do
       render_inline(described_class.new(menu_id: "dropdown-menu", icon: :check))
@@ -71,7 +79,7 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
       expect { described_class.new(menu_id: "menu", placement: :above) }
         .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :above for :placement/)
       expect { described_class.new(menu_id: "menu", trigger_event: :tap) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :tap for :trigger/)
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :tap for :trigger_event/)
     end
   end
 end

@@ -42,7 +42,7 @@ module Gustwave
   #     # Allow the caller to access themed_button methods and slots
   #     delegate_missing_to :themed_button
   #
-  #     def initialize(theme: :outline, **options)
+  #     def initialize(theme: DEFAULT, **options)
   #       @theme = theme
   #       @options = options
   #     end
@@ -159,9 +159,10 @@ module Gustwave
     # Otherwise, it falls back to the default theme. If no theme is
     # registered, raises a +ThemeNotFoundError+.
     #
-    # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+.
+    # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+ or Gustwave::Options::DEFAULT.
     # @return [Class] The theme class.
     def themed_component(theme)
+      theme = nil if theme.equal?(Gustwave::Options::DEFAULT)
       resolve_theme_class_name(theme.presence&.to_sym || default_theme).constantize
     end
 

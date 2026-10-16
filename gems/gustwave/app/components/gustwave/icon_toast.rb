@@ -4,8 +4,8 @@ module Gustwave
   class IconToast < Gustwave::Component
     base "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg", unless: { scheme: :none }
 
-    # The default is also the fallback for unknown schemes, while new toasts
-    # default to :success.
+    # The default is also the fallback for unknown schemes in production, e.g.
+    # for an unknown flash type.
     variant :scheme, default: :info, values: {
       info: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
             notice: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
@@ -29,8 +29,8 @@ module Gustwave
 
     def initialize(text = nil,
                    id: nil,
-                   scheme: :success,
-                   position: :none,
+                   scheme: DEFAULT,
+                   position: DEFAULT,
                    dismissible: true,
                    auto_remove: false,
                    icon: nil,
@@ -42,9 +42,9 @@ module Gustwave
       @position = position
 
       @text = text
-      @scheme = scheme
 
       select_options(scheme:)
+      @scheme = option_value(:scheme)
       @icon = icon.presence || derived_value(:icon)
       @options = attributes_for(options)
     end

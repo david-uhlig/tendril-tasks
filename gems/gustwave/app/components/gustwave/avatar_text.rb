@@ -27,12 +27,10 @@ module Gustwave
   #
   # @param text [String] The text to display in the avatar. Takes precedent over
   #  block content.
-  # @param scheme [Symbol] The scheme of the avatar, see +Gustwave::Avatar+ for
-  #  available options. Default is +Gustwave::Avatar+'s default.
   # @param size [Symbol] The size of the avatar, see +Gustwave::Avatar+ for
   #   available options. Default is :md.
-  # @param border [Symbol] Whether the avatar should have a border. Default is
-  #  +Gustwave::Avatar+'s default.
+  # @param options [Hash] Arguments and HTML attributes passed to the
+  #  +Gustwave::Avatar+ component, e.g. +scheme+ and +border+.
   class AvatarText < Gustwave::Component
     base "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
 
@@ -50,15 +48,11 @@ module Gustwave
       "4xl": "text-4xl"
     }
 
-    def initialize(text = nil,
-                   scheme: nil,
-                   size: DEFAULT,
-                   border: nil,
-                   **options)
+    def initialize(text = nil, size: DEFAULT, **options)
       select_options(size:)
       @text = text
       @text_options = { class: classes(:text) }
-      @options = { scheme:, size: option_value(:size), border: }.compact.merge!(attributes_for(options))
+      @options = { size: option_value(:size) }.merge!(attributes_for(options))
     end
 
     def before_render
