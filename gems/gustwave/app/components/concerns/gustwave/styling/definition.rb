@@ -19,6 +19,9 @@ module Gustwave
       Part = Struct.new(:name, :classes, :unless, keyword_init: true)
       Variant = Struct.new(:name, :values, :unless, keyword_init: true)
       Toggle = Struct.new(:name, :on, :off, :per, :values, :unless, keyword_init: true)
+      # The option values that skip the base styles, like an +unless:+ of the
+      # base that a redeclared base keeps
+      Unstyled = Struct.new(:unless, keyword_init: true)
 
       # The option kind each styled entry belongs to
       KINDS = { Variant => :variant, Toggle => :toggle }.freeze
@@ -68,7 +71,7 @@ module Gustwave
           next if skipped?(entry, values)
 
           case entry
-          when Base then entry.classes[part]
+          when Base then entry.classes[part] unless unstyled?(values)
           when Part then entry.classes if entry.name == part
           when Variant then entry.values.dig(values[entry.name], part)
           when Toggle then toggle_classes(entry, part, values)
@@ -98,9 +101,15 @@ module Gustwave
         entry.unless.any? { |name, excluded| excluded.include?(values[name]) }
       end
 
+      def unstyled?(values)
+        unstyled = @entries[:unstyled]
+        unstyled ? skipped?(unstyled, values) : false
+      end
+
       def apply(action, name: nil, **args)
         case action
         when :base then @entries[:base] = Base.new(classes: args[:classes], unless: args.fetch(:unless) || {})
+        when :unstyled then @entries[:unstyled] = Unstyled.new(unless: args.fetch(:unless))
         when :part then @entries[[ :part, name ]] = Part.new(name:, classes: args[:classes], unless: args.fetch(:unless) || {})
         when :remove_part then existing([ :part, name ], Part, "part #{name.inspect}") && @entries.delete([ :part, name ])
         when :variant then @entries[[ :option, name ]] = Variant.new(name:, values: args[:values], unless: args.fetch(:unless) || {})
@@ -164,10 +173,11 @@ module Gustwave
       def unless_problems(entry)
         entry.unless.flat_map do |name, excluded|
           option = options.option(name)
-          next [ "#{label(entry)} has unless: #{name.inspect}, which isn't an option" ] unless option
+          condition = entry.is_a?(Unstyled) ? "#{name}:" : "unless: #{name.inspect}"
+          next [ "#{label(entry)} has #{condition}, which isn't an option" ] unless option
 
           unknown = excluded - option.values
-          unknown.any? ? [ "#{label(entry)} has unless: #{name.inspect} with unknown values #{unknown.inspect}" ] : []
+          unknown.any? ? [ "#{label(entry)} has #{condition} with unknown values #{unknown.inspect}" ] : []
         end
       end
 
@@ -185,6 +195,7 @@ module Gustwave
       def label(entry)
         case entry
         when Base then "base"
+        when Unstyled then "unstyled"
         else "#{entry.class.name.demodulize.downcase} #{entry.name.inspect}"
         end
       end

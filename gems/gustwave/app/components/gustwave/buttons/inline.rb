@@ -6,8 +6,7 @@ module Gustwave
     # dismiss button of a +Gustwave::Badge+. Its colors are meant for the
     # matching light backgrounds of badges and alerts.
     class Inline < Gustwave::Buttons::Base
-      base "inline-flex items-center justify-center rounded-xs bg-transparent focus:outline-hidden focus:ring-2 disabled:cursor-not-allowed",
-           unless: { scheme: :none }
+      base "inline-flex items-center justify-center rounded-xs bg-transparent focus:outline-hidden focus:ring-2 disabled:cursor-not-allowed"
 
       extend_variant :scheme, default: :blue, values: {
         blue: "text-blue-400 hover:bg-blue-200 hover:text-blue-900 focus:ring-blue-300 dark:hover:bg-blue-800 dark:hover:text-blue-300",
