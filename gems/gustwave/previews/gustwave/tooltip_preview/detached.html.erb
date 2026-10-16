@@ -1,0 +1,9 @@
+<% tooltip = Gustwave::Tooltip.new("Tooltip content", scheme: :light) %>
+
+<div class="flex items-center justify-center gap-4 py-32">
+  <%= render Gustwave::Button.new("Show tooltip", **tooltip.trigger_options(placement: placement.to_sym)) %>
+
+  <p class="text-sm text-gray-500">Another element sits between the trigger and its tooltip.</p>
+
+  <%= render tooltip %>
+</div>

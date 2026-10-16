@@ -1,0 +1,7 @@
+<% tooltip = Gustwave::Tooltip.new("Tooltip content", scheme: scheme.to_sym, arrow:) %>
+
+<div class="flex justify-center py-32">
+  <%= render Gustwave::Button.new("Show tooltip", **tooltip.trigger_options(placement: placement.to_sym, trigger: trigger.to_sym)) %>
+
+  <%= render tooltip %>
+</div>

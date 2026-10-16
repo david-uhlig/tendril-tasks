@@ -29,7 +29,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Icon => { args: [ :close ] },
     Gustwave::IconToast => { forwards: %i[position] },
     Gustwave::Popover => { selected_elsewhere: %i[placement trigger] },
-    Gustwave::Spinner => { forwards: %i[size] }
+    Gustwave::Spinner => { forwards: %i[size] },
+    Gustwave::Tooltip => { selected_elsewhere: %i[placement trigger] }
   }
 
   components = Gustwave::Component.descendants.select do |component|
