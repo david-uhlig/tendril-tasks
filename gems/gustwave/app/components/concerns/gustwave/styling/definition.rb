@@ -3,7 +3,8 @@
 module Gustwave
   module Styling
     # The styling of a component class: its superclass's definition with the
-    # class's own declarations applied on top, in declaration order.
+    # class's own declarations applied on top. Emits base and part classes
+    # first, then those of variants and toggles, each in declaration order.
     #
     # Holds the classes only. The options that variants and toggles style,
     # with their values and defaults, are in the component's
@@ -51,6 +52,7 @@ module Gustwave
       def freeze
         @entries.freeze
         @parts = parts.freeze
+        @ordered = ordered.freeze
         super
       end
 
@@ -65,9 +67,10 @@ module Gustwave
 
       # @param part [Symbol] :root or a declared part.
       # @param values [Hash{Symbol => Object}] a value for every option.
-      # @return [Array<String>] the part's classes in declaration order.
+      # @return [Array<String>] the part's classes: base and part classes
+      #   first, then those of variants and toggles, each in declaration order.
       def classes_for(part, values)
-        @entries.each_value.filter_map do |entry|
+        ordered.filter_map do |entry|
           next if skipped?(entry, values)
 
           case entry
@@ -89,6 +92,12 @@ module Gustwave
       end
 
       private
+
+      # The styled entries, base and parts before variants and toggles, so
+      # variants and toggles win conflicts
+      def ordered
+        @ordered || @entries.values.grep_v(Unstyled).partition { |entry| !KINDS.key?(entry.class) }.flatten
+      end
 
       def toggle_classes(entry, part, values)
         return entry.off[part] unless values[entry.name]

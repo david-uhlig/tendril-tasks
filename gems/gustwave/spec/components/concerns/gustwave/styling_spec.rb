@@ -57,13 +57,45 @@ RSpec.describe Gustwave::Styling do
       expect(button.new.classes(:label, class: "ms-1")).to eq "ms-1"
     end
 
-    it "emits classes in declaration order, regardless of the selection's order" do
+    it "emits variants in declaration order, regardless of the selection's order" do
       ordered = component do
         variant :a, default: :x, values: { x: "p-1" }
         variant :b, default: :x, values: { x: "p-2" }
       end
 
       expect(ordered.new.select_options(b: :x, a: :x).classes).to eq "p-2"
+    end
+
+    it "emits a variant declared before a part after the part's classes" do
+      sized = component do
+        variant :size, default: :md, values: { md: { inner: "px-4" } }
+        part :inner, "px-2 py-1"
+      end
+
+      expect(sized.new.classes(:inner)).to eq "py-1 px-4"
+    end
+
+    it "emits a toggle declared before the base after the base's classes" do
+      padded = component do
+        toggle :compact, "p-1"
+        base "flex p-4"
+      end
+
+      expect(padded.new.select_options(compact: true).classes).to eq "flex p-1"
+    end
+
+    it "emits base and part classes for a part in declaration order" do
+      later_part = component do
+        base root: "flex", inner: "p-1"
+        part :inner, "p-2"
+      end
+      later_base = component do
+        part :inner, "p-2"
+        base root: "flex", inner: "p-1"
+      end
+
+      expect(later_part.new.classes(:inner)).to eq "p-2"
+      expect(later_base.new.classes(:inner)).to eq "p-1"
     end
   end
 
@@ -287,6 +319,15 @@ RSpec.describe Gustwave::Styling do
 
       expect(child.new.classes).to eq "flex bg-green-500 text-base px-4"
       expect(child.option_values(:scheme)).to eq %i[green none]
+    end
+
+    it "emits a variant redeclared in place after a part the subclass adds" do
+      child = component(button) do
+        part :label, "text-lg"
+        variant :size, default: :md, values: { md: { label: "text-sm" } }
+      end
+
+      expect(child.new.classes(:label)).to eq "text-sm"
     end
 
     it "merges with extend_variant, per value and part, and can change the default" do
