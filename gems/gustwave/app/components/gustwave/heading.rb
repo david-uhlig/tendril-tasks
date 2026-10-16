@@ -4,8 +4,8 @@ module Gustwave
   class Heading < Gustwave::Component
     include ActionView::Helpers::SanitizeHelper
 
-    # The id of a heading whose text yields none, e.g. one made of symbols
-    FALLBACK_ID = "heading"
+    # The id prefix of a heading whose text yields no id, e.g. one made of symbols
+    FALLBACK_ID_PREFIX = "heading"
 
     base "text-gray-900 dark:text-white", unless: { scheme: :none }
 
@@ -50,7 +50,7 @@ module Gustwave
     end
 
     def before_render
-      @config[:id] ||= strip_tags(text_or_content).parameterize.presence || FALLBACK_ID
+      @config[:id] ||= strip_tags(text_or_content).parameterize.presence || "#{FALLBACK_ID_PREFIX}-#{SecureRandom.hex(4)}"
     end
 
     def call
