@@ -127,8 +127,8 @@ module Gustwave
 
       # Sets the default theme of the calling class.
       #
-      # This theme acts as a fallback in production when the theme name is not
-      # found when calling +themed_component+. If not specified, the first
+      # This theme acts as a fallback when Gustwave isn't strict and the theme
+      # name is not found when calling +themed_component+. If not specified, the first
       # registered theme is used.
       #
       # @param theme_name [Symbol] The name of the theme.
@@ -152,11 +152,11 @@ module Gustwave
 
     # Fetches the theme class for the given +theme+ name.
     #
-    # Raises a +ThemeNotFoundError+ outside of production, letting the
-    # developer know that the supplied theme name is invalid and what their
-    # options are.
+    # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default outside
+    # production, letting the developer know that the supplied theme name is
+    # invalid and what their options are.
     #
-    # In production, it falls back to the default theme. If no theme is
+    # Otherwise, it falls back to the default theme. If no theme is
     # registered, raises a +ThemeNotFoundError+.
     #
     # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+.
@@ -172,14 +172,14 @@ module Gustwave
       class_name = themes[theme_name]
       return class_name if class_name
 
-      unless Rails.env.production?
+      if Gustwave.strict?
         raise ThemeNotFoundError, <<~MSG
           Invalid theme for #{self.class.name}.
 
           Expected one of: #{themes.keys.inspect}
           Got: #{theme_name.inspect}
 
-          This will not raise in production, but will instead fallback to #{default_theme.inspect}.
+          #{Options.fallback_note(default_theme)}
         MSG
       end
 

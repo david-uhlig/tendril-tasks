@@ -91,6 +91,19 @@ RSpec.describe Gustwave::Options do
 
         expect(instance.option_value(:tag)).to eq :a
       end
+
+      it "raises when Gustwave is strict" do
+        Gustwave.strict = true
+
+        expect { linked.new.select_options(tag: :div) }.to raise_error(Gustwave::Options::UnknownValueError)
+      end
+    end
+
+    it "falls back outside production when Gustwave isn't strict" do
+      Gustwave.strict = false
+      instance = linked.new.select_options(tga: :button, tag: :div)
+
+      expect(instance.option_value(:tag)).to eq :a
     end
   end
 
