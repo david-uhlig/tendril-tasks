@@ -7,19 +7,19 @@ module Gustwave
   #
   # Render the tooltip anywhere on the page; it doesn't need to follow its
   # trigger. The arrow is drawn by its +::before+ only: the +::after+ of
-  # Flowbite's arrow would cover the border of the light scheme's arrow, which
+  # Flowbite's arrow would cover the border of the light tooltip's arrow, which
   # is set through the tooltip's placement, not through its position next to
   # the trigger.
   #
   # The +tooltip+ class that Flowbite's CSS positions the arrow by is always
-  # set. With <tt>scheme: :none</tt> callers bring the remaining classes
+  # set. With <tt>color: :none</tt> callers bring the remaining classes
   # themselves, including +invisible+, +opacity-0+ and any transition, which
   # Flowbite's script toggles.
   #
   # Animate the fade-in with a duration class, e.g. <tt>class: "duration-500"</tt>.
   #
   # @example
-  #   <% tooltip = Gustwave::Tooltip.new("Tooltip content", scheme: :light, class: "duration-500") %>
+  #   <% tooltip = Gustwave::Tooltip.new("Tooltip content", color: :light, class: "duration-500") %>
   #   <%= render Gustwave::Button.new("Hover me", **tooltip.trigger_options(placement: :bottom)) %>
   #   <%= render tooltip %>
   class Tooltip < Gustwave::Component
@@ -36,9 +36,9 @@ module Gustwave
 
     base "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium transition-opacity duration-300 rounded-lg shadow-xs opacity-0"
     part :arrow, "tooltip-arrow after:hidden"
-    unstyled scheme: :none
+    unstyled color: :none
 
-    variant :scheme, default: :dark, values: {
+    variant :color, default: :dark, values: {
       dark: "text-white bg-gray-900 dark:bg-gray-700",
       light: {
         root: "text-gray-900 bg-white border border-gray-200",
@@ -50,12 +50,12 @@ module Gustwave
       }
     }
 
-    def initialize(text = nil, id: nil, scheme: DEFAULT, arrow: true, **options)
+    def initialize(text = nil, id: nil, color: DEFAULT, arrow: true, **options)
       @id = id || generate_random_id(prefix: "tooltip")
       @arrow = ActiveModel::Type::Boolean.new.cast(arrow) != false
       @text = text
 
-      select_options(scheme:)
+      select_options(color:)
       options = options.symbolize_keys
       options[:id] = @id
       options[:role] ||= "tooltip"
@@ -75,7 +75,7 @@ module Gustwave
       options["data-tooltip-target"] = @id
       options["data-tooltip-placement"] = option_value(:placement, placement:)
       options["data-tooltip-trigger"] = option_value(:trigger, trigger:)
-      options["data-tooltip-style"] = "light" if option_value(:scheme) == :light
+      options["data-tooltip-style"] = "light" if option_value(:color) == :light
       options["aria-describedby"] = @id
       options
     end

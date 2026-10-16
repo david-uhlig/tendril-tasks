@@ -43,11 +43,11 @@ RSpec.describe Gustwave::Tooltip, type: :component do
         )
     end
 
-    it "marks the light scheme for Flowbite" do
-      expect(described_class.new("text", scheme: :light).trigger_options).to include("data-tooltip-style" => "light")
+    it "marks the light tooltip for Flowbite" do
+      expect(described_class.new("text", color: :light).trigger_options).to include("data-tooltip-style" => "light")
     end
 
-    it "doesn't mark the dark scheme" do
+    it "doesn't mark the dark tooltip" do
       expect(described_class.new("text").trigger_options).not_to have_key("data-tooltip-style")
     end
   end
@@ -63,14 +63,14 @@ RSpec.describe Gustwave::Tooltip, type: :component do
       expect(page).to have_selector("div.tooltip.duration-500:not(.duration-300)", visible: :all)
     end
 
-    it "styles the dark scheme without borders" do
+    it "styles the dark tooltip without borders" do
       render_inline(described_class.new("text"))
       expect(page).to have_selector("div.tooltip.bg-gray-900:not(.border)", visible: :all)
       expect(page.find("[data-popper-arrow]", visible: :all)[:class]).not_to include("border")
     end
 
-    it "borders the light scheme's arrow by the tooltip's placement" do
-      render_inline(described_class.new("text", scheme: :light))
+    it "borders the light tooltip's arrow by the tooltip's placement" do
+      render_inline(described_class.new("text", color: :light))
       expect(page).to have_selector("div.tooltip.bg-white.border", visible: :all)
       expect(page.find("[data-popper-arrow]", visible: :all)[:class].split).to contain_exactly(
         "tooltip-arrow", "after:hidden", "before:border-gray-200",
@@ -85,13 +85,13 @@ RSpec.describe Gustwave::Tooltip, type: :component do
       )
     end
 
-    it "hides the arrow's ::after in the dark scheme too" do
+    it "hides the arrow's ::after of the dark tooltip too" do
       render_inline(described_class.new("text"))
       expect(page.find("[data-popper-arrow]", visible: :all)[:class].split).to contain_exactly("tooltip-arrow", "after:hidden")
     end
 
-    it "keeps only the tooltip class with scheme: :none" do
-      render_inline(described_class.new("text", scheme: :none))
+    it "keeps only the tooltip class with color: :none" do
+      render_inline(described_class.new("text", color: :none))
       expect(page.find("div[role=tooltip]", visible: :all)[:class]).to eq("tooltip")
     end
   end

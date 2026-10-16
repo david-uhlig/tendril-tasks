@@ -1,14 +1,14 @@
 ---
-look scheme=:dark arrow=true:
+look color=:dark arrow=true:
 - 'div id="tooltip-r0000001" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
   duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
   text-sm text-white tooltip transition-opacity z-10'
 - 'div data-popper-arrow="true": after:hidden tooltip-arrow'
-look scheme=:dark arrow=false:
+look color=:dark arrow=false:
 - 'div id="tooltip-r0000001" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
   duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
   text-sm text-white tooltip transition-opacity z-10'
-look scheme=:light arrow=true:
+look color=:light arrow=true:
 - 'div id="tooltip-r0000001" role="tooltip": absolute bg-white border border-gray-200
   duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
   text-gray-900 text-sm tooltip transition-opacity z-10'
@@ -18,12 +18,12 @@ look scheme=:light arrow=true:
   [[data-popper-placement^=right]>&]:before:border-l [[data-popper-placement^=top]>&]:before:border-b
   [[data-popper-placement^=top]>&]:before:border-r after:hidden before:border-gray-200
   tooltip-arrow'
-look scheme=:light arrow=false:
+look color=:light arrow=false:
 - 'div id="tooltip-r0000001" role="tooltip": absolute bg-white border border-gray-200
   duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
   text-gray-900 text-sm tooltip transition-opacity z-10'
-look scheme=:none arrow=true:
+look color=:none arrow=true:
 - 'div id="tooltip-r0000001" role="tooltip": tooltip'
 - 'div data-popper-arrow="true": after:hidden tooltip-arrow'
-look scheme=:none arrow=false:
+look color=:none arrow=false:
 - 'div id="tooltip-r0000001" role="tooltip": tooltip'
