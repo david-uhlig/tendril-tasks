@@ -42,7 +42,7 @@ module Gustwave
       @text = text
       @scheme = scheme
 
-      style_with(scheme:)
+      select_options(scheme:)
       @icon = icon.presence || derived_value(:icon)
       @options = attributes_for(options)
     end

@@ -8,11 +8,11 @@ module Gustwave
     class Base < Gustwave::Component
       include Gustwave::Visuals
 
-      DEFAULT_TAG = :button
-      TAG_OPTIONS = [ :button, :a ].freeze
+      # The HTML tag to render the button as
+      option :tag, default: :button, values: %i[button a]
 
-      DEFAULT_TYPE = :button
-      TYPE_OPTIONS = [ :button, :reset, :submit ].freeze
+      # The +type+ attribute. Only rendered for the +:button+ tag.
+      option :type, default: :button, values: %i[button reset submit]
 
       base "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed",
            unless: { scheme: :none }
@@ -68,25 +68,24 @@ module Gustwave
       # @param pill [Boolean] Whether to render the button in pill shape.
       # @param options [Hash] HTML attributes to be applied to the button.
       def initialize(text = nil,
-                     tag: DEFAULT_TAG,
-                     type: DEFAULT_TYPE,
+                     tag: DEFAULT,
+                     type: DEFAULT,
                      scheme: DEFAULT,
                      size: DEFAULT,
                      pill: false,
                      **options)
         @text = text
-        @html_tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
-        @type = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE) if @html_tag == :button
         @options = options
 
-        style_with(scheme:, size:, pill:)
-        @scheme = style_value(:scheme)
+        select_options(tag:, type:, scheme:, size:, pill:)
+        @html_tag = option_value(:tag)
+        @scheme = option_value(:scheme)
       end
 
       def before_render
         # Must build config here to know whether block content was passed
-        style_with(has_visual: has_visual?, visual_only: !has_content?)
-        @config = { type: @type }.merge(attributes_for(@options))
+        select_options(has_visual: has_visual?, visual_only: !has_content?)
+        @config = { type: type_attribute }.merge(attributes_for(@options))
       end
 
       def call
@@ -97,6 +96,11 @@ module Gustwave
 
       private
       attr_reader :html_tag, :config, :scheme
+
+      # The value of the +type+ attribute, or +nil+ to render none
+      def type_attribute
+        option_value(:type) if html_tag == :button
+      end
 
       def has_content?
         @has_content ||= text_or_content.present?

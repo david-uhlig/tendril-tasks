@@ -12,11 +12,11 @@ module Gustwave
     end
 
     def schemes
-      render_with_template(locals: { schemes: Gustwave::Badge::SCHEME_OPTIONS })
+      render_with_template(locals: { schemes: Gustwave::Badge.option_values(:scheme).excluding(:none, :base) })
     end
 
     def sizes
-      render_with_template(locals: { sizes: Gustwave::Badge.variant_values(:size).excluding(:none) })
+      render_with_template(locals: { sizes: Gustwave::Badge.option_values(:size).excluding(:none) })
     end
 
     def pill

@@ -46,14 +46,12 @@ module TendrilTasks
     )
       @text = text
 
-      tag = fetch_or_fallback(Gustwave::Heading::TAG_OPTIONS,
-                              tag,
-                              Gustwave::Heading::DEFAULT_TAG)
+      tag = fetch_or_fallback(TAG_SCHEME_MAPPINGS.keys, tag, Gustwave::Heading.option_default(:tag))
 
       # Derive scheme from the tag if not provided
       scheme ||= TAG_SCHEME_MAPPINGS[tag]
 
-      style_with(scheme:, responsive:, hyphenated:)
+      select_options(scheme:, responsive:, hyphenated:)
       @config = { tag:, scheme:, responsive:, lang: (I18n.locale if hyphenated) }
                   .merge(attributes_for(options))
     end

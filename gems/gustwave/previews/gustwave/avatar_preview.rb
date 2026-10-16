@@ -6,7 +6,7 @@ module Gustwave
     end
 
     def sizes
-      render_with_template(locals: { sizes: Gustwave::Avatar.variant_values(:size).excluding(:none, :original) })
+      render_with_template(locals: { sizes: Gustwave::Avatar.option_values(:size).excluding(:none, :original) })
     end
 
     def square

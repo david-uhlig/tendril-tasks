@@ -2,9 +2,9 @@
 
 module Gustwave
   module Test
-    # Restores the styling declarations of components after a block, so a
-    # spec can extend a component the way an initializer or +on_load+ hook
-    # does without leaking the change into other specs.
+    # Restores the option and styling declarations of components after a
+    # block, so a spec can extend a component the way an initializer or
+    # +on_load+ hook does without leaking the change into other specs.
     #
     # @example spec/components/brand_scheme_spec.rb
     #   require "gustwave/test/styling_sandbox"
@@ -16,13 +16,19 @@ module Gustwave
     #     end
     #   end
     module StylingSandbox
+      DECLARATIONS = %i[@option_declarations @styling_declarations].freeze
+
       # @param components [Array<Class>] components whose declarations to restore.
       def self.isolate(*components)
-        saved = components.to_h { |component| [ component, component.instance_variable_get(:@styling_declarations).dup ] }
+        saved = components.to_h do |component|
+          [ component, DECLARATIONS.to_h { |name| [ name, component.instance_variable_get(name).dup ] } ]
+        end
         yield
       ensure
-        saved&.each { |component, declarations| component.instance_variable_set(:@styling_declarations, declarations) }
-        Gustwave::Styling.changed!
+        saved&.each do |component, declarations|
+          declarations.each { |name, value| component.instance_variable_set(name, value) }
+        end
+        Gustwave::Options.changed!
       end
     end
   end

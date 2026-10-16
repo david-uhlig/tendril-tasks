@@ -2,11 +2,11 @@ module Gustwave
   class IndicatorPreview < ViewComponent::Preview
     # http://localhost:3030/rails/view_components/gustwave/indicator/schemes
     def schemes
-      render_with_template(locals: { schemes: Gustwave::Indicator.variant_values(:scheme).excluding(:none) })
+      render_with_template(locals: { schemes: Gustwave::Indicator.option_values(:scheme).excluding(:none) })
     end
 
     def sizes
-      render_with_template(locals: { sizes: Gustwave::Indicator.variant_values(:size).excluding(:none, :auto) })
+      render_with_template(locals: { sizes: Gustwave::Indicator.option_values(:size).excluding(:none, :auto) })
     end
 
     def pulse

@@ -26,4 +26,12 @@ require "gustwave/engine"
 module Gustwave
   # Base error class for all Gustwave-specific exceptions
   class Error < StandardError; end
+
+  # Raised when a component's declarations of options or styles are
+  # inconsistent, e.g. a default that isn't one of its values.
+  class DefinitionError < Error
+    def initialize(component, message)
+      super("Invalid declarations of #{component}:\n#{message}")
+    end
+  end
 end

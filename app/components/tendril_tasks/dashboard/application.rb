@@ -10,7 +10,7 @@ module TendrilTasks
       def initialize(application, **options)
         @application = application
 
-        style_with(disabled: !@application.task.visible?)
+        select_options(disabled: !@application.task.visible?)
         @options = attributes_for(options)
       end
 

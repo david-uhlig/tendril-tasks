@@ -25,6 +25,46 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
   end
 
+  context "with a tag" do
+    it "renders a div" do
+      render_inline(described_class.new(tag: :div)) { "content" }
+
+      expect(page).to have_selector("div.rounded-sm")
+    end
+
+    it "renders the hover style for links and buttons only" do
+      render_inline(described_class.new(tag: :a, href: "#")) { "content" }
+      expect(page).to have_selector("a.hover\\:bg-blue-200")
+
+      render_inline(described_class.new(tag: :span)) { "content" }
+      expect(page).not_to have_selector("[class*='hover:']")
+    end
+
+    it "raises for an unsupported tag" do
+      expect { render_inline(described_class.new(tag: :p)) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :p for :tag/)
+    end
+  end
+
+  context "with a type" do
+    it "renders no type attribute by default" do
+      render_inline(described_class.new) { "content" }
+
+      expect(page).not_to have_selector("[type]")
+    end
+
+    it "renders the type of any tag" do
+      render_inline(described_class.new(tag: :span, type: :submit)) { "content" }
+
+      expect(page).to have_selector("span[type='submit']")
+    end
+
+    it "raises for an unsupported type" do
+      expect { render_inline(described_class.new(type: :link)) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :link for :type/)
+    end
+  end
+
   context "with text" do
     it "renders the text" do
       render_inline(described_class.new("text"))

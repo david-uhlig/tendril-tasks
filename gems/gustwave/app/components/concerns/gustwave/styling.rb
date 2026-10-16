@@ -2,7 +2,8 @@
 
 module Gustwave
   # Declares a component's CSS classes and computes them for the options a
-  # caller picked.
+  # caller picked. Builds on Gustwave::Options, which holds the options and
+  # their values.
   #
   # === Declaring styles
   #
@@ -25,15 +26,15 @@ module Gustwave
   # * +base+ styles the root element, or several parts when given a hash.
   # * +part+ declares a named element besides the root, e.g. an icon slot,
   #   optionally with its own classes.
-  # * +variant+ is an option with a fixed set of values and a +default:+.
-  #   A variant without a +:none+ value gets one that adds no classes.
-  # * +toggle+ is an on/off option, off by default. It can style both states
-  #   (+on:+ / +off:+) or depend on a variant (+per:+).
-  # * +derive+ derives a value that isn't a class from a variant, e.g. the
-  #   size to pass on to a child component. Read it with +derived_value+.
+  # * +variant+ declares an option with a fixed set of values and a
+  #   +default:+, and the classes of each value. A variant without a +:none+
+  #   value gets one that adds no classes.
+  # * +toggle+ declares an on/off option, off by default, and its classes. It
+  #   can style both states (+on:+ / +off:+) or depend on another option
+  #   (+per:+).
   #
-  #     derive :icon_size, from: :size, values: { sm: :xs, md: :sm }
-  #     derived_value(:icon_size) # => :sm for size :md
+  # Read the option of a variant or toggle with +option_value+, and derive
+  # values from it with +derive+, as for any option; see Gustwave::Options.
   #
   # A plain string targets the root element, or the part named by +part:+. A
   # hash targets parts by name: <tt>{ root: "…", icon: "…" }</tt>. Every
@@ -47,10 +48,9 @@ module Gustwave
   #
   # Subclasses inherit every declaration. Declaring a name again replaces it
   # in place; nothing merges implicitly. To change an inherited declaration
-  # partially, use +extend_base+, +extend_part+, +extend_variant+,
-  # +extend_toggle+ or +extend_derived+, which merge per value and per part.
-  # +remove_part+, +remove_variant+, +remove_toggle+ and +remove_derived+
-  # delete one.
+  # partially, use +extend_base+, +extend_part+, +extend_variant+ or
+  # +extend_toggle+, which merge per value and per part. +remove_part+,
+  # +remove_variant+ and +remove_toggle+ delete one.
   #
   # Definitions are resolved on first use and again after any declaration, so
   # extending a parent class, e.g. from a Zeitwerk +on_load+ hook, reaches
@@ -62,15 +62,17 @@ module Gustwave
   #
   # A subclass that redefines the variant instead of extending it doesn't see
   # the extension. Mistakes such as an unknown part, a missing default or a
-  # +per:+ toggle that doesn't cover every value raise a DefinitionError when
-  # the definition is resolved, in every environment.
+  # +per:+ toggle that doesn't cover every value raise a
+  # Gustwave::DefinitionError when the definition is resolved, in every
+  # environment.
   #
   # So does a +per:+ toggle or derived value in a subclass that the extension
-  # leaves without a value. Gustwave::Badge inherits the scheme above and
-  # styles its border, outline, hover and dismiss button per scheme, so extend
-  # those in the same hook:
+  # leaves without a value. Gustwave::Badge styles its border, outline and
+  # hover per scheme, and derives its dismiss button's scheme from it, so
+  # extend those in the same hook:
   #
   #   Rails.autoloaders.main.on_load("Gustwave::Badge") do |badge, _abspath|
+  #     badge.extend_variant :scheme, values: { brand: "bg-brand-600 text-white" }
   #     badge.extend_toggle :border, values: { brand: "border border-brand-400" }
   #     badge.extend_toggle :outline, values: { brand: "outline outline-1 outline-brand-400" }
   #     badge.extend_toggle :hover, values: { brand: "hover:bg-brand-700" }
@@ -79,90 +81,24 @@ module Gustwave
   #
   # === Using styles in a component
   #
-  # Accept style options as explicit keyword arguments and default them to
-  # +DEFAULT+, which stands for the default declared in the DSL:
+  # Select the options as described in Gustwave::Options, then add the
+  # computed classes to the HTML attributes:
   #
   #   def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, pill: false, **options)
-  #     style_with(scheme:, size:, pill:)
+  #     select_options(scheme:, size:, pill:)
   #     @options = attributes_for(options)
   #   end
   #
-  # Only those keywords are style options, so +options+ keeps every HTML
-  # attribute, even one named like an option. +attributes_for+ adds the
-  # computed classes to +options+, merged with the caller's +class+. Callers
-  # may pass +nil+ for an option to get its default, too.
-  #
-  # Unknown options or values raise outside production. In production an
-  # unknown option is ignored and an unknown value falls back to the default.
+  # +attributes_for+ adds the computed classes to +options+, merged with the
+  # caller's +class+.
   module Styling
     extend ActiveSupport::Concern
-
-    # Default value for style keyword arguments: stands for the default that
-    # the DSL declares, which a subclass or extension may change.
-    DEFAULT = Object.new.tap do |default|
-      def default.inspect = "DEFAULT"
-      def default.to_s = "DEFAULT"
-    end.freeze
-
-    # Raised when a component's styling declarations are inconsistent.
-    class DefinitionError < Gustwave::Error
-      def initialize(component, message)
-        super("Invalid styling for #{component}:\n#{message}")
-      end
-    end
-
-    # Raised outside production for an option the component doesn't declare.
-    class UnknownOptionError < Gustwave::Error
-      def initialize(component, given:, expected:)
-        super(Styling.suggest("#{component} has no style option #{given.inspect}", given, expected))
-      end
-    end
-
-    # Raised outside production for a value a variant doesn't declare.
-    class UnknownValueError < Gustwave::Error
-      def initialize(component, option, given:, expected:, fallback:)
-        message = Styling.suggest("Unknown value #{given.inspect} for #{option.inspect} of #{component}", given, expected)
-        super("#{message}\nIn production, this falls back to #{fallback.inspect}.")
-      end
-    end
+    include Gustwave::Options
 
     # Raised outside production for a part the component doesn't declare.
     class UnknownPartError < Gustwave::Error
       def initialize(component, given:, expected:)
-        super(Styling.suggest("#{component} has no part #{given.inspect}", given, expected))
-      end
-    end
-
-    # Raised for a derived value the component doesn't declare.
-    class UnknownDerivedValueError < Gustwave::Error
-      def initialize(component, given:, expected:)
-        super(Styling.suggest("#{component} has no derived value #{given.inspect}", given, expected))
-      end
-    end
-
-    @version = 0
-
-    class << self
-      # Bumped by every declaration, so cached definitions get rebuilt.
-      attr_reader :version
-
-      def changed!
-        @version += 1
-      end
-
-      def strict?
-        !Rails.env.production?
-      end
-
-      # Converts a variant value to a symbol: +2+ becomes +:"2"+.
-      def normalize_value(value)
-        value.is_a?(Symbol) ? value : value.to_s.to_sym
-      end
-
-      def suggest(message, given, expected)
-        suggestion = DidYouMean::SpellChecker.new(dictionary: expected.map(&:to_s)).correct(given.to_s).first
-        message += ". Did you mean #{suggestion.to_sym.inspect}?" if suggestion
-        "#{message}\nExpected one of: #{expected.inspect}"
+        super(Options.suggest("#{component} has no part #{given.inspect}", given, expected))
       end
     end
 
@@ -181,21 +117,26 @@ module Gustwave
         declare_styling(:part, name: name.to_sym, classes: classes, unless: style_unless(options))
       end
 
-      # Declares a variant: an option with fixed values and a default.
+      # Declares a variant: an option with fixed values and a default, and the
+      # classes of each value.
       #
       #   variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
       #   variant :size, part: :icon, default: :md, values: { sm: "h-4", md: "h-5" }
       def variant(name, default:, values:, part: Definition::ROOT, **options)
-        declare_styling(:variant, name: name.to_sym, default: Styling.normalize_value(default),
-                                  values: style_values(values, part), unless: style_unless(options))
+        values = style_values(values, part)
+        declare_option(:option, name:, kind: :variant, default: Options.normalize_value(default),
+                                values: values.keys, implicit_none: true)
+        declare_styling(:variant, name: name.to_sym, values:, unless: style_unless(options))
       end
 
-      # Declares a toggle: an on/off option that is off by default.
+      # Declares a toggle: an on/off option that is off by default, and its
+      # classes.
       #
       #   toggle :pill, "rounded-full"
       #   toggle :visible, on: "opacity-100", off: "opacity-0"
       #   toggle :border, per: :size, values: { sm: "ring-1", md: "ring-2" }
       def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, part: Definition::ROOT, **options)
+        declare_option(:option, name:, kind: :toggle, default: false, values: [ false, true ])
         declare_styling(:toggle, name: name.to_sym,
                                  on: style_targets(classes || on, part), off: style_targets(off, part),
                                  per: per&.to_sym, values: style_values(values, part), unless: style_unless(options))
@@ -215,8 +156,10 @@ module Gustwave
       # Merges values into an inherited variant, per value and part, and
       # optionally changes its default.
       def extend_variant(name, default: nil, values: {}, part: Definition::ROOT, **options)
-        declare_styling(:extend_variant, name: name.to_sym, default: default && Styling.normalize_value(default),
-                                         values: style_values(values, part), unless: style_unless(options, keep: true))
+        values = style_values(values, part)
+        declare_option(:extend_option, name:, kind: :variant, default: default && Options.normalize_value(default),
+                                       values: values.keys)
+        declare_styling(:extend_variant, name: name.to_sym, values:, unless: style_unless(options, keep: true))
       end
 
       # Merges classes into an inherited toggle, per state, value and part.
@@ -226,35 +169,18 @@ module Gustwave
                                         values: style_values(values, part), unless: style_unless(options, keep: true))
       end
 
-      # Derives a value from a variant, for anything that isn't a class. Needs
-      # a value for every value of the variant; one for an implicit +:none+ is
-      # optional.
-      #
-      #   derive :icon_size, from: :size, values: { sm: :xs, md: :sm }
-      def derive(name, from:, values:)
-        declare_styling(:derive, name: name.to_sym, from: from.to_sym, values: normalize_derived_values(values))
-      end
-
-      # Merges values into an inherited derived value, e.g. for values an
-      # extension adds to its variant.
-      def extend_derived(name, values:)
-        declare_styling(:extend_derived, name: name.to_sym, values: normalize_derived_values(values))
-      end
-
       def remove_part(name)
         declare_styling(:remove_part, name: name.to_sym)
       end
 
+      # Removes the variant's option, and with it its classes.
       def remove_variant(name)
-        declare_styling(:remove_variant, name: name.to_sym)
+        declare_option(:remove_option, name:, kind: :variant)
       end
 
+      # Removes the toggle's option, and with it its classes.
       def remove_toggle(name)
-        declare_styling(:remove_toggle, name: name.to_sym)
-      end
-
-      def remove_derived(name)
-        declare_styling(:remove_derived, name: name.to_sym)
+        declare_option(:remove_option, name:, kind: :toggle)
       end
 
       # Sets or returns the TailwindMerge instance that merges this
@@ -268,37 +194,24 @@ module Gustwave
       # The resolved styling of this class, including inherited declarations.
       #
       # @return [Gustwave::Styling::Definition]
-      # @raise [DefinitionError] if the declarations are inconsistent.
+      # @raise [Gustwave::DefinitionError] if the declarations of styles or
+      #   options are inconsistent.
       def style_definition
-        if @style_definition.nil? || @style_definition_version != Styling.version
+        options = option_definition
+        if @style_definition.nil? || @style_definition_version != Options.version
           parent = superclass.style_definition if superclass.respond_to?(:style_definition)
-          @style_definition = Definition.build(name || inspect, parent, @styling_declarations || [])
-          @style_definition_version = Styling.version
+          @style_definition = Definition.build(name || inspect, parent, @styling_declarations || [], options)
+          @style_definition_version = Options.version
         end
         @style_definition
-      end
-
-      # @return [Symbol] the default value of a variant.
-      def variant_default(name)
-        style_variant(name).default
-      end
-
-      # @return [Array<Symbol>] the values of a variant, including +:none+.
-      def variant_values(name)
-        style_variant(name).values.keys
       end
 
       private
 
       def declare_styling(action, **args)
         (@styling_declarations ||= []) << [ action, args ]
-        Styling.changed!
+        Options.changed!
         nil
-      end
-
-      def style_variant(name)
-        style_definition.variant(name.to_sym) ||
-          raise(UnknownOptionError.new(self.name || inspect, given: name, expected: style_definition.options.values.grep(Definition::Variant).map(&:name)))
       end
 
       # "classes" → { target => "classes" }, { root: …, icon: … } stays.
@@ -311,11 +224,7 @@ module Gustwave
       end
 
       def style_values(values, target)
-        values.to_h { |value, classes| [ Styling.normalize_value(value), style_targets(classes, target) ] }
-      end
-
-      def normalize_derived_values(values)
-        values.to_h { |value, result| [ Styling.normalize_value(value), result ] }.freeze
+        values.to_h { |value, classes| [ Options.normalize_value(value), style_targets(classes, target) ] }
       end
 
       def style_unless(options, keep: false)
@@ -323,44 +232,9 @@ module Gustwave
         return nil if keep && !options.key?(:unless)
 
         (options[:unless] || {}).to_h do |name, values|
-          [ name.to_sym, Array(values).map { |value| value == true || value == false ? value : Styling.normalize_value(value) } ]
+          [ name.to_sym, Array(values).map { |value| value == true || value == false ? value : Options.normalize_value(value) } ]
         end
       end
-    end
-
-    # Selects style options for this instance. Merges with earlier calls.
-    # +nil+ and +DEFAULT+ leave an option at its default.
-    #
-    #   style_with(scheme:, size:, pill:)
-    def style_with(**selection)
-      style_selection.merge!(normalize_style_selection(selection))
-      self
-    end
-
-    # @return [Object] the value in effect for an option: the selected one or
-    #   the default. +true+ or +false+ for a toggle.
-    def style_value(name)
-      values = style_values_for({})
-      name = name.to_sym
-      return values[name] if values.key?(name)
-
-      raise UnknownOptionError.new(style_component_name, given: name, expected: values.keys)
-    end
-
-    # Returns a derived value for the value its variant has in effect, or
-    # +nil+ for an implicit +:none+ it doesn't cover. Options given here
-    # override the selection for this call.
-    #
-    #   derived_value(:icon_size)
-    #   derived_value(:icon_size, size: :sm)
-    #
-    # @raise [UnknownDerivedValueError] if the component derives no such value.
-    def derived_value(name, **overrides)
-      definition = self.class.style_definition
-      derived = definition.derived(name.to_sym) ||
-        raise(UnknownDerivedValueError.new(style_component_name, given: name.to_sym, expected: definition.derived_values.keys))
-
-      derived.values[style_values_for(overrides)[derived.from]]
     end
 
     # Returns the classes of the root element or a part, or +nil+ if there are
@@ -376,12 +250,12 @@ module Gustwave
       part = part.to_sym
 
       unless definition.part?(part)
-        raise UnknownPartError.new(style_component_name, given: part, expected: definition.parts) if Styling.strict?
+        raise UnknownPartError.new(option_component_name, given: part, expected: definition.parts) if Options.strict?
 
         return merge_classes(extra)
       end
 
-      merge_classes(definition.classes_for(part, style_values_for(overrides)), extra)
+      merge_classes(definition.classes_for(part, option_values_for(overrides)), extra)
     end
 
     # Returns the HTML attributes +options+ with the classes of the root
@@ -401,47 +275,6 @@ module Gustwave
     # @return [String, nil]
     def merge_classes(*classes)
       self.class.class_merger.merge(classes.flatten.compact_blank).presence
-    end
-
-    # @see Gustwave::Styling::ClassMethods#variant_default
-    def variant_default(name)
-      self.class.variant_default(name)
-    end
-
-    private
-
-    def style_component_name
-      self.class.name || self.class.inspect
-    end
-
-    def style_selection
-      @style_selection ||= {}
-    end
-
-    def style_values_for(overrides)
-      self.class.style_definition.defaults.merge(style_selection, normalize_style_selection(overrides))
-    end
-
-    def normalize_style_selection(selection)
-      definition = self.class.style_definition
-      selection.each_with_object({}) do |(name, value), normalized|
-        name = name.to_sym
-        option = definition.option(name)
-        unless option
-          raise UnknownOptionError.new(style_component_name, given: name, expected: definition.options.keys) if Styling.strict?
-
-          next
-        end
-        next if value.nil? || value.equal?(DEFAULT)
-
-        if option.is_a?(Definition::Toggle)
-          normalized[name] = ActiveModel::Type::Boolean.new.cast(value) || false
-        else
-          value = Styling.normalize_value(value)
-          next normalized[name] = value if option.values.key?(value)
-          raise UnknownValueError.new(style_component_name, name, given: value, expected: option.values.keys, fallback: option.default) if Styling.strict?
-        end
-      end
     end
   end
 end

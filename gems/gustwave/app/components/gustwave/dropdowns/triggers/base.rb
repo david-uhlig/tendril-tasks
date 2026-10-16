@@ -23,20 +23,18 @@ module Gustwave
 
         # How the trigger activates
         TRIGGER_FLOWBITE_DEFAULT = :click
-        TRIGGER_DEFAULT = TRIGGER_FLOWBITE_DEFAULT
-        TRIGGER_OPTIONS = %i[click hover].freeze
+        option :trigger, default: TRIGGER_FLOWBITE_DEFAULT, values: %i[click hover]
 
         # Where the dropdown menu appears relative to the trigger
         # See: https://popper.js.org/docs/v2/constructors/#options
         PLACEMENT_FLOWBITE_DEFAULT = :bottom
-        PLACEMENT_DEFAULT = PLACEMENT_FLOWBITE_DEFAULT
-        PLACEMENT_OPTIONS = %i[
+        option :placement, default: PLACEMENT_FLOWBITE_DEFAULT, values: %i[
           auto auto-start auto-end
           top top-start top-end
           bottom bottom-start bottom-end
           right right-start right-end
           left left-start left-end
-        ].freeze
+        ]
 
         # Distance in pixels between the dropdown menu and the trigger in the
         # +placement+ main axis
@@ -59,9 +57,9 @@ module Gustwave
         def initialize(
           text = nil,
           menu_id:,
-          trigger_event: TRIGGER_DEFAULT,
+          trigger_event: DEFAULT,
           delay: DELAY_DEFAULT,
-          placement: PLACEMENT_DEFAULT,
+          placement: DEFAULT,
           offset_distance: OFFSET_DISTANCE_DEFAULT,
           offset_skidding: OFFSET_SKIDDING_DEFAULT,
           **options
@@ -71,7 +69,7 @@ module Gustwave
             menu_id: menu_id,
             trigger: trigger_event,
             delay:,
-            placement: placement.to_s.gsub("_", "-").to_sym,
+            placement: (placement.to_s.tr("_", "-").to_sym unless placement.equal?(DEFAULT)),
             offset_distance:,
             offset_skidding:,
             **options
@@ -82,8 +80,9 @@ module Gustwave
         attr_reader :config, :text
 
         def configure_trigger_options(menu_id:, trigger:, delay:, placement:, offset_distance:, offset_skidding:, **options)
-          trigger = fetch_or_fallback(TRIGGER_OPTIONS, trigger, TRIGGER_DEFAULT)
-          placement = fetch_or_fallback(PLACEMENT_OPTIONS, placement, PLACEMENT_DEFAULT)
+          select_options(trigger:, placement:)
+          trigger = option_value(:trigger)
+          placement = option_value(:placement)
 
           dropdown_config = {
             "dropdown-toggle": menu_id,

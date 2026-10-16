@@ -13,16 +13,16 @@ RSpec.describe Gustwave::Test::StylingSandbox do
     described_class.isolate(parent) do
       parent.extend_variant :scheme, values: { brand: "bg-brand" }
 
-      expect(child.variant_values(:scheme)).to include(:brand)
+      expect(child.option_values(:scheme)).to include(:brand)
     end
 
-    expect(child.variant_values(:scheme)).to eq %i[blue none]
+    expect(child.option_values(:scheme)).to eq %i[blue none]
   end
 
   it "restores a component without declarations of its own" do
     described_class.isolate(child) { child.toggle :pill, "rounded-full" }
 
-    expect(child.style_definition.options.keys).to eq [ :scheme ]
+    expect(child.option_definition.options.keys).to eq [ :scheme ]
   end
 
   it "restores after an error" do
@@ -33,6 +33,6 @@ RSpec.describe Gustwave::Test::StylingSandbox do
       end
     end.to raise_error("boom")
 
-    expect(parent.variant_default(:scheme)).to eq :blue
+    expect(parent.option_default(:scheme)).to eq :blue
   end
 end

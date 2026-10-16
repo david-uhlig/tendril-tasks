@@ -33,7 +33,7 @@ module Gustwave
       @target = target
       @label = label
 
-      style_with(size:)
+      select_options(size:)
       @options = attributes_for(options)
     end
 

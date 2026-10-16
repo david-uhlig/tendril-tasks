@@ -26,7 +26,7 @@ module Gustwave
         @toolbar_options = {
           id: toolbar_id.presence || generate_random_id(prefix: "toolbar")
         }
-        style_with(sticky_toolbar:)
+        select_options(sticky_toolbar:)
         @toolbar_container_options = { class: classes(:toolbar_container) }
       end
 

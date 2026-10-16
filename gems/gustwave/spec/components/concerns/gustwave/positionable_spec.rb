@@ -7,8 +7,8 @@ RSpec.describe Gustwave::Positionable do
 
       def self.name = "PositionableExample"
 
-      def initialize(position: Gustwave::Styling::DEFAULT)
-        style_with(position:)
+      def initialize(position: Gustwave::Options::DEFAULT)
+        select_options(position:)
       end
     end
   end
@@ -18,7 +18,7 @@ RSpec.describe Gustwave::Positionable do
   end
 
   it "declares a position for every vertical and horizontal anchor, the aliases, and :none" do
-    expect(component.variant_values(:position)).to contain_exactly(
+    expect(component.option_values(:position)).to contain_exactly(
       :top_left, :top_center, :top_right,
       :middle_left, :middle_center, :middle_right,
       :bottom_left, :bottom_center, :bottom_right,
@@ -28,7 +28,7 @@ RSpec.describe Gustwave::Positionable do
   end
 
   it "defaults to :none, which adds no classes" do
-    expect(component.variant_default(:position)).to eq :none
+    expect(component.option_default(:position)).to eq :none
     expect(component.new.classes).to be_nil
   end
 
@@ -59,6 +59,6 @@ RSpec.describe Gustwave::Positionable do
   it "can be included without Gustwave::Component" do
     standalone = Class.new { include Gustwave::Positionable }
 
-    expect(standalone.variant_values(:position)).to include(:top_left, :none)
+    expect(standalone.option_values(:position)).to include(:top_left, :none)
   end
 end

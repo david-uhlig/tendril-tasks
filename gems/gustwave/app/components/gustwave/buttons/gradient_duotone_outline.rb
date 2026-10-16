@@ -53,12 +53,12 @@ module Gustwave
       def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, **options)
         @text = text
         @options = options
-        style_with(scheme:, size:)
-        @scheme = style_value(:scheme)
+        select_options(scheme:, size:)
+        @scheme = option_value(:scheme)
       end
 
       def before_render
-        style_with(has_visual: has_visual?, visual_only: !has_content?)
+        select_options(has_visual: has_visual?, visual_only: !has_content?)
         @config = attributes_for(@options)
         @inner_config = { class: classes(:inner) }
       end

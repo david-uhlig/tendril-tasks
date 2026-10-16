@@ -24,19 +24,19 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "applies the selected values" do
-      expect(button.new.style_with(scheme: :red, size: :sm, pill: true).classes)
+      expect(button.new.select_options(scheme: :red, size: :sm, pill: true).classes)
         .to eq "inline-flex bg-red-500 text-sm px-2 rounded-full"
     end
 
     it "returns a part's classes" do
-      instance = button.new.style_with(size: :sm)
+      instance = button.new.select_options(size: :sm)
 
       expect(instance.classes(:icon)).to eq "h-3"
       expect(button.new.classes(:icon)).to eq "h-4"
     end
 
     it "lets call-time options override the selection" do
-      instance = button.new.style_with(scheme: :red)
+      instance = button.new.select_options(scheme: :red)
 
       expect(instance.classes(scheme: :blue)).to eq "inline-flex bg-blue-500 text-base px-4"
       expect(instance.classes).to eq "inline-flex bg-red-500 text-base px-4"
@@ -50,21 +50,27 @@ RSpec.describe Gustwave::Styling do
       expect(component.new.classes).to be_nil
     end
 
+    it "returns only class: for an unknown part in production" do
+      allow(Rails.env).to receive(:production?).and_return(true)
+
+      expect(button.new.classes(:label, class: "ms-1")).to eq "ms-1"
+    end
+
     it "emits classes in declaration order, regardless of the selection's order" do
       ordered = component do
         variant :a, default: :x, values: { x: "p-1" }
         variant :b, default: :x, values: { x: "p-2" }
       end
 
-      expect(ordered.new.style_with(b: :x, a: :x).classes).to eq "p-2"
+      expect(ordered.new.select_options(b: :x, a: :x).classes).to eq "p-2"
     end
   end
 
   describe "variants" do
     it "adds a :none value that renders nothing unless one is declared" do
-      instance = button.new.style_with(scheme: :none)
+      instance = button.new.select_options(scheme: :none)
 
-      expect(button.variant_values(:scheme)).to eq %i[blue red none]
+      expect(button.option_values(:scheme)).to eq %i[blue red none]
       expect(instance.classes).to eq "text-base px-4"
     end
 
@@ -77,9 +83,9 @@ RSpec.describe Gustwave::Styling do
     it "converts strings and numbers to symbols" do
       stroked = component { variant :stroke, default: 1.5, values: { "1.5": "stroke-[1.5]", "2": "stroke-2" } }
 
-      expect(stroked.variant_default(:stroke)).to eq :"1.5"
-      expect(stroked.new.style_with(stroke: 2).classes).to eq "stroke-2"
-      expect(stroked.new.style_with(stroke: "2").style_value(:stroke)).to eq :"2"
+      expect(stroked.option_default(:stroke)).to eq :"1.5"
+      expect(stroked.new.select_options(stroke: 2).classes).to eq "stroke-2"
+      expect(stroked.new.select_options(stroke: "2").option_value(:stroke)).to eq :"2"
     end
 
     it "targets a part with part:" do
@@ -95,19 +101,19 @@ RSpec.describe Gustwave::Styling do
 
   describe "toggles" do
     it "is off by default" do
-      expect(button.new.style_value(:pill)).to be false
+      expect(button.new.option_value(:pill)).to be false
     end
 
     it "casts values to booleans" do
-      expect(button.new.style_with(pill: "true").style_value(:pill)).to be true
-      expect(button.new.style_with(pill: "false").style_value(:pill)).to be false
+      expect(button.new.select_options(pill: "true").option_value(:pill)).to be true
+      expect(button.new.select_options(pill: "false").option_value(:pill)).to be false
     end
 
     it "styles both states with on: and off:" do
       visible = component { toggle :visible, on: "opacity-100", off: "opacity-0" }
 
       expect(visible.new.classes).to eq "opacity-0"
-      expect(visible.new.style_with(visible: true).classes).to eq "opacity-100"
+      expect(visible.new.select_options(visible: true).classes).to eq "opacity-100"
     end
 
     it "depends on a variant with per:" do
@@ -116,8 +122,19 @@ RSpec.describe Gustwave::Styling do
         toggle :border, per: :size, values: { sm: "ring-1", md: "ring-2" }
       end
 
-      expect(bordered.new.style_with(border: true, size: :sm).classes).to eq "text-sm ring-1"
-      expect(bordered.new.style_with(border: true, size: :none).classes).to be_nil
+      expect(bordered.new.select_options(border: true, size: :sm).classes).to eq "text-sm ring-1"
+      expect(bordered.new.select_options(border: true, size: :none).classes).to be_nil
+    end
+
+    it "depends on a plain option with per:, covering each of its values" do
+      hovered = component do
+        option :tag, default: :span, values: %i[span a]
+        toggle :hover, per: :tag, values: { span: "", a: "hover:underline" }
+      end
+
+      expect(hovered.new.select_options(tag: :a, hover: true).classes).to eq "hover:underline"
+      expect { component { option(:tag, default: :a, values: %i[a span]); toggle :hover, per: :tag, values: { a: "" } }.style_definition }
+        .to raise_error(Gustwave::DefinitionError, /toggle :hover has no classes for :tag \[:span\]/)
     end
 
     it "targets a part with part:" do
@@ -126,7 +143,7 @@ RSpec.describe Gustwave::Styling do
         toggle :sticky, "sticky top-0", part: :toolbar
       end
 
-      expect(sticky.new.style_with(sticky: true).classes(:toolbar)).to eq "flex sticky top-0"
+      expect(sticky.new.select_options(sticky: true).classes(:toolbar)).to eq "flex sticky top-0"
     end
   end
 
@@ -144,104 +161,13 @@ RSpec.describe Gustwave::Styling do
 
     it "skips a declaration for the listed values" do
       expect(guarded.new.classes).to eq "font-medium text-base text-blue-500"
-      expect(guarded.new.style_with(size: :sm).classes).to eq "text-sm text-blue-500"
-      expect(guarded.new.style_with(size: :xs, pill: true).classes).to eq "text-xs"
+      expect(guarded.new.select_options(size: :sm).classes).to eq "text-sm text-blue-500"
+      expect(guarded.new.select_options(size: :xs, pill: true).classes).to eq "text-xs"
     end
 
     it "works on parts and with toggles" do
       expect(guarded.new.classes(:icon)).to be_nil
-      expect(guarded.new.style_with(icon: true).classes(:icon)).to eq "h-4"
-    end
-  end
-
-  describe "#style_with" do
-    it "merges repeated calls" do
-      instance = button.new.style_with(scheme: :red).style_with(size: :sm)
-
-      expect(instance.style_value(:scheme)).to eq :red
-      expect(instance.style_value(:size)).to eq :sm
-    end
-
-    it "treats nil and DEFAULT as the default" do
-      expect(button.new.style_with(scheme: nil, size: Gustwave::Styling::DEFAULT).classes)
-        .to eq "inline-flex bg-blue-500 text-base px-4"
-    end
-
-    it "raises for unknown options and values, with suggestions" do
-      expect { button.new.style_with(colour: :red) }
-        .to raise_error(Gustwave::Styling::UnknownOptionError, /no style option :colour/)
-      expect { button.new.style_with(size: :smm) }
-        .to raise_error(Gustwave::Styling::UnknownValueError, /Did you mean :sm\?.*falls back to :md/m)
-    end
-
-    context "in production" do
-      before { allow(Rails.env).to receive(:production?).and_return(true) }
-
-      it "ignores unknown options and falls back to the default for unknown values" do
-        instance = button.new.style_with(colour: :red, size: :small)
-
-        expect(instance.classes).to eq "inline-flex bg-blue-500 text-base px-4"
-      end
-
-      it "returns only class: for an unknown part" do
-        expect(button.new.classes(:label, class: "ms-1")).to eq "ms-1"
-      end
-    end
-  end
-
-  describe "derived values" do
-    let(:sized) do
-      component do
-        variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
-        derive :icon_size, from: :size, values: { sm: :xs, md: :sm }
-      end
-    end
-
-    it "returns the value for the variant's value in effect" do
-      expect(sized.new.derived_value(:icon_size)).to eq :sm
-      expect(sized.new.style_with(size: :sm).derived_value("icon_size")).to eq :xs
-    end
-
-    it "takes overrides for one call" do
-      expect(sized.new.derived_value(:icon_size, size: :sm)).to eq :xs
-    end
-
-    it "returns nil for an implicit :none it doesn't cover" do
-      expect(sized.new.style_with(size: :none).derived_value(:icon_size)).to be_nil
-    end
-
-    it "adds no classes" do
-      expect(sized.new.classes).to eq "text-base"
-    end
-
-    it "raises for unknown derived values, also in production" do
-      allow(Rails.env).to receive(:production?).and_return(true)
-
-      expect { sized.new.derived_value(:icon_sise) }
-        .to raise_error(Gustwave::Styling::UnknownDerivedValueError, /no derived value :icon_sise. Did you mean :icon_size\?/)
-    end
-
-    it "is extended and removed in subclasses without changing the parent" do
-      child = component(sized) do
-        extend_variant :size, values: { lg: "text-lg" }
-        extend_derived :icon_size, values: { lg: :md }
-      end
-      removed = component(sized) { remove_derived :icon_size }
-
-      expect(child.new.style_with(size: :lg).derived_value(:icon_size)).to eq :md
-      expect { removed.new.derived_value(:icon_size) }.to raise_error(Gustwave::Styling::UnknownDerivedValueError)
-      expect(sized.style_definition.derived_values[:icon_size].values.keys).to eq %i[sm md]
-    end
-  end
-
-  describe "#style_value" do
-    it "returns the value in effect" do
-      expect(button.new.style_value(:size)).to eq :md
-      expect(button.new.style_with(size: :sm).style_value("size")).to eq :sm
-    end
-
-    it "raises for unknown options" do
-      expect { button.new.style_value(:colour) }.to raise_error(Gustwave::Styling::UnknownOptionError)
+      expect(guarded.new.select_options(icon: true).classes(:icon)).to eq "h-4"
     end
   end
 
@@ -297,7 +223,7 @@ RSpec.describe Gustwave::Styling do
       end
 
       expect(child.new.classes).to eq "flex bg-green-500 text-base px-4"
-      expect(child.variant_values(:scheme)).to eq %i[green none]
+      expect(child.option_values(:scheme)).to eq %i[green none]
     end
 
     it "merges with extend_variant, per value and part, and can change the default" do
@@ -306,8 +232,8 @@ RSpec.describe Gustwave::Styling do
       end
       instance = child.new
 
-      expect(instance.style_with(size: :sm).classes(:icon)).to eq "h-3"
-      expect(instance.style_with(size: :sm).classes).to eq "inline-flex bg-blue-500 text-xs"
+      expect(instance.select_options(size: :sm).classes(:icon)).to eq "h-3"
+      expect(instance.select_options(size: :sm).classes).to eq "inline-flex bg-blue-500 text-xs"
       expect(child.new.classes).to eq "inline-flex bg-blue-500 text-lg"
       expect(child.new.classes(:icon)).to eq "h-6"
     end
@@ -319,7 +245,7 @@ RSpec.describe Gustwave::Styling do
         extend_toggle :pill, off: "rounded-sm"
       end
 
-      expect(child.new.style_with(scheme: :none).classes).to eq "inline-flex text-base px-4 rounded-sm"
+      expect(child.new.select_options(scheme: :none).classes).to eq "inline-flex text-base px-4 rounded-sm"
       expect(child.new.classes(:icon)).to eq "shrink-0 h-5"
     end
 
@@ -337,7 +263,7 @@ RSpec.describe Gustwave::Styling do
     it "doesn't change the parent" do
       component(button) { extend_variant :scheme, values: { green: "bg-green-500" } }
 
-      expect(button.variant_values(:scheme)).to eq %i[blue red none]
+      expect(button.option_values(:scheme)).to eq %i[blue red none]
     end
 
     it "reaches loaded subclasses when the parent is extended later" do
@@ -347,8 +273,8 @@ RSpec.describe Gustwave::Styling do
 
       button.extend_variant :scheme, values: { brand: "bg-brand" }
 
-      expect(extending.new.style_with(scheme: :brand).classes).to eq "inline-flex bg-brand text-base px-4"
-      expect(redefining.variant_values(:scheme)).to eq %i[gray none]
+      expect(extending.new.select_options(scheme: :brand).classes).to eq "inline-flex bg-brand text-base px-4"
+      expect(redefining.option_values(:scheme)).to eq %i[gray none]
     end
 
     it "works when included directly into a ViewComponent" do
@@ -359,6 +285,13 @@ RSpec.describe Gustwave::Styling do
       end
 
       expect(plain.new.classes).to eq "flex"
+    end
+
+    it "drops a variant's classes when a subclass redeclares it as a plain option" do
+      child = component(button) { option :scheme, default: :blue, values: %i[blue red none] }
+
+      expect(child.new.select_options(scheme: :red).classes).to eq "inline-flex text-base px-4"
+      expect(child.style_definition.to_h[:variants]).to eq [ :size ]
     end
   end
 
@@ -371,7 +304,7 @@ RSpec.describe Gustwave::Styling do
       allow(Rails.env).to receive(:production?).and_return(true)
 
       expect { resolve { variant :size, default: :xl, values: { md: "" } } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /default :xl of variant :size/)
+        .to raise_error(Gustwave::DefinitionError, /default :xl of variant :size/)
     end
 
     it "is raised for per: toggles that don't cover the variant" do
@@ -380,64 +313,35 @@ RSpec.describe Gustwave::Styling do
           variant :size, default: :md, values: { sm: "", md: "" }
           toggle :border, per: :size, values: { md: "ring-2", xl: "ring-4" }
         end
-      end.to raise_error(Gustwave::Styling::DefinitionError, /no classes for :size \[:sm\].*unknown :size \[:xl\]/m)
+      end.to raise_error(Gustwave::DefinitionError, /no classes for :size \[:sm\].*unknown :size \[:xl\]/m)
     end
 
     it "is raised for per: on something that isn't a variant" do
       expect { resolve { toggle :border, per: :size, values: {} } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /per :size, which isn't a variant/)
-    end
-
-    it "is raised for derived values that don't cover the variant" do
-      expect do
-        resolve do
-          variant :size, default: :md, values: { sm: "", md: "" }
-          derive :icon_size, from: :size, values: { md: :sm, xl: :lg }
-        end
-      end.to raise_error(Gustwave::Styling::DefinitionError, /derived :icon_size has no values for :size \[:sm\].*unknown :size \[:xl\]/m)
-    end
-
-    it "is raised for values derived from something that isn't a variant" do
-      expect { resolve { toggle :pill; derive :radius, from: :pill, values: {} } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /derived :radius is from :pill, which isn't a variant/)
-    end
-
-    it "is raised when an extension of the variant isn't covered by its derived values" do
-      parent = component do
-        variant :size, default: :md, values: { md: "" }
-        derive :icon_size, from: :size, values: { md: :sm }
-      end
-      child = component(parent)
-      parent.style_definition
-      child.style_definition
-
-      parent.extend_variant :size, values: { xl: "" }
-
-      expect { child.style_definition }
-        .to raise_error(Gustwave::Styling::DefinitionError, /derived :icon_size has no values for :size \[:xl\]/)
+        .to raise_error(Gustwave::DefinitionError, /per :size, which isn't a variant/)
     end
 
     it "is raised for unknown unless: options and values" do
       expect { resolve { base "flex", unless: { scheme: :none } } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /unless: :scheme/)
+        .to raise_error(Gustwave::DefinitionError, /unless: :scheme/)
       expect do
         resolve do
           variant :size, default: :md, values: { md: "" }
           base "flex", unless: { size: :xl }
         end
-      end.to raise_error(Gustwave::Styling::DefinitionError, /unknown values \[:xl\]/)
+      end.to raise_error(Gustwave::DefinitionError, /unknown values \[:xl\]/)
     end
 
     it "is raised for unknown parts" do
       expect { resolve { base icon: "h-4" } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /unknown parts \[:icon\]/)
+        .to raise_error(Gustwave::DefinitionError, /unknown parts \[:icon\]/)
     end
 
     it "is raised for extending or removing something undefined" do
       expect { resolve { extend_variant :size, values: {} } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /variant :size isn't defined/)
+        .to raise_error(Gustwave::DefinitionError, /variant :size isn't defined/)
       expect { resolve { toggle(:size); remove_variant :size } }
-        .to raise_error(Gustwave::Styling::DefinitionError, /variant :size isn't defined \(it's a toggle\)/)
+        .to raise_error(Gustwave::DefinitionError, /variant :size isn't defined \(it's a toggle\)/)
     end
 
     it "lets an extension finish before checking" do
@@ -448,49 +352,18 @@ RSpec.describe Gustwave::Styling do
       extended.extend_variant :size, values: { xl: "" }
       extended.extend_toggle :border, values: { xl: "ring-4" }
 
-      expect(extended.new.style_with(size: :xl, border: true).classes).to eq "ring-4"
+      expect(extended.new.select_options(size: :xl, border: true).classes).to eq "ring-4"
+    end
+
+    it "is raised for extending a toggle that is a variant" do
+      expect { resolve { variant(:size, default: :md, values: { md: "" }); extend_toggle :size, "ring-1" } }
+        .to raise_error(Gustwave::DefinitionError, /toggle :size isn't defined \(it's a variant\)/)
     end
   end
 
   describe "readers" do
     it "describes the definition" do
-      expect(button.variant_default(:size)).to eq :md
-      expect(button.new.variant_default(:scheme)).to eq :blue
-      expect(button.style_definition.to_h).to eq(
-        parts: %i[root icon],
-        variants: { scheme: { default: :blue, values: %i[blue red none] }, size: { default: :md, values: %i[sm md none] } },
-        toggles: [ :pill ],
-        derived: {}
-      )
-      expect(component(button) { derive :icon_size, from: :size, values: { sm: :xs, md: :sm } }.style_definition.to_h[:derived])
-        .to eq(icon_size: { from: :size, values: %i[sm md] })
-    end
-
-    it "raises for unknown variants" do
-      expect { button.variant_values(:pill) }.to raise_error(Gustwave::Styling::UnknownOptionError)
-    end
-  end
-
-  describe "DEFAULT" do
-    it "is a named sentinel" do
-      expect(Gustwave::Styling::DEFAULT.inspect).to eq "DEFAULT"
-      expect(Gustwave::Styling::DEFAULT).to be_frozen
-    end
-
-    it "resolves to the default of the instance's class" do
-      parent = component do
-        variant :scheme, default: :blue, values: { blue: "bg-blue-500" }
-
-        # A block's constants resolve lexically, so a class built with
-        # Class.new names DEFAULT in full. A class body finds it unqualified.
-        def initialize(scheme: Gustwave::Styling::DEFAULT)
-          style_with(scheme:)
-        end
-      end
-      child = component(parent) { extend_variant :scheme, default: :red, values: { red: "bg-red-500" } }
-
-      expect(parent.new.classes).to eq "bg-blue-500"
-      expect(child.new.classes).to eq "bg-red-500"
+      expect(button.style_definition.to_h).to eq(parts: %i[root icon], variants: %i[scheme size], toggles: [ :pill ])
     end
   end
 end

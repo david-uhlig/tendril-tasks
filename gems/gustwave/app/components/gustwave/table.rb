@@ -31,7 +31,7 @@ module Gustwave
     # @param scheme [Symbol] the styles for the table. Pass in :none to define your own styles.
     # @param options [Hash] additional options for the HTML tag.
     def initialize(scheme: DEFAULT, **options)
-      style_with(scheme:)
+      select_options(scheme:)
       @config = attributes_for(options)
     end
 

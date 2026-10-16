@@ -10,7 +10,7 @@ module Gustwave
     end
 
     def with_icon
-      render_with_template(locals: { schemes: Gustwave::IconToast.variant_values(:scheme).excluding(:none) })
+      render_with_template(locals: { schemes: Gustwave::IconToast.option_values(:scheme).excluding(:none) })
     end
   end
 end

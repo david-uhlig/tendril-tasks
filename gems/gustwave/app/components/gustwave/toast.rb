@@ -25,7 +25,7 @@ module Gustwave
       options.deep_symbolize_keys!
       @options = {}
       @options[:id] = @id
-      style_with(position:)
+      select_options(position:)
       @options[:class] = classes(class: options.delete(:class))
       @options[:role] = "alert"
       @options.merge!(animate_and_remove_options(options))

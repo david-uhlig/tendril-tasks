@@ -14,7 +14,7 @@ module Gustwave
   #   indicators per +size+. Extend it along with +size+, e.g. with +:auto+
   #   to scale with the text.
   #
-  # Call +style_with(has_visual: has_visual?)+ before rendering.
+  # Call +select_options(has_visual: has_visual?)+ before rendering.
   #
   # Renders visual elements to appear to the left or the right of the text.
   #
@@ -166,7 +166,7 @@ module Gustwave
     # implement +apply_slot_context+. Documented in the module comment under
     # "Custom visual components"; keep both in sync.
     def visual_context
-      { size: style_value(:size), html_attributes: configure_visual_html_attributes }
+      { size: option_value(:size), html_attributes: configure_visual_html_attributes }
     end
 
     def configure_visual_html_attributes(overwrite_attrs = {}, **default_attrs)

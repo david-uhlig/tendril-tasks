@@ -7,14 +7,13 @@ module Gustwave
 
     attr_reader :id
 
-    DEFAULT_TAG = :span
-    TAG_OPTIONS = [ :div, :span, :button, :a ].freeze
-
     # \Tags rendering +hover+ style
     HOVER_TAGS = [ :button, :a ].freeze
 
-    DEFAULT_TYPE = nil
-    TYPE_OPTIONS = [ nil, :button, :submit, :reset ].freeze
+    option :tag, default: :span, values: %i[div span button a]
+
+    # Renders no +type+ attribute by default
+    option :type, default: :none, values: %i[none button submit reset]
 
     base "rounded-sm whitespace-nowrap inline-flex", unless: { scheme: :none }
 
@@ -30,8 +29,6 @@ module Gustwave
       purple: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
       pink: "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300"
     }
-    # TODO remove this
-    SCHEME_OPTIONS = variant_values(:scheme).excluding(:none, :base).freeze
 
     # The scheme of the dismiss button per badge scheme
     derive :dismiss_button_scheme, from: :scheme, values: {
@@ -171,8 +168,8 @@ module Gustwave
     # @param options [Hash] Additional HTML options passed to the component.
     def initialize(
       text = nil,
-      tag: DEFAULT_TAG,
-      type: DEFAULT_TYPE,
+      tag: DEFAULT,
+      type: DEFAULT,
       scheme: DEFAULT,
       size: DEFAULT,
       pill: false,
@@ -183,16 +180,16 @@ module Gustwave
       @text = text
       @id = options.delete(:id)
       @options = options
-      @html_tag = fetch_or_fallback(TAG_OPTIONS, tag, DEFAULT_TAG)
-      @type = fetch_or_fallback(TYPE_OPTIONS, type, DEFAULT_TYPE)
 
-      style_with(scheme:, size:, pill:, border:, outline:, hover: tag.in?(HOVER_TAGS))
+      select_options(tag:, type:, scheme:, size:, pill:, border:, outline:)
+      @html_tag = option_value(:tag)
+      select_options(hover: html_tag.in?(HOVER_TAGS))
     end
 
     def before_render
       # Must build config here to know whether block content was passed
-      style_with(has_visual: has_visual?, visual_only: !has_content?)
-      @config = { type: @type }.merge(attributes_for(@options))
+      select_options(has_visual: has_visual?, visual_only: !has_content?)
+      @config = { type: type_attribute }.merge(attributes_for(@options))
       @config[:id] = id
     end
 
@@ -213,6 +210,12 @@ module Gustwave
 
     def has_content?
       @has_content ||= text_or_content.present?
+    end
+
+    # A badge renders the type of any tag
+    def type_attribute
+      type = option_value(:type)
+      type unless type == :none
     end
   end
 end

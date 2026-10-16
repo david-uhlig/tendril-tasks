@@ -3,16 +3,15 @@
 module Gustwave
   class Popover < Gustwave::Component
     # See: https://popper.js.org/docs/v2/constructors/#options
-    PLACEMENT_DEFAULT = :top
-    PLACEMENT_OPTIONS = %i[
+    option :placement, default: :top, values: %i[
       auto auto-start auto-end
       top top-start top-end
       bottom bottom-start bottom-end
       right right-start right-end
-      left left-start left-end].freeze
+      left left-start left-end
+    ]
 
-    TRIGGER_DEFAULT = :hover
-    TRIGGER_OPTIONS = %i[hover click].freeze
+    option :trigger, default: :hover, values: %i[hover click]
 
     base "absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
 
@@ -35,16 +34,13 @@ module Gustwave
       end
     end
 
-    def trigger_options(placement: PLACEMENT_DEFAULT,
-                        trigger: TRIGGER_DEFAULT,
+    def trigger_options(placement: DEFAULT,
+                        trigger: DEFAULT,
                         offset: nil)
       options = {}
       options["data-popover-target"] = @id
-      options["data-popover-placement"] = fetch_or_fallback(
-        PLACEMENT_OPTIONS, placement, PLACEMENT_DEFAULT
-      )
-      options["data-popover-trigger"] = fetch_or_fallback(
-        TRIGGER_OPTIONS, trigger, TRIGGER_DEFAULT)
+      options["data-popover-placement"] = option_value(:placement, placement:)
+      options["data-popover-trigger"] = option_value(:trigger, trigger:)
       options["data-popover-offset"] = offset if offset.present?
       options
     end
