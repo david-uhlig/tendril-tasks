@@ -68,6 +68,8 @@ module Gustwave
   #   render Gustwave::Button.new("Click me", theme: :monochrome_button)
   #
   class Button < Gustwave::Component
+    include Gustwave::Themeable
+
     register_theme :default, "Gustwave::Buttons::Default"
     register_theme :default_outline, "Gustwave::Buttons::DefaultOutline"
     register_theme :outline, "Gustwave::Buttons::DefaultOutline"
