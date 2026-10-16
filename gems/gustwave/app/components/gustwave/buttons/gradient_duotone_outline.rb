@@ -5,8 +5,7 @@ module Gustwave
     class GradientDuotoneOutline < Gustwave::Buttons::Base
       # The root element is the gradient border; the inner span holds the
       # label and visuals, so it takes the size styles.
-      base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white",
-           unless: { scheme: :none }
+      base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white"
 
       variant :scheme, default: :purple_to_blue, values: {
         base: "",

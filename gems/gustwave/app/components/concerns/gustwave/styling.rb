@@ -8,8 +8,9 @@ module Gustwave
   # === Declaring styles
   #
   #   class Badge < Gustwave::Component
-  #     base    "inline-flex items-center rounded-sm", unless: { scheme: :none }
-  #     part    :icon, "h-3 w-auto"
+  #     base     "inline-flex items-center rounded-sm"
+  #     unstyled scheme: :none
+  #     part     :icon, "h-3 w-auto"
   #
   #     variant :scheme, default: :gray, values: {
   #       gray: "bg-gray-100 text-gray-800",
@@ -24,6 +25,9 @@ module Gustwave
   #   end
   #
   # * +base+ styles the root element, or several parts when given a hash.
+  # * +unstyled+ names the option values that render the component
+  #   unstyled, i.e. without its base styles, so callers can bring their
+  #   own. By convention that's <tt>scheme: :none</tt>. Subclasses inherit it.
   # * +part+ declares a named element besides the root, e.g. an icon slot,
   #   optionally with its own classes.
   # * +variant+ declares an option with a fixed set of values and a
@@ -113,6 +117,14 @@ module Gustwave
       def base(classes = nil, **parts)
         options = parts.extract!(:unless)
         declare_styling(:base, classes: style_targets(classes || parts), unless: style_unless(options))
+      end
+
+      # Skips the base styles for the given option values, rendering the
+      # component unstyled. Replaces an inherited declaration.
+      #
+      #   unstyled scheme: :none
+      def unstyled(**conditions)
+        declare_styling(:unstyled, unless: style_unless({ unless: conditions }))
       end
 
       # Declares a part, an element besides the root, with optional classes.

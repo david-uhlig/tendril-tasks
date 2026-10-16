@@ -32,7 +32,7 @@ Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and 
 
 ## Options and styling
 
-Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `scheme` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts.
+Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `scheme` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts. Components that declare `unstyled scheme: :none` skip their base styles for `scheme: :none`, so callers can bring their own.
 
 To restyle a component everywhere, extend it whenever it loads, e.g. in `config/initializers/gustwave.rb`. Subclasses that are already loaded pick up the change:
 

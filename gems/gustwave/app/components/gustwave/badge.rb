@@ -15,9 +15,10 @@ module Gustwave
     # Renders no +type+ attribute by default
     option :type, default: :none, values: %i[none button submit reset]
 
-    base "rounded-sm whitespace-nowrap inline-flex", unless: { scheme: :none }
+    base "rounded-sm whitespace-nowrap inline-flex"
+    unstyled scheme: :none
 
-    # +:none+ also skips the base styles, +:base+ renders only them.
+    # +:base+ renders only the base styles.
     variant :scheme, default: :default, values: {
       base: "",
       default: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
