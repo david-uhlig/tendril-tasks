@@ -14,11 +14,11 @@ module Gustwave
       # The +type+ attribute. Only rendered for the +:button+ tag.
       option :type, default: :button, values: %i[button reset submit]
 
-      base "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed",
-           unless: { scheme: :none }
+      base "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
+      unstyled scheme: :none
 
-      # General appearance of the buttons. +:none+ also skips the base styles,
-      # +:base+ renders only them.
+      # General appearance of the buttons. +:base+ renders only the base
+      # styles.
       #
       # Extend it with your own values when inheriting from this class:
       #

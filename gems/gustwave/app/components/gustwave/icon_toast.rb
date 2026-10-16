@@ -2,7 +2,8 @@
 
 module Gustwave
   class IconToast < Gustwave::Component
-    base "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg", unless: { scheme: :none }
+    base "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"
+    unstyled scheme: :none
 
     # The default is also the fallback for unknown schemes in production, e.g.
     # for an unknown flash type.

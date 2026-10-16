@@ -17,7 +17,8 @@ module Gustwave
   class Indicator < Gustwave::Component
     include Gustwave::Positionable
 
-    base "flex rounded-full aspect-square", unless: { scheme: :none }
+    base "flex rounded-full aspect-square"
+    unstyled scheme: :none
 
     # TODO consistently add a :base style option to all components
     variant :scheme, default: :gray, values: {
