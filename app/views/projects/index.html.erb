@@ -4,7 +4,7 @@
   <% projects_size = @projects.size %>
 
   <%= render TendrilTasks::Heading.new(tag: :h1,
-                                       size: :xxl,
+                                       size: :"2xl",
                                        class: "text-center") do %>
     <%= render ::Text::Highlight::GradientComponent.new(t(".title", count: projects_size),
                                                         highlight: t(".title_highlight",

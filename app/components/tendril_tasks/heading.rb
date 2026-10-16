@@ -4,8 +4,8 @@ module TendrilTasks
   class Heading < TendrilTasks::Component
     base "group leading-none tracking-tight"
 
-    variant :size, default: :xxl, values: {
-      xxl: "mb-4",
+    variant :size, default: :"2xl", values: {
+      "2xl": "mb-4",
       xl: "mb-4",
       lg: "mb-4",
       md: "mb-4",
@@ -17,7 +17,7 @@ module TendrilTasks
     # Tailwind CSS v3, responsive font sizes overrode +leading-none+, so these
     # restore the previous look on larger screens.
     toggle :responsive, per: :size, values: {
-      xxl: "md:leading-none lg:leading-none",
+      "2xl": "md:leading-none lg:leading-none",
       xl: "md:leading-10 lg:leading-none",
       lg: "md:leading-9 lg:leading-10",
       md: "md:leading-8 lg:leading-9",

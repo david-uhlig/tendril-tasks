@@ -13,8 +13,8 @@ module Gustwave
     # The HTML tag, i.e. the heading level in the document outline
     option :tag, default: :h2, values: %i[h1 h2 h3 h4 h5 h6]
 
-    variant :size, default: :xxl, values: {
-      xxl: "text-6xl font-extrabold",
+    variant :size, default: :"2xl", values: {
+      "2xl": "text-6xl font-extrabold",
       xl: "text-5xl font-extrabold",
       lg: "text-4xl font-bold",
       md: "text-3xl font-bold",
@@ -24,7 +24,7 @@ module Gustwave
 
     # The size per tag, when no size is given
     derive :default_size, from: :tag, values: {
-      h1: :xxl,
+      h1: :"2xl",
       h2: :xl,
       h3: :lg,
       h4: :md,
@@ -34,7 +34,7 @@ module Gustwave
 
     # Font sizes that grow with the screen
     toggle :responsive, per: :size, values: {
-      xxl: "text-4xl md:text-5xl lg:text-6xl",
+      "2xl": "text-4xl md:text-5xl lg:text-6xl",
       xl: "text-3xl md:text-4xl lg:text-5xl",
       lg: "text-2xl md:text-3xl lg:text-4xl",
       md: "text-xl md:text-2xl lg:text-3xl",
