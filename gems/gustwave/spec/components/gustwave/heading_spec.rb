@@ -15,7 +15,33 @@ RSpec.describe Gustwave::Heading, type: :component do
     expect(page).to have_selector("h2", text: "Title")
   end
 
+  describe "scheme" do
+    it "derives the scheme from the tag" do
+      render_inline(described_class.new("Title", tag: :h4))
+
+      expect(page).to have_selector("h4.text-3xl")
+    end
+
+    it "derives the scheme from the fallback tag" do
+      render_inline(described_class.new("Title", tag: nil))
+
+      expect(page).to have_selector("h2.text-5xl")
+    end
+
+    it "keeps an explicit scheme" do
+      render_inline(described_class.new("Title", tag: :h1, scheme: :level6))
+
+      expect(page).to have_selector("h1.text-xl")
+    end
+  end
+
   describe "id" do
+    it "falls back when the text produces an empty id" do
+      render_inline(described_class.new("???", tag: :h2))
+
+      expect(page).to have_selector("h2#heading")
+    end
+
     it "derives the id from the text" do
       render_inline(described_class.new("Getting Started", tag: :h2))
 
