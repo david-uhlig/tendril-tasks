@@ -101,30 +101,12 @@ module Gustwave
       def apply(action, name: nil, **args)
         case action
         when :base then @entries[:base] = Base.new(classes: args[:classes], unless: args.fetch(:unless) || {})
-        when :extend_base then extend_base(**args)
         when :part then @entries[[ :part, name ]] = Part.new(name:, classes: args[:classes], unless: args.fetch(:unless) || {})
-        when :extend_part then extend_part(name, **args)
         when :remove_part then existing([ :part, name ], Part, "part #{name.inspect}") && @entries.delete([ :part, name ])
         when :variant then @entries[[ :option, name ]] = Variant.new(name:, values: args[:values], unless: args.fetch(:unless) || {})
         when :extend_variant then extend_variant(name, **args)
         when :toggle then @entries[[ :option, name ]] = Toggle.new(name:, unless: args.delete(:unless) || {}, **args)
         when :extend_toggle then extend_toggle(name, **args)
-        end
-      end
-
-      def extend_base(classes:, unless:)
-        base = existing(:base, Base, "base")
-        @entries[:base] = base.dup.tap do |entry|
-          entry.classes = base.classes.merge(classes)
-          entry.unless = binding.local_variable_get(:unless) || base.unless
-        end
-      end
-
-      def extend_part(name, classes:, unless:)
-        part = existing([ :part, name ], Part, "part #{name.inspect}")
-        @entries[[ :part, name ]] = part.dup.tap do |entry|
-          entry.classes = classes unless classes.nil?
-          entry.unless = binding.local_variable_get(:unless) || part.unless
         end
       end
 
