@@ -52,7 +52,7 @@ module Gustwave
           icon_or_text ||= ATTRIBUTE_VISUAL_MAPPINGS[attribute]
 
           options.deep_symbolize_keys!
-          options[:scheme] ||= :none
+          options[:color] ||= :none
           options[:tabindex] ||= -1
           options[:disabled] = disabled.present? ? disabled : nil
           @icon_or_text = icon_or_text

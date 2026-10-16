@@ -7,7 +7,7 @@
 
     <% if @stats[:new] > 0 %>
       <%= render Gustwave::Badge.new("+#{@stats[:new]}",
-                                     scheme: :green,
+                                     color: :green,
                                      class: "align-super") %>
     <% end %>
   </dd>

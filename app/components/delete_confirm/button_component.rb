@@ -18,7 +18,7 @@ module DeleteConfirm
 
     def build_options(options)
       options.deep_symbolize_keys!
-      options[:scheme] ||= :red
+      options[:color] ||= :red
       options[:size] ||= :lg
       options[:class] ||= "w-full"
       options[:type] ||= :button

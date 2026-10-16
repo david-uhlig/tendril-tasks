@@ -4,14 +4,14 @@ module TurboStream
   class NotificationComponent < TendrilTasks::Component
     CONTAINER_ID = "notifications"
 
-    def initialize(message, scheme: :success)
+    def initialize(message, status: :success)
       @message = message
-      @scheme = scheme
+      @status = status
     end
 
     def call
       turbo_stream.append CONTAINER_ID do
-        render Gustwave::IconToast.new(@message, scheme: @scheme)
+        render Gustwave::IconToast.new(@message, status: @status)
       end
     end
   end

@@ -11,8 +11,8 @@ module Gustwave
     end
 
     # The tag and the look are independent, e.g. an +h2+ that looks like an +h4+.
-    def tag_and_scheme
-      render Gustwave::Heading.new("An h2 styled as level 4", tag: :h2, scheme: :level4)
+    def tag_and_size
+      render Gustwave::Heading.new("An h2 sized as md", tag: :h2, size: :md)
     end
   end
 end

@@ -8,7 +8,7 @@ module Gustwave
     class Inline < Gustwave::Buttons::Base
       base "inline-flex items-center justify-center rounded-xs bg-transparent focus:outline-hidden focus:ring-2 disabled:cursor-not-allowed"
 
-      extend_variant :scheme, default: :blue, values: {
+      extend_variant :color, default: :blue, values: {
         blue: "text-blue-400 hover:bg-blue-200 hover:text-blue-900 focus:ring-blue-300 dark:hover:bg-blue-800 dark:hover:text-blue-300",
         dark: "text-gray-400 hover:bg-gray-200 hover:text-gray-900 focus:ring-gray-300 dark:hover:bg-gray-600 dark:hover:text-gray-300",
         red: "text-red-400 hover:bg-red-200 hover:text-red-900 focus:ring-red-300 dark:hover:bg-red-800 dark:hover:text-red-300",

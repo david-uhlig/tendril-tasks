@@ -42,19 +42,15 @@ module Gustwave
   #     </tr>
   #   <% end %>
   class TableHead < Gustwave::Component
-    variant :scheme, default: :standard, values: {
-      standard: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-    }
+    base "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 
     renders_many_extensible :columns, "Column"
     alias th with_column
     alias column with_column
     alias col with_column
 
-    # @param scheme [Symbol] the styles for the table head. Pass in :none to define your own styles
     # @param options [Hash] additional options for the HTML tag, like class
-    def initialize(scheme: DEFAULT, **options)
-      select_options(scheme:)
+    def initialize(**options)
       @config = attributes_for(options)
     end
 

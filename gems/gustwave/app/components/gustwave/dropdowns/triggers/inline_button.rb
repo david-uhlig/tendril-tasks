@@ -14,7 +14,7 @@ module Gustwave
         # @param options [Hash] additional options passed to Gustwave::Dropdowns::Triggers::Button and Gustwave::Buttons::Base components.
         # @see Gustwave::Dropdowns::Triggers::Button and Gustwave::Dropdowns::Triggers::Base
         def initialize(text = nil, **options)
-          options = { scheme: :none, size: :none }.merge(attributes_for(options))
+          options = { color: :none, size: :none }.merge(attributes_for(options))
           super(text, **options)
         end
 

@@ -48,8 +48,8 @@ module Gustwave
   # same hook:
   #
   #   Rails.autoloaders.main.on_load("Gustwave::Badge") do |badge, _abspath|
-  #     badge.extend_variant :scheme, values: { brand: "bg-brand-600 text-white" }
-  #     badge.extend_derived :dismiss_button_scheme, values: { brand: :base }
+  #     badge.extend_variant :color, values: { brand: "bg-brand-600 text-white" }
+  #     badge.extend_derived :dismiss_button_color, values: { brand: :base }
   #   end
   #
   # === Using options in a component
@@ -57,8 +57,8 @@ module Gustwave
   # Accept options as explicit keyword arguments and default them to
   # +DEFAULT+, which stands for the default declared in the DSL:
   #
-  #   def initialize(text = nil, tag: DEFAULT, scheme: DEFAULT, pill: false, **options)
-  #     select_options(tag:, scheme:, pill:)
+  #   def initialize(text = nil, tag: DEFAULT, color: DEFAULT, pill: false, **options)
+  #     select_options(tag:, color:, pill:)
   #     @tag = option_value(:tag)
   #   end
   #
@@ -227,8 +227,8 @@ module Gustwave
     # the initializer's keyword arguments. Read them back with +option_value+
     # rather than using the arguments directly:
     #
-    #   def initialize(tag: DEFAULT, scheme: DEFAULT, pill: false)
-    #     select_options(tag:, scheme:, pill:)
+    #   def initialize(tag: DEFAULT, color: DEFAULT, pill: false)
+    #     select_options(tag:, color:, pill:)
     #     @tag = option_value(:tag) # not the tag: argument
     #   end
     #

@@ -10,7 +10,7 @@ module Gustwave
     end
 
     def square
-      render Gustwave::Avatar.new(src: "/icon.png", scheme: :square, size: :lg)
+      render Gustwave::Avatar.new(src: "/icon.png", shape: :square, size: :lg)
     end
 
     # Placeholder and initials, for users without a picture

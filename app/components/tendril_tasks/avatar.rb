@@ -4,11 +4,11 @@ module TendrilTasks
   class Avatar < TendrilTasks::Component
     with_collection_parameter :collection_item
 
-    DEFAULT_SCHEME = :round
+    DEFAULT_SHAPE = :round
     DEFAULT_SIZE = :md
 
     def initialize(user = nil,
-                   scheme: DEFAULT_SCHEME,
+                   shape: DEFAULT_SHAPE,
                    size: DEFAULT_SIZE,
                    border: false,
                    **options)
@@ -16,7 +16,7 @@ module TendrilTasks
       @avatar = user.avatar
 
       options.deep_symbolize_keys!
-      kwargs = { scheme:, size:, border: }.compact
+      kwargs = { shape:, size:, border: }.compact
       @options = kwargs.merge!(options.except!(:collection_item))
     end
 

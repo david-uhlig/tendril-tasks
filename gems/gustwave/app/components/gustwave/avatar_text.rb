@@ -30,7 +30,7 @@ module Gustwave
   # @param size [Symbol] The size of the avatar, see +Gustwave::Avatar+ for
   #   available options. Default is :md.
   # @param options [Hash] Arguments and HTML attributes passed to the
-  #  +Gustwave::Avatar+ component, e.g. +scheme+ and +border+.
+  #  +Gustwave::Avatar+ component, e.g. +shape+ and +border+.
   class AvatarText < Gustwave::Component
     base "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
 

@@ -9,7 +9,7 @@ module Gustwave
     #
     # Each snapshot is split into groups. A group renders the cartesian
     # product of its axes, so put options that affect each other (e.g. a
-    # border that depends on the scheme) into the same group and keep the
+    # border that depends on the color) into the same group and keep the
     # others apart.
     #
     # Every rendered element is recorded in document order as its tag name,
@@ -28,7 +28,7 @@ module Gustwave
     #     self.style_snapshot_dir = Rails.root.join("spec/fixtures/style_snapshots")
     #
     #     style_snapshot Gustwave::Badge do
-    #       group :scheme, scheme: %i[default red], border: [ false, true ] do |**args|
+    #       group :color, color: %i[default red], border: [ false, true ] do |**args|
     #         Gustwave::Badge.new("New", **args)
     #       end
     #     end

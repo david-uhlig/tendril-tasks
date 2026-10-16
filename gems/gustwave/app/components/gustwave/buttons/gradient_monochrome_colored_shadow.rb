@@ -4,7 +4,7 @@ module Gustwave
   # Use `Button` for actions (e.g. in forms). Use links for destinations, or moving from one page to another.
   module Buttons
     class GradientMonochromeColoredShadow < Gustwave::Buttons::Base
-      extend_variant :scheme, default: :blue, values: {
+      extend_variant :color, default: :blue, values: {
         blue: "text-white bg-linear-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-linear-to-br focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80",
         green: "text-white bg-linear-to-r from-green-400 via-green-500 to-green-600 hover:bg-linear-to-br focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80",
         cyan: "text-white bg-linear-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-linear-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80",

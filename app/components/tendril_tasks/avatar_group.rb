@@ -4,7 +4,7 @@ module TendrilTasks
   # Use AvatarGroup to render an overlapping group of avatars.
   #
   # You can determine the TendrilTask::Avatars appearance by passing in the
-  # +scheme+, +size+, +border+, and +avatar_options+.
+  # +shape+, +size+, +border+, and +avatar_options+.
   #
   # You can also specify the total size of the stack with the +visible_count+
   # option. If the number of passed in user objects is greater than the
@@ -18,7 +18,7 @@ module TendrilTasks
   # option.
   #
   # @param users [Array<User>] the users to be displayed.
-  # @param scheme [Symbol] the scheme of the avatar.
+  # @param shape [Symbol] the shape of the avatar.
   # @param size [Symbol] the size of the avatar.
   # @param border [Boolean] whether the avatar should have a border.
   # @param avatar_options [Hash] additional options to be passed to the +TendrilTasks::Avatar+ component.
@@ -28,7 +28,7 @@ module TendrilTasks
   # @param options [Hash] additional options to be passed to +Gustwave::AvatarGroup+
   class AvatarGroup < TendrilTasks::Component
     def initialize(users,
-                   scheme: nil,
+                   shape: nil,
                    size: nil,
                    border: nil,
                    avatar_options: {},
@@ -38,7 +38,7 @@ module TendrilTasks
                    **options)
       options.deep_symbolize_keys!
       avatar_options.deep_symbolize_keys!
-      kwargs = { scheme:, size:, border: }.compact
+      kwargs = { shape:, size:, border: }.compact
 
       @options = options
       @avatar_options = kwargs.merge!(avatar_options)

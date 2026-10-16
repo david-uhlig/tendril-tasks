@@ -8,44 +8,44 @@ module Gustwave
     FALLBACK_ID_PREFIX = "heading"
 
     base "text-gray-900 dark:text-white"
-    unstyled scheme: :none
+    unstyled size: :none
 
     # The HTML tag, i.e. the heading level in the document outline
     option :tag, default: :h2, values: %i[h1 h2 h3 h4 h5 h6]
 
-    variant :scheme, default: :level1, values: {
-      level1: "text-6xl font-extrabold",
-      level2: "text-5xl font-extrabold",
-      level3: "text-4xl font-bold",
-      level4: "text-3xl font-bold",
-      level5: "text-2xl font-semibold",
-      level6: "text-xl font-semibold"
+    variant :size, default: :xxl, values: {
+      xxl: "text-6xl font-extrabold",
+      xl: "text-5xl font-extrabold",
+      lg: "text-4xl font-bold",
+      md: "text-3xl font-bold",
+      sm: "text-2xl font-semibold",
+      xs: "text-xl font-semibold"
     }
 
-    # The scheme per tag, when no scheme is given
-    derive :default_scheme, from: :tag, values: {
-      h1: :level1,
-      h2: :level2,
-      h3: :level3,
-      h4: :level4,
-      h5: :level5,
-      h6: :level6
+    # The size per tag, when no size is given
+    derive :default_size, from: :tag, values: {
+      h1: :xxl,
+      h2: :xl,
+      h3: :lg,
+      h4: :md,
+      h5: :sm,
+      h6: :xs
     }
 
     # Font sizes that grow with the screen
-    toggle :responsive, per: :scheme, values: {
-      level1: "text-4xl md:text-5xl lg:text-6xl",
-      level2: "text-3xl md:text-4xl lg:text-5xl",
-      level3: "text-2xl md:text-3xl lg:text-4xl",
-      level4: "text-xl md:text-2xl lg:text-3xl",
-      level5: "text-lg md:text-xl lg:text-2xl",
-      level6: "text-base md:text-lg lg:text-xl"
+    toggle :responsive, per: :size, values: {
+      xxl: "text-4xl md:text-5xl lg:text-6xl",
+      xl: "text-3xl md:text-4xl lg:text-5xl",
+      lg: "text-2xl md:text-3xl lg:text-4xl",
+      md: "text-xl md:text-2xl lg:text-3xl",
+      sm: "text-lg md:text-xl lg:text-2xl",
+      xs: "text-base md:text-lg lg:text-xl"
     }
 
     def initialize(
       text = nil,
       tag: DEFAULT,
-      scheme: DEFAULT,
+      size: DEFAULT,
       responsive: false,
       **options
     )
@@ -54,8 +54,8 @@ module Gustwave
       select_options(tag:)
       @tag = option_value(:tag)
 
-      scheme = derived_value(:default_scheme) if scheme.nil? || scheme.equal?(DEFAULT)
-      select_options(scheme:, responsive:)
+      size = derived_value(:default_size) if size.nil? || size.equal?(DEFAULT)
+      select_options(size:, responsive:)
       @config = attributes_for(options)
     end
 

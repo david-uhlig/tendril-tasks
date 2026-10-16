@@ -5,8 +5,8 @@ module Gustwave
       render Gustwave::Spinner.new
     end
 
-    def schemes
-      render_with_template(locals: { schemes: Gustwave::Spinner.option_values(:scheme).excluding(:none) })
+    def colors
+      render_with_template(locals: { colors: Gustwave::Spinner.option_values(:color).excluding(:none) })
     end
 
     def sizes

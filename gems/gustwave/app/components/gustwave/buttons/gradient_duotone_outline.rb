@@ -10,7 +10,7 @@ module Gustwave
       part :inner,
            "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-1.5"
 
-      variant :scheme, default: :purple_to_blue, values: {
+      variant :color, default: :purple_to_blue, values: {
         base: "",
         purple_to_blue: "from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-blue-300 dark:focus:ring-blue-800",
         cyan_to_blue: "from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200 dark:focus:ring-cyan-800",
@@ -50,11 +50,11 @@ module Gustwave
         xl: "p-3.5"
       }
 
-      def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, **options)
+      def initialize(text = nil, color: DEFAULT, size: DEFAULT, **options)
         @text = text
         @options = options
-        select_options(scheme:, size:)
-        @scheme = option_value(:scheme)
+        select_options(color:, size:)
+        @color = option_value(:color)
       end
 
       def before_render
@@ -74,7 +74,7 @@ module Gustwave
       private
 
       def base_button
-        @base_button ||= Gustwave::Buttons::Base.new(scheme: :base, **@config)
+        @base_button ||= Gustwave::Buttons::Base.new(color: :base, **@config)
       end
     end
   end

@@ -19,7 +19,7 @@ module Gustwave
       render_with_template(locals: { stroke_widths: Gustwave::Icon.option_values(:stroke_width).excluding(:none) })
     end
 
-    def schemes
+    def colors
       render_with_template
     end
   end

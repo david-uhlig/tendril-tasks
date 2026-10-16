@@ -10,7 +10,7 @@ module Gustwave
   # @example
   #   render Gustwave::DismissButton.new("my-modal", size: :lg)
   #
-  # TODO add scheme support so we can dismiss colored badges
+  # TODO add color support so we can dismiss colored badges
   class DismissButton < Gustwave::Component
     base "ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
 
@@ -42,7 +42,7 @@ module Gustwave
     end
 
     def call
-      render Gustwave::Button.new(scheme: :none,
+      render Gustwave::Button.new(color: :none,
                                   data: { dismiss_target: "##{target}" },
                                   aria: { label: label },
                                   **options) do

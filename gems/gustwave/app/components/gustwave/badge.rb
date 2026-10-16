@@ -16,10 +16,10 @@ module Gustwave
     option :type, default: :none, values: %i[none button submit reset]
 
     base "rounded-sm whitespace-nowrap inline-flex"
-    unstyled scheme: :none
+    unstyled color: :none
 
     # +:base+ renders only the base styles.
-    variant :scheme, default: :default, values: {
+    variant :color, default: :default, values: {
       base: "",
       default: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
       dark: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
@@ -31,8 +31,8 @@ module Gustwave
       pink: "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300"
     }
 
-    # The scheme of the dismiss button per badge scheme
-    derive :dismiss_button_scheme, from: :scheme, values: {
+    # The color of the dismiss button per badge color
+    derive :dismiss_button_color, from: :color, values: {
       none: :none,
       base: :base,
       default: :blue,
@@ -88,7 +88,7 @@ module Gustwave
 
     # Note +border+ increases buttons dimensions by 1px on all edges. Prefer
     # +outline+ to render bordered and non-bordered badges side-by-side.
-    toggle :border, per: :scheme, values: {
+    toggle :border, per: :color, values: {
       base: "border border-gray-400",
       default: "border border-blue-400",
       dark: "border border-gray-500",
@@ -100,7 +100,7 @@ module Gustwave
       pink: "border border-pink-400"
     }
 
-    toggle :outline, per: :scheme, values: {
+    toggle :outline, per: :color, values: {
       base: "outline outline-1 outline-gray-400",
       default: "outline outline-1 outline-blue-400",
       dark: "outline outline-1 outline-gray-500",
@@ -113,7 +113,7 @@ module Gustwave
     }
 
     # Set for the tags in HOVER_TAGS
-    toggle :hover, per: :scheme, internal: true, values: {
+    toggle :hover, per: :color, internal: true, values: {
       base: "hover:bg-gray-100",
       default: "hover:bg-blue-200",
       dark: "hover:bg-gray-200",
@@ -139,7 +139,7 @@ module Gustwave
       a11y_text = sr_only(text) || (capture(&block) if block.present?) || sr_only("Dismiss")
       config = {
         theme: :inline,
-        scheme: derived_value(:dismiss_button_scheme),
+        color: derived_value(:dismiss_button_color),
         size: derived_value(:dismiss_button_size),
         aria: { label: :remove },
         data: { dismiss_target: "##{@id}" }
@@ -154,7 +154,7 @@ module Gustwave
     # @param text [String, NilClass] Text to display within the badge. Takes precedence over block content.
     # @param tag [Symbol] The HTML tag to use for the badge. Defaults to :span. Valid values are :div, :span, :button, and :a. Be aware, that :a and :button tags are not supported when using a dismiss button.
     # @param type [Symbol] The HTML type attribute to use for the badge. Defaults to +nil+. Valid values are +nil+, :button, :submit, and :reset.
-    # @param scheme [Symbol] The color scheme for the badge. Defaults to :default.
+    # @param color [Symbol] The color for the badge. Defaults to :default.
     # @param size [Symbol] The size of the badge. Defaults to :xs.
     # @param pill [Boolean] Rounds the Badge corners to make it look like a pill. Defaults to +false+.
     # @param border [Boolean] Whether the badge includes a border. Border adds 1px to all edges. Defaults to +false+.
@@ -164,7 +164,7 @@ module Gustwave
       text = nil,
       tag: DEFAULT,
       type: DEFAULT,
-      scheme: DEFAULT,
+      color: DEFAULT,
       size: DEFAULT,
       pill: false,
       border: false,
@@ -175,7 +175,7 @@ module Gustwave
       @id = options.delete(:id)
       @options = options
 
-      select_options(tag:, type:, scheme:, size:, pill:, border:, outline:)
+      select_options(tag:, type:, color:, size:, pill:, border:, outline:)
       @html_tag = option_value(:tag)
       select_options(hover: html_tag.in?(HOVER_TAGS))
     end

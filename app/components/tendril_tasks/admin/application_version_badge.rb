@@ -5,7 +5,7 @@ module TendrilTasks
     class ApplicationVersionBadge < TendrilTasks::Component
       def call
         render Gustwave::Badge.new(
-          scheme: :dark,
+          color: :dark,
           size: :md,
           pill: true,
           # The badge is a flex container, which drops whitespace between the links

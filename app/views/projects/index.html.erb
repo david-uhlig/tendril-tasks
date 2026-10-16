@@ -4,12 +4,12 @@
   <% projects_size = @projects.size %>
 
   <%= render TendrilTasks::Heading.new(tag: :h1,
-                                       scheme: :level1,
+                                       size: :xxl,
                                        class: "text-center") do %>
     <%= render ::Text::Highlight::GradientComponent.new(t(".title", count: projects_size),
                                                         highlight: t(".title_highlight",
                                                                      count: projects_size),
-                                                        scheme: :sky_to_emerald) %>
+                                                        color: :sky_to_emerald) %>
   <% end %>
 
   <%= render TendrilTasks::HorizontalLine.new %>
@@ -33,7 +33,7 @@
     <%# Link to tasks for convenience %>
     <% grid.button(tag: :a,
                    href: tasks_path,
-                   scheme: :alternative,
+                   color: :alternative,
                    class: "w-full justify-center") do |button| %>
       <span><%= t ".goto_tasks_button" %></span>
       <% button.trailing_icon(:arrow_right, size: :lg) %>

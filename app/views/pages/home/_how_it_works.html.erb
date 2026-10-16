@@ -7,7 +7,7 @@
 
 <section id="home-how-it-works" class="space-y-6">
   <%= render TendrilTasks::Heading.new(tag: :h2,
-                                       scheme: :level3,
+                                       size: :lg,
                                        class: "text-center")
                                   .with_content(t(".title")) %>
 
@@ -24,7 +24,7 @@
         </div>
 
         <%= render TendrilTasks::Heading.new(tag: :h3,
-                                             scheme: :level6,
+                                             size: :xs,
                                              class: "mb-0")
                                         .with_content(t(".#{step[:key]}.title")) %>
 

@@ -12,14 +12,14 @@ module TendrilTasks
       def call
         if visible?
           render Gustwave::Badge.new(t(".states.visible"),
-                                     scheme: :green,
+                                     color: :green,
                                      size: :md,
                                      class: "me-1") do |badge|
             badge.leading_icon :eye
           end
         else
           render Gustwave::Badge.new(t(".states.hidden"),
-                                     scheme: :dark,
+                                     color: :dark,
                                      size: :md,
                                      class: "me-1") do |badge|
             badge.leading_icon :eye_slash

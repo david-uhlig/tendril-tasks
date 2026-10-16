@@ -41,7 +41,7 @@
             tag: is_selected ? :span : :a,
             href: (project_tasks_path(project) unless is_selected),
             size: :sm,
-            scheme: badge_scheme_by_id(project.id),
+            color: badge_color_by_id(project.id),
             outline: is_selected,
             class: "md:text-lg md:font-semibold") %>
         </li>
@@ -63,7 +63,7 @@
     <% grid
          .button(tag: :a,
                  href: tasks_path,
-                 scheme: :alternative,
+                 color: :alternative,
                  class: "w-full text-center")
          .with_content(t ".view_all_tasks") if @type != :all_published_tasks %>
 
@@ -71,7 +71,7 @@
     <% grid
          .button(tag: :a,
                  href: projects_path,
-                 scheme: :alternative,
+                 color: :alternative,
                  class: "w-full justify-center") do |button| %>
       <% button.leading_icon(:arrow_left, size: :lg) %>
       <%= t ".goto_initiatives" %>

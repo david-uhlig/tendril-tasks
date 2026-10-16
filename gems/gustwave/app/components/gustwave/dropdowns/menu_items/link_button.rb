@@ -53,7 +53,7 @@ module Gustwave
           @text = text
           @icon = icon
           @trailing_icon = trailing_icon
-          @config = { **kwargs, scheme: :none, size: :none, tag: :a, tabindex: "-1" }
+          @config = { **kwargs, color: :none, size: :none, tag: :a, tabindex: "-1" }
                       .merge(attributes_for(options))
         end
 

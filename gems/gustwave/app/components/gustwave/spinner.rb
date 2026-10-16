@@ -6,10 +6,10 @@ module Gustwave
     include Gustwave::Positionable
 
     base icon: "inline animate-spin"
-    unstyled scheme: :none
+    unstyled color: :none
     part :icon
 
-    variant :scheme, part: :icon, default: :blue, values: {
+    variant :color, part: :icon, default: :blue, values: {
       base: "",
       blue: "text-gray-200 dark:text-gray-600 fill-blue-600",
       dark: "text-gray-200 dark:text-gray-600 fill-gray-600 dark:fill-gray-300",
@@ -27,7 +27,7 @@ module Gustwave
     }
 
     # @param text [String, nil] the text to display to screen readers. Takes precedence over block content. If neither is provided, a i18n version of "Loading..." is used. Block content must render sr-only markup itself, e.g. "<span class='sr-only'>Loading...</span>".
-    # @param scheme [Symbol] the color scheme for the spinner. To further customize use `fill-{*}` to change the main colors, use `text-{*}` to change the background by passing these CSS classes through the options hash.
+    # @param color [Symbol] the color for the spinner. To further customize use `fill-{*}` to change the main colors, use `text-{*}` to change the background by passing these CSS classes through the options hash.
     # @param size [Symbol] the size of the spinner. Pass in t-shirt sizes from :xs to :"9xl" to change the size. Passthrough to Gustwave::Icon.
     # @param align [Symbol] the text alignment of the spinner. Pass in :none, :left, :center, or :right to change the alignment.
     # @param position [Symbol] the position of the spinner relative to its enclosing element. Make sure the enclosing element has the Tailwind class +relative+. See Gustwave::Positionable for options.
@@ -35,9 +35,9 @@ module Gustwave
     #
     # @see Gustwave::Icon
     # @see Gustwave::Positionable for positioning options
-    def initialize(text = nil, scheme: DEFAULT, size: DEFAULT, align: DEFAULT, position: DEFAULT, **options)
+    def initialize(text = nil, color: DEFAULT, size: DEFAULT, align: DEFAULT, position: DEFAULT, **options)
       @text = sr_only_text(text)
-      select_options(scheme:, align:, position:)
+      select_options(color:, align:, position:)
       @config = { role: "status" }.merge(attributes_for(options))
       @size = size
       configure_icon

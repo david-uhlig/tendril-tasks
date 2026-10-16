@@ -4,55 +4,55 @@ module TendrilTasks
   class Heading < TendrilTasks::Component
     base "group leading-none tracking-tight"
 
-    variant :scheme, default: :level1, values: {
-      level1: "mb-4",
-      level2: "mb-4",
-      level3: "mb-4",
-      level4: "mb-4",
-      level5: "mb-2",
-      level6: "mb-2"
+    variant :size, default: :xxl, values: {
+      xxl: "mb-4",
+      xl: "mb-4",
+      lg: "mb-4",
+      md: "mb-4",
+      sm: "mb-2",
+      xs: "mb-2"
     }
 
     # Line heights of the responsive font sizes in Gustwave::Heading. With
     # Tailwind CSS v3, responsive font sizes overrode +leading-none+, so these
     # restore the previous look on larger screens.
-    toggle :responsive, per: :scheme, values: {
-      level1: "md:leading-none lg:leading-none",
-      level2: "md:leading-10 lg:leading-none",
-      level3: "md:leading-9 lg:leading-10",
-      level4: "md:leading-8 lg:leading-9",
-      level5: "md:leading-7 lg:leading-8",
-      level6: "md:leading-7 lg:leading-7"
+    toggle :responsive, per: :size, values: {
+      xxl: "md:leading-none lg:leading-none",
+      xl: "md:leading-10 lg:leading-none",
+      lg: "md:leading-9 lg:leading-10",
+      md: "md:leading-8 lg:leading-9",
+      sm: "md:leading-7 lg:leading-8",
+      xs: "md:leading-7 lg:leading-7"
     }
 
     toggle :hyphenated, "hyphens-auto"
 
-    TAG_SCHEME_MAPPINGS = {
-      h1: :level2,
-      h2: :level3,
-      h3: :level4,
-      h4: :level5,
-      h5: :level6,
-      h6: :level6
+    TAG_SIZE_MAPPINGS = {
+      h1: :xl,
+      h2: :lg,
+      h3: :md,
+      h4: :sm,
+      h5: :xs,
+      h6: :xs
     }
 
     def initialize(
       text = nil,
       tag:,
-      scheme: nil,
+      size: nil,
       responsive: true,
       hyphenated: true,
       **options
     )
       @text = text
 
-      tag = fetch_or_fallback(TAG_SCHEME_MAPPINGS.keys, tag, Gustwave::Heading.option_default(:tag))
+      tag = fetch_or_fallback(TAG_SIZE_MAPPINGS.keys, tag, Gustwave::Heading.option_default(:tag))
 
-      # Derive scheme from the tag if not provided
-      scheme ||= TAG_SCHEME_MAPPINGS[tag]
+      # Derive size from the tag if not provided
+      size ||= TAG_SIZE_MAPPINGS[tag]
 
-      select_options(scheme:, responsive:, hyphenated:)
-      @config = { tag:, scheme:, responsive:, lang: (I18n.locale if hyphenated) }
+      select_options(size:, responsive:, hyphenated:)
+      @config = { tag:, size:, responsive:, lang: (I18n.locale if hyphenated) }
                   .merge(attributes_for(options))
     end
 

@@ -22,8 +22,8 @@ RSpec.describe Gustwave::AvatarText, type: :component do
     expect(rendered_content).to have_css("span.text-xl", text: "CD")
   end
 
-  it "renders with different scheme if provided" do
-    render_inline(described_class.new("GH", scheme: :square))
+  it "renders with different shape if provided" do
+    render_inline(described_class.new("GH", shape: :square))
 
     expect(rendered_content).to have_css("div.rounded-sm")
     expect(rendered_content).to include("GH")

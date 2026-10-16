@@ -46,16 +46,16 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
-  context "with scheme argument" do
-    it "renders no base styling when scheme is set to :none" do
-      render_inline(described_class.new(scheme: :none)) { "content" }
+  context "with color argument" do
+    it "renders no base styling when color is set to :none" do
+      render_inline(described_class.new(color: :none)) { "content" }
       expect(rendered_content).not_to have_selector("button.rounded-lg")
       expect(rendered_content).not_to have_selector("button.text-center")
       expect(rendered_content).not_to have_selector("button.overflow-hidden")
     end
 
-    it "renders base styling when scheme is set to :base" do
-      render_inline(described_class.new(scheme: :base)) { "content" }
+    it "renders base styling when color is set to :base" do
+      render_inline(described_class.new(color: :base)) { "content" }
       expect(rendered_content).to have_selector("button.rounded-lg.text-center.overflow-hidden.whitespace-nowrap.align-bottom")
     end
   end

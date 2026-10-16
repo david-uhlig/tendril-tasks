@@ -15,18 +15,18 @@ module Gustwave
       option :type, default: :button, values: %i[button reset submit]
 
       base "rounded-lg focus:outline-hidden focus:ring-4 text-center overflow-hidden whitespace-nowrap align-bottom disabled:cursor-not-allowed"
-      unstyled scheme: :none
+      unstyled color: :none
 
       # General appearance of the buttons. +:base+ renders only the base
       # styles.
       #
       # Extend it with your own values when inheriting from this class:
       #
-      #   extend_variant :scheme, default: :red, values: {
+      #   extend_variant :color, default: :red, values: {
       #     red: "bg-red-500 hover:bg-red-600 focus:ring-red-300",
       #     green: "bg-green-500 hover:bg-green-600 focus:ring-green-300"
       #   }
-      variant :scheme, default: :base, values: { base: "" }
+      variant :color, default: :base, values: { base: "" }
 
       # The +visual+ part sizes leading and trailing visuals to match the
       # +text-*+ class of the button.
@@ -63,23 +63,23 @@ module Gustwave
       # @param text [String, nil] text to display on the button. Takes precedence over block content.
       # @param tag [Symbol] The HTML tag to use for the button. Options: :a and :button. Defaults to :button.
       # @param type [Symbol] The type of button. Options: :button, :reset, :submit. Defaults to :button.
-      # @param scheme [Symbol] The color scheme of the button. Options: :none and :base.
+      # @param color [Symbol] The color of the button. Options: :none and :base.
       # @param size [Symbol] The size of the button. Options: :none, :xs, :sm, :md, :lg, :xl.
       # @param pill [Boolean] Whether to render the button in pill shape.
       # @param options [Hash] HTML attributes to be applied to the button.
       def initialize(text = nil,
                      tag: DEFAULT,
                      type: DEFAULT,
-                     scheme: DEFAULT,
+                     color: DEFAULT,
                      size: DEFAULT,
                      pill: false,
                      **options)
         @text = text
         @options = options
 
-        select_options(tag:, type:, scheme:, size:, pill:)
+        select_options(tag:, type:, color:, size:, pill:)
         @html_tag = option_value(:tag)
-        @scheme = option_value(:scheme)
+        @color = option_value(:color)
       end
 
       def before_render
@@ -95,7 +95,7 @@ module Gustwave
       end
 
       private
-      attr_reader :html_tag, :config, :scheme
+      attr_reader :html_tag, :config, :color
 
       # The value of the +type+ attribute, or +nil+ to render none
       def type_attribute
