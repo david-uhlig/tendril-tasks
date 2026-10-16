@@ -14,7 +14,7 @@ module Toast
     end
 
     def call
-      render Gustwave::IconToast.new(@message, scheme: scheme_from_type)
+      render Gustwave::IconToast.new(@message, scheme: scheme_from_type, auto_remove: true)
     end
 
     private
