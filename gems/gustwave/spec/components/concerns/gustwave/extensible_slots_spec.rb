@@ -448,4 +448,13 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
       }.to raise_error(ArgumentError, /slot :entries expects a renderable/)
     end
   end
+
+  describe "errors" do
+    it "inherit from their own base error, not Gustwave::Error" do
+      [ Gustwave::ExtensibleSlots::UnknownSlotTypeError, Gustwave::ExtensibleSlots::NotExtensibleSlotError ].each do |error|
+        expect(error).to be < Gustwave::ExtensibleSlots::Error
+        expect(error).not_to be < Gustwave::Error
+      end
+    end
+  end
 end

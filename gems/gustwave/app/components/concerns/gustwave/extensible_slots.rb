@@ -105,11 +105,14 @@ module Gustwave
   module ExtensibleSlots
     extend ActiveSupport::Concern
 
+    # Base error class for extensible slot exceptions
+    class Error < StandardError; end
+
     # Raised when a slot is set with a type that has no builder
-    class UnknownSlotTypeError < Gustwave::Error; end
+    class UnknownSlotTypeError < Error; end
 
     # Raised when +extend_slot+ names a slot not declared as extensible
-    class NotExtensibleSlotError < Gustwave::Error; end
+    class NotExtensibleSlotError < Error; end
 
     included do
       # Extensible slots, keyed by slot name, with +collection+ and, for
