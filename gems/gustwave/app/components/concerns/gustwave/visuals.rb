@@ -87,7 +87,7 @@ module Gustwave
 
     included do
       # Set when a leading or trailing visual is present
-      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5"
+      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5", internal: true
 
       part :visual
 

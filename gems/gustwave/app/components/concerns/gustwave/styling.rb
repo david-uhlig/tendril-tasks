@@ -33,6 +33,9 @@ module Gustwave
   #   and its classes. It can style both states (+on:+ / +off:+) or depend on
   #   another option (+per:+).
   #
+  # Variants and toggles take +internal: true+ for state the component
+  # selects itself, as options do; see Gustwave::Options.
+  #
   # Read the option of a variant or toggle with +option_value+, and derive
   # values from it with +derive+, as for any option; see Gustwave::Options.
   #
@@ -122,10 +125,12 @@ module Gustwave
       #
       #   variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
       #   variant :size, part: :icon, default: :md, values: { sm: "h-4", md: "h-5" }
-      def variant(name, default:, values:, part: Definition::ROOT, **options)
+      #
+      # +internal: true+ marks a variant the component selects itself.
+      def variant(name, default:, values:, part: Definition::ROOT, internal: false, **options)
         values = style_values(values, part)
         declare_option(:option, name:, kind: :variant, default: Options.normalize_value(default),
-                                values: values.keys, implicit_none: true)
+                                values: values.keys, implicit_none: true, internal: internal == true)
         declare_styling(:variant, name: name.to_sym, values:, unless: style_unless(options))
       end
 
@@ -135,8 +140,13 @@ module Gustwave
       #   toggle :pill, "rounded-full"
       #   toggle :visible, default: true, on: "opacity-100", off: "opacity-0"
       #   toggle :border, per: :size, values: { sm: "ring-1", md: "ring-2" }
-      def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, part: Definition::ROOT, default: false, **options)
-        declare_option(:option, name:, kind: :toggle, default: default == true, values: [ false, true ])
+      #
+      # +internal: true+ marks a toggle the component selects itself, e.g.
+      # whether it renders any text.
+      def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, part: Definition::ROOT, default: false,
+                 internal: false, **options)
+        declare_option(:option, name:, kind: :toggle, default: default == true, values: [ false, true ],
+                                internal: internal == true)
         declare_styling(:toggle, name: name.to_sym,
                                  on: style_targets(classes || on, part), off: style_targets(off, part),
                                  per: per&.to_sym, values: style_values(values, part), unless: style_unless(options))

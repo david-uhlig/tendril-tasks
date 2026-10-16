@@ -13,8 +13,11 @@ module Gustwave
       # or +:toggle+ from Gustwave::Styling. Toggles are boolean, so their
       # values are +false+ and +true+. +implicit_none+ marks a +:none+ value
       # that was added for a variant, which derived values needn't cover.
-      Option = Struct.new(:name, :kind, :default, :values, :implicit_none, keyword_init: true) do
+      # +internal+ marks an option the component selects itself, which takes no
+      # keyword argument.
+      Option = Struct.new(:name, :kind, :default, :values, :implicit_none, :internal, keyword_init: true) do
         def boolean? = kind == :toggle
+        def internal? = internal == true
       end
 
       Derived = Struct.new(:name, :from, :values, keyword_init: true)
@@ -94,7 +97,7 @@ module Gustwave
       # A plain description of the definition, e.g. for docs and previews.
       def to_h
         {
-          options: options.transform_values { |o| { kind: o.kind, default: o.default, values: o.values } },
+          options: options.transform_values { |o| { kind: o.kind, default: o.default, values: o.values, internal: o.internal? } },
           derived: derived_values.transform_values { |d| { from: d.from, values: d.values.keys } }
         }
       end
@@ -112,10 +115,10 @@ module Gustwave
         end
       end
 
-      def new_option(name, kind:, default:, values:, implicit_none: false)
+      def new_option(name, kind:, default:, values:, implicit_none: false, internal: false)
         implicit_none &&= !values.include?(:none)
         values += [ :none ] if implicit_none
-        Option.new(name:, kind:, default:, values:, implicit_none:)
+        Option.new(name:, kind:, default:, values:, implicit_none:, internal:)
       end
 
       def extend_option(name, kind:, default:, values:)

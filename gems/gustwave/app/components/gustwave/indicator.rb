@@ -45,7 +45,7 @@ module Gustwave
     toggle :pulse, "animate-pulse"
 
     # Set when the indicator renders text or block content.
-    toggle :text, "aspect-auto px-1 items-center justify-center text-white border-white"
+    toggle :text, "aspect-auto px-1 items-center justify-center text-white border-white", internal: true
 
     part :legend, "flex items-center text-sm font-medium text-gray-900 dark:text-white gap-1.5"
 

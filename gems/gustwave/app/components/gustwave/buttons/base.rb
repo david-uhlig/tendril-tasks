@@ -52,7 +52,7 @@ module Gustwave
       toggle :pill, "rounded-full"
 
       # Set when no text or content block was given, to render a square button
-      toggle :visual_only, per: :size, values: {
+      toggle :visual_only, per: :size, internal: true, values: {
         xs: "p-2",
         sm: "p-2",
         md: "p-2.5",

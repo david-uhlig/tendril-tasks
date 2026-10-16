@@ -23,6 +23,16 @@ module Gustwave
   # is an option with classes per value, a toggle a boolean option with
   # classes. Read and derive from them the same way.
   #
+  # Mark an option, variant or toggle +internal: true+ when the component
+  # selects it itself, e.g. from its content in +before_render+ or from the
+  # record it renders, rather than callers through a keyword argument:
+  #
+  #   toggle :visual_only, "p-2", internal: true
+  #
+  #   def before_render
+  #     select_options(visual_only: !has_content?)
+  #   end
+  #
   # === Inheritance and extension
   #
   # Subclasses inherit every declaration. Declaring a name again replaces it
@@ -124,9 +134,11 @@ module Gustwave
       # Declares an option: a value from a fixed list, with a default.
       #
       #   option :tag, default: :h2, values: %i[h1 h2 h3]
-      def option(name, default:, values:)
+      #
+      # +internal: true+ marks an option the component selects itself.
+      def option(name, default:, values:, internal: false)
         declare_option(:option, name:, kind: :option, default: Options.normalize_value(default),
-                                values: normalize_option_values(values))
+                                values: normalize_option_values(values), internal: internal == true)
       end
 
       # Adds values to an inherited option, and optionally changes its

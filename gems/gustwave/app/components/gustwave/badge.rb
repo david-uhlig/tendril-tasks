@@ -81,7 +81,7 @@ module Gustwave
     toggle :pill, "rounded-full"
 
     # Render a round badge when no text or content block was given
-    toggle :visual_only, "rounded-full px-0.5"
+    toggle :visual_only, "rounded-full px-0.5", internal: true
 
     part :dismiss_button, "bg-transparent"
 
@@ -112,7 +112,7 @@ module Gustwave
     }
 
     # Set for the tags in HOVER_TAGS
-    toggle :hover, per: :scheme, values: {
+    toggle :hover, per: :scheme, internal: true, values: {
       base: "hover:bg-gray-100",
       default: "hover:bg-blue-200",
       dark: "hover:bg-gray-200",

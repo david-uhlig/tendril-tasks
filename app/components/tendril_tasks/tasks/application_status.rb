@@ -15,7 +15,7 @@ module TendrilTasks
       # The dropdown button showing the current status
       part :trigger, "focus:ring-4 focus:outline-hidden focus:ring-gray-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2"
 
-      variant :status, part: :trigger, default: :received, values: {
+      variant :status, part: :trigger, default: :received, internal: true, values: {
         received: "bg-gray-100 text-gray-800",
         under_review: "bg-cyan-100 text-cyan-800",
         interviewing: "bg-blue-100 text-blue-800",

@@ -22,6 +22,9 @@ module Gustwave
   #   with +option_value+. When its default depends on another option, the
   #   component takes it from a +derive+d value instead, e.g. the scheme per
   #   tag in Gustwave::Heading.
+  # * Callers can pick every option through a keyword argument, except one
+  #   marked +internal: true+, which the component selects itself, e.g. from
+  #   its content in +before_render+.
   # * A keyword argument forwarded to a child component defaults to +DEFAULT+,
   #   so the child's default applies, unless the component deliberately picks
   #   another one for its child. Prefer forwarding through +options+.
