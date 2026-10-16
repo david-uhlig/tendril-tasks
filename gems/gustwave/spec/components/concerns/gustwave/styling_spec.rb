@@ -100,6 +100,16 @@ RSpec.describe Gustwave::Styling do
     end
   end
 
+  describe "internal variants" do
+    it "marks a variant the component selects itself with internal: true" do
+      statused = component { variant :status, default: :open, internal: true, values: { open: "bg-green-100", closed: "bg-gray-100" } }
+
+      expect(statused.option_definition.option(:status)).to be_internal
+      expect(button.option_definition.option(:size)).not_to be_internal
+      expect(statused.new.select_options(status: :closed).classes).to eq "bg-gray-100"
+    end
+  end
+
   describe "toggles" do
     it "is off by default" do
       expect(button.new.option_value(:pill)).to be false
@@ -111,6 +121,14 @@ RSpec.describe Gustwave::Styling do
       expect(sticky.new.option_value(:sticky)).to be true
       expect(sticky.new.classes).to eq "sticky"
       expect(sticky.new.select_options(sticky: false).classes).to eq "static"
+    end
+
+    it "marks a toggle the component selects itself with internal: true" do
+      squared = component { toggle :visual_only, "p-2", internal: true }
+
+      expect(squared.option_definition.option(:visual_only)).to be_internal
+      expect(button.option_definition.option(:pill)).not_to be_internal
+      expect(squared.new.select_options(visual_only: true).classes).to eq "p-2"
     end
 
     it "casts values to booleans" do

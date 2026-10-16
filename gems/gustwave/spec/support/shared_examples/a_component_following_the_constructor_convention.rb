@@ -9,6 +9,9 @@ require "gustwave/test/styling_sandbox"
 # - An option whose default depends on another option takes it from a
 #   +derive+d value, listed in +derived_defaults:+, e.g. Gustwave::Heading's
 #   scheme per tag.
+# - Callers can pick every option through a keyword argument, except an
+#   +internal: true+ one, or one they pick through another method, listed in
+#   +selected_elsewhere:+, e.g. Gustwave::Popover's +trigger_options+.
 # - A keyword argument named like a common option, e.g. +tag+ or +scheme+, is
 #   one of the component's options, unless the component forwards it to a
 #   child component and lists it in +forwards:+.
@@ -16,9 +19,10 @@ require "gustwave/test/styling_sandbox"
 # @param args [Array] arguments to pass to the component constructor
 # @param forwards [Array<Symbol>] keyword arguments forwarded to a child component
 # @param derived_defaults [Hash{Symbol => Symbol}] options and the derived values their defaults come from
+# @param selected_elsewhere [Array<Symbol>] options callers pick through another method than the constructor
 # @param component_class [Class] component class to test (default `described_class`)
 # @param kwargs [Hash] additional keyword arguments to pass to the component constructor
-RSpec.shared_examples "a component following the constructor convention" do |*args, forwards: [], derived_defaults: {}, component_class: described_class, **kwargs|
+RSpec.shared_examples "a component following the constructor convention" do |*args, forwards: [], derived_defaults: {}, selected_elsewhere: [], component_class: described_class, **kwargs|
   common_options = %i[tag type scheme size position align placement trigger_event]
 
   keywords = component_class.instance_method(:initialize).parameters
@@ -39,6 +43,16 @@ RSpec.shared_examples "a component following the constructor convention" do |*ar
 
   it "forwards only keywords it takes and doesn't declare" do
     expect(forwards - (keywords - options.keys)).to be_empty
+  end
+
+  options.each_value do |option|
+    next if option.internal? || selected_elsewhere.include?(option.name)
+
+    it "lets callers pick #{option.name.inspect}" do
+      current = build.call.option_value(option.name)
+      other = option.boolean? ? !current : (option.values - [ current ]).first
+      expect(build.call(option.name => other).option_value(option.name)).to eq(other)
+    end
   end
 
   option_keywords.each do |name|

@@ -7,7 +7,7 @@ module TendrilTasks
       part :icon
 
       # Whether a condition for visibility is met
-      toggle :met,
+      toggle :met, internal: true,
              on: { quick_info_line: "h-1 bg-green-300 dark:bg-green-400", icon: "text-green-400 dark:text-green-500" },
              off: { quick_info_line: "h-1 bg-gray-200 dark:bg-gray-600", icon: "text-gray-400 dark:text-gray-500" }
 

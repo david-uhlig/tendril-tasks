@@ -7,13 +7,14 @@ RSpec.describe "Gustwave constructor convention", type: :component do
   Rails.autoloaders.main.eager_load_dir(components_dir)
 
   # The arguments of components that can't be built without any, the keyword
-  # arguments a component forwards to a child component, and the options
-  # whose defaults come from a derived value.
+  # arguments a component forwards to a child component, the options whose
+  # defaults come from a derived value, and the options callers pick through
+  # another method than the constructor.
   setups = {
     Gustwave::DismissButton => { args: [ "target" ] },
     Gustwave::Dropdowns::Menus::Base => { kwargs: { id: "menu" } },
     Gustwave::Dropdowns::Menus::Generic => { kwargs: { id: "menu" } },
-    Gustwave::Dropdowns::Menus::List => { kwargs: { id: "menu" } },
+    Gustwave::Dropdowns::Menus::List => { kwargs: { id: "menu" }, selected_elsewhere: %i[list_tag] },
     Gustwave::Dropdowns::MenuItems::Dropdown => { forwards: %i[placement trigger_event] },
     Gustwave::Dropdowns::Triggers::Base => { kwargs: { menu_id: "menu" } },
     Gustwave::Dropdowns::Triggers::Button => { kwargs: { menu_id: "menu" } },
@@ -27,6 +28,7 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Heading => { derived_defaults: { scheme: :default_scheme } },
     Gustwave::Icon => { args: [ :close ] },
     Gustwave::IconToast => { forwards: %i[position] },
+    Gustwave::Popover => { selected_elsewhere: %i[placement trigger] },
     Gustwave::Spinner => { forwards: %i[size] }
   }
 
@@ -39,7 +41,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
       setup = setups.fetch(component, {})
       it_behaves_like "a component following the constructor convention",
                       *setup.fetch(:args, []), forwards: setup.fetch(:forwards, []),
-                      derived_defaults: setup.fetch(:derived_defaults, {}), **setup.fetch(:kwargs, {})
+                      derived_defaults: setup.fetch(:derived_defaults, {}),
+                      selected_elsewhere: setup.fetch(:selected_elsewhere, []), **setup.fetch(:kwargs, {})
     end
   end
 end

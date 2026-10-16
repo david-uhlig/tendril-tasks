@@ -18,6 +18,12 @@ module Gustwave
         red_to_yellow: "from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:hover:text-gray-900 focus:ring-red-100 dark:focus:ring-red-400"
       }
 
+      # The tag, type and pill shape are up to the Buttons::Base this theme
+      # renders, which takes +tag:+, +type:+ and +pill:+ through the options.
+      remove_option :tag
+      remove_option :type
+      remove_toggle :pill
+
       # Declared again after the inner part, so the size styles win its
       # conflicts and the visual-only padding wins theirs. Changes to these on
       # Buttons::Base don't reach this theme; extend it separately, e.g.
@@ -39,9 +45,9 @@ module Gustwave
         xl: { inner: "px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
       }
 
-      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5", part: :inner
+      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5", part: :inner, internal: true
 
-      toggle :visual_only, per: :size, part: :inner, values: {
+      toggle :visual_only, per: :size, part: :inner, internal: true, values: {
         xs: "p-2",
         sm: "p-2",
         md: "p-2.5",

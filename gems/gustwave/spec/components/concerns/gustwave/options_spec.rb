@@ -61,6 +61,16 @@ RSpec.describe Gustwave::Options do
     end
   end
 
+  describe "internal options" do
+    it "marks an option the component selects itself with internal: true" do
+      listed = component { option :list_tag, default: :ul, values: %i[ul ol], internal: true }
+
+      expect(listed.option_definition.option(:list_tag)).to be_internal
+      expect(linked.option_definition.option(:tag)).not_to be_internal
+      expect(listed.new.select_options(list_tag: :ol).option_value(:list_tag)).to eq :ol
+    end
+  end
+
   describe "#select_options" do
     it "merges repeated calls" do
       instance = linked.new.select_options(tag: :button).select_options(rel: :nofollow)
@@ -252,8 +262,8 @@ RSpec.describe Gustwave::Options do
       expect(linked.new.option_default(:rel)).to eq :none
       expect(component(button) { derive :icon_size, from: :size, values: { sm: :xs, md: :sm } }.option_definition.to_h).to eq(
         options: {
-          size: { kind: :variant, default: :md, values: %i[sm md none] },
-          pill: { kind: :toggle, default: false, values: [ false, true ] }
+          size: { kind: :variant, default: :md, values: %i[sm md none], internal: false },
+          pill: { kind: :toggle, default: false, values: [ false, true ], internal: false }
         },
         derived: { icon_size: { from: :size, values: %i[sm md] } }
       )
