@@ -246,15 +246,11 @@ RSpec.describe Gustwave::Styling do
       expect(child.new.classes(:icon)).to eq "h-6"
     end
 
-    it "merges with extend_toggle, extend_base and extend_part" do
-      child = component(button) do
-        extend_base({ icon: "shrink-0" }, unless: {})
-        extend_part :icon, "h-5"
-        extend_toggle :pill, off: "rounded-sm"
-      end
+    it "merges with extend_toggle, per state" do
+      child = component(button) { extend_toggle :pill, off: "rounded-sm" }
 
-      expect(child.new.select_options(scheme: :none).classes).to eq "inline-flex text-base px-4 rounded-sm"
-      expect(child.new.classes(:icon)).to eq "shrink-0 h-5"
+      expect(child.new.classes).to eq "inline-flex bg-blue-500 text-base px-4 rounded-sm"
+      expect(child.new.select_options(pill: true).classes).to eq "inline-flex bg-blue-500 text-base px-4 rounded-full"
     end
 
     it "deletes with remove_*" do

@@ -47,10 +47,10 @@ module Gustwave
   # === Inheritance and extension
   #
   # Subclasses inherit every declaration. Declaring a name again replaces it
-  # in place; nothing merges implicitly. To change an inherited declaration
-  # partially, use +extend_base+, +extend_part+, +extend_variant+ or
-  # +extend_toggle+, which merge per value and per part. +remove_part+,
-  # +remove_variant+ and +remove_toggle+ delete one.
+  # in place; nothing merges implicitly. To change an inherited variant or
+  # toggle partially, use +extend_variant+ or +extend_toggle+, which merge per
+  # value and per part. Change the base or a part by declaring it again.
+  # +remove_part+, +remove_variant+ and +remove_toggle+ delete one.
   #
   # Definitions are resolved on first use and again after any declaration, so
   # extending a parent class, e.g. from a Zeitwerk +on_load+ hook, reaches
@@ -140,17 +140,6 @@ module Gustwave
         declare_styling(:toggle, name: name.to_sym,
                                  on: style_targets(classes || on, part), off: style_targets(off, part),
                                  per: per&.to_sym, values: style_values(values, part), unless: style_unless(options))
-      end
-
-      # Merges classes into the inherited base, per part.
-      def extend_base(classes = nil, **parts)
-        options = parts.extract!(:unless)
-        declare_styling(:extend_base, classes: style_targets(classes || parts), unless: style_unless(options, keep: true))
-      end
-
-      # Replaces an inherited part's classes or +unless:+.
-      def extend_part(name, classes = nil, **options)
-        declare_styling(:extend_part, name: name.to_sym, classes: classes, unless: style_unless(options, keep: true))
       end
 
       # Merges values into an inherited variant, per value and part, and
