@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 /**
  * Manages element animation and removal with timeouts.
  *
- * Connects to: `data-controller="animate-and-remove"`
+ * Connects to: `data-controller="gustwave--animate-and-remove"`
  *
  * ### Values:
  * - `animateAfter` (Number): Delay in milliseconds before applying the animation class. Default: 5000.
@@ -35,7 +35,7 @@ export default class extends Controller {
    * Pauses both animation and removal timeouts.
    *
    * Can be used to give the user more time for interacting with an element
-   * before, e.g. through a mouseover action: `mouseover->animate-and-remove#pause`
+   * before, e.g. through a mouseover action: `mouseover->gustwave--animate-and-remove#pause`
    */
   pause() {
     this.clearTimeouts()
@@ -45,7 +45,7 @@ export default class extends Controller {
    * Restart the animation and removal timeouts.
    *
    * Useful to restart the timers after a `pause()`, e.g. through a mouseout
-   * action: `mouseout->animate-and-remove#continue`
+   * action: `mouseout->gustwave--animate-and-remove#continue`
    */
   continue() {
     this.setTimeouts()

@@ -32,11 +32,13 @@ module Gustwave
                    scheme: :success,
                    position: :none,
                    dismissible: true,
+                   auto_remove: false,
                    icon: nil,
                    **options)
       # Pass-thru to Toast component
       @id = id
       @dismissible = dismissible
+      @auto_remove = auto_remove
       @position = position
 
       @text = text
