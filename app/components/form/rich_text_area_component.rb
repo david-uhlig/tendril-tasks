@@ -37,7 +37,7 @@ module Form
                                                 toolbar_id: @toolbar[:id],
                                                 sticky_toolbar: true,
                                                 **@options) do |rich_text|
-          rich_text.toolbar do
+          rich_text.with_toolbar do
             render Gustwave::Form::RichText::Lexxy::Toolbar.new(@form, **@toolbar)
           end
         end

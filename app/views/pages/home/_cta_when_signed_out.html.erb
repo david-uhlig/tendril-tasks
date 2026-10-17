@@ -9,7 +9,7 @@
                                     color: :purple_to_blue,
                                     size: :xl,
                                     data: { turbo: false }) do |login_button| %>
-      <% login_button.leading_svg("rocketchat/icon-white.svg") %>
+      <% login_button.with_leading_visual_svg("rocketchat/icon-white.svg") %>
 
       <%= t "rocketchat.sign_in_button.long",
             brand: RocketChatConfig.branding %>

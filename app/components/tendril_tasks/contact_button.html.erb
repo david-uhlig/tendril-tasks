@@ -9,7 +9,7 @@
                                  "app-link": rocketchat_applink(to: @user)
                                },
                                class: "m-0") do |contact_button| %>
-  <% contact_button.leading_image("rocketchat/icon-white.svg") %>
+  <% contact_button.with_leading_visual_image("rocketchat/icon-white.svg") %>
 
   <% if responsive? %>
     <%= tag.span t(".contact.long"), class: "hidden sm:inline" %>

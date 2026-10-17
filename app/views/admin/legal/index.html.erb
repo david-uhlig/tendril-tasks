@@ -25,7 +25,7 @@
         <%= render Gustwave::Button.new(exists ? t(".edit") : t(".create"),
                                         tag: :a,
                                         href: edit_legal_path(slug)) do |button| %>
-          <% button.leading_icon(exists ? :edit : :plus) %>
+          <% button.with_leading_visual_icon(exists ? :edit : :plus) %>
         <% end %>
       <% end %>
     <% end %>

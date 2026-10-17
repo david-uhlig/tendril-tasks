@@ -38,7 +38,7 @@ module TendrilTasks
                                       href: href,
                                       color: :default,
                                       size: :sm) do |button|
-            button.leading_icon(:edit)
+            button.with_leading_visual_icon(:edit)
             tag.span t(".edit_button")
           end
         end
@@ -55,7 +55,7 @@ module TendrilTasks
                                       ),
                                       color: :default,
                                       size: :sm) do |button|
-            button.leading_icon(:plus)
+            button.with_leading_visual_icon(:plus)
             tag.span(t(".add_task_button"))
           end
         end
@@ -70,7 +70,7 @@ module TendrilTasks
                                       theme: :default_outline,
                                       color: :default,
                                       size: :sm) do |button|
-            button.leading_icon(:plus)
+            button.with_leading_visual_icon(:plus)
             tag.span(t(".add_project_button"))
           end
         end

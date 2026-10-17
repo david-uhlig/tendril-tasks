@@ -27,7 +27,7 @@ module TendrilTasks
           lang: I18n.locale
         )
         component = Gustwave::Badge.new(text, **config, &block)
-        component.leading_icon(icon, class: "me-0.5") if icon
+        component.with_leading_visual_icon(icon, class: "me-0.5") if icon
         component
       end
       alias badge with_badge
