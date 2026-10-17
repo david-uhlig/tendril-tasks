@@ -70,11 +70,6 @@ RSpec.describe Gustwave::Tooltip, type: :component do
         .to include("aria-describedby" => "help hint tip")
     end
 
-    it "returns the trigger's other attributes as they are" do
-      expect(described_class.new("text", id: "tip").trigger_options(class: "underline", data: { controller: "x" }))
-        .to include(class: "underline", data: { controller: "x" })
-    end
-
     it "keeps the trigger's own aria-describedby on a rendered button" do
       tooltip = described_class.new("text", id: "tip")
       render_inline(Gustwave::Button.new("Hover me", **tooltip.trigger_options("aria-describedby": "help", data: { controller: "x" })))

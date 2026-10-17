@@ -76,13 +76,16 @@ module Gustwave
     # Pass the trigger's own +aria-describedby+ in +attributes+ to keep it: it
     # is joined with the tooltip's id. Given to the trigger next to
     # +trigger_options+, it is lost. The other +attributes+ are returned as
-    # they are.
+    # they are. The tooltip's own +data-tooltip-*+ attributes win over
+    # same-named trigger attributes.
     #
     #   <%= link_to "Docs", docs_path, **tooltip.trigger_options("aria-describedby": "help", class: "underline") %>
     #
     # @param attributes [Hash] the trigger's own HTML attributes.
     def trigger_options(placement: DEFAULT, trigger: DEFAULT, **attributes)
       described_by, options = extract_described_by(attributes)
+      tooltip_keys = %w[data-tooltip-target data-tooltip-placement data-tooltip-trigger data-tooltip-style]
+      options = options.reject { |key, _| tooltip_keys.include?(key.to_s) }
       options["data-tooltip-target"] = @id
       options["data-tooltip-placement"] = option_value(:placement, placement:)
       options["data-tooltip-trigger"] = option_value(:trigger, trigger:)
