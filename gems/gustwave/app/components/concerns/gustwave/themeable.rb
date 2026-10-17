@@ -2,7 +2,7 @@
 
 module Gustwave
   # Use Themeable to access interchangeable, themed components through a
-  # centralized component.
+  # centralized class.
   #
   # This is a specialization of the Strategy pattern where the +subject+ class
   # delegates to one of its registered +theme+ classes.
@@ -18,20 +18,22 @@ module Gustwave
   #
   # === Benefits
   #
-  # This can lead to much cleaner frontend code, e.g. instead of calling
+  # Callers can pick a theme by name, e.g. from data or options, instead of
+  # hard-coding its class. Instead of calling
   #   <%= render Gustwave::Buttons::GradientDuotone.new %>
   #   <%= render Ui::Buttons::Funky.new %>
-  # you can access all themes through a centralized component
-  #   <%= render Gustwave::Button.new(theme: :gradient_duotone) %>
-  #   <%= render Gustwave::Button.new(theme: :funky) %>
+  # you can look up the theme class through a centralized class
+  #   <%= render Gustwave::Button.for(:gradient_duotone).new %>
+  #   <%= render Gustwave::Button.for(:funky).new %>
   #
   # === Reference Implementation
   #
-  # This is a reference implementation for a central +Button+ component allowing
-  # you to call different themes through a single component. Theme and subject
-  # do not have to share a common ancestor.
+  # This is a reference implementation for a central +Button+ class that looks
+  # up themes by name. The subject is a plain class that registers its themes
+  # and returns the theme class from +for+. Callers instantiate that class
+  # themselves. Theme and subject do not have to share a common ancestor.
   #
-  #   class Gustwave::Button < Gustwave::Component
+  #   class Gustwave::Button
   #     include Gustwave::Themeable
   #
   #     register_theme :outline, "Ui::Buttons::Outline"
@@ -39,26 +41,14 @@ module Gustwave
   #     # Optional, defaults to the first registered theme
   #     with_default_theme :outline
   #
-  #     # Allow the caller to access themed_button methods and slots
-  #     delegate_missing_to :themed_button
-  #
-  #     def initialize(theme: DEFAULT, **options)
-  #       @theme = theme
-  #       @options = options
+  #     def self.for(theme)
+  #       themed_component(theme)
   #     end
   #
-  #     def call
-  #       render themed_button do
-  #         content
-  #       end
-  #     end
-  #
-  #     private
-  #
-  #     def themed_button
-  #       @themed_button ||= themed_component(@theme).new(**@options)
-  #     end
+  #     private_class_method :new
   #   end
+  #
+  #   render Gustwave::Button.for(:funky).new("Click me")
   #
   # === Registering themes from the outside
   #
@@ -110,7 +100,7 @@ module Gustwave
       #
       # === Examples
       #
-      #   class Gustwave::Button < Gustwave::Component
+      #   class Gustwave::Button
       #     register_theme :default_outline, "Gustwave::Buttons::DefaultOutline"
       #     register_theme :outline, "Gustwave::Buttons::DefaultOutline"
       #   end

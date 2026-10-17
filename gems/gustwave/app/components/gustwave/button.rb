@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Renders a button in the specified theme. Use Button for actions (e.g. in
-  # forms). Use links for destinations, or moving from one page to another.
+  # Looks up the button class for a theme. Gustwave::Button doesn't render
+  # anything itself: +for+ returns the themed button class, which you instantiate
+  # to render a button. Use the button class directly when the theme is fixed
+  # in code, and +for+ when the theme comes from data or options.
   #
   # === Available Themes
   #
-  # This component acts as a delegator to the themed button components. You can
-  # view all registered themes by running `Gustwave::Button.themes`. By default,
+  # View all registered themes by running `Gustwave::Button.themes`. By default,
   # Gustwave registers the following themes:
   # - :default
   # - :default_outline == :outline
@@ -17,25 +18,35 @@ module Gustwave
   # - :gradient_duotone_outline
   # - :inline
   #
-  # === Picking a Different Default Theme
+  # === Using a Fixed Theme
   #
-  # Many applications will only need to use one of the themes. Use composition
-  # to improve the readability of your code. For example, if you want to use the
-  # :gradient_duotone theme, all you need to do is:
+  # When the theme is known in code, instantiate its class directly. Your IDE can
+  # navigate to it, and stack traces stay shallow:
+  #
+  #   <%= render Gustwave::Buttons::GradientDuotone.new("Sign in") %>
+  #
+  # Use composition to give the theme a name in your application. For example,
+  # to use the :gradient_duotone theme everywhere, all you need to do is:
   #
   #   class Ui::Button < Gustwave::Component
-  #     def initialize(text = nil, theme: :gradient_duotone, **options)
+  #     def initialize(text = nil, **options)
   #       @text = text
-  #       @theme = theme
   #       @options = options
   #     end
   #
   #     def call
-  #       render Gustwave::Button.new(theme: @theme, **@options) do
+  #       render Gustwave::Buttons::GradientDuotone.new(**@options) do
   #         @text || content
   #       end
   #     end
   #   end
+  #
+  # === Choosing a Theme from Data
+  #
+  # When the theme comes from data or options, look up its class with +for+ and
+  # pass the remaining options to it:
+  #
+  #   <%= render Gustwave::Button.for(@options[:theme]).new("Click me", **@options.except(:theme)) %>
   #
   # === Building a Custom Theme
   #
@@ -65,7 +76,7 @@ module Gustwave
   #
   # You can now use this theme by calling:
   #
-  #   render Gustwave::Button.new("Click me", theme: :monochrome_button)
+  #   render Gustwave::Button.for(:monochrome_button).new("Click me")
   #
   class Button
     include Gustwave::Themeable
