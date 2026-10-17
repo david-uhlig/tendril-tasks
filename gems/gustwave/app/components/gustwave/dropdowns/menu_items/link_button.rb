@@ -69,7 +69,7 @@ module Gustwave
         attr_reader :config, :icon, :trailing_icon, :text
 
         def button_component
-          @button_component ||= Gustwave::Button.new(**config)
+          @button_component ||= Gustwave::Button.for(config[:theme]).new(**config.except(:theme))
         end
       end
     end

@@ -25,11 +25,10 @@
   </div>
 
   <% if @application.task.visible? %>
-    <%= render Gustwave::Button.new(t("forms.edit"),
-                                  tag: :a,
-                                  href: task_path(@application.task, anchor: "apply-now"),
-                                  theme: :outline,
-                                  class: "justify-center sm:self-start w-full sm:w-auto sm:ms-4") do |button| %>
+    <%= render Gustwave::Buttons::DefaultOutline.new(t("forms.edit"),
+                                                   tag: :a,
+                                                   href: task_path(@application.task, anchor: "apply-now"),
+                                                   class: "justify-center sm:self-start w-full sm:w-auto sm:ms-4") do |button| %>
       <% button.with_leading_visual_icon(:edit, size: :lg) %>
     <% end %>
   <% end %>

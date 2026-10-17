@@ -1,5 +1,5 @@
 <div class="flex flex-wrap items-center gap-8 p-4">
-  <%= render Gustwave::Button.new(class: "relative overflow-visible") do |button| %>
+  <%= render Gustwave::Buttons::Default.new(class: "relative overflow-visible") do |button| %>
     <% button.with_leading_visual_icon :inbox %> Inbox
     <%= render Gustwave::Indicator.new("8", color: :red, size: :md, position: :top_right) %>
   <% end %>

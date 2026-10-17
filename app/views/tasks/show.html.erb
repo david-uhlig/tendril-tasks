@@ -92,14 +92,14 @@
   <%= render TendrilTasks::HorizontalLine.new %>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 justify-center text-center gap-2">
-    <%= render Gustwave::Button
+    <%= render Gustwave::Buttons::Default
                  .new(tag: :a,
                       href: tasks_path,
                       color: :alternative,
                       size: :lg)
                  .with_content(t(".goto_tasks_button")) %>
 
-    <%= render Gustwave::Button
+    <%= render Gustwave::Buttons::Default
                  .new(@task.project.title,
                       tag: :a,
                       href: project_path(@task.project),

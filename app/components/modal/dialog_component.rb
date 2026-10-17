@@ -8,7 +8,7 @@ class Modal::DialogComponent < TendrilTasks::Component
   renders_one :heading, ->(text) { text }
 
   renders_many :buttons, ->(**options) {
-    Gustwave::Button.new(data: { "modal-hide": id }, **options) do
+    Gustwave::Button.for(options[:theme]).new(data: { "modal-hide": id }, **options.except(:theme)) do
       content
     end
   }

@@ -214,8 +214,8 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
       end
     end
 
-    it "works on every theme through Gustwave::Button" do
-      render_inline(Gustwave::Button.new("Me", theme: :gradient_duotone, size: :sm)) do |button|
+    it "works on every theme through Gustwave::Button.for" do
+      render_inline(Gustwave::Button.for(:gradient_duotone).new("Me", size: :sm)) do |button|
         button.with_leading_visual_renderable(consumer_avatar.new("https://example.com/me.png"))
       end
 

@@ -46,16 +46,16 @@
   <% end %>
 
   <% if applied? %>
-    <%= render Gustwave::Button.new(t(".applied_for_task_button"),
-                                    tag: :a,
-                                    href: task_path(@task, anchor: "apply-now"),
-                                    color: :green,
-                                    class: "w-full") %>
+    <%= render Gustwave::Buttons::Default.new(t(".applied_for_task_button"),
+                                              tag: :a,
+                                              href: task_path(@task, anchor: "apply-now"),
+                                              color: :green,
+                                              class: "w-full") %>
   <% else %>
-    <%= render Gustwave::Button.new(t(".express_interest_button"),
-                                    tag: :a,
-                                    href: task_path(@task, anchor: "apply-now"),
-                                    class: "w-full") %>
+    <%= render Gustwave::Buttons::Default.new(t(".express_interest_button"),
+                                              tag: :a,
+                                              href: task_path(@task, anchor: "apply-now"),
+                                              class: "w-full") %>
   <% end %>
 </section>
 

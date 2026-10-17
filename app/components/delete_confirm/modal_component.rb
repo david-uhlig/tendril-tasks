@@ -17,7 +17,7 @@ module DeleteConfirm
     }
 
     renders_one :abort_button, ->(text = t(".abort")) do
-      Gustwave::Button
+      Gustwave::Buttons::Default
         .new(color: :light,
              class: "w-full lg:w-auto",
              "data-modal-hide": @id,
@@ -26,7 +26,7 @@ module DeleteConfirm
     end
 
     renders_one :confirm_button, ->(text = t(".delete_permanently")) do
-      Gustwave::Button
+      Gustwave::Buttons::Default
         .new(type: :submit,
              color: :red,
              class: "w-full lg:w-auto disabled:opacity-50",

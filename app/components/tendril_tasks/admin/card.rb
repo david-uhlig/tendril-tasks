@@ -45,7 +45,7 @@ module TendrilTasks
         options[:tag] ||= :a
         options[:size] ||= :lg
 
-        Gustwave::Button.new(**options) do
+        Gustwave::Button.for(options[:theme]).new(**options.except(:theme)) do
           capture(&block)
         end
       end

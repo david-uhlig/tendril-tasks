@@ -26,7 +26,7 @@ module TendrilTasks
 
     renders_many :buttons, ->(**options) {
       options = parse_button_options(options)
-      Gustwave::Button.new(**options)
+      Gustwave::Button.for(options[:theme]).new(**options.except(:theme))
     }
 
     # Initializes the ButtonGrid.

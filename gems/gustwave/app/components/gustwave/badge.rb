@@ -145,7 +145,7 @@ module Gustwave
         data: { dismiss_target: "##{@id}" }
       }.merge(attributes_for(:dismiss_button, options))
 
-      component = Gustwave::Button.new(a11y_text, **config)
+      component = Gustwave::Button.for(config[:theme]).new(a11y_text, **config.except(:theme))
       component.with_leading_visual_icon icon, stroke_width: 2 if icon
       component
     }

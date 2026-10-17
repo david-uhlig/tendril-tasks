@@ -11,7 +11,7 @@ module DeleteConfirm
     end
 
     def call
-      render Gustwave::Button.new(**@options).with_content(@text)
+      render Gustwave::Button.for(@options[:theme]).new(**@options.except(:theme)).with_content(@text)
     end
 
     private

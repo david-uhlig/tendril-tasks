@@ -40,10 +40,9 @@ module Gustwave
 end
 
 RSpec.describe Gustwave::Themeable do
-  let(:base) { Gustwave::Specs::Themeable::Base.new }
-  let(:themeable_button) { Gustwave::Specs::Themeable::ThemeableButton.new }
-  let(:themeable_button_with_custom_default) { Gustwave::Specs::Themeable::ThemeableButtonWithCustomDefault.new }
-  let(:extended_themeable_button) { Gustwave::Specs::Themeable::ExtendedThemeableButton.new }
+  let(:themeable_button) { Gustwave::Specs::Themeable::ThemeableButton }
+  let(:themeable_button_with_custom_default) { Gustwave::Specs::Themeable::ThemeableButtonWithCustomDefault }
+  let(:extended_themeable_button) { Gustwave::Specs::Themeable::ExtendedThemeableButton }
 
   describe ".register_theme" do
     it "registers the theme under its name" do
@@ -60,7 +59,7 @@ RSpec.describe Gustwave::Themeable do
       end
       stub_const("Gustwave::Specs::Themeable::NotYetDefinedTheme", Class.new)
 
-      expect(klass.new.themed_component(:not_yet_defined)).to eq(Gustwave::Specs::Themeable::NotYetDefinedTheme)
+      expect(klass.themed_component(:not_yet_defined)).to eq(Gustwave::Specs::Themeable::NotYetDefinedTheme)
     end
 
     it "inherits the themes of the parent class" do
@@ -84,7 +83,7 @@ RSpec.describe Gustwave::Themeable do
     end
   end
 
-  describe "#default_theme" do
+  describe ".default_theme" do
     it "defaults to the first registered theme" do
       expect(themeable_button.default_theme).to eq(:default_theme)
     end
@@ -94,11 +93,11 @@ RSpec.describe Gustwave::Themeable do
     end
 
     it "is nil without registered themes" do
-      expect(base.default_theme).to be_nil
+      expect(Gustwave::Specs::Themeable::Base.default_theme).to be_nil
     end
   end
 
-  describe "#themed_component" do
+  describe ".themed_component" do
     it "returns the default theme for nil" do
       expect(themeable_button_with_custom_default.themed_component(nil)).to eq(Gustwave::Specs::Themeable::SpecialTheme)
     end
@@ -122,7 +121,7 @@ RSpec.describe Gustwave::Themeable do
 
       it "raises a ThemeNotFoundError without registered themes when Gustwave isn't strict" do
         Gustwave.strict = false
-        expect { base.themed_component(:some_non_existent_theme) }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /No themes registered/)
+        expect { Gustwave::Specs::Themeable::Base.themed_component(:some_non_existent_theme) }.to raise_error(Gustwave::Themeable::ThemeNotFoundError, /No themes registered/)
       end
     end
   end

@@ -56,7 +56,7 @@ module Gustwave
         attr_reader :icon, :trailing_icon
 
         def button_component
-          @button_component ||= Gustwave::Button.new(**config)
+          @button_component ||= Gustwave::Button.for(config[:theme]).new(**config.except(:theme))
         end
 
         def icon_by_placement(placement)

@@ -2,7 +2,7 @@
 
 module Gustwave
   # Use Themeable to access interchangeable, themed components through a
-  # centralized component.
+  # centralized class.
   #
   # This is a specialization of the Strategy pattern where the +subject+ class
   # delegates to one of its registered +theme+ classes.
@@ -18,20 +18,22 @@ module Gustwave
   #
   # === Benefits
   #
-  # This can lead to much cleaner frontend code, e.g. instead of calling
+  # Callers can pick a theme by name, e.g. from data or options, instead of
+  # hard-coding its class. Instead of calling
   #   <%= render Gustwave::Buttons::GradientDuotone.new %>
   #   <%= render Ui::Buttons::Funky.new %>
-  # you can access all themes through a centralized component
-  #   <%= render Gustwave::Button.new(theme: :gradient_duotone) %>
-  #   <%= render Gustwave::Button.new(theme: :funky) %>
+  # you can look up the theme class through a centralized class
+  #   <%= render Gustwave::Button.for(:gradient_duotone).new %>
+  #   <%= render Gustwave::Button.for(:funky).new %>
   #
   # === Reference Implementation
   #
-  # This is a reference implementation for a central +Button+ component allowing
-  # you to call different themes through a single component. Theme and subject
-  # do not have to share a common ancestor.
+  # This is a reference implementation for a central +Button+ class that looks
+  # up themes by name. The subject is a plain class that registers its themes
+  # and returns the theme class from +for+. Callers instantiate that class
+  # themselves. Theme and subject do not have to share a common ancestor.
   #
-  #   class Gustwave::Button < Gustwave::Component
+  #   class Gustwave::Button
   #     include Gustwave::Themeable
   #
   #     register_theme :outline, "Ui::Buttons::Outline"
@@ -39,26 +41,14 @@ module Gustwave
   #     # Optional, defaults to the first registered theme
   #     with_default_theme :outline
   #
-  #     # Allow the caller to access themed_button methods and slots
-  #     delegate_missing_to :themed_button
-  #
-  #     def initialize(theme: DEFAULT, **options)
-  #       @theme = theme
-  #       @options = options
+  #     def self.for(theme)
+  #       themed_component(theme)
   #     end
   #
-  #     def call
-  #       render themed_button do
-  #         content
-  #       end
-  #     end
-  #
-  #     private
-  #
-  #     def themed_button
-  #       @themed_button ||= themed_component(@theme).new(**@options)
-  #     end
+  #     private_class_method :new
   #   end
+  #
+  #   render Gustwave::Button.for(:funky).new("Click me")
   #
   # === Registering themes from the outside
   #
@@ -97,7 +87,7 @@ module Gustwave
       # The default theme name.
       #
       # Set this through +with_default_theme+. Safe to access directly.
-      class_attribute :default_theme,
+      class_attribute :__default_theme,
                       instance_accessor: false,
                       instance_predicate: false,
                       default: nil
@@ -110,7 +100,7 @@ module Gustwave
       #
       # === Examples
       #
-      #   class Gustwave::Button < Gustwave::Component
+      #   class Gustwave::Button
       #     register_theme :default_outline, "Gustwave::Buttons::DefaultOutline"
       #     register_theme :outline, "Gustwave::Buttons::DefaultOutline"
       #   end
@@ -133,7 +123,7 @@ module Gustwave
       #
       # @param theme_name [Symbol] The name of the theme.
       def with_default_theme(theme_name)
-        self.default_theme = theme_name&.to_sym
+        self.__default_theme = theme_name&.to_sym
       end
 
       # Returns the registered theme classes by theme name.
@@ -142,49 +132,49 @@ module Gustwave
       def themes
         __themes.transform_values(&:constantize)
       end
-    end
 
-    # Returns the default theme name, or the first registered theme name if
-    # none is set.
-    def default_theme
-      self.class.default_theme || self.class.__themes.keys.first
-    end
-
-    # Fetches the theme class for the given +theme+ name.
-    #
-    # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default in
-    # development and test, letting the developer know that the supplied theme name is
-    # invalid and what their options are.
-    #
-    # Otherwise, it falls back to the default theme. If no theme is
-    # registered, raises a +ThemeNotFoundError+.
-    #
-    # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+ or Gustwave::Options::DEFAULT.
-    # @return [Class] The theme class.
-    def themed_component(theme)
-      theme = nil if theme.equal?(Gustwave::Options::DEFAULT)
-      resolve_theme_class_name(theme.presence&.to_sym || default_theme).constantize
-    end
-
-    private
-
-    def resolve_theme_class_name(theme_name)
-      themes = self.class.__themes
-      class_name = themes[theme_name]
-      return class_name if class_name
-
-      if Gustwave.strict?
-        raise ThemeNotFoundError, <<~MSG
-          Invalid theme for #{self.class.name}.
-
-          Expected one of: #{themes.keys.inspect}
-          Got: #{theme_name.inspect}
-
-          #{Options.fallback_note(default_theme)}
-        MSG
+      # Returns the default theme name, or the first registered theme name if
+      # none is set.
+      def default_theme
+        __default_theme || __themes.keys.first
       end
 
-      themes[default_theme] || raise(ThemeNotFoundError, "No themes registered for #{self.class.name}")
+      # Fetches the theme class for the given +theme+ name.
+      #
+      # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default in
+      # development and test, letting the developer know that the supplied theme name is
+      # invalid and what their options are.
+      #
+      # Otherwise, it falls back to the default theme. If no theme is
+      # registered, raises a +ThemeNotFoundError+.
+      #
+      # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+ or Gustwave::Options::DEFAULT.
+      # @return [Class] The theme class.
+      def themed_component(theme)
+        theme = nil if theme.equal?(Gustwave::Options::DEFAULT)
+        resolve_theme_class_name(theme.presence&.to_sym || default_theme).constantize
+      end
+
+      private
+
+      def resolve_theme_class_name(theme_name)
+        themes = __themes
+        class_name = themes[theme_name]
+        return class_name if class_name
+
+        if Gustwave.strict?
+          raise ThemeNotFoundError, <<~MSG
+            Invalid theme for #{name}.
+
+            Expected one of: #{themes.keys.inspect}
+            Got: #{theme_name.inspect}
+
+            #{Options.fallback_note(default_theme)}
+          MSG
+        end
+
+        themes[default_theme] || raise(ThemeNotFoundError, "No themes registered for #{name}")
+      end
     end
   end
 end

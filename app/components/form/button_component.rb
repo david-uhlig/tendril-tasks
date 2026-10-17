@@ -15,10 +15,10 @@ module Form
     end
 
     def call
-      render Gustwave::Button.new(tag: TAG,
-                                  type: TYPE,
-                                  color: @color,
-                                  size: @size, **@options) do
+      render Gustwave::Button.for(@options[:theme]).new(tag: TAG,
+                                                        type: TYPE,
+                                                        color: @color,
+                                                        size: @size, **@options.except(:theme)) do
         content
       end
     end

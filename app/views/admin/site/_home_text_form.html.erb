@@ -45,15 +45,15 @@
 
   <div class="flex flex-wrap">
     <div class="whitespace-nowrap space-x-2 pe-3 w-full [&_button]:w-1/2">
-      <%= render Gustwave::Button.new(type: :submit,
-                                      size: :md,
-                                      color: :red,
-                                      form: "reset-site-home-text") do %>
+      <%= render Gustwave::Buttons::Default.new(type: :submit,
+                                                size: :md,
+                                                color: :red,
+                                                form: "reset-site-home-text") do %>
         <%= t("forms.reset") %>
       <% end %>
 
-      <%= render Gustwave::Button.new(type: :submit,
-                                      size: :md) do %>
+      <%= render Gustwave::Buttons::Default.new(type: :submit,
+                                                size: :md) do %>
         <%= t("forms.save") %>
       <% end %>
     </div>
