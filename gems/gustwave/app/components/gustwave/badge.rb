@@ -203,7 +203,7 @@ module Gustwave
     attr_reader :html_tag, :config, :text
 
     def has_content?
-      @has_content ||= text_or_content(text).present?
+      text_or_content(text).present?
     end
 
     # A badge renders the type of any tag
