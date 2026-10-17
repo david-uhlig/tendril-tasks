@@ -5,7 +5,7 @@
         controller: "modal-form dim-backdrop",
         action: "turbo:submit-end->modal-form#hideOnSuccess"
       }) do |shell| %>
-  <% shell.heading t(".title") %>
+  <% shell.with_heading t(".title") %>
 
   <%= render "tasks/projects/form", project_form: project_form %>
 <% end %>

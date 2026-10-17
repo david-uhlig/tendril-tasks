@@ -13,8 +13,6 @@ module Form
                                            **options)
       }
     }
-    alias button with_button_regular
-    alias delete_button with_button_delete
 
     def initialize(form, render_if: true)
       @form = form

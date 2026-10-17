@@ -5,22 +5,18 @@ module DeleteConfirm
     attr_reader :id
 
     # The heading's text, rendered by Modal::ShellComponent
-    renders_one :heading_slot, ->(text = t(".title")) { text }
-    alias heading with_heading_slot
+    renders_one :heading, ->(text = t(".title")) { text }
 
     renders_many :body_elements, types: {
       paragraph: ->(text) {
         Modal::ParagraphComponent.new(text)
       },
-      element: ->(&block) {
+      section: ->(&block) {
         block.call
       }
     }
-    alias paragraph with_body_element_paragraph
-    alias element with_body_element_element
-    alias section with_body_element_element
 
-    renders_one :abort_button_slot, ->(text = t(".abort")) do
+    renders_one :abort_button, ->(text = t(".abort")) do
       Gustwave::Button
         .new(color: :light,
              class: "w-full lg:w-auto",
@@ -28,9 +24,8 @@ module DeleteConfirm
              type: :reset)
         .with_content(text)
     end
-    alias abort_button with_abort_button_slot
 
-    renders_one :confirm_button_slot, ->(text = t(".delete_permanently")) do
+    renders_one :confirm_button, ->(text = t(".delete_permanently")) do
       Gustwave::Button
         .new(type: :submit,
              color: :red,
@@ -38,7 +33,6 @@ module DeleteConfirm
              data: { "modal-hide": @id, "cooldown-target": "button" })
         .with_content(tag.span(text, data: { "cooldown-target": "label" }))
     end
-    alias confirm_button with_confirm_button_slot
 
     # @param cooldown [Integer] seconds the confirm button stays disabled after
     #   the modal is shown, to prevent accidental clicks. 0 disables it.
@@ -49,9 +43,9 @@ module DeleteConfirm
     end
 
     def before_render
-      heading unless heading_slot?
-      abort_button unless abort_button_slot?
-      confirm_button unless confirm_button_slot?
+      with_heading unless heading?
+      with_abort_button unless abort_button?
+      with_confirm_button unless confirm_button?
     end
   end
 end

@@ -1,5 +1,5 @@
 <%= render Modal::ShellComponent.new(@id) do |shell| %>
-  <% shell.heading t(".title"), class: "text-lg" %>
+  <% shell.with_heading t(".title"), class: "text-lg" %>
 
   <%# Modal body %>
 

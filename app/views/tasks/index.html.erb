@@ -61,27 +61,27 @@
   <%= render TendrilTasks::ButtonGrid.new(orientation: :vertical, size: :lg) do |grid| %>
     <%# Link to all tasks when filter is applied %>
     <% grid
-         .button(tag: :a,
-                 href: tasks_path,
-                 color: :alternative,
-                 class: "w-full text-center")
+         .with_button(tag: :a,
+                      href: tasks_path,
+                      color: :alternative,
+                      class: "w-full text-center")
          .with_content(t ".view_all_tasks") if @type != :all_published_tasks %>
 
     <%# Link to projects for convenience %>
     <% grid
-         .button(tag: :a,
-                 href: projects_path,
-                 color: :alternative,
-                 class: "w-full justify-center") do |button| %>
+         .with_button(tag: :a,
+                      href: projects_path,
+                      color: :alternative,
+                      class: "w-full justify-center") do |button| %>
       <% button.with_leading_visual_icon(:arrow_left, size: :lg) %>
       <%= t ".goto_initiatives" %>
     <% end %>
 
     <%# Link to create project %>
     <% grid
-         .button(tag: :a,
-                 href: new_task_path,
-                 class: "w-full")
+         .with_button(tag: :a,
+                      href: new_task_path,
+                      class: "w-full")
          .with_content(t ".create_task") if can? :create, Task %>
   <% end %>
 <% end %>

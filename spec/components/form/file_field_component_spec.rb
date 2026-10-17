@@ -14,7 +14,7 @@ RSpec.describe Form::FileFieldComponent, type: :component do
   context "with helper_text" do
     before do
       render_inline(described_class.new(form, :logo, "Logo")) do |field|
-        field.helper_text("PNG or SVG, max. 2 MB")
+        field.with_helper_text("PNG or SVG, max. 2 MB")
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Form::FileFieldComponent, type: :component do
 
   it "passes id and class options to the helper text paragraph" do
     render_inline(described_class.new(form, :logo, "Logo")) do |field|
-      field.helper_text("Help", id: "logo-help", class: "custom-class")
+      field.with_helper_text("Help", id: "logo-help", class: "custom-class")
     end
 
     expect(page).to have_selector("p#logo-help.mt-1.text-sm.text-gray-500.custom-class", text: "Help")

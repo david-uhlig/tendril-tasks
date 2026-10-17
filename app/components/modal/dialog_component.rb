@@ -5,15 +5,13 @@ class Modal::DialogComponent < TendrilTasks::Component
 
 
   # The heading's text, rendered by Modal::ShellComponent
-  renders_one :heading_slot, ->(text) { text }
-  alias heading with_heading_slot
+  renders_one :heading, ->(text) { text }
 
   renders_many :buttons, ->(**options) {
     Gustwave::Button.new(data: { "modal-hide": id }, **options) do
       content
     end
   }
-  alias button with_button
 
   def initialize(id, form_path: nil, form_method: :get)
     @id = id

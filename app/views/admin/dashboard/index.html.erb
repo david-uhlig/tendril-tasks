@@ -2,8 +2,8 @@
 
 <%= render TendrilTasks::Content.new(width: :large) do %>
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
-    <% breadcrumb.home %>
-    <% breadcrumb.item(t("breadcrumbs.admin")) %>
+    <% breadcrumb.with_home %>
+    <% breadcrumb.with_item(t("breadcrumbs.admin")) %>
   <% end %>
 
   <%= render TendrilTasks::Heading
@@ -45,49 +45,49 @@
 
   <ol class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <%= render TendrilTasks::Admin::Card.new do |card| %>
-      <% card.heading t("admin.users.roles.title") %>
+      <% card.with_heading t("admin.users.roles.title") %>
 
-      <% card.paragraph do %>
+      <% card.with_paragraph do %>
         <%= t("admin.users.roles.description") %>
       <% end %>
 
-      <% card.button href: admin_users_roles_path do %>
+      <% card.with_button href: admin_users_roles_path do %>
         <%= t("forms.edit") %>
       <% end %>
     <% end %>
 
     <%= render TendrilTasks::Admin::Card.new do |card| %>
-      <% card.heading t("admin.legal.title") %>
+      <% card.with_heading t("admin.legal.title") %>
 
-      <% card.paragraph do %>
+      <% card.with_paragraph do %>
         <%= t("admin.legal.description") %>
       <% end %>
 
-      <% card.button href: admin_legal_index_path do %>
+      <% card.with_button href: admin_legal_index_path do %>
         <%= t("forms.edit") %>
       <% end %>
     <% end %>
 
     <%= render TendrilTasks::Admin::Card.new do |card| %>
-      <% card.heading t("admin.site.title") %>
+      <% card.with_heading t("admin.site.title") %>
 
-      <% card.paragraph do %>
+      <% card.with_paragraph do %>
         <%= t("admin.site.description") %>
       <% end %>
 
-      <% card.button href: edit_admin_site_path do %>
+      <% card.with_button href: edit_admin_site_path do %>
         <%= t("forms.edit") %>
       <% end %>
     <% end %>
 
     <%= render TendrilTasks::Admin::Card.new do |card| %>
-      <% card.heading t("admin.footer.title") %>
+      <% card.with_heading t("admin.footer.title") %>
 
-      <% card.paragraph do %>
+      <% card.with_paragraph do %>
         <%= t("admin.footer.description") %>
       <% end %>
 
-      <% card.button href: edit_admin_footer_url do %>
+      <% card.with_button href: edit_admin_footer_url do %>
         <%= t("forms.edit") %>
       <% end %>
     <% end %>
@@ -103,64 +103,64 @@
 
   <ol class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <%= render TendrilTasks::Admin::Card.new do |card| %>
-      <% card.heading t("admin.monitoring.jobs.title") %>
+      <% card.with_heading t("admin.monitoring.jobs.title") %>
 
       <% if @stats.active_job.fetch(:failed, 0) > 0 %>
-        <% card.badge color: :red, icon: :ban do %>
+        <% card.with_badge color: :red, icon: :ban do %>
           <%= t("admin.monitoring.jobs.failed", count: @stats.active_job.fetch(:failed)) %>
         <% end %>
       <% end %>
 
       <% if @stats.active_job.fetch(:scheduled, 0) > 0 %>
-        <% card.badge color: :yellow, icon: :layers do %>
+        <% card.with_badge color: :yellow, icon: :layers do %>
           <%= t("admin.monitoring.jobs.scheduled", count: @stats.active_job.fetch(:scheduled)) %>
         <% end %>
       <% end %>
 
       <% if @stats.active_job.fetch(:in_progress, 0) > 0 %>
-        <% card.badge color: :indigo, icon: :hourglas do %>
+        <% card.with_badge color: :indigo, icon: :hourglas do %>
           <%= t("admin.monitoring.jobs.in_progress", count: @stats.active_job.fetch(:in_progress)) %>
         <% end %>
       <% end %>
 
       <% if @stats.active_job.fetch(:finished, 0) > 0 %>
-        <% card.badge color: :green, icon: :check do %>
+        <% card.with_badge color: :green, icon: :check do %>
           <%= t("admin.monitoring.jobs.finished", count: @stats.active_job.fetch(:finished)) %>
         <% end %>
       <% end %>
 
-      <% card.paragraph do %>
+      <% card.with_paragraph do %>
         <%= t("admin.monitoring.jobs.description") %>
       <% end %>
 
-      <% card.button href: mission_control_jobs_path do %>
+      <% card.with_button href: mission_control_jobs_path do %>
         <%= t("admin.monitoring.jobs.view") %>
       <% end %>
     <% end %>
 
     <%= render TendrilTasks::Admin::Card.new do |card| %>
-      <% card.heading t("admin.monitoring.storage.title") %>
+      <% card.with_heading t("admin.monitoring.storage.title") %>
 
-      <% card.badge color: :green do %>
+      <% card.with_badge color: :green do %>
         <% it.with_leading_visual_icon :paper_clip, class: "me-0.5" %>
         <%= t("admin.monitoring.storage.attachments", count: @stats.active_storage.fetch(:files)) %>
       <% end %>
 
-      <% card.badge color: :yellow do %>
+      <% card.with_badge color: :yellow do %>
         <% it.with_leading_visual_icon :file_code, class: "me-0.5" %>
         <%= t("admin.monitoring.storage.blobs", count: @stats.active_storage.fetch(:blobs)) %>
       <% end %>
 
-      <% card.badge do %>
+      <% card.with_badge do %>
         <% it.with_leading_visual_icon :database, class: "me-0.5" %>
         <%= number_to_human_size(@stats.active_storage.fetch(:size)) %>
       <% end %>
 
-      <% card.paragraph do %>
+      <% card.with_paragraph do %>
         <%= t("admin.monitoring.storage.description") %>
       <% end %>
 
-      <% card.button href: active_storage_dashboard_path do %>
+      <% card.with_button href: active_storage_dashboard_path do %>
         <%= t("admin.monitoring.jobs.view") %>
       <% end %>
     <% end %>

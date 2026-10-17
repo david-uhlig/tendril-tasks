@@ -31,19 +31,19 @@
                                           },
                                           size: :lg) do |grid| %>
     <%# Link to tasks for convenience %>
-    <% grid.button(tag: :a,
-                   href: tasks_path,
-                   color: :alternative,
-                   class: "w-full justify-center") do |button| %>
+    <% grid.with_button(tag: :a,
+                        href: tasks_path,
+                        color: :alternative,
+                        class: "w-full justify-center") do |button| %>
       <span><%= t ".goto_tasks_button" %></span>
       <% button.with_trailing_visual_icon(:arrow_right, size: :lg) %>
     <% end %>
 
     <%# Link to create project %>
     <% grid
-         .button(tag: :a,
-                   href: new_project_path,
-                   class: "w-full")
+         .with_button(tag: :a,
+                      href: new_project_path,
+                      class: "w-full")
          .with_content(t ".create_initiative_button") if can? :create, Project %>
   <% end %>
 <% end %>

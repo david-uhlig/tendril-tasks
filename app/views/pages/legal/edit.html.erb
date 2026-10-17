@@ -6,15 +6,15 @@
 
 <%= render TendrilTasks::Content.new(width: :large) do %>
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
-    <% breadcrumb.home %>
-    <% breadcrumb.item t("breadcrumbs.admin"), href: admin_root_path %>
+    <% breadcrumb.with_home %>
+    <% breadcrumb.with_item t("breadcrumbs.admin"), href: admin_root_path %>
 
     <% options = { href: legal_path(@page.slug) } if @page.persisted? %>
 
-    <% breadcrumb.item t("pages.#{@page.slug}.title"),
-                        **options %>
+    <% breadcrumb.with_item t("pages.#{@page.slug}.title"),
+                            **options %>
 
-    <% breadcrumb.item t("breadcrumbs.edit") %>
+    <% breadcrumb.with_item t("breadcrumbs.edit") %>
   <% end %>
 
   <%= render TendrilTasks::Heading.new(tag: :h1) do %>
@@ -29,12 +29,12 @@
     <% end %>
 
     <%= render Form::SubmitButtonGroupComponent.new(form) do |button_group| %>
-      <% button_group.delete_button(t("forms.delete"),
-                                    target_modal_id: "confirm-page-delete",
-                                    disabled: !@page.persisted?,
-                                    class: "disabled:opacity-60") %>
+      <% button_group.with_button_delete(t("forms.delete"),
+                                         target_modal_id: "confirm-page-delete",
+                                         disabled: !@page.persisted?,
+                                         class: "disabled:opacity-60") %>
 
-      <% button_group.button(t("forms.update")) %>
+      <% button_group.with_button_regular(t("forms.update")) %>
     <% end %>
   <% end %>
 <% end %>
@@ -43,10 +43,10 @@
   <%= render DeleteConfirm::ModalComponent.new(
     id: "confirm-page-delete",
     delete_path: legal_path(@page.slug)) do |modal| %>
-    <% modal.heading(t(".delete_confirm.modal.title", title: t("pages.#{@page.slug}.title"))) %>
+    <% modal.with_heading(t(".delete_confirm.modal.title", title: t("pages.#{@page.slug}.title"))) %>
 
     <% paragraphize(t(".delete_confirm.modal.content")).each do |text| %>
-      <% modal.paragraph(text) %>
+      <% modal.with_body_element_paragraph(text) %>
     <% end %>
   <% end %>
 <% end %>

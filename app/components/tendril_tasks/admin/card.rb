@@ -9,7 +9,7 @@ module TendrilTasks
 
       part :button, "w-full justify-center"
 
-      renders_one :heading_slot, ->(text = nil, **options, &block) do
+      renders_one :heading, ->(text = nil, **options, &block) do
         options = attributes_for(:heading, options)
         options[:tag] ||= :h2
         options[:size] ||= :md
@@ -18,7 +18,6 @@ module TendrilTasks
           capture(&block)
         end
       end
-      alias heading with_heading_slot
 
       renders_many :badges, ->(text = nil, icon: nil, **options, &block) do
         config = configure_html_attributes(
@@ -30,7 +29,6 @@ module TendrilTasks
         component.with_leading_visual_icon(icon, class: "me-0.5") if icon
         component
       end
-      alias badge with_badge
 
       renders_many :paragraphs, ->(**options, &block) do
         options = attributes_for(:paragraph, options)
@@ -40,7 +38,6 @@ module TendrilTasks
           capture(&block)
         end
       end
-      alias paragraph with_paragraph
 
       renders_many :buttons, ->(href:, **options, &block) do
         options = attributes_for(:button, options)
@@ -52,7 +49,6 @@ module TendrilTasks
           capture(&block)
         end
       end
-      alias button with_button
     end
   end
 end
