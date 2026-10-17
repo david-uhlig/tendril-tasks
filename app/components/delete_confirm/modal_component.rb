@@ -10,7 +10,7 @@ module DeleteConfirm
 
     renders_many :body_elements, types: {
       paragraph: ->(text) {
-        tag.p text, class: "text-base leading-relaxed text-gray-500 dark:text-gray-400"
+        Modal::ParagraphComponent.new(text)
       },
       element: ->(&block) {
         block.call

@@ -38,7 +38,7 @@ module Gustwave
   class TableCaption < Gustwave::Component
     base "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
 
-    part :description, "mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"
+    part :description, "mt-1 text-sm font-normal"
 
     renders_one_extensible :title_slot, ->(text = nil, &block) {
       text || block.call
@@ -46,9 +46,7 @@ module Gustwave
     alias title with_title_slot
 
     renders_one_extensible :description_slot, ->(text = nil, **options, &block) {
-      tag.p(**attributes_for(:description, options)) do
-        text || block.call
-      end
+      Gustwave::Paragraph.new(text || (capture(&block) if block), **attributes_for(:description, options))
     }
     alias description with_description_slot
 

@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 module TendrilTasks
+  # Renders Gustwave::Paragraph with the app's responsive sizes and hyphenation.
   class Paragraph < TendrilTasks::Component
-    base "text-gray-500 dark:text-gray-400"
-
     variant :size, default: :lg, values: {
       sm: "text-sm font-normal lg:text-base",
       md: "text-base font-normal lg:text-lg",
@@ -21,9 +20,7 @@ module TendrilTasks
     end
 
     def call
-      tag.p **@options do
-        text_or_content(text)
-      end
+      render(Gustwave::Paragraph.new(text, **@options)) { content }
     end
 
     private
