@@ -1,24 +1,19 @@
 # frozen_string_literal: true
 
+# The body text of a modal, rendered with Gustwave::Paragraph.
 class Modal::ParagraphComponent < TendrilTasks::Component
-  DEFAULT_CLASS = "text-base leading-relaxed text-gray-500 dark:text-gray-400"
+  base "text-base leading-relaxed"
 
   def initialize(text = nil, **options)
     @text = text
-    @options = build_options(options)
+    @options = attributes_for(options)
   end
 
   def call
-    tag.p **@options do
-      @text || content
-    end
+    render(Gustwave::Paragraph.new(text, **@options)) { content }
   end
 
   private
 
-  def build_options(options)
-    options.deep_symbolize_keys!
-    options[:class] = class_merge(DEFAULT_CLASS, options.delete(:class))
-    options
-  end
+  attr_reader :text
 end

@@ -36,7 +36,7 @@
 
       <%# Chosen coordinators %>
       <div class="md:min-h-36 space-y-4">
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= t ".selected_contacts" %></p>
+        <%= render Gustwave::Paragraph.new(t(".selected_contacts"), class: "text-sm font-normal") %>
         <%= render Form::CoordinatorPicker::SelectionComponent.new("coordinators", @assigned, is_checked: true) %>
       </div>
     </div>
