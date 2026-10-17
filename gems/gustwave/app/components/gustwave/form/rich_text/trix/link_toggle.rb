@@ -18,9 +18,9 @@ module Gustwave
               },
               class: "mx-8"
             )
-            @options.merge!(
-              @popover.trigger_options(trigger: :click,
-                                       placement: :"top-end"))
+            @options = @popover.trigger_options(trigger: :click,
+                                                placement: :"top-end",
+                                                **@options)
           end
         end
       end
