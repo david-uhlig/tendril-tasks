@@ -14,13 +14,13 @@ module Gustwave
   # readers:
   #
   #   render Gustwave::Alert.new("A simple info alert.") do |alert|
-  #     alert.icon(label: "Info")
+  #     alert.with_icon(label: "Info")
   #   end
   #
   # With a title and a list, top-aligning the icon:
   #
   #   render Gustwave::Alert.new(title: "Ensure that these requirements are met:", align: :start) do |alert|
-  #     alert.icon(label: "Info")
+  #     alert.with_icon(label: "Info")
   #     tag.ul("...", class: "mt-1.5 list-disc list-inside")
   #   end
   #
@@ -28,8 +28,8 @@ module Gustwave
   # targets, unless you pass one:
   #
   #   render Gustwave::Alert.new("A simple info alert.", color: :green) do |alert|
-  #     alert.icon(label: "Info")
-  #     alert.dismiss_button
+  #     alert.with_icon(label: "Info")
+  #     alert.with_dismiss_button
   #   end
   #
   # Use +border+ for a border all around and +accent+ for a thick border at
@@ -110,18 +110,17 @@ module Gustwave
     # @param label [String, nil] Text to display to screen readers, e.g. "Info".
     # @param theme [Symbol] The icon theme. Defaults to +:solid+.
     # @param options [Hash] Additional HTML options passed to the icon component.
-    renders_one_extensible :icon_slot, ->(name = :info_circle, label: nil, theme: :solid, **options) {
+    renders_one_extensible :icon, ->(name = :info_circle, label: nil, theme: :solid, **options) {
       icon = Gustwave::Icon.new(name, theme:, size: :sm, position: :standalone, **attributes_for(:icon, options))
       safe_join([ render(icon), sr_only(label) ].compact)
     }
-    alias icon with_icon_slot
 
     # Renders a dismiss button to dismiss the alert visually.
     #
     # @param text [String, nil] text to display to screen readers. If missing block content is rendered without +sr-only+ markup. If both are missing a localized version of "Dismiss" is used.
     # @param icon [Symbol] The icon to use for the dismiss button. Defaults to +:close+.
     # @param options [Hash] Additional HTML options passed to the button component.
-    renders_one_extensible :dismiss_button_slot, ->(text = nil, icon: :close, **options, &block) {
+    renders_one_extensible :dismiss_button, ->(text = nil, icon: :close, **options, &block) {
       # Make sure the alert has an id that can be used to dismiss it.
       @id ||= generate_random_id(prefix: "alert")
 
@@ -136,10 +135,9 @@ module Gustwave
       component = Gustwave::Button.new(a11y_text, **config)
       # Gustwave's icons draw within the middle half of their box, so this
       # matches Flowbite's w-3 h-3 close icon
-      component.leading_icon icon, stroke_width: 2, class: "w-6 h-6" if icon
+      component.with_leading_visual_icon icon, stroke_width: 2, class: "w-6 h-6" if icon
       component
     }
-    alias dismiss_button with_dismiss_button_slot
 
     # @param text [String, nil] Text to display within the alert. Takes precedence over block content.
     # @param title [String, nil] A title rendered in bold before the text.
@@ -159,18 +157,18 @@ module Gustwave
 
     def before_render
       # Must select here to know whether slots were set
-      select_options(flex: icon_slot? || dismiss_button_slot?, dismissible: dismiss_button_slot?)
+      select_options(flex: icon? || dismiss_button?, dismissible: dismiss_button?)
       @config = attributes_for(@options)
       @config[:id] = id
     end
 
     def call
       content_tag :div, config do
-        if icon_slot? || dismiss_button_slot?
+        if icon? || dismiss_button?
           slots_and_content(
-            icon_slot,
+            icon,
             tag.div(body, class: classes(:body)),
-            dismiss_button_slot,
+            dismiss_button,
             append_content: false
           )
         else

@@ -3,17 +3,17 @@
 module Gustwave
   # Use TableHead to render an HTML table thead element
   #
-  # To render a single row of +<th scope='col'>+ cells, use the +th+ slots
-  # (aliases: +column+, +col+). For more flexibility, pass in a block. The block
-  # gets appended after the row of +th+ cells (if any).
+  # To render a single row of +<th scope='col'>+ cells, use +with_column+.
+  # For more flexibility, pass in a block. The block gets appended after the
+  # row of +th+ cells (if any).
   #
   # === Basic Usage
   #
-  # Use the simplified text argument or supply a block to the +th+ slots.
+  # Use the simplified text argument or supply a block to the +with_column+ setter.
   #
   #   <%= render Gustwave::TableHead.new do |thead| %>
-  #     <%= thead.th "First Name" %>
-  #     <%= thead.th do %>Last Name<% end %>
+  #     <%= thead.with_column "First Name" %>
+  #     <%= thead.with_column do %>Last Name<% end %>
   #   <% end %>
   #
   # === Usage with Block
@@ -30,12 +30,12 @@ module Gustwave
   #
   # === Mixed Usage
   #
-  # When you mix the two approaches, the +th+ slots will be rendered first,
+  # When you mix the two approaches, the +with_column+ cells will be rendered first,
   # followed by the block content.
   #
   #   <%= render Gustwave::TableHead.new do |thead| %>
-  #     <%= thead.th "First Name" %>
-  #     <%= thead.th "Last Name" %>
+  #     <%= thead.with_column "First Name" %>
+  #     <%= thead.with_column "Last Name" %>
   #     <tr>
   #       <th>First Name</th>
   #       <th>Last Name</th>
@@ -45,9 +45,6 @@ module Gustwave
     base "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 
     renders_many_extensible :columns, "Column"
-    alias th with_column
-    alias column with_column
-    alias col with_column
 
     # @param options [Hash] additional options for the HTML tag, like class
     def initialize(**options)

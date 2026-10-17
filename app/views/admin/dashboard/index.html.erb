@@ -142,17 +142,17 @@
       <% card.heading t("admin.monitoring.storage.title") %>
 
       <% card.badge color: :green do %>
-        <% it.leading_icon :paper_clip, class: "me-0.5" %>
+        <% it.with_leading_visual_icon :paper_clip, class: "me-0.5" %>
         <%= t("admin.monitoring.storage.attachments", count: @stats.active_storage.fetch(:files)) %>
       <% end %>
 
       <% card.badge color: :yellow do %>
-        <% it.leading_icon :file_code, class: "me-0.5" %>
+        <% it.with_leading_visual_icon :file_code, class: "me-0.5" %>
         <%= t("admin.monitoring.storage.blobs", count: @stats.active_storage.fetch(:blobs)) %>
       <% end %>
 
       <% card.badge do %>
-        <% it.leading_icon :database, class: "me-0.5" %>
+        <% it.with_leading_visual_icon :database, class: "me-0.5" %>
         <%= number_to_human_size(@stats.active_storage.fetch(:size)) %>
       <% end %>
 

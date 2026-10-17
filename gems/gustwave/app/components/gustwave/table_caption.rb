@@ -13,8 +13,8 @@ module Gustwave
   # +description+ slots.
   #
   #   <%= render Gustwave::TableCaption.new do |caption| %>
-  #     <% caption.title "Table Title" %>
-  #     <% caption.description do %>
+  #     <% caption.with_title "Table Title" %>
+  #     <% caption.with_description do %>
   # 	    Description text
   #     <% end %>
   #   <% end %>
@@ -40,15 +40,13 @@ module Gustwave
 
     part :description, "mt-1 text-sm font-normal"
 
-    renders_one_extensible :title_slot, ->(text = nil, &block) {
+    renders_one_extensible :title, ->(text = nil, &block) {
       text || block.call
     }
-    alias title with_title_slot
 
-    renders_one_extensible :description_slot, ->(text = nil, **options, &block) {
+    renders_one_extensible :description, ->(text = nil, **options, &block) {
       Gustwave::Paragraph.new(text || (capture(&block) if block), **attributes_for(:description, options))
     }
-    alias description with_description_slot
 
     # @param options [Hash] additional options for the HTML tag, like class.
     def initialize(**options)
@@ -57,7 +55,7 @@ module Gustwave
 
     def call
       tag.caption **config do
-        slots_and_content(title_slot, description_slot)
+        slots_and_content(title, description)
       end
     end
 

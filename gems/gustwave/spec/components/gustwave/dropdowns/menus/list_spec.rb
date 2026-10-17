@@ -56,28 +56,28 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
     context "with list item" do
       it "renders generic item" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.generic_item { "generic_item_content" }
+          it.with_item_generic { "generic_item_content" }
         end
         expect(rendered_content).to have_selector("div>ul>li", text: "generic_item_content")
       end
 
       it "renders link button item" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.item { "item_content" }
+          it.with_item_link { "item_content" }
         end
         expect(rendered_content).to have_selector("div>ul>li>a", text: "item_content")
       end
 
       it "renders divider item" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.divider
+          it.with_item_divider
         end
         expect(rendered_content).to have_selector("div>ul>li>div")
       end
 
       it "renders dropdown item" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.dropdown { "dropdown_content" }
+          it.with_item_dropdown { "dropdown_content" }
         end
         expect(rendered_content).to have_selector("div>ul>li>a[role='button']", text: "dropdown_content")
       end

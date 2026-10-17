@@ -1,13 +1,13 @@
 <div class="flex flex-wrap items-center gap-2">
   <%= render Gustwave::Button.new("Add") do |button| %>
-    <% button.leading_icon :plus %>
+    <% button.with_leading_visual_icon :plus %>
   <% end %>
 
   <%= render Gustwave::Button.new("Next") do |button| %>
-    <% button.trailing_icon :arrow_right %>
+    <% button.with_trailing_visual_icon :arrow_right %>
   <% end %>
 
   <%= render Gustwave::Button.new(color: :red, aria: { label: "Delete" }) do |button| %>
-    <% button.leading_icon :trash_bin %>
+    <% button.with_leading_visual_icon :trash_bin %>
   <% end %>
 </div>

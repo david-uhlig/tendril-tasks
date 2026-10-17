@@ -3,7 +3,7 @@
 module Gustwave
   # Use Table to render an HTML table element
   #
-  # \Table +caption+, +thead+, and +tbody+ can be provided through slots or by passing
+  # \Table +caption+, +head+, and +body+ can be provided through slots or by passing
   # in block content.
   # * The +caption+ slot renders a +<caption>+ HTML element
   # * The +head+ slot renders a +<thead>+ HTML element
@@ -15,16 +15,11 @@ module Gustwave
   class Table < Gustwave::Component
     base "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
 
-    renders_one_extensible :caption_slot, Gustwave::TableCaption
-    alias caption with_caption_slot
+    renders_one_extensible :caption, Gustwave::TableCaption
 
-    renders_one_extensible :head_slot, Gustwave::TableHead
-    alias head with_head_slot
-    alias thead with_head_slot
+    renders_one_extensible :head, Gustwave::TableHead
 
-    renders_one_extensible :body_slot, Gustwave::TableBody
-    alias body with_body_slot
-    alias tbody with_body_slot
+    renders_one_extensible :body, Gustwave::TableBody
 
     # @param options [Hash] additional options for the HTML tag.
     def initialize(**options)
@@ -33,7 +28,7 @@ module Gustwave
 
     def call
       tag.table **config do
-        slots_and_content(caption_slot, head_slot, body_slot)
+        slots_and_content(caption, head, body)
       end
     end
 

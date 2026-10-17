@@ -39,7 +39,7 @@
                 size: :xl,
                 class: "w-full justify-center",
                 data: { turbo: false }) do |login_button| %>
-                <% login_button.leading_svg("rocketchat/icon-white.svg") %>
+                <% login_button.with_leading_visual_svg("rocketchat/icon-white.svg") %>
                 <%= t(".login_with_rocket_chat_button", brand: RocketChatConfig.branding) %>
               <% end %>
 

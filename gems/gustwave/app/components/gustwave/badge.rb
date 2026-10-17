@@ -132,7 +132,7 @@ module Gustwave
     # @param text [String, nil] text to display to screen readers. If missing block content is rendered without +sr-only+ markup. If both are missing a localized version of "Dismiss" is used.
     # @param icon [Symbol] The icon to use for the dismiss button. Defaults to `:close`.
     # @param options [Hash] Additional HTML options passed to the button component.
-    renders_one_extensible :dismiss_button_slot, ->(text = nil, icon: :close, **options, &block) {
+    renders_one_extensible :dismiss_button, ->(text = nil, icon: :close, **options, &block) {
       # Make sure the badge has an id that can be used to dismiss it.
       @id ||= generate_random_id(prefix: "badge")
 
@@ -146,10 +146,9 @@ module Gustwave
       }.merge(attributes_for(:dismiss_button, options))
 
       component = Gustwave::Button.new(a11y_text, **config)
-      component.leading_icon icon, stroke_width: 2 if icon
+      component.with_leading_visual_icon icon, stroke_width: 2 if icon
       component
     }
-    alias dismiss_button with_dismiss_button_slot
 
     # @param text [String, NilClass] Text to display within the badge. Takes precedence over block content.
     # @param tag [Symbol] The HTML tag to use for the badge. Defaults to :span. Valid values are :div, :span, :button, and :a. Be aware, that :a and :button tags are not supported when using a dismiss button.
@@ -193,7 +192,7 @@ module Gustwave
           leading_visuals,
           text_or_content(text),
           trailing_visuals,
-          dismiss_button_slot,
+          dismiss_button,
           append_content: false
         )
       end

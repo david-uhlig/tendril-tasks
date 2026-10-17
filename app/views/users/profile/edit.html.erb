@@ -112,7 +112,7 @@
 
   <%# Data sync info ("info alert" element) %>
   <%= render Gustwave::Alert.new(border: true) do |alert| %>
-    <% alert.icon(label: t(".info")) %>
+    <% alert.with_icon(label: t(".info")) %>
     <%= t(".data_sync_info", brand: RocketChatConfig.branding) %>
   <% end %>
 

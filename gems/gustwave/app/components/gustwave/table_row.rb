@@ -4,17 +4,17 @@ module Gustwave
   # Use TableRow to render an HTML table row
   #
   # \Table cells can be provided through slots or by passing in block content.
-  # The +td+ slot (alias +cell+) renders a +<td>+ HTML element. The +th+ slot
-  # (alias: +head+) renders a +<th scope="row">+ element. Block content gets
+  # The +with_cell_td+ setter renders a +<td>+ HTML element. The +with_cell_th+ setter
+  # renders a +<th scope="row">+ element. Block content gets
   # appended at the end of any provided cells.
   #
   # === Basic Usage
   #
-  # Use the +th+ and +td+ slots to pass in table cells.
+  # Use +with_cell_td+ and +with_cell_th+ to pass in table cells.
   #
   #   <%= render Gustwave::TableRow.new do |tr| %>
-  #     <% tr.th do %>John Doe<% end %>
-  #     <% tr.td do %>Software Engineer<% end %>
+  #     <% tr.with_cell_th do %>John Doe<% end %>
+  #     <% tr.with_cell_td do %>Software Engineer<% end %>
   #   <% end %>
   #
   # === Usage with Block
@@ -39,10 +39,6 @@ module Gustwave
         Gustwave::TableCell.new(text, **config)
       }
     }
-    alias cell with_cell_td
-    alias td with_cell_td
-    alias head with_cell_th
-    alias th with_cell_th
 
     # @param options [Hash] additional options for the HTML tag.
     def initialize(**options)

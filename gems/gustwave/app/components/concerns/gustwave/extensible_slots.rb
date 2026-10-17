@@ -75,24 +75,24 @@ module Gustwave
   # is named after the slot alone:
   #
   #   class Gustwave::Indicator < Gustwave::Component
-  #     renders_one_extensible :legend_slot, ->(text = nil, **options) { ... }
+  #     renders_one_extensible :legend, ->(text = nil, **options) { ... }
   #   end
   #
-  #   indicator.with_legend_slot("New")
+  #   indicator.with_legend("New")
   #
-  # Override the private +build_slot_legend_slot+ in a subclass to wrap it, or
+  # Override the private +build_slot_legend+ in a subclass to wrap it, or
   # pass +extend_slot+ a new lambda to replace it:
   #
   #   class BoldIndicator < Gustwave::Indicator
   #     private
   #
-  #     def build_slot_legend_slot(text = nil, **options, &block)
+  #     def build_slot_legend(text = nil, **options, &block)
   #       super(text, class: "font-bold", **options, &block)
   #     end
   #   end
   #
   #   class BadgeIndicator < Gustwave::Indicator
-  #     extend_slot :legend_slot, ->(text) { Gustwave::Badge.new(text) }
+  #     extend_slot :legend, ->(text) { Gustwave::Badge.new(text) }
   #   end
   #
   # Unlike polymorphic slots, setting a single-type +renders_one+ slot twice
@@ -238,6 +238,11 @@ module Gustwave
         types.each do |type, renderable|
           setter_name = nil
           renderable, setter_name = renderable.values_at(:renders, :as) if renderable.is_a?(Hash)
+          if setter_name&.to_sym == singular.to_sym
+            raise ArgumentError,
+                  "#{name} slot #{slot_name.inspect} type #{type.inspect} can't use as: #{setter_name.inspect}, which is the slot's own setter"
+          end
+
           setter_name = :"with_#{setter_name || "#{singular}_#{type}"}"
 
           __gustwave_define_builder(slot_builder_name(slot_name, type), renderable)

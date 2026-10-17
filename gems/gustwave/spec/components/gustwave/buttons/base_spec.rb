@@ -77,28 +77,28 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
   context "with leading visual" do
     it "renders leading visual classes" do
       render_inline(described_class.new) do |component|
-        component.leading_icon :dismiss
+        component.with_leading_visual_icon :dismiss
       end
       expect(rendered_content).to have_selector("button.inline-flex.items-center.align-bottom")
     end
 
     it "renders leading visual icon" do
       render_inline(described_class.new) do |component|
-        component.leading_icon :dismiss
+        component.with_leading_visual_icon :dismiss
       end
       expect(rendered_content).to have_selector("button>svg")
     end
 
     it "renders leading visual image" do
       render_inline(described_class.new) do |component|
-        component.leading_image "https://example.com/image.png"
+        component.with_leading_visual_image "https://example.com/image.png"
       end
       expect(rendered_content).to have_selector("button>img[src='https://example.com/image.png']")
     end
 
     it "renders leading visual svg" do
       render_inline(described_class.new) do |component|
-        component.leading_svg "https://example.com/svg.svg"
+        component.with_leading_visual_svg "https://example.com/svg.svg"
       end
       expect(rendered_content).to have_selector("button>svg")
     end
@@ -107,28 +107,28 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
   context "with trailing visual" do
     it "renders trailing visual classes" do
       render_inline(described_class.new) do |component|
-        component.trailing_icon :dismiss
+        component.with_trailing_visual_icon :dismiss
       end
       expect(rendered_content).to have_selector("button.inline-flex.items-center.align-bottom")
     end
 
     it "renders trailing visual icon" do
       render_inline(described_class.new) do |component|
-        component.trailing_icon :dismiss
+        component.with_trailing_visual_icon :dismiss
       end
       expect(rendered_content).to have_selector("button>svg")
     end
 
     it "renders trailing visual image" do
       render_inline(described_class.new) do |component|
-        component.trailing_image "https://example.com/image.png"
+        component.with_trailing_visual_image "https://example.com/image.png"
       end
       expect(rendered_content).to have_selector("button>img[src='https://example.com/image.png']")
     end
 
     it "renders trailing visual svg" do
       render_inline(described_class.new) do |component|
-        component.trailing_svg "https://example.com/svg.svg"
+        component.with_trailing_visual_svg "https://example.com/svg.svg"
       end
       expect(rendered_content).to have_selector("button>svg")
     end
@@ -138,21 +138,21 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     context "with a custom class on a #{position} visual" do
       it "merges it with the visual size classes on images" do
         render_inline(described_class.new) do |component|
-          component.public_send(:"#{position}_image", "https://example.com/image.png", class: "custom")
+          component.public_send(:"with_#{position}_visual_image", "https://example.com/image.png", class: "custom")
         end
         expect(rendered_content).to have_selector("button>img.h-5.w-auto.custom[aria-hidden='true']")
       end
 
       it "merges it with the visual size classes on svgs" do
         render_inline(described_class.new) do |component|
-          component.public_send(:"#{position}_svg", "gustwave/icons/outline/arrow-left.svg", class: "custom")
+          component.public_send(:"with_#{position}_visual_svg", "gustwave/icons/outline/arrow-left.svg", class: "custom")
         end
         expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom")
       end
 
       it "merges it with the visual size classes on block svgs" do
         render_inline(described_class.new) do |component|
-          component.public_send(:"#{position}_svg", class: "custom") do
+          component.public_send(:"with_#{position}_visual_svg", class: "custom") do
             '<svg xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1"/></svg>'.html_safe
           end
         end
@@ -169,7 +169,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
       [ Gustwave::Badge, :"2xl" ] => "h-\\[1em\\]"
     }.each do |(component, size), height|
       it "sizes it for a #{size} #{component.name.demodulize}" do
-        render_inline(component.new("Text", size:)) { |button| button.trailing_indicator "3" }
+        render_inline(component.new("Text", size:)) { |button| button.with_trailing_visual_indicator "3" }
 
         expect(rendered_content).to have_selector("span.#{height}[aria-hidden='true']", text: "3")
       end
@@ -179,7 +179,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
   context "with leading visual without content" do
     it "overwrites padding" do
       render_inline(described_class.new) do |component|
-        component.leading_icon :dismiss
+        component.with_leading_visual_icon :dismiss
       end
       expect(rendered_content).to have_selector('button.p-2\.5')
     end
@@ -204,7 +204,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     %i[leading trailing].each do |position|
       it "applies the button's visual context to a #{position} component" do
         render_inline(described_class.new("Me", size: :lg)) do |component|
-          component.public_send(:"#{position}_renderable", consumer_avatar.new("https://example.com/me.png"))
+          component.public_send(:"with_#{position}_visual_renderable", consumer_avatar.new("https://example.com/me.png"))
         end
 
         expect(rendered_content).to have_selector(
@@ -216,7 +216,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
 
     it "works on every theme through Gustwave::Button" do
       render_inline(Gustwave::Button.new("Me", theme: :gradient_duotone, size: :sm)) do |button|
-        button.leading_renderable(consumer_avatar.new("https://example.com/me.png"))
+        button.with_leading_visual_renderable(consumer_avatar.new("https://example.com/me.png"))
       end
 
       expect(rendered_content).to have_selector("button>img.h-5.w-auto[data-size='sm']")
@@ -224,7 +224,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
 
     it "renders components without the protocol unchanged" do
       render_inline(described_class.new("Me")) do |component|
-        component.leading_renderable(Gustwave::Avatar.new(src: "https://example.com/me.png", size: :xs))
+        component.with_leading_visual_renderable(Gustwave::Avatar.new(src: "https://example.com/me.png", size: :xs))
       end
 
       expect(rendered_content).to have_selector("button img[src='https://example.com/me.png']")

@@ -32,12 +32,11 @@ module Gustwave
         # @param text [String, nil] the text to appear in the header. Takes precedent over block content.
         # @param tag [Symbol] HTML tag to use for the header. Default: +header+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
-        renders_one_extensible :header_slot, ->(text = nil, tag: :header, **options, &block) do
+        renders_one_extensible :header, ->(text = nil, tag: :header, **options, &block) do
           content_tag tag, **attributes_for(:header, options) do
             text || capture(&block)
           end
         end
-        alias header with_header_slot
 
         # Use the +footer+ slot to customize the footer of the dropdown menu
         #
@@ -46,12 +45,11 @@ module Gustwave
         # @param text [String, nil] the text to appear in the footer. Takes precedent over block content.
         # @param tag [Symbol] HTML tag to use for the footer. Default: +footer+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
-        renders_one_extensible :footer_slot, ->(text = nil, tag: :footer, **options, &block) do
+        renders_one_extensible :footer, ->(text = nil, tag: :footer, **options, &block) do
           content_tag tag, **attributes_for(:footer, options) do
             text || capture(&block)
           end
         end
-        alias footer with_footer_slot
 
         # @param text [String, nil] the text to appear in the dropdown menu. Takes precedent over block content.
         # @param id [String] the id attribute for the dropdown menu. Must match the id attribute called by the triggering element.
@@ -69,7 +67,7 @@ module Gustwave
         def call
           content_for_wrapper do
             content_tag menu_tag, **config do
-              safe_join([ header_slot, text_or_content(text), footer_slot ])
+              safe_join([ header, text_or_content(text), footer ])
             end
           end
         end

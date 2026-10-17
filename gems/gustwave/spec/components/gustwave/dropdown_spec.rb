@@ -74,8 +74,8 @@ RSpec.describe Gustwave::Dropdown, type: :component do
 
     def render_menu(component)
       render_inline(component) do |dropdown|
-        dropdown.menu do |menu|
-          menu.item "Profile", href: "/profile"
+        dropdown.with_menu_list do |menu|
+          menu.with_item_link "Profile", href: "/profile"
           menu.with_item_badge("New") if menu.respond_to?(:with_item_badge)
         end
       end

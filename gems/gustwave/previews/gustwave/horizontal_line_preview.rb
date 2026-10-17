@@ -11,7 +11,7 @@ module Gustwave
 
     def with_styled_text
       render Gustwave::HorizontalLine.new do |line|
-        line.text "Section", class: "font-semibold text-gray-900 dark:text-white"
+        line.with_visual_text "Section", class: "font-semibold text-gray-900 dark:text-white"
       end
     end
   end

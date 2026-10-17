@@ -131,7 +131,7 @@ RSpec.describe Gustwave::Badge, type: :component do
 
   context "with a dismiss button" do
     it "renders an inline button that dismisses the badge" do
-      render_inline(described_class.new("New", id: "badge-new"), &:dismiss_button)
+      render_inline(described_class.new("New", id: "badge-new"), &:with_dismiss_button)
 
       expect(page).to have_selector("span#badge-new > button[type='button'][aria-label='remove'][data-dismiss-target='#badge-new']")
       expect(page).to have_selector("button.bg-transparent.text-blue-400.p-1 > svg.h-3[aria-hidden='true']")
@@ -139,13 +139,13 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
 
     it "matches the badge's color and size" do
-      render_inline(described_class.new("New", color: :pink, size: :"2xl"), &:dismiss_button)
+      render_inline(described_class.new("New", color: :pink, size: :"2xl"), &:with_dismiss_button)
 
       expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2 > svg.h-4")
     end
 
     it "uses a custom label" do
-      render_inline(described_class.new("New")) { |badge| badge.dismiss_button("Remove filter") }
+      render_inline(described_class.new("New")) { |badge| badge.with_dismiss_button("Remove filter") }
 
       expect(page).to have_selector("button > span.sr-only", text: "Remove filter")
     end

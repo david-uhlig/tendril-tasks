@@ -38,7 +38,7 @@ RSpec.describe Gustwave::Dropdowns::MenuItems::Dropdown, type: :component do
   context "with text and a block filling the submenu" do
     before do
       render_inline(described_class.new("Label")) do |dropdown|
-        dropdown.menu { |menu| menu.item("Sub item", href: "/sub") }
+        dropdown.with_menu_list { |menu| menu.with_item_link("Sub item", href: "/sub") }
       end
     end
 

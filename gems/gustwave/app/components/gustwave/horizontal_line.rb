@@ -35,14 +35,14 @@ module Gustwave
   # enclosing span element:
   #
   #   <%= render Gustwave::HorizontalLine.new do |component| %>
-  #     <% component.text "Hello!", class: "text-lg font-bold" %>
+  #     <% component.with_visual_text "Hello!", class: "text-lg font-bold" %>
   #   <% end %>
   #
   # In the same way, you can render an SVG element in the middle of the line
   # enclosed by a div element:
   #
   #  <%= render Gustwave::HorizontalLine.new do |component| %>
-  #   <% component.svg(class: "w-6 h-6") do %>
+  #   <% component.with_visual_svg(class: "w-6 h-6") do %>
   #     <svg width="300" height="170" xmlns="http://www.w3.org/2000/svg">
   #       <rect width="150" height="150" x="10" y="10" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
   #     </svg>
@@ -82,8 +82,6 @@ module Gustwave
         tag.div(block.call, **options)
       }
     }
-    alias text with_visual_text
-    alias svg with_visual_svg
 
     # Initializes a new HorizontalLine component.
     #

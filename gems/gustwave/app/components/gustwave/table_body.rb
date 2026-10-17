@@ -4,15 +4,15 @@ module Gustwave
   # Use TableBody to render an HTML tbody element
   #
   # \Table rows can be provided through slots or by passing in block content.
-  # The +tr+ slots (alias +row+) render a +<tr>+ HTML element. Block content
+  # The +with_row+ setter renders a +<tr>+ HTML element. Block content
   # gets appended at the end of any provided rows.
   #
   # === Basic Usage
   #
-  # Use the +tr+ slot to pass in table rows.
+  # Use +with_row+ to pass in table rows.
   #
   #   <%= render Gustwave::TableBody.new do |tbody| %>
-  #     <% tbody.tr do %>
+  #     <% tbody.with_row do %>
   #       <td>First Name</td>
   #       <td>Last Name</td>
   #     <% end %>
@@ -30,8 +30,6 @@ module Gustwave
   #   <% end %>
   class TableBody < Gustwave::Component
     renders_many_extensible :rows, Gustwave::TableRow
-    alias row with_row
-    alias tr with_row
 
     # @param options [Hash] additional options for the HTML tag, like class
     def initialize(**options)

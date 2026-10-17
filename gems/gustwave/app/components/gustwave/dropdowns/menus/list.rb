@@ -8,7 +8,7 @@ module Gustwave
       # Slot structure (all optional)
       # - +header+ (any HTML markup)
       # - \List items:
-      #   - +item+ (LinkButton), alias: +link+
+      #   - +link+ (LinkButton), set with +with_item_link+
       #   - +generic+ (any HTML markup)
       #   - +divider+ (Divider)
       #   - +dropdown+ (Dropdown)
@@ -25,15 +25,10 @@ module Gustwave
 
         renders_many_extensible :items, types: {
           generic: ->(&block) { capture(&block) },
-          item: Gustwave::Dropdowns::MenuItems::LinkButton,
+          link: Gustwave::Dropdowns::MenuItems::LinkButton,
           divider: Gustwave::Dropdowns::MenuItems::Divider,
           dropdown: Gustwave::Dropdowns::MenuItems::Dropdown
         }
-        alias item with_item_item
-        alias link with_item_item
-        alias generic_item with_item_generic
-        alias divider with_item_divider
-        alias dropdown with_item_dropdown
 
         # @param id [String] the id attribute for the dropdown menu. Must match the id attribute called by the triggering element.
         # @param content_for [Symbol, nil] the name of the content area to render the menu. If +nil+, the menu is rendered right after the triggering element.
@@ -47,7 +42,7 @@ module Gustwave
         def call
           content_for_wrapper do
             content_tag menu_tag, **config do
-              safe_join([ header_slot, list_with_items, footer_slot ])
+              safe_join([ header, list_with_items, footer ])
             end
           end
         end
