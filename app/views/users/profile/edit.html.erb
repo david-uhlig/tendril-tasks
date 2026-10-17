@@ -3,8 +3,8 @@
 
 <%= render TendrilTasks::Content.new(width: :large) do %>
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
-    <% breadcrumb.home %>
-    <% breadcrumb.item(t "breadcrumbs.profile") %>
+    <% breadcrumb.with_home %>
+    <% breadcrumb.with_item(t "breadcrumbs.profile") %>
   <% end %>
 
   <%= render TendrilTasks::Heading.new(t(".title"), tag: :h1) %>
@@ -129,7 +129,7 @@
     <%= f.hidden_field :expire_all_remember_me_tokens, value: true %>
 
     <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
-      <% button_group.button(t(".sign_out_all_sessions")) %>
+      <% button_group.with_button_regular(t(".sign_out_all_sessions")) %>
     <% end %>
   <% end %>
 
@@ -148,15 +148,15 @@
 
 <%= content_for :modal do %>
   <%= render DeleteConfirm::ModalComponent.new(id: "confirm-account-deletion", delete_path: profile_path) do |modal| %>
-    <% modal.heading(t ".delete_confirm.modal.title") %>
+    <% modal.with_heading(t ".delete_confirm.modal.title") %>
 
     <% content = t(".delete_confirm.modal.content",
                    brand: RocketChatConfig.branding) %>
 
     <% paragraphize(content).each do |text| %>
-      <% modal.paragraph(text) %>
+      <% modal.with_body_element_paragraph(text) %>
     <% end %>
 
-    <% modal.confirm_button(t(".delete_confirm.modal.confirm_button")) %>
+    <% modal.with_confirm_button(t(".delete_confirm.modal.confirm_button")) %>
   <% end %>
 <% end %>

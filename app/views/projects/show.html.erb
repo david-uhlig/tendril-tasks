@@ -3,9 +3,9 @@
 <%= render TendrilTasks::Content.new(width: :large) do %>
   <%# Breadcrumb navigation %>
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
-    <% breadcrumb.home %>
-    <% breadcrumb.item(Project.model_name.human(count: 2), href: projects_path) %>
-    <% breadcrumb.item(@project.title) %>
+    <% breadcrumb.with_home %>
+    <% breadcrumb.with_item(Project.model_name.human(count: 2), href: projects_path) %>
+    <% breadcrumb.with_item(@project.title) %>
   <% end %>
 
   <%#

@@ -12,11 +12,9 @@ module Form
     #
     # @param text [String] the helper text to display
     # @param options [Hash] additional options to pass to the helper text paragraph
-    renders_one :helper_text_slot, ->(text, **options) do
+    renders_one :helper_text, ->(text, **options) do
       Gustwave::Paragraph.new(text, **attributes_for(:helper_text, options))
     end
-    # Alias for helper_text_slot
-    alias helper_text with_helper_text_slot
 
     def initialize(form, attribute, label = nil, **options)
       @form = form
@@ -29,7 +27,7 @@ module Form
     def call
       render BaseFieldComponent.new(@form, @attribute, @label) do
         concat @form.file_field @attribute, **@options
-        concat helper_text_slot if helper_text_slot?
+        concat helper_text if helper_text?
       end
     end
   end

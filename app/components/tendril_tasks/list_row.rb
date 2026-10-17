@@ -8,10 +8,10 @@ module TendrilTasks
   # actions.
   #
   #   <%= render TendrilTasks::ListRow.new(id: "user-#{user.id}") do |row| %>
-  #     <% row.leading do %>
+  #     <% row.with_leading do %>
   #       <%= render TendrilTasks::Avatar.new(user) %>
   #     <% end %>
-  #     <% row.title user.name %>
+  #     <% row.with_title user.name %>
   #
   #     <%= render Gustwave::Button.new(t(".edit")) %>
   #   <% end %>
@@ -25,17 +25,15 @@ module TendrilTasks
          "flex-1 ms-3 font-medium dark:text-white whitespace-nowrap truncate"
 
     # Use the +leading+ slot for a visual in front of the title, e.g. an avatar.
-    renders_one :leading_slot
-    alias leading with_leading_slot
+    renders_one :leading
 
     # Use the +title+ slot for the row's text, passed as an argument or a block.
     #
     # @param text [String] the title, unless given as a block.
     # @param options [Hash] HTML attributes passed to the +span+ element.
-    renders_one :title_slot, ->(text = nil, **options, &block) do
+    renders_one :title, ->(text = nil, **options, &block) do
       tag.span(block ? capture(&block) : text, **attributes_for(:title, options))
     end
-    alias title with_title_slot
 
     def initialize(**options)
       @options = options

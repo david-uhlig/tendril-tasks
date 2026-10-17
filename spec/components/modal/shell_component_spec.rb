@@ -15,7 +15,7 @@ RSpec.describe Modal::ShellComponent, type: :component do
 
   it "renders the heading and the content below the header" do
     render_inline(described_class.new("dialog")) do |shell|
-      shell.heading "Title"
+      shell.with_heading "Title"
       "<p>Body</p>".html_safe
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Modal::ShellComponent, type: :component do
 
   it "merges custom classes into the heading" do
     render_inline(described_class.new("dialog")) do |shell|
-      shell.heading "Title", class: "text-lg"
+      shell.with_heading "Title", class: "text-lg"
     end
 
     expect(rendered_content).to have_selector("h3.text-lg.font-semibold:not(.text-xl)", text: "Title", visible: :all)

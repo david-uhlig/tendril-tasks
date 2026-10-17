@@ -20,6 +20,6 @@
                                          maxlength: TaskApplication::COMMENT_MAX_LENGTH) %>
 
   <%= render Form::SubmitButtonGroupComponent.new(f) do |button_group| %>
-    <% button_group.button(t(".submit"), value: "save") %>
+    <% button_group.with_button_regular(t(".submit"), value: "save") %>
   <% end %>
 <% end %>

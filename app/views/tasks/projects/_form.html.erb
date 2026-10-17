@@ -14,8 +14,8 @@
     <% end %>
 
     <%= render Form::ToggleComponent.new(f, :publish, t(".visibility")) do |toggle| %>
-      <% toggle.checked_state_text(t(".private")) %>
-      <% toggle.unchecked_state_text(t(".public")) %>
+      <% toggle.with_checked_state_text(t(".private")) %>
+      <% toggle.with_unchecked_state_text(t(".public")) %>
     <% end %>
   </div>
 

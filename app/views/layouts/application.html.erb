@@ -48,14 +48,14 @@
 
     <%# Navigation %>
     <%= render NavigationComponent.new do |navigation| %>
-      <% navigation.link(name: t("navigation.home"),
-                         href: root_path) %>
+      <% navigation.with_link(name: t("navigation.home"),
+                              href: root_path) %>
 
-      <% navigation.link(name: Project.model_name.human(count: 2),
-                         href: projects_path) %>
+      <% navigation.with_link(name: Project.model_name.human(count: 2),
+                              href: projects_path) %>
 
-      <% navigation.link(name: Task.model_name.human(count: 2),
-                         href: tasks_path) %>
+      <% navigation.with_link(name: Task.model_name.human(count: 2),
+                              href: tasks_path) %>
     <% end %>
 
     <%# Full width introduction, such as on the home page %>

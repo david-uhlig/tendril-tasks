@@ -3,10 +3,10 @@
 <%= render TendrilTasks::Content.new(width: :large, class: "space-y-6") do %>
   <%# Breadcrumb navigation %>
   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
-    <% breadcrumb.home %>
-    <% breadcrumb.item(Task.model_name.human(count: 2), href: tasks_path) %>
-    <% breadcrumb.item(@task.project.title, href: project_path(@task.project)) %>
-    <% breadcrumb.item(@task.title) %>
+    <% breadcrumb.with_home %>
+    <% breadcrumb.with_item(Task.model_name.human(count: 2), href: tasks_path) %>
+    <% breadcrumb.with_item(@task.project.title, href: project_path(@task.project)) %>
+    <% breadcrumb.with_item(@task.title) %>
   <% end %>
 
   <%#

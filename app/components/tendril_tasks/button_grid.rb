@@ -28,7 +28,6 @@ module TendrilTasks
       options = parse_button_options(options)
       Gustwave::Button.new(**options)
     }
-    alias button with_button
 
     # Initializes the ButtonGrid.
     #

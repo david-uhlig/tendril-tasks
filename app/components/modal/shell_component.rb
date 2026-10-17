@@ -8,7 +8,7 @@ module Modal
   # e.g. the modal's body and footer.
   #
   #   <%= render Modal::ShellComponent.new("confirm-dialog") do |shell| %>
-  #     <% shell.heading t(".title") %>
+  #     <% shell.with_heading t(".title") %>
   #
   #     <div class="p-4 md:p-5">…</div>
   #   <% end %>
@@ -33,12 +33,11 @@ module Modal
     #
     # @param text [String] the title, unless given as a block.
     # @param options [Hash] HTML attributes passed to the +h3+ element.
-    renders_one :heading_slot, ->(text = nil, **options, &block) do
+    renders_one :heading, ->(text = nil, **options, &block) do
       options.symbolize_keys!
       options[:class] = class_merge(HEADING_CLASS, options.delete(:class))
       tag.h3(block ? capture(&block) : text, **options)
     end
-    alias heading with_heading_slot
 
     def initialize(id, **options)
       @id = id

@@ -9,8 +9,8 @@ RSpec.describe TendrilTasks::ListRow, type: :component do
 
   it "renders the leading visual, the title and the actions in order" do
     render_inline(described_class.new) do |row|
-      row.leading { "<img alt='Avatar'>".html_safe }
-      row.title "Jane Doe"
+      row.with_leading { "<img alt='Avatar'>".html_safe }
+      row.with_title "Jane Doe"
       "<button>Edit</button>".html_safe
     end
 
@@ -20,7 +20,7 @@ RSpec.describe TendrilTasks::ListRow, type: :component do
 
   it "renders the title from a block" do
     render_inline(described_class.new) do |row|
-      row.title { "<a href='/page'>Page</a>".html_safe }
+      row.with_title { "<a href='/page'>Page</a>".html_safe }
     end
 
     expect(rendered_content).to have_selector("span.flex-1 > a[href='/page']", text: "Page")
@@ -28,7 +28,7 @@ RSpec.describe TendrilTasks::ListRow, type: :component do
 
   it "merges custom classes into the title" do
     render_inline(described_class.new) do |row|
-      row.title "Jane Doe", class: "text-red-600"
+      row.with_title "Jane Doe", class: "text-red-600"
     end
 
     expect(rendered_content).to have_selector("span.flex-1.text-red-600", text: "Jane Doe")
