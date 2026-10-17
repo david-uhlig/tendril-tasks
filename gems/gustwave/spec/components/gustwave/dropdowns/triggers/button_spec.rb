@@ -32,6 +32,21 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
     expect(top_start).to eq(top)
   end
 
+  context "with data attributes" do
+    it "keeps the menu id next to the caller's data" do
+      render_inline(described_class.new(menu_id: "menu", data: { controller: "x" })) { "content" }
+
+      expect(page).to have_selector("button[data-controller='x'][data-dropdown-toggle='menu']")
+    end
+
+    it "does not let the caller's data override the menu id" do
+      render_inline(described_class.new(menu_id: "menu", data: { "dropdown-toggle": "other" })) { "content" }
+
+      expect(page).to have_selector("button[data-dropdown-toggle='menu']")
+      expect(page).not_to have_selector("button[data-dropdown-toggle='other']")
+    end
+  end
+
   context "with icon" do
     it "renders icon" do
       render_inline(described_class.new(menu_id: "dropdown-menu", icon: :check))
