@@ -19,7 +19,7 @@ module Gustwave
 
     def with_legend
       render Gustwave::Indicator.new(color: :green) do |indicator|
-        indicator.legend "Online"
+        indicator.with_legend "Online"
       end
     end
 

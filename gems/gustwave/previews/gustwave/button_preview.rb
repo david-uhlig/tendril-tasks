@@ -27,7 +27,7 @@ module Gustwave
 
     def with_indicator
       render Gustwave::Button.new("Messages") do |button|
-        button.trailing_indicator "3"
+        button.with_trailing_visual_indicator "3"
       end
     end
 

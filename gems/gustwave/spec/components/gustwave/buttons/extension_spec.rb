@@ -54,7 +54,7 @@ RSpec.describe "Extending Gustwave::Buttons::Base", type: :component do
   it "keeps the built-in types" do
     render_inline(Gustwave::Buttons::Default.new("Go")) do |button|
       button.with_leading_visual_badge("new")
-      button.leading_icon :dismiss
+      button.with_leading_visual_icon :dismiss
     end
 
     expect(rendered_content).to have_selector("mark.badge + svg")

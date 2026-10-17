@@ -37,25 +37,25 @@ module Gustwave
 
     def with_icon_and_text
       render Gustwave::Badge.new("2 minutes ago", border: true) do |badge|
-        badge.leading_icon :clock
+        badge.with_leading_visual_icon :clock
       end
     end
 
     def with_icon
       render Gustwave::Badge.new(color: :red, pill: true, aria: { label: "Verified" }) do |badge|
-        badge.leading_icon :badge_check
+        badge.with_leading_visual_icon :badge_check
       end
     end
 
     def with_indicator
       render Gustwave::Badge.new("Messages", color: :dark) do |badge|
-        badge.trailing_indicator "4"
+        badge.with_trailing_visual_indicator "4"
       end
     end
 
     def dismissible
       render Gustwave::Badge.new("Default", color: :indigo, id: "badge-dismiss-default") do |badge|
-        badge.dismiss_button
+        badge.with_dismiss_button
       end
     end
   end

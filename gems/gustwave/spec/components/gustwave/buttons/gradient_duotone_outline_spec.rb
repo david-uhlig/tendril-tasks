@@ -9,8 +9,8 @@ RSpec.describe Gustwave::Buttons::GradientDuotoneOutline, type: :component do
 
   it "renders leading and trailing visuals around the text" do
     render_inline(described_class.new("Save")) do |component|
-      component.leading_icon :dismiss
-      component.trailing_indicator "3"
+      component.with_leading_visual_icon :dismiss
+      component.with_trailing_visual_indicator "3"
     end
 
     inner = page.find("button > span")

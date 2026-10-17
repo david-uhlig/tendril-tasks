@@ -70,14 +70,14 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
   context "delegates missing to Gustwave::Button" do
     it "delegates leading_icon to Gustwave::Button" do
       render_inline(described_class.new(menu_id: "dropdown-menu")) do
-        it.leading_icon(:check)
+        it.with_leading_visual_icon(:check)
       end
       expect(rendered_content).to have_selector('button>svg>path[d="M5 11.917 9.724 16.5 19 7.5"]')
     end
 
     it "delegates leading_indicator to Gustwave::Button" do
       render_inline(described_class.new(menu_id: "dropdown-menu")) do
-        it.leading_indicator(color: :red)
+        it.with_leading_visual_indicator(color: :red)
       end
       expect(rendered_content).to have_selector('button>span.rounded-full.bg-red-500[aria-hidden="true"]')
     end

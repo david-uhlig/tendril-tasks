@@ -12,25 +12,25 @@ RSpec.describe Gustwave::Visuals, type: :component do
       end
 
       it "sizes visuals by the size variant" do
-        render_inline(component_class.new("Go", size: :lg)) { |component| component.leading_icon :close }
+        render_inline(component_class.new("Go", size: :lg)) { |component| component.with_leading_visual_icon :close }
 
         expect(rendered_content).to have_selector("svg.h-6.w-auto[aria-hidden='true']")
       end
 
       it "sizes indicators by the indicator_size derived value" do
-        render_inline(component_class.new("Go", size: :lg)) { |component| component.trailing_indicator }
+        render_inline(component_class.new("Go", size: :lg)) { |component| component.with_trailing_visual_indicator }
 
         expect(rendered_content).to have_selector("span[aria-hidden='true']")
       end
 
       it "keeps a visual hidden when given other aria attributes" do
-        render_inline(component_class.new("Go")) { |component| component.leading_icon :close, aria: { label: "Close" } }
+        render_inline(component_class.new("Go")) { |component| component.with_leading_visual_icon :close, aria: { label: "Close" } }
 
         expect(rendered_content).to have_selector("svg[aria-hidden='true'][aria-label='Close']")
       end
 
       it "shows a visual given aria: { hidden: false }" do
-        render_inline(component_class.new("Go")) { |component| component.leading_icon :close, aria: { hidden: false, label: "Close" } }
+        render_inline(component_class.new("Go")) { |component| component.with_leading_visual_icon :close, aria: { hidden: false, label: "Close" } }
 
         expect(rendered_content).to have_selector("svg[aria-label='Close']:not([aria-hidden='true'])")
       end
@@ -46,7 +46,7 @@ RSpec.describe Gustwave::Visuals, type: :component do
           end
         end)
 
-        render_inline(component_class.new("Go", size: :lg)) { |component| component.leading_renderable(SizedVisual.new) }
+        render_inline(component_class.new("Go", size: :lg)) { |component| component.with_leading_visual_renderable(SizedVisual.new) }
 
         expect(rendered_content).to have_selector("span[data-size='lg']", text: "visual")
       end

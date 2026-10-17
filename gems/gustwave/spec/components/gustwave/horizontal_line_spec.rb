@@ -10,7 +10,7 @@ RSpec.describe Gustwave::HorizontalLine, type: :component do
 
   it "renders text in the middle of the line" do
     render_inline(described_class.new) do |component|
-      component.text "Hello!", class: "custom"
+      component.with_visual_text "Hello!", class: "custom"
     end
 
     expect(rendered_content).to have_selector("div>hr + span.custom", text: "Hello!")
@@ -18,7 +18,7 @@ RSpec.describe Gustwave::HorizontalLine, type: :component do
 
   it "renders an svg in the middle of the line" do
     render_inline(described_class.new) do |component|
-      component.svg(class: "custom", data: { foo_bar: "baz" }) do
+      component.with_visual_svg(class: "custom", data: { foo_bar: "baz" }) do
         '<svg xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1"/></svg>'.html_safe
       end
     end

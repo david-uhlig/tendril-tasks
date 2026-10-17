@@ -1,21 +1,21 @@
 <%= render Gustwave::Table.new do |table| %>
-  <% table.caption do |caption| %>
-    <% caption.title "Supplies" %>
-    <% caption.description "What we have in stock and where to find it." %>
+  <% table.with_caption do |caption| %>
+    <% caption.with_title "Supplies" %>
+    <% caption.with_description "What we have in stock and where to find it." %>
   <% end %>
 
-  <% table.head do |head| %>
-    <% head.column "Item" %>
-    <% head.column "Amount" %>
-    <% head.column "Location" %>
+  <% table.with_head do |head| %>
+    <% head.with_column "Item" %>
+    <% head.with_column "Amount" %>
+    <% head.with_column "Location" %>
   <% end %>
 
-  <% table.body do |body| %>
+  <% table.with_body do |body| %>
     <% rows.each do |item, amount, location| %>
-      <% body.row do |row| %>
-        <% row.th item %>
-        <% row.td amount %>
-        <% row.td location %>
+      <% body.with_row do |row| %>
+        <% row.with_cell_th item %>
+        <% row.with_cell_td amount %>
+        <% row.with_cell_td location %>
       <% end %>
     <% end %>
   <% end %>

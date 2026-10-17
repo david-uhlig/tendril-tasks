@@ -65,7 +65,7 @@ RSpec.describe Gustwave::Indicator, type: :component do
   context "with legend slot" do
     before(:context) do
       render_inline(described_class.new) do |component|
-        component.legend { "legend_content" }
+        component.with_legend { "legend_content" }
       end
     end
 

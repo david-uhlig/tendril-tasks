@@ -3,22 +3,22 @@ module Gustwave
     # http://localhost:3030/rails/view_components/gustwave/dropdown/default
     def default
       render Gustwave::Dropdown.new("Options") do |dropdown|
-        dropdown.menu do |menu|
-          menu.item "Dashboard", href: "#"
-          menu.item "Settings", href: "#", icon: :cog
-          menu.divider
-          menu.item "Sign out", href: "#", icon: :arrow_left_to_bracket
+        dropdown.with_menu_list do |menu|
+          menu.with_item_link "Dashboard", href: "#"
+          menu.with_item_link "Settings", href: "#", icon: :cog
+          menu.with_item_divider
+          menu.with_item_link "Sign out", href: "#", icon: :arrow_left_to_bracket
         end
       end
     end
 
     def with_header_and_footer
       render Gustwave::Dropdown.new("Account", icon: :user_settings) do |dropdown|
-        dropdown.menu do |menu|
-          menu.header "Signed in as Ada"
-          menu.item "Profile", href: "#"
-          menu.item "Settings", href: "#"
-          menu.footer "Version 1.0"
+        dropdown.with_menu_list do |menu|
+          menu.with_header "Signed in as Ada"
+          menu.with_item_link "Profile", href: "#"
+          menu.with_item_link "Settings", href: "#"
+          menu.with_footer "Version 1.0"
         end
       end
     end
@@ -31,9 +31,9 @@ module Gustwave
 
     def opens_on_hover
       render Gustwave::Dropdown.new("Hover me", trigger_event: :hover) do |dropdown|
-        dropdown.menu do |menu|
-          menu.item "First", href: "#"
-          menu.item "Second", href: "#"
+        dropdown.with_menu_list do |menu|
+          menu.with_item_link "First", href: "#"
+          menu.with_item_link "Second", href: "#"
         end
       end
     end

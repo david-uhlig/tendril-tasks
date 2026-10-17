@@ -11,14 +11,14 @@ module Gustwave
         variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
         toggle :pill, "rounded-full"
 
-        renders_one :label_slot, ->(text) { tag.span(text, class: classes(:label)) }
+        renders_one :label, ->(text) { tag.span(text, class: classes(:label)) }
 
         def initialize(size: DEFAULT, pill: false)
           select_options(size:, pill:)
         end
 
         def call
-          tag.div(id: generate_random_id(prefix: "example"), class: classes) { safe_join([ label_slot, content ].compact) }
+          tag.div(id: generate_random_id(prefix: "example"), class: classes) { safe_join([ label, content ].compact) }
         end
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe "Gustwave::Test::StyleSnapshots#style_snapshot", type: :component
     group :look, size: %i[sm md], pill: [ false, true ] do |**args|
       Gustwave::Specs::StyleSnapshotMacro::Example.new(**args)
     end
-    group :content, content: "Text", slots: ->(example) { example.with_label_slot("Label") } do
+    group :content, content: "Text", slots: ->(example) { example.with_label("Label") } do
       Gustwave::Specs::StyleSnapshotMacro::Example.new
     end
   end

@@ -1,9 +1,9 @@
 <p class="text-sm text-gray-900 dark:text-white">
   Sort tasks by
   <%= render Gustwave::Dropdown.new("due date", inline: true) do |dropdown| %>
-    <% dropdown.menu do |menu| %>
-      <% menu.item "Due date", href: "#" %>
-      <% menu.item "Title", href: "#" %>
+    <% dropdown.with_menu_list do |menu| %>
+      <% menu.with_item_link "Due date", href: "#" %>
+      <% menu.with_item_link "Title", href: "#" %>
     <% end %>
   <% end %>
   and show the newest first.

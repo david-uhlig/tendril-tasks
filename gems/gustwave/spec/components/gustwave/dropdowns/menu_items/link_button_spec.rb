@@ -51,12 +51,12 @@ RSpec.describe Gustwave::Dropdowns::MenuItems::LinkButton, type: :component do
   context "with Gustwave::Button slots" do
     let(:component) { described_class.new }
 
-    it "responds to leading_icon slot" do
-      expect(component).to respond_to(:leading_icon)
+    it "responds to with_leading_visual_icon" do
+      expect(component).to respond_to(:with_leading_visual_icon)
     end
 
-    it "responds to trailing_icon slot" do
-      expect(component).to respond_to(:trailing_icon)
+    it "responds to with_trailing_visual_icon" do
+      expect(component).to respond_to(:with_trailing_visual_icon)
     end
   end
 end

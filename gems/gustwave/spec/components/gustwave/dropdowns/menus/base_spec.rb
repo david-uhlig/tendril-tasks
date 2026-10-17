@@ -52,21 +52,21 @@ RSpec.describe Gustwave::Dropdowns::Menus::Base, type: :component do
     context "with header" do
       it "renders header" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.header { "header_content" }
+          it.with_header { "header_content" }
         end
         expect(rendered_content).to have_selector("header", text: "header_content")
       end
 
       it "renders header styling" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.header { "header_content" }
+          it.with_header { "header_content" }
         end
         expect(rendered_content).to have_selector("header.px-4.py-2.text-sm")
       end
 
       it "renders custom header tag" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.header(tag: :span) { "header_content" }
+          it.with_header(tag: :span) { "header_content" }
         end
         expect(rendered_content).to have_selector("span", text: "header_content")
       end
@@ -75,21 +75,21 @@ RSpec.describe Gustwave::Dropdowns::Menus::Base, type: :component do
     context "with footer" do
       it "renders footer" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.footer { "footer_content" }
+          it.with_footer { "footer_content" }
         end
         expect(rendered_content).to have_selector("footer", text: "footer_content")
       end
 
       it "renders footer styling" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.footer { "header_content" }
+          it.with_footer { "header_content" }
         end
         expect(rendered_content).to have_selector("footer.px-4.py-2.text-sm")
       end
 
       it "renders custom footer tag" do
         render_inline(described_class.new(id: "dropdown")) do
-          it.footer(tag: :span) { "footer_content" }
+          it.with_footer(tag: :span) { "footer_content" }
         end
         expect(rendered_content).to have_selector("span", text: "footer_content")
       end

@@ -18,23 +18,23 @@ RSpec.describe Gustwave::Table, type: :component do
   end
 
   context "with slotted content" do
-    it "renders a caption tag with content when using the cell content alias" do
+    it "renders a caption tag with content when using with_caption" do
       render_inline(described_class.new) do |component|
-        component.caption { "caption_content" }
+        component.with_caption { "caption_content" }
       end
       expect(rendered_content).to have_selector("caption", text: "caption_content")
     end
 
-    it "renders a thead tag with content when using the head slot alias" do
+    it "renders a thead tag with content when using with_head" do
       render_inline(described_class.new) do |component|
-        component.head { "head_content" }
+        component.with_head { "head_content" }
       end
       expect(rendered_content).to have_selector("thead", text: "head_content")
     end
 
-    it "renders a tbody tag with content when using the body slot alias" do
+    it "renders a tbody tag with content when using with_body" do
       render_inline(described_class.new) do |component|
-        component.body { "body_content" }
+        component.with_body { "body_content" }
       end
       expect(rendered_content).to have_selector("tbody", text: "body_content")
     end
@@ -43,9 +43,9 @@ RSpec.describe Gustwave::Table, type: :component do
   context "with slotted content and block content" do
     it "appends block content after the slot content" do
       render_inline(described_class.new) do |component|
-        component.caption { "caption_content" }
-        component.head { "head_content" }
-        component.body { "body_content" }
+        component.with_caption { "caption_content" }
+        component.with_head { "head_content" }
+        component.with_body { "body_content" }
         "<tfoot>block_content</tfoot>".html_safe
       end
       expect(rendered_content).to have_selector("caption", text: "caption_content")

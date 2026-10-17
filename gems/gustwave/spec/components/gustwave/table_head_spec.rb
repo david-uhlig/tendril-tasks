@@ -18,17 +18,9 @@ RSpec.describe Gustwave::TableHead, type: :component do
   end
 
   context "with col slot content" do
-    it "renders a th tag within a tr tag when using the col slot alias" do
+    it "renders a th tag within a tr tag when using with_column" do
       render_inline(described_class.new) do |component|
-        component.col { "col_content" }
-      end
-      expect(rendered_content).to have_selector("tr")
-      expect(rendered_content).to have_selector("th", text: "col_content")
-    end
-
-    it "renders a th tag within a tr tag when using the th slot alias" do
-      render_inline(described_class.new) do |component|
-        component.th { "col_content" }
+        component.with_column { "col_content" }
       end
       expect(rendered_content).to have_selector("tr")
       expect(rendered_content).to have_selector("th", text: "col_content")
@@ -38,7 +30,7 @@ RSpec.describe Gustwave::TableHead, type: :component do
   context "with col slot and block content" do
     it "appends block content after the th slot content" do
       render_inline(described_class.new) do |component|
-        component.col { "col_content" }
+        component.with_column { "col_content" }
         "<tr><th>block_content</th></tr>".html_safe
       end
       expect(rendered_content).to have_selector("tr", count: 2)

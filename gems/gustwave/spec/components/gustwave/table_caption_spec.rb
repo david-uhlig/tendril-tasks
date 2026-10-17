@@ -27,7 +27,7 @@ RSpec.describe Gustwave::TableCaption, type: :component do
   context "with title slot content" do
     it "renders the content" do
       render_inline(described_class.new) do |component|
-        component.title { "title_content" }
+        component.with_title { "title_content" }
       end
       expect(rendered_content).to have_selector("caption", text: "title_content")
     end
@@ -36,7 +36,7 @@ RSpec.describe Gustwave::TableCaption, type: :component do
   context "with description slot content" do
     it "renders the content" do
       render_inline(described_class.new) do |component|
-        component.description { "description_content" }
+        component.with_description { "description_content" }
       end
       expect(rendered_content).to have_selector("p.mt-1.text-sm.font-normal", text: "description_content")
     end
