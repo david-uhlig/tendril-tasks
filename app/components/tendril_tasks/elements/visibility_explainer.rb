@@ -22,6 +22,10 @@ module TendrilTasks
 
       private
 
+      def popover
+        @popover ||= Gustwave::Popover.new(class: "w-72")
+      end
+
       def visible?
         @element.visible?
       end
