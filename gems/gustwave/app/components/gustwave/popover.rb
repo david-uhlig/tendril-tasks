@@ -34,10 +34,21 @@ module Gustwave
       end
     end
 
+    # Returns the HTML attributes that attach the trigger to the popover.
+    #
+    # The popover's own attributes take precedence over any caller attribute
+    # with the same name, so the trigger never ends up with duplicate keys.
+    # The trigger's other +attributes+ are returned as they are.
+    #
+    #   <%= link_to "Docs", docs_path, **popover.trigger_options(class: "underline", data: { controller: "x" }) %>
+    #
+    # @param attributes [Hash] the trigger's own HTML attributes.
     def trigger_options(placement: DEFAULT,
                         trigger: DEFAULT,
-                        offset: nil)
-      options = {}
+                        offset: nil,
+                        **attributes)
+      popover_keys = %w[data-popover-target data-popover-placement data-popover-trigger data-popover-offset]
+      options = attributes.reject { |key, _| popover_keys.include?(key.to_s) }
       options["data-popover-target"] = @id
       options["data-popover-placement"] = option_value(:placement, placement:)
       options["data-popover-trigger"] = option_value(:trigger, trigger:)
