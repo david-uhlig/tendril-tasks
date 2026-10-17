@@ -6,6 +6,8 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
     it_behaves_like "a component with configurable html attributes"
   end
 
+  it_behaves_like "a dropdown trigger owning its attributes"
+
   context "with default options" do
     before(:context) do
       render_inline(described_class.new(menu_id: "dropdown-menu")) { "content" }
