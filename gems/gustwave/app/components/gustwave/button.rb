@@ -102,7 +102,7 @@ module Gustwave
     attr_reader :theme, :text, :options
 
     def themed_button
-      @themed_button ||= themed_component(theme).new(text, **options)
+      @themed_button ||= self.class.themed_component(theme).new(text, **options)
     end
   end
 end

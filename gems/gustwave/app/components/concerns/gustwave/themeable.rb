@@ -97,7 +97,7 @@ module Gustwave
       # The default theme name.
       #
       # Set this through +with_default_theme+. Safe to access directly.
-      class_attribute :default_theme,
+      class_attribute :__default_theme,
                       instance_accessor: false,
                       instance_predicate: false,
                       default: nil
@@ -133,7 +133,7 @@ module Gustwave
       #
       # @param theme_name [Symbol] The name of the theme.
       def with_default_theme(theme_name)
-        self.default_theme = theme_name&.to_sym
+        self.__default_theme = theme_name&.to_sym
       end
 
       # Returns the registered theme classes by theme name.
@@ -142,49 +142,49 @@ module Gustwave
       def themes
         __themes.transform_values(&:constantize)
       end
-    end
 
-    # Returns the default theme name, or the first registered theme name if
-    # none is set.
-    def default_theme
-      self.class.default_theme || self.class.__themes.keys.first
-    end
-
-    # Fetches the theme class for the given +theme+ name.
-    #
-    # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default in
-    # development and test, letting the developer know that the supplied theme name is
-    # invalid and what their options are.
-    #
-    # Otherwise, it falls back to the default theme. If no theme is
-    # registered, raises a +ThemeNotFoundError+.
-    #
-    # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+ or Gustwave::Options::DEFAULT.
-    # @return [Class] The theme class.
-    def themed_component(theme)
-      theme = nil if theme.equal?(Gustwave::Options::DEFAULT)
-      resolve_theme_class_name(theme.presence&.to_sym || default_theme).constantize
-    end
-
-    private
-
-    def resolve_theme_class_name(theme_name)
-      themes = self.class.__themes
-      class_name = themes[theme_name]
-      return class_name if class_name
-
-      if Gustwave.strict?
-        raise ThemeNotFoundError, <<~MSG
-          Invalid theme for #{self.class.name}.
-
-          Expected one of: #{themes.keys.inspect}
-          Got: #{theme_name.inspect}
-
-          #{Options.fallback_note(default_theme)}
-        MSG
+      # Returns the default theme name, or the first registered theme name if
+      # none is set.
+      def default_theme
+        __default_theme || __themes.keys.first
       end
 
-      themes[default_theme] || raise(ThemeNotFoundError, "No themes registered for #{self.class.name}")
+      # Fetches the theme class for the given +theme+ name.
+      #
+      # Raises a +ThemeNotFoundError+ when Gustwave.strict?, by default in
+      # development and test, letting the developer know that the supplied theme name is
+      # invalid and what their options are.
+      #
+      # Otherwise, it falls back to the default theme. If no theme is
+      # registered, raises a +ThemeNotFoundError+.
+      #
+      # @param theme [Symbol, nil] The name of the theme. Uses the default theme when +nil+ or Gustwave::Options::DEFAULT.
+      # @return [Class] The theme class.
+      def themed_component(theme)
+        theme = nil if theme.equal?(Gustwave::Options::DEFAULT)
+        resolve_theme_class_name(theme.presence&.to_sym || default_theme).constantize
+      end
+
+      private
+
+      def resolve_theme_class_name(theme_name)
+        themes = __themes
+        class_name = themes[theme_name]
+        return class_name if class_name
+
+        if Gustwave.strict?
+          raise ThemeNotFoundError, <<~MSG
+            Invalid theme for #{name}.
+
+            Expected one of: #{themes.keys.inspect}
+            Got: #{theme_name.inspect}
+
+            #{Options.fallback_note(default_theme)}
+          MSG
+        end
+
+        themes[default_theme] || raise(ThemeNotFoundError, "No themes registered for #{name}")
+      end
     end
   end
 end
