@@ -159,7 +159,7 @@ module Gustwave
     private
 
     def has_visual?
-      @has_visual ||= leading_visuals? || trailing_visuals?
+      leading_visuals? || trailing_visuals?
     end
 
     # Context for components passed to the +renderable+ visual type that

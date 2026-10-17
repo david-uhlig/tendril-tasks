@@ -103,7 +103,7 @@ module Gustwave
       end
 
       def has_content?
-        @has_content ||= text_or_content(text).present?
+        text_or_content(text).present?
       end
     end
   end
