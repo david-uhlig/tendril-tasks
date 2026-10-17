@@ -93,11 +93,29 @@ module Gustwave
             "dropdown-offset-skidding": (offset_skidding unless offset_skidding == OFFSET_SKIDDING_FLOWBITE_DEFAULT)
           }
 
-          # Merge the caller's data here, because configure_html_attributes merges shallowly
-          data_key = [ :data, "data" ].find { |key| options[key].is_a?(Hash) }
-          data = data_key ? options.delete(data_key).merge(dropdown_config.compact) : dropdown_config
+          # The dropdown's own attributes win over the caller's, like Popover#trigger_options
+          options = without_dropdown_attributes(options, dropdown_config.keys.map(&:to_s))
+          configure_html_attributes(options, data: dropdown_config.compact, "aria-controls": menu_id)
+        end
 
-          configure_html_attributes(options, data:, "aria-controls": menu_id)
+        # Drops +aria-controls+ and the +data_keys+ (e.g. +dropdown-toggle+),
+        # flat or within an +aria+ or +data+ hash, off +options+. Keys match
+        # as strings or symbols, with dashes or underscores.
+        def without_dropdown_attributes(options, data_keys)
+          options.each_with_object({}) do |(key, value), remaining|
+            name = key.to_s.tr("_", "-")
+            if name == "aria-controls" || data_keys.any? { name == "data-#{it}" }
+              next
+            elsif key.to_s == "data" && value.is_a?(Hash)
+              data = value.reject { |data_key, _| data_keys.include?(data_key.to_s.tr("_", "-")) }
+              remaining[key] = data if data.present?
+            elsif key.to_s == "aria" && value.is_a?(Hash)
+              aria = value.reject { |aria_key, _| aria_key.to_s == "controls" }
+              remaining[key] = aria if aria.present?
+            else
+              remaining[key] = value
+            end
+          end
         end
       end
     end
