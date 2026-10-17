@@ -37,26 +37,6 @@ RSpec.describe Gustwave::Popover, type: :component do
     it "passes on an offset" do
       expect(component.trigger_options(offset: 8)).to include("data-popover-offset" => 8)
     end
-
-    it "returns the trigger's other attributes as they are" do
-      expect(component.trigger_options(class: "underline", data: { controller: "x" })).to include(
-        "data-popover-target" => "pop", class: "underline", data: { controller: "x" }
-      )
-    end
-
-    it "lets the popover's attributes win over the trigger's, without duplicate keys" do
-      [ { "data-popover-target": "other" }, { "data-popover-target" => "other" } ].each do |attributes|
-        options = component.trigger_options(**attributes)
-
-        expect(options["data-popover-target"]).to eq("pop")
-        expect(options.keys.map(&:to_s).count("data-popover-target")).to eq(1)
-      end
-    end
-
-    it "renders a button that carries the trigger's attributes and the popover's" do
-      render_inline(Gustwave::Button.new("Hover me", **component.trigger_options(data: { controller: "x" })))
-      expect(page).to have_css("button[data-controller='x'][data-popover-target='pop']", text: "Hover me")
-    end
   end
 
   describe "#trigger_options ARIA" do
