@@ -38,6 +38,10 @@ RSpec.describe Gustwave::Dropdown, type: :component do
     it "renders the menu_id as data attribute" do
       expect(rendered_content).to have_selector("button[data-dropdown-toggle='custom-menu-id']")
     end
+
+    it "points aria-controls at the menu" do
+      expect(rendered_content).to have_selector("button[aria-controls='custom-menu-id']")
+    end
   end
 
   context "with data attributes" do
@@ -52,6 +56,12 @@ RSpec.describe Gustwave::Dropdown, type: :component do
 
       expect(rendered_content).to have_selector("button[data-dropdown-toggle='m']")
       expect(rendered_content).not_to have_selector("button[data-dropdown-toggle='other']")
+    end
+
+    it "renders aria-controls with the menu id" do
+      render_inline(described_class.new("Menu", menu_id: "m"))
+
+      expect(rendered_content).to have_selector("button[aria-controls='m']")
     end
   end
 

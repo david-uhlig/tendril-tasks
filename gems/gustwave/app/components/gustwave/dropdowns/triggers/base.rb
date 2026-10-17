@@ -97,7 +97,7 @@ module Gustwave
           data_key = [ :data, "data" ].find { |key| options[key].is_a?(Hash) }
           data = data_key ? options.delete(data_key).merge(dropdown_config.compact) : dropdown_config
 
-          configure_html_attributes(options, data:)
+          configure_html_attributes(options, data:, "aria-controls": menu_id)
         end
       end
     end

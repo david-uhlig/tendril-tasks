@@ -22,6 +22,10 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Generic, type: :component do
     it "renders the menu id as data attribute" do
       expect(rendered_content).to have_selector("div[data-dropdown-toggle='dropdown-menu']")
     end
+
+    it "points aria-controls at the menu" do
+      expect(rendered_content).to have_selector("div[aria-controls='dropdown-menu']")
+    end
   end
 
   context "with data attributes" do
