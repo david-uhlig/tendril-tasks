@@ -53,7 +53,11 @@ module Gustwave
     end
 
     def call
-      tag.p(text_or_content, **@options)
+      tag.p(text_or_content(text), **@options)
     end
+
+    private
+
+    attr_reader :text
   end
 end

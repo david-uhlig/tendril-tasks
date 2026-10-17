@@ -90,12 +90,12 @@ module Gustwave
 
       def call
         content_tag html_tag, config do
-          slots_and_content(leading_visuals, text_or_content, trailing_visuals, append_content: false)
+          slots_and_content(leading_visuals, text_or_content(text), trailing_visuals, append_content: false)
         end
       end
 
       private
-      attr_reader :html_tag, :config, :color
+      attr_reader :html_tag, :config, :color, :text
 
       # The value of the +type+ attribute, or +nil+ to render none
       def type_attribute
@@ -103,7 +103,7 @@ module Gustwave
       end
 
       def has_content?
-        @has_content ||= text_or_content.present?
+        @has_content ||= text_or_content(text).present?
       end
     end
   end

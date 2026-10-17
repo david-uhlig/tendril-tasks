@@ -36,7 +36,7 @@ module Gustwave
           # Evaluate the block even when +text+ replaces its output, as it fills the submenu slot
           content
           render dropdown_component do
-            text_or_content(text: flex_grow(text))
+            text_or_content(flex_grow(text))
           end
         end
 

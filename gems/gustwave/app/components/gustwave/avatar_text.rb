@@ -63,7 +63,7 @@ module Gustwave
 
     def call
       render Gustwave::Avatar.new(**options) do
-        text_or_content
+        text_or_content(text)
       end
     end
 

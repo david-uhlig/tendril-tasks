@@ -83,7 +83,7 @@ module Gustwave
     def call
       render_legend_wrapper do
         tag.span(**config) do
-          text_or_content
+          text_or_content(text)
         end
       end
     end
