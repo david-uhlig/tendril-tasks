@@ -43,6 +43,44 @@ RSpec.describe Gustwave::Tooltip, type: :component do
         )
     end
 
+    it "joins the trigger's own aria-describedby with the tooltip's id" do
+      expect(described_class.new("text", id: "tip").trigger_options("aria-describedby": "help"))
+        .to include("aria-describedby" => "help tip")
+        .and(satisfy { !it.key?(:"aria-describedby") })
+    end
+
+    it "joins an aria-describedby given as a string key" do
+      expect(described_class.new("text", id: "tip").trigger_options(**{ "aria-describedby" => "help" }))
+        .to include("aria-describedby" => "help tip")
+        .and(satisfy { it.keys.count { |key| key.to_s == "aria-describedby" } == 1 })
+    end
+
+    it "joins an aria-describedby within the aria hash and keeps the other aria attributes" do
+      expect(described_class.new("text", id: "tip").trigger_options(aria: { describedby: "help", label: "Delete" }))
+        .to include("aria-describedby" => "help tip", aria: { label: "Delete" })
+    end
+
+    it "drops an aria hash with only aria-describedby" do
+      expect(described_class.new("text", id: "tip").trigger_options(aria: { describedby: "help" }))
+        .not_to have_key(:aria)
+    end
+
+    it "joins a list of ids and doesn't repeat the tooltip's id" do
+      expect(described_class.new("text", id: "tip").trigger_options("aria-describedby": [ "help hint", "tip" ]))
+        .to include("aria-describedby" => "help hint tip")
+    end
+
+    it "returns the trigger's other attributes as they are" do
+      expect(described_class.new("text", id: "tip").trigger_options(class: "underline", data: { controller: "x" }))
+        .to include(class: "underline", data: { controller: "x" })
+    end
+
+    it "keeps the trigger's own aria-describedby on a rendered button" do
+      tooltip = described_class.new("text", id: "tip")
+      render_inline(Gustwave::Button.new("Hover me", **tooltip.trigger_options("aria-describedby": "help", data: { controller: "x" })))
+      expect(page).to have_selector("button[aria-describedby='help tip'][data-controller=x][data-tooltip-target=tip]")
+    end
+
     it "marks the light tooltip for Flowbite" do
       expect(described_class.new("text", color: :light).trigger_options).to include("data-tooltip-style" => "light")
     end
