@@ -93,7 +93,11 @@ module Gustwave
             "dropdown-offset-skidding": (offset_skidding unless offset_skidding == OFFSET_SKIDDING_FLOWBITE_DEFAULT)
           }
 
-          configure_html_attributes(options, data: dropdown_config)
+          # Merge the caller's data here, because configure_html_attributes merges shallowly
+          data_key = [ :data, "data" ].find { |key| options[key].is_a?(Hash) }
+          data = data_key ? options.delete(data_key).merge(dropdown_config.compact) : dropdown_config
+
+          configure_html_attributes(options, data:)
         end
       end
     end
