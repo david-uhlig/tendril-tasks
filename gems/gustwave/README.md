@@ -42,6 +42,55 @@ Rails.autoloaders.main.on_load("Gustwave::Buttons::Default") do |button, _abspat
 end
 ```
 
+### Cheat-sheet
+
+| Declaration | Meaning | Example |
+|---|---|---|
+| `option` | A value from a fixed list, with a default | `option :tag, default: :h2, values: %i[h1 h2 h3]` |
+| `derive` | A value derived per value of an option | `derive :icon_size, from: :size, values: { sm: :xs, md: :sm }` |
+| `base` | Classes of the root element, or of parts given a hash | `base "inline-flex items-center"` |
+| `part` | A named element besides the root, with optional classes | `part :icon, "h-3 w-auto"` |
+| `unstyled` | Option values that skip the base styles | `unstyled color: :none` |
+| `variant` | An option with classes per value | `variant :size, default: :md, values: { sm: "text-xs", md: "text-sm" }` |
+| `toggle` | An on/off option with classes, off by default | `toggle :pill, "rounded-full"` |
+| `on:` / `off:` | A toggle's classes for each state | `toggle :shadow, on: "shadow", off: "shadow-none"` |
+| `per:` | A toggle's classes per value of another option; needs one for each value | `toggle :border, per: :color, values: { gray: "ring-gray-300", red: "ring-red-300" }` |
+| `unless:` | Skip a declaration for some option values | `base "px-2", unless: { size: [:xs, :sm] }` |
+| `part:` | Target a declared part instead of the root | `toggle :pill, "rounded-full", part: :icon` |
+| `{ root:, icon: }` | Target several parts at once | `md: { root: "text-sm", icon: "h-3" }` |
+| `internal: true` | The component selects the value itself, not callers | `toggle :visual_only, "p-2", internal: true` |
+| `extend_option` / `extend_variant` / `extend_toggle` / `extend_derived` | Merge values into an inherited declaration | `extend_variant :color, values: { brand: "bg-brand-600" }` |
+| `remove_option` / `remove_part` / `remove_variant` / `remove_toggle` / `remove_derived` | Delete an inherited declaration | `remove_toggle :pill` |
+
+In the component, default keyword arguments to `DEFAULT`, pick values with `select_options`, read them with `option_value` and `derived_value`, and add the classes with `attributes_for`:
+
+```ruby
+class Badge < Gustwave::Component
+  base     "inline-flex items-center rounded-sm"
+  unstyled color: :none
+  part     :icon, "h-3 w-auto"
+
+  variant :color, default: :gray, values: { gray: "bg-gray-100 text-gray-800", red: "bg-red-100 text-red-800" }
+  variant :size, default: :md, values: { sm: { root: "text-xs px-1.5", icon: "h-2.5" }, md: "text-sm px-2" }
+  toggle  :pill, "rounded-full"
+  toggle  :border, per: :color, values: { gray: "ring-1 ring-gray-300", red: "ring-1 ring-red-300" }
+  toggle  :visual_only, "p-1", internal: true
+  derive  :icon_size, from: :size, values: { sm: :xs, md: :sm }
+
+  def initialize(text = nil, color: DEFAULT, size: DEFAULT, pill: false, border: false, **options)
+    @text = text
+    @options = options
+    select_options(color:, size:, pill:, border:)
+  end
+
+  def before_render
+    # Internal options first, then the classes, which depend on them
+    select_options(visual_only: text_or_content(@text).blank?)
+    @config = attributes_for(@options)
+  end
+end
+```
+
 See `Gustwave::Options` and `Gustwave::Styling` for every declaration and for subclassing.
 
 Every option a component takes as a keyword argument, such as `tag`, `color` or `size`, is declared with this DSL and defaults to the declared default, so extending a component's default reaches every caller. `Gustwave::Component` documents the constructor convention, and the specs check every component against it.
