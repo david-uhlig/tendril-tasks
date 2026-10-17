@@ -48,6 +48,12 @@ module Gustwave
     # takes precedence. With special handling for the +class+ attribute to apply
     # semantic CSS merging with TailwindMerge.
     #
+    # The +data+ and +aria+ hashes are merged one level deeper, so a caller's
+    # <tt>data: { controller: "x" }</tt> adds to the default +data+ instead of
+    # replacing it. Keys within them follow the same precedence, e.g.
+    # <tt>aria: { hidden: false }</tt> overrides a default
+    # <tt>aria: { hidden: true }</tt>.
+    #
     # @param overwrite_attrs [Hash] HTML attributes and component arguments to be added or overridden if present in +default_attrs+.
     # @param overwrite_class_attr [Boolean] How to handle the +class+ attribute. When set to +false+, the CSS classes of +overwrite_attrs+ and +default_attrs+ are fused semantically with TailwindMerge. CSS classes in +overwrite_attrs+ take precedence. When set to +true+, the default Ruby merging strategy applies, replacing +default_attrs+ CSS classes with +overwrite_attrs+ CSS classes.
     # @param default_attrs [Hash] Default HTML attribute and component configuration for the component or slot.
@@ -63,6 +69,12 @@ module Gustwave
         if overwrite_attrs.key?(:class)
           overwrite_attrs[:class] = merge_classes(default_attrs[:class], overwrite_attrs[:class])
         end
+      end
+
+      %i[data aria].each do |key|
+        next unless default_attrs[key].is_a?(Hash) && overwrite_attrs[key].is_a?(Hash)
+
+        overwrite_attrs[key] = default_attrs[key].deep_symbolize_keys.merge(overwrite_attrs[key])
       end
 
       default_attrs.merge(overwrite_attrs)

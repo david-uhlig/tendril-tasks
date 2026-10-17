@@ -39,6 +39,48 @@ RSpec.describe Gustwave::Component, type: :component do
       end
     end
 
+    context "with data and aria hashes in both" do
+      it "merges the data hashes" do
+        result = component.configure_html_attributes(
+          { data: { controller: "x" } },
+          data: { "dropdown-toggle": "menu" }
+        )
+        expect(result).to eq({ data: { "dropdown-toggle": "menu", controller: "x" } })
+      end
+
+      it "merges the aria hashes" do
+        result = component.configure_html_attributes(
+          { aria: { label: "Overdue" } },
+          aria: { hidden: true }
+        )
+        expect(result).to eq({ aria: { hidden: true, label: "Overdue" } })
+      end
+
+      it "lets overwrite_attrs keys within the hashes take precedence" do
+        result = component.configure_html_attributes(
+          { aria: { hidden: false } },
+          aria: { hidden: true, live: "polite" }
+        )
+        expect(result).to eq({ aria: { hidden: false, live: "polite" } })
+      end
+
+      it "merges string keys with symbol keys" do
+        result = component.configure_html_attributes(
+          { "data" => { "controller" => "x", "hidden" => "no" } },
+          data: { "hidden" => "yes" }
+        )
+        expect(result).to eq({ data: { hidden: "no", controller: "x" } })
+      end
+
+      it "replaces a hash with a value that isn't a hash" do
+        result = component.configure_html_attributes(
+          { data: nil },
+          data: { "dropdown-toggle": "menu" }
+        )
+        expect(result).to eq({ data: nil })
+      end
+    end
+
     context "when overwrite_class_attr is false" do
       it "merges the class attribute semantically" do
         default_attrs = { class: "bg-white text-gray-800" }

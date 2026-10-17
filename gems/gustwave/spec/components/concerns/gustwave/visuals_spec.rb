@@ -23,6 +23,18 @@ RSpec.describe Gustwave::Visuals, type: :component do
         expect(rendered_content).to have_selector("span[aria-hidden='true']")
       end
 
+      it "keeps a visual hidden when given other aria attributes" do
+        render_inline(component_class.new("Go")) { |component| component.leading_icon :close, aria: { label: "Close" } }
+
+        expect(rendered_content).to have_selector("svg[aria-hidden='true'][aria-label='Close']")
+      end
+
+      it "shows a visual given aria: { hidden: false }" do
+        render_inline(component_class.new("Go")) { |component| component.leading_icon :close, aria: { hidden: false, label: "Close" } }
+
+        expect(rendered_content).to have_selector("svg[aria-label='Close']:not([aria-hidden='true'])")
+      end
+
       it "passes its size to custom visuals" do
         stub_const("SizedVisual", Class.new(Gustwave::Component) do
           def apply_slot_context(size:, **)
