@@ -29,12 +29,55 @@ RSpec.describe Gustwave::Popover, type: :component do
 
     it "targets the popover" do
       expect(component.trigger_options).to eq(
-        "data-popover-target" => "pop", "data-popover-placement" => :top, "data-popover-trigger" => :hover
+        "data-popover-target" => "pop", "data-popover-placement" => :top, "data-popover-trigger" => :hover,
+        "aria-describedby" => "pop"
       )
     end
 
     it "passes on an offset" do
       expect(component.trigger_options(offset: 8)).to include("data-popover-offset" => 8)
+    end
+  end
+
+  describe "#trigger_options ARIA" do
+    subject(:component) { described_class.new("text", id: "pop") }
+
+    it "describes the trigger with a hover popover" do
+      options = component.trigger_options
+
+      expect(options).to include("aria-describedby" => "pop")
+      expect(options.keys.map(&:to_s)).not_to include("aria-controls")
+    end
+
+    it "joins a hover popover with the trigger's own aria-describedby" do
+      expect(component.trigger_options("aria-describedby": "help")).to include("aria-describedby" => "help pop")
+    end
+
+    it "joins a hover popover with the trigger's aria-describedby inside an aria hash" do
+      options = component.trigger_options(aria: { describedby: "help", label: "X" })
+
+      expect(options).to include("aria-describedby" => "help pop", aria: { label: "X" })
+    end
+
+    it "points a click popover's trigger at the popover with aria-controls" do
+      options = component.trigger_options(trigger: :click)
+
+      expect(options).to include("aria-controls" => "pop")
+      expect(options.keys.map(&:to_s)).not_to include("aria-describedby")
+    end
+
+    it "replaces the trigger's own aria-controls with the popover's" do
+      [ { "aria-controls": "other" }, { "aria-controls" => "other" }, { aria: { controls: "other" } } ].each do |attributes|
+        options = component.trigger_options(trigger: :click, **attributes)
+
+        expect(options.keys.map(&:to_s).count("aria-controls")).to eq(1)
+        expect(options).to include("aria-controls" => "pop")
+        expect(options).not_to have_key(:aria)
+      end
+    end
+
+    it "keeps the trigger's own aria-describedby with a click popover" do
+      expect(component.trigger_options(trigger: :click, "aria-describedby": "help")).to include("aria-describedby": "help")
     end
   end
 end

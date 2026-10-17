@@ -19,6 +19,10 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
       expect(rendered_content).to have_selector("button[data-dropdown-toggle='dropdown-menu']")
     end
 
+    it "points aria-controls at the menu" do
+      expect(rendered_content).to have_selector("button[aria-controls='dropdown-menu']")
+    end
+
     it "renders a trailing icon" do
       expect(rendered_content).to have_selector("button>svg")
     end

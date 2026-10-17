@@ -38,7 +38,11 @@ module Gustwave
     #
     # The popover's own attributes take precedence over any caller attribute
     # with the same name, so the trigger never ends up with duplicate keys.
-    # The trigger's other +attributes+ are returned as they are.
+    # A hover popover describes its trigger, so the trigger's +aria-describedby+
+    # points at the popover, joined with the trigger's own. A click popover is
+    # opened by its trigger, so the trigger's +aria-controls+ points at the
+    # popover, replacing the trigger's own. The trigger's other +attributes+
+    # are returned as they are.
     #
     #   <%= link_to "Docs", docs_path, **popover.trigger_options(class: "underline", data: { controller: "x" }) %>
     #
@@ -49,16 +53,56 @@ module Gustwave
                         **attributes)
       popover_keys = %w[data-popover-target data-popover-placement data-popover-trigger data-popover-offset]
       options = attributes.reject { |key, _| popover_keys.include?(key.to_s) }
+      event = option_value(:trigger, trigger:)
       options["data-popover-target"] = @id
       options["data-popover-placement"] = option_value(:placement, placement:)
-      options["data-popover-trigger"] = option_value(:trigger, trigger:)
+      options["data-popover-trigger"] = event
       options["data-popover-offset"] = offset if offset.present?
+      if event == :hover
+        described_by, options = extract_described_by(options)
+        options["aria-describedby"] = [ *described_by, @id ].uniq.join(" ")
+      else
+        options = without_controls(options)
+        options["aria-controls"] = @id
+      end
       options
     end
 
     private
 
     attr_reader :text
+
+    # Splits the ids of +aria-describedby+, flat or within an +aria+ hash, off
+    # +attributes+.
+    def extract_described_by(attributes)
+      ids = []
+      options = attributes.each_with_object({}) do |(key, value), remaining|
+        if key.to_s == "aria-describedby"
+          ids << value
+        elsif key.to_s == "aria" && value.is_a?(Hash)
+          aria = value.reject { |aria_key, _| aria_key.to_s == "describedby" }
+          ids << value.find { |aria_key, _| aria_key.to_s == "describedby" }&.last
+          remaining[key] = aria if aria.present?
+        else
+          remaining[key] = value
+        end
+      end
+      [ ids.flat_map { Array(it).flat_map { |id| id.to_s.split } }, options ]
+    end
+
+    # Drops +aria-controls+, flat or within an +aria+ hash, off +attributes+.
+    def without_controls(attributes)
+      attributes.each_with_object({}) do |(key, value), remaining|
+        if key.to_s == "aria-controls"
+          next
+        elsif key.to_s == "aria" && value.is_a?(Hash)
+          aria = value.reject { |aria_key, _| aria_key.to_s == "controls" }
+          remaining[key] = aria if aria.present?
+        else
+          remaining[key] = value
+        end
+      end
+    end
 
     def popper_arrow
       return nil unless @arrow
