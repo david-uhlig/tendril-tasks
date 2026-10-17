@@ -60,7 +60,7 @@ module Gustwave
         end
 
         def call
-          render Gustwave::Button.new(**@options) do
+          render Gustwave::Button.for(@options[:theme]).new(**@options.except(:theme)) do
             if @icon_or_text.is_a?(String)
               concat @icon_or_text
               concat content

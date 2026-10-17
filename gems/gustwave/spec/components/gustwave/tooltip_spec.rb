@@ -72,7 +72,7 @@ RSpec.describe Gustwave::Tooltip, type: :component do
 
     it "keeps the trigger's own aria-describedby on a rendered button" do
       tooltip = described_class.new("text", id: "tip")
-      render_inline(Gustwave::Button.new("Hover me", **tooltip.trigger_options("aria-describedby": "help", data: { controller: "x" })))
+      render_inline(Gustwave::Buttons::Default.new("Hover me", **tooltip.trigger_options("aria-describedby": "help", data: { controller: "x" })))
       expect(page).to have_selector("button[aria-describedby='help tip'][data-controller=x][data-tooltip-target=tip]")
     end
 

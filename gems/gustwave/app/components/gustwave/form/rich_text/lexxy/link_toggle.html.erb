@@ -21,8 +21,8 @@
     >
 
     <div class="lexxy-editor__toolbar-dropdown-actions">
-      <%= render Gustwave::Button.new(t(".link"), value: "link") %>
-      <%= render Gustwave::Button.new(t(".unlink"), value: "unlink", color: :alternative) %>
+      <%= render Gustwave::Buttons::Default.new(t(".link"), value: "link") %>
+      <%= render Gustwave::Buttons::Default.new(t(".unlink"), value: "unlink", color: :alternative) %>
     </div>
   <% end %>
 <% end %>

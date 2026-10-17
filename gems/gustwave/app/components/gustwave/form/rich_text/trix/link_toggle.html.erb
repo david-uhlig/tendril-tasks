@@ -16,9 +16,9 @@
       "
     >
 
-    <%= render Gustwave::Button.new(t(".save"),
-                                    data: {
-                                      "trix-method": "setAttribute"
-                                    }) %>
+    <%= render Gustwave::Buttons::Default.new(t(".save"),
+                                              data: {
+                                                "trix-method": "setAttribute"
+                                              }) %>
   </div>
 <% end %>

@@ -43,7 +43,7 @@ RSpec.describe "Extending Gustwave::Buttons::Base", type: :component do
     end
 
     it "adds the type to Gustwave::Button with the #{theme_name} theme" do
-      render_inline(Gustwave::Button.new("Go", theme: theme_name)) do |button|
+      render_inline(Gustwave::Button.for(theme_name).new("Go")) do |button|
         button.with_leading_visual(:badge, "new")
       end
 

@@ -5,7 +5,7 @@
 
       <div class="flex flex-wrap items-center gap-2">
         <% colors.each do |color| %>
-          <%= render Gustwave::Button.new(color.to_s.humanize, theme:, color:) %>
+          <%= render Gustwave::Button.for(theme).new(color.to_s.humanize, color:) %>
         <% end %>
       </div>
     </section>

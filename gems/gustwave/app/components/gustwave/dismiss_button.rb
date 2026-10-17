@@ -42,10 +42,10 @@ module Gustwave
     end
 
     def call
-      render Gustwave::Button.new(color: :none,
-                                  data: { dismiss_target: "##{target}" },
-                                  aria: { label: label },
-                                  **options) do
+      render Gustwave::Button.for(options[:theme]).new(color: :none,
+                                                       data: { dismiss_target: "##{target}" },
+                                                       aria: { label: label },
+                                                       **options.except(:theme)) do
         safe_join([ screenreader_label, close_icon ])
       end
     end

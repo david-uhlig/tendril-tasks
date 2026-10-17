@@ -9,10 +9,10 @@
               data: { "dropdown-panel": true } do %>
     <div class="lexxy-highlight-colors"></div>
 
-    <%= render Gustwave::Button.new(t(".remove_highlight"),
-                                    role: "menuitem",
-                                    size: :xs,
-                                    color: :alternative,
-                                    "data-command": "removeHighlight") %>
+    <%= render Gustwave::Buttons::Default.new(t(".remove_highlight"),
+                                              role: "menuitem",
+                                              size: :xs,
+                                              color: :alternative,
+                                              "data-command": "removeHighlight") %>
   <% end %>
 <% end %>

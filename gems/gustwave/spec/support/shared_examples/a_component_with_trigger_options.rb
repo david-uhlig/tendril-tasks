@@ -50,7 +50,7 @@ RSpec.shared_examples "a component with trigger options" do |prefix:, component_
     end
 
     it "attaches a rendered trigger" do
-      render_inline(Gustwave::Button.new("Hover me", **component.trigger_options(data: { controller: "x" })))
+      render_inline(Gustwave::Buttons::Default.new("Hover me", **component.trigger_options(data: { controller: "x" })))
       expect(page).to have_css("button[data-controller=x][data-#{prefix}-target=target]")
     end
   end
