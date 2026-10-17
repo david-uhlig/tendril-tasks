@@ -82,6 +82,14 @@ module Gustwave
     with_default_theme :default
     delegate_missing_to :themed_button
 
+    # Returns the themed button class for +theme+.
+    #
+    # @param theme [Symbol, nil] The theme to use. Uses the default theme when +nil+ or Gustwave::Options::DEFAULT.
+    # @return [Class<Gustwave::Buttons::Base>] The themed button class.
+    def self.for(theme)
+      themed_component(theme)
+    end
+
     # @param [String, nil] text The text to display on the button. Takes precedent over the block content.
     # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, :gradient_duotone_outline, and :inline. See all available themes by running
     #   Gustwave::Button.themes! Defaults to :default.
