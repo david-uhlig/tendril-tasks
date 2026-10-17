@@ -51,9 +51,9 @@ module Gustwave
       # item tag:
       #
       #   <%= render Gustwave::Containers::ResponsiveHorizontalScroll.new(tag: :ul) do %>
-      #     <% it.item do %>Item 1<% end %>
-      #     <% it.item do %>Item 2<% end %>
-      #     <% it.item do %>Item 3<% end %>
+      #     <% it.with_item do %>Item 1<% end %>
+      #     <% it.with_item do %>Item 2<% end %>
+      #     <% it.with_item do %>Item 3<% end %>
       #   <% end %>
       #
       # @param text [String] the text to display inside the item. Takes precedent over block content.
@@ -66,7 +66,6 @@ module Gustwave
           text || capture(&block)
         end
       end
-      alias item with_item
 
       # @param tag [Symbol] the HTML tag for the container.
       # @param breakpoint [Symbol] the breakpoint at and above which the container wraps its items. Use t-shirt sizes from :sm to +:"2xl"+

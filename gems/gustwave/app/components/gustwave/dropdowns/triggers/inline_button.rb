@@ -20,8 +20,8 @@ module Gustwave
 
         def call
           render button_component do
-            it.leading_icon(icon, class: classes(:icon)) if icon
-            it.trailing_icon(trailing_icon, class: classes(:icon)) if trailing_icon
+            it.with_leading_visual_icon(icon, class: classes(:icon)) if icon
+            it.with_trailing_visual_icon(trailing_icon, class: classes(:icon)) if trailing_icon
             text_or_content(text)
           end
         end

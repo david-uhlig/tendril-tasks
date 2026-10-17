@@ -35,13 +35,13 @@ module Gustwave
                     instance_predicate: false,
                     default: "Gustwave::Dropdowns::Menus::List"
 
-    # Use the +trigger+ or +trigger_component+ slot to fully customize the
+    # Use the +trigger+ slot, with +with_trigger_generic+ or +with_trigger_component+, to fully customize the
     # visual appearance of the trigger element
     #
     # When the trigger slot is absent, a button with a trailing icon (chevron)
     # will be rendered by default.
     #
-    # The generic +trigger+ slot takes any block and surrounds it with an HTML
+    # The generic trigger type, +with_trigger_generic+, takes any block and surrounds it with an HTML
     # element carrying the trigger's +data-dropdown-*+ attributes. Configure
     # these attributes through the +Dropdown+ main constructor. Modify the
     # surrounding HTML element through the +options+ hash and the +tag+
@@ -51,26 +51,26 @@ module Gustwave
     # Renders the dropdown trigger as a badge with the default configuration:
     #
     #   <%= render Gustwave::Dropdown.new do %>
-    #     <%= it.trigger do %>
+    #     <%= it.with_trigger_generic do %>
     #       <%= render Gustwave::Badge.new("Dropdown badge") %>
     #     <% end %>
     #   <% end %>
     #
-    # The +trigger_component+ slot allows you to render a fully custom trigger
+    # The +with_trigger_component+ setter allows you to render a fully custom trigger
     # component. Your component should be a subclass of Gustwave::Dropdowns::Triggers::Base
     # or handle the configuration hash passed to the constructor to generate the
     # required +data-dropdown-*+ attributes.
     #
     # @param options [Hash] additional HTML attributes passed to the surrounding HTML element, and its +tag+, see Gustwave::Dropdowns::Triggers::Generic.
-    renders_one_extensible :trigger_slot, types: {
+    renders_one_extensible :trigger, types: {
       generic: ->(**options) {
         config = configure_html_attributes(options, **trigger_config)
         Gustwave::Dropdowns::Triggers::Generic.new(**config)
       },
-      # Use the +trigger_component+ slot when want to call a custom trigger
+      # Use the +with_trigger_component+ setter when you want to call a custom trigger
       # component
       #
-      # In most cases the generic +trigger+ slot is sufficient.
+      # In most cases the generic +with_trigger_generic+ setter is sufficient.
       #
       # @param args [Array] the arguments to pass to the component.
       # @param component [Class] the component to render as the trigger. Should be a subclass of Gustwave::Dropdowns::Triggers::Base to handle the trigger's +data-dropdown-*+ attributes.
@@ -80,10 +80,8 @@ module Gustwave
         component.new(*args, **config)
       }
     }
-    alias trigger with_trigger_slot_generic
-    alias trigger_component with_trigger_slot_component
 
-    # Use the +menu+ or +generic_menu+ slot to render the dropdown menu
+    # Use the +menu+ slot, with +with_menu_list+ or +with_menu_generic+, to render the dropdown menu
     #
     # Note: The +menu+ type slots are optional. The trigger will show any HTML
     # element that matches Gustwave::Dropdown#menu_id
@@ -95,7 +93,7 @@ module Gustwave
     # @see Gustwave::Dropdowns::Menus::List
     # @see list_menu_class
     # @see Gustwave::Dropdowns::Menus::Generic
-    renders_one_extensible :menu_slot, types: {
+    renders_one_extensible :menu, types: {
       list: ->(content_for: nil, list_options: {}, **options) {
         config = configure_html_attributes(options, content_for:, id: menu_id)
         component = list_menu_class.to_s.constantize.new(**config)
@@ -107,8 +105,6 @@ module Gustwave
         Gustwave::Dropdowns::Menus::Generic.new(text, **config)
       }
     }
-    alias menu with_menu_slot_list
-    alias generic_menu with_menu_slot_generic
 
     # @param text [String, nil] the text to appear on the dropdown button. Takes precedent over block content.
     # @param menu_id [String, nil] the id of the target element. If not provided, a random id will be generated.
@@ -136,7 +132,7 @@ module Gustwave
     end
 
     def call
-      safe_join([ trigger_slot || default_trigger, menu_slot ])
+      safe_join([ trigger || default_trigger, menu ])
     end
 
     private

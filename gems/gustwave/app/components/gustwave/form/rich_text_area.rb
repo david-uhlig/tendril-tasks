@@ -8,13 +8,9 @@ module Gustwave
       toggle :sticky_toolbar, part: :toolbar_container, default: true,
                               on: "group-focus-within:sticky group-hover:sticky top-0 z-10"
 
-      renders_one_extensible :toolbar_slot, ->(&block) { block&.call }
-      alias with_toolbar with_toolbar_slot
-      alias toolbar with_toolbar_slot
+      renders_one_extensible :toolbar, ->(&block) { block&.call }
 
-      renders_one_extensible :editor_slot, ->(&block) { block&.call }
-      alias with_editor with_editor_slot
-      alias editor with_editor_slot
+      renders_one_extensible :editor, ->(&block) { block&.call }
 
       def initialize(form = nil,
                      attribute = nil,
@@ -33,11 +29,11 @@ module Gustwave
       private
 
       def render_toolbar
-        @render_toolbar ||= toolbar_slot? ? toolbar_slot : default_toolbar
+        @render_toolbar ||= toolbar? ? toolbar : default_toolbar
       end
 
       def render_editor
-        @render_editor ||= editor_slot? ? editor_slot : default_editor
+        @render_editor ||= editor? ? editor : default_editor
       end
 
       def default_toolbar

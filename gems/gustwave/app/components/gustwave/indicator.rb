@@ -50,13 +50,12 @@ module Gustwave
 
     part :legend, "flex items-center text-sm font-medium text-gray-900 dark:text-white gap-1.5"
 
-    renders_one_extensible :legend_slot, ->(text = nil, **options, &block) {
+    renders_one_extensible :legend, ->(text = nil, **options, &block) {
       @legend_config = attributes_for(:legend, options)
       @legend_content = text || block.call
 
       nil
     }
-    alias legend with_legend_slot
 
     # @param text [String] the text to display in the indicator. Takes precedence over block content.
     # @param color [Symbol] the color for the indicator. Pass in :none to define your own styles.
@@ -92,7 +91,7 @@ module Gustwave
     attr_reader :config, :legend_config, :legend_content, :options, :text
 
     def render_legend_wrapper(&block)
-      return block.call unless legend_slot?
+      return block.call unless legend?
 
       tag.span(**legend_config) do
         safe_join([ block.call, legend_content ])

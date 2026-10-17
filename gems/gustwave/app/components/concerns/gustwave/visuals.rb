@@ -26,18 +26,18 @@ module Gustwave
   #
   # === Basic usage
   #   render Gustwave::Buttons::Base.new do |button|
-  #     button.leading_image src: "icon.svg", alt: "Icon description"
+  #     button.with_leading_visual_image src: "icon.svg", alt: "Icon description"
   #     "Submit"
   #   end
   #
   # === With custom options
   #   render Gustwave::Buttons::Base.new do |button|
-  #     button.leading_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
+  #     button.with_leading_visual_image src: "icon.svg", alt: "Icon description", class: "w-10 h-10 me-4"
   #     "Submit"
   #   end
   #
   # === Custom visual components
-  # Pass any component with +leading_renderable+ or +trailing_renderable+.
+  # Pass any component with +with_leading_visual_renderable+ or +with_trailing_visual_renderable+.
   # If it implements +apply_slot_context+, the component calls it when the slot
   # is set, with:
   # - +slot:+ [Symbol] +:leading_visuals+ or +:trailing_visuals+.
@@ -64,7 +64,7 @@ module Gustwave
   #     end
   #   end
   #
-  #   button.leading_renderable(MyAvatar.new("me.png", class: "rounded-full"))
+  #   button.with_leading_visual_renderable(MyAvatar.new("me.png", class: "rounded-full"))
   #
   # === Adding a visual type to a component
   # Extend the including component whenever it loads, so the type survives
@@ -117,11 +117,6 @@ module Gustwave
           Gustwave::Indicator.new(text, **config, &block)
         }
       }, renderable: :visual_context
-      alias leading_icon with_leading_visual_icon
-      alias leading_image with_leading_visual_image
-      alias leading_svg with_leading_visual_svg
-      alias leading_indicator with_leading_visual_indicator
-      alias leading_renderable with_leading_visual_renderable
 
       renders_many_extensible :trailing_visuals, types: {
         icon: ->(name, theme: :outline, **options) {
@@ -149,11 +144,6 @@ module Gustwave
           Gustwave::Indicator.new(text, **config, &block)
         }
       }, renderable: :visual_context
-      alias trailing_icon with_trailing_visual_icon
-      alias trailing_image with_trailing_visual_image
-      alias trailing_svg with_trailing_visual_svg
-      alias trailing_indicator with_trailing_visual_indicator
-      alias trailing_renderable with_trailing_visual_renderable
     end
 
     private

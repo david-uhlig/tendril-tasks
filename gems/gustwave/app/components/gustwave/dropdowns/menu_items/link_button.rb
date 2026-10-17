@@ -15,17 +15,17 @@ module Gustwave
       # Calling the component with the +trailing_icon+ parameter:
       #
       #   <%= render Gustwave::Dropdown.new "Dropdown" do |dropdown| %>
-      #     <% dropdown.menu do |menu| %>
-      #       <% menu.link "Menu Item", trailing_icon: :check, href: "#" %>
+      #     <% dropdown.with_menu_list do |menu| %>
+      #       <% menu.with_item_link "Menu Item", trailing_icon: :check, href: "#" %>
       #     <% end %>
       #   <% end %>
       #
       # Is equivalent to:
       #
       #   <%= render Gustwave::Dropdown.new "Dropdown" do |dropdown| %>
-      #     <% dropdown.menu do |menu| %>
-      #       <% menu.link "Menu Item", href: "#" do |link| %>
-      #         <% link.trailing_icon :check, class: "ms-auto h-[1.5em]" %>
+      #     <% dropdown.with_menu_list do |menu| %>
+      #       <% menu.with_item_link "Menu Item", href: "#" do |link| %>
+      #         <% link.with_trailing_visual_icon :check, class: "ms-auto h-[1.5em]" %>
       #       <% end %>
       #     <% end %>
       #   <% end %>
@@ -59,8 +59,8 @@ module Gustwave
 
         def call
           render button_component do
-            it.leading_icon(icon, class: classes(:leading_icon)) if icon
-            it.trailing_icon(trailing_icon, class: classes(:trailing_icon)) if trailing_icon
+            it.with_leading_visual_icon(icon, class: classes(:leading_icon)) if icon
+            it.with_trailing_visual_icon(trailing_icon, class: classes(:trailing_icon)) if trailing_icon
             text_or_content(text)
           end
         end
