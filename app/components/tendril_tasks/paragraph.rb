@@ -22,8 +22,12 @@ module TendrilTasks
 
     def call
       tag.p **@options do
-        text_or_content
+        text_or_content(text)
       end
     end
+
+    private
+
+    attr_reader :text
   end
 end

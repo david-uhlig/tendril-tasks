@@ -6,16 +6,9 @@ module Gustwave
       class TextOrContent
         include Gustwave::ContentHelper
 
-        def initialize(text = nil)
-          @text = text
-        end
-
         def content
           "text_as_content_block"
         end
-
-        private
-        attr_reader :text
       end
     end
   end
@@ -29,25 +22,27 @@ class TextOrContentWithSlotComponent < Gustwave::Component
   end
 
   def call
-    safe_join([ text_or_content, title ].compact)
+    safe_join([ text_or_content(text), title ].compact)
   end
+
+  private
+  attr_reader :text
 end
 
 RSpec.describe Gustwave::ContentHelper, type: :helper do
   describe "#text_or_content" do
-    let(:component) { Gustwave::Specs::ContentHelper::TextOrContent.new("text_as_instance_variable") }
+    let(:component) { Gustwave::Specs::ContentHelper::TextOrContent.new }
 
-    it "returns the text argument when it is present" do
-      expect(component.text_or_content(text: "text_as_argument")).to eq("text_as_argument")
+    it "returns the argument when it is present" do
+      expect(component.text_or_content("text_as_argument")).to eq("text_as_argument")
     end
 
-    it "returns the instance variable when the text parameter is not present" do
-      expect(component.text_or_content).to eq("text_as_instance_variable")
+    it "returns the content block when the argument is nil" do
+      expect(component.text_or_content(nil)).to eq("text_as_content_block")
     end
 
-    it "returns the content block when the text parameter is not present and the instance variable is not present" do
-      component = Gustwave::Specs::ContentHelper::TextOrContent.new
-      expect(component.text_or_content).to eq("text_as_content_block")
+    it "returns the content block when the argument is blank" do
+      expect(component.text_or_content("")).to eq("text_as_content_block")
     end
   end
 end

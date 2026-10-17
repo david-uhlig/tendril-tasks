@@ -27,7 +27,7 @@ module Gustwave
 
         def call
           content_tag(tag, config) do
-            text_or_content
+            text_or_content(text)
           end
         end
 

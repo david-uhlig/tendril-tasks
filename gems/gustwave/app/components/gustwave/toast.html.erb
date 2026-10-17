@@ -1,5 +1,5 @@
 <%= tag.div **@options do %>
-  <%= text_or_content %>
+  <%= text_or_content(text) %>
 
   <% if dismissible? %>
     <%= render Gustwave::DismissButton.new(@id,

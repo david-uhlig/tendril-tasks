@@ -60,12 +60,12 @@ module Gustwave
     end
 
     def before_render
-      @config[:id] ||= strip_tags(text_or_content).parameterize.presence || "#{FALLBACK_ID_PREFIX}-#{SecureRandom.hex(4)}"
+      @config[:id] ||= strip_tags(text_or_content(text)).parameterize.presence || "#{FALLBACK_ID_PREFIX}-#{SecureRandom.hex(4)}"
     end
 
     def call
       content_tag tag, config do
-        text_or_content
+        text_or_content(text)
       end
     end
 

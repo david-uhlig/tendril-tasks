@@ -191,7 +191,7 @@ module Gustwave
       content_tag html_tag, config do
         slots_and_content(
           leading_visuals,
-          text_or_content,
+          text_or_content(text),
           trailing_visuals,
           dismiss_button_slot,
           append_content: false
@@ -200,10 +200,10 @@ module Gustwave
     end
 
     private
-    attr_reader :html_tag, :config
+    attr_reader :html_tag, :config, :text
 
     def has_content?
-      @has_content ||= text_or_content.present?
+      @has_content ||= text_or_content(text).present?
     end
 
     # A badge renders the type of any tag

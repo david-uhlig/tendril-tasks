@@ -29,7 +29,7 @@ module Gustwave
 
     def call
       tag.div **@options do
-        concat text_or_content
+        concat text_or_content(text)
         concat popper_arrow
       end
     end
@@ -46,6 +46,8 @@ module Gustwave
     end
 
     private
+
+    attr_reader :text
 
     def popper_arrow
       return nil unless @arrow

@@ -58,7 +58,7 @@ module TendrilTasks
 
     def call
       render Gustwave::Heading.new(**config) do
-        text_or_content
+        text_or_content(text)
       end
     end
 

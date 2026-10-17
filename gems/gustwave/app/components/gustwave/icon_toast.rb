@@ -49,5 +49,9 @@ module Gustwave
       @icon = icon.presence || derived_value(:icon)
       @options = attributes_for(options)
     end
+
+    private
+
+    attr_reader :text
   end
 end

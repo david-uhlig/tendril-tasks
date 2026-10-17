@@ -180,10 +180,10 @@ module Gustwave
     end
 
     private
-    attr_reader :config
+    attr_reader :config, :text
 
     def body
-      safe_join([ title_tag, text_or_content ].compact, " ")
+      safe_join([ title_tag, text_or_content(text) ].compact, " ")
     end
 
     def title_tag

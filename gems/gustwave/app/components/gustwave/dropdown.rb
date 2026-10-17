@@ -151,7 +151,7 @@ module Gustwave
         end
 
       render component.new(**trigger_config) do
-        text_or_content
+        text_or_content(text)
       end
     end
 

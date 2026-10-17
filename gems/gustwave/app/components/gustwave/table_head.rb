@@ -77,7 +77,7 @@ module Gustwave
 
       def call
         render Gustwave::TableCell.new(**config) do
-          text_or_content
+          text_or_content(text)
         end
       end
 

@@ -26,12 +26,12 @@ module Gustwave
       safe_join(slots.compact)
     end
 
-    # Returns the provided text argument, instance variable @text, or the component's content (block).
+    # Returns the given value if it is present, otherwise the component's content (block).
     #
-    # @param text [String, nil] the text to return if provided. Takes precedence over +@text+ and the content (block).
-    # @return [String] The resolved text or content. The precedence is +text+ > +@text+ > content (block).
-    def text_or_content(text: nil)
-      text.presence || @text.presence || content
+    # @param text [Object, nil] the value to return if present: a String or any other renderable value, e.g. an html_safe span or a rich text object.
+    # @return [Object] the given value, or the content (block) if the value is blank.
+    def text_or_content(text)
+      text.presence || content
     end
   end
 end

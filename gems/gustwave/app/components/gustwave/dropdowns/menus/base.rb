@@ -69,7 +69,7 @@ module Gustwave
         def call
           content_for_wrapper do
             content_tag menu_tag, **config do
-              safe_join([ header_slot, text_or_content, footer_slot ])
+              safe_join([ header_slot, text_or_content(text), footer_slot ])
             end
           end
         end

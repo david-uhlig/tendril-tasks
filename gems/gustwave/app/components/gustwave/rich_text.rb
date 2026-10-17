@@ -17,11 +17,13 @@ module Gustwave
 
     def call
       tag.div **@options do
-        render_rich_text(text_or_content)
+        render_rich_text(text_or_content(text))
       end
     end
 
     private
+
+    attr_reader :text
 
     def render_rich_text(html)
       if html.is_a?(ActionText::RichText)
