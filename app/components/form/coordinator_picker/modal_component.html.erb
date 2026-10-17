@@ -42,7 +42,7 @@
     </div>
 
     <%= tag.div class: Modal::ShellComponent::FOOTER_CLASS do %>
-      <%= render Gustwave::Button
+      <%= render Gustwave::Buttons::Default
                    .new(type: :submit,
                         class: "w-full",
                         data: { "modal-hide": @id })

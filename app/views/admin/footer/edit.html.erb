@@ -41,7 +41,7 @@
       </div>
 
       <div class="content-end">
-        <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
       </div>

@@ -34,10 +34,10 @@ module TendrilTasks
                  edit_task_path(@element) : edit_project_path(@element)
 
         tag.li class: "inline-flex" do
-          render Gustwave::Button.new(tag: :a,
-                                      href: href,
-                                      color: :default,
-                                      size: :sm) do |button|
+          render Gustwave::Buttons::Default.new(tag: :a,
+                                                href: href,
+                                                color: :default,
+                                                size: :sm) do |button|
             button.with_leading_visual_icon(:edit)
             tag.span t(".edit_button")
           end
@@ -48,13 +48,13 @@ module TendrilTasks
         return unless can?(:create, Task)
 
         tag.li class: "inline-flex" do
-          render Gustwave::Button.new(tag: :a,
-                                      href: new_task_from_preset_path(
-                                        project_id: @project.id,
-                                        coordinator_ids: @project.coordinator_ids.join("-")
-                                      ),
-                                      color: :default,
-                                      size: :sm) do |button|
+          render Gustwave::Buttons::Default.new(tag: :a,
+                                                href: new_task_from_preset_path(
+                                                  project_id: @project.id,
+                                                  coordinator_ids: @project.coordinator_ids.join("-")
+                                                ),
+                                                color: :default,
+                                                size: :sm) do |button|
             button.with_leading_visual_icon(:plus)
             tag.span(t(".add_task_button"))
           end
@@ -65,11 +65,10 @@ module TendrilTasks
         return unless can?(:create, Project)
 
         tag.li class: "inline-flex" do
-          render Gustwave::Button.new(tag: :a,
-                                      href: new_project_path,
-                                      theme: :default_outline,
-                                      color: :default,
-                                      size: :sm) do |button|
+          render Gustwave::Buttons::DefaultOutline.new(tag: :a,
+                                                       href: new_project_path,
+                                                       color: :default,
+                                                       size: :sm) do |button|
             button.with_leading_visual_icon(:plus)
             tag.span(t(".add_project_button"))
           end

@@ -4,21 +4,19 @@
              method: rocketchat_sign_in_method,
              class: "text-center lg:text-start" do %>
   <div class="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start" role="group">
-    <%= render Gustwave::Button.new(type: :submit,
-                                    theme: :gradient_duotone,
-                                    color: :purple_to_blue,
-                                    size: :xl,
-                                    data: { turbo: false }) do |login_button| %>
+    <%= render Gustwave::Buttons::GradientDuotone.new(type: :submit,
+                                                      color: :purple_to_blue,
+                                                      size: :xl,
+                                                      data: { turbo: false }) do |login_button| %>
       <% login_button.with_leading_visual_svg("rocketchat/icon-white.svg") %>
 
       <%= t "rocketchat.sign_in_button.long",
             brand: RocketChatConfig.branding %>
     <% end %>
 
-    <%= render Gustwave::Button
+    <%= render Gustwave::Buttons::DefaultOutline
                  .new(tag: :a,
                       href: "#home-how-it-works",
-                      theme: :outline,
                       color: :white,
                       size: :xl)
                  .with_content(t(".how_it_works")) %>

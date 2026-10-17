@@ -46,7 +46,7 @@
       </div>
 
       <div class="content-end [&_button]:w-full sm:[&_button]:w-auto">
-        <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
       </div>
@@ -82,15 +82,15 @@
 
     <div class="flex flex-wrap">
       <div class="whitespace-nowrap space-x-2 pe-3 pb-6 w-full [&_button]:w-1/2">
-        <%= render Gustwave::Button.new(type: :submit,
-                                        size: :md,
-                                        color: :red,
-                                        form: "reset-site-logo") do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit,
+                                                  size: :md,
+                                                  color: :red,
+                                                  form: "reset-site-logo") do %>
           <%= t("forms.reset") %>
         <% end %>
 
-        <%= render Gustwave::Button.new(type: :submit,
-                                        size: :md) do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit,
+                                                  size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
       </div>
@@ -130,7 +130,7 @@
       </div>
 
       <div class="content-end">
-        <%= render Gustwave::Button.new(type: :submit, size: :md) do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit, size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
       </div>
@@ -187,15 +187,15 @@
 
     <div class="flex flex-wrap">
       <div class="whitespace-nowrap space-x-2 pe-3 pb-6 w-full [&_button]:w-1/2">
-        <%= render Gustwave::Button.new(type: :submit,
-                                        size: :md,
-                                        color: :red,
-                                        form: "reset-site-hero-image") do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit,
+                                                  size: :md,
+                                                  color: :red,
+                                                  form: "reset-site-hero-image") do %>
           <%= t("forms.reset") %>
         <% end %>
 
-        <%= render Gustwave::Button.new(type: :submit,
-                                        size: :md) do %>
+        <%= render Gustwave::Buttons::Default.new(type: :submit,
+                                                  size: :md) do %>
           <%= t("forms.save") %>
         <% end %>
       </div>

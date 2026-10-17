@@ -22,9 +22,9 @@
           <%= link_to_if exists, t("pages.#{slug}.title"), legal_path(slug), class: "hover:underline" %>
         <% end %>
 
-        <%= render Gustwave::Button.new(exists ? t(".edit") : t(".create"),
-                                        tag: :a,
-                                        href: edit_legal_path(slug)) do |button| %>
+        <%= render Gustwave::Buttons::Default.new(exists ? t(".edit") : t(".create"),
+                                                  tag: :a,
+                                                  href: edit_legal_path(slug)) do |button| %>
           <% button.with_leading_visual_icon(exists ? :edit : :plus) %>
         <% end %>
       <% end %>

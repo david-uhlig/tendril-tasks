@@ -11,8 +11,7 @@
       <%# Login button %>
       <% unless user_signed_in? %>
         <%= form_tag rocketchat_sign_in_path, method: rocketchat_sign_in_method do %>
-          <%= render Gustwave::Button.new(
-            theme: :gradient_duotone,
+          <%= render Gustwave::Buttons::GradientDuotone.new(
             color: :purple_to_blue,
             size: :xs,
             data: { turbo: false },

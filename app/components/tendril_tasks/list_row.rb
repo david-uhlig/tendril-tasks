@@ -13,7 +13,7 @@ module TendrilTasks
   #     <% end %>
   #     <% row.with_title user.name %>
   #
-  #     <%= render Gustwave::Button.new(t(".edit")) %>
+  #     <%= render Gustwave::Buttons::Default.new(t(".edit")) %>
   #   <% end %>
   #
   # @param options [Hash] HTML attributes passed to the +li+ element.

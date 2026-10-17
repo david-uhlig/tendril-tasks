@@ -1,7 +1,7 @@
 <%= render Form::BaseFieldComponent.new(@form, @attribute, @label, **@options) do %>
   <%= render Form::CoordinatorPicker::AssigneeComponent.new(@form.object.coordinators) %>
 
-  <%= render Gustwave::Button.new(
+  <%= render Gustwave::Buttons::Default.new(
         color: :alternative,
         id: "edit-coordinator-assignment",
         data: {

@@ -1,25 +1,23 @@
 <%# locals: (applied:) %>
 <%# On the hero picture, aligned left on wide screens. Finding a task comes first, then the user's own applications or else the initiatives %>
 <div class="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start" role="group">
-  <%= render Gustwave::Button
+  <%= render Gustwave::Buttons::Default
                .new(tag: :a,
                     href: tasks_path,
                     size: :lg)
                .with_content(t(".find_task")) %>
 
   <% if applied %>
-    <%= render Gustwave::Button
+    <%= render Gustwave::Buttons::DefaultOutline
                  .new(tag: :a,
                       href: dashboard_path,
-                      theme: :outline,
                       color: :white,
                       size: :lg)
                  .with_content(t(".my_applications")) %>
   <% else %>
-    <%= render Gustwave::Button
+    <%= render Gustwave::Buttons::DefaultOutline
                  .new(tag: :a,
                       href: projects_path,
-                      theme: :outline,
                       color: :white,
                       size: :lg)
                  .with_content(t(".browse_initiatives")) %>
