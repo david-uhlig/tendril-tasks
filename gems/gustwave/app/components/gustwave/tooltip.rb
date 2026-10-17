@@ -3,7 +3,8 @@
 module Gustwave
   # A short text that appears next to a trigger element, using Flowbite's
   # tooltip. Spread +trigger_options+ into the trigger, which also points
-  # +aria-describedby+ at the tooltip.
+  # +aria-describedby+ at the tooltip. Pass the trigger's own
+  # +aria-describedby+ to +trigger_options+ to keep it.
   #
   # Render the tooltip anywhere on the page; it doesn't need to follow its
   # trigger. The arrow is drawn by its +::before+ only: the +::after+ of
@@ -70,19 +71,47 @@ module Gustwave
       end
     end
 
-    def trigger_options(placement: DEFAULT, trigger: DEFAULT)
-      options = {}
+    # Returns the HTML attributes that attach the trigger to the tooltip.
+    #
+    # Pass the trigger's own +aria-describedby+ in +attributes+ to keep it: it
+    # is joined with the tooltip's id. Given to the trigger next to
+    # +trigger_options+, it is lost. The other +attributes+ are returned as
+    # they are.
+    #
+    #   <%= link_to "Docs", docs_path, **tooltip.trigger_options("aria-describedby": "help", class: "underline") %>
+    #
+    # @param attributes [Hash] the trigger's own HTML attributes.
+    def trigger_options(placement: DEFAULT, trigger: DEFAULT, **attributes)
+      described_by, options = extract_described_by(attributes)
       options["data-tooltip-target"] = @id
       options["data-tooltip-placement"] = option_value(:placement, placement:)
       options["data-tooltip-trigger"] = option_value(:trigger, trigger:)
       options["data-tooltip-style"] = "light" if option_value(:color) == :light
-      options["aria-describedby"] = @id
+      options["aria-describedby"] = [ *described_by, @id ].uniq.join(" ")
       options
     end
 
     private
 
     attr_reader :text
+
+    # Splits the ids of +aria-describedby+, flat or within an +aria+ hash, off
+    # +attributes+.
+    def extract_described_by(attributes)
+      ids = []
+      options = attributes.each_with_object({}) do |(key, value), remaining|
+        if key.to_s == "aria-describedby"
+          ids << value
+        elsif key.to_s == "aria" && value.is_a?(Hash)
+          aria = value.reject { |aria_key, _| aria_key.to_s == "describedby" }
+          ids << value.find { |aria_key, _| aria_key.to_s == "describedby" }&.last
+          remaining[key] = aria if aria.present?
+        else
+          remaining[key] = value
+        end
+      end
+      [ ids.flat_map { Array(it).flat_map { |id| id.to_s.split } }, options ]
+    end
 
     def popper_arrow
       return nil unless @arrow
