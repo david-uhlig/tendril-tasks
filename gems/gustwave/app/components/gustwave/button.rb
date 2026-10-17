@@ -67,7 +67,7 @@ module Gustwave
   #
   #   render Gustwave::Button.new("Click me", theme: :monochrome_button)
   #
-  class Button < Gustwave::Component
+  class Button
     include Gustwave::Themeable
 
     register_theme :default, "Gustwave::Buttons::Default"
@@ -80,7 +80,6 @@ module Gustwave
     register_theme :gradient_duotone_outline, "Gustwave::Buttons::GradientDuotoneOutline"
     register_theme :inline, "Gustwave::Buttons::Inline"
     with_default_theme :default
-    delegate_missing_to :themed_button
 
     # Returns the themed button class for +theme+.
     #
@@ -90,27 +89,6 @@ module Gustwave
       themed_component(theme)
     end
 
-    # @param [String, nil] text The text to display on the button. Takes precedent over the block content.
-    # @param [Symbol] theme The theme to use for the button. Gustwave defines :default, :default_outline, :gradient_monochrome, :gradient_monochrome_colored_shadow, :gradient_duotone, :gradient_duotone_outline, and :inline. See all available themes by running
-    #   Gustwave::Button.themes! Defaults to :default.
-    # @param [Hash] options The theme's arguments, e.g. +tag+, +type+, +color+, +size+ and +pill+ for Gustwave::Buttons::Base, and HTML attributes to add to the button, e.g. :class to overwrite some of the theme's styles.
-    def initialize(text = nil, theme: DEFAULT, **options)
-      @theme = theme
-      @text = text
-      @options = options
-    end
-
-    def call
-      render themed_button do
-        content
-      end
-    end
-
-    private
-    attr_reader :theme, :text, :options
-
-    def themed_button
-      @themed_button ||= self.class.themed_component(theme).new(text, **options)
-    end
+    private_class_method :new
   end
 end
