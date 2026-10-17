@@ -24,6 +24,21 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Generic, type: :component do
     end
   end
 
+  context "with data attributes" do
+    it "keeps the menu id next to the caller's data" do
+      render_inline(described_class.new(menu_id: "dropdown-menu", data: { controller: "x" })) { "content" }
+
+      expect(rendered_content).to have_selector("div[data-controller='x'][data-dropdown-toggle='dropdown-menu']")
+    end
+
+    it "does not let the caller's data override the menu id" do
+      render_inline(described_class.new(menu_id: "dropdown-menu", data: { "dropdown-toggle": "other" })) { "content" }
+
+      expect(rendered_content).to have_selector("div[data-dropdown-toggle='dropdown-menu']")
+      expect(rendered_content).not_to have_selector("div[data-dropdown-toggle='other']")
+    end
+  end
+
   context "with tag parameter" do
     it "renders the tag" do
       render_inline(described_class.new(tag: :span, menu_id: "dropdown-menu"))

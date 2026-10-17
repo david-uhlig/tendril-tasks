@@ -40,6 +40,21 @@ RSpec.describe Gustwave::Dropdown, type: :component do
     end
   end
 
+  context "with data attributes" do
+    it "keeps the menu id next to the caller's data" do
+      render_inline(described_class.new("Menu", menu_id: "m", data: { controller: "x" }))
+
+      expect(rendered_content).to have_selector("button[data-controller='x'][data-dropdown-toggle='m']")
+    end
+
+    it "does not let the caller's data override the menu id" do
+      render_inline(described_class.new("Menu", menu_id: "m", data: { "dropdown-toggle": "other" }))
+
+      expect(rendered_content).to have_selector("button[data-dropdown-toggle='m']")
+      expect(rendered_content).not_to have_selector("button[data-dropdown-toggle='other']")
+    end
+  end
+
   context "with a configurable list menu class" do
     let!(:badge_list) do
       stub_const("DropdownSpecBadgeList", Class.new(Gustwave::Dropdowns::Menus::List) {
