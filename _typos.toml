@@ -1,29 +1,26 @@
-# Spell check config for `mise run lint:typos`
+# Spell check config for `mise run lint:typos`. typos only knows English, so
+# German text is skipped instead of allowlisted word by word.
 [files]
 extend-exclude = [
   "config/locales/*de.yml",
+  # The app's specs assert German UI strings throughout.
+  "/spec/",
   "app/assets/stylesheets/inter-font.css",
   "vendor/",
   "app/assets/builds/",
   "*.svg",
 ]
 
+[default]
+extend-ignore-re = [
+  # The `de:` block of a component's translation file, up to the next
+  # top-level key.
+  "(?ms)^de:$.*?(?:\\z|^\\S)",
+]
+
 [default.extend-words]
 # Devise module name
 rememberable = "rememberable"
-# German UI strings in specs and component translation files
-adresse = "adresse"
-aktion = "aktion"
-alle = "alle"
-deine = "deine"
-ein = "ein"
-foto = "foto"
-ist = "ist"
-oder = "oder"
-pn = "pn"
-sie = "sie"
-suche = "suche"
-titel = "titel"
 # Deliberate misspellings that test "Did you mean" errors
 buton = "buton"
 sise = "sise"
