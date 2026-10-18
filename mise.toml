@@ -135,7 +135,7 @@ description = "Tests: RSpec, the whole suite in parallel"
 run = "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup parallel:spec"
 
 [tasks."test:ff"]
-description = "Tests: RSpec (fail fast; no coverage). Pass spec paths to run only those"
+description = "Tests: RSpec (fail fast; no coverage). Pass spec paths to run only those; fewer than 4 spec files or PARALLEL_PROCESSES=1 run in one process"
 usage = 'arg "[paths]..." help="Spec files or directories, default: spec/"'
 run = "bin/parallel-ff-ai-spec ${usage_paths:-}"
 quiet = true

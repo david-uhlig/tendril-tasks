@@ -19,16 +19,26 @@ fi
 #  | sed '/Database .* already exists/d'
 #set +o pipefail
 
-# 3. Run the given spec paths (default: the whole suite). Fewer files than
-#    processes run in one process, which skips parallel_rspec's startup cost.
+# 3. Run the given spec paths (default: the whole suite). Fewer spec files
+#    than processes, counting the ones inside directories, run in one process,
+#    which skips parallel_rspec's startup cost. PARALLEL_PROCESSES=1 always
+#    runs in one process.
 paths=("$@")
 [ "${#paths[@]}" -eq 0 ] && paths=(spec/)
 
-single=true
-[ "${#paths[@]}" -ge "$PROCESSES" ] && single=false
+files=0
 for path in "${paths[@]}"; do
-  [ -d "${path%%:*}" ] && single=false
+  if [ -d "${path%%:*}" ]; then
+    files=$((files + $(find "${path%%:*}" -name '*_spec.rb' | wc -l)))
+  else
+    files=$((files + 1))
+  fi
 done
+
+single=false
+if [ "$PROCESSES" -eq 1 ] || [ "$files" -lt "$PROCESSES" ]; then
+  single=true
+fi
 
 rspec_options=(--format RSpec::AiFormatter::Formatter --fail-fast)
 if [ "$single" = true ]; then
