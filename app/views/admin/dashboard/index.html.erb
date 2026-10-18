@@ -118,7 +118,7 @@
       <% end %>
 
       <% if @stats.active_job.fetch(:in_progress, 0) > 0 %>
-        <% card.with_badge color: :indigo, icon: :hourglas do %>
+        <% card.with_badge color: :indigo, icon: :hourglass do %>
           <%= t("admin.monitoring.jobs.in_progress", count: @stats.active_job.fetch(:in_progress)) %>
         <% end %>
       <% end %>
