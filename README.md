@@ -9,7 +9,7 @@ _Together, individual efforts intertwine, sparking growth that allows the entire
 ## About
 
 [![Static Badge](https://img.shields.io/badge/License-O'Saasy-gold)][license]
-[![GitHub Release](https://img.shields.io/github/v/release/david-uhlig/tendril-tasks)][release]
+[![GitHub Release](https://badgen.net/github/release/david-uhlig/tendril-tasks)][release]
 [![CI](https://github.com/david-uhlig/tendril-tasks/actions/workflows/ci.yml/badge.svg)](https://github.com/david-uhlig/tendril-tasks/actions/workflows/ci.yml)
 
 Tendril Tasks is a task distribution application that allows collectives and organizations to communicate areas of need and efficiently distribute tasks to their members. It comes with a beautiful, intuitive, and responsive interface that makes it easy to manage tasks.
