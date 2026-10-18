@@ -65,6 +65,46 @@ RSpec.describe Gustwave::Dropdown, type: :component do
     end
   end
 
+  context "with trigger settings" do
+    it "renders the trigger_event as data attribute" do
+      render_inline(described_class.new("Menu", trigger_event: :hover))
+
+      expect(rendered_content).to have_selector("button[data-dropdown-trigger='hover']")
+    end
+
+    it "renders the delay as data attribute" do
+      render_inline(described_class.new("Menu", delay: 500))
+
+      expect(rendered_content).to have_selector("button[data-dropdown-delay='500']")
+    end
+
+    it "renders the placement as data attribute" do
+      render_inline(described_class.new("Menu", placement: :top))
+
+      expect(rendered_content).to have_selector("button[data-dropdown-placement='top']")
+    end
+
+    it "renders the offset_distance as data attribute" do
+      render_inline(described_class.new("Menu", offset_distance: 10))
+
+      expect(rendered_content).to have_selector("button[data-dropdown-offset-distance='10']")
+    end
+
+    it "renders the offset_skidding as data attribute" do
+      render_inline(described_class.new("Menu", offset_skidding: 5))
+
+      expect(rendered_content).to have_selector("button[data-dropdown-offset-skidding='5']")
+    end
+
+    it "passes the placement to a generic trigger" do
+      render_inline(described_class.new(placement: :top)) do |dropdown|
+        dropdown.with_trigger_generic { "Trigger" }
+      end
+
+      expect(rendered_content).to have_selector("[data-dropdown-placement='top']", text: "Trigger")
+    end
+  end
+
   context "with a configurable list menu class" do
     let!(:badge_list) do
       stub_const("DropdownSpecBadgeList", Class.new(Gustwave::Dropdowns::Menus::List) {

@@ -16,7 +16,7 @@ module Gustwave
         # @param trigger_event [Symbol] the trigger event for the dropdown. Pass in :click (default) or :hover.
         # @param placement [Symbol] the placement of the dropdown. Options: +auto+, +auto-start+, +auto-end+, +top+, +top-start+, +top-end+, +bottom+, +bottom-start+, +bottom-end+, +right+, +right-start+, +right-end+, +left+, +left-start+, +left-end+. See: https://popper.js.org/docs/v2/constructors/#options
         #
-        # @see Gustwave::Dropdown for more options
+        # @see Gustwave::Dropdown for the other trigger settings and HTML attributes
         def initialize(
           text = nil,
           href: nil,
