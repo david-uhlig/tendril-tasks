@@ -119,6 +119,21 @@ The specs run against a minimal Rails application in `spec/dummy`. From the Tend
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 
+### Importing icons
+
+`bin/import-icon` copies [Flowbite icons](https://github.com/themesberg/flowbite-icons) into `app/assets/images/gustwave/icons` and converts them to Gustwave's form. Set `GITHUB_TOKEN` (or log in with `gh`) to avoid GitHub's rate limit.
+
+```sh
+bin/import-icon chalkboard-user                    # bare name, outline theme
+bin/import-icon solid/info-circle --as info        # THEME/CATEGORY/NAME path, renamed; --force overwrites
+bin/import-icon https://github.com/themesberg/flowbite-icons/blob/main/src/outline/education/chalkboard-user.svg
+bin/import-icon --reimport --dry-run               # compare every local icon with upstream
+bin/import-icon --reimport                         # ... and update the ones that differ
+bin/import-icon --check                            # offline: verify local icons follow the conventions
+```
+
+`--source URL` imports from another GitHub tree URL. `outline/spinner.svg` is a custom icon and is skipped by `--reimport` and `--check`.
+
 ## License
 
 Gustwave is released under the [MIT License](LICENSE.txt). It implements [Flowbite](https://flowbite.com/docs/getting-started/license/)'s open source components and ships Flowbite's icons, both also under the MIT License.

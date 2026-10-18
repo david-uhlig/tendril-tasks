@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../script/icon_import"
+
+exit Gustwave::IconImport::CLI.new(ARGV).run
