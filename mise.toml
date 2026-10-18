@@ -69,7 +69,7 @@ run = "bin/rubocop -a"
 
 [tasks."herb"]
 description = "Style: ERB"
-run = ["npx herb-lint", "npx herb-format --check"]
+run = ["npx herb-lint --log-level=error", "npx herb-format --check"]
 
 [tasks."typos"]
 description = "Style: Spell check code and docs"
@@ -95,7 +95,7 @@ if [ "${#ruby[@]}" -gt 0 ]; then
   bin/rubocop --force-exclusion --format quiet "${ruby[@]}" || status=1
 fi
 if [ "${#erb[@]}" -gt 0 ]; then
-  npx herb-lint "${erb[@]}" || status=1
+  npx herb-lint --log-level=error "${erb[@]}" || status=1
   npx herb-format --check "${erb[@]}" || status=1
 fi
 if [ "${#files[@]}" -gt 0 ]; then
@@ -111,7 +111,7 @@ run = "bin/check-gem-npm-versions"
 
 [tasks."herb:fix"]
 description = "Style: ERB (auto fix and format)"
-run = ["npx herb-lint --fix", "npx herb-format"]
+run = ["npx herb-lint --fix --log-level=error", "npx herb-format"]
 
 # Not part of CI: partials rendered by Rails and Devise internally, e.g.
 # `active_storage/blobs/_blob`, are always reported as unused.
