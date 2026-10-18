@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -e
+
+PROCESSES="${PARALLEL_PROCESSES:-4}"
+
+if ! [[ "$PROCESSES" =~ ^[1-9][0-9]*$ ]]; then
+  echo "PARALLEL_PROCESSES must be a positive integer, got: $PROCESSES" >&2
+  exit 1
+fi
+
+# 1. Copy environment files that are usually gitignored
+#    (adjust to your project: .env.test, config/master.key, config/credentials/test.key, etc.)
+# cp ../main-checkout/.env.test .env.test
+
+# 2. Create and load one test database per process, hiding "already exists" lines
+#set -o pipefail
+#RAILS_ENV=test PARALLEL_TEST_PROCESSORS="$PROCESSES" \
+#  bundle exec rake parallel:create parallel:prepare 2>&1 \
+#  | sed '/Database .* already exists/d'
+#set +o pipefail
+
+# 3. Run the given spec paths (default: the whole suite). Fewer files than
+#    processes run in one process, which skips parallel_rspec's startup cost.
+paths=("$@")
+[ "${#paths[@]}" -eq 0 ] && paths=(spec/)
+
+single=true
+[ "${#paths[@]}" -ge "$PROCESSES" ] && single=false
+for path in "${paths[@]}"; do
+  [ -d "${path%%:*}" ] && single=false
+done
+
+rspec_options=(--format RSpec::AiFormatter::Formatter --fail-fast)
+if [ "$single" = true ]; then
+  command=(bundle exec rspec "${rspec_options[@]}" "${paths[@]}")
+else
+  command=(bundle exec parallel_rspec -n "$PROCESSES" "${paths[@]}" -o "${rspec_options[*]}")
+fi
+
+set +e
+RAILS_ENV=test SKIP_COVERAGE=1 "${command[@]}" \
+  | grep --line-buffered '^{"t":"test"'
+status=("${PIPESTATUS[@]}")
+set -e
+
+# RSpec failed: pass its exit status through.
+if [ "${status[0]}" -ne 0 ]; then
+  exit "${status[0]}"
+fi
+
+# grep exits 0 when it matches, 1 when it doesn't, and 2 or more on an error.
+if [ "${status[1]}" -eq 0 ]; then
+  echo "Matching {\"t\":\"test\" lines found; failing the run." >&2
+  exit 1
+elif [ "${status[1]}" -ge 2 ]; then
+  echo "grep failed with status ${status[1]}" >&2
+  exit "${status[1]}"
+fi
