@@ -3,64 +3,44 @@
 module Gustwave
   # Use DismissButton to render a button that dismisses the target element.
   #
-  # The button is styled as a close button with an "X" icon. It closes the
+  # The button is an Inline button with an "X" icon by default. It closes the
   # element with the HTML id attribute that matches the target parameter. The
   # target element doesn't require any additional markup.
   #
   # @example
-  #   render Gustwave::DismissButton.new("my-modal", size: :lg)
-  #
-  # TODO add color support so we can dismiss colored badges
+  #   render Gustwave::DismissButton.new("my-modal", "Close modal", color: :dark, size: :lg)
   class DismissButton < Gustwave::Component
-    base "ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-
-    variant :size, default: :md, values: {
-      xs: "h-4 w-4",
-      sm: "h-5 w-5",
-      md: "h-6 w-6",
-      lg: "h-8 w-8",
-      xl: "h-10 w-10"
-    }
-
-    # @param target [String] the target selector to dismiss
-    # @param size [Symbol] the size of the button. One of :xs, :sm, :md, :lg, :xl.
-    # @param label [String] the aria label for the button
-    # @param options [Hash] optional HTML options for the button
+    # @param target [String] the id of the element to dismiss, without +#+
+    # @param text [String, nil] text to display to screen readers, rendered within +sr-only+ markup. If missing block content is rendered without +sr-only+ markup. If both are missing a localized version of "Dismiss" is used.
+    # @param theme [Symbol] the Gustwave::Button theme of the button. Defaults to :inline.
+    # @param icon [Symbol, nil] the icon of the button. Defaults to +:close+. Use +nil+ for no icon.
+    # @param icon_options [Hash] options for the icon, e.g. its +class+.
+    # @param options [Hash] HTML attributes and button options, such as +color+ and +size+, forwarded to the button. Its +data+ and +aria+ hashes merge with the defaults.
     def initialize(target,
-                   size: DEFAULT,
-                   label: nil,
+                   text = nil,
+                   theme: :inline,
+                   icon: :close,
+                   icon_options: {},
                    **options)
       @target = target
-      @label = label
-
-      select_options(size:)
-      @options = attributes_for(options)
+      @text = text
+      @theme = theme
+      @icon = icon
+      @icon_options = icon_options
+      @options = options
     end
 
     def before_render
-      @label ||= t(".close")
+      label = @text.presence || t(".dismiss")
+      a11y_text = sr_only(@text) || content.presence || sr_only(t(".dismiss"))
+      attrs = configure_html_attributes(@options, data: { dismiss_target: "##{@target}" }, aria: { label: })
+
+      @button = Gustwave::Button.for(@theme).new(a11y_text, **attrs)
+      @button.with_leading_visual_icon(@icon, stroke_width: 2, **@icon_options) if @icon
     end
 
     def call
-      render Gustwave::Button.for(options[:theme]).new(color: :none,
-                                                       data: { dismiss_target: "##{target}" },
-                                                       aria: { label: label },
-                                                       **options.except(:theme)) do
-        safe_join([ screenreader_label, close_icon ])
-      end
-    end
-
-    private
-    attr_reader :options, :target, :label
-
-    def screenreader_label
-      tag.span label, class: "sr-only"
-    end
-
-    def close_icon
-      render Gustwave::Icon.new(:close,
-                         position: :standalone,
-                         size: :md)
+      render @button
     end
   end
 end

@@ -52,4 +52,18 @@ RSpec.describe Gustwave::Toast, type: :component do
       expect(el[:class]).to include("mt-2", "shadow-sm")
     end
   end
+
+  describe "dismiss button" do
+    it "renders a button dismissing the toast" do
+      render_inline(described_class.new("text", id: "my-toast"))
+
+      expect(page).to have_selector("div#my-toast > button[data-dismiss-target='#my-toast'][aria-label='Dismiss'].h-8.w-8")
+    end
+
+    it "renders no button when not dismissible" do
+      render_inline(described_class.new("text", dismissible: false))
+
+      expect(page).not_to have_selector("button")
+    end
+  end
 end

@@ -120,23 +120,14 @@ module Gustwave
     # @param text [String, nil] text to display to screen readers. If missing block content is rendered without +sr-only+ markup. If both are missing a localized version of "Dismiss" is used.
     # @param icon [Symbol] The icon to use for the dismiss button. Defaults to +:close+.
     # @param options [Hash] Additional HTML options passed to the button component.
-    renders_one_extensible :dismiss_button, ->(text = nil, icon: :close, **options, &block) {
+    renders_one_extensible :dismiss_button, ->(text = nil, icon: :close, **options) {
       # Make sure the alert has an id that can be used to dismiss it.
       @id ||= generate_random_id(prefix: "alert")
 
-      a11y_text = sr_only(text) || (capture(&block) if block.present?) || sr_only(t(".dismiss"))
-      config = {
-        theme: :inline,
-        color: :none,
-        aria: { label: text.presence || t(".dismiss") },
-        data: { dismiss_target: "##{@id}" }
-      }.merge(attributes_for(:dismiss_button, options))
-
-      component = Gustwave::Button.for(config[:theme]).new(a11y_text, **config.except(:theme))
       # Gustwave's icons draw within the middle half of their box, so this
       # matches Flowbite's w-3 h-3 close icon
-      component.with_leading_visual_icon icon, stroke_width: 2, class: "w-6 h-6" if icon
-      component
+      Gustwave::DismissButton.new(@id, text, icon:, icon_options: { class: "w-6 h-6" },
+                                  **{ color: :none }.merge(attributes_for(:dismiss_button, options)))
     }
 
     # @param text [String, nil] Text to display within the alert. Takes precedence over block content.

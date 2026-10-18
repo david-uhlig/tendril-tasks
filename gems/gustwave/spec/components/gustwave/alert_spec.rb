@@ -122,14 +122,12 @@ RSpec.describe Gustwave::Alert, type: :component do
   end
 
   describe "dismiss button" do
-    it "renders a button dismissing the alert by a generated id" do
+    it_behaves_like "a component with a dismiss button slot", "content", id_prefix: "alert"
+
+    it "renders the icon at the size of Flowbite's close icon" do
       render_inline(described_class.new("content", color: :red), &:with_dismiss_button)
 
-      id = page.find("div[role='alert']")[:id]
-      expect(id).to start_with("alert-")
-      expect(page).to have_selector("div.flex > button[aria-label='Dismiss'][data-dismiss-target='##{id}']")
-      expect(page).to have_selector("button > span.sr-only", text: "Dismiss")
-      expect(page).to have_selector("button > svg.w-6.h-6")
+      expect(page).to have_selector("div.flex > button > svg.w-6.h-6")
     end
 
     it "renders the body in medium weight" do
@@ -151,32 +149,6 @@ RSpec.describe Gustwave::Alert, type: :component do
       expect(page).to have_selector("button.ms-auto.-mx-1\\.5.h-8.w-8.p-1\\.5.rounded-lg.focus\\:ring-2")
       expect(page).not_to have_selector("button.bg-transparent")
       expect(page).not_to have_selector("button.rounded-xs")
-    end
-
-    it "reuses a given id" do
-      render_inline(described_class.new("content", id: "my-alert"), &:with_dismiss_button)
-
-      expect(page).to have_selector("div#my-alert")
-      expect(page).to have_selector("button[data-dismiss-target='#my-alert']")
-    end
-
-    it "uses a custom label" do
-      render_inline(described_class.new("content")) { |alert| alert.with_dismiss_button("Close alert") }
-
-      expect(page).to have_selector("button[aria-label='Close alert'] > span.sr-only", text: "Close alert")
-    end
-
-    it "renders block content without sr-only markup" do
-      render_inline(described_class.new("content")) { |alert| alert.with_dismiss_button { "Got it" } }
-
-      expect(page).to have_selector("button", text: "Got it")
-      expect(page).not_to have_selector("button span.sr-only")
-    end
-
-    it "localizes the default label" do
-      I18n.with_locale(:de) { render_inline(described_class.new("content"), &:with_dismiss_button) }
-
-      expect(page).to have_selector("button[aria-label='Schließen'] > span.sr-only", text: "Schließen")
     end
   end
 end
