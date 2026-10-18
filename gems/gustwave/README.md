@@ -123,16 +123,27 @@ The specs run against a minimal Rails application in `spec/dummy`. From the Tend
 
 `bin/import-icon` copies [Flowbite icons](https://github.com/themesberg/flowbite-icons) into `app/assets/images/gustwave/icons` and converts them to Gustwave's form. Set `GITHUB_TOKEN` (or log in with `gh`) to avoid GitHub's rate limit.
 
+The source is pinned to a Flowbite release tag (`DEFAULT_SOURCE` in `script/icon_import.rb`), so the icons stay the same until the tag is bumped.
+
 ```sh
 bin/import-icon chalkboard-user                    # bare name, outline theme
 bin/import-icon solid/info-circle --as info        # THEME/CATEGORY/NAME path, renamed; --force overwrites
 bin/import-icon https://github.com/themesberg/flowbite-icons/blob/main/src/outline/education/chalkboard-user.svg
+bin/import-icon --new --dry-run                    # list upstream icons that are not local yet
+bin/import-icon --new                              # ... and import them
+bin/import-icon --new --theme solid --category arrows --only "arrow-*"  # narrow the import with filters
 bin/import-icon --reimport --dry-run               # compare every local icon with upstream
 bin/import-icon --reimport                         # ... and update the ones that differ
 bin/import-icon --check                            # offline: verify local icons follow the conventions
 ```
 
-`--source URL` imports from another GitHub tree URL. `outline/spinner.svg` is a custom icon and is skipped by `--reimport` and `--check`.
+`--new` imports every upstream icon that is not local yet. `--theme` limits it to one theme (default: both), `--category` to one upstream folder (exact name, such as `arrows` or `food:beverage`), and `--only` to names matching a glob. It keeps going after a failed icon and exits 1 if any failed.
+
+`EXCLUDED` in `script/icon_import.rb` lists upstream icons that are deliberately not imported. `--new` and `--reimport` skip them. `outline/spinner.svg` is a custom icon, listed in `LOCAL_ONLY`, and is skipped by `--reimport` and `--check`.
+
+To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE`, then run `bin/import-icon --reimport --dry-run` to review changes to existing icons and `bin/import-icon --new --dry-run` to review the new ones. Run them for real once the output looks right, and commit the result.
+
+`--source URL` imports from another GitHub tree URL.
 
 ## License
 

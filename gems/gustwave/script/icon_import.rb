@@ -14,10 +14,13 @@ module Gustwave
 
     class Error < StandardError; end
 
-    DEFAULT_SOURCE = "https://github.com/themesberg/flowbite-icons/tree/main/src"
+    # Pinned to a release. To upgrade, bump the tag, then run --reimport --dry-run and --new --dry-run.
+    DEFAULT_SOURCE = "https://github.com/themesberg/flowbite-icons/tree/v1.5.0/src"
     THEMES = %w[outline solid].freeze
     # Icons that are not from Flowbite and must never be compared with upstream.
     LOCAL_ONLY = %w[outline/spinner.svg].freeze
+    # Upstream icons deliberately not imported. --new and --reimport skip them.
+    EXCLUDED = %w[].freeze
     ICONS_DIR = File.expand_path("../app/assets/images/gustwave/icons", __dir__)
     NAME_PATTERN = /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/
     TREE_URL = %r{\Ahttps://github\.com/([^/]+)/([^/]+)/tree/([^/]+)(?:/(.*))?\z}
@@ -44,12 +47,14 @@ module Gustwave
 
       if theme == "outline"
         widths = stroke_widths(svg)
-        raise Error, "outline icon has no stroke-width" if widths.empty?
-
-        unexpected = widths.uniq - %w[2 1.5]
-        raise Error, "unexpected stroke-width #{unexpected.join(", ")} (expected 2 or 1.5)" if unexpected.any?
-      elsif !svg.include?('fill="currentColor"')
-        raise Error, 'solid icon must use fill="currentColor"'
+        invalid = widths.uniq.reject { |width| width.match?(/\A\d+(\.\d+)?\z/) }
+        raise Error, "unexpected stroke-width #{invalid.join(", ")} (expected a number)" if invalid.any?
+        # Some outline icons are drawn with filled paths and have no stroke-width at all.
+        if widths.empty? && !svg.include?('fill="currentColor"')
+          raise Error, 'outline icon has no stroke-width and no fill="currentColor"'
+        end
+      elsif !svg.include?('fill="currentColor"') && !svg.include?('stroke="currentColor"')
+        raise Error, 'solid icon must use fill="currentColor" or stroke="currentColor"'
       end
 
       svg
@@ -59,10 +64,8 @@ module Gustwave
     def violations(svg, theme:)
       problems = []
       problems << 'missing aria-hidden="true" on <svg>' unless root_tag(svg).include?("aria-hidden=")
-      if theme == "outline"
-        (stroke_widths(svg).uniq - %w[1.5]).each do |width|
-          problems << %(stroke-width="#{width}" (expected "1.5"))
-        end
+      if theme == "outline" && stroke_widths(svg).include?("2")
+        problems << 'stroke-width="2" was not converted to "1.5"'
       end
       problems
     end
@@ -136,6 +139,11 @@ module Gustwave
       "https://raw.githubusercontent.com/#{source[:owner]}/#{source[:repo]}/#{source[:ref]}/#{path}"
     end
 
+    # The upstream folder of an indexed path, e.g. "arrows" or "food:beverage".
+    def category(path)
+      File.basename(File.dirname(path))
+    end
+
     def fetch_svg(request)
       request.file ? File.read(request.file) : http_get(URI(request.url))
     end
@@ -176,21 +184,29 @@ module Gustwave
 
     # Command line interface. Returns the process exit status.
     class CLI
-      def initialize(argv, out: $stdout, err: $stderr)
+      def initialize(argv, out: $stdout, err: $stderr, icons_dir: ICONS_DIR)
         @argv = argv
         @out = out
         @err = err
+        @icons_dir = icons_dir
       end
 
       def run
-        options = { theme: "outline", source: DEFAULT_SOURCE }
+        options = { source: DEFAULT_SOURCE }
         parser = option_parser(options)
         names = parser.parse(@argv)
 
-        if options[:check] || options[:reimport]
-          raise Error, "--check and --reimport take no icon arguments" if names.any?
+        if options[:new] || options[:reimport] || options[:check]
+          raise Error, "use only one of --new, --reimport and --check" if %i[new reimport check].count { |mode| options[mode] } > 1
+          raise Error, "--new, --reimport and --check take no icon arguments" if names.any?
 
-          options[:check] ? check : reimport(options)
+          if options[:new]
+            new_icons(options)
+          elsif options[:reimport]
+            reimport(options)
+          else
+            check
+          end
         elsif names.any?
           import(names, options)
           0
@@ -209,15 +225,19 @@ module Gustwave
         OptionParser.new do |o|
           o.banner = <<~USAGE.chomp
             Usage: import-icon <name|path|url>... [--theme THEME] [--as NAME] [--force] [--source URL]
+                   import-icon --new [--theme THEME] [--category NAME] [--only GLOB] [--dry-run] [--source URL]
                    import-icon --reimport [--dry-run] [--source URL]
                    import-icon --check
           USAGE
-          o.on("--theme THEME", THEMES, "Theme for bare names and local files (default: outline)") { |v| options[:theme] = v }
+          o.on("--theme THEME", THEMES, "Theme for bare names and local files (default: outline); with --new, limits it to one theme") { |v| options[:theme] = v }
           o.on("--as NAME", "Save the icon under NAME (single icon only)") { |v| options[:as] = v }
           o.on("--force", "Overwrite an existing icon") { options[:force] = true }
           o.on("--source URL", "GitHub tree URL to import from") { |v| options[:source] = v }
+          o.on("--new", "Import every upstream icon that is not local yet") { options[:new] = true }
+          o.on("--category NAME", "With --new, only icons from this upstream folder (e.g. arrows)") { |v| options[:category] = v }
+          o.on("--only GLOB", "With --new, only icons whose name matches GLOB") { |v| options[:only] = v }
           o.on("--reimport", "Re-fetch every local icon from upstream") { options[:reimport] = true }
-          o.on("--dry-run", "With --reimport, report changes without writing them") { options[:dry_run] = true }
+          o.on("--dry-run", "With --new or --reimport, report changes without writing them") { options[:dry_run] = true }
           o.on("--check", "Check local icons for problems (offline)") { options[:check] = true }
         end
       end
@@ -228,11 +248,11 @@ module Gustwave
         source = IconImport.parse_source(options[:source])
         index = IconImport.build_index(source)
         args.each do |arg|
-          request = IconImport.resolve(arg, theme: options[:theme], index: index, source: source)
+          request = IconImport.resolve(arg, theme: options[:theme] || "outline", index: index, source: source)
           name = options[:as] || request.name
           raise Error, "invalid icon name #{name.inspect}" unless name.match?(NAME_PATTERN)
 
-          path = File.join(ICONS_DIR, request.theme, "#{name}.svg")
+          path = File.join(@icons_dir, request.theme, "#{name}.svg")
           raise Error, "#{path} already exists (use --force to overwrite)" if File.exist?(path) && !options[:force]
 
           svg = IconImport.fetch_svg(request)
@@ -245,6 +265,46 @@ module Gustwave
         end
       end
 
+      def new_icons(options)
+        source = IconImport.parse_source(options[:source])
+        index = IconImport.build_index(source)
+        added = 0
+        excluded = 0
+        failed = 0
+
+        index.keys.sort.each do |theme, name|
+          path = index[[ theme, name ]]
+          next if options[:theme] && theme != options[:theme]
+          next if options[:category] && IconImport.category(path) != options[:category]
+          next if options[:only] && !File.fnmatch(options[:only], name)
+
+          key = "#{theme}/#{name}.svg"
+          target = File.join(@icons_dir, theme, "#{name}.svg")
+          next if File.exist?(target)
+
+          if IconImport::EXCLUDED.include?(key)
+            excluded += 1
+            @out.puts "excluded #{key}"
+            next
+          end
+
+          begin
+            svg = IconImport.http_get(URI(IconImport.raw_url(source, path)))
+            IconImport.validate!(svg, theme: theme)
+            converted = IconImport.convert(svg, theme: theme)
+            File.write(target, converted) unless options[:dry_run]
+            added += 1
+            @out.puts "#{options[:dry_run] ? "would add" : "added"} #{key}"
+          rescue IconImport::Error => e
+            failed += 1
+            @err.puts "failed #{key}: #{e.message}"
+          end
+        end
+
+        @out.puts "added #{added}, excluded #{excluded}, failed #{failed}"
+        failed.zero? ? 0 : 1
+      end
+
       def reimport(options)
         source = IconImport.parse_source(options[:source])
         index = IconImport.build_index(source)
@@ -253,6 +313,11 @@ module Gustwave
         local_icons.each do |icon|
           if LOCAL_ONLY.include?(icon[:key])
             @out.puts "skipped #{icon[:key]}"
+            next
+          end
+
+          if IconImport::EXCLUDED.include?(icon[:key])
+            @out.puts "excluded #{icon[:key]}"
             next
           end
 
@@ -295,7 +360,7 @@ module Gustwave
 
       def local_icons
         IconImport::THEMES.flat_map do |theme|
-          Dir.glob(File.join(ICONS_DIR, theme, "*.svg")).sort.map do |path|
+          Dir.glob(File.join(@icons_dir, theme, "*.svg")).sort.map do |path|
             name = File.basename(path, ".svg")
             { key: "#{theme}/#{name}.svg", theme: theme, name: name, path: path }
           end
