@@ -115,7 +115,7 @@ config.gustwave.strict = true
 
 ## Development
 
-The specs run against a minimal Rails application in `spec/dummy`. From the Tendril Tasks root, run `mise run test:rspec:gustwave`, or `bundle exec rspec` in `gems/gustwave`.
+The specs run against a minimal Rails application in `spec/dummy`. From the Tendril Tasks root, run `mise run test:gustwave`, or `bundle exec rspec` in `gems/gustwave`.
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 

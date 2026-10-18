@@ -5,38 +5,42 @@ lychee = "latest"
 node = "24"
 npm = "latest"
 ruby = "4.0.7"
+typos = "latest"
 zizmor = "latest"
 
 [tasks."ci"]
-description = "Run the continuous integration suite in parallel."
+description = "Run the continuous integration suite in parallel"
 run = [
-    { task = "ci:setup" },
-    { tasks = ["audit", "brakeman", "gitleaks", "rubocop", "herb", "versions", "test:rspec", "test:rspec:gustwave"] },
+    { task = "setup" },
+    { tasks = ["audit", "lint", "test", "test:gustwave"] },
     { task = "test:seeds" }
 ]
 
 [tasks."ci:sequential"]
-description = "Run the continuous integration suite."
-run = [
-    { task = "ci:setup" },
-    { task = "audit" },
-    { task = "brakeman" },
-    { task = "gitleaks" },
-    { task = "rubocop" },
-    { task = "herb" },
-    { task = "versions" },
-    { task = "test:rspec" },
-    { task = "test:rspec:gustwave" },
-    { task = "test:seeds" }
-]
+description = "Run the continuous integration suite, one task at a time"
+run = "mise run --jobs 1 ci"
 
-[tasks."ci:setup"]
+[tasks."setup"]
 description = "Run bin/setup --skip-server"
 run = "bin/setup --skip-server"
+silent = "stdout"
 
+# Lists its tasks instead of `audit:*`, which would also run the `:fix` tasks.
 [tasks."audit"]
-description = "Run all audit tasks"
-depends = ["audit:*"]
+description = "Security: Run all audits"
+depends = ["audit:actions", "audit:brakeman", "audit:gems", "audit:importmap", "audit:npm", "audit:secrets"]
+
+[tasks."audit:actions"]
+description = "Security: Static analysis of the GitHub Actions workflows with zizmor"
+run = "zizmor ./.github"
+
+[tasks."audit:actions:fix"]
+description = "Security: Static analysis of the GitHub Actions workflows with zizmor (auto fix)"
+run = "zizmor --fix ./.github"
+
+[tasks."audit:brakeman"]
+description = "Security: Brakeman code analysis"
+run = "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
 
 [tasks."audit:gems"]
 description = "Security: Gem audit"
@@ -50,104 +54,130 @@ run = "bin/importmap audit"
 description = "Security: Javascript dependencies audit"
 run = "npm audit"
 
-[tasks."audit:ci"]
-description = "Security: GitHub actions workflow audit"
-depends = ["zizmor"]
-
-[tasks."brakeman"]
-description = "Security: Brakeman code analysis"
-run = "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
-
-[tasks."gitleaks"]
-description = "Security: Scan the git history for committed secrets"
+[tasks."audit:secrets"]
+description = "Security: Scan the git history for committed secrets with gitleaks"
 run = "gitleaks git --no-banner --redact"
+
+# Lists its tasks instead of `lint:*`, which would also run the `:fix` tasks
+# and the ones not part of CI.
+[tasks."lint"]
+description = "Style: Run all linters that are part of CI"
+depends = ["lint:erb", "lint:ruby", "lint:typos", "lint:versions"]
+
+[tasks."lint:changed"]
+description = "Style: RuboCop, Herb and typos on the files changed since origin/main, committed or not"
+env = { NO_COLOR = "1" }
+# `raw` keeps mise's template engine from reading bash's `${#array[@]}` as a
+# comment tag.
+run = '''
+#!/usr/bin/env bash
+{% raw %}
+set -uo pipefail
+
+base=$(git merge-base origin/main HEAD)
+mapfile -t files < <({ git diff --name-only --diff-filter=d "$base"; git ls-files --others --exclude-standard; } | sort -u)
+mapfile -t ruby < <(printf '%s\n' "${files[@]}" | grep -E '(\.(rb|rake|gemspec|ru)|(^|/)(Gemfile|Rakefile))$')
+mapfile -t erb < <(printf '%s\n' "${files[@]}" | grep -E '\.erb$')
+
+status=0
+if [ "${#ruby[@]}" -gt 0 ]; then
+  bin/rubocop --force-exclusion --format quiet "${ruby[@]}" || status=1
+fi
+if [ "${#erb[@]}" -gt 0 ]; then
+  npx herb-lint --log-level=error "${erb[@]}" || status=1
+  npx herb-format --check "${erb[@]}" || status=1
+fi
+if [ "${#files[@]}" -gt 0 ]; then
+  typos --format brief --force-exclude "${files[@]}" || status=1
+fi
+exit "$status"
+{% endraw %}
+'''
+
+[tasks."lint:erb"]
+description = "Style: ERB"
+run = ["npx herb-lint --log-level=error", "npx herb-format --check"]
+
+[tasks."lint:erb:fix"]
+description = "Style: ERB (auto fix and format)"
+run = ["npx herb-lint --fix --log-level=error", "npx herb-format"]
 
 # Not part of CI: external sites go down and rate limit, which would fail
 # unrelated builds.
-[tasks."links"]
-description = "Check that links in the Markdown docs resolve"
+[tasks."lint:links"]
+description = "Style: Check that links in the Markdown docs resolve"
 run = "lychee --no-progress --exclude-loopback README.md CHANGELOG.md RELEASING.md CODE_OF_CONDUCT.md .self-hosting gems/*/README.md"
-
-[tasks."rubocop"]
-description = "Style: Ruby"
-run = "bin/rubocop -a"
-
-[tasks."herb"]
-description = "Style: ERB"
-run = ["npx herb-lint", "npx herb-format --check"]
-
-[tasks."versions"]
-description = "Check that gems and their npm packages are locked to the same version"
-run = "bin/check-gem-npm-versions"
-
-[tasks."herb:fix"]
-description = "Style: ERB (auto fix and format)"
-run = ["npx herb-lint --fix", "npx herb-format"]
 
 # Not part of CI: partials rendered by Rails and Devise internally, e.g.
 # `active_storage/blobs/_blob`, are always reported as unused.
-[tasks."herb:check"]
-description = "Check that ERB render calls resolve to existing partials"
+[tasks."lint:partials"]
+description = "Style: Check that ERB render calls resolve to existing partials"
 run = "bundle exec herb actionview check ."
 
-[tasks.rff]
-description = "Alias for `test:rspec:ff`"
-depends = ["test:rspec:ff"]
+[tasks."lint:ruby"]
+description = "Style: Ruby"
+run = "bin/rubocop"
 
-[tasks."test:rspec"]
-description = "Tests: RSpec (silent)"
+[tasks."lint:ruby:fix"]
+description = "Style: Ruby (auto fix)"
+run = "bin/rubocop -a"
+
+[tasks."lint:typos"]
+description = "Style: Spell check code and docs"
+run = "typos --format brief"
+
+[tasks."lint:versions"]
+description = "Style: Check that gems and their npm packages are locked to the same version"
+run = "bin/check-gem-npm-versions"
+
+[tasks."test"]
+description = "Tests: RSpec, the whole suite in parallel"
 run = "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup parallel:spec"
 
-[tasks."test:rspec:ff"]
-description = "Tests: RSpec (fail fast; no coverage)"
-run = "env RAILS_ENV=test SKIP_COVERAGE=1 bundle exec rspec --format RSpec::AiFormatter::Formatter --fail-fast"
+[tasks."test:ff"]
+description = "Tests: RSpec (fail fast; no coverage). Pass spec paths to run only those; fewer than 4 spec files or PARALLEL_PROCESSES=1 run in one process"
+usage = 'arg "[paths]..." help="Spec files or directories, default: spec/"'
+run = "bin/parallel-ff-ai-spec ${usage_paths:-}"
 quiet = true
 
-[tasks."test:rspec:gustwave"]
+[tasks."test:gustwave"]
 description = "Tests: RSpec for the Gustwave gem in gems/gustwave"
 dir = "gems/gustwave"
 run = "bundle exec rspec"
 
-[tasks."test:rspec:optional"]
+[tasks."test:optional"]
 description = "Tests: RSpec, only the optional specs excluded by default"
 run = "env RAILS_ENV=test OPTIONAL_SPECS=1 bundle exec rspec --tag optional"
 
-[tasks."test:rspec:all"]
+[tasks."test:all"]
 description = "Tests: RSpec, including the optional specs"
 run = "env RAILS_ENV=test OPTIONAL_SPECS=1 bundle exec rspec"
 
 [tasks."test:db:setup"]
-description = "Prepare the test database."
+description = "Tests: Prepare the test database"
 run = "env RAILS_ENV=test bin/rails db:setup"
 silent = "stderr"
 
 [tasks."test:seeds"]
 description = "Tests: Seeds"
 run = "env RAILS_ENV=test bin/rails db:seed:replant"
+silent = "stdout"
 
-[tasks."update:project"]
-description = "Update Ruby, Ruby gems and npm packages."
+[tasks."update"]
+description = "Update Ruby, Ruby gems and npm packages"
 run = [
     { task = "update:ruby" },
     { tasks = ["update:gems", "update:npm"] }
 ]
 
 [tasks."update:ruby"]
-description = "Update Ruby to the latest patch version."
+description = "Update Ruby to the latest patch version"
 run = "bin/update-ruby -y"
 
 [tasks."update:gems"]
-description = "Update Ruby gems: `bundle update --all`."
+description = "Update Ruby gems: `bundle update --all`"
 run = "bundle update --all"
 
 [tasks."update:npm"]
-description = "Update npm packages: `npm update`."
+description = "Update npm packages: `npm update`"
 run = "npm update"
-
-[tasks."zizmor"]
-description = "Run zizmor security audit. Static analysis for GitHub Actions."
-run = "zizmor ./.github"
-
-[tasks."zizmor:fix"]
-description = "Run zizmor and auto fix."
-run = "zizmor --fix ./.github"

@@ -7,7 +7,7 @@ module Gustwave
       #
       # Accepts the same parameters as Gustwave::Button and supports using
       # Gustwave::Button slots. The +icon+ and +trailing_icon+ parameters come
-      # with preformated styling. When using the +leading_*+ and +trailing_*+
+      # with preformatted styling. When using the +leading_*+ and +trailing_*+
       # slots directly, you must apply the styling yourself.
       #
       # === Right aligned trailing icon

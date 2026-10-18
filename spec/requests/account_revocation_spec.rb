@@ -2,12 +2,12 @@
 
 require "rails_helper"
 
-RSpec.describe "Account Revokation", type: :request do
+RSpec.describe "Account Revocation", type: :request do
   let(:user) { create(:user) }
 
   # Broader scenario: Ensure that a user cannot access authentication-related
-  # pages after account revokation.
-  describe "user cannot access profile page after account revokation" do
+  # pages after account revocation.
+  describe "user cannot access profile page after account revocation" do
     context "when a user is authenticated" do
       context "without a remember me token" do
         before(:each) do

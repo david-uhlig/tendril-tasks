@@ -59,7 +59,7 @@ module Gustwave
 
     # @param text [String] the text to display in the indicator. Takes precedence over block content.
     # @param color [Symbol] the color for the indicator. Pass in :none to define your own styles.
-    # @param size [Symbol] the size of the indicator. Options: :none, :auto, :xs, :sm, :md, :lg, :xl. When chosing :auto, the indicator matches the line-height.
+    # @param size [Symbol] the size of the indicator. Options: :none, :auto, :xs, :sm, :md, :lg, :xl. When choosing :auto, the indicator matches the line-height.
     # @param pulse [Boolean] whether to apply the pulse animation.
     # @param position [Symbol] positions the indicator on another component. The enclosing component must be +relative+ positioned.
     # @param options [Hash] additional options for the HTML tag, like class.
