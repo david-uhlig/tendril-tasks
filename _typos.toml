@@ -1,4 +1,4 @@
-# Spell check config for `mise run typos`
+# Spell check config for `mise run lint:typos`
 [files]
 extend-exclude = [
   "config/locales/*de.yml",

@@ -109,7 +109,7 @@ RSpec.configure do |config|
 
   # Optional specs cover UI polish and third-party widgets rather than core
   # flows. To keep the default run fast, they only run with `OPTIONAL_SPECS=1`,
-  # e.g. `mise run test:rspec:optional`.
+  # e.g. `mise run test:optional`.
   config.filter_run_excluding optional: true unless ENV["OPTIONAL_SPECS"]
 
   config.before(:each, type: :system, js: true) do

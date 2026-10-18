@@ -35,6 +35,6 @@ if mismatches.empty?
   puts "Gem and npm package versions match."
 else
   warn mismatches
-  warn "Update both sides to the same version, e.g. with `mise run update:project`."
+  warn "Update both sides to the same version, e.g. with `mise run update`."
   exit 1
 end
