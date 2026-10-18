@@ -74,7 +74,7 @@ module Gustwave
       #
       # @param args [Array] the arguments to pass to the component.
       # @param component [Class] the component to render as the trigger. Should be a subclass of Gustwave::Dropdowns::Triggers::Base to handle the trigger's +data-dropdown-*+ attributes.
-      # @param options [Hash] additional config options and HTML attributes passed to the component.
+      # @param options [Hash] HTML attributes and the custom component's own keywords passed to the component.
       component: ->(*args, component: Gustwave::Dropdowns::Triggers::Button, **options) {
         config = configure_html_attributes(options, **trigger_config)
         component.new(*args, **config)
@@ -111,13 +111,23 @@ module Gustwave
     # @param icon [Symbol, nil] the icon identifier rendered as leading visual on the trigger button. Pass in +nil+ to not render an icon.
     # @param trailing_icon [Symbol, nil, false] the icon identifier rendered as trailing visual on the trigger button. Pass in +nil+ to automatically render a chevron icon pointing in the direction of +placement+. Pass in +false+ to not render a trailing icon.
     # @param inline [Boolean] whether to render the dropdown trigger with inline styling, so it can appear in a text block.
-    # @param options [Hash] additional HTML and component options passed to the trigger component, e.g. +trigger_event+, +delay+, +placement+, +offset_distance+ and +offset_skidding+, see Gustwave::Dropdowns::Triggers::Base.
+    # @param trigger_event [Symbol] the trigger event for the dropdown. Pass in :click (default) or :hover.
+    # @param delay [Integer] the delay in milliseconds before the dropdown is shown.
+    # @param placement [Symbol] the placement of the dropdown. Options: +auto+, +auto-start+, +auto-end+, +top+, +top-start+, +top-end+, +bottom+, +bottom-start+, +bottom-end+, +right+, +right-start+, +right-end+, +left+, +left-start+, +left-end+. See: https://popper.js.org/docs/v2/constructors/#options
+    # @param offset_distance [Integer] the distance in pixels between the target and the dropdown in the +placement+ main axis.
+    # @param offset_skidding [Integer] the distance in pixels between the target and the dropdown in the +placement+ secondary axis.
+    # @param options [Hash] additional HTML attributes for the trigger element. The default trigger is a Gustwave::Button, so its own keywords (+theme+, +color+, +size+, +pill+, +tag+, +type+) pass through as well.
     def initialize(
       text = nil,
       menu_id: nil,
       icon: nil,
       trailing_icon: nil,
       inline: false,
+      trigger_event: DEFAULT,
+      delay: Gustwave::Dropdowns::Triggers::Base::DELAY_DEFAULT,
+      placement: DEFAULT,
+      offset_distance: Gustwave::Dropdowns::Triggers::Base::OFFSET_DISTANCE_DEFAULT,
+      offset_skidding: Gustwave::Dropdowns::Triggers::Base::OFFSET_SKIDDING_DEFAULT,
       **options
     )
       @menu_id = menu_id || generate_random_id(prefix: "dropdown")
@@ -127,6 +137,11 @@ module Gustwave
         menu_id: @menu_id,
         icon:,
         trailing_icon:,
+        trigger_event:,
+        delay:,
+        placement:,
+        offset_distance:,
+        offset_skidding:,
         **options
       }
     end
