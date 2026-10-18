@@ -1,0 +1,30 @@
+# Spell check config for `mise run typos`
+[files]
+extend-exclude = [
+  "config/locales/*de.yml",
+  "app/assets/stylesheets/inter-font.css",
+  "vendor/",
+  "app/assets/builds/",
+  "*.svg",
+]
+
+[default.extend-words]
+# Devise module name
+rememberable = "rememberable"
+# German UI strings in specs and component translation files
+adresse = "adresse"
+aktion = "aktion"
+alle = "alle"
+deine = "deine"
+ein = "ein"
+foto = "foto"
+ist = "ist"
+oder = "oder"
+pn = "pn"
+sie = "sie"
+suche = "suche"
+titel = "titel"
+# Deliberate misspellings that test "Did you mean" errors
+buton = "buton"
+sise = "sise"
+tagg = "tagg"
