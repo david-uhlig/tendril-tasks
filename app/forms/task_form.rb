@@ -1,127 +1,14 @@
 # frozen_string_literal: true
 
 class TaskForm
-  include ActiveModel::Model
+  include CoordinatedRecordForm
+  coordinated_record Task
 
-  attr_reader :task
-
-  delegate :project, :project_id, :project_id=,
-           :title, :title=,
-           :description, :description=,
-           to: :task
-
-  def initialize(task_or_params = {})
-    @task = task_or_params.is_a?(Task) ? task_or_params : Task.new
-    super(task_or_params.is_a?(Task) ? {} : task_or_params)
-  end
-
-  # Stages the coordinators until the form is saved. Ignores ids of users that
-  # no longer exist, e.g. when a user was deleted while the form was open. An
-  # empty list removes all coordinators, which fails validation on save.
-  def coordinator_ids=(ids)
-    users = User.includes(avatar_attachment: :blob).where(id: Array(ids).compact_blank).to_a
-    @unsaved_coordinators =
-      if users.map(&:id).sort == task.coordinator_ids.sort
-        nil
-      else
-        users
-      end
-  end
-
-  def coordinators
-    @unsaved_coordinators || task.coordinators
-  end
-
-  def publish=(checkbox_value)
-    should_publish = ActiveModel::Type::Boolean.new.cast(checkbox_value)
-
-    if should_publish
-      task.publish
-    else
-      task.unpublish
-    end
-  end
-
-  def publish
-    task.published?
-  end
+  delegate :project, :project_id, :project_id=, to: :task
 
   def project_options
     @project_options ||= Project.select(:id, :title)
                                 .order(:title)
                                 .to_a
-  end
-
-  def coordinator_options
-    @coordinator_options ||= User.select(:id, :name)
-                                 .includes(avatar_attachment: :blob)
-                                 .excluding(coordinators)
-                                 .limit(Coordinators::SearchesController::NUM_SEARCH_RESULTS)
-                                 .to_a
-  end
-
-  def save
-    has_changes = changed?
-    @saved_changes = false
-
-    Task.transaction do
-      # Update association records first so validations on them on the parent model have an effect
-      task.coordinators = @unsaved_coordinators if coordinators_changed?
-      task.save!
-      @unsaved_coordinators = nil
-      @saved_changes = has_changes
-
-      true
-    end
-  rescue ActiveRecord::RecordInvalid
-    errors.merge!(task.errors)
-    false
-  end
-
-  def persisted?
-    task.persisted?
-  end
-
-  def changed?
-    # Rich text changes aren't tracked by `changed?` of the parent record.
-    task.changed? || task.description&.changed? || coordinators_changed?
-  end
-
-  # True when the last `save` changed the record, its rich text or its
-  # coordinators.
-  def saved_changes?
-    @saved_changes == true
-  end
-
-  def valid?
-    super && validate_task
-  end
-
-  def form_path
-    url_helpers = Rails.application.routes.url_helpers
-    persisted? ? url_helpers.task_path(task) : url_helpers.tasks_path
-  end
-
-  def form_method
-    persisted? ? :patch : :post
-  end
-
-  class << self
-    def human_attribute_name(attribute, **options)
-      Task.human_attribute_name(attribute, **options)
-    end
-  end
-
-  private
-
-  # True when coordinators other than the current ones are staged for saving.
-  def coordinators_changed?
-    !@unsaved_coordinators.nil?
-  end
-
-  def validate_task
-    task_valid = task.valid?
-    errors.merge!(task.errors) unless task_valid
-    task_valid
   end
 end

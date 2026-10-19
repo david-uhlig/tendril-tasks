@@ -14,6 +14,23 @@ RSpec.describe "Tasks::Application", type: :request do
     context "when authenticated" do
       before { login_as(user) }
 
+      it "saves the application without a comment when the comment is empty" do
+        expect {
+          post task_application_path(task),
+            params: { task_application: { comment: "" } },
+            as: :turbo_stream
+        }.to change(TaskApplication, :count).by(1)
+        expect(response).to have_http_status(:ok)
+        expect(TaskApplication.last.comment).to be_nil
+      end
+
+      it "responds with bad request when the application form is missing" do
+        expect {
+          post task_application_path(task), as: :turbo_stream
+        }.not_to change(TaskApplication, :count)
+        expect(response).to have_http_status(:bad_request)
+      end
+
       it "saves the application, celebrates it with fireworks and limits the comment length in the form", :aggregate_failures do
         expect {
           post task_application_path(task),
@@ -85,6 +102,14 @@ RSpec.describe "Tasks::Application", type: :request do
 
       context "and the task exists" do
         context "and the application exists" do
+          it "responds with bad request when the application form is missing" do
+            application = create(:task_application, task: task, user: user, comment: "Count me in!")
+            expect {
+              patch task_application_path(task), as: :turbo_stream
+            }.not_to change { application.reload.comment }
+            expect(response).to have_http_status(:bad_request)
+          end
+
           it "updates the application without celebrating it with fireworks", :aggregate_failures do
             application = create(:task_application, task: task, user: user)
             expect {

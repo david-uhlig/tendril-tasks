@@ -13,7 +13,7 @@ class Tasks::ApplicationController < ApplicationController
       # Create new entry
       @application = current_user.task_applications.build(
         task: @task,
-        comment: params[:task_application][:comment].presence
+        comment: comment_param
       )
       # Keep any old application if the new one is invalid
       raise ActiveRecord::Rollback unless @application.save
@@ -27,7 +27,7 @@ class Tasks::ApplicationController < ApplicationController
 
     @application = current_user.task_applications.find_by!(task: @task)
     @updated = @application.update_if_editable(
-      comment: params[:task_application][:comment].presence
+      comment: comment_param
     )
 
     render status: :unprocessable_content if @application.errors.any?
@@ -44,5 +44,9 @@ class Tasks::ApplicationController < ApplicationController
 
   def set_task
     @task = Task.find(params[:task_id])
+  end
+
+  def comment_param
+    params.require(:task_application).permit(:comment)[:comment].presence
   end
 end
