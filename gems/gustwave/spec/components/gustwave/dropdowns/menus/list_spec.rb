@@ -21,10 +21,29 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
     end
   end
 
-  it "doesn't render block content" do
-    render_inline(described_class.new(id: "dropdown")) { "content" }
+  context "with block content" do
+    it "renders the block content after the list and before the footer" do
+      render_inline(described_class.new(id: "dropdown")) do |list|
+        list.with_footer("footer_content")
+        list.with_item_generic { "item_content" }
+        "<p>block_content</p>".html_safe
+      end
 
-    expect(rendered_content).not_to have_content("content")
+      expect(rendered_content).to have_selector("div[id='dropdown'] > ul + p + footer")
+      expect(rendered_content).to have_selector("div[id='dropdown'] > ul + p", text: "block_content")
+    end
+
+    it "renders no extra markup when the block only sets slots" do
+      render_inline(described_class.new(id: "dropdown")) do |list|
+        list.with_header("header_content")
+        list.with_item_link("Profile", href: "/profile")
+        list.with_footer("footer_content")
+        "\n  "
+      end
+
+      menu = Capybara.string(rendered_content).find("div[id='dropdown']")
+      expect(menu.native.children.map(&:name)).to eq(%w[header ul footer])
+    end
   end
 
   context "with content_for argument" do
