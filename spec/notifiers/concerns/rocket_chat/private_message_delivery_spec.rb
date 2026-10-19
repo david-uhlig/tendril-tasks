@@ -29,14 +29,12 @@ RSpec.describe RocketChat::PrivateMessageDelivery, type: :notifier do
     expect(test_notification_class.delivery_methods).to include(:rocket_chat_pm)
 
     delivery = test_notification_class.delivery_methods[:rocket_chat_pm]
-    config = delivery.instance_variable_get(:@config)
-    # In Noticed 3, the deliver_by block sets up the delivery method
-    expect(config[:class]).to eq("DeliveryMethods::RocketChat::PrivateMessage")
+    expect(delivery.config[:class]).to eq("DeliveryMethods::RocketChat::PrivateMessage")
   end
 
   describe "configuration options" do
     let(:delivery) { test_notification_class.delivery_methods[:rocket_chat_pm] }
-    let(:config) { delivery.instance_variable_get(:@config) }
+    let(:config) { delivery.config }
 
     def evaluate(notification, value)
       case value
