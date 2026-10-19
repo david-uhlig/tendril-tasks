@@ -6,7 +6,7 @@
       <% when :divider %>
         <%= render Gustwave::Form::RichText::Divider.new %>
       <% when :link %>
-        <%= render Gustwave::Form::RichText::Trix::LinkToggle.new(@form) %>
+        <%= render Gustwave::Form::RichText::Trix::LinkToggle.new(@form, disabled: disabled?(action)) %>
       <% else %>
         <%= render Gustwave::Form::RichText::Trix::Button.new(action, disabled: disabled?(action)) %>
       <% end %>
