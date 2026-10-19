@@ -1,0 +1,670 @@
+---
+tag_and_hover tag=:div color=:none:
+- 'div: font-medium px-2.5 py-0.5 text-xs'
+tag_and_hover tag=:div color=:base:
+- 'div: font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:default:
+- 'div: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:dark:
+- 'div: bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:red:
+- 'div: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:green:
+- 'div: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:yellow:
+- 'div: bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+tag_and_hover tag=:div color=:indigo:
+- 'div: bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:purple:
+- 'div: bg-purple-100 dark:bg-purple-900 dark:text-purple-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:div color=:pink:
+- 'div: bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:none:
+- 'span: font-medium px-2.5 py-0.5 text-xs'
+tag_and_hover tag=:span color=:base:
+- 'span: font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:default:
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:dark:
+- 'span: bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:red:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:green:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:yellow:
+- 'span: bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+tag_and_hover tag=:span color=:indigo:
+- 'span: bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:purple:
+- 'span: bg-purple-100 dark:bg-purple-900 dark:text-purple-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:span color=:pink:
+- 'span: bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:none:
+- 'button: font-medium px-2.5 py-0.5 text-xs'
+tag_and_hover tag=:button color=:base:
+- 'button: font-medium hover:bg-gray-100 inline-flex px-2.5 py-0.5 rounded-sm text-xs
+  whitespace-nowrap'
+tag_and_hover tag=:button color=:default:
+- 'button: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium hover:bg-blue-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:dark:
+- 'button: bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium hover:bg-gray-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:red:
+- 'button: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium hover:bg-red-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:green:
+- 'button: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium hover:bg-green-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:yellow:
+- 'button: bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300 font-medium hover:bg-yellow-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+tag_and_hover tag=:button color=:indigo:
+- 'button: bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 font-medium hover:bg-indigo-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:purple:
+- 'button: bg-purple-100 dark:bg-purple-900 dark:text-purple-300 font-medium hover:bg-purple-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:button color=:pink:
+- 'button: bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium hover:bg-pink-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:none:
+- 'a: font-medium px-2.5 py-0.5 text-xs'
+tag_and_hover tag=:a color=:base:
+- 'a: font-medium hover:bg-gray-100 inline-flex px-2.5 py-0.5 rounded-sm text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:default:
+- 'a: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium hover:bg-blue-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:dark:
+- 'a: bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium hover:bg-gray-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:red:
+- 'a: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium hover:bg-red-200 inline-flex
+  px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:green:
+- 'a: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium hover:bg-green-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:yellow:
+- 'a: bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300 font-medium hover:bg-yellow-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+tag_and_hover tag=:a color=:indigo:
+- 'a: bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 font-medium hover:bg-indigo-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:purple:
+- 'a: bg-purple-100 dark:bg-purple-900 dark:text-purple-300 font-medium hover:bg-purple-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+tag_and_hover tag=:a color=:pink:
+- 'a: bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium hover:bg-pink-200
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+color_border_outline color=:none border=false outline=false:
+- 'span: font-medium px-2.5 py-0.5 text-xs'
+color_border_outline color=:none border=false outline=true:
+- 'span: font-medium px-2.5 py-0.5 text-xs'
+color_border_outline color=:none border=true outline=false:
+- 'span: font-medium px-2.5 py-0.5 text-xs'
+color_border_outline color=:none border=true outline=true:
+- 'span: font-medium px-2.5 py-0.5 text-xs'
+color_border_outline color=:base border=false outline=false:
+- 'span: font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs whitespace-nowrap'
+color_border_outline color=:base border=false outline=true:
+- 'span: font-medium inline-flex outline-1 outline-gray-400 px-2.5 py-0.5 rounded-sm
+  text-xs whitespace-nowrap'
+color_border_outline color=:base border=true outline=false:
+- 'span: border border-gray-400 font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs
+  whitespace-nowrap'
+color_border_outline color=:base border=true outline=true:
+- 'span: border border-gray-400 font-medium inline-flex outline-1 outline-gray-400
+  px-2.5 py-0.5 rounded-sm text-xs whitespace-nowrap'
+color_border_outline color=:default border=false outline=false:
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+color_border_outline color=:default border=false outline=true:
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex outline-1
+  outline-blue-400 px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+color_border_outline color=:default border=true outline=false:
+- 'span: bg-blue-100 border border-blue-400 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+color_border_outline color=:default border=true outline=true:
+- 'span: bg-blue-100 border border-blue-400 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex outline-1 outline-blue-400 px-2.5 py-0.5 rounded-sm text-blue-800 text-xs
+  whitespace-nowrap'
+color_border_outline color=:dark border=false outline=false:
+- 'span: bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+color_border_outline color=:dark border=false outline=true:
+- 'span: bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium inline-flex outline-1
+  outline-gray-500 px-2.5 py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+color_border_outline color=:dark border=true outline=false:
+- 'span: bg-gray-100 border border-gray-500 dark:bg-gray-700 dark:text-gray-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+color_border_outline color=:dark border=true outline=true:
+- 'span: bg-gray-100 border border-gray-500 dark:bg-gray-700 dark:text-gray-300 font-medium
+  inline-flex outline-1 outline-gray-500 px-2.5 py-0.5 rounded-sm text-gray-800 text-xs
+  whitespace-nowrap'
+color_border_outline color=:red border=false outline=false:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+color_border_outline color=:red border=false outline=true:
+- 'span: bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium inline-flex outline-1
+  outline-red-400 px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+color_border_outline color=:red border=true outline=false:
+- 'span: bg-red-100 border border-red-400 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+color_border_outline color=:red border=true outline=true:
+- 'span: bg-red-100 border border-red-400 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex outline-1 outline-red-400 px-2.5 py-0.5 rounded-sm text-red-800 text-xs
+  whitespace-nowrap'
+color_border_outline color=:green border=false outline=false:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+color_border_outline color=:green border=false outline=true:
+- 'span: bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium inline-flex
+  outline-1 outline-green-400 px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+color_border_outline color=:green border=true outline=false:
+- 'span: bg-green-100 border border-green-400 dark:bg-green-900 dark:text-green-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+color_border_outline color=:green border=true outline=true:
+- 'span: bg-green-100 border border-green-400 dark:bg-green-900 dark:text-green-300
+  font-medium inline-flex outline-1 outline-green-400 px-2.5 py-0.5 rounded-sm text-green-800
+  text-xs whitespace-nowrap'
+color_border_outline color=:yellow border=false outline=false:
+- 'span: bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+color_border_outline color=:yellow border=false outline=true:
+- 'span: bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300 font-medium inline-flex
+  outline-1 outline-yellow-300 px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+color_border_outline color=:yellow border=true outline=false:
+- 'span: bg-yellow-100 border border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+color_border_outline color=:yellow border=true outline=true:
+- 'span: bg-yellow-100 border border-yellow-300 dark:bg-yellow-900 dark:text-yellow-300
+  font-medium inline-flex outline-1 outline-yellow-300 px-2.5 py-0.5 rounded-sm text-xs
+  text-yellow-800 whitespace-nowrap'
+color_border_outline color=:indigo border=false outline=false:
+- 'span: bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+color_border_outline color=:indigo border=false outline=true:
+- 'span: bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 font-medium inline-flex
+  outline-1 outline-indigo-400 px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+color_border_outline color=:indigo border=true outline=false:
+- 'span: bg-indigo-100 border border-indigo-400 dark:bg-indigo-900 dark:text-indigo-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+color_border_outline color=:indigo border=true outline=true:
+- 'span: bg-indigo-100 border border-indigo-400 dark:bg-indigo-900 dark:text-indigo-300
+  font-medium inline-flex outline-1 outline-indigo-400 px-2.5 py-0.5 rounded-sm text-indigo-800
+  text-xs whitespace-nowrap'
+color_border_outline color=:purple border=false outline=false:
+- 'span: bg-purple-100 dark:bg-purple-900 dark:text-purple-300 font-medium inline-flex
+  px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+color_border_outline color=:purple border=false outline=true:
+- 'span: bg-purple-100 dark:bg-purple-900 dark:text-purple-300 font-medium inline-flex
+  outline-1 outline-purple-400 px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+color_border_outline color=:purple border=true outline=false:
+- 'span: bg-purple-100 border border-purple-400 dark:bg-purple-900 dark:text-purple-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+color_border_outline color=:purple border=true outline=true:
+- 'span: bg-purple-100 border border-purple-400 dark:bg-purple-900 dark:text-purple-300
+  font-medium inline-flex outline-1 outline-purple-400 px-2.5 py-0.5 rounded-sm text-purple-800
+  text-xs whitespace-nowrap'
+color_border_outline color=:pink border=false outline=false:
+- 'span: bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+color_border_outline color=:pink border=false outline=true:
+- 'span: bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium inline-flex outline-1
+  outline-pink-400 px-2.5 py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+color_border_outline color=:pink border=true outline=false:
+- 'span: bg-pink-100 border border-pink-400 dark:bg-pink-900 dark:text-pink-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+color_border_outline color=:pink border=true outline=true:
+- 'span: bg-pink-100 border border-pink-400 dark:bg-pink-900 dark:text-pink-300 font-medium
+  inline-flex outline-1 outline-pink-400 px-2.5 py-0.5 rounded-sm text-pink-800 text-xs
+  whitespace-nowrap'
+type type=:none:
+- 'span: bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium inline-flex px-2.5
+  py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+type type=:button:
+- 'span type="button": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+type type=:submit:
+- 'span type="submit": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+type type=:reset:
+- 'span type="reset": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+size size=:xs text="New" pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-sm text-blue-800 text-xs
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xs text="New" pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-blue-800 text-xs
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xs text=nil pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-xs
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xs text=nil pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-xs
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:sm text="New" pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-sm text-blue-800 text-sm
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:sm text="New" pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-blue-800 text-sm
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:sm text=nil pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-sm
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:sm text=nil pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-sm
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:md text="New" pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-sm text-base text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:md text="New" pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-base text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:md text=nil pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-base text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:md text=nil pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-base text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:lg text="New" pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-sm text-blue-800 text-lg
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:lg text="New" pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-blue-800 text-lg
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:lg text=nil pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-lg
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:lg text=nil pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-lg
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-6 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xl text="New" pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold gap-1.5
+  inline-flex items-center px-2.5 py-0.5 rounded-sm text-blue-800 text-xl whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xl text="New" pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold gap-1.5
+  inline-flex items-center px-2.5 py-0.5 rounded-full text-blue-800 text-xl whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xl text=nil pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold gap-1.5
+  inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-xl whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:xl text=nil pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold gap-1.5
+  inline-flex items-center px-0.5 py-0.5 rounded-full text-blue-800 text-xl whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-7 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:"2xl" text="New" pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-sm text-2xl text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:"2xl" text="New" pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold
+  gap-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-2xl text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:"2xl" text=nil pill=false:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-2xl text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+size size=:"2xl" text=nil pill=true:
+- 'span: align-bottom bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold
+  gap-1.5 inline-flex items-center px-0.5 py-0.5 rounded-full text-2xl text-blue-800
+  whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-8 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+dismiss_button_color color=:none:
+- 'span id="badge-r0000001": font-medium px-2.5 py-0.5 text-xs'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent gap-1.5 inline-flex items-center p-1 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:base:
+- 'span id="badge-r0000001": font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs
+  whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent disabled:cursor-not-allowed focus:outline-hidden focus:ring-2
+  gap-1.5 inline-flex items-center justify-center p-1 rounded-xs text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:default:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:dark:
+- 'span id="badge-r0000001": bg-gray-100 dark:bg-gray-700 dark:text-gray-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-gray-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-gray-600 dark:hover:text-gray-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-gray-300 gap-1.5 hover:bg-gray-200
+  hover:text-gray-900 inline-flex items-center justify-center p-1 rounded-xs text-gray-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:red:
+- 'span id="badge-r0000001": bg-red-100 dark:bg-red-900 dark:text-red-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-red-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-red-800 dark:hover:text-red-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-red-300 gap-1.5 hover:bg-red-200 hover:text-red-900
+  inline-flex items-center justify-center p-1 rounded-xs text-red-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:green:
+- 'span id="badge-r0000001": bg-green-100 dark:bg-green-900 dark:text-green-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-green-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-green-800 dark:hover:text-green-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-green-300 gap-1.5 hover:bg-green-200
+  hover:text-green-900 inline-flex items-center justify-center p-1 rounded-xs text-green-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:yellow:
+- 'span id="badge-r0000001": bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-xs text-yellow-800 whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-yellow-800 dark:hover:text-yellow-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-yellow-300
+  gap-1.5 hover:bg-yellow-200 hover:text-yellow-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-xs text-yellow-400'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:indigo:
+- 'span id="badge-r0000001": bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-indigo-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-indigo-800 dark:hover:text-indigo-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-indigo-300
+  gap-1.5 hover:bg-indigo-200 hover:text-indigo-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-indigo-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:purple:
+- 'span id="badge-r0000001": bg-purple-100 dark:bg-purple-900 dark:text-purple-300
+  font-medium inline-flex px-2.5 py-0.5 rounded-sm text-purple-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-purple-800 dark:hover:text-purple-300
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-purple-300
+  gap-1.5 hover:bg-purple-200 hover:text-purple-900 inline-flex items-center justify-center
+  p-1 rounded-xs text-purple-400 text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_color color=:pink:
+- 'span id="badge-r0000001": bg-pink-100 dark:bg-pink-900 dark:text-pink-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-pink-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-pink-800 dark:hover:text-pink-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-pink-300 gap-1.5 hover:bg-pink-200
+  hover:text-pink-900 inline-flex items-center justify-center p-1 rounded-xs text-pink-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_size size=:xs:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xs whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_size size=:sm:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-medium
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-sm whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_size size=:md:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-base text-blue-800 whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_size size=:lg:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-semibold
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-lg whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1.5 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_size size=:xl:
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-bold
+  inline-flex px-2.5 py-0.5 rounded-sm text-blue-800 text-xl whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-1.5 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-3.5 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismiss_button_size size=:"2xl":
+- 'span id="badge-r0000001": bg-blue-100 dark:bg-blue-900 dark:text-blue-300 font-extrabold
+  inline-flex px-2.5 py-0.5 rounded-sm text-2xl text-blue-800 whitespace-nowrap'
+- 'button aria-label="Dismiss" data-dismiss-target="#badge-r0000001" type="button":
+  align-bottom bg-transparent dark:hover:bg-blue-800 dark:hover:text-blue-300 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-2 focus:ring-blue-300 gap-1.5 hover:bg-blue-200
+  hover:text-blue-900 inline-flex items-center justify-center p-2 rounded-xs text-blue-400
+  text-xs'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-4 w-auto'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'

@@ -3,25 +3,6 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Badge, type: :component do
-  context "with default options" do
-    before(:each) do
-      render_inline(described_class.new) { "content" }
-    end
-
-    it "renders default styles" do
-      expect(rendered_content).to have_selector("span.rounded-sm.whitespace-nowrap.inline-flex")
-    end
-
-    it "renders default size classes" do
-      expect(page).to have_selector("span.text-xs.font-medium")
-    end
-
-    it "renders no border classes" do
-      expect(page).not_to have_selector("[class~='border']")
-      expect(page).not_to have_selector("[class*='border-']")
-    end
-  end
-
   context "without text or content" do
     it "renders an empty badge" do
       render_inline(described_class.new)
@@ -34,14 +15,20 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "renders a div" do
       render_inline(described_class.new(tag: :div)) { "content" }
 
-      expect(page).to have_selector("div.rounded-sm")
+      expect(page).to have_selector("div", exact_text: "content")
     end
 
     it "renders the hover style for links and buttons only" do
       render_inline(described_class.new(tag: :a, href: "#")) { "content" }
-      expect(page).to have_selector("a.hover\\:bg-blue-200")
+      expect(page).to have_selector("a[class*='hover:']")
+
+      render_inline(described_class.new(tag: :button)) { "content" }
+      expect(page).to have_selector("button[class*='hover:']")
 
       render_inline(described_class.new(tag: :span)) { "content" }
+      expect(page).not_to have_selector("[class*='hover:']")
+
+      render_inline(described_class.new(tag: :div)) { "content" }
       expect(page).not_to have_selector("[class*='hover:']")
     end
 
@@ -89,31 +76,7 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
   end
 
-  context "with color" do
-    it "renders color classes" do
-      render_inline(described_class.new(color: :purple))
-      expect(page).to have_selector("span.bg-purple-100.text-purple-800")
-    end
-  end
-
-  context "with size" do
-    it "renders size classes" do
-      render_inline(described_class.new(size: :lg))
-      expect(page).to have_selector("span.text-lg.font-semibold")
-    end
-
-    it "renders a round badge without text or content at any size" do
-      render_inline(described_class.new(size: :"2xl")) { |badge| badge.with_leading_visual_icon(:check) }
-      expect(page).to have_selector("span.rounded-full.px-0\\.5")
-    end
-  end
-
   context "with border" do
-    it "render border classes" do
-      render_inline(described_class.new(border: true))
-      expect(page).to have_selector("span.border.border-blue-400")
-    end
-
     it "casts a string to a boolean" do
       render_inline(described_class.new(border: "true", outline: "false"))
       expect(page).to have_selector("span.border.border-blue-400")
@@ -141,14 +104,8 @@ RSpec.describe Gustwave::Badge, type: :component do
       render_inline(described_class.new("New", id: "badge-new"), &:with_dismiss_button)
 
       expect(page).to have_selector("span#badge-new > button[type='button'][aria-label='Dismiss'][data-dismiss-target='#badge-new']")
-      expect(page).to have_selector("button.bg-transparent.text-blue-400.p-1 > svg.h-3[aria-hidden='true']")
+      expect(page).to have_selector("button > svg[aria-hidden='true']")
       expect(page).to have_selector("button > span.sr-only", text: "Dismiss")
-    end
-
-    it "matches the badge's color and size" do
-      render_inline(described_class.new("New", color: :pink, size: :"2xl"), &:with_dismiss_button)
-
-      expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2 > svg.h-4")
     end
   end
 end
