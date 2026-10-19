@@ -25,97 +25,7 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe ".orphaned" do
-    let(:user) { create(:user) }
-
-    it "returns projects without coordinators" do
-      project_without_coordinator = create(
-        :project, coordinators: [ user ]
-      )
-      create(:project)
-      user.destroy
-      expect(Project.orphaned.to_a).to eq([ project_without_coordinator ])
-    end
-  end
-
-  describe "#orphaned?" do
-    let(:user) { create(:user) }
-
-    context "when project has coordinators" do
-      it "is not orphaned" do
-        project = build(:project)
-        expect(project).not_to be_orphaned
-      end
-    end
-
-    context "when project has no coordinators" do
-      it "is orphaned" do
-        project = create(:project, coordinators: [ user ])
-        user.destroy
-        project.reload
-        expect(project).to be_orphaned
-      end
-    end
-  end
-
-  describe "#published?" do
-    context "with default values" do
-      it "is not published" do
-        project = build(:project)
-        expect(project).not_to be_published
-      end
-    end
-
-    context "when published_at is unspecified" do
-      it "is not published" do
-        project = build(:project, published_at: nil)
-        expect(project).not_to be_published
-      end
-    end
-
-    context "when published in the future" do
-      it "is not published" do
-        project = build(:project, published_at: Time.zone.tomorrow)
-        expect(project).not_to be_published
-      end
-    end
-
-    context "when published right now" do
-      it "is published" do
-        project = build(:project, published_at: Time.zone.now)
-        expect(project).to be_published
-      end
-    end
-
-    context "when published in the past" do
-      it "is published" do
-        project = build(:project, published_at: Time.zone.yesterday)
-        expect(project).to be_published
-      end
-    end
-  end
-
-  describe "#publish" do
-    it "publishes the project" do
-      project = build(:project, :not_published)
-      project.publish
-      expect(project).to be_published
-    end
-
-    it "publishes at the current time" do
-      project = build(:project, :not_published)
-      project.publish
-      expect(project.published_at).to be >= Time.zone.now - 10.seconds
-      expect(project.published_at).to be <= Time.zone.now + 10.seconds
-    end
-
-    it "keeps the publication date of a published project" do
-      published_at = 1.week.ago.change(usec: 0)
-      project = build(:project, published_at: published_at)
-      project.publish
-      expect(project.published_at).to eq(published_at)
-    end
-  end
+  it_behaves_like "a publishable record", :project
 
   describe "#order_by_most_recently_published_task" do
     it "returns an empty array when there are no projects" do
@@ -186,14 +96,6 @@ RSpec.describe Project, type: :model do
       create(:project, :published, :with_unpublished_tasks)
       create(:project, :not_published)
       expect(Project.publicly_visible).to eq([ published_project_with_published_task ])
-    end
-  end
-
-  describe "#unpublish" do
-    it "unpublishes the project" do
-      project = build(:project, :published)
-      project.unpublish
-      expect(project).not_to be_published
     end
   end
 
