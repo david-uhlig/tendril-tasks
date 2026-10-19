@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ \"$CLAUDE_CODE_REMOTE\" = true ] || exit 0; cd \"$CLAUDE_PROJECT_DIR\" && mise exec -- bin/setup --skip-server > /dev/null",
+            "command": "[ \"$CLAUDE_CODE_REMOTE\" = true ] || exit 0; echo 'export PATH=\"$HOME/.local/share/mise/shims:$PATH\"' >> \"$CLAUDE_ENV_FILE\"; cd \"$CLAUDE_PROJECT_DIR\" && mise exec -- bin/setup --skip-server > /dev/null",
             "timeout": 600
           }
         ]
