@@ -42,4 +42,37 @@ RSpec.describe Gustwave::Form::RichTextArea, type: :component do
 
     expect(page).to have_css("div#boxed > nav")
   end
+
+  context "with a form builder" do
+    def form_builder
+      ActionView::Helpers::FormBuilder.new(:article, nil, vc_test_controller.view_context, {})
+    end
+
+    it "renders the default editor from the form builder, linked to the toolbar" do
+      render_inline(described_class.new(form_builder, :body, toolbar_id: "my-toolbar"))
+
+      expect(page).to have_css("lexxy-toolbar#my-toolbar")
+      expect(page).to have_css("[toolbar='my-toolbar'].lexxy-content")
+    end
+
+    it "generates a toolbar id that the default editor shares" do
+      render_inline(described_class.new(form_builder, :body))
+
+      toolbar_id = page.find("lexxy-toolbar")["id"]
+      expect(toolbar_id).to start_with("toolbar-")
+      expect(page).to have_css("[toolbar='#{toolbar_id}'].lexxy-content")
+    end
+
+    it "sticks the toolbar to the top by default" do
+      render_inline(described_class.new(form_builder, :body))
+
+      expect(page).to have_css("div[class~='group-hover:sticky']")
+    end
+
+    it "doesn't stick the toolbar with sticky_toolbar: false" do
+      render_inline(described_class.new(form_builder, :body, sticky_toolbar: false))
+
+      expect(page).not_to have_css("div[class~='group-hover:sticky']")
+    end
+  end
 end

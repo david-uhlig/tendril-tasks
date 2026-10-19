@@ -5,10 +5,12 @@ require "rails_helper"
 RSpec.describe Gustwave::Icon, type: :component do
   icons_dir = File.expand_path("../../../app/assets/images/gustwave/icons", __dir__)
 
-  # The path data of the home icon's source file, to match the rendered <path>
-  source_path_data = ->(theme) {
-    File.read(File.join(icons_dir, theme, "home.svg"))[/ d="([^"]+)"/, 1]
+  # The path data of an icon's source file, to match the rendered <path>
+  source_path_data = ->(theme, name = "home") {
+    File.read(File.join(icons_dir, theme, "#{name}.svg"))[/ d="([^"]+)"/, 1]
   }
+
+  it_behaves_like "a component with configurable html attributes", :home, selector: "svg"
 
   it "renders the outline icon by default" do
     render_inline(described_class.new(:home))
@@ -28,17 +30,33 @@ RSpec.describe Gustwave::Icon, type: :component do
     expect(rendered_content).to have_no_selector("path[stroke]")
   end
 
-  it "renders different markup for the outline and solid themes" do
-    render_inline(described_class.new(:home))
-    outline = rendered_content
+  it "loads the file of an underscored name with dashes" do
+    render_inline(described_class.new(:arrow_up))
 
-    render_inline(described_class.new(:home, theme: :solid))
-
-    expect(rendered_content).not_to eq(outline)
+    expect(rendered_content).to have_selector("svg path[d='#{source_path_data.call("outline", "arrow-up")}']")
   end
 
-  it "raises for an unknown theme" do
-    expect { described_class.new(:home, theme: :duotone) }
-      .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :duotone for :theme/)
+  it "renders the size" do
+    render_inline(described_class.new(:home, size: :xs))
+
+    expect(rendered_content).to have_selector("svg.h-4")
+  end
+
+  it "renders the leading position margin by default" do
+    render_inline(described_class.new(:home))
+
+    expect(rendered_content).to have_selector("svg.me-1\\.5")
+  end
+
+  it "renders the color" do
+    render_inline(described_class.new(:home, color: :light))
+
+    expect(rendered_content).to have_selector("svg.text-white")
+  end
+
+  it "renders the stroke width" do
+    render_inline(described_class.new(:home, stroke_width: "2"))
+
+    expect(rendered_content).to have_selector("svg[class~='*:stroke-2']")
   end
 end

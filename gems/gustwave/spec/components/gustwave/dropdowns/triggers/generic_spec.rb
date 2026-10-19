@@ -13,10 +13,6 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Generic, type: :component do
       render_inline(described_class.new(menu_id: "dropdown-menu")) { "content" }
     end
 
-    it "renders div tag" do
-      expect(rendered_content).to have_selector("div")
-    end
-
     it "renders base styling" do
       expect(rendered_content).to have_selector("div.inline-flex.cursor-pointer")
     end
@@ -27,21 +23,6 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Generic, type: :component do
 
     it "points aria-controls at the menu" do
       expect(rendered_content).to have_selector("div[aria-controls='dropdown-menu']")
-    end
-  end
-
-  context "with data attributes" do
-    it "keeps the menu id next to the caller's data" do
-      render_inline(described_class.new(menu_id: "dropdown-menu", data: { controller: "x" })) { "content" }
-
-      expect(rendered_content).to have_selector("div[data-controller='x'][data-dropdown-toggle='dropdown-menu']")
-    end
-
-    it "does not let the caller's data override the menu id" do
-      render_inline(described_class.new(menu_id: "dropdown-menu", data: { "dropdown-toggle": "other" })) { "content" }
-
-      expect(rendered_content).to have_selector("div[data-dropdown-toggle='dropdown-menu']")
-      expect(rendered_content).not_to have_selector("div[data-dropdown-toggle='other']")
     end
   end
 

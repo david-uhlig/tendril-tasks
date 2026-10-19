@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::IconToast, type: :component do
+  it_behaves_like "a text and block content renderer", selector: "div.ms-3"
+
   it "labels the icon in German" do
     I18n.with_locale(:de) { render_inline(described_class.new("Saved", status: :success)) }
 
@@ -50,5 +52,31 @@ RSpec.describe Gustwave::IconToast, type: :component do
     render_inline(described_class.new("Plain", status: :none))
 
     expect(rendered_content).to have_selector("span.sr-only", text: "", exact_text: true, visible: :all)
+  end
+
+  describe "toast" do
+    it "passes the id on to the toast" do
+      render_inline(described_class.new("Hi", id: "my-toast"))
+
+      expect(page).to have_selector("div#my-toast[role='alert']")
+    end
+
+    it "passes the position on to the toast" do
+      render_inline(described_class.new("Hi", position: :top_right))
+
+      expect(page).to have_selector("div[role='alert'].fixed.right-5")
+    end
+
+    it "passes dismissible: false on to the toast" do
+      render_inline(described_class.new("Hi", dismissible: false))
+
+      expect(page).not_to have_selector("button")
+    end
+
+    it "passes auto_remove on to the toast" do
+      render_inline(described_class.new("Hi", auto_remove: true))
+
+      expect(page).to have_selector("div[role='alert'][data-controller='gustwave--animate-and-remove']")
+    end
   end
 end

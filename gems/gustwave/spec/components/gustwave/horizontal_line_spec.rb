@@ -1,11 +1,25 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::HorizontalLine, type: :component do
+  it_behaves_like "a component with configurable html attributes", selector: "hr"
+
   it "renders a plain horizontal line" do
     render_inline(described_class.new)
 
     expect(rendered_content).to have_selector("hr.w-full.h-px")
     expect(rendered_content).to have_no_selector("div")
+  end
+
+  it "renders a trimmed shape" do
+    render_inline(described_class.new(shape: :trimmed))
+
+    expect(rendered_content).to have_selector("hr.w-48")
+  end
+
+  it "renders a squared shape" do
+    render_inline(described_class.new(shape: :squared))
+
+    expect(rendered_content).to have_selector("hr.w-8")
   end
 
   it "renders text in the middle of the line" do
@@ -14,6 +28,12 @@ RSpec.describe Gustwave::HorizontalLine, type: :component do
     end
 
     expect(rendered_content).to have_selector("div>hr + span.custom", text: "Hello!")
+  end
+
+  it "renders plain text content in a span" do
+    render_inline(described_class.new.with_content("Hi"))
+
+    expect(rendered_content).to have_selector("div>hr + span", text: "Hi")
   end
 
   it "wraps HTML block content in a content block" do
