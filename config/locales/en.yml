@@ -428,6 +428,9 @@ en:
     omniauth_callbacks:
       failure:
         failure: "Failure. Please try again."
+      rocketchat:
+        invalid: "Sign in with Rocket.Chat failed. Please try again."
+        email_taken: "An account with this email address already exists. Please contact an administrator."
     dev_sessions:
       create:
         failure: "User not found."

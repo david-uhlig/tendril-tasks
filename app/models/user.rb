@@ -29,25 +29,35 @@ class User < ApplicationRecord
          :timeoutable,
          omniauth_providers: %i[rocketchat]
 
+  validates :email, presence: true
+
   scope :default, -> { all }
   scope :exclude, ->(users) { where.not(id: users) }
   scope :exclude_ids, ->(user_ids) { where.not(id: user_ids) }
 
   class << self
+    # Returns the user for the omniauth auth hash. If no user can be created or
+    # found, the returned user is unsaved and carries the reason in `errors`.
     def from_omniauth(auth)
       # TODO refresh email, name etc. when they are updated at the omniauth provider
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         # Although this application uses only omniauth, a password is generated
         # because it is required for devise features such as :rememberable
         user.password = Devise.friendly_token[0, 20]
-        user.name = auth.dig(:info, :name)
-        user.email = auth.dig(:info, :email)
-        user.username = auth.dig(:info, :nickname)
-        user.avatar_url = auth.dig(:info, :image)
+        user.name = auth.dig(:info, :name).to_s
+        user.email = auth.dig(:info, :email).to_s
+        user.username = auth.dig(:info, :nickname).to_s
+        user.avatar_url = auth.dig(:info, :image).to_s
         user.role = determine_role(auth)
       end.tap do |user|
         # Picks up a changed avatar URL, see DownloadAvatarJob.
         user.update(avatar_url: auth.dig(:info, :image).to_s) if user.persisted?
+      end
+    rescue ActiveRecord::RecordNotUnique
+      # Another user already has this email. Accounts are not linked by email,
+      # so the auth data is not signed in.
+      new(provider: auth.provider, uid: auth.uid, email: auth.dig(:info, :email).to_s).tap do |user|
+        user.errors.add(:email, :taken)
       end
     end
 
