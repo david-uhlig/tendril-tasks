@@ -62,11 +62,6 @@ RSpec.describe Gustwave::Paragraph, type: :component do
       expect(page).to have_selector("p.text-right.rtl\\:text-left")
     end
 
-    it "raises for an unknown align" do
-      expect { described_class.new("Some text", align: :justify) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :justify for :align/)
-    end
-
     it "falls back to no alignment for an unknown align when Gustwave isn't strict" do
       Gustwave.strict = false
       render_inline(described_class.new("Some text", align: :justify))

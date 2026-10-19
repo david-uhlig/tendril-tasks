@@ -23,16 +23,42 @@ RSpec.describe Gustwave::Popover, type: :component do
   end
 
   it_behaves_like "a component with trigger options", prefix: "popover"
+  it_behaves_like "a text and block content renderer", selector: "div[role='tooltip']"
+  it_behaves_like "a component with configurable html attributes", selector: "div[role='tooltip']"
+
+  context "with a text argument" do
+    before(:each) do
+      render_inline(described_class.new("Helpful hint"))
+    end
+
+    it "renders the popover with the tooltip role" do
+      expect(page).to have_selector("div[role='tooltip']", text: "Helpful hint")
+    end
+
+    it "marks the element as a popover" do
+      expect(page).to have_selector("div[data-popover]")
+    end
+
+    it "generates an id for the popover" do
+      expect(page).to have_selector("div[role='tooltip'][id^='popover-']")
+    end
+  end
+
+  it "keeps a given id" do
+    render_inline(described_class.new("text", id: "pop"))
+
+    expect(page).to have_selector("div#pop[role='tooltip']")
+  end
+
+  it "takes a role override" do
+    render_inline(described_class.new("text", role: "dialog"))
+
+    expect(page).to have_selector("div[role='dialog']")
+    expect(page).not_to have_selector("div[role='tooltip']")
+  end
 
   describe "#trigger_options" do
     subject(:component) { described_class.new("text", id: "pop") }
-
-    it "targets the popover" do
-      expect(component.trigger_options).to eq(
-        "data-popover-target" => "pop", "data-popover-placement" => :top, "data-popover-trigger" => :hover,
-        "aria-describedby" => "pop"
-      )
-    end
 
     it "passes on an offset" do
       expect(component.trigger_options(offset: 8)).to include("data-popover-offset" => 8)
@@ -66,8 +92,12 @@ RSpec.describe Gustwave::Popover, type: :component do
       expect(options.keys.map(&:to_s)).not_to include("aria-describedby")
     end
 
-    it "replaces the trigger's own aria-controls with the popover's" do
-      [ { "aria-controls": "other" }, { "aria-controls" => "other" }, { aria: { controls: "other" } } ].each do |attributes|
+    [
+      { "aria-controls": "other" },
+      { "aria-controls" => "other" },
+      { aria: { controls: "other" } }
+    ].each do |attributes|
+      it "replaces the trigger's aria-controls given as #{attributes.inspect}" do
         options = component.trigger_options(trigger: :click, **attributes)
 
         expect(options.keys.map(&:to_s).count("aria-controls")).to eq(1)

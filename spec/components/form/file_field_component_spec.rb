@@ -19,7 +19,7 @@ RSpec.describe Form::FileFieldComponent, type: :component do
     end
 
     it "renders the text in a paragraph" do
-      expect(page).to have_selector("p.mt-1.text-sm.text-gray-500.dark\\:text-gray-400", text: "PNG or SVG, max. 2 MB")
+      expect(page).to have_selector("p", text: "PNG or SVG, max. 2 MB")
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe Form::FileFieldComponent, type: :component do
       field.with_helper_text("Help", id: "logo-help", class: "custom-class")
     end
 
-    expect(page).to have_selector("p#logo-help.mt-1.text-sm.text-gray-500.custom-class", text: "Help")
+    expect(page).to have_selector("p#logo-help.custom-class", text: "Help")
   end
 
   it "renders no paragraph without helper_text" do

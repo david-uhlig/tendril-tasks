@@ -64,7 +64,7 @@ module TendrilTasks
         if hidden_avatars?
           concat render(
                    Gustwave::AvatarText.new(
-                     text: "+#{number_of_hidden_avatars}",
+                     "+#{number_of_hidden_avatars}",
                      **avatar_options))
         end
       end

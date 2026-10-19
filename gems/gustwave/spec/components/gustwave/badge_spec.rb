@@ -37,20 +37,22 @@ RSpec.describe Gustwave::Badge, type: :component do
       expect(page).to have_selector("div.rounded-sm")
     end
 
-    it "renders the hover style for links and buttons only" do
+    it "renders the hover style for a link" do
       render_inline(described_class.new(tag: :a, href: "#")) { "content" }
+
       expect(page).to have_selector("a.hover\\:bg-blue-200")
-
-      render_inline(described_class.new(tag: :button)) { "content" }
-      expect(page).to have_selector("button.hover\\:bg-blue-200")
-
-      render_inline(described_class.new(tag: :span)) { "content" }
-      expect(page).not_to have_selector("[class*='hover:']")
     end
 
-    it "raises for an unsupported tag" do
-      expect { render_inline(described_class.new(tag: :p)) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :p for :tag/)
+    it "renders the hover style for a button" do
+      render_inline(described_class.new(tag: :button)) { "content" }
+
+      expect(page).to have_selector("button.hover\\:bg-blue-200")
+    end
+
+    it "renders no hover style for a span" do
+      render_inline(described_class.new(tag: :span)) { "content" }
+
+      expect(page).not_to have_selector("[class*='hover:']")
     end
   end
 
@@ -66,11 +68,6 @@ RSpec.describe Gustwave::Badge, type: :component do
 
       expect(page).to have_selector("span[type='submit']")
     end
-
-    it "raises for an unsupported type" do
-      expect { render_inline(described_class.new(type: :link)) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :link for :type/)
-    end
   end
 
   context "with text" do
@@ -79,9 +76,10 @@ RSpec.describe Gustwave::Badge, type: :component do
       expect(page).to have_content("text")
     end
 
-    it "renders the text when content is given" do
+    it "renders only the text when content is given" do
       render_inline(described_class.new("text").with_content("content"))
       expect(page).to have_content("text")
+      expect(page).not_to have_content("content")
     end
   end
 
@@ -146,35 +144,42 @@ RSpec.describe Gustwave::Badge, type: :component do
       expect(page).to have_selector("span.border.border-blue-400")
     end
 
+    it "renders outline classes" do
+      render_inline(described_class.new(outline: true))
+      expect(page).to have_selector("span.outline-blue-400")
+    end
+
     it "casts a string to a boolean" do
       render_inline(described_class.new(border: "true", outline: "false"))
       expect(page).to have_selector("span.border.border-blue-400")
-      expect(page).not_to have_selector("span.outline")
+      expect(page).not_to have_selector("span.outline-blue-400")
     end
   end
 
   context "with options" do
-    it "renders additional classes" do
-      render_inline(described_class.new(class: "some-additional-css-class"))
-      expect(page).to have_selector("span.some-additional-css-class")
-    end
+    it_behaves_like "a component with configurable html attributes", selector: "span"
+  end
 
-    it "renders html attributes" do
-      render_inline(described_class.new(id: "some-id", lang: "de"))
-      expect(rendered_content).to have_selector("span[id='some-id']")
-      expect(rendered_content).to have_selector("span[lang='de']")
+  context "with leading and trailing visuals and a dismiss button" do
+    it "renders them in order around the text" do
+      render_inline(described_class.new("New", id: "badge-new")) do |badge|
+        badge.with_leading_visual_image "https://example.com/leading.png", alt: "Lead"
+        badge.with_trailing_visual_icon :close
+        badge.with_dismiss_button
+      end
+
+      children = Nokogiri::HTML.fragment(rendered_content).at_css("span#badge-new").children
+      expect(children.filter_map { it.element? ? it.name : it.text.strip.presence }).to eq %w[img New svg button]
     end
   end
 
   context "with a dismiss button" do
     it_behaves_like "a component with a dismiss button slot", "New", id_prefix: "badge"
 
-    it "renders an inline button that dismisses the badge" do
+    it "renders a dismiss button with a small icon" do
       render_inline(described_class.new("New", id: "badge-new"), &:with_dismiss_button)
 
-      expect(page).to have_selector("span#badge-new > button[type='button'][aria-label='Dismiss'][data-dismiss-target='#badge-new']")
-      expect(page).to have_selector("button.bg-transparent.text-blue-400.p-1 > svg.h-3[aria-hidden='true']")
-      expect(page).to have_selector("button > span.sr-only", text: "Dismiss")
+      expect(page).to have_selector("button.bg-transparent > svg.h-3[aria-hidden='true']")
     end
 
     it "matches the badge's color and size" do

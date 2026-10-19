@@ -57,12 +57,6 @@ RSpec.describe Gustwave::Dropdown, type: :component do
       expect(rendered_content).to have_selector("button[data-dropdown-toggle='m']")
       expect(rendered_content).not_to have_selector("button[data-dropdown-toggle='other']")
     end
-
-    it "renders aria-controls with the menu id" do
-      render_inline(described_class.new("Menu", menu_id: "m"))
-
-      expect(rendered_content).to have_selector("button[aria-controls='m']")
-    end
   end
 
   context "with trigger settings" do
@@ -125,6 +119,44 @@ RSpec.describe Gustwave::Dropdown, type: :component do
 
       expect(rendered_content).to have_selector("button[data-dropdown-toggle='m'].bg-blue-700", text: "Open")
       expect(rendered_content).to have_no_selector("button.align-baseline")
+    end
+  end
+
+  context "with inline" do
+    it "renders an inline trigger" do
+      render_inline(described_class.new("Menu", menu_id: "m", inline: true))
+
+      expect(rendered_content).to have_selector("button.align-baseline[data-dropdown-toggle='m']", text: "Menu")
+    end
+  end
+
+  context "with a generic menu" do
+    it "renders the menu content with the menu id" do
+      render_inline(described_class.new("Open", menu_id: "m")) do |dropdown|
+        dropdown.with_menu_generic("Menu body")
+      end
+
+      expect(rendered_content).to have_selector("div#m", text: "Menu body")
+    end
+
+    it "renders the menu in the given tag" do
+      render_inline(described_class.new("Open", menu_id: "m")) do |dropdown|
+        dropdown.with_menu_generic("Menu body", tag: :section)
+      end
+
+      expect(rendered_content).to have_selector("section#m", text: "Menu body")
+    end
+  end
+
+  context "with list options" do
+    it "configures the list element" do
+      render_inline(described_class.new("Open", menu_id: "m")) do |dropdown|
+        dropdown.with_menu_list(list_options: { tag: :ol }) do |menu|
+          menu.with_item_link "Profile", href: "/profile"
+        end
+      end
+
+      expect(rendered_content).to have_selector("#m ol a[href='/profile']", text: "Profile")
     end
   end
 

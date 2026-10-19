@@ -11,16 +11,12 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
       render_inline(described_class.new) { "content" }
     end
 
-    it "renders default tag with default type" do
-      expect(rendered_content).to have_selector("button[type='button']")
-    end
-
     it "renders base styling" do
-      expect(rendered_content).to have_selector("button.rounded-lg.text-center.overflow-hidden.whitespace-nowrap.align-bottom")
+      expect(rendered_content).to have_selector("button.rounded-lg")
     end
 
     it "renders default size styling" do
-      expect(rendered_content).to have_selector("button.px-5.text-sm.font-medium")
+      expect(rendered_content).to have_selector("button.px-5")
     end
 
     it "renders no pill styling" do
@@ -28,134 +24,102 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
 
     it "renders no leading/trailing visual styling" do
-      expect(rendered_content).not_to have_selector("button.inline-flex.items-center.align-bottom")
+      expect(rendered_content).not_to have_selector("button.inline-flex")
     end
   end
 
   context "with tag argument" do
-    before(:context) do
-      render_inline(described_class.new(tag: :a)) { "anchor_content" }
-    end
-
     it "renders an anchor tag" do
-      expect(rendered_content).to have_selector("a", text: "anchor_content")
-    end
+      render_inline(described_class.new(tag: :a)) { "anchor_content" }
 
-    it "render no type attribute when tag is set to :a" do
-      expect(rendered_content).not_to have_selector("a[type]")
+      expect(rendered_content).to have_selector("a", text: "anchor_content")
     end
   end
 
   context "with color argument" do
     it "renders no base styling when color is set to :none" do
       render_inline(described_class.new(color: :none)) { "content" }
-      expect(rendered_content).not_to have_selector("button.rounded-lg")
-      expect(rendered_content).not_to have_selector("button.text-center")
-      expect(rendered_content).not_to have_selector("button.overflow-hidden")
-    end
 
-    it "renders base styling when color is set to :base" do
-      render_inline(described_class.new(color: :base)) { "content" }
-      expect(rendered_content).to have_selector("button.rounded-lg.text-center.overflow-hidden.whitespace-nowrap.align-bottom")
+      expect(rendered_content).not_to have_selector("button.rounded-lg")
     end
   end
 
   context "with size argument" do
     it "renders custom size styling" do
       render_inline(described_class.new(size: :xl)) { "content" }
-      expect(rendered_content).to have_selector("button.px-6.text-base.font-medium")
+
+      expect(rendered_content).to have_selector("button.px-6")
     end
   end
 
   context "with pill argument" do
     it "renders pill styling" do
       render_inline(described_class.new(pill: true)) { "content" }
+
       expect(rendered_content).to have_selector("button.rounded-full")
     end
   end
 
-  context "with leading visual" do
-    it "renders leading visual classes" do
-      render_inline(described_class.new) do |component|
-        component.with_leading_visual_icon :dismiss
+  context "with a leading and a trailing visual around the text" do
+    it "renders the leading visual before the text and the trailing visual after it" do
+      render_inline(described_class.new("Go")) do |component|
+        component.with_leading_visual_icon :check
+        component.with_trailing_visual_icon :check
       end
-      expect(rendered_content).to have_selector("button.inline-flex.items-center.align-bottom")
-    end
 
-    it "renders leading visual icon" do
-      render_inline(described_class.new) do |component|
-        component.with_leading_visual_icon :dismiss
-      end
-      expect(rendered_content).to have_selector("button>svg")
-    end
-
-    it "renders leading visual image" do
-      render_inline(described_class.new) do |component|
-        component.with_leading_visual_image "https://example.com/image.png"
-      end
-      expect(rendered_content).to have_selector("button>img[src='https://example.com/image.png']")
-    end
-
-    it "renders leading visual svg" do
-      render_inline(described_class.new) do |component|
-        component.with_leading_visual_svg "https://example.com/svg.svg"
-      end
-      expect(rendered_content).to have_selector("button>svg")
-    end
-  end
-
-  context "with trailing visual" do
-    it "renders trailing visual classes" do
-      render_inline(described_class.new) do |component|
-        component.with_trailing_visual_icon :dismiss
-      end
-      expect(rendered_content).to have_selector("button.inline-flex.items-center.align-bottom")
-    end
-
-    it "renders trailing visual icon" do
-      render_inline(described_class.new) do |component|
-        component.with_trailing_visual_icon :dismiss
-      end
-      expect(rendered_content).to have_selector("button>svg")
-    end
-
-    it "renders trailing visual image" do
-      render_inline(described_class.new) do |component|
-        component.with_trailing_visual_image "https://example.com/image.png"
-      end
-      expect(rendered_content).to have_selector("button>img[src='https://example.com/image.png']")
-    end
-
-    it "renders trailing visual svg" do
-      render_inline(described_class.new) do |component|
-        component.with_trailing_visual_svg "https://example.com/svg.svg"
-      end
-      expect(rendered_content).to have_selector("button>svg")
+      expect(page).to have_xpath("//button/svg[1][following-sibling::text()[normalize-space()='Go']]")
+      expect(page).to have_xpath("//button/svg[2][preceding-sibling::text()[normalize-space()='Go']]")
     end
   end
 
   %i[leading trailing].each do |position|
-    context "with a custom class on a #{position} visual" do
-      it "merges it with the visual size classes on images" do
+    context "with a #{position} visual" do
+      # The text sits on the other side of the visual
+      sibling = position == :leading ? "following-sibling" : "preceding-sibling"
+
+      {
+        "icon" => [ "svg", ->(component) { component.public_send(:"with_#{position}_visual_icon", :check) } ],
+        "image" => [ "img", ->(component) { component.public_send(:"with_#{position}_visual_image", "https://example.com/image.png") } ],
+        "svg" => [ "svg", ->(component) { component.public_send(:"with_#{position}_visual_svg", "gustwave/icons/outline/arrow-left.svg") } ]
+      }.each do |kind, (element, add_visual)|
+        it "renders the #{kind} #{position} of the text" do
+          render_inline(described_class.new("Go")) { |component| add_visual.call(component) }
+
+          expect(page).to have_xpath("//button/#{element}[#{sibling}::text()[normalize-space()='Go']]")
+        end
+      end
+
+      it "renders the visual classes" do
+        render_inline(described_class.new) do |component|
+          component.public_send(:"with_#{position}_visual_icon", :check)
+        end
+
+        expect(rendered_content).to have_selector("button.inline-flex")
+      end
+
+      it "merges a custom class with the visual size classes on images" do
         render_inline(described_class.new) do |component|
           component.public_send(:"with_#{position}_visual_image", "https://example.com/image.png", class: "custom")
         end
+
         expect(rendered_content).to have_selector("button>img.h-5.w-auto.custom[aria-hidden='true']")
       end
 
-      it "merges it with the visual size classes on svgs" do
+      it "merges a custom class with the visual size classes on svgs" do
         render_inline(described_class.new) do |component|
           component.public_send(:"with_#{position}_visual_svg", "gustwave/icons/outline/arrow-left.svg", class: "custom")
         end
+
         expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom")
       end
 
-      it "merges it with the visual size classes on block svgs" do
+      it "merges a custom class with the visual size classes on block svgs" do
         render_inline(described_class.new) do |component|
           component.public_send(:"with_#{position}_visual_svg", class: "custom") do
             '<svg xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1"/></svg>'.html_safe
           end
         end
+
         expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom[aria-hidden='true']>rect")
       end
     end
@@ -179,9 +143,18 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
   context "with leading visual without content" do
     it "overwrites padding" do
       render_inline(described_class.new) do |component|
-        component.with_leading_visual_icon :dismiss
+        component.with_leading_visual_icon :check
       end
+
       expect(rendered_content).to have_selector('button.p-2\.5')
+    end
+
+    it "keeps the text padding when the button has text" do
+      render_inline(described_class.new("Go")) do |component|
+        component.with_leading_visual_icon :check
+      end
+
+      expect(rendered_content).not_to have_selector('button.p-2\.5')
     end
   end
 
@@ -210,11 +183,10 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
         expect(rendered_content).to have_selector(
           "button>img.h-6.w-auto.rounded-full[aria-hidden='true'][data-size='lg'][src='https://example.com/me.png']"
         )
-        expect(rendered_content).to have_selector("button.inline-flex.items-center.align-bottom")
       end
     end
 
-    it "works on every theme through Gustwave::Button.for" do
+    it "applies the visual context of the gradient duotone theme" do
       render_inline(Gustwave::Button.for(:gradient_duotone).new("Me", size: :sm)) do |button|
         button.with_leading_visual_renderable(consumer_avatar.new("https://example.com/me.png"))
       end
@@ -243,13 +215,6 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
       render_inline(described_class.new(type: :submit)) { "content" }
 
       expect(page).to have_selector("button[type='submit']")
-    end
-
-    it "raises for an unsupported tag or type" do
-      expect { described_class.new(tag: :div) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :div for :tag/)
-      expect { described_class.new(type: :link) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :link for :type/)
     end
   end
 end

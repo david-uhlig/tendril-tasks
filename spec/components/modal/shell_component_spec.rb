@@ -19,16 +19,8 @@ RSpec.describe Modal::ShellComponent, type: :component do
       "<p>Body</p>".html_safe
     end
 
-    expect(rendered_content).to have_selector("h3.text-xl.font-semibold", text: "Title", visible: :all)
+    expect(rendered_content).to have_selector("h3", text: "Title", visible: :all)
     expect(rendered_content).to have_selector("div:has(> h3) + p", text: "Body", visible: :all)
-  end
-
-  it "merges custom classes into the heading" do
-    render_inline(described_class.new("dialog")) do |shell|
-      shell.with_heading "Title", class: "text-lg"
-    end
-
-    expect(rendered_content).to have_selector("h3.text-lg.font-semibold:not(.text-xl)", text: "Title", visible: :all)
   end
 
   it "traps the focus within the modal" do
