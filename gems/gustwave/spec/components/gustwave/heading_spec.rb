@@ -79,21 +79,23 @@ RSpec.describe Gustwave::Heading, type: :component do
 
       expect(page).to have_selector("h2#custom")
     end
+  end
 
-    it "doesn't need the view context" do
-      component = described_class.new("Getting Started", tag: :h2)
-      allow(component).to receive(:helpers).and_raise("helpers must not be used")
+  describe "responsive" do
+    it "renders the responsive sizes" do
+      render_inline(described_class.new("Title", tag: :h2, responsive: true))
 
-      render_inline(component)
+      expect(page).to have_selector("h2[class~='md:text-4xl']")
+    end
 
-      expect(page).to have_selector("h2#getting-started")
+    it "renders no responsive sizes by default" do
+      render_inline(described_class.new("Title", tag: :h2))
+
+      expect(page).not_to have_selector("h2[class~='md:text-4xl']")
     end
   end
 
-  it "raises for an unknown tag" do
-    expect { described_class.new("Title", tag: :h7) }
-      .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :h7 for :tag/)
-  end
+  it_behaves_like "a text and block content renderer", selector: "h2"
 
   it "falls back to h2 for an unknown tag when Gustwave isn't strict" do
     Gustwave.strict = false

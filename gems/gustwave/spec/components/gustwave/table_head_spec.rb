@@ -25,6 +25,32 @@ RSpec.describe Gustwave::TableHead, type: :component do
       expect(rendered_content).to have_selector("tr")
       expect(rendered_content).to have_selector("th", text: "col_content")
     end
+
+    it "renders the column header as a column scope" do
+      render_inline(described_class.new) do |component|
+        component.with_column { "col_content" }
+      end
+
+      expect(rendered_content).to have_selector("th[scope='col']", text: "col_content")
+    end
+
+    it "renders the text argument as the column header" do
+      render_inline(described_class.new) do |component|
+        component.with_column "First Name"
+      end
+
+      expect(rendered_content).to have_selector("th", exact_text: "First Name")
+    end
+
+    it "renders multiple columns in order" do
+      render_inline(described_class.new) do |component|
+        component.with_column "First Name"
+        component.with_column "Last Name"
+        component.with_column "Email"
+      end
+
+      expect(page.all("th").map(&:text)).to eq([ "First Name", "Last Name", "Email" ])
+    end
   end
 
   context "with col slot and block content" do
