@@ -54,6 +54,7 @@ fi
   echo "app_version: $(sed -n 's/.*VERSION = "\(.*\)".*/\1/p' "$storage/../config/version.rb")"
   echo "app_git_commit: ${APP_GIT_COMMIT:-unknown}"
   echo "schema_version: $(sqlite3 "$snapshot/production.sqlite3" "SELECT max(version) FROM schema_migrations")"
+  echo "restore_instructions: https://github.com/david-uhlig/tendril-tasks/blob/main/.self-hosting/README.md#restoring-a-backup"
 } > "$snapshot/backup-info.txt"
 
 # Archives the uploads after the snapshot, so every file the snapshot refers

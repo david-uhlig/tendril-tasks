@@ -40,29 +40,29 @@ Don't copy the database file while the app runs. Changes still in its write-ahea
 With Docker Compose, from the project root:
 
 ```sh
-docker compose exec -T web bin/backup > tendril-tasks-$(date +%F).tar.gz
+docker compose exec -T web bin/backup > tendril-tasks-$(date +%F_%H-%M-%S).tar.gz
 ```
 
 With Kamal, from your machine, replacing `tendril-tasks` if you changed the `service` in `config/deploy.yml`:
 
 ```sh
 ssh root@192.168.0.1 'docker exec $(docker ps -q --latest -f label=service=tendril-tasks -f label=role=web) bin/backup' \
-  > tendril-tasks-$(date +%F).tar.gz
+  > tendril-tasks-$(date +%F_%H-%M-%S).tar.gz
 ```
 
 Or on the server Kamal deployed to:
 
 ```sh
 docker exec $(docker ps -q --latest -f label=service=tendril-tasks -f label=role=web) bin/backup \
-  > /var/backups/tendril-tasks-$(date +%F).tar.gz
+  > /var/backups/tendril-tasks-$(date +%F_%H-%M-%S).tar.gz
 ```
 
 To back up every night, run the command from a cron job, e.g. `30 3 * * *`, and keep a few older archives, too. In a crontab, write `%` as `\%`. Archives stored on the server itself are lost together with it, so copy them elsewhere, too. A backup you haven't restored once is a hope rather than a backup, so try the restore below on a spare machine.
 
-Each archive contains a `backup-info.txt` with the app version and the version of the database schema it was created with:
+Each archive contains a `backup-info.txt` with the time it was created, in UTC, the app version and the version of the database schema it was created with, and a link to the restore instructions below:
 
 ```sh
-tar -xOf tendril-tasks-2026-10-19.tar.gz backup-info.txt
+tar -xOf tendril-tasks-2026-10-19_03-30-00.tar.gz backup-info.txt
 ```
 
 ### Restoring a backup
@@ -79,7 +79,7 @@ With Docker Compose, from the project root:
 docker compose stop web
 docker compose run --rm --no-deps -T --entrypoint bash web \
   -c 'cd storage && rm -rf production*.sqlite3* uploads && gzip -dcf | tar -xf - --exclude=backup-info.txt' \
-  < tendril-tasks-2026-10-19.tar.gz
+  < tendril-tasks-2026-10-19_03-30-00.tar.gz
 docker compose start web
 ```
 
@@ -89,7 +89,7 @@ With Kamal, from your machine, replacing `your-user/tendril-tasks` with your `im
 bin/kamal app stop
 ssh root@192.168.0.1 'docker run --rm -i -v tendril-tasks_storage:/rails/storage --entrypoint bash your-user/tendril-tasks:latest \
   -c "cd storage && rm -rf production*.sqlite3* uploads && gzip -dcf | tar -xf - --exclude=backup-info.txt"' \
-  < tendril-tasks-2026-10-19.tar.gz
+  < tendril-tasks-2026-10-19_03-30-00.tar.gz
 bin/kamal app start
 ```
 
@@ -100,7 +100,7 @@ containers=$(docker ps -q -f label=service=tendril-tasks)
 docker stop $containers
 docker run --rm -i -v tendril-tasks_storage:/rails/storage --entrypoint bash your-user/tendril-tasks:latest \
   -c 'cd storage && rm -rf production*.sqlite3* uploads && gzip -dcf | tar -xf - --exclude=backup-info.txt' \
-  < /var/backups/tendril-tasks-2026-10-19.tar.gz
+  < /var/backups/tendril-tasks-2026-10-19_03-30-00.tar.gz
 docker start $containers
 ```
 
