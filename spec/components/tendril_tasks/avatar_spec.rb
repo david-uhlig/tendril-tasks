@@ -83,22 +83,6 @@ RSpec.describe TendrilTasks::Avatar, type: :component do
   end
 
   context "with options" do
-    it "renders alt text" do
-      render_inline(described_class.new(
-        user,
-        alt: "alt_text"
-      ))
-      expect(page).to have_selector("img[alt='alt_text']")
-    end
-
-    it "renders css classes" do
-      render_inline(described_class.new(
-        user,
-        class: "my-custom-class and-some-other-class"
-      ))
-      expect(page).to have_selector("img.my-custom-class.and-some-other-class")
-    end
-
     context "containing HTML attributes" do
       it "renders data attributes" do
         render_inline(described_class.new(

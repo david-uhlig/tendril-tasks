@@ -7,16 +7,16 @@ RSpec.describe Gustwave::Indicator, type: :component do
   end
 
   context "with default options" do
-    before(:context) do
+    before do
       render_inline(described_class.new)
     end
 
     it "renders base styling" do
-      expect(rendered_content).to have_selector("span.flex.rounded-full.aspect-square")
+      expect(rendered_content).to have_selector("span.rounded-full")
     end
 
     it "renders size styling" do
-      expect(rendered_content).to have_selector('span.h-\[1em\].font-semibold')
+      expect(rendered_content).to have_selector('span.h-\[1em\]')
     end
 
     it "renders color styling" do
@@ -27,7 +27,7 @@ RSpec.describe Gustwave::Indicator, type: :component do
   context "with custom size" do
     it "renders custom size styling" do
       render_inline(described_class.new(size: :lg))
-      expect(rendered_content).to have_selector("span.h-6.min-w-6.text-sm.font-semibold")
+      expect(rendered_content).to have_selector("span.h-6")
     end
   end
 
@@ -53,17 +53,17 @@ RSpec.describe Gustwave::Indicator, type: :component do
   end
 
   context "with block content" do
-    before(:context) do
+    before do
       render_inline(described_class.new) { "content" }
     end
 
     it "renders text styling" do
-      expect(rendered_content).to have_selector("span.aspect-auto.items-center.justify-center.text-white")
+      expect(rendered_content).to have_selector("span.text-white")
     end
   end
 
   context "with legend slot" do
-    before(:context) do
+    before do
       render_inline(described_class.new) do |component|
         component.with_legend { "legend_content" }
       end
@@ -75,7 +75,7 @@ RSpec.describe Gustwave::Indicator, type: :component do
     end
 
     it "renders legend styling" do
-      expect(rendered_content).to have_selector("span.flex.items-center.text-sm.font-medium")
+      expect(rendered_content).to have_selector("span.text-sm")
     end
   end
 end

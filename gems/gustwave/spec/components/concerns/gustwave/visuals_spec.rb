@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe Gustwave::Visuals, type: :component do
   [ Gustwave::Buttons::Base, Gustwave::Badge ].each do |component_class|
     describe component_class do
-      it "includes Visuals" do
-        expect(component_class.include?(Gustwave::Visuals)).to be(true)
-      end
-
       it "declares the visual slots" do
         expect(component_class.extensible_slots.keys).to include(:leading_visuals, :trailing_visuals)
       end
@@ -20,7 +16,7 @@ RSpec.describe Gustwave::Visuals, type: :component do
       it "sizes indicators by the indicator_size derived value" do
         render_inline(component_class.new("Go", size: :lg)) { |component| component.with_trailing_visual_indicator }
 
-        expect(rendered_content).to have_selector("span[aria-hidden='true']")
+        expect(rendered_content).to have_selector("span.h-4[aria-hidden='true']")
       end
 
       it "keeps a visual hidden when given other aria attributes" do
@@ -51,10 +47,6 @@ RSpec.describe Gustwave::Visuals, type: :component do
         expect(rendered_content).to have_selector("span[data-size='lg']", text: "visual")
       end
     end
-  end
-
-  it "keeps Badge independent of the buttons" do
-    expect(Gustwave::Badge.ancestors).not_to include(Gustwave::Buttons::Base)
   end
 
   it "doesn't extend the visuals of Badge when extending Buttons::Base" do

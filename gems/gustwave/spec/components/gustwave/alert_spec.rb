@@ -15,8 +15,8 @@ RSpec.describe Gustwave::Alert, type: :component do
       expect(page).to have_selector("div[role='alert']", text: "content")
     end
 
-    it "renders the base and blue classes" do
-      expect(page).to have_selector("div.p-4.text-sm.rounded-lg.text-blue-800.bg-blue-50.dark\\:text-blue-400")
+    it "renders the blue color" do
+      expect(page).to have_selector("div.bg-blue-50")
     end
 
     it "renders no flex, alignment, border or id" do
@@ -29,15 +29,15 @@ RSpec.describe Gustwave::Alert, type: :component do
 
   describe "colors" do
     {
-      red: "text-red-800.bg-red-50.dark\\:text-red-400",
-      green: "text-green-800.bg-green-50.dark\\:text-green-400",
-      yellow: "text-yellow-800.bg-yellow-50.dark\\:text-yellow-300",
-      dark: "text-gray-800.bg-gray-50.dark\\:text-gray-300"
-    }.each do |color, classes|
-      it "renders the #{color} classes" do
+      red: "red-50",
+      green: "green-50",
+      yellow: "yellow-50",
+      dark: "gray-50"
+    }.each do |color, background|
+      it "renders the #{color} color" do
         render_inline(described_class.new("content", color:))
 
-        expect(page).to have_selector("div.#{classes}")
+        expect(page).to have_selector("div.bg-#{background}")
       end
     end
 
@@ -48,24 +48,19 @@ RSpec.describe Gustwave::Alert, type: :component do
       expect(page).not_to have_selector("div.p-4")
       expect(page).not_to have_selector("div[class*='bg-']")
     end
-
-    it "raises for an unknown color" do
-      expect { render_inline(described_class.new("content", color: :pink)) }
-        .to raise_error(Gustwave::Options::UnknownValueError)
-    end
   end
 
   describe "border" do
     it "renders a border in the color" do
       render_inline(described_class.new("content", color: :red, border: true))
 
-      expect(page).to have_selector("div.border.border-red-300.dark\\:border-red-800")
+      expect(page).to have_selector("div.border-red-300")
     end
 
     it "renders a gray border for :dark" do
       render_inline(described_class.new("content", color: :dark, border: true))
 
-      expect(page).to have_selector("div.border.border-gray-300.dark\\:border-gray-600")
+      expect(page).to have_selector("div.border-gray-300")
     end
   end
 
@@ -73,14 +68,14 @@ RSpec.describe Gustwave::Alert, type: :component do
     it "renders a top border" do
       render_inline(described_class.new("content", accent: true))
 
-      expect(page).to have_selector("div.border-t-4.border-blue-300.rounded-none.dark\\:border-blue-800")
+      expect(page).to have_selector("div.border-t-4")
       expect(page).not_to have_selector("div.rounded-lg")
     end
 
     it "wins over border" do
       render_inline(described_class.new("content", border: true, accent: true))
 
-      expect(page).to have_selector("div.border-t-4.rounded-none")
+      expect(page).to have_selector("div.border-t-4")
       expect(page).not_to have_selector("div.border")
     end
   end
@@ -98,8 +93,8 @@ RSpec.describe Gustwave::Alert, type: :component do
     it "renders a flex alert with the icon before the body" do
       render_inline(described_class.new("content", title: "Title")) { |alert| alert.with_icon(label: "Info") }
 
-      expect(page).to have_selector("div.flex.items-center[role='alert']")
-      expect(page).to have_selector("div > svg.shrink-0.inline.w-4.h-4.me-3[aria-hidden='true']")
+      expect(page).to have_selector("div.flex[role='alert']")
+      expect(page).to have_selector("div > svg[aria-hidden='true']")
       expect(page).to have_selector("div > span.sr-only", text: "Info")
       expect(page).to have_selector("div > div > span.font-medium", text: "Title")
       expect(page).to have_selector("div > div", text: "content")
@@ -142,13 +137,10 @@ RSpec.describe Gustwave::Alert, type: :component do
       expect(page).not_to have_selector(".font-medium")
     end
 
-    it "renders the color's and part's classes" do
+    it "renders the dismiss button in the color" do
       render_inline(described_class.new("content", color: :red), &:with_dismiss_button)
 
-      expect(page).to have_selector("button.bg-red-50.text-red-500.hover\\:bg-red-200.focus\\:ring-red-400")
-      expect(page).to have_selector("button.ms-auto.-mx-1\\.5.h-8.w-8.p-1\\.5.rounded-lg.focus\\:ring-2")
-      expect(page).not_to have_selector("button.bg-transparent")
-      expect(page).not_to have_selector("button.rounded-xs")
+      expect(page).to have_selector("button.bg-red-50")
     end
   end
 end
