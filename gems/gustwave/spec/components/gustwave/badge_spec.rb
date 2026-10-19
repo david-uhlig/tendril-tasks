@@ -41,6 +41,9 @@ RSpec.describe Gustwave::Badge, type: :component do
       render_inline(described_class.new(tag: :a, href: "#")) { "content" }
       expect(page).to have_selector("a.hover\\:bg-blue-200")
 
+      render_inline(described_class.new(tag: :button)) { "content" }
+      expect(page).to have_selector("button.hover\\:bg-blue-200")
+
       render_inline(described_class.new(tag: :span)) { "content" }
       expect(page).not_to have_selector("[class*='hover:']")
     end
@@ -89,10 +92,31 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
   end
 
+  context "with pill" do
+    it "renders rounded corners for a pill" do
+      render_inline(described_class.new("New", pill: true))
+      expect(page).to have_selector("span.rounded-full", text: "New")
+    end
+
+    it "renders square corners by default" do
+      render_inline(described_class.new("New"))
+      expect(page).to have_selector("span.rounded-sm", text: "New")
+      expect(page).not_to have_selector("span.rounded-full")
+    end
+  end
+
   context "with color" do
     it "renders color classes" do
       render_inline(described_class.new(color: :purple))
       expect(page).to have_selector("span.bg-purple-100.text-purple-800")
+    end
+
+    it "renders no base or color styles for color :none" do
+      render_inline(described_class.new("New", color: :none))
+      expect(page).to have_selector("span", text: "New")
+      expect(page).not_to have_selector("span.rounded-sm")
+      expect(page).not_to have_selector("span.inline-flex")
+      expect(page).not_to have_selector("[class*='bg-']")
     end
   end
 
@@ -105,6 +129,14 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "renders a round badge without text or content at any size" do
       render_inline(described_class.new(size: :"2xl")) { |badge| badge.with_leading_visual_icon(:check) }
       expect(page).to have_selector("span.rounded-full.px-0\\.5")
+    end
+
+    it "sizes a leading indicator to match the badge size" do
+      render_inline(described_class.new("New", size: :xl)) { |badge| badge.with_leading_visual_indicator }
+      expect(page).to have_selector("span > span.h-6")
+
+      render_inline(described_class.new("New")) { |badge| badge.with_leading_visual_indicator }
+      expect(page).to have_selector("span > span.h-3")
     end
   end
 
