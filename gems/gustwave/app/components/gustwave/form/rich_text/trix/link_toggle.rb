@@ -5,8 +5,9 @@ module Gustwave
     module RichText
       module Trix
         class LinkToggle < Gustwave::Component
-          def initialize(form, **options)
+          def initialize(form, disabled: false, **options)
             @form = form
+            @disabled = disabled
             @options = options
           end
 
@@ -20,6 +21,7 @@ module Gustwave
             )
             @options = @popover.trigger_options(trigger: :click,
                                                 placement: :"top-end",
+                                                disabled: @disabled,
                                                 **@options)
           end
         end
