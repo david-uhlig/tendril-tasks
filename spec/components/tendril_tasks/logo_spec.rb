@@ -9,11 +9,43 @@ RSpec.describe TendrilTasks::Logo, type: :component do
     session.response || raise("Expected the logo request to return a response")
   end
 
+  # @return [ActiveStorage::Variation] the variation the rendered logo is served with
+  def rendered_variation
+    path = URI(Nokogiri::HTML.fragment(rendered_content).at_css("img")["src"]).path
+    ActiveStorage::Variation.decode(path.split("/")[-2])
+  end
+
   describe "resize height" do
+    before do
+      Site.find_or_create_instance.logo.attach(io: File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg")), filename: "for-tests.jpg")
+    end
+
     { sm: 44, lg: 64, none: 44 }.each do |size, height|
-      it "is #{height}px for size #{size}" do
-        expect(described_class.new(size:).derived_value(:resize_height)).to eq height
+      it "requests a logo #{height}px high for size #{size}" do
+        render_inline(described_class.new(size:))
+
+        expect(rendered_variation.transformations).to include(resize_to_fit: [ nil, height ])
       end
+    end
+  end
+
+  describe "alt text" do
+    before do
+      Site.find_or_create_instance.update!(name: "Acme", navigation_label: "ACME")
+    end
+
+    it "names the logo with the site's navigation label when the uploaded logo is shown" do
+      Site.find_or_create_instance.logo.attach(io: File.open(Rails.root.join("spec", "assets", "images", "for-tests.jpg")), filename: "for-tests.jpg")
+
+      render_inline(described_class.new)
+
+      expect(page).to have_selector("img[alt='ACME']")
+    end
+
+    it "names the default logo with the site's navigation label" do
+      render_inline(described_class.new)
+
+      expect(page).to have_selector("img[alt='ACME'][src*='brand/logo']")
     end
   end
 

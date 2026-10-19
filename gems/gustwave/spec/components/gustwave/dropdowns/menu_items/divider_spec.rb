@@ -16,6 +16,10 @@ RSpec.describe Gustwave::Dropdowns::MenuItems::Divider, type: :component do
       expect(rendered_content).to have_selector("div.my-1.h-px.bg-gray-100")
     end
 
+    it "renders a separator role" do
+      expect(rendered_content).to have_selector("div[role='separator']")
+    end
+
     it "ignores block content" do
       expect(rendered_content).not_to have_content("content")
     end

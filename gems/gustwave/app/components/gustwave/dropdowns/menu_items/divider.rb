@@ -16,7 +16,7 @@ module Gustwave
         end
 
         def call
-          content_tag divider_tag, nil, config
+          content_tag divider_tag, nil, { role: "separator", **config }
         end
 
         private

@@ -10,5 +10,10 @@ module Form
     def has_errors?
       @errors.any? && @error_field.present? && @errors[@error_field].present?
     end
+
+    # @return [String] the id of the element showing the error message
+    def error_id
+      "error-message-for-#{@error_field.to_param}"
+    end
   end
 end

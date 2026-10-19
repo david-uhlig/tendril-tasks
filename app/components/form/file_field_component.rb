@@ -25,8 +25,9 @@ module Form
     end
 
     def call
-      render BaseFieldComponent.new(@form, @attribute, @label) do
-        concat @form.file_field @attribute, **@options
+      field = BaseFieldComponent.new(@form, @attribute, @label)
+      render field do
+        concat @form.file_field @attribute, **field.with_error_aria(@options)
         concat helper_text if helper_text?
       end
     end

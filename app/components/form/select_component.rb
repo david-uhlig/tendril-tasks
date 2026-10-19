@@ -22,10 +22,11 @@ module Form
     end
 
     def call
-      render BaseFieldComponent.new(@form, @attribute, @label, @error_field_attribute) do
+      field = BaseFieldComponent.new(@form, @attribute, @label, @error_field_attribute)
+      render field do
         tag.div class: "flex gap-2" do
           concat leading_button if leading_button?
-          concat @form.collection_select @attribute, @collection, @value_method, @text_method, @options, @html_options
+          concat @form.collection_select @attribute, @collection, @value_method, @text_method, @options, field.with_error_aria(@html_options)
           concat trailing_button if trailing_button?
         end
       end

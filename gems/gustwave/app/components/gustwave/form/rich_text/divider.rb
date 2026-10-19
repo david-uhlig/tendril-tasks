@@ -6,7 +6,7 @@ module Gustwave
       # Use `Divider` to separate blocks of buttons in a rich text toolbar
       class Divider < Gustwave::Component
         def call
-          tag.div class: "px-1" do
+          tag.div class: "px-1", role: "separator", aria: { orientation: "vertical" } do
             tag.span class: "block w-px h-4 bg-gray-300 dark:bg-gray-600"
           end
         end
