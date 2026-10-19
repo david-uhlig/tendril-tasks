@@ -50,7 +50,14 @@ ssh root@192.168.0.1 'docker exec $(docker ps -q --latest -f label=service=tendr
   > tendril-tasks-$(date +%F).tar.gz
 ```
 
-To back up every night, run the command from a cron job, e.g. `30 3 * * *`, and keep a few older archives, too. A backup you haven't restored once is a hope rather than a backup, so try the restore below on a spare machine.
+Or on the server Kamal deployed to:
+
+```sh
+docker exec $(docker ps -q --latest -f label=service=tendril-tasks -f label=role=web) bin/backup \
+  > /var/backups/tendril-tasks-$(date +%F).tar.gz
+```
+
+To back up every night, run the command from a cron job, e.g. `30 3 * * *`, and keep a few older archives, too. In a crontab, write `%` as `\%`. Archives stored on the server itself are lost together with it, so copy them elsewhere, too. A backup you haven't restored once is a hope rather than a backup, so try the restore below on a spare machine.
 
 Each archive contains a `backup-info.txt` with the app version and the version of the database schema it was created with:
 
@@ -84,6 +91,17 @@ ssh root@192.168.0.1 'docker run --rm -i -v tendril-tasks_storage:/rails/storage
   -c "cd storage && rm -rf production*.sqlite3* uploads && gzip -dcf | tar -xf - --exclude=backup-info.txt"' \
   < tendril-tasks-2026-10-19.tar.gz
 bin/kamal app start
+```
+
+Or on the server Kamal deployed to, with the same replacements. It stops all containers of the app, including those running background jobs with `bin/jobs`, and starts them again afterwards:
+
+```sh
+containers=$(docker ps -q -f label=service=tendril-tasks)
+docker stop $containers
+docker run --rm -i -v tendril-tasks_storage:/rails/storage --entrypoint bash your-user/tendril-tasks:latest \
+  -c 'cd storage && rm -rf production*.sqlite3* uploads && gzip -dcf | tar -xf - --exclude=backup-info.txt' \
+  < /var/backups/tendril-tasks-2026-10-19.tar.gz
+docker start $containers
 ```
 
 Migrations run before the app answers on `/up`. If the backup is several versions old, starting may take longer than usual.
