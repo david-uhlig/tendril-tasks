@@ -6,7 +6,8 @@ FactoryBot.define do
     status { :received }
 
     trait :withdrawn do
-      association :status, :withdrawn
+      status { :withdrawn }
+      withdrawn_at { Time.current }
     end
 
     trait :grace_period_expired do

@@ -17,11 +17,16 @@ RSpec.describe Gustwave::Badge, type: :component do
     end
 
     it "renders no border classes" do
-      expect(page).not_to have_selector("span.border.border-blue-400")
+      expect(page).not_to have_selector("[class~='border']")
+      expect(page).not_to have_selector("[class*='border-']")
     end
+  end
 
-    it "renders no content" do
-      expect(page).to have_text("")
+  context "without text or content" do
+    it "renders an empty badge" do
+      render_inline(described_class.new)
+
+      expect(page).to have_selector("span.rounded-full", exact_text: "")
     end
   end
 

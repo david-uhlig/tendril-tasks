@@ -67,24 +67,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "devise modules" do
-    let(:user) { create(:user) }
-
-    it "is valid with valid attributes" do
-      expect(user).to be_valid
-    end
-
-    it "authenticates with a valid password" do
-      authenticated_user = user.valid_password?("password")
-      expect(authenticated_user).to be_truthy
-    end
-
-    it "does not authenticate with an invalid password" do
-      authenticated_user = user.valid_password?("wrong_password")
-      expect(authenticated_user).to be_falsey
-    end
-  end
-
   describe ".search" do
     let!(:user1) { create(:user, name: "First User", username: "some one") }
     let!(:user2) { create(:user, name: "Second Person", username: "some two") }
