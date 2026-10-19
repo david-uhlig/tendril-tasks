@@ -91,18 +91,16 @@ RSpec.describe "Tasks::Application::StatusController", type: :request do
           create(:task_application, task: task, user: applicant, status: :received)
         end
 
-        it "returns unprocessable entity" do
-          validation_error = ActiveRecord::RecordInvalid.new(application)
-
-          allow_any_instance_of(TaskApplication)
-            .to receive(:update!)
-                  .and_raise(validation_error)
+        it "returns unprocessable entity without changing the status" do
+          # update_column skips validations, leaving the stored comment over the length limit.
+          application.update_column(:comment, "a" * (TaskApplication::COMMENT_MAX_LENGTH + 1))
 
           patch status_path(task, applicant),
                 params: { status: "accepted" },
                 as: :turbo_stream
 
           expect(response).to have_http_status(:unprocessable_content)
+          expect(application.reload.status).to eq("received")
         end
       end
     end

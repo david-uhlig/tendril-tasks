@@ -51,8 +51,9 @@ RSpec.describe Navigation::LinkComponent, type: :component do
 
   context "with href to current page" do
     before(:each) do
-      allow_any_instance_of(ActionView::Helpers::UrlHelper).to receive(:current_page?).and_return(true)
-      render_inline(described_class.new(href: "https://example.com")) { "content" }
+      with_request_url("/users/sign-in") do
+        render_inline(described_class.new(href: "/users/sign-in")) { "content" }
+      end
     end
 
     it "renders active css class" do
@@ -66,8 +67,10 @@ RSpec.describe Navigation::LinkComponent, type: :component do
 
   context "with active: true" do
     before(:each) do
-      allow_any_instance_of(ActionView::Helpers::UrlHelper).to receive(:current_page?).and_return(false)
-      render_inline(described_class.new(href: "https://example.com", active: true)) { "content" }
+      # The current page differs from href, so only `active: true` can mark the link active.
+      with_request_url("/") do
+        render_inline(described_class.new(href: "/users/sign-in", active: true)) { "content" }
+      end
     end
 
     it "renders active css class" do
