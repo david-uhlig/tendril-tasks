@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe DownloadAvatarJob, :webmock, type: :job do
+RSpec.describe DownloadAvatarJob, type: :job do
   let(:avatar_url) { "https://chat.example.com/avatar/john.smith" }
   let(:request_url) { "#{avatar_url}?format=png&size=#{described_class::SIZE}" }
   let(:user) { create(:user, avatar_url:) }

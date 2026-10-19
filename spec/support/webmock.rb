@@ -3,21 +3,15 @@
 require "webmock"
 require "webmock/rspec/matchers"
 
-# Stubs HTTP requests only in examples tagged with `:webmock`, so system tests
-# keep talking to the browser driver.
-WebMock.disable!
+# Blocks real HTTP requests in every spec, so a spec that calls out to a real
+# host fails instead of passing quietly. Localhost stays open for the Capybara
+# server and the browser driver in system tests.
+WebMock.enable!
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
-  config.include WebMock::API, :webmock
-  config.include WebMock::Matchers, :webmock
+  config.include WebMock::API
+  config.include WebMock::Matchers
 
-  config.around(:each, :webmock) do |example|
-    WebMock.enable!
-    WebMock.disable_net_connect!
-    example.run
-  ensure
-    WebMock.reset!
-    WebMock.allow_net_connect!
-    WebMock.disable!
-  end
+  config.after(:each) { WebMock.reset! }
 end
