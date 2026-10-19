@@ -21,4 +21,18 @@ RSpec.describe TendrilTasks::Admin::StatsItem, type: :component do
 
     expect(rendered_content).to have_selector("dd", count: 1)
   end
+
+  it "renders the total without a badge when no stats are given" do
+    render_inline(described_class.new("Users"))
+
+    expect(rendered_content).to have_selector("div > dt", text: "Users")
+    expect(rendered_content).to have_no_selector("dd span")
+  end
+
+  it "renders no badge without new items" do
+    render_inline(described_class.new("Users", { total: 12 }))
+
+    expect(rendered_content).to have_selector("div > dt + dd", text: "12")
+    expect(rendered_content).to have_no_selector("dd span")
+  end
 end
