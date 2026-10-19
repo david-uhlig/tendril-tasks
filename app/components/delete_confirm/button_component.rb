@@ -22,7 +22,7 @@ module DeleteConfirm
       options[:size] ||= :lg
       options[:class] ||= "w-full"
       options[:type] ||= :button
-      options[:data] = { "modal-target": @target_modal_id, "modal-toggle": @target_modal_id }.merge(options.delete("data") || {})
+      options[:data] = { "modal-target": @target_modal_id, "modal-toggle": @target_modal_id }.merge(options.delete(:data) || {})
       options
     end
   end

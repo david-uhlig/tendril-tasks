@@ -17,18 +17,15 @@ module TendrilTasks
   #     <% breadcrumb.with_item "Subsection", href: subsection_path %>
   #   <% end %>
   class Breadcrumb < TendrilTasks::Component
-    # Default title for the home link.
-    DEFAULT_HOME_TITLE = t(".home")
-
     # Renders a single home link slot.
     #
-    # @param title [String] the title of the home link (default: DEFAULT_HOME_TITLE)
+    # @param title [String] the title of the home link (default: the home title in the current locale)
     # @param href [String] the URL for the home link (default: root_path)
     # @param icon [Symbol] the icon for the home link (default: :home)
     #
     # @return [TendrilTasks::BreadcrumbItem] the home link item
-    renders_one :home, ->(title = DEFAULT_HOME_TITLE, href: root_path, icon: :home) {
-      TendrilTasks::BreadcrumbItem.new(title, href: href, icon: icon)
+    renders_one :home, ->(title = nil, href: root_path, icon: :home) {
+      TendrilTasks::BreadcrumbItem.new(title || t(".home"), href: href, icon: icon)
     }
 
     # Renders multiple breadcrumb items.
