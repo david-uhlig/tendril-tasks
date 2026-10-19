@@ -22,7 +22,9 @@ RSpec.describe TaskApplicationWithdrawnNotification, type: :notifier do
       coordinators = create_list(:user, 2)
       task_application.task.coordinators = coordinators
 
-      expect(notification.send(:evaluate_recipients)).to match_array(coordinators)
+      event = notification.deliver
+
+      expect(event.notifications.map(&:recipient)).to match_array(coordinators)
     end
   end
 

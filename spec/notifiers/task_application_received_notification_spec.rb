@@ -22,9 +22,9 @@ RSpec.describe TaskApplicationReceivedNotification, type: :notifier do
       coordinators = create_list(:user, 2)
       task_application.task.coordinators = coordinators
 
-      # In Noticed 3, recipients are defined on the event class and can be evaluated
-      # using the evaluate_recipients method.
-      expect(notification.send(:evaluate_recipients)).to match_array(coordinators)
+      event = notification.deliver
+
+      expect(event.notifications.map(&:recipient)).to match_array(coordinators)
     end
   end
 
