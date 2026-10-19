@@ -105,6 +105,29 @@ RSpec.describe Gustwave::Dropdown, type: :component do
     end
   end
 
+  context "with a custom trigger component" do
+    it "renders the given component as the trigger wired to the menu" do
+      render_inline(described_class.new(menu_id: "m", trigger_event: :hover)) do |dropdown|
+        dropdown.with_trigger_component("Open", component: Gustwave::Dropdowns::Triggers::InlineButton)
+      end
+
+      expect(rendered_content).to have_selector(
+        "button.align-baseline[data-dropdown-toggle='m'][aria-controls='m'][data-dropdown-trigger='hover']",
+        text: "Open"
+      )
+      expect(rendered_content).to have_no_selector("button.bg-blue-700")
+    end
+
+    it "renders a Button trigger when no component is given" do
+      render_inline(described_class.new(menu_id: "m")) do |dropdown|
+        dropdown.with_trigger_component("Open")
+      end
+
+      expect(rendered_content).to have_selector("button[data-dropdown-toggle='m'].bg-blue-700", text: "Open")
+      expect(rendered_content).to have_no_selector("button.align-baseline")
+    end
+  end
+
   context "with a configurable list menu class" do
     let!(:badge_list) do
       stub_const("DropdownSpecBadgeList", Class.new(Gustwave::Dropdowns::Menus::List) {

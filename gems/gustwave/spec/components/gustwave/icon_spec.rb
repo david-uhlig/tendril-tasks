@@ -3,16 +3,38 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Icon, type: :component do
-  def theme_for(**options)
-    described_class.new(:home, **options).send(:icon_path)
+  icons_dir = File.expand_path("../../../app/assets/images/gustwave/icons", __dir__)
+
+  # The path data of the home icon's source file, to match the rendered <path>
+  source_path_data = ->(theme) {
+    File.read(File.join(icons_dir, theme, "home.svg"))[/ d="([^"]+)"/, 1]
+  }
+
+  it "renders the outline icon by default" do
+    render_inline(described_class.new(:home))
+
+    expect(rendered_content).to have_selector(
+      "svg[fill='none'] path[stroke='currentColor'][d='#{source_path_data.call("outline")}']"
+    )
+    expect(rendered_content).to have_no_selector("svg[fill='currentColor']")
   end
 
-  it "loads outline icons by default" do
-    expect(theme_for).to end_with("gustwave/icons/outline/home.svg")
+  it "renders the solid icon" do
+    render_inline(described_class.new(:home, theme: :solid))
+
+    expect(rendered_content).to have_selector(
+      "svg[fill='currentColor'] path[fill-rule='evenodd'][d='#{source_path_data.call("solid")}']"
+    )
+    expect(rendered_content).to have_no_selector("path[stroke]")
   end
 
-  it "loads solid icons" do
-    expect(theme_for(theme: :solid)).to end_with("gustwave/icons/solid/home.svg")
+  it "renders different markup for the outline and solid themes" do
+    render_inline(described_class.new(:home))
+    outline = rendered_content
+
+    render_inline(described_class.new(:home, theme: :solid))
+
+    expect(rendered_content).not_to eq(outline)
   end
 
   it "raises for an unknown theme" do
