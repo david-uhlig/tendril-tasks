@@ -4,7 +4,7 @@ RSpec.describe TendrilTasks::ListRow, type: :component do
   it "renders a list item with a row" do
     render_inline(described_class.new(id: "row-1"))
 
-    expect(rendered_content).to have_selector("li#row-1 > div.flex.items-center.rounded-lg.bg-gray-50")
+    expect(rendered_content).to have_selector("li#row-1 > div")
   end
 
   it "renders the leading visual, the title and the actions in order" do

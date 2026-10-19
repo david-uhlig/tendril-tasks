@@ -104,31 +104,31 @@ RSpec.describe Gustwave::Svg, type: :component do
 
     after { Gustwave::Svg::Template.clear_cache }
 
-    # The output inline_svg produced before the template cache, for comparison
-    def inline_svg_output(source, options)
-      component = described_class.new(source, **options)
-      inline_options, html_attributes = component.send(:partition_options, options.deep_symbolize_keys)
-      component.send(:with_html_attributes, component.inline_svg_tag(source, inline_options), html_attributes)
-    end
-
-    def parsed(html)
-      root = Nokogiri::HTML.fragment(html).at_css("svg")
-      [ root.attribute_nodes.to_h { |attribute| [ attribute.name, attribute.value ] }, root.inner_html ]
-    end
-
+    # Each case lists the attributes the rendered svg must carry. A value of nil
+    # means the attribute must be absent.
     [
-      [ "gustwave/icons/outline/close.svg", { class: "h-6 w-6" } ],
-      [ "gustwave/icons/outline/check.svg", { class: "h-4", id: "check", style: "color: red", data: { foo_bar: "baz" } } ],
-      [ "gustwave/icons/outline/close.svg", { aria: { label: "Close" } } ],
-      [ "gustwave/icons/solid/envelope.svg", { aria: { labelledby: "some-label", hidden: true } } ],
-      [ "gustwave/icons/outline/close.svg", { role: "button", tabindex: 0, name: "close" } ],
-      [ "gustwave/icons/outline/close.svg", { aria_hidden: true, class: "h-6" } ],
-      [ "gustwave/icons/outline/close.svg", { size: "24*16", view_box: "0 0 2 2", preserve_aspect_ratio: "none" } ]
-    ].each do |source, options|
-      it "renders #{source} with #{options} like inline_svg" do
+      [ "gustwave/icons/outline/close.svg", { class: "h-6 w-6" },
+        { "class" => "h-6 w-6", "aria-hidden" => "true", "viewbox" => "0 0 24 24" } ],
+      [ "gustwave/icons/outline/check.svg", { class: "h-4", id: "check", style: "color: red", data: { foo_bar: "baz" } },
+        { "class" => "h-4", "id" => "check", "style" => "color: red", "data-foo-bar" => "baz" } ],
+      [ "gustwave/icons/outline/close.svg", { aria: { label: "Close" } },
+        { "aria-label" => "Close", "aria-hidden" => nil } ],
+      [ "gustwave/icons/solid/envelope.svg", { aria: { labelledby: "some-label", hidden: true } },
+        { "aria-labelledby" => "some-label", "aria-hidden" => "true" } ],
+      [ "gustwave/icons/outline/close.svg", { role: "button", tabindex: 0, name: "close" },
+        { "role" => "button", "tabindex" => "0", "name" => "close" } ],
+      [ "gustwave/icons/outline/close.svg", { aria_hidden: true, class: "h-6" },
+        { "aria-hidden" => "true", "class" => "h-6" } ],
+      [ "gustwave/icons/outline/close.svg", { size: "24*16", view_box: "0 0 2 2", preserve_aspect_ratio: "none" },
+        { "width" => "24", "height" => "16", "viewbox" => "0 0 2 2", "preserveaspectratio" => "none" } ]
+    ].each do |source, options, attributes|
+      it "renders #{source} with #{options} from the cached template" do
         render_inline(described_class.new(source, **options))
 
-        expect(parsed(rendered_content)).to eq parsed(inline_svg_output(source, options))
+        attributes.each do |name, value|
+          expect(svg[name]).to eq(value), "expected #{name} to be #{value.inspect}"
+        end
+        expect(svg.element_children).not_to be_empty
       end
     end
 

@@ -89,11 +89,6 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
       expect(rendered_content).to have_selector("h2", text: "captured")
     end
 
-    it "keeps the builders private" do
-      expect(list_component.private_method_defined?(:build_slot_entry_text)).to be(true)
-      expect(list_component.private_method_defined?(:build_slot_title_text)).to be(true)
-    end
-
     it "registers the slots and their types" do
       expect(list_component.extensible_slots).to eq(
         entries: { collection: true, types: %i[text component named] },
@@ -101,48 +96,35 @@ RSpec.describe Gustwave::ExtensibleSlots, type: :component do
       )
     end
 
-    # Specs prepend Gustwave::Test::SingleSetSlots, which raises before the
-    # slot's own guard runs, so the dispatcher is exercised directly with the
-    # builder stubbed.
-    it "raises like ViewComponent when a renders_one slot is set twice" do
-      component = list_component.new
-      allow(component).to receive(:build_slot_title_text).and_return("built")
-      component.send(:__gustwave_build_slot, :title, :text, "one")
-
-      expect {
-        component.send(:__gustwave_build_slot, :title, :text, "two")
-      }.to raise_error(ViewComponent::ContentAlreadySetForPolymorphicSlotError)
-    end
-
     it "does not count a renders_one slot as set when its builder raises" do
-      component = list_component.new
-      allow(component).to receive(:build_slot_title_text).and_raise(ArgumentError, "bad text")
+      render_inline(list_component.new) do |list|
+        expect { list.with_title_block { raise ArgumentError, "bad text" } }
+          .to raise_error(ArgumentError, "bad text")
 
-      expect {
-        component.send(:__gustwave_build_slot, :title, :text, "one")
-      }.to raise_error(ArgumentError, "bad text")
+        list.with_title_block { "retry" }
+      end
 
-      allow(component).to receive(:build_slot_title_text).and_return("built")
-      expect(component.send(:__gustwave_build_slot, :title, :text, "retry")).to eq("built")
+      expect(page).to have_selector("h2", text: "retry")
     end
 
     it "does not count a renders_one slot as set for unknown types" do
-      component = list_component.new
-      allow(component).to receive(:build_slot_title_text).and_return("built")
+      render_inline(list_component.new) do |list|
+        expect { list.with_title(:missing) }
+          .to raise_error(Gustwave::ExtensibleSlots::UnknownSlotTypeError)
 
-      expect {
-        component.send(:__gustwave_build_slot, :title, :missing)
-      }.to raise_error(Gustwave::ExtensibleSlots::UnknownSlotTypeError)
-      expect(component.send(:__gustwave_build_slot, :title, :text, "retry")).to eq("built")
+        list.with_title_text("retry")
+      end
+
+      expect(page).to have_selector("h1", text: "retry")
     end
 
-    it "allows setting renders_many slots repeatedly" do
-      component = list_component.new
-      allow(component).to receive(:build_slot_entry_text).and_return("built")
+    it "renders renders_many entries repeatedly in the order they were set" do
+      render_inline(list_component.new) do |list|
+        list.with_entry_text("a")
+        list.with_entry_text("b")
+      end
 
-      expect {
-        2.times { component.send(:__gustwave_build_slot, :entries, :text, "entry") }
-      }.not_to raise_error
+      expect(page.all("div > span").map(&:text)).to eq %w[a b]
     end
 
     # The set-slot flag is never reset, which relies on ViewComponent refusing

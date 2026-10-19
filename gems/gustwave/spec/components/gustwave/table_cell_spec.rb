@@ -33,6 +33,7 @@ RSpec.describe Gustwave::TableCell, type: :component do
     it "overrides base styles with additional classes" do
       render_inline(described_class.new(class: "px-0 py-0")) { "content" }
       expect(rendered_content).to have_selector("td.px-0.py-0")
+      expect(rendered_content).not_to have_selector("td.px-6")
     end
   end
 end
