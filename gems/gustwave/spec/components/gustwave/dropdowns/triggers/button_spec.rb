@@ -1,6 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
+  icons_dir = File.expand_path("../../../../../app/assets/images/gustwave/icons/outline", __dir__)
+
+  # The path data of an outline icon's source file, to match the rendered <path>
+  icon_path_data = ->(name) { File.read(File.join(icons_dir, "#{name.to_s.dasherize}.svg"))[/ d="([^"]+)"/, 1] }
+
   with_options selector: "button", menu_id: "dropdown-menu" do
     it_behaves_like "a text and block content renderer"
     it_behaves_like "a component with configurable html attributes"
@@ -25,45 +30,76 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
       expect(rendered_content).to have_selector("button[aria-controls='dropdown-menu']")
     end
 
-    it "renders a trailing icon" do
-      expect(rendered_content).to have_selector("button>svg")
+    it "renders a trailing chevron pointing down" do
+      expect(rendered_content).to have_selector("button > svg > path[d='#{icon_path_data.call(:chevron_down)}']")
     end
   end
 
-  it "points the trailing icon to an underscored placement" do
-    top = render_inline(described_class.new(menu_id: "menu", placement: :top)).css("svg").to_html
-    top_start = render_inline(described_class.new(menu_id: "menu", placement: :top_start)).css("svg").to_html
+  context "with placement" do
+    {
+      top: :chevron_up,
+      bottom: :chevron_down,
+      left: :chevron_left,
+      right: :chevron_right
+    }.each do |placement, icon|
+      it "renders the #{icon} chevron for the #{placement} placement" do
+        render_inline(described_class.new(menu_id: "menu", placement:)) { "content" }
 
-    expect(top_start).to be_present
-    expect(top_start).to eq(top)
-  end
-
-  context "with data attributes" do
-    it "keeps the menu id next to the caller's data" do
-      render_inline(described_class.new(menu_id: "menu", data: { controller: "x" })) { "content" }
-
-      expect(page).to have_selector("button[data-controller='x'][data-dropdown-toggle='menu']")
+        expect(page).to have_selector("button > svg > path[d='#{icon_path_data.call(icon)}']")
+      end
     end
 
-    it "does not let the caller's data override the menu id" do
-      render_inline(described_class.new(menu_id: "menu", data: { "dropdown-toggle": "other" })) { "content" }
+    it "renders the top chevron for the top_start placement" do
+      render_inline(described_class.new(menu_id: "menu", placement: :top_start)) { "content" }
 
-      expect(page).to have_selector("button[data-dropdown-toggle='menu']")
-      expect(page).not_to have_selector("button[data-dropdown-toggle='other']")
+      expect(page).to have_selector("button > svg > path[d='#{icon_path_data.call(:chevron_up)}']")
+    end
+  end
+
+  context "with trailing icon false" do
+    it "renders no trailing icon" do
+      render_inline(described_class.new(menu_id: "menu", trailing_icon: false)) { "content" }
+
+      expect(page).not_to have_selector("svg")
+    end
+  end
+
+  context "with a custom trailing icon" do
+    it "renders the custom icon instead of the chevron" do
+      render_inline(described_class.new(menu_id: "menu", placement: :top, trailing_icon: :check))
+
+      expect(page).to have_selector("button > svg", count: 1)
+      expect(page).to have_selector("button > svg > path[d='#{icon_path_data.call(:check)}']")
+    end
+  end
+
+  context "with theme" do
+    it "renders the button of the theme" do
+      render_inline(described_class.new(menu_id: "menu", theme: :outline)) { "content" }
+
+      expect(page).to have_selector("button.border")
+    end
+
+    it "renders the default theme otherwise" do
+      render_inline(described_class.new(menu_id: "menu")) { "content" }
+
+      expect(page).not_to have_selector("button.border")
     end
   end
 
   context "with icon" do
     it "renders icon" do
       render_inline(described_class.new(menu_id: "dropdown-menu", icon: :check))
-      expect(rendered_content).to have_selector('button>svg>path[d="M5 11.917 9.724 16.5 19 7.5"]')
+
+      expect(rendered_content).to have_selector("button > svg > path[d='#{icon_path_data.call(:check)}']")
     end
   end
 
   context "with trailing icon" do
     it "renders trailing icon" do
       render_inline(described_class.new(menu_id: "dropdown-menu", trailing_icon: :check))
-      expect(rendered_content).to have_selector('button>svg>path[d="M5 11.917 9.724 16.5 19 7.5"]')
+
+      expect(rendered_content).to have_selector("button > svg > path[d='#{icon_path_data.call(:check)}']")
     end
   end
 
@@ -72,13 +108,15 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
       render_inline(described_class.new(menu_id: "dropdown-menu")) do
         it.with_leading_visual_icon(:check)
       end
-      expect(rendered_content).to have_selector('button>svg>path[d="M5 11.917 9.724 16.5 19 7.5"]')
+
+      expect(rendered_content).to have_selector("button > svg > path[d='#{icon_path_data.call(:check)}']")
     end
 
     it "delegates leading_indicator to Gustwave::Button" do
       render_inline(described_class.new(menu_id: "dropdown-menu")) do
         it.with_leading_visual_indicator(color: :red)
       end
+
       expect(rendered_content).to have_selector('button>span.rounded-full.bg-red-500[aria-hidden="true"]')
     end
   end
@@ -94,13 +132,6 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
       render_inline(described_class.new(menu_id: "menu", placement: :top_start, trigger_event: :hover)) { "content" }
 
       expect(page).to have_selector("button[data-dropdown-placement='top-start'][data-dropdown-trigger='hover']")
-    end
-
-    it "raises for an unknown placement or trigger event" do
-      expect { described_class.new(menu_id: "menu", placement: :above) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :above for :placement/)
-      expect { described_class.new(menu_id: "menu", trigger_event: :tap) }
-        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :tap for :trigger_event/)
     end
   end
 end

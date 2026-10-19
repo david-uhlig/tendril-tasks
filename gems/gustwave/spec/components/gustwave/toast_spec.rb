@@ -53,11 +53,27 @@ RSpec.describe Gustwave::Toast, type: :component do
     end
   end
 
+  describe "position" do
+    it "renders a fixed position" do
+      render_inline(described_class.new("text", position: :top_right))
+
+      expect(page).to have_selector("div[role='alert'].fixed.right-5")
+    end
+  end
+
   describe "dismiss button" do
     it "renders a button dismissing the toast" do
       render_inline(described_class.new("text", id: "my-toast"))
 
       expect(page).to have_selector("div#my-toast > button[data-dismiss-target='#my-toast'][aria-label='Dismiss'].h-8.w-8")
+    end
+
+    it "targets the generated id with the dismiss button" do
+      render_inline(described_class.new("text"))
+      id = page.find("div[role='alert']")["id"]
+
+      expect(id).to start_with("toast-")
+      expect(page).to have_selector("div##{id} > button[data-dismiss-target='##{id}']")
     end
 
     it "renders no button when not dismissible" do

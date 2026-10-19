@@ -8,10 +8,6 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
       render_inline(described_class.new(id: "dropdown-45dfg"))
     end
 
-    it "renders div tag" do
-      expect(rendered_content).to have_selector("div")
-    end
-
     it "renders id attribute" do
       expect(rendered_content).to have_selector("div[id='dropdown-45dfg']")
     end
@@ -23,16 +19,30 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
     it "renders list styling" do
       expect(rendered_content).to have_selector("div>ul.py-2.text-sm.text-gray-700")
     end
+  end
 
-    it "doesn't render block content" do
-      expect(rendered_content).not_to have_content("content")
-    end
+  it "doesn't render block content" do
+    render_inline(described_class.new(id: "dropdown")) { "content" }
+
+    expect(rendered_content).not_to have_content("content")
   end
 
   context "with content_for argument" do
     it "renders menu content elsewhere" do
       render_inline(described_class.new(id: "dropdown", content_for: :menu_area))
       expect(rendered_content).to be_empty
+    end
+  end
+
+  context "with header and footer" do
+    it "renders the header before the list and the footer after it" do
+      render_inline(described_class.new(id: "dropdown")) do |list|
+        list.with_header("header_content")
+        list.with_footer("footer_content")
+        list.with_item_generic { "item_content" }
+      end
+
+      expect(rendered_content).to have_selector("div[id='dropdown'] > header + ul + footer")
     end
   end
 
@@ -49,6 +59,11 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
         it.configure_list(id: "list-1234", class: "bg-white")
       end
       expect(rendered_content).to have_selector("div>ul[id='list-1234'].bg-white")
+    end
+
+    it "raises for a list tag other than ul or ol" do
+      expect { described_class.new(id: "dropdown").configure_list(tag: :div) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :div for :list_tag/)
     end
   end
 
@@ -80,6 +95,19 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
           it.with_item_dropdown { "dropdown_content" }
         end
         expect(rendered_content).to have_selector("div>ul>li>a[role='button']", text: "dropdown_content")
+      end
+
+      it "renders the items in the order they were added" do
+        render_inline(described_class.new(id: "dropdown")) do |list|
+          list.with_item_link { "first_link" }
+          list.with_item_divider
+          list.with_item_generic { "third_item" }
+        end
+
+        expect(rendered_content).to have_selector("div>ul>li:nth-child(1)>a", text: "first_link")
+        expect(rendered_content).to have_selector("div>ul>li:nth-child(2)>div")
+        expect(rendered_content).to have_selector("div>ul>li:nth-child(3)", text: "third_item")
+        expect(rendered_content).to have_selector("div>ul>li", count: 3)
       end
     end
   end

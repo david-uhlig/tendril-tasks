@@ -24,15 +24,15 @@ module Gustwave
 
           def initialize(attribute, icon_or_text: nil, key: nil, disabled: false, **options)
             @attribute = attribute.downcase.to_sym
-            key ||= ATTRIBUTE_KEY_MAPPINGS[attribute]
+            key ||= ATTRIBUTE_KEY_MAPPINGS[@attribute]
 
             options.deep_symbolize_keys!
             options[:icon_or_text] = icon_or_text
             options[:disabled] = disabled
             unless disabled.present?
-              options[:"data-trix-attribute"] ||= attribute.to_s
+              options[:"data-trix-attribute"] ||= @attribute.to_s
               options[:"data-trix-key"] ||= key
-              options[:"data-trix-action"] ||= ATTRIBUTE_ACTION_MAPPINGS[attribute]
+              options[:"data-trix-action"] ||= ATTRIBUTE_ACTION_MAPPINGS[@attribute]
             end
             @options = options
           end
