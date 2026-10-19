@@ -29,10 +29,24 @@ module Form
       @options = options
     end
 
+    # Links an input to its error message while the attribute has errors,
+    # keeping any aria-describedby the caller passed.
+    #
+    # @param options [Hash] HTML options for the input
+    # @return [Hash] the options, with ARIA error attributes when there are errors
+    def with_error_aria(options)
+      error = Form::FieldErrorComponent.new(@form.object, @error_field_attribute)
+      return options unless error.has_errors?
+
+      aria = options.fetch(:aria, {}).to_h.symbolize_keys
+      describedby = [ aria[:describedby], error.error_id ].compact.join(" ")
+      options.merge(aria: aria.merge(invalid: "true", describedby:))
+    end
+
     private
 
     def active_model_translation
-      return unless @form.object.class < ActiveModel::Model
+      return unless @form.object.class.respond_to?(:human_attribute_name)
 
       @form.object.class.human_attribute_name(@attribute).presence
     end

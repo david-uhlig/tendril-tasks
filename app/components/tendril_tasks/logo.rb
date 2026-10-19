@@ -43,7 +43,7 @@ module TendrilTasks
 
       image_tag rails_storage_proxy_path(
         logo.variant(resize_to_fit: [ nil, @resize_to ], format: :png)
-      )
+      ), alt: @site.navigation_label
     end
 
     def logo_missing?
@@ -58,7 +58,7 @@ module TendrilTasks
     end
 
     def default_logo
-      image_tag("brand/logo.svg")
+      image_tag("brand/logo.svg", alt: @site.navigation_label)
     end
   end
 end

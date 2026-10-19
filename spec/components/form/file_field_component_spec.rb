@@ -36,4 +36,18 @@ RSpec.describe Form::FileFieldComponent, type: :component do
 
     expect(page).to have_no_selector("p")
   end
+
+  context "when the attribute has errors" do
+    let(:site) { Site.new }
+    let(:form) { ActionView::Helpers::FormBuilder.new(:site, site, ActionView::Base.empty, {}) }
+
+    before do
+      site.errors.add(:logo, "is too large")
+      render_inline(described_class.new(form, :logo, "Logo"))
+    end
+
+    it "marks the input as invalid and points it at the error message" do
+      expect(page).to have_selector("input[type='file'][aria-invalid='true'][aria-describedby='error-message-for-logo']")
+    end
+  end
 end

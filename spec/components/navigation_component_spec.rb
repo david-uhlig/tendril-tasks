@@ -17,9 +17,21 @@ RSpec.describe NavigationComponent, type: :component do
     it "renders a nav element" do
       expect(page).to have_selector("nav")
     end
+
+    it "renders no menu toggle without a menu to toggle" do
+      expect(page).to have_no_selector("button[aria-controls]")
+    end
   end
 
   context "with links" do
+    it "renders a menu toggle that controls the links" do
+      render_inline(described_class.new) do |component|
+        component.with_link(name: "test_link", href: "https://example.com")
+      end
+      expect(page).to have_selector("button[aria-controls='navbar-cta'][aria-expanded='false']")
+      expect(page).to have_selector("#navbar-cta a[href='https://example.com']", text: "test_link")
+    end
+
     it "renders one link" do
       render_inline(described_class.new) do |component|
         component.with_link(name: "test_link", href: "https://example.com")

@@ -12,8 +12,9 @@ module Form
     end
 
     def call
-      render BaseFieldComponent.new(@form, @attribute, @label) do
-        @form.text_field @attribute, **@options
+      field = BaseFieldComponent.new(@form, @attribute, @label)
+      render field do
+        @form.text_field @attribute, **field.with_error_aria(@options)
       end
     end
   end
