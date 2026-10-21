@@ -19,50 +19,72 @@ fi
 #  | sed '/Database .* already exists/d'
 #set +o pipefail
 
-# 3. Run the given spec paths (default: the whole suite). Fewer spec files
-#    than processes, counting the ones inside directories, run in one process,
-#    which skips parallel_rspec's startup cost. PARALLEL_PROCESSES=1 always
-#    runs in one process.
-paths=("$@")
-[ "${#paths[@]}" -eq 0 ] && paths=(spec/)
-
-files=0
-for path in "${paths[@]}"; do
-  if [ -d "${path%%:*}" ]; then
-    files=$((files + $(find "${path%%:*}" -name '*_spec.rb' | wc -l)))
-  else
-    files=$((files + 1))
-  fi
+# 3. Run the given spec paths (default: the whole suite). Gem specs under
+#    gems/gustwave/ need the gem's own spec setup (its spec/support and
+#    spec_helper), so they run from the gem directory in a separate rspec
+#    process, after the app specs. Fewer spec files than processes, counting
+#    the ones inside directories, run in one process, which skips
+#    parallel_rspec's startup cost. PARALLEL_PROCESSES=1 always runs in one
+#    process.
+gem_dir=gems/gustwave
+app_paths=()
+gem_paths=()
+for path in "$@"; do
+  case "$path" in
+    "$gem_dir") gem_paths+=(spec/) ;;
+    "$gem_dir"/*) gem_paths+=("${path#"$gem_dir"/}") ;;
+    *) app_paths+=("$path") ;;
+  esac
 done
+[ "$#" -eq 0 ] && app_paths=(spec/)
 
-single=false
-if [ "$PROCESSES" -eq 1 ] || [ "$files" -lt "$PROCESSES" ]; then
-  single=true
+# Runs the given spec paths from the current directory and returns rspec's
+# exit status.
+run_specs() {
+  local files=0 single=false rspec_options command path status
+  for path in "$@"; do
+    if [ -d "${path%%:*}" ]; then
+      files=$((files + $(find "${path%%:*}" -name '*_spec.rb' | wc -l)))
+    else
+      files=$((files + 1))
+    fi
+  done
+
+  if [ "$PROCESSES" -eq 1 ] || [ "$files" -lt "$PROCESSES" ]; then
+    single=true
+  fi
+
+  rspec_options=(--format RSpec::AiFormatter::Formatter --fail-fast)
+  if [ "$single" = true ]; then
+    command=(bundle exec rspec "${rspec_options[@]}" "$@")
+  else
+    command=(bundle exec parallel_rspec -n "$PROCESSES" "$@" -o "${rspec_options[*]}")
+  fi
+
+  set +e
+  RAILS_ENV=test SKIP_COVERAGE=1 "${command[@]}" \
+    | grep --line-buffered '^{"t":"test"'
+  status=("${PIPESTATUS[@]}")
+  set -e
+
+  # RSpec failed: pass its exit status through.
+  if [ "${status[0]}" -ne 0 ]; then
+    return "${status[0]}"
+  fi
+
+  # grep exits 0 when it matches, 1 when it doesn't, and 2 or more on an error.
+  if [ "${status[1]}" -eq 0 ]; then
+    echo "Matching {\"t\":\"test\" lines found; failing the run." >&2
+    return 1
+  elif [ "${status[1]}" -ge 2 ]; then
+    echo "grep failed with status ${status[1]}" >&2
+    return "${status[1]}"
+  fi
+}
+
+if [ "${#app_paths[@]}" -gt 0 ]; then
+  run_specs "${app_paths[@]}" || exit $?
 fi
-
-rspec_options=(--format RSpec::AiFormatter::Formatter --fail-fast)
-if [ "$single" = true ]; then
-  command=(bundle exec rspec "${rspec_options[@]}" "${paths[@]}")
-else
-  command=(bundle exec parallel_rspec -n "$PROCESSES" "${paths[@]}" -o "${rspec_options[*]}")
-fi
-
-set +e
-RAILS_ENV=test SKIP_COVERAGE=1 "${command[@]}" \
-  | grep --line-buffered '^{"t":"test"'
-status=("${PIPESTATUS[@]}")
-set -e
-
-# RSpec failed: pass its exit status through.
-if [ "${status[0]}" -ne 0 ]; then
-  exit "${status[0]}"
-fi
-
-# grep exits 0 when it matches, 1 when it doesn't, and 2 or more on an error.
-if [ "${status[1]}" -eq 0 ]; then
-  echo "Matching {\"t\":\"test\" lines found; failing the run." >&2
-  exit 1
-elif [ "${status[1]}" -ge 2 ]; then
-  echo "grep failed with status ${status[1]}" >&2
-  exit "${status[1]}"
+if [ "${#gem_paths[@]}" -gt 0 ]; then
+  (cd "$gem_dir" && run_specs "${gem_paths[@]}") || exit $?
 fi

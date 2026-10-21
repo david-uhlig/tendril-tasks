@@ -13,27 +13,17 @@ class Modal::DialogComponent < TendrilTasks::Component
     end
   }
 
-  def initialize(id, form_path: nil, form_method: :get)
+  def initialize(id)
     @id = id
-    @form_path = form_path
-    @form_method = form_method
   end
 
   private
 
   def dialog_buttons
     classes = class_merge(Modal::ShellComponent::FOOTER_CLASS, "md:grid-cols-#{buttons.size}")
-    if @form_path.present?
-      form_tag @form_path, method: @form_method, class: classes do
-        buttons.each do |button|
-          concat button
-        end
-      end
-    else
-      tag.div class: classes do
-        buttons.each do |button|
-          concat button
-        end
+    tag.div class: classes do
+      buttons.each do |button|
+        concat button
       end
     end
   end
