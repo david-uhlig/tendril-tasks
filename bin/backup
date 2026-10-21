@@ -1,0 +1,73 @@
+#!/bin/bash
+# Backs up the database and uploaded files as a gzipped tar archive. Runs
+# inside the app's container, which has `sqlite3` and access to the storage
+# volume, and writes the archive to FILE, or to stdout to pipe it off the
+# server. See "Backup and restore" in `.self-hosting/README.md`.
+#
+# Usage: bin/backup [--uncompressed] [FILE]
+#
+#   --uncompressed  Writes a plain tar archive instead, e.g. for backup tools
+#                   that compress and deduplicate on their own.
+
+set -euo pipefail
+
+storage="$(cd "$(dirname "$0")/../storage" && pwd)"
+database="$storage/production.sqlite3"
+compression=(-z)
+if [ "${1:-}" == "--uncompressed" ]; then
+  compression=()
+  shift
+fi
+output="${1:--}"
+
+if [[ "$output" == -?* ]] || [ "$#" -gt 1 ]; then
+  echo "Usage: bin/backup [--uncompressed] [FILE]" >&2
+  exit 1
+fi
+
+if [ ! -f "$database" ]; then
+  echo "bin/backup: no database at $database" >&2
+  exit 1
+fi
+
+if [ "$output" == "-" ] && [ -t 1 ]; then
+  echo "bin/backup: refusing to write the archive to a terminal, pass a FILE or redirect stdout" >&2
+  exit 1
+fi
+
+snapshot="$(mktemp -d)"
+trap 'rm -rf "$snapshot"' EXIT
+
+# A copy of the file would miss writes still in the write-ahead log, or catch
+# it mid-write. SQLite's online backup is consistent while the app runs.
+sqlite3 "$database" ".backup '$snapshot/production.sqlite3'"
+
+integrity="$(sqlite3 "$snapshot/production.sqlite3" "PRAGMA integrity_check")"
+if [ "$integrity" != "ok" ]; then
+  echo "bin/backup: integrity check of the snapshot failed: $integrity" >&2
+  exit 1
+fi
+
+# A backup can only be restored with this version or a newer one.
+{
+  echo "created_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "app_version: $(sed -n 's/.*VERSION = "\(.*\)".*/\1/p' "$storage/../config/version.rb")"
+  echo "app_git_commit: ${APP_GIT_COMMIT:-unknown}"
+  echo "schema_version: $(sqlite3 "$snapshot/production.sqlite3" "SELECT max(version) FROM schema_migrations")"
+  echo "restore_instructions: https://github.com/david-uhlig/tendril-tasks/blob/main/.self-hosting/README.md#restoring-a-backup"
+} > "$snapshot/backup-info.txt"
+
+# Archives the uploads after the snapshot, so every file the snapshot refers
+# to is included. Files uploaded in the meantime are left over unused after a
+# restore, which does no harm.
+uploads=()
+[ -d "$storage/uploads" ] && uploads=(-C "$storage" uploads)
+
+# Exit status 1 means files changed while being read, e.g. an upload was
+# purged. That's expected on a running app, everything else isn't.
+status=0
+tar -c "${compression[@]}" -f "$output" --warning=no-file-changed --warning=no-file-removed \
+  -C "$snapshot" production.sqlite3 backup-info.txt "${uploads[@]}" || status=$?
+if [ "$status" -gt 1 ]; then
+  exit "$status"
+fi
