@@ -14,7 +14,6 @@ module Gustwave
           }.freeze
 
           ATTRIBUTE_ACTION_MAPPINGS = {
-            delete_me_href: "link",
             undo: "undo",
             redo: "redo",
             increase_nesting: "increaseNestingLevel",
