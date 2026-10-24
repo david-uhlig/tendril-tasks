@@ -51,7 +51,7 @@ gem "lexxy", "~> 1.0"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component", "~> 4.15"
+gem "view_component", "~> 4.16"
 
 # Flowbite components built with ViewComponent
 gem "gustwave", path: "gems/gustwave"
