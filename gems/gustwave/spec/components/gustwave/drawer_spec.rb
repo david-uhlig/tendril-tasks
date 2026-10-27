@@ -97,6 +97,19 @@ RSpec.describe Gustwave::Drawer, type: :component do
     expect(page).not_to have_selector("div[aria-labelledby]")
   end
 
+  it "labels the drawer by its header's title" do
+    render_inline(described_class.new(id: "info")) { |d| d.with_header("Info") }
+
+    expect(page).to have_selector("div#info[aria-labelledby='info-title']")
+    expect(page).to have_selector("#info h5#info-title")
+  end
+
+  it "passes edge on to its header" do
+    render_inline(described_class.new(id: "info", placement: :bottom, edge: true)) { |d| d.with_header("Info") }
+
+    expect(page).to have_selector("#info div[data-drawer-toggle=info]")
+  end
+
   describe "#trigger_options" do
     subject(:component) { described_class.new(id: "info") }
 
