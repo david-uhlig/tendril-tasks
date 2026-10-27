@@ -1,0 +1,252 @@
+---
+interactive style=:default vertical=true:
+- 'div id="tabs": md:flex'
+- div
+- 'ul data-tabs-active-classes="text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500"
+  data-tabs-inactive-classes="hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800
+  dark:hover:text-gray-300" data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist":
+  border-b-0 border-e border-gray-200 dark:border-gray-700 dark:text-gray-400 flex
+  flex-col flex-nowrap font-medium mb-4 md:mb-0 md:me-4 space-y-4 text-center text-gray-500
+  text-sm'
+- 'li role="presentation": me-0'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": bg-gray-100 dark:bg-gray-800 dark:text-blue-500
+  inline-block p-4 rounded-s-lg rounded-t-none text-blue-600 w-full'
+- 'li role="presentation": me-0'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": dark:hover:bg-gray-800 dark:hover:text-gray-300
+  hover:bg-gray-50 hover:text-gray-600 inline-block p-4 rounded-s-lg rounded-t-none
+  w-full'
+- 'li role="presentation": me-0'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  cursor-not-allowed dark:text-gray-500 inline-block p-4 rounded-s-lg rounded-t-none
+  text-gray-400 w-full'
+- 'div id="tabs-content": w-full'
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-6 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-6 rounded-lg'
+interactive style=:default vertical=false:
+- div id="tabs"
+- div
+- 'ul data-tabs-active-classes="text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500"
+  data-tabs-inactive-classes="hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800
+  dark:hover:text-gray-300" data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist":
+  border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 flex flex-wrap
+  font-medium text-center text-gray-500 text-sm'
+- 'li role="presentation": me-2'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": bg-gray-100 dark:bg-gray-800 dark:text-blue-500
+  inline-block p-4 rounded-t-lg text-blue-600'
+- 'li role="presentation": me-2'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": dark:hover:bg-gray-800 dark:hover:text-gray-300
+  hover:bg-gray-50 hover:text-gray-600 inline-block p-4 rounded-t-lg'
+- 'li role="presentation": me-2'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  cursor-not-allowed dark:text-gray-500 inline-block p-4 rounded-t-lg text-gray-400'
+- div id="tabs-content"
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-4 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-4 rounded-lg'
+interactive style=:underline vertical=true:
+- 'div id="tabs": md:flex'
+- 'div: border-b-0 border-e border-gray-200 dark:border-gray-700 mb-0'
+- 'ul data-tabs-active-classes="text-blue-600 hover:text-blue-600 dark:text-blue-500
+  dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" data-tabs-inactive-classes="text-gray-500
+  hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700
+  dark:hover:text-gray-300" data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist":
+  -mb-0 -me-px dark:text-gray-400 flex flex-col flex-nowrap font-medium md:mb-0 md:me-4
+  space-y-4 text-center text-gray-500 text-sm'
+- 'li role="presentation": me-0'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": border-b-0 border-blue-600 border-e-2
+  dark:border-blue-500 dark:hover:text-blue-500 dark:text-blue-500 hover:text-blue-600
+  inline-block p-4 rounded-s-lg rounded-t-none text-blue-600 w-full'
+- 'li role="presentation": me-0'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": border-b-0 border-e-2 border-gray-100
+  dark:border-gray-700 dark:hover:text-gray-300 dark:text-gray-400 hover:border-gray-300
+  hover:text-gray-600 inline-block p-4 rounded-s-lg rounded-t-none text-gray-500 w-full'
+- 'li role="presentation": me-0'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  border-b-0 border-e-2 border-transparent cursor-not-allowed dark:text-gray-500 inline-block
+  p-4 rounded-s-lg rounded-t-none text-gray-400 w-full'
+- 'div id="tabs-content": w-full'
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-6 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-6 rounded-lg'
+interactive style=:underline vertical=false:
+- div id="tabs"
+- 'div: border-b border-gray-200 dark:border-gray-700 mb-4'
+- 'ul data-tabs-active-classes="text-blue-600 hover:text-blue-600 dark:text-blue-500
+  dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" data-tabs-inactive-classes="text-gray-500
+  hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700
+  dark:hover:text-gray-300" data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist":
+  -mb-px dark:text-gray-400 flex flex-wrap font-medium text-center text-gray-500 text-sm'
+- 'li role="presentation": me-2'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": border-b-2 border-blue-600 dark:border-blue-500
+  dark:hover:text-blue-500 dark:text-blue-500 hover:text-blue-600 inline-block p-4
+  rounded-t-lg text-blue-600'
+- 'li role="presentation": me-2'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": border-b-2 border-gray-100 dark:border-gray-700
+  dark:hover:text-gray-300 dark:text-gray-400 hover:border-gray-300 hover:text-gray-600
+  inline-block p-4 rounded-t-lg text-gray-500'
+- 'li role="presentation": me-2'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  border-b-2 border-transparent cursor-not-allowed dark:text-gray-500 inline-block
+  p-4 rounded-t-lg text-gray-400'
+- div id="tabs-content"
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-4 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-4 rounded-lg'
+interactive style=:pills vertical=true:
+- 'div id="tabs": md:flex'
+- div
+- 'ul data-tabs-active-classes="text-white bg-blue-700 dark:bg-blue-600" data-tabs-inactive-classes="hover:text-gray-900
+  hover:bg-gray-100 dark:hover:text-white bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
+  data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist": dark:text-gray-400
+  flex flex-col flex-nowrap font-medium mb-4 md:mb-0 md:me-4 space-y-4 text-center
+  text-gray-500 text-sm'
+- 'li role="presentation": me-0'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": bg-blue-700 dark:bg-blue-600 inline-flex
+  items-center px-4 py-3 rounded-lg text-white w-full'
+- 'li role="presentation": me-0'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700
+  dark:hover:text-white hover:bg-gray-100 hover:text-gray-900 inline-flex items-center
+  px-4 py-3 rounded-lg w-full'
+- 'li role="presentation": me-0'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  bg-gray-50 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500 inline-flex items-center
+  px-4 py-3 rounded-lg text-gray-400 w-full'
+- 'div id="tabs-content": w-full'
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-6 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-6 rounded-lg'
+interactive style=:pills vertical=false:
+- div id="tabs"
+- div
+- 'ul data-tabs-active-classes="text-white bg-blue-600" data-tabs-inactive-classes="hover:text-gray-900
+  hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white" data-tabs-toggle="#tabs-content"
+  id="tabs-list" role="tablist": dark:text-gray-400 flex flex-wrap font-medium text-center
+  text-gray-500 text-sm'
+- 'li role="presentation": me-2'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": bg-blue-600 inline-block px-4 py-3 rounded-lg
+  text-white'
+- 'li role="presentation": me-2'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": dark:hover:bg-gray-800 dark:hover:text-white
+  hover:bg-gray-100 hover:text-gray-900 inline-block px-4 py-3 rounded-lg'
+- 'li role="presentation": me-2'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  cursor-not-allowed dark:text-gray-500 inline-block px-4 py-3 rounded-lg text-gray-400'
+- div id="tabs-content"
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-4 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-4 rounded-lg'
+interactive style=:full_width vertical=true:
+- 'div id="tabs": md:flex'
+- div
+- 'ul data-tabs-active-classes="text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white"
+  data-tabs-inactive-classes="bg-white hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white
+  dark:bg-gray-800 dark:hover:bg-gray-700" data-tabs-toggle="#tabs-content" id="tabs-list"
+  role="tablist": dark:divide-gray-700 dark:text-gray-400 flex flex-col flex-nowrap
+  font-medium mb-4 md:mb-0 md:me-4 rounded-lg shadow-sm space-y-4 text-center text-gray-500
+  text-sm'
+- 'li role="presentation": focus-within:z-10 me-0 w-full'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": bg-gray-100 border-b border-gray-200
+  border-r-0 dark:bg-gray-700 dark:border-gray-700 dark:text-white focus:outline-none
+  focus:ring-4 focus:ring-blue-300 inline-block p-4 rounded-s-lg rounded-t-lg text-gray-900
+  w-full'
+- 'li role="presentation": focus-within:z-10 me-0 w-full'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": bg-white border-b border-gray-200 border-r-0
+  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white
+  focus:outline-none focus:ring-4 focus:ring-blue-300 hover:bg-gray-50 hover:text-gray-700
+  inline-block p-4 w-full'
+- 'li role="presentation": focus-within:z-10 me-0 w-full'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  bg-white border-b-0 border-gray-200 border-r-0 cursor-not-allowed dark:bg-gray-800
+  dark:border-gray-700 dark:text-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300
+  inline-block p-4 rounded-b-lg rounded-e-lg text-gray-400 w-full'
+- 'div id="tabs-content": w-full'
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-6 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-6 rounded-lg'
+interactive style=:full_width vertical=false:
+- div id="tabs"
+- div
+- 'ul data-tabs-active-classes="text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white"
+  data-tabs-inactive-classes="bg-white hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white
+  dark:bg-gray-800 dark:hover:bg-gray-700" data-tabs-toggle="#tabs-content" id="tabs-list"
+  role="tablist": dark:divide-gray-700 dark:text-gray-400 flex flex-nowrap font-medium
+  rounded-lg shadow-sm text-center text-gray-500 text-sm'
+- 'li role="presentation": focus-within:z-10 w-full'
+- 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button": bg-gray-100 border-gray-200 border-r
+  dark:bg-gray-700 dark:border-gray-700 dark:text-white focus:outline-none focus:ring-4
+  focus:ring-blue-300 inline-block p-4 rounded-s-lg text-gray-900 w-full'
+- 'li role="presentation": focus-within:z-10 w-full'
+- 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button": bg-white border-gray-200 border-r dark:bg-gray-800
+  dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white focus:outline-none
+  focus:ring-4 focus:ring-blue-300 hover:bg-gray-50 hover:text-gray-700 inline-block
+  p-4 w-full'
+- 'li role="presentation": focus-within:z-10 w-full'
+- 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
+  bg-white border-gray-200 border-r-0 cursor-not-allowed dark:bg-gray-800 dark:border-gray-700
+  dark:text-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300 inline-block
+  p-4 rounded-e-lg text-gray-400 w-full'
+- div id="tabs-content"
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-4 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-4 rounded-lg'
+interactive style=:none vertical=true:
+- div id="tabs"
+- div
+- 'ul data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist": flex flex-wrap
+  font-medium text-center text-sm'
+- li role="presentation"
+- button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button"
+- li role="presentation"
+- button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button"
+- li role="presentation"
+- button aria-disabled="true" disabled="disabled" id="billing-tab" type="button"
+- div id="tabs-content"
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-4 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-4 rounded-lg'
+interactive style=:none vertical=false:
+- div id="tabs"
+- div
+- 'ul data-tabs-toggle="#tabs-content" id="tabs-list" role="tablist": flex flex-wrap
+  font-medium text-center text-sm'
+- li role="presentation"
+- button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
+  id="profile-tab" role="tab" type="button"
+- li role="presentation"
+- button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
+  id="settings-tab" role="tab" type="button"
+- li role="presentation"
+- button aria-disabled="true" disabled="disabled" id="billing-tab" type="button"
+- div id="tabs-content"
+- 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  p-4 rounded-lg'
+- 'div aria-labelledby="settings-tab" id="settings" role="tabpanel": bg-gray-50 dark:bg-gray-800
+  hidden p-4 rounded-lg'

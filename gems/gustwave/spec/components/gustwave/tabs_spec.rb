@@ -170,6 +170,15 @@ RSpec.describe Gustwave::Tabs, type: :component do
 
       expect(page).to have_css("div#custom > div > ul#custom-list")
     end
+
+    it "pairs a tab's id with its trigger and panel" do
+      render_inline(described_class.new) do |tabs|
+        tabs.with_tab_button("Profile", id: "profile") { |tab| tab.with_panel { "Profile content" } }
+      end
+
+      expect(page).to have_css("button#profile-tab[aria-controls=profile]")
+      expect(page).to have_css("div#profile[role=tabpanel][aria-labelledby=profile-tab]")
+    end
   end
 
   describe "active and inactive classes" do
