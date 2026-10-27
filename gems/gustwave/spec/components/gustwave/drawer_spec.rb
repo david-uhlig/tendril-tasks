@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe Gustwave::Drawer, type: :component do
   it_behaves_like "a text and block content renderer", selector: "div[tabindex='-1']"
   it_behaves_like "a component with configurable html attributes", selector: "div[tabindex='-1']"
+  it_behaves_like "a component controlling its target"
 
   it "keeps a given id on the drawer, which targets itself" do
     render_inline(described_class.new("text", id: "info"))
