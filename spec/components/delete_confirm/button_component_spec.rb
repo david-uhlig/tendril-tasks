@@ -12,6 +12,18 @@ RSpec.describe DeleteConfirm::ButtonComponent, type: :component do
     expect(button["data-modal-toggle"]).to eq("confirm-modal")
   end
 
+  it "renders an id derived from the modal, so a morph doesn't reuse it as another button" do
+    render_inline(described_class.new(text: "Delete", target_modal_id: "confirm-modal"))
+
+    expect(button["id"]).to eq("confirm-modal-toggle")
+  end
+
+  it "keeps a given id" do
+    render_inline(described_class.new(text: "Delete", target_modal_id: "confirm-modal", id: "custom"))
+
+    expect(button["id"]).to eq("custom")
+  end
+
   context "with data attributes" do
     before do
       render_inline(described_class.new(text: "Delete", target_modal_id: "confirm-modal", data: { foo: "bar" }))
