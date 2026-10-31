@@ -58,5 +58,30 @@ module Gustwave
         .compact_blank
         .join(separator)
     end
+
+    private
+
+    # Adds Stimulus tokens to the data attributes, next to the caller's own.
+    def merge_data_tokens(options, **tokens)
+      data = (options[:data] || {}).symbolize_keys
+      tokens.each do |name, added|
+        data[name] = [ data[name], options.delete(:"data-#{name}"), *added ].flat_map { _1.to_s.split }.uniq.join(" ")
+      end
+      options.merge(data:)
+    end
+
+    # Drops +aria-controls+, flat or within an +aria+ hash, off +attributes+.
+    def without_controls(attributes)
+      attributes.each_with_object({}) do |(key, value), remaining|
+        if key.to_s == "aria-controls"
+          next
+        elsif key.to_s == "aria" && value.is_a?(Hash)
+          aria = value.reject { |aria_key, _| aria_key.to_s == "controls" }
+          remaining[key] = aria if aria.present?
+        else
+          remaining[key] = value
+        end
+      end
+    end
   end
 end
