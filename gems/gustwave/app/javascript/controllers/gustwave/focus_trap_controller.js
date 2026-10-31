@@ -11,7 +11,7 @@ const FOCUSABLE = [
   "[tabindex]"
 ].join(",")
 
-// Connects to data-controller="focus-trap"
+// Connects to data-controller="gustwave--focus-trap"
 /**
  * This Stimulus controller, `FocusTrapController`, keeps keyboard focus within a modal while it
  * is shown, so keyboard users can't reach the page behind a modal that blocks outside interaction.
@@ -25,7 +25,7 @@ const FOCUSABLE = [
  * hiding a modal.
  *
  * Usage:
- * - Add `data-controller="focus-trap"` to the modal element.
+ * - Add `data-controller="gustwave--focus-trap"` to the modal element.
  */
 export default class extends Controller {
   connect() {

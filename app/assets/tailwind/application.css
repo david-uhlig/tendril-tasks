@@ -20,7 +20,7 @@
 
 /*
   Grid columns are built dynamically from the number of buttons, e.g. in
-  `TendrilTasks::ButtonGrid` and `Modal::DialogComponent`.
+  `TendrilTasks::ButtonGrid` and `Modal::FooterComponent`.
 */
 @source inline("{sm:,md:,}grid-cols-{1..8}");
 

@@ -29,6 +29,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Heading => { derived_defaults: { size: :default_size } },
     Gustwave::Icon => { args: [ :close ] },
     Gustwave::IconToast => { forwards: %i[position] },
+    Gustwave::Modal => { selected_elsewhere: %i[action] },
+    Gustwave::ModalHeader => { kwargs: { modal_id: "modal" } },
     Gustwave::Popover => { selected_elsewhere: %i[placement trigger] },
     Gustwave::Spinner => { forwards: %i[size] },
     Gustwave::Tooltip => { selected_elsewhere: %i[placement trigger] }
