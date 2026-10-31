@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module Modal
-  # Use ShellComponent to render the frame of a Flowbite modal: the backdrop
-  # container, the content box and a header with a heading and a close button.
+  # Use ShellComponent to render a modal with a static backdrop. The modal is
+  # a Gustwave::Modal, which adds the focus trap and the header with the close
+  # button.
   #
   # The block's content, apart from the heading, is rendered below the header,
   # e.g. the modal's body and footer.
@@ -13,39 +14,25 @@ module Modal
   #     <div class="p-4 md:p-5">…</div>
   #   <% end %>
   #
-  # Open the modal with a toggle carrying +data-modal-target+ and
-  # +data-modal-show+ set to the modal's +id+.
-  #
-  # Keyboard focus is trapped within the modal while it is shown.
+  # Open the modal with a trigger from +Gustwave::Modal.trigger_options(id)+.
   #
   # @param id [String] the modal's id, targeted by its toggles.
-  # @param options [Hash] HTML attributes passed to the +section+ element. Data
-  #   attributes are merged with the modal's own, Stimulus controllers are added
-  #   to the modal's.
+  # @param options [Hash] HTML attributes passed to the modal's root element.
   class ShellComponent < TendrilTasks::Component
-    HEADING_CLASS = "text-xl font-semibold text-gray-900 dark:text-white"
-    # Classes for the modal's footer, rendered by the caller below the body
-    FOOTER_CLASS = "grid grid-cols-1 place-items-stretch gap-2 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
-
     attr_reader :id
 
     # Use the +heading+ slot for the modal's title, passed as an argument or a block.
     #
     # @param text [String] the title, unless given as a block.
-    # @param options [Hash] HTML attributes passed to the +h3+ element.
+    # @param options [Hash] options for the title, passed as +title_options+ to the header.
     renders_one :heading, ->(text = nil, **options, &block) do
-      options.symbolize_keys!
-      options[:class] = class_merge(HEADING_CLASS, options.delete(:class))
-      tag.h3(block ? capture(&block) : text, **options)
+      @heading_text = block ? capture(&block) : text
+      @heading_options = options
+      @heading_text
     end
 
     def initialize(id, **options)
       @id = id
-
-      options.deep_symbolize_keys!
-      data = options.fetch(:data, {})
-      controller = [ "gustwave--focus-trap", data[:controller] ].compact_blank.join(" ")
-      options[:data] = { "modal-backdrop": "static" }.merge(data, controller: controller)
       @options = options
     end
   end

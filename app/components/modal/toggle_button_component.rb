@@ -13,9 +13,7 @@ module Modal
     private
 
     def build_options(options)
-      options.deep_symbolize_keys!
-      options[:"data-modal-target"] = modal_id
-      options[:"data-modal-toggle"] = modal_id
+      options = Gustwave::Modal.trigger_options(modal_id, **options.deep_symbolize_keys)
       options[:type] ||= :button
       options
     end
