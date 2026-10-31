@@ -91,7 +91,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # HTML+ERB parser, linter and formatter [https://herb-tools.dev]
-  gem "herb", "~> 0.11.0", require: false
+  gem "herb", "~> 0.11.1", require: false
 
   # Runs the specs in parallel processes [https://github.com/grosser/parallel_tests]
   gem "parallel_tests"
