@@ -90,20 +90,6 @@ module Gustwave
       [ ids.flat_map { Array(it).flat_map { |id| id.to_s.split } }, options ]
     end
 
-    # Drops +aria-controls+, flat or within an +aria+ hash, off +attributes+.
-    def without_controls(attributes)
-      attributes.each_with_object({}) do |(key, value), remaining|
-        if key.to_s == "aria-controls"
-          next
-        elsif key.to_s == "aria" && value.is_a?(Hash)
-          aria = value.reject { |aria_key, _| aria_key.to_s == "controls" }
-          remaining[key] = aria if aria.present?
-        else
-          remaining[key] = value
-        end
-      end
-    end
-
     def popper_arrow
       return nil unless @arrow
       tag.div "data-popper-arrow": true

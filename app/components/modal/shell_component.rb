@@ -44,7 +44,7 @@ module Modal
 
       options.deep_symbolize_keys!
       data = options.fetch(:data, {})
-      controller = [ "focus-trap", data[:controller] ].compact_blank.join(" ")
+      controller = [ "gustwave--focus-trap", data[:controller] ].compact_blank.join(" ")
       options[:data] = { "modal-backdrop": "static" }.merge(data, controller: controller)
       @options = options
     end

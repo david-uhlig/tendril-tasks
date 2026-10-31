@@ -48,14 +48,5 @@ module Gustwave
     private
 
     attr_reader :text
-
-    # Adds Stimulus tokens to the data attributes, next to the caller's own.
-    def merge_data_tokens(options, **tokens)
-      data = (options[:data] || {}).symbolize_keys
-      tokens.each do |name, added|
-        data[name] = [ data[name], options.delete(:"data-#{name}"), *added ].flat_map { _1.to_s.split }.uniq.join(" ")
-      end
-      options.merge(data:)
-    end
   end
 end

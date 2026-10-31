@@ -22,7 +22,7 @@ Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and 
 
 ### Optional
 
-- **Stimulus controllers:** Gustwave pins its controllers under `controllers/gustwave` in the importmap. Apps that eager load their controllers from `controllers` register them as `gustwave--*`, e.g. `gustwave--lexxy-heading`.
+- **Stimulus controllers:** Gustwave pins its controllers under `controllers/gustwave` in the importmap. Apps that eager load their controllers from `controllers` register them as `gustwave--*`, e.g. `gustwave--lexxy-heading`. `Gustwave::Modal` uses `gustwave--focus-trap`, plus `gustwave--undismissible-modal` when `dismissible: false`.
 - **Action Text:** `Gustwave::RichText` renders Action Text content.
 - **Previews:** Add Gustwave's ViewComponent previews in `config/application.rb`:
 

@@ -26,12 +26,12 @@ RSpec.describe Modal::ShellComponent, type: :component do
   it "traps the focus within the modal" do
     render_inline(described_class.new("dialog"))
 
-    expect(rendered_content).to have_selector("section[data-controller='focus-trap']", visible: :all)
+    expect(rendered_content).to have_selector("section[data-controller='gustwave--focus-trap']", visible: :all)
   end
 
   it "merges data attributes with the backdrop and the focus trap" do
     render_inline(described_class.new("dialog", data: { controller: "cooldown", "cooldown-seconds-value": 3 }))
 
-    expect(rendered_content).to have_selector("section[data-modal-backdrop='static'][data-controller='focus-trap cooldown'][data-cooldown-seconds-value='3']", visible: :all)
+    expect(rendered_content).to have_selector("section[data-modal-backdrop='static'][data-controller='gustwave--focus-trap cooldown'][data-cooldown-seconds-value='3']", visible: :all)
   end
 end
