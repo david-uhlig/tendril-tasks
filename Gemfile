@@ -51,7 +51,7 @@ gem "lexxy", "~> 1.0"
 
 # Create reusable, testable & encapsulated view components
 # See https://viewcomponent.org/
-gem "view_component", "~> 4.15"
+gem "view_component", "~> 4.19"
 
 # Flowbite components built with ViewComponent
 gem "gustwave", path: "gems/gustwave"
@@ -60,7 +60,7 @@ gem "gustwave", path: "gems/gustwave"
 gem "cancancan"
 
 # Configuration
-gem "anyway_config", "~> 2.7"
+gem "anyway_config", "~> 2.9"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 2.0"
