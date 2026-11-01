@@ -99,7 +99,8 @@ module Gustwave
         },
         horizontal: {
           root: "relative mb-6 sm:mb-0",
-          track: "flex items-center",
+          # As tall as a marker, so items with a dot line up with items with a marker
+          track: "flex items-center h-6",
           dot: "z-10 w-3 h-3 bg-gray-200 rounded-full border border-white dark:border-gray-900 dark:bg-gray-700 shrink-0",
           marker: "z-10 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0",
           connector: "hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700",
