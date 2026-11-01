@@ -1,7 +1,5 @@
 module Gustwave
   class DismissButtonPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/dismiss_button/default
-    #
     # Removes the element whose id matches the target.
     def default
       render_with_template

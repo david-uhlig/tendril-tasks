@@ -1,6 +1,5 @@
 module Gustwave
   class CardPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/card/default
     def default
       render_with_template
     end

@@ -1,6 +1,5 @@
 module Gustwave
   class ButtonPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/button/playground?theme=gradient_duotone&color=purple_to_pink
     def playground(text: "Button", theme: :default, color: nil, size: nil)
       render Gustwave::Button.for(theme).new(text, color:, size:)
     end

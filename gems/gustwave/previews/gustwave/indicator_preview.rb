@@ -1,6 +1,5 @@
 module Gustwave
   class IndicatorPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/indicator/colors
     def colors
       render_with_template(locals: { colors: Gustwave::Indicator.option_values(:color).excluding(:none) })
     end

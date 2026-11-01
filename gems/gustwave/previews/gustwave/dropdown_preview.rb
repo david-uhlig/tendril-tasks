@@ -1,6 +1,5 @@
 module Gustwave
   class DropdownPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/dropdown/default
     def default
       render Gustwave::Dropdown.new("Options") do |dropdown|
         dropdown.with_menu_list do |menu|

@@ -1,6 +1,5 @@
 module Gustwave
   class ParagraphPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/paragraph/default
     def default
       render_with_template
     end
