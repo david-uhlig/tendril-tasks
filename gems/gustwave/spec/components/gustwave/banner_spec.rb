@@ -29,11 +29,11 @@ RSpec.describe Gustwave::Banner, type: :component do
     end
 
     it "renders the body centered with the text" do
-      expect(page).to have_selector("div.mx-auto", text: "content")
+      expect(page).to have_selector("div.flex-1.text-center", text: "content")
     end
 
     it "renders the body without flex" do
-      expect(page).not_to have_selector("div.mx-auto.flex")
+      expect(page).not_to have_selector("div.flex-1.flex")
     end
   end
 
@@ -77,25 +77,10 @@ RSpec.describe Gustwave::Banner, type: :component do
       expect(page).not_to have_selector("div[class~='border-t']")
     end
 
-    it "renders a relative card without fixed positioning for :none" do
-      render_inline(described_class.new("content", position: :none, floating: true))
+    it "leaves the layout and the dismiss button alone" do
+      render_inline(described_class.new("content", floating: true), &:with_dismiss_button)
 
-      expect(page).to have_selector("div[class~='relative']")
-      expect(page).not_to have_selector("div.fixed")
-      expect(page).not_to have_selector("div[class~='top-6']")
-      expect(page).not_to have_selector("div[class~='start-1/2']")
-    end
-
-    it "absolutely positions the dismiss button" do
-      render_inline(described_class.new("content", floating: true)) { |banner| banner.with_dismiss_button }
-
-      expect(page).to have_selector("button.absolute")
-    end
-
-    it "does not absolutely position the dismiss button when not floating" do
-      render_inline(described_class.new("content")) { |banner| banner.with_dismiss_button }
-
-      expect(page).to have_selector("button")
+      expect(page).not_to have_selector("div[class~='flex-col']")
       expect(page).not_to have_selector("button.absolute")
     end
   end
@@ -104,8 +89,8 @@ RSpec.describe Gustwave::Banner, type: :component do
     it "aligns the body to the start" do
       render_inline(described_class.new("content", align: :start))
 
-      expect(page).to have_selector("div.me-auto", text: "content")
-      expect(page).not_to have_selector("div.mx-auto")
+      expect(page).to have_selector("div.flex-1.text-start", text: "content")
+      expect(page).not_to have_selector("div.text-center")
     end
   end
 
@@ -115,23 +100,11 @@ RSpec.describe Gustwave::Banner, type: :component do
 
       expect(page).to have_selector("button.w-7.h-7.p-0")
     end
-  end
 
-  describe "actions slot" do
-    it "renders the actions before the dismiss button" do
-      render_inline(described_class.new("content")) do |banner|
-        banner.with_actions(class: "extra") { "Sign up" }
-        banner.with_dismiss_button
-      end
+    it "follows the body as a direct child of the root" do
+      render_inline(described_class.new("content"), &:with_dismiss_button)
 
-      expect(page).to have_selector("div.shrink-0.extra", text: "Sign up")
-      expect(page).to have_selector("div.shrink-0.extra + button")
-    end
-
-    it "renders no actions wrapper when the slot is not set" do
-      render_inline(described_class.new("content"))
-
-      expect(page).not_to have_selector("div.shrink-0")
+      expect(page).to have_selector("div[tabindex='-1'] > div.flex-1 + button")
     end
   end
 end
