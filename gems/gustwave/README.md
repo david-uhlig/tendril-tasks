@@ -153,7 +153,7 @@ To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE`, then run `bin/import-icon
 
 ### Flowbite coverage
 
-`lookbook/flowbite.yml` lists every example in Flowbite's docs and how far Gustwave covers it. `previewed` means a scenario demonstrates it, `composable` that existing components could build it, and `tailwind` that it needs plain Tailwind classes only. `feature_gap`, `partial` and `blocked` say what's missing in `needs`, and `out_of_scope` marks the third-party plugin pages. The file isn't shipped with the gem.
+`lookbook/flowbite.yml` lists every example in Flowbite's docs and how far Gustwave covers it. `previewed` means a scenario demonstrates it, `composable` that existing components could build it, and `tailwind` that it needs plain Tailwind classes only. `feature_gap`, `partial` and `blocked` say what's missing in `needs`, and `out_of_scope` marks the third-party plugin pages. Lookbook shows it at `/lookbook/pages`, with one page per Flowbite docs page. The importer generates those pages into `lookbook/pages/flowbite`, so don't edit them by hand. None of this is shipped with the gem.
 
 To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE` in `script/flowbite_inventory.rb`, run `bin/flowbite-inventory --dry-run` to review the changes, then run it for real and classify what it added. The specs fail until every example has a status.
 

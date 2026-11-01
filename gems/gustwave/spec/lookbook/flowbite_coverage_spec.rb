@@ -53,6 +53,12 @@ RSpec.describe "The Flowbite manifest" do
     expect(duplicates.keys).to be_empty
   end
 
+  it "has a generated Lookbook page for every page, and no others" do
+    pages = Dir.glob("**/*.html.erb", base: Gustwave::Engine.root.join("lookbook/pages/flowbite")).map { _1.delete_suffix(".html.erb") }
+
+    expect(pages).to match_array(manifest.fetch("pages").keys)
+  end
+
   it "gives every previewed example a preview" do
     expect(keys_of(entries.select { _1["status"] == "previewed" && _1["preview"].blank? })).to be_empty
   end

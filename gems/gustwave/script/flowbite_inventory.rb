@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "fileutils"
 require "json"
 require "optparse"
 require "uri"
@@ -112,7 +113,28 @@ module Gustwave
       HEADER + { "flowbite_version" => version, "pages" => pages }.to_yaml(line_width: -1)
     end
 
+    # Writes one Lookbook page per docs page into dir, so that Lookbook's nav
+    # mirrors Flowbite's, and removes the pages of docs pages that are gone.
+    def write_stubs(pages, dir)
+      stubs = pages.keys.to_h { |page| [ File.join(dir, "#{page}.html.erb"), stub(page) ] }
+
+      stubs.each do |path, content|
+        FileUtils.mkdir_p(File.dirname(path))
+        File.write(path, content, encoding: "utf-8")
+      end
+      (Dir.glob(File.join(dir, "**/*.html.erb")) - stubs.keys).each { |path| File.delete(path) }
+    end
+
     private
+
+    def stub(page)
+      <<~ERB
+        ---
+        title: #{File.basename(page).tr("-", " ").capitalize}
+        ---
+        <%= render "lookbook/flowbite/page", key: "#{page}" %>
+      ERB
+    end
 
     def slug(heading)
       heading.to_s.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/\A-|-\z/, "")
@@ -159,6 +181,7 @@ module Gustwave
         report(pages, changes)
         unless options[:dry_run]
           File.write(@manifest, FlowbiteInventory.dump_manifest(FlowbiteInventory.version(source), pages), encoding: "utf-8")
+          FlowbiteInventory.write_stubs(pages, File.join(File.dirname(@manifest), "pages/flowbite"))
         end
         0
       rescue Error, OptionParser::ParseError => e

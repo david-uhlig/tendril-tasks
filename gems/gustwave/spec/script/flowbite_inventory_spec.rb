@@ -139,6 +139,30 @@ RSpec.describe Gustwave::FlowbiteInventory do
     end
   end
 
+  describe ".write_stubs" do
+    it "writes a titled page per docs page, also for a hyphenated name" do
+      Dir.mktmpdir do |dir|
+        described_class.write_stubs({ "components/device-mockups" => [] }, dir)
+
+        expect(File.read(File.join(dir, "components/device-mockups.html.erb"))).to eq(<<~ERB)
+          ---
+          title: Device mockups
+          ---
+          <%= render "lookbook/flowbite/page", key: "components/device-mockups" %>
+        ERB
+      end
+    end
+
+    it "removes the page of a docs page that is gone" do
+      Dir.mktmpdir do |dir|
+        described_class.write_stubs({ "components/old" => [] }, dir)
+        described_class.write_stubs({ "components/new" => [] }, dir)
+
+        expect(Dir.glob("**/*.html.erb", base: dir)).to eq([ "components/new.html.erb" ])
+      end
+    end
+  end
+
   describe Gustwave::FlowbiteInventory::CLI do
     let(:out) { StringIO.new }
     let(:err) { StringIO.new }
@@ -154,6 +178,7 @@ RSpec.describe Gustwave::FlowbiteInventory do
         expect(out.string).to include("added components/tabs#a")
         expect(out.string).to include("pages 1, examples 1: added 1, removed 0, retitled 0")
         expect(Gustwave::FlowbiteInventory.read_manifest(path)).to include("flowbite_version" => "3.1.2")
+        expect(File.exist?(File.join(dir, "pages/flowbite/components/tabs.html.erb"))).to be(true)
       end
     end
 
@@ -163,6 +188,7 @@ RSpec.describe Gustwave::FlowbiteInventory do
 
         expect(described_class.new([ "--dry-run" ], out:, err:, manifest: path).run).to eq(0)
         expect(File.exist?(path)).to be(false)
+        expect(Dir.exist?(File.join(dir, "pages"))).to be(false)
       end
     end
 
