@@ -1,0 +1,2379 @@
+# Every example in Flowbite's docs and how far Gustwave covers it. After
+# bumping the tag in script/flowbite_inventory.rb, run bin/flowbite-inventory
+# and classify what it added. spec/lookbook/flowbite_coverage_spec.rb checks
+# this file.
+---
+flowbite_version: 3.1.2
+pages:
+  components/accordion:
+  - id: default-accordion-example
+    title: Default accordion
+    status: blocked
+    needs: accordion
+  - id: accordion-always-open-example
+    title: Always open
+    status: blocked
+    needs: accordion
+  - id: accordion-color-options-example
+    title: Color options
+    status: blocked
+    needs: accordion
+  - id: accordion-flush-example
+    title: Flush accordion
+    status: blocked
+    needs: accordion
+  - id: accordion-arrow-style-example
+    title: Arrow style
+    status: blocked
+    needs: accordion
+  - id: accordion-nesting-example
+    title: Nesting accordions
+    status: blocked
+    needs: accordion
+  components/alerts:
+  - id: default-alert-example
+    title: Default alert
+    status: previewed
+    preview: gustwave/alert/default
+  - id: alerts-with-icon-example
+    title: Alerts with icon
+    status: previewed
+    preview: gustwave/alert/with_icon
+  - id: alerts-with-border-example
+    title: Bordered alerts
+    status: previewed
+    preview: gustwave/alert/bordered
+  - id: alerts-list-example
+    title: Alerts with list
+    status: previewed
+    preview: gustwave/alert/with_list
+  - id: alerts-dismissing-example
+    title: Dismissing
+    status: previewed
+    preview: gustwave/alert/dismissible
+  - id: alerts-border-accent-example
+    title: Border accent
+    status: previewed
+    preview: gustwave/alert/border_accent
+  - id: alerts-additional-content-example
+    title: Additional content
+    status: composable
+  components/avatar:
+  - id: default-avatar-example
+    title: Default avatar
+    status: previewed
+    preview: gustwave/avatar/square
+  - id: avatar-bordered-example
+    title: Bordered
+    status: previewed
+    preview: gustwave/avatar/with_border
+  - id: avatar-placeholder-example
+    title: Placeholder icon
+    status: previewed
+    preview: gustwave/avatar/placeholder_and_text
+  - id: avatar-placeholder-initials-example
+    title: Placeholder initials
+    status: previewed
+    preview: gustwave/avatar/placeholder_and_text
+  - id: avatar-tooltip-example
+    title: Avatar tooltip
+    status: composable
+  - id: avatar-dot-indicator-example
+    title: Dot indicator
+    status: composable
+  - id: avatar-stacked-example
+    title: Stacked
+    status: previewed
+    preview: gustwave/avatar/group
+  - id: avatar-text-example
+    title: Avatar text
+    status: previewed
+    preview: gustwave/avatar/placeholder_and_text
+  - id: avatar-user-dropdown-example
+    title: User dropdown
+    status: composable
+  - id: avatar-sizes-example
+    title: Sizes
+    status: previewed
+    preview: gustwave/avatar/sizes
+  components/badge:
+  - id: default-badge-example
+    title: Default badge
+    status: previewed
+    preview: gustwave/badge/colors
+  - id: badge-sizes-example
+    title: Large badges
+    status: previewed
+    preview: gustwave/badge/sizes
+  - id: bordered-badge-example
+    title: Bordered badge
+    status: previewed
+    preview: gustwave/badge/bordered
+  - id: pills-badge-example
+    title: Pills badge
+    status: previewed
+    preview: gustwave/badge/pill
+  - id: badge-links-example
+    title: Badges as links
+    status: previewed
+    preview: gustwave/badge/as_link
+  - id: badge-icons-example
+    title: Badges with icon
+    status: previewed
+    preview: gustwave/badge/with_icon_and_text
+  - id: badge-notification-example
+    title: Notification badge
+    status: previewed
+    preview: gustwave/button/with_indicator
+  - id: badge-button-example
+    title: Button with badge
+    status: composable
+  - id: badge-icon-only-example
+    title: Badge with icon only
+    status: previewed
+    preview: gustwave/badge/with_icon
+  - id: badge-dismiss-example
+    title: Chips (dismissible badges)
+    status: previewed
+    preview: gustwave/badge/dismissible
+  components/banner:
+  - id: default-sticky-banner-example
+    title: Default sticky banner
+    status: previewed
+    preview: gustwave/banner/default
+  - id: bottom-banner-example
+    title: Bottom banner position
+    status: previewed
+    preview: gustwave/banner/bottom
+  - id: marketing-sticky-banner-example
+    title: Marketing CTA banner
+    status: previewed
+    preview: gustwave/banner/marketing
+  - id: newsletter-sticky-banner-example
+    title: Newsletter sign-up banner
+    status: partial
+    needs: form
+    preview: gustwave/banner/newsletter
+  - id: informational-sticky-banner-example
+    title: Informational banner
+    status: previewed
+    preview: gustwave/banner/informational
+  components/bottom-navigation:
+  - id: default-bottom-nav-example
+    title: Default bottom navigation
+    status: blocked
+    needs: bottom-navigation
+  - id: border-bottom-nav-example
+    title: Menu items with border
+    status: blocked
+    needs: bottom-navigation
+  - id: cta-button-bottom-nav-example
+    title: Application bar example
+    status: blocked
+    needs: bottom-navigation
+  - id: pagination-bottom-nav-example
+    title: Example with pagination
+    status: blocked
+    needs: bottom-navigation
+  - id: button-group-bottom-nav-example
+    title: Button group bottom bar
+    status: blocked
+    needs: bottom-navigation
+  - id: card-bottom-nav-example
+    title: Card with bottom bar
+    status: blocked
+    needs: bottom-navigation
+  - id: video-bottom-nav-example
+    title: Online meeting control bar
+    status: blocked
+    needs: bottom-navigation
+  - id: audio-bottom-nav-example
+    title: Video player bar
+    status: blocked
+    needs: bottom-navigation
+  components/breadcrumb:
+  - id: default-breadcrumb-example
+    title: Default breadcrumb
+    status: blocked
+    needs: breadcrumb
+  - id: breadcrumb-background-example
+    title: Solid background
+    status: blocked
+    needs: breadcrumb
+  - id: header-breadcrumb-example
+    title: Header breadcrumb
+    status: blocked
+    needs: breadcrumb
+  - id: breadcrumb-dropdown-example
+    title: Breadcrumb with dropdown
+    status: blocked
+    needs: breadcrumb
+  components/button-group:
+  - id: default-button-group-example
+    title: Default example
+    status: previewed
+    preview: gustwave/button_group/default
+  - id: button-group-links-example
+    title: Button group as links
+    status: previewed
+    preview: gustwave/button_group/as_links
+  - id: button-group-icons-example
+    title: Group buttons with icons
+    status: previewed
+    preview: gustwave/button_group/with_icons
+  - id: button-group-outline-example
+    title: Outline
+    status: previewed
+    preview: gustwave/button_group/outline
+  - id: button-group-outline-icon-example
+    title: Outlined with icon
+    status: previewed
+    preview: gustwave/button_group/outline_with_icons
+  components/buttons:
+  - id: default-button-example
+    title: Default button
+    status: previewed
+    preview: gustwave/button/themes
+  - id: button-pills-example
+    title: Button pills
+    status: previewed
+    preview: gustwave/button/pill
+  - id: button-monochrome-example
+    title: Gradient monochrome
+    status: previewed
+    preview: gustwave/button/themes
+  - id: button-duotone-example
+    title: Gradient duotone
+    status: previewed
+    preview: gustwave/button/themes
+  - id: button-gradient-outline-example
+    title: Gradient outline
+    status: previewed
+    preview: gustwave/button/themes
+  - id: button-colored-shadows-example
+    title: Colored shadows
+    status: previewed
+    preview: gustwave/button/themes
+  - id: button-social-example
+    title: Social buttons
+    status: composable
+  - id: button-payment-example
+    title: Payment buttons
+    status: composable
+  - id: button-outline-example
+    title: Outline buttons
+    status: previewed
+    preview: gustwave/button/themes
+  - id: button-sizes-example
+    title: Button sizes
+    status: previewed
+    preview: gustwave/button/sizes
+  - id: button-sizes-example-10
+    title: Button sizes with icon
+    status: composable
+  - id: button-icon-example
+    title: Buttons with icon
+    status: previewed
+    preview: gustwave/button/with_icons
+  - id: button-label-example
+    title: Button with label
+    status: composable
+  - id: button-icon-only-example
+    title: Icon buttons
+    status: composable
+  - id: button-loader-example
+    title: Loader
+    status: composable
+  - id: button-disabled-example
+    title: Disabled
+    status: previewed
+    preview: gustwave/button/disabled
+  components/card:
+  - id: default-card-example
+    title: Default card
+    status: previewed
+    preview: gustwave/card/default
+  - id: card-cta-button-example
+    title: Card with button
+    status: previewed
+    preview: gustwave/card/with_button
+  - id: card-cta-link-example
+    title: Card with link
+    status: previewed
+    preview: gustwave/card/link
+  - id: card-image-example
+    title: Card with image
+    status: previewed
+    preview: gustwave/card/image
+  - id: card-horizontal-example
+    title: Horizontal card
+    status: previewed
+    preview: gustwave/card/horizontal
+  - id: card-user-profile-example
+    title: User profile card
+    status: previewed
+    preview: gustwave/card/compositions
+  - id: card-form-inputs-example
+    title: Card with form inputs
+    status: partial
+    needs: form
+  - id: card-ecommerce-example
+    title: E-commerce card
+    status: partial
+    needs: rating
+  - id: card-cta-example
+    title: Call to action card
+    status: previewed
+    preview: gustwave/card/compositions
+  - id: card-nav-tabs-example
+    title: Card with nav tabs
+    status: composable
+  - id: card-full-width-tabs-example
+    title: Card full width tabs
+    status: composable
+  - id: card-list-example
+    title: Card with list
+    status: composable
+  - id: card-pricing-example
+    title: Pricing card
+    status: previewed
+    preview: gustwave/card/compositions
+  - id: card-testimonial-example
+    title: Testimonial card
+    status: composable
+  - id: card-crypto-example
+    title: Crypto card
+    status: composable
+  components/carousel:
+  - id: default-carousel-example
+    title: Default slider
+    status: blocked
+    needs: carousel
+  - id: carousel-controls-example
+    title: Controls
+    status: blocked
+    needs: carousel
+  - id: carousel-indicators-example
+    title: Indicators
+    status: blocked
+    needs: carousel
+  - id: carousel-animation-example
+    title: Animation
+    status: blocked
+    needs: carousel
+  components/chat-bubble:
+  - id: chat-bubble-example
+    title: Default chat bubble
+    status: blocked
+    needs: chat-bubble
+  - id: voice-note-example
+    title: Voice note message
+    status: blocked
+    needs: chat-bubble
+  - id: file-attachement-example
+    title: File attachment
+    status: blocked
+    needs: chat-bubble
+  - id: image-attachment-example
+    title: Image attachment
+    status: blocked
+    needs: chat-bubble
+  - id: image-gallery-example
+    title: Image gallery
+    status: blocked
+    needs: chat-bubble
+  - id: url-sharing-example
+    title: URL preview sharing
+    status: blocked
+    needs: chat-bubble
+  - id: outline-chat-bubble-example
+    title: Outline chat bubble
+    status: blocked
+    needs: chat-bubble
+  - id: outline-voice-note-example
+    title: Outline voice note
+    status: blocked
+    needs: chat-bubble
+  - id: outline-file-attachment-example
+    title: Outline file attachment
+    status: blocked
+    needs: chat-bubble
+  - id: outline-image-attachment-example
+    title: Outline image attachment
+    status: blocked
+    needs: chat-bubble
+  - id: outline-image-gallery-example
+    title: Outline image gallery
+    status: blocked
+    needs: chat-bubble
+  - id: outline-url-sharing-example
+    title: Outline URL preview sharing
+    status: blocked
+    needs: chat-bubble
+  - id: clean-chat-bubble-example
+    title: Clean chat bubble
+    status: blocked
+    needs: chat-bubble
+  - id: clean-voice-note-example
+    title: Clean voice note
+    status: blocked
+    needs: chat-bubble
+  - id: clean-file-attachment-example
+    title: Clean file attachment
+    status: blocked
+    needs: chat-bubble
+  - id: clean-image-attachment-example
+    title: Clean image attachment
+    status: blocked
+    needs: chat-bubble
+  - id: clean-image-gallery-example
+    title: Clean image gallery
+    status: blocked
+    needs: chat-bubble
+  - id: clean-url-sharing-example
+    title: Clean URL preview sharing
+    status: blocked
+    needs: chat-bubble
+  components/clipboard:
+  - id: clipboard-example
+    title: Default copy to clipboard
+    status: blocked
+    needs: clipboard
+  - id: clipboard-button-input-example
+    title: Input with copy button
+    status: blocked
+    needs: clipboard
+  - id: clipboard-button-text-input-example
+    title: Copy button with text
+    status: blocked
+    needs: clipboard
+  - id: clipboard-button-group-example
+    title: Input group with copy
+    status: blocked
+    needs: clipboard
+  - id: clipboard-url-shortener-example
+    title: URL shortener input group
+    status: blocked
+    needs: clipboard
+  - id: clipboard-source-block
+    title: Copy source code block
+    status: blocked
+    needs: clipboard
+  - id: clipboard-api-keys
+    title: Card with API keys
+    status: blocked
+    needs: clipboard
+  - id: contact-details-clipboard
+    title: Copy contact details
+    status: blocked
+    needs: clipboard
+  - id: copy-to-clipboard-modal
+    title: Copy button with modal
+    status: blocked
+    needs: clipboard
+  components/datepicker:
+  - id: default-datepicker-example
+    title: Datepicker example
+    status: blocked
+    needs: datepicker
+  - id: datepicker-inline-example
+    title: Inline datepicker
+    status: blocked
+    needs: datepicker
+  - id: datepicker-range-example
+    title: Date range picker
+    status: blocked
+    needs: datepicker
+  - id: datepicker-autohide-example
+    title: Options > Autohide
+    status: blocked
+    needs: datepicker
+  - id: datepicker-action-example
+    title: Options > Action buttons
+    status: blocked
+    needs: datepicker
+  - id: datepicker-date-format-example
+    title: Options > Date format
+    status: blocked
+    needs: datepicker
+  - id: datepicker-max-min-example
+    title: Options > Max and min dates
+    status: blocked
+    needs: datepicker
+  - id: datepicker-orientation-example
+    title: Options > Orientation
+    status: blocked
+    needs: datepicker
+  - id: datepicker-title-example
+    title: Options > Title
+    status: blocked
+    needs: datepicker
+  - id: timepicker-default-example
+    title: Timepicker
+    status: blocked
+    needs: datepicker
+  components/device-mockups:
+  - id: default-mockup
+    title: Default mockup
+    status: previewed
+    preview: gustwave/device_mockup/default
+  - id: iphone-mockup
+    title: iPhone 12 mockup (iOS)
+    status: previewed
+    preview: gustwave/device_mockup/iphone
+  - id: android-mockup
+    title: Google Pixel (Android)
+    status: previewed
+    preview: gustwave/device_mockup/android
+  - id: tablet-mockup
+    title: Tablet mockup
+    status: previewed
+    preview: gustwave/device_mockup/tablet
+  - id: laptop-mockup
+    title: Laptop mockup
+    status: previewed
+    preview: gustwave/device_mockup/laptop
+  - id: desktop-mockup
+    title: Desktop mockup
+    status: previewed
+    preview: gustwave/device_mockup/desktop
+  - id: smartwatch-mockup
+    title: Smartwatch mockup
+    status: previewed
+    preview: gustwave/device_mockup/smartwatch
+  - id: colors-mockup
+    title: Mockup colors
+    status: previewed
+    preview: gustwave/device_mockup/colors
+  components/drawer:
+  - id: default-drawer-example
+    title: Default drawer
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-navigation-example
+    title: Drawer navigation
+    status: composable
+  - id: drawer-contact-example
+    title: Contact form
+    status: partial
+    needs: form
+  - id: drawer-form-example
+    title: Form elements
+    status: partial
+    needs: form
+  - id: drawer-placement-left-example
+    title: Placement > Left drawer
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-placement-right-example
+    title: Placement > Right drawer
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-placement-top-example
+    title: Placement > Top drawer
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-placement-bottom-example
+    title: Placement > Bottom drawer
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-disable-body-scrolling-example
+    title: Body scrolling > Disabled (default)
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-body-scrolling-example
+    title: Body scrolling > Enabled
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-backdrop-example
+    title: Backdrop > Enabled (default)
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-disabled-backdrop-example
+    title: Backdrop > Disabled
+    status: previewed
+    preview: gustwave/drawer/default
+  - id: drawer-swipe-example
+    title: Swipeable edge
+    status: previewed
+    preview: gustwave/drawer/swipeable_edge
+  components/dropdowns:
+  - id: default-dropdown-example
+    title: Dropdown example
+    status: previewed
+    preview: gustwave/dropdown/default
+  - id: dropdown-hover-example
+    title: Dropdown hover
+    status: previewed
+    preview: gustwave/dropdown/opens_on_hover
+  - id: dropdown-delay-example
+    title: Dropdown hover > Delay duration
+    status: composable
+  - id: dropdown-divider-example
+    title: Dropdown divider
+    status: composable
+  - id: dropdown-header-example
+    title: Dropdown header
+    status: previewed
+    preview: gustwave/dropdown/with_header_and_footer
+  - id: dropdown-multi-level-example
+    title: Multi-level dropdown
+    status: previewed
+    preview: gustwave/dropdown/with_submenu
+  - id: dropdown-checkbox-example
+    title: Dropdown with checkbox
+    status: partial
+    needs: form
+  - id: dropdown-checkbox-bg-hover-example
+    title: Dropdown with checkbox > Background hover
+    status: partial
+    needs: form
+  - id: dropdown-checkbox-helper-example
+    title: Dropdown with checkbox > Helper text
+    status: partial
+    needs: form
+  - id: dropdown-radio-example
+    title: Dropdown with radio
+    status: partial
+    needs: form
+  - id: dropdown-radio-bg-hover-example
+    title: Dropdown with radio > Background hover
+    status: partial
+    needs: form
+  - id: dropdown-radio-helper-example
+    title: Dropdown with radio > Helper text
+    status: partial
+    needs: form
+  - id: dropdown-toggle-example
+    title: Dropdown with toggle switch
+    status: partial
+    needs: form
+  - id: dropdown-scroll-example
+    title: Dropdown with scrolling
+    status: composable
+  - id: dropdown-search-example
+    title: Dropdown with search
+    status: partial
+    needs: form
+  - id: dropdown-menu-icon-example
+    title: Menu icon
+    status: composable
+  - id: dropdown-notification-example
+    title: Notification bell
+    status: composable
+  - id: dropdown-avatar-example
+    title: User avatar
+    status: composable
+  - id: dropdown-avatar-name-example
+    title: User avatar > Avatar with name
+    status: composable
+  - id: dropdown-navbar-example
+    title: Dropdown navbar
+    status: previewed
+    preview: gustwave/navbar/with_dropdown
+  - id: dropdown-datepicker-example
+    title: Dropdown datepicker
+    status: blocked
+    needs: datepicker
+  - id: dropdown-sizes-example
+    title: Sizes
+    status: composable
+  - id: dropdown-placement-example
+    title: Placement
+    status: previewed
+    preview: gustwave/dropdown/placements
+  - id: dropdown-2x-placement-example
+    title: Placement > Double placement
+    status: composable
+  - id: dropdown-offset-distance-example
+    title: Dropdown offset > Distance
+    status: composable
+  - id: dropdown-offset-skidding-example
+    title: Dropdown offset > Skidding
+    status: composable
+  components/footer:
+  - id: default-footer-example
+    title: Default footer
+    status: blocked
+    needs: footer
+  - id: footer-logo-example
+    title: Footer with logo
+    status: blocked
+    needs: footer
+  - id: footer-social-media-example
+    title: Social media icons
+    status: blocked
+    needs: footer
+  - id: footer-sitemap-example
+    title: Sitemap links
+    status: blocked
+    needs: footer
+  - id: footer-sticky-example
+    title: Sticky footer
+    status: blocked
+    needs: footer
+  components/forms:
+  - id: default-form-example
+    title: Default form
+    status: blocked
+    needs: form
+  - id: form-floating-label-example
+    title: Floating labels
+    status: blocked
+    needs: form
+  - id: form-sizes-example
+    title: Input Sizes
+    status: blocked
+    needs: form
+  - id: form-disabled-example
+    title: Disabled inputs
+    status: blocked
+    needs: form
+  - id: form-shadow-example
+    title: Shadow inputs
+    status: blocked
+    needs: form
+  - id: form-helper-text-example
+    title: Helper text
+    status: blocked
+    needs: form
+  - id: form-input-icon-example
+    title: Input element with icon
+    status: blocked
+    needs: form
+  - id: form-input-addon-example
+    title: Input element with addon
+    status: blocked
+    needs: form
+  - id: form-validation-example
+    title: Form validation
+    status: blocked
+    needs: form
+  - id: form-textarea-example
+    title: Textarea
+    status: blocked
+    needs: form
+  - id: form-select-input-example
+    title: Select input
+    status: blocked
+    needs: form
+  - id: form-checkbox-example
+    title: Checkbox
+    status: blocked
+    needs: form
+  - id: form-radio-example
+    title: Radio buttons
+    status: blocked
+    needs: form
+  - id: form-file-input-example
+    title: File upload
+    status: blocked
+    needs: form
+  - id: form-toggle-example
+    title: Toggle Switch
+    status: blocked
+    needs: form
+  components/gallery:
+  - id: default-gallery-example
+    title: Default gallery
+    status: tailwind
+  - id: masonry-gallery-example
+    title: Masonry grid
+    status: tailwind
+  - id: featured-gallery-example
+    title: Featured image
+    status: tailwind
+  - id: quad-gallery-example
+    title: Quad gallery
+    status: tailwind
+  - id: slider-gallery-example
+    title: Gallery with slider
+    status: blocked
+    needs: carousel
+  - id: slider-controls-gallery-example
+    title: Custom slider controls
+    status: blocked
+    needs: carousel
+  - id: tags-gallery-example
+    title: Gallery with tag filters
+    status: composable
+  components/indicators:
+  - id: default-indicator-example
+    title: Default indicator
+    status: previewed
+    preview: gustwave/indicator/colors
+  - id: legend-indicator-example
+    title: Legend indicator
+    status: previewed
+    preview: gustwave/indicator/with_legend
+  - id: indicator-count-example
+    title: Indicator count
+    status: previewed
+    preview: gustwave/indicator/with_text
+  - id: status-indicator-example
+    title: Status indicator
+    status: previewed
+    preview: gustwave/indicator/positioned
+  - id: badge-indicator-example
+    title: Badge indicator
+    status: composable
+  - id: stepper-indicator-example
+    title: Stepper indicator
+    status: composable
+  - id: loading-indicator-example
+    title: Loading indicator
+    status: composable
+  - id: spinner-indicator-example
+    title: Spinner indicator
+    status: composable
+  - id: position-indicator
+    title: Indicator position
+    status: previewed
+    preview: gustwave/indicator/positioned
+  components/jumbotron:
+  - id: default-jumbotron-example
+    title: Default jumbotron
+    status: blocked
+    needs: jumbotron
+  - id: background-jumbotron-example
+    title: Background image
+    status: blocked
+    needs: jumbotron
+  - id: video-jumbotron-example
+    title: Featured video
+    status: blocked
+    needs: jumbotron
+  - id: form-jumbotron-example
+    title: Authentication form
+    status: blocked
+    needs: jumbotron
+  - id: gradient-jumbotron-example
+    title: Gradient background
+    status: blocked
+    needs: jumbotron
+  - id: cards-jumbotron-example
+    title: Jumbotron with cards
+    status: blocked
+    needs: jumbotron
+  components/kbd:
+  - id: default-kbd-example
+    title: Default KBD
+    status: previewed
+    preview: gustwave/kbd/default
+  - id: kbd-text-example
+    title: KBD inside text
+    status: previewed
+    preview: gustwave/kbd/inside_text
+  - id: kbd-table-example
+    title: KBD inside table
+    status: previewed
+    preview: gustwave/kbd/inside_table
+  - id: kbd-arrow-example
+    title: Arrow keys
+    status: previewed
+    preview: gustwave/kbd/arrow_keys
+  - id: kbd-letter-example
+    title: Letter keys
+    status: composable
+  - id: kbd-number-example
+    title: Number keys
+    status: composable
+  - id: kbd-function-example
+    title: Function keys
+    status: previewed
+    preview: gustwave/kbd/function_keys
+  components/list-group:
+  - id: default-list-group-example
+    title: Default list group
+    status: blocked
+    needs: list-group
+  - id: list-group-links-example
+    title: List group with links
+    status: blocked
+    needs: list-group
+  - id: list-group-buttons-example
+    title: List group with buttons
+    status: blocked
+    needs: list-group
+  - id: list-group-icons-example
+    title: List group with icons
+    status: blocked
+    needs: list-group
+  components/mega-menu:
+  - id: default-mega-menu-example
+    title: Default mega menu
+    status: partial
+    needs: mega-menu
+  - id: mega-menu-icons-example
+    title: Mega menu with icons
+    status: partial
+    needs: mega-menu
+  - id: mega-menu-full-width-example
+    title: Full width dropdown
+    status: partial
+    needs: mega-menu
+  - id: mega-menu-full-width-cta-example
+    title: Full width with CTA
+    status: partial
+    needs: mega-menu
+  - id: mega-menu-full-width-image-example
+    title: Full width with image
+    status: partial
+    needs: mega-menu
+  components/modal:
+  - id: default-modal-example
+    title: Default modal
+    status: previewed
+    preview: gustwave/modal/default
+  - id: static-modal
+    title: Static modal
+    status: previewed
+    preview: gustwave/modal/not_dismissible
+  - id: modal-popup-example
+    title: Pop-up modal
+    status: composable
+  - id: modal-form-example
+    title: Form element
+    status: partial
+    needs: form
+    preview: gustwave/modal/with_form
+  - id: modal-crud-example
+    title: Modal with CRUD
+    status: partial
+    needs: form
+  - id: modal-radio-example
+    title: Modal with radio inputs
+    status: partial
+    needs: form
+  - id: modal-timeline-example
+    title: Modal with timeline
+    status: composable
+  - id: modal-progress-example
+    title: Modal with progress bar
+    status: partial
+    needs: progress
+  - id: modal-crypto-example
+    title: Crypto wallet
+    status: composable
+  - id: modal-sizes-example
+    title: Sizes
+    status: previewed
+    preview: gustwave/modal/default
+  - id: modal-placement-example
+    title: Placement
+    status: previewed
+    preview: gustwave/modal/default
+  components/navbar:
+  - id: default-navbar-example
+    title: Default navbar
+    status: previewed
+    preview: gustwave/navbar/default
+  - id: navbar-dropdown-example
+    title: Navbar with dropdown
+    status: previewed
+    preview: gustwave/navbar/with_dropdown
+  - id: navbar-multi-dropdown-example
+    title: Multi-level dropdown
+    status: composable
+  - id: navbar-sticky-example
+    title: Sticky navbar
+    status: previewed
+    preview: gustwave/navbar/sticky
+  - id: navbar-submenu-example
+    title: Navbar with submenu
+    status: composable
+  - id: navbar-search-example
+    title: Navbar with search
+    status: partial
+    needs: search-input
+  - id: navbar-cta-example
+    title: Navbar with CTA button
+    status: previewed
+    preview: gustwave/navbar/with_actions
+  - id: navbar-language-example
+    title: Language dropdown
+    status: composable
+  - id: navbar-user-example
+    title: User menu dropdown
+    status: composable
+  - id: navbar-mega-menu
+    title: Mega menu navbar
+    status: partial
+    needs: mega-menu
+  - id: navbar-solid-bg-example
+    title: Solid background
+    status: previewed
+    preview: gustwave/navbar/solid
+  - id: navbar-hamburger-example
+    title: Hamburger menu
+    status: composable
+  components/pagination:
+  - id: default-pagination-example
+    title: Default pagination
+    status: blocked
+    needs: pagination
+  - id: pagination-icons-example
+    title: Pagination with icons
+    status: blocked
+    needs: pagination
+  - id: pagination-prev-next-example
+    title: Previous and next
+    status: blocked
+    needs: pagination
+  - id: pagination-prev-next-icons-example
+    title: Previous and next with icons
+    status: blocked
+    needs: pagination
+  - id: pagination-table-example
+    title: Table data pagination
+    status: blocked
+    needs: pagination
+  - id: pagination-table-icons-example
+    title: Table data pagination with icons
+    status: blocked
+    needs: pagination
+  components/popover:
+  - id: default-popover-example
+    title: Default popover
+    status: previewed
+    preview: gustwave/popover/default
+  - id: popover-user-profile-example
+    title: User profile
+    status: composable
+  - id: popover-company-profile-example
+    title: Company profile
+    status: composable
+  - id: popover-image-example
+    title: Image popover
+    status: composable
+  - id: popover-description-example
+    title: Description popover
+    status: composable
+  - id: popover-description-example-5
+    title: Progress popover
+    status: partial
+    needs: progress
+  - id: popover-password-example
+    title: Password strength
+    status: partial
+    needs: form
+  - id: popover-placement-example
+    title: Placement
+    status: previewed
+    preview: gustwave/popover/default
+  - id: popover-triggering-example
+    title: Triggering
+    status: previewed
+    preview: gustwave/popover/default
+  - id: popover-offset-example
+    title: Offset
+    status: composable
+  - id: popover-animation-example
+    title: Animation
+    status: composable
+  - id: popover-disable-arrow-example
+    title: Disable arrow
+    status: composable
+  components/progress:
+  - id: default-progress-example
+    title: Default progress bar
+    status: blocked
+    needs: progress
+  - id: progress-sizes-example
+    title: Sizes
+    status: blocked
+    needs: progress
+  - id: progress-label-example
+    title: With label inside
+    status: blocked
+    needs: progress
+  - id: progress-label-outside-example
+    title: With label outside
+    status: blocked
+    needs: progress
+  - id: progress-colors-example
+    title: Colors
+    status: blocked
+    needs: progress
+  components/rating:
+  - id: default-rating-example
+    title: Default rating
+    status: blocked
+    needs: rating
+  - id: rating-text-example
+    title: Rating with text
+    status: blocked
+    needs: rating
+  - id: rating-count-example
+    title: Rating count
+    status: blocked
+    needs: rating
+  - id: rating-star-sizes-example
+    title: Star sizes
+    status: blocked
+    needs: rating
+  - id: rating-advanced-example
+    title: Advanced rating
+    status: blocked
+    needs: rating
+  - id: rating-score-example
+    title: Score rating
+    status: blocked
+    needs: rating
+  - id: rating-comment-example
+    title: Rating comment
+    status: blocked
+    needs: rating
+  - id: rating-review-example
+    title: Review content
+    status: blocked
+    needs: rating
+  components/sidebar:
+  - id: default-sidebar-example
+    title: Default sidebar
+    status: blocked
+    needs: sidebar
+  - id: sidebar-multi-level-example
+    title: Multi-level menu
+    status: blocked
+    needs: sidebar
+  - id: sidebar-separator-example
+    title: Content separator
+    status: blocked
+    needs: sidebar
+  - id: sidebar-cta-button-example
+    title: CTA button
+    status: blocked
+    needs: sidebar
+  - id: sidebar-logo-example
+    title: Logo branding
+    status: blocked
+    needs: sidebar
+  - id: sidebar-logo-example-5
+    title: Sidebar with navbar
+    status: blocked
+    needs: sidebar
+  - id: drawer-navigation-example
+    title: Off-canvas sidebar
+    status: blocked
+    needs: sidebar
+  components/skeleton:
+  - id: default-skeleton-example
+    title: Default skeleton
+    status: blocked
+    needs: skeleton
+  - id: skeleton-image-example
+    title: Image placeholder
+    status: blocked
+    needs: skeleton
+  - id: skeleton-video-example
+    title: Video placeholder
+    status: blocked
+    needs: skeleton
+  - id: skeleton-text-example
+    title: Text placeholder
+    status: blocked
+    needs: skeleton
+  - id: skeleton-card-example
+    title: Card placeholder
+    status: blocked
+    needs: skeleton
+  - id: skeleton-chart-example
+    title: Widget placeholder
+    status: blocked
+    needs: skeleton
+  - id: skeleton-list-example
+    title: List placeholder
+    status: blocked
+    needs: skeleton
+  - id: skeleton-testimonial-example
+    title: Testimonial placeholder
+    status: blocked
+    needs: skeleton
+  components/speed-dial:
+  - id: default-speed-dial-example
+    title: Default speed dial
+    status: previewed
+    preview: gustwave/speed_dial/default
+  - id: square-speed-dial-example
+    title: Square speed dial
+    status: previewed
+    preview: gustwave/speed_dial/square
+  - id: speed-dial-menu-text-inside-button-example
+    title: Text inside button
+    status: previewed
+    preview: gustwave/speed_dial/text_inside
+  - id: speed-dial-text-outside-button-example
+    title: Text outside button
+    status: previewed
+    preview: gustwave/speed_dial/text_outside
+  - id: dropdown-speed-dial-example
+    title: Dropdown menu
+    status: feature_gap
+    needs: speed-dial-menu
+  - id: dropdown-alternative-speed-dial-example
+    title: Alternative menu
+    status: feature_gap
+    needs: speed-dial-menu
+  - id: top-right-speed-dial-example
+    title: Positioning > Top right
+    status: previewed
+    preview: gustwave/speed_dial/positions
+  - id: bottom-right-speed-dial-example
+    title: Positioning > Bottom right
+    status: previewed
+    preview: gustwave/speed_dial/positions
+  - id: bottom-left-speed-dial-example
+    title: Positioning > Bottom left
+    status: previewed
+    preview: gustwave/speed_dial/positions
+  - id: top-left-speed-dial-example
+    title: Positioning > Top left
+    status: previewed
+    preview: gustwave/speed_dial/positions
+  - id: vertical-speed-dial-example
+    title: Alignment > Vertical
+    status: previewed
+    preview: gustwave/speed_dial/default
+  - id: horizontal-speed-dial-example
+    title: Alignment > Horizontal
+    status: previewed
+    preview: gustwave/speed_dial/horizontal
+  - id: hover-speed-dial-example
+    title: Triggering > Hover
+    status: previewed
+    preview: gustwave/speed_dial/default
+  - id: click-speed-dial-example
+    title: Triggering > Click
+    status: previewed
+    preview: gustwave/speed_dial/click
+  components/spinner:
+  - id: default-spinner-example
+    title: Default spinner
+    status: previewed
+    preview: gustwave/spinner/default
+  - id: spinner-colors-example
+    title: Colors
+    status: previewed
+    preview: gustwave/spinner/colors
+  - id: spinner-sizes-example
+    title: Sizes
+    status: previewed
+    preview: gustwave/spinner/sizes
+  - id: spinner-alignment-example
+    title: Alignment
+    status: previewed
+    preview: gustwave/spinner/positioned
+  - id: spinner-card-example
+    title: Spinner with card
+    status: composable
+  - id: spinner-progress-example
+    title: Progress spinner
+    status: partial
+    needs: progress
+  - id: spinner-buttons-example
+    title: Buttons
+    status: composable
+  components/stepper:
+  - id: default-stepper-example
+    title: Default stepper
+    status: blocked
+    needs: stepper
+  - id: progress-stepper-example
+    title: Progress stepper
+    status: blocked
+    needs: stepper
+  - id: detailed-stepper-example
+    title: Detailed stepper
+    status: blocked
+    needs: stepper
+  - id: vertical-stepper-example
+    title: Vertical stepper
+    status: blocked
+    needs: stepper
+  - id: breadcrumb-stepper-example
+    title: Breadcrumb stepper
+    status: blocked
+    needs: stepper
+  - id: timeline-stepper-example
+    title: Timeline stepper
+    status: blocked
+    needs: stepper
+  - id: form-stepper-example
+    title: Stepper with form
+    status: blocked
+    needs: stepper
+  components/tables:
+  - id: default-table-example
+    title: Default table
+    status: previewed
+    preview: gustwave/table/default
+  - id: table-striped-rows-example
+    title: Highlight > Striped rows
+    status: composable
+  - id: table-striped-columns-example
+    title: Highlight > Striped columns
+    status: composable
+  - id: table-hover-example
+    title: Highlight > Hover state
+    status: composable
+  - id: table-head-example
+    title: Table layout > Table head (sortable)
+    status: composable
+  - id: table-foot-example
+    title: Table layout > Table foot
+    status: feature_gap
+    needs: table-foot
+  - id: table-caption-example
+    title: Table layout > Table caption
+    status: composable
+  - id: table-borderless-example
+    title: Table styles > Without border
+    status: composable
+  - id: table-shadow-example
+    title: Table styles > Table with shadow
+    status: composable
+  - id: table-scroll-example
+    title: Overflow scrolling
+    status: composable
+  - id: table-search-example
+    title: Table search
+    status: partial
+    needs: form
+  - id: table-filter-example
+    title: Table filter
+    status: partial
+    needs: form
+  - id: table-pagination-example
+    title: Table pagination
+    status: partial
+    needs: pagination
+  - id: table-checkbox-example
+    title: Checkbox selection
+    status: partial
+    needs: form
+  - id: table-users-example
+    title: Table with users
+    status: partial
+    needs: form
+  - id: table-products-example
+    title: Table with products
+    status: partial
+    needs: form
+  - id: table-modal-example
+    title: Table with modal
+    status: partial
+    needs: form
+  - id: table-comparison-example
+    title: Comparison table
+    status: composable
+  - id: table-colors-example
+    title: Table colors
+    status: composable
+  - id: table-striped-rows-colors-example
+    title: Table colors > Striped rows color
+    status: composable
+  - id: table-striped-columns-colors-example
+    title: Table colors > Striped columns color
+    status: composable
+  - id: table-striped-colors-hover-example
+    title: Table colors > Hover state
+    status: composable
+  components/tabs:
+  - id: default-tabs-example
+    title: Default tabs
+    status: previewed
+    preview: gustwave/tabs/default
+  - id: tabs-underline-example
+    title: Tabs with underline
+    status: previewed
+    preview: gustwave/tabs/underline
+  - id: tabs-icons-example
+    title: Tabs with icons
+    status: previewed
+    preview: gustwave/tabs/with_icons
+  - id: tabs-pill-example
+    title: Pills tabs
+    status: previewed
+    preview: gustwave/tabs/pills
+  - id: tabs-vertical-example
+    title: Vertical tabs
+    status: previewed
+    preview: gustwave/tabs/vertical
+  - id: tabs-full-width-example
+    title: Full width tabs
+    status: previewed
+    preview: gustwave/tabs/full_width
+  - id: tabs-interactive-example
+    title: Interactive tabs
+    status: previewed
+    preview: gustwave/tabs/interactive
+  - id: tabs-interactive-active-example
+    title: Active tab style
+    status: previewed
+    preview: gustwave/tabs/active_tab_style
+  components/timeline:
+  - id: default-timeline-example
+    title: Default timeline
+    status: previewed
+    preview: gustwave/timeline/default
+  - id: timeline-vertical-example
+    title: Vertical timeline
+    status: previewed
+    preview: gustwave/timeline/with_icons
+  - id: timeline-stepper-example
+    title: Stepper timeline
+    status: previewed
+    preview: gustwave/timeline/horizontal
+  - id: timeline-activity-log-example
+    title: Activity log
+    status: previewed
+    preview: gustwave/timeline/activity_log
+  - id: timeline-grouped-example
+    title: Grouped timeline
+    status: composable
+  components/toast:
+  - id: default-toast-example
+    title: Default toast
+    status: previewed
+    preview: gustwave/toast/default
+  - id: toast-colors-example
+    title: Colors
+    status: previewed
+    preview: gustwave/toast/with_icon
+  - id: toast-simple-example
+    title: Simple toast
+    status: composable
+  - id: toast-undo-example
+    title: Undo button
+    status: composable
+  - id: toast-message-example
+    title: Toast message
+    status: composable
+  - id: toast-push-example
+    title: Push notification
+    status: composable
+  - id: toast-interactive-example
+    title: Interactive toast
+    status: composable
+  - id: toast-positioning-example
+    title: Positioning
+    status: previewed
+    preview: gustwave/toast/default
+  components/tooltips:
+  - id: default-tooltip-example
+    title: Default tooltip example
+    status: previewed
+    preview: gustwave/tooltip/default
+  - id: tooltip-styles-example
+    title: Tooltip styles
+    status: previewed
+    preview: gustwave/tooltip/default
+  - id: tooltip-placement-example
+    title: Placement
+    status: previewed
+    preview: gustwave/tooltip/default
+  - id: tooltip-triggering-example
+    title: Triggering
+    status: previewed
+    preview: gustwave/tooltip/default
+  - id: tooltip-animation-example
+    title: Animation
+    status: composable
+  - id: tooltip-disable-arrow-example
+    title: Disable arrow
+    status: previewed
+    preview: gustwave/tooltip/default
+  components/video:
+  - id: default-video-example
+    title: Video player
+    status: blocked
+    needs: video
+  - id: video-autoplay-example
+    title: Autoplay
+    status: blocked
+    needs: video
+  - id: video-muted-example
+    title: Muted
+    status: blocked
+    needs: video
+  - id: video-width-example
+    title: Sizes > Width
+    status: blocked
+    needs: video
+  - id: video-height-example
+    title: Sizes > Height
+    status: blocked
+    needs: video
+  - id: video-responsive-example
+    title: Sizes > Responsive
+    status: blocked
+    needs: video
+  - id: video-customize-example
+    title: Custom styles
+    status: blocked
+    needs: video
+  forms/checkbox:
+  - id: default-checkbox-example
+    title: Checkbox example
+    status: blocked
+    needs: form
+  - id: disabled-checkbox-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: checkbox-link-example
+    title: Checkbox link
+    status: blocked
+    needs: form
+  - id: checkbox-helper-example
+    title: Helper text
+    status: blocked
+    needs: form
+  - id: checkbox-bordered-example
+    title: Bordered
+    status: blocked
+    needs: form
+  - id: checkbox-list-example
+    title: Checkbox list group
+    status: blocked
+    needs: form
+  - id: checkbox-horizontal-list-example
+    title: Horizontal list group
+    status: blocked
+    needs: form
+  - id: checkbox-dropdown-example
+    title: Checkbox dropdown
+    status: blocked
+    needs: form
+  - id: checkbox-inline-example
+    title: Inline layout
+    status: blocked
+    needs: form
+  - id: checkbox-colors-example
+    title: Colors
+    status: blocked
+    needs: form
+  - id: checkbox-advanced-example
+    title: Advanced layout
+    status: blocked
+    needs: form
+  forms/file-input:
+  - id: default-file-upload-example
+    title: File upload example
+    status: blocked
+    needs: form
+  - id: file-upload-helper-example
+    title: Helper text
+    status: blocked
+    needs: form
+  - id: file-upload-multiple-example
+    title: Multiple files
+    status: blocked
+    needs: form
+  - id: file-upload-sizes-example
+    title: Sizes
+    status: blocked
+    needs: form
+  - id: file-upload-dropzone-example
+    title: Dropzone
+    status: blocked
+    needs: form
+  forms/floating-label:
+  - id: default-floating-label-example
+    title: Floating label example
+    status: blocked
+    needs: form
+  - id: floating-label-disabled-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: floating-label-validation-example
+    title: Validation
+    status: blocked
+    needs: form
+  - id: floating-label-sizes-example
+    title: Sizes
+    status: blocked
+    needs: form
+  - id: floating-label-helper-example
+    title: Helper text
+    status: blocked
+    needs: form
+  forms/input-field:
+  - id: default-input-field-example
+    title: Input fields
+    status: blocked
+    needs: form
+  - id: input-field-sizes-example
+    title: Input sizes
+    status: blocked
+    needs: form
+  - id: input-field-disabled-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: input-field-validation-example
+    title: Validation
+    status: blocked
+    needs: form
+  - id: input-field-group-example
+    title: Input group
+    status: blocked
+    needs: form
+  - id: input-field-helper-example
+    title: Helper text
+    status: blocked
+    needs: form
+  - id: input-field-search-example
+    title: Search input
+    status: blocked
+    needs: form
+  - id: input-field-dropdown-example
+    title: Dropdown input
+    status: blocked
+    needs: form
+  forms/number-input:
+  - id: default-number-input
+    title: Default number input
+    status: blocked
+    needs: form
+  - id: zip-code-number-input
+    title: ZIP code input
+    status: blocked
+    needs: form
+  - id: phone-code-number-input
+    title: Phone number
+    status: blocked
+    needs: form
+  - id: control-number-input
+    title: Control buttons
+    status: blocked
+    needs: form
+  - id: control-icon-number-input
+    title: Control buttons with icon
+    status: blocked
+    needs: form
+  - id: control-icon-number-input-5
+    title: Counter input
+    status: blocked
+    needs: form
+  - id: control-number-input-6
+    title: Currency input
+    status: blocked
+    needs: form
+  - id: zip-code-number-input-7
+    title: Credit card input
+    status: blocked
+    needs: form
+  - id: zip-code-number-input-8
+    title: Pin code input
+    status: blocked
+    needs: form
+  - id: zip-code-number-input-9
+    title: Number input with slider
+    status: blocked
+    needs: form
+  - id: control-number-input-10
+    title: Convert currency
+    status: blocked
+    needs: form
+  - id: control-icon-number-input-11
+    title: Advanced control buttons
+    status: blocked
+    needs: form
+  - id: control-number-min-max-input
+    title: Min and max values
+    status: blocked
+    needs: form
+  forms/phone-input:
+  - id: default-phone-number-input
+    title: Default phone input
+    status: blocked
+    needs: form
+  - id: phone-code-number-input
+    title: Phone input country code
+    status: blocked
+    needs: form
+  - id: floating-label-phone-example
+    title: Floating label input
+    status: blocked
+    needs: form
+  - id: phone-verification-number-input
+    title: Verification code input
+    status: blocked
+    needs: form
+  - id: phone-select-number-input
+    title: Phone number select
+    status: blocked
+    needs: form
+  - id: phone-auth-number-input
+    title: Authentication form
+    status: blocked
+    needs: form
+  - id: phone-code-alt-number-input
+    title: Advanced phone verification
+    status: blocked
+    needs: form
+  forms/radio:
+  - id: default-radio-example
+    title: Radio example
+    status: blocked
+    needs: form
+  - id: radio-disabled-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: radio-link-example
+    title: Radio link
+    status: blocked
+    needs: form
+  - id: radio-helper-example
+    title: Helper text
+    status: blocked
+    needs: form
+  - id: radio-bordered-example
+    title: Bordered
+    status: blocked
+    needs: form
+  - id: radio-list-group-example
+    title: Radio list group
+    status: blocked
+    needs: form
+  - id: radio-horizontal-list-example
+    title: Horizontal list group
+    status: blocked
+    needs: form
+  - id: radio-dropdown-example
+    title: Radio in dropdown
+    status: blocked
+    needs: form
+  - id: radio-inline-example
+    title: Inline layout
+    status: blocked
+    needs: form
+  - id: radio-advanced-example
+    title: Advanced layout
+    status: blocked
+    needs: form
+  - id: radio-colors-example
+    title: Colors
+    status: blocked
+    needs: form
+  forms/range:
+  - id: default-range-example
+    title: Range slider example
+    status: blocked
+    needs: form
+  - id: range-disabled-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: range-minmax-example
+    title: Min and max
+    status: blocked
+    needs: form
+  - id: range-steps-example
+    title: Steps
+    status: blocked
+    needs: form
+  - id: range-sizes-example
+    title: Sizes
+    status: blocked
+    needs: form
+  - id: range-labels-example
+    title: Labels
+    status: blocked
+    needs: form
+  forms/search-input:
+  - id: default-search-bar-example
+    title: Search bar example
+    status: blocked
+    needs: search-input
+  - id: search-bar-dropdown-example
+    title: Search with dropdown
+    status: blocked
+    needs: search-input
+  - id: search-bar-simple-example
+    title: Simple search input
+    status: blocked
+    needs: search-input
+  - id: search-bar-location-example
+    title: Location search
+    status: blocked
+    needs: search-input
+  - id: search-bar-voice-example
+    title: Voice search
+    status: blocked
+    needs: search-input
+  forms/select:
+  - id: default-select-example
+    title: Select input example
+    status: blocked
+    needs: form
+  - id: select-multiple-example
+    title: Multiple options
+    status: blocked
+    needs: form
+  - id: select-size-example
+    title: Size attribute
+    status: blocked
+    needs: form
+  - id: select-disabled-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: select-underline-example
+    title: Underline select
+    status: blocked
+    needs: form
+  - id: select-dropdown-example
+    title: Select with dropdown
+    status: blocked
+    needs: form
+  - id: select-sizes-example
+    title: Sizes
+    status: blocked
+    needs: form
+  forms/textarea:
+  - id: default-textarea-example
+    title: Textarea example
+    status: blocked
+    needs: form
+  - id: textarea-wysiwyg-example
+    title: WYSIWYG Editor
+    status: blocked
+    needs: form
+  - id: textarea-comment-example
+    title: Comment box
+    status: blocked
+    needs: form
+  - id: textarea-chatroom-example
+    title: Chatroom input
+    status: blocked
+    needs: form
+  forms/timepicker:
+  - id: timepicker-default-example
+    title: Default timepicker
+    status: blocked
+    needs: form
+  - id: timepicker-input-group-example
+    title: Timepicker with icon
+    status: blocked
+    needs: form
+  - id: timepicker-dropdown-example
+    title: Timepicker with dropdown
+    status: blocked
+    needs: form
+  - id: timepicker-select-example
+    title: Timepicker with select
+    status: blocked
+    needs: form
+  - id: timepicker-range-selector-example
+    title: Timepicker range selector
+    status: blocked
+    needs: form
+  - id: timepicker-range-selector-dropdown-example
+    title: Timerange with dropdown
+    status: blocked
+    needs: form
+  - id: timepicker-range-selector-dropdown-example-6
+    title: Timerange picker with toggle
+    status: blocked
+    needs: form
+  - id: timepicker-inline-example
+    title: Inline timepicker buttons
+    status: blocked
+    needs: form
+  - id: timepicker-modal-example
+    title: Modal with timepicker
+    status: blocked
+    needs: form
+  - id: timepicker-drawer-example
+    title: Drawer with timepicker
+    status: blocked
+    needs: form
+  forms/toggle:
+  - id: default-toggle-example
+    title: Toggle example
+    status: blocked
+    needs: form
+  - id: toggle-checked-example
+    title: Checked state
+    status: blocked
+    needs: form
+  - id: toggle-disabled-example
+    title: Disabled state
+    status: blocked
+    needs: form
+  - id: toggle-colors-example
+    title: Colors
+    status: blocked
+    needs: form
+  - id: toggle-sizes-example
+    title: Sizes
+    status: blocked
+    needs: form
+  typography/blockquote:
+  - id: default-blockquote-example
+    title: Default blockquote
+    status: blocked
+    needs: blockquote
+  - id: blockquote-background-example
+    title: Solid background
+    status: blocked
+    needs: blockquote
+  - id: blockquote-icon-example
+    title: Blockquote icon
+    status: blocked
+    needs: blockquote
+  - id: blockquote-paragraph-example
+    title: Paragraph context
+    status: blocked
+    needs: blockquote
+  - id: blockquote-testimonial-example
+    title: User testimonial
+    status: blocked
+    needs: blockquote
+  - id: blockquote-review-example
+    title: User Review
+    status: blocked
+    needs: blockquote
+  - id: default-blockquote-left-example
+    title: Alignment > Left
+    status: blocked
+    needs: blockquote
+  - id: default-blockquote-center-example
+    title: Alignment > Center
+    status: blocked
+    needs: blockquote
+  - id: default-blockquote-right-example
+    title: Alignment > Right
+    status: blocked
+    needs: blockquote
+  - id: default-blockquote-small-example
+    title: Sizes > Small
+    status: blocked
+    needs: blockquote
+  - id: default-blockquote-medium-example
+    title: Sizes > Medium
+    status: blocked
+    needs: blockquote
+  - id: default-blockquote-large-example
+    title: Sizes > Large
+    status: blocked
+    needs: blockquote
+  typography/headings:
+  - id: default-heading-example
+    title: Default heading
+    status: previewed
+    preview: gustwave/heading/levels
+  - id: second-level-heading-example
+    title: Second-level heading
+    status: previewed
+    preview: gustwave/heading/levels
+  - id: highlighted-heading-example
+    title: Highlighted heading
+    status: composable
+  - id: heading-mark-example
+    title: Heading mark
+    status: composable
+  - id: heading-gradient-example
+    title: Heading gradient
+    status: composable
+  - id: heading-underline-example
+    title: Heading underline
+    status: composable
+  - id: heading-breadcrumb-example
+    title: Breadcrumb context
+    status: partial
+    needs: breadcrumb
+  - id: heading-badge-example
+    title: Badge context
+    status: composable
+  - id: heading-secondary-example
+    title: Secondary text
+    status: composable
+  - id: heading-one-example
+    title: Sizes > Heading one (H1)
+    status: previewed
+    preview: gustwave/heading/tag_and_size
+  - id: heading-two-example
+    title: Sizes > Heading two (H2)
+    status: previewed
+    preview: gustwave/heading/tag_and_size
+  - id: heading-three-example
+    title: Sizes > Heading three (H3)
+    status: previewed
+    preview: gustwave/heading/tag_and_size
+  - id: heading-four-example
+    title: Sizes > Heading four (H4)
+    status: previewed
+    preview: gustwave/heading/tag_and_size
+  - id: heading-five-example
+    title: Sizes > Heading five (H5)
+    status: previewed
+    preview: gustwave/heading/tag_and_size
+  - id: heading-six-example
+    title: Sizes > Heading six (H6)
+    status: previewed
+    preview: gustwave/heading/tag_and_size
+  typography/hr:
+  - id: default-hr-example
+    title: Default HR
+    status: previewed
+    preview: gustwave/horizontal_line/shapes
+  - id: hr-trimmed-example
+    title: Trimmed
+    status: previewed
+    preview: gustwave/horizontal_line/shapes
+  - id: hr-icon-example
+    title: Icon HR
+    status: composable
+  - id: hr-text-example
+    title: HR with text
+    status: previewed
+    preview: gustwave/horizontal_line/with_text
+  - id: hr-shape-example
+    title: HR shape
+    status: previewed
+    preview: gustwave/horizontal_line/shapes
+  typography/images:
+  - id: default-image-example
+    title: Default image
+    status: tailwind
+  - id: image-caption-example
+    title: Image caption
+    status: tailwind
+  - id: image-rounded-example
+    title: Rounded corners > Border radius
+    status: tailwind
+  - id: image-rounded-example-3
+    title: Rounded corners > Full circle
+    status: tailwind
+  - id: image-shadow-example
+    title: Image shadow
+    status: tailwind
+  - id: image-retina-example
+    title: Retina-ready
+    status: tailwind
+  - id: image-card-example
+    title: Image card
+    status: tailwind
+  - id: image-grayscale-example
+    title: Image effects > Grayscale
+    status: tailwind
+  - id: image-blur-example
+    title: Image effects > Blur
+    status: tailwind
+  - id: image-left-example
+    title: Alignment > Left
+    status: tailwind
+  - id: image-center-example
+    title: Alignment > Center
+    status: tailwind
+  - id: image-right-example
+    title: Alignment > Right
+    status: tailwind
+  - id: image-small-example
+    title: Sizes > Small
+    status: tailwind
+  - id: image-medium-example
+    title: Sizes > Medium
+    status: tailwind
+  - id: image-large-example
+    title: Sizes > Large
+    status: tailwind
+  - id: image-full-example
+    title: Sizes > Full width
+    status: tailwind
+  typography/links:
+  - id: default-link-example
+    title: Default link
+    status: previewed
+    preview: gustwave/link/default
+  - id: link-button-example
+    title: Button
+    status: previewed
+    preview: gustwave/button/as_link
+  - id: paragraph-link-example
+    title: Paragraph
+    status: previewed
+    preview: gustwave/link/paragraph
+  - id: link-icon-example
+    title: Icon link
+    status: previewed
+    preview: gustwave/link/icon
+  - id: link-cta-example
+    title: CTA link
+    status: composable
+  - id: link-card-example
+    title: Card link
+    status: previewed
+    preview: gustwave/card/link
+  - id: link-image-example
+    title: Image link
+    status: composable
+  typography/lists:
+  - id: unordered-list-example
+    title: Unordered list
+    status: blocked
+    needs: list
+  - id: unordered-list-icon-example
+    title: Unordered list > Icons
+    status: blocked
+    needs: list
+  - id: unordered-list-nested-example
+    title: Unordered list > Nested
+    status: blocked
+    needs: list
+  - id: unordered-list-unstyled-example
+    title: Unordered list > Unstyled
+    status: blocked
+    needs: list
+  - id: ordered-list-example
+    title: Ordered list
+    status: blocked
+    needs: list
+  - id: ordered-list-nested-example
+    title: Ordered list > Nested
+    status: blocked
+    needs: list
+  - id: description-list-example
+    title: Description list
+    status: blocked
+    needs: list
+  - id: list-icons-example
+    title: List with icons
+    status: blocked
+    needs: list
+  - id: list-advanced-layout-example
+    title: Advanced layout
+    status: blocked
+    needs: list
+  - id: horizontal-list-example
+    title: Horizontal list
+    status: blocked
+    needs: list
+  typography/paragraphs:
+  - id: default-paragraph-example
+    title: Default paragraph
+    status: previewed
+    preview: gustwave/paragraph/default
+  - id: paragraph-leading-example
+    title: Leading paragraph
+    status: composable
+  - id: paragraph-first-letter-example
+    title: First letter
+    status: composable
+  - id: paragraph-link-example
+    title: Paragraph link
+    status: previewed
+    preview: gustwave/paragraph/inline_elements
+  - id: paragraph-bold-example
+    title: Paragraph bold
+    status: previewed
+    preview: gustwave/paragraph/inline_elements
+  - id: paragraph-underline-example
+    title: Paragraph underline
+    status: previewed
+    preview: gustwave/paragraph/inline_elements
+  - id: paragraph-italic-example
+    title: Paragraph italic
+    status: previewed
+    preview: gustwave/paragraph/inline_elements
+  - id: paragraph-popover-example
+    title: Paragraph popover
+    status: previewed
+    preview: gustwave/paragraph/popover
+  - id: paragraph-one-column-example
+    title: Layout > One column
+    status: previewed
+    preview: gustwave/paragraph/layouts
+  - id: paragraphs-two-columns-example
+    title: Layout > Two columns even
+    status: previewed
+    preview: gustwave/paragraph/layouts
+  - id: paragraphs-three-columns-example
+    title: Layout > Three columns even
+    status: previewed
+    preview: gustwave/paragraph/layouts
+  - id: paragraphs-two-columns-uneven-example
+    title: Layout > Two columns uneven
+    status: previewed
+    preview: gustwave/paragraph/layouts
+  - id: paragraph-left-example
+    title: Text alignment > Left
+    status: previewed
+    preview: gustwave/paragraph/alignment
+  - id: paragraph-center-example
+    title: Text alignment > Center
+    status: previewed
+    preview: gustwave/paragraph/alignment
+  - id: paragraph-right-example
+    title: Text alignment > Right
+    status: previewed
+    preview: gustwave/paragraph/alignment
+  typography/text:
+  - id: font-size-example
+    title: Font size
+    status: tailwind
+  - id: font-weight-example
+    title: Font weight
+    status: tailwind
+  - id: text-color-example
+    title: Text color
+    status: tailwind
+  - id: letter-spacing-example
+    title: Letter spacing
+    status: tailwind
+  - id: text-underline-example
+    title: Text Decoration > Underline
+    status: tailwind
+  - id: text-line-through-example
+    title: Text Decoration > Line through
+    status: tailwind
+  - id: text-uppercase-example
+    title: Text Decoration > Uppercase
+    status: tailwind
+  - id: text-italic-example
+    title: Font style > Italic
+    status: tailwind
+  - id: text-normal-example
+    title: Font style > Normal
+    status: tailwind
+  - id: font-leading-normal-example
+    title: Line Height > Leading normal
+    status: tailwind
+  - id: leading-relaxed-example
+    title: Line Height > Leading relaxed
+    status: tailwind
+  - id: leading-loose-example
+    title: Line Height > Leading loose
+    status: tailwind
+  - id: text-left-example
+    title: Text Align > Left
+    status: tailwind
+  - id: text-center-example
+    title: Text Align > Center
+    status: tailwind
+  - id: text-right-example
+    title: Text Align > Right
+    status: tailwind
+  - id: text-justify-example
+    title: Text Align > Text justify
+    status: tailwind
+  - id: whitespace-normal-example
+    title: Whitespace > Normal
+    status: tailwind
+  - id: whitespace-nowrap-example
+    title: Whitespace > Nowrap
+    status: tailwind
+  - id: whitespace-preline-example
+    title: Whitespace > Pre line
+    status: tailwind
+  - id: text-decoration-style-example
+    title: Text Decoration Style
+    status: tailwind
+  - id: text-opacity-example
+    title: Opacity
+    status: tailwind
+  plugins/charts:
+  - id: default-area-chart-example
+    title: Area chart
+    status: out_of_scope
+  - id: line-chart-example
+    title: Line chart
+    status: out_of_scope
+  - id: column-chart-example
+    title: Column chart
+    status: out_of_scope
+  - id: bar-chart-example
+    title: Bar chart
+    status: out_of_scope
+  - id: pie-chart-example
+    title: Pie chart
+    status: out_of_scope
+  - id: donut-chart-example
+    title: Donut chart
+    status: out_of_scope
+  - id: radial-chart-example
+    title: Radial chart
+    status: out_of_scope
+  - id: data-series-chart
+    title: Options > Data series
+    status: out_of_scope
+  - id: labels-example-chart
+    title: Options > Labels
+    status: out_of_scope
+  - id: legend-chart-example
+    title: Options > Legends
+    status: out_of_scope
+  - id: tooltip-chart-example
+    title: Options > Tooltip
+    status: out_of_scope
+  - id: grid-chart-example
+    title: Options > Grid
+    status: out_of_scope
+  - id: data-labels-chart-example
+    title: Options > Data labels
+    status: out_of_scope
+  - id: default-area-chart
+    title: Options > Format data
+    status: out_of_scope
+  - id: size-example-chart
+    title: Options > Chart size
+    status: out_of_scope
+  plugins/datatables:
+  - id: default-datatable-example
+    title: Default datatable
+    status: out_of_scope
+  - id: search-datatable-example
+    title: Table search
+    status: out_of_scope
+  - id: filter-datatable-example
+    title: Filtering data
+    status: out_of_scope
+  - id: sorting-datatable-example
+    title: Sorting data
+    status: out_of_scope
+  - id: pagination-datatable-example
+    title: Table pagination
+    status: out_of_scope
+  - id: selection-datatable-example
+    title: Selecting rows
+    status: out_of_scope
+  - id: export-datatable-example
+    title: Export files
+    status: out_of_scope
+  plugins/wysiwyg:
+  - id: default-wysiwyg-example
+    title: Default text editor
+    status: out_of_scope
+  - id: default-wysiwyg-text-example
+    title: Text formatting
+    status: out_of_scope
+  - id: default-wysiwyg-alignment-example
+    title: Text alignment
+    status: out_of_scope
+  - id: default-wysiwyg-typography-example
+    title: Typography elements
+    status: out_of_scope
+  - id: default-wysiwyg-links-example
+    title: Configuring links
+    status: out_of_scope
+  - id: default-wysiwyg-image-example
+    title: Using images
+    status: out_of_scope
+  - id: default-wysiwyg-video-example
+    title: Adding videos
+    status: out_of_scope
+  - id: default-wysiwyg-tables-example
+    title: Editing tables
+    status: out_of_scope
+  - id: default-wysiwyg-history-example
+    title: Undo and redo
+    status: out_of_scope
+  - id: default-wysiwyg-export-example
+    title: Exporting data
+    status: out_of_scope

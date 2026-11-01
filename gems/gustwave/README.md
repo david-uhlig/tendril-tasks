@@ -151,6 +151,12 @@ To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE`, then run `bin/import-icon
 
 `--source URL` imports from another GitHub tree URL.
 
+### Flowbite coverage
+
+`lookbook/flowbite.yml` lists every example in Flowbite's docs and how far Gustwave covers it. `previewed` means a scenario demonstrates it, `composable` that existing components could build it, and `tailwind` that it needs plain Tailwind classes only. `feature_gap`, `partial` and `blocked` say what's missing in `needs`, and `out_of_scope` marks the third-party plugin pages. The file isn't shipped with the gem.
+
+To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE` in `script/flowbite_inventory.rb`, run `bin/flowbite-inventory --dry-run` to review the changes, then run it for real and classify what it added. The specs fail until every example has a status.
+
 ## License
 
 Gustwave is released under the [MIT License](LICENSE.txt). It implements [Flowbite](https://flowbite.com/docs/getting-started/license/)'s open source components and ships Flowbite's icons, both also under the MIT License.
