@@ -12,6 +12,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
   # another method than the constructor.
   setups = {
     Gustwave::DismissButton => { args: [ "target" ] },
+    Gustwave::Drawer => { selected_elsewhere: %i[action edge] },
+    Gustwave::DrawerHeader => { kwargs: { drawer_id: "drawer" } },
     Gustwave::Dropdown => { forwards: %i[placement trigger_event] },
     Gustwave::Dropdowns::Menus::Base => { kwargs: { id: "menu" } },
     Gustwave::Dropdowns::Menus::Generic => { kwargs: { id: "menu" } },
