@@ -2,34 +2,34 @@
 
 module Gustwave
   # Use Timeline to render a list of events along a line, as in Flowbite's
-  # timeline. Each item has optional slots for a marker, a date, a title and a
-  # body, in that order. Block content renders after them, e.g. a call to action.
-  #
-  # An item shows the date before the title. To put the title first, as some of
-  # Flowbite's examples do, pass the date and title as block content instead.
+  # timeline. The timeline draws the line and places each item's marker. What an
+  # item shows is up to its block, composed from other components.
   #
   # === Basic Usage
   #
   #   <%= render Gustwave::Timeline.new do |timeline| %>
-  #     <% timeline.with_item do |item| %>
-  #       <% item.with_date "February 2022" %>
-  #       <% item.with_title "Application UI code in Tailwind CSS" %>
-  #       <% item.with_body "Get access to over 20+ pages." %>
+  #     <% timeline.with_item do %>
+  #       <%= time_tag Date.new(2022, 2, 1), "February 2022", class: "block mb-1 text-sm leading-none text-gray-400 dark:text-gray-500" %>
+  #       <%= render Gustwave::Heading.new("Application UI code in Tailwind CSS", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Paragraph.new("Get access to over 20+ pages.") %>
   #     <% end %>
   #   <% end %>
   #
-  # === Icon Marker, Badge and Call to Action
+  # === Markers
+  #
+  # An item without a marker shows a dot. Set an icon or an image as its marker
+  # with +with_marker_icon+ or +with_marker_image+:
   #
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <% item.with_date Date.new(2022, 1, 13) %>
-  #       <% item.with_title(class: "flex items-center mb-1") do %>
-  #         Flowbite Application UI v2.0.0
-  #         <%= render Gustwave::Badge.new("Latest", class: "ms-3") %>
+  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg") %>
+  #     <% end %>
+  #     <% timeline.with_item do |item| %>
+  #       <% item.with_marker_image "/avatar.png", alt: "Bonnie Green" %>
+  #       <%= render Gustwave::Card.new(class: "max-w-none") do %>
+  #         Bonnie moved Jese Leos to Funny Group
   #       <% end %>
-  #       <% item.with_body "Get started with dozens of web components." %>
-  #       <%= render Gustwave::Buttons::Default.new("Download ZIP", tag: :a, href: "#", color: :alternative) %>
   #     <% end %>
   #   <% end %>
   #
@@ -40,19 +40,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new(orientation: :horizontal) do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <% item.with_title "Flowbite Library v1.0.0" %>
-  #     <% end %>
-  #   <% end %>
-  #
-  # === Activity Log
-  #
-  # Flowbite's activity log is a composition: image markers, with a
-  # Gustwave::Card as block content.
-  #
-  #   <% timeline.with_item do |item| %>
-  #     <% item.with_marker_image "/avatar.png", alt: "Bonnie Green" %>
-  #     <%= render Gustwave::Card.new(class: "max-w-none") do %>
-  #       Bonnie moved Jese Leos to Funny Group
+  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg") %>
   #     <% end %>
   #   <% end %>
   #
@@ -85,11 +73,6 @@ module Gustwave
       part :track
       part :connector
       part :content
-      part :date, "block mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"
-      # Gustwave::Heading drops its colors with size: :none, so they are here
-      part :title, "text-lg font-semibold text-gray-900 dark:text-white"
-      # Spaces the body from any block content after it
-      part :body, "mb-4 last:mb-0 text-base font-normal"
 
       variant :orientation, default: :vertical, values: {
         vertical: {
@@ -120,30 +103,6 @@ module Gustwave
         }
       }
 
-      # @param value [Date, Time, String, nil] the date. A date or time is localized and sets +datetime+. Pass a block for other content.
-      # @param datetime [String, nil] the +datetime+ attribute.
-      # @param options [Hash] HTML attributes for the +<time>+ element.
-      renders_one_extensible :date, ->(value = nil, datetime: nil, **options, &block) {
-        if value.respond_to?(:iso8601)
-          datetime ||= value.iso8601
-          value = I18n.l(value)
-        end
-        tag.time(value || capture(&block), datetime:, **attributes_for(:date, options))
-      }
-
-      # @param text [String, nil] the title. Pass a block for other content.
-      # @param tag [Symbol] the heading level.
-      # @param options [Hash] the arguments of Gustwave::Heading.
-      renders_one_extensible :title, ->(text = nil, tag: :h3, **options) {
-        Gustwave::Heading.new(text, tag:, size: :none, **attributes_for(:title, options))
-      }
-
-      # @param text [String, nil] the body. Pass a block for other content.
-      # @param options [Hash] the arguments of Gustwave::Paragraph.
-      renders_one_extensible :body, ->(text = nil, **options) {
-        Gustwave::Paragraph.new(text, **attributes_for(:body, options))
-      }
-
       # @param orientation [Symbol] +:vertical+ (default) or +:horizontal+. Set by Gustwave::Timeline.
       # @param options [Hash] HTML attributes for the +<li>+ element.
       def initialize(orientation: DEFAULT, **options)
@@ -164,13 +123,13 @@ module Gustwave
       private
 
       def vertical
-        safe_join([ marker_or_dot, details ])
+        safe_join([ marker_or_dot, content ].compact)
       end
 
       def horizontal
         safe_join([
           tag.div(safe_join([ marker_or_dot, tag.div(class: classes(:connector)) ]), class: classes(:track)),
-          tag.div(details, class: classes(:content))
+          tag.div(content, class: classes(:content))
         ])
       end
 
@@ -178,10 +137,6 @@ module Gustwave
         return tag.span(marker, class: classes(:marker)) if marker?
 
         tag.div(class: classes(:dot), aria: { hidden: true })
-      end
-
-      def details
-        safe_join([ date, title, body, content ].compact)
       end
     end
   end

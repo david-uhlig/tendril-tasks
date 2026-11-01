@@ -7,14 +7,10 @@ RSpec.describe "Gustwave::Timeline style snapshot", type: :component do
 
   style_snapshot "Gustwave::Timeline" do
     items = ->(timeline) do
-      timeline.with_item do |item|
-        item.with_date "February 2022"
-        item.with_title "Without a marker"
-        item.with_body "Body"
-      end
+      timeline.with_item { "Without a marker" }
       timeline.with_item do |item|
         item.with_marker_icon :calendar_month
-        item.with_title "With a marker"
+        "With a marker"
       end
     end
 

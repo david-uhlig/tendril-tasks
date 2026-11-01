@@ -4,16 +4,12 @@ orientation orientation=:vertical:
 - 'li: last:mb-0 mb-10 ms-4'
 - 'div aria-hidden="true": -start-1.5 absolute bg-gray-200 border border-white dark:bg-gray-700
   dark:border-gray-900 h-3 mt-1.5 rounded-full w-3'
-- 'time: block dark:text-gray-500 font-normal leading-none mb-1 text-gray-400 text-sm'
-- 'h3 id="without-a-marker": dark:text-white font-semibold text-gray-900 text-lg'
-- 'p: dark:text-gray-400 font-normal last:mb-0 mb-4 text-base text-gray-500'
 - 'li: last:mb-0 mb-10 ms-6'
 - 'span: -start-3 absolute bg-blue-100 dark:bg-blue-900 dark:ring-gray-900 flex h-6
   items-center justify-center ring-8 ring-white rounded-full w-6'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
   xmlns="http://www.w3.org/2000/svg": dark:text-blue-300 h-2.5 text-blue-800 w-2.5'
 - path clip-rule="evenodd" fill-rule="evenodd"
-- 'h3 id="with-a-marker": dark:text-white font-semibold text-gray-900 text-lg'
 orientation orientation=:horizontal:
 - 'ol: items-center sm:flex'
 - 'li: mb-6 relative sm:mb-0'
@@ -22,9 +18,6 @@ orientation orientation=:horizontal:
   h-3 rounded-full shrink-0 w-3 z-10'
 - 'div: bg-gray-200 dark:bg-gray-700 h-0.5 hidden sm:flex w-full'
 - 'div: mt-3 sm:pe-8'
-- 'time: block dark:text-gray-500 font-normal leading-none mb-1 text-gray-400 text-sm'
-- 'h3 id="without-a-marker": dark:text-white font-semibold text-gray-900 text-lg'
-- 'p: dark:text-gray-400 font-normal last:mb-0 mb-4 text-base text-gray-500'
 - 'li: mb-6 relative sm:mb-0'
 - 'div: flex h-6 items-center'
 - 'span: bg-blue-100 dark:bg-blue-900 dark:ring-gray-900 flex h-6 items-center justify-center
@@ -34,4 +27,3 @@ orientation orientation=:horizontal:
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'div: bg-gray-200 dark:bg-gray-700 h-0.5 hidden sm:flex w-full'
 - 'div: mt-3 sm:pe-8'
-- 'h3 id="with-a-marker": dark:text-white font-semibold text-gray-900 text-lg'
