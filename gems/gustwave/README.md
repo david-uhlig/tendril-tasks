@@ -119,6 +119,12 @@ The specs run against a minimal Rails application in `spec/dummy`. From the Tend
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 
+### Previewing components
+
+Start the host application in development and open `/lookbook` to browse every preview with its source, notes and params. Set the `theme` display option to `dark` to check the `dark:` variants.
+
+Lookbook belongs to the host application in this repository and isn't a dependency of the gem, so previews stay plain `ViewComponent::Preview` classes. `/rails/view_components` keeps working without it.
+
 ### Importing icons
 
 `bin/import-icon` copies [Flowbite icons](https://github.com/themesberg/flowbite-icons) into `app/assets/images/gustwave/icons` and converts them to Gustwave's form. Set `GITHUB_TOKEN` (or log in with `gh`) to avoid GitHub's rate limit.
