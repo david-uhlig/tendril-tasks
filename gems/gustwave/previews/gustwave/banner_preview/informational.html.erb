@@ -1,0 +1,9 @@
+<%= render Gustwave::Banner.new(align: :start) do |banner| %>
+  <% banner.with_actions do %>
+    <%= render Gustwave::Buttons::Default.new("Get started", tag: :a, href: "#", size: :xs) %>
+  <% end %>
+
+  <% banner.with_dismiss_button %>
+  <%= render Gustwave::Heading.new("Integration is the key", tag: :h2, class: "mb-1 text-base font-semibold") %>
+  <%= render Gustwave::Paragraph.new("You can integrate Flowbite with many tools to make your website faster.", class: "text-sm") %>
+<% end %>
