@@ -132,6 +132,7 @@ module Gustwave
         ---
         title: #{File.basename(page).tr("-", " ").capitalize}
         ---
+
         <%= render "lookbook/flowbite/page", key: "#{page}" %>
       ERB
     end

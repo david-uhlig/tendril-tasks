@@ -148,6 +148,7 @@ RSpec.describe Gustwave::FlowbiteInventory do
           ---
           title: Device mockups
           ---
+
           <%= render "lookbook/flowbite/page", key: "components/device-mockups" %>
         ERB
       end
