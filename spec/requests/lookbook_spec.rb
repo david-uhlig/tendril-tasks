@@ -1,8 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "Lookbook", type: :request do
-  it "serves the explorer" do
+  it "lands on the Flowbite coverage overview" do
     get "/lookbook"
+
+    expect(response).to redirect_to("/lookbook/pages/coverage")
+
+    follow_redirect!
 
     expect(response).to have_http_status(:ok)
   end
