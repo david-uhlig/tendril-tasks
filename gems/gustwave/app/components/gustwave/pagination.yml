@@ -1,0 +1,9 @@
+en:
+  label: "Page navigation"
+  previous: "Previous"
+  next: "Next"
+
+de:
+  label: "Seitennavigation"
+  previous: "Zurück"
+  next: "Weiter"
