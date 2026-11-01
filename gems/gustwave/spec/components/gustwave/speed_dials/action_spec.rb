@@ -107,6 +107,8 @@ RSpec.describe Gustwave::SpeedDials::Action, type: :component do
     render_inline(described_class.new("Edit", icon: :edit))
 
     expect(page).to have_selector("button svg[aria-hidden='true']")
+    expect(page).to have_selector("button svg.size-5")
+    expect(page).not_to have_selector("button svg.me-1\\.5")
   end
 
   it "renders a square shape" do

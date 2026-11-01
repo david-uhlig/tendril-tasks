@@ -1,0 +1,6 @@
+<%= render Gustwave::SpeedDial.new(position: position.to_sym, direction: direction.to_sym, trigger_event: trigger_event.to_sym, shape: shape.to_sym, label_display: label_display.to_sym) do |dial| %>
+  <% dial.with_action "Edit", icon: :edit %>
+  <% dial.with_action "Share", icon: :link %>
+  <% dial.with_action "Copy", icon: :clipboard_list %>
+  <% dial.with_action "Delete", icon: :trash_bin %>
+<% end %>

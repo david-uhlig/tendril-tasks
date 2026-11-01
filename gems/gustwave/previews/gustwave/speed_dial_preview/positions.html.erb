@@ -1,0 +1,8 @@
+<% %i[bottom_right bottom_left top_right top_left].each do |position| %>
+  <%= render Gustwave::SpeedDial.new(position:) do |dial| %>
+    <% dial.with_action "Edit", icon: :edit %>
+    <% dial.with_action "Share", icon: :link %>
+    <% dial.with_action "Copy", icon: :clipboard_list %>
+    <% dial.with_action "Delete", icon: :trash_bin %>
+  <% end %>
+<% end %>
