@@ -7,8 +7,8 @@ RSpec.describe "Gustwave::SpeedDial style snapshot", type: :component do
 
   style_snapshot "Gustwave::SpeedDial" do
     actions = ->(dial) do
-      dial.with_action("Edit", icon: :edit)
-      dial.with_action("Share", icon: :link)
+      dial.with_action("Share", icon: :share_nodes)
+      dial.with_action("Print", icon: :printer)
     end
 
     group :placement, position: %i[none bottom_right bottom_left top_right top_left],

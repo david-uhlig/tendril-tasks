@@ -32,7 +32,7 @@ module Gustwave
         @button = Gustwave::Button.for(@theme).new(label, pill: @round, size: :none, **attrs)
         return if content.present?
 
-        @button.with_leading_visual_icon(@icon, class: "size-5 transition-transform group-hover:rotate-45")
+        @button.with_leading_visual_icon(@icon, class: "size-8 transition-transform group-hover:rotate-45")
       end
 
       def call

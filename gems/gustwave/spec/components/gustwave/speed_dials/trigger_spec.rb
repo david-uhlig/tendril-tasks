@@ -25,7 +25,7 @@ RSpec.describe Gustwave::SpeedDials::Trigger, type: :component do
   it "renders the plus icon with the rotate-on-hover classes" do
     render_inline(described_class.new)
 
-    expect(page).to have_selector("button > svg.size-5.group-hover\\:rotate-45")
+    expect(page).to have_selector("button > svg.size-8.group-hover\\:rotate-45")
   end
 
   it "renders the block content instead of the icon" do

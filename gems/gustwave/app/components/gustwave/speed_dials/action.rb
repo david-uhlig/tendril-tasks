@@ -16,6 +16,7 @@ module Gustwave
     #
     # @param text [String] the label of the action. Required.
     # @param icon [Symbol, nil] the name of the icon. Ignored when block content is given.
+    # @param icon_theme [Symbol] the theme of the icon, +:solid+ (default) or +:outline+.
     # @param tag [Symbol] the HTML tag to render, :button or :a. Defaults to :button.
     # @param color [Symbol] the color of the button, :default or :none. :none renders no base styles.
     # @param shape [Symbol] the shape of the button, :round or :square.
@@ -40,11 +41,12 @@ module Gustwave
       part :inside_label, "block mb-px text-xs font-medium"
       part :outside_label, "absolute text-sm font-medium whitespace-nowrap"
 
-      # Where the label is shown
+      # Where the label is shown. The icons are padded within their viewBox, so
+      # these sizes draw them as large as Flowbite draws its tighter icons.
       variant :label_display, default: :tooltip, values: {
-        tooltip: { root: "size-13",          icon: "size-5" },
-        inside:  { root: "size-14",          icon: "size-4 mb-1" },
-        outside: { root: "relative size-13", icon: "size-5" }
+        tooltip: { root: "size-13",          icon: "size-6.5" },
+        inside:  { root: "size-14",          icon: "size-5.5 mb-1" },
+        outside: { root: "relative size-13", icon: "size-6.5" }
       }
 
       # The side of the label: the tooltip's placement, or the side of the outside label
@@ -57,6 +59,7 @@ module Gustwave
 
       def initialize(text,
                      icon: nil,
+                     icon_theme: :solid,
                      tag: DEFAULT,
                      color: DEFAULT,
                      shape: DEFAULT,
@@ -65,6 +68,7 @@ module Gustwave
                      **options)
         @text = text
         @icon = icon
+        @icon_theme = icon_theme
 
         select_options(tag:, color:, shape:, label_display:, label_placement:)
         @html_tag = option_value(:tag)
@@ -86,7 +90,7 @@ module Gustwave
 
       private
 
-      attr_reader :text, :icon, :html_tag, :label_display, :label_placement, :options, :tooltip
+      attr_reader :text, :icon, :icon_theme, :html_tag, :label_display, :label_placement, :options, :tooltip
 
       # The +type+ attribute is only set for the button tag. A caller's +type+ wins.
       def trigger_attributes
@@ -102,7 +106,7 @@ module Gustwave
         return content if content.present?
         return if icon.blank?
 
-        render Gustwave::Icon.new(icon, class: classes(:icon), aria: { hidden: true })
+        render Gustwave::Icon.new(icon, theme: icon_theme, class: classes(:icon), aria: { hidden: true })
       end
 
       def label_content
