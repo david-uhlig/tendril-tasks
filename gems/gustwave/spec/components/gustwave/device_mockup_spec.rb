@@ -63,11 +63,17 @@ RSpec.describe Gustwave::DeviceMockup, type: :component do
     expect(page).to have_selector("#{piece[:action_button]}.bg-gray-300")
   end
 
-  it "renders no colour outside the screen for the none color" do
+  it "keeps the geometry and renders no colour for the none color" do
     render_inline(described_class.new(color: :none))
 
     expect(page).to have_selector("div[class*='border-[14px]']")
-    expect(page).to have_no_selector("div:not(.overflow-hidden)[class*='bg-gray-'], div[class*='border-gray-']")
+    expect(page).to have_no_selector("div[class*='bg-gray-'], div[class*='border-gray-']")
+  end
+
+  it "leaves the screen's background to the caller's content" do
+    render_inline(described_class.new)
+
+    expect(page).to have_no_selector("div.overflow-hidden[class*='bg-']")
   end
 
   it "renders only the frame and screen for the none device" do

@@ -66,23 +66,23 @@ module Gustwave
     variant :device, default: :phone, values: {
       phone: {
         frame: "border-[14px] rounded-[2.5rem] h-[600px] w-[300px]",
-        screen: "rounded-[2rem] w-[272px] h-[572px] bg-white dark:bg-gray-800"
+        screen: "rounded-[2rem] w-[272px] h-[572px]"
       },
       iphone: {
         frame: "border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl",
-        screen: "rounded-[2rem] w-[272px] h-[572px] bg-white dark:bg-gray-800"
+        screen: "rounded-[2rem] w-[272px] h-[572px]"
       },
       android: {
         frame: "border-[14px] rounded-xl h-[600px] w-[300px] shadow-xl",
-        screen: "rounded-xl w-[272px] h-[572px] bg-white dark:bg-gray-800"
+        screen: "rounded-xl w-[272px] h-[572px]"
       },
       tablet: {
         frame: "border-[14px] rounded-[2.5rem] h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]",
-        screen: "rounded-[2rem] h-[426px] md:h-[654px] bg-white dark:bg-gray-800"
+        screen: "rounded-[2rem] h-[426px] md:h-[654px]"
       },
       laptop: {
         frame: "border-[8px] rounded-t-xl h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px]",
-        screen: "rounded-lg h-[156px] md:h-[278px] bg-white dark:bg-gray-800"
+        screen: "rounded-lg h-[156px] md:h-[278px]"
       },
       desktop: {
         frame: "border-[16px] rounded-t-xl h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px]",
