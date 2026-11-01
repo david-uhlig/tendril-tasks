@@ -42,7 +42,7 @@ module Gustwave
              "dark:hover:text-white dark:hover:bg-gray-600 " \
              "disabled:text-gray-400 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
 
-        part :icon, "m-0 w-5 h-5"
+        part :icon, "w-5 h-5"
 
         def initialize(attribute,
                        icon_or_text: nil,
