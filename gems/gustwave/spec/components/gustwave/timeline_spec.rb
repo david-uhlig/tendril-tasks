@@ -20,6 +20,13 @@ RSpec.describe Gustwave::Timeline, type: :component do
       expect(page).not_to have_selector("ol.border-s")
     end
 
+    it "gives horizontal items equal columns, top aligned" do
+      render_inline(described_class.new(orientation: :horizontal)) { |timeline| timeline.with_item { "Event" } }
+
+      expect(page).to have_selector("li.sm\\:flex-1")
+      expect(page).not_to have_selector("ol.items-center")
+    end
+
     it "renders the track, connector and content wrapper for a horizontal item" do
       render_inline(described_class.new(orientation: :horizontal)) do |timeline|
         timeline.with_item do |item|

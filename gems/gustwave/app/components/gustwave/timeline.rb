@@ -5,11 +5,14 @@ module Gustwave
   # timeline. The timeline draws the line and places each item's marker. What an
   # item shows is up to its block, composed from other components.
   #
+  # A vertical item's dot lines up with a first line of text 24px tall. Keep a
+  # date in that first line inline, as below, not +block+ with +leading-none+.
+  #
   # === Basic Usage
   #
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do %>
-  #       <%= time_tag Date.new(2022, 2, 1), "February 2022", class: "block mb-1 text-sm leading-none text-gray-400 dark:text-gray-500" %>
+  #       <%= time_tag Date.new(2022, 2, 1), "February 2022", class: "text-sm font-normal leading-none text-gray-400 dark:text-gray-500" %>
   #       <%= render Gustwave::Heading.new("Application UI code in Tailwind CSS", tag: :h3, size: :xs, class: "text-lg") %>
   #       <%= render Gustwave::Paragraph.new("Get access to over 20+ pages.") %>
   #     <% end %>
@@ -49,7 +52,7 @@ module Gustwave
   class Timeline < Gustwave::Component
     variant :orientation, default: :vertical, values: {
       vertical: "relative border-s border-gray-200 dark:border-gray-700",
-      horizontal: "items-center sm:flex"
+      horizontal: "sm:flex"
     }
 
     # @param options [Hash] the arguments of Gustwave::Timeline::Item
@@ -81,7 +84,8 @@ module Gustwave
           marker: "absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
         },
         horizontal: {
-          root: "relative mb-6 sm:mb-0",
+          # Equal columns, so items with more text don't squeeze the others
+          root: "relative mb-6 last:mb-0 sm:mb-0 sm:flex-1",
           # As tall as a marker, so items with a dot line up with items with a marker
           track: "flex items-center h-6",
           dot: "z-10 w-3 h-3 bg-gray-200 rounded-full border border-white dark:border-gray-900 dark:bg-gray-700 shrink-0",

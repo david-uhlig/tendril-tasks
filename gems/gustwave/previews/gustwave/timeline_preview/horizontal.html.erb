@@ -13,9 +13,10 @@
     <%= render Gustwave::Paragraph.new("Get started with dozens of web components and interactive elements.") %>
   <% end %>
 
-  <% timeline.with_item do %>
+  <% timeline.with_item do |item| %>
+    <% item.with_marker_icon :calendar_month %>
     <%= render Gustwave::Heading.new("Flowbite Library v1.3.0", tag: :h3, size: :xs, class: "text-lg") %>
     <%= time_tag Date.new(2022, 1, 5), "Released on January 5, 2022", class: "block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" %>
-    <%= render Gustwave::Paragraph.new("This item has no marker, so it shows a dot.") %>
+    <%= render Gustwave::Paragraph.new("Get started with dozens of web components and interactive elements.") %>
   <% end %>
 <% end %>

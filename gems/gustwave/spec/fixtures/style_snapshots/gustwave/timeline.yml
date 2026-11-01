@@ -11,14 +11,14 @@ orientation orientation=:vertical:
   xmlns="http://www.w3.org/2000/svg": dark:text-blue-300 h-2.5 text-blue-800 w-2.5'
 - path clip-rule="evenodd" fill-rule="evenodd"
 orientation orientation=:horizontal:
-- 'ol: items-center sm:flex'
-- 'li: mb-6 relative sm:mb-0'
+- 'ol: sm:flex'
+- 'li: last:mb-0 mb-6 relative sm:flex-1 sm:mb-0'
 - 'div: flex h-6 items-center'
 - 'div aria-hidden="true": bg-gray-200 border border-white dark:bg-gray-700 dark:border-gray-900
   h-3 rounded-full shrink-0 w-3 z-10'
 - 'div: bg-gray-200 dark:bg-gray-700 h-0.5 hidden sm:flex w-full'
 - 'div: mt-3 sm:pe-8'
-- 'li: mb-6 relative sm:mb-0'
+- 'li: last:mb-0 mb-6 relative sm:flex-1 sm:mb-0'
 - 'div: flex h-6 items-center'
 - 'span: bg-blue-100 dark:bg-blue-900 dark:ring-gray-900 flex h-6 items-center justify-center
   ring-0 ring-white rounded-full shrink-0 sm:ring-8 w-6 z-10'
