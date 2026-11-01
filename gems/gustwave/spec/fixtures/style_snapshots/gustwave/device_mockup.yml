@@ -1,0 +1,225 @@
+---
+look device=:phone color=:dark:
+- div
+- 'div: bg-gray-800 border-[14px] border-gray-800 dark:border-gray-800 h-[600px] mx-auto
+  relative rounded-[2.5rem] w-[300px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[32px] rounded-s-lg
+  top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-[2rem] w-[272px]'
+look device=:phone color=:light:
+- div
+- 'div: bg-gray-300 border-[14px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[600px] mx-auto relative rounded-[2.5rem] w-[300px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[32px] rounded-s-lg
+  top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-[2rem] w-[272px]'
+look device=:phone color=:none:
+- div
+- 'div: border-[14px] h-[600px] mx-auto relative rounded-[2.5rem] w-[300px]'
+- 'div: -start-[17px] absolute h-[32px] rounded-s-lg top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute h-[64px] rounded-e-lg top-[142px] w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-[2rem] w-[272px]'
+look device=:iphone color=:dark:
+- div
+- 'div: bg-gray-800 border-[14px] border-gray-800 dark:border-gray-800 h-[600px] mx-auto
+  relative rounded-[2.5rem] shadow-xl w-[300px]'
+- 'div: -translate-x-1/2 absolute bg-gray-800 dark:bg-gray-800 h-[18px] left-1/2 rounded-b-[1rem]
+  top-0 w-[148px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-[2rem] w-[272px]'
+look device=:iphone color=:light:
+- div
+- 'div: bg-gray-300 border-[14px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[600px] mx-auto relative rounded-[2.5rem] shadow-xl w-[300px]'
+- 'div: -translate-x-1/2 absolute bg-gray-300 dark:bg-gray-800 h-[18px] left-1/2 rounded-b-[1rem]
+  top-0 w-[148px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-[2rem] w-[272px]'
+look device=:iphone color=:none:
+- div
+- 'div: border-[14px] h-[600px] mx-auto relative rounded-[2.5rem] shadow-xl w-[300px]'
+- 'div: -translate-x-1/2 absolute h-[18px] left-1/2 rounded-b-[1rem] top-0 w-[148px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute h-[64px] rounded-e-lg top-[142px] w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-[2rem] w-[272px]'
+look device=:android color=:dark:
+- div
+- 'div: bg-gray-800 border-[14px] border-gray-800 dark:border-gray-800 h-[600px] mx-auto
+  relative rounded-xl shadow-xl w-[300px]'
+- 'div: -translate-x-1/2 absolute bg-gray-800 dark:bg-gray-800 h-[18px] left-1/2 rounded-b-[1rem]
+  top-0 w-[148px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[32px] rounded-s-lg
+  top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-xl w-[272px]'
+look device=:android color=:light:
+- div
+- 'div: bg-gray-300 border-[14px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[600px] mx-auto relative rounded-xl shadow-xl w-[300px]'
+- 'div: -translate-x-1/2 absolute bg-gray-300 dark:bg-gray-800 h-[18px] left-1/2 rounded-b-[1rem]
+  top-0 w-[148px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[32px] rounded-s-lg
+  top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-xl w-[272px]'
+look device=:android color=:none:
+- div
+- 'div: border-[14px] h-[600px] mx-auto relative rounded-xl shadow-xl w-[300px]'
+- 'div: -translate-x-1/2 absolute h-[18px] left-1/2 rounded-b-[1rem] top-0 w-[148px]'
+- 'div: -start-[17px] absolute h-[32px] rounded-s-lg top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute h-[64px] rounded-e-lg top-[142px] w-[3px]'
+- 'div: h-[572px] overflow-hidden rounded-xl w-[272px]'
+look device=:tablet color=:dark:
+- div
+- 'div: bg-gray-800 border-[14px] border-gray-800 dark:border-gray-800 h-[454px] max-w-[341px]
+  md:h-[682px] md:max-w-[512px] mx-auto relative rounded-[2.5rem]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[32px] rounded-s-lg
+  top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-800 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[426px] md:h-[654px] overflow-hidden rounded-[2rem]'
+look device=:tablet color=:light:
+- div
+- 'div: bg-gray-300 border-[14px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px] mx-auto relative rounded-[2.5rem]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[32px] rounded-s-lg
+  top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[46px] rounded-s-lg
+  top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute bg-gray-300 dark:bg-gray-800 h-[64px] rounded-e-lg top-[142px]
+  w-[3px]'
+- 'div: h-[426px] md:h-[654px] overflow-hidden rounded-[2rem]'
+look device=:tablet color=:none:
+- div
+- 'div: border-[14px] h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px] mx-auto
+  relative rounded-[2.5rem]'
+- 'div: -start-[17px] absolute h-[32px] rounded-s-lg top-[72px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[124px] w-[3px]'
+- 'div: -start-[17px] absolute h-[46px] rounded-s-lg top-[178px] w-[3px]'
+- 'div: -end-[17px] absolute h-[64px] rounded-e-lg top-[142px] w-[3px]'
+- 'div: h-[426px] md:h-[654px] overflow-hidden rounded-[2rem]'
+look device=:laptop color=:dark:
+- div
+- 'div: bg-gray-800 border-[8px] border-gray-800 dark:border-gray-800 h-[172px] max-w-[301px]
+  md:h-[294px] md:max-w-[512px] mx-auto relative rounded-t-xl'
+- 'div: h-[156px] md:h-[278px] overflow-hidden rounded-lg'
+- 'div: bg-gray-900 dark:bg-gray-700 h-[17px] max-w-[351px] md:h-[21px] md:max-w-[597px]
+  mx-auto relative rounded-b-xl rounded-t-sm'
+- 'div: -translate-x-1/2 absolute bg-gray-800 h-[5px] left-1/2 md:h-[8px] md:w-[96px]
+  rounded-b-xl top-0 w-[56px]'
+look device=:laptop color=:light:
+- div
+- 'div: bg-gray-300 border-[8px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px] mx-auto relative rounded-t-xl'
+- 'div: h-[156px] md:h-[278px] overflow-hidden rounded-lg'
+- 'div: bg-gray-400 dark:bg-gray-700 h-[17px] max-w-[351px] md:h-[21px] md:max-w-[597px]
+  mx-auto relative rounded-b-xl rounded-t-sm'
+- 'div: -translate-x-1/2 absolute bg-gray-300 dark:bg-gray-800 h-[5px] left-1/2 md:h-[8px]
+  md:w-[96px] rounded-b-xl top-0 w-[56px]'
+look device=:laptop color=:none:
+- div
+- 'div: border-[8px] h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px] mx-auto
+  relative rounded-t-xl'
+- 'div: h-[156px] md:h-[278px] overflow-hidden rounded-lg'
+- 'div: h-[17px] max-w-[351px] md:h-[21px] md:max-w-[597px] mx-auto relative rounded-b-xl
+  rounded-t-sm'
+- 'div: -translate-x-1/2 absolute h-[5px] left-1/2 md:h-[8px] md:w-[96px] rounded-b-xl
+  top-0 w-[56px]'
+look device=:desktop color=:dark:
+- div
+- 'div: bg-gray-800 border-[16px] border-gray-800 dark:border-gray-800 h-[172px] max-w-[301px]
+  md:h-[294px] md:max-w-[512px] mx-auto relative rounded-t-xl'
+- 'div: h-[140px] md:h-[262px] overflow-hidden rounded-xl'
+- 'div: bg-gray-900 dark:bg-gray-700 h-[24px] max-w-[301px] md:h-[42px] md:max-w-[512px]
+  mx-auto relative rounded-b-xl'
+- 'div: bg-gray-800 h-[55px] max-w-[83px] md:h-[95px] md:max-w-[142px] mx-auto relative
+  rounded-b-xl'
+look device=:desktop color=:light:
+- div
+- 'div: bg-gray-300 border-[16px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px] mx-auto relative rounded-t-xl'
+- 'div: h-[140px] md:h-[262px] overflow-hidden rounded-xl'
+- 'div: bg-gray-400 dark:bg-gray-700 h-[24px] max-w-[301px] md:h-[42px] md:max-w-[512px]
+  mx-auto relative rounded-b-xl'
+- 'div: bg-gray-300 dark:bg-gray-800 h-[55px] max-w-[83px] md:h-[95px] md:max-w-[142px]
+  mx-auto relative rounded-b-xl'
+look device=:desktop color=:none:
+- div
+- 'div: border-[16px] h-[172px] max-w-[301px] md:h-[294px] md:max-w-[512px] mx-auto
+  relative rounded-t-xl'
+- 'div: h-[140px] md:h-[262px] overflow-hidden rounded-xl'
+- 'div: h-[24px] max-w-[301px] md:h-[42px] md:max-w-[512px] mx-auto relative rounded-b-xl'
+- 'div: h-[55px] max-w-[83px] md:h-[95px] md:max-w-[142px] mx-auto relative rounded-b-xl'
+look device=:smartwatch color=:dark:
+- div
+- 'div: bg-gray-800 dark:bg-gray-700 h-[63px] max-w-[133px] mx-auto relative rounded-t-[2.5rem]'
+- 'div: bg-gray-800 border-[10px] border-gray-800 dark:border-gray-800 h-[213px] mx-auto
+  relative rounded-[2.5rem] w-[208px]'
+- 'div: -end-[16px] absolute bg-gray-800 dark:bg-gray-800 h-[41px] rounded-e-lg top-[40px]
+  w-[6px]'
+- 'div: -end-[16px] absolute bg-gray-800 dark:bg-gray-800 h-[32px] rounded-e-lg top-[88px]
+  w-[6px]'
+- 'div: h-[193px] overflow-hidden rounded-[2rem] w-[188px]'
+- 'div: bg-gray-800 dark:bg-gray-700 h-[63px] max-w-[133px] mx-auto relative rounded-b-[2.5rem]'
+look device=:smartwatch color=:light:
+- div
+- 'div: bg-gray-300 dark:bg-gray-700 h-[63px] max-w-[133px] mx-auto relative rounded-t-[2.5rem]'
+- 'div: bg-gray-300 border-[10px] border-gray-300 dark:bg-gray-800 dark:border-gray-800
+  h-[213px] mx-auto relative rounded-[2.5rem] w-[208px]'
+- 'div: -end-[16px] absolute bg-gray-300 dark:bg-gray-800 h-[41px] rounded-e-lg top-[40px]
+  w-[6px]'
+- 'div: -end-[16px] absolute bg-gray-300 dark:bg-gray-800 h-[32px] rounded-e-lg top-[88px]
+  w-[6px]'
+- 'div: h-[193px] overflow-hidden rounded-[2rem] w-[188px]'
+- 'div: bg-gray-300 dark:bg-gray-700 h-[63px] max-w-[133px] mx-auto relative rounded-b-[2.5rem]'
+look device=:smartwatch color=:none:
+- div
+- 'div: h-[63px] max-w-[133px] mx-auto relative rounded-t-[2.5rem]'
+- 'div: border-[10px] h-[213px] mx-auto relative rounded-[2.5rem] w-[208px]'
+- 'div: -end-[16px] absolute h-[41px] rounded-e-lg top-[40px] w-[6px]'
+- 'div: -end-[16px] absolute h-[32px] rounded-e-lg top-[88px] w-[6px]'
+- 'div: h-[193px] overflow-hidden rounded-[2rem] w-[188px]'
+- 'div: h-[63px] max-w-[133px] mx-auto relative rounded-b-[2.5rem]'
