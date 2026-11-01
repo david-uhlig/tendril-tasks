@@ -1,5 +1,6 @@
 module Gustwave
   class AvatarPreview < ViewComponent::Preview
+    # @param size select { choices: [xs, sm, md, lg, xl, 2xl, 3xl, 4xl] }
     def with_border(size: :lg)
       render Gustwave::Avatar.new(src: "/icon.png", size: size, border: true)
     end

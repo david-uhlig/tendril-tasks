@@ -3,6 +3,7 @@ module Gustwave
     class ResponsiveHorizontalScrollPreview < ViewComponent::Preview
       # Scrolls horizontally below the +md+ breakpoint and wraps from there on.
       # Resize the window to see both.
+      # @param breakpoint select { choices: [sm, md, lg, xl, 2xl] }
       def default(breakpoint: :md)
         render_with_template(locals: { breakpoint: breakpoint.to_sym })
       end

@@ -1,5 +1,6 @@
 module Gustwave
   class BannerPreview < ViewComponent::Preview
+    # @param position select { choices: [top, bottom] }
     def default(position: :top)
       render_with_template(locals: { position: position.to_sym })
     end
