@@ -80,8 +80,10 @@ RSpec.describe Gustwave::Progress, type: :component do
   it "renders content set with with_content inside the fill" do
     render_inline(described_class.new(45).with_content("45%"))
 
+    expect(page).to have_selector("div[role='progressbar'].h-auto")
     expect(page).to have_selector("div[role='progressbar'] > div.h-auto", text: "45%")
     expect(page).to have_no_selector("div[role='progressbar'].h-2\\.5")
+    expect(page).to have_no_selector("div[role='progressbar'] > div.h-2\\.5")
   end
 
   it "keeps the size height without content" do
