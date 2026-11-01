@@ -36,6 +36,7 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Modal => { selected_elsewhere: %i[action] },
     Gustwave::ModalHeader => { kwargs: { modal_id: "modal" } },
     Gustwave::Navbars::Link => { kwargs: { href: "#" } },
+    Gustwave::Pagination::Link => { kwargs: { href: "/" } },
     Gustwave::Popover => { selected_elsewhere: %i[placement trigger] },
     Gustwave::Spinner => { forwards: %i[size] },
     Gustwave::Tooltip => { selected_elsewhere: %i[placement trigger] }
