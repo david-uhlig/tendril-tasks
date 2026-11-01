@@ -68,7 +68,8 @@ module Gustwave
 
     part :body, "text-sm font-normal text-gray-500 dark:text-gray-400"
     part :actions, "flex items-center shrink-0 gap-2"
-    part :dismiss_button, "shrink-0 inline-flex items-center justify-center w-7 h-7 p-1.5 rounded-lg text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+    # +p-0+ leaves the w-6 icon its full size: +p-1.5+ would squeeze it to 16px
+    part :dismiss_button, "shrink-0 inline-flex items-center justify-center w-7 h-7 p-0 rounded-lg text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
 
     # Renders content next to the dismiss button, e.g. a call to action.
     #

@@ -109,6 +109,14 @@ RSpec.describe Gustwave::Banner, type: :component do
     end
   end
 
+  describe "dismiss button" do
+    it "has no padding that would squeeze its icon" do
+      render_inline(described_class.new("content"), &:with_dismiss_button)
+
+      expect(page).to have_selector("button.w-7.h-7.p-0")
+    end
+  end
+
   describe "actions slot" do
     it "renders the actions before the dismiss button" do
       render_inline(described_class.new("content")) do |banner|
