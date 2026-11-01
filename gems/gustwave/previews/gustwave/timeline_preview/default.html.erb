@@ -1,0 +1,23 @@
+<%= render Gustwave::Timeline.new do |timeline| %>
+  <% timeline.with_item do |item| %>
+    <% item.with_date "February 2022" %>
+    <% item.with_title "Application UI code in Tailwind CSS" %>
+    <% item.with_body "Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages." %>
+
+    <%= render Gustwave::Buttons::Default.new("Learn more", tag: :a, href: "#", color: :alternative, size: :sm) do |button| %>
+      <% button.with_trailing_visual_icon :arrow_right %>
+    <% end %>
+  <% end %>
+
+  <% timeline.with_item do |item| %>
+    <% item.with_date "March 2022" %>
+    <% item.with_title "Marketing UI design in Figma" %>
+    <% item.with_body "All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project." %>
+  <% end %>
+
+  <% timeline.with_item do |item| %>
+    <% item.with_date "April 2022" %>
+    <% item.with_title "E-Commerce UI code in Tailwind CSS" %>
+    <% item.with_body "Get started with dozens of web components and interactive elements built on top of Tailwind CSS." %>
+  <% end %>
+<% end %>

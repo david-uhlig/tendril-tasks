@@ -1,0 +1,21 @@
+<%= render Gustwave::Timeline.new(orientation: :horizontal) do |timeline| %>
+  <% timeline.with_item do |item| %>
+    <% item.with_marker_icon :calendar_month %>
+    <% item.with_date "Released on December 2, 2021" %>
+    <% item.with_title "Flowbite Library v1.0.0" %>
+    <% item.with_body "Get started with dozens of web components and interactive elements." %>
+  <% end %>
+
+  <% timeline.with_item do |item| %>
+    <% item.with_marker_icon :calendar_month %>
+    <% item.with_date "Released on December 23, 2021" %>
+    <% item.with_title "Flowbite Library v1.2.0" %>
+    <% item.with_body "Get started with dozens of web components and interactive elements." %>
+  <% end %>
+
+  <% timeline.with_item do |item| %>
+    <% item.with_date "Released on January 5, 2022" %>
+    <% item.with_title "Flowbite Library v1.3.0" %>
+    <% item.with_body "This item has no marker, so it shows a dot." %>
+  <% end %>
+<% end %>
