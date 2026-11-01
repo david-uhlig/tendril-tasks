@@ -23,6 +23,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Dropdowns::Triggers::Button => { kwargs: { menu_id: "menu" } },
     Gustwave::Dropdowns::Triggers::Generic => { kwargs: { menu_id: "menu" } },
     Gustwave::Dropdowns::Triggers::InlineButton => { kwargs: { menu_id: "menu" } },
+    Gustwave::SpeedDial => { derived_defaults: { direction: :default_direction } },
+    Gustwave::SpeedDials::Action => { args: [ "Label" ] },
     Gustwave::Form::RichText::Button => { args: [ :bold ] },
     Gustwave::Form::RichText::Lexxy::Button => { args: [ :bold ] },
     Gustwave::Form::RichText::Trix::Button => { args: [ :bold ] },

@@ -1,0 +1,971 @@
+---
+placement position=:none direction=:up:
+- 'div data-dial-init="true": flex flex-col-reverse gap-4 group items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:none direction=:down:
+- 'div data-dial-init="true": flex flex-col gap-4 group items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:none direction=:left:
+- 'div data-dial-init="true": flex flex-row-reverse gap-4 group items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:none direction=:right:
+- 'div data-dial-init="true": flex flex-row gap-4 group items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_right direction=:up:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_right direction=:down:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col gap-4 group items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_right direction=:left:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-row-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_right direction=:right:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-row gap-4 group items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_left direction=:up:
+- 'div data-dial-init="true": bottom-6 fixed flex flex-col-reverse gap-4 group items-center
+  start-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_left direction=:down:
+- 'div data-dial-init="true": bottom-6 fixed flex flex-col gap-4 group items-center
+  start-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_left direction=:left:
+- 'div data-dial-init="true": bottom-6 fixed flex flex-row-reverse gap-4 group items-center
+  start-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:bottom_left direction=:right:
+- 'div data-dial-init="true": bottom-6 fixed flex flex-row gap-4 group items-center
+  start-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_right direction=:up:
+- 'div data-dial-init="true": end-6 fixed flex flex-col-reverse gap-4 group items-center
+  top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_right direction=:down:
+- 'div data-dial-init="true": end-6 fixed flex flex-col gap-4 group items-center top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_right direction=:left:
+- 'div data-dial-init="true": end-6 fixed flex flex-row-reverse gap-4 group items-center
+  top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_right direction=:right:
+- 'div data-dial-init="true": end-6 fixed flex flex-row gap-4 group items-center top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_left direction=:up:
+- 'div data-dial-init="true": fixed flex flex-col-reverse gap-4 group items-center
+  start-6 top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_left direction=:down:
+- 'div data-dial-init="true": fixed flex flex-col gap-4 group items-center start-6
+  top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_left direction=:left:
+- 'div data-dial-init="true": fixed flex flex-row-reverse gap-4 group items-center
+  start-6 top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+placement position=:top_left direction=:right:
+- 'div data-dial-init="true": fixed flex flex-row gap-4 group items-center start-6
+  top-6'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+look shape=:round label_display=:tooltip:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+look shape=:round label_display=:inside:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-14 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": mb-1 size-5.5'
+- path
+- 'span: block font-medium mb-px text-xs'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-full shadow-xs size-14 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": mb-1 size-5.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: block font-medium mb-px text-xs'
+look shape=:round label_display=:outside:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center relative rounded-full shadow-xs
+  size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: -translate-y-1/2 absolute end-full font-medium me-3 text-sm top-1/2 whitespace-nowrap'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center relative rounded-full shadow-xs
+  size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: -translate-y-1/2 absolute end-full font-medium me-3 text-sm top-1/2 whitespace-nowrap'
+look shape=:square label_display=:tooltip:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-lg shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: sr-only'
+- 'div id="tooltip-r0000002" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+- 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000003" data-tooltip-trigger="hover"
+  type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-lg shadow-xs size-13 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: sr-only'
+- 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
+  duration-300 font-medium inline-block invisible opacity-0 px-3 py-2 rounded-lg shadow-xs
+  text-sm text-white tooltip transition-opacity z-10'
+- 'div data-popper-arrow="true": after:hidden tooltip-arrow'
+look shape=:square label_display=:inside:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-lg shadow-xs size-14 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": mb-1 size-5.5'
+- path
+- 'span: block font-medium mb-px text-xs'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center rounded-lg shadow-xs size-14 text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": mb-1 size-5.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: block font-medium mb-px text-xs'
+look shape=:square label_display=:outside:
+- 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col-reverse gap-4 group
+  items-center'
+- 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
+  data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
+  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
+  justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  group-hover:rotate-45 size-8 transition-transform'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+- 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center relative rounded-lg shadow-xs size-13
+  text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path
+- 'span: -translate-y-1/2 absolute end-full font-medium me-3 text-sm top-1/2 whitespace-nowrap'
+- 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  flex flex-col focus:outline-hidden focus:ring-4 focus:ring-gray-300 hover:bg-gray-50
+  hover:text-gray-900 items-center justify-center relative rounded-lg shadow-xs size-13
+  text-gray-500'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+- 'span: -translate-y-1/2 absolute end-full font-medium me-3 text-sm top-1/2 whitespace-nowrap'
