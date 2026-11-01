@@ -1,0 +1,13 @@
+---
+look color=:default underline=:hover:
+- 'a href="/x": dark:text-blue-500 font-medium hover:underline text-blue-600'
+look color=:default underline=:always:
+- 'a href="/x": dark:text-blue-500 font-medium hover:no-underline text-blue-600 underline'
+look color=:default underline=:none:
+- 'a href="/x": dark:text-blue-500 font-medium text-blue-600'
+look color=:none underline=:hover:
+- 'a href="/x": hover:underline'
+look color=:none underline=:always:
+- 'a href="/x": hover:no-underline underline'
+look color=:none underline=:none:
+- a href="/x"
