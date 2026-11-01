@@ -35,7 +35,7 @@ module Gustwave
   class Banner < Gustwave::Component
     attr_reader :id
 
-    base "z-50 flex items-center justify-between gap-4 p-4 bg-gray-50 border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+    base "z-50 flex items-center gap-4 p-4 bg-gray-50 border-gray-200 dark:bg-gray-700 dark:border-gray-600"
 
     variant :position, default: :top, values: {
       top: "fixed top-0 start-0 w-full border-b",
