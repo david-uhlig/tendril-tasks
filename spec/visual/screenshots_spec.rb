@@ -162,7 +162,7 @@ RSpec.describe "Visual snapshots", type: :system, js: true, visual: true do
     login_as(admin, scope: :user)
     page.driver.browser.manage.window.resize_to(widths[:mobile], 800)
     visit root_path
-    find("[data-collapse-toggle='navbar-cta']").click
+    find("nav button[data-collapse-toggle]").click
     snapshot("mobile_navigation_expanded--mobile", width: widths[:mobile])
   end
 
