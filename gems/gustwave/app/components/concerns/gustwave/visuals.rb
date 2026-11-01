@@ -96,7 +96,6 @@ module Gustwave
           config = configure_visual_html_attributes(
             options,
             theme:,
-            position: :standalone,
           )
           Gustwave::Icon.new(name, **config)
         },
@@ -122,8 +121,7 @@ module Gustwave
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
             options,
-            theme:,
-            position: :standalone
+            theme:
           )
           Gustwave::Icon.new(name, **config)
         },

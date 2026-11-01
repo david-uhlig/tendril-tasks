@@ -77,7 +77,7 @@ module Gustwave
     def icon_tag
       return if @icon.blank?
 
-      render Gustwave::Icon.new(@icon, theme: :solid, position: :standalone, class: classes(:title_icon))
+      render Gustwave::Icon.new(@icon, theme: :solid, class: classes(:title_icon))
     end
 
     def close_button_tag
