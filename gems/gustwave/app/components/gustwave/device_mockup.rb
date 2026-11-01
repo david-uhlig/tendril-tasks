@@ -26,11 +26,18 @@ module Gustwave
   #   <% end %>
   #
   # The +none+ color renders the shapes without their colors. Add a brand color
-  # by targeting the parts by name:
+  # by targeting the parts by name. Parts you leave out stay uncolored:
   #
-  #   Gustwave::DeviceMockup.extend_variant :color, values: {
-  #     brand: { frame: "border-brand-800 bg-brand-800", notch: "bg-brand-800" }
-  #   }
+  #   Rails.autoloaders.main.on_load("Gustwave::DeviceMockup") do |mockup, _abspath|
+  #     mockup.extend_variant :color, values: {
+  #       brand: {
+  #         frame: "border-brand-800 bg-brand-800",
+  #         **mockup::SIDE_PARTS.index_with("bg-brand-800"),
+  #         **%i[strap_top strap_bottom keyboard_notch stand].index_with("bg-brand-800"),
+  #         **%i[keyboard chin].index_with("bg-brand-900")
+  #       }
+  #     }
+  #   end
   #
   # You can pass HTML attributes to the wrapper element, and your css classes
   # will be merged with its classes:
