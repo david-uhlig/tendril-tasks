@@ -167,8 +167,8 @@ interactive style=:full_width vertical=true:
 - 'button aria-controls="profile" aria-selected="true" data-tabs-target="#profile"
   id="profile-tab" role="tab" type="button": bg-gray-100 border-b border-gray-200
   border-r-0 dark:bg-gray-700 dark:border-gray-700 dark:text-white focus:outline-none
-  focus:ring-4 focus:ring-blue-300 inline-block justify-center p-4 rounded-s-lg rounded-t-lg
-  text-gray-900 w-full'
+  focus:ring-4 focus:ring-blue-300 inline-block justify-center p-4 rounded-s-none
+  rounded-t-lg text-gray-900 w-full'
 - 'li role="presentation": focus-within:z-10 me-0 w-full'
 - 'button aria-controls="settings" aria-selected="false" data-tabs-target="#settings"
   id="settings-tab" role="tab" type="button": bg-white border-b border-gray-200 border-r-0
@@ -179,7 +179,7 @@ interactive style=:full_width vertical=true:
 - 'button aria-disabled="true" disabled="disabled" id="billing-tab" type="button":
   bg-white border-b-0 border-gray-200 border-r-0 cursor-not-allowed dark:bg-gray-800
   dark:border-gray-700 dark:text-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300
-  inline-block justify-center p-4 rounded-b-lg rounded-e-lg text-gray-400 w-full'
+  inline-block justify-center p-4 rounded-b-lg rounded-e-none text-gray-400 w-full'
 - 'div id="tabs-content": w-full'
 - 'div aria-labelledby="profile-tab" id="profile" role="tabpanel": bg-gray-50 dark:bg-gray-800
   p-6 rounded-lg'

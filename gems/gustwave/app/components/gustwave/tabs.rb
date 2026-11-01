@@ -124,8 +124,8 @@ module Gustwave
       ),
       full_width: VERTICAL.merge(
         tab: "#{VERTICAL[:tab]} border-r-0 border-b",
-        first_tab: "rounded-t-lg",
-        last_tab: "rounded-b-lg border-b-0"
+        first_tab: "rounded-s-none rounded-t-lg",
+        last_tab: "rounded-e-none rounded-b-lg border-b-0"
       )
     }
 
