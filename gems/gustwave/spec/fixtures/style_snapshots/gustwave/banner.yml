@@ -1,0 +1,78 @@
+---
+look position=:top floating=true:
+- 'div tabindex="-1": -translate-x-1/2 bg-white border border-gray-100 dark:bg-gray-700
+  dark:border-gray-600 fixed flex gap-4 items-center lg:max-w-7xl p-4 rounded-lg rtl:translate-x-1/2
+  shadow-xs start-1/2 top-6 w-[calc(100%-2rem)] z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+look position=:top floating=false:
+- 'div tabindex="-1": bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  fixed flex gap-4 items-center p-4 start-0 top-0 w-full z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+look position=:bottom floating=true:
+- 'div tabindex="-1": -translate-x-1/2 bg-white border border-gray-100 bottom-6 dark:bg-gray-700
+  dark:border-gray-600 fixed flex gap-4 items-center lg:max-w-7xl p-4 rounded-lg rtl:translate-x-1/2
+  shadow-xs start-1/2 w-[calc(100%-2rem)] z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+look position=:bottom floating=false:
+- 'div tabindex="-1": bg-gray-50 border-gray-200 border-t bottom-0 dark:bg-gray-700
+  dark:border-gray-600 fixed flex gap-4 items-center p-4 start-0 w-full z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+align align=:center:
+- 'div tabindex="-1": bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  fixed flex gap-4 items-center p-4 start-0 top-0 w-full z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+align align=:start:
+- 'div tabindex="-1": bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  fixed flex gap-4 items-center p-4 start-0 top-0 w-full z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-gray-500 text-sm text-start'
+dismissible position=:top floating=true:
+- 'div id="banner" tabindex="-1": -translate-x-1/2 bg-white border border-gray-100
+  dark:bg-gray-700 dark:border-gray-600 fixed flex gap-4 items-center lg:max-w-7xl
+  p-4 rounded-lg rtl:translate-x-1/2 shadow-xs start-1/2 top-6 w-[calc(100%-2rem)]
+  z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+- 'button aria-label="Dismiss" data-dismiss-target="#banner" type="button": align-bottom
+  dark:hover:bg-gray-600 dark:hover:text-white gap-1.5 h-7 hover:bg-gray-200 hover:text-gray-900
+  inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
+  shrink-0 text-gray-400 text-sm w-7'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismissible position=:top floating=false:
+- 'div id="banner" tabindex="-1": bg-gray-50 border-b border-gray-200 dark:bg-gray-700
+  dark:border-gray-600 fixed flex gap-4 items-center p-4 start-0 top-0 w-full z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+- 'button aria-label="Dismiss" data-dismiss-target="#banner" type="button": align-bottom
+  dark:hover:bg-gray-600 dark:hover:text-white gap-1.5 h-7 hover:bg-gray-200 hover:text-gray-900
+  inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
+  shrink-0 text-gray-400 text-sm w-7'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismissible position=:bottom floating=true:
+- 'div id="banner" tabindex="-1": -translate-x-1/2 bg-white border border-gray-100
+  bottom-6 dark:bg-gray-700 dark:border-gray-600 fixed flex gap-4 items-center lg:max-w-7xl
+  p-4 rounded-lg rtl:translate-x-1/2 shadow-xs start-1/2 w-[calc(100%-2rem)] z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+- 'button aria-label="Dismiss" data-dismiss-target="#banner" type="button": align-bottom
+  dark:hover:bg-gray-600 dark:hover:text-white gap-1.5 h-7 hover:bg-gray-200 hover:text-gray-900
+  inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
+  shrink-0 text-gray-400 text-sm w-7'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
+dismissible position=:bottom floating=false:
+- 'div id="banner" tabindex="-1": bg-gray-50 border-gray-200 border-t bottom-0 dark:bg-gray-700
+  dark:border-gray-600 fixed flex gap-4 items-center p-4 start-0 w-full z-50'
+- 'div: dark:text-gray-400 flex-1 font-normal min-w-0 text-center text-gray-500 text-sm'
+- 'button aria-label="Dismiss" data-dismiss-target="#banner" type="button": align-bottom
+  dark:hover:bg-gray-600 dark:hover:text-white gap-1.5 h-7 hover:bg-gray-200 hover:text-gray-900
+  inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
+  shrink-0 text-gray-400 text-sm w-7'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  *:stroke-2 h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- 'span: sr-only'
