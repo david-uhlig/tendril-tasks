@@ -155,6 +155,16 @@ RSpec.describe Gustwave::Tabs, type: :component do
       expect(page).to have_css("div#profile.p-6[data-role=main]", text: "content", visible: :all)
     end
 
+    it "lays out a trigger with a visual as a row, keeping the visual beside the label" do
+      render_inline(described_class.new) do |tabs|
+        tabs.with_tab_button("Profile") { |tab| tab.with_leading_visual_icon(:user_circle) }
+        tabs.with_tab_button("Settings")
+      end
+
+      expect(page).to have_css("button.inline-flex.items-center.gap-1\\.5", text: "Profile")
+      expect(page).to have_no_css("button.inline-flex", text: "Settings")
+    end
+
     it "uses the block content as the label when no text is given" do
       render_inline(described_class.new) do |tabs|
         tabs.with_tab_button(id: "block") { "Block label" }

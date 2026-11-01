@@ -83,7 +83,7 @@ module Gustwave
       full_width: {
         list: "flex-nowrap text-gray-500 rounded-lg shadow-sm dark:divide-gray-700 dark:text-gray-400",
         item: "w-full focus-within:z-10",
-        tab: "inline-block w-full p-4 border-r border-gray-200 dark:border-gray-700 focus:ring-4 focus:ring-blue-300 focus:outline-none",
+        tab: "inline-block justify-center w-full p-4 border-r border-gray-200 dark:border-gray-700 focus:ring-4 focus:ring-blue-300 focus:outline-none",
         first_tab: "rounded-s-lg",
         last_tab: "rounded-e-lg border-r-0",
         active: "text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white",

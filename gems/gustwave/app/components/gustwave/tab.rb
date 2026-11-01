@@ -164,7 +164,7 @@ module Gustwave
     # own classes. A caller's class: that conflicts with them breaks the swap
     # Flowbite's JS does, see Gustwave::Tabs.
     def trigger_classes
-      merge_classes(@tab_class, @edge_class, state_classes, @options[:class]).presence
+      merge_classes(@tab_class, @edge_class, classes, state_classes, @options[:class]).presence
     end
 
     def state_classes
