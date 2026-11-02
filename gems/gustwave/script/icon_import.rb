@@ -38,10 +38,9 @@ module Gustwave
 
     # Converts an upstream Flowbite SVG to the form stored in Gustwave.
     # Plain string substitution on purpose, so the file is not reformatted.
-    def convert(svg, theme:)
+    def convert(svg)
       text = svg
       text = text.sub("<svg ", '<svg aria-hidden="true" ') unless root_tag(text).include?("aria-hidden=")
-      text = text.gsub('stroke-width="2"', 'stroke-width="1.5"') if theme == "outline"
       text.rstrip + "\n"
     end
 
@@ -72,8 +71,8 @@ module Gustwave
     def violations(svg, theme:)
       problems = []
       problems << 'missing aria-hidden="true" on <svg>' unless root_tag(svg).include?("aria-hidden=")
-      if theme == "outline" && stroke_widths(svg).include?("2")
-        problems << 'stroke-width="2" was not converted to "1.5"'
+      if theme == "outline" && stroke_widths(svg).include?("1.5")
+        problems << 'stroke-width="1.5" should be "2", as upstream'
       end
       problems
     end
@@ -265,7 +264,7 @@ module Gustwave
 
           svg = IconImport.fetch_svg(request)
           IconImport.validate!(svg, theme: request.theme)
-          File.write(path, IconImport.convert(svg, theme: request.theme))
+          File.write(path, IconImport.convert(svg))
 
           solid = request.theme == "solid" ? ", theme: :solid" : ""
           @out.puts path
@@ -299,7 +298,7 @@ module Gustwave
           begin
             svg = IconImport.http_get(URI(IconImport.raw_url(source, path)))
             IconImport.validate!(svg, theme: theme)
-            converted = IconImport.convert(svg, theme: theme)
+            converted = IconImport.convert(svg)
             File.write(target, converted) unless options[:dry_run]
             added += 1
             @out.puts "#{options[:dry_run] ? "would add" : "added"} #{key}"
@@ -338,7 +337,7 @@ module Gustwave
 
           svg = IconImport.http_get(URI(IconImport.raw_url(source, upstream)))
           IconImport.validate!(svg, theme: icon[:theme])
-          converted = IconImport.convert(svg, theme: icon[:theme])
+          converted = IconImport.convert(svg)
           current = File.read(icon[:path])
           if converted == current
             @out.puts "unchanged #{icon[:key]}"

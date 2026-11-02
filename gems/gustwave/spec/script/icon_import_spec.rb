@@ -40,7 +40,7 @@ RSpec.describe Gustwave::IconImport do
   let(:converted_outline) do
     <<~SVG
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.7141 15h4.268c.4043 0 .732-.3838.732-.8571V3.85714c0-.47338-.3277-.85714-.732-.85714H6.71411c-.55228 0-1 .44772-1 1v4m10.99999 7v-3h3v3h-3Zm-3 6H6.71411c-.55228 0-1-.4477-1-1 0-1.6569 1.34315-3 3-3h2.99999c1.6569 0 3 1.3431 3 3 0 .5523-.4477 1-1 1Zm-1-9.5c0 1.3807-1.1193 2.5-2.5 2.5s-2.49999-1.1193-2.49999-2.5S8.8334 9 10.2141 9s2.5 1.1193 2.5 2.5Z"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.7141 15h4.268c.4043 0 .732-.3838.732-.8571V3.85714c0-.47338-.3277-.85714-.732-.85714H6.71411c-.55228 0-1 .44772-1 1v4m10.99999 7v-3h3v3h-3Zm-3 6H6.71411c-.55228 0-1-.4477-1-1 0-1.6569 1.34315-3 3-3h2.99999c1.6569 0 3 1.3431 3 3 0 .5523-.4477 1-1 1Zm-1-9.5c0 1.3807-1.1193 2.5-2.5 2.5s-2.49999-1.1193-2.49999-2.5S8.8334 9 10.2141 9s2.5 1.1193 2.5 2.5Z"/>
       </svg>
     SVG
   end
@@ -55,10 +55,10 @@ RSpec.describe Gustwave::IconImport do
 
   describe ".convert" do
     it "converts an outline icon exactly" do
-      expect(described_class.convert(upstream_outline, theme: "outline")).to eq(converted_outline)
+      expect(described_class.convert(upstream_outline)).to eq(converted_outline)
     end
 
-    it "converts every path of a multi-path outline icon" do
+    it "keeps the stroke width of every path" do
       svg = <<~SVG
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-width="2" d="M1 1h2"/>
@@ -66,32 +66,31 @@ RSpec.describe Gustwave::IconImport do
         </svg>
       SVG
 
-      converted = described_class.convert(svg, theme: "outline")
+      converted = described_class.convert(svg)
 
-      expect(converted.scan('stroke-width="1.5"').size).to eq(2)
-      expect(converted).not_to include('stroke-width="2"')
+      expect(converted.scan('stroke-width="2"').size).to eq(2)
       expect(converted).to start_with('<svg aria-hidden="true" xmlns=')
     end
 
     it "only adds aria-hidden to a solid icon" do
       expected = upstream_solid.sub("<svg ", '<svg aria-hidden="true" ')
 
-      expect(described_class.convert(upstream_solid, theme: "solid")).to eq(expected)
+      expect(described_class.convert(upstream_solid)).to eq(expected)
     end
 
     it "ends the file with exactly one trailing newline" do
-      converted = described_class.convert(upstream_solid.chomp + "\n\n", theme: "solid")
+      converted = described_class.convert(upstream_solid.chomp + "\n\n")
 
       expect(converted).to end_with("</svg>\n")
       expect(converted).not_to end_with("\n\n")
     end
 
     it "is idempotent" do
-      once = described_class.convert(upstream_outline, theme: "outline")
+      once = described_class.convert(upstream_outline)
 
-      expect(described_class.convert(once, theme: "outline")).to eq(once)
-      expect(described_class.convert(upstream_solid, theme: "solid"))
-        .to eq(described_class.convert(described_class.convert(upstream_solid, theme: "solid"), theme: "solid"))
+      expect(described_class.convert(once)).to eq(once)
+      expect(described_class.convert(upstream_solid))
+        .to eq(described_class.convert(described_class.convert(upstream_solid)))
     end
   end
 
@@ -148,24 +147,24 @@ RSpec.describe Gustwave::IconImport do
     end
 
     it "flags a missing aria-hidden" do
-      problems = described_class.violations(upstream_outline.sub('stroke-width="2"', 'stroke-width="1.5"'), theme: "outline")
+      problems = described_class.violations(upstream_outline, theme: "outline")
 
       expect(problems).to contain_exactly(a_string_including("aria-hidden"))
     end
 
-    it "flags stroke-width 2 on an outline icon" do
-      problems = described_class.violations(upstream_outline.sub("<svg ", '<svg aria-hidden="true" '), theme: "outline")
+    it "flags stroke-width 1.5 on an outline icon" do
+      problems = described_class.violations(converted_outline.sub('stroke-width="2"', 'stroke-width="1.5"'), theme: "outline")
 
-      expect(problems).to contain_exactly(a_string_including('stroke-width="2"'))
+      expect(problems).to contain_exactly(a_string_including('stroke-width="1.5"'))
     end
 
     it "accepts the outlier shapes once converted" do
       [ fill_only_outline, thick_outline ].each do |svg|
-        converted = described_class.convert(svg, theme: "outline")
+        converted = described_class.convert(svg)
 
         expect(described_class.violations(converted, theme: "outline")).to be_empty
       end
-      converted = described_class.convert(stroke_solid, theme: "solid")
+      converted = described_class.convert(stroke_solid)
 
       expect(described_class.violations(converted, theme: "solid")).to be_empty
     end
@@ -261,7 +260,7 @@ RSpec.describe Gustwave::IconImport do
       allow(described_class).to receive(:build_index).and_return(upstream)
       allow(described_class).to receive(:http_get) { |uri, *| svgs.fetch(uri.to_s) }
       FileUtils.mkdir_p([ File.join(icons_dir, "outline"), File.join(icons_dir, "solid") ])
-      write_local("outline", "chalkboard-user", described_class.convert(upstream_outline, theme: "outline"))
+      write_local("outline", "chalkboard-user", described_class.convert(upstream_outline))
     end
 
     after { FileUtils.remove_entry(icons_dir) }
@@ -305,7 +304,7 @@ RSpec.describe Gustwave::IconImport do
         run([ "--new", "--theme", "outline", "--only", "calendar-plus" ])
 
         expect(File.read(File.join(icons_dir, "outline", "calendar-plus.svg")))
-          .to eq(described_class.convert(fill_only_outline, theme: "outline"))
+          .to eq(described_class.convert(fill_only_outline))
       end
 
       it "continues after a failure and exits 1" do
@@ -372,19 +371,19 @@ RSpec.describe Gustwave::IconImport do
 
     describe "--check" do
       it "passes on converted outlier icons" do
-        write_local("outline", "calendar-plus", described_class.convert(fill_only_outline, theme: "outline"))
-        write_local("outline", "thick", described_class.convert(thick_outline, theme: "outline"))
-        write_local("solid", "laravel", described_class.convert(stroke_solid, theme: "solid"))
+        write_local("outline", "calendar-plus", described_class.convert(fill_only_outline))
+        write_local("outline", "thick", described_class.convert(thick_outline))
+        write_local("solid", "laravel", described_class.convert(stroke_solid))
 
         expect(run([ "--check" ])).to eq(0)
         expect(out.string).to be_empty
       end
 
-      it "flags an outline icon still using stroke-width 2" do
-        write_local("outline", "unconverted", upstream_outline.sub("<svg ", '<svg aria-hidden="true" '))
+      it "flags an outline icon still using stroke-width 1.5" do
+        write_local("outline", "unconverted", converted_outline.sub('stroke-width="2"', 'stroke-width="1.5"'))
 
         expect(run([ "--check" ])).to eq(1)
-        expect(out.string).to include('outline/unconverted.svg: stroke-width="2"')
+        expect(out.string).to include('outline/unconverted.svg: stroke-width="1.5"')
       end
     end
   end
