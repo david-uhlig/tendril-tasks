@@ -21,14 +21,14 @@ module Gustwave
     MANIFEST = File.expand_path("../lookbook/flowbite.yml", __dir__)
     BASE_URL = "http://127.0.0.1:3021"
     THEMES = %w[light dark].freeze
-    STRATEGIES = { "components/dropdowns" => :dropdown }.freeze
+    STRATEGIES = { "components/dropdowns" => :dropdown, "components/modal" => :modal }.freeze
     # Examples whose own interaction differs from their page's, keyed by example id.
     EXAMPLE_STRATEGIES = {
       "avatar-user-dropdown-example" => :dropdown,
       "card-user-profile-example" => :dropdown
     }.freeze
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
-    NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
+    NOT_YET = %w[speed-dial drawer tabs navbar tooltips popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
     # Icon sets leave different margins, so a drawing's size varies with the artwork
     # while its centre should not. The size uses SIZE_TOLERANCE.
@@ -51,6 +51,20 @@ module Gustwave
     ITEM = "a:not([data-dropdown-toggle]), button:not([data-dropdown-toggle])"
     DIVIDER = "hr, [role=separator]"
     NESTED = "[data-dropdown-toggle]"
+    MODAL_TRIGGER = "[data-modal-target]"
+
+    # Flowbite's example pages open their first modal on load. Closing it gives every
+    # trigger the same starting point as on a preview.
+    CLOSE_MODALS = <<~JS
+      document.querySelectorAll('#{MODAL_TRIGGER}').forEach(trigger => {
+        const modal = document.getElementById(trigger.dataset.modalTarget);
+        if (modal && !modal.classList.contains('hidden')) trigger.click();
+      });
+    JS
+
+    # Gustwave's focus trap focuses the first button in a modal and Flowbite doesn't, so
+    # neither side keeps focus when it is compared.
+    BLUR = "document.activeElement?.blur()"
 
     # Triggers that are not inside another dropdown's menu.
     TOP_LEVEL = <<~JS
@@ -315,6 +329,7 @@ module Gustwave
       case strategy
       when :static then static_captures(driver, url, dark, reference:)
       when :dropdown then dropdown_captures(driver, url, dark, reference:)
+      when :modal then modal_captures(driver, url, dark, reference:)
       end
     end
 
@@ -425,6 +440,58 @@ module Gustwave
       return {} unless submenu&.displayed?
 
       { "submenu" => capture(driver, submenu).merge(shared).merge("offset" => offset(driver, submenu, nested)) }
+    end
+
+    def modal_captures(driver, url, dark, reference: nil)
+      load(driver, url, dark)
+      modal_triggers(driver).each_index.to_h do |index|
+        key = index.to_s
+        [ key, modal_regions(driver, url, dark, index, reference&.dig(key)) ]
+      end
+    end
+
+    def modal_triggers(driver)
+      driver.find_elements(css: MODAL_TRIGGER).select(&:displayed?)
+    end
+
+    # Reloads the page, so each trigger starts from a clean state. The trigger is captured
+    # before it opens the modal, so the backdrop doesn't cover it. The text is swapped
+    # before opening, and the click goes through JavaScript, so no pointer hovers or
+    # focuses anything.
+    def modal_regions(driver, url, dark, index, reference)
+      load(driver, url, dark)
+      driver.execute_script(CLOSE_MODALS)
+      sleep 0.5
+      trigger = modal_triggers(driver)[index]
+      return { "trigger" => { "error" => "trigger not found after reload" } } unless trigger
+
+      modal = driver.execute_script("return document.getElementById(arguments[0].dataset.modalTarget)", trigger)
+      trigger_swap = swap_text(driver, trigger, reference&.dig("trigger"))
+      regions = { "trigger" => capture(driver, trigger).merge(trigger_swap) }
+      modal_swap = swap_text(driver, modal, reference&.dig("modal"))
+      driver.execute_script("arguments[0].click()", trigger)
+      sleep 0.5
+      driver.execute_script(BLUR)
+      sleep 0.2
+      if modal.displayed?
+        regions.merge!(open_modal_regions(driver, modal, modal_swap))
+      else
+        regions["trigger"]["menu_open"] = false
+      end
+      regions
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      { "trigger" => { "error" => e.message } }
+    end
+
+    # The content's offset from the root shows the placement and the dialog's padding.
+    def open_modal_regions(driver, modal, modal_swap)
+      content = modal.find_element(xpath: "./*/*")
+      shared = modal_swap.slice("swapped")
+      parts = content.find_elements(xpath: "./*").select(&:displayed?)
+      {
+        "modal" => capture(driver, modal).merge(modal_swap),
+        "content" => capture(driver, content).merge(shared).merge("offset" => offset(driver, content, modal))
+      }.merge(parts.each_with_index.to_h { |part, index| [ "part-#{index + 1}", capture(driver, part).merge(shared) ] })
     end
 
     # Sets the element's own text to the reference text. Returns {} without a reference.
