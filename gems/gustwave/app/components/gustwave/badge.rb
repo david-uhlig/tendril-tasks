@@ -15,7 +15,7 @@ module Gustwave
     # Renders no +type+ attribute by default
     option :type, default: :none, values: %i[none button submit reset]
 
-    base "rounded-sm whitespace-nowrap inline-flex"
+    base "rounded-sm whitespace-nowrap inline-flex items-center"
     unstyled color: :none
 
     # +:base+ renders only the base styles.
@@ -109,7 +109,7 @@ module Gustwave
     }
 
     # Set when the badge has a dismiss button
-    toggle :dismissible, "px-2 py-1 items-center", internal: true
+    toggle :dismissible, "px-2 py-1", internal: true
 
     part :dismiss_button, "bg-transparent ms-2"
 
