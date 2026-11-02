@@ -120,6 +120,7 @@ module Gustwave
       const el = arguments[0], cs = getComputedStyle(el), r = el.getBoundingClientRect();
       return {
         classes: [...el.classList],
+        tag: el.tagName.toLowerCase(),
         text: el.textContent.replace(/\\s+/g, ' ').trim(),
         text_parts: fbVisibleText(el).map(n => n.textContent.replace(/\\s+/g, ' ')),
         tags: [...el.querySelectorAll('*')].map(e => e.tagName.toLowerCase()).filter(t => t != 'path').join(' '),
@@ -361,17 +362,22 @@ module Gustwave
       driver.find_elements(css: ELEMENTS).select(&:displayed?)
     end
 
-    # Replaces a lone wrapper with its displayed children while the reference has several elements.
+    # Replaces a lone wrapper with its displayed children while the reference has several elements
+    # or its one element isn't a div, as when a preview repeats the wrapper Flowbite's docs add.
     # Only a div counts as a wrapper: stepping into a lone badge or button would compare its icon with
     # the reference's whole element. An element without displayed element children stays as it is.
     def unwrap(driver, elements, wanted)
-      while elements.size == 1 && wanted.size > 1 && elements.first.tag_name == "div"
+      while elements.size == 1 && elements.first.tag_name == "div" && expects_unwrapped?(wanted)
         children = elements.first.find_elements(xpath: "./*").select(&:displayed?)
         break if children.empty?
 
         elements = children
       end
       elements
+    end
+
+    def expects_unwrapped?(wanted)
+      wanted.size > 1 || wanted.dig("0", "element", "tag") != "div"
     end
 
     def dropdown_captures(driver, url, dark, reference: nil)

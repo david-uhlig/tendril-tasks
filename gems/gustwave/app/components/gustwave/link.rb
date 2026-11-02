@@ -20,7 +20,7 @@ module Gustwave
   #
   #   <%= render Gustwave::Link.new(href: "/stories", class: "inline-flex items-center") do %>
   #     Read their stories
-  #     <%= render Gustwave::Icon.new(:arrow_right, class: "ms-2 rtl:rotate-180") %>
+  #     <%= render Gustwave::Icon.new(:arrow_right, class: "ms-1 -me-1 rtl:rotate-180") %>
   #   <% end %>
   #
   # Inherit the surrounding text style with the +none+ color:
