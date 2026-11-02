@@ -994,14 +994,16 @@ pages:
     preview: gustwave/navbar/with_dropdown
   - id: navbar-multi-dropdown-example
     title: Multi-level dropdown
-    status: composable
+    status: previewed
+    preview: gustwave/navbar/with_multi_level_dropdown
   - id: navbar-sticky-example
     title: Sticky navbar
     status: previewed
     preview: gustwave/navbar/sticky
   - id: navbar-submenu-example
     title: Navbar with submenu
-    status: composable
+    status: previewed
+    preview: gustwave/navbar/with_submenu
   - id: navbar-search-example
     title: Navbar with search
     status: partial
@@ -1012,10 +1014,12 @@ pages:
     preview: gustwave/navbar/with_actions
   - id: navbar-language-example
     title: Language dropdown
-    status: composable
+    status: previewed
+    preview: gustwave/navbar/with_language_dropdown
   - id: navbar-user-example
     title: User menu dropdown
-    status: composable
+    status: previewed
+    preview: gustwave/navbar/with_user_menu
   - id: navbar-mega-menu
     title: Mega menu navbar
     status: partial
@@ -1026,7 +1030,8 @@ pages:
     preview: gustwave/navbar/solid
   - id: navbar-hamburger-example
     title: Hamburger menu
-    status: composable
+    status: feature_gap
+    needs: navbar-hamburger
   components/pagination:
   - id: default-pagination-example
     title: Default pagination

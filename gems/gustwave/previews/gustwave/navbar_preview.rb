@@ -30,5 +30,25 @@ module Gustwave
     def with_compact_dropdown
       render_with_template
     end
+
+    # A dropdown with a submenu inside its menu, as in Flowbite's multi-level dropdown example.
+    def with_multi_level_dropdown
+      render_with_template
+    end
+
+    # A second row of links below the navbar, as in Flowbite's navbar with submenu example.
+    def with_submenu
+      render_with_template
+    end
+
+    # A language switcher with a globe icon in the actions row, as in Flowbite's language dropdown example.
+    def with_language_dropdown
+      render_with_template
+    end
+
+    # A user avatar that opens a user menu in the actions row, as in Flowbite's user menu example.
+    def with_user_menu
+      render_with_template
+    end
   end
 end
