@@ -22,6 +22,20 @@ RSpec.describe Gustwave::HorizontalLine, type: :component do
     expect(rendered_content).to have_selector("hr.w-8")
   end
 
+  it "leaves the default line unrounded" do
+    render_inline(described_class.new)
+
+    expect(rendered_content).to have_no_selector("hr.rounded-sm")
+  end
+
+  it "rounds the trimmed and squared shapes" do
+    %i[trimmed squared].each do |shape|
+      render_inline(described_class.new(shape:))
+
+      expect(rendered_content).to have_selector("hr.rounded-sm")
+    end
+  end
+
   it "renders text in the middle of the line" do
     render_inline(described_class.new) do |component|
       component.with_visual_text "Hello!", class: "custom"

@@ -2048,14 +2048,15 @@ pages:
   - id: default-hr-example
     title: Default HR
     status: previewed
-    preview: gustwave/horizontal_line/shapes
+    preview: gustwave/horizontal_line/default
   - id: hr-trimmed-example
     title: Trimmed
     status: previewed
-    preview: gustwave/horizontal_line/shapes
+    preview: gustwave/horizontal_line/trimmed
   - id: hr-icon-example
     title: Icon HR
-    status: composable
+    status: previewed
+    preview: gustwave/horizontal_line/icon
   - id: hr-text-example
     title: HR with text
     status: previewed
@@ -2063,7 +2064,7 @@ pages:
   - id: hr-shape-example
     title: HR shape
     status: previewed
-    preview: gustwave/horizontal_line/shapes
+    preview: gustwave/horizontal_line/squared
   typography/images:
   - id: default-image-example
     title: Default image
