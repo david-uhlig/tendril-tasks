@@ -21,14 +21,14 @@ module Gustwave
     MANIFEST = File.expand_path("../lookbook/flowbite.yml", __dir__)
     BASE_URL = "http://127.0.0.1:3021"
     THEMES = %w[light dark].freeze
-    STRATEGIES = { "components/dropdowns" => :dropdown, "components/modal" => :modal, "components/navbar" => :navbar }.freeze
+    STRATEGIES = { "components/dropdowns" => :dropdown, "components/modal" => :modal, "components/navbar" => :navbar, "components/popover" => :popover }.freeze
     # Examples whose own interaction differs from their page's, keyed by example id.
     EXAMPLE_STRATEGIES = {
       "avatar-user-dropdown-example" => :dropdown,
       "card-user-profile-example" => :dropdown
     }.freeze
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
-    NOT_YET = %w[speed-dial drawer tabs tooltips popover].map { "components/#{_1}" }.freeze
+    NOT_YET = %w[speed-dial drawer tabs tooltips].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
     # Icon sets leave different margins, so a drawing's size varies with the artwork
     # while its centre should not. The size uses SIZE_TOLERANCE.
@@ -52,6 +52,10 @@ module Gustwave
     DIVIDER = "hr, [role=separator]"
     NESTED = "[data-dropdown-toggle]"
     MODAL_TRIGGER = "[data-modal-target]"
+    POPOVER_TRIGGER = "[data-popover-target]"
+    POPOVER_KEY = "popover-"
+    # The arrow's visible part is its ::before, so its own computed style says nothing.
+    ARROW_STYLES = "const cs = getComputedStyle(arguments[0], '::before'); return Object.fromEntries(arguments[1].map(k => [k, cs[k]]));"
 
     # Flowbite's example pages open their first modal on load. Closing it gives every
     # trigger the same starting point as on a preview.
@@ -332,6 +336,7 @@ module Gustwave
       when :dropdown then dropdown_captures(driver, url, dark, reference:)
       when :modal then modal_captures(driver, url, dark, reference:)
       when :navbar then navbar_captures(driver, url, dark, reference:)
+      when :popover then popover_captures(driver, url, dark, reference:)
       end
     end
 
@@ -517,6 +522,78 @@ module Gustwave
         "modal" => capture(driver, modal).merge(modal_swap),
         "content" => capture(driver, content).merge(shared).merge("offset" => offset(driver, content, modal))
       }.merge(parts.each_with_index.to_h { |part, index| [ "part-#{index + 1}", capture(driver, part).merge(shared) ] })
+    end
+
+    # The page around the popovers compares as on a static page, then each trigger opens
+    # its popover on a fresh page.
+    def popover_captures(driver, url, dark, reference: nil)
+      page = reference&.reject { |key, _| key.start_with?(POPOVER_KEY) }
+      regions = static_captures(driver, url, dark, reference: page)
+      popover_triggers(driver).each_index do |index|
+        key = "#{POPOVER_KEY}#{index}"
+        regions[key] = popover_regions(driver, url, dark, index, reference&.dig(key))
+      end
+      regions
+    end
+
+    def popover_triggers(driver)
+      driver.find_elements(css: POPOVER_TRIGGER).select(&:displayed?)
+    end
+
+    # The trigger is captured before the pointer reaches it, so it shows no hover colours.
+    # The text is swapped before opening, so the positioning library measures the final sizes.
+    def popover_regions(driver, url, dark, index, reference)
+      load(driver, url, dark)
+      trigger = popover_triggers(driver)[index]
+      return { "trigger" => { "error" => "trigger not found after reload" } } unless trigger
+
+      popover = driver.execute_script("return document.getElementById(arguments[0].dataset.popoverTarget)", trigger)
+      trigger_swap = swap_text(driver, trigger, reference&.dig("trigger"))
+      regions = { "trigger" => capture(driver, trigger).merge(trigger_swap) }
+      popover_swap = swap_text(driver, popover, reference&.dig("popover"))
+      open_popover(driver, trigger)
+      if popover.displayed?
+        regions.merge!(open_popover_regions(driver, trigger, popover, popover_swap))
+      else
+        regions["trigger"]["menu_open"] = false
+      end
+      regions
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      { "trigger" => { "error" => e.message } }
+    ensure
+      rest_pointer(driver)
+    end
+
+    # A missing attribute means hover, Flowbite's default trigger.
+    def open_popover(driver, trigger)
+      if trigger.attribute("data-popover-trigger") == "click"
+        trigger.click
+      else
+        driver.action.move_to(trigger).perform
+      end
+      sleep 0.5
+    end
+
+    # A pointer left over a trigger would open the next page's popover.
+    def rest_pointer(driver)
+      driver.action.move_to_location(0, 0).perform
+    end
+
+    # The popover's offset from its trigger shows the placement and the distance.
+    def open_popover_regions(driver, trigger, popover, popover_swap)
+      shared = popover_swap.slice("swapped")
+      parts = popover.find_elements(xpath: "./*[not(@data-popper-arrow)]").select(&:displayed?)
+      arrow = popover.find_elements(xpath: "./*[@data-popper-arrow]").first
+      regions = { "popover" => capture(driver, popover).merge(popover_swap).merge("offset" => offset(driver, popover, trigger)) }
+      parts.each_with_index { |part, index| regions["part-#{index + 1}"] = capture(driver, part).merge(shared) }
+      regions["arrow"] = arrow_capture(driver, arrow, popover) if arrow
+      regions
+    end
+
+    # No screenshot: the element itself is invisible and only its ::before draws.
+    def arrow_capture(driver, arrow, popover)
+      driver.execute_script(CAPTURE, arrow, STYLES)
+            .merge("styles" => driver.execute_script(ARROW_STYLES, arrow, STYLES), "offset" => offset(driver, arrow, popover))
     end
 
     # Sets the element's own text to the reference text. Returns {} without a reference.
