@@ -82,7 +82,8 @@ pages:
     preview: gustwave/avatar/with_tooltip
   - id: avatar-dot-indicator-example
     title: Dot indicator
-    status: composable
+    status: previewed
+    preview: gustwave/avatar/with_indicator
   - id: avatar-stacked-example
     title: Stacked
     status: previewed
@@ -93,7 +94,8 @@ pages:
     preview: gustwave/avatar/with_text
   - id: avatar-user-dropdown-example
     title: User dropdown
-    status: composable
+    status: previewed
+    preview: gustwave/avatar/with_dropdown
   - id: avatar-sizes-example
     title: Sizes
     status: previewed
