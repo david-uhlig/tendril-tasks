@@ -17,11 +17,11 @@
 
   <%= render Gustwave::ModalBody.new(class: "text-center") do %>
     <div>
-      <%= render Gustwave::Icon.new(:exclamation_circle, size: :"5xl", class: "mx-auto mb-4 text-gray-400 dark:text-gray-200") %>
+      <%= render Gustwave::Icon.new(:exclamation_circle, class: "h-14 w-14 mx-auto -mt-1 mb-3 text-gray-400 dark:text-gray-200") %>
 
       <%= render Gustwave::Heading.new("Delete this project?", tag: :h3, size: :none, class: "mb-5 text-lg font-normal text-gray-500 dark:text-gray-400") %>
 
-      <%= render Gustwave::Buttons::Default.new("Yes, delete", color: :red, **modal.trigger_options(action: :hide)) %>
+      <%= render Gustwave::Buttons::Default.new("Yes, delete", color: :red, class: "bg-red-600 hover:bg-red-800", **modal.trigger_options(action: :hide)) %>
       <%= render Gustwave::Buttons::Default.new("No, cancel", color: :alternative, class: "ms-3", **modal.trigger_options(action: :hide)) %>
     </div>
   <% end %>

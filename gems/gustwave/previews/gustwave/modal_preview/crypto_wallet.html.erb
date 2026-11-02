@@ -1,8 +1,8 @@
 <% modal = Gustwave::Modal.new(id: "crypto-modal", size: :sm) %>
 
 <div class="flex justify-center">
-  <% trigger = Gustwave::Buttons::Default.new("Connect wallet", color: :alternative, **modal.trigger_options) %>
-  <% trigger.with_leading_visual_icon(:wallet, theme: :solid, class: "h-5 w-5 -mx-0.5") %>
+  <% trigger = Gustwave::Buttons::Default.new("Connect wallet", color: :alternative, class: "dark:text-white", **modal.trigger_options) %>
+  <% trigger.with_leading_visual_icon(:wallet, theme: :solid, class: "h-4 w-4 me-0.5") %>
 
   <%= render trigger %>
 </div>
@@ -37,7 +37,7 @@
               hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
             "
           >
-            <%= render Gustwave::Icon.new(:wallet, theme: :solid, class: "h-5 w-5 -mx-0.5") %>
+            <%= render Gustwave::Icon.new(:wallet, theme: :solid, class: "h-7 w-7 -m-1") %>
             <span class="flex-1 ms-3 whitespace-nowrap">Coinbase Wallet</span>
           </a>
         </li>
@@ -50,7 +50,7 @@
               hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
             "
           >
-            <%= render Gustwave::Icon.new(:wallet, theme: :solid, class: "h-6 w-6 -mx-0.5") %>
+            <%= render Gustwave::Icon.new(:wallet, theme: :solid, class: "h-7 w-7 -m-1") %>
             <span class="flex-1 ms-3 whitespace-nowrap">Opera Wallet</span>
           </a>
         </li>
@@ -63,7 +63,7 @@
               hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
             "
           >
-            <%= render Gustwave::Icon.new(:wallet, theme: :solid, class: "h-6 w-6 -mx-0.5") %>
+            <%= render Gustwave::Icon.new(:wallet, theme: :solid, class: "h-7 w-7 -m-1") %>
             <span class="flex-1 ms-3 whitespace-nowrap">WalletConnect</span>
           </a>
         </li>
