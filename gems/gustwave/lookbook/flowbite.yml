@@ -965,7 +965,6 @@ pages:
     title: Modal with timeline
     status: previewed
     preview: gustwave/modal/with_timeline
-    note: The timeline is plain HTML, because Gustwave::Timeline can't restyle its markers.
   - id: modal-progress-example
     title: Modal with progress bar
     status: partial
@@ -978,10 +977,12 @@ pages:
     title: Sizes
     status: previewed
     preview: gustwave/modal/sizes
+    note: Keeps Gustwave's widths, which follow Flowbite's other modal examples. This example puts the padding on the outer element and calls a narrower modal default.
   - id: modal-placement-example
     title: Placement
     status: previewed
     preview: gustwave/modal/placement
+    note: Keeps Gustwave's widths, which follow Flowbite's other modal examples. This example puts the padding on the outer element and calls a narrower modal default.
   components/navbar:
   - id: default-navbar-example
     title: Default navbar
