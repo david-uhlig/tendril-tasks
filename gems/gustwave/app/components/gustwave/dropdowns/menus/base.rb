@@ -16,7 +16,7 @@ module Gustwave
       # For consistency, do not use this class directly in the UI. Instead, use
       # Gustwave::Dropdowns::Menus::Generic
       class Base < Gustwave::Component
-        base "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-md w-auto dark:bg-gray-700 hidden"
+        base "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm min-w-44 dark:bg-gray-700 hidden"
 
         # The HTML tag of the menu
         option :tag, default: :div, values: %i[div nav section]
