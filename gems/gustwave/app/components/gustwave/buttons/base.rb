@@ -29,13 +29,13 @@ module Gustwave
       variant :color, default: :base, values: { base: "" }
 
       # The +visual+ part sizes leading and trailing visuals to match the
-      # +text-*+ class of the button.
+      # +text-*+ class of the button. Heights come from padding and line height so a border adds to them, as in Flowbite, and xl's negative margin keeps its height when it has an icon.
       variant :size, default: :md, values: {
-        xs: { root: "h-8 px-3 py-2 text-xs font-medium", visual: "h-4 w-auto" },
-        sm: { root: "h-9 px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
-        md: { root: "h-10 px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
-        lg: { root: "h-12 px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
-        xl: { root: "h-13 px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+        xs: { root: "px-3 py-2 text-xs font-medium", visual: "h-4 w-auto" },
+        sm: { root: "px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
+        md: { root: "px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
+        lg: { root: "px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
+        xl: { root: "px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto -my-0.5" }
       }
 
       # The size of leading and trailing indicators per button size. Extend it

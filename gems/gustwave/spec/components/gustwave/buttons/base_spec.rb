@@ -52,6 +52,24 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
+  context "with each size" do
+    %i[xs sm md lg xl].each do |size|
+      it "renders #{size} without a fixed height" do
+        render_inline(described_class.new("Go", size:))
+
+        expect(page.find("button")["class"].split).not_to include("h-8", "h-9", "h-10", "h-12", "h-13")
+      end
+    end
+  end
+
+  context "with an xl leading icon" do
+    it "pulls the icon's negative margin so it keeps the button height" do
+      render_inline(described_class.new("Go", size: :xl)) { |component| component.with_leading_visual_icon :check }
+
+      expect(rendered_content).to have_selector('button>svg.h-7.w-auto.-my-0\.5')
+    end
+  end
+
   context "with pill argument" do
     it "renders pill styling" do
       render_inline(described_class.new(pill: true)) { "content" }
