@@ -123,8 +123,7 @@ pages:
     preview: gustwave/badge/with_icon_and_text
   - id: badge-notification-example
     title: Notification badge
-    status: previewed
-    preview: gustwave/button/with_indicator
+    status: composable
   - id: badge-button-example
     title: Button with badge
     status: composable
