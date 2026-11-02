@@ -41,5 +41,33 @@ module Gustwave
     def disabled
       render Gustwave::Buttons::Default.new("Disabled", disabled: true)
     end
+
+    def default_colors
+      render_with_template(locals: { colors: %i[default alternative dark light green red yellow purple] })
+    end
+
+    def pills
+      render_with_template(locals: { colors: %i[default alternative dark light green red yellow purple] })
+    end
+
+    def outline_colors
+      render_with_template(locals: { colors: %i[default dark green red yellow purple] })
+    end
+
+    def gradient_monochrome
+      render_with_template(locals: { colors: %i[blue green cyan teal lime red pink purple] })
+    end
+
+    def gradient_duotone
+      render_with_template(locals: { colors: %i[purple_to_blue cyan_to_blue green_to_blue purple_to_pink pink_to_orange teal_to_lime red_to_yellow] })
+    end
+
+    def gradient_outline
+      render_with_template(locals: { colors: %i[purple_to_blue cyan_to_blue green_to_blue purple_to_pink pink_to_orange teal_to_lime red_to_yellow] })
+    end
+
+    def colored_shadows
+      render_with_template(locals: { colors: %i[blue green cyan teal lime red pink purple] })
+    end
   end
 end

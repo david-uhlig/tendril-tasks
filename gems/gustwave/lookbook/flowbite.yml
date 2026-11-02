@@ -236,27 +236,27 @@ pages:
   - id: default-button-example
     title: Default button
     status: previewed
-    preview: gustwave/button/themes
+    preview: gustwave/button/default_colors
   - id: button-pills-example
     title: Button pills
     status: previewed
-    preview: gustwave/button/pill
+    preview: gustwave/button/pills
   - id: button-monochrome-example
     title: Gradient monochrome
     status: previewed
-    preview: gustwave/button/themes
+    preview: gustwave/button/gradient_monochrome
   - id: button-duotone-example
     title: Gradient duotone
     status: previewed
-    preview: gustwave/button/themes
+    preview: gustwave/button/gradient_duotone
   - id: button-gradient-outline-example
     title: Gradient outline
     status: previewed
-    preview: gustwave/button/themes
+    preview: gustwave/button/gradient_outline
   - id: button-colored-shadows-example
     title: Colored shadows
     status: previewed
-    preview: gustwave/button/themes
+    preview: gustwave/button/colored_shadows
   - id: button-social-example
     title: Social buttons
     status: composable
@@ -266,7 +266,7 @@ pages:
   - id: button-outline-example
     title: Outline buttons
     status: previewed
-    preview: gustwave/button/themes
+    preview: gustwave/button/outline_colors
   - id: button-sizes-example
     title: Button sizes
     status: previewed
