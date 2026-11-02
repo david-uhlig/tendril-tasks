@@ -1,7 +1,7 @@
 <%= render Gustwave::Card.new do %>
   <%= render Gustwave::Icon.new(:clipboard, theme: :solid, size: :lg, class: "mb-3 text-gray-500 dark:text-gray-400") %>
 
-  <%= render Gustwave::Link.new(href: "#", color: :none) do %>
+  <%= render Gustwave::Link.new(href: "#", color: :none, class: "hover:no-underline") do %>
     <%= render Gustwave::Heading.new("Need help with a claim?", tag: :h5, size: :sm, class: "mb-2 font-semibold tracking-tight") %>
   <% end %>
 

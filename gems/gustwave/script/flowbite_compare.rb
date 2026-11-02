@@ -23,7 +23,10 @@ module Gustwave
     THEMES = %w[light dark].freeze
     STRATEGIES = { "components/dropdowns" => :dropdown }.freeze
     # Examples whose own interaction differs from their page's, keyed by example id.
-    EXAMPLE_STRATEGIES = { "avatar-user-dropdown-example" => :dropdown }.freeze
+    EXAMPLE_STRATEGIES = {
+      "avatar-user-dropdown-example" => :dropdown,
+      "card-user-profile-example" => :dropdown
+    }.freeze
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
     NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2

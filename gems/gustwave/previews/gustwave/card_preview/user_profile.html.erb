@@ -20,13 +20,13 @@
       <% dropdown.with_menu_list do |menu| %>
         <% menu.with_item_link "Edit", href: "#" %>
         <% menu.with_item_link "Export Data", href: "#" %>
-        <% menu.with_item_link "Delete", href: "#" %>
+        <% menu.with_item_link "Delete", href: "#", class: "text-red-600 dark:text-gray-200" %>
       <% end %>
     <% end %>
   </div>
 
   <div class="flex flex-col items-center pb-10">
-    <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Jane Doe", size: :"2xl", class: "mb-3 h-24 w-24 shadow-lg ring-0") %>
+    <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Jane Doe", size: :"2xl", class: "mb-3 h-24 w-24 shadow-lg") %>
     <%= render Gustwave::Heading.new("Jane Doe", tag: :h5, class: "mb-1 text-xl font-medium") %>
 
     <span class="text-sm text-gray-500 dark:text-gray-400">Visual designer</span>
