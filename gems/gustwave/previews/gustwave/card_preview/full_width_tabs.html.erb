@@ -1,1 +1,131 @@
-<div>Placeholder</div>
+<%= render Gustwave::Card.new(class: "w-full max-w-none") do |card| %>
+  <% card.configure_body(class: "p-0") %>
+
+  <%= render Gustwave::Tabs.new(style: :full_width, list_class: "rounded-none rounded-t-lg border-b border-gray-200 shadow-none dark:border-gray-600", active_class: "bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600", inactive_class: "bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600") do |tabs| %>
+    <% tabs.with_tab_button("Statistics", selected: true, class: "rounded-s-none rounded-ss-lg") do |tab| %>
+      <% tab.with_panel(class: "bg-white md:p-8 dark:bg-gray-800") do %>
+        <dl
+          class="
+            grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6
+            dark:text-white sm:p-8
+          "
+        >
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">73M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Developers</dd>
+          </div>
+
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">100M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Public repositories</dd>
+          </div>
+
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">1000s</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Open source projects</dd>
+          </div>
+
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">1B+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Contributors</dd>
+          </div>
+
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">90+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Top Forbes companies</dd>
+          </div>
+
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">4M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Organizations</dd>
+          </div>
+        </dl>
+      <% end %>
+    <% end %>
+
+    <% tabs.with_tab_button("Services", class: "rounded-none") do |tab| %>
+      <% tab.with_panel(class: "bg-white md:p-8 dark:bg-gray-800") do %>
+        <%= render Gustwave::Heading.new("What we offer for your team", tag: :h2, class: "mb-5 text-2xl font-extrabold tracking-tight") %>
+
+        <ul role="list" class="space-y-4 text-gray-500 dark:text-gray-400">
+          <li class="flex space-x-2 rtl:space-x-reverse items-center">
+            <svg
+              class="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
+              />
+            </svg>
+
+            <span class="leading-tight">Live dashboards and reports</span>
+          </li>
+
+          <li class="flex space-x-2 rtl:space-x-reverse items-center">
+            <svg
+              class="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
+              />
+            </svg>
+
+            <span class="leading-tight">Ready-made templates for everyone</span>
+          </li>
+
+          <li class="flex space-x-2 rtl:space-x-reverse items-center">
+            <svg
+              class="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
+              />
+            </svg>
+
+            <span class="leading-tight">A development workflow that scales</span>
+          </li>
+
+          <li class="flex space-x-2 rtl:space-x-reverse items-center">
+            <svg
+              class="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
+              />
+            </svg>
+
+            <span class="leading-tight">Automation without limits</span>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% tabs.with_tab_button("FAQ", class: "rounded-e-none rounded-se-lg") do |tab| %>
+      <% tab.with_panel(class: "bg-white dark:bg-gray-800") do %>
+        <h2 class="py-5 font-medium text-gray-500 dark:text-gray-400">What is Gustwave?</h2>
+        <%= render Gustwave::Paragraph.new("Gustwave is an open-source library of interactive components built on top of Tailwind CSS, including buttons, dropdowns, modals, navbars and more.") %>
+
+        <h2 class="py-5 font-medium text-gray-500 dark:text-gray-400">Is there a design file available?</h2>
+        <%= render Gustwave::Paragraph.new("Every component has a matching design in our design file, so what you see in the library can be reproduced in your own tools.") %>
+
+        <h2 class="py-5 font-medium text-gray-500 dark:text-gray-400">How is Gustwave different from other kits?</h2>
+        <%= render Gustwave::Paragraph.new("The core components are open source under the MIT license, and they are small, standalone pieces you can combine freely.") %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
