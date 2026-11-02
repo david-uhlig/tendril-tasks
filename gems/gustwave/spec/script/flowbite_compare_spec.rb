@@ -132,4 +132,63 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(described_class.mask_boxes(nil, [])).to eq([])
     end
   end
+
+  describe ".look_at?" do
+    it "asks for a look when icon pixels differ" do
+      expect(described_class.look_at?({ "icon_pct" => 0.5 })).to be(true)
+    end
+
+    it "does not ask when icon pixels match" do
+      expect(described_class.look_at?({ "icon_pct" => 0.0 })).to be(false)
+    end
+
+    it "does not ask without icons" do
+      expect(described_class.look_at?({})).to be(false)
+    end
+  end
+
+  describe "the reminder in the output" do
+    let(:differing) { { "key" => "0", "region" => "element", "pct" => 0.0, "icon_pct" => 12.5, "review" => [] } }
+    let(:matching) { { "key" => "1", "region" => "element", "pct" => 0.0, "icon_pct" => 0.0, "review" => [] } }
+    let(:flagged) { { "key" => "2", "region" => "element", "pct" => 3.0, "icon_pct" => 1.0, "review" => [ "pixels 3.0%" ] } }
+
+    def summary(*records) = described_class.send(:summary, [ [ "== header", records ] ])
+    def report(*records) = described_class.send(:report, [ [ "== header", records ] ])
+
+    it "tags and explains an element with differing icon pixels" do
+      expect(summary(differing)).to include(
+        "[look] 0 element: pixels differ 0.0%, icon pixels differ 12.5%",
+        "look by eye: a wrong icon or line thickness raises no flag"
+      )
+    end
+
+    it "stays quiet about icons whose pixels match" do
+      output = summary(matching)
+
+      expect(output).to include("[ok] 1 element")
+      expect(output).not_to include("look by eye:")
+    end
+
+    it "keeps the reminder on a flagged element" do
+      expect(summary(flagged)).to include("[review] 2 element", "look by eye:")
+    end
+
+    it "counts the elements to look at" do
+      expect(summary(differing, matching, flagged)).to include(
+        "records: 3, to review: 1",
+        "icons to look at by eye: 2 (a wrong icon or line thickness raises no flag)"
+      )
+    end
+
+    it "reports none without the explanation" do
+      expect(summary(matching)).to end_with("icons to look at by eye: 0")
+    end
+
+    it "repeats the reminder in the report" do
+      expect(report(differing)).to include(
+        "<p>icons to look at by eye: 1 (a wrong icon or line thickness raises no flag)</p>",
+        "<p>Look by eye: a wrong icon or line thickness raises no flag</p>"
+      )
+    end
+  end
 end

@@ -10,6 +10,9 @@ module Gustwave
   # the Lookbook server running on BASE_URL and the example files already built
   # into OUT_DIR. Run it by hand:
   #   bundle exec ruby gems/gustwave/script/flowbite_compare.rb PAGE OUT_DIR [BASE_URL]
+  #
+  # Icon pixels are left out of the score, so a wrong icon or line thickness raises
+  # no flag. [look] marks the elements a person has to check by eye for these.
   module FlowbiteCompare
     extend self
 
@@ -27,6 +30,7 @@ module Gustwave
     # Boxes are whole CSS pixels and an element screenshot can start a pixel off, so
     # the mask reaches one pixel further. Assumes a device pixel ratio of 1.
     MASK_PADDING = 1
+    LOOK_NOTE = "a wrong icon or line thickness raises no flag"
     # Only sorts what a person looks at and decides nothing. The 1.0 value comes from
     # two components so far.
     PIXEL_FLAG = 1.0
@@ -207,6 +211,11 @@ module Gustwave
         left, top, width, height = icon["box"]
         [ left - MASK_PADDING, top - MASK_PADDING, width + 2 * MASK_PADDING, height + 2 * MASK_PADDING ]
       end
+    end
+
+    # Matching icon pixels rule out a wrong icon or line thickness. Anything else needs a person.
+    def look_at?(record)
+      record["icon_pct"]&.positive? || false
     end
 
     private
@@ -546,7 +555,12 @@ module Gustwave
       end.join("\n\n")
       records = blocks.flat_map(&:last)
       flagged = records.count { |record| flagged?(record) }
-      "#{body}\n\nrecords: #{records.size}, to review: #{flagged}"
+      "#{body}\n\nrecords: #{records.size}, to review: #{flagged}\n#{look_summary(records)}"
+    end
+
+    def look_summary(records)
+      count = records.count { |record| look_at?(record) }
+      "icons to look at by eye: #{count}#{" (#{LOOK_NOTE})" if count.positive?}"
     end
 
     def flagged?(record)
@@ -554,7 +568,9 @@ module Gustwave
     end
 
     def review_tag(record)
-      flagged?(record) ? "[review]" : "[ok]"
+      return "[review]" if flagged?(record)
+
+      look_at?(record) ? "[look]" : "[ok]"
     end
 
     def summary_lines(record)
@@ -566,6 +582,7 @@ module Gustwave
       parts << "size #{dims(record["fb_size"])} vs #{dims(record["gw_size"])}" if record["fb_size"] || record["gw_size"]
       parts << "offset #{offset_text(record["fb_offset"])} vs #{offset_text(record["gw_offset"])}" if record["fb_offset"] || record["gw_offset"]
       parts << "pixels differ #{record["pct"]}%" if record["pct"]
+      parts << "icon pixels differ #{record["icon_pct"]}%" if record["icon_pct"]
       "#{review_tag(record)} #{record["key"]} #{record["region"]}: #{parts.join(", ")}"
     end
 
@@ -580,6 +597,7 @@ module Gustwave
     def details(record)
       lines = []
       lines << "review: #{record["review"].join("; ")}" if flagged?(record)
+      lines << "look by eye: #{LOOK_NOTE}" if look_at?(record)
       lines << "missing: #{record["missing"]}" if record["missing"]
       lines << "menu_open: false" if record["menu_open"] == false
       lines << "error: #{record["error"]}" if record["error"]
@@ -608,6 +626,7 @@ module Gustwave
         <meta charset="utf-8">
         <title>Flowbite and Gustwave comparison</title>
         <body style="font: 14px sans-serif; margin: 16px">
+        <p>#{CGI.escapeHTML(look_summary(blocks.flat_map(&:last)))}</p>
         #{sections.join}
         </body>
         </html>
@@ -617,6 +636,7 @@ module Gustwave
     def report_record(record)
       notes = []
       notes << "<p>review: #{CGI.escapeHTML(record["review"].join("; "))}</p>" if flagged?(record)
+      notes << "<p>Look by eye: #{CGI.escapeHTML(LOOK_NOTE)}</p>" if look_at?(record)
       notes << "<p>Preview text: #{CGI.escapeHTML(record["gw_original_text"])}</p>" if record["swapped"] == true && record["gw_original_text"]
       "<div style=\"margin: 8px 0\"><p>#{CGI.escapeHTML(caption(record))}</p>#{notes.join}" \
         "#{report_image("Flowbite", record["fb_png"])}#{report_image("Gustwave", record["gw_png"])}</div>\n"
