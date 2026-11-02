@@ -1,6 +1,6 @@
 module Gustwave
   class ToastPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/toast/default?position=bottom_right
+    # @param position select { choices: [none, top_left, top_center, top_right, bottom_left, bottom_center, bottom_right] }
     def default(position: :none)
       render Gustwave::Toast.new("Your changes were saved.", position:)
     end

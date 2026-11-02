@@ -1,6 +1,5 @@
 module Gustwave
   class NavbarPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/navbar/default
     def default
       render_with_template
     end
@@ -24,6 +23,11 @@ module Gustwave
     # trigger is inline text with the classes of an inactive link, so it lines
     # up with the links next to it, also as a row in the collapsed menu.
     def with_dropdown
+      render_with_template
+    end
+
+    # Smaller text than +with_dropdown+, as in the example on Flowbite's dropdown page.
+    def with_compact_dropdown
       render_with_template
     end
   end

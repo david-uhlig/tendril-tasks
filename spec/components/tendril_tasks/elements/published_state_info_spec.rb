@@ -1,6 +1,13 @@
 require "rails_helper"
 
 RSpec.describe TendrilTasks::Elements::PublishedStateInfo, type: :component do
+  it "renders a 20px icon without Badge's negative margin" do
+    render_inline(described_class.new(create(:project, :published)))
+
+    expect(page).to have_selector("svg.h-5.mx-0")
+    expect(page).not_to have_selector("svg.-mx-px")
+  end
+
   context "with a task" do
     it "shows the published state for a published task" do
       task = create(:task, :published, :with_published_project)

@@ -10,7 +10,7 @@ module Gustwave
   class Icon < Gustwave::Component
     ICON_PATH = File.join("gustwave", "icons").freeze
 
-    SVG_STROKE_WIDTH = 1.5
+    SVG_STROKE_WIDTH = 2
     DEFAULT_STROKE_WIDTH = SVG_STROKE_WIDTH
 
     # The folder the icon is loaded from
@@ -21,8 +21,8 @@ module Gustwave
       "0": "*:stroke-0",
       "0.5": "*:stroke-[0.5px]",
       "1": "*:stroke-1",
-      "1.5": "",
-      "2": "*:stroke-2",
+      "1.5": "*:stroke-[1.5px]",
+      "2": "",
       "2.5": "*:stroke-[2.5px]",
       "3": "*:stroke-[3px]",
       "3.5": "*:stroke-[3.5px]",

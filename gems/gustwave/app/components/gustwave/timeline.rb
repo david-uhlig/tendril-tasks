@@ -13,7 +13,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do %>
   #       <%= time_tag Date.new(2022, 2, 1), "February 2022", class: "text-sm font-normal leading-none text-gray-400 dark:text-gray-500" %>
-  #       <%= render Gustwave::Heading.new("Application UI code in Tailwind CSS", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Heading.new("Application UI code in Tailwind CSS", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #       <%= render Gustwave::Paragraph.new("Get access to over 20+ pages.") %>
   #     <% end %>
   #   <% end %>
@@ -26,13 +26,22 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_image "/avatar.png", alt: "Bonnie Green" %>
   #       <%= render Gustwave::Card.new(class: "max-w-none") do %>
   #         Bonnie moved Jese Leos to Funny Group
   #       <% end %>
+  #     <% end %>
+  #   <% end %>
+  #
+  # Restyle a marker or dot with +marker_options+, e.g. to match a darker
+  # background. Its classes merge with the default ones:
+  #
+  #   <%= render Gustwave::Timeline.new do |timeline| %>
+  #     <% timeline.with_item(marker_options: { class: "bg-gray-100 dark:bg-gray-600 dark:ring-gray-700" }) do |item| %>
+  #       <% item.with_marker_icon :calendar_month %>
   #     <% end %>
   #   <% end %>
   #
@@ -43,7 +52,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new(orientation: :horizontal) do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #   <% end %>
   #
@@ -108,9 +117,11 @@ module Gustwave
       }
 
       # @param orientation [Symbol] +:vertical+ (default) or +:horizontal+. Set by Gustwave::Timeline.
+      # @param marker_options [Hash] HTML attributes for the element around the marker, or for the dot. Its +class+ merges with the default classes.
       # @param options [Hash] HTML attributes for the +<li>+ element.
-      def initialize(orientation: DEFAULT, **options)
+      def initialize(orientation: DEFAULT, marker_options: {}, **options)
         select_options(orientation:)
+        @marker_options = marker_options
         @options = options
       end
 
@@ -138,9 +149,13 @@ module Gustwave
       end
 
       def marker_or_dot
-        return tag.span(marker, class: classes(:marker)) if marker?
+        return tag.span(marker, **marker_attributes(:marker)) if marker?
 
-        tag.div(class: classes(:dot), aria: { hidden: true })
+        tag.div(**marker_attributes(:dot), aria: { hidden: true })
+      end
+
+      def marker_attributes(part)
+        @marker_options.merge(class: merge_classes(classes(part), @marker_options[:class]))
       end
     end
   end

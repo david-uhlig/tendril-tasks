@@ -1,6 +1,5 @@
 module Gustwave
   class KbdPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/kbd/default
     def default
       render_with_template
     end

@@ -2,7 +2,7 @@
   <% timeline.with_item do |item| %>
     <% item.with_marker_icon :calendar_month %>
 
-    <%= render Gustwave::Heading.new(tag: :h3, size: :xs, class: "flex items-center mb-1 text-lg") do %>
+    <%= render Gustwave::Heading.new(tag: :h3, size: :xs, class: "flex items-center mb-1 text-lg font-semibold") do %>
       Flowbite Application UI v2.0.0 <%= render Gustwave::Badge.new("Latest", class: "ms-3") %>
     <% end %>
 
@@ -16,14 +16,14 @@
 
   <% timeline.with_item do |item| %>
     <% item.with_marker_icon :calendar_month %>
-    <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "mb-1 text-lg") %>
+    <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "mb-1 text-lg font-semibold") %>
     <%= time_tag Date.new(2021, 12, 7), "Released on December 7th, 2021", class: "block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" %>
     <%= render Gustwave::Paragraph.new("All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.") %>
   <% end %>
 
   <% timeline.with_item do |item| %>
     <% item.with_marker_icon :calendar_month %>
-    <%= render Gustwave::Heading.new("Flowbite Library v1.2.2", tag: :h3, size: :xs, class: "mb-1 text-lg") %>
+    <%= render Gustwave::Heading.new("Flowbite Library v1.2.2", tag: :h3, size: :xs, class: "mb-1 text-lg font-semibold") %>
     <%= time_tag Date.new(2021, 12, 2), "Released on December 2nd, 2021", class: "block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" %>
     <%= render Gustwave::Paragraph.new("Get started with dozens of web components and interactive elements built on top of Tailwind CSS.") %>
   <% end %>

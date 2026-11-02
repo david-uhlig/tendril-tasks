@@ -1,6 +1,5 @@
 module Gustwave
   class DeviceMockupPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/device_mockup/default
     def default
       render_with_template
     end

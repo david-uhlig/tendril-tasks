@@ -39,6 +39,11 @@ module Gustwave
   # classes of these states, e.g. for purple tabs. The classes of the active
   # and inactive states must not share a class, and a trigger's own +class:+
   # must not conflict with its state's classes, or the swap breaks.
+  #
+  # === List class
+  #
+  # The +list_class+ option adds classes to the list of tabs, e.g. to round it
+  # or give it a background. They win conflicts with the style's classes.
   class Tabs < Gustwave::Component
     # Parts shared by every style
     part :list, "flex flex-wrap text-sm font-medium text-center"
@@ -143,11 +148,13 @@ module Gustwave
     # @param vertical [Boolean] whether the tabs are stacked in a column, beside their panels.
     # @param active_class [String, nil] classes of the selected tab that replace the style's, e.g. +"text-purple-600 border-purple-600"+. They win conflicts with the style's classes.
     # @param inactive_class [String, nil] classes of the unselected tabs that replace the style's. They win conflicts with the style's classes.
+    # @param list_class [String, nil] classes added to the list of tabs, e.g. +"rounded-t-lg bg-gray-50"+. They win conflicts with the style's classes.
     # @param options [Hash] additional HTML attributes of the root element. For link tabs, which render in a +nav+ element, this is that element, so pass +aria: { label: }+ here.
-    def initialize(id: nil, style: DEFAULT, vertical: false, active_class: nil, inactive_class: nil, **options)
+    def initialize(id: nil, style: DEFAULT, vertical: false, active_class: nil, inactive_class: nil, list_class: nil, **options)
       @id = id || generate_random_id(prefix: "tabs")
       @active_class = active_class
       @inactive_class = inactive_class
+      @list_class = list_class
 
       select_options(style:, vertical:)
       @options = attributes_for(options.merge(id: @id))
@@ -210,12 +217,12 @@ module Gustwave
 
     def navigation_tabs
       tag.nav **attributes_for(:nav, @options) do
-        tag.ul(class: classes(:list)) { safe_join(tab_items) }
+        tag.ul(class: classes(:list, class: @list_class)) { safe_join(tab_items) }
       end
     end
 
     def tablist
-      tag.ul id: list_id, role: "tablist", class: classes(:list),
+      tag.ul id: list_id, role: "tablist", class: classes(:list, class: @list_class),
              "data-tabs-toggle": "##{panels_id}",
              "data-tabs-active-classes": @active_classes,
              "data-tabs-inactive-classes": @inactive_classes do

@@ -3,12 +3,14 @@ placement position=:none direction=:up:
 - 'div data-dial-init="true": flex flex-col-reverse gap-4 group items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -41,12 +43,14 @@ placement position=:none direction=:down:
 - 'div data-dial-init="true": flex flex-col gap-4 group items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -79,12 +83,14 @@ placement position=:none direction=:left:
 - 'div data-dial-init="true": flex flex-row-reverse gap-4 group items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -117,12 +123,14 @@ placement position=:none direction=:right:
 - 'div data-dial-init="true": flex flex-row gap-4 group items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -156,12 +164,14 @@ placement position=:bottom_right direction=:up:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -194,12 +204,14 @@ placement position=:bottom_right direction=:down:
 - 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-col gap-4 group items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -233,12 +245,14 @@ placement position=:bottom_right direction=:left:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -271,12 +285,14 @@ placement position=:bottom_right direction=:right:
 - 'div data-dial-init="true": bottom-6 end-6 fixed flex flex-row gap-4 group items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -310,12 +326,14 @@ placement position=:bottom_left direction=:up:
   start-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -349,12 +367,14 @@ placement position=:bottom_left direction=:down:
   start-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -388,12 +408,14 @@ placement position=:bottom_left direction=:left:
   start-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -427,12 +449,14 @@ placement position=:bottom_left direction=:right:
   start-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -466,12 +490,14 @@ placement position=:top_right direction=:up:
   top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -504,12 +530,14 @@ placement position=:top_right direction=:down:
 - 'div data-dial-init="true": end-6 fixed flex flex-col gap-4 group items-center top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -543,12 +571,14 @@ placement position=:top_right direction=:left:
   top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -581,12 +611,14 @@ placement position=:top_right direction=:right:
 - 'div data-dial-init="true": end-6 fixed flex flex-row gap-4 group items-center top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -620,12 +652,14 @@ placement position=:top_left direction=:up:
   start-6 top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -659,12 +693,14 @@ placement position=:top_left direction=:down:
   top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -698,12 +734,14 @@ placement position=:top_left direction=:left:
   start-6 top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -737,12 +775,14 @@ placement position=:top_left direction=:right:
   top-6'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -776,12 +816,14 @@ look shape=:round label_display=:tooltip:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -815,12 +857,14 @@ look shape=:round label_display=:inside:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
@@ -844,12 +888,14 @@ look shape=:round label_display=:outside:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-full size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
@@ -875,12 +921,14 @@ look shape=:square label_display=:tooltip:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-lg size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -914,12 +962,14 @@ look shape=:square label_display=:inside:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-lg size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
@@ -943,12 +993,14 @@ look shape=:square label_display=:outside:
   items-center'
 - 'button aria-controls="speed-dial-r0000001" aria-expanded="false" data-dial-toggle="speed-dial-r0000001"
   data-dial-trigger="hover" type="button": align-bottom bg-blue-700 dark:bg-blue-600
-  dark:focus:ring-blue-800 dark:hover:bg-blue-700 disabled:cursor-not-allowed focus:outline-hidden
-  focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800 inline-flex items-center
-  justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
+  dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 gap-1.5 hover:bg-blue-800
+  inline-flex items-center justify-center overflow-hidden rounded-lg size-14 text-center
+  text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600

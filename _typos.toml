@@ -9,6 +9,8 @@ extend-exclude = [
   "vendor/",
   "app/assets/builds/",
   "*.svg",
+  # Generated from Flowbite's docs. Its ids must match theirs, typos included.
+  "gems/gustwave/lookbook/flowbite.yml",
 ]
 
 [default]

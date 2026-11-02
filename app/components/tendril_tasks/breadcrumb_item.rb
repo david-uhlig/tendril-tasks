@@ -20,20 +20,11 @@ module TendrilTasks
       </svg>
     HTML
 
-    # SVG icon for the separator.
-    SEPARATOR_ICON = <<-HTML
-      <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-      </svg>
-    HTML
+    # CSS class for the separator icon.
+    SEPARATOR_CLASS = "rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
 
     DEFAULT_ICON = :separator
-    ICON_MAPPINGS = {
-      separator: SEPARATOR_ICON,
-      home: HOME_ICON,
-      none: ""
-    }
-    ICON_OPTIONS = ICON_MAPPINGS.keys
+    ICON_OPTIONS = %i[separator home none].freeze
 
     # Initializes a new BreadcrumbItem.
     #
@@ -53,9 +44,16 @@ module TendrilTasks
         class: class_merge(LINK_CLASS, margin)
       }
 
-      @icon = {}
-      @icon[:html] = ICON_MAPPINGS[fetch_or_fallback(ICON_OPTIONS, icon, DEFAULT_ICON)].html_safe
-      @icon[:type] = icon.to_sym
+      @icon = fetch_or_fallback(ICON_OPTIONS, icon, DEFAULT_ICON)
+    end
+
+    private
+
+    def icon_html
+      case @icon
+      when :separator then render(Gustwave::Icon.new(:chevron_right_compact, class: SEPARATOR_CLASS))
+      when :home then HOME_ICON.html_safe
+      end
     end
   end
 end

@@ -22,6 +22,14 @@ RSpec.describe Gustwave::AvatarText, type: :component do
     expect(rendered_content).to have_css("span.text-xl", text: "CD")
   end
 
+  it "applies dark mode text color to the text in every size" do
+    %i[xs sm md lg xl 2xl 3xl 4xl].each do |size|
+      render_inline(described_class.new("AB", size:))
+
+      expect(rendered_content).to have_css("span.dark\\:text-gray-300", text: "AB")
+    end
+  end
+
   it "renders with different shape if provided" do
     render_inline(described_class.new("GH", shape: :square))
 

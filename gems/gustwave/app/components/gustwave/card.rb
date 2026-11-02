@@ -12,7 +12,7 @@ module Gustwave
   # Renders a card with a block of content:
   #
   #   <%= render Gustwave::Card.new do %>
-  #     <%= render Gustwave::Heading.new("Noteworthy technology", tag: :h5, class: "mb-2 tracking-tight") %>
+  #     <%= render Gustwave::Heading.new("Noteworthy technology", tag: :h5, size: :sm, class: "mb-2 tracking-tight") %>
   #     <%= render Gustwave::Paragraph.new("Here are the biggest enterprise technology acquisitions of 2021.") %>
   #   <% end %>
   #
