@@ -2189,26 +2189,28 @@ pages:
     preview: gustwave/paragraph/default
   - id: paragraph-leading-example
     title: Leading paragraph
-    status: composable
+    status: previewed
+    preview: gustwave/paragraph/leading
   - id: paragraph-first-letter-example
     title: First letter
-    status: composable
+    status: previewed
+    preview: gustwave/paragraph/first_letter
   - id: paragraph-link-example
     title: Paragraph link
     status: previewed
-    preview: gustwave/paragraph/inline_elements
+    preview: gustwave/paragraph/link
   - id: paragraph-bold-example
     title: Paragraph bold
     status: previewed
-    preview: gustwave/paragraph/inline_elements
+    preview: gustwave/paragraph/bold
   - id: paragraph-underline-example
     title: Paragraph underline
     status: previewed
-    preview: gustwave/paragraph/inline_elements
+    preview: gustwave/paragraph/underline
   - id: paragraph-italic-example
     title: Paragraph italic
     status: previewed
-    preview: gustwave/paragraph/inline_elements
+    preview: gustwave/paragraph/italic
   - id: paragraph-popover-example
     title: Paragraph popover
     status: previewed
@@ -2232,15 +2234,15 @@ pages:
   - id: paragraph-left-example
     title: Text alignment > Left
     status: previewed
-    preview: gustwave/paragraph/alignment
+    preview: gustwave/paragraph/align_left
   - id: paragraph-center-example
     title: Text alignment > Center
     status: previewed
-    preview: gustwave/paragraph/alignment
+    preview: gustwave/paragraph/align_center
   - id: paragraph-right-example
     title: Text alignment > Right
     status: previewed
-    preview: gustwave/paragraph/alignment
+    preview: gustwave/paragraph/align_right
   typography/text:
   - id: font-size-example
     title: Font size
