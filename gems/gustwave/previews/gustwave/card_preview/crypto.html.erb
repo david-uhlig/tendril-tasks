@@ -1,1 +1,83 @@
-<div>Placeholder</div>
+<%= render Gustwave::Card.new(class: "w-full") do |card| %>
+  <% card.configure_body(class: "p-4 sm:p-6") %>
+
+  <%= render Gustwave::Heading.new("Connect wallet", tag: :h5, class: "mb-3 text-base font-semibold md:text-xl") %>
+  <%= render Gustwave::Paragraph.new("Connect with one of our available wallet providers or create a new one.", class: "text-sm font-normal") %>
+
+  <ul class="my-4 space-y-3">
+    <li>
+      <a
+        href="/wallets/metamask"
+        class="
+          flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group
+          hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
+        "
+      >
+        <%= render Gustwave::Icon.new(:wallet, class: "h-4 w-4 scale-[1.5] text-[rgb(22,22,22)]") %>
+        <span class="flex-1 ms-3 whitespace-nowrap">MetaMask</span>
+        <%= render Gustwave::Badge.new("Popular", color: :base,class: "ms-3 px-2 justify-center bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400") %>
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/wallets/coinbase-wallet"
+        class="
+          flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group
+          hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
+        "
+      >
+        <%= render Gustwave::Icon.new(:wallet, class: "h-5 w-5 scale-[1.5] text-[rgb(50,89,165)]") %>
+        <span class="flex-1 ms-3 whitespace-nowrap">Coinbase Wallet</span>
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/wallets/opera-wallet"
+        class="
+          flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group
+          hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
+        "
+      >
+        <%= render Gustwave::Icon.new(:wallet, class: "h-5 w-5 scale-[1.5]") %>
+        <span class="flex-1 ms-3 whitespace-nowrap">Opera Wallet</span>
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/wallets/walletconnect"
+        class="
+          flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group
+          hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
+        "
+      >
+        <%= render Gustwave::Icon.new(:wallet, class: "h-5 w-5 scale-[1.5]") %>
+        <span class="flex-1 ms-3 whitespace-nowrap">WalletConnect</span>
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/wallets/fortmatic"
+        class="
+          flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group
+          hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white
+        "
+      >
+        <%= render Gustwave::Icon.new(:wallet, class: "h-4 w-4 scale-[1.5] text-[rgb(97,123,255)]") %>
+        <span class="flex-1 ms-3 whitespace-nowrap">Fortmatic</span>
+      </a>
+    </li>
+  </ul>
+
+  <div>
+    <a
+      href="/wallets/help"
+      class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400"
+    >
+      <%= render Gustwave::Icon.new(:question_circle, class: "me-2 h-3 w-3") %> Why do I need to connect with my wallet?
+    </a>
+  </div>
+<% end %>
