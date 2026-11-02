@@ -57,7 +57,8 @@ pages:
     preview: gustwave/alert/border_accent
   - id: alerts-additional-content-example
     title: Additional content
-    status: composable
+    status: previewed
+    preview: gustwave/alert/additional_content
   components/avatar:
   - id: default-avatar-example
     title: Default avatar
