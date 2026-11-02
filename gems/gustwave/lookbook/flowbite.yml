@@ -943,10 +943,11 @@ pages:
   - id: static-modal
     title: Static modal
     status: previewed
-    preview: gustwave/modal/not_dismissible
+    preview: gustwave/modal/static_backdrop
   - id: modal-popup-example
     title: Pop-up modal
-    status: composable
+    status: previewed
+    preview: gustwave/modal/popup
   - id: modal-form-example
     title: Form element
     status: partial
@@ -962,22 +963,26 @@ pages:
     needs: form
   - id: modal-timeline-example
     title: Modal with timeline
-    status: composable
+    status: previewed
+    preview: gustwave/modal/with_timeline
   - id: modal-progress-example
     title: Modal with progress bar
     status: partial
     needs: progress
   - id: modal-crypto-example
     title: Crypto wallet
-    status: composable
+    status: previewed
+    preview: gustwave/modal/crypto_wallet
   - id: modal-sizes-example
     title: Sizes
     status: previewed
-    preview: gustwave/modal/default
+    preview: gustwave/modal/sizes
+    note: Keeps Gustwave's widths, which follow Flowbite's other modal examples. This example puts the padding on the outer element and calls a narrower modal default.
   - id: modal-placement-example
     title: Placement
     status: previewed
-    preview: gustwave/modal/default
+    preview: gustwave/modal/placement
+    note: Keeps Gustwave's widths, which follow Flowbite's other modal examples. This example puts the padding on the outer element and calls a narrower modal default.
   components/navbar:
   - id: default-navbar-example
     title: Default navbar

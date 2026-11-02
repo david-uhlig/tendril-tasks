@@ -166,6 +166,18 @@ RSpec.describe Gustwave::FlowbiteCompare do
     end
   end
 
+  describe ".strategy_for" do
+    def strategy_for(page) = described_class.send(:strategy_for, page)
+
+    it "opens the modals of the modal page" do
+      expect(strategy_for("components/modal")).to eq(:modal)
+    end
+
+    it "refuses a page whose interactions no strategy covers" do
+      expect { strategy_for("components/drawer") }.to raise_error(described_class::Error, /interaction strategy/)
+    end
+  end
+
   describe "the reminder in the output" do
     let(:differing) { { "key" => "0", "region" => "element", "pct" => 0.0, "icon_pct" => 12.5, "review" => [] } }
     let(:matching) { { "key" => "1", "region" => "element", "pct" => 0.0, "icon_pct" => 0.0, "review" => [] } }

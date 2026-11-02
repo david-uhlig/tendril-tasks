@@ -36,10 +36,19 @@ RSpec.describe Gustwave::FlowbiteExamples do
       expect(described_class.parse(markdown).first).to have_attributes(wrapper_class: "", body_class: "bg-red-500")
     end
 
-    it "falls back to a zero-based index for an example without an id" do
-      markdown = "{{< example class=\"a\" >}}\n1\n{{< /example >}}\n{{< example >}}\n2\n{{< /example >}}\n"
+    it "names an example without an id after its heading, like the inventory" do
+      markdown = <<~MD
+        ## Static modal
 
-      expect(described_class.parse(markdown).map(&:id)).to eq([ "example-0", "example-1" ])
+        {{< example class="a" >}}
+        1
+        {{< /example >}}
+        {{< example >}}
+        2
+        {{< /example >}}
+      MD
+
+      expect(described_class.parse(markdown).map(&:id)).to eq([ "static-modal", "static-modal-1" ])
     end
 
     it "reads attributes spread over several lines" do
@@ -133,11 +142,11 @@ RSpec.describe Gustwave::FlowbiteExamples do
 
   describe ".write_pages" do
     it "writes one file per example and returns the count" do
-      markdown = "{{< example id=\"one\" >}}\n1\n{{< /example >}}\n{{< example >}}\n2\n{{< /example >}}\n"
+      markdown = "{{< example id=\"one\" >}}\n1\n{{< /example >}}\n## Static modal\n{{< example >}}\n2\n{{< /example >}}\n"
 
       Dir.mktmpdir do |dir|
         expect(described_class.write_pages(markdown, dir)).to eq(2)
-        expect(Dir.children(File.join(dir, "examples")).sort).to eq([ "example-1.html", "one.html" ])
+        expect(Dir.children(File.join(dir, "examples")).sort).to eq([ "one.html", "static-modal.html" ])
         expect(File.read(File.join(dir, "examples", "one.html"))).to include("<html lang=\"en\">")
       end
     end

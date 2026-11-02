@@ -95,6 +95,39 @@ RSpec.describe Gustwave::Timeline, type: :component do
       expect(page).to have_selector("li > span > img[alt='Bonnie'].rounded-full.w-6.shadow-lg")
       expect(page).to have_selector("li.ms-6")
     end
+
+    it "merges marker_options into a marker" do
+      render_inline(described_class.new) do |timeline|
+        timeline.with_item(marker_options: { class: "bg-gray-100 -start-3.5", data: { kind: "release" } }) do |item|
+          item.with_marker_icon :calendar_month
+          "Event"
+        end
+      end
+
+      expect(page).to have_selector("li > span.bg-gray-100.-start-3\\.5.w-6[data-kind='release']")
+      expect(page).not_to have_selector("li > span.bg-blue-100")
+      expect(page).not_to have_selector("li > span.-start-3")
+    end
+
+    it "merges marker_options into a dot" do
+      render_inline(described_class.new) do |timeline|
+        timeline.with_item(marker_options: { class: "bg-red-500" }) { "Event" }
+      end
+
+      expect(page).to have_selector("li > div[aria-hidden='true'].bg-red-500.rounded-full")
+      expect(page).not_to have_selector("li > div.bg-gray-200")
+    end
+
+    it "keeps the marker's default classes without marker_options" do
+      render_inline(described_class.new) do |timeline|
+        timeline.with_item do |item|
+          item.with_marker_icon :calendar_month
+          "Event"
+        end
+      end
+
+      expect(page).to have_selector("li > span.bg-blue-100.-start-3")
+    end
   end
 
   describe "items" do

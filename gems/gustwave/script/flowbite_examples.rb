@@ -18,7 +18,6 @@ module Gustwave
     Example = Struct.new(:id, :html, :wrapper_class, :body_class, :init_js, keyword_init: true)
 
     BLOCK = /\{\{<\s*example\b(.*?)>\}\}\n?(.*?)\{\{<\s*\/example\s*>\}\}/m
-    ID = /(?<![A-Za-z])id="([^"]+)"/
     CLASS = /(?<![A-Za-z])class="([^"]*)"/
     BODY_CLASS = /bodyClass="([^"]*)"/
     DISABLE_INIT_JS = /disable_init_js="?true\b/
@@ -47,16 +46,12 @@ module Gustwave
 
     # The examples in a docs page, in order of appearance.
     def parse(markdown)
-      seen = []
+      # The inventory names the examples, so the ids agree with lookbook/flowbite.yml.
+      ids = FlowbiteInventory.parse(markdown).map { _1["id"] }
 
       markdown.scan(BLOCK).each_with_index.map do |(attributes, html), index|
-        # Same rule as FlowbiteInventory, so the ids agree with lookbook/flowbite.yml.
-        id = attributes[ID, 1] || "example-#{index}"
-        id = "#{id}-#{seen.size}" if seen.include?(id)
-        seen << id
-
         Example.new(
-          id: id,
+          id: ids.fetch(index),
           html: html,
           wrapper_class: attributes[CLASS, 1].to_s.strip,
           body_class: attributes[BODY_CLASS, 1].to_s,
