@@ -8,7 +8,7 @@ module Gustwave
       base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white"
 
       part :inner,
-           "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-1.5"
+           "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-2"
 
       variant :color, default: :purple_to_blue, values: {
         base: "",
@@ -33,21 +33,21 @@ module Gustwave
       #   extend_variant :size, values: { "2xl": { inner: "…", visual: "…" } }
       #   extend_toggle :visual_only, part: :inner, values: { "2xl": "…" }
       variant :size, default: :md, values: {
-        xs: { inner: "px-2.5 py-2 text-xs font-medium", visual: "h-4 w-auto" },
-        sm: { inner: "px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
-        md: { inner: "px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
-        lg: { inner: "px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
-        xl: { inner: "px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+        xs: { inner: "px-2.5 py-2 text-xs font-medium", visual: "h-4 w-auto -mx-0.5" },
+        sm: { inner: "px-3 py-2 text-sm font-medium", visual: "h-4 w-auto -mx-0.5" },
+        md: { inner: "px-5 py-2.5 text-sm font-medium", visual: "h-4.5 w-auto -mx-0.5" },
+        lg: { inner: "px-5 py-3 text-base font-medium", visual: "h-5 w-auto -mx-0.5" },
+        xl: { inner: "px-6 py-3.5 text-base font-medium", visual: "h-5 w-auto -mx-0.5" }
       }
 
-      toggle :has_visual, "inline-flex items-center align-bottom gap-1.5", part: :inner, internal: true
+      toggle :has_visual, "inline-flex items-center align-bottom gap-2", part: :inner, internal: true
 
       toggle :visual_only, per: :size, part: :inner, internal: true, values: {
-        xs: "p-2",
-        sm: "p-2",
-        md: "p-2.5",
-        lg: "p-3",
-        xl: "p-3.5"
+        xs: "p-2 *:h-4 *:mx-0",
+        sm: "p-2 *:h-5 *:mx-0",
+        md: "p-2.5 *:h-5 *:mx-0",
+        lg: "p-3 *:h-6 *:mx-0",
+        xl: "p-3.5 *:h-7 *:mx-0"
       }
 
       def initialize(text = nil, color: DEFAULT, size: DEFAULT, **options)

@@ -75,20 +75,28 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
     it "trails the text" do
       render_inline(described_class.new("content", menu_id: "menu"))
 
-      expect(page).to have_selector("button > svg.ms-1\\.5:last-child")
+      expect(page).to have_selector("button > svg.ms-1:last-child")
+    end
+
+    it "spaces the trailing chevron with the button gap and no negative margin" do
+      render_inline(described_class.new("content", menu_id: "menu"))
+
+      chevron_classes = page.find("button > svg:last-child")["class"].split
+      expect(chevron_classes).to include("h-2.5", "mx-0", "ms-1")
+      expect(chevron_classes).not_to include("-mx-0.5")
     end
 
     it "leads the text for a menu on the left" do
       render_inline(described_class.new("content", menu_id: "menu", placement: :left))
 
-      expect(page).to have_selector("button > svg.me-1\\.5:first-child")
+      expect(page).to have_selector("button > svg.me-1:first-child")
     end
 
     it "trails the text for a menu on the left when an icon leads" do
       render_inline(described_class.new("content", menu_id: "menu", placement: :left, icon: :check))
 
       expect(page).to have_selector("button > svg:first-child > path[d='#{icon_path_data.call(:check)}']")
-      expect(page).to have_selector("button > svg.ms-1\\.5:last-child > path[d='#{icon_path_data.call(:chevron_left_compact)}']")
+      expect(page).to have_selector("button > svg.ms-1:last-child > path[d='#{icon_path_data.call(:chevron_left_compact)}']")
     end
 
     it "renders a custom trailing icon as given" do

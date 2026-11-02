@@ -11,6 +11,13 @@ RSpec.describe Gustwave::Buttons::Default, type: :component do
     end
   end
 
+  it "sizes the icon of an icon-only button at md" do
+    render_inline(described_class.new(size: :md)) { |button| button.with_leading_visual_icon :check }
+
+    classes = page.find("button")["class"].split
+    expect(classes).to include("*:h-5", "*:mx-0")
+  end
+
   it "renders the disabled colour of the default color" do
     render_inline(described_class.new("Go"))
 

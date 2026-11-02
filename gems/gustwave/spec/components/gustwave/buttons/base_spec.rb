@@ -62,11 +62,24 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
     end
   end
 
-  context "with an xl leading icon" do
-    it "pulls the icon's negative margin so it keeps the button height" do
-      render_inline(described_class.new("Go", size: :xl)) { |component| component.with_leading_visual_icon :check }
+  {
+    xs: "h-4",
+    sm: "h-4",
+    md: "h-4.5",
+    lg: "h-5",
+    xl: "h-5"
+  }.each do |size, icon_height|
+    context "with a leading icon at #{size}" do
+      it "renders Flowbite's gap and an icon box with its negative margin" do
+        render_inline(described_class.new("Go", size:)) { |component| component.with_leading_visual_icon :check }
 
-      expect(rendered_content).to have_selector('button>svg.h-7.w-auto.-my-0\.5')
+        classes = page.find("button")["class"].split
+        icon_classes = page.find("button svg")["class"].split
+
+        expect(classes).to include("gap-2")
+        expect(classes).not_to include("gap-1.5")
+        expect(icon_classes).to include(icon_height, "w-auto", "-mx-0.5")
+      end
     end
   end
 
@@ -120,7 +133,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
           component.public_send(:"with_#{position}_visual_image", "https://example.com/image.png", class: "custom")
         end
 
-        expect(rendered_content).to have_selector("button>img.h-5.w-auto.custom[aria-hidden='true']")
+        expect(rendered_content).to have_selector("button>img.h-4\\.5.w-auto.-mx-0\\.5.custom[aria-hidden='true']")
       end
 
       it "merges a custom class with the visual size classes on svgs" do
@@ -128,7 +141,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
           component.public_send(:"with_#{position}_visual_svg", "gustwave/icons/outline/arrow-left.svg", class: "custom")
         end
 
-        expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom")
+        expect(rendered_content).to have_selector("button>svg.h-4\\.5.w-auto.-mx-0\\.5.custom")
       end
 
       it "merges a custom class with the visual size classes on block svgs" do
@@ -138,7 +151,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
           end
         end
 
-        expect(rendered_content).to have_selector("button>svg.h-5.w-auto.custom[aria-hidden='true']>rect")
+        expect(rendered_content).to have_selector("button>svg.h-4\\.5.w-auto.-mx-0\\.5.custom[aria-hidden='true']>rect")
       end
     end
   end
@@ -199,7 +212,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
         end
 
         expect(rendered_content).to have_selector(
-          "button>img.h-6.w-auto.rounded-full[aria-hidden='true'][data-size='lg'][src='https://example.com/me.png']"
+          "button>img.h-5.w-auto.-mx-0\\.5.rounded-full[aria-hidden='true'][data-size='lg'][src='https://example.com/me.png']"
         )
       end
     end
@@ -209,7 +222,7 @@ RSpec.describe Gustwave::Buttons::Base, type: :component do
         button.with_leading_visual_renderable(consumer_avatar.new("https://example.com/me.png"))
       end
 
-      expect(rendered_content).to have_selector("button>img.h-5.w-auto[data-size='sm']")
+      expect(rendered_content).to have_selector("button>img.h-4.w-auto.-mx-0\\.5[data-size='sm']")
     end
 
     it "renders components without the protocol unchanged" do
