@@ -6,5 +6,20 @@ module Gustwave
     def default(placement: :top, trigger: :hover)
       render_with_template(locals: { placement:, trigger: })
     end
+
+    # Each placement on its own trigger.
+    def placement; end
+
+    # Opens on hover or on click.
+    def triggering; end
+
+    # Moves the popover further from its trigger.
+    def offset; end
+
+    # Fades in, through the transition every popover has.
+    def animation; end
+
+    # Leaves out the arrow.
+    def no_arrow; end
   end
 end
