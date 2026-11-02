@@ -40,7 +40,8 @@ module Gustwave
     attr_reader :text
 
     def title_tag
-      render Gustwave::Heading.new(text_or_content(text), tag: :h3, size: :xs, id: "#{@modal_id}-title", **@title_options)
+      options = @title_options.merge(class: class_names("font-semibold", @title_options[:class]))
+      render Gustwave::Heading.new(text_or_content(text), tag: :h3, size: :xs, id: "#{@modal_id}-title", **options)
     end
 
     def close_button

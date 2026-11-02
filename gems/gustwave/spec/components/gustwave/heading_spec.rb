@@ -25,19 +25,29 @@ RSpec.describe Gustwave::Heading, type: :component do
     it "derives the size from the tag" do
       render_inline(described_class.new("Title", tag: :h4))
 
-      expect(page).to have_selector("h4.text-3xl")
+      expect(page).to have_selector("h4.text-2xl")
     end
 
     it "derives the size from the fallback tag" do
       render_inline(described_class.new("Title", tag: nil))
 
-      expect(page).to have_selector("h2.text-5xl")
+      expect(page).to have_selector("h2.text-4xl")
     end
 
     it "keeps an explicit size" do
       render_inline(described_class.new("Title", tag: :h1, size: :xs))
 
       expect(page).to have_selector("h1.text-xl")
+    end
+
+    it "renders the sm and xs sizes in bold" do
+      render_inline(described_class.new("Title", tag: :h2, size: :sm))
+
+      expect(page).to have_selector("h2.text-2xl.font-bold")
+
+      render_inline(described_class.new("Title", tag: :h2, size: :xs))
+
+      expect(page).to have_selector("h2.text-xl.font-bold")
     end
   end
 
@@ -85,13 +95,13 @@ RSpec.describe Gustwave::Heading, type: :component do
     it "renders the responsive sizes" do
       render_inline(described_class.new("Title", tag: :h2, responsive: true))
 
-      expect(page).to have_selector("h2[class~='md:text-4xl']")
+      expect(page).to have_selector("h2[class~='md:text-3xl']")
     end
 
     it "renders no responsive sizes by default" do
       render_inline(described_class.new("Title", tag: :h2))
 
-      expect(page).not_to have_selector("h2[class~='md:text-4xl']")
+      expect(page).not_to have_selector("h2[class~='md:text-3xl']")
     end
   end
 

@@ -18,17 +18,17 @@ module Gustwave
       xl: "text-5xl font-extrabold",
       lg: "text-4xl font-bold",
       md: "text-3xl font-bold",
-      sm: "text-2xl font-semibold",
-      xs: "text-xl font-semibold"
+      sm: "text-2xl font-bold",
+      xs: "text-xl font-bold"
     }
 
     # The size per tag, when no size is given
     derive :default_size, from: :tag, values: {
-      h1: :"2xl",
-      h2: :xl,
-      h3: :lg,
-      h4: :md,
-      h5: :sm,
+      h1: :xl,
+      h2: :lg,
+      h3: :md,
+      h4: :sm,
+      h5: :xs,
       h6: :xs
     }
 

@@ -13,7 +13,7 @@
 
     <div class="flex flex-col items-center">
       <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Jane Doe", size: :xl, class: "mb-3") %>
-      <%= render Gustwave::Heading.new("Jane Doe", tag: :h5, class: "mb-1 tracking-tight") %>
+      <%= render Gustwave::Heading.new("Jane Doe", tag: :h5, size: :sm, class: "mb-1 tracking-tight") %>
 
       <span class="text-sm text-gray-500 dark:text-gray-400">Visual designer</span>
 
@@ -26,7 +26,7 @@
 
   <%= render Gustwave::Card.new do %>
     <div class="text-center">
-      <%= render Gustwave::Heading.new("Ready to get started?", tag: :h5, class: "mb-2 tracking-tight") %>
+      <%= render Gustwave::Heading.new("Ready to get started?", tag: :h5, size: :sm, class: "mb-2 tracking-tight") %>
       <%= render Gustwave::Paragraph.new("Start a free trial today and see how the platform fits your team.", class: "mb-4") %>
 
       <div class="flex justify-center gap-3">
@@ -37,7 +37,7 @@
   <% end %>
 
   <%= render Gustwave::Card.new do %>
-    <%= render Gustwave::Heading.new("Standard", tag: :h5, class: "mb-2 tracking-tight") %>
+    <%= render Gustwave::Heading.new("Standard", tag: :h5, size: :sm, class: "mb-2 tracking-tight") %>
 
     <div class="flex items-baseline text-gray-900 dark:text-white">
       <span class="text-3xl font-semibold">$29</span>
@@ -62,7 +62,7 @@
   <% end %>
 
   <%= render Gustwave::Card.new do %>
-    <%= render Gustwave::Heading.new("Included in every plan", tag: :h5, class: "mb-4 tracking-tight") %>
+    <%= render Gustwave::Heading.new("Included in every plan", tag: :h5, size: :sm, class: "mb-4 tracking-tight") %>
 
     <ul class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
       <li class="flex items-center">

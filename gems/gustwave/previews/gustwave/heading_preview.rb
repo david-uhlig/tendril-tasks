@@ -55,28 +55,28 @@ module Gustwave
     end
 
     def heading_one
-      render Gustwave::Heading.new("Heading 1", tag: :h1, size: :xl)
+      render Gustwave::Heading.new("Heading 1", tag: :h1)
     end
 
     def heading_two
-      render Gustwave::Heading.new("Heading 2", tag: :h2, size: :lg)
+      render Gustwave::Heading.new("Heading 2", tag: :h2)
     end
 
     def heading_three
-      render Gustwave::Heading.new("Heading 3", tag: :h3, size: :md)
+      render Gustwave::Heading.new("Heading 3", tag: :h3)
     end
 
     def heading_four
-      render Gustwave::Heading.new("Heading 4", tag: :h4, size: :sm)
+      render Gustwave::Heading.new("Heading 4", tag: :h4)
     end
 
     def heading_five
-      render Gustwave::Heading.new("Heading 5", tag: :h5, size: :xs)
+      render Gustwave::Heading.new("Heading 5", tag: :h5)
     end
 
     # Heading has no size this small, so the class sets the font size.
     def heading_six
-      render Gustwave::Heading.new("Heading 6", tag: :h6, size: :xs, class: "text-lg")
+      render Gustwave::Heading.new("Heading 6", tag: :h6, class: "text-lg")
     end
   end
 end
