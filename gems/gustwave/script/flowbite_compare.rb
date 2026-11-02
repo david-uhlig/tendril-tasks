@@ -10,6 +10,9 @@ module Gustwave
   # the Lookbook server running on BASE_URL and the example files already built
   # into OUT_DIR. Run it by hand:
   #   bundle exec ruby gems/gustwave/script/flowbite_compare.rb PAGE OUT_DIR [BASE_URL]
+  #
+  # Icon pixels are left out of the score, so a wrong icon or line thickness raises
+  # no flag. [look] marks the elements a person has to check by eye for these.
   module FlowbiteCompare
     extend self
 
@@ -22,6 +25,13 @@ module Gustwave
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
     NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
+    # Icon sets leave different margins, so a drawing's size varies with the artwork
+    # while its centre should not. The size uses SIZE_TOLERANCE.
+    ICON_CENTRE_TOLERANCE = 1
+    # Boxes are whole CSS pixels and an element screenshot can start a pixel off, so
+    # the mask reaches one pixel further. Assumes a device pixel ratio of 1.
+    MASK_PADDING = 1
+    LOOK_NOTE = "a wrong icon or line thickness raises no flag"
     # Only sorts what a person looks at and decides nothing. The 1.0 value comes from
     # two components so far.
     PIXEL_FLAG = 1.0
@@ -61,6 +71,32 @@ module Gustwave
       };
     JS
 
+    # Each icon's box relative to the element, the box of what it draws, and the colours
+    # it paints. Shapes in defs, clip paths, masks and symbols draw nothing themselves.
+    # A nested svg belongs to the icon around it. Hidden icons have no box.
+    FB_ICONS = <<~JS
+      window.fbIcons = root => {
+        const origin = root.getBoundingClientRect();
+        const svgs = [...(root.matches('svg') ? [root] : []), ...root.querySelectorAll('svg')];
+        return svgs.filter(s => !s.parentElement.closest('svg')).map(s => ({ svg: s, r: s.getBoundingClientRect() }))
+          .filter(({ r }) => r.width > 0 && r.height > 0)
+          .map(({ svg, r }) => {
+            const shapes = [...svg.querySelectorAll('path, circle, rect, line, polygon, polyline, ellipse')]
+              .filter(e => !e.closest('defs, clipPath, mask, symbol'));
+            const paints = shapes.flatMap(e => { const c = getComputedStyle(e); return [c.fill, c.stroke]; }).filter(p => p !== 'none');
+            const drawn = shapes.map(e => e.getBoundingClientRect()).filter(b => b.width > 0 || b.height > 0);
+            const boxes = drawn.length ? drawn : [r];
+            const left = Math.min(...boxes.map(b => b.left)), top = Math.min(...boxes.map(b => b.top));
+            const right = Math.max(...boxes.map(b => b.right)), bottom = Math.max(...boxes.map(b => b.bottom));
+            return {
+              box: [r.left - origin.left, r.top - origin.top, r.width, r.height].map(Math.round),
+              ink: [left - origin.left, top - origin.top, right - left, bottom - top].map(n => Math.round(n * 100) / 100),
+              paints: [...new Set(paints)].sort()
+            };
+          });
+      };
+    JS
+
     CAPTURE = <<~JS
       const el = arguments[0], cs = getComputedStyle(el), r = el.getBoundingClientRect();
       return {
@@ -68,6 +104,7 @@ module Gustwave
         text: el.textContent.replace(/\\s+/g, ' ').trim(),
         text_parts: fbVisibleText(el).map(n => n.textContent.replace(/\\s+/g, ' ')),
         tags: [...el.querySelectorAll('*')].map(e => e.tagName.toLowerCase()).filter(t => t != 'path').join(' '),
+        icons: fbIcons(el),
         size: [Math.round(r.width), Math.round(r.height)],
         styles: Object.fromEntries(arguments[1].map(k => [k, cs[k]]))
       };
@@ -98,15 +135,27 @@ module Gustwave
       return [Math.round(a.left - b.left), Math.round(a.top - b.top)];
     JS
 
+    # Pixels inside an icon box on either side count apart from the rest.
     PIXEL_DIFF = <<~JS
-      const [a, b, done] = arguments;
+      const [a, b, masks, done] = arguments;
       const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = 'data:image/png;base64,' + src; });
       Promise.all([load(a), load(b)]).then(([x, y]) => {
         const w = Math.min(x.width, y.width), h = Math.min(x.height, y.height);
         const read = i => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); g.drawImage(i, 0, 0); return g.getImageData(0, 0, w, h).data; };
-        const p = read(x), q = read(y); let n = 0;
-        for (let k = 0; k < p.length; k += 4) if (Math.abs(p[k]-q[k]) > 32 || Math.abs(p[k+1]-q[k+1]) > 32 || Math.abs(p[k+2]-q[k+2]) > 32) n++;
-        done({ differing: n, total: w * h });
+        const covered = new Uint8Array(w * h);
+        masks.forEach(([left, top, width, height]) => {
+          for (let row = Math.max(top, 0); row < Math.min(top + height, h); row++) {
+            for (let col = Math.max(left, 0); col < Math.min(left + width, w); col++) covered[row * w + col] = 1;
+          }
+        });
+        const p = read(x), q = read(y);
+        const counts = { differing: 0, total: 0, icon_differing: 0, icon_total: 0 };
+        for (let k = 0; k < p.length; k += 4) {
+          const differs = Math.abs(p[k]-q[k]) > 32 || Math.abs(p[k+1]-q[k+1]) > 32 || Math.abs(p[k+2]-q[k+2]) > 32;
+          if (covered[k / 4]) { counts.icon_total++; if (differs) counts.icon_differing++; }
+          else { counts.total++; if (differs) counts.differing++; }
+        }
+        done(counts);
       });
     JS
 
@@ -147,8 +196,34 @@ module Gustwave
       if fb_offset && gw_offset && beyond?(fb_offset, gw_offset, SIZE_TOLERANCE)
         reasons << "offset #{offset_text(fb_offset)} vs #{offset_text(gw_offset)}"
       end
+      reasons.concat(icon_reasons(record))
       reasons << "pixels #{record["pct"]}%" if record["pct"] && record["pct"] >= PIXEL_FLAG
       reasons
+    end
+
+    # What can still be measured about icons once their pixels are not compared.
+    def icon_reasons(record)
+      flowbite, gustwave = record["fb_icons"], record["gw_icons"]
+      return [] unless flowbite && gustwave
+      return [ "icons #{flowbite.size} vs #{gustwave.size}" ] if flowbite.size != gustwave.size
+
+      flowbite.zip(gustwave).each_with_index.flat_map do |(fb, gw), index|
+        icon_differences(fb, gw).map { |difference| "icon #{index + 1} #{difference}" }
+      end
+    end
+
+    # The areas left out of the pixel score: every icon box from both sides, as
+    # [left, top, width, height].
+    def mask_boxes(flowbite_icons, gustwave_icons)
+      [ *flowbite_icons, *gustwave_icons ].map do |icon|
+        left, top, width, height = icon["box"]
+        [ left - MASK_PADDING, top - MASK_PADDING, width + 2 * MASK_PADDING, height + 2 * MASK_PADDING ]
+      end
+    end
+
+    # Matching icon pixels rule out a wrong icon or line thickness. Anything else needs a person.
+    def look_at?(record)
+      record["icon_pct"]&.positive? || false
     end
 
     private
@@ -226,6 +301,7 @@ module Gustwave
       driver.navigate.to url
       sleep 1
       driver.execute_script(FB_VISIBLE_TEXT)
+      driver.execute_script(FB_ICONS)
       driver.execute_script("document.documentElement.classList.add('dark')") if dark
       driver.execute_script(NORMALIZE)
       sleep 0.3
@@ -248,9 +324,10 @@ module Gustwave
     end
 
     # Replaces a lone wrapper with its displayed children while the reference has several elements.
-    # An element without displayed element children stays as it is.
+    # Only a div counts as a wrapper: stepping into a lone badge or button would compare its icon with
+    # the reference's whole element. An element without displayed element children stays as it is.
     def unwrap(driver, elements, wanted)
-      while elements.size == 1 && wanted.size > 1
+      while elements.size == 1 && wanted.size > 1 && elements.first.tag_name == "div"
         children = elements.first.find_elements(xpath: "./*").select(&:displayed?)
         break if children.empty?
 
@@ -383,16 +460,32 @@ module Gustwave
       before.zip(after).any? { |a, b| (a - b).abs > tolerance }
     end
 
+    def icon_differences(flowbite, gustwave)
+      fb_size, gw_size = flowbite["ink"].last(2), gustwave["ink"].last(2)
+      fb_centre, gw_centre = centre(flowbite["ink"]), centre(gustwave["ink"])
+      fb_paints, gw_paints = flowbite["paints"], gustwave["paints"]
+      differences = []
+      differences << "size #{dims(fb_size)} vs #{dims(gw_size)}" if beyond?(fb_size, gw_size, SIZE_TOLERANCE)
+      differences << "centre #{offset_text(fb_centre)} vs #{offset_text(gw_centre)}" if beyond?(fb_centre, gw_centre, ICON_CENTRE_TOLERANCE)
+      # Artwork may add a detail colour, so only icons with no colour in common differ.
+      differences << "colour #{fb_paints.join(" ")} vs #{gw_paints.join(" ")}" if fb_paints != gw_paints && (fb_paints & gw_paints).empty?
+      differences
+    end
+
+    def centre(ink)
+      left, top, width, height = ink
+      [ (left + width / 2.0).round(2), (top + height / 2.0).round(2) ]
+    end
+
     def record(driver, meta, place, flowbite, gustwave)
       fields = {
         "missing" => missing(flowbite, gustwave),
         "menu_open" => menu_open(flowbite, gustwave),
-        "pct" => pct(driver, flowbite&.dig("png"), gustwave&.dig("png")),
         "error" => errors(flowbite, gustwave),
         "fb_png" => flowbite&.dig("png"),
         "gw_png" => gustwave&.dig("png")
       }
-      built = meta.merge(place).merge(fields).merge(side_fields(flowbite, gustwave)).merge(text_fields(flowbite, gustwave)).compact
+      built = meta.merge(place).merge(fields).merge(pixel_fields(driver, flowbite, gustwave)).merge(side_fields(flowbite, gustwave)).merge(text_fields(flowbite, gustwave)).compact
       built.merge("review" => review_reasons(built))
     end
 
@@ -410,7 +503,8 @@ module Gustwave
         "fb_size" => flowbite&.dig("size"), "gw_size" => gustwave&.dig("size"),
         "fb_offset" => flowbite&.dig("offset"), "gw_offset" => gustwave&.dig("offset"),
         "fb_text" => flowbite&.dig("text"), "gw_text" => gustwave&.dig("text"),
-        "fb_tags" => flowbite&.dig("tags"), "gw_tags" => gustwave&.dig("tags")
+        "fb_tags" => flowbite&.dig("tags"), "gw_tags" => gustwave&.dig("tags"),
+        "fb_icons" => flowbite&.dig("icons"), "gw_icons" => gustwave&.dig("icons")
       }
       return fields unless flowbite && gustwave
 
@@ -437,18 +531,21 @@ module Gustwave
       messages.join("; ") if messages.any?
     end
 
-    def pct(driver, before, after)
-      return unless before && after
+    def pixel_fields(driver, flowbite, gustwave)
+      before, after = flowbite&.dig("png"), gustwave&.dig("png")
+      return {} unless before && after
 
-      result = pixel_diff(driver, before, after)
-      return if result["total"].zero?
-
-      (100.0 * result["differing"] / result["total"]).round(2)
+      result = pixel_diff(driver, before, after, mask_boxes(flowbite["icons"], gustwave["icons"]))
+      { "pct" => share(result["differing"], result["total"]), "icon_pct" => share(result["icon_differing"], result["icon_total"]) }
     end
 
-    def pixel_diff(driver, before, after)
+    def share(part, whole)
+      (100.0 * part / whole).round(2) unless whole.zero?
+    end
+
+    def pixel_diff(driver, before, after, masks)
       driver.navigate.to "about:blank"
-      driver.execute_async_script(PIXEL_DIFF, before, after)
+      driver.execute_async_script(PIXEL_DIFF, before, after, masks)
     end
 
     def style_diffs(flowbite, gustwave)
@@ -473,7 +570,12 @@ module Gustwave
       end.join("\n\n")
       records = blocks.flat_map(&:last)
       flagged = records.count { |record| flagged?(record) }
-      "#{body}\n\nrecords: #{records.size}, to review: #{flagged}"
+      "#{body}\n\nrecords: #{records.size}, to review: #{flagged}\n#{look_summary(records)}"
+    end
+
+    def look_summary(records)
+      count = records.count { |record| look_at?(record) }
+      "icons to look at by eye: #{count}#{" (#{LOOK_NOTE})" if count.positive?}"
     end
 
     def flagged?(record)
@@ -481,7 +583,9 @@ module Gustwave
     end
 
     def review_tag(record)
-      flagged?(record) ? "[review]" : "[ok]"
+      return "[review]" if flagged?(record)
+
+      look_at?(record) ? "[look]" : "[ok]"
     end
 
     def summary_lines(record)
@@ -493,6 +597,7 @@ module Gustwave
       parts << "size #{dims(record["fb_size"])} vs #{dims(record["gw_size"])}" if record["fb_size"] || record["gw_size"]
       parts << "offset #{offset_text(record["fb_offset"])} vs #{offset_text(record["gw_offset"])}" if record["fb_offset"] || record["gw_offset"]
       parts << "pixels differ #{record["pct"]}%" if record["pct"]
+      parts << "icon pixels differ #{record["icon_pct"]}%" if record["icon_pct"]
       "#{review_tag(record)} #{record["key"]} #{record["region"]}: #{parts.join(", ")}"
     end
 
@@ -507,6 +612,7 @@ module Gustwave
     def details(record)
       lines = []
       lines << "review: #{record["review"].join("; ")}" if flagged?(record)
+      lines << "look by eye: #{LOOK_NOTE}" if look_at?(record)
       lines << "missing: #{record["missing"]}" if record["missing"]
       lines << "menu_open: false" if record["menu_open"] == false
       lines << "error: #{record["error"]}" if record["error"]
@@ -535,6 +641,7 @@ module Gustwave
         <meta charset="utf-8">
         <title>Flowbite and Gustwave comparison</title>
         <body style="font: 14px sans-serif; margin: 16px">
+        <p>#{CGI.escapeHTML(look_summary(blocks.flat_map(&:last)))}</p>
         #{sections.join}
         </body>
         </html>
@@ -544,6 +651,7 @@ module Gustwave
     def report_record(record)
       notes = []
       notes << "<p>review: #{CGI.escapeHTML(record["review"].join("; "))}</p>" if flagged?(record)
+      notes << "<p>Look by eye: #{CGI.escapeHTML(LOOK_NOTE)}</p>" if look_at?(record)
       notes << "<p>Preview text: #{CGI.escapeHTML(record["gw_original_text"])}</p>" if record["swapped"] == true && record["gw_original_text"]
       "<div style=\"margin: 8px 0\"><p>#{CGI.escapeHTML(caption(record))}</p>#{notes.join}" \
         "#{report_image("Flowbite", record["fb_png"])}#{report_image("Gustwave", record["gw_png"])}</div>\n"

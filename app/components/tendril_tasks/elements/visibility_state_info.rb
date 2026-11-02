@@ -15,14 +15,14 @@ module TendrilTasks
                                      color: :green,
                                      size: :md,
                                      class: "me-1") do |badge|
-            badge.with_leading_visual_icon :eye
+            badge.with_leading_visual_icon :eye, class: "h-5 mx-0"
           end
         else
           render Gustwave::Badge.new(t(".states.hidden"),
                                      color: :dark,
                                      size: :md,
                                      class: "me-1") do |badge|
-            badge.with_leading_visual_icon :eye_slash
+            badge.with_leading_visual_icon :eye_slash, class: "h-5 mx-0"
           end
         end
       end

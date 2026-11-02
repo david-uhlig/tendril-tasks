@@ -15,7 +15,7 @@ module Gustwave
     # Renders no +type+ attribute by default
     option :type, default: :none, values: %i[none button submit reset]
 
-    base "rounded-sm whitespace-nowrap inline-flex"
+    base "rounded-sm whitespace-nowrap inline-flex items-center"
     unstyled color: :none
 
     # +:base+ renders only the base styles.
@@ -46,15 +46,17 @@ module Gustwave
     }
 
     # The +visual+ part sizes leading and trailing visuals to match the
-    # +text-*+ class of the badge. The dismiss_button part pads the dismiss
-    # button per size.
+    # +text-*+ class of the badge. Icons leave a blank margin around their
+    # drawing, so they are larger than Flowbite's and the negative margin keeps
+    # the text in place. The dismiss_button part pads the dismiss button per
+    # size, and the dismiss_icon part sizes its icon the same way.
     variant :size, default: :xs, values: {
-      xs: { root: "px-2.5 py-0.5 text-xs font-medium", visual: "h-4 w-auto", dismiss_button: "p-1" },
-      sm: { root: "px-2.5 py-0.5 text-sm font-medium", visual: "h-5 w-auto", dismiss_button: "p-1" },
-      md: { root: "px-2.5 py-0.5 text-base font-semibold", visual: "h-5 w-auto", dismiss_button: "p-1" },
-      lg: { root: "px-2.5 py-0.5 text-lg font-semibold", visual: "h-6 w-auto", dismiss_button: "p-1.5" },
-      xl: { root: "px-2.5 py-0.5 text-xl font-bold", visual: "h-7 w-auto", dismiss_button: "p-1.5" },
-      "2xl": { root: "px-2.5 py-0.5 text-2xl font-extrabold", visual: "h-8 w-auto", dismiss_button: "p-2" }
+      xs: { root: "px-2.5 py-0.5 text-xs font-medium", visual: "h-3 w-auto -mx-px", dismiss_button: "p-0.5", dismiss_icon: "h-3.5 -m-px" },
+      sm: { root: "px-2.5 py-0.5 text-sm font-medium", visual: "h-3.5 w-auto -mx-px", dismiss_button: "p-0.5", dismiss_icon: "h-3.5 -m-px" },
+      md: { root: "px-2.5 py-0.5 text-base font-semibold", visual: "h-4 w-auto -mx-px", dismiss_button: "p-0.5", dismiss_icon: "h-3.5 -m-px" },
+      lg: { root: "px-2.5 py-0.5 text-lg font-semibold", visual: "h-5 w-auto -mx-0.5", dismiss_button: "p-1.5", dismiss_icon: "h-4 -m-px" },
+      xl: { root: "px-2.5 py-0.5 text-xl font-bold", visual: "h-5.5 w-auto -mx-0.5", dismiss_button: "p-1.5", dismiss_icon: "h-4 -m-px" },
+      "2xl": { root: "px-2.5 py-0.5 text-2xl font-extrabold", visual: "h-6 w-auto -mx-0.5", dismiss_button: "p-2", dismiss_icon: "h-5 -m-0.5" }
     }
 
     # The size of the dismiss button per badge size
@@ -82,22 +84,50 @@ module Gustwave
     toggle :pill, "rounded-full"
 
     # Render a round badge when no text or content block was given
-    toggle :visual_only, "rounded-full px-0.5", internal: true
+    toggle :visual_only, "rounded-full justify-center p-0", internal: true
 
-    part :dismiss_button, "bg-transparent"
+    # The round badge's dimensions per size. Sizes the icon from the root,
+    # because visuals get their classes before the badge knows it has no text.
+    toggle :visual_only_size, per: :size, internal: true, values: {
+      xs: "w-6 h-6 *:h-3.5",
+      sm: "w-7 h-7 *:h-4",
+      md: "w-8 h-8 *:h-5",
+      lg: "w-9 h-9 *:h-5.5",
+      xl: "w-10 h-10 *:h-6",
+      "2xl": "w-12 h-12 *:h-7"
+    }
+
+    # The round badge's dark colors
+    toggle :visual_only_color, per: :color, internal: true, values: {
+      base: "",
+      default: "dark:bg-gray-700 dark:text-blue-400",
+      dark: "",
+      red: "dark:bg-gray-700 dark:text-red-400",
+      green: "dark:bg-gray-700 dark:text-green-400",
+      yellow: "dark:bg-gray-700 dark:text-yellow-300",
+      indigo: "dark:bg-gray-700 dark:text-indigo-400",
+      purple: "dark:bg-gray-700 dark:text-purple-400",
+      pink: "dark:bg-gray-700 dark:text-pink-400"
+    }
+
+    # Set when the badge has a dismiss button
+    toggle :dismissible, "px-2 py-1", internal: true
+
+    part :dismiss_button, "bg-transparent ms-2"
+    part :dismiss_icon
 
     # Note +border+ increases buttons dimensions by 1px on all edges. Prefer
     # +outline+ to render bordered and non-bordered badges side-by-side.
     toggle :border, per: :color, values: {
       base: "border border-gray-400",
-      default: "border border-blue-400",
-      dark: "border border-gray-500",
-      red: "border border-red-400",
-      green: "border border-green-400",
-      yellow: "border border-yellow-300",
-      indigo: "border border-indigo-400",
-      purple: "border border-purple-400",
-      pink: "border border-pink-400"
+      default: "border border-blue-400 dark:bg-gray-700 dark:text-blue-400",
+      dark: "border border-gray-500 dark:bg-gray-700 dark:text-gray-400",
+      red: "border border-red-400 dark:bg-gray-700 dark:text-red-400",
+      green: "border border-green-400 dark:bg-gray-700 dark:text-green-400",
+      yellow: "border border-yellow-300 dark:bg-gray-700 dark:text-yellow-300",
+      indigo: "border border-indigo-400 dark:bg-gray-700 dark:text-indigo-400",
+      purple: "border border-purple-400 dark:bg-gray-700 dark:text-purple-400",
+      pink: "border border-pink-400 dark:bg-gray-700 dark:text-pink-400"
     }
 
     toggle :outline, per: :color, values: {
@@ -138,7 +168,8 @@ module Gustwave
 
       Gustwave::DismissButton.new(@id, text, icon:, **{
         color: derived_value(:dismiss_button_color),
-        size: derived_value(:dismiss_button_size)
+        size: derived_value(:dismiss_button_size),
+        icon_options: { class: classes(:dismiss_icon) }
       }.merge(attributes_for(:dismiss_button, options)))
     }
 
@@ -173,7 +204,14 @@ module Gustwave
 
     def before_render
       # Must build config here to know whether block content was passed
-      select_options(has_visual: has_visual?, visual_only: !has_content?)
+      visual_only = !has_content?
+      select_options(
+        has_visual: has_visual?,
+        visual_only:,
+        visual_only_size: visual_only,
+        visual_only_color: visual_only,
+        dismissible: dismiss_button?
+      )
       @config = { type: type_attribute }.merge(attributes_for(@options))
       @config[:id] = id
     end
