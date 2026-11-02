@@ -14,6 +14,6 @@
 
   <% component.with_footer do %>
     <%= render Gustwave::Buttons::Default.new("I accept", **modal.trigger_options(action: :hide)) %>
-    <%= render Gustwave::Buttons::Default.new("Decline", color: :alternative,**modal.trigger_options(action: :hide)) %>
+    <%= render Gustwave::Buttons::Default.new("Decline", color: :alternative, **modal.trigger_options(action: :hide)) %>
   <% end %>
 <% end %>
