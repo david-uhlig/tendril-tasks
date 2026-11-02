@@ -248,9 +248,10 @@ module Gustwave
     end
 
     # Replaces a lone wrapper with its displayed children while the reference has several elements.
-    # An element without displayed element children stays as it is.
+    # Only a div counts as a wrapper: stepping into a lone badge or button would compare its icon with
+    # the reference's whole element. An element without displayed element children stays as it is.
     def unwrap(driver, elements, wanted)
-      while elements.size == 1 && wanted.size > 1
+      while elements.size == 1 && wanted.size > 1 && elements.first.tag_name == "div"
         children = elements.first.find_elements(xpath: "./*").select(&:displayed?)
         break if children.empty?
 
