@@ -29,7 +29,9 @@ module Gustwave
       variant :color, default: :base, values: { base: "" }
 
       # The +visual+ part sizes leading and trailing visuals to match the
-      # +text-*+ class of the button. Heights come from padding and line height so a border adds to them, as in Flowbite, and xl's negative margin keeps its height when it has an icon.
+      # +text-*+ class of the button. Heights come from padding and line height,
+      # so a border adds to them as in Flowbite. xl's negative margin keeps its
+      # height when it has an icon.
       variant :size, default: :md, values: {
         xs: { root: "px-3 py-2 text-xs font-medium", visual: "h-4 w-auto" },
         sm: { root: "px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
