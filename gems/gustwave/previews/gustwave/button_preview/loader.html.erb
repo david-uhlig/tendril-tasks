@@ -1,9 +1,9 @@
 <div>
   <%= render Gustwave::Buttons::Default.new("Loading...", disabled: true, class: "me-2") do |button| %>
-    <% button.with_leading_visual_icon :spinner, class: "h-4 w-4 me-1.5 text-white animate-spin" %>
+    <% button.with_leading_visual_icon :spinner, class: "h-4 w-4 me-1.5 text-gray-200 fill-white animate-spin" %>
   <% end %>
 
   <%= render Gustwave::Buttons::Default.new("Loading...", disabled: true, color: :alternative, class: "h-auto me-2") do |button| %>
-    <% button.with_leading_visual_icon :spinner, class: "h-4 w-4 me-1.5 text-gray-200 animate-spin dark:text-gray-600" %>
+    <% button.with_leading_visual_icon :spinner, class: "h-4 w-4 me-1.5 text-gray-200 fill-[#1C64F2] animate-spin dark:text-gray-600" %>
   <% end %>
 </div>

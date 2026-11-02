@@ -259,7 +259,8 @@ pages:
     preview: gustwave/button/colored_shadows
   - id: button-social-example
     title: Social buttons
-    status: composable
+    status: previewed
+    preview: gustwave/button/social
   - id: button-payment-example
     title: Payment buttons
     status: composable
