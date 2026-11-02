@@ -36,7 +36,7 @@
 
             <li class="flex items-start mb-2">
               <span class="me-2 font-semibold text-gray-400">
-                <%= render Gustwave::Icon.new(:heart, theme: :solid, class: "w-3.5 h-3.5") %>
+                <%= render Gustwave::Icon.new(:heart, theme: :solid, class: "w-[18px] h-[18px] -m-0.5") %>
               </span>
 
               <span class="-mt-1">4,567 people like this including 5 of your friends</span>
@@ -53,7 +53,7 @@
 
           <div class="flex">
             <%= render Gustwave::Buttons::Default.new("Like page", color: :alternative, class: "w-full justify-center px-5 py-2 me-2") do |button| %>
-              <% button.with_leading_visual_icon(:thumbs_up, theme: :solid, class: "w-3.5 h-3.5") %>
+              <% button.with_leading_visual_icon(:thumbs_up, theme: :solid, class: "me-0") %>
             <% end %>
 
             <%= render Gustwave::Dropdown.new(placement: :right) do |dropdown| %>
@@ -67,7 +67,17 @@
                     dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700
                   "
                 >
-                  <%= render Gustwave::Icon.new(:dots_horizontal, class: "w-3.5 h-3.5") %>
+                  <svg
+                    class="w-3.5 h-3.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 16 3"
+                  >
+                    <circle cx="2" cy="1.5" r="1.5" />
+                    <circle cx="8" cy="1.5" r="1.5" />
+                    <circle cx="14" cy="1.5" r="1.5" />
+                  </svg>
                 </button>
               <% end %>
 

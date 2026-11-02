@@ -531,9 +531,18 @@ module Gustwave
       regions = static_captures(driver, url, dark, reference: page)
       popover_triggers(driver).each_index do |index|
         key = "#{POPOVER_KEY}#{index}"
-        regions[key] = popover_regions(driver, url, dark, index, reference&.dig(key))
+        regions[key] = popover_regions(driver, url, dark, index, page, reference&.dig(key))
       end
       regions
+    end
+
+    # Text around a trigger moves it, so a fresh page takes on the reference's text too.
+    def swap_page_text(driver, reference)
+      return unless reference
+
+      unwrap(driver, visible_elements(driver), reference).each_with_index do |element, index|
+        swap_text(driver, element, reference.dig(index.to_s, "element"))
+      end
     end
 
     def popover_triggers(driver)
@@ -542,8 +551,9 @@ module Gustwave
 
     # The trigger is captured before the pointer reaches it, so it shows no hover colours.
     # The text is swapped before opening, so the positioning library measures the final sizes.
-    def popover_regions(driver, url, dark, index, reference)
+    def popover_regions(driver, url, dark, index, page, reference)
       load(driver, url, dark)
+      swap_page_text(driver, page)
       trigger = popover_triggers(driver)[index]
       return { "trigger" => { "error" => "trigger not found after reload" } } unless trigger
 
