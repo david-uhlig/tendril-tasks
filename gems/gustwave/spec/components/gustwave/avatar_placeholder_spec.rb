@@ -18,6 +18,11 @@ RSpec.describe Gustwave::AvatarPlaceholder, type: :component do
       expect(rendered_content).to have_css("svg")
       expect(rendered_content).to include("M10 9a3 3 0 100-6 3 3 0 000 6z")
     end
+
+    it "scales the default placeholder SVG to 120% and offsets it left by 10%" do
+      expect(rendered_content).to have_css("svg.w-\\[120\\%\\].h-\\[120\\%\\].-left-\\[10\\%\\]")
+      expect(rendered_content).not_to have_css("svg.-bottom-1")
+    end
   end
 
   context "with custom placeholder" do
