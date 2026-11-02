@@ -53,6 +53,19 @@ RSpec.describe Gustwave::ButtonGroups::Button, type: :component do
     expect(classes).not_to include("h-10")
   end
 
+  it "renders Flowbite's icon gap and icon box for an md button with a leading icon" do
+    component = described_class.new("Go", size: :md)
+    component.apply_slot_context(group_position: :only)
+    render_inline(component) { |button| button.with_leading_visual_icon :check }
+
+    classes = page.find("button")["class"].split
+    icon_classes = page.find("button svg")["class"].split
+
+    expect(classes).to include("gap-2")
+    expect(classes).not_to include("gap-1.5")
+    expect(icon_classes).to include("h-4", "w-auto", "-mx-0.5")
+  end
+
   it "renders the outline color" do
     expect(classes_at(:only, color: :outline)).to include("border-gray-900")
   end
