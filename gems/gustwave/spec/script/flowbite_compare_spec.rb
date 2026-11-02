@@ -153,6 +153,18 @@ RSpec.describe Gustwave::FlowbiteCompare do
     end
   end
 
+  describe ".strategy_for_pair" do
+    def strategy_for_pair(pair, page_strategy) = described_class.send(:strategy_for_pair, pair, page_strategy)
+
+    it "gives a listed example its own strategy" do
+      expect(strategy_for_pair({ "id" => "avatar-user-dropdown-example" }, :static)).to eq(:dropdown)
+    end
+
+    it "gives any other example the page strategy" do
+      expect(strategy_for_pair({ "id" => "avatar-sizes-example" }, :static)).to eq(:static)
+    end
+  end
+
   describe "the reminder in the output" do
     let(:differing) { { "key" => "0", "region" => "element", "pct" => 0.0, "icon_pct" => 12.5, "review" => [] } }
     let(:matching) { { "key" => "1", "region" => "element", "pct" => 0.0, "icon_pct" => 0.0, "review" => [] } }
