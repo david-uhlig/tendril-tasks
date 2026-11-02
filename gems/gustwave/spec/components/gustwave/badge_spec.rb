@@ -126,7 +126,24 @@ RSpec.describe Gustwave::Badge, type: :component do
 
     it "renders a round badge without text or content at any size" do
       render_inline(described_class.new(size: :"2xl")) { |badge| badge.with_leading_visual_icon(:check) }
-      expect(page).to have_selector("span.rounded-full.px-0\\.5")
+      expect(page).to have_selector("span.rounded-full.p-0.w-12.h-12")
+    end
+
+    it "renders a 24px round badge by default" do
+      render_inline(described_class.new) { |badge| badge.with_leading_visual_icon(:check) }
+      expect(page).to have_selector("span.rounded-full.w-6.h-6.justify-center")
+      expect(page).not_to have_selector("span.px-2\\.5")
+    end
+
+    it "keeps text padding on a badge with text" do
+      render_inline(described_class.new("New"))
+      expect(page).to have_selector("span.px-2\\.5.py-0\\.5")
+      expect(page).not_to have_selector("span.w-6")
+    end
+
+    it "sizes a leading icon to match the text" do
+      render_inline(described_class.new("New")) { |badge| badge.with_leading_visual_icon(:check) }
+      expect(page).to have_selector("span > svg.h-2\\.5")
     end
 
     it "sizes a leading indicator to match the badge size" do
@@ -147,6 +164,12 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "renders outline classes" do
       render_inline(described_class.new(outline: true))
       expect(page).to have_selector("span.outline-blue-400")
+    end
+
+    it "renders Flowbite's dark colors" do
+      render_inline(described_class.new(border: true, color: :red))
+      expect(page).to have_selector("span.dark\\:bg-gray-700.dark\\:text-red-400")
+      expect(page).not_to have_selector("span.dark\\:bg-red-900")
     end
 
     it "casts a string to a boolean" do
@@ -180,6 +203,13 @@ RSpec.describe Gustwave::Badge, type: :component do
       render_inline(described_class.new("New", id: "badge-new"), &:with_dismiss_button)
 
       expect(page).to have_selector("button.bg-transparent > svg.h-3[aria-hidden='true']")
+    end
+
+    it "uses Flowbite's padding and spacing" do
+      render_inline(described_class.new("New", size: :sm, id: "badge-new"), &:with_dismiss_button)
+
+      expect(page).to have_selector("span#badge-new.px-2.py-1.items-center")
+      expect(page).to have_selector("button.ms-2.p-0\\.5")
     end
 
     it "matches the badge's color and size" do
