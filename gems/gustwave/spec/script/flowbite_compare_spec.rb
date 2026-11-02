@@ -73,50 +73,56 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(reasons({ "pct" => 1.0 })).to eq([ "pixels 1.0%" ])
     end
 
-    it "does not flag icons that match" do
-      icon = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-
-      expect(reasons({ "fb_icons" => [ icon ], "gw_icons" => [ icon ] })).to eq([])
+    def icon(ink: [ 2, 2, 12, 12 ], paints: [ "rgb(1, 2, 3)" ])
+      { "box" => [ 0, 0, 16, 16 ], "ink" => ink, "paints" => paints }
     end
 
-    it "does not flag icon boxes exactly at the tolerance" do
-      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-      gw = { "box" => [ 3, 3, 13, 13 ], "paints" => [ "rgb(1, 2, 3)" ] }
+    def icon_reasons(flowbite, gustwave) = reasons({ "fb_icons" => [ flowbite ], "gw_icons" => [ gustwave ] })
 
-      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([])
+    it "does not flag icons that match" do
+      expect(icon_reasons(icon, icon)).to eq([])
+    end
+
+    it "does not flag a different svg box around the same drawing" do
+      gustwave = icon.merge("box" => [ 0, 0, 24, 24 ])
+
+      expect(icon_reasons(icon, gustwave)).to eq([])
     end
 
     it "flags a different number of icons" do
-      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-
-      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [] })).to eq([ "icons 1 vs 0" ])
+      expect(reasons({ "fb_icons" => [ icon ], "gw_icons" => [] })).to eq([ "icons 1 vs 0" ])
     end
 
-    it "flags an icon size over the tolerance" do
-      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-      gw = { "box" => [ 2, 2, 14, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-
-      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([ "icon 1 size 12x12 vs 14x12" ])
+    it "does not flag a drawing size exactly at the tolerance" do
+      expect(icon_reasons(icon(ink: [ 2, 2, 12, 12 ]), icon(ink: [ 3, 3, 10, 10 ]))).to eq([])
     end
 
-    it "flags an icon position over the tolerance" do
-      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-      gw = { "box" => [ 4, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-
-      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([ "icon 1 position 2,2 vs 4,2" ])
+    it "flags a drawing size over the tolerance" do
+      expect(icon_reasons(icon(ink: [ 2, 2, 12, 12 ]), icon(ink: [ 0.5, 2, 15, 12 ]))).to eq([ "icon 1 size 12x12 vs 15x12" ])
     end
 
-    it "flags an icon colour" do
-      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-      gw = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(4, 5, 6)" ] }
+    it "does not flag a centre exactly at the tolerance" do
+      expect(icon_reasons(icon(ink: [ 2, 2, 12, 12 ]), icon(ink: [ 3, 2, 12, 12 ]))).to eq([])
+    end
 
-      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([ "icon 1 colour rgb(1, 2, 3) vs rgb(4, 5, 6)" ])
+    it "flags a centre over the tolerance" do
+      expect(icon_reasons(icon(ink: [ 2, 2, 12, 12 ]), icon(ink: [ 4, 2, 12, 12 ]))).to eq([ "icon 1 centre 8.0,8.0 vs 10.0,8.0" ])
+    end
+
+    it "flags icons with no colour in common" do
+      flowbite, gustwave = icon(paints: [ "rgb(1, 2, 3)" ]), icon(paints: [ "rgb(4, 5, 6)" ])
+
+      expect(icon_reasons(flowbite, gustwave)).to eq([ "icon 1 colour rgb(1, 2, 3) vs rgb(4, 5, 6)" ])
+    end
+
+    it "does not flag artwork that adds a detail colour" do
+      flowbite, gustwave = icon(paints: [ "rgb(1, 2, 3)", "rgb(255, 255, 255)" ]), icon(paints: [ "rgb(1, 2, 3)" ])
+
+      expect(icon_reasons(flowbite, gustwave)).to eq([])
     end
 
     it "ignores icons when a side was not captured" do
-      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
-
-      expect(reasons({ "fb_icons" => [ fb ] })).to eq([])
+      expect(reasons({ "fb_icons" => [ icon ] })).to eq([])
     end
   end
 

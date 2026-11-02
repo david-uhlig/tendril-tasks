@@ -25,8 +25,9 @@ module Gustwave
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
     NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
-    # Icons are small, so an icon box may be off by less than the element around it.
-    ICON_TOLERANCE = 1
+    # Icon sets leave different margins, so a drawing's size varies with the artwork
+    # while its centre should not. The size uses SIZE_TOLERANCE.
+    ICON_CENTRE_TOLERANCE = 1
     # Boxes are whole CSS pixels and an element screenshot can start a pixel off, so
     # the mask reaches one pixel further. Assumes a device pixel ratio of 1.
     MASK_PADDING = 1
@@ -70,7 +71,8 @@ module Gustwave
       };
     JS
 
-    # Each icon's box relative to the element, and the colours its shapes paint.
+    # Each icon's box relative to the element, the box of what it draws, and the colours
+    # it paints. Shapes in defs, clip paths, masks and symbols draw nothing themselves.
     # A nested svg belongs to the icon around it. Hidden icons have no box.
     FB_ICONS = <<~JS
       window.fbIcons = root => {
@@ -79,10 +81,16 @@ module Gustwave
         return svgs.filter(s => !s.parentElement.closest('svg')).map(s => ({ svg: s, r: s.getBoundingClientRect() }))
           .filter(({ r }) => r.width > 0 && r.height > 0)
           .map(({ svg, r }) => {
-            const shapes = svg.querySelectorAll('path, circle, rect, line, polygon, polyline, ellipse');
-            const paints = [...shapes].flatMap(e => { const c = getComputedStyle(e); return [c.fill, c.stroke]; }).filter(p => p !== 'none');
+            const shapes = [...svg.querySelectorAll('path, circle, rect, line, polygon, polyline, ellipse')]
+              .filter(e => !e.closest('defs, clipPath, mask, symbol'));
+            const paints = shapes.flatMap(e => { const c = getComputedStyle(e); return [c.fill, c.stroke]; }).filter(p => p !== 'none');
+            const drawn = shapes.map(e => e.getBoundingClientRect()).filter(b => b.width > 0 || b.height > 0);
+            const boxes = drawn.length ? drawn : [r];
+            const left = Math.min(...boxes.map(b => b.left)), top = Math.min(...boxes.map(b => b.top));
+            const right = Math.max(...boxes.map(b => b.right)), bottom = Math.max(...boxes.map(b => b.bottom));
             return {
               box: [r.left - origin.left, r.top - origin.top, r.width, r.height].map(Math.round),
+              ink: [left - origin.left, top - origin.top, right - left, bottom - top].map(n => Math.round(n * 100) / 100),
               paints: [...new Set(paints)].sort()
             };
           });
@@ -453,13 +461,20 @@ module Gustwave
     end
 
     def icon_differences(flowbite, gustwave)
-      fb_position, gw_position = flowbite["box"].first(2), gustwave["box"].first(2)
-      fb_size, gw_size = flowbite["box"].last(2), gustwave["box"].last(2)
+      fb_size, gw_size = flowbite["ink"].last(2), gustwave["ink"].last(2)
+      fb_centre, gw_centre = centre(flowbite["ink"]), centre(gustwave["ink"])
+      fb_paints, gw_paints = flowbite["paints"], gustwave["paints"]
       differences = []
-      differences << "size #{dims(fb_size)} vs #{dims(gw_size)}" if beyond?(fb_size, gw_size, ICON_TOLERANCE)
-      differences << "position #{offset_text(fb_position)} vs #{offset_text(gw_position)}" if beyond?(fb_position, gw_position, ICON_TOLERANCE)
-      differences << "colour #{flowbite["paints"].join(" ")} vs #{gustwave["paints"].join(" ")}" if flowbite["paints"] != gustwave["paints"]
+      differences << "size #{dims(fb_size)} vs #{dims(gw_size)}" if beyond?(fb_size, gw_size, SIZE_TOLERANCE)
+      differences << "centre #{offset_text(fb_centre)} vs #{offset_text(gw_centre)}" if beyond?(fb_centre, gw_centre, ICON_CENTRE_TOLERANCE)
+      # Artwork may add a detail colour, so only icons with no colour in common differ.
+      differences << "colour #{fb_paints.join(" ")} vs #{gw_paints.join(" ")}" if fb_paints != gw_paints && (fb_paints & gw_paints).empty?
       differences
+    end
+
+    def centre(ink)
+      left, top, width, height = ink
+      [ (left + width / 2.0).round(2), (top + height / 2.0).round(2) ]
     end
 
     def record(driver, meta, place, flowbite, gustwave)
