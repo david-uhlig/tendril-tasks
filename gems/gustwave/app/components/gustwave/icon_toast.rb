@@ -28,6 +28,7 @@ module Gustwave
       alert: :exclamation_circle
     }
 
+    # @param icon [Symbol, nil] Replaces the status's icon. Needs a solid icon.
     def initialize(text = nil,
                    id: nil,
                    status: DEFAULT,

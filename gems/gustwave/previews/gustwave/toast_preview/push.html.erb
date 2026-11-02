@@ -9,7 +9,7 @@
       <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Grace Hopper", size: :lg) %>
 
       <%= render Gustwave::Indicator.new(color: :blue, size: :lg, class: "absolute bottom-0 right-0 w-6 px-0") do %>
-        <%= render Gustwave::Icon.new(:message_dots, theme: :solid, class: "w-3 h-3 text-white") %>
+        <%= render Gustwave::Icon.new(:messages, theme: :solid, size: :xs, class: "text-white") %>
         <span class="sr-only">Message icon</span>
       <% end %>
     </div>

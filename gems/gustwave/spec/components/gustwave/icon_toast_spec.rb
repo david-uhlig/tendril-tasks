@@ -21,7 +21,7 @@ RSpec.describe Gustwave::IconToast, type: :component do
     end
 
     def paths_of(icon)
-      render_inline(Gustwave::Icon.new(icon))
+      render_inline(Gustwave::Icon.new(icon, theme: :solid))
       icon_paths
     end
 
