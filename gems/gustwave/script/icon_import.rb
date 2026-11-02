@@ -17,8 +17,16 @@ module Gustwave
     # Pinned to a release. To upgrade, bump the tag, then run --reimport --dry-run and --new --dry-run.
     DEFAULT_SOURCE = "https://github.com/themesberg/flowbite-icons/tree/v1.5.0/src"
     THEMES = %w[outline solid].freeze
-    # Icons that are not from Flowbite and must never be compared with upstream.
-    LOCAL_ONLY = %w[outline/spinner.svg].freeze
+    # Icons with no counterpart in Flowbite's icon set, which must never be
+    # compared with upstream. The compact chevrons are the tight chevrons that
+    # Flowbite's components draw inline, not 24x24 icons.
+    LOCAL_ONLY = %w[
+      outline/chevron-down-compact.svg
+      outline/chevron-left-compact.svg
+      outline/chevron-right-compact.svg
+      outline/chevron-up-compact.svg
+      outline/spinner.svg
+    ].freeze
     # Upstream icons deliberately not imported. --new and --reimport skip them.
     EXCLUDED = %w[].freeze
     ICONS_DIR = File.expand_path("../app/assets/images/gustwave/icons", __dir__)

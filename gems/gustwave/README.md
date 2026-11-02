@@ -145,7 +145,7 @@ bin/import-icon --check                            # offline: verify local icons
 
 `--new` imports every upstream icon that is not local yet. `--theme` limits it to one theme (default: both), `--category` to one upstream folder (exact name, such as `arrows` or `food:beverage`), and `--only` to names matching a glob. It keeps going after a failed icon and exits 1 if any failed.
 
-`EXCLUDED` in `script/icon_import.rb` lists upstream icons that are deliberately not imported. `--new` and `--reimport` skip them. `outline/spinner.svg` is a custom icon, listed in `LOCAL_ONLY`, and is skipped by `--reimport` and `--check`.
+`EXCLUDED` in `script/icon_import.rb` lists upstream icons that are deliberately not imported. `--new` and `--reimport` skip them. `outline/spinner.svg` and the `outline/chevron-*-compact.svg` icons are custom, listed in `LOCAL_ONLY`, and skipped by `--reimport` and `--check`. The compact chevrons have no padding around their artwork, so always give them a size class, e.g. `class: "h-2.5 w-2.5"`.
 
 To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE`, then run `bin/import-icon --reimport --dry-run` to review changes to existing icons and `bin/import-icon --new --dry-run` to review the new ones. Run them for real once the output looks right, and commit the result.
 
