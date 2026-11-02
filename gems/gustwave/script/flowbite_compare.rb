@@ -83,6 +83,16 @@ module Gustwave
       return { swapped: true, original_text: original, own_parts: nodes.length };
     JS
 
+    # Text renders differently at a fractional position, for example when Flowbite
+    # centers an example, so both sides move to a whole pixel before a screenshot.
+    SNAP = <<~JS
+      const el = arguments[0], left = el.getBoundingClientRect().left;
+      if (left !== Math.round(left) && getComputedStyle(el).position === 'static') {
+        el.style.position = 'relative';
+        el.style.left = (Math.round(left) - left) + 'px';
+      }
+    JS
+
     OFFSET = <<~JS
       const a = arguments[0].getBoundingClientRect(), b = arguments[1].getBoundingClientRect();
       return [Math.round(a.left - b.left), Math.round(a.top - b.top)];
@@ -351,6 +361,7 @@ module Gustwave
 
     # Element screenshot failures are recorded on the capture, not raised.
     def capture(driver, element)
+      driver.execute_script(SNAP, element)
       data = driver.execute_script(CAPTURE, element, STYLES)
       data["png"] = element.screenshot_as(:base64)
       data
