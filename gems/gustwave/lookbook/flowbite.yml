@@ -2218,19 +2218,19 @@ pages:
   - id: paragraph-one-column-example
     title: Layout > One column
     status: previewed
-    preview: gustwave/paragraph/layouts
+    preview: gustwave/paragraph/one_column
   - id: paragraphs-two-columns-example
     title: Layout > Two columns even
     status: previewed
-    preview: gustwave/paragraph/layouts
+    preview: gustwave/paragraph/two_columns
   - id: paragraphs-three-columns-example
     title: Layout > Three columns even
     status: previewed
-    preview: gustwave/paragraph/layouts
+    preview: gustwave/paragraph/three_columns
   - id: paragraphs-two-columns-uneven-example
     title: Layout > Two columns uneven
     status: previewed
-    preview: gustwave/paragraph/layouts
+    preview: gustwave/paragraph/two_columns_uneven
   - id: paragraph-left-example
     title: Text alignment > Left
     status: previewed

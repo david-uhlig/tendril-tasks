@@ -55,8 +55,23 @@ module Gustwave
       render_with_template
     end
 
-    # Paragraphs in a grid, between full-width paragraphs.
-    def layouts
+    # Paragraphs stacked in one column.
+    def one_column
+      render_with_template
+    end
+
+    # Two even columns between full-width paragraphs.
+    def two_columns
+      render_with_template
+    end
+
+    # Three even columns between full-width paragraphs.
+    def three_columns
+      render_with_template
+    end
+
+    # A wide and a narrow column between full-width paragraphs.
+    def two_columns_uneven
       render_with_template
     end
   end
