@@ -1,6 +1,5 @@
 module Gustwave
   class BadgePreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/badge/with_text_block
     def with_text_parameter
       render Gustwave::Badge.new("Default")
     end

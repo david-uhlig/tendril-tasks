@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # Landing page on the root ("/") path.
   root "pages#home"
 
+  # Component explorer. Never drawn in production.
+  mount Lookbook::Engine, at: "/lookbook" if Rails.env.local?
+
   # Devise authentication and OmniAuth callback routes for the User model.
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }, skip: [ :sessions ]
   # Disable username/password logins (`POST "/users/sign_in"`) since we only support OmniAuth.

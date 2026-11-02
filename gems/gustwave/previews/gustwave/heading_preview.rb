@@ -1,6 +1,5 @@
 module Gustwave
   class HeadingPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/heading/levels
     def levels
       render_with_template
     end

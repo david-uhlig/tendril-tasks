@@ -3,7 +3,6 @@ module Gustwave
     # The names Flowbite's examples give the colors
     NAMES = { blue: "Info", red: "Danger", green: "Success", yellow: "Warning", dark: "Dark" }.freeze
 
-    # http://localhost:3030/rails/view_components/gustwave/alert/default
     def default
       render_with_template(locals: { colors: colors })
     end

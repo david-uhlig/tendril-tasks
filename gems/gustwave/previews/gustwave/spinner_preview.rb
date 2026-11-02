@@ -1,6 +1,5 @@
 module Gustwave
   class SpinnerPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/spinner/default
     def default
       render Gustwave::Spinner.new
     end

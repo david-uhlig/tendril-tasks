@@ -119,6 +119,12 @@ The specs run against a minimal Rails application in `spec/dummy`. From the Tend
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 
+### Previewing components
+
+Start the host application in development and open `/lookbook` to browse every preview with its source, notes and params. Set the `theme` display option to `dark` to check the `dark:` variants.
+
+Lookbook belongs to the host application in this repository and isn't a dependency of the gem, so previews stay plain `ViewComponent::Preview` classes. `/rails/view_components` keeps working without it.
+
 ### Importing icons
 
 `bin/import-icon` copies [Flowbite icons](https://github.com/themesberg/flowbite-icons) into `app/assets/images/gustwave/icons` and converts them to Gustwave's form. Set `GITHUB_TOKEN` (or log in with `gh`) to avoid GitHub's rate limit.
@@ -144,6 +150,12 @@ bin/import-icon --check                            # offline: verify local icons
 To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE`, then run `bin/import-icon --reimport --dry-run` to review changes to existing icons and `bin/import-icon --new --dry-run` to review the new ones. Run them for real once the output looks right, and commit the result.
 
 `--source URL` imports from another GitHub tree URL.
+
+### Flowbite coverage
+
+`lookbook/flowbite.yml` lists every example in Flowbite's docs and how far Gustwave covers it. `previewed` means a scenario demonstrates it, `composable` that existing components could build it, and `tailwind` that it needs plain Tailwind classes only. `feature_gap`, `partial` and `blocked` say what's missing in `needs`, and `out_of_scope` marks the third-party plugin pages. Lookbook shows it at `/lookbook/pages`, with one page per Flowbite docs page. The importer generates those pages into `lookbook/pages/flowbite`, so don't edit them by hand. None of this is shipped with the gem.
+
+To upgrade Flowbite, bump the tag in `DEFAULT_SOURCE` in `script/flowbite_inventory.rb`, run `bin/flowbite-inventory --dry-run` to review the changes, then run it for real and classify what it added. The specs fail until every example has a status.
 
 ## License
 

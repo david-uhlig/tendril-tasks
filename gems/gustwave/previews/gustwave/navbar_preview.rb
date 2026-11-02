@@ -1,6 +1,5 @@
 module Gustwave
   class NavbarPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/navbar/default
     def default
       render_with_template
     end

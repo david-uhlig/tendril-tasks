@@ -1,6 +1,6 @@
 module Gustwave
   class BannerPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/banner/default?position=bottom
+    # @param position select { choices: [top, bottom] }
     def default(position: :top)
       render_with_template(locals: { position: position.to_sym })
     end

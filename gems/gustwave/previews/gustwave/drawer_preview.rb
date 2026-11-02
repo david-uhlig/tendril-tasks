@@ -1,8 +1,9 @@
 module Gustwave
   class DrawerPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/drawer/default
-    #
     # Spread +trigger_options+ into the triggering element.
+    # @param placement select { choices: [left, right, top, bottom] }
+    # @param backdrop toggle
+    # @param body_scrolling toggle
     def default(placement: :left, backdrop: true, body_scrolling: false)
       render_with_template(locals: { placement:, backdrop:, body_scrolling: })
     end

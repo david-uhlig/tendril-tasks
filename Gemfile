@@ -95,6 +95,9 @@ group :development, :test do
 
   # Runs the specs in parallel processes [https://github.com/grosser/parallel_tests]
   gem "parallel_tests"
+
+  # Component explorer for the ViewComponent previews [https://lookbook.build]
+  gem "lookbook", "~> 2.3"
 end
 
 group :development do

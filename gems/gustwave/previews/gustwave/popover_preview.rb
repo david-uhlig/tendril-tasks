@@ -1,8 +1,8 @@
 module Gustwave
   class PopoverPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/popover/default
-    #
     # Spread +trigger_options+ into the triggering element.
+    # @param placement select { choices: [auto, auto-start, auto-end, top, top-start, top-end, bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end] }
+    # @param trigger select { choices: [hover, click] }
     def default(placement: :top, trigger: :hover)
       render_with_template(locals: { placement:, trigger: })
     end

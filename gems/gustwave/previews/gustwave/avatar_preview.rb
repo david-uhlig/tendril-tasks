@@ -1,6 +1,6 @@
 module Gustwave
   class AvatarPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/avatar/with_border
+    # @param size select { choices: [xs, sm, md, lg, xl, 2xl, 3xl, 4xl] }
     def with_border(size: :lg)
       render Gustwave::Avatar.new(src: "/icon.png", size: size, border: true)
     end
