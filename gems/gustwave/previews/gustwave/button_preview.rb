@@ -38,8 +38,28 @@ module Gustwave
       render Gustwave::Buttons::Default.new("Link", tag: :a, href: "#")
     end
 
+    def sizes_with_icon
+      render_with_template
+    end
+
+    def with_icon
+      render_with_template
+    end
+
     def disabled
-      render Gustwave::Buttons::Default.new("Disabled", disabled: true)
+      render Gustwave::Buttons::Default.new("Disabled", disabled: true, class: "bg-blue-400 hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-500")
+    end
+
+    def with_label
+      render_with_template
+    end
+
+    def icon_only
+      render_with_template
+    end
+
+    def loader
+      render_with_template
     end
 
     def default_colors

@@ -273,11 +273,12 @@ pages:
     preview: gustwave/button/sizes
   - id: button-sizes-example-10
     title: Button sizes with icon
-    status: composable
+    status: previewed
+    preview: gustwave/button/sizes_with_icon
   - id: button-icon-example
     title: Buttons with icon
     status: previewed
-    preview: gustwave/button/with_icons
+    preview: gustwave/button/with_icon
   - id: button-label-example
     title: Button with label
     status: composable
@@ -286,7 +287,8 @@ pages:
     status: composable
   - id: button-loader-example
     title: Loader
-    status: composable
+    status: previewed
+    preview: gustwave/button/loader
   - id: button-disabled-example
     title: Disabled
     status: previewed
