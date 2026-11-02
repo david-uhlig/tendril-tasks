@@ -43,7 +43,7 @@ module Gustwave
     end
 
     def as_link
-      render Gustwave::Buttons::Default.new("Link", tag: :a, href: "#")
+      render_with_template
     end
 
     def sizes_with_icon

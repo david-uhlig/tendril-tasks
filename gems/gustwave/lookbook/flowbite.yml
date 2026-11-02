@@ -2133,14 +2133,16 @@ pages:
     preview: gustwave/link/icon
   - id: link-cta-example
     title: CTA link
-    status: composable
+    status: previewed
+    preview: gustwave/link/cta
   - id: link-card-example
     title: Card link
     status: previewed
     preview: gustwave/card/link
   - id: link-image-example
     title: Image link
-    status: composable
+    status: previewed
+    preview: gustwave/link/image
   typography/lists:
   - id: unordered-list-example
     title: Unordered list
