@@ -177,12 +177,15 @@ module Gustwave
       driver.execute_script(TOP_LEVEL).select(&:displayed?)
     end
 
-    # The placement when it is unique on the page, otherwise the position.
+    # The placement when it is unique among the triggers, otherwise the position.
+    # A missing attribute means bottom, Flowbite's default placement.
     def dropdown_keys(driver, triggers)
-      placements = driver.find_elements(css: "[data-dropdown-placement]").map { |el| el.attribute("data-dropdown-placement") }
-      triggers.each_with_index.map do |trigger, index|
-        placement = trigger.attribute("data-dropdown-placement")
-        placement && placements.count(placement) == 1 ? placement : index.to_s
+      placements = triggers.map { |trigger| trigger.attribute("data-dropdown-placement") }
+      return triggers.each_index.map(&:to_s) if placements.compact.empty?
+
+      placements = placements.map { |placement| placement || "bottom" }
+      placements.each_with_index.map do |placement, index|
+        placements.count(placement) == 1 ? placement : index.to_s
       end
     end
 
