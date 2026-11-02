@@ -2,7 +2,6 @@
 
 require "cgi"
 require "json"
-require "selenium-webdriver"
 require "yaml"
 
 module Gustwave
@@ -19,13 +18,21 @@ module Gustwave
     MANIFEST = File.expand_path("../lookbook/flowbite.yml", __dir__)
     BASE_URL = "http://127.0.0.1:3021"
     THEMES = %w[light dark].freeze
-    STRATEGIES = { "components/alerts" => :static, "components/dropdowns" => :dropdown }.freeze
+    STRATEGIES = { "components/dropdowns" => :dropdown }.freeze
+    # Pages whose interactions no strategy covers yet. Each needs one before it runs.
+    NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
+    SIZE_TOLERANCE = 2
+    # Only sorts what a person looks at and decides nothing. The 1.0 value comes from
+    # two components so far.
+    PIXEL_FLAG = 1.0
     USAGE = "Usage: bundle exec ruby gems/gustwave/script/flowbite_compare.rb PAGE OUT_DIR [BASE_URL]"
     CHROME_ARGS = %w[--headless=new --no-sandbox --disable-dev-shm-usage --window-size=1000,1400 --no-proxy-server --allow-file-access-from-files].freeze
     STYLES = %w[color backgroundColor paddingTop paddingRight paddingBottom paddingLeft borderTopWidth borderTopColor
                 borderTopLeftRadius fontSize fontWeight lineHeight display alignItems boxShadow textAlign].freeze
     # The same font and padding on both sides, so only the component differs.
     NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} body{padding:20px !important}';document.head.append(s);"
+    # The wrapper's children on a Flowbite page, the body's children on a preview.
+    ELEMENTS = "#exampleWrapper > *, body > *:not(#exampleWrapper):not(script):not(style):not(link):not(noscript)"
     ITEM = "a:not([data-dropdown-toggle]), button:not([data-dropdown-toggle])"
     DIVIDER = "hr, [role=separator]"
     NESTED = "[data-dropdown-toggle]"
@@ -42,15 +49,38 @@ module Gustwave
       return toggles.filter(t => !inMenu(t));
     JS
 
+    # Visible text nodes, so the comparison can use Flowbite's exact text on both sides.
+    FB_VISIBLE_TEXT = <<~JS
+      window.fbVisibleText = root => {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), out = [];
+        while (walker.nextNode()) {
+          const n = walker.currentNode;
+          if (n.textContent.trim() && !n.parentElement.closest('.sr-only')) out.push(n);
+        }
+        return out;
+      };
+    JS
+
     CAPTURE = <<~JS
       const el = arguments[0], cs = getComputedStyle(el), r = el.getBoundingClientRect();
       return {
         classes: [...el.classList],
         text: el.textContent.replace(/\\s+/g, ' ').trim(),
+        text_parts: fbVisibleText(el).map(n => n.textContent.replace(/\\s+/g, ' ')),
         tags: [...el.querySelectorAll('*')].map(e => e.tagName.toLowerCase()).filter(t => t != 'path').join(' '),
         size: [Math.round(r.width), Math.round(r.height)],
         styles: Object.fromEntries(arguments[1].map(k => [k, cs[k]]))
       };
+    JS
+
+    # Sets the text nodes of an element to the reference values, if the counts match.
+    SWAP_TEXT = <<~JS
+      const [el, values] = arguments;
+      const nodes = fbVisibleText(el);
+      const original = nodes.map(n => n.textContent).join('').trim();
+      if (nodes.length !== values.length) return { swapped: false, original_text: original, own_parts: nodes.length };
+      nodes.forEach((n, i) => { n.textContent = values[i]; });
+      return { swapped: true, original_text: original, own_parts: nodes.length };
     JS
 
     OFFSET = <<~JS
@@ -75,18 +105,40 @@ module Gustwave
       return usage(err) unless argv.size.between?(2, 3)
 
       page, out_dir, base = argv
-      strategy = STRATEGIES.fetch(page) { raise Error, "no strategy for #{page}, add one to STRATEGIES" }
+      strategy = strategy_for(page)
       out_dir = File.expand_path(out_dir)
       raise Error, "OUT_DIR does not exist: #{out_dir}" unless Dir.exist?(out_dir)
 
       blocks = compare(page, strategy, pairs(page), out_dir, base || BASE_URL)
       write_outputs(blocks, out_dir)
       out.puts summary(blocks)
-      out.puts "records: #{blocks.sum { |_header, records| records.size }}"
       0
     rescue Error => e
       err.puts "flowbite-compare: #{e.message}"
       1
+    end
+
+    # Flagged for a person to look at; nothing here decides a verdict.
+    def review_reasons(record)
+      reasons = []
+      reasons << "only on gustwave" if record["missing"] == "flowbite"
+      reasons << "only on flowbite" if record["missing"] == "gustwave"
+      reasons << "error" if record["error"]
+      reasons << "menu did not open" if record["menu_open"] == false
+      if record["text_nodes"]
+        flowbite_count, gustwave_count = record["text_nodes"]
+        reasons << "text nodes #{flowbite_count} vs #{gustwave_count}" if flowbite_count != gustwave_count
+      end
+      fb_size, gw_size = record["fb_size"], record["gw_size"]
+      if fb_size && gw_size && beyond?(fb_size, gw_size, SIZE_TOLERANCE)
+        reasons << "size #{dims(fb_size)} vs #{dims(gw_size)}"
+      end
+      fb_offset, gw_offset = record["fb_offset"], record["gw_offset"]
+      if fb_offset && gw_offset && beyond?(fb_offset, gw_offset, SIZE_TOLERANCE)
+        reasons << "offset #{offset_text(fb_offset)} vs #{offset_text(gw_offset)}"
+      end
+      reasons << "pixels #{record["pct"]}%" if record["pct"] && record["pct"] >= PIXEL_FLAG
+      reasons
     end
 
     private
@@ -94,6 +146,12 @@ module Gustwave
     def usage(err)
       err.puts USAGE
       1
+    end
+
+    def strategy_for(page)
+      raise Error, "#{page} needs an interaction strategy first" if NOT_YET.include?(page)
+
+      STRATEGIES.fetch(page, :static)
     end
 
     # The manifest entries of PAGE that have a Gustwave preview to compare with.
@@ -118,10 +176,11 @@ module Gustwave
     end
 
     # Returns [header, records] for one example in one theme.
+    # Flowbite goes first: its text is the reference the Gustwave preview takes on.
     def compare_pair(driver, strategy, meta, out_dir, base)
       dark = meta["theme"] == "dark"
       flowbite = captures(driver, strategy, "file://#{out_dir}/examples/#{meta["id"]}.html", dark)
-      gustwave = captures(driver, strategy, preview_url(base, meta["preview"], meta["theme"]), false)
+      gustwave = captures(driver, strategy, preview_url(base, meta["preview"], meta["theme"]), false, reference: flowbite)
       header = "== #{meta["theme"]} #{meta["id"]} <-> #{meta["scenario"]}"
       [ header, records(driver, meta, flowbite, gustwave) ]
     end
@@ -134,6 +193,8 @@ module Gustwave
     end
 
     def with_driver
+      require "selenium-webdriver"
+
       driver = Selenium::WebDriver.for(:chrome, options: Selenium::WebDriver::Chrome::Options.new(args: CHROME_ARGS))
       driver.manage.timeouts.script_timeout = 30
       yield driver
@@ -142,10 +203,11 @@ module Gustwave
     end
 
     # One loaded side: a Hash of key => { region => capture }.
-    def captures(driver, strategy, url, dark)
+    # With a reference (Flowbite's captures), the Gustwave side takes on its text.
+    def captures(driver, strategy, url, dark, reference: nil)
       case strategy
-      when :static then static_captures(driver, url, dark)
-      when :dropdown then dropdown_captures(driver, url, dark)
+      when :static then static_captures(driver, url, dark, reference:)
+      when :dropdown then dropdown_captures(driver, url, dark, reference:)
       end
     end
 
@@ -153,23 +215,30 @@ module Gustwave
     def load(driver, url, dark)
       driver.navigate.to url
       sleep 1
+      driver.execute_script(FB_VISIBLE_TEXT)
       driver.execute_script("document.documentElement.classList.add('dark')") if dark
       driver.execute_script(NORMALIZE)
       sleep 0.3
     end
 
-    def static_captures(driver, url, dark)
+    def static_captures(driver, url, dark, reference: nil)
       load(driver, url, dark)
-      driver.find_elements(css: "[role=alert]").each_with_index.to_h do |alert, index|
-        [ index.to_s, { "alert" => capture(driver, alert) } ]
+      visible_elements(driver).each_with_index.to_h do |element, index|
+        key = index.to_s
+        swap = swap_text(driver, element, reference&.dig(key, "element"))
+        [ key, { "element" => capture(driver, element).merge(swap) } ]
       end
     end
 
-    def dropdown_captures(driver, url, dark)
+    def visible_elements(driver)
+      driver.find_elements(css: ELEMENTS).select(&:displayed?)
+    end
+
+    def dropdown_captures(driver, url, dark, reference: nil)
       load(driver, url, dark)
       triggers = top_level_triggers(driver)
       dropdown_keys(driver, triggers).each_with_index.to_h do |key, index|
-        [ key, dropdown_regions(driver, url, dark, index) ]
+        [ key, dropdown_regions(driver, url, dark, index, key:, reference:) ]
       end
     end
 
@@ -190,18 +259,21 @@ module Gustwave
     end
 
     # Reloads the page, so each trigger starts from a clean state.
-    def dropdown_regions(driver, url, dark, index)
+    # The text is swapped before opening, so the positioning library measures the final sizes.
+    def dropdown_regions(driver, url, dark, index, key:, reference:)
       load(driver, url, dark)
       driver.execute_script("document.body.click()")
       sleep 0.3
       trigger = top_level_triggers(driver)[index]
       return { "trigger" => { "error" => "trigger not found after reload" } } unless trigger
 
-      open_trigger(driver, trigger)
-      regions = { "trigger" => capture(driver, trigger) }
+      trigger_swap = swap_text(driver, trigger, reference&.dig(key, "trigger"))
       menu = menu_of(driver, trigger)
+      menu_swap = menu ? swap_text(driver, menu, reference&.dig(key, "menu")) : {}
+      open_trigger(driver, trigger)
+      regions = { "trigger" => capture(driver, trigger).merge(trigger_swap) }
       if menu&.displayed?
-        regions.merge!(open_menu_regions(driver, trigger, menu))
+        regions.merge!(open_menu_regions(driver, trigger, menu, menu_swap))
       else
         regions["trigger"]["menu_open"] = false
       end
@@ -210,23 +282,34 @@ module Gustwave
       { "trigger" => { "error" => e.message } }
     end
 
-    def open_menu_regions(driver, trigger, menu)
+    def open_menu_regions(driver, trigger, menu, menu_swap)
       nested = menu.find_elements(css: NESTED).first
+      shared = menu_swap.slice("swapped")
       regions = {
-        "menu" => capture(driver, menu).merge("offset" => offset(driver, menu, trigger)),
-        "item" => first_capture(driver, menu, ITEM),
-        "divider" => first_capture(driver, menu, DIVIDER),
-        "nested" => nested && capture(driver, nested)
+        "menu" => capture(driver, menu).merge(menu_swap).merge("offset" => offset(driver, menu, trigger)),
+        "item" => first_capture(driver, menu, ITEM)&.merge(shared),
+        "divider" => first_capture(driver, menu, DIVIDER)&.merge(shared),
+        "nested" => nested && capture(driver, nested).merge(shared)
       }.compact
-      nested ? regions.merge(submenu_regions(driver, nested)) : regions
+      nested ? regions.merge(submenu_regions(driver, nested, shared)) : regions
     end
 
-    def submenu_regions(driver, nested)
+    def submenu_regions(driver, nested, shared)
       open_trigger(driver, nested)
       submenu = menu_of(driver, nested)
       return {} unless submenu&.displayed?
 
-      { "submenu" => capture(driver, submenu).merge("offset" => offset(driver, submenu, nested)) }
+      { "submenu" => capture(driver, submenu).merge(shared).merge("offset" => offset(driver, submenu, nested)) }
+    end
+
+    # Sets the element's own text to the reference text. Returns {} without a reference.
+    def swap_text(driver, element, reference_capture)
+      values = reference_capture&.dig("text_parts")
+      return {} unless values
+
+      result = driver.execute_script(SWAP_TEXT, element, values)
+      sleep 0.2 if result["swapped"]
+      result
     end
 
     def first_capture(driver, root, css)
@@ -270,6 +353,10 @@ module Gustwave
       end
     end
 
+    def beyond?(before, after, tolerance)
+      before.zip(after).any? { |a, b| (a - b).abs > tolerance }
+    end
+
     def record(driver, meta, place, flowbite, gustwave)
       fields = {
         "missing" => missing(flowbite, gustwave),
@@ -279,11 +366,20 @@ module Gustwave
         "fb_png" => flowbite&.dig("png"),
         "gw_png" => gustwave&.dig("png")
       }
-      meta.merge(place).merge(fields).merge(side_fields(place["region"], flowbite, gustwave)).compact
+      built = meta.merge(place).merge(fields).merge(side_fields(flowbite, gustwave)).merge(text_fields(flowbite, gustwave)).compact
+      built.merge("review" => review_reasons(built))
+    end
+
+    # The text the Gustwave side ended with, and how many text nodes each side has.
+    def text_fields(flowbite, gustwave)
+      fields = { "swapped" => gustwave&.dig("swapped"), "gw_original_text" => gustwave&.dig("original_text") }
+      flowbite_parts, gustwave_parts = flowbite&.dig("text_parts"), gustwave&.dig("own_parts")
+      fields["text_nodes"] = [ flowbite_parts.size, gustwave_parts ] if flowbite_parts && gustwave_parts
+      fields
     end
 
     # What each side reports on its own, plus the comparison when both exist.
-    def side_fields(region, flowbite, gustwave)
+    def side_fields(flowbite, gustwave)
       fields = {
         "fb_size" => flowbite&.dig("size"), "gw_size" => gustwave&.dig("size"),
         "fb_offset" => flowbite&.dig("offset"), "gw_offset" => gustwave&.dig("offset"),
@@ -293,7 +389,7 @@ module Gustwave
       return fields unless flowbite && gustwave
 
       fields.merge(
-        "style_diffs" => style_diffs(region, flowbite, gustwave),
+        "style_diffs" => style_diffs(flowbite, gustwave),
         "classes_only_flowbite" => flowbite["classes"] - gustwave["classes"],
         "classes_only_gustwave" => gustwave["classes"] - flowbite["classes"]
       )
@@ -329,10 +425,9 @@ module Gustwave
       driver.execute_async_script(PIXEL_DIFF, before, after)
     end
 
-    def style_diffs(region, flowbite, gustwave)
+    def style_diffs(flowbite, gustwave)
       names = STYLES.dup
       names -= [ "borderTopColor" ] if flowbite["styles"]["borderTopWidth"] == "0px" && gustwave["styles"]["borderTopWidth"] == "0px"
-      names -= %w[fontSize lineHeight color] if region == "alert"
       names.filter_map do |name|
         before, after = flowbite["styles"][name], gustwave["styles"][name]
         "#{name}: #{before} -> #{after}" if before != after
@@ -347,9 +442,20 @@ module Gustwave
     end
 
     def summary(blocks)
-      blocks.map do |header, records|
+      body = blocks.map do |header, records|
         [ header, *records.flat_map { |record| summary_lines(record) } ].join("\n")
       end.join("\n\n")
+      records = blocks.flat_map(&:last)
+      flagged = records.count { |record| flagged?(record) }
+      "#{body}\n\nrecords: #{records.size}, to review: #{flagged}"
+    end
+
+    def flagged?(record)
+      record["review"]&.any? || false
+    end
+
+    def review_tag(record)
+      flagged?(record) ? "[review]" : "[ok]"
     end
 
     def summary_lines(record)
@@ -361,7 +467,7 @@ module Gustwave
       parts << "size #{dims(record["fb_size"])} vs #{dims(record["gw_size"])}" if record["fb_size"] || record["gw_size"]
       parts << "offset #{offset_text(record["fb_offset"])} vs #{offset_text(record["gw_offset"])}" if record["fb_offset"] || record["gw_offset"]
       parts << "pixels differ #{record["pct"]}%" if record["pct"]
-      "#{record["key"]} #{record["region"]}: #{parts.join(", ")}"
+      "#{review_tag(record)} #{record["key"]} #{record["region"]}: #{parts.join(", ")}"
     end
 
     def dims(size)
@@ -374,10 +480,11 @@ module Gustwave
 
     def details(record)
       lines = []
+      lines << "review: #{record["review"].join("; ")}" if flagged?(record)
       lines << "missing: #{record["missing"]}" if record["missing"]
       lines << "menu_open: false" if record["menu_open"] == false
       lines << "error: #{record["error"]}" if record["error"]
-      if differing?(record, "text")
+      if record["swapped"] != true && differing?(record, "text")
         lines << "text differs: \"#{record["fb_text"][0, 70]}\" | \"#{record["gw_text"][0, 70]}\""
       end
       lines << "tags differ: #{record["fb_tags"]} | #{record["gw_tags"]}" if differing?(record, "tags")
@@ -409,7 +516,10 @@ module Gustwave
     end
 
     def report_record(record)
-      "<div style=\"margin: 8px 0\"><p>#{CGI.escapeHTML(caption(record))}</p>" \
+      notes = []
+      notes << "<p>review: #{CGI.escapeHTML(record["review"].join("; "))}</p>" if flagged?(record)
+      notes << "<p>Preview text: #{CGI.escapeHTML(record["gw_original_text"])}</p>" if record["swapped"] == true && record["gw_original_text"]
+      "<div style=\"margin: 8px 0\"><p>#{CGI.escapeHTML(caption(record))}</p>#{notes.join}" \
         "#{report_image("Flowbite", record["fb_png"])}#{report_image("Gustwave", record["gw_png"])}</div>\n"
     end
 
