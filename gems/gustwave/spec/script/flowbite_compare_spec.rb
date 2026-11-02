@@ -158,6 +158,7 @@ RSpec.describe Gustwave::FlowbiteCompare do
 
     it "gives a listed example its own strategy" do
       expect(strategy_for_pair({ "id" => "avatar-user-dropdown-example" }, :static)).to eq(:dropdown)
+      expect(strategy_for_pair({ "id" => "card-user-profile-example" }, :static)).to eq(:dropdown)
     end
 
     it "gives any other example the page strategy" do
