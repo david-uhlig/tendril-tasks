@@ -300,7 +300,7 @@ pages:
   - id: default-card-example
     title: Default card
     status: previewed
-    preview: gustwave/card/default
+    preview: gustwave/card/link
   - id: card-cta-button-example
     title: Card with button
     status: previewed
@@ -308,7 +308,7 @@ pages:
   - id: card-cta-link-example
     title: Card with link
     status: previewed
-    preview: gustwave/card/link
+    preview: gustwave/card/with_link
   - id: card-image-example
     title: Card with image
     status: previewed
@@ -320,7 +320,7 @@ pages:
   - id: card-user-profile-example
     title: User profile card
     status: previewed
-    preview: gustwave/card/compositions
+    preview: gustwave/card/user_profile
   - id: card-form-inputs-example
     title: Card with form inputs
     status: partial
@@ -332,26 +332,33 @@ pages:
   - id: card-cta-example
     title: Call to action card
     status: previewed
-    preview: gustwave/card/compositions
+    preview: gustwave/card/call_to_action
   - id: card-nav-tabs-example
     title: Card with nav tabs
-    status: composable
+    status: previewed
+    preview: gustwave/card/nav_tabs
   - id: card-full-width-tabs-example
     title: Card full width tabs
-    status: composable
+    status: partial
+    preview: gustwave/card/full_width_tabs
+    needs: accordion
+    note: The FAQ tab lists its answers without an accordion, and phones keep the tabs instead of Flowbite's select, which needs form.
   - id: card-list-example
     title: Card with list
-    status: composable
+    status: previewed
+    preview: gustwave/card/list
   - id: card-pricing-example
     title: Pricing card
     status: previewed
-    preview: gustwave/card/compositions
+    preview: gustwave/card/pricing
   - id: card-testimonial-example
     title: Testimonial card
-    status: composable
+    status: previewed
+    preview: gustwave/card/testimonial
   - id: card-crypto-example
     title: Crypto card
-    status: composable
+    status: previewed
+    preview: gustwave/card/crypto
   components/carousel:
   - id: default-carousel-example
     title: Default slider
