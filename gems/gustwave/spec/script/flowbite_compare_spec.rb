@@ -178,6 +178,48 @@ RSpec.describe Gustwave::FlowbiteCompare do
     end
   end
 
+  describe ".unwrap" do
+    def unwrap(elements, wanted) = described_class.send(:unwrap, nil, elements, wanted)
+
+    def element(tag, children: [], displayed: true)
+      double("element #{tag}", tag_name: tag, find_elements: children, displayed?: displayed)
+    end
+
+    def reference(*tags) = tags.each_with_index.to_h { |tag, index| [ index.to_s, { "element" => { "tag" => tag } } ] }
+
+    it "steps into a lone div when the reference's one element is not a div" do
+      child = element("a")
+      wrapper = element("div", children: [ child ])
+
+      expect(unwrap([ wrapper ], reference("a"))).to eq([ child ])
+    end
+
+    it "keeps a lone div when the reference's one element is a div" do
+      wrapper = element("div", children: [ element("a") ])
+
+      expect(unwrap([ wrapper ], reference("div"))).to eq([ wrapper ])
+    end
+
+    it "steps into a lone div when the reference has several elements" do
+      link, paragraph = element("a"), element("p")
+      wrapper = element("div", children: [ link, paragraph ])
+
+      expect(unwrap([ wrapper ], reference("div", "p"))).to eq([ link, paragraph ])
+    end
+
+    it "keeps a lone element that is not a div when the reference's one element is not a div" do
+      link = element("a", children: [ element("span") ])
+
+      expect(unwrap([ link ], reference("p"))).to eq([ link ])
+    end
+
+    it "keeps a lone div without displayed children" do
+      wrapper = element("div", children: [ element("a", displayed: false) ])
+
+      expect(unwrap([ wrapper ], reference("a"))).to eq([ wrapper ])
+    end
+  end
+
   describe "the reminder in the output" do
     let(:differing) { { "key" => "0", "region" => "element", "pct" => 0.0, "icon_pct" => 12.5, "review" => [] } }
     let(:matching) { { "key" => "1", "region" => "element", "pct" => 0.0, "icon_pct" => 0.0, "review" => [] } }
