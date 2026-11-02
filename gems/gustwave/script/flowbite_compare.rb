@@ -42,7 +42,7 @@ module Gustwave
     STYLES = %w[color backgroundColor paddingTop paddingRight paddingBottom paddingLeft borderTopWidth borderTopColor
                 borderTopLeftRadius fontSize fontWeight lineHeight display alignItems boxShadow textAlign].freeze
     # The same font and padding on both sides, so only the component differs.
-    NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} body{padding:20px !important}';document.head.append(s);"
+    NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} *{animation:none !important} body{padding:20px !important}';document.head.append(s);"
     # The wrapper's children on a Flowbite page, the body's children on a preview.
     ELEMENTS = "#exampleWrapper > *, body > *:not(#exampleWrapper):not(script):not(style):not(link):not(noscript)"
     ITEM = "a:not([data-dropdown-toggle]), button:not([data-dropdown-toggle])"

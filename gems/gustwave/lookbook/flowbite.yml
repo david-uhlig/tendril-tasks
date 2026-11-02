@@ -281,10 +281,12 @@ pages:
     preview: gustwave/button/with_icon
   - id: button-label-example
     title: Button with label
-    status: composable
+    status: previewed
+    preview: gustwave/button/with_label
   - id: button-icon-only-example
     title: Icon buttons
-    status: composable
+    status: previewed
+    preview: gustwave/button/icon_only
   - id: button-loader-example
     title: Loader
     status: previewed
