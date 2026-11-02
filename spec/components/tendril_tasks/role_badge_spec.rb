@@ -17,6 +17,22 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
       render_inline(described_class.new(user, id: "role-badge"))
       expect(rendered_content).to have_selector("a[href]", text: "Redaktion")
     end
+
+    it "keeps its blue background in dark mode" do
+      user = build_stubbed(:user, role: :editor)
+      render_inline(described_class.new(user))
+      expect(page).to have_selector("a.border[class~='dark:bg-blue-900'][class~='dark:text-blue-300']")
+      expect(page).not_to have_selector("a[class~='dark:bg-gray-700']")
+    end
+  end
+
+  context "with admin" do
+    it "keeps its purple background in dark mode" do
+      user = build_stubbed(:user, role: :admin)
+      render_inline(described_class.new(user))
+      expect(page).to have_selector("a.border[class~='dark:bg-purple-900'][class~='dark:text-purple-300']")
+      expect(page).not_to have_selector("a[class~='dark:bg-gray-700']")
+    end
   end
 
   context "with admin" do
@@ -34,7 +50,7 @@ RSpec.describe TendrilTasks::RoleBadge, type: :component do
 
     { admin: :purple, editor: :default }.each do |role, color|
       it "is #{color} for #{role}" do
-        render_inline(Gustwave::Badge.new("Badge", tag: :a, color:, size: :sm, border: true))
+        render_inline(Gustwave::Badge.new("Badge", tag: :a, color:, size: :sm, border: true, class: described_class::ROLE_DARK_COLORS[role]))
         expected = badge_classes
 
         render_inline(described_class.new(build_stubbed(:user, role:)))

@@ -8,6 +8,13 @@ class TendrilTasks::RoleBadge < TendrilTasks::Component
     user: :default
   }.freeze
 
+  # A bordered badge turns gray in dark mode, these keep their color.
+  ROLE_DARK_COLORS = {
+    admin: "dark:bg-purple-900 dark:text-purple-300",
+    editor: "dark:bg-blue-900 dark:text-blue-300",
+    user: "dark:bg-blue-900 dark:text-blue-300"
+  }.freeze
+
   def initialize(user, size: :sm, border: true, **options)
     @user = user
     @role = user.role.to_sym
@@ -16,7 +23,8 @@ class TendrilTasks::RoleBadge < TendrilTasks::Component
       tag: :a,
       color: ROLE_COLORS.fetch(role, :default),
       size:,
-      border:
+      border:,
+      class: ROLE_DARK_COLORS.fetch(role, ROLE_DARK_COLORS[:user])
     )
   end
 

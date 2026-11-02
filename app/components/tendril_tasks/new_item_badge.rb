@@ -5,7 +5,8 @@ module TendrilTasks
   #
   # Renders a green, pill-shaped badge with the i18n text "New" by default.
   class NewItemBadge < TendrilTasks::Component
-    base "opacity-80"
+    # A bordered badge turns gray in dark mode, this one stays green.
+    base "opacity-80 dark:bg-green-900 dark:text-green-300"
 
     def initialize(text = nil,
                    color: :green,
