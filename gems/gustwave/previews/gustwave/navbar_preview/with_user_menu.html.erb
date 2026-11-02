@@ -16,7 +16,7 @@
         <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Open user menu", size: :sm) %>
       <% end %>
 
-      <% dropdown.with_menu_list class: "dark:divide-gray-600" do |menu| %>
+      <% dropdown.with_menu_list class: "min-w-0 dark:divide-gray-600" do |menu| %>
         <% menu.with_header class: "py-3" do %>
           <div>Ada Lovelace</div>
           <div class="font-medium truncate">ada@example.com</div>

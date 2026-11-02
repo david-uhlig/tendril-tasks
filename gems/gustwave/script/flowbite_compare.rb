@@ -44,8 +44,8 @@ module Gustwave
     CHROME_ARGS = %w[--headless=new --no-sandbox --disable-dev-shm-usage --window-size=1000,1400 --no-proxy-server --allow-file-access-from-files].freeze
     STYLES = %w[color backgroundColor paddingTop paddingRight paddingBottom paddingLeft borderTopWidth borderTopColor
                 borderTopLeftRadius fontSize fontWeight lineHeight display alignItems boxShadow textAlign].freeze
-    # The same font and padding on both sides, so only the component differs.
-    NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} *{animation:none !important} body{padding:20px !important}';document.head.append(s);"
+    # The same font and padding on both sides, so only the component differs. The padding is inline because Flowbite's !p-0 on some pages beats a stylesheet rule.
+    NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} *{animation:none !important}';document.head.append(s);document.body.style.setProperty('padding','20px','important');"
     # The wrapper's children on a Flowbite page, the body's children on a preview.
     ELEMENTS = "#exampleWrapper > *, body > *:not(#exampleWrapper):not(script):not(style):not(link):not(noscript)"
     ITEM = "a:not([data-dropdown-toggle]), button:not([data-dropdown-toggle])"
@@ -415,7 +415,7 @@ module Gustwave
     # A missing attribute means bottom, Flowbite's default placement.
     def dropdown_keys(driver, triggers)
       placements = triggers.map { |trigger| trigger.attribute("data-dropdown-placement") }
-      return triggers.each_index.map(&:to_s) if placements.compact.empty?
+      return triggers.each_index.map(&:to_s) if (placements.compact - [ "bottom" ]).empty?
 
       placements = placements.map { |placement| placement || "bottom" }
       placements.each_with_index.map do |placement, index|

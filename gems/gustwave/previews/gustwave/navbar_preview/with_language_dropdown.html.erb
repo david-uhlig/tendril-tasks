@@ -11,20 +11,8 @@
   <% navbar.with_item_link "Contact", href: "#" %>
 
   <% navbar.with_actions do %>
-    <%= render Gustwave::Dropdown.new do |dropdown| %>
-      <% dropdown.with_trigger_generic do %>
-        <button
-          type="button"
-          class="
-            inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white
-            rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white
-          "
-        >
-          <%= render Gustwave::Icon.new(:globe, position: :standalone, class: "size-5 me-3") %> English (US)
-        </button>
-      <% end %>
-
-      <% dropdown.with_menu_list class: "font-medium" do |menu| %>
+    <%= render Gustwave::Dropdown.new("English (US)", inline: true, icon: :globe, trailing_icon: false, class: "inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white") do |dropdown| %>
+      <% dropdown.with_menu_list class: "min-w-0 font-medium" do |menu| %>
         <% menu.with_item_link "English (US)", href: "#", icon: :globe %>
         <% menu.with_item_link "Deutsch", href: "#", icon: :globe %>
         <% menu.with_item_link "Italiano", href: "#", icon: :globe %>

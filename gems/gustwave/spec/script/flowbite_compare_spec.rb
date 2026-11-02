@@ -224,6 +224,23 @@ RSpec.describe Gustwave::FlowbiteCompare do
     end
   end
 
+  describe ".dropdown_keys" do
+    def trigger(placement) = double("trigger", attribute: placement)
+    def dropdown_keys(*triggers) = described_class.send(:dropdown_keys, nil, triggers)
+
+    it "keys a lone explicit bottom placement by position" do
+      expect(dropdown_keys(trigger("bottom"))).to eq([ "0" ])
+    end
+
+    it "keys a missing placement by position" do
+      expect(dropdown_keys(trigger(nil))).to eq([ "0" ])
+    end
+
+    it "keys a missing placement as bottom beside other placements" do
+      expect(dropdown_keys(trigger("top"), trigger(nil))).to eq([ "top", "bottom" ])
+    end
+  end
+
   describe "the reminder in the output" do
     let(:differing) { { "key" => "0", "region" => "element", "pct" => 0.0, "icon_pct" => 12.5, "review" => [] } }
     let(:matching) { { "key" => "1", "region" => "element", "pct" => 0.0, "icon_pct" => 0.0, "review" => [] } }
