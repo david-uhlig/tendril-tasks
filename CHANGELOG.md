@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - "New" next to the initiative in the task form opens a modal to create the initiative, instead of leaving the page. The task's entries are kept, and the new initiative is selected. It's published by default, and you become its contact person.
 - Outline icons are drawn with a slightly thicker line, matching Flowbite's stroke width of 2.
+- Green buttons are darker, disabled buttons are paler, and bordered buttons are slightly taller, matching Flowbite.
 
 ## [0.8.0] - 2026-10-13
 

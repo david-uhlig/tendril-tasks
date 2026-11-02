@@ -47,9 +47,16 @@ module Gustwave
 
     # The examples in a docs page, in order of appearance.
     def parse(markdown)
+      seen = []
+
       markdown.scan(BLOCK).each_with_index.map do |(attributes, html), index|
+        # Same rule as FlowbiteInventory, so the ids agree with lookbook/flowbite.yml.
+        id = attributes[ID, 1] || "example-#{index}"
+        id = "#{id}-#{seen.size}" if seen.include?(id)
+        seen << id
+
         Example.new(
-          id: attributes[ID, 1] || "example-#{index}",
+          id: id,
           html: html,
           wrapper_class: attributes[CLASS, 1].to_s.strip,
           body_class: attributes[BODY_CLASS, 1].to_s,

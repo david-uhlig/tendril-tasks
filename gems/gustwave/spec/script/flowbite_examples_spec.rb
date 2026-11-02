@@ -68,6 +68,25 @@ RSpec.describe Gustwave::FlowbiteExamples do
 
       expect(described_class.parse(markdown).map(&:init_js)).to eq([ false, false, true ])
     end
+
+    it "suffixes a repeated id with the number of ids before it" do
+      markdown = "{{< example id=\"dup\" >}}\n1\n{{< /example >}}\n{{< example id=\"dup\" >}}\n2\n{{< /example >}}\n"
+
+      expect(described_class.parse(markdown).map(&:id)).to eq([ "dup", "dup-1" ])
+    end
+
+    it "counts every earlier id when it suffixes a repeated id" do
+      markdown = <<~MD
+        {{< example id="dup" >}}
+        {{< /example >}}
+        {{< example id="other" >}}
+        {{< /example >}}
+        {{< example id="dup" >}}
+        {{< /example >}}
+      MD
+
+      expect(described_class.parse(markdown).map(&:id)).to eq([ "dup", "other", "dup-2" ])
+    end
   end
 
   describe ".page_html" do
