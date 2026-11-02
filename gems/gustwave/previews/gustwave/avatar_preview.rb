@@ -45,5 +45,17 @@ module Gustwave
     def square_sizes
       render_with_template
     end
+
+    def with_tooltip
+      render_with_template
+    end
+
+    def with_indicator
+      render_with_template
+    end
+
+    def with_dropdown
+      render_with_template
+    end
   end
 end

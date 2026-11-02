@@ -78,7 +78,8 @@ pages:
     preview: gustwave/avatar/initials
   - id: avatar-tooltip-example
     title: Avatar tooltip
-    status: composable
+    status: previewed
+    preview: gustwave/avatar/with_tooltip
   - id: avatar-dot-indicator-example
     title: Dot indicator
     status: composable
