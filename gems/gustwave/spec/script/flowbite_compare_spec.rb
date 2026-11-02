@@ -72,5 +72,51 @@ RSpec.describe Gustwave::FlowbiteCompare do
     it "flags a pixel share at the flag" do
       expect(reasons({ "pct" => 1.0 })).to eq([ "pixels 1.0%" ])
     end
+
+    it "does not flag icons that match" do
+      icon = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+
+      expect(reasons({ "fb_icons" => [ icon ], "gw_icons" => [ icon ] })).to eq([])
+    end
+
+    it "does not flag icon boxes exactly at the tolerance" do
+      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+      gw = { "box" => [ 3, 3, 13, 13 ], "paints" => [ "rgb(1, 2, 3)" ] }
+
+      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([])
+    end
+
+    it "flags a different number of icons" do
+      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+
+      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [] })).to eq([ "icons 1 vs 0" ])
+    end
+
+    it "flags an icon size over the tolerance" do
+      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+      gw = { "box" => [ 2, 2, 14, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+
+      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([ "icon 1 size 12x12 vs 14x12" ])
+    end
+
+    it "flags an icon position over the tolerance" do
+      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+      gw = { "box" => [ 4, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+
+      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([ "icon 1 position 2,2 vs 4,2" ])
+    end
+
+    it "flags an icon colour" do
+      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+      gw = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(4, 5, 6)" ] }
+
+      expect(reasons({ "fb_icons" => [ fb ], "gw_icons" => [ gw ] })).to eq([ "icon 1 colour rgb(1, 2, 3) vs rgb(4, 5, 6)" ])
+    end
+
+    it "ignores icons when a side was not captured" do
+      fb = { "box" => [ 2, 2, 12, 12 ], "paints" => [ "rgb(1, 2, 3)" ] }
+
+      expect(reasons({ "fb_icons" => [ fb ] })).to eq([])
+    end
   end
 end

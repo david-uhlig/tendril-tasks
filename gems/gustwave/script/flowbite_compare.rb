@@ -22,6 +22,8 @@ module Gustwave
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
     NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
+    # Icons are small, so an icon box may be off by less than the element around it.
+    ICON_TOLERANCE = 1
     # Only sorts what a person looks at and decides nothing. The 1.0 value comes from
     # two components so far.
     PIXEL_FLAG = 1.0
@@ -61,6 +63,25 @@ module Gustwave
       };
     JS
 
+    # Each icon's box relative to the element, and the colours its shapes paint.
+    # A nested svg belongs to the icon around it. Hidden icons have no box.
+    FB_ICONS = <<~JS
+      window.fbIcons = root => {
+        const origin = root.getBoundingClientRect();
+        const svgs = [...(root.matches('svg') ? [root] : []), ...root.querySelectorAll('svg')];
+        return svgs.filter(s => !s.parentElement.closest('svg')).map(s => ({ svg: s, r: s.getBoundingClientRect() }))
+          .filter(({ r }) => r.width > 0 && r.height > 0)
+          .map(({ svg, r }) => {
+            const shapes = svg.querySelectorAll('path, circle, rect, line, polygon, polyline, ellipse');
+            const paints = [...shapes].flatMap(e => { const c = getComputedStyle(e); return [c.fill, c.stroke]; }).filter(p => p !== 'none');
+            return {
+              box: [r.left - origin.left, r.top - origin.top, r.width, r.height].map(Math.round),
+              paints: [...new Set(paints)].sort()
+            };
+          });
+      };
+    JS
+
     CAPTURE = <<~JS
       const el = arguments[0], cs = getComputedStyle(el), r = el.getBoundingClientRect();
       return {
@@ -68,7 +89,8 @@ module Gustwave
         text: el.textContent.replace(/\\s+/g, ' ').trim(),
         text_parts: fbVisibleText(el).map(n => n.textContent.replace(/\\s+/g, ' ')),
         tags: [...el.querySelectorAll('*')].map(e => e.tagName.toLowerCase()).filter(t => t != 'path').join(' '),
-        size: [Math.round(r.width), Math.round(r.height)],
+        icons: fbIcons(el),
+        size:[Math.round(r.width), Math.round(r.height)],
         styles: Object.fromEntries(arguments[1].map(k => [k, cs[k]]))
       };
     JS
@@ -147,8 +169,20 @@ module Gustwave
       if fb_offset && gw_offset && beyond?(fb_offset, gw_offset, SIZE_TOLERANCE)
         reasons << "offset #{offset_text(fb_offset)} vs #{offset_text(gw_offset)}"
       end
+      reasons.concat(icon_reasons(record))
       reasons << "pixels #{record["pct"]}%" if record["pct"] && record["pct"] >= PIXEL_FLAG
       reasons
+    end
+
+    # What can still be measured about icons once their pixels are not compared.
+    def icon_reasons(record)
+      flowbite, gustwave = record["fb_icons"], record["gw_icons"]
+      return [] unless flowbite && gustwave
+      return [ "icons #{flowbite.size} vs #{gustwave.size}" ] if flowbite.size != gustwave.size
+
+      flowbite.zip(gustwave).each_with_index.flat_map do |(fb, gw), index|
+        icon_differences(fb, gw).map { |difference| "icon #{index + 1} #{difference}" }
+      end
     end
 
     private
@@ -226,6 +260,7 @@ module Gustwave
       driver.navigate.to url
       sleep 1
       driver.execute_script(FB_VISIBLE_TEXT)
+      driver.execute_script(FB_ICONS)
       driver.execute_script("document.documentElement.classList.add('dark')") if dark
       driver.execute_script(NORMALIZE)
       sleep 0.3
@@ -384,6 +419,16 @@ module Gustwave
       before.zip(after).any? { |a, b| (a - b).abs > tolerance }
     end
 
+    def icon_differences(flowbite, gustwave)
+      fb_position, gw_position = flowbite["box"].first(2), gustwave["box"].first(2)
+      fb_size, gw_size = flowbite["box"].last(2), gustwave["box"].last(2)
+      differences = []
+      differences << "size #{dims(fb_size)} vs #{dims(gw_size)}" if beyond?(fb_size, gw_size, ICON_TOLERANCE)
+      differences << "position #{offset_text(fb_position)} vs #{offset_text(gw_position)}" if beyond?(fb_position, gw_position, ICON_TOLERANCE)
+      differences << "colour #{flowbite["paints"].join(" ")} vs #{gustwave["paints"].join(" ")}" if flowbite["paints"] != gustwave["paints"]
+      differences
+    end
+
     def record(driver, meta, place, flowbite, gustwave)
       fields = {
         "missing" => missing(flowbite, gustwave),
@@ -411,7 +456,8 @@ module Gustwave
         "fb_size" => flowbite&.dig("size"), "gw_size" => gustwave&.dig("size"),
         "fb_offset" => flowbite&.dig("offset"), "gw_offset" => gustwave&.dig("offset"),
         "fb_text" => flowbite&.dig("text"), "gw_text" => gustwave&.dig("text"),
-        "fb_tags" => flowbite&.dig("tags"), "gw_tags" => gustwave&.dig("tags")
+        "fb_tags" => flowbite&.dig("tags"), "gw_tags" => gustwave&.dig("tags"),
+        "fb_icons" => flowbite&.dig("icons"), "gw_icons" => gustwave&.dig("icons")
       }
       return fields unless flowbite && gustwave
 
