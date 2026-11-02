@@ -63,7 +63,7 @@ pages:
   - id: default-avatar-example
     title: Default avatar
     status: previewed
-    preview: gustwave/avatar/square
+    preview: gustwave/avatar/default
   - id: avatar-bordered-example
     title: Bordered
     status: previewed
@@ -71,32 +71,35 @@ pages:
   - id: avatar-placeholder-example
     title: Placeholder icon
     status: previewed
-    preview: gustwave/avatar/placeholder_and_text
+    preview: gustwave/avatar/placeholder
   - id: avatar-placeholder-initials-example
     title: Placeholder initials
     status: previewed
-    preview: gustwave/avatar/placeholder_and_text
+    preview: gustwave/avatar/initials
   - id: avatar-tooltip-example
     title: Avatar tooltip
-    status: composable
+    status: previewed
+    preview: gustwave/avatar/with_tooltip
   - id: avatar-dot-indicator-example
     title: Dot indicator
-    status: composable
+    status: previewed
+    preview: gustwave/avatar/with_indicator
   - id: avatar-stacked-example
     title: Stacked
     status: previewed
-    preview: gustwave/avatar/group
+    preview: gustwave/avatar/stacked
   - id: avatar-text-example
     title: Avatar text
     status: previewed
-    preview: gustwave/avatar/placeholder_and_text
+    preview: gustwave/avatar/with_text
   - id: avatar-user-dropdown-example
     title: User dropdown
-    status: composable
+    status: previewed
+    preview: gustwave/avatar/with_dropdown
   - id: avatar-sizes-example
     title: Sizes
     status: previewed
-    preview: gustwave/avatar/sizes
+    preview: gustwave/avatar/square_sizes
   components/badge:
   - id: default-badge-example
     title: Default badge

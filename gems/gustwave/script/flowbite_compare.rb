@@ -22,6 +22,8 @@ module Gustwave
     BASE_URL = "http://127.0.0.1:3021"
     THEMES = %w[light dark].freeze
     STRATEGIES = { "components/dropdowns" => :dropdown }.freeze
+    # Examples whose own interaction differs from their page's, keyed by example id.
+    EXAMPLE_STRATEGIES = { "avatar-user-dropdown-example" => :dropdown }.freeze
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
     NOT_YET = %w[speed-dial drawer tabs navbar tooltips modal popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
@@ -133,6 +135,18 @@ module Gustwave
     OFFSET = <<~JS
       const a = arguments[0].getBoundingClientRect(), b = arguments[1].getBoundingClientRect();
       return [Math.round(a.left - b.left), Math.round(a.top - b.top)];
+    JS
+
+    # The images cannot be compared: Flowbite's /docs/images paths do not load under
+    # file://, so both sides show this same picture instead. Only the size, shape and
+    # ring of an image are compared.
+    SAME_IMAGE = <<~JS
+      const solid = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'><rect width='100' height='100' fill='%23888'/></svg>";
+      document.querySelectorAll('img').forEach(img => {
+        img.removeAttribute('srcset');
+        img.alt = '';
+        img.src = solid;
+      });
     JS
 
     # Pixels inside an icon box on either side count apart from the rest.
@@ -248,13 +262,18 @@ module Gustwave
       previewed
     end
 
+    # An example listed in EXAMPLE_STRATEGIES uses its own strategy, otherwise the page's.
+    def strategy_for_pair(pair, page_strategy)
+      EXAMPLE_STRATEGIES.fetch(pair["id"], page_strategy)
+    end
+
     def compare(page, strategy, pairs, out_dir, base)
       with_driver do |driver|
         THEMES.flat_map do |theme|
           pairs.map do |pair|
             meta = { "page" => page, "id" => pair["id"], "scenario" => pair["preview"].split("/").last,
                      "preview" => pair["preview"], "theme" => theme }
-            compare_pair(driver, strategy, meta, out_dir, base)
+            compare_pair(driver, strategy_for_pair(pair, strategy), meta, out_dir, base)
           end
         end
       end
@@ -302,6 +321,7 @@ module Gustwave
       sleep 1
       driver.execute_script(FB_VISIBLE_TEXT)
       driver.execute_script(FB_ICONS)
+      driver.execute_script(SAME_IMAGE)
       driver.execute_script("document.documentElement.classList.add('dark')") if dark
       driver.execute_script(NORMALIZE)
       sleep 0.3
