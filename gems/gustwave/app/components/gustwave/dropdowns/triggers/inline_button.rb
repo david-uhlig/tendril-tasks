@@ -10,6 +10,10 @@ module Gustwave
 
         part :icon, "h-[1.5em] w-auto"
 
+        part :leading_chevron, "h-2.5 w-2.5 me-3"
+
+        part :trailing_chevron, "h-2.5 w-2.5 ms-3"
+
         # @param text [String, nil] the text to appear on the dropdown button. Takes precedent over block content.
         # @param options [Hash] additional options passed to Gustwave::Dropdowns::Triggers::Button and Gustwave::Buttons::Base components.
         # @see Gustwave::Dropdowns::Triggers::Button and Gustwave::Dropdowns::Triggers::Base
@@ -18,15 +22,11 @@ module Gustwave
           super(text, **options)
         end
 
-        def call
-          render button_component do
-            it.with_leading_visual_icon(icon, class: classes(:icon)) if icon
-            it.with_trailing_visual_icon(trailing_icon, class: classes(:icon)) if trailing_icon
-            text_or_content(text)
-          end
-        end
-
         private
+
+        def icon_options
+          { class: classes(:icon) }
+        end
 
         def button_component
           @button_component ||= Gustwave::Buttons::Base.new(**config)
