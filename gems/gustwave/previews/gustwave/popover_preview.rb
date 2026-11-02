@@ -1,5 +1,17 @@
 module Gustwave
   class PopoverPreview < ViewComponent::Preview
+    # A person's details with a follow button.
+    def user_profile; end
+
+    # A company's details with links, people and actions.
+    def company_profile; end
+
+    # Text and an image side by side, opened from a link in a paragraph.
+    def image; end
+
+    # Longer help text, opened from an icon next to a label.
+    def description; end
+
     # Spread +trigger_options+ into the triggering element.
     # @param placement select { choices: [auto, auto-start, auto-end, top, top-start, top-end, bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end] }
     # @param trigger select { choices: [hover, click] }
