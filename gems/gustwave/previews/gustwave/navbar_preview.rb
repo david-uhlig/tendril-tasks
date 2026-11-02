@@ -41,7 +41,7 @@ module Gustwave
       render_with_template
     end
 
-    # A language switcher with a globe icon in the actions row, as in Flowbite's language dropdown example.
+    # A language switcher with Flowbite's flags in the actions row, as in its language dropdown example.
     def with_language_dropdown
       render_with_template
     end
