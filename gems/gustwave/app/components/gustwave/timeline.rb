@@ -13,7 +13,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do %>
   #       <%= time_tag Date.new(2022, 2, 1), "February 2022", class: "text-sm font-normal leading-none text-gray-400 dark:text-gray-500" %>
-  #       <%= render Gustwave::Heading.new("Application UI code in Tailwind CSS", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Heading.new("Application UI code in Tailwind CSS", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #       <%= render Gustwave::Paragraph.new("Get access to over 20+ pages.") %>
   #     <% end %>
   #   <% end %>
@@ -26,7 +26,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_image "/avatar.png", alt: "Bonnie Green" %>
@@ -43,7 +43,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new(orientation: :horizontal) do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg") %>
+  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #   <% end %>
   #

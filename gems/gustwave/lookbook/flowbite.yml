@@ -1975,57 +1975,63 @@ pages:
   - id: default-heading-example
     title: Default heading
     status: previewed
-    preview: gustwave/heading/levels
+    preview: gustwave/heading/default
   - id: second-level-heading-example
     title: Second-level heading
     status: previewed
-    preview: gustwave/heading/levels
+    preview: gustwave/heading/second_level
   - id: highlighted-heading-example
     title: Highlighted heading
-    status: composable
+    status: previewed
+    preview: gustwave/heading/highlighted
   - id: heading-mark-example
     title: Heading mark
-    status: composable
+    status: previewed
+    preview: gustwave/heading/mark
   - id: heading-gradient-example
     title: Heading gradient
-    status: composable
+    status: previewed
+    preview: gustwave/heading/gradient
   - id: heading-underline-example
     title: Heading underline
-    status: composable
+    status: previewed
+    preview: gustwave/heading/underline
   - id: heading-breadcrumb-example
     title: Breadcrumb context
     status: partial
     needs: breadcrumb
   - id: heading-badge-example
     title: Badge context
-    status: composable
+    status: previewed
+    preview: gustwave/heading/badge
   - id: heading-secondary-example
     title: Secondary text
-    status: composable
+    status: previewed
+    preview: gustwave/heading/secondary
   - id: heading-one-example
     title: Sizes > Heading one (H1)
     status: previewed
-    preview: gustwave/heading/tag_and_size
+    preview: gustwave/heading/heading_one
   - id: heading-two-example
     title: Sizes > Heading two (H2)
     status: previewed
-    preview: gustwave/heading/tag_and_size
+    preview: gustwave/heading/heading_two
   - id: heading-three-example
     title: Sizes > Heading three (H3)
     status: previewed
-    preview: gustwave/heading/tag_and_size
+    preview: gustwave/heading/heading_three
   - id: heading-four-example
     title: Sizes > Heading four (H4)
     status: previewed
-    preview: gustwave/heading/tag_and_size
+    preview: gustwave/heading/heading_four
   - id: heading-five-example
     title: Sizes > Heading five (H5)
     status: previewed
-    preview: gustwave/heading/tag_and_size
+    preview: gustwave/heading/heading_five
   - id: heading-six-example
     title: Sizes > Heading six (H6)
     status: previewed
-    preview: gustwave/heading/tag_and_size
+    preview: gustwave/heading/heading_six
   typography/hr:
   - id: default-hr-example
     title: Default HR
