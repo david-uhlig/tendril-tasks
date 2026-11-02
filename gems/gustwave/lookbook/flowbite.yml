@@ -104,7 +104,7 @@ pages:
   - id: badge-sizes-example
     title: Large badges
     status: previewed
-    preview: gustwave/badge/sizes
+    preview: gustwave/badge/large
   - id: bordered-badge-example
     title: Bordered badge
     status: previewed
