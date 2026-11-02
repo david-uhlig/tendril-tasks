@@ -50,13 +50,13 @@ module Gustwave
   #  <% end %>
   #
   class HorizontalLine < Gustwave::Component
-    base "mx-auto border-0 rounded-sm dark:bg-gray-700"
+    base "mx-auto border-0 dark:bg-gray-700"
     unstyled shape: :none
 
     variant :shape, default: :default, values: {
       default: "w-full h-px my-8 bg-gray-200",
-      trimmed: "w-48 h-1 my-4 bg-gray-100 md:my-10",
-      squared: "w-8 h-8 my-8 bg-gray-200 md:my-12"
+      trimmed: "w-48 h-1 my-4 bg-gray-100 rounded-sm md:my-10",
+      squared: "w-8 h-8 my-8 bg-gray-200 rounded-sm md:my-12"
     }
 
     part :visual_text,
