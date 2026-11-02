@@ -135,6 +135,11 @@ RSpec.describe Gustwave::Badge, type: :component do
       expect(page).not_to have_selector("span.px-2\\.5")
     end
 
+    it "sizes the icon of a round badge from the root" do
+      render_inline(described_class.new(size: :md)) { |badge| badge.with_leading_visual_icon(:check) }
+      expect(page).to have_selector("span.w-8.h-8[class~='*:h-5']")
+    end
+
     it "keeps text padding on a badge with text" do
       render_inline(described_class.new("New"))
       expect(page).to have_selector("span.px-2\\.5.py-0\\.5")
@@ -143,7 +148,7 @@ RSpec.describe Gustwave::Badge, type: :component do
 
     it "sizes a leading icon to match the text" do
       render_inline(described_class.new("New")) { |badge| badge.with_leading_visual_icon(:check) }
-      expect(page).to have_selector("span > svg.h-2\\.5")
+      expect(page).to have_selector("span > svg.h-3.-mx-px")
     end
 
     it "sizes a leading indicator to match the badge size" do
@@ -202,7 +207,7 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "renders a dismiss button with a small icon" do
       render_inline(described_class.new("New", id: "badge-new"), &:with_dismiss_button)
 
-      expect(page).to have_selector("button.bg-transparent > svg.h-3[aria-hidden='true']")
+      expect(page).to have_selector("button.bg-transparent > svg[class~='h-3.5'][aria-hidden='true']")
     end
 
     it "uses Flowbite's padding and spacing" do
@@ -215,7 +220,7 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "matches the badge's color and size" do
       render_inline(described_class.new("New", color: :pink, size: :"2xl"), &:with_dismiss_button)
 
-      expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2 > svg.h-4")
+      expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2 > svg.h-5")
     end
   end
 end

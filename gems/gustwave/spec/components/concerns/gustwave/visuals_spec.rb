@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Visuals, type: :component do
-  { Gustwave::Buttons::Base => "h-6", Gustwave::Badge => "h-4" }.each do |component_class, lg_visual_height|
+  { Gustwave::Buttons::Base => "h-6", Gustwave::Badge => "h-5" }.each do |component_class, lg_visual_height|
     describe component_class do
       it "declares the visual slots" do
         expect(component_class.extensible_slots.keys).to include(:leading_visuals, :trailing_visuals)
