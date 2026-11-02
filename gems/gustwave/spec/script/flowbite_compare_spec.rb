@@ -173,6 +173,10 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(strategy_for("components/modal")).to eq(:modal)
     end
 
+    it "opens the dropdowns of the navbar page" do
+      expect(strategy_for("components/navbar")).to eq(:navbar)
+    end
+
     it "refuses a page whose interactions no strategy covers" do
       expect { strategy_for("components/drawer") }.to raise_error(described_class::Error, /interaction strategy/)
     end
