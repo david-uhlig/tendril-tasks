@@ -1,0 +1,5 @@
+<div class="space-y-4">
+  <%= render Gustwave::IconToast.new("Your changes were saved.", status: :success) %>
+  <%= render Gustwave::IconToast.new("The task was deleted.", status: :error) %>
+  <%= render Gustwave::IconToast.new("Your session expires soon.", status: :warning) %>
+</div>
