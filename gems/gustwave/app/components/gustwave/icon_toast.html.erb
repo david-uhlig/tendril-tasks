@@ -3,7 +3,7 @@
                                dismissible: @dismissible,
                                auto_remove: @auto_remove) do %>
   <%= tag.div **@options do %>
-    <%= render Gustwave::Icon.new(@icon) %>
+    <%= render Gustwave::Icon.new(@icon, theme: :solid) %>
     <%= tag.span t(".#{@status}", default: ""), class: "sr-only" %>
   <% end %>
 

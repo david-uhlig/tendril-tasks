@@ -1460,26 +1460,31 @@ pages:
   - id: toast-colors-example
     title: Colors
     status: previewed
-    preview: gustwave/toast/with_icon
+    preview: gustwave/toast/colors
   - id: toast-simple-example
     title: Simple toast
-    status: composable
+    status: previewed
+    preview: gustwave/toast/simple
   - id: toast-undo-example
     title: Undo button
-    status: composable
+    status: previewed
+    preview: gustwave/toast/undo
   - id: toast-message-example
     title: Toast message
-    status: composable
+    status: previewed
+    preview: gustwave/toast/message
   - id: toast-push-example
     title: Push notification
-    status: composable
+    status: previewed
+    preview: gustwave/toast/push
   - id: toast-interactive-example
     title: Interactive toast
-    status: composable
+    status: previewed
+    preview: gustwave/toast/interactive
   - id: toast-positioning-example
     title: Positioning
     status: previewed
-    preview: gustwave/toast/default
+    preview: gustwave/toast/positioning
   components/tooltips:
   - id: default-tooltip-example
     title: Default tooltip example
