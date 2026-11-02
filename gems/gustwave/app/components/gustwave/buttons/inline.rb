@@ -23,11 +23,11 @@ module Gustwave
       extend_variant :size, default: :xs, values: {
         "3xs": { root: "p-0.5 text-xs", visual: "h-3 w-auto" },
         "2xs": { root: "p-1 text-xs", visual: "h-3.5 w-auto" },
-        xs: "p-1 text-xs",
-        sm: "p-1.5 text-sm",
-        md: "p-1.5 text-sm",
-        lg: "p-2 text-base",
-        xl: "p-2 text-base"
+        xs: { root: "p-1 text-xs", visual: "h-4 w-auto" },
+        sm: { root: "p-1.5 text-sm", visual: "h-5 w-auto" },
+        md: { root: "p-1.5 text-sm", visual: "h-5 w-auto" },
+        lg: { root: "p-2 text-base", visual: "h-6 w-auto" },
+        xl: { root: "p-2 text-base", visual: "h-7 w-auto" }
       }
 
       # Indicators scale with the text below :xs

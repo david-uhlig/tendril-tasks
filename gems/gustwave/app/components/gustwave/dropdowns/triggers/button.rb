@@ -29,9 +29,9 @@ module Gustwave
           "left-end": :chevron_left_compact
         }.freeze
 
-        part :leading_chevron, "h-2.5 w-2.5 me-1.5"
+        part :leading_chevron, "h-2.5 w-2.5 mx-0 me-1"
 
-        part :trailing_chevron, "h-2.5 w-2.5 ms-1.5"
+        part :trailing_chevron, "h-2.5 w-2.5 mx-0 ms-1"
 
         # @param text [String, nil] the text to appear on the dropdown button. Takes precedent over block content.
         # @param icon [Symbol, nil] the icon identifier rendered as leading visual on the trigger button. Pass in +nil+ to not render an icon.
