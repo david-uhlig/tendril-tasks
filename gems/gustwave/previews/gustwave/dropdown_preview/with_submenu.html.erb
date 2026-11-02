@@ -2,8 +2,7 @@
   <% dropdown.with_menu_list do |menu| %>
     <% menu.with_item_link "All projects", href: "#" %>
 
-    <% menu.with_item_dropdown placement: :right_start, trigger_event: :click do |submenu| %>
-      Recent
+    <% menu.with_item_dropdown "Recent", placement: :right_start, trigger_event: :click do |submenu| %>
       <% submenu.with_menu_list do |items| %>
         <% items.with_item_link "Garden", href: "#" %>
         <% items.with_item_link "Library", href: "#" %>

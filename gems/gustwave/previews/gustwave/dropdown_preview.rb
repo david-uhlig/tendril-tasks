@@ -26,8 +26,6 @@ module Gustwave
       render_with_template
     end
 
-    # A submenu takes its label from the block, since a +text+ argument would
-    # skip the block that fills the menu.
     def with_submenu
       render_with_template
     end
