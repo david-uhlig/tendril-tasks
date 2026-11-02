@@ -1016,6 +1016,7 @@ pages:
     title: Language dropdown
     status: previewed
     preview: gustwave/navbar/with_language_dropdown
+    note: Uses a globe icon for Flowbite's flags. The trigger's icon keeps Gustwave's size and gap, so the trigger is about 11px narrower and the menu about 8px wider.
   - id: navbar-user-example
     title: User menu dropdown
     status: previewed
