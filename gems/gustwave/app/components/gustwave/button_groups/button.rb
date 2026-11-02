@@ -13,15 +13,16 @@ module Gustwave
         outline: "text-gray-900 bg-transparent border-gray-900 hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
       }
 
-      # Base's xs, sm, lg and xl sizes, and md as in Flowbite. The md icon box is
-      # larger than Flowbite's 12px because Gustwave's icons leave a margin around
-      # their drawing, and the negative margin keeps Flowbite's layout.
+      # Flowbite's padding, text and icon space per size, with no fixed height, so
+      # the border adds to the height as in Flowbite. The icon boxes are larger than
+      # Flowbite's 12px and 16px because Gustwave's icons leave a margin around their
+      # drawing, and the negative margin keeps Flowbite's layout.
       variant :size, default: :md, values: {
-        xs: { root: "h-8 px-3 py-2 text-xs font-medium", visual: "h-4 w-auto" },
-        sm: { root: "h-9 px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
+        xs: { root: "px-3 py-2 text-xs font-medium gap-2", visual: "h-4 w-auto -mx-0.5" },
+        sm: { root: "px-3 py-2 text-sm font-medium gap-2", visual: "h-4 w-auto -mx-0.5" },
         md: { root: "px-4 py-2 text-sm font-medium gap-2", visual: "h-4 w-auto -mx-0.5" },
-        lg: { root: "h-12 px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
-        xl: { root: "h-13 px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+        lg: { root: "px-5 py-3 text-base font-medium gap-2", visual: "h-5 w-auto -mx-0.5" },
+        xl: { root: "px-6 py-3.5 text-base font-medium gap-2", visual: "h-5 w-auto -mx-0.5" }
       }
 
       # Selected by Gustwave::ButtonGroup. Declared after color so it wins.
