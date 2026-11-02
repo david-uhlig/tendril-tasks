@@ -55,8 +55,8 @@ RSpec.describe Gustwave::Icon, type: :component do
   end
 
   it "renders the stroke width" do
-    render_inline(described_class.new(:home, stroke_width: "2"))
+    render_inline(described_class.new(:home, stroke_width: "3"))
 
-    expect(rendered_content).to have_selector("svg[class~='*:stroke-2']")
+    expect(rendered_content).to have_selector("svg[class~='*:stroke-[3px]']")
   end
 end

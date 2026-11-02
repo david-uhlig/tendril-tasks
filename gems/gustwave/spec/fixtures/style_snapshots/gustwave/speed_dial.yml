@@ -8,7 +8,7 @@ placement position=:none direction=:up:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -46,7 +46,7 @@ placement position=:none direction=:down:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -84,7 +84,7 @@ placement position=:none direction=:left:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -122,7 +122,7 @@ placement position=:none direction=:right:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -161,7 +161,7 @@ placement position=:bottom_right direction=:up:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -199,7 +199,7 @@ placement position=:bottom_right direction=:down:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -238,7 +238,7 @@ placement position=:bottom_right direction=:left:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -276,7 +276,7 @@ placement position=:bottom_right direction=:right:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -315,7 +315,7 @@ placement position=:bottom_left direction=:up:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -354,7 +354,7 @@ placement position=:bottom_left direction=:down:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -393,7 +393,7 @@ placement position=:bottom_left direction=:left:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -432,7 +432,7 @@ placement position=:bottom_left direction=:right:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -471,7 +471,7 @@ placement position=:top_right direction=:up:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -509,7 +509,7 @@ placement position=:top_right direction=:down:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -548,7 +548,7 @@ placement position=:top_right direction=:left:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -586,7 +586,7 @@ placement position=:top_right direction=:right:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -625,7 +625,7 @@ placement position=:top_left direction=:up:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -664,7 +664,7 @@ placement position=:top_left direction=:down:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="right" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -703,7 +703,7 @@ placement position=:top_left direction=:left:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -742,7 +742,7 @@ placement position=:top_left direction=:right:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-row gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="top" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -781,7 +781,7 @@ look shape=:round label_display=:tooltip:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -820,7 +820,7 @@ look shape=:round label_display=:inside:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
@@ -849,7 +849,7 @@ look shape=:round label_display=:outside:
   justify-center overflow-hidden rounded-full size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
@@ -880,7 +880,7 @@ look shape=:square label_display=:tooltip:
   justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button data-tooltip-placement="left" data-tooltip-target="tooltip-r0000002" data-tooltip-trigger="hover"
@@ -919,7 +919,7 @@ look shape=:square label_display=:inside:
   justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600
@@ -948,7 +948,7 @@ look shape=:square label_display=:outside:
   justify-center overflow-hidden rounded-lg size-14 text-center text-white whitespace-nowrap'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   group-hover:rotate-45 size-8 transition-transform'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 - 'div id="speed-dial-r0000001": flex-col gap-2 hidden items-center not-[.hidden]:flex'
 - 'button type="button": bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600

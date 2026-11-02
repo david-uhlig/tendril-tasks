@@ -36,8 +36,8 @@ dismissible position=:top floating=true:
   inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
   shrink-0 text-gray-400 text-sm w-7'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
-  *:stroke-2 h-6 w-6'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 dismissible position=:top floating=false:
 - 'div id="banner" tabindex="-1": bg-gray-50 border-b border-gray-200 dark:bg-gray-700
@@ -48,8 +48,8 @@ dismissible position=:top floating=false:
   inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
   shrink-0 text-gray-400 text-sm w-7'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
-  *:stroke-2 h-6 w-6'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 dismissible position=:bottom floating=true:
 - 'div id="banner" tabindex="-1": -translate-x-1/2 bg-white border border-gray-100
@@ -61,8 +61,8 @@ dismissible position=:bottom floating=true:
   inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
   shrink-0 text-gray-400 text-sm w-7'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
-  *:stroke-2 h-6 w-6'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
 dismissible position=:bottom floating=false:
 - 'div id="banner" tabindex="-1": bg-gray-50 border-gray-200 border-t bottom-0 dark:bg-gray-700
@@ -73,6 +73,6 @@ dismissible position=:bottom floating=false:
   inline-flex items-center justify-center md:self-center p-0 rounded-lg self-start
   shrink-0 text-gray-400 text-sm w-7'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
-  *:stroke-2 h-6 w-6'
-- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+  h-6 w-6'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 - 'span: sr-only'
