@@ -25,5 +25,10 @@ module Gustwave
     def with_dropdown
       render_with_template
     end
+
+    # Smaller text than +with_dropdown+, as in the example on Flowbite's dropdown page.
+    def with_compact_dropdown
+      render_with_template
+    end
   end
 end

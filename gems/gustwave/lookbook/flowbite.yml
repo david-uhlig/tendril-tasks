@@ -670,7 +670,7 @@ pages:
   - id: dropdown-navbar-example
     title: Dropdown navbar
     status: previewed
-    preview: gustwave/navbar/with_dropdown
+    preview: gustwave/navbar/with_compact_dropdown
   - id: dropdown-datepicker-example
     title: Dropdown datepicker
     status: blocked
