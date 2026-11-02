@@ -24,6 +24,9 @@ module Gustwave
     SIZE_TOLERANCE = 2
     # Icons are small, so an icon box may be off by less than the element around it.
     ICON_TOLERANCE = 1
+    # Boxes are whole CSS pixels and an element screenshot can start a pixel off, so
+    # the mask reaches one pixel further. Assumes a device pixel ratio of 1.
+    MASK_PADDING = 1
     # Only sorts what a person looks at and decides nothing. The 1.0 value comes from
     # two components so far.
     PIXEL_FLAG = 1.0
@@ -90,7 +93,7 @@ module Gustwave
         text_parts: fbVisibleText(el).map(n => n.textContent.replace(/\\s+/g, ' ')),
         tags: [...el.querySelectorAll('*')].map(e => e.tagName.toLowerCase()).filter(t => t != 'path').join(' '),
         icons: fbIcons(el),
-        size:[Math.round(r.width), Math.round(r.height)],
+        size: [Math.round(r.width), Math.round(r.height)],
         styles: Object.fromEntries(arguments[1].map(k => [k, cs[k]]))
       };
     JS
@@ -120,15 +123,27 @@ module Gustwave
       return [Math.round(a.left - b.left), Math.round(a.top - b.top)];
     JS
 
+    # Pixels inside an icon box on either side count apart from the rest.
     PIXEL_DIFF = <<~JS
-      const [a, b, done] = arguments;
+      const [a, b, masks, done] = arguments;
       const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = 'data:image/png;base64,' + src; });
       Promise.all([load(a), load(b)]).then(([x, y]) => {
         const w = Math.min(x.width, y.width), h = Math.min(x.height, y.height);
         const read = i => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); g.drawImage(i, 0, 0); return g.getImageData(0, 0, w, h).data; };
-        const p = read(x), q = read(y); let n = 0;
-        for (let k = 0; k < p.length; k += 4) if (Math.abs(p[k]-q[k]) > 32 || Math.abs(p[k+1]-q[k+1]) > 32 || Math.abs(p[k+2]-q[k+2]) > 32) n++;
-        done({ differing: n, total: w * h });
+        const covered = new Uint8Array(w * h);
+        masks.forEach(([left, top, width, height]) => {
+          for (let row = Math.max(top, 0); row < Math.min(top + height, h); row++) {
+            for (let col = Math.max(left, 0); col < Math.min(left + width, w); col++) covered[row * w + col] = 1;
+          }
+        });
+        const p = read(x), q = read(y);
+        const counts = { differing: 0, total: 0, icon_differing: 0, icon_total: 0 };
+        for (let k = 0; k < p.length; k += 4) {
+          const differs = Math.abs(p[k]-q[k]) > 32 || Math.abs(p[k+1]-q[k+1]) > 32 || Math.abs(p[k+2]-q[k+2]) > 32;
+          if (covered[k / 4]) { counts.icon_total++; if (differs) counts.icon_differing++; }
+          else { counts.total++; if (differs) counts.differing++; }
+        }
+        done(counts);
       });
     JS
 
@@ -182,6 +197,15 @@ module Gustwave
 
       flowbite.zip(gustwave).each_with_index.flat_map do |(fb, gw), index|
         icon_differences(fb, gw).map { |difference| "icon #{index + 1} #{difference}" }
+      end
+    end
+
+    # The areas left out of the pixel score: every icon box from both sides, as
+    # [left, top, width, height].
+    def mask_boxes(flowbite_icons, gustwave_icons)
+      [ *flowbite_icons, *gustwave_icons ].map do |icon|
+        left, top, width, height = icon["box"]
+        [ left - MASK_PADDING, top - MASK_PADDING, width + 2 * MASK_PADDING, height + 2 * MASK_PADDING ]
       end
     end
 
@@ -433,12 +457,11 @@ module Gustwave
       fields = {
         "missing" => missing(flowbite, gustwave),
         "menu_open" => menu_open(flowbite, gustwave),
-        "pct" => pct(driver, flowbite&.dig("png"), gustwave&.dig("png")),
         "error" => errors(flowbite, gustwave),
         "fb_png" => flowbite&.dig("png"),
         "gw_png" => gustwave&.dig("png")
       }
-      built = meta.merge(place).merge(fields).merge(side_fields(flowbite, gustwave)).merge(text_fields(flowbite, gustwave)).compact
+      built = meta.merge(place).merge(fields).merge(pixel_fields(driver, flowbite, gustwave)).merge(side_fields(flowbite, gustwave)).merge(text_fields(flowbite, gustwave)).compact
       built.merge("review" => review_reasons(built))
     end
 
@@ -484,18 +507,21 @@ module Gustwave
       messages.join("; ") if messages.any?
     end
 
-    def pct(driver, before, after)
-      return unless before && after
+    def pixel_fields(driver, flowbite, gustwave)
+      before, after = flowbite&.dig("png"), gustwave&.dig("png")
+      return {} unless before && after
 
-      result = pixel_diff(driver, before, after)
-      return if result["total"].zero?
-
-      (100.0 * result["differing"] / result["total"]).round(2)
+      result = pixel_diff(driver, before, after, mask_boxes(flowbite["icons"], gustwave["icons"]))
+      { "pct" => share(result["differing"], result["total"]), "icon_pct" => share(result["icon_differing"], result["icon_total"]) }
     end
 
-    def pixel_diff(driver, before, after)
+    def share(part, whole)
+      (100.0 * part / whole).round(2) unless whole.zero?
+    end
+
+    def pixel_diff(driver, before, after, masks)
       driver.navigate.to "about:blank"
-      driver.execute_async_script(PIXEL_DIFF, before, after)
+      driver.execute_async_script(PIXEL_DIFF, before, after, masks)
     end
 
     def style_diffs(flowbite, gustwave)

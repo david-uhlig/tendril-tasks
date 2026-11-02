@@ -119,4 +119,17 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(reasons({ "fb_icons" => [ fb ] })).to eq([])
     end
   end
+
+  describe ".mask_boxes" do
+    it "covers every icon from both sides, one pixel further" do
+      flowbite = [ { "box" => [ 2, 3, 12, 14 ] } ]
+      gustwave = [ { "box" => [ 4, 5, 10, 10 ] } ]
+
+      expect(described_class.mask_boxes(flowbite, gustwave)).to eq([ [ 1, 2, 14, 16 ], [ 3, 4, 12, 12 ] ])
+    end
+
+    it "covers nothing without icons" do
+      expect(described_class.mask_boxes(nil, [])).to eq([])
+    end
+  end
 end
