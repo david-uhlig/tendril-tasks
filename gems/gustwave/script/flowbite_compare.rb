@@ -21,14 +21,14 @@ module Gustwave
     MANIFEST = File.expand_path("../lookbook/flowbite.yml", __dir__)
     BASE_URL = "http://127.0.0.1:3021"
     THEMES = %w[light dark].freeze
-    STRATEGIES = { "components/dropdowns" => :dropdown, "components/modal" => :modal }.freeze
+    STRATEGIES = { "components/dropdowns" => :dropdown, "components/modal" => :modal, "components/navbar" => :navbar }.freeze
     # Examples whose own interaction differs from their page's, keyed by example id.
     EXAMPLE_STRATEGIES = {
       "avatar-user-dropdown-example" => :dropdown,
       "card-user-profile-example" => :dropdown
     }.freeze
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
-    NOT_YET = %w[speed-dial drawer tabs navbar tooltips popover].map { "components/#{_1}" }.freeze
+    NOT_YET = %w[speed-dial drawer tabs tooltips popover].map { "components/#{_1}" }.freeze
     SIZE_TOLERANCE = 2
     # Icon sets leave different margins, so a drawing's size varies with the artwork
     # while its centre should not. The size uses SIZE_TOLERANCE.
@@ -44,8 +44,8 @@ module Gustwave
     CHROME_ARGS = %w[--headless=new --no-sandbox --disable-dev-shm-usage --window-size=1000,1400 --no-proxy-server --allow-file-access-from-files].freeze
     STYLES = %w[color backgroundColor paddingTop paddingRight paddingBottom paddingLeft borderTopWidth borderTopColor
                 borderTopLeftRadius fontSize fontWeight lineHeight display alignItems boxShadow textAlign].freeze
-    # The same font and padding on both sides, so only the component differs.
-    NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} *{animation:none !important} body{padding:20px !important}';document.head.append(s);"
+    # The same font and padding on both sides, so only the component differs. The padding is inline because Flowbite's !p-0 on some pages beats a stylesheet rule.
+    NORMALIZE = "const s=document.createElement('style');s.textContent='*{font-family:sans-serif !important} *{animation:none !important}';document.head.append(s);document.body.style.setProperty('padding','20px','important');"
     # The wrapper's children on a Flowbite page, the body's children on a preview.
     ELEMENTS = "#exampleWrapper > *, body > *:not(#exampleWrapper):not(script):not(style):not(link):not(noscript)"
     ITEM = "a:not([data-dropdown-toggle]), button:not([data-dropdown-toggle])"
@@ -331,6 +331,7 @@ module Gustwave
       when :static then static_captures(driver, url, dark, reference:)
       when :dropdown then dropdown_captures(driver, url, dark, reference:)
       when :modal then modal_captures(driver, url, dark, reference:)
+      when :navbar then navbar_captures(driver, url, dark, reference:)
       end
     end
 
@@ -348,6 +349,10 @@ module Gustwave
 
     def static_captures(driver, url, dark, reference: nil)
       load(driver, url, dark)
+      element_captures(driver, reference)
+    end
+
+    def element_captures(driver, reference)
       elements = visible_elements(driver)
       # Previews often wrap what a Flowbite example has at the top level.
       elements = unwrap(driver, elements, reference) if reference
@@ -388,6 +393,20 @@ module Gustwave
       end
     end
 
+    # The navbar itself with its dropdowns closed, then each dropdown opened on a fresh page.
+    # Flowbite's example pages open their first dropdown on load, so that is closed first.
+    def navbar_captures(driver, url, dark, reference: nil)
+      load(driver, url, dark)
+      driver.execute_script("document.body.click()")
+      sleep 0.3
+      regions = element_captures(driver, reference)
+      triggers = top_level_triggers(driver)
+      dropdown_keys(driver, triggers).each_with_index do |key, index|
+        regions[key] = regions.fetch(key, {}).merge(dropdown_regions(driver, url, dark, index, key:, reference:))
+      end
+      regions
+    end
+
     def top_level_triggers(driver)
       driver.execute_script(TOP_LEVEL).select(&:displayed?)
     end
@@ -396,7 +415,7 @@ module Gustwave
     # A missing attribute means bottom, Flowbite's default placement.
     def dropdown_keys(driver, triggers)
       placements = triggers.map { |trigger| trigger.attribute("data-dropdown-placement") }
-      return triggers.each_index.map(&:to_s) if placements.compact.empty?
+      return triggers.each_index.map(&:to_s) if (placements.compact - [ "bottom" ]).empty?
 
       placements = placements.map { |placement| placement || "bottom" }
       placements.each_with_index.map do |placement, index|

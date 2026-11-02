@@ -173,6 +173,10 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(strategy_for("components/modal")).to eq(:modal)
     end
 
+    it "opens the dropdowns of the navbar page" do
+      expect(strategy_for("components/navbar")).to eq(:navbar)
+    end
+
     it "refuses a page whose interactions no strategy covers" do
       expect { strategy_for("components/drawer") }.to raise_error(described_class::Error, /interaction strategy/)
     end
@@ -217,6 +221,23 @@ RSpec.describe Gustwave::FlowbiteCompare do
       wrapper = element("div", children: [ element("a", displayed: false) ])
 
       expect(unwrap([ wrapper ], reference("a"))).to eq([ wrapper ])
+    end
+  end
+
+  describe ".dropdown_keys" do
+    def trigger(placement) = double("trigger", attribute: placement)
+    def dropdown_keys(*triggers) = described_class.send(:dropdown_keys, nil, triggers)
+
+    it "keys a lone explicit bottom placement by position" do
+      expect(dropdown_keys(trigger("bottom"))).to eq([ "0" ])
+    end
+
+    it "keys a missing placement by position" do
+      expect(dropdown_keys(trigger(nil))).to eq([ "0" ])
+    end
+
+    it "keys a missing placement as bottom beside other placements" do
+      expect(dropdown_keys(trigger("top"), trigger(nil))).to eq([ "top", "bottom" ])
     end
   end
 

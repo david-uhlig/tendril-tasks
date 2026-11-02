@@ -5,7 +5,7 @@
   <% end %>
 
   <% navbar.with_actions do %>
-    <%= render Gustwave::Buttons::Default.new("Get started", tag: :a, href: "#") %>
+    <%= render Gustwave::Buttons::Default.new("Get started", tag: :a, href: "#", class: "px-4 py-2") %>
   <% end %>
 
   <% navbar.with_item_link "Home", href: "#", active: true %>
