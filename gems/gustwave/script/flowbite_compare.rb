@@ -223,7 +223,10 @@ module Gustwave
 
     def static_captures(driver, url, dark, reference: nil)
       load(driver, url, dark)
-      visible_elements(driver).each_with_index.to_h do |element, index|
+      elements = visible_elements(driver)
+      # Previews often wrap what a Flowbite example has at the top level.
+      elements = unwrap(driver, elements, reference) if reference
+      elements.each_with_index.to_h do |element, index|
         key = index.to_s
         swap = swap_text(driver, element, reference&.dig(key, "element"))
         [ key, { "element" => capture(driver, element).merge(swap) } ]
@@ -232,6 +235,18 @@ module Gustwave
 
     def visible_elements(driver)
       driver.find_elements(css: ELEMENTS).select(&:displayed?)
+    end
+
+    # Replaces a lone wrapper with its displayed children while the reference has several elements.
+    # An element without displayed element children stays as it is.
+    def unwrap(driver, elements, wanted)
+      while elements.size == 1 && wanted.size > 1
+        children = elements.first.find_elements(xpath: "./*").select(&:displayed?)
+        break if children.empty?
+
+        elements = children
+      end
+      elements
     end
 
     def dropdown_captures(driver, url, dark, reference: nil)
