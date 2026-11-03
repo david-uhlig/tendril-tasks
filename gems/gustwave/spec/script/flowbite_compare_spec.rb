@@ -173,6 +173,10 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(strategy_for("components/modal")).to eq(:modal)
     end
 
+    it "opens the popovers of the popover page" do
+      expect(strategy_for("components/popover")).to eq(:popover)
+    end
+
     it "opens the dropdowns of the navbar page" do
       expect(strategy_for("components/navbar")).to eq(:navbar)
     end

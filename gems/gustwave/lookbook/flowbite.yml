@@ -1065,16 +1065,20 @@ pages:
     preview: gustwave/popover/default
   - id: popover-user-profile-example
     title: User profile
-    status: composable
+    status: previewed
+    preview: gustwave/popover/user_profile
   - id: popover-company-profile-example
     title: Company profile
-    status: composable
+    status: previewed
+    preview: gustwave/popover/company_profile
   - id: popover-image-example
     title: Image popover
-    status: composable
+    status: previewed
+    preview: gustwave/popover/image
   - id: popover-description-example
     title: Description popover
-    status: composable
+    status: previewed
+    preview: gustwave/popover/description
   - id: popover-description-example-5
     title: Progress popover
     status: partial
@@ -1086,20 +1090,23 @@ pages:
   - id: popover-placement-example
     title: Placement
     status: previewed
-    preview: gustwave/popover/default
+    preview: gustwave/popover/placement
   - id: popover-triggering-example
     title: Triggering
     status: previewed
-    preview: gustwave/popover/default
+    preview: gustwave/popover/triggering
   - id: popover-offset-example
     title: Offset
-    status: composable
+    status: previewed
+    preview: gustwave/popover/offset
   - id: popover-animation-example
     title: Animation
-    status: composable
+    status: previewed
+    preview: gustwave/popover/animation
   - id: popover-disable-arrow-example
     title: Disable arrow
-    status: composable
+    status: previewed
+    preview: gustwave/popover/no_arrow
   components/progress:
   - id: default-progress-example
     title: Default progress bar
