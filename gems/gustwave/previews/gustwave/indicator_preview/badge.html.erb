@@ -1,0 +1,9 @@
+<div class="flex flex-wrap items-center justify-center gap-4">
+  <%= render Gustwave::Badge.new(color: :green, pill: true) do %>
+    <%= render Gustwave::Indicator.new(color: :green, size: :xs, class: "me-1") %> Available
+  <% end %>
+
+  <%= render Gustwave::Badge.new(color: :red, pill: true) do %>
+    <%= render Gustwave::Indicator.new(color: :red, size: :xs, class: "me-1") %> Unavailable
+  <% end %>
+</div>

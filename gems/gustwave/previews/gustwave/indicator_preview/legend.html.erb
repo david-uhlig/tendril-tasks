@@ -1,0 +1,7 @@
+<div class="flex flex-wrap items-center justify-center gap-3">
+  <% [ [ "Visitors", :blue ], [ "Sessions", :purple ], [ "Customers", :indigo ], [ "Revenue", :teal ] ].each do |label, color| %>
+    <%= render Gustwave::Indicator.new(color:, size: :none, class: "h-2.5 w-2.5 shrink-0") do |indicator| %>
+      <% indicator.with_legend label %>
+    <% end %>
+  <% end %>
+</div>
