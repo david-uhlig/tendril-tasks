@@ -3,9 +3,8 @@
 module Gustwave
   # Use TableFoot to render an HTML table tfoot element
   #
-  # To render a single row of cells, use +with_row+.
-  # For more flexibility, pass in a block. The block gets appended after the
-  # rows (if any).
+  # Footer rows can be provided through +with_row+ or by passing in block
+  # content. Block content gets appended after the rows (if any).
   #
   # === Basic Usage
   #
@@ -13,9 +12,10 @@ module Gustwave
   # to pass in its cells.
   #
   #   <%= render Gustwave::TableFoot.new do |tfoot| %>
-  #     <% row = tfoot.with_row %>
-  #     <% row.with_cell_th do %>Total<% end %>
-  #     <% row.with_cell_td do %>3<% end %>
+  #     <% tfoot.with_row do |row| %>
+  #       <% row.with_cell_th "Total" %>
+  #       <% row.with_cell_td "3" %>
+  #     <% end %>
   #   <% end %>
   #
   # === Usage with Block
