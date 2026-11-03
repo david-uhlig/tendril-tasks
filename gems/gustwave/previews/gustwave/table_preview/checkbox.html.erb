@@ -26,7 +26,9 @@
 
     <% table.with_body do |body| %>
       <% rows.each_with_index do |supply, index| %>
-        <% body.with_row class: "hover:bg-gray-50 dark:hover:bg-gray-600" do |row| %>
+        <% row_class = index == rows.size - 1 ? "hover:bg-gray-50 dark:hover:bg-gray-600 border-b-0" : "hover:bg-gray-50 dark:hover:bg-gray-600" %>
+
+        <% body.with_row class: row_class do |row| %>
           <% row.with_cell_td class: "w-4 p-4" do %>
             <div class="flex items-center">
               <input

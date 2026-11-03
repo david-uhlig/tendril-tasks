@@ -6,15 +6,13 @@
       <% head.with_column "Category" %>
       <% head.with_column "Amount" %>
 
-      <% head.with_column do %>
-        <span class="sr-only">Edit</span>
-      <% end %>
+      <% head.with_column "Action" %>
     <% end %>
 
     <% table.with_body do |body| %>
       <% rows.each_with_index do |supply, index| %>
         <% row_class = if index == rows.size - 1
-                         "bg-blue-500 dark:bg-blue-500 border-blue-40 dark:border-blue-400"
+                         "bg-blue-500 dark:bg-blue-500 border-b-0 dark:border-blue-400"
                        elsif index.even?
                          "bg-blue-500 dark:bg-blue-500 border-b border-blue-400 dark:border-blue-400"
                        else
