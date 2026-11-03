@@ -820,31 +820,34 @@ pages:
   - id: legend-indicator-example
     title: Legend indicator
     status: previewed
-    preview: gustwave/indicator/with_legend
+    preview: gustwave/indicator/legend
   - id: indicator-count-example
     title: Indicator count
     status: previewed
-    preview: gustwave/indicator/with_text
+    preview: gustwave/indicator/count
   - id: status-indicator-example
     title: Status indicator
     status: previewed
-    preview: gustwave/indicator/positioned
+    preview: gustwave/indicator/status
   - id: badge-indicator-example
     title: Badge indicator
-    status: composable
+    status: previewed
+    preview: gustwave/indicator/badge
   - id: stepper-indicator-example
     title: Stepper indicator
     status: composable
   - id: loading-indicator-example
     title: Loading indicator
-    status: composable
+    status: previewed
+    preview: gustwave/indicator/loading
   - id: spinner-indicator-example
     title: Spinner indicator
-    status: composable
+    status: previewed
+    preview: gustwave/indicator/spinner
   - id: position-indicator
     title: Indicator position
     status: previewed
-    preview: gustwave/indicator/positioned
+    preview: gustwave/indicator/position
   components/jumbotron:
   - id: default-jumbotron-example
     title: Default jumbotron

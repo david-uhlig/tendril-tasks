@@ -24,7 +24,7 @@ module Gustwave
     variant :size, internal: true, default: :sm, values: { sm: { visual: "w-4 h-4" } }
 
     # The size of the leading and trailing indicators per tab size
-    derive :indicator_size, from: :size, values: { none: :none, sm: :md }
+    derive :indicator_size, from: :size, values: { none: :none, sm: :lg }
 
     # The panel of a button tab, shown while the tab is selected. Its
     # options are HTML attributes of the panel element.

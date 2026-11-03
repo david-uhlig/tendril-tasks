@@ -47,9 +47,9 @@ module Gustwave
         none: :none,
         xs: :sm,
         sm: :sm,
-        md: :md,
-        lg: :md,
-        xl: :lg
+        md: :lg,
+        lg: :lg,
+        xl: :xl
       }
 
       toggle :pill, "rounded-full"
