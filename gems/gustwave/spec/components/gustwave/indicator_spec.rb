@@ -16,7 +16,7 @@ RSpec.describe Gustwave::Indicator, type: :component do
     end
 
     it "renders size styling" do
-      expect(rendered_content).to have_selector('span.h-\[1em\]')
+      expect(rendered_content).to have_selector("span.h-3.min-w-3")
     end
 
     it "renders color styling" do
@@ -27,7 +27,28 @@ RSpec.describe Gustwave::Indicator, type: :component do
   context "with custom size" do
     it "renders custom size styling" do
       render_inline(described_class.new(size: :lg))
-      expect(rendered_content).to have_selector("span.h-6")
+      expect(rendered_content).to have_selector("span.h-4")
+    end
+  end
+
+  context "with auto size" do
+    it "matches the line height" do
+      render_inline(described_class.new(size: :auto))
+      expect(rendered_content).to have_selector('span.h-\[1em\]')
+    end
+  end
+
+  {
+    xs: "h-2\\.5.min-w-2\\.5",
+    sm: "h-3.min-w-3",
+    md: "h-3\\.5.min-w-3\\.5",
+    lg: "h-4.min-w-4",
+    xl: "h-6.min-w-6",
+    "2xl": "h-8.min-w-8"
+  }.each do |size, classes|
+    it "renders the #{size} scale" do
+      render_inline(described_class.new(size:))
+      expect(rendered_content).to have_selector("span.#{classes}")
     end
   end
 

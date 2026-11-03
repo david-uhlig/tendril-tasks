@@ -75,9 +75,9 @@ module Gustwave
       none: :none,
       xs: :sm,
       sm: :sm,
-      md: :md,
-      lg: :md,
-      xl: :lg,
+      md: :lg,
+      lg: :lg,
+      xl: :xl,
       "2xl": :auto
     }
 

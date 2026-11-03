@@ -5,7 +5,7 @@ module Gustwave
   #
   # Indicator supports three modes:
   # - By default, the indicator is rendered as a dot.
-  # - When +text+ or block content is provided, the content is rendered within the dot. Works best for +size+ :md and larger. The dot is automatically stretched to a pill to fit the content.
+  # - When +text+ or block content is provided, the content is rendered within the dot. Works best for +size+ :lg and larger. The dot is automatically stretched to a pill to fit the content.
   # - Use the +legend+ slot to render content to the right of the dot, making it look like a legend.
   #
   # === Position Indicator on other Components
@@ -34,13 +34,14 @@ module Gustwave
       white: "bg-white"
     }
 
-    variant :size, default: :auto, values: {
+    variant :size, default: :sm, values: {
       auto: "h-[1em] min-w-[1em] text-[0.8em] font-semibold",
-      xs: "h-2 min-w-2 text-xs font-normal",
+      xs: "h-2.5 min-w-2.5 text-xs font-normal",
       sm: "h-3 min-w-3 text-xs font-medium",
-      md: "h-4 min-w-4 text-xs font-medium",
-      lg: "h-6 min-w-6 text-sm font-semibold",
-      xl: "h-8 min-w-8 text-md font-bold"
+      md: "h-3.5 min-w-3.5 text-xs font-medium",
+      lg: "h-4 min-w-4 text-xs font-medium",
+      xl: "h-6 min-w-6 text-sm font-semibold",
+      "2xl": "h-8 min-w-8 text-md font-bold"
     }
 
     toggle :pulse, "animate-pulse"
@@ -59,7 +60,7 @@ module Gustwave
 
     # @param text [String] the text to display in the indicator. Takes precedence over block content.
     # @param color [Symbol] the color for the indicator. Pass in :none to define your own styles.
-    # @param size [Symbol] the size of the indicator. Options: :none, :auto, :xs, :sm, :md, :lg, :xl. When choosing :auto, the indicator matches the line-height.
+    # @param size [Symbol] the size of the indicator. Options: :none, :auto, :xs, :sm, :md, :lg, :xl, :"2xl". Defaults to :sm. When choosing :auto, the indicator matches the line-height.
     # @param pulse [Boolean] whether to apply the pulse animation.
     # @param position [Symbol] positions the indicator on another component. The enclosing component must be +relative+ positioned.
     # @param options [Hash] additional options for the HTML tag, like class.

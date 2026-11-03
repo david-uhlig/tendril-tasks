@@ -13,7 +13,7 @@ module Gustwave
       render Gustwave::Indicator.new(color: :green, size: :md, pulse: true)
     end
 
-    # Flowbite's legend example. Its dots are 10px, a size Indicator doesn't offer, so they set their own.
+    # Flowbite's legend example.
     def legend
       render_with_template
     end
@@ -28,7 +28,7 @@ module Gustwave
       render_with_template
     end
 
-    # Flowbite's badge example: a dot inside a badge.
+    # Flowbite's badge example: a dot inside a badge. Its 8px dot has no size of its own, so it sets one.
     def badge
       render_with_template
     end
