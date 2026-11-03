@@ -6,8 +6,8 @@
       <%= render Gustwave::Dropdown.new do |dropdown| %>
         <% dropdown.with_trigger_generic do %>
           <%= render Gustwave::Buttons::Default.new("Last 30 days", color: :light, class: "text-gray-500 dark:text-white px-3 py-1.5") do |button| %>
-            <% button.with_leading_visual_icon :clock, theme: :solid, class: "w-3 h-3 scale-120 me-3 text-gray-500 dark:text-gray-400" %>
-            <% button.with_trailing_visual_icon :chevron_down_compact, class: "h-2.5 w-2.5 mx-0 ms-2.5" %>
+            <% button.with_leading_visual_icon :clock, theme: :solid, class: "w-3 h-3 scale-120 mx-0 me-1 text-gray-500 dark:text-gray-400" %>
+            <% button.with_trailing_visual_icon :chevron_down_compact, class: "h-2.5 w-2.5 mx-0 ms-0.5" %>
           <% end %>
         <% end %>
 
