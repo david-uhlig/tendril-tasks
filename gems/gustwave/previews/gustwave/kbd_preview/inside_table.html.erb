@@ -28,26 +28,22 @@
 
       <% body.with_row class: "border-b-0 dark:bg-gray-900" do |row| %>
         <% row.with_cell_th class: "inline-flex items-center text-gray-500 dark:text-gray-400" do %>
-          <%= render Gustwave::Kbd.new(class: "me-1") do %>
-            <%= render Gustwave::Icon.new(:caret_up, theme: :solid, size: :xs, class: "-m-0.75", aria: { hidden: true }) %>
-            <span class="sr-only">Arrow key up</span>
+          <%= render Gustwave::Kbd.new(class: "me-1") do |kbd| %>
+            <% kbd.with_icon(:caret_up, label: "Arrow key up") %>
           <% end %>
 
-          <%= render Gustwave::Kbd.new do %>
-            <%= render Gustwave::Icon.new(:caret_down, theme: :solid, size: :xs, class: "-m-0.75", aria: { hidden: true }) %>
-            <span class="sr-only">Arrow key down</span>
+          <%= render Gustwave::Kbd.new do |kbd| %>
+            <% kbd.with_icon(:caret_down, label: "Arrow key down") %>
           <% end %>
 
           <span class="mx-2">or</span>
 
-          <%= render Gustwave::Kbd.new(class: "rtl:rotate-180 me-1") do %>
-            <%= render Gustwave::Icon.new(:caret_left, theme: :solid, size: :xs, class: "-m-0.75", aria: { hidden: true }) %>
-            <span class="sr-only">Arrow key left</span>
+          <%= render Gustwave::Kbd.new(class: "rtl:rotate-180 me-1") do |kbd| %>
+            <% kbd.with_icon(:caret_left, label: "Arrow key left") %>
           <% end %>
 
-          <%= render Gustwave::Kbd.new(class: "rtl:rotate-180") do %>
-            <%= render Gustwave::Icon.new(:caret_right, theme: :solid, size: :xs, class: "-m-0.75", aria: { hidden: true }) %>
-            <span class="sr-only">Arrow key right</span>
+          <%= render Gustwave::Kbd.new(class: "rtl:rotate-180") do |kbd| %>
+            <% kbd.with_icon(:caret_right, label: "Arrow key right") %>
           <% end %>
         <% end %>
 
