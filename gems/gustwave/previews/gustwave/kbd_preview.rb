@@ -19,6 +19,16 @@ module Gustwave
       render_with_template
     end
 
+    # Letter keys from the Latin alphabet.
+    def letter_keys
+      render_with_template
+    end
+
+    # Number keys from the English numeral system.
+    def number_keys
+      render_with_template
+    end
+
     # Function keys F1 to F12.
     def function_keys
       render_with_template

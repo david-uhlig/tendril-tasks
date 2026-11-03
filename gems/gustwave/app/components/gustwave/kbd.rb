@@ -15,18 +15,19 @@ module Gustwave
   #
   # Build an icon key from an icon and a screen reader label. The +has-[svg]:+
   # classes give keys that contain an icon Flowbite's +inline-flex items-center+
-  # layout, and tighter padding that keeps a +:xs+ icon's key close to the size
-  # of Flowbite's:
+  # layout. Gustwave's caret icons leave space around their drawing, so the
+  # +:xs+ icon's 16px box takes a negative margin of 3px on each side, the same
+  # approach as Flowbite's 10px arrows:
   #
   #   <%= render Gustwave::Kbd.new do %>
-  #     <%= render Gustwave::Icon.new(:caret_up, theme: :solid, size: :xs, aria: { hidden: true }) %>
+  #     <%= render Gustwave::Icon.new(:caret_up, theme: :solid, size: :xs, class: "-m-0.75", aria: { hidden: true }) %>
   #     <span class="sr-only">Arrow key up</span>
   #   <% end %>
   #
   # Mirror the left and right arrows for right-to-left text:
   #
   #   <%= render Gustwave::Kbd.new(class: "rtl:rotate-180") do %>
-  #     <%= render Gustwave::Icon.new(:caret_right, theme: :solid, size: :xs, aria: { hidden: true }) %>
+  #     <%= render Gustwave::Icon.new(:caret_right, theme: :solid, size: :xs, class: "-m-0.75", aria: { hidden: true }) %>
   #     <span class="sr-only">Arrow key right</span>
   #   <% end %>
   #
@@ -35,7 +36,7 @@ module Gustwave
   #
   class Kbd < Gustwave::Component
     base "px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg " \
-         "has-[svg]:inline-flex has-[svg]:items-center has-[svg]:px-1 has-[svg]:py-0.5 " \
+         "has-[svg]:inline-flex has-[svg]:items-center " \
          "dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
 
     def initialize(text = nil, **options)

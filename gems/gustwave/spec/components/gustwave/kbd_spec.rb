@@ -35,12 +35,6 @@ RSpec.describe Gustwave::Kbd, type: :component do
     expect(page).to have_selector("kbd[class~='has-[svg]:items-center']")
   end
 
-  it "tightens the padding of keys that contain an icon" do
-    render_inline(described_class.new("Shift"))
-
-    expect(page).to have_selector("kbd[class~='has-[svg]:px-1'][class~='has-[svg]:py-0.5']")
-  end
-
   it "lets the caller's classes win conflicts" do
     render_inline(described_class.new("Space", class: "px-4"))
 
