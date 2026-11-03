@@ -1343,75 +1343,96 @@ pages:
     preview: gustwave/table/default
   - id: table-striped-rows-example
     title: Highlight > Striped rows
-    status: composable
+    status: previewed
+    preview: gustwave/table/striped_rows
   - id: table-striped-columns-example
     title: Highlight > Striped columns
-    status: composable
+    status: previewed
+    preview: gustwave/table/striped_columns
   - id: table-hover-example
     title: Highlight > Hover state
-    status: composable
+    status: previewed
+    preview: gustwave/table/hover
   - id: table-head-example
     title: Table layout > Table head (sortable)
-    status: composable
+    status: previewed
+    preview: gustwave/table/sortable_head
   - id: table-foot-example
     title: Table layout > Table foot
-    status: feature_gap
-    needs: table-foot
+    status: previewed
+    preview: gustwave/table/foot
   - id: table-caption-example
     title: Table layout > Table caption
-    status: composable
+    status: previewed
+    preview: gustwave/table/caption
   - id: table-borderless-example
     title: Table styles > Without border
-    status: composable
+    status: previewed
+    preview: gustwave/table/borderless
   - id: table-shadow-example
     title: Table styles > Table with shadow
-    status: composable
+    status: previewed
+    preview: gustwave/table/shadow
   - id: table-scroll-example
     title: Overflow scrolling
-    status: composable
+    status: partial
+    needs: form
+    preview: gustwave/table/scroll
   - id: table-search-example
     title: Table search
     status: partial
     needs: form
+    preview: gustwave/table/search
   - id: table-filter-example
     title: Table filter
     status: partial
     needs: form
+    preview: gustwave/table/filter
   - id: table-pagination-example
     title: Table pagination
     status: partial
-    needs: pagination
+    needs: form
+    preview: gustwave/table/pagination
   - id: table-checkbox-example
     title: Checkbox selection
     status: partial
     needs: form
+    preview: gustwave/table/checkbox
   - id: table-users-example
     title: Table with users
     status: partial
     needs: form
+    preview: gustwave/table/users
   - id: table-products-example
     title: Table with products
     status: partial
     needs: form
+    preview: gustwave/table/products
   - id: table-modal-example
     title: Table with modal
     status: partial
     needs: form
+    preview: gustwave/table/modal
   - id: table-comparison-example
     title: Comparison table
-    status: composable
+    status: previewed
+    preview: gustwave/table/comparison
   - id: table-colors-example
     title: Table colors
-    status: composable
+    status: previewed
+    preview: gustwave/table/colors
   - id: table-striped-rows-colors-example
     title: Table colors > Striped rows color
-    status: composable
+    status: previewed
+    preview: gustwave/table/striped_rows_colors
   - id: table-striped-columns-colors-example
     title: Table colors > Striped columns color
-    status: composable
+    status: previewed
+    preview: gustwave/table/striped_columns_colors
   - id: table-striped-colors-hover-example
     title: Table colors > Hover state
-    status: composable
+    status: previewed
+    preview: gustwave/table/hover_colors
   components/tabs:
   - id: default-tabs-example
     title: Default tabs

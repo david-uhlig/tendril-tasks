@@ -46,9 +46,9 @@ RSpec.describe "Lookbook's Flowbite coverage", type: :request do
     end
 
     it "says what an example is waiting for" do
-      get "/lookbook/pages/flowbite/components/tables"
+      get "/lookbook/pages/flowbite/components/navbar"
 
-      expect(response.body).to include("table-foot")
+      expect(response.body).to include("search-input")
     end
   end
 
