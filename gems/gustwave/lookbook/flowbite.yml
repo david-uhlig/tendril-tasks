@@ -889,10 +889,12 @@ pages:
     preview: gustwave/kbd/arrow_keys
   - id: kbd-letter-example
     title: Letter keys
-    status: composable
+    status: previewed
+    preview: gustwave/kbd/letter_keys
   - id: kbd-number-example
     title: Number keys
-    status: composable
+    status: previewed
+    preview: gustwave/kbd/number_keys
   - id: kbd-function-example
     title: Function keys
     status: previewed
