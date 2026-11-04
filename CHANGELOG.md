@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- The task page no longer stays dimmed and unable to scroll after withdrawing an application and applying again.
+
+### Security
+- Upgrade Ruby to 4.0.9 and Rails to 8.1.4.1, and update Addressable, Crass, Loofah, Nokogiri, Rack, Rails HTML Sanitizer and SQLite3, to fix known vulnerabilities. These include possible cross-site scripting, IP spoofing and a strong parameters bypass in Rails, and regular expression bugs in Ruby.
+
 ## [0.8.0] - 2026-10-13
 
 ### Breaking Changes
