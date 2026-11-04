@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3] - 2026-11-04
+
 ### Security
 - Upgrade Ruby to 3.4.12 and Rails to 8.1.4.1, and update Addressable, Crass, Loofah, Nokogiri, Rack, Rails HTML Sanitizer and SQLite3, to fix known vulnerabilities. These include possible cross-site scripting, IP spoofing and a strong parameters bypass in Rails, and regular expression bugs in Ruby.
 
@@ -177,7 +179,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.2...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.3...HEAD
+[0.7.3]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...v0.7.0
