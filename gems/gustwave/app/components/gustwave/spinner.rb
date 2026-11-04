@@ -33,22 +33,16 @@ module Gustwave
     # @param size [Symbol] the size of the spinner. Pass in t-shirt sizes from :xs to :"9xl" to change the size. Passthrough to Gustwave::Icon.
     # @param align [Symbol] the text alignment of the spinner. Pass in :none, :left, :center, or :right to change the alignment.
     # @param position [Symbol] the position of the spinner relative to its enclosing element. Make sure the enclosing element has the Tailwind class +relative+. See Gustwave::Positionable for options.
-    # @param options [Hash] additional HTML attributes for the wrapping div tag. Use #configure_icon to customize the SVG icon tag.
+    # @param icon_options [Hash] additional HTML attributes and component options for the Gustwave::Icon component, e.g. its +class+.
+    # @param options [Hash] additional HTML attributes for the wrapping div tag.
     #
     # @see Gustwave::Icon
     # @see Gustwave::Positionable for positioning options
-    def initialize(text = nil, color: DEFAULT, size: DEFAULT, align: DEFAULT, position: DEFAULT, **options)
+    def initialize(text = nil, color: DEFAULT, size: DEFAULT, align: DEFAULT, position: DEFAULT, icon_options: {}, **options)
       @text = sr_only_text(text)
       select_options(color:, align:, position:)
       @config = { role: "status" }.merge(attributes_for(options))
-      @size = size
-      configure_icon
-    end
-
-    # @param options [Hash] additional HTML attributes and component options for the Gustwave::Icon component.
-    def configure_icon(**options)
-      @icon_config = { size: @size, aria_hidden: true }
-                       .merge(attributes_for(:icon, options))
+      @icon_config = { size:, aria_hidden: true }.merge(attributes_for(:icon, icon_options))
     end
 
     def before_render

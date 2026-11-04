@@ -1,7 +1,5 @@
-<%= render Gustwave::Card.new(class: "w-full max-w-none") do |card| %>
-  <% card.configure_body(class: "p-0") %>
-
-  <%= render Gustwave::Tabs.new(style: :none, list_class: "rounded-t-lg border-b border-gray-200 bg-gray-50 text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 [&>li]:me-2", active_class: "text-blue-600 dark:bg-gray-800 dark:text-blue-500", inactive_class: "hover:text-gray-600 dark:hover:text-gray-300") do |tabs| %>
+<%= render Gustwave::Card.new(class: "w-full max-w-none", body_options: { class: "p-0" }) do %>
+  <%= render Gustwave::Tabs.new(style: :none, list_options: { class: "rounded-t-lg border-b border-gray-200 bg-gray-50 text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 [&>li]:me-2" }, active_class: "text-blue-600 dark:bg-gray-800 dark:text-blue-500", inactive_class: "hover:text-gray-600 dark:hover:text-gray-300") do |tabs| %>
     <% tabs.with_tab_button("About", selected: true, class: "inline-block p-4 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-ss-lg") do |tab| %>
       <% tab.with_panel(class: "bg-white md:p-8 dark:bg-gray-800") do %>
         <%= render Gustwave::Heading.new("Powering innovation and trust at 200,000+ companies worldwide", tag: :h2, class: "mb-3 text-3xl font-extrabold tracking-tight") %>
