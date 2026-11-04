@@ -4,6 +4,8 @@ How Gustwave slices a Flowbite UI pattern into ViewComponents, options, slots an
 
 A caller who knows one Gustwave component should be able to predict the API of the next one. Two maintainers extracting the same Flowbite pattern should arrive at the same slicing.
 
+Gustwave is built against Flowbite 3.x. A "Flowbite example" here means an example in Flowbite's docs at the version pinned in `lookbook/flowbite.yml`, currently 3.1.2. Take markup, classes and `data-*` attributes from those docs, not from another Flowbite version.
+
 The styling DSL (`Gustwave::Options`, `Gustwave::Styling`) is documented in the README, and the constructor convention in `Gustwave::Component`. Specs already enforce both. This document builds on them and doesn't repeat them.
 
 **How to apply it.** The rules apply to every new component and to every change to an existing component's API. Some existing components don't follow them yet; that work is tracked in issues labelled `gustwave-design`. Mechanisms marked *planned* don't exist yet. Follow the rule anyway and don't wait for the mechanism. Past decisions, with their reasons, are listed under [Decisions](#decisions).

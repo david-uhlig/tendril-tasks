@@ -2,6 +2,8 @@
 
 Gustwave is an unofficial implementation of the [Flowbite](https://flowbite.com/docs/) UI library in [ViewComponent](https://viewcomponent.org/). It only implements Flowbite's open source components.
 
+Gustwave is built against Flowbite 3.x, currently 3.1.2. Its markup, classes and `data-*` attributes follow Flowbite's docs for that version.
+
 Gustwave isn't published yet. It's used as a path gem and will move to its own repository once its API settles.
 
 ## Setup
@@ -18,7 +20,7 @@ Import Gustwave's Tailwind CSS entry point in `app/assets/tailwind/application.c
 @import "../builds/tailwind/gustwave";
 ```
 
-Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and its JavaScript.
+Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and its JavaScript. Use Flowbite 3.x: Gustwave's components rely on its JavaScript reading their `data-*` attributes, and other major versions aren't supported.
 
 ### Optional
 

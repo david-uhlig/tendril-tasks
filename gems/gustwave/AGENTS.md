@@ -2,6 +2,8 @@
 
 Gustwave implements Flowbite's open source UI components as ViewComponents for Rails. `README.md` documents how to use it. `docs/design.md` documents how components are designed.
 
+Gustwave is built against Flowbite 3.x. `lookbook/flowbite.yml` pins the exact docs version, currently 3.1.2. Take markup, classes and `data-*` attributes from Flowbite's docs at that version, not from memory or another version.
+
 ## Before changing a component
 
 Read `docs/design.md` before you add a component or change a component's API: its keywords, options, slots, parts or extension points. It decides how a Flowbite pattern is split into components, options, slots and block content. Don't invent a new shape for something it already covers.
