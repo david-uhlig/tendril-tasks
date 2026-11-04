@@ -2,6 +2,7 @@
 
 module Gustwave
   module Buttons
+    # @status alpha
     class GradientDuotoneOutline < Gustwave::Buttons::Base
       # The root element is the gradient border; the inner span holds the
       # label and visuals, so it takes the size styles.

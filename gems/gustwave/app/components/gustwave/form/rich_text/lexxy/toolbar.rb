@@ -8,6 +8,8 @@ module Gustwave
         #
         # Connect the toolbar to an editor by passing its +id+ to the editor's
         # +toolbar+ attribute.
+        #
+        # @status alpha
         class Toolbar < Gustwave::Component
           ACTION_GROUPS = [
             %i[bold italic strike underline highlight link],

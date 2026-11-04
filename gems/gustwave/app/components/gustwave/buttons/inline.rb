@@ -5,6 +5,8 @@ module Gustwave
     # A transparent, compact button that sits inside other elements, e.g. the
     # dismiss button of a +Gustwave::Badge+. Its colors are meant for the
     # matching light backgrounds of badges and alerts.
+    #
+    # @status alpha
     class Inline < Gustwave::Buttons::Base
       base "inline-flex items-center justify-center rounded-xs bg-transparent focus:outline-hidden focus:ring-2 disabled:cursor-not-allowed"
 

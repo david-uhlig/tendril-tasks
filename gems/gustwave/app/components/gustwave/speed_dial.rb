@@ -26,6 +26,8 @@ module Gustwave
   # @param shape [Symbol] the shape of the trigger and actions, +:round+ (default) or +:square+.
   # @param label_display [Symbol] where the labels of the actions are shown, +:tooltip+ (default), +:inside+ or +:outside+.
   # @param options [Hash] HTML attributes for the wrapper element.
+  #
+  # @status alpha
   class SpeedDial < Gustwave::Component
     # The id of the menu element shown when the trigger is activated
     attr_reader :menu_id

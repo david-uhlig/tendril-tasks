@@ -23,6 +23,8 @@ module Gustwave
     # @param label_display [Symbol] where the label is shown, :tooltip, :inside or :outside.
     # @param label_placement [Symbol] the side of the label, :left, :right, :top or :bottom.
     # @param options [Hash] HTML attributes, e.g. +href+ for the :a tag.
+    #
+    # @status alpha
     class Action < Gustwave::Component
       # The HTML tag to render the action as
       option :tag, default: :button, values: %i[button a]

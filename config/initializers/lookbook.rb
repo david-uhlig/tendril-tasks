@@ -2,6 +2,7 @@
 # production, see the Gemfile.
 if defined?(Lookbook)
   require Gustwave::Engine.root.join("lookbook/flowbite_coverage")
+  require Gustwave::Engine.root.join("lookbook/component_status")
 
   Rails.application.configure do
     config.lookbook.project_name = "Gustwave"
@@ -15,4 +16,13 @@ if defined?(Lookbook)
   Lookbook.add_panel(:flowbite, "lookbook/panels/flowbite",
                      label: "Flowbite",
                      disabled: ->(data) { Gustwave::FlowbiteCoverage.current.for_scenario(data.target.lookup_path).empty? })
+
+  # Shows the status of the component a preview is named after, read from the
+  # @status tag in its class docstring.
+  Lookbook.add_panel(:status, "lookbook/panels/status",
+                     label: "Status",
+                     disabled: ->(data) {
+                       component = Gustwave::ComponentStatus.component_for_preview(data.preview.preview_class)
+                       component.nil? || Gustwave::ComponentStatus.for(component).nil?
+                     })
 end

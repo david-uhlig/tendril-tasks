@@ -50,6 +50,8 @@ module Gustwave
   #       render Gustwave::Dropdown.new(...) # trigger and menu, see Gustwave::Dropdown
   #     end
   #   end
+  #
+  # @status alpha
   class Navbar < Gustwave::Component
     base "bg-white border-gray-200 dark:bg-gray-900"
 

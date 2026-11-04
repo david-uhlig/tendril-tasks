@@ -16,6 +16,8 @@ module Gustwave
       #
       # Block content renders after the list items and before the footer. Blank block content,
       # such as a block that only sets slots, renders nothing.
+      #
+      # @status alpha
       class List < Gustwave::Dropdowns::Menus::Base
         # The HTML tag of the list, see +configure_list+
         option :list_tag, default: :ul, values: %i[ul ol]

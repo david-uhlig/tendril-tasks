@@ -9,6 +9,8 @@ module Gustwave
       # Can be placed in any content area with the +content_for+ argument.
       #
       # @see Gustwave::Dropdowns::Menus::Base
+      #
+      # @status alpha
       class Generic < Gustwave::Dropdowns::Menus::Base
       end
     end

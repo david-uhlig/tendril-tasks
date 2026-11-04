@@ -29,6 +29,8 @@ module Gustwave
   #       <td>3</td>
   #     </tr>
   #   <% end %>
+  #
+  # @status alpha
   class TableFoot < Gustwave::Component
     renders_many_extensible :rows, "Row"
 
@@ -46,6 +48,7 @@ module Gustwave
     private
     attr_reader :config
 
+    # @status alpha
     class Row < Gustwave::Component
       base "font-semibold text-gray-900 dark:text-white"
 

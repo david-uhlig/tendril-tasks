@@ -14,6 +14,8 @@ module Gustwave
   #   <%= render Gustwave::Badge.new("Badge", class: "relative") do %>
   #     <%= render Gustwave::Indicator.new(position: :top_right, color: :blue) %>
   #   <% end %>
+  #
+  # @status alpha
   class Indicator < Gustwave::Component
     include Gustwave::Positionable
 

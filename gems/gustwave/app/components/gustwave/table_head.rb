@@ -41,6 +41,8 @@ module Gustwave
   #       <th>Last Name</th>
   #     </tr>
   #   <% end %>
+  #
+  # @status alpha
   class TableHead < Gustwave::Component
     base "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 
@@ -64,6 +66,7 @@ module Gustwave
       tag.tr { safe_join(columns) } if columns?
     end
 
+    # @status alpha
     class Column < Gustwave::Component
       base "px-6 py-3"
 

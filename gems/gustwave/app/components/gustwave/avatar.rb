@@ -35,6 +35,8 @@ module Gustwave
   # @see Gustwave::AvatarGroup
   # @see Gustwave::AvatarText
   # @see Gustwave::AvatarPlaceholder
+  #
+  # @status alpha
   class Avatar < Gustwave::Component
     # The element wrapping the block when there is no +src+
     option :tag, default: :div, values: %i[div span]

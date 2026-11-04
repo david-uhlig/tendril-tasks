@@ -4,6 +4,7 @@ module Gustwave
   module Form
     module RichText
       module Trix
+        # @status alpha
         class Button < Gustwave::Component
           ATTRIBUTE_KEY_MAPPINGS = {
             bold: "b",

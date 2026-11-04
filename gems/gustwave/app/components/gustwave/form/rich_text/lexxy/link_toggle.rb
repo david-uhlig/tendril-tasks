@@ -8,6 +8,8 @@ module Gustwave
         #
         # Lexxy's +lexxy-link-dropdown+ element opens and closes the dialog and
         # applies the link through the buttons' +value+ attributes.
+        #
+        # @status alpha
         class LinkToggle < Gustwave::Component
           def initialize(disabled: false, **options)
             @disabled = disabled

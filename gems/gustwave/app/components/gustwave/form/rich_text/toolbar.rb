@@ -3,6 +3,7 @@
 module Gustwave
   module Form
     module RichText
+      # @status alpha
       class Toolbar < Gustwave::Component
         base "flex items-center space-x-1 rtl:space-x-reverse flex-wrap"
 

@@ -6,6 +6,8 @@ module Gustwave
       # Use the Button trigger to render a Gustwave::Button with a chevron icon
       # in the direction of the menu's placement. The chevron trails the text,
       # except for a menu on the left, where it leads.
+      #
+      # @status alpha
       class Button < Gustwave::Dropdowns::Triggers::Base
         delegate_missing_to :button_component
 

@@ -68,4 +68,21 @@ RSpec.describe "Lookbook's Flowbite coverage", type: :request do
       expect(response.body).not_to include("Default tabs")
     end
   end
+
+  describe "the status panel" do
+    it "shows the status of the component a preview is named after" do
+      get "/lookbook/inspect/gustwave/tabs/default"
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("<code>Gustwave::Tabs</code> is <strong>alpha</strong>")
+      expect(response.body).to include("/lookbook/pages/design#component-lifecycle")
+    end
+
+    it "shows no status for a preview not named after a component" do
+      get "/lookbook/inspect/gustwave/button/playground"
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).not_to include("</code> is <strong>")
+    end
+  end
 end

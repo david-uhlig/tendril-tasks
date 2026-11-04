@@ -29,6 +29,8 @@ module Gustwave
   # they are set in.
   #
   # @see Gustwave::Pagination::Link
+  #
+  # @status alpha
   class Pagination < Gustwave::Component
     part :list, "inline-flex -space-x-px"
 

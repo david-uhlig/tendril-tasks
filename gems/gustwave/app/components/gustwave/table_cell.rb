@@ -20,6 +20,8 @@ module Gustwave
   #     <span>John Doe</span>
   #   <% end %>
   #   # => <td class="px-6 py-4"><span>John Doe</span></td>
+  #
+  # @status alpha
   class TableCell < Gustwave::Component
     base "px-6 py-4"
 

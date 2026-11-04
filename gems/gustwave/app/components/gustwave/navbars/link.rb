@@ -9,6 +9,8 @@ module Gustwave
     # mark the link as the current page with +aria-current="page"+.
     #
     #   render Gustwave::Navbars::Link.new("Home", href: "/", active: true)
+    #
+    # @status alpha
     class Link < Gustwave::Component
       base "block py-2 px-3 md:p-0 rounded-sm"
 

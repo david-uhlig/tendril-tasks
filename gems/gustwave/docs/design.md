@@ -133,7 +133,7 @@ For an extensible library, extension points are part of the contract:
 
 Every component has a status: alpha, beta or stable. A component on its way out is deprecated. Every new component starts at alpha, and so does every existing component when statuses are introduced (D3).
 
-Statuses are being introduced (*planned*). Until a component declares one, treat it as alpha.
+Every component states its status with a `@status` tag in its class docstring, see [Lifecycle rules](#lifecycle-rules).
 
 ### Releases
 
@@ -180,7 +180,7 @@ A component becomes stable when all of these hold:
 - **Statuses only move forward.** A beta or stable component that needs a breaking change goes through a deprecation; it doesn't go back to alpha.
 - **Promotions happen in minor releases** and are listed in the changelog under Changed.
 - **The status is a `@status` tag in the class docstring,** next to the YARD tags the gem already uses, as in the example below. It changes nothing at runtime. Every class states its own status, because a docstring isn't inherited: a new theme under a beta `Buttons::Base` still starts at alpha.
-- **Each preview's notes repeat the status,** because Lookbook reads preview comments, not component docstrings.
+- **Lookbook shows the status in its Status panel,** read from the docstring of the component a preview is named after, e.g. `Gustwave::Card` for `Gustwave::CardPreview`. Nothing else repeats it, so the docstring is the only place to change.
 - **A deprecated component also warns at runtime.** Its constructor calls `Gustwave.deprecator.warn` (*planned*) with what to use instead. The `@status deprecated` tag alone can't warn.
 
 ```ruby
@@ -201,10 +201,13 @@ ViewComponent's guide prefers composition over inheritance. Gustwave uses three 
 
 ## Enforcement
 
-Convention specs, like the existing constructor spec, keep the rules from drifting. All of these are *planned*. Each will land with an allowlist of known exceptions that points to their `gustwave-design` issues, and its failure message will link to the rule in this document.
+Convention specs, like the constructor spec, keep the rules from drifting. Their failure messages link to the rule in this document.
+
+- **Statuses** (`spec/components/component_status_spec.rb`). Every component's class docstring has exactly one `@status` tag with `alpha`, `beta`, `stable` or `deprecated`. A component tagged `deprecated` calls `Gustwave.deprecator.warn`.
+
+The rest are *planned*. Each will land with an allowlist of known exceptions that points to their `gustwave-design` issues.
 
 - **API snapshot.** Each component's status, keywords, options and values, slots and setters, and parts recorded in a YAML fixture, as `StyleSnapshots` does for classes. Every API change then shows up in review as a fixture diff, next to the status that says whether it needs a deprecation.
-- Every component's class docstring has exactly one `@status` tag with `alpha`, `beta`, `stable` or `deprecated`. Its preview's notes show the same status. A component tagged `deprecated` calls `Gustwave.deprecator.warn`.
 - Every `<name>_options:` keyword names a declared part. A `<name>_class:` keyword only names a state class a script swaps, never an element.
 - `icon:` and `trailing_icon:` keywords only set a `Visuals` slot or a positional slot, never render an icon of their own.
 - Components that render `DismissButton` expose it as a `dismiss_button` slot. Overlay headers expose `close_button`.
