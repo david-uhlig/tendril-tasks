@@ -23,7 +23,7 @@ RSpec.describe Gustwave::Popover, type: :component do
   end
 
   it_behaves_like "a component with trigger options", prefix: "popover"
-  it_behaves_like "a component controlling its target", trigger_options: { trigger: :click }
+  it_behaves_like "a component controlling its target", trigger_options: { trigger_event: :click }
   it_behaves_like "a text and block content renderer", selector: "div[role='tooltip']"
   it_behaves_like "a component with configurable html attributes", selector: "div[role='tooltip']"
 
@@ -87,14 +87,14 @@ RSpec.describe Gustwave::Popover, type: :component do
     end
 
     it "points a click popover's trigger at the popover with aria-controls" do
-      options = component.trigger_options(trigger: :click)
+      options = component.trigger_options(trigger_event: :click)
 
       expect(options).to include("aria-controls" => "pop")
       expect(options.keys.map(&:to_s)).not_to include("aria-describedby")
     end
 
     it "keeps the trigger's own aria-describedby with a click popover" do
-      expect(component.trigger_options(trigger: :click, "aria-describedby": "help")).to include("aria-describedby": "help")
+      expect(component.trigger_options(trigger_event: :click, "aria-describedby": "help")).to include("aria-describedby": "help")
     end
   end
 end
