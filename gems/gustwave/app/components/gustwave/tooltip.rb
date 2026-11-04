@@ -35,7 +35,7 @@ module Gustwave
       left left-start left-end
     ]
 
-    option :trigger, default: :hover, values: %i[hover click]
+    option :trigger_event, default: :hover, values: %i[hover click]
 
     base "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium transition-opacity duration-300 rounded-lg shadow-xs opacity-0"
     part :arrow, "tooltip-arrow after:hidden"
@@ -83,14 +83,15 @@ module Gustwave
     #
     #   <%= link_to "Docs", docs_path, **tooltip.trigger_options("aria-describedby": "help", class: "underline") %>
     #
+    # @param trigger_event [Symbol] +:hover+ or +:click+.
     # @param attributes [Hash] the trigger's own HTML attributes.
-    def trigger_options(placement: DEFAULT, trigger: DEFAULT, **attributes)
+    def trigger_options(placement: DEFAULT, trigger_event: DEFAULT, **attributes)
       described_by, options = extract_described_by(attributes)
       tooltip_keys = %w[data-tooltip-target data-tooltip-placement data-tooltip-trigger data-tooltip-style]
       options = options.reject { |key, _| tooltip_keys.include?(key.to_s) }
       options["data-tooltip-target"] = @id
       options["data-tooltip-placement"] = option_value(:placement, placement:)
-      options["data-tooltip-trigger"] = option_value(:trigger, trigger:)
+      options["data-tooltip-trigger"] = option_value(:trigger_event, trigger_event:)
       options["data-tooltip-style"] = "light" if option_value(:color) == :light
       options["aria-describedby"] = [ *described_by, @id ].uniq.join(" ")
       options

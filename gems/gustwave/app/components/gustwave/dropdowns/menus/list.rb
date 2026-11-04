@@ -19,7 +19,7 @@ module Gustwave
       #
       # @status alpha
       class List < Gustwave::Dropdowns::Menus::Base
-        # The HTML tag of the list, see +configure_list+
+        # The HTML tag of the list, set with +tag:+ in +list_options:+
         option :list_tag, default: :ul, values: %i[ul ol]
 
         part :list, "py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -36,10 +36,14 @@ module Gustwave
         # @param id [String] the id attribute for the dropdown menu. Must match the id attribute called by the triggering element.
         # @param content_for [Symbol, nil] the name of the content area to render the menu. If +nil+, the menu is rendered right after the triggering element.
         # @param tag [Symbol] HTML tag to use for the dropdown menu. Default: +div+.
-        # @param options [Hash] additional HTML attributes passed to the surrounding HTML element. Call +configure_list+ to configure the list element (optional).
-        def initialize(id:, content_for: nil, tag: DEFAULT, **options)
+        # @param list_options [Hash] HTML attributes passed to the list element, and its +tag+ (+ul+ or +ol+), e.g. +{ tag: :ol, class: "py-1" }+ (optional).
+        # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
+        def initialize(id:, content_for: nil, tag: DEFAULT, list_options: {}, **options)
           super(nil, content_for:, tag:, id:, **options)
-          configure_list
+          list_options = list_options.symbolize_keys
+          select_options(list_tag: list_options.fetch(:tag, DEFAULT))
+          @list_tag = option_value(:list_tag)
+          @list_config = attributes_for(:list, list_options.except(:tag))
         end
 
         def call
@@ -48,16 +52,6 @@ module Gustwave
               safe_join([ header, list_with_items, content.presence, footer ])
             end
           end
-        end
-
-        # Configure the surrounding HTML list element
-        #
-        # @param tag [Symbol] the tag of the HTML list element, usually +ul+ or +ol+.
-        # @param options [Hash] additional HTML attributes passed to the list element.
-        def configure_list(tag: DEFAULT, **options)
-          select_options(list_tag: tag)
-          @list_tag = option_value(:list_tag)
-          @list_config = attributes_for(:list, options)
         end
 
         private

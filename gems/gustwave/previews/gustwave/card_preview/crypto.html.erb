@@ -1,6 +1,4 @@
-<%= render Gustwave::Card.new(class: "w-full") do |card| %>
-  <% card.configure_body(class: "p-4 sm:p-6") %>
-
+<%= render Gustwave::Card.new(class: "w-full", body_options: { class: "p-4 sm:p-6" }) do %>
   <%= render Gustwave::Heading.new("Connect wallet", tag: :h5, class: "mb-3 text-base font-semibold md:text-xl") %>
   <%= render Gustwave::Paragraph.new("Connect with one of our available wallet providers or create a new one.", class: "text-sm font-normal") %>
 

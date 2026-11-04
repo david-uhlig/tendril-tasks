@@ -39,11 +39,10 @@ module Gustwave
   #     <%= render Gustwave::Paragraph.new("A horizontal card.") %>
   #   <% end %>
   #
-  # Adjusts the body's classes with +configure_body+, e.g. to drop its padding
+  # Adjusts the body's classes with +body_options:+, e.g. to drop its padding
   # for a composition that pads its own parts:
   #
-  #   <%= render Gustwave::Card.new do |card| %>
-  #     <% card.configure_body(class: "px-0 pb-10 pt-4") %>
+  #   <%= render Gustwave::Card.new(body_options: { class: "px-0 pb-10 pt-4" }) do %>
   #     <%= render Gustwave::Paragraph.new("Padding on the sides is up to the content.") %>
   #   <% end %>
   #
@@ -86,17 +85,13 @@ module Gustwave
 
     # @param tag [Symbol] The HTML tag of the card. Defaults to :div. Use :a with an +href+ to render the whole card as a link.
     # @param horizontal [Boolean] Whether the image sits beside the body from the +md+ breakpoint up. Defaults to +false+.
+    # @param body_options [Hash] Additional HTML attributes for the body element, e.g. +class+. Its classes win conflicts with the body's classes.
     # @param options [Hash] Additional HTML attributes passed to the root element, e.g. +href+, +id+ or +class+.
-    def initialize(tag: DEFAULT, horizontal: false, **options)
+    def initialize(tag: DEFAULT, horizontal: false, body_options: {}, **options)
       select_options(tag:, horizontal:)
       select_options(link: option_value(:tag) == :a)
       @options = options
-      @body_options = {}
-    end
-
-    # @param options [Hash] Additional HTML attributes for the body element, e.g. +class+.
-    def configure_body(**options)
-      @body_options = options
+      @body_options = body_options
     end
 
     def before_render

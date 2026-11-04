@@ -4,6 +4,7 @@ constructor:
 - 'id:'
 - 'content_for: (optional)'
 - 'tag: (optional)'
+- 'list_options: (optional)'
 - "**options"
 options:
   list_tag:
@@ -35,7 +36,6 @@ slots:
     - generic
     - link
 methods:
-- configure_list
 - footer
 - footer?
 - header

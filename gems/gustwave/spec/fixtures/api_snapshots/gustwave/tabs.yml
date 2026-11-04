@@ -6,7 +6,7 @@ constructor:
 - 'vertical: (optional)'
 - 'active_class: (optional)'
 - 'inactive_class: (optional)'
-- 'list_class: (optional)'
+- 'list_options: (optional)'
 - "**options"
 options:
   style:
