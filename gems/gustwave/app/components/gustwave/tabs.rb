@@ -159,11 +159,6 @@ module Gustwave
       @inactive_class = inactive_class
       list_options = list_options.symbolize_keys
 
-      if options.key?(:list_class)
-        Gustwave.deprecator.warn("Gustwave::Tabs' `list_class:` is deprecated, use `list_options: { class: }` instead")
-        list_options[:class] = merge_classes(options.delete(:list_class), list_options[:class])
-      end
-
       select_options(style:, vertical:)
       @list_config = attributes_for(:list, list_options)
       @options = attributes_for(options.merge(id: @id))

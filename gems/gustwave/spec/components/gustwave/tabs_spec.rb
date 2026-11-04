@@ -237,17 +237,6 @@ RSpec.describe Gustwave::Tabs, type: :component do
       expect(page).to have_selector("ul[role=tablist]")
       expect(page).not_to have_selector("ul#other")
     end
-
-    it "still takes list_class, with a deprecation warning" do
-      expect do
-        render_inline(described_class.new(style: :pills, list_class: "rounded-t-lg bg-gray-50")) do |tabs|
-          tabs.with_tab_button("A", id: "a", selected: true)
-        end
-      end.to output(/list_options/).to_stderr
-
-      expect(classes_of("ul[role=tablist]")).to include("rounded-t-lg", "bg-gray-50", "text-gray-500")
-      expect(rendered_content).not_to include("list_class")
-    end
   end
 
   describe "the active and inactive classes of every style and vertical" do
