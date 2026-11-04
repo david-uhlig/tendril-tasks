@@ -4,6 +4,8 @@ constructor:
 - 'menu_id: (optional)'
 - 'sticky: (optional)'
 - 'solid: (optional)'
+- 'container_options: (optional)'
+- 'menu_options: (optional)'
 - "**options"
 options:
   solid:
@@ -32,8 +34,6 @@ methods:
 - actions?
 - brand
 - brand?
-- configure_container
-- configure_menu
 - items
 - items?
 - menu_id

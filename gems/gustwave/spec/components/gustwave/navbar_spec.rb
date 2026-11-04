@@ -191,10 +191,9 @@ RSpec.describe Gustwave::Navbar, type: :component do
     end
   end
 
-  describe "#configure_container" do
+  describe "container_options" do
     it "lets its classes win conflicts with the defaults" do
-      render_inline(described_class.new) do |navbar|
-        navbar.configure_container(class: "max-w-(--breakpoint-lg)")
+      render_inline(described_class.new(container_options: { class: "max-w-(--breakpoint-lg)" })) do |navbar|
         navbar.with_brand { "Brand" }
       end
       expect(rendered_content).to have_selector("div.max-w-\\(--breakpoint-lg\\)")
@@ -202,13 +201,20 @@ RSpec.describe Gustwave::Navbar, type: :component do
     end
   end
 
-  describe "#configure_menu" do
+  describe "menu_options" do
     it "lets its classes win conflicts with the defaults" do
-      render_inline(described_class.new(menu_id: "menu")) do |navbar|
-        navbar.configure_menu(class: "md:ms-auto md:me-8")
+      render_inline(described_class.new(menu_id: "menu", menu_options: { class: "md:ms-auto md:me-8" })) do |navbar|
         navbar.with_item_link("Home", href: "/")
       end
       expect(rendered_content).to have_selector("div[id='menu'].md\\:ms-auto.md\\:me-8")
+    end
+
+    it "keeps the menu id, which the toggle controls" do
+      render_inline(described_class.new(menu_id: "menu", menu_options: { id: "other" })) do |navbar|
+        navbar.with_item_link("Home", href: "/")
+      end
+      expect(rendered_content).to have_selector("div[id='menu']")
+      expect(rendered_content).not_to have_selector("div[id='other']")
     end
   end
 end

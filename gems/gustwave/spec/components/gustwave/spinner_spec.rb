@@ -74,13 +74,18 @@ RSpec.describe Gustwave::Spinner, type: :component do
     end
   end
 
-  context "with configure_icon" do
+  context "with icon_options" do
     it "passes the icon options on to the icon" do
-      spinner = described_class.new
-      spinner.configure_icon(size: :lg)
-      render_inline(spinner)
+      render_inline(described_class.new(icon_options: { size: :lg }))
 
       expect(rendered_content).to have_selector("svg.h-7.w-7")
+    end
+
+    it "lets the caller's classes win conflicts on the icon" do
+      render_inline(described_class.new(icon_options: { class: "fill-red-600" }))
+
+      expect(rendered_content).to have_selector("svg.fill-red-600")
+      expect(rendered_content).not_to have_selector("svg.fill-blue-600")
     end
   end
 

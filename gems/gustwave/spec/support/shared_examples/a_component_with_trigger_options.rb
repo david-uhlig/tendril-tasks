@@ -18,7 +18,7 @@ RSpec.shared_examples "a component with trigger options" do |prefix:, component_
     end
 
     it "passes on a placement and trigger" do
-      expect(component.trigger_options(placement: :"bottom-start", trigger: :click))
+      expect(component.trigger_options(placement: :"bottom-start", trigger_event: :click))
         .to include("data-#{prefix}-placement" => :"bottom-start", "data-#{prefix}-trigger" => :click)
     end
 
@@ -30,7 +30,7 @@ RSpec.shared_examples "a component with trigger options" do |prefix:, component_
     it "falls back to the defaults when Gustwave isn't strict" do
       Gustwave.strict = false
 
-      expect(component.trigger_options(placement: :above, trigger: :tap))
+      expect(component.trigger_options(placement: :above, trigger_event: :tap))
         .to include("data-#{prefix}-placement" => :top, "data-#{prefix}-trigger" => :hover)
     end
 

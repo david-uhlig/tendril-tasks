@@ -84,20 +84,13 @@ RSpec.describe "Component conventions" do
   }
 
   known_violations = {
-    "Gustwave::Card" => { "configure_method: configure_body" => 521 },
     "Gustwave::DismissButton" => { "icon_keyword: icon" => 520 },
     "Gustwave::DrawerHeader" => { "icon_keyword: icon" => 520 },
-    "Gustwave::Dropdowns::Menus::List" => { "configure_method: configure_list" => 521 },
     "Gustwave::IconToast" => { "icon_keyword: icon" => 519 },
-    "Gustwave::Navbar" => { "configure_method: configure_container" => 521, "configure_method: configure_menu" => 521 },
     "Gustwave::Pagination::Link" => { "icon_keyword: icon" => 520 },
-    "Gustwave::Popover" => { "trigger_name: option trigger" => 522, "trigger_name: trigger_options(trigger:)" => 522 },
     "Gustwave::SpeedDials::Action" => { "icon_keyword: icon" => 520 },
     "Gustwave::SpeedDials::Trigger" => { "icon_keyword: icon" => 520 },
-    "Gustwave::Spinner" => { "configure_method: configure_icon" => 521 },
-    "Gustwave::Tab" => { "configure_method: configure_selection" => 523, "configure_method: configure_classes" => 523 },
-    "Gustwave::Tabs" => { "class_keyword: list_class" => 521 },
-    "Gustwave::Tooltip" => { "trigger_name: option trigger" => 522, "trigger_name: trigger_options(trigger:)" => 522 }
+    "Gustwave::Tab" => { "configure_method: configure_selection" => 523, "configure_method: configure_classes" => 523 }
   }
 
   exceptions = {

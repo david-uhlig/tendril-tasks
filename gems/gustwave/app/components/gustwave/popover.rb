@@ -12,7 +12,7 @@ module Gustwave
       left left-start left-end
     ]
 
-    option :trigger, default: :hover, values: %i[hover click]
+    option :trigger_event, default: :hover, values: %i[hover click]
 
     base "absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
 
@@ -49,12 +49,12 @@ module Gustwave
     #
     # @param attributes [Hash] the trigger's own HTML attributes.
     def trigger_options(placement: DEFAULT,
-                        trigger: DEFAULT,
+                        trigger_event: DEFAULT,
                         offset: nil,
                         **attributes)
       popover_keys = %w[data-popover-target data-popover-placement data-popover-trigger data-popover-offset]
       options = attributes.reject { |key, _| popover_keys.include?(key.to_s) }
-      event = option_value(:trigger, trigger:)
+      event = option_value(:trigger_event, trigger_event:)
       options["data-popover-target"] = @id
       options["data-popover-placement"] = option_value(:placement, placement:)
       options["data-popover-trigger"] = event

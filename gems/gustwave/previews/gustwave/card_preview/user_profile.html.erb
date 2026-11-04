@@ -1,6 +1,4 @@
-<%= render Gustwave::Card.new(class: "w-full") do |card| %>
-  <% card.configure_body(class: "p-0") %>
-
+<%= render Gustwave::Card.new(class: "w-full", body_options: { class: "p-0" }) do %>
   <div class="flex justify-end px-4 pt-4">
     <%= render Gustwave::Dropdown.new do |dropdown| %>
       <% dropdown.with_trigger_generic(class: "flex") do %>

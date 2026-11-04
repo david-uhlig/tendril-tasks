@@ -1,6 +1,4 @@
-<%= render Gustwave::Card.new(class: "w-full") do |card| %>
-  <% card.configure_body(class: "p-4 sm:p-8") %>
-
+<%= render Gustwave::Card.new(class: "w-full", body_options: { class: "p-4 sm:p-8" }) do %>
   <%= render Gustwave::Heading.new("Standard plan", tag: :h5, class: "mb-4 text-xl font-medium text-gray-500 dark:text-gray-400") %>
 
   <div class="flex items-baseline text-gray-900 dark:text-white">

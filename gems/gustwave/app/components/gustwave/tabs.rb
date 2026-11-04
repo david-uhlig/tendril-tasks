@@ -40,10 +40,11 @@ module Gustwave
   # and inactive states must not share a class, and a trigger's own +class:+
   # must not conflict with its state's classes, or the swap breaks.
   #
-  # === List class
+  # === List options
   #
-  # The +list_class+ option adds classes to the list of tabs, e.g. to round it
-  # or give it a background. They win conflicts with the style's classes.
+  # The +list_options+ option sets the HTML attributes of the list of tabs,
+  # e.g. its classes, to round it or give it a background. Its classes win
+  # conflicts with the style's classes.
   #
   # @status alpha
   class Tabs < Gustwave::Component
@@ -150,15 +151,16 @@ module Gustwave
     # @param vertical [Boolean] whether the tabs are stacked in a column, beside their panels.
     # @param active_class [String, nil] classes of the selected tab that replace the style's, e.g. +"text-purple-600 border-purple-600"+. They win conflicts with the style's classes.
     # @param inactive_class [String, nil] classes of the unselected tabs that replace the style's. They win conflicts with the style's classes.
-    # @param list_class [String, nil] classes added to the list of tabs, e.g. +"rounded-t-lg bg-gray-50"+. They win conflicts with the style's classes.
+    # @param list_options [Hash] HTML attributes of the list of tabs, e.g. +{ class: "rounded-t-lg bg-gray-50" }+. Its classes win conflicts with the style's classes.
     # @param options [Hash] additional HTML attributes of the root element. For link tabs, which render in a +nav+ element, this is that element, so pass +aria: { label: }+ here.
-    def initialize(id: nil, style: DEFAULT, vertical: false, active_class: nil, inactive_class: nil, list_class: nil, **options)
+    def initialize(id: nil, style: DEFAULT, vertical: false, active_class: nil, inactive_class: nil, list_options: {}, **options)
       @id = id || generate_random_id(prefix: "tabs")
       @active_class = active_class
       @inactive_class = inactive_class
-      @list_class = list_class
+      list_options = list_options.symbolize_keys
 
       select_options(style:, vertical:)
+      @list_config = attributes_for(:list, list_options)
       @options = attributes_for(options.merge(id: @id))
     end
 
@@ -219,12 +221,12 @@ module Gustwave
 
     def navigation_tabs
       tag.nav **attributes_for(:nav, @options) do
-        tag.ul(class: classes(:list, class: @list_class)) { safe_join(tab_items) }
+        tag.ul(**@list_config) { safe_join(tab_items) }
       end
     end
 
     def tablist
-      tag.ul id: list_id, role: "tablist", class: classes(:list, class: @list_class),
+      tag.ul **@list_config, id: list_id, role: "tablist",
              "data-tabs-toggle": "##{panels_id}",
              "data-tabs-active-classes": @active_classes,
              "data-tabs-inactive-classes": @inactive_classes do
