@@ -48,6 +48,37 @@ RSpec.describe User, type: :model do
       end
     end
 
+    context "when another user already has the email" do
+      let!(:existing_user) { create(:user, email: "john.doe@example.com") }
+
+      it "returns an unsaved user with an error on the email" do
+        user = User.from_omniauth(auth)
+
+        expect(user).not_to be_persisted
+        expect(user.errors.of_kind?(:email, :taken)).to be(true)
+      end
+
+      it "does not create a user or change the existing one" do
+        expect { User.from_omniauth(auth) }
+          .not_to(change { [ User.count, existing_user.reload.attributes ] })
+      end
+    end
+
+    context "when the email is missing" do
+      before { auth.info[:email] = nil }
+
+      it "returns an unsaved user with an error on the email" do
+        user = User.from_omniauth(auth)
+
+        expect(user).not_to be_persisted
+        expect(user.errors.of_kind?(:email, :blank)).to be(true)
+      end
+
+      it "does not create a user" do
+        expect { User.from_omniauth(auth) }.not_to change(User, :count)
+      end
+    end
+
     context "when assigning the role" do
       let(:rocketchat_admin_auth) { auth.merge(extra: { raw_info: { roles: [ "admin" ] } }) }
 
