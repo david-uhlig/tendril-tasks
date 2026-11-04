@@ -21,6 +21,8 @@ The short version:
 - Follow the constructor convention in `app/components/gustwave/component.rb`.
 - A breaking change to a beta or stable component needs a deprecation one minor release before the removal.
 
+To turn a Flowbite pattern into a component, or to cover more of a Flowbite page with an existing one, follow the `extract-flowbite-component` skill in `.claude/skills/`.
+
 If a rule doesn't fit your case, stop and ask rather than working around it. A change to a rule belongs in `docs/design.md`, and a settled question gets a new entry under its Decisions.
 
 ## Layout

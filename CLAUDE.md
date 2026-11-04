@@ -5,3 +5,7 @@
 - If an output overflows to a `tool-results/*.txt` file, search it or read a slice; never read it whole.
 - Check changes with `mise run test:ff <paths>` (`file:line` works) and `mise run lint:changed`.
 - Don't `cat` many files in a shell loop; search for what you need.
+
+# Gustwave
+
+- The Flowbite UI components live in the Gustwave gem in `gems/gustwave`. Before working on them, read `gems/gustwave/AGENTS.md`. Its `extract-flowbite-component` skill loads once you read a file in `gems/gustwave`.
