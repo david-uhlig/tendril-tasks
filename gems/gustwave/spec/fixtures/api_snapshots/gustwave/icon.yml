@@ -1,0 +1,52 @@
+---
+status: alpha
+constructor:
+- name
+- 'theme: (optional)'
+- 'color: (optional)'
+- 'size: (optional)'
+- 'stroke_width: (optional)'
+- "**options"
+options:
+  color:
+    default: none
+    values:
+    - light
+    - dark
+    - none
+  size:
+    default: md
+    values:
+    - xs
+    - sm
+    - md
+    - base
+    - lg
+    - xl
+    - 2xl
+    - 3xl
+    - 4xl
+    - 5xl
+    - 6xl
+    - 7xl
+    - 8xl
+    - 9xl
+    - none
+  stroke_width:
+    default: '2'
+    values:
+    - '0'
+    - '0.5'
+    - '1'
+    - '1.5'
+    - '2'
+    - '2.5'
+    - '3'
+    - '3.5'
+    - '4'
+    - none
+  theme:
+    default: outline
+    values:
+    - outline
+    - solid

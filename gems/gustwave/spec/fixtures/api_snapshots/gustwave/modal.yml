@@ -1,0 +1,73 @@
+---
+status: alpha
+constructor:
+- 'id: (optional)'
+- 'size: (optional)'
+- 'placement: (optional)'
+- 'backdrop: (optional)'
+- 'dismissible: (optional)'
+- "**options"
+options:
+  action:
+    default: toggle
+    values:
+    - toggle
+    - show
+    - hide
+  backdrop:
+    default: dynamic
+    values:
+    - dynamic
+    - static
+  placement:
+    default: center
+    values:
+    - top-left
+    - top-center
+    - top-right
+    - center-left
+    - center
+    - center-right
+    - bottom-left
+    - bottom-center
+    - bottom-right
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - xl
+    - none
+parts:
+- content
+- dialog
+slots:
+  body:
+    many: false
+  footer:
+    many: false
+  header:
+    many: false
+methods:
+- body
+- body?
+- dismissible?
+- footer
+- footer?
+- header
+- header?
+- id
+- trigger_options
+- with_body
+- with_body_content
+- with_footer
+- with_footer_content
+- with_header
+- with_header_content
+class_methods:
+- trigger_options
+slot_builders:
+- build_slot_body
+- build_slot_footer
+- build_slot_header

@@ -1,0 +1,35 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'menu_id:'
+- 'trigger_event: (optional)'
+- 'delay: (optional)'
+- 'placement: (optional)'
+- 'offset_distance: (optional)'
+- 'offset_skidding: (optional)'
+- "**options"
+options:
+  placement:
+    default: bottom
+    values:
+    - auto
+    - auto-start
+    - auto-end
+    - top
+    - top-start
+    - top-end
+    - bottom
+    - bottom-start
+    - bottom-end
+    - right
+    - right-start
+    - right-end
+    - left
+    - left-start
+    - left-end
+  trigger_event:
+    default: click
+    values:
+    - click
+    - hover

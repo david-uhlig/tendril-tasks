@@ -1,0 +1,37 @@
+---
+status: alpha
+constructor:
+- 'src: (optional)'
+- 'alt: (optional)'
+- 'shape: (optional)'
+- 'size: (optional)'
+- 'border: (optional)'
+- 'tag: (optional)'
+- "**options"
+options:
+  border:
+    default: 'false'
+  shape:
+    default: round
+    values:
+    - round
+    - square
+    - none
+  size:
+    default: md
+    values:
+    - original
+    - xs
+    - sm
+    - md
+    - lg
+    - xl
+    - 2xl
+    - 3xl
+    - 4xl
+    - none
+  tag:
+    default: div
+    values:
+    - div
+    - span

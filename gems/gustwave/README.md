@@ -136,6 +136,8 @@ Read [docs/design.md](docs/design.md) before you add a component or change a com
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 
+The API snapshots in `spec/fixtures/api_snapshots` record each component's public and extension API, so every API change shows up in review. Run `UPDATE_API_SNAPSHOTS=1 bundle exec rspec spec/components/api_snapshot_spec.rb` to record an intended change. `spec/components/conventions_spec.rb` checks the conventions of [docs/design.md](docs/design.md#enforcement).
+
 ### Previewing components
 
 Start the host application in development and open `/lookbook` to browse every preview with its source, notes and params. Set the `theme` display option to `dark` to check the `dark:` variants.

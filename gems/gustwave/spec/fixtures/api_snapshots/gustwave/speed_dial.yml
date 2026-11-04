@@ -1,0 +1,69 @@
+---
+status: alpha
+constructor:
+- 'id: (optional)'
+- 'position: (optional)'
+- 'direction: (optional)'
+- 'trigger_event: (optional)'
+- 'shape: (optional)'
+- 'label_display: (optional)'
+- "**options"
+options:
+  direction:
+    default: up
+    values:
+    - up
+    - down
+    - left
+    - right
+    - none
+  label_display:
+    default: tooltip
+    values:
+    - tooltip
+    - inside
+    - outside
+  position:
+    default: bottom_right
+    values:
+    - none
+    - bottom_right
+    - bottom_left
+    - top_right
+    - top_left
+  shape:
+    default: round
+    values:
+    - round
+    - square
+  trigger_event:
+    default: hover
+    values:
+    - hover
+    - click
+derived:
+  default_direction:
+    from: position
+  label_side:
+    from: position
+parts:
+- menu
+slots:
+  actions:
+    many: true
+  trigger:
+    many: false
+methods:
+- actions
+- actions?
+- menu_id
+- trigger
+- trigger?
+- with_action
+- with_action_content
+- with_actions
+- with_trigger
+- with_trigger_content
+slot_builders:
+- build_slot_action
+- build_slot_trigger

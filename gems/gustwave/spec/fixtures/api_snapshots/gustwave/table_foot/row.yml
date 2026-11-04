@@ -1,0 +1,26 @@
+---
+status: alpha
+constructor:
+- "**options"
+parts:
+- cell
+- header_cell
+slots:
+  cells:
+    many: true
+    types:
+    - td
+    - th
+methods:
+- cells
+- cells?
+- with_cell
+- with_cell_content
+- with_cell_td
+- with_cell_td_content
+- with_cell_th
+- with_cell_th_content
+- with_cells
+slot_builders:
+- build_slot_cell_td
+- build_slot_cell_th

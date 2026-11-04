@@ -1,0 +1,36 @@
+---
+status: alpha
+constructor:
+- 'shape: (optional)'
+- "**options"
+options:
+  shape:
+    default: default
+    values:
+    - default
+    - trimmed
+    - squared
+    - none
+parts:
+- content_block
+- content_text
+- visual_svg
+- visual_text
+slots:
+  visual:
+    many: false
+    types:
+    - svg
+    - text
+methods:
+- visual
+- visual?
+- with_visual
+- with_visual_content
+- with_visual_svg
+- with_visual_svg_content
+- with_visual_text
+- with_visual_text_content
+slot_builders:
+- build_slot_visual_svg
+- build_slot_visual_text

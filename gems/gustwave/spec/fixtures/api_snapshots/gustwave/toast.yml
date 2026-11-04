@@ -1,0 +1,25 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'position: (optional)'
+- 'id: (optional)'
+- 'dismissible: (optional)'
+- 'auto_remove: (optional)'
+- "**options"
+options:
+  position:
+    default: none
+    values:
+    - top_left
+    - top_center
+    - top_right
+    - bottom_left
+    - bottom_center
+    - bottom_right
+    - none
+parts:
+- dismiss_button
+methods:
+- dismiss_button
+- dismissible?

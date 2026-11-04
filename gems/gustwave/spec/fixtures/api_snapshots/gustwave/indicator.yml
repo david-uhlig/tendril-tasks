@@ -1,0 +1,66 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'color: (optional)'
+- 'size: (optional)'
+- 'pulse: (optional)'
+- 'position: (optional)'
+- "**options"
+options:
+  color:
+    default: gray
+    values:
+    - gray
+    - dark
+    - blue
+    - green
+    - red
+    - purple
+    - indigo
+    - yellow
+    - teal
+    - white
+    - none
+  position:
+    default: none
+    values:
+    - top_left
+    - top_center
+    - top_right
+    - middle_left
+    - middle_center
+    - middle_right
+    - bottom_left
+    - bottom_center
+    - bottom_right
+    - top
+    - middle
+    - center
+    - bottom
+    - none
+  pulse:
+    default: 'false'
+  size:
+    default: sm
+    values:
+    - auto
+    - xs
+    - sm
+    - md
+    - lg
+    - xl
+    - 2xl
+    - none
+parts:
+- legend
+slots:
+  legend:
+    many: false
+methods:
+- legend
+- legend?
+- with_legend
+- with_legend_content
+slot_builders:
+- build_slot_legend

@@ -1,0 +1,35 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'id:'
+- 'content_for: (optional)'
+- 'tag: (optional)'
+- "**options"
+options:
+  tag:
+    default: div
+    values:
+    - div
+    - nav
+    - section
+parts:
+- footer
+- header
+slots:
+  footer:
+    many: false
+  header:
+    many: false
+methods:
+- footer
+- footer?
+- header
+- header?
+- with_footer
+- with_footer_content
+- with_header
+- with_header_content
+slot_builders:
+- build_slot_footer
+- build_slot_header

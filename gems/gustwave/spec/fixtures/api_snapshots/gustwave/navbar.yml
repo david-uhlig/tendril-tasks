@@ -1,0 +1,55 @@
+---
+status: alpha
+constructor:
+- 'menu_id: (optional)'
+- 'sticky: (optional)'
+- 'solid: (optional)'
+- "**options"
+options:
+  solid:
+    default: 'false'
+  sticky:
+    default: 'false'
+parts:
+- actions
+- brand
+- container
+- list
+- menu
+- toggle
+slots:
+  actions:
+    many: false
+  brand:
+    many: false
+  items:
+    many: true
+    types:
+    - generic
+    - link
+methods:
+- actions
+- actions?
+- brand
+- brand?
+- configure_container
+- configure_menu
+- items
+- items?
+- menu_id
+- with_actions
+- with_actions_content
+- with_brand
+- with_brand_content
+- with_item
+- with_item_content
+- with_item_generic
+- with_item_generic_content
+- with_item_link
+- with_item_link_content
+- with_items
+slot_builders:
+- build_slot_actions
+- build_slot_brand
+- build_slot_item_generic
+- build_slot_item_link

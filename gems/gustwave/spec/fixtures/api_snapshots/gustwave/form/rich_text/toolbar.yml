@@ -1,0 +1,12 @@
+---
+status: alpha
+constructor:
+- 'tag: (optional)'
+- "**options"
+options:
+  tag:
+    default: div
+    values:
+    - div
+    - trix-toolbar
+    - lexxy-toolbar

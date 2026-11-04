@@ -91,7 +91,7 @@ Symbol keywords such as `icon:` and `trailing_icon:` are allowed as **shorthand 
 
 ### Styling a part
 
-Use **`<part>_options:`**: a hash of HTML attributes for a declared `part`, merged with `configure_html_attributes`, so caller classes win conflicts. It works at construction, and slot setters forward it, as in `timeline.with_item(marker_options: { class: "..." })`. `class:` on a slot setter styles that slot's root element.
+Use **`<part>_options:`**: a hash of HTML attributes for a declared `part`, or the options of a component rendered for that element, like ModalHeader's `title_options:` for its `Gustwave::Heading`, merged with `configure_html_attributes`, so caller classes win conflicts. It works at construction, and slot setters forward it, as in `timeline.with_item(marker_options: { class: "..." })`. `class:` on a slot setter styles that slot's root element.
 
 Older components also use `configure_<part>` methods and `<part>_class:` keywords. Both are replaced by `<part>_options:`, after a deprecation (D1).
 
@@ -201,18 +201,18 @@ ViewComponent's guide prefers composition over inheritance. Gustwave uses three 
 
 ## Enforcement
 
-Convention specs, like the constructor spec, keep the rules from drifting. Their failure messages link to the rule in this document.
+Convention specs, like the constructor spec, keep the rules from drifting. Their failure messages name the rule and link to it in this document.
 
 - **Statuses** (`spec/components/component_status_spec.rb`). Every component's class docstring has exactly one `@status` tag with `alpha`, `beta`, `stable` or `deprecated`. A component tagged `deprecated` calls `Gustwave.deprecator.warn`.
+- **API snapshot** (`spec/components/api_snapshot_spec.rb`). Each component's status, constructor, options and their values, derived values, parts, slots and their types, public methods and slot builders are recorded in `spec/fixtures/api_snapshots`. Every API change then shows up in review as a fixture diff, and the failure message says what the change needs for the component's status: an upgrade note for alpha, and a deprecation before removing or renaming anything in beta or stable. Run with `UPDATE_API_SNAPSHOTS=1` to record an intended change. Internal options aren't recorded.
+- **Conventions** (`spec/components/conventions_spec.rb`), read off each component's declarations and source:
+  - A `<name>_options:` keyword names a declared part, or a component the component renders for that element. A `<name>_class:` keyword only names a state class a script swaps, never an element. There are no public `configure_<part>` methods.
+  - `icon:` and `trailing_icon:` keywords are shorthand for a slot callers can reach as well.
+  - Components that render `DismissButton` expose it as a `dismiss_button` slot. A `dismiss_button:` or `close_button:` keyword comes with the slot of the same name.
+  - Flowbite's trigger setting is `trigger_event`, as an option, a keyword and in `trigger_options`.
+  - A standalone sub-component requires its parent's ID as `<parent>_id:`.
 
-The rest are *planned*. Each will land with an allowlist of known exceptions that points to their `gustwave-design` issues.
-
-- **API snapshot.** Each component's status, keywords, options and values, slots and setters, and parts recorded in a YAML fixture, as `StyleSnapshots` does for classes. Every API change then shows up in review as a fixture diff, next to the status that says whether it needs a deprecation.
-- Every `<name>_options:` keyword names a declared part. A `<name>_class:` keyword only names a state class a script swaps, never an element.
-- `icon:` and `trailing_icon:` keywords only set a `Visuals` slot or a positional slot, never render an icon of their own.
-- Components that render `DismissButton` expose it as a `dismiss_button` slot. Overlay headers expose `close_button`.
-- A Flowbite `data-*-trigger` setting is always the keyword `trigger_event:`.
-- Standalone section components require their parent's `<parent>_id:`.
+The conventions spec lists components written before this document as known violations, each with its `gustwave-design` issue. That list only shrinks: once a component is fixed, the spec fails until its entry is removed. Findings that are fine for good, like `Tabs`' state classes (D5), are exceptions with their reason. Add neither for new code; follow the rule instead.
 
 ## Decisions
 

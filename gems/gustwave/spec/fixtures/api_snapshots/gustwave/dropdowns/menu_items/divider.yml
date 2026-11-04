@@ -1,0 +1,13 @@
+---
+status: alpha
+constructor:
+- 'tag: (optional)'
+- "**options"
+options:
+  tag:
+    default: div
+    values:
+    - div
+    - span
+parts:
+- flex_grow

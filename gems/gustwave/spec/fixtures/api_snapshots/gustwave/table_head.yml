@@ -1,0 +1,15 @@
+---
+status: alpha
+constructor:
+- "**options"
+slots:
+  columns:
+    many: true
+methods:
+- columns
+- columns?
+- with_column
+- with_column_content
+- with_columns
+slot_builders:
+- build_slot_column

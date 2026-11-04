@@ -1,0 +1,23 @@
+---
+status: alpha
+constructor:
+- 'orientation: (optional)'
+- "**options"
+options:
+  orientation:
+    default: vertical
+    values:
+    - vertical
+    - horizontal
+    - none
+slots:
+  items:
+    many: true
+methods:
+- items
+- items?
+- with_item
+- with_item_content
+- with_items
+slot_builders:
+- build_slot_item

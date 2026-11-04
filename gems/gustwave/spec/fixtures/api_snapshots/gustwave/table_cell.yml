@@ -1,0 +1,12 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'tag: (optional)'
+- "**options"
+options:
+  tag:
+    default: td
+    values:
+    - td
+    - th

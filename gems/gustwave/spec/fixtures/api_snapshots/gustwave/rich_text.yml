@@ -1,0 +1,5 @@
+---
+status: alpha
+constructor:
+- rich_text (optional)
+- "**options"

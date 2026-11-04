@@ -1,0 +1,12 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'href: (optional)'
+- 'icon: (optional)'
+- 'trailing_icon: (optional)'
+- "**options"
+parts:
+- flex_grow
+- leading_icon
+- trailing_icon

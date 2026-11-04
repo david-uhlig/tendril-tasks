@@ -1,0 +1,19 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'color: (optional)'
+- 'underline: (optional)'
+- "**options"
+options:
+  color:
+    default: default
+    values:
+    - default
+    - none
+  underline:
+    default: hover
+    values:
+    - hover
+    - always
+    - none

@@ -1,0 +1,21 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'size: (optional)'
+- "**options"
+options:
+  size:
+    default: md
+    values:
+    - xs
+    - sm
+    - md
+    - lg
+    - xl
+    - 2xl
+    - 3xl
+    - 4xl
+    - none
+parts:
+- text

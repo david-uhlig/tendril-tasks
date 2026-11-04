@@ -1,0 +1,37 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'position: (optional)'
+- 'floating: (optional)'
+- 'align: (optional)'
+- "**options"
+options:
+  align:
+    default: center
+    values:
+    - center
+    - start
+    - none
+  floating:
+    default: 'false'
+  position:
+    default: top
+    values:
+    - top
+    - bottom
+    - none
+parts:
+- body
+- dismiss_button
+slots:
+  dismiss_button:
+    many: false
+methods:
+- dismiss_button
+- dismiss_button?
+- id
+- with_dismiss_button
+- with_dismiss_button_content
+slot_builders:
+- build_slot_dismiss_button

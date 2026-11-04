@@ -1,0 +1,43 @@
+---
+status: alpha
+constructor:
+- 'device: (optional)'
+- 'color: (optional)'
+- "**options"
+options:
+  color:
+    default: dark
+    values:
+    - dark
+    - light
+    - none
+  device:
+    default: phone
+    values:
+    - phone
+    - iphone
+    - android
+    - tablet
+    - laptop
+    - desktop
+    - smartwatch
+    - none
+derived:
+  elements:
+    from: device
+parts:
+- action_button
+- chin
+- crown
+- crown_button
+- frame
+- keyboard
+- keyboard_notch
+- notch
+- power_button
+- screen
+- stand
+- strap_bottom
+- strap_top
+- volume_down_button
+- volume_up_button

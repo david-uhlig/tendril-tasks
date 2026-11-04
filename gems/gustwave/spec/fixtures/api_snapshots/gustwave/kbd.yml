@@ -1,0 +1,70 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- "**options"
+derived:
+  indicator_size:
+    from: size
+parts:
+- visual
+slots:
+  leading_visuals:
+    many: true
+    types:
+    - icon
+    - image
+    - indicator
+    - renderable
+    - svg
+  trailing_visuals:
+    many: true
+    types:
+    - icon
+    - image
+    - indicator
+    - renderable
+    - svg
+methods:
+- leading_visuals
+- leading_visuals?
+- trailing_visuals
+- trailing_visuals?
+- with_icon
+- with_leading_visual
+- with_leading_visual_content
+- with_leading_visual_icon
+- with_leading_visual_icon_content
+- with_leading_visual_image
+- with_leading_visual_image_content
+- with_leading_visual_indicator
+- with_leading_visual_indicator_content
+- with_leading_visual_renderable
+- with_leading_visual_renderable_content
+- with_leading_visual_svg
+- with_leading_visual_svg_content
+- with_leading_visuals
+- with_trailing_visual
+- with_trailing_visual_content
+- with_trailing_visual_icon
+- with_trailing_visual_icon_content
+- with_trailing_visual_image
+- with_trailing_visual_image_content
+- with_trailing_visual_indicator
+- with_trailing_visual_indicator_content
+- with_trailing_visual_renderable
+- with_trailing_visual_renderable_content
+- with_trailing_visual_svg
+- with_trailing_visual_svg_content
+- with_trailing_visuals
+slot_builders:
+- build_slot_leading_visual_icon
+- build_slot_leading_visual_image
+- build_slot_leading_visual_indicator
+- build_slot_leading_visual_renderable
+- build_slot_leading_visual_svg
+- build_slot_trailing_visual_icon
+- build_slot_trailing_visual_image
+- build_slot_trailing_visual_indicator
+- build_slot_trailing_visual_renderable
+- build_slot_trailing_visual_svg

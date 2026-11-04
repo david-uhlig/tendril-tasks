@@ -1,0 +1,35 @@
+---
+status: alpha
+constructor:
+- "**options"
+slots:
+  body:
+    many: false
+  caption:
+    many: false
+  foot:
+    many: false
+  head:
+    many: false
+methods:
+- body
+- body?
+- caption
+- caption?
+- foot
+- foot?
+- head
+- head?
+- with_body
+- with_body_content
+- with_caption
+- with_caption_content
+- with_foot
+- with_foot_content
+- with_head
+- with_head_content
+slot_builders:
+- build_slot_body
+- build_slot_caption
+- build_slot_foot
+- build_slot_head
