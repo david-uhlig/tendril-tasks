@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Green buttons are darker, disabled buttons are paler, and bordered buttons are slightly taller, matching Flowbite.
 - Icons in buttons are smaller, matching Flowbite, so buttons with an icon are slightly narrower.
 - Made smaller headings bold to match the rest of the heading scale.
+- Upgrade dependencies: Ruby 4.0.9, Rails 8.1.4.1, ViewComponent 4.22.0, and other gems and npm packages.
 
 ## [0.8.0] - 2026-10-13
 
