@@ -106,7 +106,7 @@ run = ["npx herb-lint --fix --log-level=error", "npx herb-format"]
 # unrelated builds.
 [tasks."lint:links"]
 description = "Style: Check that links in the Markdown docs resolve"
-run = "lychee --no-progress --exclude-loopback README.md CHANGELOG.md RELEASING.md CODE_OF_CONDUCT.md .self-hosting gems/*/README.md"
+run = "lychee --no-progress --exclude-loopback README.md CHANGELOG.md RELEASING.md CODE_OF_CONDUCT.md .self-hosting gems/*/README.md gems/*/AGENTS.md gems/*/docs/*.md"
 
 # Not part of CI: partials rendered by Rails and Devise internally, e.g.
 # `active_storage/blobs/_blob`, are always reported as unused.

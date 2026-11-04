@@ -2,7 +2,7 @@
 
 Gustwave is an unofficial implementation of the [Flowbite](https://flowbite.com/docs/) UI library in [ViewComponent](https://viewcomponent.org/). It only implements Flowbite's open source components.
 
-Gustwave is developed inside Tendril Tasks as a path gem and will move to its own repository once its API settles.
+Gustwave isn't published yet. It's used as a path gem and will move to its own repository once its API settles.
 
 ## Setup
 
@@ -113,9 +113,24 @@ In development and test, an unknown option, value, part or theme raises an error
 config.gustwave.strict = true
 ```
 
+## Component status
+
+Every component has a status that says how much its API may change:
+
+- **Alpha:** may change in any minor release. Every change comes with an upgrade note.
+- **Beta:** the API has settled. Anything removed is deprecated one minor release first.
+- **Stable:** like beta while Gustwave is at 0.x. From 1.0, removals only come in a major release.
+- **Deprecated:** logs a warning and is removed in the next minor release.
+
+Patch releases only contain fixes. Statuses are being introduced; until a component's docs show one, treat it as alpha. When a component moves up, and when it's ready to, is described under [Component lifecycle](docs/design.md#component-lifecycle).
+
 ## Development
 
-The specs run against a minimal Rails application in `spec/dummy`. From the Tendril Tasks root, run `mise run test:gustwave`, or `bundle exec rspec` in `gems/gustwave`.
+The specs run against a minimal Rails application in `spec/dummy`. Run `bundle exec rspec` in the gem's directory.
+
+### Designing components
+
+Read [docs/design.md](docs/design.md) before you add a component or change a component's API. It decides how a Flowbite pattern is split into components, options, slots and block content, which conventions recurring parts follow, and how components move from alpha to stable. Lookbook shows it under "Component design". [AGENTS.md](AGENTS.md) sums it up for coding agents.
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 
