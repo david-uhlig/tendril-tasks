@@ -14,7 +14,8 @@ module Gustwave
       #   - +dropdown+ (Dropdown)
       # - +footer+ (any HTML markup)
       #
-      # Block content gets ignored.
+      # Block content renders after the list items and before the footer. Blank block content,
+      # such as a block that only sets slots, renders nothing.
       class List < Gustwave::Dropdowns::Menus::Base
         # The HTML tag of the list, see +configure_list+
         option :list_tag, default: :ul, values: %i[ul ol]
@@ -35,14 +36,14 @@ module Gustwave
         # @param tag [Symbol] HTML tag to use for the dropdown menu. Default: +div+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element. Call +configure_list+ to configure the list element (optional).
         def initialize(id:, content_for: nil, tag: DEFAULT, **options)
-          super(text, content_for:, tag:, id:, **options)
+          super(nil, content_for:, tag:, id:, **options)
           configure_list
         end
 
         def call
           content_for_wrapper do
             content_tag menu_tag, **config do
-              safe_join([ header, list_with_items, footer ])
+              safe_join([ header, list_with_items, content.presence, footer ])
             end
           end
         end

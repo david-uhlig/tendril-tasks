@@ -45,7 +45,7 @@ module Gustwave
 
     # @param options [Hash] additional HTML attributes and component options for the Gustwave::Icon component.
     def configure_icon(**options)
-      @icon_config = { size: @size, position: :standalone, aria_hidden: true }
+      @icon_config = { size: @size, aria_hidden: true }
                        .merge(attributes_for(:icon, options))
     end
 

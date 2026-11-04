@@ -8,33 +8,12 @@ class Modal::DialogComponent < TendrilTasks::Component
   renders_one :heading, ->(text) { text }
 
   renders_many :buttons, ->(**options) {
-    Gustwave::Button.for(options[:theme]).new(data: { "modal-hide": id }, **options.except(:theme)) do
+    Gustwave::Button.for(options[:theme]).new(**Gustwave::Modal.trigger_options(id, action: :hide), **options.except(:theme)) do
       content
     end
   }
 
-  def initialize(id, form_path: nil, form_method: :get)
+  def initialize(id)
     @id = id
-    @form_path = form_path
-    @form_method = form_method
-  end
-
-  private
-
-  def dialog_buttons
-    classes = class_merge(Modal::ShellComponent::FOOTER_CLASS, "md:grid-cols-#{buttons.size}")
-    if @form_path.present?
-      form_tag @form_path, method: @form_method, class: classes do
-        buttons.each do |button|
-          concat button
-        end
-      end
-    else
-      tag.div class: classes do
-        buttons.each do |button|
-          concat button
-        end
-      end
-    end
   end
 end

@@ -1,8 +1,8 @@
 module Gustwave
   class IndicatorPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/indicator/colors
+    # Flowbite's default example: one dot per color. Flowbite's palette has no white dot.
     def colors
-      render_with_template(locals: { colors: Gustwave::Indicator.option_values(:color).excluding(:none) })
+      render_with_template(locals: { colors: Gustwave::Indicator.option_values(:color).excluding(:none, :white) })
     end
 
     def sizes
@@ -13,14 +13,39 @@ module Gustwave
       render Gustwave::Indicator.new(color: :green, size: :md, pulse: true)
     end
 
-    def with_text
-      render Gustwave::Indicator.new("12", color: :red, size: :lg)
+    # Flowbite's legend example.
+    def legend
+      render_with_template
     end
 
-    def with_legend
-      render Gustwave::Indicator.new(color: :green) do |indicator|
-        indicator.with_legend "Online"
-      end
+    # Flowbite's count example: a count on the corner of a button.
+    def count
+      render_with_template
+    end
+
+    # Flowbite's status example: a presence dot on the corner of an avatar.
+    def status
+      render_with_template
+    end
+
+    # Flowbite's badge example: a dot inside a badge. Its 8px dot has no size of its own, so it sets one.
+    def badge
+      render_with_template
+    end
+
+    # Flowbite's loading example: a pulsing pill while a card loads.
+    def loading
+      render_with_template
+    end
+
+    # Flowbite's spinner example: a spinner while a card loads.
+    def spinner
+      render_with_template
+    end
+
+    # Flowbite's position example: an indicator at each of the nine positions.
+    def position
+      render_with_template
     end
 
     # The indicator sits on the corner of a +relative+ parent.

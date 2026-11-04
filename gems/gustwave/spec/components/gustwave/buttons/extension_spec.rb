@@ -38,7 +38,9 @@ RSpec.describe "Extending Gustwave::Buttons::Base", type: :component do
         button.with_leading_visual_badge("new")
       end
 
-      expect(rendered_content).to have_selector("mark.badge.h-6.w-auto[aria-hidden='true']", text: "new")
+      # Inline keeps its own visual sizes, which are not Base's
+      visual_classes = theme_class <= Gustwave::Buttons::Inline ? "h-6.w-auto" : "h-5.w-auto.-mx-0\\.5"
+      expect(rendered_content).to have_selector("mark.badge.#{visual_classes}[aria-hidden='true']", text: "new")
       expect(theme_class.extensible_slots[:leading_visuals][:types]).to include(:badge)
     end
 

@@ -1,7 +1,5 @@
 module Gustwave
   class IconPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/icon/gallery
-    #
     # Every icon Gustwave ships, by theme, with the name to pass to Icon.
     def gallery
       icons = Gustwave::Icon.option_values(:theme).to_h do |theme|

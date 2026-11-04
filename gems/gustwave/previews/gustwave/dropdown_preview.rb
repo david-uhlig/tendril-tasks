@@ -1,7 +1,17 @@
 module Gustwave
   class DropdownPreview < ViewComponent::Preview
-    # http://localhost:3030/rails/view_components/gustwave/dropdown/default
     def default
+      render Gustwave::Dropdown.new("Options") do |dropdown|
+        dropdown.with_menu_list do |menu|
+          menu.with_item_link "Dashboard", href: "#"
+          menu.with_item_link "Settings", href: "#"
+          menu.with_item_link "Earnings", href: "#"
+          menu.with_item_link "Sign out", href: "#"
+        end
+      end
+    end
+
+    def with_icons_and_divider
       render Gustwave::Dropdown.new("Options") do |dropdown|
         dropdown.with_menu_list do |menu|
           menu.with_item_link "Dashboard", href: "#"
@@ -13,18 +23,9 @@ module Gustwave
     end
 
     def with_header_and_footer
-      render Gustwave::Dropdown.new("Account", icon: :user_settings) do |dropdown|
-        dropdown.with_menu_list do |menu|
-          menu.with_header "Signed in as Ada"
-          menu.with_item_link "Profile", href: "#"
-          menu.with_item_link "Settings", href: "#"
-          menu.with_footer "Version 1.0"
-        end
-      end
+      render_with_template
     end
 
-    # A submenu takes its label from the block, since a +text+ argument would
-    # skip the block that fills the menu.
     def with_submenu
       render_with_template
     end
@@ -32,8 +33,10 @@ module Gustwave
     def opens_on_hover
       render Gustwave::Dropdown.new("Hover me", trigger_event: :hover) do |dropdown|
         dropdown.with_menu_list do |menu|
-          menu.with_item_link "First", href: "#"
-          menu.with_item_link "Second", href: "#"
+          menu.with_item_link "Dashboard", href: "#"
+          menu.with_item_link "Settings", href: "#"
+          menu.with_item_link "Earnings", href: "#"
+          menu.with_item_link "Sign out", href: "#"
         end
       end
     end

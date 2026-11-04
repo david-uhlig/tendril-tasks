@@ -16,6 +16,22 @@ RSpec.describe Gustwave::Buttons::Inline, type: :component do
     expect(rendered_content).not_to have_selector("button.p-2")
   end
 
+  it "sizes the icon at md without Base's negative margin" do
+    render_inline(described_class.new("Go", size: :md)) { |button| button.with_leading_visual_icon :check }
+
+    icon_classes = page.find("button svg")["class"].split
+    expect(icon_classes).to include("h-5")
+    expect(icon_classes).not_to include("-mx-0.5")
+  end
+
+  it "sizes the icon at xl without Base's negative margin" do
+    render_inline(described_class.new("Go", size: :xl)) { |button| button.with_leading_visual_icon :check }
+
+    icon_classes = page.find("button svg")["class"].split
+    expect(icon_classes).to include("h-7")
+    expect(icon_classes).not_to include("-my-0.5")
+  end
+
   it "sizes its visuals for the 3xs size" do
     render_inline(described_class.new("Go", size: :"3xs")) { |button| button.with_leading_visual_icon :check }
 

@@ -81,5 +81,20 @@ RSpec.describe Gustwave::Toast, type: :component do
 
       expect(page).not_to have_selector("button")
     end
+
+    it "keeps the button at the end of the row" do
+      render_inline(described_class.new("text"))
+
+      expect(page).to have_selector("button.ms-auto.shrink-0")
+    end
+
+    it "renders the button once where the block places it" do
+      render_inline(described_class.new(id: "my-toast")) do |toast|
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).to have_selector("div#my-toast > div.row > button[data-dismiss-target='#my-toast']")
+      expect(page).to have_selector("button", count: 1)
+    end
   end
 end

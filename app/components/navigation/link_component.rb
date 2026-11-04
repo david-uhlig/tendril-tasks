@@ -23,26 +23,14 @@ class Navigation::LinkComponent < TendrilTasks::Component
     @active = active
   end
 
-  # Renders the link component.
+  # Renders the link as a Gustwave::Navbars::Link, which sets the active classes and aria-current.
   #
   # @return [String] HTML-safe string of the link element.
   def call
-    link_to link_label, @href, html_options
+    render Gustwave::Navbars::Link.new(link_label, href: @href, active: active?)
   end
 
   private
-
-  # Generates the HTML options for the link.
-  #
-  # Adds the correct CSS class based on the active state and sets the aria-current attribute if the link is active.
-  #
-  # @return [Hash] The HTML options for the `link_to` helper.
-  def html_options
-    {
-      class: active? ? "nav-link--active" : "nav-link",
-      aria: active? ? { current: "page" } : {}
-    }
-  end
 
   # Determines if the link should be marked as active.
   #

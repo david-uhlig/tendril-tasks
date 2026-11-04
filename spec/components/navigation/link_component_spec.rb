@@ -16,8 +16,13 @@ RSpec.describe Navigation::LinkComponent, type: :component do
       expect(page).to have_selector("a[href='#']", count: 1)
     end
 
-    it "renders css class" do
-      expect(page).to have_css("a.nav-link")
+    it "renders inactive classes" do
+      expect(page).to have_css("a[class~='text-gray-900']")
+      expect(page).to have_no_css("a[class~='md:text-blue-700']")
+    end
+
+    it "renders no aria-current" do
+      expect(page).to have_no_css("a[aria-current]")
     end
   end
 
@@ -56,8 +61,9 @@ RSpec.describe Navigation::LinkComponent, type: :component do
       end
     end
 
-    it "renders active css class" do
-      expect(page).to have_css("a.nav-link--active")
+    it "renders active classes" do
+      expect(page).to have_css("a[class~='md:text-blue-700']")
+      expect(page).to have_no_css("a[class~='text-gray-900']")
     end
 
     it "renders accessibility attributes" do
@@ -73,8 +79,9 @@ RSpec.describe Navigation::LinkComponent, type: :component do
       end
     end
 
-    it "renders active css class" do
-      expect(page).to have_css("a.nav-link--active")
+    it "renders active classes" do
+      expect(page).to have_css("a[class~='md:text-blue-700']")
+      expect(page).to have_no_css("a[class~='text-gray-900']")
     end
 
     it "renders accessibility attributes" do

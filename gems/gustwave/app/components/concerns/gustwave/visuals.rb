@@ -44,7 +44,7 @@ module Gustwave
   # - +size:+ [Symbol] the component's size, e.g. +:none+, +:xs+, +:sm+, +:md+, +:lg+ or +:xl+.
   # - +html_attributes:+ [Hash] the attributes the built-in visuals get:
   #   +aria: { hidden: true }+ and the size classes for +size+, e.g.
-  #   +h-6 w-auto+ for +:lg+.
+  #   +h-5 w-auto -mx-0.5+ for +:lg+.
   # The component may add keys later, so accept unknown ones with +**+.
   # Components without +apply_slot_context+ render unchanged.
   #
@@ -96,7 +96,6 @@ module Gustwave
           config = configure_visual_html_attributes(
             options,
             theme:,
-            position: :standalone,
           )
           Gustwave::Icon.new(name, **config)
         },
@@ -122,8 +121,7 @@ module Gustwave
         icon: ->(name, theme: :outline, **options) {
           config = configure_visual_html_attributes(
             options,
-            theme:,
-            position: :standalone
+            theme:
           )
           Gustwave::Icon.new(name, **config)
         },

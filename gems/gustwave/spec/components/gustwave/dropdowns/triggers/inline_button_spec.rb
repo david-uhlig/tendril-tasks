@@ -35,7 +35,7 @@ RSpec.describe Gustwave::Dropdowns::Triggers::InlineButton, type: :component do
     end
 
     it "renders a trailing chevron pointing down" do
-      expect(rendered_content).to have_selector("button > svg:last-child > path[d='#{icon_path_data.call(:chevron_down)}']")
+      expect(rendered_content).to have_selector("button > svg:last-child > path[d='#{icon_path_data.call(:chevron_down_compact)}']")
     end
   end
 

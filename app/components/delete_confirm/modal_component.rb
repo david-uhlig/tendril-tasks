@@ -20,7 +20,7 @@ module DeleteConfirm
       Gustwave::Buttons::Default
         .new(color: :light,
              class: "w-full lg:w-auto",
-             "data-modal-hide": @id,
+             **Gustwave::Modal.trigger_options(@id, action: :hide),
              type: :reset)
         .with_content(text)
     end
@@ -29,8 +29,9 @@ module DeleteConfirm
       Gustwave::Buttons::Default
         .new(type: :submit,
              color: :red,
-             class: "w-full lg:w-auto disabled:opacity-50",
-             data: { "modal-hide": @id, "cooldown-target": "button" })
+             class: "w-full lg:w-auto",
+             **Gustwave::Modal.trigger_options(@id, action: :hide),
+             data: { "cooldown-target": "button" })
         .with_content(tag.span(text, data: { "cooldown-target": "label" }))
     end
 

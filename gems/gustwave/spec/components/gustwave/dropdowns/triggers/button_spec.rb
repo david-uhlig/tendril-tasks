@@ -31,16 +31,16 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
     end
 
     it "renders a trailing chevron pointing down" do
-      expect(rendered_content).to have_selector("button > svg > path[d='#{icon_path_data.call(:chevron_down)}']")
+      expect(rendered_content).to have_selector("button > svg > path[d='#{icon_path_data.call(:chevron_down_compact)}']")
     end
   end
 
   context "with placement" do
     {
-      top: :chevron_up,
-      bottom: :chevron_down,
-      left: :chevron_left,
-      right: :chevron_right
+      top: :chevron_up_compact,
+      bottom: :chevron_down_compact,
+      left: :chevron_left_compact,
+      right: :chevron_right_compact
     }.each do |placement, icon|
       it "renders the #{icon} chevron for the #{placement} placement" do
         render_inline(described_class.new(menu_id: "menu", placement:)) { "content" }
@@ -52,7 +52,57 @@ RSpec.describe Gustwave::Dropdowns::Triggers::Button, type: :component do
     it "renders the top chevron for the top_start placement" do
       render_inline(described_class.new(menu_id: "menu", placement: :top_start)) { "content" }
 
-      expect(page).to have_selector("button > svg > path[d='#{icon_path_data.call(:chevron_up)}']")
+      expect(page).to have_selector("button > svg > path[d='#{icon_path_data.call(:chevron_up_compact)}']")
+    end
+  end
+
+  context "with the automatic chevron" do
+    {
+      top: "0 0 10 6",
+      bottom: "0 0 10 6",
+      left: "0 0 6 10",
+      right: "0 0 6 10"
+    }.each do |placement, view_box|
+      it "uses the compact #{placement} chevron" do
+        render_inline(described_class.new(menu_id: "menu", placement:)) { "content" }
+
+        expect(page).to have_selector("button > svg.h-2\\.5.w-2\\.5")
+        expect(rendered_content).to include(%(viewBox="#{view_box}"))
+        expect(rendered_content).not_to include(%(viewBox="0 0 24 24"))
+      end
+    end
+
+    it "trails the text" do
+      render_inline(described_class.new("content", menu_id: "menu"))
+
+      expect(page).to have_selector("button > svg.ms-1:last-child")
+    end
+
+    it "spaces the trailing chevron with the button gap and no negative margin" do
+      render_inline(described_class.new("content", menu_id: "menu"))
+
+      chevron_classes = page.find("button > svg:last-child")["class"].split
+      expect(chevron_classes).to include("h-2.5", "mx-0", "ms-1")
+      expect(chevron_classes).not_to include("-mx-0.5")
+    end
+
+    it "leads the text for a menu on the left" do
+      render_inline(described_class.new("content", menu_id: "menu", placement: :left))
+
+      expect(page).to have_selector("button > svg.me-1:first-child")
+    end
+
+    it "trails the text for a menu on the left when an icon leads" do
+      render_inline(described_class.new("content", menu_id: "menu", placement: :left, icon: :check))
+
+      expect(page).to have_selector("button > svg:first-child > path[d='#{icon_path_data.call(:check)}']")
+      expect(page).to have_selector("button > svg.ms-1:last-child > path[d='#{icon_path_data.call(:chevron_left_compact)}']")
+    end
+
+    it "renders a custom trailing icon as given" do
+      render_inline(described_class.new(menu_id: "menu", trailing_icon: :chevron_down))
+
+      expect(rendered_content).to include(%(viewBox="0 0 24 24"))
     end
   end
 

@@ -19,7 +19,7 @@ RSpec.describe "User withdraws application after grace period and reapplies",
     login_as(user)
     visit task_path(application.task)
     click_on "Meldung zurückziehen"
-    within("section#confirm-application-withdrawal-#{application.task.id}") do
+    within("div#confirm-application-withdrawal-#{application.task.id}") do
       click_on "Meldung zurückziehen"
     end
   end

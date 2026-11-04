@@ -111,7 +111,7 @@ module Gustwave
     # @param theme [Symbol] The icon theme. Defaults to +:solid+.
     # @param options [Hash] Additional HTML options passed to the icon component.
     renders_one_extensible :icon, ->(name = :info_circle, label: nil, theme: :solid, **options) {
-      icon = Gustwave::Icon.new(name, theme:, size: :sm, position: :standalone, **attributes_for(:icon, options))
+      icon = Gustwave::Icon.new(name, theme:, size: :sm, **attributes_for(:icon, options))
       safe_join([ render(icon), sr_only(label) ].compact)
     }
 

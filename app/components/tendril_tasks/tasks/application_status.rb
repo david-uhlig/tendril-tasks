@@ -46,7 +46,7 @@ module TendrilTasks
       private
 
       def render_icon_for(status)
-        render Gustwave::Icon.new(derived_value(:icon, status:), position: :standalone)
+        render Gustwave::Icon.new(derived_value(:icon, status:))
       end
     end
   end

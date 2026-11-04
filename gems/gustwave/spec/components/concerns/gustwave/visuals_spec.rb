@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Visuals, type: :component do
-  [ Gustwave::Buttons::Base, Gustwave::Badge ].each do |component_class|
+  { Gustwave::Buttons::Base => "h-5", Gustwave::Badge => "h-5" }.each do |component_class, lg_visual_height|
     describe component_class do
       it "declares the visual slots" do
         expect(component_class.extensible_slots.keys).to include(:leading_visuals, :trailing_visuals)
@@ -10,7 +10,7 @@ RSpec.describe Gustwave::Visuals, type: :component do
       it "sizes visuals by the size variant" do
         render_inline(component_class.new("Go", size: :lg)) { |component| component.with_leading_visual_icon :close }
 
-        expect(rendered_content).to have_selector("svg.h-6.w-auto[aria-hidden='true']")
+        expect(rendered_content).to have_selector("svg.#{lg_visual_height}.w-auto[aria-hidden='true']")
       end
 
       it "sizes indicators by the indicator_size derived value" do

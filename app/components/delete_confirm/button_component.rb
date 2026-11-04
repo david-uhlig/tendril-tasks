@@ -22,8 +22,11 @@ module DeleteConfirm
       options[:size] ||= :lg
       options[:class] ||= "w-full"
       options[:type] ||= :button
-      options[:data] = { "modal-target": @target_modal_id, "modal-toggle": @target_modal_id }.merge(options.delete(:data) || {})
-      options
+      # A stable id keeps Turbo's morph from reusing this toggle as another
+      # button: Flowbite's click listener would survive and open the modal.
+      options[:id] ||= "#{@target_modal_id}-toggle"
+      options[:data] = options.delete(:data) || {}
+      Gustwave::Modal.trigger_options(@target_modal_id, **options)
     end
   end
 end

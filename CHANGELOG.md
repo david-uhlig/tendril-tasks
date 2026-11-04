@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `bin/backup` backs up the database and uploaded files to an archive while the app keeps running. See "Backup and restore" in `.self-hosting/README.md` for how to create backups with Docker Compose or Kamal and how to restore them, also after upgrading.
+
 ### Changed
 - "New" next to the initiative in the task form opens a modal to create the initiative, instead of leaving the page. The task's entries are kept, and the new initiative is selected. It's published by default, and you become its contact person.
+- Outline icons are drawn with a slightly thicker line, matching Flowbite's stroke width of 2.
+- Green buttons are darker, disabled buttons are paler, and bordered buttons are slightly taller, matching Flowbite.
+- Icons in buttons are smaller, matching Flowbite, so buttons with an icon are slightly narrower.
+- Made smaller headings bold to match the rest of the heading scale.
 
 ## [0.8.0] - 2026-10-13
 

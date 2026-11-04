@@ -38,6 +38,15 @@ RSpec.describe Gustwave::Table, type: :component do
       end
       expect(rendered_content).to have_selector("tbody", text: "body_content")
     end
+
+    it "renders a tfoot tag after the tbody when using with_foot" do
+      render_inline(described_class.new) do |component|
+        component.with_body { "body_content" }
+        component.with_foot { "foot_content" }
+      end
+      expect(rendered_content).to have_selector("tfoot", text: "foot_content")
+      expect(rendered_content).to match(/body_content.*foot_content/)
+    end
   end
 
   context "with slotted content and block content" do

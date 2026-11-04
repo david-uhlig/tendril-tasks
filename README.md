@@ -27,7 +27,7 @@ The application runs in a single Docker container and can be deployed easily wit
 
 ## Self-hosting
 
-You can deploy Tendril Tasks with [Kamal](https://kamal-deploy.org/) or run it with Docker Compose. See [Self-hosting Tendril Tasks](.self-hosting/README.md) for instructions.
+You can deploy Tendril Tasks with [Kamal](https://kamal-deploy.org/) or run it with Docker Compose. See [Self-hosting Tendril Tasks](.self-hosting/README.md) for instructions, including how to back up and restore your data.
 
 ## Development
 

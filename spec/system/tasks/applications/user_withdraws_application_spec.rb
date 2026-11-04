@@ -14,7 +14,7 @@ RSpec.describe "User withdraws application", type: :system, js: true do
       click_on "Meldung zurückziehen"
       expect(page).to have_content("Bist du sicher, dass du kein Interesse mehr an dieser Aufgabe hast?")
 
-      within("section#confirm-application-withdrawal-1") do
+      within("div#confirm-application-withdrawal-1") do
         click_on "Meldung zurückziehen"
       end
 

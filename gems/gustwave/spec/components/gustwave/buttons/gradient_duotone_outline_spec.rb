@@ -21,6 +21,20 @@ RSpec.describe Gustwave::Buttons::GradientDuotoneOutline, type: :component do
     expect(inner.text).to match(/Save.*3/m)
   end
 
+  it "spaces the label and the icon of the inner part with gap-2" do
+    render_inline(described_class.new("Save")) { |button| button.with_leading_visual_icon :check }
+
+    inner_classes = page.find("button > span")["class"].split
+    expect(inner_classes).to include("gap-2")
+    expect(inner_classes).not_to include("gap-1.5")
+  end
+
+  it "sizes the icon at md to Flowbite's icon box" do
+    render_inline(described_class.new("Save", size: :md)) { |button| button.with_leading_visual_icon :check }
+
+    expect(page).to have_selector("button > span > svg.h-4\\.5")
+  end
+
   it "forwards the tag to the button" do
     render_inline(described_class.new("Go", tag: :a, href: "#"))
 

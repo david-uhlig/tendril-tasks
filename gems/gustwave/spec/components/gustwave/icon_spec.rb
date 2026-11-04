@@ -42,10 +42,10 @@ RSpec.describe Gustwave::Icon, type: :component do
     expect(rendered_content).to have_selector("svg.h-4")
   end
 
-  it "renders the leading position margin by default" do
+  it "renders no margin by default" do
     render_inline(described_class.new(:home))
 
-    expect(rendered_content).to have_selector("svg.me-1\\.5")
+    expect(page.find("svg")[:class].split).not_to include(a_string_matching(/\Am[sexy]?-/))
   end
 
   it "renders the color" do
@@ -55,8 +55,8 @@ RSpec.describe Gustwave::Icon, type: :component do
   end
 
   it "renders the stroke width" do
-    render_inline(described_class.new(:home, stroke_width: "2"))
+    render_inline(described_class.new(:home, stroke_width: "3"))
 
-    expect(rendered_content).to have_selector("svg[class~='*:stroke-2']")
+    expect(rendered_content).to have_selector("svg[class~='*:stroke-[3px]']")
   end
 end

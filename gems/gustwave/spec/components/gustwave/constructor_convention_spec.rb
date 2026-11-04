@@ -12,6 +12,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
   # another method than the constructor.
   setups = {
     Gustwave::DismissButton => { args: [ "target" ] },
+    Gustwave::Drawer => { selected_elsewhere: %i[action edge] },
+    Gustwave::DrawerHeader => { kwargs: { drawer_id: "drawer" } },
     Gustwave::Dropdown => { forwards: %i[placement trigger_event] },
     Gustwave::Dropdowns::Menus::Base => { kwargs: { id: "menu" } },
     Gustwave::Dropdowns::Menus::Generic => { kwargs: { id: "menu" } },
@@ -21,6 +23,8 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Dropdowns::Triggers::Button => { kwargs: { menu_id: "menu" } },
     Gustwave::Dropdowns::Triggers::Generic => { kwargs: { menu_id: "menu" } },
     Gustwave::Dropdowns::Triggers::InlineButton => { kwargs: { menu_id: "menu" } },
+    Gustwave::SpeedDial => { derived_defaults: { direction: :default_direction } },
+    Gustwave::SpeedDials::Action => { args: [ "Label" ] },
     Gustwave::Form::RichText::Button => { args: [ :bold ] },
     Gustwave::Form::RichText::Lexxy::Button => { args: [ :bold ] },
     Gustwave::Form::RichText::Trix::Button => { args: [ :bold ] },
@@ -29,6 +33,10 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Heading => { derived_defaults: { size: :default_size } },
     Gustwave::Icon => { args: [ :close ] },
     Gustwave::IconToast => { forwards: %i[position] },
+    Gustwave::Modal => { selected_elsewhere: %i[action] },
+    Gustwave::ModalHeader => { kwargs: { modal_id: "modal" } },
+    Gustwave::Navbars::Link => { kwargs: { href: "#" } },
+    Gustwave::Pagination::Link => { kwargs: { href: "/" } },
     Gustwave::Popover => { selected_elsewhere: %i[placement trigger] },
     Gustwave::Spinner => { forwards: %i[size] },
     Gustwave::Tooltip => { selected_elsewhere: %i[placement trigger] }

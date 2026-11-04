@@ -29,13 +29,16 @@ module Gustwave
       variant :color, default: :base, values: { base: "" }
 
       # The +visual+ part sizes leading and trailing visuals to match the
-      # +text-*+ class of the button.
+      # +text-*+ class of the button. The icon boxes are 4px larger than
+      # Flowbite's, because Gustwave's icons leave a margin around their
+      # drawing. The negative margin keeps Flowbite's layout. Heights come from
+      # padding and line height, so a border adds to them as in Flowbite.
       variant :size, default: :md, values: {
-        xs: { root: "h-8 px-3 py-2 text-xs font-medium", visual: "h-4 w-auto" },
-        sm: { root: "h-9 px-3 py-2 text-sm font-medium", visual: "h-5 w-auto" },
-        md: { root: "h-10 px-5 py-2.5 text-sm font-medium", visual: "h-5 w-auto" },
-        lg: { root: "h-12 px-5 py-3 text-base font-medium", visual: "h-6 w-auto" },
-        xl: { root: "h-13 px-6 py-3.5 text-base font-medium", visual: "h-7 w-auto" }
+        xs: { root: "px-3 py-2 text-xs font-medium gap-2", visual: "h-4 w-auto -mx-0.5" },
+        sm: { root: "px-3 py-2 text-sm font-medium gap-2", visual: "h-4 w-auto -mx-0.5" },
+        md: { root: "px-5 py-2.5 text-sm font-medium gap-2", visual: "h-4.5 w-auto -mx-0.5" },
+        lg: { root: "px-5 py-3 text-base font-medium gap-2", visual: "h-5 w-auto -mx-0.5" },
+        xl: { root: "px-6 py-3.5 text-base font-medium gap-2", visual: "h-5 w-auto -mx-0.5" }
       }
 
       # The size of leading and trailing indicators per button size. Extend it
@@ -44,20 +47,22 @@ module Gustwave
         none: :none,
         xs: :sm,
         sm: :sm,
-        md: :md,
-        lg: :md,
-        xl: :lg
+        md: :lg,
+        lg: :lg,
+        xl: :xl
       }
 
       toggle :pill, "rounded-full"
 
-      # Set when no text or content block was given, to render a square button
+      # Set when no text or content block was given, to render a square button.
+      # Its +*:+ classes size the icon of an icon-only button, because the size
+      # variant's visual classes are for an icon beside text.
       toggle :visual_only, per: :size, internal: true, values: {
-        xs: "p-2",
-        sm: "p-2",
-        md: "p-2.5",
-        lg: "p-3",
-        xl: "p-3.5"
+        xs: "p-2 *:h-4 *:mx-0",
+        sm: "p-2 *:h-5 *:mx-0",
+        md: "p-2.5 *:h-5 *:mx-0",
+        lg: "p-3 *:h-6 *:mx-0",
+        xl: "p-3.5 *:h-7 *:mx-0"
       }
 
       # @param text [String, nil] text to display on the button. Takes precedence over block content.

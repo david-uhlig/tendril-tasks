@@ -8,10 +8,9 @@ module Gustwave
   # * The +caption+ slot renders a +<caption>+ HTML element
   # * The +head+ slot renders a +<thead>+ HTML element
   # * The +body+ slot renders a +<tbody>+ HTML element
+  # * The +foot+ slot renders a +<tfoot>+ HTML element
   #
   # Block content gets appended at the end of any provided slots.
-  #
-  # TODO implement foot slot
   class Table < Gustwave::Component
     base "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
 
@@ -21,6 +20,8 @@ module Gustwave
 
     renders_one_extensible :body, Gustwave::TableBody
 
+    renders_one_extensible :foot, Gustwave::TableFoot
+
     # @param options [Hash] additional options for the HTML tag.
     def initialize(**options)
       @config = attributes_for(options)
@@ -28,7 +29,7 @@ module Gustwave
 
     def call
       tag.table **config do
-        slots_and_content(caption, head, body)
+        slots_and_content(caption, head, body, foot)
       end
     end
 

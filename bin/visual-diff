@@ -3,23 +3,29 @@
 
 # Compares two sets of screenshots taken with `spec/visual/screenshots_spec.rb`
 # and writes an HTML report with side-by-side images and diff highlights.
-# Requires ImageMagick (`compare` and `convert`).
 #
 # Usage:
 #   bin/visual-diff <before-label> <after-label> [--fuzz=1%]
+#
+# Pixels count as changed when their root mean square difference across the
+# colour bands exceeds the fuzz, a percentage of the full colour range.
 #
 # Example:
 #   VISUAL_LABEL=before bundle exec rspec spec/visual
 #   VISUAL_LABEL=after bundle exec rspec spec/visual
 #   bin/visual-diff before after
 
+require_relative "../config/boot"
+
 require "cgi"
 require "fileutils"
-require "open3"
+require "vips"
 
 fuzz = ARGV.find { |arg| arg.start_with?("--fuzz=") }&.delete_prefix("--fuzz=") || "1%"
 before_label, after_label = ARGV.reject { |arg| arg.start_with?("--") }
 abort "Usage: bin/visual-diff <before-label> <after-label> [--fuzz=1%]" unless before_label && after_label
+abort "Invalid --fuzz, expected a percentage such as 1%: #{fuzz}" unless fuzz.match?(/\A\d+(\.\d+)?%\z/)
+threshold = fuzz.to_f / 100 * 255
 
 root = File.expand_path("../tmp/visual", __dir__)
 before_dir = File.join(root, before_label)
@@ -30,9 +36,16 @@ report_dir = File.join(root, "diff--#{before_label}--#{after_label}")
 FileUtils.rm_rf(report_dir)
 FileUtils.mkdir_p(report_dir)
 
-def dimensions(path)
-  out, = Open3.capture2("identify", "-format", "%w %h", path)
-  out.split.map(&:to_i)
+def load_image(path)
+  image = Vips::Image.new_from_file(path).colourspace(:srgb)
+  image.has_alpha? ? image.flatten(background: [ 255, 255, 255 ]) : image
+end
+
+# A mask of the pixels whose root mean square difference across the colour bands
+# exceeds the threshold.
+def changed_mask(before, after, threshold)
+  difference = before.cast(:float) - after.cast(:float)
+  (difference * difference).bandmean > threshold**2
 end
 
 names = (Dir.children(before_dir) | Dir.children(after_dir)).grep(/\.png\z/).sort
@@ -43,18 +56,23 @@ results = names.map do |name|
   next { name:, status: :missing_after } unless File.exist?(after)
 
   # Pad both images to the same size, so that pages with different heights can be compared.
-  bw, bh = dimensions(before)
-  aw, ah = dimensions(after)
-  size = "#{[ bw, aw ].max}x#{[ bh, ah ].max}"
-  padded_before = File.join(report_dir, "before--#{name}")
-  padded_after = File.join(report_dir, "after--#{name}")
-  [ [ before, padded_before ], [ after, padded_after ] ].each do |src, dest|
-    system("convert", src, "-background", "magenta", "-gravity", "northwest", "-extent", size, dest, exception: true)
+  before_image = load_image(before)
+  after_image = load_image(after)
+  bw, bh = before_image.size
+  aw, ah = after_image.size
+  width = [ bw, aw ].max
+  height = [ bh, ah ].max
+  padded_before, padded_after = [ before_image, after_image ].map do |image|
+    image.embed(0, 0, width, height, extend: :background, background: [ 255, 0, 255 ])
   end
+  padded_before.write_to_file(File.join(report_dir, "before--#{name}"))
+  padded_after.write_to_file(File.join(report_dir, "after--#{name}"))
 
-  diff = File.join(report_dir, "diff--#{name}")
-  _, err, = Open3.capture3("compare", "-metric", "AE", "-fuzz", fuzz, padded_before, padded_after, diff)
-  pixels = err.to_f.to_i
+  mask = changed_mask(padded_before, padded_after, threshold)
+  pixels = (mask.avg / 255 * width * height).round
+  # The changed pixels in red over a faded copy of the before image.
+  faded = (padded_before * 0.25 + 191).cast(:uchar)
+  mask.ifthenelse([ 255, 0, 0 ], faded).write_to_file(File.join(report_dir, "diff--#{name}"))
   { name:, status: pixels.zero? && [ bw, bh ] == [ aw, ah ] ? :same : :changed, pixels:,
     size_change: [ bw, bh ] == [ aw, ah ] ? nil : "#{bw}x#{bh} → #{aw}x#{ah}" }
 end
