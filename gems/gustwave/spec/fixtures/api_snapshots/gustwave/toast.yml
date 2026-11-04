@@ -20,6 +20,15 @@ options:
     - none
 parts:
 - dismiss_button
+slots:
+  dismiss_button:
+    many: false
 methods:
+- default_dismiss_button
 - dismiss_button
+- dismiss_button?
 - dismissible?
+- with_dismiss_button
+- with_dismiss_button_content
+slot_builders:
+- build_slot_dismiss_button

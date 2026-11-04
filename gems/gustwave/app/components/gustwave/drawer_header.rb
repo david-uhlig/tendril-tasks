@@ -51,9 +51,38 @@ module Gustwave
       if edge?
         handle_tag
       else
-        safe_join([ title_tag, close_button_tag ].compact)
+        safe_join([ title_tag, (close_button if @close_button) ].compact)
       end
     end
+
+    # The button rendered when no +close_button+ is set. Public, because
+    # ViewComponent only finds +default_<slot>+ methods that are public.
+    def default_close_button
+      build_slot_close_button
+    end
+
+    # Hides the drawer when clicked. Rendered by default, unless
+    # +close_button: false+ or +edge+.
+    #
+    # @param text [String, nil] text to display to screen readers. Defaults to a localized "Close".
+    # @param icon [Symbol] The icon to use for the close button. Defaults to +:close+.
+    # @param options [Hash] Additional HTML options passed to the button component. Its +class+ adds to the button's classes.
+    renders_one_extensible :close_button, ->(text = nil, icon: :close, **options) {
+      # Accepts +text:+ too, as a keyword, since the lambda's positional
+      # argument can't take it.
+      text ||= options.delete(:text)
+
+      # The +data-drawer-hide+ trigger calls drawer.hide(), see the class docs.
+      button = Gustwave::Button.for(:inline).new(
+        sr_only(text.presence || t(".close")),
+        **configure_html_attributes(options,
+                                    color: :none,
+                                    class: classes(:close_button),
+                                    **Gustwave::Drawer.trigger_options(@drawer_id, action: :hide))
+      )
+      button.with_leading_visual_icon(icon, stroke_width: 2, class: "w-6 h-6")
+      button
+    }
 
     private
 
@@ -80,16 +109,6 @@ module Gustwave
       return if @icon.blank?
 
       render Gustwave::Icon.new(@icon, theme: :solid, class: classes(:title_icon))
-    end
-
-    def close_button_tag
-      return unless @close_button && !edge?
-
-      # The +data-drawer-hide+ trigger calls drawer.hide(), see the class docs.
-      button = Gustwave::Button.for(:inline).new(sr_only(t(".close")), color: :none, class: classes(:close_button),
-                                                 **Gustwave::Drawer.trigger_options(@drawer_id, action: :hide))
-      button.with_leading_visual_icon(:close, stroke_width: 2, class: "w-6 h-6")
-      render button
     end
 
     # The handle toggles the drawer, so it carries the toggle's ARIA

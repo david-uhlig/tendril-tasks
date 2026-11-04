@@ -17,3 +17,14 @@ parts:
 - handle_bar
 - title
 - title_icon
+slots:
+  close_button:
+    many: false
+methods:
+- close_button
+- close_button?
+- default_close_button
+- with_close_button
+- with_close_button_content
+slot_builders:
+- build_slot_close_button

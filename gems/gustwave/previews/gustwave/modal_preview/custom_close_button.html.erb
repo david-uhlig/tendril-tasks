@@ -1,0 +1,15 @@
+<% modal = Gustwave::Modal.new(id: "custom-close-modal", size: :sm) %>
+
+<div class="flex justify-center">
+  <%= render Gustwave::Buttons::Default.new("Open modal", **modal.trigger_options) %>
+</div>
+
+<%= render modal do %>
+  <%= render Gustwave::ModalHeader.new(modal_id: modal.id) do |header| %>
+    <% header.with_close_button(text: "Dismiss dialog", icon: :close) %> Delete this project?
+  <% end %>
+
+  <%= render Gustwave::ModalBody.new(class: "text-center") do %>
+    <p class="text-sm text-gray-500 dark:text-gray-400">The close button in the header is customized.</p>
+  <% end %>
+<% end %>
