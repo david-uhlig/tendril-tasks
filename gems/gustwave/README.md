@@ -132,7 +132,7 @@ The specs run against a minimal Rails application in `spec/dummy`. Run `bundle e
 
 ### Designing components
 
-Read [docs/design.md](docs/design.md) before you add a component or change a component's API. It decides how a Flowbite pattern is split into components, options, slots and block content, which conventions recurring parts follow, and how components move from alpha to stable. Lookbook shows it under "Component design". [AGENTS.md](AGENTS.md) sums it up for coding agents.
+Read [docs/design.md](docs/design.md) before you add a component or change a component's API. It decides how a Flowbite pattern is split into components, options, slots and block content, which conventions recurring parts follow, and how components move from alpha to stable. Lookbook shows it under "Component design". [AGENTS.md](AGENTS.md) sums it up for coding agents, and the [extract-flowbite-component skill](.claude/skills/extract-flowbite-component/SKILL.md) walks them through turning a Flowbite pattern into a component.
 
 `Gustwave::Test::StyleSnapshots` records the markup a component renders for every combination of its style options and compares it to a YAML fixture. It helps when building a component or changing one's styles; see its documentation for usage.
 
