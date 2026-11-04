@@ -33,8 +33,7 @@ slots:
     - renderable
     - svg
 methods:
-- configure_classes
-- configure_selection
+- apply_slot_context
 - disabled?
 - leading_visuals
 - leading_visuals?
