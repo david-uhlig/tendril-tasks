@@ -96,5 +96,48 @@ RSpec.describe Gustwave::Toast, type: :component do
       expect(page).to have_selector("div#my-toast > div.row > button[data-dismiss-target='#my-toast']")
       expect(page).to have_selector("button", count: 1)
     end
+
+    it "customizes the button with with_dismiss_button" do
+      render_inline(described_class.new("text", id: "my-toast")) do |toast|
+        toast.with_dismiss_button(text: "Close notification")
+      end
+
+      expect(page).to have_selector("button[data-dismiss-target='#my-toast'][aria-label='Close notification'] > span.sr-only", text: "Close notification")
+    end
+
+    it "customizes the button placed by the block" do
+      render_inline(described_class.new(id: "my-toast")) do |toast|
+        toast.with_dismiss_button("Close notification")
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).to have_selector("div#my-toast > div.row > button[aria-label='Close notification']")
+      expect(page).to have_selector("button", count: 1)
+    end
+
+    it "renders the customized button once, not again at the end" do
+      render_inline(described_class.new(id: "my-toast")) do |toast|
+        toast.with_dismiss_button(text: "Close notification")
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).to have_selector("button", count: 1)
+    end
+
+    it "renders no button with dismissible: false, even when the block places one" do
+      render_inline(described_class.new(id: "my-toast", dismissible: false)) do |toast|
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).not_to have_selector("button")
+    end
+
+    it "renders no button with dismissible: false, even when one is set" do
+      render_inline(described_class.new("text", dismissible: false)) do |toast|
+        toast.with_dismiss_button(text: "Close notification")
+      end
+
+      expect(page).not_to have_selector("button")
+    end
   end
 end

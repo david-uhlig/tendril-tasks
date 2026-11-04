@@ -6,3 +6,14 @@ constructor:
 - 'close_button: (optional)'
 - 'title_options: (optional)'
 - "**options"
+slots:
+  close_button:
+    many: false
+methods:
+- close_button
+- close_button?
+- default_close_button
+- with_close_button
+- with_close_button_content
+slot_builders:
+- build_slot_close_button

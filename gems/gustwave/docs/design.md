@@ -50,6 +50,21 @@ If the parent doesn't need to know, the piece belongs in the content block. When
 
 Every polymorphic slot keeps an escape hatch: a `generic` type that takes a block, or a `renderable` type that takes any component.
 
+**A slot's block reaches the component it builds.** When a slot builds a component, the block given to its setter becomes that component's content block, and the block receives the component, as `render` does (D6). So callers reach a sub-component's own slots through the parent, without the parent forwarding them:
+
+```ruby
+render Gustwave::Modal.new do |modal|
+  modal.with_header("Delete task") { |header| header.with_close_button(text: "Close dialog") }
+end
+```
+
+For this to hold:
+
+- **The block is also the content.** Without a text argument, its output is the component's content. In ERB, a block that only configures leaves whitespace, so pass the text as an argument.
+- **Read slots through their getter or predicate** (`close_button`, `icon?`), at render time. Both evaluate the block first. A decision made in `initialize`, or from an instance variable, can't see what the block sets.
+- **A wrapper that delegates slots to an inner component** (`delegate_missing_to`, as `Dropdowns::Triggers::Button` and `DismissButton` do) calls `content` before reading the inner component's slots, since the inner component's getters don't evaluate the wrapper's block.
+- It doesn't apply to slots that build markup instead of a component, like Alert's `icon`.
+
 ## Variation
 
 Variation between similar components takes one of four shapes:
@@ -223,3 +238,4 @@ Settled questions, so they aren't reopened without a new reason. A new decision 
 - **D3. Everything starts at alpha.** Every existing component starts at alpha when statuses are introduced, including ones already used in production. Promotions follow [Component lifecycle](#component-lifecycle).
 - **D4. Alert keeps a positional `icon` slot.** `Visuals` isn't a fit: it always declares both sides as collections, needs a `size` variant Alert doesn't have, makes the root inline-flex, and hides visuals from screen readers, while Alert's icon carries meaning. Timeline's `marker` is the precedent. See [Icons and other visuals](#icons-and-other-visuals).
 - **D5. Tabs keeps `active_class:` and `inactive_class:`, and gets nothing more for now.** Flowbite's own examples need per-instance state classes: the purple active tab, and Card's nav and full-width tabs. `extend_variant :style` alone would need a new style for each. They stay strings, not `active_options:`, because Flowbite swaps them on a state, not an element with attributes. Anything beyond that waits until a caller needs it. See [Styling a part](#styling-a-part).
+- **D6. Sub-component slots are reached through the parent slot's block.** A caller customizes a nested part, like a modal header's close button, in the block of the parent's slot setter, which receives the sub-component. ViewComponent already passes it, so parents don't forward their children's slots or options (no `close_button_options:` on `with_header`, no `with_header_close_button`), which would repeat each child's API on every parent. See [Slot or content block](#slot-or-content-block).

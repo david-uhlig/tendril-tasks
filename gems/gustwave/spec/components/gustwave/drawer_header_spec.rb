@@ -63,6 +63,32 @@ RSpec.describe Gustwave::DrawerHeader, type: :component do
 
       expect(page).not_to have_selector("button")
     end
+
+    it "customizes the close button with with_close_button" do
+      render_inline(described_class.new("Info", drawer_id: "info")) do |header|
+        header.with_close_button(text: "Dismiss drawer")
+      end
+
+      expect(page).to have_selector("button[data-drawer-hide=info] > span.sr-only", text: "Dismiss drawer", visible: :all)
+      expect(page).to have_selector("button", count: 1)
+    end
+
+    it "lets caller classes win over the defaults" do
+      render_inline(described_class.new("Info", drawer_id: "info")) do |header|
+        header.with_close_button(class: "text-red-500")
+      end
+
+      expect(page).to have_selector("button[data-drawer-hide=info].text-red-500")
+      expect(page).not_to have_selector("button.text-gray-400")
+    end
+
+    it "renders no button with close_button: false, even when one is set" do
+      render_inline(described_class.new("Info", drawer_id: "info", close_button: false)) do |header|
+        header.with_close_button(text: "Dismiss drawer")
+      end
+
+      expect(page).not_to have_selector("button")
+    end
   end
 
   context "with an edge" do
