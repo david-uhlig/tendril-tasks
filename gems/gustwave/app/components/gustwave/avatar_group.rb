@@ -17,6 +17,8 @@ module Gustwave
   #  <% end %>
   #
   # @param options [Hash] HTML attributes passed to the div element.
+  #
+  # @status alpha
   class AvatarGroup < Gustwave::Component
     base "flex -space-x-4 rtl:space-x-reverse"
 

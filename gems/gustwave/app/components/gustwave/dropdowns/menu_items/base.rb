@@ -3,6 +3,7 @@
 module Gustwave
   module Dropdowns
     module MenuItems
+      # @status alpha
       class Base < Gustwave::Component
         base "flex items-center gap-1.5 w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white whitespace-nowrap"
 

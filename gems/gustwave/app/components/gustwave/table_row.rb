@@ -25,6 +25,8 @@ module Gustwave
   #     <th>John Doe</th>
   #     <td>Software Engineer</td>
   #   <% end %>
+  #
+  # @status alpha
   class TableRow < Gustwave::Component
     base "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
 

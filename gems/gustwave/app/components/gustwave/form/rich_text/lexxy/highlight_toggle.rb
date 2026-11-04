@@ -8,6 +8,8 @@ module Gustwave
         #
         # Lexxy's +lexxy-highlight-dropdown+ element fills the menu with the
         # configured colors and applies them to the selected text.
+        #
+        # @status alpha
         class HighlightToggle < Gustwave::Component
           def initialize(disabled: false, **options)
             @disabled = disabled

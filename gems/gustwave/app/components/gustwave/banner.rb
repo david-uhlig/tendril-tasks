@@ -32,6 +32,8 @@ module Gustwave
   # It has no default role, because +banner+ is the landmark of the site
   # header. If it needs a landmark, pass
   # +role: "region", aria: { label: "..." }+.
+  #
+  # @status alpha
   class Banner < Gustwave::Component
     attr_reader :id
 

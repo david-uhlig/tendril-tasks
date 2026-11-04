@@ -3,6 +3,7 @@
 module Gustwave
   # Use `Button` for actions (e.g. in forms). Use links for destinations, or moving from one page to another.
   module Buttons
+    # @status alpha
     class Default < Gustwave::Buttons::Base
       extend_variant :color, default: :default, values: {
         default: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-blue-400 disabled:hover:bg-blue-400 dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500",

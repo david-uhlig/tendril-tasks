@@ -9,6 +9,8 @@ module Gustwave
   #
   # @example
   #   render Gustwave::DismissButton.new("my-modal", "Close modal", color: :dark, size: :lg)
+  #
+  # @status alpha
   class DismissButton < Gustwave::Component
     # @param target [String] the id of the element to dismiss, without +#+
     # @param text [String, nil] text to display to screen readers, rendered within +sr-only+ markup. If missing block content is rendered without +sr-only+ markup. If both are missing a localized version of "Dismiss" is used.

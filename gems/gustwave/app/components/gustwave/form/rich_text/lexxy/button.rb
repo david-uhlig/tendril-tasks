@@ -8,6 +8,8 @@ module Gustwave
         #
         # The +name+ attribute lets Lexxy toggle +aria-pressed+ and
         # +aria-disabled+ on the button to reflect the editor state.
+        #
+        # @status alpha
         class Button < Gustwave::Component
           ATTRIBUTE_COMMAND_MAPPINGS = {
             bold: "bold",

@@ -31,6 +31,8 @@ module Gustwave
   # @param options [Hash] Arguments and HTML attributes passed to the
   #  +Gustwave::Avatar+ component, e.g. +src+, +alt+, +shape+, +size+ and
   #  +border+.
+  #
+  # @status alpha
   class AvatarPlaceholder < Gustwave::Component
     # As in Flowbite, the icon is 120% of the avatar and is cropped, in percentages so it scales with every size.
     DEFAULT_PLACEHOLDER = <<~SVG

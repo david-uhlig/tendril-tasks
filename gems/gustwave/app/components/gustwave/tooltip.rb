@@ -23,6 +23,8 @@ module Gustwave
   #   <% tooltip = Gustwave::Tooltip.new("Tooltip content", color: :light, class: "duration-500") %>
   #   <%= render Gustwave::Buttons::Default.new("Hover me", **tooltip.trigger_options(placement: :bottom)) %>
   #   <%= render tooltip %>
+  #
+  # @status alpha
   class Tooltip < Gustwave::Component
     # See: https://popper.js.org/docs/v2/constructors/#options
     option :placement, default: :top, values: %i[

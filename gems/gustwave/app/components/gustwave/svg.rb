@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # @status alpha
   class Svg < Gustwave::Component
     include InlineSvg::ActionView::Helpers
 

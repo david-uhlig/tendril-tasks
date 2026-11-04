@@ -23,6 +23,8 @@ module Gustwave
   #     <% d.with_header("Info", icon: :info_circle) %>
   #     …body…
   #   <% end %>
+  #
+  # @status alpha
   class Drawer < Gustwave::Component
     EDGE_OFFSET_DEFAULT = "bottom-[60px]"
 

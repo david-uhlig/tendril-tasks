@@ -3,6 +3,7 @@
 module Gustwave
   module Form
     module RichText
+      # @status alpha
       class Button < Gustwave::Component
         ATTRIBUTE_OPTIONS = %w[
           bold italic strike underline highlight bullet number quote code href

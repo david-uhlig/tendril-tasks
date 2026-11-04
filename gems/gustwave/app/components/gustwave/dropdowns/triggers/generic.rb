@@ -8,6 +8,8 @@ module Gustwave
       #
       # Wraps the supplied content in an HTML element (default: +div+) that acts
       # as the trigger.
+      #
+      # @status alpha
       class Generic < Gustwave::Dropdowns::Triggers::Base
         base "inline-flex cursor-pointer"
 

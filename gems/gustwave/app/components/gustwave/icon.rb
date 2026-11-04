@@ -7,6 +7,8 @@ module Gustwave
   # to determine the icon's filename. The +theme+ parameter determines the
   # icon's theme, either +:outline+ or +:solid+, i.e. the path where it's found.
   # Several other parameters can be passed to customize the icon's appearance.
+  #
+  # @status alpha
   class Icon < Gustwave::Component
     ICON_PATH = File.join("gustwave", "icons").freeze
 

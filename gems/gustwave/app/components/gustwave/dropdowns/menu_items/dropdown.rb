@@ -6,6 +6,8 @@ module Gustwave
       # Use Dropdown to render a Gustwave::Dropdown component submenu
       #
       # @see Gustwave::Dropdown
+      #
+      # @status alpha
       class Dropdown < Gustwave::Dropdowns::MenuItems::Base
         delegate_missing_to :dropdown_component
 

@@ -31,6 +31,8 @@ module Gustwave
       #   <% end %>
       #
       # @see Gustwave::Button
+      #
+      # @status alpha
       class LinkButton < Gustwave::Dropdowns::MenuItems::Base
         delegate_missing_to :button_component
 

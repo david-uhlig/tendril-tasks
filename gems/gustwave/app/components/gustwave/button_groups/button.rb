@@ -4,6 +4,8 @@ module Gustwave
   module ButtonGroups
     # A button within Gustwave::ButtonGroup. The group selects its position,
     # which sets the border and rounding. +pill+ has no effect in a group.
+    #
+    # @status alpha
     class Button < Gustwave::Buttons::Base
       # Replaces Base's rounded-lg focus:ring-4
       base "text-center whitespace-nowrap align-bottom overflow-hidden focus:outline-hidden focus:ring-2 focus:z-10 disabled:cursor-not-allowed"

@@ -4,6 +4,7 @@ module Gustwave
   module Form
     module RichText
       module Trix
+        # @status alpha
         class LinkToggle < Gustwave::Component
           def initialize(form, disabled: false, **options)
             @form = form

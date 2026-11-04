@@ -34,6 +34,8 @@ module Gustwave
   #
   # Use +border+ for a border all around and +accent+ for a thick border at
   # the top only.
+  #
+  # @status alpha
   class Alert < Gustwave::Component
     attr_reader :id
 
