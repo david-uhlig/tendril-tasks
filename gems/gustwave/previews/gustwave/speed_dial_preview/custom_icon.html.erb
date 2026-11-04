@@ -1,0 +1,8 @@
+<div class="flex flex-wrap items-center gap-6">
+  <%# The icon slot takes any icon, or a component. Block content would replace it. %>
+  <%= render Gustwave::SpeedDials::Action.new("Edit", label_display: :outside) do |action| %>
+    <% action.with_icon :edit, theme: :outline %>
+  <% end %>
+
+  <%= render Gustwave::SpeedDials::Action.new("Edit", label_display: :outside, icon_options: { theme: :solid }, icon: :edit) %>
+</div>

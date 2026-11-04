@@ -117,10 +117,47 @@ RSpec.describe Gustwave::SpeedDials::Action, type: :component do
     expect(page).to have_selector("button svg[fill='currentColor']")
   end
 
-  it "renders the icon in the given theme" do
-    render_inline(described_class.new("Edit", icon: :edit, icon_theme: :outline))
+  it "renders the icon in the theme of icon_options" do
+    render_inline(described_class.new("Edit", icon: :edit, icon_options: { theme: :outline }))
 
     expect(page).to have_selector("button svg[fill='none']")
+  end
+
+  it "renders an icon set through the slot with its theme" do
+    render_inline(described_class.new("Edit")) { |action| action.with_icon :edit, theme: :outline }
+
+    expect(page).to have_selector("button svg[fill='none'][aria-hidden='true']")
+  end
+
+  it "renders an icon component set through the slot" do
+    render_inline(described_class.new("Edit")) { |action| action.with_icon(Gustwave::Icon.new(:close, theme: :outline)) }
+
+    expect(page).to have_selector("button svg[fill='none']", count: 1)
+  end
+
+  it "renders the icon from icon: in the slot" do
+    component = described_class.new("Edit", icon: :edit)
+    render_inline(component)
+
+    expect(component.icon?).to be true
+    expect(page).to have_selector("button svg[fill='currentColor']", count: 1)
+  end
+
+  it "warns about icon_theme: and still renders its theme" do
+    allow(Gustwave.deprecator).to receive(:warn)
+
+    render_inline(described_class.new("Edit", icon: :edit, icon_theme: :outline))
+
+    expect(Gustwave.deprecator).to have_received(:warn).with(/icon_theme:.*deprecated/)
+    expect(page).to have_selector("button svg[fill='none']")
+  end
+
+  it "prefers icon_options: theme over icon_theme:" do
+    allow(Gustwave.deprecator).to receive(:warn)
+
+    render_inline(described_class.new("Edit", icon: :edit, icon_theme: :outline, icon_options: { theme: :solid }))
+
+    expect(page).to have_selector("button svg[fill='currentColor']")
   end
 
   it "renders a square shape" do

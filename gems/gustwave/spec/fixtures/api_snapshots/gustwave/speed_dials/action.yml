@@ -4,6 +4,7 @@ constructor:
 - text
 - 'icon: (optional)'
 - 'icon_theme: (optional)'
+- 'icon_options: (optional)'
 - 'tag: (optional)'
 - 'color: (optional)'
 - 'shape: (optional)'
@@ -46,3 +47,13 @@ parts:
 - icon
 - inside_label
 - outside_label
+slots:
+  icon:
+    many: false
+methods:
+- icon
+- icon?
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_icon

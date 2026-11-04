@@ -14,9 +14,15 @@ module Gustwave
     # @example
     #   <%= render Gustwave::SpeedDials::Action.new("Edit", icon: :edit, label_display: :outside) %>
     #
+    # @example An icon through the slot
+    #   <%= render Gustwave::SpeedDials::Action.new("Edit") do |action| %>
+    #     <% action.with_icon :pencil_square, theme: :outline %>
+    #   <% end %>
+    #
     # @param text [String] the label of the action. Required.
-    # @param icon [Symbol, nil] the name of the icon. Ignored when block content is given.
-    # @param icon_theme [Symbol] the theme of the icon, +:solid+ (default) or +:outline+.
+    # @param icon [Symbol, nil] the name of the icon. Ignored when block content is given. Shorthand for the +icon+ slot.
+    # @param icon_theme [Symbol, nil] Deprecated, use the +icon+ slot or +icon_options: { theme: }+ instead.
+    # @param icon_options [Hash] options for the icon, e.g. +theme+, +:solid+ (default) or +:outline+, and +class+.
     # @param tag [Symbol] the HTML tag to render, :button or :a. Defaults to :button.
     # @param color [Symbol] the color of the button, :default or :none. :none renders no base styles.
     # @param shape [Symbol] the shape of the button, :round or :square.
@@ -41,6 +47,18 @@ module Gustwave
 
       part :icon
       part :inside_label, "block mb-px text-xs font-medium"
+
+      # Renders the icon, unless block content is given. Also accepts a
+      # component to render as the icon.
+      #
+      # @param name [Symbol, Object] The icon to render, or a component.
+      # @param theme [Symbol] The icon theme, +:solid+ or +:outline+. Defaults to +:solid+.
+      # @param options [Hash] Additional HTML options passed to the icon component.
+      renders_one_extensible :icon, ->(name, theme: :solid, **options) {
+        next name if name.respond_to?(:render_in)
+
+        Gustwave::Icon.new(name, theme:, **configure_html_attributes(attributes_for(:icon, options), aria: { hidden: true }))
+      }
       part :outside_label, "absolute text-sm font-medium whitespace-nowrap"
 
       # Where the label is shown. The icons are padded within their viewBox, so
@@ -61,7 +79,8 @@ module Gustwave
 
       def initialize(text,
                      icon: nil,
-                     icon_theme: :solid,
+                     icon_theme: nil,
+                     icon_options: {},
                      tag: DEFAULT,
                      color: DEFAULT,
                      shape: DEFAULT,
@@ -70,7 +89,11 @@ module Gustwave
                      **options)
         @text = text
         @icon = icon
-        @icon_theme = icon_theme
+        @icon_options = icon_options
+        if icon_theme
+          Gustwave.deprecator.warn("Gustwave::SpeedDials::Action's `icon_theme:` is deprecated, use the icon slot or `icon_options: { theme: }` instead")
+          @icon_options = { theme: icon_theme }.merge(icon_options)
+        end
 
         select_options(tag:, color:, shape:, label_display:, label_placement:)
         @html_tag = option_value(:tag)
@@ -78,6 +101,10 @@ module Gustwave
         @label_placement = option_value(:label_placement)
         @tooltip = Gustwave::Tooltip.new(text)
         @options = attributes_for(options)
+      end
+
+      def before_render
+        with_icon(@icon, **@icon_options) if @icon.present? && !content.present? && !icon?
       end
 
       def call
@@ -92,7 +119,7 @@ module Gustwave
 
       private
 
-      attr_reader :text, :icon, :icon_theme, :html_tag, :label_display, :label_placement, :options, :tooltip
+      attr_reader :text, :html_tag, :label_display, :label_placement, :options, :tooltip
 
       # The +type+ attribute is only set for the button tag. A caller's +type+ wins.
       def trigger_attributes
@@ -106,9 +133,8 @@ module Gustwave
 
       def icon_content
         return content if content.present?
-        return if icon.blank?
 
-        render Gustwave::Icon.new(icon, theme: icon_theme, class: classes(:icon), aria: { hidden: true })
+        render(icon) if icon?
       end
 
       def label_content

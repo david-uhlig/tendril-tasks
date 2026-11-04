@@ -18,5 +18,14 @@ options:
     - none
 parts:
 - icon
+slots:
+  icon:
+    many: false
 methods:
 - apply_slot_context
+- icon
+- icon?
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_icon

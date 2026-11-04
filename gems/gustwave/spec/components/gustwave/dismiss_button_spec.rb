@@ -59,6 +59,33 @@ RSpec.describe Gustwave::DismissButton, type: :component do
     expect(page).to have_selector("button > svg.w-6.h-6")
   end
 
+  it "renders a leading visual set through the slot in place of the default icon" do
+    render_inline(described_class.new("my-modal")) { |button| button.with_leading_visual_icon :edit, theme: :solid }
+
+    expect(page).to have_selector("button > svg[fill='currentColor']", count: 1)
+    expect(page).not_to have_selector("button svg[fill='none']")
+  end
+
+  it "renders a leading visual set before rendering" do
+    component = described_class.new("my-modal", icon: nil)
+    component.with_leading_visual_icon :edit, theme: :solid
+    render_inline(component)
+
+    expect(page).to have_selector("button > svg[fill='currentColor']", count: 1)
+  end
+
+  it "renders a leading visual set through the slot with icon: nil" do
+    render_inline(described_class.new("my-modal", icon: nil)) { |button| button.with_leading_visual_icon :edit }
+
+    expect(page).to have_selector("button > svg", count: 1)
+  end
+
+  it "keeps the default icon when a trailing visual is set" do
+    render_inline(described_class.new("my-modal")) { |button| button.with_trailing_visual_icon :edit }
+
+    expect(page).to have_selector("button > svg[fill='none']", count: 2)
+  end
+
   it "merges data and aria attributes with the defaults" do
     I18n.with_locale(:en) { render_inline(described_class.new("my-modal", data: { foo: "1" }, aria: { describedby: "hint" })) }
 
