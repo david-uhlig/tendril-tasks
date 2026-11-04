@@ -42,6 +42,39 @@ RSpec.describe Gustwave do
     end
   end
 
+  describe ".deprecator" do
+    it "names Gustwave and the next minor release in its warnings" do
+      stub_const("Gustwave::VERSION", "0.4.2")
+      deprecator = described_class.instance_variable_get(:@deprecator)
+      described_class.remove_instance_variable(:@deprecator) if deprecator
+
+      expect(described_class.deprecator.deprecation_horizon).to eq("0.5")
+      expect(described_class.deprecator.gem_name).to eq("Gustwave")
+    ensure
+      described_class.instance_variable_set(:@deprecator, deprecator)
+    end
+
+    it "is registered with the app's deprecators" do
+      expect(Rails.application.deprecators[:gustwave]).to be(described_class.deprecator)
+    end
+
+    it "warns" do
+      expect { described_class.deprecator.warn("`old:` is deprecated") }
+        .to output(/DEPRECATION WARNING: `old:` is deprecated/).to_stderr
+    end
+
+    it "names the removal release for a deprecated method" do
+      klass = Class.new do
+        def self.name = "Old"
+        def old = :still_works
+      end
+      described_class.deprecator.deprecate_methods(klass, old: "use `new` instead")
+
+      expect { expect(klass.new.old).to eq(:still_works) }
+        .to output(/old is deprecated and will be removed from Gustwave \d+\.\d+ \(use `new` instead\)/).to_stderr
+    end
+  end
+
   describe "config.gustwave.strict" do
     it "sets Gustwave.strict when the app initializes" do
       initializer = Gustwave::Engine.initializers.find { it.name == "gustwave.strict" }

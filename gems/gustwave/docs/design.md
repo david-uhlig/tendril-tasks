@@ -181,7 +181,7 @@ A component becomes stable when all of these hold:
 - **Promotions happen in minor releases** and are listed in the changelog under Changed.
 - **The status is a `@status` tag in the class docstring,** next to the YARD tags the gem already uses, as in the example below. It changes nothing at runtime. Every class states its own status, because a docstring isn't inherited: a new theme under a beta `Buttons::Base` still starts at alpha.
 - **Lookbook shows the status in its Status panel,** read from the docstring of the component a preview is named after, e.g. `Gustwave::Card` for `Gustwave::CardPreview`. Nothing else repeats it, so the docstring is the only place to change.
-- **A deprecated component also warns at runtime.** Its constructor calls `Gustwave.deprecator.warn` (*planned*) with what to use instead. The `@status deprecated` tag alone can't warn.
+- **A deprecated component also warns at runtime.** Its constructor calls `Gustwave.deprecator.warn` with what to use instead. The `@status deprecated` tag alone can't warn.
 
 ```ruby
 module Gustwave

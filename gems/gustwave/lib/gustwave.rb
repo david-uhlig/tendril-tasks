@@ -56,5 +56,33 @@ module Gustwave
     def strict?
       @strict.nil? ? Rails.env.local? : @strict
     end
+
+    # Warns about deprecated components, options, keywords and methods. A
+    # deprecation is removed in the next minor release (D1 in docs/design.md).
+    # Say what to use instead:
+    #
+    #   Gustwave.deprecator.warn("Tooltip's `trigger:` is deprecated, use `trigger_event:` instead")
+    #
+    # A deprecated method can be marked instead, and the warning then names
+    # the release that removes it:
+    #
+    #   Gustwave.deprecator.deprecate_methods(self, configure_body: "use `body_options:` instead")
+    #   # DEPRECATION WARNING: configure_body is deprecated and will be removed
+    #   # from Gustwave 0.2 (use `body_options:` instead)
+    #
+    # The engine registers it with +Rails.application.deprecators+, so it
+    # follows the app's +config.active_support.deprecation+ settings, e.g.
+    # raising in test with +:raise+.
+    def deprecator
+      @deprecator ||= ActiveSupport::Deprecation.new(removal_version, "Gustwave")
+    end
+
+    private
+
+    # The next minor release after VERSION.
+    def removal_version
+      major, minor = Gem::Version.new(VERSION).segments
+      "#{major}.#{minor + 1}"
+    end
   end
 end
