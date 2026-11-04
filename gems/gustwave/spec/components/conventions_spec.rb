@@ -89,8 +89,7 @@ RSpec.describe "Component conventions" do
     "Gustwave::IconToast" => { "icon_keyword: icon" => 519 },
     "Gustwave::Pagination::Link" => { "icon_keyword: icon" => 520 },
     "Gustwave::SpeedDials::Action" => { "icon_keyword: icon" => 520 },
-    "Gustwave::SpeedDials::Trigger" => { "icon_keyword: icon" => 520 },
-    "Gustwave::Tab" => { "configure_method: configure_selection" => 523, "configure_method: configure_classes" => 523 }
+    "Gustwave::SpeedDials::Trigger" => { "icon_keyword: icon" => 520 }
   }
 
   exceptions = {
