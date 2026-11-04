@@ -11,6 +11,17 @@ RSpec.describe "Lookbook", type: :request do
     expect(response).to have_http_status(:ok)
   end
 
+  it "renders Gustwave's component design from its Markdown source" do
+    get "/lookbook/pages/design"
+
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include("<h1", "Component design", "<table>")
+    # Escaped once by Markdown, not twice by ERB
+    expect(response.body).to include("<code>&lt;part&gt;_options:</code>")
+    # The README links to this anchor
+    expect(response.body).to include('id="component-lifecycle"')
+  end
+
   it "inspects a Gustwave preview" do
     get "/lookbook/inspect/gustwave/tabs/default"
 

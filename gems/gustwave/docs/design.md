@@ -1,0 +1,222 @@
+# Component design
+
+How Gustwave slices a Flowbite UI pattern into ViewComponents, options, slots and block content, and the conventions every component follows. It's for anyone adding a component or changing a component's API, human or agent.
+
+A caller who knows one Gustwave component should be able to predict the API of the next one. Two maintainers extracting the same Flowbite pattern should arrive at the same slicing.
+
+Gustwave is built against Flowbite 3.x. A "Flowbite example" here means an example in Flowbite's docs at the version pinned in `lookbook/flowbite.yml`, currently 3.1.2. Take markup, classes and `data-*` attributes from those docs, not from another Flowbite version.
+
+The styling DSL (`Gustwave::Options`, `Gustwave::Styling`) is documented in the README, and the constructor convention in `Gustwave::Component`. Specs already enforce both. This document builds on them and doesn't repeat them.
+
+**How to apply it.** The rules apply to every new component and to every change to an existing component's API. Some existing components don't follow them yet; that work is tracked in issues labelled `gustwave-design`. Mechanisms marked *planned* don't exist yet. Follow the rule anyway and don't wait for the mechanism. Past decisions, with their reasons, are listed under [Decisions](#decisions).
+
+## The core rule
+
+A Flowbite example is a tree of markup, and a component boundary could go at almost any node. Don't slice the DOM. Slice by the decisions a caller makes.
+
+A component owns its **invariant**: the classes, nesting, ARIA and JavaScript wiring that break if a caller gets them wrong. Everything a caller **chooses** is exposed in the lightest mechanism that can express the choice:
+
+| The caller chooses | Expose it as | Example |
+|---|---|---|
+| A value from a fixed list | `option`, `variant` or `toggle` | `size`, `color`, `horizontal` |
+| Whether a known part appears | A slot | `Card#with_image`, `Banner#with_dismiss_button` |
+| Which kind of a known part appears | A polymorphic slot | `with_item_link` / `with_item_generic` |
+| Anything else | The content block, composed from other components | Card body, Timeline item body |
+
+## When a piece becomes a component
+
+A piece of markup gets its own component class when at least one of these holds:
+
+1. **It has its own invariant.** Markup that's easy to get subtly wrong, such as a modal header's close button and label, or a dropdown trigger's `data-dropdown-*` attributes. Hard-coded classes alone don't count.
+2. **Callers need it outside its parent's slot.** `ModalBody` and `ModalFooter` exist because a `form_with` has to wrap them. Table rows and cells exist because callers render them in loops.
+3. **It appears in more than one pattern.** `Icon`, `Avatar`, `Badge`, `Heading`, `Paragraph`, `Buttons::*`.
+4. **It belongs to a family of interchangeable variations.** See [Variation](#variation).
+
+Otherwise it stays inside its parent as a declared `part`, styled through `<part>_options:` (see [Styling a part](#styling-a-part)).
+
+Name a component after its Flowbite pattern, without a `Component` suffix: `Gustwave::Card`, not `Gustwave::CardComponent` (D2).
+
+## Slot or content block
+
+Use a slot only when the parent has to know about the child:
+
+- **Position.** It goes somewhere the block can't reach: Card's image above the padded body, a timeline marker on the line.
+- **Mutual influence.** The parent changes because the child exists (`has_image` pads Card's body less; Navbar shows the hamburger only with items), or passes something down (`apply_slot_context` in ButtonGroup and Pagination).
+- **Wiring.** Parent and child share an ID or behavior: the Banner `id` its dismiss button targets, a modal header's label.
+
+If the parent doesn't need to know, the piece belongs in the content block. When a Flowbite example only rearranges existing components, it's `composable` in `lookbook/flowbite.yml`, not a reason for a new slot.
+
+**Promote, don't predict.** A composition repeated at three or more call sites becomes a component. A component that always needs a specific child becomes a slot. A new slot or option is hard to remove; block content costs nothing to add later.
+
+Every polymorphic slot keeps an escape hatch: a `generic` type that takes a block, or a `renderable` type that takes any component.
+
+## Variation
+
+Variation between similar components takes one of four shapes:
+
+- **A separate class** when the variation changes the markup structure, the constructor, or the set of option values. Each button theme has its own color palette, which the Options DSL can't express as one `variant`, so `Buttons::GradientDuotone` is its own class. Dropdown triggers and menus differ in structure.
+- **A variant** when it only picks classes from within one option set: Badge and Alert colors.
+- **A wrapper component** (composition) when it presets another component: `AvatarText` and `AvatarPlaceholder` render `Avatar`. This is also the recommended way for an app to name a theme, e.g. a `Ui::Button` that renders `Gustwave::Buttons::GradientDuotone`.
+- **A slot** when it adds an optional sub-part to otherwise identical markup. By this rule, `IconToast` should be `Toast` with an `icon` slot, not a separate class.
+
+## Recurring sub-patterns
+
+These parts show up across many Flowbite patterns. Each has one shape, so callers learn it once.
+
+### Dismiss and close buttons
+
+Two behaviors, two names, one shape:
+
+- **`dismiss_button`** removes an element from the page for good, through `Gustwave::DismissButton` and `data-dismiss-target`. Alert, Banner, Badge, Toast.
+- **`close_button`** hides an overlay that can open again, through Flowbite's `data-modal-hide` or `data-drawer-hide`. Modal and Drawer headers.
+
+Both are `renders_one_extensible` slots. Where Flowbite's examples always show the button, the component renders it by default through ViewComponent's `default_<slot>`. A `dismissible:` keyword means "the user can dismiss or close this". With `dismissible: false` the button isn't rendered and, for overlays, the backdrop and Escape don't close it, as `Modal` already does.
+
+```ruby
+render Gustwave::Toast.new("Saved.")                      # dismiss button by default
+render Gustwave::Toast.new("Saved.", dismissible: false)  # none
+render Gustwave::Toast.new("Saved.") do |toast|
+  toast.with_dismiss_button(text: "Close notification")   # customized
+end
+```
+
+### Icons and other visuals
+
+Two shapes, depending on where the visual sits:
+
+- **Inline with text, on either side: `Gustwave::Visuals`.** `leading_visuals` and `trailing_visuals` slots with `icon`, `image`, `svg`, `indicator` and `renderable` types, sized from the component's `size` and hidden from screen readers as decoration. Buttons, Badge, Tab and Kbd use it, and all four render both sides. Include it only in a component where both sides make sense and that has the `size` variant and `indicator_size` value it requires.
+- **A single visual the component places itself: a slot named after its role.** Alert's `icon` sits beside the body; Timeline's `marker` sits on the line. It's a `renders_one_extensible` slot. It becomes polymorphic, with types like `icon` and `image` as `marker` has, once a caller needs more than one kind. When the visual carries meaning, as an alert's status icon does, the slot takes a `label:` for screen readers (D4).
+
+Symbol keywords such as `icon:` and `trailing_icon:` are allowed as **shorthand only**: they must set one of these slots, so the slot can always do anything the keyword can. `Dropdowns::Triggers::Button` is the reference: its `trailing_icon:` calls `with_trailing_visual_icon`. A keyword is never the only way to set an icon, and doesn't come with companions like `icon_theme:`.
+
+### Styling a part
+
+Use **`<part>_options:`**: a hash of HTML attributes for a declared `part`, merged with `configure_html_attributes`, so caller classes win conflicts. It works at construction, and slot setters forward it, as in `timeline.with_item(marker_options: { class: "..." })`. `class:` on a slot setter styles that slot's root element.
+
+Older components also use `configure_<part>` methods and `<part>_class:` keywords. Both are replaced by `<part>_options:`, after a deprecation (D1).
+
+**Exception: state classes.** Some classes style a state that a script switches, not an element, like the active and inactive classes Flowbite's JavaScript swaps on a tab through `data-tabs-active-classes`. Only classes make sense there, so they're `<state>_class:` keywords that take a string: `Tabs`' `active_class:` and `inactive_class:` (D5).
+
+### Triggers
+
+When the trigger lives elsewhere on the page, the component exposes `trigger_options(...)`, as an instance and a class method, which returns the attributes to spread into any trigger. `Modal`, `Tooltip` and `Popover` do this. When Flowbite renders the trigger next to its target, the trigger is a slot: `Dropdown`, `SpeedDial`.
+
+Flowbite's `data-*-trigger` setting, hover or click, is the keyword **`trigger_event:`** everywhere, because `trigger` is already a slot name.
+
+### Header, body and footer
+
+Overlay and container components expose sections as slots named `header`, `body` and `footer`. Each one is backed by a standalone component, e.g. `ModalHeader`, that takes its parent's ID, so it also works outside the slot, inside a form for example. Add a section when a Flowbite example or a caller needs it, not for symmetry.
+
+### IDs
+
+A component takes `id:` for its own root and generates one with a component-specific prefix when it's blank. A reference to another element is `<target>_id:`: `modal_id:`, `drawer_id:`, `menu_id:`, `toolbar_id:`.
+
+## Wiring and accessibility
+
+- The parent owns wiring. When it builds a slot, it passes IDs, `aria-labelledby` or `aria-describedby`, and Flowbite's `data-*` attributes. Callers never have to repeat them.
+- A standalone sub-component takes its wiring as a **required** keyword: `ModalHeader` requires `modal_id:`. It never guesses or silently renders unwired.
+- A child that adapts to its parent implements `apply_slot_context` and accepts unknown keywords with `**`, so parents can add context later without breaking it.
+- Decorative visuals get `aria-hidden`. A visual that carries meaning takes a label keyword.
+- Behavior that Flowbite's JavaScript doesn't cover ships as a `gustwave--*` Stimulus controller, which the component wires up itself, e.g. `gustwave--focus-trap` on Modal.
+
+## Public API and stability
+
+For an extensible library, extension points are part of the contract:
+
+| Tier | Includes | A change to it |
+|---|---|---|
+| Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `trigger_options`; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
+| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` | Is breaking. Follows the component's status. |
+| Internal | Options marked `internal: true`; private helpers; the class strings themselves, which follow Flowbite | Isn't breaking. |
+
+## Component lifecycle
+
+Every component has a status: alpha, beta or stable. A component on its way out is deprecated. Every new component starts at alpha, and so does every existing component when statuses are introduced (D3).
+
+Statuses are being introduced (*planned*). Until a component declares one, treat it as alpha.
+
+### Releases
+
+While Gustwave is at 0.x:
+
+- **Patch releases** only contain fixes. They deprecate nothing and change no API.
+- **Minor releases** contain everything else, including breaking changes, each with an upgrade note in the changelog.
+- **A deprecation comes one minor release before the removal.** Deprecate in 0.2.0, remove in 0.3.0 (D1).
+- **1.0** comes once minor releases no longer break anything: when every component that's meant to ship is stable.
+
+The status says how much of that protection a component gets:
+
+| Status | Meant for | How its public and extension API may change |
+|---|---|---|
+| Alpha | Early adopters who expect change | In any minor release, with an upgrade note under Breaking Changes. Deprecating first is welcome but not required. |
+| Beta | Anyone. The API has settled and is used for real. | Only through a deprecation: deprecated in one minor release, removed in the next. |
+| Stable | Anyone, long term | Like beta while Gustwave is at 0.x. From 1.0, removals only in a major release. |
+| Deprecated | Nobody new | Logs a warning and is removed in the next minor release. |
+
+After 1.0, alpha and beta components stay exempt from semantic versioning, so new components can still start at alpha.
+
+### From alpha to beta
+
+A component moves to beta when all of these hold:
+
+1. **It follows this document.** No open `gustwave-design` issues for it, and the convention specs pass.
+2. **Its Flowbite page is covered.** Every example on the component's Flowbite docs page is `previewed`, `composable`, `tailwind` or `out_of_scope` in `lookbook/flowbite.yml`. Any `partial` or `feature_gap` example names what's missing, and adding it won't change existing keywords or slots.
+3. **An application uses it in production.**
+4. **It's accessible.** Automated accessibility checks pass on every preview. For interactive components, keyboard and screen reader behavior have been checked by hand.
+5. **It's documented.** The class docs have an example for every slot, and there's a preview for every variant.
+6. **Its API held still.** Its public and extension API didn't change in the last minor release.
+
+### From beta to stable
+
+A component becomes stable when all of these hold:
+
+1. **Two minor releases without change.** Two consecutive minor releases in beta with no breaking change or deprecation in its public or extension API.
+2. **Three or more call sites,** in one or more applications.
+3. **Its dependencies are stable.** Every component it exposes through its API (slot types, sub-components, components it renders by default) is stable. `Dropdown` can't be stable before its triggers, menus and menu items are.
+4. **No open design questions.** No open issues that would change its API.
+
+### Lifecycle rules
+
+- **Statuses only move forward.** A beta or stable component that needs a breaking change goes through a deprecation; it doesn't go back to alpha.
+- **Promotions happen in minor releases** and are listed in the changelog under Changed.
+- **The status is a `@status` tag in the class docstring,** next to the YARD tags the gem already uses, as in the example below. It changes nothing at runtime. Every class states its own status, because a docstring isn't inherited: a new theme under a beta `Buttons::Base` still starts at alpha.
+- **Each preview's notes repeat the status,** because Lookbook reads preview comments, not component docstrings.
+- **A deprecated component also warns at runtime.** Its constructor calls `Gustwave.deprecator.warn` (*planned*) with what to use instead. The `@status deprecated` tag alone can't warn.
+
+```ruby
+module Gustwave
+  # Use Card to group content in a bordered box, as in Flowbite's cards.
+  # ...
+  # @status alpha
+  class Card < Gustwave::Component
+```
+
+## Extension scope
+
+ViewComponent's guide prefers composition over inheritance. Gustwave uses three tools, each for a reason:
+
+- **Composition** (a wrapper component) to name or preset a component in an app. This is the default.
+- **A subclass** for a variation that has to coexist with the original, like an extra slot type in one dropdown.
+- **`on_load` with `extend_*`** for app-wide changes. It changes the class itself, so it affects every caller and every subclass in the process, tests included. Use it for brand colors, not for one screen.
+
+## Enforcement
+
+Convention specs, like the existing constructor spec, keep the rules from drifting. All of these are *planned*. Each will land with an allowlist of known exceptions that points to their `gustwave-design` issues, and its failure message will link to the rule in this document.
+
+- **API snapshot.** Each component's status, keywords, options and values, slots and setters, and parts recorded in a YAML fixture, as `StyleSnapshots` does for classes. Every API change then shows up in review as a fixture diff, next to the status that says whether it needs a deprecation.
+- Every component's class docstring has exactly one `@status` tag with `alpha`, `beta`, `stable` or `deprecated`. Its preview's notes show the same status. A component tagged `deprecated` calls `Gustwave.deprecator.warn`.
+- Every `<name>_options:` keyword names a declared part. A `<name>_class:` keyword only names a state class a script swaps, never an element.
+- `icon:` and `trailing_icon:` keywords only set a `Visuals` slot or a positional slot, never render an icon of their own.
+- Components that render `DismissButton` expose it as a `dismiss_button` slot. Overlay headers expose `close_button`.
+- A Flowbite `data-*-trigger` setting is always the keyword `trigger_event:`.
+- Standalone section components require their parent's `<parent>_id:`.
+
+## Decisions
+
+Settled questions, so they aren't reopened without a new reason. A new decision gets the next number.
+
+- **D1. Deprecations come one minor release before the removal.** Never in a patch release. The deprecation goes under Deprecated in the changelog; the removal goes under Breaking Changes with an upgrade note. This covers the replacements this document calls for: `configure_<part>` and `<part>_class:` for elements, Tooltip's and Popover's `trigger`, SpeedDial's `icon_theme:`, and `IconToast`.
+- **D2. No `Component` suffix.** Components are named after their Flowbite pattern: `Gustwave::Card`, `Gustwave::Buttons::Default`. The `Gustwave::` namespace and `app/components` already say what they are. This departs from ViewComponent's recommendation on purpose, as Primer ViewComponents does. Apps choose their own convention for components that wrap Gustwave.
+- **D3. Everything starts at alpha.** Every existing component starts at alpha when statuses are introduced, including ones already used in production. Promotions follow [Component lifecycle](#component-lifecycle).
+- **D4. Alert keeps a positional `icon` slot.** `Visuals` isn't a fit: it always declares both sides as collections, needs a `size` variant Alert doesn't have, makes the root inline-flex, and hides visuals from screen readers, while Alert's icon carries meaning. Timeline's `marker` is the precedent. See [Icons and other visuals](#icons-and-other-visuals).
+- **D5. Tabs keeps `active_class:` and `inactive_class:`, and gets nothing more for now.** Flowbite's own examples need per-instance state classes: the purple active tab, and Card's nav and full-width tabs. `extend_variant :style` alone would need a new style for each. They stay strings, not `active_options:`, because Flowbite swaps them on a state, not an element with attributes. Anything beyond that waits until a caller needs it. See [Styling a part](#styling-a-part).
