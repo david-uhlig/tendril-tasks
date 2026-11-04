@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+- Upgrade Ruby to 3.4.12 and Rails to 8.1.4.1, and update Addressable, Crass, Loofah, Nokogiri, Rack, Rails HTML Sanitizer and SQLite3, to fix known vulnerabilities. These include possible cross-site scripting, IP spoofing and a strong parameters bypass in Rails, and regular expression bugs in Ruby.
+
 ## [0.7.2] - 2026-10-12
 
 ### Fixed
