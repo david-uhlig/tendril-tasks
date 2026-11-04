@@ -16,22 +16,22 @@ module Gustwave
 
     # The component class rendered by the +menu+ slot, as a class or class name.
     #
-    # Set it to a subclass of Gustwave::Dropdowns::Menus::List to add item
-    # types without subclassing Dropdown. Set it whenever Dropdown loads, and
-    # use a class name, so both survive code reloading:
+    # Setting it on Gustwave::Dropdown itself, e.g. from +on_load+, is global:
+    # it changes the menu for every dropdown in the process, tests included.
+    # To change it in one place, set it on a subclass:
     #
     #   class MyList < Gustwave::Dropdowns::Menus::List
     #     extend_slot :items, types: { avatar: MyAvatarItem }
     #   end
     #
-    #   # config/initializers/gustwave.rb, for every dropdown
-    #   Rails.autoloaders.main.on_load("Gustwave::Dropdown") do |dropdown, _abspath|
-    #     dropdown.list_menu_class = "MyList"
+    #   class MyDropdown < Gustwave::Dropdown
+    #     self.list_menu_class = "MyList"
     #   end
     #
-    #   class MyDropdown < Gustwave::Dropdown
-    #     self.list_menu_class = "MyList" # only this subclass
-    #   end
+    # Use a class name, so it survives code reloading. This attribute is part of
+    # the extension API (see docs/design.md, "Public API and stability"). Changing
+    # or removing it is breaking. Dropdown is alpha, so changes come with an
+    # upgrade note; once Dropdown is beta, they go through a deprecation.
     class_attribute :list_menu_class,
                     instance_writer: false,
                     instance_predicate: false,
