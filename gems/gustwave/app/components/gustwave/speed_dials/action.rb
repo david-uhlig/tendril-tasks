@@ -21,7 +21,6 @@ module Gustwave
     #
     # @param text [String] the label of the action. Required.
     # @param icon [Symbol, nil] the name of the icon. Ignored when block content is given. Shorthand for the +icon+ slot.
-    # @param icon_theme [Symbol, nil] Deprecated, use the +icon+ slot or +icon_options: { theme: }+ instead.
     # @param icon_options [Hash] options for the icon, e.g. +theme+, +:solid+ (default) or +:outline+, and +class+.
     # @param tag [Symbol] the HTML tag to render, :button or :a. Defaults to :button.
     # @param color [Symbol] the color of the button, :default or :none. :none renders no base styles.
@@ -79,7 +78,6 @@ module Gustwave
 
       def initialize(text,
                      icon: nil,
-                     icon_theme: nil,
                      icon_options: {},
                      tag: DEFAULT,
                      color: DEFAULT,
@@ -90,10 +88,6 @@ module Gustwave
         @text = text
         @icon = icon
         @icon_options = icon_options
-        if icon_theme
-          Gustwave.deprecator.warn("Gustwave::SpeedDials::Action's `icon_theme:` is deprecated, use the icon slot or `icon_options: { theme: }` instead")
-          @icon_options = { theme: icon_theme }.merge(icon_options)
-        end
 
         select_options(tag:, color:, shape:, label_display:, label_placement:)
         @html_tag = option_value(:tag)

@@ -3,7 +3,6 @@ status: alpha
 constructor:
 - text
 - 'icon: (optional)'
-- 'icon_theme: (optional)'
 - 'icon_options: (optional)'
 - 'tag: (optional)'
 - 'color: (optional)'

@@ -143,23 +143,6 @@ RSpec.describe Gustwave::SpeedDials::Action, type: :component do
     expect(page).to have_selector("button svg[fill='currentColor']", count: 1)
   end
 
-  it "warns about icon_theme: and still renders its theme" do
-    allow(Gustwave.deprecator).to receive(:warn)
-
-    render_inline(described_class.new("Edit", icon: :edit, icon_theme: :outline))
-
-    expect(Gustwave.deprecator).to have_received(:warn).with(/icon_theme:.*deprecated/)
-    expect(page).to have_selector("button svg[fill='none']")
-  end
-
-  it "prefers icon_options: theme over icon_theme:" do
-    allow(Gustwave.deprecator).to receive(:warn)
-
-    render_inline(described_class.new("Edit", icon: :edit, icon_theme: :outline, icon_options: { theme: :solid }))
-
-    expect(page).to have_selector("button svg[fill='currentColor']")
-  end
-
   it "renders a square shape" do
     render_inline(described_class.new("Edit", shape: :square))
 
