@@ -34,6 +34,11 @@ module Gustwave
       render_with_template
     end
 
+    # The dismiss button customized with +with_dismiss_button+, nested in the layout.
+    def custom_dismiss_button
+      render_with_template
+    end
+
     def not_dismissible
       render Gustwave::Toast.new("Saving…", dismissible: false)
     end

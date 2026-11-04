@@ -33,9 +33,39 @@ module Gustwave
 
     def call
       tag.div(**@config) do
-        safe_join([ title_tag, close_button ].compact)
+        safe_join([ title_tag, (close_button if @close_button) ].compact)
       end
     end
+
+    # The button rendered when no +close_button+ is set. Public, because
+    # ViewComponent only finds +default_<slot>+ methods that are public.
+    def default_close_button
+      build_slot_close_button
+    end
+
+    # Hides the modal when clicked. The close button is rendered by default,
+    # see +close_button:+ to hide it.
+    #
+    # @param text [String, nil] text to display to screen readers. Defaults to a localized "Close".
+    # @param icon [Symbol] The icon to use for the close button. Defaults to +:close+.
+    # @param options [Hash] Additional HTML options passed to the button component. Its +class+ adds to the button's classes.
+    renders_one_extensible :close_button, ->(text = nil, icon: :close, **options) {
+      # Accepts +text:+ too, as a keyword, since the lambda's positional
+      # argument can't take it.
+      text ||= options.delete(:text)
+
+      button = Gustwave::Button.for(:inline).new(
+        sr_only(text.presence || t(".close")),
+        **configure_html_attributes(options,
+                                    color: :none,
+                                    class: "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white",
+                                    **Gustwave::Modal.trigger_options(@modal_id, action: :hide))
+      )
+      # Gustwave's icons draw within the middle half of their box, so this
+      # matches Flowbite's w-3 h-3 close icon
+      button.with_leading_visual_icon(icon, stroke_width: 2, class: "w-6 h-6")
+      button
+    }
 
     private
 
@@ -44,21 +74,6 @@ module Gustwave
     def title_tag
       options = @title_options.merge(class: class_names("font-semibold", @title_options[:class]))
       render Gustwave::Heading.new(text_or_content(text), tag: :h3, size: :xs, id: "#{@modal_id}-title", **options)
-    end
-
-    def close_button
-      return unless @close_button
-
-      button = Gustwave::Button.for(:inline).new(
-        sr_only(t(".close")),
-        color: :none,
-        class: "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white",
-        **Gustwave::Modal.trigger_options(@modal_id, action: :hide)
-      )
-      # Gustwave's icons draw within the middle half of their box, so this
-      # matches Flowbite's w-3 h-3 close icon
-      button.with_leading_visual_icon(:close, stroke_width: 2, class: "w-6 h-6")
-      render button
     end
   end
 end

@@ -17,5 +17,10 @@ module Gustwave
     def multiple_triggers
       render_with_template
     end
+
+    # The header's close button customized with +with_close_button+.
+    def custom_close_button
+      render_with_template
+    end
   end
 end
