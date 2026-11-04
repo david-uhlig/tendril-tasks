@@ -10,7 +10,7 @@ module Gustwave
   #     toast.with_dismiss_button(text: "Close notification")
   #   end
   #
-  # Without +dismissible: false+ no button is rendered, whatever the slot
+  # With +dismissible: false+ no button is rendered, whatever the slot
   # holds.
   #
   # To place the button in your own layout, call +dismiss_button+ in the
