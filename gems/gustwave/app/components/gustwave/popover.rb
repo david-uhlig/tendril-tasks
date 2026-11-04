@@ -47,14 +47,11 @@ module Gustwave
     #
     #   <%= link_to "Docs", docs_path, **popover.trigger_options(class: "underline", data: { controller: "x" }) %>
     #
-    # +trigger_event:+ is +:hover+ or +:click+. The deprecated +trigger:+ still works, and warns.
-    #
     # @param attributes [Hash] the trigger's own HTML attributes.
     def trigger_options(placement: DEFAULT,
                         trigger_event: DEFAULT,
                         offset: nil,
                         **attributes)
-      trigger_event = without_deprecated_trigger(attributes, trigger_event)
       popover_keys = %w[data-popover-target data-popover-placement data-popover-trigger data-popover-offset]
       options = attributes.reject { |key, _| popover_keys.include?(key.to_s) }
       event = option_value(:trigger_event, trigger_event:)
@@ -75,16 +72,6 @@ module Gustwave
     private
 
     attr_reader :text
-
-    # Takes the deprecated +trigger:+ out of +attributes+, so it isn't emitted
-    # as an HTML attribute, and warns. An explicit +trigger_event:+ wins over it.
-    def without_deprecated_trigger(attributes, trigger_event)
-      return trigger_event unless attributes.key?(:trigger)
-
-      Gustwave.deprecator.warn("#{self.class.name}'s `trigger:` is deprecated, use `trigger_event:` instead")
-      trigger = attributes.delete(:trigger)
-      trigger_event.equal?(DEFAULT) ? trigger : trigger_event
-    end
 
     # Splits the ids of +aria-describedby+, flat or within an +aria+ hash, off
     # +attributes+.

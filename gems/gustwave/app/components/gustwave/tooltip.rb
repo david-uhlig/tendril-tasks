@@ -83,11 +83,9 @@ module Gustwave
     #
     #   <%= link_to "Docs", docs_path, **tooltip.trigger_options("aria-describedby": "help", class: "underline") %>
     #
-    # @param trigger_event [Symbol] +:hover+ or +:click+. The deprecated
-    #   +trigger:+ still works, and warns.
+    # @param trigger_event [Symbol] +:hover+ or +:click+.
     # @param attributes [Hash] the trigger's own HTML attributes.
     def trigger_options(placement: DEFAULT, trigger_event: DEFAULT, **attributes)
-      trigger_event = without_deprecated_trigger(attributes, trigger_event)
       described_by, options = extract_described_by(attributes)
       tooltip_keys = %w[data-tooltip-target data-tooltip-placement data-tooltip-trigger data-tooltip-style]
       options = options.reject { |key, _| tooltip_keys.include?(key.to_s) }
@@ -102,16 +100,6 @@ module Gustwave
     private
 
     attr_reader :text
-
-    # Takes the deprecated +trigger:+ out of +attributes+, so it isn't emitted
-    # as an HTML attribute, and warns. An explicit +trigger_event:+ wins over it.
-    def without_deprecated_trigger(attributes, trigger_event)
-      return trigger_event unless attributes.key?(:trigger)
-
-      Gustwave.deprecator.warn("#{self.class.name}'s `trigger:` is deprecated, use `trigger_event:` instead")
-      trigger = attributes.delete(:trigger)
-      trigger_event.equal?(DEFAULT) ? trigger : trigger_event
-    end
 
     # Splits the ids of +aria-describedby+, flat or within an +aria+ hash, off
     # +attributes+.

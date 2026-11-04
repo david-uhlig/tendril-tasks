@@ -22,26 +22,6 @@ RSpec.shared_examples "a component with trigger options" do |prefix:, component_
         .to include("data-#{prefix}-placement" => :"bottom-start", "data-#{prefix}-trigger" => :click)
     end
 
-    it "warns about the deprecated trigger:, and passes it on as trigger_event:" do
-      options = nil
-      expect { options = component.trigger_options(trigger: :click) }
-        .to output(/`trigger:` is deprecated, use `trigger_event:` instead/).to_stderr
-      expect(options).to include("data-#{prefix}-trigger" => :click)
-    end
-
-    it "doesn't emit the deprecated trigger: as an HTML attribute" do
-      options = nil
-      expect { options = component.trigger_options(trigger: :click, class: "x") }.to output.to_stderr
-      expect(options.keys.map(&:to_s)).not_to include("trigger")
-      expect(options).to include(class: "x")
-    end
-
-    it "lets an explicit trigger_event: win over the deprecated trigger:" do
-      options = nil
-      expect { options = component.trigger_options(trigger_event: :click, trigger: :hover) }.to output.to_stderr
-      expect(options).to include("data-#{prefix}-trigger" => :click)
-    end
-
     it "raises for an unknown placement" do
       expect { component.trigger_options(placement: :above) }
         .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :above for :placement/)
