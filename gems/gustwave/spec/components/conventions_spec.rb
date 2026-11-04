@@ -89,12 +89,10 @@ RSpec.describe "Component conventions" do
     "Gustwave::IconToast" => { "icon_keyword: icon" => 519 },
     "Gustwave::ModalHeader" => { "button_keyword: close_button" => 518 },
     "Gustwave::Pagination::Link" => { "icon_keyword: icon" => 520 },
-    "Gustwave::Popover" => { "trigger_name: option trigger" => 522, "trigger_name: trigger_options(trigger:)" => 522 },
     "Gustwave::SpeedDials::Action" => { "icon_keyword: icon" => 520 },
     "Gustwave::SpeedDials::Trigger" => { "icon_keyword: icon" => 520 },
     "Gustwave::Tab" => { "configure_method: configure_selection" => 523, "configure_method: configure_classes" => 523 },
-    "Gustwave::Toast" => { "dismiss_slot: no dismiss_button slot" => 518 },
-    "Gustwave::Tooltip" => { "trigger_name: option trigger" => 522, "trigger_name: trigger_options(trigger:)" => 522 }
+    "Gustwave::Toast" => { "dismiss_slot: no dismiss_button slot" => 518 }
   }
 
   exceptions = {

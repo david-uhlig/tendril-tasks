@@ -31,7 +31,7 @@ options:
     - left
     - left-start
     - left-end
-  trigger:
+  trigger_event:
     default: hover
     values:
     - hover
