@@ -99,6 +99,36 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  describe "publication date in the future" do
+    include ActiveSupport::Testing::TimeHelpers
+
+    let(:publish_at) { 1.day.from_now.change(usec: 0) }
+
+    it "excludes projects published in the future from published" do
+      project = create(:project, published_at: publish_at)
+      expect(Project.published).not_to include(project)
+    end
+
+    it "includes projects published in the future in published once that time has passed" do
+      project = create(:project, published_at: publish_at)
+      travel_to(publish_at + 1.second) do
+        expect(Project.published).to include(project)
+      end
+    end
+
+    it "excludes projects published in the future from publicly_visible" do
+      project = create(:project, :with_published_tasks, published_at: publish_at)
+      expect(Project.publicly_visible).not_to include(project)
+    end
+
+    it "includes projects published in the future in publicly_visible once that time has passed" do
+      project = create(:project, :with_published_tasks, published_at: publish_at)
+      travel_to(publish_at + 1.second) do
+        expect(Project.publicly_visible).to include(project)
+      end
+    end
+  end
+
   describe "#visible?" do
     context "when project is published and has published tasks" do
       it "returns true" do

@@ -139,6 +139,26 @@ RSpec.describe "Tasks::Application", type: :request do
               expect(response.body).not_to include(%(target="task-application-#{user.id}"))
             end
           end
+
+          context "and the grace period has expired" do
+            it "doesn't update the comment" do
+              application = create(:task_application, :grace_period_expired, task: task, user: user, comment: "Count me in!")
+              expect {
+                patch task_application_path(task),
+                      params: { task_application: { comment: "edited comment" } },
+                      as: :turbo_stream
+              }.not_to change { application.reload.comment }
+            end
+
+            it "tells the user the message could not be updated" do
+              create(:task_application, :grace_period_expired, task: task, user: user, comment: "Count me in!")
+              patch task_application_path(task),
+                    params: { task_application: { comment: "edited comment" } },
+                    as: :turbo_stream
+              expect(response).to have_http_status(:ok)
+              expect(response.body).to include(I18n.t("tasks.application.update.we_couldnt_update_your_application"))
+            end
+          end
         end
 
         context "but the user hasn't previously applied to the task" do

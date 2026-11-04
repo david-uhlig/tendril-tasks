@@ -49,6 +49,62 @@ RSpec.describe Task, type: :model do
     end
   end
 
+  describe "publication date in the future" do
+    include ActiveSupport::Testing::TimeHelpers
+
+    let(:publish_at) { 1.day.from_now.change(usec: 0) }
+
+    it "excludes tasks published in the future from is_published" do
+      task = create(:task, :with_published_project, published_at: publish_at)
+      expect(Task.is_published).not_to include(task)
+    end
+
+    it "includes tasks published in the future in is_published once that time has passed" do
+      task = create(:task, :with_published_project, published_at: publish_at)
+      travel_to(publish_at + 1.second) do
+        expect(Task.is_published).to include(task)
+      end
+    end
+
+    it "excludes tasks published in the future from publicly_visible" do
+      task = create(:task, :with_published_project, published_at: publish_at)
+      expect(Task.publicly_visible).not_to include(task)
+    end
+
+    it "includes tasks published in the future in publicly_visible once that time has passed" do
+      task = create(:task, :with_published_project, published_at: publish_at)
+      travel_to(publish_at + 1.second) do
+        expect(Task.publicly_visible).to include(task)
+      end
+    end
+  end
+
+  describe "#new?" do
+    include ActiveSupport::Testing::TimeHelpers
+
+    before { freeze_time }
+
+    it "is true when the task was created just now" do
+      task = build(:task, created_at: Time.zone.now)
+      expect(task).to be_new
+    end
+
+    it "is true when the task was created just inside the threshold" do
+      task = build(:task, created_at: 2.weeks.ago + 1.second)
+      expect(task).to be_new
+    end
+
+    it "is false when the task was created exactly at the threshold" do
+      task = build(:task, created_at: 2.weeks.ago)
+      expect(task).not_to be_new
+    end
+
+    it "is false when the task was created just outside the threshold" do
+      task = build(:task, created_at: 2.weeks.ago - 1.second)
+      expect(task).not_to be_new
+    end
+  end
+
   describe "#visible?" do
     context "when task and project are published" do
       it "returns true" do
