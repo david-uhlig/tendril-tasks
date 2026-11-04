@@ -54,6 +54,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The buttons below the introduction on the home page lead to the next step. Signed in users go to "Find a task" and, once they applied for a task, to "My applications", otherwise to the initiatives. Visitors sign in or read how it works first.
 - The navigation is calmer. The label next to the logo is plain bold text behind a thin divider, also on the sign in page. The links sit next to the user menu or the login button, and the user's picture has a white ring with a soft shadow instead of a colored one.
 
+## [0.7.3] - 2026-11-04
+
+### Security
+- Upgrade Ruby to 3.4.12 and Rails to 8.1.4.1, and update Addressable, Crass, Loofah, Nokogiri, Rack, Rails HTML Sanitizer and SQLite3, to fix known vulnerabilities. These include possible cross-site scripting, IP spoofing and a strong parameters bypass in Rails, and regular expression bugs in Ruby.
+
 ## [0.7.2] - 2026-10-12
 
 ### Fixed
@@ -224,6 +229,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.0...HEAD
 [0.8.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.8.0
+[0.7.3]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.6.1...v0.7.0
