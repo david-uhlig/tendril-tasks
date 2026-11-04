@@ -2,7 +2,7 @@
 # the component, replacing the trigger's own, e.g. a click Popover and
 # Drawer, through Gustwave::HtmlAttributesHelper#without_controls.
 #
-# @param trigger_options [Hash] arguments that make +trigger_options+ set +aria-controls+, e.g. +{ trigger: :click }+
+# @param trigger_options [Hash] arguments that make +trigger_options+ set +aria-controls+, e.g. +{ trigger_event: :click }+
 # @param component_class [Class] component class to test (default `described_class`)
 RSpec.shared_examples "a component controlling its target" do |trigger_options: {}, component_class: described_class|
   describe "#trigger_options aria-controls" do
