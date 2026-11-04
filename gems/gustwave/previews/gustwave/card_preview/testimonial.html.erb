@@ -1,6 +1,4 @@
-<%= render Gustwave::Card.new(class: "mb-8 max-w-none shadow-xs md:mb-12") do |card| %>
-  <% card.configure_body(class: "grid p-0 md:grid-cols-2") %>
-
+<%= render Gustwave::Card.new(class: "mb-8 max-w-none shadow-xs md:mb-12", body_options: { class: "grid p-0 md:grid-cols-2" }) do %>
   <figure
     class="
       flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg

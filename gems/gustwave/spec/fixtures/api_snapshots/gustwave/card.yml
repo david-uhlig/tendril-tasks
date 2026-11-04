@@ -3,6 +3,7 @@ status: alpha
 constructor:
 - 'tag: (optional)'
 - 'horizontal: (optional)'
+- 'body_options: (optional)'
 - "**options"
 options:
   horizontal:
@@ -19,7 +20,6 @@ slots:
   image:
     many: false
 methods:
-- configure_body
 - image
 - image?
 - with_image

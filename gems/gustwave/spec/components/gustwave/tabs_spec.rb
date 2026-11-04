@@ -205,20 +205,48 @@ RSpec.describe Gustwave::Tabs, type: :component do
       expect(page.find("ul[role=tablist]")["data-tabs-inactive-classes"]).to include("text-purple-400")
     end
 
-    it "adds the list class to the list of button tabs" do
-      render_inline(described_class.new(style: :pills, list_class: "rounded-t-lg bg-gray-50")) do |tabs|
+    it "adds the list classes to the list of button tabs" do
+      render_inline(described_class.new(style: :pills, list_options: { class: "rounded-t-lg bg-gray-50" })) do |tabs|
         tabs.with_tab_button("A", id: "a", selected: true)
       end
 
       expect(classes_of("ul[role=tablist]")).to include("rounded-t-lg", "bg-gray-50", "text-gray-500")
     end
 
-    it "adds the list class to the list of link tabs" do
-      render_inline(described_class.new(style: :pills, list_class: "rounded-t-lg bg-gray-50")) do |tabs|
+    it "adds the list classes to the list of link tabs" do
+      render_inline(described_class.new(style: :pills, list_options: { class: "rounded-t-lg bg-gray-50" })) do |tabs|
         tabs.with_tab_link("Profile", href: "/profile", selected: true)
       end
 
       expect(classes_of("nav ul")).to include("rounded-t-lg", "bg-gray-50", "text-gray-500")
+    end
+
+    it "lets the list classes win conflicts with the style's classes" do
+      render_inline(described_class.new(style: :pills, list_options: { class: "text-red-600" })) do |tabs|
+        tabs.with_tab_button("A", id: "a", selected: true)
+      end
+
+      expect(classes_of("ul[role=tablist]")).to include("text-red-600").and(satisfy { !it.include?("text-gray-500") })
+    end
+
+    it "keeps the list's id and role" do
+      render_inline(described_class.new(style: :pills, list_options: { id: "other", role: "none" })) do |tabs|
+        tabs.with_tab_button("A", id: "a", selected: true)
+      end
+
+      expect(page).to have_selector("ul[role=tablist]")
+      expect(page).not_to have_selector("ul#other")
+    end
+
+    it "still takes list_class, with a deprecation warning" do
+      expect do
+        render_inline(described_class.new(style: :pills, list_class: "rounded-t-lg bg-gray-50")) do |tabs|
+          tabs.with_tab_button("A", id: "a", selected: true)
+        end
+      end.to output(/list_options/).to_stderr
+
+      expect(classes_of("ul[role=tablist]")).to include("rounded-t-lg", "bg-gray-50", "text-gray-500")
+      expect(rendered_content).not_to include("list_class")
     end
   end
 

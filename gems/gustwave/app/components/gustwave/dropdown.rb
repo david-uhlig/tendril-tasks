@@ -98,9 +98,7 @@ module Gustwave
     renders_one_extensible :menu, types: {
       list: ->(content_for: nil, list_options: {}, **options) {
         config = configure_html_attributes(options, content_for:, id: menu_id)
-        component = list_menu_class.to_s.constantize.new(**config)
-        component.configure_list(**list_options) if list_options.present?
-        component
+        list_menu_class.to_s.constantize.new(**config, list_options:)
       },
       generic: ->(text = nil, tag: :div, content_for: nil, **options) {
         config = configure_html_attributes(options, id: menu_id, tag:, content_for:)

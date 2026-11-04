@@ -1,7 +1,4 @@
-<%= render Gustwave::Navbar.new(class: "min-w-[320px] border-b border-gray-100 shadow-xs") do |navbar| %>
-  <% navbar.configure_container(class: "max-w-(--breakpoint-lg)") %>
-  <% navbar.configure_menu(class: "md:ms-auto md:me-8") %>
-
+<%= render Gustwave::Navbar.new(class: "min-w-[320px] border-b border-gray-100 shadow-xs", container_options: { class: "max-w-(--breakpoint-lg)" }, menu_options: { class: "md:ms-auto md:me-8" }) do |navbar| %>
   <%# Brand logo and label %>
   <% navbar.with_brand do %>
     <%= render Navigation::BrandComponent.new %>
