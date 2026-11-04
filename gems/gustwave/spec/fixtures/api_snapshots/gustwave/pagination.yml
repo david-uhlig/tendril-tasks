@@ -1,0 +1,39 @@
+---
+status: alpha
+constructor:
+- 'size: (optional)'
+- "**options"
+options:
+  size:
+    default: sm
+    values:
+    - sm
+    - md
+    - none
+parts:
+- list
+slots:
+  next_page:
+    many: false
+  pages:
+    many: true
+  previous_page:
+    many: false
+methods:
+- next_page
+- next_page?
+- pages
+- pages?
+- previous_page
+- previous_page?
+- with_next_page
+- with_next_page_content
+- with_page
+- with_page_content
+- with_pages
+- with_previous_page
+- with_previous_page_content
+slot_builders:
+- build_slot_next_page
+- build_slot_page
+- build_slot_previous_page

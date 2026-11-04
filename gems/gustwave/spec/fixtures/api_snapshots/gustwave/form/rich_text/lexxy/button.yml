@@ -1,0 +1,7 @@
+---
+status: alpha
+constructor:
+- attribute
+- 'icon_or_text: (optional)'
+- 'disabled: (optional)'
+- "**options"

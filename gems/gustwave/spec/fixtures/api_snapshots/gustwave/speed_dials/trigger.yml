@@ -1,0 +1,13 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'icon: (optional)'
+- 'shape: (optional)'
+- "**options"
+options:
+  shape:
+    default: round
+    values:
+    - round
+    - square

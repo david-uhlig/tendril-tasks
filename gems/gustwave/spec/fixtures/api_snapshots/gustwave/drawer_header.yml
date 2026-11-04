@@ -1,0 +1,19 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'drawer_id:'
+- 'close_button: (optional)'
+- 'icon: (optional)'
+- 'edge: (optional)'
+- 'title_options: (optional)'
+- "**options"
+options:
+  edge:
+    default: 'false'
+parts:
+- close_button
+- handle
+- handle_bar
+- title
+- title_icon

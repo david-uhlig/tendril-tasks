@@ -1,0 +1,52 @@
+---
+status: alpha
+constructor:
+- 'id: (optional)'
+- 'style: (optional)'
+- 'vertical: (optional)'
+- 'active_class: (optional)'
+- 'inactive_class: (optional)'
+- 'list_class: (optional)'
+- "**options"
+options:
+  style:
+    default: default
+    values:
+    - default
+    - underline
+    - pills
+    - full_width
+    - none
+  vertical:
+    default: 'false'
+parts:
+- active
+- disabled
+- first_tab
+- inactive
+- item
+- last_tab
+- list
+- nav
+- panel
+- panels
+- tab
+slots:
+  tabs:
+    many: true
+    types:
+    - button
+    - link
+methods:
+- tabs
+- tabs?
+- with_tab
+- with_tab_button
+- with_tab_button_content
+- with_tab_content
+- with_tab_link
+- with_tab_link_content
+- with_tabs
+slot_builders:
+- build_slot_tab_button
+- build_slot_tab_link

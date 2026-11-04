@@ -1,0 +1,33 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'tag: (optional)'
+- 'size: (optional)'
+- 'responsive: (optional)'
+- "**options"
+options:
+  responsive:
+    default: 'false'
+  size:
+    default: 2xl
+    values:
+    - 2xl
+    - xl
+    - lg
+    - md
+    - sm
+    - xs
+    - none
+  tag:
+    default: h2
+    values:
+    - h1
+    - h2
+    - h3
+    - h4
+    - h5
+    - h6
+derived:
+  default_size:
+    from: tag

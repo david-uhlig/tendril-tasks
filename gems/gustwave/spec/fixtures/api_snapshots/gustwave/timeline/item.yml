@@ -1,0 +1,37 @@
+---
+status: alpha
+constructor:
+- 'orientation: (optional)'
+- 'marker_options: (optional)'
+- "**options"
+options:
+  orientation:
+    default: vertical
+    values:
+    - vertical
+    - horizontal
+    - none
+parts:
+- connector
+- content
+- dot
+- marker
+- track
+slots:
+  marker:
+    many: false
+    types:
+    - icon
+    - image
+methods:
+- marker
+- marker?
+- with_marker
+- with_marker_content
+- with_marker_icon
+- with_marker_icon_content
+- with_marker_image
+- with_marker_image_content
+slot_builders:
+- build_slot_marker_icon
+- build_slot_marker_image

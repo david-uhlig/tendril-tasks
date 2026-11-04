@@ -1,0 +1,28 @@
+---
+status: alpha
+constructor:
+- 'tag: (optional)'
+- 'horizontal: (optional)'
+- "**options"
+options:
+  horizontal:
+    default: 'false'
+  tag:
+    default: div
+    values:
+    - div
+    - a
+parts:
+- body
+- image
+slots:
+  image:
+    many: false
+methods:
+- configure_body
+- image
+- image?
+- with_image
+- with_image_content
+slot_builders:
+- build_slot_image

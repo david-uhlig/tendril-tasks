@@ -1,0 +1,23 @@
+---
+status: alpha
+constructor:
+- "**options"
+parts:
+- description
+slots:
+  description:
+    many: false
+  title:
+    many: false
+methods:
+- description
+- description?
+- title
+- title?
+- with_description
+- with_description_content
+- with_title
+- with_title_content
+slot_builders:
+- build_slot_description
+- build_slot_title

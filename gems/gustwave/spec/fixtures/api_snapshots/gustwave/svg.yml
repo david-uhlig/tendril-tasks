@@ -1,0 +1,9 @@
+---
+status: alpha
+constructor:
+- source (optional)
+- "**options"
+methods:
+- inline_svg
+- inline_svg_pack_tag
+- inline_svg_tag

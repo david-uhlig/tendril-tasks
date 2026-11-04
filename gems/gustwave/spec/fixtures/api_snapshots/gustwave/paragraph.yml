@@ -1,0 +1,20 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'color: (optional)'
+- 'align: (optional)'
+- "**options"
+options:
+  align:
+    default: none
+    values:
+    - left
+    - center
+    - right
+    - none
+  color:
+    default: default
+    values:
+    - default
+    - none

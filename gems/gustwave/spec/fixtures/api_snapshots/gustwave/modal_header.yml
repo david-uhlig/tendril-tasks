@@ -1,0 +1,8 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'modal_id:'
+- 'close_button: (optional)'
+- 'title_options: (optional)'
+- "**options"

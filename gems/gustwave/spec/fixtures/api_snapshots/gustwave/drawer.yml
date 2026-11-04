@@ -1,0 +1,42 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'id: (optional)'
+- 'placement: (optional)'
+- 'backdrop: (optional)'
+- 'body_scrolling: (optional)'
+- 'edge: (optional)'
+- 'edge_offset: (optional)'
+- "**options"
+options:
+  action:
+    default: toggle
+    values:
+    - toggle
+    - show
+    - hide
+  edge:
+    default: 'false'
+  placement:
+    default: left
+    values:
+    - left
+    - right
+    - top
+    - bottom
+    - none
+slots:
+  header:
+    many: false
+methods:
+- header
+- header?
+- id
+- trigger_options
+- with_header
+- with_header_content
+class_methods:
+- trigger_options
+slot_builders:
+- build_slot_header

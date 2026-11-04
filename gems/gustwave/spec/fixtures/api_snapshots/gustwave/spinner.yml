@@ -1,0 +1,50 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'color: (optional)'
+- 'size: (optional)'
+- 'align: (optional)'
+- 'position: (optional)'
+- "**options"
+options:
+  align:
+    default: none
+    values:
+    - left
+    - center
+    - right
+    - none
+  color:
+    default: blue
+    values:
+    - base
+    - blue
+    - dark
+    - green
+    - red
+    - yellow
+    - pink
+    - purple
+    - none
+  position:
+    default: none
+    values:
+    - top_left
+    - top_center
+    - top_right
+    - middle_left
+    - middle_center
+    - middle_right
+    - bottom_left
+    - bottom_center
+    - bottom_right
+    - top
+    - middle
+    - center
+    - bottom
+    - none
+parts:
+- icon
+methods:
+- configure_icon

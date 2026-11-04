@@ -1,0 +1,22 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'href:'
+- 'icon: (optional)'
+- 'size: (optional)'
+- 'active: (optional)'
+- "**options"
+options:
+  active:
+    default: 'false'
+  size:
+    default: sm
+    values:
+    - sm
+    - md
+    - none
+parts:
+- icon
+methods:
+- apply_slot_context

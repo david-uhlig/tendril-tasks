@@ -1,0 +1,52 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'menu_id: (optional)'
+- 'icon: (optional)'
+- 'trailing_icon: (optional)'
+- 'inline: (optional)'
+- 'trigger_event: (optional)'
+- 'delay: (optional)'
+- 'placement: (optional)'
+- 'offset_distance: (optional)'
+- 'offset_skidding: (optional)'
+- "**options"
+slots:
+  menu:
+    many: false
+    types:
+    - generic
+    - list
+  trigger:
+    many: false
+    types:
+    - component
+    - generic
+methods:
+- list_menu_class
+- menu
+- menu?
+- menu_id
+- trigger
+- trigger?
+- with_menu
+- with_menu_content
+- with_menu_generic
+- with_menu_generic_content
+- with_menu_list
+- with_menu_list_content
+- with_trigger
+- with_trigger_component
+- with_trigger_component_content
+- with_trigger_content
+- with_trigger_generic
+- with_trigger_generic_content
+class_methods:
+- list_menu_class
+- list_menu_class=
+slot_builders:
+- build_slot_menu_generic
+- build_slot_menu_list
+- build_slot_trigger_component
+- build_slot_trigger_generic

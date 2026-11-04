@@ -1,0 +1,42 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'id: (optional)'
+- 'color: (optional)'
+- 'arrow: (optional)'
+- "**options"
+options:
+  color:
+    default: dark
+    values:
+    - dark
+    - light
+    - none
+  placement:
+    default: top
+    values:
+    - auto
+    - auto-start
+    - auto-end
+    - top
+    - top-start
+    - top-end
+    - bottom
+    - bottom-start
+    - bottom-end
+    - right
+    - right-start
+    - right-end
+    - left
+    - left-start
+    - left-end
+  trigger:
+    default: hover
+    values:
+    - hover
+    - click
+parts:
+- arrow
+methods:
+- trigger_options

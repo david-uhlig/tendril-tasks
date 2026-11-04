@@ -1,0 +1,48 @@
+---
+status: alpha
+constructor:
+- text
+- 'icon: (optional)'
+- 'icon_theme: (optional)'
+- 'tag: (optional)'
+- 'color: (optional)'
+- 'shape: (optional)'
+- 'label_display: (optional)'
+- 'label_placement: (optional)'
+- "**options"
+options:
+  color:
+    default: default
+    values:
+    - default
+    - none
+  label_display:
+    default: tooltip
+    values:
+    - tooltip
+    - inside
+    - outside
+    - none
+  label_placement:
+    default: left
+    values:
+    - left
+    - right
+    - top
+    - bottom
+    - none
+  shape:
+    default: round
+    values:
+    - round
+    - square
+    - none
+  tag:
+    default: button
+    values:
+    - button
+    - a
+parts:
+- icon
+- inside_label
+- outside_label

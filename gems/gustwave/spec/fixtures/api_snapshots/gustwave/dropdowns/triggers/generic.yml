@@ -1,0 +1,35 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'tag: (optional)'
+- "**options"
+options:
+  placement:
+    default: bottom
+    values:
+    - auto
+    - auto-start
+    - auto-end
+    - top
+    - top-start
+    - top-end
+    - bottom
+    - bottom-start
+    - bottom-end
+    - right
+    - right-start
+    - right-end
+    - left
+    - left-start
+    - left-end
+  tag:
+    default: div
+    values:
+    - div
+    - span
+  trigger_event:
+    default: click
+    values:
+    - click
+    - hover

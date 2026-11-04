@@ -1,0 +1,66 @@
+---
+status: alpha
+constructor:
+- 'id:'
+- 'content_for: (optional)'
+- 'tag: (optional)'
+- "**options"
+options:
+  list_tag:
+    default: ul
+    values:
+    - ul
+    - ol
+  tag:
+    default: div
+    values:
+    - div
+    - nav
+    - section
+parts:
+- footer
+- header
+- list
+- list_item
+slots:
+  footer:
+    many: false
+  header:
+    many: false
+  items:
+    many: true
+    types:
+    - divider
+    - dropdown
+    - generic
+    - link
+methods:
+- configure_list
+- footer
+- footer?
+- header
+- header?
+- items
+- items?
+- with_footer
+- with_footer_content
+- with_header
+- with_header_content
+- with_item
+- with_item_content
+- with_item_divider
+- with_item_divider_content
+- with_item_dropdown
+- with_item_dropdown_content
+- with_item_generic
+- with_item_generic_content
+- with_item_link
+- with_item_link_content
+- with_items
+slot_builders:
+- build_slot_footer
+- build_slot_header
+- build_slot_item_divider
+- build_slot_item_dropdown
+- build_slot_item_generic
+- build_slot_item_link

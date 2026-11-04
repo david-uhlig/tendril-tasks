@@ -1,0 +1,12 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'href: (optional)'
+- 'icon: (optional)'
+- 'trailing_icon: (optional)'
+- 'placement: (optional)'
+- 'trigger_event: (optional)'
+- "**options"
+parts:
+- flex_grow

@@ -1,0 +1,19 @@
+---
+status: alpha
+constructor:
+- 'outline: (optional)'
+- "**options"
+options:
+  outline:
+    default: 'false'
+slots:
+  buttons:
+    many: true
+methods:
+- buttons
+- buttons?
+- with_button
+- with_button_content
+- with_buttons
+slot_builders:
+- build_slot_button

@@ -1,0 +1,53 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'title: (optional)'
+- 'color: (optional)'
+- 'align: (optional)'
+- 'border: (optional)'
+- 'accent: (optional)'
+- "**options"
+options:
+  accent:
+    default: 'false'
+  align:
+    default: center
+    values:
+    - center
+    - start
+    - none
+  border:
+    default: 'false'
+  color:
+    default: blue
+    values:
+    - blue
+    - red
+    - green
+    - yellow
+    - dark
+    - none
+parts:
+- body
+- dismiss_button
+- icon
+- title
+slots:
+  dismiss_button:
+    many: false
+  icon:
+    many: false
+methods:
+- dismiss_button
+- dismiss_button?
+- icon
+- icon?
+- id
+- with_dismiss_button
+- with_dismiss_button_content
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_dismiss_button
+- build_slot_icon
