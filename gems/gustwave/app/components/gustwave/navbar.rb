@@ -27,7 +27,7 @@ module Gustwave
   # +generic+ item. Use +class: "md:hidden"+ on it to show it on small screens
   # only.
   #
-  # Use +configure_container+ and +configure_menu+ to set the HTML attributes
+  # Use +container_options:+ and +menu_options:+ to set the HTML attributes
   # of the container and the menu. Their classes win conflicts with the
   # defaults.
   #
@@ -93,28 +93,16 @@ module Gustwave
     # @param menu_id [String, nil] the id of the menu, which the toggle controls. Generated if +nil+.
     # @param sticky [Boolean] whether the navbar sticks to the top of the viewport. Defaults to +false+.
     # @param solid [Boolean] whether the navbar has a solid grey background. Defaults to +false+.
+    # @param container_options [Hash] additional HTML attributes passed to the container element, which holds the brand, actions and menu.
+    # @param menu_options [Hash] additional HTML attributes passed to the menu element, which holds the list of items. Its +id+ is always +menu_id+.
     # @param options [Hash] additional HTML attributes passed to the +nav+ element.
-    def initialize(menu_id: nil, sticky: false, solid: false, **options)
+    def initialize(menu_id: nil, sticky: false, solid: false, container_options: {}, menu_options: {}, **options)
       @menu_id = menu_id || generate_random_id(prefix: "navbar")
       select_options(sticky:, solid:)
       @config = attributes_for(options)
-      configure_container
-      configure_menu
+      @container_config = attributes_for(:container, container_options)
+      @menu_config = attributes_for(:menu, menu_options).merge(id: @menu_id)
       @list_config = attributes_for(:list, {})
-    end
-
-    # Configure the container element, which holds the brand, actions and menu.
-    #
-    # @param options [Hash] additional HTML attributes passed to the container element.
-    def configure_container(**options)
-      @container_config = attributes_for(:container, options)
-    end
-
-    # Configure the menu element, which holds the list of items.
-    #
-    # @param options [Hash] additional HTML attributes passed to the menu element. Its +id+ is always +menu_id+.
-    def configure_menu(**options)
-      @menu_config = attributes_for(:menu, options).merge(id: menu_id)
     end
 
     def before_render

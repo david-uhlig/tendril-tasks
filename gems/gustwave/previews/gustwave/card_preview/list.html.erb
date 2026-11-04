@@ -1,6 +1,4 @@
-<%= render Gustwave::Card.new(class: "w-full max-w-md") do |card| %>
-  <% card.configure_body(class: "p-4 sm:p-8") %>
-
+<%= render Gustwave::Card.new(class: "w-full max-w-md", body_options: { class: "p-4 sm:p-8" }) do %>
   <div class="flex items-center justify-between mb-4">
     <%= render Gustwave::Heading.new("Latest customers", tag: :h5, class: "text-xl font-bold leading-none") %>
     <%= render Gustwave::Link.new("View all", href: "#", class: "text-sm") %>

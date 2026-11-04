@@ -65,23 +65,25 @@ RSpec.describe Gustwave::Dropdowns::Menus::List, type: :component do
     end
   end
 
-  context "#configure_list" do
+  context "with list_options" do
     it "renders custom list tag" do
-      render_inline(described_class.new(id: "dropdown")) do
-        it.configure_list(tag: :ol)
-      end
+      render_inline(described_class.new(id: "dropdown", list_options: { tag: :ol }))
       expect(rendered_content).to have_selector("div[id='dropdown']>ol")
     end
 
     it "renders custom list HTML attributes" do
-      render_inline(described_class.new(id: "dropdown")) do
-        it.configure_list(id: "list-1234", class: "bg-white")
-      end
+      render_inline(described_class.new(id: "dropdown", list_options: { id: "list-1234", class: "bg-white" }))
       expect(rendered_content).to have_selector("div>ul[id='list-1234'].bg-white")
     end
 
+    it "lets its classes win conflicts with the list's classes" do
+      render_inline(described_class.new(id: "dropdown", list_options: { class: "py-0" }))
+      expect(rendered_content).to have_selector("div>ul.py-0")
+      expect(rendered_content).not_to have_selector("div>ul.py-2")
+    end
+
     it "raises for a list tag other than ul or ol" do
-      expect { described_class.new(id: "dropdown").configure_list(tag: :div) }
+      expect { described_class.new(id: "dropdown", list_options: { tag: :div }) }
         .to raise_error(Gustwave::Options::UnknownValueError, /Unknown value :div for :list_tag/)
     end
   end

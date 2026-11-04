@@ -20,7 +20,7 @@ module Gustwave
               },
               class: "mx-8"
             )
-            @options = @popover.trigger_options(trigger: :click,
+            @options = @popover.trigger_options(trigger_event: :click,
                                                 placement: :"top-end",
                                                 disabled: @disabled,
                                                 **@options)

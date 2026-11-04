@@ -162,31 +162,22 @@ RSpec.describe Gustwave::Card, type: :component do
     end
   end
 
-  describe "configure_body" do
+  describe "body_options" do
     it "adds the caller's classes to the body" do
-      render_inline(described_class.new) do |card|
-        card.configure_body(class: "px-0 pb-10 pt-4")
-        "Some text"
-      end
+      render_inline(described_class.new(body_options: { class: "px-0 pb-10 pt-4" })) { "Some text" }
 
       expect(page).to have_selector("div.px-0.pb-10.pt-4", text: "Some text")
     end
 
     it "lets the caller's classes win conflicts on the body" do
-      render_inline(described_class.new) do |card|
-        card.configure_body(class: "p-0")
-        "Some text"
-      end
+      render_inline(described_class.new(body_options: { class: "p-0" })) { "Some text" }
 
       expect(page).to have_selector("div.p-0", text: "Some text")
       expect(page).to have_no_selector("div.p-6")
     end
 
     it "keeps the body classes that the caller doesn't override" do
-      render_inline(described_class.new) do |card|
-        card.configure_body(id: "body")
-        "Some text"
-      end
+      render_inline(described_class.new(body_options: { id: "body" })) { "Some text" }
 
       expect(page).to have_selector("div#body.p-6", text: "Some text")
     end

@@ -6,6 +6,7 @@ constructor:
 - 'size: (optional)'
 - 'align: (optional)'
 - 'position: (optional)'
+- 'icon_options: (optional)'
 - "**options"
 options:
   align:
@@ -46,5 +47,3 @@ options:
     - none
 parts:
 - icon
-methods:
-- configure_icon
