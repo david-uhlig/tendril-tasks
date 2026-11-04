@@ -13,6 +13,8 @@ module Gustwave
   # Standalone, pass +modal_id+ and, to hide the close button, +close_button: false+:
   #
   #   <%= render Gustwave::ModalHeader.new("Delete task", modal_id: "delete-task", close_button: false) %>
+  #
+  # @status alpha
   class ModalHeader < Gustwave::Component
     base "flex items-center justify-between p-4 md:p-5 border-b border-gray-200 rounded-t dark:border-gray-600"
 

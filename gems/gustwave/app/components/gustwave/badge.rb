@@ -2,6 +2,8 @@
 
 module Gustwave
   # Renders leading and trailing visuals, see Gustwave::Visuals.
+  #
+  # @status alpha
   class Badge < Gustwave::Component
     include Gustwave::Visuals
 

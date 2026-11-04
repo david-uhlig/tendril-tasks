@@ -10,6 +10,8 @@ module Gustwave
   #       <p>Are you sure you want to delete this item?</p>
   #     <% end %>
   #   <% end %>
+  #
+  # @status alpha
   class ModalBody < Gustwave::Component
     base "p-4 md:p-5 space-y-4"
 

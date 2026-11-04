@@ -12,7 +12,7 @@ The short version:
 
 - Options for fixed choices, slots for parts the component has to place or wire, the content block for everything else. A new slot or option needs a reason from `docs/design.md`; when in doubt, leave it to the block.
 - No `Component` suffix: `Gustwave::Card`.
-- Every new component gets `@status alpha` in its class docstring, and its preview notes say so.
+- Every new component, nested and base classes included, gets `# @status alpha` as the last line of its class docstring. `spec/components/component_status_spec.rb` checks it. Don't change a status unless asked; promotions follow `docs/design.md`.
 - Style a part with `<part>_options:`. Never add `configure_<part>` or `<part>_class:` for an element. `<state>_class:` is only for classes a script swaps.
 - `dismiss_button` slot for elements that go away for good, `close_button` slot for overlays that reopen.
 - `Gustwave::Visuals` for visuals inline with text. A slot named after its role, like `icon` or `marker`, for a single visual the component places. `icon:` keywords are shorthand for a slot, never the only way.
@@ -27,7 +27,8 @@ If a rule doesn't fit your case, stop and ask rather than working around it. A c
 
 - `app/components/gustwave/`: components. `app/components/concerns/gustwave/`: the Options, Styling, ExtensibleSlots and Visuals concerns.
 - `previews/gustwave/`: ViewComponent previews, one scenario per Flowbite example where possible.
-- `lookbook/flowbite.yml`: every Flowbite docs example and how far Gustwave covers it. A spec fails until every example has a status.
+- `lookbook/flowbite.yml`: every Flowbite docs example and how far Gustwave covers it. A spec fails until every example has a coverage status.
+- `lookbook/component_status.rb`: reads each component's `@status` tag, for the status spec and Lookbook's Status panel. Like `lookbook/flowbite.yml`, it isn't shipped with the gem.
 - `spec/`: specs, run against the Rails app in `spec/dummy`. `spec/fixtures/style_snapshots/` holds the class snapshots.
 - `script/`, `bin/`: the icon importer and the Flowbite inventory.
 

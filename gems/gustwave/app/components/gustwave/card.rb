@@ -50,6 +50,8 @@ module Gustwave
   # Spacing around the card is up to the caller, e.g. +class: "mb-4"+. Caller
   # classes win conflicts with the card's classes, e.g. +class: "max-w-md"+
   # replaces the default +max-w-sm+.
+  #
+  # @status alpha
   class Card < Gustwave::Component
     option :tag, default: :div, values: %i[div a]
 

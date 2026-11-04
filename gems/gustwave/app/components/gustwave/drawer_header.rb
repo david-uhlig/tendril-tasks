@@ -17,6 +17,8 @@ module Gustwave
   #     <% d.with_header("Info", icon: :info_circle) %>
   #     …body…
   #   <% end %>
+  #
+  # @status alpha
   class DrawerHeader < Gustwave::Component
     part :title, "inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
     part :title_icon, "w-4 h-4 me-2.5"

@@ -2,6 +2,8 @@
 
 module Gustwave
   # Use Spinner as a loading indicator
+  #
+  # @status alpha
   class Spinner < Gustwave::Component
     include Gustwave::Positionable
 

@@ -32,6 +32,7 @@ module Gustwave
   #
   #   <%= render Gustwave::Paragraph.new("Plain", color: :none) %>
   #
+  # @status alpha
   class Paragraph < Gustwave::Component
     unstyled color: :none
 

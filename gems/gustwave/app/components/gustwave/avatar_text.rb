@@ -31,6 +31,8 @@ module Gustwave
   #   available options. Default is :md.
   # @param options [Hash] Arguments and HTML attributes passed to the
   #  +Gustwave::Avatar+ component, e.g. +shape+ and +border+.
+  #
+  # @status alpha
   class AvatarText < Gustwave::Component
     base "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
 

@@ -27,6 +27,7 @@ module Gustwave
   #
   #   <%= render Gustwave::Link.new("Imprint", href: "/imprint", color: :none) %>
   #
+  # @status alpha
   class Link < Gustwave::Component
     base "font-medium"
     unstyled color: :none

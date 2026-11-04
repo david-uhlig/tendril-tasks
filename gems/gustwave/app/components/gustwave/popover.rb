@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # @status alpha
   class Popover < Gustwave::Component
     # See: https://popper.js.org/docs/v2/constructors/#options
     option :placement, default: :top, values: %i[

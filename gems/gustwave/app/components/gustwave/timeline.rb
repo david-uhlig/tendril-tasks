@@ -58,6 +58,8 @@ module Gustwave
   #
   # @param orientation [Symbol] +:vertical+ (default) or +:horizontal+. The items take the timeline's orientation.
   # @param options [Hash] HTML attributes for the +<ol>+ element.
+  #
+  # @status alpha
   class Timeline < Gustwave::Component
     variant :orientation, default: :vertical, values: {
       vertical: "relative border-s border-gray-200 dark:border-gray-700",
@@ -79,6 +81,8 @@ module Gustwave
     end
 
     # An item of a Gustwave::Timeline, set with +with_item+.
+    #
+    # @status alpha
     class Item < Gustwave::Component
       part :dot
       part :marker

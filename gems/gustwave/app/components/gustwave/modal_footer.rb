@@ -11,6 +11,8 @@ module Gustwave
   #       <button type="button">No, cancel</button>
   #     <% end %>
   #   <% end %>
+  #
+  # @status alpha
   class ModalFooter < Gustwave::Component
     # The gap-3 replaces the ms-3 Flowbite puts on the second button
     base "flex items-center gap-3 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"

@@ -7,6 +7,8 @@ module Gustwave
     #
     # @example
     #   render Gustwave::SpeedDials::Trigger.new("Open menu", icon: :plus, color: :dark)
+    #
+    # @status alpha
     class Trigger < Gustwave::Component
       # The shape of the button. +:round+ renders a pill, +:square+ a rounded square.
       option :shape, default: :round, values: %i[round square]

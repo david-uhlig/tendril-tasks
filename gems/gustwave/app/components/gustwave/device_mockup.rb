@@ -49,6 +49,8 @@ module Gustwave
   # @param device [Symbol] +:phone+ (default), +:iphone+, +:android+, +:tablet+, +:laptop+, +:desktop+ or +:smartwatch+.
   # @param color [Symbol] +:dark+ (default), +:light+ or +:none+.
   # @param options [Hash] HTML attributes for the wrapper element.
+  #
+  # @status alpha
   class DeviceMockup < Gustwave::Component
     # The small pieces on the frame that share one color
     SIDE_PARTS = %i[notch action_button volume_up_button volume_down_button power_button crown crown_button].freeze

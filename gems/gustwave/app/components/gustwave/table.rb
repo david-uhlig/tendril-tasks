@@ -11,6 +11,8 @@ module Gustwave
   # * The +foot+ slot renders a +<tfoot>+ HTML element
   #
   # Block content gets appended at the end of any provided slots.
+  #
+  # @status alpha
   class Table < Gustwave::Component
     base "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
 

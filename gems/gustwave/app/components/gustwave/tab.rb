@@ -17,6 +17,8 @@ module Gustwave
   #
   # A link tab has no panel. Setting one raises when Gustwave is strict, and
   # is ignored otherwise.
+  #
+  # @status alpha
   class Tab < Gustwave::Component
     include Gustwave::Visuals
 

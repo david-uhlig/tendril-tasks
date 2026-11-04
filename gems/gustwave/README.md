@@ -124,7 +124,7 @@ Every component has a status that says how much its API may change:
 - **Stable:** like beta while Gustwave is at 0.x. From 1.0, removals only come in a major release.
 - **Deprecated:** logs a warning and is removed in the next minor release.
 
-Patch releases only contain fixes. Statuses are being introduced; until a component's docs show one, treat it as alpha. When a component moves up, and when it's ready to, is described under [Component lifecycle](docs/design.md#component-lifecycle).
+Patch releases only contain fixes. A component's class documentation names its status in a `@status` tag, and Lookbook shows it in the Status panel. Every component is alpha for now. When a component moves up, and when it's ready to, is described under [Component lifecycle](docs/design.md#component-lifecycle).
 
 ## Development
 

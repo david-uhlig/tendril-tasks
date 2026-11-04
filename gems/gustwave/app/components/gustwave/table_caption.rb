@@ -35,6 +35,8 @@ module Gustwave
   # 	  <h2>Table Title</h2>
   # 	  <p>Description text</p>
   #   <% end %>
+  #
+  # @status alpha
   class TableCaption < Gustwave::Component
     base "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
 

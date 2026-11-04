@@ -5,6 +5,8 @@ module Gustwave
     # One link in a Gustwave::Pagination. The pagination sets its position in
     # the list, its size and its default label. Pass +icon+ to show an icon
     # instead of the text, which then stays for screen readers only.
+    #
+    # @status alpha
     class Link < Gustwave::Component
       base "flex items-center justify-center leading-tight border"
 

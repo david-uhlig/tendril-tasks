@@ -44,6 +44,8 @@ module Gustwave
   #
   # The +list_class+ option adds classes to the list of tabs, e.g. to round it
   # or give it a background. They win conflicts with the style's classes.
+  #
+  # @status alpha
   class Tabs < Gustwave::Component
     # Parts shared by every style
     part :list, "flex flex-wrap text-sm font-medium text-center"

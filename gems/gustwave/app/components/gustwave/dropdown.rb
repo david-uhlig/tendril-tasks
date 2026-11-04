@@ -8,6 +8,8 @@ module Gustwave
   # direction of the menu's placement and a list menu.
   #
   # The trigger and menu can be customized through their respective slots.
+  #
+  # @status alpha
   class Dropdown < Gustwave::Component
     # The id of the menu element shown when the trigger is activated
     attr_reader :menu_id

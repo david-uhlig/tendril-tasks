@@ -15,6 +15,8 @@ module Gustwave
       #
       # Inherit from this class when your trigger needs extended behavior or
       # configuration.
+      #
+      # @status alpha
       class Base < Gustwave::Component
         # Delay in milliseconds before showing the dropdown menu when the
         # trigger is activated

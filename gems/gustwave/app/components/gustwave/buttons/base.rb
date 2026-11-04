@@ -5,6 +5,8 @@ module Gustwave
     # Use Base as a building block for button themes
     #
     # Renders leading and trailing visuals, see Gustwave::Visuals.
+    #
+    # @status alpha
     class Base < Gustwave::Component
       include Gustwave::Visuals
 

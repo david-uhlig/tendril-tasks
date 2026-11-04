@@ -31,6 +31,7 @@ module Gustwave
   # You can pass HTML attributes to the +<kbd>+ element and your css classes
   # will be merged with the default classes without style conflicts.
   #
+  # @status alpha
   class Kbd < Gustwave::Component
     include Gustwave::Visuals
 

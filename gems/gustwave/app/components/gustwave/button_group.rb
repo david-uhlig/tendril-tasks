@@ -44,6 +44,8 @@ module Gustwave
   #   <% end %>
   #
   # @see Gustwave::ButtonGroups::Button
+  #
+  # @status alpha
   class ButtonGroup < Gustwave::Component
     base "inline-flex rounded-md shadow-xs"
 

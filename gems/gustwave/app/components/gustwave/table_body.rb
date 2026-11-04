@@ -28,6 +28,8 @@ module Gustwave
   #       <td>Last Name</td>
   #     </tr>
   #   <% end %>
+  #
+  # @status alpha
   class TableBody < Gustwave::Component
     renders_many_extensible :rows, Gustwave::TableRow
 

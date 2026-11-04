@@ -2,6 +2,7 @@
 
 module Gustwave
   module Form
+    # @status alpha
     class RichTextArea < Gustwave::Component
       part :toolbar_container,
            "px-3 py-2 border-b dark:border-gray-600 flex flex-wrap items-center bg-gray-50 rounded-t-lg border-t-red-200 dark:bg-gray-700"

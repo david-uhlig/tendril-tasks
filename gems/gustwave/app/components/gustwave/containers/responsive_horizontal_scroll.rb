@@ -5,6 +5,8 @@ module Gustwave
     # Use ResponsiveHorizontalScroll to create a container that scrolls
     # horizontally on mobile device viewports and wraps its elements on larger
     # viewports.
+    #
+    # @status alpha
     class ResponsiveHorizontalScroll < Gustwave::Component
       base "flex flex-nowrap overflow-x-auto touch-pan-x gap-2 pb-2"
 

@@ -4,6 +4,8 @@ module Gustwave
   module Dropdowns
     module MenuItems
       # Use Divider to separate blocks of menu items
+      #
+      # @status alpha
       class Divider < Gustwave::Dropdowns::MenuItems::Base
         base "my-1 h-px bg-gray-100 dark:bg-gray-700 w-full"
 

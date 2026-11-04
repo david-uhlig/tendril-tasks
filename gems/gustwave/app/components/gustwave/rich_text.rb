@@ -2,6 +2,8 @@
 
 module Gustwave
   # Use this component to render rich text content.
+  #
+  # @status alpha
   class RichText < Gustwave::Component
     base "*:hyphens-auto"
 

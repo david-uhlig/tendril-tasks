@@ -5,6 +5,8 @@ module Gustwave
     module Triggers
       # Use the InlineButton trigger to render a Gustwave::Buttons::Base with
       # inline styling so it looks like part of a text block.
+      #
+      # @status alpha
       class InlineButton < Gustwave::Dropdowns::Triggers::Button
         base "align-baseline gap-0"
 

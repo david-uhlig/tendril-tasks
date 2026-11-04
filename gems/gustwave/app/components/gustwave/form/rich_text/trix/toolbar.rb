@@ -4,6 +4,7 @@ module Gustwave
   module Form
     module RichText
       module Trix
+        # @status alpha
         class Toolbar < Gustwave::Component
           ACTION_GROUPS = [
             %i[bold italic strike link],

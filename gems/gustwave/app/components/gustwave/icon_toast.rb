@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # @status alpha
   class IconToast < Gustwave::Component
     base "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"
     unstyled status: :none
