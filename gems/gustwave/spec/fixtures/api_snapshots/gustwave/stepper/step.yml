@@ -1,0 +1,43 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'style: (optional)'
+- 'state: (optional)'
+- 'description: (optional)'
+- "**options"
+options:
+  state:
+    default: upcoming
+    values:
+    - complete
+    - current
+    - upcoming
+  style:
+    default: default
+    values:
+    - default
+    - progress
+    - detailed
+    - breadcrumb
+    - vertical
+    - none
+parts:
+- box
+- description
+- icon
+- indicator
+- label
+- separator
+- text
+slots:
+  icon:
+    many: false
+methods:
+- apply_slot_context
+- icon
+- icon?
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_icon

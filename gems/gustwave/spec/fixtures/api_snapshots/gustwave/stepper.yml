@@ -1,0 +1,26 @@
+---
+status: alpha
+constructor:
+- 'style: (optional)'
+- "**options"
+options:
+  style:
+    default: default
+    values:
+    - default
+    - progress
+    - detailed
+    - breadcrumb
+    - vertical
+    - none
+slots:
+  steps:
+    many: true
+methods:
+- steps
+- steps?
+- with_step
+- with_step_content
+- with_steps
+slot_builders:
+- build_slot_step
