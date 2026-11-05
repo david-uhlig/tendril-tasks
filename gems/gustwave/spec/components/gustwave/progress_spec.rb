@@ -56,9 +56,9 @@ RSpec.describe Gustwave::Progress, type: :component do
     it "gives the track and the fill the #{size} height" do
       render_inline(described_class.new(45, size:))
 
-      escaped = height_class.gsub(".", "\\.")
-      expect(page).to have_selector("div[role='progressbar'].#{escaped}")
-      expect(page).to have_selector("div[role='progressbar'] > div.#{escaped}")
+      track = page.find("div[role='progressbar']")
+      expect(track[:class].split).to include(height_class)
+      expect(track.find(:xpath, "./div")[:class].split).to include(height_class)
     end
   end
 
