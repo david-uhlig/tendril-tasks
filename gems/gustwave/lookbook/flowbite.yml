@@ -1315,32 +1315,34 @@ pages:
   components/stepper:
   - id: default-stepper-example
     title: Default stepper
-    status: blocked
-    needs: stepper
+    status: previewed
+    preview: gustwave/stepper/default
   - id: progress-stepper-example
     title: Progress stepper
-    status: blocked
-    needs: stepper
+    status: previewed
+    preview: gustwave/stepper/progress
   - id: detailed-stepper-example
     title: Detailed stepper
-    status: blocked
-    needs: stepper
+    status: previewed
+    preview: gustwave/stepper/detailed
   - id: vertical-stepper-example
     title: Vertical stepper
-    status: blocked
-    needs: stepper
+    status: previewed
+    preview: gustwave/stepper/vertical
   - id: breadcrumb-stepper-example
     title: Breadcrumb stepper
-    status: blocked
-    needs: stepper
+    status: previewed
+    preview: gustwave/stepper/breadcrumb
   - id: timeline-stepper-example
     title: Timeline stepper
-    status: blocked
-    needs: stepper
+    status: previewed
+    preview: gustwave/stepper/timeline
   - id: form-stepper-example
     title: Stepper with form
-    status: blocked
-    needs: stepper
+    status: partial
+    needs: form
+    preview: gustwave/stepper/with_form
+    note: Form fields are plain Tailwind markup until Gustwave has form components.
   components/tables:
   - id: default-table-example
     title: Default table
