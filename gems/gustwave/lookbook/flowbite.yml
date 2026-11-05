@@ -452,40 +452,41 @@ pages:
   components/clipboard:
   - id: clipboard-example
     title: Default copy to clipboard
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/default
   - id: clipboard-button-input-example
     title: Input with copy button
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/input_with_copy_button
   - id: clipboard-button-text-input-example
     title: Copy button with text
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/copy_button_with_text
   - id: clipboard-button-group-example
     title: Input group with copy
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/input_group
   - id: clipboard-url-shortener-example
     title: URL shortener input group
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/url_shortener
   - id: clipboard-source-block
     title: Copy source code block
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/source_code_block
   - id: clipboard-api-keys
     title: Card with API keys
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/api_keys_card
   - id: contact-details-clipboard
     title: Copy contact details
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/contact_details
   - id: copy-to-clipboard-modal
     title: Copy button with modal
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/modal
+    note: Gustwave's :sm modal is max-w-md, narrower than Flowbite's max-w-lg, which no Modal size matches.
   components/datepicker:
   - id: default-datepicker-example
     title: Datepicker example
