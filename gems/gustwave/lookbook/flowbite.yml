@@ -972,8 +972,7 @@ pages:
     preview: gustwave/modal/with_timeline
   - id: modal-progress-example
     title: Modal with progress bar
-    status: partial
-    needs: progress
+    status: composable
   - id: modal-crypto-example
     title: Crypto wallet
     status: previewed
@@ -1086,8 +1085,7 @@ pages:
     preview: gustwave/popover/description
   - id: popover-description-example-5
     title: Progress popover
-    status: partial
-    needs: progress
+    status: composable
   - id: popover-password-example
     title: Password strength
     status: partial
@@ -1115,24 +1113,24 @@ pages:
   components/progress:
   - id: default-progress-example
     title: Default progress bar
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/default
   - id: progress-sizes-example
     title: Sizes
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/sizes
   - id: progress-label-example
     title: With label inside
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/label_inside
   - id: progress-label-outside-example
     title: With label outside
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/label_outside
   - id: progress-colors-example
     title: Colors
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/colors
   components/rating:
   - id: default-rating-example
     title: Default rating
@@ -1307,8 +1305,7 @@ pages:
     status: composable
   - id: spinner-progress-example
     title: Progress spinner
-    status: partial
-    needs: progress
+    status: composable
   - id: spinner-buttons-example
     title: Buttons
     status: composable
