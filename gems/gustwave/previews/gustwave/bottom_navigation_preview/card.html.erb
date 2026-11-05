@@ -1,0 +1,99 @@
+<div
+  class="
+    relative w-full max-w-sm overflow-y-scroll bg-white border border-gray-100 rounded-lg dark:bg-gray-700
+    dark:border-gray-600 h-96
+  "
+>
+  <ul>
+    <li class="border-b border-gray-100 dark:border-gray-600">
+      <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Jese Leos avatar", class: "w-11 h-11 me-3") %>
+
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            New message from <span class="font-medium text-gray-900 dark:text-white">Jese Leos</span>: "Hey, what's up?
+            All set for the presentation?"
+          </p>
+
+          <span class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</span>
+        </div>
+      <% end %>
+    </li>
+
+    <li class="border-b border-gray-100 dark:border-gray-600">
+      <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Joseph McFall avatar", class: "w-11 h-11 me-3") %>
+
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <span class="font-medium text-gray-900 dark:text-white">Joseph McFall</span> and
+            <span class="font-medium text-gray-900 dark:text-white">5 others</span> started following you.
+          </p>
+
+          <span class="text-xs text-blue-600 dark:text-blue-500">10 minutes ago</span>
+        </div>
+      <% end %>
+    </li>
+
+    <li class="border-b border-gray-100 dark:border-gray-600">
+      <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Bonnie Green avatar", class: "w-11 h-11 me-3") %>
+
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <span class="font-medium text-gray-900 dark:text-white">Bonnie Green</span> and
+            <span class="font-medium text-gray-900 dark:text-white">141 others</span> love your story. See it and view
+            more stories.
+          </p>
+
+          <span class="text-xs text-blue-600 dark:text-blue-500">23 minutes ago</span>
+        </div>
+      <% end %>
+    </li>
+
+    <li class="border-b border-gray-100 dark:border-gray-600">
+      <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Leslie Livingston avatar", class: "w-11 h-11 me-3") %>
+
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <span class="font-medium text-gray-900 dark:text-white">Leslie Livingston</span> mentioned you in a
+            comment: <span class="font-medium text-blue-600 dark:text-blue-500 hover:underline">@bonnie.green</span>
+            what do you say?
+          </p>
+
+          <span class="text-xs text-blue-600 dark:text-blue-500">23 minutes ago</span>
+        </div>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Robert Brown avatar", class: "w-11 h-11 me-3") %>
+
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <span class="font-medium text-gray-900 dark:text-white">Robert Brown</span> posted a new video:
+            Glassmorphism - learn how to implement the new design trend.
+          </p>
+
+          <span class="text-xs text-blue-600 dark:text-blue-500">23 minutes ago</span>
+        </div>
+      <% end %>
+    </li>
+  </ul>
+
+  <%= render Gustwave::BottomNavigation.new(position: :sticky) do |navigation| %>
+    <% navigation.with_item_button "Latest" do |item| %>
+      <% item.with_icon(:clock, class: "mb-0.25") %>
+    <% end %>
+
+    <% navigation.with_item_button "Following" do |item| %>
+      <% item.with_icon(:users_group, class: "mb-0.25") %>
+    <% end %>
+
+    <% navigation.with_item_button "Favorites" do |item| %>
+      <% item.with_icon(:star, class: "mb-0.25") %>
+    <% end %>
+  <% end %>
+</div>
