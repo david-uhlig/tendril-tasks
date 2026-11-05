@@ -1,0 +1,32 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'icon: (optional)'
+- 'tag: (optional)'
+- 'active: (optional)'
+- 'disabled: (optional)'
+- "**options"
+options:
+  active:
+    default: 'false'
+  disabled:
+    default: 'false'
+  tag:
+    default: li
+    values:
+    - li
+    - div
+    - a
+    - button
+slots:
+  icon:
+    many: false
+methods:
+- apply_slot_context
+- icon
+- icon?
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_icon

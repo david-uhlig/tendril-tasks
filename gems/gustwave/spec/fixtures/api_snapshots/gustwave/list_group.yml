@@ -1,0 +1,31 @@
+---
+status: alpha
+constructor:
+- "**options"
+slots:
+  items:
+    many: true
+    types:
+    - button
+    - link
+    - renderable
+    - text
+methods:
+- items
+- items?
+- with_item
+- with_item_button
+- with_item_button_content
+- with_item_content
+- with_item_link
+- with_item_link_content
+- with_item_renderable
+- with_item_renderable_content
+- with_item_text
+- with_item_text_content
+- with_items
+slot_builders:
+- build_slot_item_button
+- build_slot_item_link
+- build_slot_item_renderable
+- build_slot_item_text
