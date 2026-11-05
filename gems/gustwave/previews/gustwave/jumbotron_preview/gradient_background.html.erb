@@ -1,6 +1,6 @@
 <%= render Gustwave::Jumbotron.new(centered: true, class: "relative isolate bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')] dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')]") do %>
   <%= render Gustwave::Link.new(href: "#", color: :none, class: "inline-flex justify-between items-center py-1 px-1 pe-4 mb-7 text-sm text-blue-700 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 hover:no-underline") do %>
-    <%= render Gustwave::Badge.new("New", pill: true, class: "text-xs bg-blue-600 text-white px-4 py-1.5 me-3 dark:bg-blue-600 dark:text-white") %>
+    <%= render Gustwave::Badge.new("New", pill: true, class: "text-xs font-normal bg-blue-600 text-white px-4 py-1.5 me-3 dark:bg-blue-600 dark:text-white") %>
     <span class="text-sm font-medium">Jumbotron component was launched! See what's new</span>
     <%= render Gustwave::Icon.new(:chevron_right, class: "w-2.5 h-2.5 ms-2 rtl:rotate-180") %>
   <% end %>
