@@ -1,0 +1,61 @@
+---
+look tag=:li active=false disabled=false:
+- 'li: px-4 py-2 rounded-lg w-full'
+look tag=:li active=false disabled=true:
+- 'li: px-4 py-2 rounded-lg w-full'
+look tag=:li active=true disabled=false:
+- 'li: px-4 py-2 rounded-lg w-full'
+look tag=:li active=true disabled=true:
+- 'li: px-4 py-2 rounded-lg w-full'
+look tag=:a active=false disabled=false:
+- 'a: block cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white dark:hover:bg-gray-600
+  dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700
+  hover:bg-gray-100 hover:text-blue-700 px-4 py-2 rounded-lg w-full'
+look tag=:a active=false disabled=true:
+- 'a: block cursor-pointer px-4 py-2 rounded-lg w-full'
+look tag=:a active=true disabled=false:
+- 'a aria-current="true": bg-blue-700 block cursor-pointer dark:bg-gray-800 px-4 py-2
+  rounded-lg text-white w-full'
+look tag=:a active=true disabled=true:
+- 'a aria-current="true": bg-blue-700 block cursor-pointer dark:bg-gray-800 px-4 py-2
+  rounded-lg text-white w-full'
+look tag=:button active=false disabled=false:
+- 'button type="button": cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white
+  dark:hover:bg-gray-600 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700
+  focus:text-blue-700 font-medium hover:bg-gray-100 hover:text-blue-700 px-4 py-2
+  rounded-lg rtl:text-right text-left w-full'
+look tag=:button active=false disabled=true:
+- 'button disabled="disabled" type="button": bg-gray-100 cursor-not-allowed dark:bg-gray-600
+  dark:text-gray-400 font-medium px-4 py-2 rounded-lg rtl:text-right text-left w-full'
+look tag=:button active=true disabled=false:
+- 'button aria-current="true" type="button": bg-blue-700 cursor-pointer dark:bg-gray-800
+  font-medium px-4 py-2 rounded-lg rtl:text-right text-left text-white w-full'
+look tag=:button active=true disabled=true:
+- 'button aria-current="true" disabled="disabled" type="button": bg-gray-100 cursor-not-allowed
+  dark:bg-gray-600 dark:text-gray-400 font-medium px-4 py-2 rounded-lg rtl:text-right
+  text-left text-white w-full'
+position list_position=:only:
+- 'li: px-4 py-2 rounded-lg w-full'
+position list_position=:first:
+- 'li: border-b border-gray-200 dark:border-gray-600 px-4 py-2 rounded-t-lg w-full'
+position list_position=:middle:
+- 'li: border-b border-gray-200 dark:border-gray-600 px-4 py-2 w-full'
+position list_position=:last:
+- 'li: px-4 py-2 rounded-b-lg w-full'
+icon tag=:a:
+- 'a: cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white dark:hover:bg-gray-600
+  dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700
+  focus:z-10 hover:bg-gray-100 hover:text-blue-700 inline-flex items-center px-4 py-2
+  relative rounded-lg w-full'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+- path clip-rule="evenodd" fill-rule="evenodd"
+icon tag=:button:
+- 'button type="button": cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white
+  dark:hover:bg-gray-600 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700
+  focus:text-blue-700 focus:z-10 font-medium hover:bg-gray-100 hover:text-blue-700
+  inline-flex items-center px-4 py-2 relative rounded-lg rtl:text-right text-left
+  w-full'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+- path clip-rule="evenodd" fill-rule="evenodd"
