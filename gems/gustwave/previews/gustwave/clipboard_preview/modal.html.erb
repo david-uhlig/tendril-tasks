@@ -19,14 +19,16 @@
 </div>
 
 <%= render modal do |component| %>
-  <% component.with_header("Share course", title_options: { class: "font-normal text-gray-500 dark:text-gray-400" }) %>
+  <% component.with_header("Share course", class: "border-b-0", title_options: { class: "text-lg font-normal text-gray-500 dark:text-gray-400" }) %>
 
-  <% component.with_body(class: "pt-0 space-y-0") do %>
-    <label for="course-url" class="text-sm font-medium text-gray-900 dark:text-white mb-2 block">Share the course link below with your friends:</label>
-    <div class="relative mb-4">
-      <input id="course-url" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="https://flowbite.com/docs/components/alerts/" disabled readonly>
-      <%= render clipboard %>
+  <% component.with_body(class: "pt-0") do %>
+    <div>
+      <label for="course-url" class="text-sm font-medium text-gray-900 dark:text-white mb-2 block">Share the course link below with your friends:</label>
+      <div class="relative mb-4">
+        <input id="course-url" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="https://flowbite.com/docs/components/alerts/" disabled readonly>
+        <%= render clipboard %>
+      </div>
+      <%= render Gustwave::Buttons::Default.new("Close", color: :alternative, **modal.trigger_options(action: :hide)) %>
     </div>
-    <%= render Gustwave::Buttons::Default.new("Close", color: :alternative, **modal.trigger_options(action: :hide)) %>
   <% end %>
 <% end %>
