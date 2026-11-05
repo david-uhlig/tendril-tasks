@@ -11,8 +11,9 @@ module Gustwave
     # Pass +active: true+ to mark the current item, which also sets
     # +aria-current="true"+, or +disabled: true+ to disable a button.
     #
-    # Pass +icon+ to show an icon before the text. The icon is decorative and
-    # hidden from screen readers.
+    # Pass +icon+ to show an icon before the text. The icon is solid, as in
+    # Flowbite; pass +theme: :outline+ to +with_icon+ for an outline one. It's
+    # decorative and hidden from screen readers.
     #
     # @status alpha
     class Item < Gustwave::Component
@@ -51,8 +52,11 @@ module Gustwave
       # Selected by the item when it has an icon
       toggle :has_icon, "relative inline-flex items-center focus:z-10", internal: true
 
-      renders_one_extensible :icon, ->(name, **options) {
-        Gustwave::Icon.new(name, **configure_html_attributes(options, class: "w-3 h-3 me-2.5", aria: { hidden: true }))
+      # Solid by default, like Flowbite's icons. Gustwave's icons leave 3 units of
+      # their 24x24 viewBox empty on each side. At w-4 the glyph is as large as
+      # Flowbite's w-3 icon, and the margins make up for the empty part.
+      renders_one_extensible :icon, ->(name, theme: :solid, **options) {
+        Gustwave::Icon.new(name, theme:, **configure_html_attributes(options, class: "w-4 h-4 -ms-0.5 me-2 -my-0.5", aria: { hidden: true }))
       }
 
       # @param text [String, nil] The item text. Takes precedence over block content.

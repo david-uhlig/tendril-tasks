@@ -27,7 +27,7 @@ module Gustwave
   #
   #   <%= render Gustwave::ListGroup.new(class: "w-48") do |list_group| %>
   #     <% list_group.with_item_button("Profile", icon: :user_circle) %>
-  #     <% list_group.with_item_button("Messages", icon: :envelope) %>
+  #     <% list_group.with_item_button("Messages", icon: :messages) %>
   #   <% end %>
   #
   # An item takes its content from its block when it has no text, e.g. to show
