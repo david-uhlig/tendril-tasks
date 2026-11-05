@@ -1,0 +1,55 @@
+---
+look size=:sm value=4.95:
+- 'div: flex items-center'
+- 'div aria-label="Rated 4.95 out of 5" role="img": flex gap-0.5 items-center'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-4.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-4.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-4.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-4.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-500 size-4.5 text-gray-300'
+- path
+look size=:md value=4.95:
+- 'div: flex items-center'
+- 'div aria-label="Rated 4.95 out of 5" role="img": flex gap-1.5 items-center'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-6.5 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-500 size-6.5 text-gray-300'
+- path
+look size=:lg value=4.95:
+- 'div: flex items-center'
+- 'div aria-label="Rated 4.95 out of 5" role="img": flex gap-2 items-center'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-9 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-9 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-9 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": size-9 text-yellow-300'
+- path
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-500 size-9 text-gray-300'
+- path
