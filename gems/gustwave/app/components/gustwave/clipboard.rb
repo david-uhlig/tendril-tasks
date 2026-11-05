@@ -93,11 +93,10 @@ module Gustwave
       @tooltip_id = options.delete(:id).presence || generate_random_id(prefix: "clipboard-tooltip")
       @tooltip_trigger = { placement:, trigger_event: }
 
-      states = safe_join([
-        clipboard_tooltip_state(text || t(".copy"), copied: false),
-        clipboard_tooltip_state(copied_text || t(".copied"), copied: true)
-      ])
-      Gustwave::Tooltip.new(states, id: @tooltip_id, **options)
+      # The states are added in before_render: the slot can be set before
+      # render, when translations aren't available yet.
+      @tooltip_texts = { text:, copied_text: }
+      Gustwave::Tooltip.new(id: @tooltip_id, **options)
     }
 
     # The icon of an icon-only button, which has no label. Public, because
@@ -145,6 +144,7 @@ module Gustwave
     end
 
     def before_render
+      tooltip.with_content(tooltip_states) if tooltip?
       @button = Gustwave::Button.for(@theme).new(states, **button_attributes)
     end
 
@@ -195,6 +195,13 @@ module Gustwave
     def copied_attributes
       attributes_for(:copied_message, configure_html_attributes(@copied_message_options, hidden: true,
                                                                 data: { "gustwave--clipboard-target": "copiedMessage" }))
+    end
+
+    def tooltip_states
+      safe_join([
+        clipboard_tooltip_state(@tooltip_texts[:text] || t(".copy"), copied: false),
+        clipboard_tooltip_state(@tooltip_texts[:copied_text] || t(".copied"), copied: true)
+      ])
     end
 
     def clipboard_tooltip_state(text, copied:)

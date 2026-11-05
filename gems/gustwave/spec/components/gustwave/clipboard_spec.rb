@@ -235,6 +235,16 @@ RSpec.describe Gustwave::Clipboard, type: :component do
       expect(page).to have_selector("button + div[role='tooltip']", visible: :all)
     end
 
+    it "takes the tooltip set before render, with its localized default texts" do
+      clipboard = described_class.new("Copy", target_id: "npm-install")
+      clipboard.with_tooltip
+
+      I18n.with_locale(:en) { render_inline(clipboard) }
+
+      expect(page).to have_selector("[role='tooltip'] span", text: "Copy to clipboard", visible: :all)
+      expect(page).to have_selector("[role='tooltip'] span[hidden]", text: "Copied!", visible: :all)
+    end
+
     it "points the button at the tooltip with its trigger attributes" do
       render_inline(described_class.new("Copy", target_id: "npm-install")) { |clipboard| clipboard.with_tooltip }
 
