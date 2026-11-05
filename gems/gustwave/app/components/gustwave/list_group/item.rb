@@ -18,12 +18,17 @@ module Gustwave
     class Item < Gustwave::Component
       # Text items are li elements in a list and div elements in a group. Set by
       # Gustwave::ListGroup through +apply_slot_context+.
-      variant :tag, default: :li, values: {
-        li: nil,
-        div: nil,
-        a: "block cursor-pointer",
+      option :tag, default: :li, values: %i[li div a button]
+
+      # Selected from +tag+: text items are static, links and buttons interactive
+      variant :kind, default: :static, internal: true, values: {
+        static: "",
+        link: "block cursor-pointer",
         button: "font-medium text-left rtl:text-right cursor-pointer"
       }
+
+      KINDS = { li: :static, div: :static, a: :link, button: :button }.freeze
+      private_constant :KINDS
 
       # Selected by Gustwave::ListGroup
       variant :list_position, default: :only, internal: true, values: {
@@ -37,11 +42,11 @@ module Gustwave
 
       # Hover and focus states, while the item can be pressed
       toggle :hover, "hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white",
-             internal: true, unless: { tag: %i[li div] }
+             internal: true, unless: { kind: :static }
 
-      toggle :active, "text-white bg-blue-700 dark:bg-gray-800", unless: { tag: %i[li div] }
+      toggle :active, "text-white bg-blue-700 dark:bg-gray-800", unless: { kind: :static }
 
-      toggle :disabled, "bg-gray-100 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400", unless: { tag: %i[li div a] }
+      toggle :disabled, "bg-gray-100 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400", unless: { kind: %i[static link] }
 
       # Selected by the item when it has an icon
       toggle :has_icon, "relative inline-flex items-center focus:z-10", internal: true
@@ -60,6 +65,7 @@ module Gustwave
         @text = text
         with_icon(icon) if icon
         select_options(tag:, active:, disabled:)
+        select_options(kind: KINDS.fetch(option_value(:tag)))
         @options = options
       end
 

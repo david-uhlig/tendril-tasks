@@ -19,7 +19,6 @@ options:
     - div
     - a
     - button
-    - none
 slots:
   icon:
     many: false
