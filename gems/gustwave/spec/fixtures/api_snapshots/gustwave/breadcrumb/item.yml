@@ -1,0 +1,30 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'href: (optional)'
+- 'icon: (optional)'
+- 'separator: (optional)'
+- "**options"
+options:
+  separator:
+    default: chevron
+    values:
+    - chevron
+    - slash
+    - none
+parts:
+- content
+- separator
+- wrapper
+slots:
+  icon:
+    many: false
+methods:
+- apply_slot_context
+- icon
+- icon?
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_icon

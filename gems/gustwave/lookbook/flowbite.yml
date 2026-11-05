@@ -197,20 +197,22 @@ pages:
   components/breadcrumb:
   - id: default-breadcrumb-example
     title: Default breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/default
   - id: breadcrumb-background-example
     title: Solid background
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/solid
   - id: header-breadcrumb-example
     title: Header breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/header
+    note: The trigger is Gustwave's default dropdown button, in place of Flowbite's gray one, and the branch icon is Gustwave's code-branch.
   - id: breadcrumb-dropdown-example
     title: Breadcrumb with dropdown
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/dropdown
+    note: The triggers are Gustwave's default dropdown buttons, in place of Flowbite's plain ones, and use a cubes icon in place of Flowbite's database icon.
   components/button-group:
   - id: default-button-group-example
     title: Default example
@@ -905,20 +907,20 @@ pages:
   components/list-group:
   - id: default-list-group-example
     title: Default list group
-    status: blocked
-    needs: list-group
+    status: previewed
+    preview: gustwave/list_group/default
   - id: list-group-links-example
     title: List group with links
-    status: blocked
-    needs: list-group
+    status: previewed
+    preview: gustwave/list_group/links
   - id: list-group-buttons-example
     title: List group with buttons
-    status: blocked
-    needs: list-group
+    status: previewed
+    preview: gustwave/list_group/buttons
   - id: list-group-icons-example
     title: List group with icons
-    status: blocked
-    needs: list-group
+    status: previewed
+    preview: gustwave/list_group/icons
   components/mega-menu:
   - id: default-mega-menu-example
     title: Default mega menu
@@ -2051,8 +2053,8 @@ pages:
     preview: gustwave/heading/underline
   - id: heading-breadcrumb-example
     title: Breadcrumb context
-    status: partial
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/heading/breadcrumb
   - id: heading-badge-example
     title: Badge context
     status: previewed
