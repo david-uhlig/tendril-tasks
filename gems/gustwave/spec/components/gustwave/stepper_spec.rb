@@ -169,7 +169,7 @@ RSpec.describe Gustwave::Stepper, type: :component do
         stepper.with_step("Account info")
       end
 
-      expect(page).to have_selector("li svg[aria-hidden='true'].me-2\\.5")
+      expect(page).to have_selector("li svg[aria-hidden='true'].size-4\\.5.me-2")
       expect(page).to have_selector("li", text: "Personal info")
       expect(page).not_to have_selector("li span.me-2", text: "1")
       expect(page).to have_selector("li span.me-2", text: "2")
@@ -180,7 +180,7 @@ RSpec.describe Gustwave::Stepper, type: :component do
         stepper.with_step("Personal info", state: :complete) { |step| step.with_icon(:check) }
       end
 
-      expect(page).to have_selector("li span svg.w-3\\.5.h-3\\.5")
+      expect(page).to have_selector("li span svg.size-4\\.25")
     end
 
     it "renders the icon outline by default and lets the caller pick the theme" do
@@ -189,8 +189,8 @@ RSpec.describe Gustwave::Stepper, type: :component do
         stepper.with_step("Review") { |step| step.with_icon(:check_circle, theme: :solid) }
       end
 
-      expect(page).to have_selector("li svg.w-4.h-4 path[d]")
-      expect(page).to have_selector("li svg.w-4.h-4[fill='currentColor']")
+      expect(page).to have_selector("li svg.size-6 path[d]")
+      expect(page).to have_selector("li svg.size-6[fill='currentColor']")
     end
   end
 

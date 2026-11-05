@@ -124,18 +124,18 @@ module Gustwave
       part :box
 
       variant :style, default: :default, values: {
-        default: { root: "flex items-center", label: "flex items-center", indicator: "me-2", icon: "w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" },
+        default: { root: "flex items-center", label: "flex items-center", indicator: "me-2", icon: "size-4.5 -m-0.5 me-2 sm:size-5" },
         progress: { root: "flex items-center w-full",
                     indicator: "flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0",
-                    icon: "w-4 h-4 text-gray-500 lg:w-5 lg:h-5 dark:text-gray-100", text: "sr-only" },
+                    icon: "size-4.75 text-gray-500 lg:size-6 dark:text-gray-100", text: "sr-only" },
         detailed: { root: "flex items-center text-gray-500 dark:text-gray-400 space-x-2.5 rtl:space-x-reverse",
                     indicator: "flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400",
-                    icon: "w-3.5 h-3.5", text: "font-medium leading-tight", description: "text-sm" },
+                    icon: "size-4.25", text: "font-medium leading-tight", description: "text-sm" },
         breadcrumb: { root: "flex items-center",
                       indicator: "flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400",
-                      icon: "w-3 h-3", separator: "w-6 h-6 -my-1 ms-0.5 -me-1.5 sm:ms-2.5 rtl:rotate-180" },
+                      icon: "size-3.5", separator: "w-6 h-6 -my-1 ms-0.5 -me-1.5 sm:ms-2.5 rtl:rotate-180" },
         vertical: { box: "w-full p-4 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400",
-                    label: "flex items-center justify-between", text: "font-medium", icon: "w-4 h-4" }
+                    label: "flex items-center justify-between", text: "font-medium", icon: "size-6 -m-1" }
       }
 
       option :state, default: :upcoming, values: %i[complete current upcoming]
@@ -144,7 +144,7 @@ module Gustwave
       toggle :active, per: :style, internal: true, values: {
         default: "text-blue-600 dark:text-blue-500",
         progress: { root: "text-blue-600 dark:text-blue-500", indicator: "bg-blue-100 dark:bg-blue-800",
-                    icon: "w-3.5 h-3.5 text-blue-600 lg:w-4 lg:h-4 dark:text-blue-300" },
+                    icon: "size-4.25 text-blue-600 lg:size-4.75 dark:text-blue-300" },
         detailed: { root: "text-blue-600 dark:text-blue-500", indicator: "border-blue-600 dark:border-blue-500" },
         breadcrumb: { root: "text-blue-600 dark:text-blue-500", indicator: "border-blue-600 dark:border-blue-500" },
         vertical: { box: "text-blue-700 bg-blue-100 border-blue-300 dark:border-blue-800 dark:text-blue-400" }
@@ -160,7 +160,7 @@ module Gustwave
       toggle :connected, per: :style, internal: true, values: {
         default: { root: "md:w-full after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700",
                    label: "after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500" },
-        progress: "after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700",
+        progress: "after:content-[''] after:w-full after:h-1 after:border-4 after:border-b after:border-gray-100 after:inline-block dark:after:border-gray-700",
         detailed: "", breadcrumb: "", vertical: ""
       }
 
