@@ -327,8 +327,8 @@ pages:
     needs: form
   - id: card-ecommerce-example
     title: E-commerce card
-    status: partial
-    needs: rating
+    status: previewed
+    preview: gustwave/card/ecommerce
   - id: card-cta-example
     title: Call to action card
     status: previewed
@@ -1136,36 +1136,38 @@ pages:
   components/rating:
   - id: default-rating-example
     title: Default rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/default
   - id: rating-text-example
     title: Rating with text
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/text
   - id: rating-count-example
     title: Rating count
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/count
   - id: rating-star-sizes-example
     title: Star sizes
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/sizes
   - id: rating-advanced-example
     title: Advanced rating
-    status: blocked
-    needs: rating
+    status: partial
+    preview: gustwave/rating/advanced
+    needs: progress
+    note: The per-star bars are plain Tailwind until Gustwave has a Progress component.
   - id: rating-score-example
     title: Score rating
     status: blocked
-    needs: rating
+    needs: progress
   - id: rating-comment-example
     title: Rating comment
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/comment
   - id: rating-review-example
     title: Review content
-    status: blocked
-    needs: rating
+    status: composable
+    note: Composed from Gustwave's Avatar, Heading, Paragraph, Badge and Link. It has no stars.
   components/sidebar:
   - id: default-sidebar-example
     title: Default sidebar
