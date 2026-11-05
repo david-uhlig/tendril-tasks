@@ -12,7 +12,8 @@
   clipboard.with_tooltip
 %>
 
-<div class="flex justify-center">
+<%# Tall enough for the open modal: Lookbook sizes the frame to the page, not to the fixed modal. %>
+<div class="flex items-start justify-center min-h-137">
   <% share_button = Gustwave::Buttons::Default.new("Share course", color: :alternative, **modal.trigger_options) %>
   <% share_button.with_leading_visual_icon(:share_nodes, theme: :solid, class: "w-4 h-4 me-2") %>
 
