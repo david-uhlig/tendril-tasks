@@ -38,8 +38,8 @@ module Gustwave
     def icons
       render Gustwave::ListGroup.new(class: "w-48") do |list_group|
         list_group.with_item_button("Profile", icon: :user_circle)
-        list_group.with_item_button("Settings", icon: :cog)
-        list_group.with_item_button("Messages", icon: :envelope)
+        list_group.with_item_button("Settings", icon: :adjustments_horizontal)
+        list_group.with_item_button("Messages", icon: :messages)
         list_group.with_item_button("Download", icon: :download)
       end
     end

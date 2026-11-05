@@ -130,8 +130,18 @@ RSpec.describe Gustwave::ListGroup, type: :component do
         list_group.with_item_button("Profile", icon: :user_circle)
       end
 
-      expect(rendered_content).to have_selector("button.relative.inline-flex svg.w-3.h-3.me-2\\.5[aria-hidden='true']")
+      expect(rendered_content).to have_selector("button.relative.inline-flex svg.w-4.h-4.me-2[aria-hidden='true']")
       expect(rendered_content).to have_selector("button", text: "Profile")
+    end
+
+    it "renders solid icons by default and outline icons on request" do
+      render_inline(described_class.new) do |list_group|
+        list_group.with_item_button("Profile", icon: :user_circle)
+        list_group.with_item_button("Messages") { |item| item.with_icon(:envelope, theme: :outline) }
+      end
+
+      expect(rendered_content).to have_selector("button:first-child svg[fill='currentColor']")
+      expect(rendered_content).to have_selector("button:last-child svg[fill='none']")
     end
 
     it "sets the icon through its slot" do
