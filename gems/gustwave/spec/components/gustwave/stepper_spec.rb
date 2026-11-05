@@ -99,7 +99,7 @@ RSpec.describe Gustwave::Stepper, type: :component do
     it "renders a separator on all but the last step" do
       render_steps(style: :breadcrumb)
 
-      separators = page.all("li").map { |li| li.all("svg.w-3.h-3.ms-2").size }
+      separators = page.all("li").map { |li| li.all(:xpath, "./*[local-name()='svg']").size }
 
       expect(separators).to eq([ 1, 1, 0 ])
     end
