@@ -1,7 +1,7 @@
 <%= render Gustwave::Stepper.new(style: :progress, class: "mb-4 sm:mb-5") do |stepper| %>
-  <% stepper.with_step("Personal info", state: :current) { |step| step.with_icon :profile_card, theme: :solid } %>
-  <% stepper.with_step("Payment info") { |step| step.with_icon :credit_card, theme: :solid, class: "text-blue-600 dark:text-blue-300 lg:w-6 lg:h-6" } %>
-  <% stepper.with_step("Confirmation") { |step| step.with_icon :clipboard_check, theme: :solid } %>
+  <% stepper.with_step("Personal info", state: :current) { |step| step.with_icon :profile_card, theme: :solid, class: "w-4 h-4 lg:w-6 lg:h-6 text-blue-600 dark:text-blue-300" } %>
+  <% stepper.with_step("Payment info") { |step| step.with_icon :credit_card, theme: :solid, class: "w-4 h-4 lg:w-6 lg:h-6 text-blue-600 dark:text-blue-300" } %>
+  <% stepper.with_step("Confirmation") { |step| step.with_icon :clipboard_check, theme: :solid, class: "w-4 h-4 lg:w-6 lg:h-6 text-blue-600 dark:text-blue-300" } %>
 <% end %>
 <form action="#">
   <%= render Gustwave::Heading.new("Invoice details", tag: :h3, size: :none, class: "mb-4 text-lg font-medium leading-none text-gray-900 dark:text-white") %>

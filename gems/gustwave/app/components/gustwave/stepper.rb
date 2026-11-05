@@ -133,7 +133,7 @@ module Gustwave
                     icon: "w-3.5 h-3.5", text: "font-medium leading-tight", description: "text-sm" },
         breadcrumb: { root: "flex items-center",
                       indicator: "flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400",
-                      icon: "w-3 h-3", separator: "w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" },
+                      icon: "w-3 h-3", separator: "w-6 h-6 -my-1 ms-0.5 -me-1.5 sm:ms-2.5 rtl:rotate-180" },
         vertical: { box: "w-full p-4 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400",
                     label: "flex items-center justify-between", text: "font-medium", icon: "w-4 h-4" }
       }
