@@ -201,6 +201,12 @@ RSpec.describe Gustwave::Clipboard, type: :component do
   end
 
   describe "appearance" do
+    it "centers the states within the button, as Flowbite's clipboard buttons do" do
+      render_inline(described_class.new("Copy", target_id: "npm-install", class: "w-full"))
+
+      expect(page).to have_selector("button.inline-flex.items-center.justify-center.w-full")
+    end
+
     it "renders the button of the given theme" do
       render_inline(described_class.new("Copy", target_id: "npm-install", theme: :inline))
 

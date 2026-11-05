@@ -34,6 +34,8 @@ module Gustwave
   class Clipboard < Gustwave::Component
     CONTROLLER = "gustwave--clipboard"
     COPY_ACTION = "click->gustwave--clipboard#copied"
+    # Every Flowbite clipboard button centers its states, which are spans.
+    BUTTON_CLASS = "inline-flex items-center justify-center"
     CONTENT_TYPES = { inner_html: "innerHTML", text_content: "textContent" }.freeze
 
     # Where Flowbite reads the text from. The default, +:input+, is the value
@@ -213,7 +215,7 @@ module Gustwave
       if tooltip?
         attributes = tooltip.trigger_options(**@tooltip_trigger, **attributes).symbolize_keys
       end
-      configure_html_attributes(attributes, data: button_data)
+      configure_html_attributes(attributes, class: BUTTON_CLASS, data: button_data)
     end
 
     def button_data

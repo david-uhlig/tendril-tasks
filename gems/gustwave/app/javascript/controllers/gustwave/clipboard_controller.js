@@ -28,11 +28,15 @@ export default class extends Controller {
    */
   copied() {
     clearTimeout(this.timer)
-    this._setCopied(true)
+    // Flowbite copies through a temporary textarea, which blurs the button, and a blur hides a
+    // hover tooltip. Wait until every click listener, Flowbite's included, has run.
+    this.timer = setTimeout(() => {
+      this._setCopied(true)
 
-    if (this.resetAfterValue > 0) {
-      this.timer = setTimeout(() => this.reset(), this.resetAfterValue)
-    }
+      if (this.resetAfterValue > 0) {
+        this.timer = setTimeout(() => this.reset(), this.resetAfterValue)
+      }
+    })
   }
 
   /**
