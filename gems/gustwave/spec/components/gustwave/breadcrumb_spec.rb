@@ -58,6 +58,16 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
       expect(rendered_content).to have_selector("span[aria-hidden='true']", text: "/", count: 1)
       expect(rendered_content).not_to have_selector("svg")
     end
+
+    it "doesn't indent the content after the slash" do
+      render_inline(described_class.new(separator: :slash)) do |breadcrumb|
+        breadcrumb.with_item("Home", href: "/")
+        breadcrumb.with_item("Projects")
+      end
+
+      expect(rendered_content).to have_selector("span.text-sm", text: "Projects")
+      expect(rendered_content).not_to have_selector("span.ms-1", text: "Projects")
+    end
   end
 
   context "with custom list options" do
@@ -98,6 +108,15 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
 
       expect(rendered_content).to have_selector("li", text: "Issue #312 docs")
       expect(rendered_content).not_to have_selector("li > span")
+    end
+
+    it "sets the block in the item's text style" do
+      render_inline(described_class.new) do |breadcrumb|
+        breadcrumb.with_item("Home", href: "/")
+        breadcrumb.with_item { "Issue #312" }
+      end
+
+      expect(rendered_content).to have_selector("li[aria-current='page'] div.text-sm.font-medium.text-gray-500.ms-1", text: "Issue #312")
     end
 
     it "gives the text precedence over the block" do

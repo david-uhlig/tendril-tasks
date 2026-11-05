@@ -29,7 +29,7 @@ module Gustwave
       # separator before their content. Set by Gustwave::Breadcrumb.
       variant :position, default: :first, internal: true, values: {
         first: { root: "inline-flex items-center", content: "inline-flex items-center text-sm font-medium" },
-        other: { wrapper: "flex items-center", content: "ms-1 text-sm font-medium md:ms-2" }
+        other: { wrapper: "flex items-center", content: "text-sm font-medium" }
       }
 
       # Set by the item: a link, or the text of the current page
@@ -39,15 +39,18 @@ module Gustwave
              part: :content,
              internal: true
 
-      # Chevrons fill a small part of their 24x24 viewBox. These sizes match the
-      # chevron drawn by Flowbite's w-3 icon, as in Gustwave::Pagination::Link.
-      variant :separator, part: :separator, default: :chevron, values: {
-        chevron: "w-6 h-6 -mx-[7px] rtl:rotate-180 text-gray-400",
-        slash: "mx-2 text-gray-400"
+      # The chevron is Flowbite's own 6x10 glyph, +chevron_right_compact+. With a
+      # chevron the content is indented, as in Flowbite; a slash has its own margins.
+      variant :separator, default: :chevron, unless: { position: :first }, values: {
+        chevron: { separator: "w-3 h-3 mx-1 rtl:rotate-180 text-gray-400", content: "ms-1 md:ms-2" },
+        slash: { separator: "mx-2 text-gray-400" }
       }
 
       renders_one_extensible :icon, ->(name, theme: :solid, **options) {
-        Gustwave::Icon.new(name, theme:, **configure_html_attributes(options, class: "w-3 h-3 me-2.5", aria: { hidden: true }))
+        # Gustwave's icons leave 3 units of their 24x24 viewBox empty on each
+        # side. At w-4 the glyph is as large as Flowbite's w-3 icon, and the
+        # margins make up for the empty part.
+        Gustwave::Icon.new(name, theme:, **configure_html_attributes(options, class: "w-4 h-4 -ms-0.5 me-2 -my-0.5", aria: { hidden: true }))
       }
 
       # @param text [String, nil] The item text. Takes precedence over block content.
@@ -94,9 +97,12 @@ module Gustwave
 
       private
 
-      # Block content without text replaces the link or text, without a wrapper
+      # Block content without text replaces the link or text. It's set in the
+      # item's text style, so plain text in the block looks like the other items.
       def content_element
-        return safe_join([ leading_icon, content ]) if @text.blank? && content.present?
+        if @text.blank? && content.present?
+          return tag.div(class: classes(:content, class: "inline-flex items-center")) { safe_join([ leading_icon, content ]) }
+        end
 
         label = safe_join([ leading_icon, @text ].compact)
         if option_value(:linked)
@@ -114,7 +120,7 @@ module Gustwave
         if option_value(:separator) == :slash
           tag.span("/", class: classes(:separator), aria: { hidden: true })
         else
-          render Gustwave::Icon.new(:chevron_right, class: classes(:separator), aria: { hidden: true })
+          render Gustwave::Icon.new(:chevron_right_compact, class: classes(:separator), aria: { hidden: true })
         end
       end
     end
