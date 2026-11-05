@@ -1,0 +1,11 @@
+---
+status: alpha
+constructor:
+- 'centered: (optional)'
+- 'container_options: (optional)'
+- "**options"
+options:
+  centered:
+    default: 'false'
+parts:
+- container
