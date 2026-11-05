@@ -197,20 +197,22 @@ pages:
   components/breadcrumb:
   - id: default-breadcrumb-example
     title: Default breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/default
   - id: breadcrumb-background-example
     title: Solid background
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/solid
   - id: header-breadcrumb-example
     title: Header breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/header
+    note: The trigger's chevron sits 2px further from the text, as in Gustwave's other dropdown buttons.
   - id: breadcrumb-dropdown-example
     title: Breadcrumb with dropdown
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/dropdown
+    note: The triggers' chevrons sit 2px further from the text, as in Gustwave's other dropdown buttons.
   components/button-group:
   - id: default-button-group-example
     title: Default example
@@ -2052,8 +2054,8 @@ pages:
     preview: gustwave/heading/underline
   - id: heading-breadcrumb-example
     title: Breadcrumb context
-    status: partial
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/heading/breadcrumb
   - id: heading-badge-example
     title: Badge context
     status: previewed
