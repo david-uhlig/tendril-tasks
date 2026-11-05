@@ -23,7 +23,7 @@ look solid=false separator=:chevron:
 - 'span: dark:text-gray-400 font-medium md:ms-2 ms-1 text-gray-500 text-sm'
 look solid=false separator=:slash:
 - 'nav aria-label="Breadcrumb": flex'
-- 'ol: inline-flex items-center md:space-x-2 rtl:space-x-reverse space-x-1'
+- 'ol: inline-flex items-center'
 - 'li: inline-flex items-center'
 - 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium hover:text-blue-600
   inline-flex items-center text-gray-700 text-sm'
@@ -65,7 +65,7 @@ look solid=true separator=:chevron:
 look solid=true separator=:slash:
 - 'nav aria-label="Breadcrumb": bg-gray-50 border border-gray-200 dark:bg-gray-800
   dark:border-gray-700 flex px-5 py-3 rounded-lg text-gray-700'
-- 'ol: inline-flex items-center md:space-x-2 rtl:space-x-reverse space-x-1'
+- 'ol: inline-flex items-center'
 - 'li: inline-flex items-center'
 - 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium hover:text-blue-600
   inline-flex items-center text-gray-700 text-sm'

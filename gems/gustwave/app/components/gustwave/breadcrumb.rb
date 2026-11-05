@@ -37,9 +37,13 @@ module Gustwave
 
     toggle :solid, "px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
 
-    part :list, "inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
+    part :list, "inline-flex items-center"
 
     option :separator, default: :chevron, values: %i[chevron slash]
+
+    # Chevrons need space around them. A slash brings its own margins, so
+    # the list has none, as in Flowbite.
+    toggle :spaced, "space-x-1 md:space-x-2 rtl:space-x-reverse", part: :list, internal: true
 
     # @param text [String, nil] The item text. Takes precedence over block content.
     # @param href [String, nil] The URL the item links to. Leave it out for the current page.
@@ -55,6 +59,7 @@ module Gustwave
     # @param options [Hash] HTML attributes for the +nav+ element.
     def initialize(solid: DEFAULT, separator: DEFAULT, list_options: {}, **options)
       select_options(solid:, separator:)
+      select_options(spaced: option_value(:separator) == :chevron)
       @list_options = list_options
       @options = options
     end
