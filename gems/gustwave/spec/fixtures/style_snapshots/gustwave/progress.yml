@@ -1,0 +1,152 @@
+---
+look size=:sm color=:blue:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-1.5 rounded-full text-blue-100'
+look size=:sm color=:dark:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 dark:text-gray-900 h-1.5 rounded-full
+  text-white'
+look size=:sm color=:red:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 h-1.5 rounded-full text-red-100'
+look size=:sm color=:green:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 h-1.5 rounded-full text-green-100'
+look size=:sm color=:yellow:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 h-1.5 rounded-full text-yellow-900'
+look size=:sm color=:indigo:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 h-1.5 rounded-full text-indigo-100'
+look size=:sm color=:purple:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 h-1.5 rounded-full text-purple-100'
+look size=:md color=:blue:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full text-blue-100'
+look size=:md color=:dark:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 dark:text-gray-900 h-2.5 rounded-full
+  text-white'
+look size=:md color=:red:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 h-2.5 rounded-full text-red-100'
+look size=:md color=:green:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 h-2.5 rounded-full text-green-100'
+look size=:md color=:yellow:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 h-2.5 rounded-full text-yellow-900'
+look size=:md color=:indigo:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full text-indigo-100'
+look size=:md color=:purple:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 h-2.5 rounded-full text-purple-100'
+look size=:lg color=:blue:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-4 rounded-full text-blue-100'
+look size=:lg color=:dark:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 dark:text-gray-900 h-4 rounded-full
+  text-white'
+look size=:lg color=:red:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 h-4 rounded-full text-red-100'
+look size=:lg color=:green:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 h-4 rounded-full text-green-100'
+look size=:lg color=:yellow:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 h-4 rounded-full text-yellow-900'
+look size=:lg color=:indigo:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 h-4 rounded-full text-indigo-100'
+look size=:lg color=:purple:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 h-4 rounded-full text-purple-100'
+look size=:xl color=:blue:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-6 rounded-full text-blue-100'
+look size=:xl color=:dark:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 dark:text-gray-900 h-6 rounded-full
+  text-white'
+look size=:xl color=:red:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 h-6 rounded-full text-red-100'
+look size=:xl color=:green:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 h-6 rounded-full text-green-100'
+look size=:xl color=:yellow:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 h-6 rounded-full text-yellow-900'
+look size=:xl color=:indigo:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 h-6 rounded-full text-indigo-100'
+look size=:xl color=:purple:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 h-6 rounded-full text-purple-100'
+label color=:blue:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 font-medium h-auto leading-none
+  p-0.5 rounded-full text-blue-100 text-center text-xs'
+label color=:dark:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 dark:text-gray-900 font-medium
+  h-auto leading-none p-0.5 rounded-full text-center text-white text-xs'
+label color=:red:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 font-medium h-auto leading-none
+  p-0.5 rounded-full text-center text-red-100 text-xs'
+label color=:green:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 font-medium h-auto leading-none
+  p-0.5 rounded-full text-center text-green-100 text-xs'
+label color=:yellow:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 font-medium h-auto leading-none p-0.5 rounded-full
+  text-center text-xs text-yellow-900'
+label color=:indigo:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 font-medium h-auto leading-none
+  p-0.5 rounded-full text-center text-indigo-100 text-xs'
+label color=:purple:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-auto rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 font-medium h-auto leading-none
+  p-0.5 rounded-full text-center text-purple-100 text-xs'

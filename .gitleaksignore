@@ -9,3 +9,7 @@ f1f396f3232d04cf57c9c52e78112573623762f7:app/notifiers/delivery_methods/rocket_c
 
 # The commented-out `config.secret_key` that the Devise generator writes.
 30415b35000ad3c58b1041023254004a481700d2:config/initializers/devise.rb:generic-api-key:17
+
+# The sample API key of Flowbite's "Card with API keys" clipboard example,
+# shown in a Lookbook preview.
+5576ec5178211dec4ada0b51371239af6bfc23d8:gems/gustwave/previews/gustwave/clipboard_preview/api_keys_card.html.erb:generic-api-key:4
