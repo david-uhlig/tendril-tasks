@@ -164,36 +164,42 @@ pages:
   components/bottom-navigation:
   - id: default-bottom-nav-example
     title: Default bottom navigation
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/default
   - id: border-bottom-nav-example
     title: Menu items with border
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/border
   - id: cta-button-bottom-nav-example
     title: Application bar example
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/application_bar
+    note: The call to action is a Buttons::Default with a Tooltip, placed as a generic item.
   - id: pagination-bottom-nav-example
     title: Example with pagination
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/pagination
+    note: The pager is plain Tailwind markup with Gustwave::Icon, placed as a generic item spanning two columns.
   - id: button-group-bottom-nav-example
     title: Button group bottom bar
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/button_group
+    note: The segmented control is plain buttons in the block content, above the items.
   - id: card-bottom-nav-example
     title: Card with bottom bar
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/card
+    note: The bar is sticky in a scrolling card. The avatars are Gustwave::Avatar.
   - id: video-bottom-nav-example
     title: Online meeting control bar
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/meeting_controls
+    note: "No items: the controls are block content, with Gustwave::Dropdown for the options menu on small screens."
   - id: audio-bottom-nav-example
     title: Video player bar
-    status: blocked
-    needs: bottom-navigation
+    status: previewed
+    preview: gustwave/bottom_navigation/video_player
+    note: "No items: the player is block content. The thumbnail is a placeholder, and the icons are approximations of Flowbite's."
   components/breadcrumb:
   - id: default-breadcrumb-example
     title: Default breadcrumb

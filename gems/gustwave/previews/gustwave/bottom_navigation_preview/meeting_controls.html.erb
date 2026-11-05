@@ -1,0 +1,146 @@
+<%# The whole bar is block content. Its controls are icon buttons with tooltips, and the options menu is a dropdown on small screens. %>
+<%= render Gustwave::BottomNavigation.new(class: "grid grid-cols-1 px-8 md:grid-cols-3") do %>
+  <div class="items-center justify-center hidden text-gray-500 dark:text-gray-400 me-auto md:flex">
+    <%= render Gustwave::Icon.new(:clock, theme: :solid, class: "w-3 h-3 me-2", aria: { hidden: true }) %>
+    <span class="text-sm">12:43 PM</span>
+  </div>
+
+  <div class="flex items-center justify-center mx-auto">
+    <% microphone = Gustwave::Tooltip.new("Mute microphone") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group bg-gray-100 rounded-full hover:bg-gray-200 me-4 focus:outline-none focus:ring-4
+        focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800
+      "
+      <%= tag.attributes(microphone.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:microphone, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Mute microphone</span>
+    </button>
+
+    <%= render microphone %>
+
+    <% camera = Gustwave::Tooltip.new("Hide camera") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 bg-gray-100 group rounded-full hover:bg-gray-200 me-4 focus:outline-none focus:ring-4
+        focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800
+      "
+      <%= tag.attributes(camera.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:video_camera, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Hide camera</span>
+    </button>
+
+    <%= render camera %>
+
+    <% feedback = Gustwave::Tooltip.new("Share feedback") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 bg-gray-100 group rounded-full hover:bg-gray-200 me-4 focus:outline-none focus:ring-4
+        focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800
+      "
+      <%= tag.attributes(feedback.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:messages, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Share feedback</span>
+    </button>
+
+    <%= render feedback %>
+
+    <% settings = Gustwave::Tooltip.new("Video settings") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 bg-gray-100 group rounded-full me-4 md:me-0 hover:bg-gray-200 focus:outline-none focus:ring-4
+        focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800
+      "
+      <%= tag.attributes(settings.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:cog, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Video settings</span>
+    </button>
+
+    <%= render settings %>
+
+    <div class="md:hidden">
+      <%= render Gustwave::Dropdown.new do |dropdown| %>
+        <% dropdown.with_trigger_generic do %>
+          <button
+            type="button"
+            class="
+              p-2.5 bg-gray-100 group rounded-full hover:bg-gray-200 focus:outline-none focus:ring-4
+              focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800
+            "
+          >
+            <%= render Gustwave::Icon.new(:adjustments_vertical, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+            <span class="sr-only">Show options</span>
+          </button>
+        <% end %>
+
+        <% dropdown.with_menu_list do |menu| %>
+          <% menu.with_item_link "Show participants", href: "#" %>
+          <% menu.with_item_link "Adjust volume", href: "#" %>
+          <% menu.with_item_link "Show information", href: "#" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="items-center justify-center hidden ms-auto md:flex">
+    <% participants = Gustwave::Tooltip.new("Show participants") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(participants.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:users_group, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Show participants</span>
+    </button>
+
+    <%= render participants %>
+
+    <% volume = Gustwave::Tooltip.new("Adjust volume") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(volume.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:volume_up, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Adjust volume</span>
+    </button>
+
+    <%= render volume %>
+
+    <% information = Gustwave::Tooltip.new("Show information") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(information.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:info_circle, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Show information</span>
+    </button>
+
+    <%= render information %>
+  </div>
+<% end %>

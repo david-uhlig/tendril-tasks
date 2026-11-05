@@ -1,0 +1,59 @@
+---
+status: alpha
+constructor:
+- 'tag: (optional)'
+- 'position: (optional)'
+- 'floating: (optional)'
+- 'bordered: (optional)'
+- 'label_display: (optional)'
+- 'grid_options: (optional)'
+- "**options"
+options:
+  bordered:
+    default: 'false'
+  floating:
+    default: 'false'
+  label_display:
+    default: inside
+    values:
+    - inside
+    - tooltip
+  position:
+    default: fixed
+    values:
+    - fixed
+    - sticky
+    - none
+  tag:
+    default: div
+    values:
+    - div
+    - nav
+parts:
+- first_item
+- grid
+- item
+- last_item
+slots:
+  items:
+    many: true
+    types:
+    - button
+    - generic
+    - link
+methods:
+- items
+- items?
+- with_item
+- with_item_button
+- with_item_button_content
+- with_item_content
+- with_item_generic
+- with_item_generic_content
+- with_item_link
+- with_item_link_content
+- with_items
+slot_builders:
+- build_slot_item_button
+- build_slot_item_generic
+- build_slot_item_link
