@@ -7,7 +7,7 @@ module Gustwave
 
     # The four heights, with a label above each one.
     def sizes
-      render_with_template(locals: { sizes: Gustwave::Progress.option_values(:size) })
+      render_with_template
     end
 
     # The percentage inside the bar. The bar is as tall as its text, so the size doesn't apply.
@@ -17,12 +17,12 @@ module Gustwave
 
     # The percentage above the track, with the block content as the title.
     def label_outside
-      render Gustwave::Progress.new(45, label: :outside) { "Flowbite" }
+      render(Gustwave::Progress.new(45, label: :outside)) { "Flowbite" }
     end
 
-    # Each color of the bar.
+    # Each color of the bar, with a label in the matching color.
     def colors
-      render_with_template(locals: { colors: Gustwave::Progress.option_values(:color).excluding(:none) })
+      render_with_template
     end
 
     # @param value number
@@ -30,7 +30,7 @@ module Gustwave
     # @param color select { choices: [blue, dark, red, green, yellow, indigo, purple] }
     # @param label select { choices: [none, inside, outside] }
     def playground(value: 45, size: :md, color: :blue, label: :none)
-      render Gustwave::Progress.new(value, size:, color:, label:, aria: { label: "Task progress" }) { "Flowbite" }
+      render(Gustwave::Progress.new(value, size:, color:, label:, aria: { label: "Task progress" })) { "Flowbite" }
     end
   end
 end

@@ -1,4 +1,12 @@
-<% colors.each do |color| %>
-  <p class="mb-1 text-base font-medium dark:text-white"><%= color.to_s.titleize %></p>
-  <%= render Gustwave::Progress.new(45, color:, class: "mb-4", aria: { label: "#{color.to_s.titleize} progress" }) %>
+<% [
+  [ :dark, "Dark", "dark:text-white" ],
+  [ :blue, "Blue", "text-blue-700 dark:text-blue-500" ],
+  [ :red, "Red", "text-red-700 dark:text-red-500" ],
+  [ :green, "Green", "text-green-700 dark:text-green-500" ],
+  [ :yellow, "Yellow", "text-yellow-700 dark:text-yellow-500" ],
+  [ :indigo, "Indigo", "text-indigo-700 dark:text-indigo-500" ],
+  [ :purple, "Purple", "text-purple-700 dark:text-purple-500" ]
+].each_with_index do |(color, label, text_color), index| %>
+  <div class="mb-1 text-base font-medium <%= text_color %>"><%= label %></div>
+  <%= render Gustwave::Progress.new(45, color:, class: ("mb-4" unless index == 6), aria: { label: "#{label} progress" }) %>
 <% end %>

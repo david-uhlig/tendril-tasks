@@ -1,4 +1,9 @@
-<% sizes.each do |size| %>
-  <p class="mb-1 text-base font-medium dark:text-white"><%= size.to_s.titleize %></p>
-  <%= render Gustwave::Progress.new(45, size:, class: "mb-4", aria: { label: "#{size.to_s.titleize} progress" }) %>
+<% [
+  [ :sm, "Small", "text-base", "mb-4" ],
+  [ :md, "Default", "text-base", "mb-4" ],
+  [ :lg, "Large", "text-lg", "mb-4" ],
+  [ :xl, "Extra Large", "text-lg", nil ]
+].each do |size, label, text_size, margin| %>
+  <div class="mb-1 <%= text_size %> font-medium dark:text-white"><%= label %></div>
+  <%= render Gustwave::Progress.new(45, size:, class: margin, aria: { label: "#{label} progress" }) %>
 <% end %>
