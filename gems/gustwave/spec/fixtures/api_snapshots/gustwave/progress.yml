@@ -1,0 +1,40 @@
+---
+status: alpha
+constructor:
+- value (optional)
+- 'size: (optional)'
+- 'color: (optional)'
+- 'label: (optional)'
+- 'bar_options: (optional)'
+- "**options"
+options:
+  color:
+    default: blue
+    values:
+    - blue
+    - dark
+    - red
+    - green
+    - yellow
+    - indigo
+    - purple
+    - none
+  label:
+    default: none
+    values:
+    - none
+    - inside
+    - outside
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - xl
+    - none
+parts:
+- bar
+- label_row
+- title
+- value_label

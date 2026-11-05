@@ -1,0 +1,4 @@
+<% colors.each do |color| %>
+  <p class="mb-1 text-base font-medium dark:text-white"><%= color.to_s.titleize %></p>
+  <%= render Gustwave::Progress.new(45, color:, class: "mb-4", aria: { label: "#{color.to_s.titleize} progress" }) %>
+<% end %>

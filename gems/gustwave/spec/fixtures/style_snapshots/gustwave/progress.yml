@@ -1,0 +1,136 @@
+---
+size size=:sm label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-1.5 rounded-full'
+size size=:sm label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+size size=:md label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full'
+size size=:md label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+size size=:lg label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-4 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-4 rounded-full'
+size size=:lg label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+size size=:xl label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-6 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-6 rounded-full'
+size size=:xl label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+outside_label label=:outside size=:sm:
+- div
+- 'div: flex justify-between mb-1'
+- 'span id="progress-title-r0000001": dark:text-white font-medium text-base text-blue-700'
+- 'span: dark:text-white font-medium ms-auto text-blue-700 text-sm'
+- 'div aria-labelledby="progress-title-r0000001" aria-valuemax="100" aria-valuemin="0"
+  aria-valuenow="45" role="progressbar": bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full
+  w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-1.5 rounded-full'
+outside_label label=:outside size=:md:
+- div
+- 'div: flex justify-between mb-1'
+- 'span id="progress-title-r0000001": dark:text-white font-medium text-base text-blue-700'
+- 'span: dark:text-white font-medium ms-auto text-blue-700 text-sm'
+- 'div aria-labelledby="progress-title-r0000001" aria-valuemax="100" aria-valuemin="0"
+  aria-valuenow="45" role="progressbar": bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full
+  w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full'
+outside_label label=:outside size=:lg:
+- div
+- 'div: flex justify-between mb-1'
+- 'span id="progress-title-r0000001": dark:text-white font-medium text-base text-blue-700'
+- 'span: dark:text-white font-medium ms-auto text-blue-700 text-sm'
+- 'div aria-labelledby="progress-title-r0000001" aria-valuemax="100" aria-valuemin="0"
+  aria-valuenow="45" role="progressbar": bg-gray-200 dark:bg-gray-700 h-4 rounded-full
+  w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-4 rounded-full'
+outside_label label=:outside size=:xl:
+- div
+- 'div: flex justify-between mb-1'
+- 'span id="progress-title-r0000001": dark:text-white font-medium text-base text-blue-700'
+- 'span: dark:text-white font-medium ms-auto text-blue-700 text-sm'
+- 'div aria-labelledby="progress-title-r0000001" aria-valuemax="100" aria-valuemin="0"
+  aria-valuenow="45" role="progressbar": bg-gray-200 dark:bg-gray-700 h-6 rounded-full
+  w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-6 rounded-full'
+color color=:blue label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full'
+color color=:blue label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-blue-600 dark:bg-blue-500 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+color color=:dark label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 h-2.5 rounded-full'
+color color=:dark label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-gray-600 dark:bg-gray-300 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+color color=:red label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 h-2.5 rounded-full'
+color color=:red label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-red-600 dark:bg-red-500 font-medium leading-none p-0.5
+  rounded-full text-blue-100 text-center text-xs'
+color color=:green label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 h-2.5 rounded-full'
+color color=:green label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-green-600 dark:bg-green-500 font-medium leading-none
+  p-0.5 rounded-full text-blue-100 text-center text-xs'
+color color=:yellow label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 h-2.5 rounded-full'
+color color=:yellow label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-yellow-400 font-medium leading-none p-0.5 rounded-full
+  text-blue-100 text-center text-xs'
+color color=:indigo label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full'
+color color=:indigo label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-indigo-600 dark:bg-indigo-500 font-medium leading-none
+  p-0.5 rounded-full text-blue-100 text-center text-xs'
+color color=:purple label=:none:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 h-2.5 rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 h-2.5 rounded-full'
+color color=:purple label=:inside:
+- 'div aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar":
+  bg-gray-200 dark:bg-gray-700 rounded-full w-full'
+- 'div style="width: 45%": bg-purple-600 dark:bg-purple-500 font-medium leading-none
+  p-0.5 rounded-full text-blue-100 text-center text-xs'
