@@ -38,6 +38,8 @@ module Gustwave
   # won't announce the text of a label inside the fill. Pass
   # <tt>aria: { valuetext: "..." }</tt> when the label says more than the
   # percentage.
+  #
+  # @status alpha
   class Progress < Gustwave::Component
     base "w-full bg-gray-200 rounded-full dark:bg-gray-700"
 
