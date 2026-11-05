@@ -26,6 +26,8 @@ module Gustwave
     end
 
     # The bar sticks to the bottom of a scrolling card instead of the viewport.
+    # Each icon is set through the item's icon slot, whose class tightens the
+    # gap to the label as in Flowbite's card.
     def card
       render_with_template
     end

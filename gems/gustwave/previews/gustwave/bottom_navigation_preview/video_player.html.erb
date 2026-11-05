@@ -18,7 +18,7 @@
           "
           <%= tag.attributes(shuffle.trigger_options.except("aria-describedby")) %>
         >
-          <%= render Gustwave::Icon.new(:adjustments_horizontal, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <%= render Gustwave::Icon.new(:shuffle, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
           <span class="sr-only">Shuffle video</span>
         </button>
 
@@ -34,7 +34,7 @@
           "
           <%= tag.attributes(previous.trigger_options.except("aria-describedby")) %>
         >
-          <%= render Gustwave::Icon.new(:backward_step, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <%= render Gustwave::Icon.new(:backward_step, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
           <span class="sr-only">Previous video</span>
         </button>
 
@@ -50,7 +50,7 @@
           "
           <%= tag.attributes(pause.trigger_options.except("aria-describedby")) %>
         >
-          <%= render Gustwave::Icon.new(:pause, theme: :solid, class: "w-3 h-3 text-white", aria: { hidden: true }) %>
+          <%= render Gustwave::Icon.new(:pause, theme: :solid, class: "size-4 -m-0.5 text-white", aria: { hidden: true }) %>
           <span class="sr-only">Pause video</span>
         </button>
 
@@ -66,7 +66,7 @@
           "
           <%= tag.attributes(next_video.trigger_options.except("aria-describedby")) %>
         >
-          <%= render Gustwave::Icon.new(:forward_step, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <%= render Gustwave::Icon.new(:forward_step, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
           <span class="sr-only">Next video</span>
         </button>
 
@@ -82,7 +82,7 @@
           "
           <%= tag.attributes(restart.trigger_options.except("aria-describedby")) %>
         >
-          <%= render Gustwave::Icon.new(:reply, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <%= render Gustwave::Icon.new(:refresh, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
           <span class="sr-only">Restart video</span>
         </button>
 
@@ -112,7 +112,7 @@
       "
       <%= tag.attributes(playlist.trigger_options.except("aria-describedby")) %>
     >
-      <%= render Gustwave::Icon.new(:list_music, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <%= render Gustwave::Icon.new(:list_music, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
       <span class="sr-only">View playlist</span>
     </button>
 
@@ -128,7 +128,7 @@
       "
       <%= tag.attributes(captions.trigger_options.except("aria-describedby")) %>
     >
-      <%= render Gustwave::Icon.new(:caption, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <%= render Gustwave::Icon.new(:caption, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
       <span class="sr-only">Captions</span>
     </button>
 
@@ -144,7 +144,7 @@
       "
       <%= tag.attributes(expand.trigger_options.except("aria-describedby")) %>
     >
-      <%= render Gustwave::Icon.new(:zoom_in, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <%= render Gustwave::Icon.new(:expand, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
       <span class="sr-only">Expand</span>
     </button>
 
@@ -160,7 +160,7 @@
       "
       <%= tag.attributes(volume.trigger_options.except("aria-describedby")) %>
     >
-      <%= render Gustwave::Icon.new(:volume_up, theme: :solid, class: "w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <%= render Gustwave::Icon.new(:volume_up, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
       <span class="sr-only">Adjust volume</span>
     </button>
 

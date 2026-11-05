@@ -5,14 +5,14 @@
   <% navigation.with_item_generic do %>
     <% tooltip = Gustwave::Tooltip.new("Create new item") %>
 
-    <%= render Gustwave::Buttons::Default.new(pill: true, class: "w-10 h-10", **tooltip.trigger_options.except("aria-describedby")) do %>
+    <%= render Gustwave::Buttons::Default.new(pill: true, class: "w-10 h-10 bg-blue-600 hover:bg-blue-700", **tooltip.trigger_options.except("aria-describedby")) do %>
       <%= tag.span "New item", class: "sr-only" %>
-      <%= render Gustwave::Icon.new(:plus, class: "w-4 h-4", aria: { hidden: true }) %>
+      <%= render Gustwave::Icon.new(:plus, class: "size-5 -m-0.5", aria: { hidden: true }) %>
     <% end %>
 
     <%= render tooltip %>
   <% end %>
 
-  <% navigation.with_item_button "Settings", icon: :cog %>
+  <% navigation.with_item_button "Settings", icon: :adjustments_vertical %>
   <% navigation.with_item_button "Profile", icon: :user_circle %>
 <% end %>

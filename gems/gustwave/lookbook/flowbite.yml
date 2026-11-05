@@ -199,7 +199,7 @@ pages:
     title: Video player bar
     status: previewed
     preview: gustwave/bottom_navigation/video_player
-    note: "No items: the player is block content. The thumbnail is a placeholder, and the icons are approximations of Flowbite's."
+    note: "No items: the player is block content. The thumbnail is a placeholder."
   components/breadcrumb:
   - id: default-breadcrumb-example
     title: Default breadcrumb

@@ -6,16 +6,16 @@ placement position=:fixed floating=false:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -23,8 +23,8 @@ placement position=:fixed floating=false:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -35,16 +35,16 @@ placement position=:fixed floating=true:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5 rounded-s-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -52,8 +52,8 @@ placement position=:fixed floating=true:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5 rounded-e-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -64,16 +64,16 @@ placement position=:sticky floating=false:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -81,8 +81,8 @@ placement position=:sticky floating=false:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -93,16 +93,16 @@ placement position=:sticky floating=true:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5 rounded-s-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -110,8 +110,8 @@ placement position=:sticky floating=true:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5 rounded-e-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -122,16 +122,16 @@ placement position=:none floating=false:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -139,8 +139,8 @@ placement position=:none floating=false:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -151,16 +151,16 @@ placement position=:none floating=true:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5 rounded-s-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -168,8 +168,8 @@ placement position=:none floating=true:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5 rounded-e-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -180,16 +180,16 @@ items bordered=false label_display=:inside:
 - 'button type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -197,8 +197,8 @@ items bordered=false label_display=:inside:
 - 'button aria-current="true" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -210,8 +210,8 @@ items bordered=false label_display=:tooltip:
   type="button": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex
   items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-1 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-0.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: sr-only'
 - 'div id="tooltip-r0000001" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
@@ -222,8 +222,8 @@ items bordered=false label_display=:tooltip:
   href="#": dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex items-center
   justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-1 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-0.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: sr-only'
@@ -235,8 +235,8 @@ items bordered=false label_display=:tooltip:
   data-tooltip-trigger="hover" type="button": dark:hover:bg-gray-800 flex-col group
   hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-1 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-0.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: sr-only'
 - 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
@@ -250,16 +250,16 @@ items bordered=true label_display=:inside:
 - 'button type="button": border-e border-gray-200 border-s dark:border-gray-600 dark:hover:bg-gray-800
   flex-col group hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
   text-gray-500 text-sm'
 - 'a href="#": border-e border-gray-200 dark:border-gray-600 dark:hover:bg-gray-800
   flex-col group hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-2 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-gray-400 group-hover:text-blue-600
@@ -268,8 +268,8 @@ items bordered=true label_display=:inside:
   dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex items-center
   justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-2 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-1.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: dark:group-hover:text-blue-500 dark:text-blue-500 group-hover:text-blue-600
   text-blue-600 text-sm'
@@ -281,8 +281,8 @@ items bordered=true label_display=:tooltip:
   type="button": border-e border-gray-200 border-s dark:border-gray-600 dark:hover:bg-gray-800
   flex-col group hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-1 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-0.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: sr-only'
 - 'div id="tooltip-r0000001" role="tooltip": absolute bg-gray-900 dark:bg-gray-700
@@ -293,8 +293,8 @@ items bordered=true label_display=:tooltip:
   href="#": border-e border-gray-200 dark:border-gray-600 dark:hover:bg-gray-800 flex-col
   group hover:bg-gray-50 inline-flex items-center justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-gray-400
-  group-hover:text-blue-600 h-5 mb-1 text-gray-500 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-gray-400
+  group-hover:text-blue-600 mb-0.25 size-6.5 text-gray-500'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: sr-only'
@@ -307,8 +307,8 @@ items bordered=true label_display=:tooltip:
   dark:hover:bg-gray-800 flex-col group hover:bg-gray-50 inline-flex items-center
   justify-center px-5'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:group-hover:text-blue-500 dark:text-blue-500
-  group-hover:text-blue-600 h-5 mb-1 text-blue-600 w-5'
+  xmlns="http://www.w3.org/2000/svg": -mt-0.75 dark:group-hover:text-blue-500 dark:text-blue-500
+  group-hover:text-blue-600 mb-0.25 size-6.5 text-blue-600'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - 'span: sr-only'
 - 'div id="tooltip-r0000003" role="tooltip": absolute bg-gray-900 dark:bg-gray-700

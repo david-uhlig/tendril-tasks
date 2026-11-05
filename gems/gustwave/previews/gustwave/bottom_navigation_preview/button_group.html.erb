@@ -32,7 +32,14 @@
 
   <% navigation.with_item_button "Home", icon: :home %>
   <% navigation.with_item_button "Bookmark", icon: :bookmark %>
-  <% navigation.with_item_button "New post", icon: :file_circle_plus %>
-  <% navigation.with_item_button "Search", icon: :search %>
-  <% navigation.with_item_button "Settings", icon: :cog %>
+
+  <% navigation.with_item_button "New post" do |item| %>
+    <% item.with_icon(:plus, theme: :outline) %>
+  <% end %>
+
+  <% navigation.with_item_button "Search" do |item| %>
+    <% item.with_icon(:search, theme: :outline) %>
+  <% end %>
+
+  <% navigation.with_item_button "Settings", icon: :adjustments_vertical %>
 <% end %>

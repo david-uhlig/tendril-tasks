@@ -7,7 +7,7 @@
   <ul>
     <li class="border-b border-gray-100 dark:border-gray-600">
       <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
-        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Jese Leos avatar", size: :md, class: "me-3") %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Jese Leos avatar", class: "w-11 h-11 me-3") %>
 
         <div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -22,7 +22,7 @@
 
     <li class="border-b border-gray-100 dark:border-gray-600">
       <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
-        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Joseph McFall avatar", size: :md, class: "me-3") %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Joseph McFall avatar", class: "w-11 h-11 me-3") %>
 
         <div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -37,7 +37,7 @@
 
     <li class="border-b border-gray-100 dark:border-gray-600">
       <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
-        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Bonnie Green avatar", size: :md, class: "me-3") %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Bonnie Green avatar", class: "w-11 h-11 me-3") %>
 
         <div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -53,7 +53,7 @@
 
     <li class="border-b border-gray-100 dark:border-gray-600">
       <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
-        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Leslie Livingston avatar", size: :md, class: "me-3") %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Leslie Livingston avatar", class: "w-11 h-11 me-3") %>
 
         <div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -69,7 +69,7 @@
 
     <li>
       <%= link_to "#", class: "flex items-center justify-center w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800" do %>
-        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Robert Brown avatar", size: :md, class: "me-3") %>
+        <%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Robert Brown avatar", class: "w-11 h-11 me-3") %>
 
         <div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -84,8 +84,16 @@
   </ul>
 
   <%= render Gustwave::BottomNavigation.new(position: :sticky) do |navigation| %>
-    <% navigation.with_item_button "Latest", icon: :clock %>
-    <% navigation.with_item_button "Following", icon: :users_group %>
-    <% navigation.with_item_button "Favorites", icon: :heart %>
+    <% navigation.with_item_button "Latest" do |item| %>
+      <% item.with_icon(:clock, class: "mb-0.25") %>
+    <% end %>
+
+    <% navigation.with_item_button "Following" do |item| %>
+      <% item.with_icon(:users_group, class: "mb-0.25") %>
+    <% end %>
+
+    <% navigation.with_item_button "Favorites" do |item| %>
+      <% item.with_icon(:star, class: "mb-0.25") %>
+    <% end %>
   <% end %>
 </div>

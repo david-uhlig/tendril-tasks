@@ -36,13 +36,17 @@ module Gustwave
 
       base "inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
 
-      part :icon, "w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+      # Gustwave's icons draw within the middle three quarters of their box,
+      # so a 26px box draws them as large as Flowbite's 20px icons. The
+      # negative top margin keeps Flowbite's layout.
+      part :icon, "size-6.5 -mt-0.75 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
       part :label, "text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
 
-      # Where the label is shown. The tooltip's label sits closer to the icon.
+      # Where the label is shown. The margins are Flowbite's mb-2 and mb-1,
+      # less the 3px the larger icon box adds below the drawing.
       variant :label_display, default: :inside, values: {
-        inside: { icon: "mb-2" },
-        tooltip: { icon: "mb-1" }
+        inside: { icon: "mb-1.25" },
+        tooltip: { icon: "mb-0.25" }
       }
 
       # Whether the item marks the current page or section

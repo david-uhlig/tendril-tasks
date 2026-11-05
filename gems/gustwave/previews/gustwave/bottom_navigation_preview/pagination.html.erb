@@ -17,7 +17,7 @@
           dark:focus:ring-gray-800
         "
       >
-        <%= render Gustwave::Icon.new(:caret_left, theme: :solid, class: "w-2 h-2 rtl:rotate-180", aria: { hidden: true }) %>
+        <%= render Gustwave::Icon.new(:chevron_left, class: "w-3.5 h-3.5 rtl:rotate-180", aria: { hidden: true }) %>
         <span class="sr-only">Previous page</span>
       </button>
 
@@ -31,12 +31,12 @@
           dark:focus:ring-gray-800
         "
       >
-        <%= render Gustwave::Icon.new(:caret_right, theme: :solid, class: "w-2 h-2 rtl:rotate-180", aria: { hidden: true }) %>
+        <%= render Gustwave::Icon.new(:chevron_right, class: "w-3.5 h-3.5 rtl:rotate-180", aria: { hidden: true }) %>
         <span class="sr-only">Next page</span>
       </button>
     </div>
   <% end %>
 
-  <% navigation.with_item_button "Settings", icon: :cog %>
+  <% navigation.with_item_button "Settings", icon: :adjustments_vertical %>
   <% navigation.with_item_button "Profile", icon: :user_circle %>
 <% end %>
