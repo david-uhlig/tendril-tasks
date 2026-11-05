@@ -41,7 +41,7 @@
     <div class="flex mt-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
       <% [[:facebook, "Facebook page"], [:discord, "Discord community"], [:twitter, "Twitter page"], [:github, "GitHub account"], [:dribbble, "Dribbble account"]].each do |icon, label| %>
         <%= render Gustwave::Link.new(href: "#", color: :none, underline: :none, class: "text-gray-400 hover:text-gray-900 dark:hover:text-white") do %>
-          <%= render Gustwave::Icon.new(icon, theme: :solid, class: "w-4 h-4") %>
+          <%= render Gustwave::Icon.new(icon, theme: :solid, class: "size-5 -m-0.5") %>
           <span class="sr-only"><%= label %></span>
         <% end %>
       <% end %>
