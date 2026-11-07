@@ -46,7 +46,15 @@ module Gustwave
         slash: { separator: "mx-2 text-gray-400" }
       }
 
+      # Renders an icon before the text. Also accepts a component to render as
+      # the icon.
+      #
+      # @param name [Symbol, Object] The icon to render, or a component.
+      # @param theme [Symbol] The icon theme, +:solid+ or +:outline+. Defaults to +:solid+.
+      # @param options [Hash] Additional HTML options passed to the icon component.
       renders_one_extensible :icon, ->(name, theme: :solid, **options) {
+        next name if name.respond_to?(:render_in)
+
         # Gustwave's icons leave 3 units of their 24x24 viewBox empty on each
         # side. At w-4 the glyph is as large as Flowbite's w-3 icon, and the
         # margins make up for the empty part.
