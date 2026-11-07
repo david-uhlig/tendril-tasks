@@ -40,6 +40,16 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
     end
   end
 
+  context "with an icon slot" do
+    it "renders a component set as the icon" do
+      render_inline(described_class.new) do |breadcrumb|
+        breadcrumb.with_item("Home", href: "/") { |item| item.with_icon(Gustwave::Icon.new(:home, class: "text-blue-700")) }
+      end
+
+      expect(rendered_content).to have_selector("li > a > svg.text-blue-700", count: 1)
+    end
+  end
+
   context "with the solid style" do
     it "gives the nav a bordered background" do
       render_inline(described_class.new(solid: true)) { |breadcrumb| breadcrumb.with_item("Home") }

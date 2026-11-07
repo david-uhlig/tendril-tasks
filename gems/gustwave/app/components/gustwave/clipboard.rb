@@ -57,7 +57,7 @@ module Gustwave
     #     clipboard.with_icon(:clipboard)
     #   end
     #
-    # @param name [Symbol] The icon to use. Defaults to +:clipboard+.
+    # @param name [Symbol, Object] The icon to use, or a component to render as the icon. Defaults to +:clipboard+.
     # @param theme [Symbol] The icon theme. Defaults to +:solid+, as Flowbite's.
     # @param options [Hash] Additional HTML options passed to the icon component.
     renders_one_extensible :icon, ->(name = :clipboard, theme: :solid, **options) {
@@ -71,7 +71,7 @@ module Gustwave
     #     clipboard.with_copied_icon(:check, theme: :outline)
     #   end
     #
-    # @param name [Symbol] The icon to use. Defaults to +:check+.
+    # @param name [Symbol, Object] The icon to use, or a component to render as the icon. Defaults to +:check+.
     # @param theme [Symbol] The icon theme. Defaults to +:outline+.
     # @param options [Hash] Additional HTML options passed to the icon component.
     renders_one_extensible :copied_icon, ->(name = :check, theme: :outline, **options) {
@@ -157,6 +157,8 @@ module Gustwave
     private
 
     def clipboard_icon(name, theme:, **options)
+      return name if name.respond_to?(:render_in)
+
       # The label says what the button does, so the icon is decorative.
       options = configure_html_attributes(options, aria: { hidden: true })
       Gustwave::Icon.new(name, theme:, **attributes_for(:icon, options))

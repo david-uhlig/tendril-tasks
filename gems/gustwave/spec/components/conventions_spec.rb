@@ -84,12 +84,8 @@ RSpec.describe "Component conventions" do
   }
 
   known_violations = {
-    "Gustwave::DismissButton" => { "icon_keyword: icon" => 520 },
     "Gustwave::DrawerHeader" => { "icon_keyword: icon" => 520 },
-    "Gustwave::IconToast" => { "icon_keyword: icon" => 519 },
-    "Gustwave::Pagination::Link" => { "icon_keyword: icon" => 520 },
-    "Gustwave::SpeedDials::Action" => { "icon_keyword: icon" => 520 },
-    "Gustwave::SpeedDials::Trigger" => { "icon_keyword: icon" => 520 }
+    "Gustwave::IconToast" => { "icon_keyword: icon" => 519 }
   }
 
   exceptions = {

@@ -3,8 +3,13 @@
 module Gustwave
   class Pagination < Gustwave::Component
     # One link in a Gustwave::Pagination. The pagination sets its position in
-    # the list, its size and its default label. Pass +icon+ to show an icon
-    # instead of the text, which then stays for screen readers only.
+    # the list, its size and its default label. Set the +icon+ slot to show an
+    # icon instead of the text, which then stays for screen readers only.
+    #
+    # @example An icon through the slot
+    #   <%= render Gustwave::Pagination::Link.new(href: "/tasks?page=2") do |link| %>
+    #     <% link.with_icon :arrow_right, theme: :solid %>
+    #   <% end %>
     #
     # @status alpha
     class Link < Gustwave::Component
@@ -32,9 +37,21 @@ module Gustwave
         last: "rounded-e-lg"
       }
 
+      # Renders an icon in place of the text, which stays for screen readers
+      # only. Also accepts a component to render as the icon.
+      #
+      # @param name [Symbol, Object] The icon to render, or a component.
+      # @param theme [Symbol] The icon theme, +:outline+ or +:solid+. Defaults to +:outline+.
+      # @param options [Hash] Additional HTML options passed to the icon component.
+      renders_one_extensible :icon, ->(name, theme: :outline, **options) {
+        next name if name.respond_to?(:render_in)
+
+        Gustwave::Icon.new(name, theme:, **attributes_for(:icon, options))
+      }
+
       # @param text [String, nil] The link text. Takes precedence over block content.
       # @param href [String] The URL the link points to.
-      # @param icon [Symbol, nil] Shows this icon and keeps the text for screen readers only.
+      # @param icon [Symbol, nil] Shorthand for the +icon+ slot. Shows this icon and keeps the text for screen readers only.
       # @param size [Symbol] +:sm+ (default) or +:md+. Set by Gustwave::Pagination.
       # @param active [Boolean] Whether the link is the current page.
       # @param options [Hash] Additional HTML attributes for the +a+ element.
@@ -56,6 +73,7 @@ module Gustwave
       end
 
       def before_render
+        with_icon(@icon) if @icon && !icon?
         @config = attributes_for(@options)
         @config[:"aria-current"] = "page" if option_value(:active)
       end
@@ -67,10 +85,10 @@ module Gustwave
       private
 
       def link_content
-        return text_or_content(@text).presence || @default_text unless @icon
+        return text_or_content(@text).presence || @default_text unless icon?
 
         label = @text || @default_text
-        safe_join([ tag.span(label, class: "sr-only"), render(Gustwave::Icon.new(@icon, class: classes(:icon))) ])
+        safe_join([ tag.span(label, class: "sr-only"), render(icon) ])
       end
     end
   end

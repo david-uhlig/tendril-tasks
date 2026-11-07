@@ -14,6 +14,11 @@ module Gustwave
       render_with_template
     end
 
+    # An action's icon, set through its slot, or with icon_options: for the theme.
+    def custom_icon
+      render_with_template
+    end
+
     def text_inside
       render_with_template
     end
