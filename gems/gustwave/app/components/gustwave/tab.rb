@@ -69,28 +69,26 @@ module Gustwave
       @link
     end
 
-    # Hands over the selection of the tab. Tabs calls it before rendering.
+    # Called by Gustwave::Tabs, which calls it before rendering each tab. This
+    # is extension API: a parent may pass more keywords later, so unknown
+    # keywords are ignored.
     #
     # @param selected [Boolean] whether the tab is selected.
     # @param interactive [Boolean] whether the list is interactive, i.e. Flowbite's JS toggles its panels. Otherwise the tabs are navigation links.
-    def configure_selection(selected:, interactive:)
+    # @param classes [Hash] the classes of the tab, with the keys below.
+    # @option classes [String, nil] :item the classes of the list item.
+    # @option classes [String, nil] :tab the classes of the trigger.
+    # @option classes [String, nil] :panel the classes of the panel.
+    # @option classes [Hash{Symbol => String, nil}] :states the classes of the +:active+, +:inactive+ and +:disabled+ states.
+    # @option classes [String, nil] :edge the classes of the first or last tab, if any.
+    def apply_slot_context(selected:, interactive:, classes:, **)
       @selected = selected == true
       @interactive = interactive == true
-    end
-
-    # Hands over the classes of the tab. Tabs calls it before rendering.
-    #
-    # @param item [String, nil] the classes of the list item.
-    # @param tab [String, nil] the classes of the trigger.
-    # @param panel [String, nil] the classes of the panel.
-    # @param states [Hash{Symbol => String, nil}] the classes of the +:active+, +:inactive+ and +:disabled+ states.
-    # @param edge [String, nil] the classes of the first or last tab, if any.
-    def configure_classes(item:, tab:, panel:, states:, edge: nil)
-      @item_class = item
-      @tab_class = tab
-      @panel_class = panel
-      @states = states
-      @edge_class = edge
+      @item_class = classes.fetch(:item)
+      @tab_class = classes.fetch(:tab)
+      @panel_class = classes.fetch(:panel)
+      @states = classes.fetch(:states)
+      @edge_class = classes[:edge]
     end
 
     # The panel of a selected or unselected button tab, as an element that

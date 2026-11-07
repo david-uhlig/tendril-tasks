@@ -11,6 +11,7 @@ RSpec.describe "Gustwave constructor convention", type: :component do
   # defaults come from a derived value, and the options callers pick through
   # another method than the constructor.
   setups = {
+    Gustwave::Clipboard => { kwargs: { target_id: "target" } },
     Gustwave::DismissButton => { args: [ "target" ] },
     Gustwave::Drawer => { selected_elsewhere: %i[action edge] },
     Gustwave::DrawerHeader => { kwargs: { drawer_id: "drawer" } },
