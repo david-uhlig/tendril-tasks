@@ -44,6 +44,16 @@ Rails.autoloaders.main.on_load("Gustwave::Buttons::Default") do |button, _abspat
 end
 ```
 
+Some components let you swap the class they render, such as the menu of `Gustwave::Dropdown` with `list_menu_class`. Set it on a subclass, not on `Gustwave::Dropdown` itself. Setting it in `on_load` changes it for every dropdown in the process, tests included.
+
+```ruby
+class MyDropdown < Gustwave::Dropdown
+  self.list_menu_class = "MyList"
+end
+```
+
+`list_menu_class` is part of the extension API. See [Public API and stability](docs/design.md#public-api-and-stability).
+
 ### Cheat-sheet
 
 | Declaration | Meaning | Example |
