@@ -12,16 +12,29 @@ module Gustwave
   # With +edge+, the header is the swipeable handle that toggles the drawer,
   # and it has no close button.
   #
+  # Pass +icon+ to show an icon before the title. Set visuals on either side
+  # of the title with +with_leading_visual_icon+, +with_trailing_visual_icon+
+  # and the other types of Gustwave::Visuals.
+  #
   #   <% drawer = Gustwave::Drawer.new(id: "info", placement: :right) %>
   #   <%= render drawer do |d| %>
   #     <% d.with_header("Info", icon: :info_circle) %>
   #     …body…
   #   <% end %>
   #
+  #   <% d.with_header("Info") do |header| %>
+  #     <% header.with_leading_visual_icon :info_circle, theme: :outline %>
+  #   <% end %>
+  #
   # @status alpha
   class DrawerHeader < Gustwave::Component
+    include Gustwave::Visuals
+    renders_visuals :leading_visuals, :trailing_visuals
+    self.visual_icon_theme = :solid
+
     part :title, "inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
-    part :title_icon, "w-4 h-4 me-2.5"
+    # The title's gap spaces the visuals from its text
+    part :visual, "w-4 h-4"
     part :close_button, "absolute top-2.5 end-2.5 w-8 h-8 inline-flex items-center justify-center rounded-lg text-sm text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
     part :handle, "p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
     part :handle_bar, "absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"
@@ -32,7 +45,7 @@ module Gustwave
     # @param text [String, nil] The title text. Takes precedence over block content.
     # @param drawer_id [String] The id of the drawer this header belongs to. The title's id is +"#{drawer_id}-title"+, which the drawer labels itself by, and the close button or handle targets the drawer.
     # @param close_button [Boolean] Whether a close button is rendered. Defaults to +true+. Ignored with +edge+.
-    # @param icon [Symbol, nil] The icon rendered before the title, e.g. +:info_circle+. Defaults to no icon.
+    # @param icon [Symbol, nil] Shorthand for +with_leading_visual_icon+: an icon before the title, e.g. +:info_circle+, in the solid theme. Defaults to no icon.
     # @param edge [Boolean] Whether the header is the swipeable handle of an edge drawer, which toggles the drawer instead of closing it. Defaults to +false+.
     # @param title_options [Hash] HTML attributes for the title. Its +class+ adds to the title's classes, and its +id+ is replaced by the title's id.
     # @param options [Hash] HTML attributes for the header's outermost element: the title, or the handle with +edge+. The +title_options+ win for the title.
@@ -45,6 +58,10 @@ module Gustwave
       @options = options
 
       select_options(edge:)
+    end
+
+    def before_render
+      with_leading_visual_icon(@icon) if @icon.present? && !leading_visuals?
     end
 
     def call
@@ -99,16 +116,13 @@ module Gustwave
     def title_tag
       # Without +edge+ the title is the outermost element, so it takes the
       # header's +options+ too. The drawer is labelled by this id.
-      attrs = edge? ? attributes_for(:title, @title_options) : attributes_for(:title, @options.merge(@title_options))
+      options = (edge? ? @title_options : @options.merge(@title_options)).to_h.symbolize_keys
+      # The gap spaces the visuals from the text. A caller's class wins.
+      options = options.merge(class: merge_classes("gap-2.5", options[:class])) if has_visual?
+      attrs = attributes_for(:title, options)
       tag.h5(**attrs.merge(id: title_id)) do
-        safe_join([ icon_tag, text_or_content(text) ].compact)
+        safe_join([ *leading_visuals, text_or_content(text), *trailing_visuals ].compact)
       end
-    end
-
-    def icon_tag
-      return if @icon.blank?
-
-      render Gustwave::Icon.new(@icon, theme: :solid, class: classes(:title_icon))
     end
 
     # The handle toggles the drawer, so it carries the toggle's ARIA
