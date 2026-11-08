@@ -21,6 +21,7 @@ module Gustwave
   # @status alpha
   class Tab < Gustwave::Component
     include Gustwave::Visuals
+    renders_visuals :leading_visuals, :trailing_visuals
 
     # Sizes the leading and trailing visuals to the tab's text
     variant :size, internal: true, default: :sm, values: { sm: { visual: "w-4 h-4" } }

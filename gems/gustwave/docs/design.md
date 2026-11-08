@@ -97,7 +97,7 @@ end
 
 ### Icons and other visuals
 
-Visuals are icons, images, SVGs, indicators and custom components. `Gustwave::Visuals` provides three slots for them, and a component declares the ones it places (D7):
+Visuals are icons, images, SVGs, indicators and custom components. `Gustwave::Visuals` provides three slots for them, and a component declares the ones it places with `renders_visuals`, e.g. `renders_visuals :leading_visuals, :trailing_visuals` (D7):
 
 - **`leading_visuals` and `trailing_visuals`** for visuals inline with text, on either side, as in Buttons, Badge, Tab and Kbd.
 - **`visuals`** for visuals the component places itself, such as a toast's or a pagination link's icon.

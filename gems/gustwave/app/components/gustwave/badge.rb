@@ -6,6 +6,7 @@ module Gustwave
   # @status alpha
   class Badge < Gustwave::Component
     include Gustwave::Visuals
+    renders_visuals :leading_visuals, :trailing_visuals
 
     attr_reader :id
 
