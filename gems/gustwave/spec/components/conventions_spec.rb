@@ -84,8 +84,7 @@ RSpec.describe "Component conventions" do
   }
 
   known_violations = {
-    "Gustwave::DrawerHeader" => { "icon_keyword: icon" => 520 },
-    "Gustwave::IconToast" => { "icon_keyword: icon" => 519 }
+    "Gustwave::DrawerHeader" => { "icon_keyword: icon" => 520 }
   }
 
   exceptions = {
