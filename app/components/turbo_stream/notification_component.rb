@@ -11,7 +11,7 @@ module TurboStream
 
     def call
       turbo_stream.append CONTAINER_ID do
-        render Gustwave::IconToast.new(@message, status: @status)
+        render Gustwave::Toast.new(@message, status: @status)
       end
     end
   end

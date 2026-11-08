@@ -6,6 +6,7 @@ module Gustwave
   # @status alpha
   class Badge < Gustwave::Component
     include Gustwave::Visuals
+    renders_visuals :leading_visuals, :trailing_visuals
 
     attr_reader :id
 
@@ -51,14 +52,14 @@ module Gustwave
     # +text-*+ class of the badge. Icons leave a blank margin around their
     # drawing, so they are larger than Flowbite's and the negative margin keeps
     # the text in place. The dismiss_button part pads the dismiss button per
-    # size, and the dismiss_icon part sizes its icon the same way.
+    # size and sizes its icon through its [&>svg] classes.
     variant :size, default: :xs, values: {
-      xs: { root: "px-2.5 py-0.5 text-xs font-medium", visual: "h-3 w-auto -mx-px", dismiss_button: "p-0.5", dismiss_icon: "h-3.5 -m-px" },
-      sm: { root: "px-2.5 py-0.5 text-sm font-medium", visual: "h-3.5 w-auto -mx-px", dismiss_button: "p-0.5", dismiss_icon: "h-3.5 -m-px" },
-      md: { root: "px-2.5 py-0.5 text-base font-semibold", visual: "h-4 w-auto -mx-px", dismiss_button: "p-0.5", dismiss_icon: "h-3.5 -m-px" },
-      lg: { root: "px-2.5 py-0.5 text-lg font-semibold", visual: "h-5 w-auto -mx-0.5", dismiss_button: "p-1.5", dismiss_icon: "h-4 -m-px" },
-      xl: { root: "px-2.5 py-0.5 text-xl font-bold", visual: "h-5.5 w-auto -mx-0.5", dismiss_button: "p-1.5", dismiss_icon: "h-4 -m-px" },
-      "2xl": { root: "px-2.5 py-0.5 text-2xl font-extrabold", visual: "h-6 w-auto -mx-0.5", dismiss_button: "p-2", dismiss_icon: "h-5 -m-0.5" }
+      xs: { root: "px-2.5 py-0.5 text-xs font-medium", visual: "h-3 w-auto -mx-px", dismiss_button: "p-0.5 [&>svg]:h-3.5 [&>svg]:-m-px" },
+      sm: { root: "px-2.5 py-0.5 text-sm font-medium", visual: "h-3.5 w-auto -mx-px", dismiss_button: "p-0.5 [&>svg]:h-3.5 [&>svg]:-m-px" },
+      md: { root: "px-2.5 py-0.5 text-base font-semibold", visual: "h-4 w-auto -mx-px", dismiss_button: "p-0.5 [&>svg]:h-3.5 [&>svg]:-m-px" },
+      lg: { root: "px-2.5 py-0.5 text-lg font-semibold", visual: "h-5 w-auto -mx-0.5", dismiss_button: "p-1.5 [&>svg]:h-4 [&>svg]:-m-px" },
+      xl: { root: "px-2.5 py-0.5 text-xl font-bold", visual: "h-5.5 w-auto -mx-0.5", dismiss_button: "p-1.5 [&>svg]:h-4 [&>svg]:-m-px" },
+      "2xl": { root: "px-2.5 py-0.5 text-2xl font-extrabold", visual: "h-6 w-auto -mx-0.5", dismiss_button: "p-2 [&>svg]:h-5 [&>svg]:-m-0.5" }
     }
 
     # The size of the dismiss button per badge size
@@ -116,7 +117,6 @@ module Gustwave
     toggle :dismissible, "px-2 py-1", internal: true
 
     part :dismiss_button, "bg-transparent ms-2"
-    part :dismiss_icon
 
     # Note +border+ increases buttons dimensions by 1px on all edges. Prefer
     # +outline+ to render bordered and non-bordered badges side-by-side.
@@ -170,8 +170,7 @@ module Gustwave
 
       Gustwave::DismissButton.new(@id, text, icon:, **{
         color: derived_value(:dismiss_button_color),
-        size: derived_value(:dismiss_button_size),
-        icon_options: { class: classes(:dismiss_icon) }
+        size: derived_value(:dismiss_button_size)
       }.merge(attributes_for(:dismiss_button, options)))
     }
 

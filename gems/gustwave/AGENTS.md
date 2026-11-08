@@ -15,7 +15,7 @@ The short version:
 - Every new component, nested and base classes included, gets `# @status alpha` as the last line of its class docstring. `spec/components/component_status_spec.rb` checks it. Don't change a status unless asked; promotions follow `docs/design.md`.
 - Style a part with `<part>_options:`. Never add `configure_<part>` or `<part>_class:` for an element. `<state>_class:` is only for classes a script swaps.
 - `dismiss_button` slot for elements that go away for good, `close_button` slot for overlays that reopen.
-- `Gustwave::Visuals` for visuals inline with text. A slot named after its role, like `icon` or `marker`, for a single visual the component places. `icon:` keywords are shorthand for a slot, never the only way.
+- `Gustwave::Visuals` for visuals: `leading_visuals` and `trailing_visuals` inline with text, `visuals` for visuals the component places. All three are many, with every type. A slot named after its role only for a visual that carries meaning or isn't an icon, image or SVG, like Alert's `icon` or Timeline's `marker`. `icon:` keywords are shorthand for a slot, never the only way.
 - Flowbite's hover or click trigger setting is `trigger_event:`. Triggers rendered elsewhere use `trigger_options(...)`.
 - A standalone sub-component requires its parent's ID as `<parent>_id:`.
 - Follow the constructor convention in `app/components/gustwave/component.rb`.

@@ -9,6 +9,7 @@ module Gustwave
     # @status alpha
     class Base < Gustwave::Component
       include Gustwave::Visuals
+      renders_visuals :leading_visuals, :trailing_visuals
 
       # The HTML tag to render the button as
       option :tag, default: :button, values: %i[button a]
