@@ -53,10 +53,10 @@ RSpec.describe Gustwave::DismissButton, type: :component do
     expect(page).not_to have_selector("button svg")
   end
 
-  it "passes the icon options to the icon" do
-    render_inline(described_class.new("my-modal", icon_options: { class: "w-6 h-6" }))
+  it "takes the icon's size from the button's class" do
+    render_inline(described_class.new("my-modal", class: "[&>svg]:w-6 [&>svg]:h-6"))
 
-    expect(page).to have_selector("button > svg.w-6.h-6")
+    expect(page).to have_selector("button[class~='[&>svg]:w-6'][class~='[&>svg]:h-6'] > svg")
   end
 
   it "renders a leading visual set through the slot in place of the default icon" do

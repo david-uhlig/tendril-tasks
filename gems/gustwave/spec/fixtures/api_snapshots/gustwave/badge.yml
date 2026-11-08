@@ -63,7 +63,6 @@ derived:
     from: size
 parts:
 - dismiss_button
-- dismiss_icon
 - visual
 slots:
   dismiss_button:
