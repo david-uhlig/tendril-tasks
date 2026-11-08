@@ -18,10 +18,54 @@ RSpec.describe Gustwave::DrawerHeader, type: :component do
     expect(page).to have_selector("h5#info-title.font-semibold.mb-4")
   end
 
-  it "renders an icon before the title" do
-    render_inline(described_class.new("Info", drawer_id: "info", icon: :info_circle))
+  context "with visuals" do
+    it "renders icon: as a solid leading visual, spaced by the title's gap" do
+      header = described_class.new("Info", drawer_id: "info", icon: :info_circle)
+      render_inline(header)
 
-    expect(page).to have_selector("h5 svg.me-2\\.5")
+      expect(header.leading_visuals?).to be true
+      expect(page).to have_selector("h5.gap-2\\.5 > svg:first-child.w-4.h-4[fill='currentColor'][aria-hidden='true']", count: 1)
+    end
+
+    it "renders a leading visual set in the block in place of icon:" do
+      render_inline(described_class.new("Info", drawer_id: "info", icon: :info_circle)) do |header|
+        header.with_leading_visual_icon :info_circle, theme: :outline
+      end
+
+      expect(page).to have_selector("h5 > svg[fill='none']", count: 1)
+    end
+
+    it "renders a trailing visual after the text" do
+      render_inline(described_class.new("Info", drawer_id: "info")) { |header| header.with_trailing_visual_indicator }
+
+      expect(page).to have_selector("h5.gap-2\\.5 > span:last-child[aria-hidden='true']")
+    end
+
+    it "renders a component set as a visual" do
+      render_inline(described_class.new("Info", drawer_id: "info")) do |header|
+        header.with_leading_visual_renderable(Gustwave::Icon.new(:bell, class: "text-blue-700"))
+      end
+
+      expect(page).to have_selector("h5 > svg.text-blue-700:first-child")
+    end
+
+    it "keeps the caller's title class over the gap" do
+      render_inline(described_class.new("Info", drawer_id: "info", icon: :info_circle, title_options: { class: "gap-4" }))
+
+      expect(page).to have_selector("h5.gap-4:not(.gap-2\\.5)")
+    end
+
+    it "renders visuals in the edge handle's title" do
+      render_inline(described_class.new("Swipe", drawer_id: "info", edge: true, icon: :info_circle))
+
+      expect(page).to have_selector("div[data-drawer-toggle] h5.gap-2\\.5 > svg")
+    end
+
+    it "adds no gap without a visual" do
+      render_inline(described_class.new("Info", drawer_id: "info"))
+
+      expect(page).not_to have_selector("h5.gap-2\\.5")
+    end
   end
 
   context "with a close button" do
