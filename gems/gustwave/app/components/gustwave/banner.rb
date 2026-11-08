@@ -58,7 +58,9 @@ module Gustwave
     part :body, "flex-1 min-w-0 text-sm font-normal text-gray-500 dark:text-gray-400"
     # +p-0+ leaves the w-6 icon its full size: +p-1.5+ would squeeze it to 16px.
     # Stays at the top next to content that stacks on small screens.
-    part :dismiss_button, "shrink-0 self-start md:self-center inline-flex items-center justify-center w-7 h-7 p-0 rounded-lg text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+    # Gustwave's icons draw within the middle half of their box, so the
+    # [&>svg] classes match Flowbite's w-3 h-3 close icon
+    part :dismiss_button, "shrink-0 self-start md:self-center inline-flex items-center justify-center w-7 h-7 p-0 rounded-lg text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white [&>svg]:w-6 [&>svg]:h-6"
 
     # Renders a dismiss button to dismiss the banner visually.
     #
@@ -69,9 +71,7 @@ module Gustwave
       # Make sure the banner has an id that can be used to dismiss it.
       @id ||= generate_random_id(prefix: "banner")
 
-      # Gustwave's icons draw within the middle half of their box, so this
-      # matches Flowbite's w-3 h-3 close icon
-      Gustwave::DismissButton.new(@id, text, icon:, icon_options: { class: "w-6 h-6" },
+      Gustwave::DismissButton.new(@id, text, icon:,
                                   **{ color: :none }.merge(attributes_for(:dismiss_button, options)))
     }
 

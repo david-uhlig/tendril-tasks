@@ -104,7 +104,9 @@ module Gustwave
     part :body
     part :title, "font-medium"
     # +ms-auto+ follows +-mx-1.5+, or the class merger drops it
-    part :dismiss_button, "-mx-1.5 -my-1.5 ms-auto p-1.5 h-8 w-8 rounded-lg focus:ring-2 inline-flex items-center justify-center"
+    # Gustwave's icons draw within the middle half of their box, so the
+    # [&>svg] classes match Flowbite's w-3 h-3 close icon
+    part :dismiss_button, "-mx-1.5 -my-1.5 ms-auto p-1.5 h-8 w-8 rounded-lg focus:ring-2 inline-flex items-center justify-center [&>svg]:w-6 [&>svg]:h-6"
 
     # Renders an icon before the alert's text.
     #
@@ -126,9 +128,7 @@ module Gustwave
       # Make sure the alert has an id that can be used to dismiss it.
       @id ||= generate_random_id(prefix: "alert")
 
-      # Gustwave's icons draw within the middle half of their box, so this
-      # matches Flowbite's w-3 h-3 close icon
-      Gustwave::DismissButton.new(@id, text, icon:, icon_options: { class: "w-6 h-6" },
+      Gustwave::DismissButton.new(@id, text, icon:,
                                   **{ color: :none }.merge(attributes_for(:dismiss_button, options)))
     }
 
