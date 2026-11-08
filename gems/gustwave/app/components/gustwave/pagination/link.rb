@@ -3,21 +3,30 @@
 module Gustwave
   class Pagination < Gustwave::Component
     # One link in a Gustwave::Pagination. The pagination sets its position in
-    # the list, its size and its default label. Pass +icon+ to show an icon
-    # instead of the text, which then stays for screen readers only.
+    # the list, its size and its default label. Set a visual to show it
+    # instead of the text, which then stays for screen readers only. See
+    # Gustwave::Visuals for the visual types.
+    #
+    # @example A visual through the slot
+    #   <%= render Gustwave::Pagination::Link.new(href: "/tasks?page=2") do |link| %>
+    #     <% link.with_visual_icon :arrow_right, theme: :solid %>
+    #   <% end %>
     #
     # @status alpha
     class Link < Gustwave::Component
       base "flex items-center justify-center leading-tight border"
 
-      part :icon, "*:stroke-2 rtl:rotate-180"
+      include Gustwave::Visuals
+      renders_visuals :visuals
+
+      part :visual, "*:stroke-2 rtl:rotate-180"
 
       # Gustwave's chevrons fill a small part of their 24x24 viewBox. These sizes
       # match the chevron drawn by Flowbite's w-2.5 and w-3 icons, and the negative
       # margins take the empty part of the viewBox out of the link's width.
       variant :size, default: :sm, values: {
-        sm: { root: "px-3 h-8", icon: "w-6 h-6 -mx-[7px]" },
-        md: { root: "px-4 h-10", icon: "w-7 h-7 -mx-2" }
+        sm: { root: "px-3 h-8", visual: "w-6 h-6 -mx-[7px]" },
+        md: { root: "px-4 h-10", visual: "w-7 h-7 -mx-2" }
       }
 
       toggle :active,
@@ -34,7 +43,7 @@ module Gustwave
 
       # @param text [String, nil] The link text. Takes precedence over block content.
       # @param href [String] The URL the link points to.
-      # @param icon [Symbol, nil] Shows this icon and keeps the text for screen readers only.
+      # @param icon [Symbol, nil] Shorthand for +with_visual_icon+. Shows this icon and keeps the text for screen readers only.
       # @param size [Symbol] +:sm+ (default) or +:md+. Set by Gustwave::Pagination.
       # @param active [Boolean] Whether the link is the current page.
       # @param options [Hash] Additional HTML attributes for the +a+ element.
@@ -56,6 +65,7 @@ module Gustwave
       end
 
       def before_render
+        with_visual_icon(@icon) if @icon && !visuals?
         @config = attributes_for(@options)
         @config[:"aria-current"] = "page" if option_value(:active)
       end
@@ -67,10 +77,10 @@ module Gustwave
       private
 
       def link_content
-        return text_or_content(@text).presence || @default_text unless @icon
+        return text_or_content(@text).presence || @default_text unless visuals?
 
         label = @text || @default_text
-        safe_join([ tag.span(label, class: "sr-only"), render(Gustwave::Icon.new(@icon, class: classes(:icon))) ])
+        safe_join([ tag.span(label, class: "sr-only"), *visuals ])
       end
     end
   end

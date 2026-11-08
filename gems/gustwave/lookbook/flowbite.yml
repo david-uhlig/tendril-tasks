@@ -197,20 +197,22 @@ pages:
   components/breadcrumb:
   - id: default-breadcrumb-example
     title: Default breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/default
   - id: breadcrumb-background-example
     title: Solid background
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/solid
   - id: header-breadcrumb-example
     title: Header breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/header
+    note: The trigger's chevron sits 2px further from the text, as in Gustwave's other dropdown buttons.
   - id: breadcrumb-dropdown-example
     title: Breadcrumb with dropdown
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/dropdown
+    note: The triggers' chevrons sit 2px further from the text, as in Gustwave's other dropdown buttons.
   components/button-group:
   - id: default-button-group-example
     title: Default example
@@ -452,40 +454,41 @@ pages:
   components/clipboard:
   - id: clipboard-example
     title: Default copy to clipboard
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/default
   - id: clipboard-button-input-example
     title: Input with copy button
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/input_with_copy_button
   - id: clipboard-button-text-input-example
     title: Copy button with text
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/copy_button_with_text
   - id: clipboard-button-group-example
     title: Input group with copy
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/input_group
   - id: clipboard-url-shortener-example
     title: URL shortener input group
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/url_shortener
   - id: clipboard-source-block
     title: Copy source code block
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/source_code_block
   - id: clipboard-api-keys
     title: Card with API keys
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/api_keys_card
   - id: contact-details-clipboard
     title: Copy contact details
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/contact_details
   - id: copy-to-clipboard-modal
     title: Copy button with modal
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/modal
+    note: Gustwave's :sm modal is max-w-md, narrower than Flowbite's max-w-lg, which no Modal size matches.
   components/datepicker:
   - id: default-datepicker-example
     title: Datepicker example
@@ -972,8 +975,7 @@ pages:
     preview: gustwave/modal/with_timeline
   - id: modal-progress-example
     title: Modal with progress bar
-    status: partial
-    needs: progress
+    status: composable
   - id: modal-crypto-example
     title: Crypto wallet
     status: previewed
@@ -1086,8 +1088,7 @@ pages:
     preview: gustwave/popover/description
   - id: popover-description-example-5
     title: Progress popover
-    status: partial
-    needs: progress
+    status: composable
   - id: popover-password-example
     title: Password strength
     status: partial
@@ -1115,24 +1116,24 @@ pages:
   components/progress:
   - id: default-progress-example
     title: Default progress bar
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/default
   - id: progress-sizes-example
     title: Sizes
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/sizes
   - id: progress-label-example
     title: With label inside
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/label_inside
   - id: progress-label-outside-example
     title: With label outside
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/label_outside
   - id: progress-colors-example
     title: Colors
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/colors
   components/rating:
   - id: default-rating-example
     title: Default rating
@@ -1307,8 +1308,7 @@ pages:
     status: composable
   - id: spinner-progress-example
     title: Progress spinner
-    status: partial
-    needs: progress
+    status: composable
   - id: spinner-buttons-example
     title: Buttons
     status: composable
@@ -2056,8 +2056,8 @@ pages:
     preview: gustwave/heading/underline
   - id: heading-breadcrumb-example
     title: Breadcrumb context
-    status: partial
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/heading/breadcrumb
   - id: heading-badge-example
     title: Badge context
     status: previewed

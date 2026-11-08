@@ -36,6 +36,27 @@ RSpec.describe Gustwave::SpeedDials::Trigger, type: :component do
     expect(page).to have_selector("button > span.sr-only", exact_text: "Open actions menu")
   end
 
+  it "renders a leading visual set through the slot in place of the plus icon" do
+    render_inline(described_class.new) { |trigger| trigger.with_leading_visual_icon :edit, theme: :outline }
+
+    expect(page).to have_selector("button > svg[fill='none']", count: 1)
+    expect(page).not_to have_selector("button svg.group-hover\\:rotate-45")
+  end
+
+  it "renders no icon with icon: nil" do
+    render_inline(described_class.new(icon: nil))
+
+    expect(page).not_to have_selector("button svg")
+  end
+
+  it "renders a leading visual set before rendering" do
+    component = described_class.new(icon: nil)
+    component.with_leading_visual_icon :edit
+    render_inline(component)
+
+    expect(page).to have_selector("button > svg", count: 1)
+  end
+
   it "renders a round button by default" do
     render_inline(described_class.new)
 

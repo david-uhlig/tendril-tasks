@@ -207,7 +207,7 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "renders a dismiss button with a small icon" do
       render_inline(described_class.new("New", id: "badge-new"), &:with_dismiss_button)
 
-      expect(page).to have_selector("button.bg-transparent > svg[class~='h-3.5'][aria-hidden='true']")
+      expect(page).to have_selector("button.bg-transparent[class~='[&>svg]:h-3.5'] > svg[aria-hidden='true']")
     end
 
     it "uses Flowbite's padding and spacing" do
@@ -220,7 +220,7 @@ RSpec.describe Gustwave::Badge, type: :component do
     it "matches the badge's color and size" do
       render_inline(described_class.new("New", color: :pink, size: :"2xl"), &:with_dismiss_button)
 
-      expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2 > svg.h-5")
+      expect(page).to have_selector("button.text-pink-400.hover\\:bg-pink-200.p-2[class~='[&>svg]:h-5'] > svg")
     end
   end
 end
