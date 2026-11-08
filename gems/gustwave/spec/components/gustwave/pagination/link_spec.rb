@@ -42,6 +42,52 @@ RSpec.describe Gustwave::Pagination::Link, type: :component do
     end
   end
 
+  context "with the icon keyword" do
+    it "renders the icon and keeps the text for screen readers only" do
+      render_inline(described_class.new("2", href: "/tasks?page=2", icon: :chevron_right))
+
+      expect(rendered_content).to have_selector("a > span.sr-only", exact_text: "2")
+      expect(rendered_content).to have_selector("a > svg[aria-hidden='true']")
+    end
+
+    it "renders the icon with the outline theme by default" do
+      render_inline(described_class.new("2", href: "/", icon: :chevron_right))
+
+      expect(rendered_content).to have_selector("a > svg[fill='none']")
+    end
+  end
+
+  context "with a visual" do
+    it "renders an icon in the given theme and keeps the text for screen readers only" do
+      render_inline(described_class.new("2", href: "/")) { |link| link.with_visual_icon :edit, theme: :solid }
+
+      expect(rendered_content).to have_selector("a > span.sr-only", exact_text: "2")
+      expect(rendered_content).to have_selector("a > svg[fill='currentColor']", count: 1)
+    end
+
+    it "renders a component set as the visual" do
+      render_inline(described_class.new("2", href: "/")) { |link| link.with_visual_renderable(Gustwave::Icon.new(:edit, theme: :solid)) }
+
+      expect(rendered_content).to have_selector("a > span.sr-only", exact_text: "2")
+      expect(rendered_content).to have_selector("a > svg[fill='currentColor']", count: 1)
+    end
+
+    it "sizes the visual by the link's size" do
+      render_inline(described_class.new("2", href: "/", size: :md)) { |link| link.with_visual_icon :chevron_right }
+
+      expect(rendered_content).to have_selector("a > svg.w-7.h-7[aria-hidden='true']")
+    end
+
+    it "renders the icon set before rendering" do
+      link = described_class.new("2", href: "/")
+      link.with_visual_icon :chevron_right
+      render_inline(link)
+
+      expect(rendered_content).to have_selector("a > span.sr-only", exact_text: "2")
+      expect(rendered_content).to have_selector("a > svg", count: 1)
+    end
+  end
+
   context "with HTML attributes" do
     it "passes the attributes through to the link" do
       render_inline(described_class.new("2", href: "/tasks?page=2", data: { turbo_frame: "tasks" }))

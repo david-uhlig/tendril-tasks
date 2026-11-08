@@ -17,6 +17,40 @@ options:
     - md
     - none
 parts:
-- icon
+- visual
+slots:
+  visuals:
+    many: true
+    types:
+    - icon
+    - image
+    - indicator
+    - renderable
+    - svg
 methods:
 - apply_slot_context
+- visuals
+- visuals?
+- with_visual
+- with_visual_content
+- with_visual_icon
+- with_visual_icon_content
+- with_visual_image
+- with_visual_image_content
+- with_visual_indicator
+- with_visual_indicator_content
+- with_visual_renderable
+- with_visual_renderable_content
+- with_visual_svg
+- with_visual_svg_content
+- with_visuals
+class_methods:
+- renders_visuals
+- visual_icon_theme
+- visual_icon_theme=
+slot_builders:
+- build_slot_visual_icon
+- build_slot_visual_image
+- build_slot_visual_indicator
+- build_slot_visual_renderable
+- build_slot_visual_svg
