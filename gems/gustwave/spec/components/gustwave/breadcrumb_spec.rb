@@ -40,10 +40,19 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
     end
   end
 
-  context "with an icon slot" do
-    it "renders a component set as the icon" do
+  context "with a visual" do
+    it "renders a solid icon set on the item before the text" do
       render_inline(described_class.new) do |breadcrumb|
-        breadcrumb.with_item("Home", href: "/") { |item| item.with_icon(Gustwave::Icon.new(:home, class: "text-blue-700")) }
+        breadcrumb.with_item("Home", href: "/") { |item| item.with_visual_icon(:home, class: "text-blue-700") }
+      end
+
+      expect(rendered_content).to have_selector("li > a > svg.text-blue-700.w-4[fill='currentColor'][aria-hidden='true']", count: 1)
+      expect(rendered_content).to have_link("Home", href: "/")
+    end
+
+    it "renders a component set as the visual" do
+      render_inline(described_class.new) do |breadcrumb|
+        breadcrumb.with_item("Home", href: "/") { |item| item.with_visual_renderable(Gustwave::Icon.new(:home, class: "text-blue-700")) }
       end
 
       expect(rendered_content).to have_selector("li > a > svg.text-blue-700", count: 1)

@@ -7,7 +7,8 @@ module Gustwave
     # item with an +href+ is a link; without one it's the text of the current
     # page. Block content replaces the link or text, e.g. for a dropdown.
     #
-    # Pass +icon+ to show an icon before the text, or set it with +with_icon+.
+    # Pass +icon+ to show an icon before the text, or set a visual with
+    # +with_visual_icon+ and the other types of Gustwave::Visuals.
     #
     # === Example
     #
@@ -15,12 +16,20 @@ module Gustwave
     #
     # @param text [String, nil] The item text. Takes precedence over block content.
     # @param href [String, nil] The URL the item links to.
-    # @param icon [Symbol, nil] Shorthand for +with_icon+: an icon shown before the text.
+    # @param icon [Symbol, nil] Shorthand for +with_visual_icon+: an icon shown before the text, in the solid theme.
     # @param separator [Symbol] +:chevron+ (default) or +:slash+. Set by Gustwave::Breadcrumb.
     # @param options [Hash] HTML attributes for the +li+ element.
     #
     # @status alpha
     class Item < Gustwave::Component
+      include Gustwave::Visuals
+      renders_visuals :visuals
+      self.visual_icon_theme = :solid
+
+      # Gustwave's icons leave 3 units of their 24x24 viewBox empty on each
+      # side. At w-4 the glyph is as large as Flowbite's w-3 icon, and the
+      # margins make up for the empty part.
+      part :visual, "w-4 h-4 -ms-0.5 me-2 -my-0.5"
       part :wrapper
       part :separator
       part :content
@@ -44,21 +53,6 @@ module Gustwave
       variant :separator, default: :chevron, unless: { position: :first }, values: {
         chevron: { separator: "w-3 h-3 mx-1 rtl:rotate-180 text-gray-400", content: "ms-1 md:ms-2" },
         slash: { separator: "mx-2 text-gray-400" }
-      }
-
-      # Renders an icon before the text. Also accepts a component to render as
-      # the icon.
-      #
-      # @param name [Symbol, Object] The icon to render, or a component.
-      # @param theme [Symbol] The icon theme, +:solid+ or +:outline+. Defaults to +:solid+.
-      # @param options [Hash] Additional HTML options passed to the icon component.
-      renders_one_extensible :icon, ->(name, theme: :solid, **options) {
-        next name if name.respond_to?(:render_in)
-
-        # Gustwave's icons leave 3 units of their 24x24 viewBox empty on each
-        # side. At w-4 the glyph is as large as Flowbite's w-3 icon, and the
-        # margins make up for the empty part.
-        Gustwave::Icon.new(name, theme:, **configure_html_attributes(options, class: "w-4 h-4 -ms-0.5 me-2 -my-0.5", aria: { hidden: true }))
       }
 
       # @param text [String, nil] The item text. Takes precedence over block content.
@@ -87,7 +81,7 @@ module Gustwave
       end
 
       def before_render
-        with_icon(@icon) if @icon && !icon?
+        with_visual_icon(@icon) if @icon && !visuals?
         select_options(linked: @href.present?)
         @config = attributes_for(@options)
         @config[:"aria-current"] = "page" if @current
@@ -121,7 +115,7 @@ module Gustwave
       end
 
       def leading_icon
-        icon if icon?
+        safe_join(visuals) if visuals?
       end
 
       def separator_element

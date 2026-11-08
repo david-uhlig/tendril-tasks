@@ -43,7 +43,7 @@ RSpec.describe "Component conventions" do
       rule: "icon: and trailing_icon: are shorthand for a slot callers can also set, never the only way",
       check: ->(component) {
         found = keywords.(component).keys & %i[icon trailing_icon]
-        reachable = (slots.(component) & %i[leading_visuals trailing_visuals icon]).any? || code.(component).include?("delegate_missing_to")
+        reachable = (slots.(component) & %i[leading_visuals trailing_visuals visuals icon]).any? || code.(component).include?("delegate_missing_to")
         reachable ? [] : found
       }
     },

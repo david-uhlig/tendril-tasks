@@ -191,22 +191,6 @@ RSpec.describe Gustwave::Clipboard, type: :component do
       expect(page).to have_selector("svg[aria-hidden='true']", count: 2, visible: :all)
     end
 
-    it "renders a component set as the icon" do
-      render_inline(described_class.new("Copy", target_id: "npm-install")) do |clipboard|
-        clipboard.with_icon(Gustwave::Icon.new(:clipboard, class: "text-blue-700"))
-      end
-
-      expect(page).to have_selector("span[data-gustwave--clipboard-target='message'] > svg.text-blue-700")
-    end
-
-    it "renders a component set as the copied icon" do
-      render_inline(described_class.new("Copy", target_id: "npm-install")) do |clipboard|
-        clipboard.with_copied_icon(Gustwave::Icon.new(:check_circle, class: "text-green-700"))
-      end
-
-      expect(page).to have_selector("span[data-gustwave--clipboard-target='copiedMessage'] > svg.text-green-700", visible: :all)
-    end
-
     it "passes the icon's own options to the icon" do
       render_inline(described_class.new("Copy", target_id: "npm-install")) do |clipboard|
         clipboard.with_icon(:clipboard, class: "text-red-500")

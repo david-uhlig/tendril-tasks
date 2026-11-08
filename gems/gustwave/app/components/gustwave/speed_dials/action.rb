@@ -14,14 +14,13 @@ module Gustwave
     # @example
     #   <%= render Gustwave::SpeedDials::Action.new("Edit", icon: :edit, label_display: :outside) %>
     #
-    # @example An icon through the slot
+    # @example A visual through the slot
     #   <%= render Gustwave::SpeedDials::Action.new("Edit") do |action| %>
-    #     <% action.with_icon :pencil_square, theme: :outline %>
+    #     <% action.with_visual_icon :pencil_square, theme: :outline %>
     #   <% end %>
     #
     # @param text [String] the label of the action. Required.
-    # @param icon [Symbol, nil] the name of the icon. Ignored when block content is given. Shorthand for the +icon+ slot.
-    # @param icon_options [Hash] options for the icon, e.g. +theme+, +:solid+ (default) or +:outline+, and +class+.
+    # @param icon [Symbol, nil] the name of the icon, in the solid theme. Ignored when block content is given. Shorthand for +with_visual_icon+, see Gustwave::Visuals.
     # @param tag [Symbol] the HTML tag to render, :button or :a. Defaults to :button.
     # @param color [Symbol] the color of the button, :default or :none. :none renders no base styles.
     # @param shape [Symbol] the shape of the button, :round or :square.
@@ -44,28 +43,20 @@ module Gustwave
 
       variant :shape, default: :round, values: { round: "rounded-full", square: "rounded-lg" }
 
-      part :icon
+      include Gustwave::Visuals
+      renders_visuals :visuals
+      self.visual_icon_theme = :solid
+
       part :inside_label, "block mb-px text-xs font-medium"
 
-      # Renders the icon, unless block content is given. Also accepts a
-      # component to render as the icon.
-      #
-      # @param name [Symbol, Object] The icon to render, or a component.
-      # @param theme [Symbol] The icon theme, +:solid+ or +:outline+. Defaults to +:solid+.
-      # @param options [Hash] Additional HTML options passed to the icon component.
-      renders_one_extensible :icon, ->(name, theme: :solid, **options) {
-        next name if name.respond_to?(:render_in)
-
-        Gustwave::Icon.new(name, theme:, **configure_html_attributes(attributes_for(:icon, options), aria: { hidden: true }))
-      }
       part :outside_label, "absolute text-sm font-medium whitespace-nowrap"
 
       # Where the label is shown. The icons are padded within their viewBox, so
       # these sizes draw them as large as Flowbite draws its tighter icons.
       variant :label_display, default: :tooltip, values: {
-        tooltip: { root: "size-13",          icon: "size-6.5" },
-        inside:  { root: "size-14",          icon: "size-5.5 mb-1" },
-        outside: { root: "relative size-13", icon: "size-6.5" }
+        tooltip: { root: "size-13",          visual: "size-6.5" },
+        inside:  { root: "size-14",          visual: "size-5.5 mb-1" },
+        outside: { root: "relative size-13", visual: "size-6.5" }
       }
 
       # The side of the label: the tooltip's placement, or the side of the outside label
@@ -78,7 +69,6 @@ module Gustwave
 
       def initialize(text,
                      icon: nil,
-                     icon_options: {},
                      tag: DEFAULT,
                      color: DEFAULT,
                      shape: DEFAULT,
@@ -87,7 +77,6 @@ module Gustwave
                      **options)
         @text = text
         @icon = icon
-        @icon_options = icon_options
 
         select_options(tag:, color:, shape:, label_display:, label_placement:)
         @html_tag = option_value(:tag)
@@ -98,7 +87,7 @@ module Gustwave
       end
 
       def before_render
-        with_icon(@icon, **@icon_options) if @icon.present? && !content.present? && !icon?
+        with_visual_icon(@icon) if @icon.present? && !content.present? && !visuals?
       end
 
       def call
@@ -128,7 +117,7 @@ module Gustwave
       def icon_content
         return content if content.present?
 
-        render(icon) if icon?
+        safe_join(visuals) if visuals?
       end
 
       def label_content

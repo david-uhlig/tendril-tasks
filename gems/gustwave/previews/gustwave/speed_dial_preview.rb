@@ -14,7 +14,7 @@ module Gustwave
       render_with_template
     end
 
-    # An action's icon, set through its slot, or with icon_options: for the theme.
+    # An action's visual, set through its slot in any theme, or with the icon: shorthand.
     def custom_icon
       render_with_template
     end

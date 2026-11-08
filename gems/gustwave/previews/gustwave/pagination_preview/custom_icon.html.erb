@@ -1,7 +1,7 @@
 <div class="flex gap-3">
-  <%# The icon slot shows an icon in place of the text, which stays for screen readers %>
+  <%# A visual shows in place of the text, which stays for screen readers %>
   <%= render Gustwave::Pagination::Link.new("Edit", href: "#") do |link| %>
-    <% link.with_icon :edit, theme: :solid %>
+    <% link.with_visual_icon :edit, theme: :solid %>
   <% end %>
 
   <%= render Gustwave::Pagination::Link.new("Edit", href: "#", icon: :edit) %>
