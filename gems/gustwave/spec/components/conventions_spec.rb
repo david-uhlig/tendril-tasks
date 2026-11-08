@@ -83,9 +83,7 @@ RSpec.describe "Component conventions" do
     }
   }
 
-  known_violations = {
-    "Gustwave::DrawerHeader" => { "icon_keyword: icon" => 520 }
-  }
+  known_violations = {}
 
   exceptions = {
     "Gustwave::DismissButton" => {
