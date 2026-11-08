@@ -68,7 +68,7 @@ module Gustwave
 
     # A standalone close button in the toast's corner. ms-auto comes after -mx-1.5
     # because tailwind_merge drops an earlier ms-* when a later mx-* follows.
-    part :dismiss_button, "-mx-1.5 ms-auto shrink-0 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 h-8 w-8"
+    part :dismiss_button, "-mx-1.5 ms-auto shrink-0 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 h-8 w-8 [&>svg]:w-6 [&>svg]:h-6 [&>svg]:mx-0"
 
     variant :position, default: :none, values: {
       top_left: "fixed top-5 left-5",
@@ -134,7 +134,7 @@ module Gustwave
       # argument can't take it.
       text ||= options.delete(:text)
 
-      Gustwave::DismissButton.new(@id, text, icon:, icon_options: { class: "h-6 w-6 mx-0" },
+      Gustwave::DismissButton.new(@id, text, icon:,
                                   **{ theme: :default, color: :none }.merge(attributes_for(:dismiss_button, options)))
     }
 

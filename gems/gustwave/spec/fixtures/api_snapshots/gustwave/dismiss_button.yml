@@ -5,5 +5,4 @@ constructor:
 - text (optional)
 - 'theme: (optional)'
 - 'icon: (optional)'
-- 'icon_options: (optional)'
 - "**options"
