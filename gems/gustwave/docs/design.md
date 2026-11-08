@@ -72,7 +72,7 @@ Variation between similar components takes one of four shapes:
 - **A separate class** when the variation changes the markup structure, the constructor, or the set of option values. Each button theme has its own color palette, which the Options DSL can't express as one `variant`, so `Buttons::GradientDuotone` is its own class. Dropdown triggers and menus differ in structure.
 - **A variant** when it only picks classes from within one option set: Badge and Alert colors.
 - **A wrapper component** (composition) when it presets another component: `AvatarText` and `AvatarPlaceholder` render `Avatar`. This is also the recommended way for an app to name a theme, e.g. a `Ui::Button` that renders `Gustwave::Buttons::GradientDuotone`.
-- **A slot** when it adds an optional sub-part to otherwise identical markup. By this rule, `IconToast` should be `Toast` with an `icon` slot, not a separate class.
+- **A slot** when it adds an optional sub-part to otherwise identical markup. By this rule, `IconToast` should be `Toast` with a `visuals` slot, not a separate class.
 
 ## Recurring sub-patterns
 
@@ -97,12 +97,19 @@ end
 
 ### Icons and other visuals
 
-Two shapes, depending on where the visual sits:
+Visuals are icons, images, SVGs, indicators and custom components. `Gustwave::Visuals` provides three slots for them, and a component declares the ones it places (D7):
 
-- **Inline with text, on either side: `Gustwave::Visuals`.** `leading_visuals` and `trailing_visuals` slots with `icon`, `image`, `svg`, `indicator` and `renderable` types, sized from the component's `size` and hidden from screen readers as decoration. Buttons, Badge, Tab and Kbd use it, and all four render both sides. Include it only in a component where both sides make sense and that has the `size` variant and `indicator_size` value it requires.
-- **A single visual the component places itself: a slot named after its role.** Alert's `icon` sits beside the body; Timeline's `marker` sits on the line. It's a `renders_one_extensible` slot. It becomes polymorphic, with types like `icon` and `image` as `marker` has, once a caller needs more than one kind. When the visual carries meaning, as an alert's status icon does, the slot takes a `label:` for screen readers (D4).
+- **`leading_visuals` and `trailing_visuals`** for visuals inline with text, on either side, as in Buttons, Badge, Tab and Kbd.
+- **`visuals`** for visuals the component places itself, such as a toast's or a pagination link's icon.
 
-Symbol keywords such as `icon:` and `trailing_icon:` are allowed as **shorthand only**: they must set one of these slots, so the slot can always do anything the keyword can. `Dropdowns::Triggers::Button` is the reference: its `trailing_icon:` calls `with_trailing_visual_icon`. A keyword is never the only way to set an icon, and doesn't come with companions like `icon_theme:`.
+All three have one shape: a `renders_many_extensible` slot with every type, `icon`, `image`, `svg`, `indicator` and `renderable`. Setters read the same everywhere: `with_visual_icon(:check)`, `with_leading_visual_image(src)`, `with_visual_renderable(MyAvatar.new)`. A slot stays `many` with every type, even where a component normally shows one visual, until a caller needs it narrower. Add a type with `extend_slot`.
+
+- **Sizing is optional.** A component with a `size` variant and an `indicator_size` value sizes its visuals and indicators from them. Without them, its `visual` part sets the visuals' size, and indicators take the Indicator's default size.
+- **The `has_visual` toggle**, which makes the root inline-flex, is only for components whose visuals sit inline with text.
+- **Icons default to the outline theme.** A component whose Flowbite pattern uses solid icons sets `self.visual_icon_theme = :solid`, so the slot and the `icon:` shorthand agree.
+- **Visuals are decorative** and hidden from screen readers. A visual that carries meaning, like an alert's status icon, keeps a slot named after its role that takes a `label:` (D4). So does a visual that isn't one of these types, like Timeline's `marker`.
+
+Symbol keywords such as `icon:` and `trailing_icon:` are allowed as **shorthand only**: they must set one of these slots, so the slot can always do anything the keyword can. `Dropdowns::Triggers::Button` is the reference: its `trailing_icon:` calls `with_trailing_visual_icon`. A keyword is never the only way to set an icon, and doesn't come with companions like `icon_theme:` or `icon_options:`. A keyword whose default icon can be turned off, like DismissButton's `icon: :close`, takes `nil` for none.
 
 ### Styling a part
 
@@ -233,9 +240,10 @@ The conventions spec lists components written before this document as known viol
 
 Settled questions, so they aren't reopened without a new reason. A new decision gets the next number.
 
-- **D1. Deprecations come one minor release before the removal.** Never in a patch release. The deprecation goes under Deprecated in the changelog; the removal goes under Breaking Changes with an upgrade note. This covers the replacements this document calls for: `configure_<part>` and `<part>_class:` for elements, Tooltip's and Popover's `trigger`, SpeedDial's `icon_theme:`, and `IconToast`.
+- **D1. Deprecations come one minor release before the removal.** Never in a patch release. The deprecation goes under Deprecated in the changelog; the removal goes under Breaking Changes with an upgrade note. It applies to beta and stable components. Alpha components change without one, with an upgrade note, as `configure_<part>`, `<part>_class:` for elements, Tooltip's and Popover's `trigger`, SpeedDials::Action's `icon_theme:` and `IconToast` did.
 - **D2. No `Component` suffix.** Components are named after their Flowbite pattern: `Gustwave::Card`, `Gustwave::Buttons::Default`. The `Gustwave::` namespace and `app/components` already say what they are. This departs from ViewComponent's recommendation on purpose, as Primer ViewComponents does. Apps choose their own convention for components that wrap Gustwave.
 - **D3. Everything starts at alpha.** Every existing component starts at alpha when statuses are introduced, including ones already used in production. Promotions follow [Component lifecycle](#component-lifecycle).
 - **D4. Alert keeps a positional `icon` slot.** `Visuals` isn't a fit: it always declares both sides as collections, needs a `size` variant Alert doesn't have, makes the root inline-flex, and hides visuals from screen readers, while Alert's icon carries meaning. Timeline's `marker` is the precedent. See [Icons and other visuals](#icons-and-other-visuals).
 - **D5. Tabs keeps `active_class:` and `inactive_class:`, and gets nothing more for now.** Flowbite's own examples need per-instance state classes: the purple active tab, and Card's nav and full-width tabs. `extend_variant :style` alone would need a new style for each. They stay strings, not `active_options:`, because Flowbite swaps them on a state, not an element with attributes. Anything beyond that waits until a caller needs it. See [Styling a part](#styling-a-part).
 - **D6. Sub-component slots are reached through the parent slot's block.** A caller customizes a nested part, like a modal header's close button, in the block of the parent's slot setter, which receives the sub-component. ViewComponent already passes it, so parents don't forward their children's slots or options (no `close_button_options:` on `with_header`, no `with_header_close_button`), which would repeat each child's API on every parent. See [Slot or content block](#slot-or-content-block).
+- **D7. Visual slots have one shape.** `Visuals` provides `leading_visuals`, `trailing_visuals` and `visuals`, each a `renders_many_extensible` slot with every visual type, and components declare the ones they place. A component's own icon slot, or one that also accepts a component in place of an icon name, would give each component its own way to set a visual and its own subset of types. One shape keeps the setters the same everywhere and lets `extend_slot` add types to all of them. Slots narrow to one visual or fewer types only when a caller asks. `icon:` keywords stay as shorthand for `with_visual_icon`. See [Icons and other visuals](#icons-and-other-visuals).
