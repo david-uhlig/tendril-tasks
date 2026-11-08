@@ -88,9 +88,6 @@ RSpec.describe "Component conventions" do
   }
 
   exceptions = {
-    "Gustwave::DismissButton" => {
-      "part_options: icon_options" => "Options for the Gustwave::Icon it renders as its icon."
-    },
     "Gustwave::Dropdown" => {
       "icon_keyword: icon" => "Shorthand for the default trigger; the trigger slot's generic and component types render any visual.",
       "icon_keyword: trailing_icon" => "Shorthand for the default trigger; the trigger slot's generic and component types render any visual."

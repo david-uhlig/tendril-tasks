@@ -9,7 +9,8 @@ module Gustwave
   #
   # The button's visual slots, such as +with_leading_visual_icon+, are
   # delegated to Gustwave::Button. A leading visual set through them replaces
-  # the default +icon:+.
+  # the default +icon:+. To size the icon, set the visual's options, or
+  # size the button's +svg+ child from its +class+, e.g. +[&>svg]:w-6+.
   #
   # @example
   #   render Gustwave::DismissButton.new("my-modal", "Close modal", color: :dark, size: :lg)
@@ -27,19 +28,16 @@ module Gustwave
     # @param text [String, nil] text to display to screen readers, rendered within +sr-only+ markup. If missing block content is rendered without +sr-only+ markup. If both are missing a localized version of "Dismiss" is used.
     # @param theme [Symbol] the Gustwave::Button theme of the button. Defaults to :inline.
     # @param icon [Symbol, nil] the icon of the button. Defaults to +:close+. Use +nil+ for no icon. Shorthand for a leading visual icon: a leading visual set through the button's slots replaces it.
-    # @param icon_options [Hash] options for the icon, e.g. its +class+.
     # @param options [Hash] HTML attributes and button options, such as +color+ and +size+, forwarded to the button. Its +data+ and +aria+ hashes merge with the defaults.
     def initialize(target,
                    text = nil,
                    theme: :inline,
                    icon: :close,
-                   icon_options: {},
                    **options)
       @target = target
       @text = text
       @theme = theme
       @icon = icon
-      @icon_options = icon_options
       @options = options
     end
 
@@ -48,7 +46,7 @@ module Gustwave
       content
       return if !@icon || button_component.leading_visuals?
 
-      button_component.with_leading_visual_icon(@icon, stroke_width: 2, **@icon_options)
+      button_component.with_leading_visual_icon(@icon, stroke_width: 2)
     end
 
     def call
