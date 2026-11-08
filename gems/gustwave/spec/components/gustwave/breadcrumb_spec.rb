@@ -40,22 +40,45 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
     end
   end
 
-  context "with a visual" do
-    it "renders a solid icon set on the item before the text" do
+  context "with visuals" do
+    it "renders a solid leading icon before the text, spaced by the content's gap" do
       render_inline(described_class.new) do |breadcrumb|
-        breadcrumb.with_item("Home", href: "/") { |item| item.with_visual_icon(:home, class: "text-blue-700") }
+        breadcrumb.with_item("Home", href: "/") { |item| item.with_leading_visual_icon(:home, class: "text-blue-700") }
       end
 
-      expect(rendered_content).to have_selector("li > a > svg.text-blue-700.w-4[fill='currentColor'][aria-hidden='true']", count: 1)
+      expect(rendered_content).to have_selector("li > a.inline-flex.items-center.gap-2\\.5 > svg:first-child.text-blue-700.w-4.-mx-0\\.5[fill='currentColor'][aria-hidden='true']", count: 1)
       expect(rendered_content).to have_link("Home", href: "/")
     end
 
-    it "renders a component set as the visual" do
+    it "renders a trailing visual after the text" do
       render_inline(described_class.new) do |breadcrumb|
-        breadcrumb.with_item("Home", href: "/") { |item| item.with_visual_renderable(Gustwave::Icon.new(:home, class: "text-blue-700")) }
+        breadcrumb.with_item("Home", href: "/")
+        breadcrumb.with_item("Projects", href: "/projects") { |item| item.with_trailing_visual_icon(:chevron_down) }
+      end
+
+      expect(rendered_content).to have_selector("li:last-child a.inline-flex.gap-2\\.5 > svg:last-child", count: 1)
+    end
+
+    it "sets icon: as the leading visual" do
+      item = Gustwave::Breadcrumb::Item.new("Home", href: "/", icon: :home)
+      render_inline(item)
+
+      expect(item.leading_visuals?).to be true
+      expect(rendered_content).to have_selector("li > a > svg:first-child[fill='currentColor']", count: 1)
+    end
+
+    it "renders a component set as a visual" do
+      render_inline(described_class.new) do |breadcrumb|
+        breadcrumb.with_item("Home", href: "/") { |item| item.with_leading_visual_renderable(Gustwave::Icon.new(:home, class: "text-blue-700")) }
       end
 
       expect(rendered_content).to have_selector("li > a > svg.text-blue-700", count: 1)
+    end
+
+    it "adds no gap without a visual" do
+      render_inline(described_class.new) { |breadcrumb| breadcrumb.with_item("Home", href: "/") }
+
+      expect(rendered_content).not_to have_selector("a.gap-2\\.5")
     end
   end
 

@@ -3,10 +3,10 @@ look solid=false separator=:chevron:
 - 'nav aria-label="Breadcrumb": flex'
 - 'ol: inline-flex items-center md:space-x-2 rtl:space-x-reverse space-x-1'
 - 'li: inline-flex items-center'
-- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium hover:text-blue-600
+- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium gap-2.5 hover:text-blue-600
   inline-flex items-center text-gray-700 text-sm'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 -my-0.5 h-4 w-4'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - li
 - 'div: flex items-center'
@@ -25,10 +25,10 @@ look solid=false separator=:slash:
 - 'nav aria-label="Breadcrumb": flex'
 - 'ol: inline-flex items-center'
 - 'li: inline-flex items-center'
-- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium hover:text-blue-600
+- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium gap-2.5 hover:text-blue-600
   inline-flex items-center text-gray-700 text-sm'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 -my-0.5 h-4 w-4'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - li
 - 'div: flex items-center'
@@ -44,10 +44,10 @@ look solid=true separator=:chevron:
   dark:border-gray-700 flex px-5 py-3 rounded-lg text-gray-700'
 - 'ol: inline-flex items-center md:space-x-2 rtl:space-x-reverse space-x-1'
 - 'li: inline-flex items-center'
-- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium hover:text-blue-600
+- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium gap-2.5 hover:text-blue-600
   inline-flex items-center text-gray-700 text-sm'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 -my-0.5 h-4 w-4'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - li
 - 'div: flex items-center'
@@ -67,10 +67,10 @@ look solid=true separator=:slash:
   dark:border-gray-700 flex px-5 py-3 rounded-lg text-gray-700'
 - 'ol: inline-flex items-center'
 - 'li: inline-flex items-center'
-- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium hover:text-blue-600
+- 'a href="#": dark:hover:text-white dark:text-gray-400 font-medium gap-2.5 hover:text-blue-600
   inline-flex items-center text-gray-700 text-sm'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 -my-0.5 h-4 w-4'
 - path clip-rule="evenodd" fill-rule="evenodd"
 - li
 - 'div: flex items-center'
