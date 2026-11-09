@@ -712,24 +712,24 @@ pages:
   components/footer:
   - id: default-footer-example
     title: Default footer
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/default
   - id: footer-logo-example
     title: Footer with logo
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/with_logo
   - id: footer-social-media-example
     title: Social media icons
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/social_media
   - id: footer-sitemap-example
     title: Sitemap links
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/sitemap
   - id: footer-sticky-example
     title: Sticky footer
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/sticky
   components/forms:
   - id: default-form-example
     title: Default form
