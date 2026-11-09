@@ -1,0 +1,17 @@
+---
+centered centered=false:
+- 'section: bg-white dark:bg-gray-900'
+- 'div: lg:py-16 max-w-screen-xl mx-auto px-4 py-8'
+centered centered=true:
+- 'section: bg-white dark:bg-gray-900'
+- 'div: lg:py-16 max-w-screen-xl mx-auto px-4 py-8 text-center'
+background_image centered=false:
+- 'section: bg-gray-700 dark:bg-gray-700 isolate relative'
+- 'img alt="" src="/hero.jpg": -z-10 absolute inset-0 mix-blend-multiply object-cover
+  size-full'
+- 'div: lg:py-16 max-w-screen-xl mx-auto px-4 py-8'
+background_image centered=true:
+- 'section: bg-gray-700 dark:bg-gray-700 isolate relative'
+- 'img alt="" src="/hero.jpg": -z-10 absolute inset-0 mix-blend-multiply object-cover
+  size-full'
+- 'div: lg:py-16 max-w-screen-xl mx-auto px-4 py-8 text-center'
