@@ -1159,8 +1159,10 @@ pages:
     note: The per-star bars are plain Tailwind until Gustwave has a Progress component.
   - id: rating-score-example
     title: Score rating
-    status: blocked
+    status: partial
+    preview: gustwave/rating/score
     needs: progress
+    note: The category bars are plain Tailwind until Gustwave has a Progress component.
   - id: rating-comment-example
     title: Rating comment
     status: previewed

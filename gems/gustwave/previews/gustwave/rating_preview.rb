@@ -30,6 +30,13 @@ module Gustwave
       render_with_template
     end
 
+    # An overall score with its verdict and review count, broken down by
+    # category. It has no stars. The bars are plain Tailwind until Gustwave
+    # has a Progress component.
+    def score
+      render_with_template
+    end
+
     # A guest review in a three-column grid: the guest and their stay, then the
     # review with its 8.7 score badge and helpful votes. It has no stars;
     # it's composed from Avatar, Heading, Badge, Link and Icon.
