@@ -18,14 +18,15 @@ module Gustwave
     #     item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
     #   end
     #
-    # +icon:+ is shorthand for +with_leading_visual_icon+ with a solid icon, as
-    # in Flowbite. +with_leading_visual_icon+ itself defaults to outline, as in
-    # Gustwave's other components. Visuals are decorative and hidden from
-    # screen readers.
+    # Icons are solid, as in Flowbite; pass +theme: :outline+ for an outline
+    # one. +icon:+ is shorthand for +with_leading_visual_icon+. Visuals are
+    # decorative and hidden from screen readers.
     #
     # @status alpha
     class Item < Gustwave::Component
       include Gustwave::Visuals
+      renders_visuals :leading_visuals, :trailing_visuals
+      self.visual_icon_theme = :solid
 
       # Text items are li elements in a list and div elements in a group. Set by
       # Gustwave::ListGroup through +apply_slot_context+.
@@ -75,14 +76,14 @@ module Gustwave
       toggle :has_visual_item, "relative inline-flex gap-2.5 focus:z-10", internal: true
 
       # @param text [String, nil] The item text. Takes precedence over block content.
-      # @param icon [Symbol, nil] Shows this solid icon before the text. Shorthand for +with_leading_visual_icon+.
+      # @param icon [Symbol, nil] Shorthand for +with_leading_visual_icon+: an icon shown before the text.
       # @param tag [Symbol] +:li+ (default), +:div+, +:a+ or +:button+. Set by Gustwave::ListGroup for text items.
       # @param active [Boolean] Whether this is the current item.
       # @param disabled [Boolean] Whether a button item is disabled.
       # @param options [Hash] HTML attributes for the item element, e.g. +href:+ for a link.
       def initialize(text = nil, icon: nil, tag: DEFAULT, active: false, disabled: false, **options)
         @text = text
-        with_leading_visual_icon(icon, theme: :solid) if icon
+        with_leading_visual_icon(icon) if icon
         select_options(tag:, active:, disabled:)
         select_options(kind: KINDS.fetch(option_value(:tag)))
         @options = options

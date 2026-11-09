@@ -19,7 +19,7 @@ RSpec.describe "Gustwave::ListGroup::Item style snapshot", type: :component do
     end
 
     group :trailing_visual, tag: %i[a button] do |**args|
-      Gustwave::ListGroup::Item.new("Profile", **args).tap { |item| item.with_trailing_visual_icon(:chevron_right) }
+      Gustwave::ListGroup::Item.new("Profile", **args).tap { |item| item.with_trailing_visual_icon(:chevron_right, theme: :outline) }
     end
   end
 end

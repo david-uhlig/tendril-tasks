@@ -52,7 +52,7 @@ module Gustwave
           item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
         end
         list_group.with_item_link("Settings", href: "#", icon: :adjustments_horizontal) do |item|
-          item.with_trailing_visual_icon(:chevron_right, class: "ms-auto rtl:rotate-180")
+          item.with_trailing_visual_icon(:chevron_right, theme: :outline, class: "ms-auto rtl:rotate-180")
         end
         list_group.with_item_link("Docs", href: "#", icon: :book) do |item|
           item.with_trailing_visual_icon(:arrow_up_right_from_square)
