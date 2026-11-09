@@ -1167,8 +1167,8 @@ pages:
     preview: gustwave/rating/comment
   - id: rating-review-example
     title: Review content
-    status: composable
-    note: Composed from Gustwave's Avatar, Heading, Paragraph, Badge and Link. It has no stars.
+    status: previewed
+    preview: gustwave/rating/review
   components/sidebar:
   - id: default-sidebar-example
     title: Default sidebar

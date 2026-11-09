@@ -30,6 +30,13 @@ module Gustwave
       render_with_template
     end
 
+    # A guest review in a three-column grid: the guest and their stay, then the
+    # review with its 8.7 score badge and helpful votes. It has no stars;
+    # it's composed from Avatar, Heading, Badge, Link and Icon.
+    def review
+      render_with_template
+    end
+
     # Change the score, the number of stars and the size.
     # @param value [Float] number
     # @param max [Integer] number
