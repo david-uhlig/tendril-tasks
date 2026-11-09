@@ -20,7 +20,8 @@ module Gustwave
       render_with_template
     end
 
-    # A rating with its score, the number of global ratings, and a bar per star count.
+    # A rating with its score, the number of global ratings, and a Progress bar
+    # per star count.
     def advanced
       render_with_template
     end
@@ -31,8 +32,7 @@ module Gustwave
     end
 
     # An overall score with its verdict and review count, broken down by
-    # category. It has no stars. The bars are plain Tailwind until Gustwave
-    # has a Progress component.
+    # category with a Progress bar. It has no stars.
     def score
       render_with_template
     end

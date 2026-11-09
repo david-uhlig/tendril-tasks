@@ -1153,16 +1153,12 @@ pages:
     preview: gustwave/rating/sizes
   - id: rating-advanced-example
     title: Advanced rating
-    status: partial
+    status: previewed
     preview: gustwave/rating/advanced
-    needs: progress
-    note: The per-star bars are plain Tailwind until Gustwave has a Progress component.
   - id: rating-score-example
     title: Score rating
-    status: partial
+    status: previewed
     preview: gustwave/rating/score
-    needs: progress
-    note: The category bars are plain Tailwind until Gustwave has a Progress component.
   - id: rating-comment-example
     title: Rating comment
     status: previewed

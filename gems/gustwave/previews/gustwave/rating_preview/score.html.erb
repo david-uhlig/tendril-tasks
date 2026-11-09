@@ -15,12 +15,17 @@
     <div>
       <% column.each_with_index do |(category, score), index| %>
         <dl>
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400"><%= category %></dt>
+          <dt id="score-<%= category.parameterize %>" class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <%= category %>
+          </dt>
 
           <dd class="<%= class_names("flex items-center", "mb-3" => index < column.size - 1) %>">
-            <div class="w-full bg-gray-200 rounded-sm h-2.5 dark:bg-gray-700 me-2">
-              <div class="bg-blue-600 h-2.5 rounded-sm dark:bg-blue-500" style="width: <%= (score * 10).round %>%"></div>
-            </div>
+            <%= render Gustwave::Progress.new(
+              score * 10,
+              class: "me-2 rounded-sm",
+              fill_options: { class: "rounded-sm" },
+              aria: { labelledby: "score-#{category.parameterize}" }
+            ) %>
 
             <span class="text-sm font-medium text-gray-500 dark:text-gray-400"><%= format("%.1f", score) %></span>
           </dd>
