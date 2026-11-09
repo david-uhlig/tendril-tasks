@@ -1,4 +1,4 @@
-<%= render Gustwave::Timeline.new(class: "text-gray-500 dark:text-gray-400") do |timeline| %>
+<%= render Gustwave::Timeline.new(class: "ms-4 text-gray-500 dark:text-gray-400") do |timeline| %>
   <% timeline.with_item(marker_options: { class: "w-8 h-8 -start-4 ring-4 bg-green-200 dark:bg-green-900" }) do |item| %>
     <% item.with_marker_icon :check, theme: :outline, class: "size-5.25 text-green-500 dark:text-green-400" %>
 
