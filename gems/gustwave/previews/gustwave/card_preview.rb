@@ -68,5 +68,10 @@ module Gustwave
     def full_width_tabs
       render_with_template
     end
+
+    # A product with its image, name, a rating with a score badge, price and an add to cart button.
+    def ecommerce
+      render_with_template
+    end
   end
 end
