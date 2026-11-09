@@ -329,8 +329,8 @@ pages:
     needs: form
   - id: card-ecommerce-example
     title: E-commerce card
-    status: partial
-    needs: rating
+    status: previewed
+    preview: gustwave/card/ecommerce
   - id: card-cta-example
     title: Call to action card
     status: previewed
@@ -712,24 +712,24 @@ pages:
   components/footer:
   - id: default-footer-example
     title: Default footer
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/default
   - id: footer-logo-example
     title: Footer with logo
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/with_logo
   - id: footer-social-media-example
     title: Social media icons
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/social_media
   - id: footer-sitemap-example
     title: Sitemap links
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/sitemap
   - id: footer-sticky-example
     title: Sticky footer
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/sticky
   components/forms:
   - id: default-form-example
     title: Default form
@@ -1141,36 +1141,36 @@ pages:
   components/rating:
   - id: default-rating-example
     title: Default rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/default
   - id: rating-text-example
     title: Rating with text
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/text
   - id: rating-count-example
     title: Rating count
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/count
   - id: rating-star-sizes-example
     title: Star sizes
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/sizes
   - id: rating-advanced-example
     title: Advanced rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/advanced
   - id: rating-score-example
     title: Score rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/score
   - id: rating-comment-example
     title: Rating comment
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/comment
   - id: rating-review-example
     title: Review content
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/review
   components/sidebar:
   - id: default-sidebar-example
     title: Default sidebar
