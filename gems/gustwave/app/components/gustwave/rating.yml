@@ -1,0 +1,5 @@
+en:
+  label: "Rated %{value} out of %{max}"
+
+de:
+  label: "Bewertet mit %{value} von %{max}"

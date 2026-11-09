@@ -1,0 +1,23 @@
+---
+status: alpha
+constructor:
+- value
+- 'max: (optional)'
+- 'size: (optional)'
+- 'label: (optional)'
+- 'stars_options: (optional)'
+- 'filled_star_options: (optional)'
+- 'empty_star_options: (optional)'
+- "**options"
+options:
+  size:
+    default: sm
+    values:
+    - sm
+    - md
+    - lg
+    - none
+parts:
+- empty_star
+- filled_star
+- stars
