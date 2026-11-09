@@ -11,12 +11,22 @@ module Gustwave
     # Pass +active: true+ to mark the current item, which also sets
     # +aria-current="true"+, or +disabled: true+ to disable a button.
     #
-    # Pass +icon+ to show an icon before the text. The icon is solid, as in
-    # Flowbite; pass +theme: :outline+ to +with_icon+ for an outline one. It's
-    # decorative and hidden from screen readers.
+    # Renders leading and trailing visuals, see Gustwave::Visuals, e.g. a
+    # count after the text:
+    #
+    #   list_group.with_item_link("Messages", href: "/messages") do |item|
+    #     item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
+    #   end
+    #
+    # +icon:+ is shorthand for +with_leading_visual_icon+ with a solid icon, as
+    # in Flowbite. +with_leading_visual_icon+ itself defaults to outline, as in
+    # Gustwave's other components. Visuals are decorative and hidden from
+    # screen readers.
     #
     # @status alpha
     class Item < Gustwave::Component
+      include Gustwave::Visuals
+
       # Text items are li elements in a list and div elements in a group. Set by
       # Gustwave::ListGroup through +apply_slot_context+.
       option :tag, default: :li, values: %i[li div a button]
@@ -49,25 +59,30 @@ module Gustwave
 
       toggle :disabled, "bg-gray-100 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400", unless: { kind: %i[static link] }
 
-      # Selected by the item when it has an icon
-      toggle :has_icon, "relative inline-flex items-center focus:z-10", internal: true
-
-      # Solid by default, like Flowbite's icons. Gustwave's icons leave 3 units of
-      # their 24x24 viewBox empty on each side. At w-4 the glyph is as large as
-      # Flowbite's w-3 icon, and the margins make up for the empty part.
-      renders_one_extensible :icon, ->(name, theme: :solid, **options) {
-        Gustwave::Icon.new(name, theme:, **configure_html_attributes(options, class: "w-4 h-4 -ms-0.5 me-2 -my-0.5", aria: { hidden: true }))
+      # Gustwave::Visuals needs a size. Items have one. Gustwave's icons leave 3
+      # units of their 24x24 viewBox empty on each side. At w-4 the glyph is as
+      # large as Flowbite's w-3 icon, and the margins and the gap make up for
+      # the empty part, which leaves Flowbite's 10px between icon and text.
+      variant :size, default: :sm, internal: true, values: {
+        sm: { root: "", visual: "w-4 h-4 -mx-0.5 -my-0.5" }
       }
 
+      derive :indicator_size, from: :size, values: { sm: :sm }
+
+      # Selected by the item when it has a visual. Declared after +kind+, so
+      # inline-flex wins over a link's block, and after Visuals' has_visual, so
+      # gap-2.5 wins over its gap.
+      toggle :has_visual_item, "relative inline-flex gap-2.5 focus:z-10", internal: true
+
       # @param text [String, nil] The item text. Takes precedence over block content.
-      # @param icon [Symbol, nil] Shows this icon before the text.
+      # @param icon [Symbol, nil] Shows this solid icon before the text. Shorthand for +with_leading_visual_icon+.
       # @param tag [Symbol] +:li+ (default), +:div+, +:a+ or +:button+. Set by Gustwave::ListGroup for text items.
       # @param active [Boolean] Whether this is the current item.
       # @param disabled [Boolean] Whether a button item is disabled.
       # @param options [Hash] HTML attributes for the item element, e.g. +href:+ for a link.
       def initialize(text = nil, icon: nil, tag: DEFAULT, active: false, disabled: false, **options)
         @text = text
-        with_icon(icon) if icon
+        with_leading_visual_icon(icon, theme: :solid) if icon
         select_options(tag:, active:, disabled:)
         select_options(kind: KINDS.fetch(option_value(:tag)))
         @options = options
@@ -83,8 +98,8 @@ module Gustwave
       end
 
       def before_render
-        # Reading the icon evaluates the block, so the icon is known before the classes are set
-        select_options(has_icon: icon?, hover: !option_value(:active) && !option_value(:disabled))
+        # Reading the visuals evaluates the block, so they are known before the classes are set
+        select_options(has_visual: has_visual?, has_visual_item: has_visual?, hover: !option_value(:active) && !option_value(:disabled))
 
         @config = attributes_for(@options)
         case option_value(:tag)
@@ -99,7 +114,7 @@ module Gustwave
 
       def call
         content_tag(option_value(:tag), **@config) do
-          safe_join([ icon, text_or_content(@text) ].compact)
+          slots_and_content(leading_visuals, text_or_content(@text), trailing_visuals, append_content: false)
         end
       end
     end

@@ -30,14 +30,16 @@ module Gustwave
   #     <% list_group.with_item_button("Messages", icon: :messages) %>
   #   <% end %>
   #
-  # An item takes its content from its block when it has no text, e.g. to show
-  # a badge next to the label:
+  # Items take leading and trailing visuals, see Gustwave::Visuals, e.g. a
+  # count at the end of the item:
   #
   #   <%= render Gustwave::ListGroup.new(class: "w-48") do |list_group| %>
-  #     <% list_group.with_item_text do %>
-  #       Messages <%= render Gustwave::Badge.new("3") %>
+  #     <% list_group.with_item_link("Messages", href: "/messages") do |item| %>
+  #       <% item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto")) %>
   #     <% end %>
   #   <% end %>
+  #
+  # An item takes its content from its block when it has no text.
   #
   # @see Gustwave::ListGroup::Item
   #

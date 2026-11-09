@@ -43,5 +43,21 @@ module Gustwave
         list_group.with_item_button("Download", icon: :download)
       end
     end
+
+    # Links with a leading icon and a trailing count or chevron. Not a Flowbite example.
+    # http://localhost:3030/rails/view_components/gustwave/list_group/trailing_visuals
+    def trailing_visuals
+      render Gustwave::ListGroup.new(class: "w-56") do |list_group|
+        list_group.with_item_link("Inbox", href: "#", icon: :inbox) do |item|
+          item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
+        end
+        list_group.with_item_link("Settings", href: "#", icon: :adjustments_horizontal) do |item|
+          item.with_trailing_visual_icon(:chevron_right, class: "ms-auto rtl:rotate-180")
+        end
+        list_group.with_item_link("Docs", href: "#", icon: :book) do |item|
+          item.with_trailing_visual_icon(:arrow_up_right_from_square)
+        end
+      end
+    end
   end
 end

@@ -43,19 +43,36 @@ position list_position=:middle:
 position list_position=:last:
 - 'li: px-4 py-2 rounded-b-lg w-full'
 icon tag=:a:
-- 'a: cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white dark:hover:bg-gray-600
+- 'a: align-bottom cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white dark:hover:bg-gray-600
   dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700
-  focus:z-10 hover:bg-gray-100 hover:text-blue-700 inline-flex items-center px-4 py-2
-  relative rounded-lg w-full'
+  focus:z-10 gap-2.5 hover:bg-gray-100 hover:text-blue-700 inline-flex items-center
+  px-4 py-2 relative rounded-lg w-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 -my-0.5 h-4 w-4'
 - path clip-rule="evenodd" fill-rule="evenodd"
 icon tag=:button:
-- 'button type="button": cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white
+- 'button type="button": align-bottom cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white
   dark:hover:bg-gray-600 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700
-  focus:text-blue-700 focus:z-10 font-medium hover:bg-gray-100 hover:text-blue-700
+  focus:text-blue-700 focus:z-10 font-medium gap-2.5 hover:bg-gray-100 hover:text-blue-700
   inline-flex items-center px-4 py-2 relative rounded-lg rtl:text-right text-left
   w-full'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": -ms-0.5 -my-0.5 h-4 me-2 w-4'
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 -my-0.5 h-4 w-4'
 - path clip-rule="evenodd" fill-rule="evenodd"
+trailing_visual tag=:a:
+- 'a: align-bottom cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white dark:hover:bg-gray-600
+  dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700
+  focus:z-10 gap-2.5 hover:bg-gray-100 hover:text-blue-700 inline-flex items-center
+  px-4 py-2 relative rounded-lg w-full'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  -mx-0.5 -my-0.5 h-4 w-4'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+trailing_visual tag=:button:
+- 'button type="button": align-bottom cursor-pointer dark:focus:ring-gray-500 dark:focus:text-white
+  dark:hover:bg-gray-600 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700
+  focus:text-blue-700 focus:z-10 font-medium gap-2.5 hover:bg-gray-100 hover:text-blue-700
+  inline-flex items-center px-4 py-2 relative rounded-lg rtl:text-right text-left
+  w-full'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  -mx-0.5 -my-0.5 h-4 w-4'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

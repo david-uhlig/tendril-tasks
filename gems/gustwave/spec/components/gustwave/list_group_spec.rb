@@ -124,34 +124,46 @@ RSpec.describe Gustwave::ListGroup, type: :component do
     end
   end
 
-  context "with icons" do
+  context "with visuals" do
     it "renders a decorative icon before the text of a button" do
       render_inline(described_class.new) do |list_group|
         list_group.with_item_button("Profile", icon: :user_circle)
       end
 
-      expect(rendered_content).to have_selector("button.relative.inline-flex svg.w-4.h-4.me-2[aria-hidden='true']")
+      expect(rendered_content).to have_selector("button.relative.inline-flex.gap-2\\.5 svg.w-4.h-4[aria-hidden='true']")
       expect(rendered_content).to have_selector("button", text: "Profile")
     end
 
-    it "renders solid icons by default and outline icons on request" do
+    it "renders solid icons from the icon keyword and outline icons from the slot" do
       render_inline(described_class.new) do |list_group|
         list_group.with_item_button("Profile", icon: :user_circle)
-        list_group.with_item_button("Messages") { |item| item.with_icon(:envelope, theme: :outline) }
+        list_group.with_item_button("Messages") { |item| item.with_leading_visual_icon(:envelope) }
       end
 
       expect(rendered_content).to have_selector("button:first-child svg[fill='currentColor']")
       expect(rendered_content).to have_selector("button:last-child svg[fill='none']")
     end
 
-    it "sets the icon through its slot" do
+    it "renders a trailing visual after the text" do
       render_inline(described_class.new) do |list_group|
-        list_group.with_item_link("Messages", href: "/messages") do |item|
-          item.with_icon(:envelope)
+        list_group.with_item_link("Messages", href: "/messages", icon: :envelope) do |item|
+          item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
         end
       end
 
-      expect(rendered_content).to have_selector("a.relative svg", count: 1)
+      link = page.find("a")
+      expect(link).to have_selector("svg + span", text: "3")
+      expect(link.native.children.map(&:name)).to eq(%w[svg text span])
+      expect(link[:class].split).to include("inline-flex")
+      expect(link[:class].split).not_to include("block")
+    end
+
+    it "leaves items without visuals unchanged" do
+      render_inline(described_class.new) do |list_group|
+        list_group.with_item_button("Profile")
+      end
+
+      expect(page.find("button")[:class].split).not_to include("inline-flex", "gap-2.5")
     end
   end
 
