@@ -12,9 +12,5 @@
     <% end %>
   </span>
 
-  <%#
-    The chevron's glyph is 4x8 of its 24px box, as Flowbite's is of its 10px one. The negative margins keep
-    Flowbite's 10px layout box, and shrink-[0.42] (10/24) makes it give way on phones as much as Flowbite's does.
-  %>
-  <%= render Gustwave::Icon.new(:chevron_right, class: "size-6 -m-1.75 ms-0.25 shrink-[0.42] rtl:rotate-180") %>
+  <%= render Gustwave::Icon.new(:chevron_right_compact, class: "shrink-0 w-2.5 h-2.5 ms-2 rtl:rotate-180") %>
 <% end %>
