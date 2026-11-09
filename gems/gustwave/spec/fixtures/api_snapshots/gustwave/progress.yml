@@ -1,0 +1,30 @@
+---
+status: alpha
+constructor:
+- value (optional)
+- 'color: (optional)'
+- 'size: (optional)'
+- 'fill_options: (optional)'
+- "**options"
+options:
+  color:
+    default: blue
+    values:
+    - blue
+    - dark
+    - red
+    - green
+    - yellow
+    - indigo
+    - purple
+    - none
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - xl
+    - none
+parts:
+- fill

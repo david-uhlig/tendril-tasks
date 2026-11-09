@@ -11,6 +11,7 @@ RSpec.describe "Gustwave constructor convention", type: :component do
   # defaults come from a derived value, and the options callers pick through
   # another method than the constructor.
   setups = {
+    Gustwave::Clipboard => { kwargs: { target_id: "target" } },
     Gustwave::DismissButton => { args: [ "target" ] },
     Gustwave::Drawer => { selected_elsewhere: %i[action edge] },
     Gustwave::DrawerHeader => { kwargs: { drawer_id: "drawer" } },
@@ -32,12 +33,12 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Form::RichText::Trix::Toolbar => { args: [ nil ] },
     Gustwave::Heading => { derived_defaults: { size: :default_size } },
     Gustwave::Icon => { args: [ :close ] },
-    Gustwave::IconToast => { forwards: %i[position] },
     Gustwave::Modal => { selected_elsewhere: %i[action] },
     Gustwave::ModalHeader => { kwargs: { modal_id: "modal" } },
     Gustwave::Navbars::Link => { kwargs: { href: "#" } },
     Gustwave::Pagination::Link => { kwargs: { href: "/" } },
     Gustwave::Popover => { selected_elsewhere: %i[placement trigger_event] },
+    Gustwave::Rating => { args: [ 4 ] },
     Gustwave::Spinner => { forwards: %i[size] },
     Gustwave::Tooltip => { selected_elsewhere: %i[placement trigger_event] }
   }

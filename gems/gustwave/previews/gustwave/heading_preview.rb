@@ -54,6 +54,11 @@ module Gustwave
       render_with_template
     end
 
+    # A breadcrumb above the heading, as in Flowbite's breadcrumb context example.
+    def breadcrumb
+      render_with_template
+    end
+
     def heading_one
       render Gustwave::Heading.new("Heading 1", tag: :h1)
     end

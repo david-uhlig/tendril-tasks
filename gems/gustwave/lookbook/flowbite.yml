@@ -197,20 +197,22 @@ pages:
   components/breadcrumb:
   - id: default-breadcrumb-example
     title: Default breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/default
   - id: breadcrumb-background-example
     title: Solid background
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/solid
   - id: header-breadcrumb-example
     title: Header breadcrumb
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/header
+    note: The trigger's chevron sits 2px further from the text, as in Gustwave's other dropdown buttons.
   - id: breadcrumb-dropdown-example
     title: Breadcrumb with dropdown
-    status: blocked
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/breadcrumb/dropdown
+    note: The triggers' chevrons sit 2px further from the text, as in Gustwave's other dropdown buttons.
   components/button-group:
   - id: default-button-group-example
     title: Default example
@@ -327,8 +329,8 @@ pages:
     needs: form
   - id: card-ecommerce-example
     title: E-commerce card
-    status: partial
-    needs: rating
+    status: previewed
+    preview: gustwave/card/ecommerce
   - id: card-cta-example
     title: Call to action card
     status: previewed
@@ -452,40 +454,41 @@ pages:
   components/clipboard:
   - id: clipboard-example
     title: Default copy to clipboard
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/default
   - id: clipboard-button-input-example
     title: Input with copy button
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/input_with_copy_button
   - id: clipboard-button-text-input-example
     title: Copy button with text
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/copy_button_with_text
   - id: clipboard-button-group-example
     title: Input group with copy
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/input_group
   - id: clipboard-url-shortener-example
     title: URL shortener input group
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/url_shortener
   - id: clipboard-source-block
     title: Copy source code block
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/source_code_block
   - id: clipboard-api-keys
     title: Card with API keys
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/api_keys_card
   - id: contact-details-clipboard
     title: Copy contact details
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/contact_details
   - id: copy-to-clipboard-modal
     title: Copy button with modal
-    status: blocked
-    needs: clipboard
+    status: previewed
+    preview: gustwave/clipboard/modal
+    note: Gustwave's :sm modal is max-w-md, narrower than Flowbite's max-w-lg, which no Modal size matches.
   components/datepicker:
   - id: default-datepicker-example
     title: Datepicker example
@@ -709,24 +712,24 @@ pages:
   components/footer:
   - id: default-footer-example
     title: Default footer
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/default
   - id: footer-logo-example
     title: Footer with logo
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/with_logo
   - id: footer-social-media-example
     title: Social media icons
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/social_media
   - id: footer-sitemap-example
     title: Sitemap links
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/sitemap
   - id: footer-sticky-example
     title: Sticky footer
-    status: blocked
-    needs: footer
+    status: previewed
+    preview: gustwave/footer/sticky
   components/forms:
   - id: default-form-example
     title: Default form
@@ -851,28 +854,32 @@ pages:
   components/jumbotron:
   - id: default-jumbotron-example
     title: Default jumbotron
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/default
   - id: background-jumbotron-example
     title: Background image
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/background_image
   - id: video-jumbotron-example
     title: Featured video
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/featured_video
   - id: form-jumbotron-example
     title: Authentication form
-    status: blocked
-    needs: jumbotron
+    status: partial
+    needs: form
+    preview: gustwave/jumbotron/authentication_form
+    note: Form fields are plain Tailwind markup until Gustwave has form components.
   - id: gradient-jumbotron-example
     title: Gradient background
-    status: blocked
-    needs: jumbotron
+    status: partial
+    needs: form
+    preview: gustwave/jumbotron/gradient_background
+    note: Form fields are plain Tailwind markup until Gustwave has form components.
   - id: cards-jumbotron-example
     title: Jumbotron with cards
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/with_cards
   components/kbd:
   - id: default-kbd-example
     title: Default KBD
@@ -972,8 +979,7 @@ pages:
     preview: gustwave/modal/with_timeline
   - id: modal-progress-example
     title: Modal with progress bar
-    status: partial
-    needs: progress
+    status: composable
   - id: modal-crypto-example
     title: Crypto wallet
     status: previewed
@@ -1086,8 +1092,7 @@ pages:
     preview: gustwave/popover/description
   - id: popover-description-example-5
     title: Progress popover
-    status: partial
-    needs: progress
+    status: composable
   - id: popover-password-example
     title: Password strength
     status: partial
@@ -1115,57 +1120,57 @@ pages:
   components/progress:
   - id: default-progress-example
     title: Default progress bar
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/default
   - id: progress-sizes-example
     title: Sizes
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/sizes
   - id: progress-label-example
     title: With label inside
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/label_inside
   - id: progress-label-outside-example
     title: With label outside
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/label_outside
   - id: progress-colors-example
     title: Colors
-    status: blocked
-    needs: progress
+    status: previewed
+    preview: gustwave/progress/colors
   components/rating:
   - id: default-rating-example
     title: Default rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/default
   - id: rating-text-example
     title: Rating with text
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/text
   - id: rating-count-example
     title: Rating count
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/count
   - id: rating-star-sizes-example
     title: Star sizes
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/sizes
   - id: rating-advanced-example
     title: Advanced rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/advanced
   - id: rating-score-example
     title: Score rating
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/score
   - id: rating-comment-example
     title: Rating comment
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/comment
   - id: rating-review-example
     title: Review content
-    status: blocked
-    needs: rating
+    status: previewed
+    preview: gustwave/rating/review
   components/sidebar:
   - id: default-sidebar-example
     title: Default sidebar
@@ -1307,8 +1312,7 @@ pages:
     status: composable
   - id: spinner-progress-example
     title: Progress spinner
-    status: partial
-    needs: progress
+    status: composable
   - id: spinner-buttons-example
     title: Buttons
     status: composable
@@ -2054,8 +2058,8 @@ pages:
     preview: gustwave/heading/underline
   - id: heading-breadcrumb-example
     title: Breadcrumb context
-    status: partial
-    needs: breadcrumb
+    status: previewed
+    preview: gustwave/heading/breadcrumb
   - id: heading-badge-example
     title: Badge context
     status: previewed

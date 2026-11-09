@@ -1,36 +1,42 @@
 # frozen_string_literal: true
 
 module TendrilTasks
-  # Use `Breadcrumb` to display page hierarchy.
+  # Gustwave::Breadcrumb with the app's home link. Long titles are cut off
+  # rather than wrapped, so the breadcrumb stays on one line on small screens.
   #
-  # This component allows you to render a breadcrumb navigation with a home link
-  # and multiple breadcrumb items.
+  # Call +with_home+ first, as items render in the order they're set.
   #
-  # === Rendering a breadcrumb navigation
-  #
-  # This example renders a breadcrumb navigation with a home link and two
-  # breadcrumb items.
+  # === Example
   #
   #   <%= render TendrilTasks::Breadcrumb.new do |breadcrumb| %>
-  #     <% breadcrumb.with_home "Home", href: root_path, icon: :home %>
+  #     <% breadcrumb.with_home %>
   #     <% breadcrumb.with_item "Section", href: section_path %>
-  #     <% breadcrumb.with_item "Subsection", href: subsection_path %>
+  #     <% breadcrumb.with_item "Subsection" %>
   #   <% end %>
   class Breadcrumb < TendrilTasks::Component
-    # Renders a single home link slot.
-    #
-    # @param title [String] the title of the home link (default: the home title in the current locale)
-    # @param href [String] the URL for the home link (default: root_path)
-    # @param icon [Symbol] the icon for the home link (default: :home)
-    #
-    # @return [TendrilTasks::BreadcrumbItem] the home link item
-    renders_one :home, ->(title = nil, href: root_path, icon: :home) {
-      TendrilTasks::BreadcrumbItem.new(title || t(".home"), href: href, icon: icon)
-    }
+    delegate :with_item, to: :@breadcrumb
 
-    # Renders multiple breadcrumb items.
+    # @param list_options [Hash] HTML attributes for the +ol+ element.
+    # @param options [Hash] the arguments of Gustwave::Breadcrumb, e.g. HTML attributes for the +nav+ element.
+    def initialize(list_options: {}, **options)
+      @breadcrumb = Gustwave::Breadcrumb.new(
+        list_options: configure_html_attributes(list_options, class: "truncate"),
+        **options
+      )
+    end
+
+    # Adds the link to the home page.
     #
-    # @return [Array<TendrilTasks::BreadcrumbItem>] the breadcrumb items
-    renders_many :items, TendrilTasks::BreadcrumbItem
+    # @param title [String, nil] the title of the link (default: the home title in the current locale)
+    # @param href [String] the URL of the link (default: root_path)
+    # @param icon [Symbol] the icon of the link (default: :home)
+    def with_home(title = nil, href: root_path, icon: :home)
+      @breadcrumb.with_item(title || t(".home"), href:, icon:)
+    end
+
+    def call
+      content
+      render @breadcrumb
+    end
   end
 end

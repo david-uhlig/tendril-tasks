@@ -1,0 +1,22 @@
+---
+status: alpha
+constructor:
+- 'centered: (optional)'
+- 'container_options: (optional)'
+- "**options"
+options:
+  centered:
+    default: 'false'
+parts:
+- background_image
+- container
+slots:
+  background_image:
+    many: false
+methods:
+- background_image
+- background_image?
+- with_background_image
+- with_background_image_content
+slot_builders:
+- build_slot_background_image
