@@ -854,28 +854,32 @@ pages:
   components/jumbotron:
   - id: default-jumbotron-example
     title: Default jumbotron
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/default
   - id: background-jumbotron-example
     title: Background image
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/background_image
   - id: video-jumbotron-example
     title: Featured video
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/featured_video
   - id: form-jumbotron-example
     title: Authentication form
-    status: blocked
-    needs: jumbotron
+    status: partial
+    needs: form
+    preview: gustwave/jumbotron/authentication_form
+    note: Form fields are plain Tailwind markup until Gustwave has form components.
   - id: gradient-jumbotron-example
     title: Gradient background
-    status: blocked
-    needs: jumbotron
+    status: partial
+    needs: form
+    preview: gustwave/jumbotron/gradient_background
+    note: Form fields are plain Tailwind markup until Gustwave has form components.
   - id: cards-jumbotron-example
     title: Jumbotron with cards
-    status: blocked
-    needs: jumbotron
+    status: previewed
+    preview: gustwave/jumbotron/with_cards
   components/kbd:
   - id: default-kbd-example
     title: Default KBD
