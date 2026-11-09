@@ -2,7 +2,7 @@ module Gustwave
   class ToastPreview < ViewComponent::Preview
     # @param position select { choices: [none, top_left, top_center, top_right, bottom_left, bottom_center, bottom_right] }
     def default(position: :none)
-      render Gustwave::IconToast.new("Your changes were saved.", position:)
+      render Gustwave::Toast.new("Your changes were saved.", status: :info, position:)
     end
 
     def colors
@@ -34,13 +34,24 @@ module Gustwave
       render_with_template
     end
 
+    # The dismiss button customized with +with_dismiss_button+, nested in the layout.
+    def custom_dismiss_button
+      render_with_template
+    end
+
+    # Any visual in place of the status's icon: an icon in another theme, an
+    # image, or a component.
+    def custom_icon
+      render_with_template
+    end
+
     def not_dismissible
       render Gustwave::Toast.new("Saving…", dismissible: false)
     end
 
-    # Every status IconToast knows, including the aliases for flash types.
+    # Every status, including the aliases for flash types.
     def with_icon
-      render_with_template(locals: { statuses: Gustwave::IconToast.option_values(:status).excluding(:none) })
+      render_with_template(locals: { statuses: Gustwave::Toast.option_values(:status).excluding(:none) })
     end
   end
 end

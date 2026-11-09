@@ -96,5 +96,143 @@ RSpec.describe Gustwave::Toast, type: :component do
       expect(page).to have_selector("div#my-toast > div.row > button[data-dismiss-target='#my-toast']")
       expect(page).to have_selector("button", count: 1)
     end
+
+    it "customizes the button with with_dismiss_button" do
+      render_inline(described_class.new("text", id: "my-toast")) do |toast|
+        toast.with_dismiss_button(text: "Close notification")
+      end
+
+      expect(page).to have_selector("button[data-dismiss-target='#my-toast'][aria-label='Close notification'] > span.sr-only", text: "Close notification")
+    end
+
+    it "customizes the button placed by the block" do
+      render_inline(described_class.new(id: "my-toast")) do |toast|
+        toast.with_dismiss_button("Close notification")
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).to have_selector("div#my-toast > div.row > button[aria-label='Close notification']")
+      expect(page).to have_selector("button", count: 1)
+    end
+
+    it "renders the customized button once, not again at the end" do
+      render_inline(described_class.new(id: "my-toast")) do |toast|
+        toast.with_dismiss_button(text: "Close notification")
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).to have_selector("button", count: 1)
+    end
+
+    it "renders no button with dismissible: false, even when the block places one" do
+      render_inline(described_class.new(id: "my-toast", dismissible: false)) do |toast|
+        %(<div class="row">#{toast.dismiss_button}</div>).html_safe
+      end
+
+      expect(page).not_to have_selector("button")
+    end
+
+    it "renders no button with dismissible: false, even when one is set" do
+      render_inline(described_class.new("text", dismissible: false)) do |toast|
+        toast.with_dismiss_button(text: "Close notification")
+      end
+
+      expect(page).not_to have_selector("button")
+    end
+  end
+
+  describe "status" do
+    it_behaves_like "a text and block content renderer", selector: "div.ms-3", status: :success
+
+    def icon_paths(selector)
+      Nokogiri::HTML.fragment(rendered_content).at_css(selector).css("path").map { _1["d"] }
+    end
+
+    def paths_of(icon)
+      render_inline(Gustwave::Icon.new(icon, theme: :solid))
+      icon_paths("svg")
+    end
+
+    { info: :info_circle, notice: :info_circle, success: :check_circle, error: :close_circle,
+      failure: :close_circle, warning: :exclamation_circle, alert: :exclamation_circle }.each do |status, icon|
+      it "shows the solid #{icon} for #{status}" do
+        expected = paths_of(icon)
+        render_inline(described_class.new("Hi", status:))
+
+        expect(icon_paths("div.shrink-0.w-8 > svg[aria-hidden='true']")).to eq expected
+      end
+    end
+
+    it "colors the visual box by status" do
+      render_inline(described_class.new("Hi", status: :error))
+
+      expect(rendered_content).to have_selector("div[role='alert'] > div.shrink-0.text-red-500.bg-red-100")
+    end
+
+    it "names the status for screen readers in English" do
+      I18n.with_locale(:en) { render_inline(described_class.new("Oops", status: :error)) }
+
+      expect(rendered_content).to have_selector("div.shrink-0 > span.sr-only", text: "Error")
+    end
+
+    it "names the status for screen readers in German" do
+      I18n.with_locale(:de) { render_inline(described_class.new("Saved", status: :success)) }
+
+      expect(rendered_content).to have_selector("div.shrink-0 > span.sr-only", text: "Erfolg")
+    end
+
+    it "renders no visual box, label or message wrapper without a status" do
+      render_inline(described_class.new("Plain"))
+
+      expect(rendered_content).not_to have_selector("div.shrink-0")
+      expect(rendered_content).not_to have_selector("div[role='alert'] > div > span.sr-only")
+      expect(rendered_content).not_to have_selector("div.ms-3")
+      expect(rendered_content).to have_selector("div[role='alert']", text: "Plain")
+    end
+
+    it "keeps the dismiss button after the message" do
+      render_inline(described_class.new("Hi", status: :success))
+
+      expect(rendered_content).to have_selector("div[role='alert'] > div.ms-3 + button")
+    end
+  end
+
+  describe "visuals" do
+    it "replaces the status's icon with icon:" do
+      expected = paths_of(:bell)
+      render_inline(described_class.new("Hi", status: :success, icon: :bell))
+
+      expect(icon_paths("div.shrink-0 > svg")).to eq expected
+    end
+
+    it "replaces the status's icon with a visual set in the block" do
+      render_inline(described_class.new("Hi", status: :success)) { |toast| toast.with_visual_icon(:bell, theme: :outline) }
+
+      expect(rendered_content).to have_selector("div.shrink-0.text-green-500 > svg[fill='none']", count: 1)
+      expect(rendered_content).to have_selector("div.shrink-0 > span.sr-only", text: "Success")
+    end
+
+    it "renders a visual without a status, in an uncolored box without a label" do
+      render_inline(described_class.new("Hi")) { |toast| toast.with_visual_renderable(Gustwave::Icon.new(:bell, class: "text-purple-500")) }
+
+      expect(rendered_content).to have_selector("div.shrink-0.w-8 > svg.text-purple-500")
+      expect(rendered_content).not_to have_selector("div.shrink-0 > span.sr-only")
+      expect(rendered_content).to have_selector("div.ms-3", text: "Hi")
+    end
+
+    it "renders the icon from icon: in solid by default" do
+      render_inline(described_class.new("Hi", icon: :bell))
+
+      expect(rendered_content).to have_selector("div.shrink-0 > svg[fill='currentColor']")
+    end
+
+    def icon_paths(selector)
+      Nokogiri::HTML.fragment(rendered_content).at_css(selector).css("path").map { _1["d"] }
+    end
+
+    def paths_of(icon)
+      render_inline(Gustwave::Icon.new(icon, theme: :solid))
+      icon_paths("svg")
+    end
   end
 end

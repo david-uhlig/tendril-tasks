@@ -122,7 +122,7 @@ RSpec.describe Gustwave::Alert, type: :component do
     it "renders the icon at the size of Flowbite's close icon" do
       render_inline(described_class.new("content", color: :red), &:with_dismiss_button)
 
-      expect(page).to have_selector("div.flex > button > svg.w-6.h-6")
+      expect(page).to have_selector("div.flex > button[class~='[&>svg]:w-6'][class~='[&>svg]:h-6'] > svg")
     end
 
     it "renders the body in medium weight" do

@@ -84,6 +84,18 @@ RSpec.describe Gustwave::Modal, type: :component do
     end
   end
 
+  describe "the header slot's block" do
+    it "receives the header, so callers customize its close button" do
+      render_inline(described_class.new(id: "modal")) do |modal|
+        modal.with_header("Title text") { |header| header.with_close_button("Dismiss dialog", class: "custom-close") }
+      end
+
+      expect(page).to have_selector("button", count: 1)
+      expect(page).to have_selector("button.custom-close[data-modal-hide='modal']", text: "Dismiss dialog")
+      expect(page).to have_selector("h3#modal-title", text: "Title text")
+    end
+  end
+
   describe "dismissible" do
     it "is dismissible by default" do
       expect(described_class.new).to be_dismissible

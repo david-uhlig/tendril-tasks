@@ -187,4 +187,16 @@ RSpec.describe Gustwave::Drawer, type: :component do
       expect(described_class.trigger_options("info", action: :hide)).to include("data-drawer-hide" => "info")
     end
   end
+
+  describe "the header slot's block" do
+    it "receives the header, so callers customize its close button" do
+      render_inline(described_class.new(id: "drawer")) do |drawer|
+        drawer.with_header("Info") { |header| header.with_close_button("Dismiss drawer", class: "custom-close") }
+      end
+
+      expect(page).to have_selector("button", count: 1)
+      expect(page).to have_selector("button.custom-close[data-drawer-hide='drawer']", text: "Dismiss drawer")
+      expect(page).to have_selector("h5#drawer-title", text: "Info")
+    end
+  end
 end

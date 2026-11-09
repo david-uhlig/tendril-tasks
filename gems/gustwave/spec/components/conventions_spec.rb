@@ -43,7 +43,7 @@ RSpec.describe "Component conventions" do
       rule: "icon: and trailing_icon: are shorthand for a slot callers can also set, never the only way",
       check: ->(component) {
         found = keywords.(component).keys & %i[icon trailing_icon]
-        reachable = (slots.(component) & %i[leading_visuals trailing_visuals icon]).any? || code.(component).include?("delegate_missing_to")
+        reachable = (slots.(component) & %i[leading_visuals trailing_visuals visuals icon]).any? || code.(component).include?("delegate_missing_to")
         reachable ? [] : found
       }
     },
@@ -83,22 +83,9 @@ RSpec.describe "Component conventions" do
     }
   }
 
-  known_violations = {
-    "Gustwave::DismissButton" => { "icon_keyword: icon" => 520 },
-    "Gustwave::DrawerHeader" => { "icon_keyword: icon" => 520, "button_keyword: close_button" => 518 },
-    "Gustwave::IconToast" => { "icon_keyword: icon" => 519 },
-    "Gustwave::ModalHeader" => { "button_keyword: close_button" => 518 },
-    "Gustwave::Pagination::Link" => { "icon_keyword: icon" => 520 },
-    "Gustwave::SpeedDials::Action" => { "icon_keyword: icon" => 520 },
-    "Gustwave::SpeedDials::Trigger" => { "icon_keyword: icon" => 520 },
-    "Gustwave::Tab" => { "configure_method: configure_selection" => 523, "configure_method: configure_classes" => 523 },
-    "Gustwave::Toast" => { "dismiss_slot: no dismiss_button slot" => 518 }
-  }
+  known_violations = {}
 
   exceptions = {
-    "Gustwave::DismissButton" => {
-      "part_options: icon_options" => "Options for the Gustwave::Icon it renders as its icon."
-    },
     "Gustwave::Dropdown" => {
       "icon_keyword: icon" => "Shorthand for the default trigger; the trigger slot's generic and component types render any visual.",
       "icon_keyword: trailing_icon" => "Shorthand for the default trigger; the trigger slot's generic and component types render any visual."

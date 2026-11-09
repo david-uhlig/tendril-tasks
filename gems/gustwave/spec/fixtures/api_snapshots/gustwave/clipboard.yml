@@ -1,0 +1,50 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'target_id:'
+- 'copied_text: (optional)'
+- 'theme: (optional)'
+- 'content_type: (optional)'
+- 'html_entities: (optional)'
+- 'reset_after: (optional)'
+- 'message_options: (optional)'
+- 'copied_message_options: (optional)'
+- "**options"
+options:
+  content_type:
+    default: input
+    values:
+    - input
+    - inner_html
+    - text_content
+parts:
+- copied_message
+- icon
+- message
+slots:
+  copied_icon:
+    many: false
+  icon:
+    many: false
+  tooltip:
+    many: false
+methods:
+- copied_icon
+- copied_icon?
+- default_copied_icon
+- default_icon
+- icon
+- icon?
+- tooltip
+- tooltip?
+- with_copied_icon
+- with_copied_icon_content
+- with_icon
+- with_icon_content
+- with_tooltip
+- with_tooltip_content
+slot_builders:
+- build_slot_copied_icon
+- build_slot_icon
+- build_slot_tooltip

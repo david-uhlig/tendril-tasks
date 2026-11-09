@@ -99,6 +99,10 @@ methods:
 - with_trailing_visual_svg
 - with_trailing_visual_svg_content
 - with_trailing_visuals
+class_methods:
+- renders_visuals
+- visual_icon_theme
+- visual_icon_theme=
 slot_builders:
 - build_slot_leading_visual_icon
 - build_slot_leading_visual_image

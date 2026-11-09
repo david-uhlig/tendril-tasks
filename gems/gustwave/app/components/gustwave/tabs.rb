@@ -197,9 +197,8 @@ module Gustwave
 
       tabs.each_with_index do |tab, index|
         selected = @interactive ? index == chosen : tab.selected?
-        tab.configure_selection(selected:, interactive: @interactive)
-        tab.configure_classes(item: classes(:item), tab: classes(:tab), panel: classes(:panel), states:,
-                              edge: edge_classes(index))
+        tab.apply_slot_context(selected:, interactive: @interactive,
+                               classes: { item: classes(:item), tab: classes(:tab), panel: classes(:panel), states:, edge: edge_classes(index) })
       end
     end
 

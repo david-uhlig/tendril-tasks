@@ -38,4 +38,48 @@ RSpec.describe Gustwave::ModalHeader, type: :component do
 
     expect(page).not_to have_selector("button")
   end
+
+  describe "close button slot" do
+    it "customizes the close button with with_close_button" do
+      render_inline(described_class.new("Title text", modal_id: "modal")) do |header|
+        header.with_close_button(text: "Dismiss dialog")
+      end
+
+      expect(page).to have_selector("button[data-modal-hide='modal'] > span.sr-only", text: "Dismiss dialog")
+      expect(page).to have_selector("button", count: 1)
+    end
+
+    it "accepts the text as a positional argument" do
+      render_inline(described_class.new("Title text", modal_id: "modal")) do |header|
+        header.with_close_button("Dismiss dialog")
+      end
+
+      expect(page).to have_selector("button[data-modal-hide='modal'] > span.sr-only", text: "Dismiss dialog")
+    end
+
+    it "lets caller classes win over the defaults" do
+      render_inline(described_class.new("Title text", modal_id: "modal")) do |header|
+        header.with_close_button(class: "text-red-500")
+      end
+
+      expect(page).to have_selector("button[data-modal-hide='modal'].text-red-500")
+      expect(page).not_to have_selector("button.text-gray-400")
+    end
+
+    it "keeps the hide trigger when the caller adds data" do
+      render_inline(described_class.new("Title text", modal_id: "modal")) do |header|
+        header.with_close_button(data: { foo: "1" })
+      end
+
+      expect(page).to have_selector("button[data-foo='1'][data-modal-hide='modal']")
+    end
+
+    it "renders no close button with close_button: false, even when one is set" do
+      render_inline(described_class.new("Title text", modal_id: "modal", close_button: false)) do |header|
+        header.with_close_button(text: "Dismiss dialog")
+      end
+
+      expect(page).not_to have_selector("button")
+    end
+  end
 end

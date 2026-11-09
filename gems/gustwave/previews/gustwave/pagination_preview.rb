@@ -59,6 +59,11 @@ module Gustwave
       render_with_template
     end
 
+    # http://localhost:3030/rails/view_components/gustwave/pagination/custom_icon
+    def custom_icon
+      render_with_template
+    end
+
     # http://localhost:3030/rails/view_components/gustwave/pagination/table_data
     def table_data
       render_with_template
