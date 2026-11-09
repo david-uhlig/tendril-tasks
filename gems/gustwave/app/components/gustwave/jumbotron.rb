@@ -34,10 +34,18 @@ module Gustwave
   #     </div>
   #   <% end %>
   #
-  # Sets a background image on the section with +class:+ and +style:+. Add
-  # more padding with +container_options:+ for a taller hero:
+  # Sets a background image behind the content with +with_background_image+.
+  # It takes any image source +image_tag+ does, such as an asset path or an
+  # Active Storage attachment, and HTML attributes for the +<img>+. The image
+  # covers the section and is darkened by multiplying it with the section's
+  # gray background; change the tint with +class:+ on the jumbotron. It's
+  # decorative, so +alt+ defaults to +""+. A hero image is usually the
+  # largest element on the page, so consider +fetchpriority: "high"+. The
+  # text over it isn't recolored: give it light classes, e.g. +text-white+.
+  # Add more padding with +container_options:+ for a taller hero:
   #
-  #   <%= render Gustwave::Jumbotron.new(class: "bg-center bg-no-repeat bg-gray-700 bg-blend-multiply", style: "background-image: url(/hero.jpg)", container_options: { class: "py-24 lg:py-56" }) do %>
+  #   <%= render Gustwave::Jumbotron.new(centered: true, container_options: { class: "py-24 lg:py-56" }) do |jumbotron| %>
+  #     <% jumbotron.with_background_image("hero.jpg", fetchpriority: "high") %>
   #     <%= render Gustwave::Heading.new("We invest in the world’s potential", tag: :h1, size: :"2xl", responsive: true, class: "mb-4 text-white") %>
   #   <% end %>
   #
@@ -59,21 +67,42 @@ module Gustwave
 
     part :container, "py-8 px-4 mx-auto max-w-screen-xl lg:py-16"
 
+    part :background_image, "absolute inset-0 -z-10 size-full object-cover mix-blend-multiply"
+
     # Centers the content, as in Flowbite's default jumbotron
     toggle :centered, "text-center", part: :container
+
+    # Set by the component: the section holds the background image and
+    # darkens it with its gray background
+    toggle :has_background_image, "relative isolate bg-gray-700 dark:bg-gray-700", internal: true
+
+    # Renders an image behind the content, covering the section.
+    #
+    # @param src [String] the image source, passed to +image_tag+
+    # @param alt [String] the alt text. Defaults to +""+, as the image is decorative.
+    # @param options [Hash] additional HTML attributes for the image tag, e.g. +fetchpriority+ or +srcset+. Its classes win conflicts.
+    renders_one_extensible :background_image, ->(src, alt: "", **options) {
+      image_tag(src, alt:, **attributes_for(:background_image, options))
+    }
 
     # @param centered [Boolean] Whether the content is centered. Defaults to +false+.
     # @param container_options [Hash] Additional HTML attributes for the container inside the section, e.g. +class+. Its classes win conflicts with the container's classes.
     # @param options [Hash] Additional HTML attributes passed to the +<section>+ element, e.g. +class+, +id+ or +style+.
     def initialize(centered: false, container_options: {}, **options)
       select_options(centered:)
-      @options = attributes_for(options)
+      @options = options
       @container_options = attributes_for(:container, container_options)
     end
 
+    def before_render
+      # Must select here to know whether the background image slot was set
+      select_options(has_background_image: background_image?)
+      @config = attributes_for(@options)
+    end
+
     def call
-      tag.section(**@options) do
-        tag.div(content, **@container_options)
+      tag.section(**@config) do
+        safe_join([ background_image, tag.div(content, **@container_options) ].compact)
       end
     end
   end

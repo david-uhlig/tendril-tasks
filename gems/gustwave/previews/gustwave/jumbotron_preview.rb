@@ -5,7 +5,7 @@ module Gustwave
       render_with_template
     end
 
-    # A centered hero over a dark background image, with a taller container for more room.
+    # A centered hero over a darkened background image, with a taller container for more room.
     def background_image
       render_with_template
     end

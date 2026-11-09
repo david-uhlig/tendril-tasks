@@ -38,4 +38,50 @@ RSpec.describe Gustwave::Jumbotron, type: :component do
 
     expect(page).to have_selector("section.relative.isolate.bg-white")
   end
+
+  describe "background image" do
+    def render_with_background_image(*args, jumbotron_options: {}, **options)
+      render_inline(described_class.new(**jumbotron_options)) do |jumbotron|
+        jumbotron.with_background_image(*args, **options)
+        "Content"
+      end
+    end
+
+    it "renders a decorative image behind the content, covering the section" do
+      render_with_background_image("/hero.jpg")
+
+      expect(page).to have_selector("section > img[src='/hero.jpg'][alt=''].absolute.inset-0.-z-10.size-full.object-cover.mix-blend-multiply")
+      expect(page).to have_selector("section > img + div", text: "Content")
+    end
+
+    it "darkens the image with the section's gray background" do
+      render_with_background_image("/hero.jpg")
+
+      classes = page.find("section")[:class].split
+      expect(classes).to include("relative", "isolate", "bg-gray-700", "dark:bg-gray-700")
+      expect(classes).not_to include("bg-white", "dark:bg-gray-900")
+    end
+
+    it "passes the alt text and HTML attributes to the image and lets its classes win conflicts" do
+      render_with_background_image("/hero.jpg", alt: "Conference hall", fetchpriority: "high", class: "object-none")
+
+      expect(page).to have_selector("img[alt='Conference hall'][fetchpriority='high'].object-none")
+      expect(page).not_to have_selector("img.object-cover")
+    end
+
+    it "lets the caller's classes change the tint" do
+      render_with_background_image("/hero.jpg", jumbotron_options: { class: "bg-blue-900 dark:bg-blue-900" })
+
+      classes = page.find("section")[:class].split
+      expect(classes).to include("bg-blue-900", "dark:bg-blue-900")
+      expect(classes).not_to include("bg-gray-700", "dark:bg-gray-700")
+    end
+
+    it "renders no image and keeps the white background without one" do
+      render_inline(described_class.new) { "Content" }
+
+      expect(page).not_to have_selector("img")
+      expect(page.find("section")[:class].split).not_to include("relative", "isolate")
+    end
+  end
 end

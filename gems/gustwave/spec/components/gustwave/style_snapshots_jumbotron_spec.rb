@@ -9,5 +9,11 @@ RSpec.describe "Gustwave::Jumbotron style snapshot", type: :component do
     group :centered, centered: [ false, true ] do |**args|
       Gustwave::Jumbotron.new(**args)
     end
+
+    # The background image slot sets the image through the render block, where view helpers are available
+    group :background_image, centered: [ false, true ],
+          slots: ->(jumbotron) { jumbotron.with_background_image("/hero.jpg") } do |**args|
+      Gustwave::Jumbotron.new(**args)
+    end
   end
 end
