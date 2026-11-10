@@ -113,7 +113,7 @@ RSpec.describe Gustwave::Form::Input, type: :component do
       svg = page.find("svg")
       expect(svg[:fill]).to eq("currentColor")
       expect(svg[:"aria-hidden"]).to eq("true")
-      expect(class_set(svg[:class])).to eq(class_set("h-4 w-4 text-gray-500 dark:text-gray-400"))
+      expect(class_set(svg[:class])).to eq(class_set("h-5 w-5 -ms-0.5 text-gray-500 dark:text-gray-400"))
     end
 
     it "renders it for a visual set through the slot" do
@@ -128,7 +128,7 @@ RSpec.describe Gustwave::Form::Input, type: :component do
         render_inline(described_class.new(icon: :envelope, size:))
 
         expect(input_classes).to include("ps-10")
-        expect(class_set(page.find("svg")[:class])).to include("h-4", "w-4")
+        expect(class_set(page.find("svg")[:class])).to include("h-5", "w-5", "-ms-0.5")
       end
     end
 

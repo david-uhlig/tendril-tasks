@@ -56,7 +56,8 @@ icon size=:sm validation=:none:
 - 'div: relative'
 - 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
 - path
 - path
 - 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
@@ -67,7 +68,8 @@ icon size=:sm validation=:error:
 - 'div: relative'
 - 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
 - path
 - path
 - 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
@@ -78,7 +80,8 @@ icon size=:md validation=:none:
 - 'div: relative'
 - 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
 - path
 - path
 - 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
@@ -89,7 +92,8 @@ icon size=:md validation=:error:
 - 'div: relative'
 - 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
 - path
 - path
 - 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
@@ -100,7 +104,8 @@ icon size=:lg validation=:none:
 - 'div: relative'
 - 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
 - path
 - path
 - 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
@@ -111,7 +116,8 @@ icon size=:lg validation=:error:
 - 'div: relative'
 - 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
 - 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
-  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+  xmlns="http://www.w3.org/2000/svg": -ms-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
 - path
 - path
 - 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700

@@ -81,9 +81,12 @@ module Gustwave
       # The container of the leading visuals in the input group
       part :icon_container, "absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
 
-      # Flowbite shows the icon only at the default size. It keeps its size at
-      # every input size.
-      part :visual, "h-4 w-4 text-gray-500 dark:text-gray-400"
+      # Flowbite's example icon fills its 16px box, while Gustwave's icons
+      # leave a margin inside theirs. So the box is 20px, which draws the icon
+      # at Flowbite's size, and starts 2px earlier, which keeps it centered
+      # where Flowbite's is. Flowbite shows the icon only at the default size.
+      # It keeps its size at every input size.
+      part :visual, "h-5 w-5 -ms-0.5 text-gray-500 dark:text-gray-400"
 
       # The classes shared by every size and validation state
       base input: "block w-full border rounded-lg dark:bg-gray-700"
