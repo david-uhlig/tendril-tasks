@@ -133,6 +133,61 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "in an ERB template" do
+    def render_erb(erb, **locals)
+      parse(vc_test_controller.view_context.render(inline: erb, locals:))
+    end
+
+    it "renders a field for an invalid record, a field with an icon and helper text, and leaves hidden fields alone" do
+      html = render_erb(<<~ERB, record: invalid_task)
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.text_field :title, placeholder: "Title" %>
+          <%= f.text_field :password, icon: :envelope, helper_text: "At least 8 characters." %>
+          <%= f.hidden_field :project_id %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("label[for='task_title']", text: "Title")
+      expect(html).to have_css("input#task_title[aria-invalid='true'][aria-describedby='task_title_validation_message']")
+      expect(html).to have_css("p#task_title_validation_message", text: "Can't be blank")
+      expect(html).to have_no_css(".field_with_errors")
+
+      expect(html).to have_css("div.relative > div svg + input#task_password, div.relative > div + input#task_password[aria-describedby='task_password_helper_text']")
+      expect(html).to have_css("p#task_password_helper_text", text: "At least 8 characters.")
+
+      expect(html).to have_css("input[type='hidden'][name='task[project_id]']", visible: :all)
+      expect(html).to have_no_css("input[type='hidden'] + p, label[for='task_project_id']", visible: :all)
+    end
+
+    it "renders a link in the helper text of an ERB block" do
+      html = render_erb(<<~ERB, record: task)
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.password_field :password do |field| %><% field.with_helper_text do %>Read our <a href="/rules">rules</a>.<% end %><% end %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("p#task_password_helper_text", text: "Read our rules.")
+      expect(html).to have_css("p#task_password_helper_text a[href='/rules']", text: "rules")
+      expect(html).to have_css("input[type='password'][aria-describedby='task_password_helper_text']")
+    end
+
+    it "renders a Form::Field inside a form with Rails' default builder" do
+      html = render_erb(<<~ERB, record: task)
+        <%= form_with model: record, scope: :task, url: "/tasks" do |f| %>
+          <%= render Gustwave::Form::Field.new(:title, form: f, validation: :error) do |field| %>
+            <% field.with_label("Task title") %>
+            <% field.with_control_input %>
+            <% field.with_validation_message do %><b>Oops!</b> Pick another title.<% end %>
+          <% end %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("label[for='task_title']", text: "Task title")
+      expect(html).to have_css("input#task_title[name='task[title]'][aria-invalid='true'][aria-describedby='task_title_validation_message']")
+      expect(html).to have_css("p#task_title_validation_message b", text: "Oops!")
+    end
+  end
+
   describe "extending it" do
     it "renders the field class of a subclass" do
       stub_const("SpecField", Class.new(Gustwave::Form::Field) {

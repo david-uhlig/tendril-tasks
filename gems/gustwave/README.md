@@ -116,6 +116,45 @@ render Gustwave::Buttons::GradientDuotone.new("Sign in")
 render Gustwave::Button.for(theme).new("Sign in")
 ```
 
+### Forms
+
+A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The builder is never the default: Gustwave doesn't set `default_form_builder`, so forms the app didn't write keep Rails' output.
+
+```erb
+<%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
+  <%= f.text_field :title, helper_text: "Shown in the task list." %>
+  <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
+  <%= f.hidden_field :project_id %>
+<% end %>
+```
+
+The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
+
+`Gustwave::Form::Field` and `Gustwave::Form::Input` work on their own: with any Rails builder, or without one:
+
+```erb
+<%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
+  <% field.with_control_input(size: :lg) %>
+  <% field.with_helper_text("Shown in the task list.") %>
+<% end %>
+
+<%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
+```
+
+To extend the builder, subclass it. `field_class` names the field class its helpers render, and `render_field(attribute, control, options)` is what each helper calls, for helpers of your own:
+
+```ruby
+class AppFormBuilder < Gustwave::FormBuilder
+  self.field_class = "App::Field"
+
+  def toggle(attribute, options = {}, &block)
+    render_field(attribute, :toggle, options, &block)
+  end
+end
+```
+
+See [Forms in the design notes](docs/design.md#forms).
+
 ### Strictness
 
 In development and test, an unknown option, value, part or theme raises an error that names the valid ones. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
