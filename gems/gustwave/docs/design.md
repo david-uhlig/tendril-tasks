@@ -142,14 +142,75 @@ A component takes `id:` for its own root and generates one with a component-spec
 - Decorative visuals get `aria-hidden`. A visual that carries meaning takes a label keyword.
 - Behavior that Flowbite's JavaScript doesn't cover ships as a `gustwave--*` Stimulus controller, which the component wires up itself, e.g. `gustwave--focus-trap` on Modal.
 
+## Forms
+
+Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). *Planned:* only `Form::RichTextArea` exists so far. It predates this section and moves to its shape with an upgrade note.
+
+| Layer | Owns | Example |
+|---|---|---|
+| A control | One form element: its classes, sizes, validation look and the visuals inside it | `Form::Input`, `Form::Select`, `Form::Toggle` |
+| `Form::Field` | What surrounds a control: label, helper text and error message, and the IDs and ARIA attributes that tie them to it | |
+| `Gustwave::FormBuilder` | No markup. It turns Rails' form helpers into fields | `f.text_field :title` |
+
+```erb
+<%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
+  <%= f.text_field :title, helper_text: "Shown in the task list." %>
+<% end %>
+
+<%# The same field without the builder's shorthand, in a form with any builder %>
+<%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
+  <% field.with_control_input %>
+  <% field.with_helper_text("Shown in the task list.") %>
+<% end %>
+
+<%# A control on its own, without a form builder %>
+<%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
+```
+
+Form components live in `Gustwave::Form`, named after their Flowbite pattern (D11).
+
+### Controls
+
+- **One control per Flowbite pattern, not per Rails helper.** `text_field`, `email_field` and `password_field` all render `Form::Input`; the type is an HTML attribute. A Flowbite example that only arranges a control with buttons, dropdowns or visuals is `composable`, not a new control.
+- **The attribute is the positional subject, `form:` is the wiring.** `Form::Input.new(:title, form: f)` binds the control to a form builder, Rails' own or any subclass. An attribute without `form:` raises, as a sub-component without its parent's ID does.
+- **Rails renders a bound element.** The control hands its attributes to Rails' helper for that element, so the name, ID, value, type casting, nested attributes and `index` behave as in any Rails form. A control never works them out itself. Without `form:` it renders a plain element, and `name:`, `id:` and `value:` are ordinary HTML attributes.
+- **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
+- **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes.
+- **Label, helper text and errors belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
+
+### Field
+
+`Form::Field` takes the same `attribute` and `form:` as a control and passes them on, so callers state them once.
+
+- **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `error`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`.
+- **`label:` and `helper_text:` are shorthand** for the slots of the same name, as `icon:` is for a visual. `label: false` renders no label.
+- **A bound field has defaults.** Without a `label`, it renders the text Rails' `label` helper finds: a translation, then the humanized attribute. Without an `error`, it renders the attribute's error messages when there are any. A field without `form:` renders only what the caller sets.
+- **The field wires its control,** through `apply_slot_context`: `aria-describedby` for the helper text and the error, and `aria-invalid` and `validation: :error` while the attribute has errors. A caller's own `validation:` wins.
+- **IDs come from Rails' `field_id`,** e.g. `field_id(:title, :error)`, so the same attribute in two forms on a page doesn't collide. A field without `form:` generates them.
+
+### Form builder
+
+`Gustwave::FormBuilder` is a subclass of `ActionView::Helpers::FormBuilder`. A form opts in with `builder: Gustwave::FormBuilder` (D10).
+
+- **It keeps Rails' helper names and signatures.** Switching a form to it changes no call: HTML options still go to the element. A helper Gustwave has no control for, like `hidden_field`, renders what Rails renders.
+- **Each helper renders a field with its control,** and also takes the control's options and the field's shorthand: `f.text_field :title, size: :lg, helper_text: "…"`.
+- **A control without a Rails helper gets one named after it:** `f.toggle :publish`.
+- **The builder holds no markup, classes or behavior.** Whatever it renders can be rendered with `Form::Field` and the controls directly. A new feature goes into a component first, then gets its shorthand.
+- **An app extends it with a subclass,** which adds helpers for the app's own controls, and changes the control a helper renders through a class attribute, as `list_menu_class` does for Dropdown's menu.
+- **It follows the [Component lifecycle](#component-lifecycle)** and starts at alpha, with a `@status` tag like a component.
+
+### What stays composition
+
+No component wraps `form_with` or lays out a form: spacing and grids are Tailwind classes, and a submit button is a `Gustwave::Buttons::*` with `type: :submit`.
+
 ## Public API and stability
 
 For an extensible library, extension points are part of the contract:
 
 | Tier | Includes | A change to it |
 |---|---|---|
-| Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `trigger_options`; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
-| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` | Is breaking. Follows the component's status. |
+| Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `trigger_options`; the form builder's helper names and signatures; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
+| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` and the form builder's controls | Is breaking. Follows the component's status. |
 | Internal | Options marked `internal: true`; private helpers; the class strings themselves, which follow Flowbite | Isn't breaking. |
 
 ## Component lifecycle
@@ -249,3 +310,6 @@ Settled questions, so they aren't reopened without a new reason. A new decision 
 - **D6. Sub-component slots are reached through the parent slot's block.** A caller customizes a nested part, like a modal header's close button, in the block of the parent's slot setter, which receives the sub-component. ViewComponent already passes it, so parents don't forward their children's slots or options (no `close_button_options:` on `with_header`, no `with_header_close_button`), which would repeat each child's API on every parent. See [Slot or content block](#slot-or-content-block).
 - **D7. Visual slots have one shape.** `Visuals` provides `leading_visuals`, `trailing_visuals` and `visuals`, each a `renders_many_extensible` slot with every visual type, and components declare the ones they place. A component's own icon slot, or one that also accepts a component in place of an icon name, would give each component its own way to set a visual and its own subset of types. One shape keeps the setters the same everywhere and lets `extend_slot` add types to all of them. Slots narrow to one visual or fewer types only when a caller asks. `icon:` keywords stay as shorthand for `with_visual_icon`. See [Icons and other visuals](#icons-and-other-visuals).
 - **D8. Clipboard keeps an `icon` and a `copied_icon` slot.** Its button shows one icon in the default state and another once the text is copied, and Flowbite's script swaps the two. A single `visuals` slot would need a way to tag each visual with its state, which no other component needs. So each state gets its own `renders_one_extensible` slot that renders a `Gustwave::Icon`, with defaults for an icon-only button (`:clipboard`) and the copied state (`:check`). They become polymorphic, with the visual types of `Visuals`, once a caller needs more than an icon. A component with visuals per state follows this shape. See [Icons and other visuals](#icons-and-other-visuals).
+- **D9. Forms are controls, a field and Gustwave's own form builder.** Controls work without a builder, so previews, forms without a model and compositions can use them. `Form::Field` owns the wiring between a control and its label, helper text and errors, which is the part that's easy to get wrong. The builder gives a form Rails' short call sites without holding any markup. Three alternatives were ruled out. Components that only take a builder, as `Form::RichTextArea` did, can't render on their own and repeat `render …new(form, …)` on every line. A builder that holds the class strings has no options, slots, previews or `extend_*`. The `view_component-form` gem slices by Rails helper instead of by Flowbite pattern, constructs every component from a builder, has no field wrapper, and takes its components' parent class from one setting that belongs to the app, so they couldn't use Gustwave's DSL. It would also be a runtime dependency that caps Gustwave's ViewComponent version. See [Forms](#forms).
+- **D10. The form builder is opt-in per form.** A form uses it with `builder: Gustwave::FormBuilder`. Gustwave never sets `default_form_builder` or changes Rails' own builder, because that would restyle forms the app didn't write, like Devise's or another engine's, and would force an app to migrate every form at once. An app that wants it everywhere sets `default_form_builder` itself. See [Form builder](#form-builder).
+- **D11. Form components live in `Gustwave::Form`; the builder is `Gustwave::FormBuilder`.** Flowbite names its form pages generically: Select, Range, Toggle, Radio. The namespace says they're form controls and keeps them apart from unrelated top-level components. `Form::RichTextArea` already lives there. The builder sits at the top level, named as Rails names builders, since an app writes it on every form. See [Forms](#forms).
