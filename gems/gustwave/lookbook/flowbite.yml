@@ -1673,36 +1673,40 @@ pages:
   forms/input-field:
   - id: default-input-field-example
     title: Input fields
-    status: blocked
-    needs: form
+    status: partial
+    needs: checkbox
+    preview: gustwave/form/input/default
+    note: The terms checkbox is plain Tailwind until Gustwave has a checkbox.
   - id: input-field-sizes-example
     title: Input sizes
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/input/sizes
   - id: input-field-disabled-example
     title: Disabled state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/input/disabled
   - id: input-field-validation-example
     title: Validation
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/input/validation
   - id: input-field-group-example
     title: Input group
-    status: blocked
-    needs: form
+    status: partial
+    needs: input-group
+    preview: gustwave/form/input/group
+    note: The icon inside the input is covered. The attached addon, a text or icon beside the input, is not.
   - id: input-field-helper-example
     title: Helper text
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/input/helper_text
   - id: input-field-search-example
     title: Search input
     status: blocked
-    needs: form
+    needs: search-input
   - id: input-field-dropdown-example
     title: Dropdown input
     status: blocked
-    needs: form
+    needs: input-group
   forms/number-input:
   - id: default-number-input
     title: Default number input
