@@ -1,0 +1,81 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'type: (optional)'
+- 'size: (optional)'
+- 'validation: (optional)'
+- 'icon: (optional)'
+- "**options"
+options:
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - none
+  type:
+    default: text
+    values:
+    - text
+    - email
+    - password
+    - number
+    - url
+    - tel
+    - search
+    - date
+    - time
+    - datetime_local
+    - month
+    - week
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- icon_container
+- input
+- visual
+- wrapper
+slots:
+  leading_visuals:
+    many: true
+    types:
+    - icon
+    - image
+    - indicator
+    - renderable
+    - svg
+methods:
+- apply_slot_context
+- html_id
+- leading_visuals
+- leading_visuals?
+- with_leading_visual
+- with_leading_visual_content
+- with_leading_visual_icon
+- with_leading_visual_icon_content
+- with_leading_visual_image
+- with_leading_visual_image_content
+- with_leading_visual_indicator
+- with_leading_visual_indicator_content
+- with_leading_visual_renderable
+- with_leading_visual_renderable_content
+- with_leading_visual_svg
+- with_leading_visual_svg_content
+- with_leading_visuals
+class_methods:
+- renders_visuals
+- visual_icon_theme
+- visual_icon_theme=
+slot_builders:
+- build_slot_leading_visual_icon
+- build_slot_leading_visual_image
+- build_slot_leading_visual_indicator
+- build_slot_leading_visual_renderable
+- build_slot_leading_visual_svg

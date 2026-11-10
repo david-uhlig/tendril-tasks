@@ -144,7 +144,7 @@ A component takes `id:` for its own root and generates one with a component-spec
 
 ## Forms
 
-Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). *Planned:* only `Form::RichTextArea` exists so far. It predates this section and moves to its shape with an upgrade note.
+Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Field` and the builder follow it. *Planned:* the other controls. `Form::RichTextArea` predates this section and moves to its shape with an upgrade note.
 
 | Layer | Owns | Example |
 |---|---|---|
@@ -182,12 +182,12 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 
 `Form::Field` takes the same `attribute` and `form:` as a control and passes them on, so callers state them once.
 
-- **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `validation_message`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`.
+- **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `validation_message`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`. The other three take text or a block and build markup, not a component.
 - **`label:` and `helper_text:` are shorthand** for the slots of the same name, as `icon:` is for a visual. `label: false` renders no label.
 - **A bound field has defaults.** Without a `label`, it renders the text Rails' `label` helper finds: a translation, then the humanized attribute. Without a `validation_message`, it renders the attribute's error messages when there are any. A field without `form:` renders only what the caller sets.
 - **The field holds the validation state.** Flowbite colors the label and the message along with the control, so `Form::Field` takes `validation:` as well, and one `validation_message` slot shows a success or an error message. While a bound attribute has errors, the state is `:error`. A caller's own `validation:` wins.
-- **The field wires its control,** through `apply_slot_context`: the validation state, `aria-describedby` for the helper text and the validation message, and `aria-invalid` in the error state.
-- **IDs come from Rails' `field_id`,** e.g. `field_id(:title, :error)`, so the same attribute in two forms on a page doesn't collide. A field without `form:` generates them.
+- **The field wires its control,** through `apply_slot_context`: the validation state, and `aria-describedby` for the helper text and the validation message. A control sets `aria-invalid` itself in the error state.
+- **IDs come from Rails' `field_id`,** e.g. `field_id(:title, :validation_message)`, so the same attribute in two forms on a page doesn't collide. A field without `form:` generates them.
 
 ### Form builder
 
@@ -197,7 +197,7 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 - **Each helper renders a field with its control,** and also takes the control's options and the field's shorthand: `f.text_field :title, size: :lg, helper_text: "…"`.
 - **A control without a Rails helper gets one named after it:** `f.toggle :publish`.
 - **The builder holds no markup, classes or behavior.** Whatever it renders can be rendered with `Form::Field` and the controls directly. A new feature goes into a component first, then gets its shorthand.
-- **An app extends it with a subclass,** which adds helpers for the app's own controls, and changes the control a helper renders through a class attribute, as `list_menu_class` does for Dropdown's menu.
+- **An app extends it with a subclass,** which adds helpers for the app's own controls with `render_field`, and renders the app's own field class through `field_class`, as `list_menu_class` does for Dropdown's menu.
 - **It follows the [Component lifecycle](#component-lifecycle)** and starts at alpha, with a `@status` tag like a component.
 
 ### What stays composition
@@ -211,7 +211,7 @@ For an extensible library, extension points are part of the contract:
 | Tier | Includes | A change to it |
 |---|---|---|
 | Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `trigger_options`; the form builder's helper names and signatures; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
-| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` and the form builder's controls | Is breaking. Follows the component's status. |
+| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` and the form builder's `field_class`; the form builder's `render_field` | Is breaking. Follows the component's status. |
 | Internal | Options marked `internal: true`; private helpers; the class strings themselves, which follow Flowbite | Isn't breaking. |
 
 ## Component lifecycle

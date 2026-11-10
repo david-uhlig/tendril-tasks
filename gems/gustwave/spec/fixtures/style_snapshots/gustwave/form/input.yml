@@ -1,0 +1,180 @@
+---
+look size=:sm validation=:none:
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2 rounded-lg text-gray-900 text-xs w-full'
+look size=:sm validation=:success:
+- 'input type="text": bg-green-50 block border border-green-500 dark:bg-gray-700 dark:border-green-500
+  dark:placeholder-green-500 dark:text-green-400 focus:border-green-500 focus:ring-green-500
+  p-2 placeholder-green-700 rounded-lg text-green-900 text-xs w-full'
+look size=:sm validation=:error:
+- 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
+  dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
+  focus:ring-red-500 p-2 placeholder-red-700 rounded-lg text-red-900 text-xs w-full'
+look size=:md validation=:none:
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+look size=:md validation=:success:
+- 'input type="text": bg-green-50 block border border-green-500 dark:bg-gray-700 dark:border-green-500
+  dark:placeholder-green-500 dark:text-green-400 focus:border-green-500 focus:ring-green-500
+  p-2.5 placeholder-green-700 rounded-lg text-green-900 text-sm w-full'
+look size=:md validation=:error:
+- 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
+  dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
+  focus:ring-red-500 p-2.5 placeholder-red-700 rounded-lg text-red-900 text-sm w-full'
+look size=:lg validation=:none:
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-4 rounded-lg text-base text-gray-900
+  w-full'
+look size=:lg validation=:success:
+- 'input type="text": bg-green-50 block border border-green-500 dark:bg-gray-700 dark:border-green-500
+  dark:placeholder-green-500 dark:text-green-400 focus:border-green-500 focus:ring-green-500
+  p-4 placeholder-green-700 rounded-lg text-base text-green-900 w-full'
+look size=:lg validation=:error:
+- 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
+  dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
+  focus:ring-red-500 p-4 placeholder-red-700 rounded-lg text-base text-red-900 w-full'
+disabled validation=:none disabled=true:
+- 'input disabled="disabled" type="text": bg-gray-100 block border border-gray-300
+  cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-gray-400 focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full'
+disabled validation=:success disabled=true:
+- 'input disabled="disabled" type="text": bg-green-50 block border border-green-500
+  cursor-not-allowed dark:bg-gray-700 dark:border-green-500 dark:placeholder-green-500
+  dark:text-green-400 focus:border-green-500 focus:ring-green-500 p-2.5 placeholder-green-700
+  rounded-lg text-green-900 text-sm w-full'
+disabled validation=:error disabled=true:
+- 'input aria-invalid="true" disabled="disabled" type="text": bg-red-50 block border
+  border-red-500 cursor-not-allowed dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500
+  dark:text-red-500 focus:border-red-500 focus:ring-red-500 p-2.5 placeholder-red-700
+  rounded-lg text-red-900 text-sm w-full'
+icon size=:sm validation=:none:
+- 'div: relative'
+- 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+- path
+- path
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2 ps-10 rounded-lg text-gray-900 text-xs
+  w-full'
+icon size=:sm validation=:error:
+- 'div: relative'
+- 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+- path
+- path
+- 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
+  dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
+  focus:ring-red-500 p-2 placeholder-red-700 ps-10 rounded-lg text-red-900 text-xs
+  w-full'
+icon size=:md validation=:none:
+- 'div: relative'
+- 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+- path
+- path
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 ps-10 rounded-lg text-gray-900 text-sm
+  w-full'
+icon size=:md validation=:error:
+- 'div: relative'
+- 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+- path
+- path
+- 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
+  dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
+  focus:ring-red-500 p-2.5 placeholder-red-700 ps-10 rounded-lg text-red-900 text-sm
+  w-full'
+icon size=:lg validation=:none:
+- 'div: relative'
+- 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+- path
+- path
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-4 ps-10 rounded-lg text-base text-gray-900
+  w-full'
+icon size=:lg validation=:error:
+- 'div: relative'
+- 'div: absolute flex inset-y-0 items-center pointer-events-none ps-3.5 start-0'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": dark:text-gray-400 h-4 text-gray-500 w-4'
+- path
+- path
+- 'input aria-invalid="true" type="text": bg-red-50 block border border-red-500 dark:bg-gray-700
+  dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
+  focus:ring-red-500 p-4 placeholder-red-700 ps-10 rounded-lg text-base text-red-900
+  w-full'
+type type=:text:
+- 'input type="text": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:email:
+- 'input type="email": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:password:
+- 'input type="password": bg-gray-50 block border border-gray-300 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400
+  dark:text-white focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900
+  text-sm w-full'
+type type=:number:
+- 'input type="number": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:url:
+- 'input type="url": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:tel:
+- 'input type="tel": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:search:
+- 'input type="search": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:date:
+- 'input type="date": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:time:
+- 'input type="time": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:datetime_local:
+- 'input type="datetime-local": bg-gray-50 block border border-gray-300 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400
+  dark:text-white focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900
+  text-sm w-full'
+type type=:month:
+- 'input type="month": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+type type=:week:
+- 'input type="week": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
