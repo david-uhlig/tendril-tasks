@@ -18,6 +18,7 @@ The short version:
 - `Gustwave::Visuals` for visuals: `leading_visuals` and `trailing_visuals` inline with text, `visuals` for visuals the component places. All three are many, with every type. A slot named after its role only for a visual that carries meaning or isn't an icon, image or SVG, like Alert's `icon` or Timeline's `marker`, and a slot per state for a visual per state, like Clipboard's `icon` and `copied_icon`. `icon:` keywords are shorthand for a slot, never the only way.
 - Flowbite's hover or click trigger setting is `trigger_event:`. Triggers rendered elsewhere use `trigger_options(...)`.
 - A standalone sub-component requires its parent's ID as `<parent>_id:`.
+- Form components live in `Gustwave::Form`. A control takes its attribute and `form:`, and its `options` go to the form element. Label, helper text and validation messages belong to `Form::Field`. `Gustwave::FormBuilder` holds no markup.
 - Follow the constructor convention in `app/components/gustwave/component.rb`.
 - A breaking change to a beta or stable component needs a deprecation one minor release before the removal.
 
