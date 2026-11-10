@@ -1,0 +1,2379 @@
+---
+look validation=:none:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 group
+  rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+look validation=:success:
+- 'div: bg-gray-50 border border-green-500 dark:bg-gray-700 dark:border-green-500
+  group rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+look validation=:error:
+- 'div: bg-gray-50 border border-red-500 dark:bg-gray-700 dark:border-red-500 group
+  rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor aria-invalid="true" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+editor editor=:lexxy:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 group
+  rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+editor editor=:trix:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 group
+  rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'trix-toolbar id="toolbar-r0000001": flex flex-wrap items-center rtl:space-x-reverse
+  space-x-1'
+- 'button data-trix-attribute="bold" data-trix-key="b" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-attribute="italic" data-trix-key="i" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-attribute="strike" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button aria-controls="popover-r0000002" data-popover-placement="top-end" data-popover-target="popover-r0000002"
+  data-popover-trigger="click" data-trix-attribute="href" data-trix-key="k" tabindex="-1"
+  type="button": cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400
+  font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500
+  text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div data-popover="true" data-trix-dialog="href" data-trix-dialog-attribute="href"
+  id="popover-r0000002" role="tooltip": absolute bg-white border border-gray-200 dark:bg-gray-800
+  dark:border-gray-600 dark:text-gray-400 duration-300 inline-block invisible mx-8
+  opacity-0 rounded-lg shadow-xs text-gray-500 text-sm transition-opacity z-10'
+- 'div: flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" data-trix-input="" name="href" placeholder="Enter
+  a URL…" type="url": bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-64'
+- 'button data-trix-method="setAttribute" type="button": align-bottom bg-blue-700
+  dark:bg-blue-600 dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
+  dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
+  focus:outline-hidden focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800
+  overflow-hidden px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- div data-popper-arrow="true"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-trix-attribute="heading1" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'button data-trix-attribute="heading2" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'button data-trix-attribute="heading3" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'button data-trix-attribute="heading4" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'button data-trix-attribute="heading5" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'button data-trix-attribute="heading6" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-trix-attribute="quote" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-attribute="code" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-attribute="bullet" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-trix-attribute="number" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-action="decreaseNestingLevel" data-trix-attribute="decrease_nesting"
+  tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400
+  font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500
+  text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-action="increaseNestingLevel" data-trix-attribute="increase_nesting"
+  tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400
+  font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500
+  text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-trix-action="attachFiles" data-trix-attribute="attach_files" tabindex="-1"
+  type="button": cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400
+  font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500
+  text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-trix-action="undo" data-trix-attribute="undo" data-trix-key="z" tabindex="-1"
+  type="button": cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400
+  font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500
+  text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-trix-action="redo" data-trix-attribute="redo" data-trix-key="shift+z"
+  tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400
+  font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500
+  text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden min-h-80 px-0 text-gray-800 text-sm trix-content
+  w-full'
+sticky validation=:none sticky_toolbar=true:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 group
+  rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+sticky validation=:none sticky_toolbar=false:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 rounded-lg
+  w-full'
+- 'div: border-b border-gray-200 dark:border-gray-600 flex items-center justify-between
+  px-3 py-2'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+sticky validation=:error sticky_toolbar=true:
+- 'div: bg-gray-50 border border-red-500 dark:bg-gray-700 dark:border-red-500 group
+  rounded-lg w-full'
+- 'div: bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-t-lg top-0 z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor aria-invalid="true" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+sticky validation=:error sticky_toolbar=false:
+- 'div: bg-gray-50 border border-red-500 dark:bg-gray-700 dark:border-red-500 rounded-lg
+  w-full'
+- 'div: border-b border-gray-200 dark:border-gray-600 flex items-center justify-between
+  px-3 py-2'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-b-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor aria-invalid="true" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+footer validation=:none sticky_toolbar=true:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 group
+  rounded-lg w-full'
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-t-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+- 'div: bg-gray-50 border-gray-200 border-t bottom-0 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-b-lg z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+footer validation=:none sticky_toolbar=false:
+- 'div: bg-gray-50 border border-gray-200 dark:bg-gray-700 dark:border-gray-600 rounded-lg
+  w-full'
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-t-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+- 'div: border-gray-200 border-t dark:border-gray-600 flex items-center justify-between
+  px-3 py-2'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+footer validation=:error sticky_toolbar=true:
+- 'div: bg-gray-50 border border-red-500 dark:bg-gray-700 dark:border-red-500 group
+  rounded-lg w-full'
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-t-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor aria-invalid="true" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+- 'div: bg-gray-50 border-gray-200 border-t bottom-0 dark:bg-gray-700 dark:border-gray-600
+  flex group-focus-within:sticky group-hover:sticky items-center justify-between px-3
+  py-2 rounded-b-lg z-10'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"
+footer validation=:error sticky_toolbar=false:
+- 'div: bg-gray-50 border border-red-500 dark:bg-gray-700 dark:border-red-500 rounded-lg
+  w-full'
+- 'div: bg-white dark:bg-gray-800 px-4 py-2 rounded-t-lg'
+- input id="trix_input_1" type="hidden"
+- 'trix-editor aria-invalid="true" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" input="trix_input_1"
+  toolbar="toolbar-r0000001": block border-0 dark:bg-gray-800 dark:placeholder-gray-400
+  dark:text-white focus:outline-hidden lexxy-content min-h-80 px-0 text-gray-800 text-sm
+  w-full'
+- 'div: border-gray-200 border-t dark:border-gray-600 flex items-center justify-between
+  px-3 py-2'
+- div
+- 'lexxy-toolbar data-controller="gustwave--lexxy-heading" id="toolbar-r0000001":
+  border-0 flex flex-wrap gap-0 items-center p-0 rtl:space-x-reverse space-x-1'
+- 'button data-command="bold" name="bold" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="italic" name="italic" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="strikethrough" name="strikethrough" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="underline" name="underline" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'lexxy-highlight-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--highlight'
+- 'button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="true"
+  name="highlight" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- div aria-label="Color highlight" data-dropdown-panel="true" hidden="hidden" role="menu"
+- 'div: lexxy-highlight-colors'
+- 'button data-command="removeHighlight" role="menuitem" type="button": align-bottom
+  bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700
+  dark:hover:bg-gray-700 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  focus:outline-hidden focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2
+  hover:bg-gray-100 hover:text-blue-700 overflow-hidden px-3 py-2 rounded-lg text-center
+  text-gray-900 text-xs whitespace-nowrap'
+- 'lexxy-link-dropdown: lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-dropdown--link'
+- 'button aria-expanded="false" aria-haspopup="dialog" data-dropdown-trigger="true"
+  data-hotkey="cmd+k ctrl+k" name="link" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-label="Link" data-dropdown-panel="true" hidden="hidden" role="dialog":
+  flex flex-nowrap gap-2 p-3'
+- 'input aria-label="URL" autocomplete="url" placeholder="Enter a URL…" type="url":
+  bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+  dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500
+  focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-64'
+- 'div: lexxy-editor__toolbar-dropdown-actions'
+- 'button type="button" value="link": align-bottom bg-blue-700 dark:bg-blue-600 dark:disabled:bg-blue-500
+  dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800 dark:hover:bg-blue-700
+  disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400 focus:outline-hidden
+  focus:ring-4 focus:ring-blue-300 font-medium gap-2 hover:bg-blue-800 overflow-hidden
+  px-5 py-2.5 rounded-lg text-center text-sm text-white whitespace-nowrap'
+- 'button type="button" value="unlink": align-bottom bg-white border border-gray-200
+  dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-700
+  dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed focus:outline-hidden
+  focus:ring-4 focus:ring-gray-100 focus:z-10 font-medium gap-2 hover:bg-gray-100
+  hover:text-blue-700 overflow-hidden px-5 py-2.5 rounded-lg text-center text-gray-900
+  text-sm whitespace-nowrap'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h1" name="heading1" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h2" name="heading2" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h3" name="heading3" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'button data-command="applyHeadingFormat" data-gustwave--lexxy-heading-target="button"
+  data-payload="h4" name="heading4" tabindex="-1" type="button": cursor-pointer dark:disabled:text-gray-500
+  dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400 disabled:cursor-not-allowed
+  disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5
+  rounded-sm text-gray-500 text-sm'
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertQuoteBlock" name="quote" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertCodeBlock" name="code" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="insertUnorderedList" name="unordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+- 'button data-command="insertOrderedList" name="ordered-list" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="insertTable" name="table" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-width="2"
+- 'button data-command="insertHorizontalDivider" name="divider" tabindex="-1" type="button":
+  cursor-pointer dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white
+  dark:text-gray-400 disabled:cursor-not-allowed disabled:text-gray-400 font-medium
+  gap-2 hover:bg-gray-100 hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="uploadFile" name="file" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'div aria-orientation="vertical" role="separator": px-1'
+- 'span: bg-gray-300 block dark:bg-gray-600 h-4 w-px'
+- 'button data-command="undo" name="undo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'button data-command="redo" name="redo" tabindex="-1" type="button": cursor-pointer
+  dark:disabled:text-gray-500 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400
+  disabled:cursor-not-allowed disabled:text-gray-400 font-medium gap-2 hover:bg-gray-100
+  hover:text-gray-900 p-1.5 rounded-sm text-gray-500 text-sm'
+- 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
+  h-5 w-5'
+- path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+- 'lexxy-toolbar-dropdown hidden="": lexxy-editor__toolbar-dropdown lexxy-editor__toolbar-overflow'
+- button aria-expanded="false" aria-haspopup="menu" data-dropdown-trigger="" hidden=""
+  type="button"
+- div data-dropdown-panel="" hidden="" role="menu"

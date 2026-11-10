@@ -369,6 +369,46 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "a rich textarea control" do
+    # The editor element, the one with a +toolbar+ attribute, and the frame
+    # around it
+    def editor
+      page.find("[toolbar]")
+    end
+
+    def frame
+      page.find("div.border.rounded-lg")
+    end
+
+    it "wires a bound rich textarea: label for, aria-describedby and the editor's ID" do
+      render_field(:body, form: form_builder(task(body: "Hi")), helper_text: "Help") do |field|
+        field.with_control_rich_textarea(editor: :trix)
+      end
+
+      expect(label[:for]).to eq("task_body")
+      expect(editor[:id]).to eq("task_body")
+      expect(page).to have_css("input[type='hidden'][name='task[body]']", visible: :all)
+      expect(editor["aria-describedby"]).to eq("task_body_helper_text")
+      expect(page).to have_css("trix-toolbar")
+    end
+
+    it "passes the error state on to the editor and colors the frame" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_rich_textarea }
+
+      expect(editor["aria-invalid"]).to eq("true")
+      expect(editor["aria-describedby"]).to eq("task_title_validation_message")
+      expect(class_set(frame[:class])).to include("border-red-500")
+    end
+
+    it "wires an unbound rich textarea with a generated ID" do
+      render_field(label: "Message", helper_text: "Help") { |field| field.with_control(:rich_textarea) }
+
+      expect(editor[:id]).to start_with("field-")
+      expect(label[:for]).to eq(editor[:id])
+      expect(editor["aria-describedby"]).to eq("#{editor[:id]}-helper-text")
+    end
+  end
+
   describe "ids" do
     it "differ between forms with another namespace or object name" do
       render_inline(described_class.new(:title, form: form_builder(namespace: "a"), helper_text: "Help")) { |f| f.with_control_input }

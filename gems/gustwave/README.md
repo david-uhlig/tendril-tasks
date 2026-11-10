@@ -127,6 +127,7 @@ A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The b
   <%= f.text_field :title, helper_text: "Shown in the task list." %>
   <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
   <%= f.text_area :notes, rows: 4 %>
+  <%= f.rich_textarea :description %>
   <%= f.select :country, @countries, prompt: "Choose a country", size: :lg %>
   <%= f.hidden_field :project_id %>
 <% end %>
@@ -148,7 +149,7 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 <%= render Gustwave::Form::Select.new(name: "country", choices: @countries, prompt: "Choose a country") %>
 ```
 
-A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`.
+A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`. The rich textarea renders Lexxy or Trix in Flowbite's frame. Its toolbar goes to the header by default, or to the footer with `with_footer_toolbar`.
 
 To extend the builder, subclass it. `field_class` names the field class its helpers render, and `render_field(attribute, control, options)` is what each helper calls, for helpers of your own:
 

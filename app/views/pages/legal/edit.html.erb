@@ -23,9 +23,10 @@
 
   <%= form_with model: @page, url: legal_path(@page.slug) , method: :patch, class: "space-y-4" do |form| %>
     <%= render Form::BaseFieldComponent.new(form, :content, false) do %>
-      <%= render Gustwave::Form::RichTextarea.new(form,
-                                                  :content,
-                                                  toolbar_id: "legal-page-toolbar") %>
+      <%= render Gustwave::Form::RichTextarea.new(:content,
+                                                  form: form,
+                                                  toolbar_id: "legal-page-toolbar",
+                                                  spellcheck: false) %>
     <% end %>
 
     <%= render Form::SubmitButtonGroupComponent.new(form) do |button_group| %>

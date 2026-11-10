@@ -343,8 +343,39 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
-  it "leaves rich_textarea to Rails" do
-    expect(described_class.instance_method(:rich_textarea).owner).to eq(ActionView::Helpers::FormBuilder)
+  %i[rich_textarea rich_text_area].each do |helper|
+    describe "##{helper}" do
+      it "renders a field with a framed rich textarea" do
+        html = parse(gustwave_form(task(body: "Hi")).public_send(helper, :body))
+
+        expect(html).to have_css("div > label[for='task_body'] + div.rounded-lg")
+        expect(html).to have_css("[toolbar][id='task_body']", visible: :all)
+        expect(html).to have_css("lexxy-toolbar")
+        expect(html).to have_css("input[type='hidden'][name='task[body]']", visible: :all)
+      end
+
+      it "sends helper_text to the field and aria-describedby to the editor" do
+        html = parse(gustwave_form.public_send(helper, :body, helper_text: "Help"))
+
+        expect(html).to have_css("p#task_body_helper_text", text: "Help")
+        expect(html.find("[toolbar]")["aria-describedby"]).to eq("task_body_helper_text")
+      end
+
+      it "sends editor and placeholder to the rich textarea and the editor element" do
+        html = parse(gustwave_form.public_send(helper, :body, editor: :trix, placeholder: "Write"))
+        editor = html.find("[toolbar]", visible: :all)
+
+        expect(html).to have_css("trix-toolbar")
+        expect(editor[:class].split).to include("trix-content")
+        expect(editor[:placeholder]).to eq("Write")
+      end
+
+      it "passes the field to a block" do
+        html = parse(gustwave_form.public_send(helper, :body) { |field| field.with_helper_text("From the block") })
+
+        expect(html).to have_css("p#task_body_helper_text", text: "From the block")
+      end
+    end
   end
 
   it "leaves other helpers to Rails" do
@@ -420,6 +451,18 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(html).to have_css("textarea#task_title[name='task[title]'][rows='4'][aria-invalid='true']")
       expect(html).to have_css("textarea[aria-describedby='task_title_helper_text task_title_validation_message']")
       expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "renders a field with a rich textarea" do
+      html = render_erb(<<~ERB, record: task(body: "Hi"))
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.rich_text_area :body, label: "Body", helper_text: "Shown on the page." %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("label[for='task_body']", text: "Body")
+      expect(html).to have_css("p#task_body_helper_text", text: "Shown on the page.")
+      expect(html).to have_css("[toolbar][id='task_body'][aria-describedby='task_body_helper_text']", visible: :all)
     end
 
     it "renders a link in the helper text of an ERB block" do

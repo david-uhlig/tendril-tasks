@@ -32,14 +32,13 @@ module Form
 
     def call
       render BaseFieldComponent.new(@form, @attribute, @label) do
-        render Gustwave::Form::RichTextarea.new(@form,
-                                                @attribute,
+        render Gustwave::Form::RichTextarea.new(@attribute,
+                                                form: @form,
                                                 toolbar_id: @toolbar[:id],
                                                 sticky_toolbar: true,
-                                                **@options) do |rich_text|
-          rich_text.with_toolbar do
-            render Gustwave::Form::RichText::Lexxy::Toolbar.new(@form, **@toolbar)
-          end
+                                                spellcheck: false,
+                                                **@options) do |editor|
+          editor.with_header_toolbar(**@toolbar.except(:id))
         end
       end
     end

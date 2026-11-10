@@ -10,6 +10,7 @@ class FormSpecTask
   attribute :project_id, :integer
   attribute :password, :string
   attribute :country, :string
+  attribute :body, :string
   attribute :tags, default: -> { [] }
 
   validates :title, presence: true

@@ -25,6 +25,7 @@ slots:
     types:
     - input
     - renderable
+    - rich_textarea
     - select
     - textarea
   helper_text:
@@ -47,6 +48,8 @@ methods:
 - with_control_input_content
 - with_control_renderable
 - with_control_renderable_content
+- with_control_rich_textarea
+- with_control_rich_textarea_content
 - with_control_select
 - with_control_select_content
 - with_control_textarea
@@ -60,6 +63,7 @@ methods:
 slot_builders:
 - build_slot_control_input
 - build_slot_control_renderable
+- build_slot_control_rich_textarea
 - build_slot_control_select
 - build_slot_control_textarea
 - build_slot_helper_text

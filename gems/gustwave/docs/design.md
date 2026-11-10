@@ -160,7 +160,7 @@ A component takes `id:` for its own root and generates one with a component-spec
 
 ## Forms
 
-Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::Select`, `Form::Field` and the builder follow it. *Planned:* the other controls. `Form::RichTextarea` predates this section and moves to its shape with an upgrade note.
+Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::RichTextarea`, `Form::Select`, `Form::Field` and the builder follow it. *Planned:* the other controls.
 
 | Layer | Owns | Example |
 |---|---|---|
@@ -193,7 +193,7 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 - **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
 - **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes. `size`, `style` and `type` are HTML attributes too, but the keyword is always the option: `size: :lg` is the large input, and `html: { size: 20 }` renders `size="20"`. See [HTML attributes](#html-attributes).
 - **Label, helper text and validation messages belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
-- **A control may render in a frame.** With a `header` or `footer` slot, `Form::Textarea` renders in Flowbite's frame. The frame's parts take `<part>_options:`; `options` still go to the `<textarea>`. The frame is shared by the controls that have one, in the `Framed` concern.
+- **A control may render in a frame.** With a `header` or `footer` slot, `Form::Textarea` renders in Flowbite's frame. The frame's parts take `<part>_options:`; `options` still go to the `<textarea>`. The frame is shared by the controls that have one, in the `Framed` concern. `Form::RichTextarea` always renders in it; its `header` and `footer` are polymorphic, so the toolbar can sit in either.
 
 ### Field
 

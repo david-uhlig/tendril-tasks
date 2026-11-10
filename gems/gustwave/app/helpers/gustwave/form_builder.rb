@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A form builder that renders Rails' input, text area and select helpers as
-  # Gustwave::Form::Field with a Gustwave::Form::Input,
-  # Gustwave::Form::Textarea or Gustwave::Form::Select. A form opts in with
+  # A form builder that renders Rails' input, text area, rich text area and
+  # select helpers as Gustwave::Form::Field with a Gustwave::Form::Input,
+  # Gustwave::Form::Textarea, Gustwave::Form::RichTextarea or
+  # Gustwave::Form::Select. A form opts in with
   # +builder:+. Gustwave never sets +default_form_builder+ (D10 in
   # docs/design.md).
   #
@@ -45,11 +46,14 @@ module Gustwave
   # Overridden: +text_field+, +email_field+, +password_field+, +number_field+,
   # +url_field+, +telephone_field+ (+phone_field+), +search_field+,
   # +date_field+, +time_field+, +datetime_field+, +datetime_local_field+,
-  # +month_field+ and +week_field+, which render an input, and +textarea+
-  # (+text_area+), and +select+ and +collection_select+, which render a
-  # select. Every other helper stays Rails', including +rich_textarea+ and the
-  # other select helpers such as +grouped_collection_select+ and
-  # +time_zone_select+.
+  # +month_field+ and +week_field+, which render an input, +textarea+
+  # (+text_area+) and +rich_textarea+ (+rich_text_area+), which render a
+  # textarea and a rich textarea, and +select+ and +collection_select+, which
+  # render a select. Every other helper stays Rails', including the other
+  # select helpers such as +grouped_collection_select+ and +time_zone_select+.
+  #
+  # The rich textarea's +editor+, +sticky_toolbar+ and +toolbar_id+ are its
+  # options, and the rest of the options are the editor element's attributes.
   #
   # The builder holds no markup or classes. Whatever it renders can be
   # rendered with Gustwave::Form::Field and its control directly.
@@ -113,6 +117,13 @@ module Gustwave
       render_field(attribute, :textarea, options, &block)
     end
     alias_method :text_area, :textarea
+
+    # Renders a field with a Gustwave::Form::RichTextarea. The block receives
+    # the field, as for the input helpers.
+    def rich_textarea(attribute, options = {}, &block)
+      render_field(attribute, :rich_textarea, options, &block)
+    end
+    alias_method :rich_text_area, :rich_textarea
 
     # The options of a select helper that go to the control as they are.
     # +disabled+ goes as +disabled_choices+.
