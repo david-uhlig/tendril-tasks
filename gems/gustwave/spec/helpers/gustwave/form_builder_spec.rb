@@ -143,6 +143,62 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "#file_field" do
+    it "renders a field with a file input" do
+      html = parse(gustwave_form.file_field(:title))
+
+      expect(html).to have_css("div > label[for='task_title'] + input#task_title[name='task[title]'][type='file']")
+    end
+
+    it "sends size to the input and the rest to the field and the HTML attributes" do
+      html = parse(gustwave_form.file_field(:title, size: :lg, label: "Upload", helper_text: "Help", validation: :success,
+                                                    accept: "image/*", class: "shadow-xs"))
+      input = html.find("input")
+
+      expect(html.find("label").text).to eq("Upload")
+      expect(html).to have_css("p#task_title_helper_text", text: "Help")
+      expect(input[:class].split).to include("text-lg", "shadow-xs", "bg-green-50")
+      expect(input[:size]).to be_nil
+      expect(input[:accept]).to eq("image/*")
+      expect(input["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "names a multiple file field as a list" do
+      html = parse(gustwave_form.file_field(:title, multiple: true))
+
+      expect(html).to have_css("input[type='file'][multiple][name='task[title][]']")
+    end
+
+    it "marks the form as multipart" do
+      form = gustwave_form
+      expect(form.multipart?).to be_falsey
+
+      form.file_field(:title)
+
+      expect(form.multipart?).to be(true)
+    end
+
+    it "marks the input as invalid for a record with errors" do
+      html = parse(gustwave_form(invalid_task).file_field(:title))
+
+      expect(html).to have_css("input[type='file'][aria-invalid='true']")
+      expect(html).to have_css("p", text: "Can't be blank")
+      expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "passes the field to a block" do
+      yielded = nil
+      html = parse(gustwave_form.file_field(:title) do |field|
+        yielded = field
+        field.with_helper_text("From the block")
+      end)
+
+      expect(yielded).to be_a(Gustwave::Form::Field)
+      expect(html).to have_css("p#task_title_helper_text", text: "From the block")
+      expect(html).to have_css("input[type='file'][aria-describedby='task_title_helper_text']")
+    end
+  end
+
   describe "#select" do
     let(:countries) { [ %w[Canada CA], %w[France FR], %w[Germany DE] ] }
 
@@ -463,6 +519,17 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(html).to have_css("label[for='task_body']", text: "Body")
       expect(html).to have_css("p#task_body_helper_text", text: "Shown on the page.")
       expect(html).to have_css("[toolbar][id='task_body'][aria-describedby='task_body_helper_text']", visible: :all)
+    end
+
+    it "renders a file field in a form without multipart: true" do
+      html = render_erb(<<~ERB, record: task)
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.file_field :title, accept: "image/*" %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("form[enctype='multipart/form-data']")
+      expect(html).to have_css("input[type='file'][name='task[title]'][accept='image/*']")
     end
 
     it "renders a link in the helper text of an ERB block" do
