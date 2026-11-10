@@ -1916,14 +1916,14 @@ pages:
     preview: gustwave/form/textarea/default
   - id: textarea-wysiwyg-example
     title: WYSIWYG Editor
-    status: feature_gap
-    needs: textarea-frame
-    note: Needs a borderless textarea inside a frame with a toolbar, which Form::Textarea doesn't have yet.
+    status: previewed
+    preview: gustwave/form/textarea/wysiwyg
+    note: Form::Field renders the label before the frame, where Flowbite has it inside the body. It is sr-only, so nothing shows.
   - id: textarea-comment-example
     title: Comment box
-    status: feature_gap
-    needs: textarea-frame
-    note: Needs a borderless textarea inside a frame with a toolbar, which Form::Textarea doesn't have yet.
+    status: previewed
+    preview: gustwave/form/textarea/comment_box
+    note: Flowbite's textarea is inline here, so its body is 7px taller. Gustwave's framed textarea is a block, as in the WYSIWYG example.
   - id: textarea-chatroom-example
     title: Chatroom input
     status: previewed

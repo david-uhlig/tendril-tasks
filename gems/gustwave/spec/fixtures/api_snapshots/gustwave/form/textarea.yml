@@ -4,6 +4,10 @@ constructor:
 - attribute (optional)
 - 'form: (optional)'
 - 'validation: (optional)'
+- 'frame_options: (optional)'
+- 'header_options: (optional)'
+- 'body_options: (optional)'
+- 'footer_options: (optional)'
 - "**options"
 options:
   validation:
@@ -13,7 +17,27 @@ options:
     - success
     - error
 parts:
+- body
+- footer
+- frame
+- header
 - textarea
+slots:
+  footer:
+    many: false
+  header:
+    many: false
 methods:
 - apply_slot_context
+- footer
+- footer?
+- header
+- header?
 - html_id
+- with_footer
+- with_footer_content
+- with_header
+- with_header_content
+slot_builders:
+- build_slot_footer
+- build_slot_header

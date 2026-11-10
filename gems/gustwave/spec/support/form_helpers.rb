@@ -58,6 +58,17 @@ module FormSpecHelpers
                       "focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 " \
                       "dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
+  # Flowbite's "WYSIWYG Editor" and "Comment box" textarea examples: the frame
+  # without its margin, the bars, the body next to each bar, and the textarea
+  # in the frame
+  FLOWBITE_TEXTAREA_FRAME = "w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+  FLOWBITE_TEXTAREA_HEADER = "flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-600"
+  FLOWBITE_TEXTAREA_BODY_UNDER_HEADER = "px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800"
+  FLOWBITE_TEXTAREA_BODY_ABOVE_FOOTER = "px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800"
+  FLOWBITE_TEXTAREA_FOOTER = "flex items-center justify-between px-3 py-2 border-t dark:border-gray-600 border-gray-200"
+  FLOWBITE_TEXTAREA_FRAMED = "block w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0 dark:bg-gray-800 " \
+                             "dark:text-white dark:placeholder-gray-400"
+
   # Flowbite's "Select input example" is the default select, with the classes
   # of the default input. Its "Sizes" example has the small and the large one,
   # without the example's +mb-6+.

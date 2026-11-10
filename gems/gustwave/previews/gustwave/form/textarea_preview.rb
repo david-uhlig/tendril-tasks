@@ -13,6 +13,20 @@ module Gustwave
         render_with_template
       end
 
+      # Flowbite's "WYSIWYG Editor": a textarea in a frame with a header of toolbar buttons, and a publish button below.
+      # The buttons are plain Tailwind and do nothing: Gustwave doesn't have a toolbar. For a real editor, use
+      # Gustwave::Form::RichTextArea.
+      def wysiwyg
+        render_with_template
+      end
+
+      # Flowbite's "Comment box": a textarea in a frame with a footer of a submit button and icon buttons, and a
+      # guidelines paragraph below. The buttons are plain Tailwind and do nothing. For a real editor, use
+      # Gustwave::Form::RichTextArea.
+      def comment_box
+        render_with_template
+      end
+
       # Not a Flowbite example. The success and error look of the textarea, each with a validation message. The looks
       # follow the input field's.
       def validation
@@ -29,12 +43,14 @@ module Gustwave
       # @param disabled toggle
       # @param rows number
       # @param placeholder text
-      def playground(validation: :none, disabled: false, rows: 4, placeholder: "Write your thoughts here...")
+      # @param frame select { choices: [none, header, footer, both] }
+      def playground(validation: :none, disabled: false, rows: 4, placeholder: "Write your thoughts here...", frame: :none)
         render_with_template(locals: {
           validation: validation.to_sym,
           disabled: ActiveModel::Type::Boolean.new.cast(disabled),
           rows: rows.to_i,
-          placeholder: placeholder
+          placeholder: placeholder,
+          frame: frame.to_sym
         })
       end
     end

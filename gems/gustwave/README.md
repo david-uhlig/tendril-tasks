@@ -146,6 +146,8 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 <%= render Gustwave::Form::Select.new(name: "country", choices: @countries, prompt: "Choose a country") %>
 ```
 
+A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextArea`.
+
 To extend the builder, subclass it. `field_class` names the field class its helpers render, and `render_field(attribute, control, options)` is what each helper calls, for helpers of your own:
 
 ```ruby

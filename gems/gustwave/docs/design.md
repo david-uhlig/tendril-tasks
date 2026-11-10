@@ -177,6 +177,7 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 - **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
 - **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes. `size` and `style` are HTML attributes too, so a Symbol picks the choice and any other value is the attribute of that name: `size: :lg` is the large select, `size: 5` renders `size="5"`.
 - **Label, helper text and validation messages belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
+- **A control may render in a frame.** With a `header` or `footer` slot, `Form::Textarea` renders in Flowbite's frame. The frame's parts take `<part>_options:`; `options` still go to the `<textarea>`. The frame is shared by the controls that have one, in the `Framed` concern.
 
 ### Field
 
