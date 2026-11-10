@@ -32,7 +32,7 @@ module Form
 
     def call
       render BaseFieldComponent.new(@form, @attribute, @label) do
-        render Gustwave::Form::RichTextArea.new(@form,
+        render Gustwave::Form::RichTextarea.new(@form,
                                                 @attribute,
                                                 toolbar_id: @toolbar[:id],
                                                 sticky_toolbar: true,

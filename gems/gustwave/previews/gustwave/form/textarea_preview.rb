@@ -15,14 +15,14 @@ module Gustwave
 
       # Flowbite's "WYSIWYG Editor": a textarea in a frame with a header of toolbar buttons, and a publish button below.
       # The buttons are plain Tailwind and do nothing: Gustwave doesn't have a toolbar. For a real editor, use
-      # Gustwave::Form::RichTextArea.
+      # Gustwave::Form::RichTextarea.
       def wysiwyg
         render_with_template
       end
 
       # Flowbite's "Comment box": a textarea in a frame with a footer of a submit button and icon buttons, and a
       # guidelines paragraph below. The buttons are plain Tailwind and do nothing. For a real editor, use
-      # Gustwave::Form::RichTextArea.
+      # Gustwave::Form::RichTextarea.
       def comment_box
         render_with_template
       end

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Gustwave::Form::RichTextArea, type: :component do
+RSpec.describe Gustwave::Form::RichTextarea, type: :component do
   def render_with_editor(component = described_class.new(toolbar_id: "my-toolbar"), &block)
     render_inline(component) do |rich_text|
       rich_text.with_editor { "<textarea id='editor'></textarea>".html_safe }
@@ -32,7 +32,7 @@ RSpec.describe Gustwave::Form::RichTextArea, type: :component do
   end
 
   it "replaces the toolbar builder in a subclass with extend_slot" do
-    subclass = stub_const("RichTextAreaWithBoxedToolbar", Class.new(described_class) {
+    subclass = stub_const("RichTextareaWithBoxedToolbar", Class.new(described_class) {
       extend_slot :toolbar, ->(&block) { tag.div(block.call, id: "boxed") }
     })
 
