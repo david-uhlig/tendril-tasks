@@ -149,7 +149,7 @@ Flowbite's form patterns come in three layers, so a form reads like a Rails form
 | Layer | Owns | Example |
 |---|---|---|
 | A control | One form element: its classes, sizes, validation look and the visuals inside it | `Form::Input`, `Form::Select`, `Form::Toggle` |
-| `Form::Field` | What surrounds a control: label, helper text and error message, and the IDs and ARIA attributes that tie them to it | |
+| `Form::Field` | What surrounds a control: label, helper text and validation message, and the IDs and ARIA attributes that tie them to it | |
 | `Gustwave::FormBuilder` | No markup. It turns Rails' form helpers into fields | `f.text_field :title` |
 
 ```erb
@@ -171,21 +171,22 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 
 ### Controls
 
-- **One control per Flowbite pattern, not per Rails helper.** `text_field`, `email_field` and `password_field` all render `Form::Input`; the type is an HTML attribute. A Flowbite example that only arranges a control with buttons, dropdowns or visuals is `composable`, not a new control.
+- **One control per Flowbite pattern, not per Rails helper.** `text_field`, `email_field` and `password_field` all render `Form::Input`, which takes the `type` as an option, because Rails treats the value differently per type. A Flowbite example that only arranges a control with buttons, dropdowns or visuals is `composable`, not a new control.
 - **The attribute is the positional subject, `form:` is the wiring.** `Form::Input.new(:title, form: f)` binds the control to a form builder, Rails' own or any subclass. An attribute without `form:` raises, as a sub-component without its parent's ID does.
 - **Rails renders a bound element.** The control hands its attributes to Rails' helper for that element, so the name, ID, value, type casting, nested attributes and `index` behave as in any Rails form. A control never works them out itself. Without `form:` it renders a plain element, and `name:`, `id:` and `value:` are ordinary HTML attributes.
 - **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
 - **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes.
-- **Label, helper text and errors belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
+- **Label, helper text and validation messages belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
 
 ### Field
 
 `Form::Field` takes the same `attribute` and `form:` as a control and passes them on, so callers state them once.
 
-- **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `error`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`.
+- **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `validation_message`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`.
 - **`label:` and `helper_text:` are shorthand** for the slots of the same name, as `icon:` is for a visual. `label: false` renders no label.
-- **A bound field has defaults.** Without a `label`, it renders the text Rails' `label` helper finds: a translation, then the humanized attribute. Without an `error`, it renders the attribute's error messages when there are any. A field without `form:` renders only what the caller sets.
-- **The field wires its control,** through `apply_slot_context`: `aria-describedby` for the helper text and the error, and `aria-invalid` and `validation: :error` while the attribute has errors. A caller's own `validation:` wins.
+- **A bound field has defaults.** Without a `label`, it renders the text Rails' `label` helper finds: a translation, then the humanized attribute. Without a `validation_message`, it renders the attribute's error messages when there are any. A field without `form:` renders only what the caller sets.
+- **The field holds the validation state.** Flowbite colors the label and the message along with the control, so `Form::Field` takes `validation:` as well, and one `validation_message` slot shows a success or an error message. While a bound attribute has errors, the state is `:error`. A caller's own `validation:` wins.
+- **The field wires its control,** through `apply_slot_context`: the validation state, `aria-describedby` for the helper text and the validation message, and `aria-invalid` in the error state.
 - **IDs come from Rails' `field_id`,** e.g. `field_id(:title, :error)`, so the same attribute in two forms on a page doesn't collide. A field without `form:` generates them.
 
 ### Form builder
