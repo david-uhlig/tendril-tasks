@@ -9,9 +9,9 @@ RSpec.describe "The Flowbite manifest" do
   statuses = %w[previewed composable tailwind feature_gap partial blocked out_of_scope].freeze
   # Missing components and features that examples are waiting for.
   needs = %w[
-    accordion blockquote bottom-navigation breadcrumb carousel chat-bubble checkbox clipboard datepicker form
-    input-group list list-group mega-menu navbar-hamburger pagination progress rating search-input sidebar skeleton
-    speed-dial-menu video
+    accordion blockquote bottom-navigation breadcrumb carousel chat-bubble checkbox clipboard datepicker dropzone
+    form input-group list list-group mega-menu navbar-hamburger pagination progress rating search-input sidebar
+    skeleton speed-dial-menu video
   ].freeze
   keys = %w[id title status preview params needs note].freeze
 

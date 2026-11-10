@@ -785,8 +785,8 @@ pages:
     needs: form
   - id: form-file-input-example
     title: File upload
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/file_input/helper_text
   - id: form-toggle-example
     title: Toggle Switch
     status: blocked
@@ -1631,24 +1631,25 @@ pages:
   forms/file-input:
   - id: default-file-upload-example
     title: File upload example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/file_input/default
   - id: file-upload-helper-example
     title: Helper text
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/file_input/helper_text
   - id: file-upload-multiple-example
     title: Multiple files
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/file_input/multiple
   - id: file-upload-sizes-example
     title: Sizes
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/file_input/sizes
   - id: file-upload-dropzone-example
     title: Dropzone
     status: blocked
-    needs: form
+    needs: dropzone
+    note: A styled label around a hidden file input, a pattern of its own that waits for a dropzone component.
   forms/floating-label:
   - id: default-floating-label-example
     title: Floating label example
