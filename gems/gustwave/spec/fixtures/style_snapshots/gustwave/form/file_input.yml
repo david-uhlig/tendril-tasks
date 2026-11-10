@@ -1,0 +1,57 @@
+---
+look size=:sm validation=:none:
+- 'input type="file": bg-gray-50 block border border-gray-300 cursor-pointer dark:bg-gray-700
+  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 focus:outline-none
+  rounded-lg text-gray-900 text-xs w-full'
+look size=:sm validation=:success:
+- 'input type="file": bg-green-50 block border border-green-500 cursor-pointer dark:bg-gray-700
+  dark:border-green-500 dark:placeholder-green-500 dark:text-green-400 focus:border-green-500
+  focus:outline-none focus:ring-green-500 placeholder-green-700 rounded-lg text-green-900
+  text-xs w-full'
+look size=:sm validation=:error:
+- 'input aria-invalid="true" type="file": bg-red-50 block border border-red-500 cursor-pointer
+  dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500 dark:text-red-500
+  focus:border-red-500 focus:outline-none focus:ring-red-500 placeholder-red-700 rounded-lg
+  text-red-900 text-xs w-full'
+look size=:md validation=:none:
+- 'input type="file": bg-gray-50 block border border-gray-300 cursor-pointer dark:bg-gray-700
+  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 focus:outline-none
+  rounded-lg text-gray-900 text-sm w-full'
+look size=:md validation=:success:
+- 'input type="file": bg-green-50 block border border-green-500 cursor-pointer dark:bg-gray-700
+  dark:border-green-500 dark:placeholder-green-500 dark:text-green-400 focus:border-green-500
+  focus:outline-none focus:ring-green-500 placeholder-green-700 rounded-lg text-green-900
+  text-sm w-full'
+look size=:md validation=:error:
+- 'input aria-invalid="true" type="file": bg-red-50 block border border-red-500 cursor-pointer
+  dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500 dark:text-red-500
+  focus:border-red-500 focus:outline-none focus:ring-red-500 placeholder-red-700 rounded-lg
+  text-red-900 text-sm w-full'
+look size=:lg validation=:none:
+- 'input type="file": bg-gray-50 block border border-gray-300 cursor-pointer dark:bg-gray-700
+  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 focus:outline-none
+  rounded-lg text-gray-900 text-lg w-full'
+look size=:lg validation=:success:
+- 'input type="file": bg-green-50 block border border-green-500 cursor-pointer dark:bg-gray-700
+  dark:border-green-500 dark:placeholder-green-500 dark:text-green-400 focus:border-green-500
+  focus:outline-none focus:ring-green-500 placeholder-green-700 rounded-lg text-green-900
+  text-lg w-full'
+look size=:lg validation=:error:
+- 'input aria-invalid="true" type="file": bg-red-50 block border border-red-500 cursor-pointer
+  dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500 dark:text-red-500
+  focus:border-red-500 focus:outline-none focus:ring-red-500 placeholder-red-700 rounded-lg
+  text-lg text-red-900 w-full'
+disabled validation=:none disabled=true:
+- 'input disabled="disabled" type="file": bg-gray-100 block border border-gray-300
+  cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+  dark:text-gray-400 focus:outline-none rounded-lg text-gray-900 text-sm w-full'
+disabled validation=:success disabled=true:
+- 'input disabled="disabled" type="file": bg-green-50 block border border-green-500
+  cursor-not-allowed dark:bg-gray-700 dark:border-green-500 dark:placeholder-green-500
+  dark:text-green-400 focus:border-green-500 focus:outline-none focus:ring-green-500
+  placeholder-green-700 rounded-lg text-green-900 text-sm w-full'
+disabled validation=:error disabled=true:
+- 'input aria-invalid="true" disabled="disabled" type="file": bg-red-50 block border
+  border-red-500 cursor-not-allowed dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500
+  dark:text-red-500 focus:border-red-500 focus:outline-none focus:ring-red-500 placeholder-red-700
+  rounded-lg text-red-900 text-sm w-full'
