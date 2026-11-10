@@ -144,7 +144,7 @@ A component takes `id:` for its own root and generates one with a component-spec
 
 ## Forms
 
-Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Field` and the builder follow it. *Planned:* the other controls. `Form::RichTextArea` predates this section and moves to its shape with an upgrade note.
+Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::Field` and the builder follow it. *Planned:* the other controls. `Form::RichTextArea` predates this section and moves to its shape with an upgrade note.
 
 | Layer | Owns | Example |
 |---|---|---|

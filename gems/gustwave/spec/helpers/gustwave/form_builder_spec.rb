@@ -97,6 +97,43 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     expect(html).to have_no_css(".field_with_errors")
   end
 
+  %i[text_area textarea].each do |helper|
+    describe "##{helper}" do
+      it "renders a field with a textarea" do
+        html = parse(gustwave_form(task(title: "Write")).public_send(helper, :title))
+
+        expect(html).to have_css("div > label[for='task_title'] + textarea#task_title[name='task[title]']", text: "Write")
+      end
+
+      it "sends HTML options to the textarea and field options to the field" do
+        html = parse(gustwave_form.public_send(helper, :title, label: "Notes", helper_text: "Help", validation: :success,
+                                                               rows: 4, placeholder: "P", class: "shadow-xs"))
+
+        expect(html.find("label").text).to eq("Notes")
+        expect(html).to have_css("p#task_title_helper_text", text: "Help")
+        expect(html).to have_css("textarea[rows='4'][placeholder='P'][aria-describedby='task_title_helper_text']")
+        expect(html.find("textarea")[:class].split).to include("shadow-xs", "bg-green-50")
+      end
+
+      it "gives cols and rows for Rails' size option" do
+        textarea = parse(gustwave_form.public_send(helper, :title, size: "20x40")).find("textarea")
+
+        expect(textarea[:cols]).to eq("20")
+        expect(textarea[:rows]).to eq("40")
+      end
+
+      it "passes the field to a block" do
+        html = parse(gustwave_form.public_send(helper, :title) { |field| field.with_helper_text("From the block") })
+
+        expect(html).to have_css("p#task_title_helper_text", text: "From the block")
+      end
+    end
+  end
+
+  it "leaves rich_textarea to Rails" do
+    expect(described_class.instance_method(:rich_textarea).owner).to eq(ActionView::Helpers::FormBuilder)
+  end
+
   it "leaves other helpers to Rails" do
     plain = form_builder.hidden_field(:title, value: "x")
 
@@ -157,6 +194,19 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
 
       expect(html).to have_css("input[type='hidden'][name='task[project_id]']", visible: :all)
       expect(html).to have_no_css("input[type='hidden'] + p, label[for='task_project_id']", visible: :all)
+    end
+
+    it "renders a field with a textarea" do
+      html = render_erb(<<~ERB, record: invalid_task)
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.text_area :title, rows: 4, helper_text: "Shown in the list." %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("label[for='task_title']")
+      expect(html).to have_css("textarea#task_title[name='task[title]'][rows='4'][aria-invalid='true']")
+      expect(html).to have_css("textarea[aria-describedby='task_title_helper_text task_title_validation_message']")
+      expect(html).to have_no_css(".field_with_errors")
     end
 
     it "renders a link in the helper text of an ERB block" do

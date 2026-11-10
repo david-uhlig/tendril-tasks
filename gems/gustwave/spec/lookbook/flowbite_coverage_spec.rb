@@ -11,7 +11,7 @@ RSpec.describe "The Flowbite manifest" do
   needs = %w[
     accordion blockquote bottom-navigation breadcrumb carousel chat-bubble checkbox clipboard datepicker form
     input-group list list-group mega-menu navbar-hamburger pagination progress rating search-input sidebar skeleton
-    speed-dial-menu video
+    speed-dial-menu textarea-frame video
   ].freeze
   keys = %w[id title status preview params needs note].freeze
 

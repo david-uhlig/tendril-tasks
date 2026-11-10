@@ -1,0 +1,19 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'validation: (optional)'
+- "**options"
+options:
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- textarea
+methods:
+- apply_slot_context
+- html_id

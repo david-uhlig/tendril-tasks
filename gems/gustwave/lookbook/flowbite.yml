@@ -769,8 +769,8 @@ pages:
     needs: form
   - id: form-textarea-example
     title: Textarea
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/textarea/default
   - id: form-select-input-example
     title: Select input
     status: blocked
@@ -1912,20 +1912,22 @@ pages:
   forms/textarea:
   - id: default-textarea-example
     title: Textarea example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/textarea/default
   - id: textarea-wysiwyg-example
     title: WYSIWYG Editor
-    status: blocked
-    needs: form
+    status: feature_gap
+    needs: textarea-frame
+    note: Needs a borderless textarea inside a frame with a toolbar, which Form::Textarea doesn't have yet.
   - id: textarea-comment-example
     title: Comment box
-    status: blocked
-    needs: form
+    status: feature_gap
+    needs: textarea-frame
+    note: Needs a borderless textarea inside a frame with a toolbar, which Form::Textarea doesn't have yet.
   - id: textarea-chatroom-example
     title: Chatroom input
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/textarea/chatroom
   forms/timepicker:
   - id: timepicker-default-example
     title: Default timepicker
