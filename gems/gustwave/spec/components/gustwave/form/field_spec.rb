@@ -336,6 +336,39 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "a select control" do
+    def select_element
+      page.find("select")
+    end
+
+    it "wires a bound select: label for, aria-describedby and the record's value" do
+      render_field(:country, form: form_builder(task(country: "FR")), helper_text: "Help") do |field|
+        field.with_control_select(choices: [ %w[Canada CA], %w[France FR] ], prompt: "Choose")
+      end
+
+      expect(label[:for]).to eq("task_country")
+      expect(select_element[:id]).to eq("task_country")
+      expect(select_element["aria-describedby"]).to eq("task_country_helper_text")
+      expect(page.all("option[selected]").map { |option| option[:value] }).to eq([ "FR" ])
+    end
+
+    it "passes the error state on" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_select(choices: %w[a]) }
+
+      expect(select_element["aria-invalid"]).to eq("true")
+      expect(class_set(select_element[:class])).to include("bg-red-50")
+      expect(select_element["aria-describedby"]).to eq("task_title_validation_message")
+    end
+
+    it "wires an unbound select with a generated ID" do
+      render_field(label: "Country", helper_text: "Help") { |field| field.with_control(:select, choices: %w[a b]) }
+
+      expect(select_element[:id]).to start_with("field-")
+      expect(label[:for]).to eq(select_element[:id])
+      expect(select_element["aria-describedby"]).to eq("#{select_element[:id]}-helper-text")
+    end
+  end
+
   describe "ids" do
     it "differ between forms with another namespace or object name" do
       render_inline(described_class.new(:title, form: form_builder(namespace: "a"), helper_text: "Help")) { |f| f.with_control_input }

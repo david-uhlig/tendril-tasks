@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A form builder that renders Rails' input and text area helpers as
-  # Gustwave::Form::Field with a Gustwave::Form::Input or
-  # Gustwave::Form::Textarea. A form opts in with +builder:+. Gustwave
-  # never sets +default_form_builder+ (D10 in docs/design.md).
+  # A form builder that renders Rails' input, text area and select helpers as
+  # Gustwave::Form::Field with a Gustwave::Form::Input,
+  # Gustwave::Form::Textarea or Gustwave::Form::Select. A form opts in with
+  # +builder:+. Gustwave never sets +default_form_builder+ (D10 in
+  # docs/design.md).
   #
   #   <%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
   #     <%= f.text_field :title, helper_text: "Shown in the task list." %>
   #     <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
   #     <%= f.text_area :notes, rows: 4 %>
+  #     <%= f.select :country, @countries, prompt: "Choose a country", size: :lg %>
   #     <%= f.hidden_field :project_id %>
   #   <% end %>
   #
@@ -23,11 +25,29 @@ module Gustwave
   #     <% field.with_helper_text { "Read our #{link_to("rules", rules_path)}.".html_safe } %>
   #   <% end %>
   #
+  # +select+ and +collection_select+ take two hashes, as in Rails. The first
+  # holds Rails' select options (+prompt+, +include_blank+, +selected+,
+  # +disabled+, +include_hidden+) and Gustwave's: the field's +label+,
+  # +helper_text+, +validation+ and +validation_message+ and the select's
+  # +size+ and +style+. The second is the +<select>+'s HTML attributes, so a
+  # +size+ or +style+ in it is the HTML attribute, not Gustwave's. Giving
+  # one of them in both hashes raises, as the select can't take it twice.
+  # The block of +select+ stays Rails': it supplies the option tags, and
+  # doesn't receive the field. Set a select's slots with
+  # Gustwave::Form::Field directly:
+  #
+  #   <%= f.select :country, @countries, prompt: "Choose a country", size: :lg, helper_text: "Where you live." %>
+  #   <%= f.select :tags, @tags, {}, multiple: true, size: 5 %>
+  #   <%= f.collection_select :country_id, Country.all, :id, :name, include_blank: true %>
+  #
   # Overridden: +text_field+, +email_field+, +password_field+, +number_field+,
   # +url_field+, +telephone_field+ (+phone_field+), +search_field+,
   # +date_field+, +time_field+, +datetime_field+, +datetime_local_field+,
   # +month_field+ and +week_field+, which render an input, and +textarea+
-  # (+text_area+). Every other helper stays Rails', including +rich_textarea+.
+  # (+text_area+), and +select+ and +collection_select+, which render a
+  # select. Every other helper stays Rails', including +rich_textarea+ and the
+  # other select helpers such as +grouped_collection_select+ and
+  # +time_zone_select+.
   #
   # The builder holds no markup or classes. Whatever it renders can be
   # rendered with Gustwave::Form::Field and its control directly.
@@ -92,6 +112,47 @@ module Gustwave
     end
     alias_method :text_area, :textarea
 
+    # The options of a select helper that go to the control as they are.
+    # +disabled+ goes as +disabled_choices+.
+    SELECT_CONTROL_OPTIONS = %i[size style prompt include_blank selected include_hidden].freeze
+
+    # Rails reads these from the options of a select, too, when the HTML
+    # attributes don't have them.
+    SELECT_HTML_OPTIONS = %i[required multiple].freeze
+
+    # Renders a field with a Gustwave::Form::Select. +options+ holds Rails'
+    # select options and Gustwave's, +html_options+ the +<select>+'s HTML
+    # attributes. The block is Rails': it supplies the option tags and doesn't
+    # receive the field.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param choices [Array, Hash, String, nil] the choices, as Rails' +select+ takes them.
+    # @param options [Hash] Rails' +prompt+, +include_blank+, +selected+, +disabled+ and +include_hidden+, the field's +label+, +helper_text+, +validation+ and +validation_message+, and the select's +size+ and +style+.
+    # @param html_options [Hash] the HTML attributes of the +<select>+.
+    # @yield the option tags, instead of +choices+.
+    # @return [ActiveSupport::SafeBuffer]
+    def select(attribute, choices = nil, options = {}, html_options = {}, &block)
+      choices = @template.capture { block.call || "" } if block
+      render_select(attribute, choices, options, html_options)
+    end
+
+    # Renders a field with a Gustwave::Form::Select, for a collection of
+    # objects. +value_method+ and +text_method+ are method names or anything
+    # that responds to +call+, and +selected+ and +disabled+ may be a Proc that
+    # tells which objects, as in Rails. Takes the options of +select+.
+    def collection_select(attribute, collection, value_method, text_method, options = {}, html_options = {})
+      options = options.to_h.symbolize_keys
+      choices = collection.map do |item|
+        [ collection_value(item, text_method), collection_value(item, value_method) ]
+      end
+      %i[selected disabled].each do |key|
+        next unless options[key].is_a?(Proc)
+
+        options[key] = collection.filter_map { |item| collection_value(item, value_method) if options[key].call(item) }
+      end
+      render_select(attribute, choices, options, html_options)
+    end
+
     # Renders a field for +attribute+ with a control of the slot type
     # +control+, e.g. +:input+ or one an app adds to Gustwave::Form::Field
     # with +extend_slot+. This is what every helper calls, and the one to call
@@ -104,14 +165,44 @@ module Gustwave
     # @return [ActiveSupport::SafeBuffer]
     def render_field(attribute, control, options = {}, &block)
       options = options.to_h.symbolize_keys
-      field_options = options.slice(*FIELD_OPTIONS)
-      control_options = options.except(*FIELD_OPTIONS)
+      render_field_with(attribute, control, options.slice(*FIELD_OPTIONS), options.except(*FIELD_OPTIONS), &block)
+    end
+
+    private
+
+    # Renders the field with its own options and the control's.
+    def render_field_with(attribute, control, field_options, control_options, &block)
       field = field_class.to_s.constantize.new(attribute, form: self, **field_options)
 
       @template.render(field) do |rendered|
         rendered.with_control(control, **control_options)
         block&.call(rendered)
       end
+    end
+
+    # Sends each option of a select helper to the field, to the control or to
+    # the HTML attributes. Options Rails doesn't know are dropped, as Rails
+    # ignores them.
+    def render_select(attribute, choices, options, html_options)
+      options = options.to_h.symbolize_keys
+      html_options = html_options.to_h.symbolize_keys
+      SELECT_HTML_OPTIONS.each do |key|
+        html_options[key] = options[key] if options.key?(key) && !html_options.key?(key)
+      end
+
+      control_options = options.slice(*SELECT_CONTROL_OPTIONS).merge(choices:)
+      %i[size style].each do |key|
+        next unless control_options.key?(key) && html_options.key?(key)
+
+        raise ArgumentError, "A select can't take #{key}: as Gustwave's option and as an HTML attribute at once. " \
+                             "Pass #{key}: #{control_options[key].inspect} or the HTML attribute, not both."
+      end
+      control_options[:disabled_choices] = options[:disabled] if options.key?(:disabled)
+      render_field_with(attribute, :select, options.slice(*FIELD_OPTIONS), control_options.merge(html_options))
+    end
+
+    def collection_value(item, method)
+      method.respond_to?(:call) ? method.call(item) : item.public_send(method)
     end
   end
 end

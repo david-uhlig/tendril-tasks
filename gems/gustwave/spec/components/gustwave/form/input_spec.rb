@@ -28,6 +28,30 @@ RSpec.describe Gustwave::Form::Input, type: :component do
       expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_SMALL))
     end
 
+    it "renders a size that isn't a symbol as the HTML attribute, at the default size" do
+      render_inline(described_class.new(size: 20))
+
+      expect(page.find("input")[:size]).to eq("20")
+      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT))
+
+      render_inline(described_class.new(size: "20"))
+      expect(page.find("input")[:size]).to eq("20")
+      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT))
+    end
+
+    it "accepts a string naming the size" do
+      render_inline(described_class.new(size: "lg"))
+
+      expect(page.find("input")[:size]).to be_nil
+      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_LARGE))
+    end
+
+    it "renders the size attribute of a bound input" do
+      render_inline(described_class.new(:title, form: form_builder, size: 20))
+
+      expect(page.find("input")[:size]).to eq("20")
+    end
+
     it "carries Flowbite's classes for the success and error state" do
       render_inline(described_class.new(validation: :success))
       expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_SUCCESS))

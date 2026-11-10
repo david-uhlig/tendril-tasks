@@ -9,6 +9,8 @@ class FormSpecTask
   attribute :due_on, :date
   attribute :project_id, :integer
   attribute :password, :string
+  attribute :country, :string
+  attribute :tags, default: -> { [] }
 
   validates :title, presence: true
 end
@@ -55,6 +57,22 @@ module FormSpecHelpers
   FLOWBITE_TEXTAREA = "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 " \
                       "focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 " \
                       "dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+
+  # Flowbite's "Select input example" is the default select, with the classes
+  # of the default input. Its "Sizes" example has the small and the large one,
+  # without the example's +mb-6+.
+  FLOWBITE_SELECT = FLOWBITE_INPUT
+  FLOWBITE_SELECT_SMALL = "block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 " \
+                          "focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 " \
+                          "dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  FLOWBITE_SELECT_LARGE = "block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 " \
+                          "focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 " \
+                          "dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+
+  # Flowbite's "Underline select" example
+  FLOWBITE_SELECT_UNDERLINE = "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 " \
+                              "border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 " \
+                              "focus:outline-none focus:ring-0 focus:border-gray-200 peer"
 
   # The class set of a string, so specs compare sets and not their order.
   def class_set(classes)

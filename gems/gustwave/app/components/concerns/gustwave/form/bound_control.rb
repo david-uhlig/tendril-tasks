@@ -165,11 +165,28 @@ module Gustwave
       # @param helper [Symbol] e.g. +:text_field+.
       # @param form [ActionView::Helpers::FormBuilder]
       # @param attribute [Symbol, String]
-      # @param html_options [Hash] the element's HTML attributes.
+      # @param args the arguments of Rails' helper after the attribute, e.g. the HTML attributes, or for +:select+ the choices, the options and the HTML attributes.
+      # @yield passed on to the helper.
       # @return [ActiveSupport::SafeBuffer]
-      def render_bound_element(helper, form, attribute, html_options)
+      def render_bound_element(helper, form, attribute, *args, &block)
         ActionView::Helpers::FormBuilder.instance_method(helper)
-                                        .bind_call(errorless_builder(form), attribute, html_options)
+                                        .bind_call(errorless_builder(form), attribute, *args, &block)
+      end
+
+      # Tells an option from the HTML attribute of the same name, for a
+      # keyword like +size+ or +style+ that is both. A Symbol picks the
+      # option's value, and so does a String naming one. Any other value is
+      # the HTML attribute, e.g. +size: 5+. +nil+ and +DEFAULT+ stay with the
+      # option.
+      #
+      # @param name [Symbol] the option, e.g. +:size+.
+      # @param value [Object] what the caller passed.
+      # @return [Array(Object, Hash)] the value for +select_options+, and the HTML attribute to add to the element, empty for an option.
+      def split_option_or_attribute(name, value)
+        return [ value, {} ] if value.nil? || value.equal?(Gustwave::Options::DEFAULT) || value.is_a?(Symbol)
+        return [ value, {} ] if value.is_a?(String) && self.class.option_values(name).include?(value.to_sym)
+
+        [ Gustwave::Options::DEFAULT, { name => value } ]
       end
 
       # A builder of the form's class for a record without errors. A form

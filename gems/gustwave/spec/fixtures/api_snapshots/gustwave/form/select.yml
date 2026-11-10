@@ -1,0 +1,40 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'choices: (optional)'
+- 'size: (optional)'
+- 'style: (optional)'
+- 'validation: (optional)'
+- 'prompt: (optional)'
+- 'include_blank: (optional)'
+- 'selected: (optional)'
+- 'disabled_choices: (optional)'
+- 'include_hidden: (optional)'
+- "**options"
+options:
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - none
+  style:
+    default: default
+    values:
+    - default
+    - underline
+    - none
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- select
+methods:
+- apply_slot_context
+- html_id

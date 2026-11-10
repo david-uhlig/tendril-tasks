@@ -7,7 +7,9 @@ module Gustwave
     # and with a success or error look.
     #
     # +options+ are the +<input>+'s HTML attributes. The label, helper text
-    # and validation message belong to Gustwave::Form::Field.
+    # and validation message belong to Gustwave::Form::Field. A +size+ that
+    # isn't a Symbol is the HTML attribute: +size: :lg+ is the large input,
+    # +size: 20+ renders +size="20"+.
     #
     # === Without a form builder
     #
@@ -112,7 +114,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the input is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the input is a plain +<input>+.
       # @param type [Symbol] the input type. Defaults to +:text+. Valid values are +:text+, +:email+, +:password+, +:number+, +:url+, +:tel+, +:search+, +:date+, +:time+, +:datetime_local+, +:month+ and +:week+.
-      # @param size [Symbol] the size of the input. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+.
+      # @param size [Symbol, Object] the size of the input. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. Any other value, e.g. +20+, is the HTML attribute +size+.
       # @param validation [Symbol] the look of the input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+.
       # @param icon [Symbol, nil] the name of an icon rendered as leading visual. Shorthand for +with_leading_visual_icon+.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +value+, +placeholder+, +required+, +disabled+.
@@ -123,7 +125,8 @@ module Gustwave
         @attribute = attribute
         @form = form
         @icon = icon
-        @options = options
+        size, size_attributes = split_option_or_attribute(:size, size)
+        @options = options.merge(size_attributes)
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
         select_options(type:, size:, validation:)
       end

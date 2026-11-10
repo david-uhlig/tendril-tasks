@@ -144,7 +144,7 @@ A component takes `id:` for its own root and generates one with a component-spec
 
 ## Forms
 
-Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::Field` and the builder follow it. *Planned:* the other controls. `Form::RichTextArea` predates this section and moves to its shape with an upgrade note.
+Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::Select`, `Form::Field` and the builder follow it. *Planned:* the other controls. `Form::RichTextArea` predates this section and moves to its shape with an upgrade note.
 
 | Layer | Owns | Example |
 |---|---|---|
@@ -175,7 +175,7 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 - **The attribute is the positional subject, `form:` is the wiring.** `Form::Input.new(:title, form: f)` binds the control to a form builder, Rails' own or any subclass. An attribute without `form:` raises, as a sub-component without its parent's ID does.
 - **Rails renders a bound element.** The control hands its attributes to Rails' helper for that element, so the name, ID, value, type casting, nested attributes and `index` behave as in any Rails form. A control never works them out itself. Without `form:` it renders a plain element, and `name:`, `id:` and `value:` are ordinary HTML attributes.
 - **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
-- **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes.
+- **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes. `size` and `style` are HTML attributes too, so a Symbol picks the choice and any other value is the attribute of that name: `size: :lg` is the large select, `size: 5` renders `size="5"`.
 - **Label, helper text and validation messages belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
 
 ### Field
@@ -195,6 +195,7 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 
 - **It keeps Rails' helper names and signatures.** Switching a form to it changes no call: HTML options still go to the element. A helper Gustwave has no control for, like `hidden_field`, renders what Rails renders.
 - **Each helper renders a field with its control,** and also takes the control's options and the field's shorthand: `f.text_field :title, size: :lg, helper_text: "…"`.
+- **A helper with two option hashes, like `select`, takes Gustwave's options in the first** with Rails' own, and leaves the second to the element's HTML attributes. The block of `select` stays Rails': it supplies the option tags.
 - **A control without a Rails helper gets one named after it:** `f.toggle :publish`.
 - **The builder holds no markup, classes or behavior.** Whatever it renders can be rendered with `Form::Field` and the controls directly. A new feature goes into a component first, then gets its shorthand.
 - **An app extends it with a subclass,** which adds helpers for the app's own controls with `render_field`, and renders the app's own field class through `field_class`, as `list_menu_class` does for Dropdown's menu.
