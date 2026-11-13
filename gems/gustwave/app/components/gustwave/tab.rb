@@ -30,13 +30,13 @@ module Gustwave
     derive :indicator_size, from: :size, values: { none: :none, sm: :lg }
 
     # The panel of a button tab, shown while the tab is selected. Its
-    # options are HTML attributes of the panel element.
+    # options are HTML attributes of the panel element, also in +html:+.
     #
     #   tab.with_panel(class: "p-6") do
     #     "Profile content"
     #   end
     renders_one_extensible :panel, ->(**options, &block) {
-      @panel_options = options
+      @panel_options = configure_html_attributes(options)
       block ? capture(&block) : ""
     }
 

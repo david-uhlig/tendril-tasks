@@ -64,6 +64,19 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(html).to have_css("div > div.relative > div.absolute > svg")
     end
 
+    it "passes html: to the input, next to its size" do
+      input = parse(gustwave_form.text_field(:title, size: :lg, html: { size: 20 }, placeholder: "p")).find("input")
+
+      expect(input[:size]).to eq("20")
+      expect(input[:placeholder]).to eq("p")
+      expect(class_set(input[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_INPUT_LARGE))
+    end
+
+    it "raises for a size that is an HTML attribute, and names html:" do
+      expect { gustwave_form.text_field(:title, size: 20) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /pass html: \{ size: 20 \}\./)
+    end
+
     it "accepts string keys" do
       html = parse(gustwave_form.text_field(:title, "helper_text" => "Help", "size" => :sm, "placeholder" => "P"))
 

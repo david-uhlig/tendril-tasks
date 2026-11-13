@@ -276,9 +276,12 @@ module Gustwave
     #
     #   attributes_for(options)
     #   attributes_for(:icon, options, pill: true)
+    #
+    # An +html+ hash within +options+ is merged into it first, see
+    # Gustwave::Component.new.
     def attributes_for(*args, **overrides)
       part = args.first.is_a?(Symbol) || args.first.is_a?(String) ? args.shift : Definition::ROOT
-      attributes = (args.first || {}).to_h.symbolize_keys
+      attributes = Gustwave::HtmlAttributesHelper.merge_html((args.first || {}).to_h.symbolize_keys)
       merged = classes(part, **overrides, class: attributes[:class])
       merged ? attributes.merge(class: merged) : attributes.except(:class)
     end

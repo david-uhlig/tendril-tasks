@@ -2,6 +2,28 @@
 
 module Gustwave
   module HtmlAttributesHelper
+    # Merges the HTML attributes under +html:+ into the hash they are in, so
+    # they reach the same element as the attributes next to them. An
+    # attribute in +html:+ replaces the one of the same name next to it.
+    # Expects Symbol keys at the top level.
+    #
+    #   Gustwave::HtmlAttributesHelper.merge_html(id: "a", html: { id: "b", size: 5 })
+    #   # => { id: "b", size: 5 }
+    #
+    # @param attributes [Hash] HTML attributes, with or without an +html+ key.
+    # @return [Hash] the attributes without the +html+ key.
+    # @raise [ArgumentError] if +html+ is neither a Hash nor +nil+.
+    def self.merge_html(attributes)
+      return attributes unless attributes.key?(:html)
+
+      html = attributes[:html]
+      attributes = attributes.except(:html)
+      return attributes if html.nil?
+      raise ArgumentError, "html: takes a Hash of HTML attributes, got #{html.inspect}" unless html.is_a?(Hash)
+
+      attributes.merge(html.symbolize_keys)
+    end
+
     # Normalizes HTML attributes equivalent to +content_tag+.
     #
     # Symbolizes keys and transforms keys nested within +aria+ and +data+

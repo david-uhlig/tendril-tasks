@@ -93,6 +93,18 @@ RSpec.describe Gustwave::Options do
         .to raise_error(Gustwave::Options::UnknownValueError, /Did you mean :button\?.*falls back to :a/m)
     end
 
+    it "names html: for a value of an option named like an HTML attribute" do
+      expect { button.new.select_options(size: 20) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /For the HTML attribute, pass html: \{ size: 20 \}\.\nWhen Gustwave isn't strict/)
+      expect { linked.new.select_options(tag: :buton) }
+        .to raise_error(Gustwave::Options::UnknownValueError) { |error| expect(error.message).not_to include("html:") }
+    end
+
+    it "lists size, style and type as HTML attributes" do
+      expect(Gustwave::Options::HTML_ATTRIBUTE_NAMES).to include(:size, :style, :type)
+      expect(Gustwave::Options::HTML_ATTRIBUTE_NAMES).to be_frozen
+    end
+
     context "when Gustwave isn't strict" do
       before { Gustwave.strict = false }
 
