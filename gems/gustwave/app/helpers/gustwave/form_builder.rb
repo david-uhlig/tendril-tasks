@@ -16,8 +16,10 @@ module Gustwave
   # The helpers keep Rails' names and signatures, so switching a form to the
   # builder changes no call: HTML options still go to the +<input>+ or
   # +<textarea>+. They also take the field's +label+, +helper_text+,
-  # +validation+ and +validation_message+ and the input's +size+ and +icon+. A
-  # block receives the field, to set its slots:
+  # +validation+ and +validation_message+ and the input's +size+ and +icon+.
+  # +size+ is Gustwave's size, so the HTML attribute goes in +html:+, e.g.
+  # <tt>f.text_field :title, html: { size: 20 }</tt>. A block receives the
+  # field, to set its slots:
   #
   #   <%= f.text_field :title do |field| %>
   #     <% field.with_helper_text { "Read our #{link_to("rules", rules_path)}.".html_safe } %>
@@ -57,7 +59,7 @@ module Gustwave
 
     # The options that go to the field. The rest goes to the control: an
     # input's +size+ and +icon+ are its options, everything else the HTML
-    # attributes of the form element.
+    # attributes of the form element. +html:+ goes to the control, too.
     FIELD_OPTIONS = %i[label helper_text validation validation_message].freeze
 
     # The input type each overridden helper renders
@@ -99,7 +101,7 @@ module Gustwave
     #
     # @param attribute [Symbol, String] the attribute.
     # @param control [Symbol] the type of the field's +control+ slot.
-    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field, an input's +size+ and +icon+ to the control, and the rest are the HTML attributes of the form element. String keys are accepted.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field, an input's +size+ and +icon+ to the control, and the rest are the HTML attributes of the form element. String keys are accepted. +html:+ holds HTML attributes of the form element, also those named like an option of the control.
     # @yield [field] the field, to set its slots.
     # @return [ActiveSupport::SafeBuffer]
     def render_field(attribute, control, options = {}, &block)

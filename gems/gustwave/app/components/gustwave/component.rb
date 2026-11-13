@@ -30,6 +30,11 @@ module Gustwave
   #   another one for its child. Prefer forwarding through +options+.
   # * +options+ holds HTML attributes, or the arguments of the component a
   #   component wraps.
+  # * +html:+ is taken by +new+, not by +initialize+, so no component
+  #   declares it. It holds HTML attributes for the element +options+ go to
+  #   and is the only way to pass an attribute named like one of the
+  #   component's options: <tt>size: :lg, html: { size: 5 }</tt>. See
+  #   Gustwave::Component.new.
   #
   # The gem's specs check every component against this convention.
   class Component < ViewComponent::Base
@@ -40,6 +45,43 @@ module Gustwave
     include Gustwave::ExtensibleSlots
     include Gustwave::FetchOrFallbackHelper
     include Gustwave::TailwindHelper
+
+    class << self
+      # Builds the component. Next to the arguments of +initialize+ it takes
+      # +html:+, a hash of HTML attributes for the element the component's
+      # +options+ go to.
+      #
+      #   Gustwave::Tabs.new(style: :underline, html: { style: "max-width: 40rem" })
+      #
+      # A keyword named like one of the component's options is always the
+      # option, so +html:+ is the only way to pass the HTML attribute of that
+      # name. Every other attribute works flat as well, e.g. +placeholder:+
+      # or +class:+. An attribute given both flat and in +html:+ takes the
+      # value in +html:+. That holds for +class+, +data+ and +aria+ too, which
+      # then merge with the component's own as the flat ones do.
+      #
+      # An attribute named like an option reaches +initialize+ in +options+
+      # under a String key, e.g. <tt>"size"</tt>, so no keyword argument takes
+      # it. Every other attribute is merged into +options+ under its Symbol
+      # key.
+      #
+      # @param html [Hash, nil] HTML attributes for the element the component's +options+ go to.
+      # @raise [ArgumentError] if +html+ is neither a Hash nor +nil+.
+      def new(*args, html: nil, **options, &block)
+        return super(*args, **options, &block) if html.nil?
+        raise ArgumentError, "html: takes a Hash of HTML attributes, got #{html.inspect}" unless html.is_a?(Hash)
+
+        merged = html.each_with_object(options.dup) do |(name, value), result|
+          name = name.to_sym
+          if option_definition.option(name)
+            result[name.to_s] = value
+          else
+            result[name] = value
+          end
+        end
+        super(*args, **merged, &block)
+      end
+    end
 
     # Returns configured HTML attributes and component settings for the
     # component or slot.
@@ -54,6 +96,10 @@ module Gustwave
     # <tt>aria: { hidden: false }</tt> overrides a default
     # <tt>aria: { hidden: true }</tt>.
     #
+    # An +html+ hash within +overwrite_attrs+ is merged into it first, and
+    # its attributes replace the ones of the same name next to it (see
+    # Gustwave::Component.new).
+    #
     # @param overwrite_attrs [Hash] HTML attributes and component arguments to be added or overridden if present in +default_attrs+.
     # @param overwrite_class_attr [Boolean] How to handle the +class+ attribute. When set to +false+, the CSS classes of +overwrite_attrs+ and +default_attrs+ are fused semantically with TailwindMerge. CSS classes in +overwrite_attrs+ take precedence. When set to +true+, the default Ruby merging strategy applies, replacing +default_attrs+ CSS classes with +overwrite_attrs+ CSS classes.
     # @param default_attrs [Hash] Default HTML attribute and component configuration for the component or slot.
@@ -61,7 +107,7 @@ module Gustwave
     def configure_html_attributes(overwrite_attrs = {}, overwrite_class_attr: false, **default_attrs)
       return default_attrs if overwrite_attrs.blank?
 
-      overwrite_attrs = overwrite_attrs.deep_symbolize_keys
+      overwrite_attrs = Gustwave::HtmlAttributesHelper.merge_html(overwrite_attrs.deep_symbolize_keys)
       unless overwrite_class_attr
         # A caller's class: nil adds no classes, like class: "", instead of
         # replacing the defaults.

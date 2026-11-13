@@ -290,6 +290,11 @@ RSpec.describe Gustwave::Styling do
     it "raises for unknown parts" do
       expect { button.new.attributes_for(:label, {}) }.to raise_error(Gustwave::Styling::UnknownPartError, /no part :label/)
     end
+
+    it "merges an html hash, which wins over the attributes next to it" do
+      expect(button.new.attributes_for({ class: "px-0", id: "flat", html: { class: "px-1", "id" => "go" } }))
+        .to eq(id: "go", class: "inline-flex bg-blue-500 text-base px-1")
+    end
   end
 
   describe "#merge_classes" do

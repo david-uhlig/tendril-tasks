@@ -139,5 +139,16 @@ RSpec.describe Gustwave::Component, type: :component do
         expect(result).to eq({ class: "bg-red-500 some-custom-class" })
       end
     end
+
+    context "with an html hash in overwrite_attrs" do
+      it "merges it, and it wins over the attributes next to it" do
+        result = component.configure_html_attributes({ id: "flat", class: "a", html: { id: "x", class: "b" } }, id: "d", class: "c")
+        expect(result).to eq({ id: "x", class: "c b" })
+      end
+
+      it "raises for an html value that isn't a hash" do
+        expect { component.configure_html_attributes({ html: "nope" }) }.to raise_error(ArgumentError, /html: takes a Hash/)
+      end
+    end
   end
 end

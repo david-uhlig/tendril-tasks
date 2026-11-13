@@ -112,6 +112,22 @@ All three have one shape: a `renders_many_extensible` slot with every type, `ico
 
 Symbol keywords such as `icon:` and `trailing_icon:` are allowed as **shorthand only**: they must set one of these slots, so the slot can always do anything the keyword can. `Dropdowns::Triggers::Button` is the reference: its `trailing_icon:` calls `with_trailing_visual_icon`. A keyword is never the only way to set an icon, and doesn't come with companions like `icon_theme:` or `icon_options:`. A keyword whose default icon can be turned off, like DismissButton's `icon: :close`, takes `nil` for none.
 
+### HTML attributes
+
+A component's `options` are the HTML attributes of one element, usually its root. A keyword that is one of the component's options always means the option, whatever the value: `size: 5` is an unknown size, not `size="5"`. In strict mode the error says so and names the fix.
+
+**`html:` takes HTML attributes as a hash,** for the same element as `options`. It's the only way to pass an attribute named like an option (D12):
+
+```ruby
+render Gustwave::Tabs.new(style: :underline, html: { style: "max-width: 40rem" })
+render Gustwave::Form::Input.new(:title, form: f, size: :lg, html: { size: 20 })
+```
+
+- **Attributes without a clash stay flat:** `placeholder:`, `class:`, `data:`. Both spellings reach the same element.
+- **`html:` wins.** An attribute given flat and in `html:` takes the value in `html:`. That holds for `class`, `data` and `aria` too, which then merge with the component's own as the flat ones do.
+- **It works wherever options reach an element,** on components and on slot setters: `timeline.with_item(html: { … })`. A component or slot without an element for its options doesn't take it, like `Form::RichText::Divider` or a `renderable` slot. `Gustwave::Component.new` takes it, so no component declares or handles it, and `attributes_for` and `configure_html_attributes` merge an `html` hash for slots that build markup. A slot or part that renders its attributes without them calls `configure_html_attributes(options)` first.
+- **It doesn't reach past a keyword that isn't an option.** `html: { id: … }` is the component's `id:`, as the flat spelling is. Where a slot or a wrapper hands its attributes to another component, a key named like that component's option picks the option.
+
 ### Styling a part
 
 Use **`<part>_options:`**: a hash of HTML attributes for a declared `part`, or the options of a component rendered for that element, like ModalHeader's `title_options:` for its `Gustwave::Heading`, merged with `configure_html_attributes`, so caller classes win conflicts. It works at construction, and slot setters forward it, as in `timeline.with_item(marker_options: { class: "..." })`. `class:` on a slot setter styles that slot's root element.
@@ -175,7 +191,7 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 - **The attribute is the positional subject, `form:` is the wiring.** `Form::Input.new(:title, form: f)` binds the control to a form builder, Rails' own or any subclass. An attribute without `form:` raises, as a sub-component without its parent's ID does.
 - **Rails renders a bound element.** The control hands its attributes to Rails' helper for that element, so the name, ID, value, type casting, nested attributes and `index` behave as in any Rails form. A control never works them out itself. Without `form:` it renders a plain element, and `name:`, `id:` and `value:` are ordinary HTML attributes.
 - **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
-- **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes.
+- **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes. `size` and `type` are HTML attributes too, but the keyword is always the option: `size: :lg` is the large input, and `html: { size: 20 }` renders `size="20"`. See [HTML attributes](#html-attributes).
 - **Label, helper text and validation messages belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
 
 ### Field
@@ -193,8 +209,8 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 
 `Gustwave::FormBuilder` is a subclass of `ActionView::Helpers::FormBuilder`. A form opts in with `builder: Gustwave::FormBuilder` (D10).
 
-- **It keeps Rails' helper names and signatures.** Switching a form to it changes no call: HTML options still go to the element. A helper Gustwave has no control for, like `hidden_field`, renders what Rails renders.
-- **Each helper renders a field with its control,** and also takes the control's options and the field's shorthand: `f.text_field :title, size: :lg, helper_text: "…"`.
+- **It keeps Rails' helper names and signatures.** HTML options still go to the element. One call changes when a form switches to it: a key named like an option of the control is that option, so `size: 20` on `text_field` becomes `html: { size: 20 }`. A helper Gustwave has no control for, like `hidden_field`, renders what Rails renders.
+- **Each helper renders a field with its control,** and also takes the control's options, `html:` and the field's shorthand: `f.text_field :title, size: :lg, helper_text: "…"`.
 - **A control without a Rails helper gets one named after it:** `f.toggle :publish`.
 - **The builder holds no markup, classes or behavior.** Whatever it renders can be rendered with `Form::Field` and the controls directly. A new feature goes into a component first, then gets its shorthand.
 - **An app extends it with a subclass,** which adds helpers for the app's own controls with `render_field`, and renders the app's own field class through `field_class`, as `list_menu_class` does for Dropdown's menu.
@@ -210,7 +226,7 @@ For an extensible library, extension points are part of the contract:
 
 | Tier | Includes | A change to it |
 |---|---|---|
-| Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `trigger_options`; the form builder's helper names and signatures; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
+| Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `html:`; `trigger_options`; the form builder's helper names and signatures; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
 | Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` and the form builder's `field_class`; the form builder's `render_field` | Is breaking. Follows the component's status. |
 | Internal | Options marked `internal: true`; private helpers; the class strings themselves, which follow Flowbite | Isn't breaking. |
 
@@ -314,3 +330,4 @@ Settled questions, so they aren't reopened without a new reason. A new decision 
 - **D9. Forms are controls, a field and Gustwave's own form builder.** Controls work without a builder, so previews, forms without a model and compositions can use them. `Form::Field` owns the wiring between a control and its label, helper text and errors, which is the part that's easy to get wrong. The builder gives a form Rails' short call sites without holding any markup. Three alternatives were ruled out. Components that only take a builder, as `Form::RichTextArea` did, can't render on their own and repeat `render …new(form, …)` on every line. A builder that holds the class strings has no options, slots, previews or `extend_*`. The `view_component-form` gem slices by Rails helper instead of by Flowbite pattern, constructs every component from a builder, has no field wrapper, and takes its components' parent class from one setting that belongs to the app, so they couldn't use Gustwave's DSL. It would also be a runtime dependency that caps Gustwave's ViewComponent version. See [Forms](#forms).
 - **D10. The form builder is opt-in per form.** A form uses it with `builder: Gustwave::FormBuilder`. Gustwave never sets `default_form_builder` or changes Rails' own builder, because that would restyle forms the app didn't write, like Devise's or another engine's, and would force an app to migrate every form at once. An app that wants it everywhere sets `default_form_builder` itself. See [Form builder](#form-builder).
 - **D11. Form components live in `Gustwave::Form`; the builder is `Gustwave::FormBuilder`.** Flowbite names its form pages generically: Select, Range, Toggle, Radio. The namespace says they're form controls and keeps them apart from unrelated top-level components. `Form::RichTextArea` already lives there. The builder sits at the top level, named as Rails names builders, since an app writes it on every form. See [Forms](#forms).
+- **D12. A keyword named like an option is the option; HTML attributes of that name go in `html:`.** `size`, `style` and `type` are options of many components and HTML attributes as well. So the keyword always means the option, and `html:` takes a hash of HTML attributes for the element `options` go to. Attributes without a clash stay flat, and `html:` wins over a flat attribute of the same name. `Gustwave::Component.new` implements it once for every component, and the error for a rejected value names `html:` when the option is named like an HTML attribute. Telling them apart by the value's type, a Symbol for the option and anything else for the attribute, was ruled out: it makes one keyword mean two things and turns a typo into an attribute. Renaming the options (`control_size`) was ruled out too: it would depart from Flowbite's and the gem's vocabulary across the gem to free a name few callers need as an attribute. See [HTML attributes](#html-attributes).
