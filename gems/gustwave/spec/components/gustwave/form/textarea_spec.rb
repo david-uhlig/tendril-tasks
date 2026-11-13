@@ -185,6 +185,169 @@ RSpec.describe Gustwave::Form::Textarea, type: :component do
     end
   end
 
+  describe "header and footer" do
+    # The frame, the first <div> of the component
+    def frame
+      page.find("div", match: :first)
+    end
+
+    # The frame's children in order: the header bar, the body and the footer bar
+    def frame_children
+      frame.all(:xpath, "./*")
+    end
+
+    def button_markup
+      "<button type=\"submit\">Post</button>".html_safe
+    end
+
+    # Renders the textarea with the given bars, each the markup of its slot
+    def render_bars(header: nil, footer: nil, **options)
+      render_inline(described_class.new(**options)) do |textarea|
+        textarea.with_header { header } if header
+        textarea.with_footer { footer } if footer
+        nil
+      end
+    end
+
+    it "renders a footer bar below the body, and the textarea in the body" do
+      render_bars(footer: button_markup, value: "Hi")
+
+      expect(class_set(frame[:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_FRAME))
+      expect(frame_children.map(&:tag_name)).to eq(%w[div div])
+      expect(class_set(frame_children[0][:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_BODY_ABOVE_FOOTER))
+      expect(frame_children[0]).to have_css("textarea")
+      expect(textarea_classes).to eq(class_set(helpers::FLOWBITE_TEXTAREA_FRAMED))
+      expect(class_set(frame_children[1][:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_FOOTER))
+      expect(frame_children[1]).to have_css("button", text: "Post")
+    end
+
+    it "renders a header bar above the body" do
+      render_bars(header: "<span>Bold</span>".html_safe, value: "Hi")
+
+      expect(frame_children.map(&:tag_name)).to eq(%w[div div])
+      expect(class_set(frame_children[0][:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_HEADER))
+      expect(frame_children[0]).to have_css("span", text: "Bold")
+      expect(class_set(frame_children[1][:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_BODY_UNDER_HEADER))
+      expect(frame_children[1]).to have_css("textarea")
+    end
+
+    it "renders the header, the body and the footer, with the body's corners square" do
+      render_bars(header: "H", footer: "F", value: "Hi")
+
+      expect(frame_children.map(&:tag_name)).to eq(%w[div div div])
+      expect(frame_children[0].text).to eq("H")
+      expect(frame_children[2].text).to eq("F")
+      expect(class_set(frame_children[0][:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_HEADER))
+      expect(class_set(frame_children[1][:class])).to eq(class_set("px-4 py-2 bg-white dark:bg-gray-800"))
+      expect(class_set(frame_children[2][:class])).to eq(class_set(helpers::FLOWBITE_TEXTAREA_FOOTER))
+    end
+
+    it "renders the textarea alone, without the frame, without slots" do
+      render_inline(described_class.new(value: "Hi"))
+
+      expect(page).to have_no_css("div")
+      expect(textarea_classes).to eq(class_set(helpers::FLOWBITE_TEXTAREA))
+    end
+
+    it "colors the frame's border by the validation state, and only sets aria-invalid on the textarea" do
+      render_bars(footer: "F", validation: :error, value: "Hi")
+
+      expect(class_set(frame[:class])).to include("border-red-500")
+      expect(class_set(frame[:class])).not_to include("border-gray-200")
+      expect(textarea["aria-invalid"]).to eq("true")
+      expect(textarea_classes).to eq(class_set(helpers::FLOWBITE_TEXTAREA_FRAMED))
+
+      render_bars(footer: "F", validation: :success, value: "Hi")
+
+      expect(class_set(frame[:class])).to include("border-green-500")
+      expect(textarea["aria-invalid"]).to be_nil
+    end
+
+    it "disables the textarea without extra classes" do
+      render_bars(footer: "F", disabled: true, value: "Hi")
+
+      expect(textarea["disabled"]).to be_present
+      expect(textarea_classes).to eq(class_set(helpers::FLOWBITE_TEXTAREA_FRAMED))
+    end
+
+    it "puts the parts' attributes on their elements and keeps the textarea's own options on the textarea" do
+      render_bars(header: "H", footer: "F", value: "Hi", id: "msg", name: "message", rows: 4, placeholder: "Write",
+                  frame_options: { class: "mb-4", data: { test: "frame" } },
+                  header_options: { data: { test: "header" } },
+                  body_options: { data: { test: "body" } },
+                  footer_options: { class: "gap-2", data: { test: "footer" } })
+
+      expect(class_set(frame[:class])).to include("mb-4")
+      expect(frame["data-test"]).to eq("frame")
+      expect(frame_children[0]["data-test"]).to eq("header")
+      expect(frame_children[1]["data-test"]).to eq("body")
+      expect(frame_children[2]["data-test"]).to eq("footer")
+      expect(class_set(frame_children[2][:class])).to include("gap-2")
+      expect(textarea[:id]).to eq("msg")
+      expect(textarea[:name]).to eq("message")
+      expect(textarea[:rows]).to eq("4")
+      expect(textarea[:placeholder]).to eq("Write")
+      expect(frame["rows"]).to be_nil
+    end
+
+    it "takes the text from value, not from the block, which sets the slots" do
+      render_inline(described_class.new(value: "Hi")) do |textarea|
+        textarea.with_footer { "F" }
+        "Block"
+      end
+
+      expect(textarea_text).to eq("Hi")
+    end
+
+    it "leaves the textarea empty without value, although the block renders whitespace" do
+      render_inline(described_class.new) do |textarea|
+        textarea.with_footer { "F" }
+        "  "
+      end
+
+      expect(textarea_text).to be_empty
+    end
+
+    it "takes the text of a bound textarea from the record" do
+      render_inline(described_class.new(:title, form: form_builder(task(title: "Write specs")))) do |textarea|
+        textarea.with_footer { "F" }
+      end
+
+      expect(textarea[:name]).to eq("task[title]")
+      expect(textarea[:id]).to eq("task_title")
+      expect(textarea_text).to eq("Write specs")
+      expect(page).to have_css("div > div > textarea#task_title")
+    end
+
+    it "never wraps a framed bound textarea in Rails' field_error_proc" do
+      original = ActionView::Base.field_error_proc
+      ActionView::Base.field_error_proc = proc { |html, _| "<div class=\"field_with_errors\">#{html}</div>".html_safe }
+      form = form_builder(invalid_task)
+
+      expect(form.text_area(:title)).to include("field_with_errors")
+
+      render_inline(described_class.new(:title, form:, validation: :error)) do |textarea|
+        textarea.with_footer { "F" }
+      end
+
+      expect(page).to have_no_css(".field_with_errors")
+      expect(page).to have_css("div > div > textarea#task_title[name='task[title]'][aria-invalid='true']")
+    ensure
+      ActionView::Base.field_error_proc = original
+    end
+
+    it "renders the frame in a field, with the label for the textarea" do
+      render_inline(Gustwave::Form::Field.new(label: "Comment")) do |field|
+        field.with_control_textarea(rows: 4) { |textarea| textarea.with_footer { "bar" } }
+        nil
+      end
+
+      expect(page.find("label")[:for]).to eq(textarea[:id])
+      expect(page).to have_css("div.border > div.rounded-t-lg > textarea##{textarea[:id]}")
+      expect(page).to have_css("div.border > div.border-t", text: "bar")
+    end
+  end
+
   describe "#apply_slot_context" do
     it "binds the textarea to the context's form and attribute" do
       component = described_class.new
