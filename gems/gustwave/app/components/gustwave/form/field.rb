@@ -73,16 +73,19 @@ module Gustwave
       #
       # * +input+: a Gustwave::Form::Input, built with the given arguments.
       # * +textarea+: a Gustwave::Form::Textarea, built with the given arguments.
+      # * +select+: a Gustwave::Form::Select, built with the given arguments.
       # * +renderable+: any component. One that implements +apply_slot_context+
       #   receives +attribute+, +form+, +id+ (without a form), +validation+ and
       #   +described_by+, as Gustwave::Form::Input does.
       #
       #   <% field.with_control_input(type: :email, icon: :envelope) %>
       #   <% field.with_control_textarea(rows: 4) %>
+      #   <% field.with_control_select(choices: @countries, prompt: "Choose a country") %>
       #   <% field.with_control_renderable(MyToggle.new) %>
       renders_one_extensible :control, types: {
         input: ->(*args, **options) { Gustwave::Form::Input.new(*args, **options) },
-        textarea: ->(*args, **options) { Gustwave::Form::Textarea.new(*args, **options) }
+        textarea: ->(*args, **options) { Gustwave::Form::Textarea.new(*args, **options) },
+        select: ->(*args, **options) { Gustwave::Form::Select.new(*args, **options) }
       }, renderable: :control_context
 
       # The label. Takes text or a block, and HTML attributes. Its +for+ is

@@ -143,6 +143,206 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "#select" do
+    let(:countries) { [ %w[Canada CA], %w[France FR], %w[Germany DE] ] }
+
+    def selected_values(html) = html.all("option[selected]").map { |option| option[:value] }
+
+    it "renders a field with a select, with the record's value selected" do
+      html = parse(gustwave_form(task(country: "FR")).select(:country, countries))
+
+      expect(html).to have_css("div > label[for='task_country'] + select#task_country[name='task[country]']")
+      expect(html.all("option").map { |option| option[:value] }).to eq(%w[CA FR DE])
+      expect(selected_values(html)).to eq([ "FR" ])
+    end
+
+    it "sends Rails' select options, the field's options and size and style to the right place" do
+      html = parse(gustwave_form.select(:country, countries, prompt: "Choose", disabled: "DE", size: :lg,
+                                                             style: :underline, label: "Where", helper_text: "Help",
+                                                             validation: :success, validation_message: "Fine"))
+      select = html.find("select")
+
+      expect(html.find("label").text).to eq("Where")
+      expect(html).to have_css("p#task_country_helper_text", text: "Help")
+      expect(html).to have_css("p#task_country_validation_message.text-green-600", text: "Fine")
+      expect(html.all("option").map { |option| option[:value] }).to eq([ "", "CA", "FR", "DE" ])
+      expect(html.find("option", text: "Choose")[:value]).to eq("")
+      expect(html.all("option[disabled]").map { |option| option[:value] }).to eq([ "DE" ])
+      expect(selected_values(html)).to be_empty
+      expect(select[:disabled]).to be_nil
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_UNDERLINE))
+      expect(select[:size]).to be_nil
+      expect(select[:style]).to be_nil
+    end
+
+    it "takes size as an option in the first hash and as an attribute in the second" do
+      select = parse(gustwave_form.select(:country, countries, { size: :lg }, { size: 5 })).find("select")
+
+      expect(select[:size]).to eq("5")
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_LARGE))
+    end
+
+    it "merges html: of the first hash under the second hash" do
+      select = parse(gustwave_form.select(:country, countries, { html: { size: 3, style: "x: y" } }, { size: 5 })).find("select")
+
+      expect(select[:size]).to eq("5")
+      expect(select[:style]).to eq("x: y")
+    end
+
+    it "raises for an html: in the first hash that isn't a hash" do
+      expect { gustwave_form.select(:country, countries, { html: "nope" }) }
+        .to raise_error(ArgumentError, 'html: takes a Hash of HTML attributes, got "nope"')
+    end
+
+    it "takes the large size without a hash around the options" do
+      select = parse(gustwave_form.select(:country, countries, size: :lg)).find("select")
+
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_LARGE))
+    end
+
+    it "takes the HTML attributes from the second hash, where size and style stay attributes" do
+      html = parse(gustwave_form.select(:country, countries, {}, { size: 5, style: "min-width: 12rem", class: "shadow-xs",
+                                                                  required: true, data: { x: "1" } }))
+      select = html.find("select")
+
+      expect(select[:size]).to eq("5")
+      expect(select[:style]).to eq("min-width: 12rem")
+      expect(select[:required]).to be_present
+      expect(select["data-x"]).to eq("1")
+      expect(class_set(select[:class])).to include("shadow-xs", "p-2.5")
+    end
+
+    it "renders a multiple select with Rails' hidden field" do
+      html = parse(gustwave_form(task(tags: %w[b])).select(:tags, %w[a b], {}, multiple: true))
+
+      expect(html).to have_css("input[type='hidden'][name='task[tags][]'] + select#task_tags[name='task[tags][]'][multiple]", visible: :all)
+      expect(selected_values(html)).to eq(%w[b])
+    end
+
+    it "reads multiple and include_hidden from the options, as Rails does" do
+      html = parse(gustwave_form.select(:tags, %w[a b], multiple: true, include_hidden: false, required: true))
+
+      expect(html).to have_css("select[multiple][required]")
+      expect(html).to have_no_css("input", visible: :all)
+    end
+
+    it "takes the option tags from the block, which doesn't get the field" do
+      yielded = nil
+      view = vc_test_controller.view_context
+      html = parse(gustwave_form(task(country: "FR")).select(:country, nil, { prompt: "Choose" }) do |*args|
+        yielded = args
+        view.options_for_select(countries, "DE")
+      end)
+
+      expect(yielded).to be_empty
+      expect(html.all("option").map { |option| option[:value] }).to eq(%w[CA FR DE])
+      expect(selected_values(html)).to eq([ "DE" ])
+    end
+
+    it "gives the same name, ID and selected option as Rails' own builder" do
+      record = task(country: "DE")
+      ours = parse(gustwave_form(record, index: 2, namespace: "ns").select(:country, countries, { include_blank: true }, { required: true })).find("select")
+      rails = parse(form_builder(record, index: 2, namespace: "ns").select(:country, countries, { include_blank: true }, { required: true })).find("select")
+
+      expect(ours[:name]).to eq(rails[:name])
+      expect(ours[:id]).to eq(rails[:id])
+      expect(ours.all("option").map { |option| [ option[:value], option[:selected] ] })
+        .to eq(rails.all("option").map { |option| [ option[:value], option[:selected] ] })
+    end
+
+    it "shows the errors of the attribute" do
+      html = parse(gustwave_form(invalid_task).select(:title, %w[a]))
+
+      expect(html).to have_css("select[aria-invalid='true']")
+      expect(html).to have_css("p", text: "Can't be blank")
+      expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "drops options Rails doesn't know" do
+      expect { gustwave_form.select(:country, countries, unknown: 1) }.not_to raise_error
+    end
+  end
+
+  describe "#collection_select" do
+    let(:countries) { [ Struct.new(:name, :code).new("Canada", "CA"), Struct.new(:name, :code).new("France", "FR") ] }
+
+    def selected_values(html) = html.all("option[selected]").map { |option| option[:value] }
+
+    it "renders a field with a select from method names, with the record's value selected" do
+      html = parse(gustwave_form(task(country: "FR")).collection_select(:country, countries, :code, :name))
+
+      expect(html).to have_css("label[for='task_country'] + select#task_country[name='task[country]']")
+      expect(html.all("option").map { |option| [ option.text, option[:value] ] }).to eq([ %w[Canada CA], %w[France FR] ])
+      expect(selected_values(html)).to eq([ "FR" ])
+    end
+
+    it "takes a lambda as the text method" do
+      html = parse(gustwave_form.collection_select(:country, countries, :code, ->(country) { "#{country.name} (#{country.code})" }))
+
+      expect(html.all("option").map(&:text)).to eq([ "Canada (CA)", "France (FR)" ])
+    end
+
+    it "takes a lambda as the value method" do
+      html = parse(gustwave_form.collection_select(:country, countries, ->(country) { country.code.downcase }, :name))
+
+      expect(html.all("option").map { |option| option[:value] }).to eq(%w[ca fr])
+    end
+
+    it "turns a Proc for selected and disabled into the values it picks" do
+      html = parse(gustwave_form.collection_select(:country, countries, :code, :name,
+                                                   selected: ->(country) { country.code == "CA" },
+                                                   disabled: proc { |country| country.code == "FR" }))
+
+      expect(selected_values(html)).to eq([ "CA" ])
+      expect(html.all("option[disabled]").map { |option| option[:value] }).to eq([ "FR" ])
+    end
+
+    it "takes plain values for selected and disabled" do
+      html = parse(gustwave_form(task(country: "FR")).collection_select(:country, countries, :code, :name, selected: "CA", disabled: "FR"))
+
+      expect(selected_values(html)).to eq([ "CA" ])
+      expect(html.all("option[disabled]").map { |option| option[:value] }).to eq([ "FR" ])
+    end
+
+    it "sends options and HTML attributes as select does" do
+      html = parse(gustwave_form.collection_select(:country, countries, :code, :name,
+                                                   { include_blank: true, label: "Country", helper_text: "Help" },
+                                                   { size: 3, class: "shadow-xs" }))
+      select = html.find("select")
+
+      expect(html.find("label").text).to eq("Country")
+      expect(html).to have_css("p#task_country_helper_text", text: "Help")
+      expect(html.all("option").first[:value]).to eq("")
+      expect(select[:size]).to eq("3")
+      expect(class_set(select[:class])).to include("shadow-xs", "p-2.5")
+    end
+
+    it "takes style as an option in the first hash and as an attribute in the second" do
+      select = parse(gustwave_form.collection_select(:country, countries, :code, :name, { style: :underline },
+                                                     { style: "color: red" })).find("select")
+
+      expect(select[:style]).to eq("color: red")
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_UNDERLINE))
+    end
+
+    it "renders the same name, ID and options as Rails' own builder" do
+      record = task(country: "CA")
+      ours = parse(gustwave_form(record).collection_select(:country, countries, :code, :name, include_blank: true)).find("select")
+      rails = parse(form_builder(record).collection_select(:country, countries, :code, :name, include_blank: true)).find("select")
+
+      expect(ours[:name]).to eq(rails[:name])
+      expect(ours[:id]).to eq(rails[:id])
+      expect(ours.all("option").map { |option| [ option.text, option[:value], option[:selected] ] })
+        .to eq(rails.all("option").map { |option| [ option.text, option[:value], option[:selected] ] })
+    end
+  end
+
+  it "leaves the other select helpers to Rails" do
+    %i[grouped_collection_select time_zone_select weekday_select date_select].each do |helper|
+      expect(described_class.instance_method(helper).owner).to eq(ActionView::Helpers::FormBuilder), helper.to_s
+    end
+  end
+
   it "leaves rich_textarea to Rails" do
     expect(described_class.instance_method(:rich_textarea).owner).to eq(ActionView::Helpers::FormBuilder)
   end
@@ -232,6 +432,28 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(html).to have_css("p#task_password_helper_text", text: "Read our rules.")
       expect(html).to have_css("p#task_password_helper_text a[href='/rules']", text: "rules")
       expect(html).to have_css("input[type='password'][aria-describedby='task_password_helper_text']")
+    end
+
+    it "renders selects, with the options of a block, a prompt, a multiple select and a collection" do
+      html = render_erb(<<~ERB, record: task(country: "FR"))
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.select :country, [["Canada", "CA"], ["France", "FR"]], prompt: "Choose a country", size: :lg, helper_text: "Where you live." %>
+          <%= f.select :title, nil, { label: "Block" } do %>
+            <%= options_for_select(["a", "b"], "b") %>
+          <% end %>
+          <%= f.select :tags, %w[a b c], { label: "Tags" }, { multiple: true, size: 3 } %>
+          <%= f.collection_select :project_id, [Struct.new(:id, :name).new(1, "Alpha")], :id, :name, prompt: "Choose a project" %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("label[for='task_country']", text: "Country")
+      expect(html).to have_css("select#task_country[aria-describedby='task_country_helper_text'] option[selected][value='FR']")
+      expect(html).to have_css("p#task_country_helper_text", text: "Where you live.")
+      expect(html).to have_css("label[for='task_title']", text: "Block")
+      expect(html).to have_css("select#task_title option[selected]", text: "b")
+      expect(html).to have_css("select#task_tags[multiple][size='3'][name='task[tags][]']")
+      expect(html).to have_css("label[for='task_project_id'] + select#task_project_id option[value='1']", text: "Alpha")
+      expect(html).to have_css("select#task_project_id option[value='']", text: "Choose a project")
     end
 
     it "renders a Form::Field inside a form with Rails' default builder" do
