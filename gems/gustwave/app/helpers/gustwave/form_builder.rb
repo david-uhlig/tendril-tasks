@@ -1,21 +1,23 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A form builder that renders Rails' input helpers as Gustwave::Form::Field
-  # with a Gustwave::Form::Input. A form opts in with +builder:+. Gustwave
+  # A form builder that renders Rails' input and text area helpers as
+  # Gustwave::Form::Field with a Gustwave::Form::Input or
+  # Gustwave::Form::Textarea. A form opts in with +builder:+. Gustwave
   # never sets +default_form_builder+ (D10 in docs/design.md).
   #
   #   <%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
   #     <%= f.text_field :title, helper_text: "Shown in the task list." %>
   #     <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
+  #     <%= f.text_area :notes, rows: 4 %>
   #     <%= f.hidden_field :project_id %>
   #   <% end %>
   #
   # The helpers keep Rails' names and signatures, so switching a form to the
-  # builder changes no call: HTML options still go to the +<input>+. They also
-  # take the field's +label+, +helper_text+, +validation+ and
-  # +validation_message+ and the input's +size+ and +icon+. A block receives
-  # the field, to set its slots:
+  # builder changes no call: HTML options still go to the +<input>+ or
+  # +<textarea>+. They also take the field's +label+, +helper_text+,
+  # +validation+ and +validation_message+ and the input's +size+ and +icon+. A
+  # block receives the field, to set its slots:
   #
   #   <%= f.text_field :title do |field| %>
   #     <% field.with_helper_text { "Read our #{link_to("rules", rules_path)}.".html_safe } %>
@@ -24,10 +26,11 @@ module Gustwave
   # Overridden: +text_field+, +email_field+, +password_field+, +number_field+,
   # +url_field+, +telephone_field+ (+phone_field+), +search_field+,
   # +date_field+, +time_field+, +datetime_field+, +datetime_local_field+,
-  # +month_field+ and +week_field+. Every other helper stays Rails'.
+  # +month_field+ and +week_field+, which render an input, and +textarea+
+  # (+text_area+). Every other helper stays Rails', including +rich_textarea+.
   #
   # The builder holds no markup or classes. Whatever it renders can be
-  # rendered with Gustwave::Form::Field and Gustwave::Form::Input directly.
+  # rendered with Gustwave::Form::Field and its control directly.
   #
   # === Extending
   #
@@ -52,9 +55,9 @@ module Gustwave
                     instance_predicate: false,
                     default: "Gustwave::Form::Field"
 
-    # The options that go to the field. The rest goes to the control: +size+
-    # and +icon+ are its options, everything else the HTML attributes of the
-    # form element.
+    # The options that go to the field. The rest goes to the control: an
+    # input's +size+ and +icon+ are its options, everything else the HTML
+    # attributes of the form element.
     FIELD_OPTIONS = %i[label helper_text validation validation_message].freeze
 
     # The input type each overridden helper renders
@@ -82,6 +85,13 @@ module Gustwave
 
     alias_method :phone_field, :telephone_field
 
+    # Renders a field with a Gustwave::Form::Textarea. Rails' +size: "20x40"+
+    # still sets +cols+ and +rows+.
+    def textarea(attribute, options = {}, &block)
+      render_field(attribute, :textarea, options, &block)
+    end
+    alias_method :text_area, :textarea
+
     # Renders a field for +attribute+ with a control of the slot type
     # +control+, e.g. +:input+ or one an app adds to Gustwave::Form::Field
     # with +extend_slot+. This is what every helper calls, and the one to call
@@ -89,7 +99,7 @@ module Gustwave
     #
     # @param attribute [Symbol, String] the attribute.
     # @param control [Symbol] the type of the field's +control+ slot.
-    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field, +size+ and +icon+ to the control, and the rest are the HTML attributes of the form element. String keys are accepted.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field, an input's +size+ and +icon+ to the control, and the rest are the HTML attributes of the form element. String keys are accepted.
     # @yield [field] the field, to set its slots.
     # @return [ActiveSupport::SafeBuffer]
     def render_field(attribute, control, options = {}, &block)

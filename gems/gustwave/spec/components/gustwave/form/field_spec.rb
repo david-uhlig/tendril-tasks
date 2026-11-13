@@ -298,6 +298,44 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "a textarea control" do
+    def textarea
+      page.find("textarea")
+    end
+
+    def textarea_text
+      textarea.text.delete_prefix("\n")
+    end
+
+    it "wires a bound textarea: label for, aria-describedby and the text from the record" do
+      render_field(:title, form: form_builder(task(title: "Write")), helper_text: "Help") do |field|
+        field.with_control_textarea(rows: 4)
+      end
+
+      expect(label[:for]).to eq("task_title")
+      expect(textarea[:id]).to eq("task_title")
+      expect(textarea[:rows]).to eq("4")
+      expect(textarea_text).to eq("Write")
+      expect(textarea["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "passes the error state on" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_textarea }
+
+      expect(textarea["aria-invalid"]).to eq("true")
+      expect(class_set(textarea[:class])).to include("bg-red-50")
+      expect(textarea["aria-describedby"]).to eq("task_title_validation_message")
+    end
+
+    it "wires an unbound textarea with a generated ID" do
+      render_field(label: "Message", helper_text: "Help") { |field| field.with_control(:textarea, rows: 2) }
+
+      expect(textarea[:id]).to start_with("field-")
+      expect(label[:for]).to eq(textarea[:id])
+      expect(textarea["aria-describedby"]).to eq("#{textarea[:id]}-helper-text")
+    end
+  end
+
   describe "ids" do
     it "differ between forms with another namespace or object name" do
       render_inline(described_class.new(:title, form: form_builder(namespace: "a"), helper_text: "Help")) { |f| f.with_control_input }

@@ -124,11 +124,12 @@ A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The b
 <%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
   <%= f.text_field :title, helper_text: "Shown in the task list." %>
   <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
+  <%= f.text_area :notes, rows: 4 %>
   <%= f.hidden_field :project_id %>
 <% end %>
 ```
 
-The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
+The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s or `<textarea>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
 
 `Gustwave::Form::Field` and `Gustwave::Form::Input` work on their own: with any Rails builder, or without one:
 

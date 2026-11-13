@@ -97,21 +97,13 @@ module Gustwave
         lg: "p-4 text-base"
       }
 
-      variant :validation, part: :input, default: :none, values: {
-        none: "bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-        success: "bg-green-50 border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-500",
-        error: "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
-      }
+      variant :validation, part: :input, default: :none, values: VALIDATION_LOOK
 
       # Set when the input has a leading visual, which needs room at the start
       toggle :has_visual, "ps-10", part: :input, internal: true
 
       # Set when the input is disabled, as Flowbite's disabled example does
-      toggle :disabled_look, part: :input, per: :validation, internal: true, values: {
-        none: "bg-gray-100 cursor-not-allowed dark:text-gray-400",
-        success: "cursor-not-allowed",
-        error: "cursor-not-allowed"
-      }
+      toggle :disabled_look, part: :input, per: :validation, internal: true, values: DISABLED_LOOK
 
       renders_visuals :leading_visuals
 
@@ -126,10 +118,7 @@ module Gustwave
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +value+, +placeholder+, +required+, +disabled+.
       # @raise [ArgumentError] for an +attribute+ without +form+.
       def initialize(attribute = nil, form: nil, type: DEFAULT, size: DEFAULT, validation: DEFAULT, icon: nil, **options)
-        if attribute && form.nil?
-          raise ArgumentError, "Gustwave::Form::Input needs `form:` for the attribute #{attribute.inspect}. " \
-                               "Without a form builder, pass name:, id: and value: as HTML attributes instead."
-        end
+        require_form_for_attribute(attribute, form)
 
         @attribute = attribute
         @form = form
@@ -137,32 +126,6 @@ module Gustwave
         @options = options
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
         select_options(type:, size:, validation:)
-      end
-
-      # Lets a parent bind and wire the input, as Gustwave::Form::Field does.
-      # What the caller gave the input itself wins over the context: its own
-      # +form+ and attribute, an explicit +validation+ and its own +id+. The
-      # parent may add keys later, so unknown ones are accepted.
-      #
-      # @param attribute [Symbol, String, nil] the attribute to bind to.
-      # @param form [ActionView::Helpers::FormBuilder, nil] the form builder to bind to.
-      # @param id [String, nil] the ID of an input without a form.
-      # @param validation [Symbol, nil] the validation state, unless the caller picked one.
-      # @param described_by [String, nil] IDs of the elements describing the input, merged with the caller's +aria-describedby+.
-      def apply_slot_context(attribute: nil, form: nil, id: nil, validation: nil, described_by: nil, **)
-        @context_attribute = attribute
-        @context_form = form
-        @context_id = id.presence
-        @described_by = described_by.presence
-        select_options(validation:) if validation && !@validation_given
-      end
-
-      # The ID the input renders: the caller's own, one from the context, or
-      # Rails' ID for the bound attribute.
-      #
-      # @return [String, nil] +nil+ for an unbound input without an ID.
-      def html_id
-        explicit_id || (bound_form.field_id(bound_attribute) if bound?)
       end
 
       def before_render
@@ -181,18 +144,6 @@ module Gustwave
 
       private
 
-      def bound_form = @form || @context_form
-
-      def bound_attribute = @attribute || @context_attribute
-
-      def bound? = bound_form.present? && bound_attribute.present?
-
-      # An ID Rails mustn't work out itself. It would add the namespace to a
-      # bound ID again.
-      def explicit_id = @options[:id].presence || @context_id
-
-      def disabled? = @options[:disabled].present?
-
       def element
         if bound?
           render_bound_element(HELPERS.fetch(option_value(:type)), bound_form, bound_attribute, @input_options)
@@ -208,18 +159,6 @@ module Gustwave
         options = attributes_for(:input, @options)
         options[:id] = explicit_id if explicit_id
         merge_aria(options)
-      end
-
-      # +aria-invalid+ in the error state and +aria-describedby+ from the
-      # context, next to the caller's own +aria+ attributes, which win.
-      def merge_aria(options)
-        aria = (options[:aria] || {}).to_h.symbolize_keys
-        flat_invalid = options.key?(:"aria-invalid")
-        flat_describedby = options.delete(:"aria-describedby")
-        aria[:invalid] = true if option_value(:validation) == :error && !aria.key?(:invalid) && !flat_invalid
-        described = [ aria[:describedby] || flat_describedby, @described_by ].compact_blank.join(" ")
-        aria[:describedby] = described if described.present?
-        aria.empty? ? options : options.merge(aria:)
       end
     end
   end
