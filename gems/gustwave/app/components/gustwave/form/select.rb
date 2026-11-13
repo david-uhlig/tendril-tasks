@@ -62,10 +62,10 @@ module Gustwave
     # size and without validation looks, so with +style: :underline+ neither
     # the size's nor the validation's classes apply. +aria-invalid+ still does.
     #
-    # +size+ and +style+ are also HTML attributes. A Symbol picks the
-    # Flowbite choice, and any other value is the attribute: +size: 5+ renders
-    # +size="5"+ at the default size, and +style: "min-width: 12rem"+ is
-    # inline CSS.
+    # +size+ and +style+ are also HTML attributes. The keywords are always
+    # the options, so the attributes go in +html:+:
+    # <tt>size: :lg, html: { size: 5, style: "min-width: 12rem" }</tt> is the
+    # large select with +size="5"+ and inline CSS.
     #
     # === In a field
     #
@@ -108,29 +108,27 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the select is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the select is a plain +<select>+.
       # @param choices [Array, Hash, String, Range, nil] the options of the select, as Rails' +select+ takes them. The content block is used instead when there is one.
-      # @param size [Symbol, Object] the size of the select. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. Any other value, e.g. +5+, is the HTML attribute +size+.
-      # @param style [Symbol, Object] the style of the select. Defaults to +:default+. Valid values are +:default+ and +:underline+. Any other value, e.g. +"min-width: 12rem"+, is the HTML attribute +style+.
+      # @param size [Symbol] the size of the select. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
+      # @param style [Symbol] the style of the select. Defaults to +:default+. Valid values are +:default+ and +:underline+. The HTML attribute +style+ goes in +html:+.
       # @param validation [Symbol] the look of the select. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+. The underline style has no looks.
       # @param prompt [String, Boolean] Rails' +prompt+ option: an option with no value, first in the list.
       # @param include_blank [String, Boolean] Rails' +include_blank+ option: a blank option, or one with this text.
       # @param selected [Object] Rails' +selected+ option: the value or values to select. +nil+ selects nothing. Without it a bound select selects the record's value.
       # @param disabled_choices [Object] Rails' +disabled+ select option: the value or values of the options to disable. To disable the select, pass +disabled: true+.
       # @param include_hidden [Boolean] Rails' +include_hidden+ option: whether a +multiple+ select renders its hidden field. Defaults to +true+.
-      # @param options [Hash] the HTML attributes of the +<select>+, e.g. +name+, +id+, +multiple+, +required+, +disabled+.
+      # @param options [Hash] the HTML attributes of the +<select>+, e.g. +name+, +id+, +multiple+, +required+, +disabled+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+.
       def initialize(attribute = nil, form: nil, choices: nil, size: DEFAULT, style: DEFAULT, validation: DEFAULT,
                      prompt: DEFAULT, include_blank: DEFAULT, selected: DEFAULT, disabled_choices: DEFAULT,
                      include_hidden: DEFAULT, **options)
         require_form_for_attribute(attribute, form)
 
-        size, size_attributes = split_option_or_attribute(:size, size)
-        style, style_attributes = split_option_or_attribute(:style, style)
         @attribute = attribute
         @form = form
         @choices = choices
         @rails_options = { prompt:, include_blank:, selected:, disabled: disabled_choices, include_hidden: }
                          .reject { |_name, value| value.equal?(DEFAULT) }
-        @options = options.merge(size_attributes, style_attributes)
+        @options = options
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
         select_options(size:, style:, validation:)
       end

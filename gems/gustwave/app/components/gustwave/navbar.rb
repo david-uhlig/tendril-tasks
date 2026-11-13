@@ -84,7 +84,7 @@ module Gustwave
         tag.li { render(link) }
       end,
       generic: ->(**options, &block) do
-        tag.li(**options) { capture(&block) if block }
+        tag.li(**configure_html_attributes(options)) { capture(&block) if block }
       end
     }
 

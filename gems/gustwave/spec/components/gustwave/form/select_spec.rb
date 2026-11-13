@@ -101,33 +101,36 @@ RSpec.describe Gustwave::Form::Select, type: :component do
     end
   end
 
-  describe "size and style as HTML attributes" do
-    it "renders a size that isn't a symbol as the attribute, at the default size" do
-      render_inline(described_class.new(size: 5))
+  describe "size and style as HTML attributes, in html:" do
+    it "renders both attributes next to the Flowbite size" do
+      render_inline(described_class.new(size: :lg, html: { size: 5, style: "min-width: 12rem" }))
 
       expect(select_element[:size]).to eq("5")
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
-    end
-
-    it "renders a numeric string as the attribute" do
-      render_inline(described_class.new(size: "5"))
-
-      expect(select_element[:size]).to eq("5")
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
-    end
-
-    it "renders a style that isn't a symbol as the attribute, in the default style" do
-      render_inline(described_class.new(style: "min-width: 12rem"))
-
       expect(select_element[:style]).to eq("min-width: 12rem")
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_LARGE))
     end
 
-    it "takes both a Flowbite size and the attribute from their keywords" do
-      render_inline(described_class.new(size: :lg, style: "color: red"))
+    it "renders the style attribute next to the underline style" do
+      render_inline(described_class.new(style: :underline, html: { style: "color: red" }))
 
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_LARGE))
       expect(select_element[:style]).to eq("color: red")
+      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_UNDERLINE))
+    end
+
+    it "raises for a size or style that isn't one of its values, and names html:" do
+      expect { described_class.new(size: 5) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /pass html: \{ size: 5 \}\./)
+      expect { described_class.new(style: "min-width: 12rem") }
+        .to raise_error(Gustwave::Options::UnknownValueError, /pass html: \{ style: "min-width: 12rem" \}\./)
+    end
+
+    it "falls back to the defaults when Gustwave isn't strict" do
+      Gustwave.strict = false
+      render_inline(described_class.new(size: 5, style: "color: red"))
+
+      expect(select_element[:size]).to be_nil
+      expect(select_element[:style]).to be_nil
+      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
     end
   end
 
@@ -407,8 +410,8 @@ RSpec.describe Gustwave::Form::Select, type: :component do
       expect(select_element[:name]).to eq("my[country]")
     end
 
-    it "renders size as the attribute for a number" do
-      render_inline(described_class.new(:country, form: form_builder, choices: countries, size: 5))
+    it "renders the size attribute of a bound select from html:" do
+      render_inline(described_class.new(:country, form: form_builder, choices: countries, html: { size: 5 }))
 
       expect(select_element[:size]).to eq("5")
       expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))

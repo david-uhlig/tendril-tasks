@@ -415,6 +415,13 @@ RSpec.describe Gustwave::Form::Field, type: :component do
       expect(classes_of(input)).to include("p-4", "ps-10")
     end
 
+    it "passes html: to the control" do
+      render_field(:title, form: form_builder) { |f| f.with_control_input(size: :sm, html: { size: 20 }) }
+
+      expect(input[:size]).to eq("20")
+      expect(classes_of(input)).to include("p-2")
+    end
+
     it "renders the block in place of a control" do
       render_inline(described_class.new(label: "Plan", helper_text: "Pick one.")) do
         "<select id='plan'></select>".html_safe

@@ -64,6 +64,19 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(html).to have_css("div > div.relative > div.absolute > svg")
     end
 
+    it "passes html: to the input, next to its size" do
+      input = parse(gustwave_form.text_field(:title, size: :lg, html: { size: 20 }, placeholder: "p")).find("input")
+
+      expect(input[:size]).to eq("20")
+      expect(input[:placeholder]).to eq("p")
+      expect(class_set(input[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_INPUT_LARGE))
+    end
+
+    it "raises for a size that is an HTML attribute, and names html:" do
+      expect { gustwave_form.text_field(:title, size: 20) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /pass html: \{ size: 20 \}\./)
+    end
+
     it "accepts string keys" do
       html = parse(gustwave_form.text_field(:title, "helper_text" => "Help", "size" => :sm, "placeholder" => "P"))
 
@@ -160,6 +173,25 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_UNDERLINE))
       expect(select[:size]).to be_nil
       expect(select[:style]).to be_nil
+    end
+
+    it "takes size as an option in the first hash and as an attribute in the second" do
+      select = parse(gustwave_form.select(:country, countries, { size: :lg }, { size: 5 })).find("select")
+
+      expect(select[:size]).to eq("5")
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_LARGE))
+    end
+
+    it "merges html: of the first hash under the second hash" do
+      select = parse(gustwave_form.select(:country, countries, { html: { size: 3, style: "x: y" } }, { size: 5 })).find("select")
+
+      expect(select[:size]).to eq("5")
+      expect(select[:style]).to eq("x: y")
+    end
+
+    it "raises for an html: in the first hash that isn't a hash" do
+      expect { gustwave_form.select(:country, countries, { html: "nope" }) }
+        .to raise_error(ArgumentError, 'html: takes a Hash of HTML attributes, got "nope"')
     end
 
     it "takes the large size without a hash around the options" do
@@ -285,9 +317,12 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(class_set(select[:class])).to include("shadow-xs", "p-2.5")
     end
 
-    it "raises when size or style is both Gustwave's option and an HTML attribute" do
-      expect { gustwave_form.select(:country, countries, { size: :lg }, { size: 5 }) }.to raise_error(ArgumentError, /size:/)
-      expect { gustwave_form.select(:country, countries, { style: :underline }, { style: "color: red" }) }.to raise_error(ArgumentError, /style:/)
+    it "takes style as an option in the first hash and as an attribute in the second" do
+      select = parse(gustwave_form.collection_select(:country, countries, :code, :name, { style: :underline },
+                                                     { style: "color: red" })).find("select")
+
+      expect(select[:style]).to eq("color: red")
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_UNDERLINE))
     end
 
     it "renders the same name, ID and options as Rails' own builder" do

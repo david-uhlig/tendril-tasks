@@ -62,8 +62,10 @@ module Gustwave
   #     @tag = option_value(:tag)
   #   end
   #
-  # Only those keywords are options, so +options+ keeps every HTML attribute,
-  # even one named like an option. Callers may pass +nil+ for an option to get
+  # Only those keywords are options, and a keyword named like an option is
+  # always the option. Callers pass the HTML attribute of that name with
+  # +html:+, e.g. <tt>size: :lg, html: { size: 5 }</tt> (see
+  # Gustwave::Component.new). Callers may pass +nil+ for an option to get
   # its default, too.
   #
   # Unknown options or values raise when Gustwave.strict?, by default in
@@ -79,6 +81,16 @@ module Gustwave
       def default.to_s = "DEFAULT"
     end.freeze
 
+    # The HTML attributes an option may share its name with: the global
+    # attributes and those of form controls. For an option named like one of
+    # them, UnknownValueError says how to pass the attribute instead.
+    HTML_ATTRIBUTE_NAMES = %i[
+      accept accesskey alt autocapitalize autocomplete autofocus checked class cols contenteditable dir disabled
+      draggable enterkeyhint form formaction formenctype formmethod formnovalidate formtarget height hidden id inert
+      inputmode lang list max maxlength min minlength multiple name pattern placeholder popover readonly required
+      role rows selected size slot spellcheck src step style tabindex title translate type value width wrap
+    ].freeze
+
     # Raised when Gustwave.strict? for an option the component doesn't
     # declare.
     class UnknownOptionError < Gustwave::Error
@@ -88,10 +100,12 @@ module Gustwave
     end
 
     # Raised when Gustwave.strict? for a value an option doesn't declare.
+    # +passed+ is the value before it was normalized, for the hint.
     class UnknownValueError < Gustwave::Error
-      def initialize(component, option, given:, expected:, fallback:)
+      def initialize(component, option, given:, expected:, fallback:, passed: given)
         message = Options.suggest("Unknown value #{given.inspect} for #{option.inspect} of #{component}", given, expected)
-        super("#{message}\n#{Options.fallback_note(fallback)}")
+        hint = Options.html_attribute_hint(option, passed)
+        super([ message, hint, Options.fallback_note(fallback) ].compact.join("\n"))
       end
     end
 
@@ -116,6 +130,15 @@ module Gustwave
       # Tells what a component falls back to when Gustwave isn't strict.
       def fallback_note(fallback)
         "When Gustwave isn't strict, e.g. outside development and test, this falls back to #{fallback.inspect}."
+      end
+
+      # Tells how to pass the HTML attribute an option shares its name with.
+      #
+      # @return [String, nil] +nil+ for an option that isn't named like an HTML attribute.
+      def html_attribute_hint(option, value)
+        return unless HTML_ATTRIBUTE_NAMES.include?(option.to_sym)
+
+        "For the HTML attribute, pass html: { #{option}: #{value.inspect} }."
       end
 
       # Converts an option value to a symbol: +2+ becomes +:"2"+.
@@ -317,9 +340,13 @@ module Gustwave
         if option.boolean?
           normalized[name] = ActiveModel::Type::Boolean.new.cast(value) || false
         else
-          value = Options.normalize_value(value)
-          next normalized[name] = value if option.values.include?(value)
-          raise UnknownValueError.new(option_component_name, name, given: value, expected: option.values, fallback: option.default) if Gustwave.strict?
+          normalized_value = Options.normalize_value(value)
+          next normalized[name] = normalized_value if option.values.include?(normalized_value)
+
+          if Gustwave.strict?
+            raise UnknownValueError.new(option_component_name, name, given: normalized_value, expected: option.values,
+                                                                     fallback: option.default, passed: value)
+          end
         end
       end
     end

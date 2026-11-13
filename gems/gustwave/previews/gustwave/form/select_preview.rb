@@ -14,8 +14,8 @@ module Gustwave
         render_with_template
       end
 
-      # Flowbite's "Size attribute" example: +size: 5+ is the HTML attribute, which shows five options of the list.
-      # The select keeps the default size, because only a Symbol picks Flowbite's size.
+      # Flowbite's "Size attribute" example: +html: { size: 5 }+ is the HTML attribute, which shows five options of the
+      # list. The select keeps the default size, because the +size+ keyword is Flowbite's size.
       def size_attribute
         render_with_template
       end

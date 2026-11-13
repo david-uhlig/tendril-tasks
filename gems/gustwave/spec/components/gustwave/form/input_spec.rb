@@ -28,17 +28,6 @@ RSpec.describe Gustwave::Form::Input, type: :component do
       expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_SMALL))
     end
 
-    it "renders a size that isn't a symbol as the HTML attribute, at the default size" do
-      render_inline(described_class.new(size: 20))
-
-      expect(page.find("input")[:size]).to eq("20")
-      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT))
-
-      render_inline(described_class.new(size: "20"))
-      expect(page.find("input")[:size]).to eq("20")
-      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT))
-    end
-
     it "accepts a string naming the size" do
       render_inline(described_class.new(size: "lg"))
 
@@ -46,10 +35,39 @@ RSpec.describe Gustwave::Form::Input, type: :component do
       expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_LARGE))
     end
 
-    it "renders the size attribute of a bound input" do
-      render_inline(described_class.new(:title, form: form_builder, size: 20))
+    it "renders the size attribute from html:, next to the size option" do
+      render_inline(described_class.new(size: :lg, html: { size: 20 }))
 
       expect(page.find("input")[:size]).to eq("20")
+      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_LARGE))
+    end
+
+    it "renders the size attribute of a bound input from html:" do
+      render_inline(described_class.new(:title, form: form_builder, html: { size: 20 }))
+
+      expect(page.find("input")[:size]).to eq("20")
+      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT))
+    end
+
+    it "raises for a size that isn't one of its sizes, and names html:" do
+      expect { described_class.new(size: 20) }
+        .to raise_error(Gustwave::Options::UnknownValueError, /For the HTML attribute, pass html: \{ size: 20 \}\./)
+      expect { described_class.new(size: "20") }
+        .to raise_error(Gustwave::Options::UnknownValueError, /html: \{ size: "20" \}/)
+    end
+
+    it "falls back to the default size when Gustwave isn't strict" do
+      Gustwave.strict = false
+      render_inline(described_class.new(size: 20))
+
+      expect(page.find("input")[:size]).to be_nil
+      expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT))
+    end
+
+    it "lets html: set the type attribute" do
+      render_inline(described_class.new(type: :email, html: { type: "text" }))
+
+      expect(page.find("input")[:type]).to eq("text")
     end
 
     it "carries Flowbite's classes for the success and error state" do

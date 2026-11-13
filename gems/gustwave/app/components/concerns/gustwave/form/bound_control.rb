@@ -173,22 +173,6 @@ module Gustwave
                                         .bind_call(errorless_builder(form), attribute, *args, &block)
       end
 
-      # Tells an option from the HTML attribute of the same name, for a
-      # keyword like +size+ or +style+ that is both. A Symbol picks the
-      # option's value, and so does a String naming one. Any other value is
-      # the HTML attribute, e.g. +size: 5+. +nil+ and +DEFAULT+ stay with the
-      # option.
-      #
-      # @param name [Symbol] the option, e.g. +:size+.
-      # @param value [Object] what the caller passed.
-      # @return [Array(Object, Hash)] the value for +select_options+, and the HTML attribute to add to the element, empty for an option.
-      def split_option_or_attribute(name, value)
-        return [ value, {} ] if value.nil? || value.equal?(Gustwave::Options::DEFAULT) || value.is_a?(Symbol)
-        return [ value, {} ] if value.is_a?(String) && self.class.option_values(name).include?(value.to_sym)
-
-        [ Gustwave::Options::DEFAULT, { name => value } ]
-      end
-
       # A builder of the form's class for a record without errors. A form
       # without a record has no errors to hide, so it stays as it is.
       def errorless_builder(form)

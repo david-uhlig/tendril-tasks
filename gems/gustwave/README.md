@@ -36,6 +36,8 @@ Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and 
 
 Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `color` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts. Components that declare `unstyled color: :none` skip their base styles for `color: :none`, so callers can bring their own.
 
+A keyword that is neither an option nor one of the component's own arguments is an HTML attribute of the component's element. A keyword named like an option is always the option, so pass the HTML attribute of that name in `html:`, which takes any attributes as a hash and wins over the flat ones: `Gustwave::Tabs.new(style: :underline, html: { style: "max-width: 40rem" })`. It works on slot setters that build an element too.
+
 To restyle a component everywhere, extend it whenever it loads, e.g. in `config/initializers/gustwave.rb`. Subclasses that are already loaded pick up the change:
 
 ```ruby
@@ -130,9 +132,9 @@ A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The b
 <% end %>
 ```
 
-The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s or `<textarea>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
+The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s or `<textarea>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. `size` is Gustwave's size, so the HTML attribute goes in `html:`: `f.text_field :title, html: { size: 20 }`. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
 
-`select` and `collection_select` take two hashes, as in Rails. The first holds Rails' select options (`prompt`, `include_blank`, `selected`, `disabled`, `include_hidden`) and Gustwave's (`label`, `helper_text`, `validation`, `validation_message`, and the select's `size` and `style`), so `f.select :country, @countries, prompt: "Choose", size: :lg` needs no braces. The second is the `<select>`'s HTML attributes, e.g. `multiple: true` or `size: 5`. The block of `select` stays Rails': it supplies the option tags and doesn't receive the field. Set the slots of a select's field with `Gustwave::Form::Field` and `with_control_select`.
+`select` and `collection_select` take two hashes, as in Rails. The first holds Rails' select options (`prompt`, `include_blank`, `selected`, `disabled`, `include_hidden`) and Gustwave's (`label`, `helper_text`, `validation`, `validation_message`, and the select's `size` and `style`), so `f.select :country, @countries, prompt: "Choose", size: :lg` needs no braces. The second is the `<select>`'s HTML attributes, e.g. `multiple: true` or `size: 5`, also when the first has a `size`: `f.select :tags, @tags, { size: :lg }, { size: 5 }`. The block of `select` stays Rails': it supplies the option tags and doesn't receive the field. Set the slots of a select's field with `Gustwave::Form::Field` and `with_control_select`.
 
 `Gustwave::Form::Field`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea` and `Gustwave::Form::Select` work on their own: with any Rails builder, or without one:
 
@@ -164,7 +166,7 @@ See [Forms in the design notes](docs/design.md#forms).
 
 ### Strictness
 
-In development and test, an unknown option, value, part or theme raises an error that names the valid ones. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
+In development and test, an unknown option, value, part or theme raises an error that names the valid ones. For an option named like an HTML attribute, such as `size`, the error says how to pass the attribute: `html: { size: 20 }`. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
 
 ```ruby
 # config/environments/staging.rb
