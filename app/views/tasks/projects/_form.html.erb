@@ -1,8 +1,8 @@
 <%# locals: (project_form:) %>
 <%= form_with model: project_form,
-              builder: Gustwave::FormBuilder,
               url: tasks_projects_path,
               method: :post,
+              builder: Gustwave::FormBuilder,
               id: "new-project-form",
               data: { turbo_stream: "true" } do |f| %>
   <div class="p-4 md:p-5 space-y-4">

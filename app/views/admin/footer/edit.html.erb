@@ -30,8 +30,8 @@
   <%= form_with id: "copyright-form",
                 url: admin_footer_copyright_path,
                 method: :put,
-                class: "space-y-6",
-                builder: Gustwave::FormBuilder do |form| %>
+                builder: Gustwave::FormBuilder,
+                class: "space-y-6" do |form| %>
     <div class="flex flex-nowrap space-x-4">
       <div class="grow">
         <%= form.text_field :copyright_notice,

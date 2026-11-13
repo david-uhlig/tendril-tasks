@@ -12,8 +12,8 @@
 <%# Keep the submitted comment and its errors if the application was invalid %>
 <%= form_with model: application&.new_record? ? application : TaskApplication.new,
               url: task_application_path(task),
-              class: "mx-auto space-y-4",
-              builder: Gustwave::FormBuilder do |f| %>
+              builder: Gustwave::FormBuilder,
+              class: "mx-auto space-y-4" do |f| %>
   <%= f.text_area :comment,
                   label: t("activerecord.attributes.task_application.comment"),
                   rows: 8,

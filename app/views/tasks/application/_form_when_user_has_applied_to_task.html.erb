@@ -18,8 +18,8 @@
 <%= form_with model: application,
               method: :patch,
               url: task_application_path(task),
-              class: "mx-auto space-y-4",
-              builder: Gustwave::FormBuilder do |f| %>
+              builder: Gustwave::FormBuilder,
+              class: "mx-auto space-y-4" do |f| %>
   <% if application.editable? %>
     <%= f.text_area :comment,
                     label: t("activerecord.attributes.task_application.comment"),
