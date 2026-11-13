@@ -18,7 +18,12 @@ RSpec.describe "Admin Site Hero Image", type: :request do
       get edit_admin_site_path
 
       page = Nokogiri::HTML(response.body)
-      expect(page.at_css("#site-hero-image-form #hero-image-field")).to be_present
+      expect(page.at_css("#site-hero-image-form")["enctype"]).to eq("multipart/form-data")
+      input = page.at_css("#site-hero-image-form #hero-image-field input[type=file][name='site[hero_image]']")
+      expect(input["id"]).to eq("site_hero_image")
+      expect(input["aria-invalid"]).to be_nil
+      expect(page.at_css("#hero-image-field label[for=site_hero_image]")).to be_present
+      expect(page.at_css("#hero-image-field").text).to include(I18n.t("admin.site.edit.home_page.hero_image.file_field.helper_text"))
       expect(page.at_css("#current-hero-image figcaption").text.squish).to eq("Standardfoto von Anna Schroeder auf Unsplash")
     end
 
@@ -69,7 +74,9 @@ RSpec.describe "Admin Site Hero Image", type: :request do
       put admin_site_hero_image_path, params: { site: { hero_image: uploaded_image("application/pdf") } }, as: :turbo_stream
 
       expect(response).to have_http_status(:unprocessable_content)
-      expect(response.body).to include("error-message-for-hero_image")
+      field = Nokogiri::HTML(response.body).at_css("#hero-image-field")
+      expect(field.at_css("input[type=file][name='site[hero_image]']")["aria-invalid"]).to eq("true")
+      expect(field.at_css("input[type=file]")["aria-describedby"]).to be_present
       expect(response.body).not_to include('target="current-hero-image"')
       expect(hero_image.content_type).to eq("image/jpeg")
     end

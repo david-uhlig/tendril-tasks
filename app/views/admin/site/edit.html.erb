@@ -66,6 +66,7 @@
                 id: "site-logo-form",
                 url: admin_site_logo_path,
                 method: :put,
+                builder: Gustwave::FormBuilder,
                 class: "space-y-6" do |form| %>
     <%# Shows the file field next to the logo, or below a logo too wide for both. %>
     <div class="flex flex-wrap items-center gap-4 sm:gap-6">
@@ -178,6 +179,7 @@
                 id: "site-hero-image-form",
                 url: admin_site_hero_image_path,
                 method: :put,
+                builder: Gustwave::FormBuilder,
                 class: "space-y-6" do |form| %>
     <%# Shows the picture wide like on the home page, with the file field below it %>
     <%= render "admin/site/hero_image_preview", site: @site %>
