@@ -16,6 +16,15 @@ RSpec.describe Gustwave::Form::FileInput, type: :component do
     class_set(file_input[:class])
   end
 
+  describe "html:" do
+    it "renders the size attribute from html:, next to the size option" do
+      render_inline(described_class.new(size: :lg, html: { size: 20 }))
+
+      expect(file_input[:size]).to eq("20")
+      expect(file_input_classes).to include("text-lg")
+    end
+  end
+
   describe "classes" do
     it "carries Flowbite's classes by default" do
       render_inline(described_class.new)
