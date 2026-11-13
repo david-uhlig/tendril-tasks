@@ -773,8 +773,8 @@ pages:
     preview: gustwave/form/textarea/default
   - id: form-select-input-example
     title: Select input
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/default
   - id: form-checkbox-example
     title: Checkbox
     status: blocked
@@ -1883,32 +1883,32 @@ pages:
   forms/select:
   - id: default-select-example
     title: Select input example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/default
   - id: select-multiple-example
     title: Multiple options
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/multiple
   - id: select-size-example
     title: Size attribute
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/size_attribute
   - id: select-disabled-example
     title: Disabled state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/disabled
   - id: select-underline-example
     title: Underline select
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/underline
   - id: select-dropdown-example
     title: Select with dropdown
     status: blocked
-    needs: form
+    needs: input-group
   - id: select-sizes-example
     title: Sizes
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/select/sizes
   forms/textarea:
   - id: default-textarea-example
     title: Textarea example

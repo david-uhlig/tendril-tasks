@@ -165,11 +165,12 @@ module Gustwave
       # @param helper [Symbol] e.g. +:text_field+.
       # @param form [ActionView::Helpers::FormBuilder]
       # @param attribute [Symbol, String]
-      # @param html_options [Hash] the element's HTML attributes.
+      # @param args the arguments of Rails' helper after the attribute, e.g. the HTML attributes, or for +:select+ the choices, the options and the HTML attributes.
+      # @yield passed on to the helper.
       # @return [ActiveSupport::SafeBuffer]
-      def render_bound_element(helper, form, attribute, html_options)
+      def render_bound_element(helper, form, attribute, *args, &block)
         ActionView::Helpers::FormBuilder.instance_method(helper)
-                                        .bind_call(errorless_builder(form), attribute, html_options)
+                                        .bind_call(errorless_builder(form), attribute, *args, &block)
       end
 
       # A builder of the form's class for a record without errors. A form
