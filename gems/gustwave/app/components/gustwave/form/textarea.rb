@@ -50,7 +50,7 @@ module Gustwave
     # "mb-4" }</tt>. +options+ still go to the +<textarea>+. The validation
     # state colors the frame's border, and the textarea gets +aria-invalid+
     # only. For a real editor such as Lexxy, use
-    # Gustwave::Form::RichTextArea.
+    # Gustwave::Form::RichTextarea.
     #
     # === In a field
     #

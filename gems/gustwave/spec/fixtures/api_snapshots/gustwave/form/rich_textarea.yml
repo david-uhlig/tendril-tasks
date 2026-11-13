@@ -1,0 +1,70 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'editor: (optional)'
+- 'validation: (optional)'
+- 'sticky_toolbar: (optional)'
+- 'toolbar_id: (optional)'
+- 'frame_options: (optional)'
+- 'header_options: (optional)'
+- 'body_options: (optional)'
+- 'footer_options: (optional)'
+- "**options"
+options:
+  editor:
+    default: lexxy
+    values:
+    - lexxy
+    - trix
+  sticky_toolbar:
+    default: 'true'
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- body
+- editor
+- footer
+- frame
+- header
+slots:
+  footer:
+    many: false
+    types:
+    - generic
+    - toolbar
+  header:
+    many: false
+    types:
+    - generic
+    - toolbar
+methods:
+- apply_slot_context
+- footer
+- footer?
+- header
+- header?
+- html_id
+- toolbar_id
+- with_footer
+- with_footer_content
+- with_footer_generic
+- with_footer_generic_content
+- with_footer_toolbar
+- with_footer_toolbar_content
+- with_header
+- with_header_content
+- with_header_generic
+- with_header_generic_content
+- with_header_toolbar
+- with_header_toolbar_content
+slot_builders:
+- build_slot_footer_generic
+- build_slot_footer_toolbar
+- build_slot_header_generic
+- build_slot_header_toolbar

@@ -6,8 +6,9 @@ module Gustwave
     # a white body, and a bar above it, below it or both, as in Flowbite's
     # "WYSIWYG Editor" and "Comment box" textarea examples.
     #
-    # Gustwave::Form::Textarea includes the concern. It holds the frame, so
-    # every control with one shares it. A control that includes it
+    # Gustwave::Form::Textarea and Gustwave::Form::RichTextarea include the
+    # concern. It holds the frame, so every control with one shares it. A
+    # control that includes it
     #
     # * declares a +validation+ variant, which the frame's border follows,
     # * takes +frame_options:+, +header_options:+, +body_options:+ and
