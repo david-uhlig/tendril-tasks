@@ -1,5 +1,11 @@
-<%= render Gustwave::Form::Toggle.new(value: "", label_options: { class: "mb-5" }) { "Weekly summary" } %>
+<%= render Gustwave::Form::InlineField.new(label: "Weekly summary", class: "mb-5") do |field| %>
+  <% field.with_control_toggle(id: "weekly-summary", value: "") %>
+<% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, label_options: { class: "mb-5" }) { "Product updates" } %>
+<%= render Gustwave::Form::InlineField.new(label: "Product updates", class: "mb-5") do |field| %>
+  <% field.with_control_toggle(id: "product-updates", value: "", checked: true) %>
+<% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", disabled: true, label_options: { class: "mb-5" }, text_options: { class: "text-gray-900 dark:text-gray-300" }) { "Security alerts" } %>
+<%= render Gustwave::Form::InlineField.new(label: "Security alerts", class: "mb-5") do |field| %>
+  <% field.with_control_toggle(id: "security-alerts", value: "", disabled: true) %>
+<% end %>

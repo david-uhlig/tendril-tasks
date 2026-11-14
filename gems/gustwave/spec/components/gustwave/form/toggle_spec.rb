@@ -27,27 +27,16 @@ RSpec.describe Gustwave::Form::Toggle, type: :component do
     class_set(track[:class])
   end
 
-  def text
-    page.find("label > span")
-  end
-
   describe "markup" do
-    it "renders Flowbite's label around a hidden checkbox, the track and the text" do
-      render_inline(described_class.new(value: "")) { "Toggle me" }
+    it "renders a label around a hidden checkbox and the track, without text" do
+      render_inline(described_class.new(value: "", aria: { label: "Notify me" }))
 
       expect(class_set(label[:class])).to eq(class_set("inline-flex items-center cursor-pointer"))
       expect(class_set(checkbox[:class])).to eq(class_set("sr-only peer"))
       expect(checkbox[:value]).to eq("")
-      expect(page).to have_css("label > input[type='checkbox'] + div + span")
-      expect(class_set(text[:class])).to eq(class_set("ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"))
-      expect(text.text).to eq("Toggle me")
-    end
-
-    it "renders no text without a block" do
-      render_inline(described_class.new(aria: { label: "Notify me" }))
-
-      expect(page).to have_no_css("span")
       expect(checkbox["aria-label"]).to eq("Notify me")
+      expect(page.all("label > *", visible: :all).map(&:tag_name)).to eq(%w[input div])
+      expect(label.text).to eq("")
     end
 
     it "sends the options to the checkbox" do
@@ -62,14 +51,11 @@ RSpec.describe Gustwave::Form::Toggle, type: :component do
 
     it "styles the parts with their options" do
       render_inline(described_class.new(label_options: { class: "mb-5", data: { a: "1" } },
-                                        track_options: { class: "shadow-xs" },
-                                        text_options: { class: "font-bold" })) { "Text" }
+                                        track_options: { class: "shadow-xs" }))
 
       expect(class_set(label[:class])).to include("mb-5")
       expect(label["data-a"]).to eq("1")
       expect(track_classes).to include("shadow-xs")
-      expect(class_set(text[:class])).to include("font-bold")
-      expect(class_set(text[:class])).not_to include("font-medium")
     end
 
     it "takes the size attribute from html:" do
@@ -122,18 +108,12 @@ RSpec.describe Gustwave::Form::Toggle, type: :component do
       end
     end
 
-    it "grays the text of a disabled toggle, as Flowbite's disabled example does" do
-      render_inline(described_class.new(disabled: true)) { "Disabled toggle" }
+    it "keeps its classes when disabled, as Flowbite's disabled example does" do
+      render_inline(described_class.new(disabled: true))
 
       expect(checkbox[:disabled]).to be_present
-      expect(class_set(text[:class])).to include("text-gray-400", "dark:text-gray-500")
-      expect(class_set(text[:class])).not_to include("text-gray-900", "dark:text-gray-300")
-    end
-
-    it "doesn't look disabled for required" do
-      render_inline(described_class.new(required: true)) { "Text" }
-
-      expect(class_set(text[:class])).to include("text-gray-900")
+      expect(track_classes).to eq(class_set(flowbite_track))
+      expect(class_set(label[:class])).to include("cursor-pointer")
     end
 
     it "adds the caller's classes to the checkbox, which win conflicts" do

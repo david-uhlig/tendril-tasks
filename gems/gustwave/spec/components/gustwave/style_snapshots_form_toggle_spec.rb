@@ -7,11 +7,11 @@ RSpec.describe "Gustwave::Form::Toggle style snapshot", type: :component do
 
   style_snapshot "Gustwave::Form::Toggle" do
     group :look, size: %i[sm md lg], color: %i[blue red green purple yellow teal orange] do |**args|
-      Gustwave::Form::Toggle.new(**args) { "Toggle me" }
+      Gustwave::Form::Toggle.new(**args)
     end
 
     group :disabled, disabled: [ true ] do |**args|
-      Gustwave::Form::Toggle.new(**args) { "Toggle me" }
+      Gustwave::Form::Toggle.new(**args)
     end
   end
 end

@@ -53,14 +53,13 @@ module Gustwave
   # Rails', including the other select helpers such as
   # +grouped_collection_select+ and +time_zone_select+.
   #
-  # +toggle+ has no Rails helper. It renders a field with a
-  # Gustwave::Form::Toggle through Rails' +check_box+, so the label goes above
-  # the switch. It takes Rails' +checked_value+ and +unchecked_value+ after
-  # the options, and the toggle's +size+ and +color+. A toggle with text of
-  # its own is its own label, which the toggle's block sets, so render it
-  # with Gustwave::Form::Field and +label: false+, as for the select's slots:
+  # +toggle+ has no Rails helper. It renders a Gustwave::Form::InlineField
+  # with a Gustwave::Form::Toggle through Rails' +check_box+, so the label
+  # goes beside the switch and the helper text under the label. It takes
+  # Rails' +checked_value+ and +unchecked_value+ after the options, and the
+  # toggle's +size+ and +color+:
   #
-  #   <%= f.toggle :published, color: :green %>
+  #   <%= f.toggle :published, color: :green, helper_text: "Visible to everyone." %>
   #   <%= f.toggle :published, { size: :lg }, "yes", "no" %>
   #
   # The rich textarea's +editor+, +sticky_toolbar+ and +toolbar_id+ are its
@@ -71,11 +70,14 @@ module Gustwave
   #
   # === Extending
   #
-  # An app's subclass renders its own field class with +field_class+, and
-  # adds helpers for its own controls with +render_field+:
+  # An app's subclass renders its own field classes with +field_class+, for
+  # the helpers with the label above the control, and +inline_field_class+,
+  # for those with the label beside it. It adds helpers for its own controls
+  # with +render_field+ and +render_inline_field+:
   #
   #   class AppFormBuilder < Gustwave::FormBuilder
   #     self.field_class = "App::Field"
+  #     self.inline_field_class = "App::InlineField"
   #
   #     def rating(attribute, options = {}, &block)
   #       render_field(attribute, :rating, options, &block)
@@ -91,6 +93,13 @@ module Gustwave
                     instance_writer: false,
                     instance_predicate: false,
                     default: "Gustwave::Form::Field"
+
+    # The field class of the helpers whose label goes beside the control, as
+    # +toggle+'s does. Set it like +field_class+.
+    class_attribute :inline_field_class,
+                    instance_writer: false,
+                    instance_predicate: false,
+                    default: "Gustwave::Form::InlineField"
 
     # The options that go to the field. The rest goes to the control: an
     # input's +size+ and +icon+ are its options, everything else the HTML
@@ -141,11 +150,10 @@ module Gustwave
       render_field(attribute, :file_input, options, &block)
     end
 
-    # Renders a field with a Gustwave::Form::Toggle. There is no Rails helper
-    # of this name, so it follows +check_box+: the options, then the checked
-    # and the unchecked value. The block receives the field, as for the input
-    # helpers. It can't set the toggle's text, as the control is set already:
-    # for that, render Gustwave::Form::Field with +label: false+.
+    # Renders an inline field with a Gustwave::Form::Toggle. There is no
+    # Rails helper of this name, so it follows +check_box+: the options, then
+    # the checked and the unchecked value. The block receives the field, as
+    # for the input helpers.
     #
     # @param attribute [Symbol, String] the attribute.
     # @param options [Hash] as for +render_field+; +size+ and +color+ go to the toggle.
@@ -153,7 +161,7 @@ module Gustwave
     # @param unchecked_value [Object] Rails' value of an unchecked box.
     def toggle(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
       options = options.to_h.symbolize_keys.merge(checked_value:, unchecked_value:)
-      render_field(attribute, :toggle, options, &block)
+      render_inline_field(attribute, :toggle, options, &block)
     end
 
     # The options of a select helper that go to the control as they are.
@@ -212,10 +220,25 @@ module Gustwave
       render_field_with(attribute, control, options.slice(*FIELD_OPTIONS), options.except(*FIELD_OPTIONS), &block)
     end
 
+    # Renders an inline field for +attribute+, with the label beside the
+    # control, as +render_field+ renders a stacked one. +control+ is a type
+    # of the +control+ slot of +inline_field_class+.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param control [Symbol] the type of the inline field's +control+ slot.
+    # @param options [Hash] as for +render_field+.
+    # @yield [field] the field, to set its slots.
+    # @return [ActiveSupport::SafeBuffer]
+    def render_inline_field(attribute, control, options = {}, &block)
+      options = options.to_h.symbolize_keys
+      render_field_with(attribute, control, options.slice(*FIELD_OPTIONS), options.except(*FIELD_OPTIONS),
+                        field_class: inline_field_class, &block)
+    end
+
     private
 
     # Renders the field with its own options and the control's.
-    def render_field_with(attribute, control, field_options, control_options, &block)
+    def render_field_with(attribute, control, field_options, control_options, field_class: self.field_class, &block)
       field = field_class.to_s.constantize.new(attribute, form: self, **field_options)
 
       @template.render(field) do |rendered|

@@ -160,12 +160,12 @@ A component takes `id:` for its own root and generates one with a component-spec
 
 ## Forms
 
-Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::RichTextarea`, `Form::Select`, `Form::Field` and the builder follow it. *Planned:* the other controls.
+Flowbite's form patterns come in three layers, so a form reads like a Rails form and every piece still works on its own (D9). `Form::Input`, `Form::Textarea`, `Form::RichTextarea`, `Form::Select`, `Form::Toggle`, `Form::Field`, `Form::InlineField` and the builder follow it. *Planned:* the other controls.
 
 | Layer | Owns | Example |
 |---|---|---|
 | A control | One form element: its classes, sizes, validation look and the visuals inside it | `Form::Input`, `Form::Select`, `Form::Toggle` |
-| `Form::Field` | What surrounds a control: label, helper text and validation message, and the IDs and ARIA attributes that tie them to it | |
+| A field | What surrounds a control: label, helper text and validation message, and the IDs and ARIA attributes that tie them to it | `Form::Field`, `Form::InlineField` |
 | `Gustwave::FormBuilder` | No markup. It turns Rails' form helpers into fields | `f.text_field :title` |
 
 ```erb
@@ -192,12 +192,15 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 - **Rails renders a bound element.** The control hands its attributes to Rails' helper for that element, so the name, ID, value, type casting, nested attributes and `index` behave as in any Rails form. A control never works them out itself. Without `form:` it renders a plain element, and `name:`, `id:` and `value:` are ordinary HTML attributes.
 - **`options` are the form element's attributes:** the `<input>`, `<select>` or `<textarea>`, in every control, also where that element isn't the root. Any other element is a part with `<part>_options:`.
 - **Fixed choices are options:** `size`, and `validation` with `:success` and `:error` for Flowbite's validation looks. `disabled`, `readonly` and `required` stay HTML attributes. `size`, `style` and `type` are HTML attributes too, but the keyword is always the option: `size: :lg` is the large input, and `html: { size: 20 }` renders `size="20"`. See [HTML attributes](#html-attributes).
-- **Label, helper text and validation messages belong to `Form::Field`,** not to the control. A control rendered on its own gets its accessible name from the caller.
+- **Label, helper text and validation messages belong to the field,** not to the control, without exception (D13). A control renders its element and its look, never the label or the arrangement around it. A control rendered on its own gets its accessible name from the caller. `Form::Toggle`'s own `<label>` holds only the input and the track, as the click target, and no text.
 - **A control may render in a frame.** With a `header` or `footer` slot, `Form::Textarea` renders in Flowbite's frame. The frame's parts take `<part>_options:`; `options` still go to the `<textarea>`. The frame is shared by the controls that have one, in the `Framed` concern. `Form::RichTextarea` always renders in it; its `header` and `footer` are polymorphic, so the toolbar can sit in either.
 
 ### Field
 
-`Form::Field` takes the same `attribute` and `form:` as a control and passes them on, so callers state them once.
+A field takes the same `attribute` and `form:` as a control and passes them on, so callers state them once.
+
+- **One field class per label layout (D13).** `Form::Field` stacks the label, the control and the texts. `Form::InlineField` puts the label beside the control, with the helper text under the label, for the toggle. *Planned:* checkbox and radio in the inline field, and a field for the floating label. What they share is the `FieldWiring` concern, so the rules below hold for every field. Each field has the control types of its layout.
+- **Layout between control and text is the field's.** Flowbite's gap is `ms-3` after a toggle and `ms-2` after a checkbox, so `Form::InlineField` picks it from the type of its control. The control carries no layout.
 
 - **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `validation_message`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`. The other three take text or a block and build markup, not a component.
 - **`label:` and `helper_text:` are shorthand** for the slots of the same name, as `icon:` is for a visual. `label: false` renders no label.
@@ -211,11 +214,12 @@ Form components live in `Gustwave::Form`, named after their Flowbite pattern (D1
 `Gustwave::FormBuilder` is a subclass of `ActionView::Helpers::FormBuilder`. A form opts in with `builder: Gustwave::FormBuilder` (D10).
 
 - **It keeps Rails' helper names and signatures.** HTML options still go to the element. One call changes when a form switches to it: a key named like an option of the control is that option, so `size: 20` on `text_field` becomes `html: { size: 20 }`. A helper Gustwave has no control for, like `hidden_field`, renders what Rails renders.
+- **A helper renders the field of its control's layout:** `f.toggle` renders a `Form::InlineField`, the others a `Form::Field`.
 - **Each helper renders a field with its control,** and also takes the control's options, `html:` and the field's shorthand: `f.text_field :title, size: :lg, helper_text: "…"`.
 - **A helper with two option hashes, like `select`, takes Gustwave's options in the first** with Rails' own. The second is the element's HTML attributes, as in Rails, and goes to the control as `html:`, so `f.select :tags, @tags, { size: :lg }, { size: 5 }` is the large select with `size="5"`. The block of `select` stays Rails': it supplies the option tags.
 - **A control without a Rails helper gets one named after it:** `f.toggle :publish`.
 - **The builder holds no markup, classes or behavior.** Whatever it renders can be rendered with `Form::Field` and the controls directly. A new feature goes into a component first, then gets its shorthand.
-- **An app extends it with a subclass,** which adds helpers for the app's own controls with `render_field`, and renders the app's own field class through `field_class`, as `list_menu_class` does for Dropdown's menu.
+- **An app extends it with a subclass,** which adds helpers for the app's own controls with `render_field` and `render_inline_field`, and renders the app's own field classes through `field_class` and `inline_field_class`, one per layout, as `list_menu_class` does for Dropdown's menu.
 - **It follows the [Component lifecycle](#component-lifecycle)** and starts at alpha, with a `@status` tag like a component.
 
 ### What stays composition
@@ -229,7 +233,7 @@ For an extensible library, extension points are part of the contract:
 | Tier | Includes | A change to it |
 |---|---|---|
 | Public API | Component class names; positional arguments and keywords; option names and values; slot names, types and setters; `<part>_options:`; `html:`; `trigger_options`; the form builder's helper names and signatures; Stimulus controller identifiers | Is breaking. Follows the component's status, see [Component lifecycle](#component-lifecycle). |
-| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` and the form builder's `field_class`; the form builder's `render_field` | Is breaking. Follows the component's status. |
+| Extension API | Part names; `build_slot_*` builder names and signatures; targets of `extend_slot`, `extend_variant`, `extend_toggle`; `apply_slot_context` keywords; class attributes like `list_menu_class` and the form builder's `field_class` and `inline_field_class`; the form builder's `render_field` and `render_inline_field` | Is breaking. Follows the component's status. |
 | Internal | Options marked `internal: true`; private helpers; the class strings themselves, which follow Flowbite | Isn't breaking. |
 
 ## Component lifecycle
@@ -333,3 +337,4 @@ Settled questions, so they aren't reopened without a new reason. A new decision 
 - **D10. The form builder is opt-in per form.** A form uses it with `builder: Gustwave::FormBuilder`. Gustwave never sets `default_form_builder` or changes Rails' own builder, because that would restyle forms the app didn't write, like Devise's or another engine's, and would force an app to migrate every form at once. An app that wants it everywhere sets `default_form_builder` itself. See [Form builder](#form-builder).
 - **D11. Form components live in `Gustwave::Form`; the builder is `Gustwave::FormBuilder`.** Flowbite names its form pages generically: Select, Range, Toggle, Radio. The namespace says they're form controls and keeps them apart from unrelated top-level components. `Form::RichTextarea` already lives there. The builder sits at the top level, named as Rails names builders, since an app writes it on every form. See [Forms](#forms).
 - **D12. A keyword named like an option is the option; HTML attributes of that name go in `html:`.** `size`, `style` and `type` are options of many components and HTML attributes as well. So the keyword always means the option, and `html:` takes a hash of HTML attributes for the element `options` go to. Attributes without a clash stay flat, and `html:` wins over a flat attribute of the same name. `Gustwave::Component.new` implements it once for every component, and the error for a rejected value names `html:` when the option is named like an HTML attribute. The form builder sends the second hash of `select` and `collection_select` as `html:`. Telling them apart by the value's type, a Symbol for the option and anything else for the attribute, was ruled out: it makes one keyword mean two things and turns a typo into an attribute. Renaming the options (`control_size`) was ruled out too: it would depart from Flowbite's and the gem's vocabulary across the gem to free a name few callers need as an attribute. See [HTML attributes](#html-attributes).
+- **D13. A control is only the control; there is one field class per label layout.** A toggle, a checkbox, a radio button and a floating label need the label somewhere else than above the control. Letting a control render the label itself was ruled out: it breaks D9's split, gives a field two labels, and needs `label: false` on the field. Instead each layout has its field: `Form::Field` stacked, `Form::InlineField` with the label beside the control, and a field for the floating label, which will pass `style` and `size` down to its control as fields pass the validation state. The toggle is a control in the inline field, not a field type. Its own `<label>` wraps only the input and the track, so the switch is clickable, and the field renders the text as a sibling `<label for>`. Accepted costs: Flowbite's single wrapping label becomes two elements, which the preview comparison shows, and the gap between the switch and the text isn't clickable. See [Forms](#forms).

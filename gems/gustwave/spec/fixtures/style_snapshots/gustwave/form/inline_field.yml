@@ -1,0 +1,104 @@
+---
+validation validation=:none:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- 'label: cursor-pointer inline-flex items-center'
+- 'input aria-describedby="field-r0000001-helper-text field-r0000001-validation-message"
+  id="field-r0000001" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+- 'div: ms-3 text-sm'
+- 'label for="field-r0000001": dark:text-gray-300 font-medium text-gray-900'
+- 'p id="field-r0000001-helper-text": dark:text-gray-300 font-normal text-gray-500
+  text-xs'
+- 'p id="field-r0000001-validation-message": dark:text-gray-400 mt-2 text-gray-500
+  text-sm'
+validation validation=:success:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- 'label: cursor-pointer inline-flex items-center'
+- 'input aria-describedby="field-r0000001-helper-text field-r0000001-validation-message"
+  id="field-r0000001" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+- 'div: ms-3 text-sm'
+- 'label for="field-r0000001": dark:text-green-500 font-medium text-green-700'
+- 'p id="field-r0000001-helper-text": dark:text-gray-300 font-normal text-gray-500
+  text-xs'
+- 'p id="field-r0000001-validation-message": dark:text-green-500 mt-2 text-green-600
+  text-sm'
+validation validation=:error:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- 'label: cursor-pointer inline-flex items-center'
+- 'input aria-describedby="field-r0000001-helper-text field-r0000001-validation-message"
+  aria-invalid="true" id="field-r0000001" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+- 'div: ms-3 text-sm'
+- 'label for="field-r0000001": dark:text-red-500 font-medium text-red-700'
+- 'p id="field-r0000001-helper-text": dark:text-gray-300 font-normal text-gray-500
+  text-xs'
+- 'p id="field-r0000001-validation-message": dark:text-red-500 mt-2 text-red-600 text-sm'
+label_only validation=:none:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- 'label: cursor-pointer inline-flex items-center'
+- 'input id="field-r0000001" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+- 'div: ms-3 text-sm'
+- 'label for="field-r0000001": dark:text-gray-300 font-medium text-gray-900'
+label_only validation=:error:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- 'label: cursor-pointer inline-flex items-center'
+- 'input aria-invalid="true" id="field-r0000001" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+- 'div: ms-3 text-sm'
+- 'label for="field-r0000001": dark:text-red-500 font-medium text-red-700'
+control_only validation=:none:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- 'label: cursor-pointer inline-flex items-center'
+- 'input id="field-r0000001" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+content validation=:none:
+- div
+- 'div: flex'
+- 'div: flex items-center'
+- input type="checkbox"
+- 'div: ms-2 text-sm'
+- 'label: dark:text-gray-300 font-medium text-gray-900'

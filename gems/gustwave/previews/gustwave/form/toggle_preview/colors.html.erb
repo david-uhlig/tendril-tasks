@@ -1,11 +1,25 @@
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, color: :red, label_options: { class: "me-5" }) { "Red" } %>
+<div class="flex flex-wrap gap-5">
+  <%= render Gustwave::Form::InlineField.new(label: "Red") do |field| %>
+    <% field.with_control_toggle(id: "color-red", value: "", checked: true, color: :red) %>
+  <% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, color: :green, label_options: { class: "me-5" }) { "Green" } %>
+  <%= render Gustwave::Form::InlineField.new(label: "Green") do |field| %>
+    <% field.with_control_toggle(id: "color-green", value: "", checked: true, color: :green) %>
+  <% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, color: :purple, label_options: { class: "me-5" }) { "Purple" } %>
+  <%= render Gustwave::Form::InlineField.new(label: "Purple") do |field| %>
+    <% field.with_control_toggle(id: "color-purple", value: "", checked: true, color: :purple) %>
+  <% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, color: :yellow, label_options: { class: "me-5" }) { "Yellow" } %>
+  <%= render Gustwave::Form::InlineField.new(label: "Yellow") do |field| %>
+    <% field.with_control_toggle(id: "color-yellow", value: "", checked: true, color: :yellow) %>
+  <% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, color: :teal, label_options: { class: "me-5" }) { "Teal" } %>
+  <%= render Gustwave::Form::InlineField.new(label: "Teal") do |field| %>
+    <% field.with_control_toggle(id: "color-teal", value: "", checked: true, color: :teal) %>
+  <% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, color: :orange, label_options: { class: "me-5" }) { "Orange" } %>
+  <%= render Gustwave::Form::InlineField.new(label: "Orange") do |field| %>
+    <% field.with_control_toggle(id: "color-orange", value: "", checked: true, color: :orange) %>
+  <% end %>
+</div>

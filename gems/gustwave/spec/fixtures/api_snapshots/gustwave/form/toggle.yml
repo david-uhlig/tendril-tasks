@@ -11,7 +11,6 @@ constructor:
 - 'include_hidden: (optional)'
 - 'label_options: (optional)'
 - 'track_options: (optional)'
-- 'text_options: (optional)'
 - "**options"
 options:
   color:
@@ -41,7 +40,6 @@ options:
 parts:
 - input
 - label
-- text
 - track
 methods:
 - apply_slot_context

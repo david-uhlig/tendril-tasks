@@ -1,3 +1,9 @@
-<%= render Gustwave::Form::Toggle.new(value: "", disabled: true, label_options: { class: "mb-5" }) { "Sync is unavailable" } %>
+<%= render Gustwave::Form::InlineField.new(class: "mb-5") do |field| %>
+  <% field.with_control_toggle(id: "sync", value: "", disabled: true) %>
+  <% field.with_label("Sync is unavailable", class: "text-gray-400 dark:text-gray-500") %>
+<% end %>
 
-<%= render Gustwave::Form::Toggle.new(value: "", checked: true, disabled: true) { "Sync is locked on" } %>
+<%= render Gustwave::Form::InlineField.new do |field| %>
+  <% field.with_control_toggle(id: "sync-locked", value: "", checked: true, disabled: true) %>
+  <% field.with_label("Sync is locked on", class: "text-gray-400 dark:text-gray-500") %>
+<% end %>

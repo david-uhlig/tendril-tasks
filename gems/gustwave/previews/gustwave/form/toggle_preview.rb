@@ -1,7 +1,9 @@
 module Gustwave
   module Form
     class TogglePreview < ViewComponent::Preview
-      # Flowbite's "Toggle example": a toggle with its text next to it.
+      # Flowbite's "Toggle example": a toggle with its text next to it. The text is the label of a
+      # Gustwave::Form::InlineField, a sibling of the toggle's own label around the switch, where Flowbite has one
+      # label around both.
       def default
         render_with_template
       end
@@ -11,7 +13,8 @@ module Gustwave
         render_with_template
       end
 
-      # Flowbite's "Disabled state": a disabled toggle and a disabled, checked one. The text turns gray.
+      # Flowbite's "Disabled state": a disabled toggle and a disabled, checked one. The gray of the text is the class of the
+      # field's label.
       def disabled
         render_with_template
       end
@@ -28,19 +31,19 @@ module Gustwave
       end
 
       # Flowbite's "Toggle Switch" example on its forms page: a toggle, a checked one and a disabled one. Flowbite
-      # keeps the text of the disabled toggle dark there, so it takes the text's classes with +text_options+.
+      # keeps the text of the disabled toggle dark there.
       def toggle_switch
         render_with_template
       end
 
-      # Not a Flowbite example. A toggle in a field, which puts its label above the switch, with helper text, and a
-      # toggle with its own text and a validation message.
+      # Not a Flowbite example. A toggle in an inline field with helper text under its label, and one in the error
+      # state with a validation message.
       def in_a_field
         render_with_template
       end
 
-      # Not a Flowbite example. A toggle that is its own label, in a field without a label.
-      def field_without_label
+      # Not a Flowbite example. A toggle on its own, without text, named with +aria-label+.
+      def standalone
         render_with_template
       end
 

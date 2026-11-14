@@ -8,15 +8,12 @@ module Gustwave
     # +options+ are the +<input type="checkbox">+'s HTML attributes, e.g.
     # +checked+, +disabled+, +name+ and +required+. The input itself is hidden
     # and the switch is its +track+, which Flowbite's classes draw from the
-    # input's state. So the control renders the +<label>+ that wraps both, as
-    # Flowbite does, to make the whole switch clickable. The block is the
-    # text next to the switch, inside that label:
+    # input's state. The toggle renders a +<label>+ around the two, so a click
+    # on the switch reaches the input. That label holds no text: the text
+    # beside the switch is the label of a Gustwave::Form::InlineField. On its
+    # own, the toggle gets its accessible name from the caller:
     #
-    #   <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1") { "Enable notifications" } %>
-    #
-    # Without a block there is no text, and the toggle gets its accessible
-    # name from the caller, e.g. <tt>aria: { label: "Enable notifications" }</tt>,
-    # or from a Gustwave::Form::Field.
+    #   <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
     #
     # +size+ and +color+ are options. Flowbite's sizes are +:sm+, +:md+ and
     # +:lg+ and its colors +:blue+, +:red+, +:green+, +:purple+, +:yellow+,
@@ -37,7 +34,7 @@ module Gustwave
     # +checked_value+ and +unchecked_value+ are Rails' own, +"1"+ and +"0"+
     # by default, and +include_hidden: false+ leaves the hidden field out:
     #
-    #   <%= render Gustwave::Form::Toggle.new(:published, form: f) { "Published" } %>
+    #   <%= render Gustwave::Form::Toggle.new(:published, form: f, aria: { label: "Published" }) %>
     #
     # Rails' +field_error_proc+ never wraps the toggle. In the +error+
     # validation state the toggle sets +aria-invalid="true"+, unless the
@@ -46,13 +43,12 @@ module Gustwave
     #
     # === In a field
     #
-    # Gustwave::Form::Field builds the toggle and wires it through
-    # +apply_slot_context+ (see there). The field's label goes above the
-    # switch, as for every control. A toggle with text of its own is its own
-    # label, so give the field +label: false+:
+    # Gustwave::Form::InlineField builds the toggle, wires it through
+    # +apply_slot_context+ (see there) and renders its label beside the
+    # switch, with the helper text under it:
     #
-    #   <%= render Gustwave::Form::Field.new(:published, form: f, label: false) do |field| %>
-    #     <% field.with_control_toggle { "Published" } %>
+    #   <%= render Gustwave::Form::InlineField.new(:published, form: f) do |field| %>
+    #     <% field.with_control_toggle %>
     #   <% end %>
     #
     # @status alpha
@@ -62,7 +58,7 @@ module Gustwave
       # The checkbox itself, hidden, which the other parts follow with +peer+ classes
       part :input, "sr-only peer"
 
-      # The +<label>+ around the checkbox, the switch and the text
+      # The +<label>+ around the checkbox and the switch, which makes the switch clickable
       part :label, "inline-flex items-center cursor-pointer"
 
       # The switch: the track and, as its +::after+, the knob
@@ -70,9 +66,6 @@ module Gustwave
                    "peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full " \
                    "peer-checked:after:border-white after:content-[''] after:absolute after:bg-white " \
                    "after:border-gray-300 after:border after:rounded-full after:transition-all dark:border-gray-600"
-
-      # The text next to the switch, from the content block
-      part :text, "ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
 
       variant :size, part: :track, default: :md, values: {
         sm: "w-9 h-5 after:top-[2px] after:start-[2px] after:h-4 after:w-4",
@@ -94,9 +87,6 @@ module Gustwave
       # sets +aria-invalid+.
       option :validation, default: :none, values: %i[none success error]
 
-      # Set when the toggle is disabled: Flowbite's grayed text
-      toggle :disabled_look, "text-gray-400 dark:text-gray-500", part: :text, internal: true
-
       # @param attribute [Symbol, String, nil] the attribute of the form's object the toggle is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the toggle is a plain checkbox.
       # @param size [Symbol] the size of the toggle. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
@@ -107,13 +97,11 @@ module Gustwave
       # @param include_hidden [Boolean] Rails' +include_hidden+ option: whether a bound toggle renders the hidden field for the unchecked value. Defaults to +true+.
       # @param label_options [Hash] the HTML attributes of the +<label>+ around the toggle, e.g. +class+ for its margin.
       # @param track_options [Hash] the HTML attributes of the switch's +<div>+.
-      # @param text_options [Hash] the HTML attributes of the text's +<span>+. Only with text.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +value+, +checked+, +required+, +disabled+. +html:+ takes them as a hash, see Gustwave::Component.new.
-      # @yield the text next to the switch.
       # @raise [ArgumentError] for an +attribute+ without +form+.
       def initialize(attribute = nil, form: nil, size: DEFAULT, color: DEFAULT, validation: DEFAULT,
                      checked_value: DEFAULT, unchecked_value: DEFAULT, include_hidden: DEFAULT,
-                     label_options: {}, track_options: {}, text_options: {}, **options)
+                     label_options: {}, track_options: {}, **options)
         require_form_for_attribute(attribute, form)
 
         @attribute = attribute
@@ -121,7 +109,7 @@ module Gustwave
         @checked_value = checked_value.equal?(DEFAULT) ? "1" : checked_value
         @unchecked_value = unchecked_value.equal?(DEFAULT) ? "0" : unchecked_value
         @include_hidden = include_hidden
-        @part_options = { label: label_options, track: track_options, text: text_options }
+        @part_options = { label: label_options, track: track_options }
                         .transform_values { |part_options| (part_options || {}).to_h }
         @options = options
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
@@ -129,18 +117,12 @@ module Gustwave
       end
 
       def before_render
-        content # runs the block, so the text is known
-        select_options(disabled_look: disabled?)
         @input_options = input_options
       end
 
       def call
         tag.label(**attributes_for(:label, @part_options[:label])) do
-          safe_join([
-            input_element,
-            tag.div(**attributes_for(:track, @part_options[:track])),
-            (tag.span(content, **attributes_for(:text, @part_options[:text])) if content?)
-          ].compact)
+          safe_join([ input_element, tag.div(**attributes_for(:track, @part_options[:track])) ])
         end
       end
 
