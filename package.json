@@ -2,8 +2,8 @@
   "name": "tendril-tasks",
   "private": true,
   "dependencies": {
-    "@37signals/lexxy": "^1.0.1",
-    "flowbite": "^3.1.2"
+    "@37signals/lexxy": "^1.0.4",
+    "flowbite": "^4.0.2"
   },
   "scripts": {
     "dependencies": "cp node_modules/flowbite/dist/flowbite.turbo.min.js vendor/javascript/"
