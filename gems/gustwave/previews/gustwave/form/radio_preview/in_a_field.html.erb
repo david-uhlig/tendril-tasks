@@ -1,0 +1,16 @@
+<%# A group in the error state: every radio has the label colors, the message is rendered once %>
+<fieldset>
+  <legend class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Plan</legend>
+
+  <%= render Gustwave::Form::InlineField.new(label: "Free", validation: :error, validation_message: "Choose a plan to continue.", class: "mb-2") do |field| %>
+    <% field.with_control_radio(id: "plan-free", name: "plan", value: "free") %>
+  <% end %>
+
+  <%= render Gustwave::Form::InlineField.new(label: "Pro", validation: :error, validation_message: false, class: "mb-2") do |field| %>
+    <% field.with_control_radio(id: "plan-pro", name: "plan", value: "pro") %>
+  <% end %>
+
+  <%= render Gustwave::Form::InlineField.new(label: "Team", validation: :error, validation_message: false) do |field| %>
+    <% field.with_control_radio(id: "plan-team", name: "plan", value: "team") %>
+  <% end %>
+</fieldset>

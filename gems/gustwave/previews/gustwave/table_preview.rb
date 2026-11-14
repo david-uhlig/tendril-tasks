@@ -69,7 +69,7 @@ module Gustwave
     # The search field waits for form components.
     def search = render_with_template(locals: { rows: SUPPLIES.first(6) })
 
-    # The filter's radio buttons and the search field wait for form components.
+    # The filter's radio buttons are +Form::Radio+ in an inline field. The search field waits for a form component.
     def filter = render_with_template(locals: { rows: SUPPLIES.first(6) })
 
     # With +Pagination+ below.

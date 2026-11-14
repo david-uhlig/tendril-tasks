@@ -178,6 +178,16 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "validation_message: false" do
+    it "renders no message, also for a record with errors, and keeps the state" do
+      render_field(:title, form: form_builder(invalid_task), validation_message: false)
+
+      expect(page).to have_no_css("p")
+      expect(input["aria-invalid"]).to eq("true")
+      expect(input["aria-describedby"]).to be_nil
+    end
+  end
+
   describe "validation state" do
     it "is none without errors" do
       render_field(:title, form: form_builder(task(title: "x")))

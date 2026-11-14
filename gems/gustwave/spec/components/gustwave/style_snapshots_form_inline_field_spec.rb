@@ -53,6 +53,23 @@ RSpec.describe "Gustwave::Form::InlineField style snapshot", type: :component do
       Gustwave::Form::InlineField.new(**args)
     end
 
+    group :radio, validation: %i[none error],
+          slots: ->(field) {
+            field.with_label("Free")
+            field.with_control_radio(value: "free")
+            field.with_helper_text("No card needed.")
+          } do |**args|
+      Gustwave::Form::InlineField.new(**args)
+    end
+
+    group :radio_disabled, validation: %i[none],
+          slots: ->(field) {
+            field.with_label("Free")
+            field.with_control_radio(value: "free", disabled: true)
+          } do |**args|
+      Gustwave::Form::InlineField.new(**args)
+    end
+
     group :content, validation: %i[none], content: "<input type=\"checkbox\">".html_safe do |**args|
       Gustwave::Form::InlineField.new(label: "Remember me", **args)
     end

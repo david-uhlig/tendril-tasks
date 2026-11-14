@@ -147,6 +147,12 @@ module Gustwave
 
       def bound? = bound_form.present? && bound_attribute.present?
 
+      # A value as Rails writes it into an ID, e.g. of a radio button or of a
+      # +multiple+ checkbox.
+      def sanitized_value(value)
+        value.to_s.gsub(/[\s.]/, "_").gsub(/[^-[[:word:]]]/, "").downcase
+      end
+
       # An ID Rails mustn't work out itself. It would add the namespace to a
       # bound ID again.
       def explicit_id = @options[:id].presence || @context_id

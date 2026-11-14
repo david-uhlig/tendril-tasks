@@ -35,7 +35,8 @@ module Gustwave
     # it's +:error+ while the bound attribute has errors, or the attribute of
     # a +name_id+ attribute's +name+, and +:none+ otherwise. It passes the
     # state to its control. Without a +validation_message+, a bound field
-    # shows the attribute's error messages as a sentence.
+    # shows the attribute's error messages as a sentence. +validation_message:
+    # false+ renders no message at all.
     #
     # A checkbox, radio button or toggle has its label beside it: see
     # Gustwave::Form::InlineField.

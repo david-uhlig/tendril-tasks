@@ -30,6 +30,7 @@ slots:
     many: false
     types:
     - checkbox
+    - radio
     - renderable
     - toggle
   helper_text:
@@ -50,6 +51,8 @@ methods:
 - with_control_checkbox
 - with_control_checkbox_content
 - with_control_content
+- with_control_radio
+- with_control_radio_content
 - with_control_renderable
 - with_control_renderable_content
 - with_control_toggle
@@ -62,6 +65,7 @@ methods:
 - with_validation_message_content
 slot_builders:
 - build_slot_control_checkbox
+- build_slot_control_radio
 - build_slot_control_renderable
 - build_slot_control_toggle
 - build_slot_helper_text
