@@ -1,0 +1,27 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'size: (optional)'
+- 'validation: (optional)'
+- "**options"
+options:
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - none
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- input
+methods:
+- apply_slot_context
+- html_id

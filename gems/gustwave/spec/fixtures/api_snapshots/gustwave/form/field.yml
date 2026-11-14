@@ -23,6 +23,7 @@ slots:
   control:
     many: false
     types:
+    - file_input
     - input
     - renderable
     - rich_textarea
@@ -44,6 +45,8 @@ methods:
 - validation_message?
 - with_control
 - with_control_content
+- with_control_file_input
+- with_control_file_input_content
 - with_control_input
 - with_control_input_content
 - with_control_renderable
@@ -61,6 +64,7 @@ methods:
 - with_validation_message
 - with_validation_message_content
 slot_builders:
+- build_slot_control_file_input
 - build_slot_control_input
 - build_slot_control_renderable
 - build_slot_control_rich_textarea

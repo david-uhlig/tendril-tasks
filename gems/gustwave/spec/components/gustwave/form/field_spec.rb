@@ -409,6 +409,42 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "a file input control" do
+    def file_input
+      page.find("input[type='file']")
+    end
+
+    it "binds a file input to the attribute, with the label's for matching its id" do
+      render_field(:title, form: form_builder, helper_text: "Help") do |field|
+        field.with_control_file_input(accept: "image/*")
+      end
+
+      expect(label[:for]).to eq("task_title")
+      expect(file_input[:id]).to eq("task_title")
+      expect(file_input[:name]).to eq("task[title]")
+      expect(file_input[:accept]).to eq("image/*")
+      expect(file_input["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "passes the error state on" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_file_input }
+
+      expect(file_input["aria-invalid"]).to eq("true")
+      expect(class_set(file_input[:class])).to include("bg-red-50")
+      expect(file_input["aria-describedby"]).to eq("task_title_validation_message")
+    end
+
+    it "wires an unbound file input with a generated ID" do
+      render_field(label: "Attachment", helper_text: "Help") { |field| field.with_control(:file_input, multiple: true) }
+
+      expect(file_input[:id]).to start_with("field-")
+      expect(file_input[:name]).to be_nil
+      expect(file_input[:multiple]).to be_present
+      expect(label[:for]).to eq(file_input[:id])
+      expect(file_input["aria-describedby"]).to eq("#{file_input[:id]}-helper-text")
+    end
+  end
+
   describe "ids" do
     it "differ between forms with another namespace or object name" do
       render_inline(described_class.new(:title, form: form_builder(namespace: "a"), helper_text: "Help")) { |f| f.with_control_input }

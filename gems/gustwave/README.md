@@ -128,16 +128,19 @@ A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The b
   <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
   <%= f.text_area :notes, rows: 4 %>
   <%= f.rich_textarea :description %>
+  <%= f.file_field :attachment, accept: "image/*" %>
   <%= f.select :country, @countries, prompt: "Choose a country", size: :lg %>
   <%= f.hidden_field :project_id %>
 <% end %>
 ```
 
+A file field marks the form as multipart, so `form_with` needs no `multipart: true`.
+
 The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s or `<textarea>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. `size` is Gustwave's size, so the HTML attribute goes in `html:`: `f.text_field :title, html: { size: 20 }`. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
 
 `select` and `collection_select` take two hashes, as in Rails. The first holds Rails' select options (`prompt`, `include_blank`, `selected`, `disabled`, `include_hidden`) and Gustwave's (`label`, `helper_text`, `validation`, `validation_message`, and the select's `size` and `style`), so `f.select :country, @countries, prompt: "Choose", size: :lg` needs no braces. The second is the `<select>`'s HTML attributes, e.g. `multiple: true` or `size: 5`, also when the first has a `size`: `f.select :tags, @tags, { size: :lg }, { size: 5 }`. The block of `select` stays Rails': it supplies the option tags and doesn't receive the field. Set the slots of a select's field with `Gustwave::Form::Field` and `with_control_select`.
 
-`Gustwave::Form::Field`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea` and `Gustwave::Form::Select` work on their own: with any Rails builder, or without one:
+`Gustwave::Form::Field`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput` and `Gustwave::Form::Select` work on their own: with any Rails builder, or without one:
 
 ```erb
 <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
@@ -146,6 +149,7 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 <% end %>
 
 <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
+<%= render Gustwave::Form::FileInput.new(name: "avatar", accept: "image/*") %>
 <%= render Gustwave::Form::Select.new(name: "country", choices: @countries, prompt: "Choose a country") %>
 ```
 

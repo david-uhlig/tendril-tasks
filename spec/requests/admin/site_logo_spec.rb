@@ -11,6 +11,22 @@ RSpec.describe "Admin Site Logo", type: :request do
     Rack::Test::UploadedFile.new(Rails.root.join("spec", "assets", "images", "for-tests.jpg"), content_type)
   end
 
+  describe "GET /admin/site/edit" do
+    it "renders the logo file input with its label and helper text in a multipart form" do
+      login_as(admin)
+
+      get edit_admin_site_path
+
+      page = Nokogiri::HTML(response.body)
+      expect(page.at_css("#site-logo-form")["enctype"]).to eq("multipart/form-data")
+      input = page.at_css("#site-logo-form #brand-logo-field input[type=file][name='site[logo]']")
+      expect(input["id"]).to eq("site_logo")
+      expect(input["aria-invalid"]).to be_nil
+      expect(page.at_css("#brand-logo-field label[for=site_logo]")).to be_present
+      expect(page.at_css("#brand-logo-field").text).to include(I18n.t("admin.site.edit.navigation.logo.file_field.helper_text"))
+    end
+  end
+
   describe "PUT /admin/site/logo" do
     context "requires admin authorization" do
       it "redirects unauthenticated users to the login page" do
@@ -45,7 +61,10 @@ RSpec.describe "Admin Site Logo", type: :request do
         put admin_site_logo_path, params: { site: { logo: uploaded_logo("application/pdf") } }, as: :turbo_stream
 
         expect(response).to have_http_status(:unprocessable_content)
-        expect(response.body).to include("error-message-for-logo")
+        field = Nokogiri::HTML(response.body).at_css("#brand-logo-field")
+      expect(field.at_css("input[type=file][name='site[logo]']")["aria-invalid"]).to eq("true")
+      expect(field.at_css("input[type=file]")["aria-describedby"]).to be_present
+      expect(field.text).to match(/\S/).and include(I18n.t("admin.site.edit.navigation.logo.file_field.helper_text"))
         expect(response.body).not_to include('target="current-brand-logo"')
         expect(logo.content_type).to eq("image/jpeg")
       end
