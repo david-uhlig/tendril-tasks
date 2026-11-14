@@ -50,9 +50,10 @@ module Gustwave
   # (+text_area+), +rich_textarea+ (+rich_text_area+) and +file_field+, which
   # render a textarea, a rich textarea and a file input, and +select+ and
   # +collection_select+, which render a select, and +check_box+ (+checkbox+),
-  # which renders a checkbox. Every other helper stays Rails', including the
-  # other select helpers such as +grouped_collection_select+ and
-  # +time_zone_select+, and +collection_check_boxes+.
+  # which renders a checkbox, and +radio_button+, which renders a radio.
+  # Every other helper stays Rails', including the other select helpers such
+  # as +grouped_collection_select+ and +time_zone_select+,
+  # +collection_check_boxes+ and +collection_radio_buttons+.
   #
   # +check_box+ renders a Gustwave::Form::InlineField with a
   # Gustwave::Form::Checkbox, so the label goes beside the box and the helper
@@ -61,6 +62,16 @@ module Gustwave
   #
   #   <%= f.check_box :terms, label: "I accept the terms", helper_text: "You can withdraw at any time." %>
   #   <%= f.check_box :newsletter, { color: :green }, "yes", "no" %>
+  #
+  # +radio_button+ renders a Gustwave::Form::InlineField with a
+  # Gustwave::Form::Radio the same way. The signature is Rails': the
+  # attribute, the value and the options. Without a +label+, the label is the
+  # translation for the value, otherwise the humanized value. One radio is one field, so a
+  # group's error message goes under one radio, and
+  # <tt>validation_message: false</tt> leaves it off the others:
+  #
+  #   <%= f.radio_button :plan, "free", helper_text: "No card needed." %>
+  #   <%= f.radio_button :plan, "pro", { color: :green, validation_message: false } %>
   #
   # +toggle+ has no Rails helper. It renders a Gustwave::Form::InlineField
   # with a Gustwave::Form::Toggle through Rails' +check_box+, so the label
@@ -104,7 +115,7 @@ module Gustwave
                     default: "Gustwave::Form::Field"
 
     # The field class of the helpers whose label goes beside the control, as
-    # +toggle+'s and +check_box+'s do. Set it like +field_class+.
+    # +toggle+'s, +check_box+'s and +radio_button+'s do. Set it like +field_class+.
     class_attribute :inline_field_class,
                     instance_writer: false,
                     instance_predicate: false,
@@ -187,6 +198,18 @@ module Gustwave
     end
     # Rails 8 names the helper +checkbox+ and keeps +check_box+ as its alias.
     alias_method :checkbox, :check_box if ActionView::Helpers::FormBuilder.method_defined?(:checkbox)
+
+    # Renders an inline field with a Gustwave::Form::Radio. The signature is
+    # Rails': the attribute, the value the radio stands for, then the options.
+    # The block receives the field, as for the input helpers.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param tag_value [Object] the value of the radio.
+    # @param options [Hash] as for +render_field+; +color+ goes to the radio.
+    def radio_button(attribute, tag_value, options = {}, &block)
+      options = options.to_h.symbolize_keys.merge(value: tag_value)
+      render_inline_field(attribute, :radio, options, &block)
+    end
 
     # The options of a select helper that go to the control as they are.
     # +disabled+ goes as +disabled_choices+.

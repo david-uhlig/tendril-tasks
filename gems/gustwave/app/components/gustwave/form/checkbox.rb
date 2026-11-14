@@ -114,15 +114,10 @@ module Gustwave
       def html_id
         return super unless bound? && explicit_id.nil? && @options[:multiple] && !@checked_value.nil?
 
-        bound_form.field_id(bound_attribute, sanitized_checked_value)
+        bound_form.field_id(bound_attribute, sanitized_value(@checked_value))
       end
 
       private
-
-      # The checked value as Rails writes it into the ID of a +multiple+ checkbox
-      def sanitized_checked_value
-        @checked_value.to_s.gsub(/[\s.]/, "_").gsub(/[^-[[:word:]]]/, "").downcase
-      end
 
       def input_options
         options = attributes_for(@options)

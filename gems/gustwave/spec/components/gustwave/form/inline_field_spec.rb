@@ -7,6 +7,10 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
     page.find("input[type='checkbox']", visible: :all)
   end
 
+  def radio_input
+    page.find("input[type='radio']", visible: :all)
+  end
+
   def label
     page.find("label[for]")
   end
@@ -163,6 +167,103 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
       expect(toggle["aria-invalid"]).to eq("true")
       expect(page).to have_css("p#task_title_validation_message", text: "Can't be blank")
       expect(classes_of(label)).to eq(class_set("font-medium text-gray-400 dark:text-gray-500"))
+    end
+  end
+
+  describe "with a radio" do
+    it "renders the radio in a cell of the label's line height, like the checkbox" do
+      render_field(label: "Free", helper_text: "No card needed.") { |field| field.with_control_radio(color: :green, value: "free") }
+
+      cell, text = page.find("div.flex", match: :first).all(:xpath, "./div").to_a
+      expect(classes_of(cell)).to eq(class_set("flex items-center h-5"))
+      expect(cell.all(:xpath, "./*").map(&:tag_name)).to eq(%w[input])
+      expect(cell.find("input")[:type]).to eq("radio")
+      expect(classes_of(cell.find("input"))).to include("w-4", "h-4", "text-green-600")
+      expect(classes_of(text)).to eq(class_set("ms-2 text-sm"))
+      expect(text.all(:xpath, "./*").map(&:tag_name)).to eq(%w[label p])
+    end
+
+    it "binds the radio, with the label's for matching its id, and labels it by its value" do
+      render_field(:title, form: form_builder, helper_text: "Help") { |field| field.with_control_radio(value: "free") }
+
+      expect(label.text).to eq("Free")
+      expect(label[:for]).to eq("task_title_free")
+      expect(radio_input[:id]).to eq("task_title_free")
+      expect(radio_input[:name]).to eq("task[title]")
+      expect(radio_input["aria-describedby"]).to eq("task_title_free_helper_text")
+      expect(page).to have_css("p#task_title_free_helper_text", text: "Help")
+    end
+
+    it "gives the radios of one attribute their own label for and text IDs" do
+      render_inline(Gustwave::Form::InlineField.new(:title, form: form_builder, helper_text: "One", validation: :error, validation_message: "Wrong")) do |field|
+        field.with_control_radio(value: "free")
+      end
+      first = page.native.to_html
+      render_inline(Gustwave::Form::InlineField.new(:title, form: form_builder, helper_text: "Two", validation: :error, validation_message: "Wrong")) do |field|
+        field.with_control_radio(value: "pro")
+      end
+      second = page.native.to_html
+
+      expect(first).to include('for="task_title_free"', 'id="task_title_free_helper_text"', 'id="task_title_free_validation_message"')
+      expect(second).to include('for="task_title_pro"', 'id="task_title_pro_helper_text"', 'id="task_title_pro_validation_message"')
+      expect(radio_input["aria-describedby"]).to eq("task_title_pro_helper_text task_title_pro_validation_message")
+    end
+
+    it "keeps the IDs of the texts of a control whose ID doesn't extend Rails' ID" do
+      render_field(:title, form: form_builder, helper_text: "Help") { |field| field.with_control_radio(value: "free", id: "mine") }
+
+      expect(radio_input["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "labels a radio by the translation or the humanized value" do
+      render_field(:title, form: form_builder) { |field| field.with_control_radio(value: "in_progress") }
+
+      expect(label.text).to eq("In progress")
+    end
+
+    it "labels a radio by the translation for its value" do
+      I18n.backend.store_translations(:en, helpers: { label: { task: { title: { free: "Free of charge" } } } })
+      render_field(:title, form: form_builder) { |field| field.with_control_radio(value: "free") }
+
+      expect(label.text).to eq("Free of charge")
+    ensure
+      I18n.backend.reload!
+    end
+
+    it "labels a radio by the humanized value in a form without an object" do
+      render_field(:title, form: form_builder(nil)) { |field| field.with_control_radio(value: "free") }
+
+      expect(label.text).to eq("Free")
+    end
+
+    it "labels a radio whose value is false by the humanized value" do
+      render_field(:title, form: form_builder) { |field| field.with_control_radio(value: false) }
+
+      expect(label.text).to eq("False")
+    end
+
+    it "points the label and the texts at a radio whose value is nil" do
+      render_field(:title, form: form_builder, helper_text: "Help") { |field| field.with_control_radio(value: nil) }
+
+      expect(radio_input[:id]).to eq("task_title")
+      expect(label[:for]).to eq(radio_input[:id])
+      expect(radio_input["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "renders no validation message for validation_message: false, and keeps the state" do
+      render_field(:title, form: form_builder(invalid_task), validation_message: false) { |field| field.with_control_radio(value: "free") }
+
+      expect(page).to have_no_css("p")
+      expect(radio_input["aria-invalid"]).to eq("true")
+      expect(radio_input["aria-describedby"]).to be_nil
+      expect(classes_of(label)).to include("text-red-700")
+    end
+
+    it "wires an unbound radio with a generated ID" do
+      render_field(label: "Free") { |field| field.with_control(:radio, value: "free") }
+
+      expect(radio_input[:id]).to start_with("field-")
+      expect(label[:for]).to eq(radio_input[:id])
     end
   end
 

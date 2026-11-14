@@ -242,6 +242,64 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "#radio_button" do
+    it "renders an inline field with a radio, bound through Rails' radio_button" do
+      html = parse(gustwave_form.radio_button(:title, "free"))
+
+      expect(html).to have_css("div.flex > div + div > label[for='task_title_free']", text: "Free")
+      expect(html).to have_css("div.flex > div.h-5 > input#task_title_free[type='radio'][name='task[title]'][value='free']")
+      expect(html).to have_css("input", count: 1)
+      expect(html).to have_css("label", count: 1)
+    end
+
+    it "sends color to the radio and the rest to the field and the HTML attributes" do
+      html = parse(gustwave_form.radio_button(:title, "free", color: :red, label: "Gratis", helper_text: "Help", required: true))
+      radio = html.find("input#task_title_free")
+
+      expect(html.find("label[for='task_title_free']").text).to eq("Gratis")
+      expect(html).to have_css("label[for='task_title_free'] + p#task_title_free_helper_text", text: "Help")
+      expect(class_set(radio[:class])).to include("text-red-600")
+      expect(radio[:required]).to be_present
+      expect(radio["aria-describedby"]).to eq("task_title_free_helper_text")
+    end
+
+    it "passes the field to a block" do
+      html = parse(gustwave_form.radio_button(:title, "free") { |field| field.with_label("From the block") })
+
+      expect(html).to have_css("label[for='task_title_free']", text: "From the block")
+    end
+
+    it "checks the radio whose value is the record's value" do
+      form = gustwave_form(task(title: "pro"))
+
+      expect(parse(form.radio_button(:title, "pro")).find("input")[:checked]).to be_present
+      expect(parse(form.radio_button(:title, "free")).find("input")[:checked]).to be_nil
+    end
+
+    it "takes string keys and the caller's checked" do
+      html = parse(gustwave_form.radio_button(:title, "free", "checked" => true, "class" => "extra"))
+
+      expect(html).to have_css("input#task_title_free.extra[checked]")
+    end
+
+    it "marks the radio as invalid for a record with errors, and shows the message once per field" do
+      form = gustwave_form(invalid_task)
+      html = parse(form.radio_button(:title, "free") + form.radio_button(:title, "pro", validation_message: false))
+
+      expect(html).to have_css("input[type='radio'][aria-invalid='true']", count: 2)
+      expect(html).to have_css("p", text: "Can't be blank", count: 1)
+      expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "gives the radios of a group labels and IDs of their own" do
+      form = gustwave_form
+      html = parse(form.radio_button(:title, "free", helper_text: "A") + form.radio_button(:title, "pro", helper_text: "B"))
+
+      expect(html.all("label").map { _1[:for] }).to eq(%w[task_title_free task_title_pro])
+      expect(html.all("p").map { _1[:id] }).to eq(%w[task_title_free_helper_text task_title_pro_helper_text])
+    end
+  end
+
   describe "#check_box" do
     it "renders an inline field with a checkbox, bound through Rails' check_box" do
       html = parse(gustwave_form.check_box(:title))

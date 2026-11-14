@@ -1,0 +1,31 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'color: (optional)'
+- 'validation: (optional)'
+- "**options"
+options:
+  color:
+    default: blue
+    values:
+    - blue
+    - red
+    - green
+    - purple
+    - teal
+    - yellow
+    - orange
+    - none
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+methods:
+- apply_slot_context
+- disabled?
+- html_id
+- value

@@ -782,8 +782,9 @@ pages:
     note: This example's own classes, the dark focus ring offset, the helper text's dark color and the disabled checkbox's lighter look, are passed as classes. The disabled checkbox keeps text-blue-600, which only shows on a checked box.
   - id: form-radio-example
     title: Radio buttons
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/fieldset
+    note: This example's own classes, the focus ring, the dark focus background, the block labels, and the disabled radio's lighter border and label, are passed as classes. Its radios have no text color and no ring offset, but they keep Form::Radio's blue and ring offset, which only show on a checked radio or around the focus ring.
   - id: form-file-input-example
     title: File upload
     status: previewed
@@ -1798,48 +1799,53 @@ pages:
   forms/radio:
   - id: default-radio-example
     title: Radio example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/default
   - id: radio-disabled-example
     title: Disabled state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/disabled
   - id: radio-link-example
     title: Radio link
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/link
   - id: radio-helper-example
     title: Helper text
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/helper_text
   - id: radio-bordered-example
     title: Bordered
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/bordered
+    note: Form::InlineField wraps the label in its text column, so the label fills the box through classes on the field's parts, where Flowbite's label is a child of the box.
   - id: radio-list-group-example
     title: Radio list group
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/list_group
+    note: The items are a ListGroup's, without their padding, so the label fills the row. The radios' darker dark mode classes for the list's background are passed as classes.
   - id: radio-horizontal-list-example
     title: Horizontal list group
-    status: blocked
-    needs: form
+    status: feature_gap
+    needs: list-group
+    note: ListGroup has no horizontal layout. The radios in the items are covered by the vertical list group.
   - id: radio-dropdown-example
     title: Radio in dropdown
     status: blocked
     needs: form
+    note: Waits for a dropdown menu item that holds a radio button. Form::Radio renders the radio itself.
   - id: radio-inline-example
     title: Inline layout
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/inline
   - id: radio-advanced-example
     title: Advanced layout
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/advanced
+    note: The radio is a hidden Form::Radio. Each card is its label in plain Tailwind, a sibling of the radio for the peer classes, which a field's label can't be.
   - id: radio-colors-example
     title: Colors
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/radio/colors
   forms/range:
   - id: default-range-example
     title: Range slider example

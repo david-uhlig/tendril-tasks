@@ -146,7 +146,9 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 
 `f.check_box`, or `f.checkbox` as Rails 8 names it, renders Flowbite's checkbox in a `Gustwave::Form::InlineField` as well. It keeps Rails' signature, with `checked_value` and `unchecked_value` after the options, and takes the checkbox's `color`: `f.check_box :newsletter, { color: :green }, "yes", "no"`. A label with a link goes in the block: `field.with_label(...)`. `collection_check_boxes` stays Rails'. A form that switches to the builder gets the label with every `check_box`, so drop the `f.label` beside it, or pass `label: false`.
 
-`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle` and `Gustwave::Form::Checkbox` work on their own: with any Rails builder, or without one:
+`f.radio_button` renders Flowbite's radio button in a `Gustwave::Form::InlineField`. It keeps Rails' signature, the attribute, the value and the options, and takes the radio's `color`: `f.radio_button :plan, "pro", color: :green`. The label is the translation for the value (`helpers.label.task.plan.pro`), otherwise the humanized value, "Pro". One radio is one field, so an error message would repeat under every radio of a group: pass `validation_message: false` to all but one. A group's `<fieldset>` is yours, and `collection_radio_buttons` stays Rails'. A form that switches to the builder gets the label with every `radio_button`, so drop the `f.label` beside it, or pass `label: false`.
+
+`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle`, `Gustwave::Form::Checkbox` and `Gustwave::Form::Radio` work on their own: with any Rails builder, or without one:
 
 ```erb
 <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
@@ -168,6 +170,12 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 <% end %>
 
 <%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: task.id, aria: { label: "Select task" }) %>
+
+<%= render Gustwave::Form::InlineField.new(label: "Free") do |field| %>
+  <% field.with_control_radio(name: "plan", value: "free") %>
+<% end %>
+
+<%= render Gustwave::Form::Radio.new(name: "assignee", value: "7", aria: { label: "Assign to Sam" }) %>
 ```
 
 A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`. The rich textarea renders Lexxy or Trix in Flowbite's frame. Its toolbar goes to the header by default, or to the footer with `with_footer_toolbar`.
