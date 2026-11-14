@@ -96,6 +96,74 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
 
       expect(classes_of(page.find("div.flex > div + div"))).to eq(class_set("ms-2 text-sm"))
     end
+
+    it "is Flowbite's ms-2 after a checkbox" do
+      render_field(label: "Remember me") { |field| field.with_control_checkbox }
+
+      expect(classes_of(page.find("div.flex > div + div"))).to eq(class_set("ms-2 text-sm"))
+    end
+  end
+
+  describe "with a checkbox" do
+    it "renders Flowbite's checkbox with helper text: the box in a cell of the label's line height" do
+      render_field(label: "Remember me", helper_text: "For 30 days.") { |field| field.with_control_checkbox(color: :green) }
+
+      cell, text = page.find("div.flex", match: :first).all(:xpath, "./div").to_a
+      expect(classes_of(cell)).to eq(class_set("flex items-center h-5"))
+      expect(cell.all(:xpath, "./*").map(&:tag_name)).to eq(%w[input])
+      expect(classes_of(cell.find("input"))).to include("w-4", "h-4", "text-green-600")
+      expect(classes_of(text)).to eq(class_set("ms-2 text-sm"))
+      expect(text.all(:xpath, "./*").map(&:tag_name)).to eq(%w[label p])
+      expect(page).to have_css("label", count: 1)
+    end
+
+    it "keeps the cell of any other control without a height" do
+      render_field(label: "Notify")
+      expect(classes_of(page.find("div.flex > div", match: :first))).to eq(class_set("flex items-center"))
+
+      render_field(label: "Notify") { |field| field.with_control_renderable(Gustwave::Form::Checkbox.new) }
+      expect(classes_of(page.find("div.flex > div", match: :first))).to eq(class_set("flex items-center"))
+    end
+
+    it "lets the caller's cell classes win over the height" do
+      render_field(label: "Remember me", control_cell_options: { class: "h-6" }) { |field| field.with_control_checkbox }
+
+      expect(classes_of(page.find("div.flex > div", match: :first))).to eq(class_set("flex items-center h-6"))
+    end
+
+    it "binds the checkbox, with the label's for matching its id and the hidden field beside it" do
+      render_field(:title, form: form_builder, helper_text: "Help") { |field| field.with_control_checkbox }
+
+      expect(label[:for]).to eq("task_title")
+      expect(toggle[:id]).to eq("task_title")
+      expect(toggle[:name]).to eq("task[title]")
+      expect(toggle["aria-describedby"]).to eq("task_title_helper_text")
+      expect(page).to have_css("div.h-5 > input[type='hidden'][name='task[title]'][value='0']", visible: :all)
+    end
+
+    it "wires an unbound checkbox with a generated ID" do
+      render_field(label: "Remember me") { |field| field.with_control(:checkbox, value: "1") }
+
+      expect(toggle[:id]).to start_with("field-")
+      expect(label[:for]).to eq(toggle[:id])
+    end
+
+    it "points the label at the ID of a multiple checkbox, which carries the checked value" do
+      render_field(:title, form: form_builder) do |field|
+        field.with_control_checkbox(multiple: true, checked_value: "a", unchecked_value: nil)
+      end
+
+      expect(toggle[:id]).to eq("task_title_a")
+      expect(label[:for]).to eq("task_title_a")
+    end
+
+    it "passes the error state on and grays the label of a disabled checkbox" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_checkbox(disabled: true) }
+
+      expect(toggle["aria-invalid"]).to eq("true")
+      expect(page).to have_css("p#task_title_validation_message", text: "Can't be blank")
+      expect(classes_of(label)).to eq(class_set("font-medium text-gray-400 dark:text-gray-500"))
+    end
   end
 
   describe "the wiring" do

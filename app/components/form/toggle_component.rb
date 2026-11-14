@@ -28,6 +28,14 @@ module Form
 
     private
 
+    # Rails' own check_box, whatever the form's builder is. The checkbox has
+    # to be the bare input, right before the switch, for the peer classes.
+    # Gustwave::FormBuilder's check_box renders a whole field with a label.
+    def check_box
+      ActionView::Helpers::FormBuilder.instance_method(:check_box)
+                                      .bind_call(@form, @attribute, @check_box_options, "1", "0")
+    end
+
     def build_options(options)
       options.deep_symbolize_keys!
       options[:class] = class_merge(

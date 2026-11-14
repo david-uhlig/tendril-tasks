@@ -131,6 +131,7 @@ A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The b
   <%= f.file_field :attachment, accept: "image/*" %>
   <%= f.select :country, @countries, prompt: "Choose a country", size: :lg %>
   <%= f.toggle :published, color: :green %>
+  <%= f.check_box :terms, label: "I accept the terms" %>
   <%= f.hidden_field :project_id %>
 <% end %>
 ```
@@ -143,7 +144,9 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 
 `f.toggle` has no Rails helper of its own. It renders Flowbite's toggle, a checkbox shown as a switch, through Rails' `check_box`, so it takes `checked_value` and `unchecked_value` after the options: `f.toggle :published, { size: :lg }, "yes", "no"`. It renders in a `Gustwave::Form::InlineField`, so its label goes beside the switch, with the helper text under the label.
 
-`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select` and `Gustwave::Form::Toggle` work on their own: with any Rails builder, or without one:
+`f.check_box`, or `f.checkbox` as Rails 8 names it, renders Flowbite's checkbox in a `Gustwave::Form::InlineField` as well. It keeps Rails' signature, with `checked_value` and `unchecked_value` after the options, and takes the checkbox's `color`: `f.check_box :newsletter, { color: :green }, "yes", "no"`. A label with a link goes in the block: `field.with_label(...)`. `collection_check_boxes` stays Rails'. A form that switches to the builder gets the label with every `check_box`, so drop the `f.label` beside it, or pass `label: false`.
+
+`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle` and `Gustwave::Form::Checkbox` work on their own: with any Rails builder, or without one:
 
 ```erb
 <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
@@ -159,11 +162,17 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 <% end %>
 
 <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
+
+<%= render Gustwave::Form::InlineField.new(label: "Remember me", helper_text: "For 30 days on this device.") do |field| %>
+  <% field.with_control_checkbox(name: "remember_me", value: "1") %>
+<% end %>
+
+<%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: task.id, aria: { label: "Select task" }) %>
 ```
 
 A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`. The rich textarea renders Lexxy or Trix in Flowbite's frame. Its toolbar goes to the header by default, or to the footer with `with_footer_toolbar`.
 
-To extend the builder, subclass it. `field_class` names the field class its helpers render, and `inline_field_class` the one of the helpers with the label beside the control, like `toggle`. `render_field(attribute, control, options)` and `render_inline_field(attribute, control, options)` are what each helper calls, for helpers of your own:
+To extend the builder, subclass it. `field_class` names the field class its helpers render, and `inline_field_class` the one of the helpers with the label beside the control, like `toggle` and `check_box`. `render_field(attribute, control, options)` and `render_inline_field(attribute, control, options)` are what each helper calls, for helpers of your own:
 
 ```ruby
 class AppFormBuilder < Gustwave::FormBuilder

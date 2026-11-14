@@ -2,7 +2,7 @@ module Gustwave
   module Form
     class InputPreview < ViewComponent::Preview
       # Flowbite's "Input fields" example: an account form with the fields in a two-column grid. Every field is a
-      # Form::Field with a Form::Input. The terms checkbox is plain Tailwind, because Gustwave has no checkbox yet.
+      # Form::Field with a Form::Input, and the terms checkbox a Form::InlineField with a Form::Checkbox.
       def default
         render_with_template
       end

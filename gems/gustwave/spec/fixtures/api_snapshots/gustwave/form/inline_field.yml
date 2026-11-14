@@ -29,6 +29,7 @@ slots:
   control:
     many: false
     types:
+    - checkbox
     - renderable
     - toggle
   helper_text:
@@ -46,6 +47,8 @@ methods:
 - validation_message
 - validation_message?
 - with_control
+- with_control_checkbox
+- with_control_checkbox_content
 - with_control_content
 - with_control_renderable
 - with_control_renderable_content
@@ -58,6 +61,7 @@ methods:
 - with_validation_message
 - with_validation_message_content
 slot_builders:
+- build_slot_control_checkbox
 - build_slot_control_renderable
 - build_slot_control_toggle
 - build_slot_helper_text

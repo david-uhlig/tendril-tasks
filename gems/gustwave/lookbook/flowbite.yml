@@ -777,8 +777,9 @@ pages:
     preview: gustwave/form/select/default
   - id: form-checkbox-example
     title: Checkbox
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/fieldset
+    note: This example's own classes, the dark focus ring offset, the helper text's dark color and the disabled checkbox's lighter look, are passed as classes. The disabled checkbox keeps text-blue-600, which only shows on a checked box.
   - id: form-radio-example
     title: Radio buttons
     status: blocked
@@ -1586,48 +1587,53 @@ pages:
   forms/checkbox:
   - id: default-checkbox-example
     title: Checkbox example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/default
   - id: disabled-checkbox-example
     title: Disabled state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/disabled
   - id: checkbox-link-example
     title: Checkbox link
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/link
   - id: checkbox-helper-example
     title: Helper text
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/helper_text
   - id: checkbox-bordered-example
     title: Bordered
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/bordered
+    note: Form::InlineField wraps the label in its text column, so the label fills the box through classes on the field's parts, where Flowbite's label is a child of the box.
   - id: checkbox-list-example
     title: Checkbox list group
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/list_group
+    note: The items are a ListGroup's, without their padding, so the label fills the row. The checkboxes' darker dark mode classes for the list's background are passed as classes.
   - id: checkbox-horizontal-list-example
     title: Horizontal list group
-    status: blocked
-    needs: form
+    status: feature_gap
+    needs: list-group
+    note: ListGroup has no horizontal layout. The checkboxes in the items are covered by the vertical list group.
   - id: checkbox-dropdown-example
     title: Checkbox dropdown
     status: blocked
-    needs: form
+    needs: checkbox
+    note: Waits for a dropdown menu item that holds a checkbox, and for a search input in the menu. Form::Checkbox renders the checkbox itself.
   - id: checkbox-inline-example
     title: Inline layout
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/inline
   - id: checkbox-colors-example
     title: Colors
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/colors
   - id: checkbox-advanced-example
     title: Advanced layout
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/checkbox/advanced
+    note: The checkbox is a hidden Form::Checkbox. Each card is its label in plain Tailwind, a sibling of the checkbox for the peer classes, which a field's label can't be.
   forms/file-input:
   - id: default-file-upload-example
     title: File upload example
@@ -1677,7 +1683,7 @@ pages:
     status: partial
     needs: checkbox
     preview: gustwave/form/input/default
-    note: The terms checkbox is plain Tailwind until Gustwave has a checkbox.
+    note: The terms checkbox is a Form::Checkbox with the look of Flowbite's checkbox page. This example draws it differently, with bg-gray-50, a focus:ring-3 focus:ring-blue-300 ring and no text-blue-600, a look Form::Checkbox has no option for.
   - id: input-field-sizes-example
     title: Input sizes
     status: previewed

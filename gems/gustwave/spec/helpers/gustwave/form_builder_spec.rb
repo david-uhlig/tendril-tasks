@@ -240,12 +240,87 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(html).to have_css("p", text: "Can't be blank")
       expect(html).to have_no_css(".field_with_errors")
     end
+  end
 
-    it "leaves Rails' check_box alone" do
+  describe "#check_box" do
+    it "renders an inline field with a checkbox, bound through Rails' check_box" do
       html = parse(gustwave_form.check_box(:title))
 
-      expect(html).to have_no_css("label")
-      expect(html).to have_css("input[type='checkbox']#task_title")
+      expect(html).to have_css("div.flex > div + div > label[for='task_title']", text: "Title")
+      expect(html).to have_css("div.flex > div.h-5 > input[type='hidden'][name='task[title]'][value='0']", visible: :all)
+      expect(html).to have_css("div.flex > div.h-5 > input#task_title[type='checkbox'][name='task[title]'][value='1']")
+      expect(html).to have_css("label", count: 1)
+    end
+
+    it "sends color to the checkbox and the rest to the field and the HTML attributes" do
+      html = parse(gustwave_form.check_box(:title, color: :red, label: "Publish", helper_text: "Help", required: true))
+      checkbox = html.find("input#task_title")
+
+      expect(html.find("label[for='task_title']").text).to eq("Publish")
+      expect(html).to have_css("label[for='task_title'] + p#task_title_helper_text", text: "Help")
+      expect(class_set(checkbox[:class])).to include("text-red-600")
+      expect(checkbox[:required]).to be_present
+      expect(checkbox["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "passes the field to a block" do
+      html = parse(gustwave_form.check_box(:title) { |field| field.with_label("From the block") })
+
+      expect(html).to have_css("label[for='task_title']", text: "From the block")
+    end
+
+    it "takes the checked and unchecked value after the options, as Rails' check_box does" do
+      html = parse(gustwave_form.check_box(:title, {}, "yes", "no"))
+
+      expect(html).to have_css("input#task_title[value='yes']")
+      expect(html).to have_css("input[type='hidden'][value='no']", visible: :all)
+    end
+
+    it "takes Rails' include_hidden and string keys" do
+      html = parse(gustwave_form.check_box(:title, "include_hidden" => false, "class" => "extra"))
+
+      expect(html).to have_no_css("input[type='hidden']", visible: :all)
+      expect(html).to have_css("input#task_title.extra")
+    end
+
+    it "points the label at the ID Rails gives a multiple checkbox" do
+      html = parse(gustwave_form.check_box(:title, { multiple: true, helper_text: "Help" }, "a", nil))
+      checkbox = html.find("input[type='checkbox']")
+
+      expect(checkbox[:id]).to eq("task_title_a")
+      expect(checkbox[:name]).to eq("task[title][]")
+      expect(html.find("label")[:for]).to eq("task_title_a")
+      expect(html).to have_css("p##{checkbox["aria-describedby"]}", text: "Help")
+    end
+
+    it "checks the box for a record whose value is the checked value" do
+      html = parse(gustwave_form(task(title: "1")).check_box(:title))
+
+      expect(html.find("input#task_title")[:checked]).to be_present
+    end
+
+    it "marks the input as invalid for a record with errors" do
+      html = parse(gustwave_form(invalid_task).check_box(:title))
+
+      expect(html).to have_css("input[type='checkbox'][aria-invalid='true']")
+      expect(html).to have_css("p", text: "Can't be blank")
+      expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "is Rails' checkbox as well, where Rails has that name" do
+      skip "Rails names the helper check_box only" unless ActionView::Helpers::FormBuilder.method_defined?(:checkbox)
+
+      html = parse(gustwave_form.checkbox(:title, { color: :green }, "yes", "no"))
+
+      expect(html).to have_css("div.flex > div + div > label[for='task_title']")
+      expect(html).to have_css("input#task_title.text-green-600[value='yes']")
+    end
+
+    it "leaves Rails' collection_check_boxes alone" do
+      html = parse(gustwave_form.collection_check_boxes(:title, [ %w[a A], %w[b B] ], :first, :last))
+
+      expect(html).to have_css("input[type='checkbox']", count: 2)
+      expect(html).to have_no_css("div.flex")
     end
   end
 
