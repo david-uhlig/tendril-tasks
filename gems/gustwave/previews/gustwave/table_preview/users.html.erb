@@ -49,17 +49,7 @@
     <% table.with_head do |head| %>
       <% head.with_column class: "p-4" do %>
         <div class="flex items-center">
-          <input
-            id="checkbox-all-search"
-            type="checkbox"
-            class="
-              w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500
-              dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2
-              dark:bg-gray-700 dark:border-gray-600
-            "
-          >
-
-          <label for="checkbox-all-search" class="sr-only">checkbox</label>
+          <%= render Gustwave::Form::Checkbox.new(id: "checkbox-all-search", aria: { label: "Select all" }) %>
         </div>
       <% end %>
 
@@ -74,17 +64,7 @@
         <% body.with_row class: (index == people.size - 1 ? "border-b-0 hover:bg-gray-50 dark:hover:bg-gray-600" : "hover:bg-gray-50 dark:hover:bg-gray-600") do |tr| %>
           <% tr.with_cell_td class: "w-4 p-4" do %>
             <div class="flex items-center">
-              <input
-                id="checkbox-table-search-<%= index + 1 %>"
-                type="checkbox"
-                class="
-                  w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500
-                  dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2
-                  dark:bg-gray-700 dark:border-gray-600
-                "
-              >
-
-              <label for="checkbox-table-search-<%= index + 1 %>" class="sr-only">checkbox</label>
+              <%= render Gustwave::Form::Checkbox.new(id: "checkbox-table-search-#{index + 1}", aria: { label: "Select row" }) %>
             </div>
           <% end %>
 

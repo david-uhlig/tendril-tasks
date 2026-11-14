@@ -63,22 +63,22 @@ module Gustwave
     # Coloured rows that change their shade under the pointer.
     def hover_colors = render_with_template(locals: { rows: SUPPLIES.first(5) })
 
-    # Many columns that scroll sideways. The checkboxes wait for form components.
+    # Many columns that scroll sideways.
     def scroll = render_with_template(locals: { rows: SUPPLIES })
 
-    # The search field and checkboxes wait for form components.
+    # The search field waits for form components.
     def search = render_with_template(locals: { rows: SUPPLIES.first(6) })
 
-    # The filter's radio buttons, the search field and the checkboxes wait for form components.
+    # The filter's radio buttons and the search field wait for form components.
     def filter = render_with_template(locals: { rows: SUPPLIES.first(6) })
 
-    # With +Pagination+ below. The checkboxes wait for form components.
+    # With +Pagination+ below.
     def pagination = render_with_template(locals: { rows: SUPPLIES })
 
-    # The checkboxes wait for form components.
+    # Rows with a checkbox each, to select them.
     def checkbox = render_with_template(locals: { rows: SUPPLIES.first(6) })
 
-    # People with an avatar and a status. The search field and checkboxes wait for form components.
+    # People with an avatar and a status. The search field waits for form components.
     def users = render_with_template(locals: { people: VOLUNTEERS })
 
     # Items with an image. The quantity fields wait for form components.
