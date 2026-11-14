@@ -28,8 +28,9 @@ module Gustwave
     #     <%= check_box_tag :remember_me %>
     #   <% end %>
     #
-    # A disabled control's label isn't grayed by the field. Flowbite does that
-    # in some examples only, so it's the label's class:
+    # The label of a disabled control is gray, as on Flowbite's toggle page.
+    # The field asks its control with +disabled?+, so with a block as the
+    # control the gray is the label's class:
     # <tt>field.with_label("Sync", class: "text-gray-400 dark:text-gray-500")</tt>.
     #
     # @status alpha
@@ -78,12 +79,17 @@ module Gustwave
         md: "ms-3"
       }
 
+      # Set while the control is disabled: Flowbite's gray label, in every
+      # validation state
+      toggle :disabled_look, "text-gray-400 dark:text-gray-500", part: :label, internal: true
+
       # The control of the field.
       #
       # * +toggle+: a Gustwave::Form::Toggle, built with the given arguments.
       # * +renderable+: any component. One that implements +apply_slot_context+
       #   receives +attribute+, +form+, +id+ (without a form), +validation+ and
-      #   +described_by+, as Gustwave::Form::Toggle does.
+      #   +described_by+, as Gustwave::Form::Toggle does. One that implements
+      #   +disabled?+ grays the label while it's disabled.
       #
       #   <% field.with_control_toggle(size: :lg) %>
       #   <% field.with_control_renderable(MyCheckbox.new) %>
@@ -110,6 +116,11 @@ module Gustwave
         @part_options = { row: row_options, control_cell: control_cell_options, text: text_options }
                         .transform_values { |part_options| (part_options || {}).to_h }
         super(attribute, form:, label:, helper_text:, validation:, validation_message:, **options)
+      end
+
+      def before_render
+        super
+        select_options(disabled_look: true) if control.respond_to?(:disabled?) && control.disabled?
       end
 
       def call

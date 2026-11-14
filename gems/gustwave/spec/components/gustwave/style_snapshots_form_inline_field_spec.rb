@@ -24,6 +24,14 @@ RSpec.describe "Gustwave::Form::InlineField style snapshot", type: :component do
       Gustwave::Form::InlineField.new(**args)
     end
 
+    group :disabled, validation: %i[none success error],
+          slots: ->(field) {
+            field.with_label("Notify me")
+            field.with_control_toggle(disabled: true)
+          } do |**args|
+      Gustwave::Form::InlineField.new(**args)
+    end
+
     group :control_only, validation: %i[none], slots: ->(field) { field.with_control_toggle } do |**args|
       Gustwave::Form::InlineField.new(**args)
     end

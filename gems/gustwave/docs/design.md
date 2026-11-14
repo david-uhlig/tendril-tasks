@@ -201,6 +201,7 @@ A field takes the same `attribute` and `form:` as a control and passes them on, 
 
 - **One field class per label layout (D13).** `Form::Field` stacks the label, the control and the texts. `Form::InlineField` puts the label beside the control, with the helper text under the label, for the toggle. *Planned:* checkbox and radio in the inline field, and a field for the floating label. What they share is the `FieldWiring` concern, so the rules below hold for every field. Each field has the control types of its layout.
 - **Layout between control and text is the field's.** Flowbite's gap is `ms-3` after a toggle and `ms-2` after a checkbox, so `Form::InlineField` picks it from the type of its control. The control carries no layout.
+- **The inline field grays the label of a disabled control,** as Flowbite's toggle page does. It asks the control with `disabled?`. With a block as the control, the gray is the label's class.
 
 - **Its parts are slots,** because the field places and wires them: `control`, `label`, `helper_text` and `validation_message`. `control` is polymorphic, with a type per control and a `renderable` type for anything else. An app adds its own controls with `extend_slot`. The other three take text or a block and build markup, not a component.
 - **`label:` and `helper_text:` are shorthand** for the slots of the same name, as `icon:` is for a visual. `label: false` renders no label.

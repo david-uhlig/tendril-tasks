@@ -29,6 +29,7 @@ slots:
     many: false
 methods:
 - apply_slot_context
+- disabled?
 - footer
 - footer?
 - header

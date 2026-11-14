@@ -13,8 +13,8 @@ module Gustwave
         render_with_template
       end
 
-      # Flowbite's "Disabled state": a disabled toggle and a disabled, checked one. The gray of the text is the class of the
-      # field's label.
+      # Flowbite's "Disabled state": a disabled toggle and a disabled, checked one. The field grays the label of a disabled
+      # control.
       def disabled
         render_with_template
       end
@@ -31,7 +31,7 @@ module Gustwave
       end
 
       # Flowbite's "Toggle Switch" example on its forms page: a toggle, a checked one and a disabled one. Flowbite
-      # keeps the text of the disabled toggle dark there.
+      # keeps the text of the disabled toggle dark there, so its label takes the dark classes.
       def toggle_switch
         render_with_template
       end

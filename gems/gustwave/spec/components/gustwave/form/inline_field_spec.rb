@@ -135,13 +135,46 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
       expect(toggle["aria-describedby"]).to eq("#{toggle[:id]}-helper-text")
     end
 
-    it "takes the label's attributes from the slot, e.g. the gray of a disabled control" do
-      render_field do |field|
-        field.with_control_toggle(disabled: true)
-        field.with_label("Sync", class: "text-gray-400 dark:text-gray-500")
-      end
+    it "grays the label of a disabled control, as Flowbite's disabled toggle" do
+      render_field(label: "Sync") { |field| field.with_control_toggle(disabled: true) }
 
       expect(classes_of(label)).to eq(class_set("font-medium text-gray-400 dark:text-gray-500"))
+    end
+
+    it "grays the label of a disabled control in the error state, too" do
+      render_field(label: "Sync", validation: :error) { |field| field.with_control_toggle(disabled: true) }
+
+      expect(classes_of(label)).to eq(class_set("font-medium text-gray-400 dark:text-gray-500"))
+    end
+
+    it "grays the label for a disabled renderable control" do
+      render_field(label: "Sync") { |field| field.with_control_renderable(Gustwave::Form::Toggle.new(disabled: true)) }
+
+      expect(classes_of(label)).to include("text-gray-400", "dark:text-gray-500")
+    end
+
+    it "keeps the label's colors for an enabled or required control" do
+      render_field(label: "Sync") { |field| field.with_control_toggle(required: true) }
+
+      expect(classes_of(label)).to eq(class_set("font-medium text-gray-900 dark:text-gray-300"))
+    end
+
+    it "lets the label's own classes win over the gray" do
+      render_field do |field|
+        field.with_control_toggle(disabled: true)
+        field.with_label("Sync", class: "text-gray-900 dark:text-gray-300")
+      end
+
+      expect(classes_of(label)).to eq(class_set("font-medium text-gray-900 dark:text-gray-300"))
+    end
+
+    it "leaves the gray to the caller with a block as the control" do
+      render_inline(described_class.new) do |field|
+        field.with_label("Sync", class: "text-gray-400 dark:text-gray-500")
+        "<input type=\"checkbox\" disabled>".html_safe
+      end
+
+      expect(classes_of(page.find("label"))).to eq(class_set("font-medium text-gray-400 dark:text-gray-500"))
     end
 
     it "raises for an attribute without a form, naming the class" do
