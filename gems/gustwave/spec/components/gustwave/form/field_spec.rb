@@ -445,6 +445,45 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "a toggle control" do
+    def toggle
+      page.find("input[type='checkbox']", visible: :all)
+    end
+
+    it "binds a toggle to the attribute, with the label's for matching its id" do
+      render_field(:title, form: form_builder, helper_text: "Help") do |field|
+        field.with_control_toggle(color: :green) { "Publish" }
+      end
+
+      expect(page.find("div > label", match: :first)[:for]).to eq("task_title")
+      expect(toggle[:id]).to eq("task_title")
+      expect(toggle[:name]).to eq("task[title]")
+      expect(toggle["aria-describedby"]).to eq("task_title_helper_text")
+      expect(page).to have_css("label span", text: "Publish")
+    end
+
+    it "passes the error state on" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_toggle }
+
+      expect(toggle["aria-invalid"]).to eq("true")
+      expect(toggle["aria-describedby"]).to eq("task_title_validation_message")
+    end
+
+    it "renders no label with label: false" do
+      render_field(:title, form: form_builder, label: false) { |field| field.with_control_toggle { "Publish" } }
+
+      expect(page).to have_css("label", count: 1)
+    end
+
+    it "wires an unbound toggle with a generated ID" do
+      render_field(label: "Notify", helper_text: "Help") { |field| field.with_control(:toggle, value: "1") }
+
+      expect(toggle[:id]).to start_with("field-")
+      expect(page.find("div > label", match: :first)[:for]).to eq(toggle[:id])
+      expect(toggle["aria-describedby"]).to eq("#{toggle[:id]}-helper-text")
+    end
+  end
+
   describe "ids" do
     it "differ between forms with another namespace or object name" do
       render_inline(described_class.new(:title, form: form_builder(namespace: "a"), helper_text: "Help")) { |f| f.with_control_input }

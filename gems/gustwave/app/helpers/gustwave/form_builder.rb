@@ -53,6 +53,16 @@ module Gustwave
   # Rails', including the other select helpers such as
   # +grouped_collection_select+ and +time_zone_select+.
   #
+  # +toggle+ has no Rails helper. It renders a field with a
+  # Gustwave::Form::Toggle through Rails' +check_box+, so the label goes above
+  # the switch. It takes Rails' +checked_value+ and +unchecked_value+ after
+  # the options, and the toggle's +size+ and +color+. A toggle with text of
+  # its own is its own label, which the toggle's block sets, so render it
+  # with Gustwave::Form::Field and +label: false+, as for the select's slots:
+  #
+  #   <%= f.toggle :published, color: :green %>
+  #   <%= f.toggle :published, { size: :lg }, "yes", "no" %>
+  #
   # The rich textarea's +editor+, +sticky_toolbar+ and +toolbar_id+ are its
   # options, and the rest of the options are the editor element's attributes.
   #
@@ -67,8 +77,8 @@ module Gustwave
   #   class AppFormBuilder < Gustwave::FormBuilder
   #     self.field_class = "App::Field"
   #
-  #     def toggle(attribute, options = {}, &block)
-  #       render_field(attribute, :toggle, options, &block)
+  #     def rating(attribute, options = {}, &block)
+  #       render_field(attribute, :rating, options, &block)
   #     end
   #   end
   #
@@ -129,6 +139,21 @@ module Gustwave
     # Renders a field with a Gustwave::Form::FileInput.
     def file_field(attribute, options = {}, &block)
       render_field(attribute, :file_input, options, &block)
+    end
+
+    # Renders a field with a Gustwave::Form::Toggle. There is no Rails helper
+    # of this name, so it follows +check_box+: the options, then the checked
+    # and the unchecked value. The block receives the field, as for the input
+    # helpers. It can't set the toggle's text, as the control is set already:
+    # for that, render Gustwave::Form::Field with +label: false+.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] as for +render_field+; +size+ and +color+ go to the toggle.
+    # @param checked_value [Object] Rails' value of a checked box.
+    # @param unchecked_value [Object] Rails' value of an unchecked box.
+    def toggle(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
+      options = options.to_h.symbolize_keys.merge(checked_value:, unchecked_value:)
+      render_field(attribute, :toggle, options, &block)
     end
 
     # The options of a select helper that go to the control as they are.

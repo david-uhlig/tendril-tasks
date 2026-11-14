@@ -789,8 +789,8 @@ pages:
     preview: gustwave/form/file_input/helper_text
   - id: form-toggle-example
     title: Toggle Switch
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/toggle/toggle_switch
   components/gallery:
   - id: default-gallery-example
     title: Default gallery
@@ -1973,24 +1973,24 @@ pages:
   forms/toggle:
   - id: default-toggle-example
     title: Toggle example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/toggle/default
   - id: toggle-checked-example
     title: Checked state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/toggle/checked
   - id: toggle-disabled-example
     title: Disabled state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/toggle/disabled
   - id: toggle-colors-example
     title: Colors
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/toggle/colors
   - id: toggle-sizes-example
     title: Sizes
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/toggle/sizes
   typography/blockquote:
   - id: default-blockquote-example
     title: Default blockquote

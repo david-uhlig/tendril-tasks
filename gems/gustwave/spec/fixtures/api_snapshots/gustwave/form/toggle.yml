@@ -1,0 +1,48 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'size: (optional)'
+- 'color: (optional)'
+- 'validation: (optional)'
+- 'checked_value: (optional)'
+- 'unchecked_value: (optional)'
+- 'include_hidden: (optional)'
+- 'label_options: (optional)'
+- 'track_options: (optional)'
+- 'text_options: (optional)'
+- "**options"
+options:
+  color:
+    default: blue
+    values:
+    - blue
+    - red
+    - green
+    - purple
+    - yellow
+    - teal
+    - orange
+    - none
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+    - none
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- input
+- label
+- text
+- track
+methods:
+- apply_slot_context
+- html_id

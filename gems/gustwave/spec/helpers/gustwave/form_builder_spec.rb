@@ -199,6 +199,49 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "#toggle" do
+    it "renders a field with a toggle, bound through Rails' check_box" do
+      html = parse(gustwave_form.toggle(:title))
+
+      expect(html).to have_css("div > label[for='task_title']", text: "Title")
+      expect(html).to have_css("div > label > input[type='hidden'][name='task[title]'][value='0']", visible: :all)
+      expect(html).to have_css("label > input#task_title[type='checkbox'][name='task[title]'][value='1']", visible: :all)
+      expect(html).to have_css("label > input + div")
+    end
+
+    it "sends size and color to the toggle and the rest to the field and the HTML attributes" do
+      html = parse(gustwave_form.toggle(:title, size: :lg, color: :red, label: "Publish", helper_text: "Help", required: true))
+      track = html.find("label > div")
+
+      expect(html.find("div > label", match: :first).text).to eq("Publish")
+      expect(html).to have_css("p#task_title_helper_text", text: "Help")
+      expect(class_set(track[:class])).to include("w-14", "peer-checked:bg-red-600")
+      expect(html.find("input#task_title", visible: :all)[:required]).to be_present
+    end
+
+    it "takes the checked and unchecked value after the options, as check_box does" do
+      html = parse(gustwave_form.toggle(:title, {}, "yes", "no"))
+
+      expect(html).to have_css("input#task_title[value='yes']", visible: :all)
+      expect(html).to have_css("input[type='hidden'][value='no']", visible: :all)
+    end
+
+    it "marks the input as invalid for a record with errors" do
+      html = parse(gustwave_form(invalid_task).toggle(:title))
+
+      expect(html).to have_css("input[type='checkbox'][aria-invalid='true']", visible: :all)
+      expect(html).to have_css("p", text: "Can't be blank")
+      expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "leaves Rails' check_box alone" do
+      html = parse(gustwave_form.check_box(:title))
+
+      expect(html).to have_no_css("label")
+      expect(html).to have_css("input[type='checkbox']#task_title")
+    end
+  end
+
   describe "#select" do
     let(:countries) { [ %w[Canada CA], %w[France FR], %w[Germany DE] ] }
 

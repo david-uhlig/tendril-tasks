@@ -76,6 +76,8 @@ module Gustwave
       # * +select+: a Gustwave::Form::Select, built with the given arguments.
       # * +rich_textarea+: a Gustwave::Form::RichTextarea, built with the given arguments.
       # * +file_input+: a Gustwave::Form::FileInput, built with the given arguments.
+      # * +toggle+: a Gustwave::Form::Toggle, built with the given arguments and block.
+      #   A toggle with text of its own is its own label, so give the field +label: false+.
       # * +renderable+: any component. One that implements +apply_slot_context+
       #   receives +attribute+, +form+, +id+ (without a form), +validation+ and
       #   +described_by+, as Gustwave::Form::Input does.
@@ -85,13 +87,15 @@ module Gustwave
       #   <% field.with_control_select(choices: @countries, prompt: "Choose a country") %>
       #   <% field.with_control_rich_textarea %>
       #   <% field.with_control_file_input(accept: "image/*") %>
-      #   <% field.with_control_renderable(MyToggle.new) %>
+      #   <% field.with_control_toggle(color: :green) { "Published" } %>
+      #   <% field.with_control_renderable(MyRating.new) %>
       renders_one_extensible :control, types: {
         input: ->(*args, **options) { Gustwave::Form::Input.new(*args, **options) },
         textarea: ->(*args, **options) { Gustwave::Form::Textarea.new(*args, **options) },
         select: ->(*args, **options) { Gustwave::Form::Select.new(*args, **options) },
         rich_textarea: ->(*args, **options) { Gustwave::Form::RichTextarea.new(*args, **options) },
-        file_input: ->(*args, **options) { Gustwave::Form::FileInput.new(*args, **options) }
+        file_input: ->(*args, **options) { Gustwave::Form::FileInput.new(*args, **options) },
+        toggle: ->(*args, **options) { Gustwave::Form::Toggle.new(*args, **options) }
       }, renderable: :control_context
 
       # The label. Takes text or a block, and HTML attributes. Its +for+ is

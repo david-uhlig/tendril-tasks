@@ -130,6 +130,7 @@ A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The b
   <%= f.rich_textarea :description %>
   <%= f.file_field :attachment, accept: "image/*" %>
   <%= f.select :country, @countries, prompt: "Choose a country", size: :lg %>
+  <%= f.toggle :published, color: :green %>
   <%= f.hidden_field :project_id %>
 <% end %>
 ```
@@ -140,7 +141,9 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 
 `select` and `collection_select` take two hashes, as in Rails. The first holds Rails' select options (`prompt`, `include_blank`, `selected`, `disabled`, `include_hidden`) and Gustwave's (`label`, `helper_text`, `validation`, `validation_message`, and the select's `size` and `style`), so `f.select :country, @countries, prompt: "Choose", size: :lg` needs no braces. The second is the `<select>`'s HTML attributes, e.g. `multiple: true` or `size: 5`, also when the first has a `size`: `f.select :tags, @tags, { size: :lg }, { size: 5 }`. The block of `select` stays Rails': it supplies the option tags and doesn't receive the field. Set the slots of a select's field with `Gustwave::Form::Field` and `with_control_select`.
 
-`Gustwave::Form::Field`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput` and `Gustwave::Form::Select` work on their own: with any Rails builder, or without one:
+`f.toggle` has no Rails helper of its own. It renders Flowbite's toggle, a checkbox shown as a switch, through Rails' `check_box`, so it takes `checked_value` and `unchecked_value` after the options: `f.toggle :published, { size: :lg }, "yes", "no"`. Its label goes above the switch. For a toggle with its own text, render the field yourself with `label: false`: `field.with_control_toggle { "Published" }`.
+
+`Gustwave::Form::Field`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select` and `Gustwave::Form::Toggle` work on their own: with any Rails builder, or without one:
 
 ```erb
 <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
@@ -151,6 +154,7 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
 <%= render Gustwave::Form::FileInput.new(name: "avatar", accept: "image/*") %>
 <%= render Gustwave::Form::Select.new(name: "country", choices: @countries, prompt: "Choose a country") %>
+<%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", color: :green) { "Enable notifications" } %>
 ```
 
 A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`. The rich textarea renders Lexxy or Trix in Flowbite's frame. Its toolbar goes to the header by default, or to the footer with `with_footer_toolbar`.
@@ -161,8 +165,8 @@ To extend the builder, subclass it. `field_class` names the field class its help
 class AppFormBuilder < Gustwave::FormBuilder
   self.field_class = "App::Field"
 
-  def toggle(attribute, options = {}, &block)
-    render_field(attribute, :toggle, options, &block)
+  def rating(attribute, options = {}, &block)
+    render_field(attribute, :rating, options, &block)
   end
 end
 ```

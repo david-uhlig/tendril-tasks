@@ -29,6 +29,7 @@ slots:
     - rich_textarea
     - select
     - textarea
+    - toggle
   helper_text:
     many: false
   label:
@@ -57,6 +58,8 @@ methods:
 - with_control_select_content
 - with_control_textarea
 - with_control_textarea_content
+- with_control_toggle
+- with_control_toggle_content
 - with_helper_text
 - with_helper_text_content
 - with_label
@@ -70,6 +73,7 @@ slot_builders:
 - build_slot_control_rich_textarea
 - build_slot_control_select
 - build_slot_control_textarea
+- build_slot_control_toggle
 - build_slot_helper_text
 - build_slot_label
 - build_slot_validation_message

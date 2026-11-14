@@ -1,0 +1,5 @@
+<%= render Gustwave::Form::Toggle.new(value: "", label_options: { class: "mb-5" }) { "Weekly summary" } %>
+
+<%= render Gustwave::Form::Toggle.new(value: "", checked: true, label_options: { class: "mb-5" }) { "Product updates" } %>
+
+<%= render Gustwave::Form::Toggle.new(value: "", disabled: true, label_options: { class: "mb-5" }, text_options: { class: "text-gray-900 dark:text-gray-300" }) { "Security alerts" } %>
