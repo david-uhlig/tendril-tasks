@@ -1407,8 +1407,7 @@ pages:
     preview: gustwave/table/pagination
   - id: table-checkbox-example
     title: Checkbox selection
-    status: partial
-    needs: form
+    status: previewed
     preview: gustwave/table/checkbox
   - id: table-users-example
     title: Table with users
