@@ -36,6 +36,23 @@ RSpec.describe "Gustwave::Form::InlineField style snapshot", type: :component do
       Gustwave::Form::InlineField.new(**args)
     end
 
+    group :checkbox, validation: %i[none error],
+          slots: ->(field) {
+            field.with_label("Remember me")
+            field.with_control_checkbox
+            field.with_helper_text("For 30 days on this device.")
+          } do |**args|
+      Gustwave::Form::InlineField.new(**args)
+    end
+
+    group :checkbox_disabled, validation: %i[none],
+          slots: ->(field) {
+            field.with_label("Remember me")
+            field.with_control_checkbox(disabled: true)
+          } do |**args|
+      Gustwave::Form::InlineField.new(**args)
+    end
+
     group :content, validation: %i[none], content: "<input type=\"checkbox\">".html_safe do |**args|
       Gustwave::Form::InlineField.new(label: "Remember me", **args)
     end

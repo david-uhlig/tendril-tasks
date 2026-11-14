@@ -49,9 +49,18 @@ module Gustwave
   # +month_field+ and +week_field+, which render an input, +textarea+
   # (+text_area+), +rich_textarea+ (+rich_text_area+) and +file_field+, which
   # render a textarea, a rich textarea and a file input, and +select+ and
-  # +collection_select+, which render a select. Every other helper stays
-  # Rails', including the other select helpers such as
-  # +grouped_collection_select+ and +time_zone_select+.
+  # +collection_select+, which render a select, and +check_box+ (+checkbox+),
+  # which renders a checkbox. Every other helper stays Rails', including the
+  # other select helpers such as +grouped_collection_select+ and
+  # +time_zone_select+, and +collection_check_boxes+.
+  #
+  # +check_box+ renders a Gustwave::Form::InlineField with a
+  # Gustwave::Form::Checkbox, so the label goes beside the box and the helper
+  # text under the label. The signature is Rails', with the checked and the
+  # unchecked value after the options, and it takes the checkbox's +color+:
+  #
+  #   <%= f.check_box :terms, label: "I accept the terms", helper_text: "You can withdraw at any time." %>
+  #   <%= f.check_box :newsletter, { color: :green }, "yes", "no" %>
   #
   # +toggle+ has no Rails helper. It renders a Gustwave::Form::InlineField
   # with a Gustwave::Form::Toggle through Rails' +check_box+, so the label
@@ -95,7 +104,7 @@ module Gustwave
                     default: "Gustwave::Form::Field"
 
     # The field class of the helpers whose label goes beside the control, as
-    # +toggle+'s does. Set it like +field_class+.
+    # +toggle+'s and +check_box+'s do. Set it like +field_class+.
     class_attribute :inline_field_class,
                     instance_writer: false,
                     instance_predicate: false,
@@ -163,6 +172,21 @@ module Gustwave
       options = options.to_h.symbolize_keys.merge(checked_value:, unchecked_value:)
       render_inline_field(attribute, :toggle, options, &block)
     end
+
+    # Renders an inline field with a Gustwave::Form::Checkbox. The signature
+    # is Rails': the options, then the checked and the unchecked value. The
+    # block receives the field, as for the input helpers.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] as for +render_field+; +color+ and +include_hidden+ go to the checkbox.
+    # @param checked_value [Object] Rails' value of a checked box.
+    # @param unchecked_value [Object] Rails' value of an unchecked box.
+    def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
+      options = options.to_h.symbolize_keys.merge(checked_value:, unchecked_value:)
+      render_inline_field(attribute, :checkbox, options, &block)
+    end
+    # Rails 8 names the helper +checkbox+ and keeps +check_box+ as its alias.
+    alias_method :checkbox, :check_box if ActionView::Helpers::FormBuilder.method_defined?(:checkbox)
 
     # The options of a select helper that go to the control as they are.
     # +disabled+ goes as +disabled_choices+.

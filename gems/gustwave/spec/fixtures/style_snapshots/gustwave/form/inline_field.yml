@@ -138,6 +138,39 @@ control_only validation=:none:
   dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
   peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
   relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+checkbox validation=:none:
+- div
+- 'div: flex'
+- 'div: flex h-5 items-center'
+- 'input aria-describedby="field-r0000001-helper-text" id="field-r0000001" type="checkbox":
+  bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600
+  dark:ring-offset-gray-800 focus:ring-2 focus:ring-blue-500 h-4 rounded-sm text-blue-600
+  w-4'
+- 'div: ms-2 text-sm'
+- 'label for="field-r0000001": dark:text-gray-300 font-medium text-gray-900'
+- 'p id="field-r0000001-helper-text": dark:text-gray-300 font-normal text-gray-500
+  text-xs'
+checkbox validation=:error:
+- div
+- 'div: flex'
+- 'div: flex h-5 items-center'
+- 'input aria-describedby="field-r0000001-helper-text" aria-invalid="true" id="field-r0000001"
+  type="checkbox": bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 focus:ring-blue-500
+  h-4 rounded-sm text-blue-600 w-4'
+- 'div: ms-2 text-sm'
+- 'label for="field-r0000001": dark:text-red-500 font-medium text-red-700'
+- 'p id="field-r0000001-helper-text": dark:text-gray-300 font-normal text-gray-500
+  text-xs'
+checkbox_disabled validation=:none:
+- div
+- 'div: flex'
+- 'div: flex h-5 items-center'
+- 'input disabled="disabled" id="field-r0000001" type="checkbox": bg-gray-100 border-gray-300
+  dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800
+  focus:ring-2 focus:ring-blue-500 h-4 rounded-sm text-blue-600 w-4'
+- 'div: ms-2 text-sm'
+- 'label for="field-r0000001": dark:text-gray-500 font-medium text-gray-400'
 content validation=:none:
 - div
 - 'div: flex'

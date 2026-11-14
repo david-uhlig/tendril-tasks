@@ -37,23 +37,10 @@
     <% field.with_control_input(type: :password, id: "confirm_password", placeholder: "•••••••••", required: true) %>
   <% end %>
 
-  <%# Plain Tailwind, copied from Flowbite: Gustwave has no checkbox component yet. %>
-  <div class="flex items-start mb-6">
-    <div class="flex items-center h-5">
-      <input
-        id="remember"
-        type="checkbox"
-        value=""
-        class="
-          w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700
-          dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800
-        "
-        required
-      >
-    </div>
-
-    <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#terms" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
-  </div>
+  <%= render Gustwave::Form::InlineField.new(class: "mb-6") do |field| %>
+    <% field.with_control_checkbox(id: "remember", value: "", required: true) %>
+    <% field.with_label(safe_join([ "I agree with the ", render(Gustwave::Link.new("terms and conditions", href: "#terms")), "." ])) %>
+  <% end %>
 
   <%= render Gustwave::Buttons::Default.new("Create account", type: :submit, class: "w-full sm:w-auto") %>
 </form>
