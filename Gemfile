@@ -91,7 +91,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # HTML+ERB parser, linter and formatter [https://herb-tools.dev]
-  gem "herb", "~> 0.11.1", require: false
+  gem "herb", "~> 0.11.2", require: false
 
   # Runs the specs in parallel processes [https://github.com/grosser/parallel_tests]
   gem "parallel_tests"
@@ -120,7 +120,7 @@ end
 
 group :test do
   # Testing framework
-  gem "rspec-rails", "~> 8.0"
+  gem "rspec-rails", "~> 8.1"
   gem "factory_bot_rails"
   gem "simplecov"
   gem "capybara"
