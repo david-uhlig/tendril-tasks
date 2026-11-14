@@ -27,9 +27,9 @@ module Gustwave
     #   <% end %>
     #
     # The radios of a group are one field each, for the same attribute, each
-    # with its +value+. The default label of a radio is Rails'
-    # <tt>label(:plan, value: "free")</tt>: "Free", or the translation of that
-    # value.
+    # with its +value+. The default label of a radio is the
+    # translation for that value (<tt>helpers.label.task.plan.free</tt>),
+    # otherwise the humanized value: "Free".
     #
     #   <%= render Gustwave::Form::InlineField.new(:plan, form: f, helper_text: "No card needed.") do |field| %>
     #     <% field.with_control_radio(value: "free") %>
@@ -115,7 +115,8 @@ module Gustwave
       #   receives +attribute+, +form+, +id+ (without a form), +validation+ and
       #   +described_by+, as Gustwave::Form::Toggle does. One that implements
       #   +disabled?+ grays the label while it's disabled. One that implements
-      #   +value+ gets its default label from Rails' +label(attribute, value:)+.
+      #   +value+ that isn't +nil+ gets its default label from the translation
+      #   for that value, otherwise from the humanized value.
       #
       #   <% field.with_control_toggle(size: :lg) %>
       #   <% field.with_control_checkbox(color: :green) %>

@@ -120,6 +120,8 @@ module Gustwave
       def html_id
         return explicit_id if explicit_id
         return unless bound?
+        # Rails leaves the value out of the ID of a radio whose value is nil
+        return bound_form.field_id(bound_attribute) if value.nil?
 
         bound_form.field_id(bound_attribute, sanitized_value(value))
       end

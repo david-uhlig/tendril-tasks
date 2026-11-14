@@ -221,6 +221,35 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
       expect(label.text).to eq("In progress")
     end
 
+    it "labels a radio by the translation for its value" do
+      I18n.backend.store_translations(:en, helpers: { label: { task: { title: { free: "Free of charge" } } } })
+      render_field(:title, form: form_builder) { |field| field.with_control_radio(value: "free") }
+
+      expect(label.text).to eq("Free of charge")
+    ensure
+      I18n.backend.reload!
+    end
+
+    it "labels a radio by the humanized value in a form without an object" do
+      render_field(:title, form: form_builder(nil)) { |field| field.with_control_radio(value: "free") }
+
+      expect(label.text).to eq("Free")
+    end
+
+    it "labels a radio whose value is false by the humanized value" do
+      render_field(:title, form: form_builder) { |field| field.with_control_radio(value: false) }
+
+      expect(label.text).to eq("False")
+    end
+
+    it "points the label and the texts at a radio whose value is nil" do
+      render_field(:title, form: form_builder, helper_text: "Help") { |field| field.with_control_radio(value: nil) }
+
+      expect(radio_input[:id]).to eq("task_title")
+      expect(label[:for]).to eq(radio_input[:id])
+      expect(radio_input["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
     it "renders no validation message for validation_message: false, and keeps the state" do
       render_field(:title, form: form_builder(invalid_task), validation_message: false) { |field| field.with_control_radio(value: "free") }
 

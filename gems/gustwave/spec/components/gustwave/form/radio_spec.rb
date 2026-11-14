@@ -262,6 +262,14 @@ RSpec.describe Gustwave::Form::Radio, type: :component do
       end
     end
 
+    it "is the ID Rails gives a bound radio whose value is nil, without a suffix" do
+      component = described_class.new(:title, form: form_builder, value: nil)
+      render_inline(component)
+
+      expect(radio[:id]).to eq("task_title")
+      expect(component.html_id).to eq("task_title")
+    end
+
     it "is the caller's ID for a bound radio" do
       expect(described_class.new(:title, form: form_builder, value: "free", id: "own").html_id).to eq("own")
     end

@@ -65,8 +65,8 @@ module Gustwave
   #
   # +radio_button+ renders a Gustwave::Form::InlineField with a
   # Gustwave::Form::Radio the same way. The signature is Rails': the
-  # attribute, the value and the options. Without a +label+, the label is
-  # Rails' <tt>label(attribute, value:)</tt>. One radio is one field, so a
+  # attribute, the value and the options. Without a +label+, the label is the
+  # translation for the value, otherwise the humanized value. One radio is one field, so a
   # group's error message goes under one radio, and
   # <tt>validation_message: false</tt> leaves it off the others:
   #

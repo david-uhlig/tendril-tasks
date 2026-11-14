@@ -116,11 +116,19 @@ module Gustwave
       # The text Rails' +label+ helper would render, from a translation or
       # the humanized attribute.
       def default_label_text
+        text = label_translation
+        return text unless control.respond_to?(:value) && !control.value.nil?
+
+        # A control with a value, like a radio, is labeled by that value: the
+        # translation for it, otherwise the humanized value. Rails only
+        # humanizes through a model, and skips a +false+ value.
+        value_text = label_translation(value: control.value)
+        value_text == text ? control.value.to_s.humanize : value_text
+      end
+
+      def label_translation(**options)
         text = nil
-        label_options = {}
-        # A control with a value, like a radio, is labeled by that value
-        label_options[:value] = control.value if control.respond_to?(:value) && control.value.present?
-        @form.label(@attribute, **label_options) { |builder| text = builder.translation; "" }
+        @form.label(@attribute, **options) { |builder| text = builder.translation; "" }
         text
       end
 

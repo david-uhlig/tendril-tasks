@@ -784,7 +784,7 @@ pages:
     title: Radio buttons
     status: previewed
     preview: gustwave/form/radio/fieldset
-    note: This example's own classes, the border, the focus ring and the dark focus background, are passed as classes. Its radios have no text color, so a checked one keeps the blue of Form::Radio's default, and Flowbite's lighter disabled border is passed as a class.
+    note: This example's own classes, the focus ring, the dark focus background, the block labels, and the disabled radio's lighter border and label, are passed as classes. Its radios have no text color and no ring offset, but they keep Form::Radio's blue and ring offset, which only show on a checked radio or around the focus ring.
   - id: form-file-input-example
     title: File upload
     status: previewed
