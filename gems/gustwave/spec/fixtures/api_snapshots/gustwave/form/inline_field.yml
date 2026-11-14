@@ -1,0 +1,65 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'label: (optional)'
+- 'helper_text: (optional)'
+- 'validation: (optional)'
+- 'validation_message: (optional)'
+- 'row_options: (optional)'
+- 'control_cell_options: (optional)'
+- 'text_options: (optional)'
+- "**options"
+options:
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- control_cell
+- helper_text
+- label
+- row
+- text
+- validation_message
+slots:
+  control:
+    many: false
+    types:
+    - renderable
+    - toggle
+  helper_text:
+    many: false
+  label:
+    many: false
+  validation_message:
+    many: false
+methods:
+- control
+- control?
+- helper_text
+- helper_text?
+- label?
+- validation_message
+- validation_message?
+- with_control
+- with_control_content
+- with_control_renderable
+- with_control_renderable_content
+- with_control_toggle
+- with_control_toggle_content
+- with_helper_text
+- with_helper_text_content
+- with_label
+- with_label_content
+- with_validation_message
+- with_validation_message_content
+slot_builders:
+- build_slot_control_renderable
+- build_slot_control_toggle
+- build_slot_helper_text
+- build_slot_label
+- build_slot_validation_message

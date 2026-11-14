@@ -199,6 +199,56 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "#toggle" do
+    it "renders an inline field with a toggle, bound through Rails' check_box" do
+      html = parse(gustwave_form.toggle(:title))
+
+      expect(html).to have_css("div.flex > div + div > label[for='task_title']", text: "Title")
+      expect(html).to have_css("div.flex > div > label > input[type='hidden'][name='task[title]'][value='0']", visible: :all)
+      expect(html).to have_css("label > input#task_title[type='checkbox'][name='task[title]'][value='1']", visible: :all)
+      expect(html).to have_css("label > input + div")
+    end
+
+    it "sends size and color to the toggle and the rest to the field and the HTML attributes" do
+      html = parse(gustwave_form.toggle(:title, size: :lg, color: :red, label: "Publish", helper_text: "Help", required: true))
+      track = html.find("label > div")
+
+      expect(html.find("label[for='task_title']").text).to eq("Publish")
+      expect(html).to have_css("label[for='task_title'] + p#task_title_helper_text", text: "Help")
+      expect(class_set(track[:class])).to include("w-14", "peer-checked:bg-red-600")
+      expect(html.find("input#task_title", visible: :all)[:required]).to be_present
+      expect(html.find("input#task_title", visible: :all)["aria-describedby"]).to eq("task_title_helper_text")
+    end
+
+    it "passes the field to a block" do
+      html = parse(gustwave_form.toggle(:title) { |field| field.with_label("From the block") })
+
+      expect(html).to have_css("label[for='task_title']", text: "From the block")
+    end
+
+    it "takes the checked and unchecked value after the options, as check_box does" do
+      html = parse(gustwave_form.toggle(:title, {}, "yes", "no"))
+
+      expect(html).to have_css("input#task_title[value='yes']", visible: :all)
+      expect(html).to have_css("input[type='hidden'][value='no']", visible: :all)
+    end
+
+    it "marks the input as invalid for a record with errors" do
+      html = parse(gustwave_form(invalid_task).toggle(:title))
+
+      expect(html).to have_css("input[type='checkbox'][aria-invalid='true']", visible: :all)
+      expect(html).to have_css("p", text: "Can't be blank")
+      expect(html).to have_no_css(".field_with_errors")
+    end
+
+    it "leaves Rails' check_box alone" do
+      html = parse(gustwave_form.check_box(:title))
+
+      expect(html).to have_no_css("label")
+      expect(html).to have_css("input[type='checkbox']#task_title")
+    end
+  end
+
   describe "#select" do
     let(:countries) { [ %w[Canada CA], %w[France FR], %w[Germany DE] ] }
 
@@ -594,6 +644,30 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
 
       expect(html).to have_css("section.spec-field input#task_title")
       expect(described_class.field_class).to eq("Gustwave::Form::Field")
+    end
+
+    it "renders the inline field class of a subclass" do
+      stub_const("SpecInlineField", Class.new(Gustwave::Form::InlineField) {
+        def call = tag.section(super, class: "spec-inline-field")
+      })
+      stub_const("SpecBuilder", Class.new(described_class) { self.inline_field_class = "SpecInlineField" })
+
+      html = parse(form_builder(builder: SpecBuilder).toggle(:title))
+
+      expect(html).to have_css("section.spec-inline-field input#task_title", visible: :all)
+      expect(parse(form_builder(builder: SpecBuilder).text_field(:title))).to have_no_css("section")
+      expect(described_class.inline_field_class).to eq("Gustwave::Form::InlineField")
+    end
+
+    it "adds helpers with render_inline_field" do
+      stub_const("SpecBuilder", Class.new(described_class) {
+        def switch(attribute, options = {}, &block) = render_inline_field(attribute, :toggle, options, &block)
+      })
+
+      html = parse(form_builder(builder: SpecBuilder).switch(:title, color: :green, helper_text: "Find"))
+
+      expect(html).to have_css("div.flex input#task_title[type='checkbox']", visible: :all)
+      expect(html).to have_css("p", text: "Find")
     end
 
     it "adds helpers with render_field" do

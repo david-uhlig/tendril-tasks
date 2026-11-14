@@ -53,6 +53,7 @@ slots:
     - svg
 methods:
 - apply_slot_context
+- disabled?
 - html_id
 - leading_visuals
 - leading_visuals?

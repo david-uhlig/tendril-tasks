@@ -45,6 +45,7 @@ slots:
     - toolbar
 methods:
 - apply_slot_context
+- disabled?
 - footer
 - footer?
 - header

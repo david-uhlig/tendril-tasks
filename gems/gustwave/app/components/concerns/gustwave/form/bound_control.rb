@@ -9,9 +9,10 @@ module Gustwave
     # so the name, ID, value, type casting, nested attributes, +index+ and
     # +namespace+ behave as in any Rails form (D9 in docs/design.md).
     #
-    # *Wiring.* It implements +apply_slot_context+ and +html_id+, so a field
-    # can bind the control, give it its ID and validation state, and list the
-    # IDs of the helper text and message in +aria-describedby+.
+    # *Wiring.* It implements +apply_slot_context+, +html_id+ and +disabled?+,
+    # so a field can bind the control, give it its ID and validation state,
+    # list the IDs of the helper text and message in +aria-describedby+, and
+    # gray its label along with a disabled control.
     #
     # *Looks.* It holds the classes of the validation states and of a
     # disabled control, so every control looks alike (+VALIDATION_LOOK+ and
@@ -122,6 +123,11 @@ module Gustwave
         explicit_id || (bound_form.field_id(bound_attribute) if bound?)
       end
 
+      # Whether the control is disabled, for a field that shows it on the label.
+      #
+      # @return [Boolean]
+      def disabled? = @options[:disabled].present?
+
       private
 
       # Raises for an attribute without a form builder, with the name of the
@@ -144,8 +150,6 @@ module Gustwave
       # An ID Rails mustn't work out itself. It would add the namespace to a
       # bound ID again.
       def explicit_id = @options[:id].presence || @context_id
-
-      def disabled? = @options[:disabled].present?
 
       # +aria-invalid+ in the error state and +aria-describedby+ from the
       # context, next to the caller's own +aria+ attributes, which win.

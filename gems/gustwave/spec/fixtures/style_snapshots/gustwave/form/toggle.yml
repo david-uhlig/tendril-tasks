@@ -1,0 +1,199 @@
+---
+look size=:sm color=:blue:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:sm color=:red:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-red-600
+  dark:peer-focus:ring-red-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-red-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:sm color=:green:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-green-600
+  dark:peer-focus:ring-green-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-green-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:sm color=:purple:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-purple-600
+  dark:peer-focus:ring-purple-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-purple-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:sm color=:yellow:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-yellow-400
+  dark:peer-focus:ring-yellow-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-yellow-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:sm color=:teal:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-teal-600
+  dark:peer-focus:ring-teal-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-teal-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:sm color=:orange:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-4 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-4 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-orange-500
+  dark:peer-focus:ring-orange-800 h-5 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-orange-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-9'
+look size=:md color=:blue:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:md color=:red:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-red-600
+  dark:peer-focus:ring-red-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-red-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:md color=:green:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-green-600
+  dark:peer-focus:ring-green-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-green-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:md color=:purple:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-purple-600
+  dark:peer-focus:ring-purple-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-purple-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:md color=:yellow:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-yellow-400
+  dark:peer-focus:ring-yellow-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-yellow-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:md color=:teal:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-teal-600
+  dark:peer-focus:ring-teal-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-teal-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:md color=:orange:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-orange-500
+  dark:peer-focus:ring-orange-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-orange-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
+look size=:lg color=:blue:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+look size=:lg color=:red:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-red-600
+  dark:peer-focus:ring-red-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-red-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+look size=:lg color=:green:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-green-600
+  dark:peer-focus:ring-green-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-green-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+look size=:lg color=:purple:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-purple-600
+  dark:peer-focus:ring-purple-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-purple-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+look size=:lg color=:yellow:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-yellow-400
+  dark:peer-focus:ring-yellow-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-yellow-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+look size=:lg color=:teal:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-teal-600
+  dark:peer-focus:ring-teal-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-teal-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+look size=:lg color=:orange:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-6 after:rounded-full after:start-[4px] after:top-0.5 after:transition-all
+  after:w-6 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-orange-500
+  dark:peer-focus:ring-orange-800 h-7 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-orange-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-14'
+disabled disabled=true:
+- 'label: cursor-pointer inline-flex items-center'
+- 'input disabled="disabled" type="checkbox": peer sr-only'
+- 'div: after:absolute after:bg-white after:border after:border-gray-300 after:content-['''']
+  after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all
+  after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-checked:bg-blue-600
+  dark:peer-focus:ring-blue-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full
+  peer-checked:bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+  relative rounded-full rtl:peer-checked:after:-translate-x-full w-11'
