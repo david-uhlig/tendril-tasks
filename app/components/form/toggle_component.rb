@@ -1,48 +1,38 @@
 # frozen_string_literal: true
 
 module Form
+  # A Gustwave::Form::Toggle with the field's label and errors, and optional
+  # texts around the switch: one shown before it and one after it.
+  #
+  # Example Usage:
+  #   <%= render Form::ToggleComponent.new(f, :publish, "Visibility") do |toggle| %>
+  #     <% toggle.with_checked_state_text("Private") %>
+  #     <% toggle.with_unchecked_state_text("Public") %>
+  #   <% end %>
   class ToggleComponent < TendrilTasks::Component
-    CHECKBOX_STATE_CLASSES = "text-sm font-medium text-gray-900 dark:text-gray-300"
-    TOGGLE_BUTTON_CLASSES = "relative w-11 h-6 bg-gray-200 peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:rtl:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+    STATE_TEXT_CLASSES = "text-sm font-medium text-gray-900 dark:text-gray-300"
 
     renders_one :checked_state_text, ->(text, **options) do
       options.deep_symbolize_keys!
-      options[:class] = class_merge("me-3", CHECKBOX_STATE_CLASSES, options.delete(:class))
+      options[:class] = class_merge("me-3", STATE_TEXT_CLASSES, options.delete(:class))
       tag.span(text, **options)
     end
 
     renders_one :unchecked_state_text, ->(text, **options) do
       options.deep_symbolize_keys!
-      options[:class] = class_merge("ms-3", CHECKBOX_STATE_CLASSES, options.delete(:class))
+      options[:class] = class_merge("ms-3", STATE_TEXT_CLASSES, options.delete(:class))
       tag.span(text, **options)
     end
 
+    # @param form [Object] the form builder
+    # @param attribute [Symbol] the boolean attribute
+    # @param label [String, nil, false] as for Form::BaseFieldComponent
+    # @param options [Hash] HTML attributes of the toggle's checkbox, e.g. +checked+
     def initialize(form, attribute, label = nil, **options)
       @form = form
       @attribute = attribute
       @label = label
-      @check_box_options = { class: "sr-only peer" }
-      @check_box_options[:checked] = options.delete(:checked) if options.key?(:checked)
-      @options = build_options(options)
-    end
-
-    private
-
-    # Rails' own check_box, whatever the form's builder is. The checkbox has
-    # to be the bare input, right before the switch, for the peer classes.
-    # Gustwave::FormBuilder's check_box renders a whole field with a label.
-    def check_box
-      ActionView::Helpers::FormBuilder.instance_method(:check_box)
-                                      .bind_call(@form, @attribute, @check_box_options, "1", "0")
-    end
-
-    def build_options(options)
-      options.deep_symbolize_keys!
-      options[:class] = class_merge(
-        TOGGLE_BUTTON_CLASSES,
-        options.delete(:class)
-      )
-      options
+      @options = options
     end
   end
 end
