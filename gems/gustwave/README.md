@@ -163,7 +163,7 @@ The checkboxes of a `multiple` attribute are one field each, and so are radios. 
 
 The fieldset's `aria-describedby` names its helper text and message. A legend for screen readers only is `fieldset.with_label("Tags", class: "sr-only")`. The message of every field is a `Gustwave::Form::ValidationMessage`, so style it with the HTML attributes of the `validation_message` slot.
 
-`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Fieldset`, `Gustwave::Form::ValidationMessage`, `Gustwave::Form::Input`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle` and `Gustwave::Form::Checkbox` work on their own: with any Rails builder, or without one:
+`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Fieldset`, `Gustwave::Form::ValidationMessage`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle` and `Gustwave::Form::Checkbox` work on their own: with any Rails builder, or without one:
 
 ```erb
 <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>

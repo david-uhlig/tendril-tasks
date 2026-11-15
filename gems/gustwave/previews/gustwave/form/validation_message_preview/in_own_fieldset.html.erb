@@ -1,16 +1,11 @@
-<%= form_with model: plan, scope: :plan, url: "#", builder: Gustwave::FormBuilder do |f| %>
-  <fieldset aria-describedby="<%= f.field_id(:plan, :validation_message) %>">
-    <legend class="mb-2 text-sm font-medium text-red-700 dark:text-red-500">Plan</legend>
+<%= form_with model: settings, scope: :settings, url: "#", builder: Gustwave::FormBuilder do |f| %>
+  <fieldset aria-describedby="<%= f.field_id(:channels, :validation_message) %>">
+    <legend class="mb-2 text-sm font-medium text-red-700 dark:text-red-500">Notify me by</legend>
 
-    <div class="flex items-center mb-2">
-      <%= f.radio_button :plan, "free" %>
-      <label for="<%= f.field_id(:plan, :free) %>" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Free</label>
-    </div>
-    <div class="flex items-center">
-      <%= f.radio_button :plan, "pro" %>
-      <label for="<%= f.field_id(:plan, :pro) %>" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pro</label>
-    </div>
+    <%= f.check_box :channels, { multiple: true, label: "Email", class: "mb-4" }, "email", nil %>
+    <%= f.check_box :channels, { multiple: true, label: "Text message", class: "mb-4" }, "sms", nil %>
+    <%= f.check_box :channels, { multiple: true, label: "Push notification" }, "push", nil %>
 
-    <%= f.validation_message :plan %>
+    <%= f.validation_message :channels %>
   </fieldset>
 <% end %>
