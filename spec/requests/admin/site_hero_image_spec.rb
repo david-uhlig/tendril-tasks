@@ -33,7 +33,7 @@ RSpec.describe "Admin Site Hero Image", type: :request do
       get edit_admin_site_path
 
       page = Nokogiri::HTML(response.body)
-      expect(page.at_css("#current-hero-image label").text.squish).to eq("Mit dem Text der Startseite zeigen")
+      expect(page.css("#current-hero-image label").map { |label| label.text.squish }.join(" ").strip).to eq("Mit dem Text der Startseite zeigen")
       expect(page.at_css("#current-hero-image input#hero-image-show-text[type=checkbox]")).to be_present
       expect(page.at_css("#hero-image-text-preview").text.squish).to include("Bring dich aktiv ein!", "Aufgabe finden")
     end
