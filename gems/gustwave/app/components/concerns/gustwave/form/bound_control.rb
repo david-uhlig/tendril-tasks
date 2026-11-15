@@ -97,6 +97,16 @@ module Gustwave
         names.flat_map { |name| Array(errors[name.to_sym]) }.uniq
       end
 
+      # The error messages of +attribute+ as one sentence, as a field and
+      # Gustwave::Form::ValidationMessage render them.
+      #
+      # @param form [ActionView::Helpers::FormBuilder, nil]
+      # @param attribute [Symbol, String, nil]
+      # @return [String, nil] +nil+ without errors.
+      def self.error_sentence(form, attribute)
+        error_messages(form, attribute).to_sentence.upcase_first.presence
+      end
+
       # Lets a parent bind and wire the control, as Gustwave::Form::Field does.
       # What the caller gave the control itself wins over the context: its own
       # +form+ and attribute, an explicit +validation+ and its own +id+. The

@@ -28,4 +28,5 @@ methods:
 - apply_slot_context
 - disabled?
 - html_id
+- shares_attribute?
 - value

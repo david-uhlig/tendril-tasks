@@ -112,6 +112,13 @@ module Gustwave
       # @return [Object, nil]
       def value = @options[:value]
 
+      # A radio is always one of several for its attribute. Its field then
+      # leaves the attribute's error messages to the group, see
+      # Gustwave::Form::FieldWiring.
+      #
+      # @return [Boolean]
+      def shares_attribute? = true
+
       # The ID the radio renders, for a field's label. Rails appends the
       # value to the ID of a bound radio, so the radios of one group don't
       # share it.

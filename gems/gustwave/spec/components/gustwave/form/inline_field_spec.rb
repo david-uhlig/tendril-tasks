@@ -152,6 +152,32 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
       expect(label[:for]).to eq(toggle[:id])
     end
 
+    it "leaves the attribute's errors to the group for a control that shares the attribute, and keeps the state" do
+      render_field(:title, form: form_builder(invalid_task)) do |field|
+        field.with_control_checkbox(multiple: true, checked_value: "a", unchecked_value: nil)
+      end
+
+      expect(page).to have_no_css("p")
+      expect(page).to have_css("input[type='checkbox'][aria-invalid='true']")
+      expect(page).to have_no_css("input[aria-describedby]")
+      expect(classes_of(label)).to include("text-red-700")
+    end
+
+    it "renders the own message of a control that shares the attribute" do
+      render_field(:title, form: form_builder(invalid_task), validation_message: "Not this one.") do |field|
+        field.with_control_checkbox(multiple: true, checked_value: "a", unchecked_value: nil)
+      end
+
+      expect(page).to have_css("p#task_title_a_validation_message", text: "Not this one.")
+      expect(page).to have_css("input[aria-describedby='task_title_a_validation_message']")
+    end
+
+    it "renders the errors of a checkbox of its own" do
+      render_field(:title, form: form_builder(invalid_task), &:with_control_checkbox)
+
+      expect(page).to have_css("p#task_title_validation_message.text-red-600")
+    end
+
     it "points the label at the ID of a multiple checkbox, which carries the checked value" do
       render_field(:title, form: form_builder) do |field|
         field.with_control_checkbox(multiple: true, checked_value: "a", unchecked_value: nil)
@@ -250,13 +276,20 @@ RSpec.describe Gustwave::Form::InlineField, type: :component do
       expect(radio_input["aria-describedby"]).to eq("task_title_helper_text")
     end
 
-    it "renders no validation message for validation_message: false, and keeps the state" do
-      render_field(:title, form: form_builder(invalid_task), validation_message: false) { |field| field.with_control_radio(value: "free") }
+    it "renders no message by default for a radio, and keeps the state" do
+      render_field(:title, form: form_builder(invalid_task)) { |field| field.with_control_radio(value: "free") }
 
       expect(page).to have_no_css("p")
       expect(radio_input["aria-invalid"]).to eq("true")
       expect(radio_input["aria-describedby"]).to be_nil
       expect(classes_of(label)).to include("text-red-700")
+    end
+
+    it "renders the explicit message of a radio under the ID of the radio" do
+      render_field(:title, form: form_builder(invalid_task), validation_message: "Not this one.") { |field| field.with_control_radio(value: "free") }
+
+      expect(page).to have_css("p#task_title_free_validation_message", text: "Not this one.")
+      expect(radio_input["aria-describedby"]).to eq("task_title_free_validation_message")
     end
 
     it "wires an unbound radio with a generated ID" do

@@ -117,6 +117,13 @@ module Gustwave
         bound_form.field_id(bound_attribute, sanitized_value(@checked_value))
       end
 
+      # Whether the checkbox is one of several for its attribute, as with
+      # +multiple: true+. Its field then leaves the attribute's error messages
+      # to the group, see Gustwave::Form::FieldWiring.
+      #
+      # @return [Boolean]
+      def shares_attribute? = @options[:multiple].present?
+
       private
 
       def input_options

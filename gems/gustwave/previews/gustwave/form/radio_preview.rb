@@ -62,8 +62,8 @@ module Gustwave
         render_with_template
       end
 
-      # Not a Flowbite example. A group of radios in the error state: each field colors its label, and only the first
-      # carries the validation message, the others have +validation_message: false+.
+      # Not a Flowbite example. A group of radios in the error state: each field colors its label, and the
+      # Gustwave::Form::Fieldset around them renders the validation message once.
       def in_a_field
         render_with_template
       end

@@ -146,9 +146,31 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 
 `f.check_box`, or `f.checkbox` as Rails 8 names it, renders Flowbite's checkbox in a `Gustwave::Form::InlineField` as well. It keeps Rails' signature, with `checked_value` and `unchecked_value` after the options, and takes the checkbox's `color`: `f.check_box :newsletter, { color: :green }, "yes", "no"`. A label with a link goes in the block: `field.with_label(...)`. `collection_check_boxes` stays Rails'. A form that switches to the builder gets the label with every `check_box`, so drop the `f.label` beside it, or pass `label: false`.
 
-`f.radio_button` renders Flowbite's radio button in a `Gustwave::Form::InlineField`. It keeps Rails' signature, the attribute, the value and the options, and takes the radio's `color`: `f.radio_button :plan, "pro", color: :green`. The label is the translation for the value (`helpers.label.task.plan.pro`), otherwise the humanized value, "Pro". One radio is one field, so an error message would repeat under every radio of a group: pass `validation_message: false` to all but one. A group's `<fieldset>` is yours, and `collection_radio_buttons` stays Rails'. A form that switches to the builder gets the label with every `radio_button`, so drop the `f.label` beside it, or pass `label: false`.
+`f.radio_button` renders Flowbite's radio button in a `Gustwave::Form::InlineField`. It keeps Rails' signature, the attribute, the value and the options, and takes the radio's `color`: `f.radio_button :plan, "pro", color: :green`. The label is the translation for the value (`helpers.label.task.plan.pro`), otherwise the humanized value, "Pro". One radio is one field, so the radios of a group go in an `f.fieldset`, which renders the error message once (see below). `collection_radio_buttons` stays Rails'. A form that switches to the builder gets the label with every `radio_button`, so drop the `f.label` beside it, or pass `label: false`.
 
-`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle`, `Gustwave::Form::Checkbox` and `Gustwave::Form::Radio` work on their own: with any Rails builder, or without one:
+The radios of a group and the checkboxes of a `multiple` attribute are one field each. Such a field keeps the validation state, but doesn't render the attribute's error messages, so the error isn't repeated per field: the group renders it once. `f.fieldset` renders a `Gustwave::Form::Fieldset`, a `<fieldset>` with a `<legend>` (the `label`), the validation message and a helper text below the group. `f.validation_message` renders a `Gustwave::Form::ValidationMessage`, the attribute's error sentence on its own, for a `<fieldset>` of your own. A group without either shows the error state without a message. A `validation_message:` set on a field is still rendered.
+
+```erb
+<%= f.fieldset :plan, label: "Plan", helper_text: "You can change it later." do %>
+  <%= f.radio_button :plan, "free" %>
+  <%= f.radio_button :plan, "pro" %>
+<% end %>
+
+<%= f.fieldset :tag_ids, label: "Tags", helper_text: "Pick any." do %>
+  <%= f.check_box :tag_ids, { multiple: true, label: "Urgent" }, "urgent", nil %>
+  <%= f.check_box :tag_ids, { multiple: true, label: "Home" }, "home", nil %>
+<% end %>
+
+<fieldset aria-describedby="<%= f.field_id(:tag_ids, :validation_message) %>">
+  <legend>Tags</legend>
+  <%= f.check_box :tag_ids, { multiple: true, label: "Urgent" }, "urgent", nil %>
+  <%= f.validation_message :tag_ids %>
+</fieldset>
+```
+
+The fieldset's `aria-describedby` names its message and helper text. A legend for screen readers only is `fieldset.with_label("Tags", class: "sr-only")`. The message of every field is a `Gustwave::Form::ValidationMessage`, so style it with the HTML attributes of the `validation_message` slot.
+
+`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Fieldset`, `Gustwave::Form::ValidationMessage`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle`, `Gustwave::Form::Checkbox` and `Gustwave::Form::Radio` work on their own: with any Rails builder, or without one:
 
 ```erb
 <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
@@ -180,11 +202,12 @@ The helpers keep Rails' names and arguments, so unknown options are still the `<
 
 A textarea takes `header` and `footer` slots, and then renders in Flowbite's frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`. The rich textarea renders Lexxy or Trix in Flowbite's frame. Its toolbar goes to the header by default, or to the footer with `with_footer_toolbar`.
 
-To extend the builder, subclass it. `field_class` names the field class its helpers render, and `inline_field_class` the one of the helpers with the label beside the control, like `toggle` and `check_box`. `render_field(attribute, control, options)` and `render_inline_field(attribute, control, options)` are what each helper calls, for helpers of your own:
+To extend the builder, subclass it. `field_class` names the field class its helpers render, and `inline_field_class` the one of the helpers with the label beside the control, like `toggle` and `check_box`. `fieldset_class` names the class of `fieldset`. `render_field(attribute, control, options)` and `render_inline_field(attribute, control, options)` are what each helper calls, for helpers of your own:
 
 ```ruby
 class AppFormBuilder < Gustwave::FormBuilder
   self.field_class = "App::Field"
+  self.fieldset_class = "App::Fieldset"
 
   def rating(attribute, options = {}, &block)
     render_field(attribute, :rating, options, &block)

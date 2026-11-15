@@ -35,8 +35,10 @@ module Gustwave
     # it's +:error+ while the bound attribute has errors, or the attribute of
     # a +name_id+ attribute's +name+, and +:none+ otherwise. It passes the
     # state to its control. Without a +validation_message+, a bound field
-    # shows the attribute's error messages as a sentence. +validation_message:
-    # false+ renders no message at all.
+    # shows the attribute's error messages as a sentence, unless its control
+    # is one of several for the attribute, see Gustwave::Form::Fieldset. The
+    # message is a Gustwave::Form::ValidationMessage: style it with the
+    # slot's HTML attributes.
     #
     # A checkbox, radio button or toggle has its label beside it: see
     # Gustwave::Form::InlineField.
@@ -51,22 +53,15 @@ module Gustwave
       # The helper text below the control
       part :helper_text, "mt-2 text-sm text-gray-500 dark:text-gray-400"
 
-      # The validation message below the control. Without a validation state
-      # it looks like the helper text.
-      part :validation_message, "mt-2 text-sm"
-
       variant :validation, default: :none, values: {
         none: {
-          label: "text-gray-900 dark:text-white",
-          validation_message: "text-gray-500 dark:text-gray-400"
+          label: "text-gray-900 dark:text-white"
         },
         success: {
-          label: "text-green-700 dark:text-green-500",
-          validation_message: "text-green-600 dark:text-green-500"
+          label: "text-green-700 dark:text-green-500"
         },
         error: {
-          label: "text-red-700 dark:text-red-500",
-          validation_message: "text-red-600 dark:text-red-500"
+          label: "text-red-700 dark:text-red-500"
         }
       }
 

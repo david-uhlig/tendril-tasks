@@ -1,0 +1,7 @@
+---
+validation validation=:none:
+- 'p: dark:text-gray-400 mt-2 text-gray-500 text-sm'
+validation validation=:success:
+- 'p: dark:text-green-500 mt-2 text-green-600 text-sm'
+validation validation=:error:
+- 'p: dark:text-red-500 mt-2 text-red-600 text-sm'
