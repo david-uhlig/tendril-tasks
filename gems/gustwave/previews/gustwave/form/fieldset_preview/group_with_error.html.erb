@@ -1,12 +1,10 @@
-<%# The builder sends every option but the field's own to the checkbox, so the spacing goes on a wrapper %>
+<%# The fields are spaced by their container: a class on f.check_box goes to the checkbox, not to its field %>
 <%= form_with model: settings, scope: :settings, url: "#", builder: Gustwave::FormBuilder do |f| %>
   <%= f.fieldset :channels, label: "Notify me by", helper_text: "Pick any." do %>
-    <div class="mb-4">
+    <div class="space-y-4">
       <%= f.check_box :channels, { multiple: true, label: "Email" }, "email", nil %>
-    </div>
-    <div class="mb-4">
       <%= f.check_box :channels, { multiple: true, label: "Text message" }, "sms", nil %>
+      <%= f.check_box :channels, { multiple: true, label: "Push notification" }, "push", nil %>
     </div>
-    <%= f.check_box :channels, { multiple: true, label: "Push notification" }, "push", nil %>
   <% end %>
 <% end %>
