@@ -24,8 +24,8 @@ module Gustwave
     #
     # === Several fields for one attribute
     #
-    # The checkboxes of a +multiple+ attribute, like the radios of a group,
-    # are one field each, and the attribute's errors belong to all of them.
+    # The checkboxes of a +multiple+ attribute and the radios of a group are
+    # one field each, and the attribute's errors belong to all of them.
     # A control tells its field with +shares_attribute?+. Such a field keeps
     # the validation state, but doesn't render the attribute's error messages
     # by default: the group renders them once, with
@@ -131,8 +131,20 @@ module Gustwave
       # The text Rails' +label+ helper would render, from a translation or
       # the humanized attribute.
       def default_label_text
+        text = label_translation
+        control = wired_control
+        return text unless control.respond_to?(:value) && !control.value.nil?
+
+        # A control with a value, like a radio, is labeled by that value: the
+        # translation for it, otherwise the humanized value. Rails only
+        # humanizes through a model, and skips a +false+ value.
+        value_text = label_translation(value: control.value)
+        value_text == text ? control.value.to_s.humanize : value_text
+      end
+
+      def label_translation(**options)
         text = nil
-        @form.label(@attribute) { |builder| text = builder.translation; "" }
+        @form.label(@attribute, **options) { |builder| text = builder.translation; "" }
         text
       end
 
@@ -159,6 +171,10 @@ module Gustwave
       # IDs of the helper text and message that are rendered.
       def wire_control
         control = wired_control
+        # The control's ID may depend on the binding, so it gets the context
+        # first and the IDs of the texts, which may depend on its ID, after.
+        control.apply_slot_context(slot: :control, **control_context) if control.respond_to?(:apply_slot_context)
+
         explicit = control.html_id.presence if control.respond_to?(:html_id)
         @control_id = explicit || (@form.field_id(@attribute) if bound?) || @control_id
 
@@ -178,14 +194,23 @@ module Gustwave
       def helper_text_id
         return unless @helper_text_content
 
-        @helper_text_content.options[:id] || (bound? ? @form.field_id(@attribute, :helper_text) : "#{@control_id}-helper-text")
+        @helper_text_content.options[:id] || text_id(:helper_text)
       end
 
       def validation_message_id
         return unless @validation_message_content
 
-        @validation_message_content.options[:id] ||
-          (bound? ? @form.field_id(@attribute, :validation_message) : "#{@control_id}-validation-message")
+        @validation_message_content.options[:id] || text_id(:validation_message)
+      end
+
+      # The ID of the helper text or the message. A bound control whose ID
+      # extends Rails' ID of the attribute, like a radio's, gives its texts
+      # IDs of their own, so the fields of one attribute don't share them.
+      def text_id(kind)
+        return "#{@control_id}-#{kind.to_s.dasherize}" unless bound?
+        return "#{@control_id}_#{kind}" if @control_id.to_s.start_with?("#{@form.field_id(@attribute)}_")
+
+        @form.field_id(@attribute, kind)
       end
 
       def label_element

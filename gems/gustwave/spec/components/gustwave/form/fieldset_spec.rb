@@ -60,6 +60,17 @@ RSpec.describe Gustwave::Form::Fieldset, type: :component do
       expect(page).to have_css("p#task_title_validation_message.text-red-600", text: "Pick one.")
     end
 
+    it "keeps the attribute's ID for the message when its radios carry texts of their own" do
+      form = gustwave_form(invalid_task)
+      render_inline(described_class.new(:title, form:)) do
+        form.radio_button(:title, "free", validation_message: "Own") + form.radio_button(:title, "pro")
+      end
+
+      expect(page).to have_css("fieldset > p#task_title_validation_message", text: "Can't be blank")
+      expect(page).to have_css("p#task_title_free_validation_message", text: "Own")
+      expect(page.find("fieldset")["aria-describedby"]).to eq("task_title_validation_message")
+    end
+
     it "keeps the caller's aria-describedby" do
       render_group(gustwave_form, helper_text: "Pick any.", aria: { describedby: "own" })
 

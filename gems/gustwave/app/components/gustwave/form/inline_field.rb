@@ -27,7 +27,16 @@ module Gustwave
     #     <% field.with_label { "I agree with the #{link_to("terms", terms_path)}.".html_safe } %>
     #   <% end %>
     #
-    # A checkbox sits in a cell as high as the label's first line, so it stays
+    # The radios of a group are one field each, for the same attribute, each
+    # with its +value+. The default label of a radio is the
+    # translation for that value (<tt>helpers.label.task.plan.free</tt>),
+    # otherwise the humanized value: "Free".
+    #
+    #   <%= render Gustwave::Form::InlineField.new(:plan, form: f, helper_text: "No card needed.") do |field| %>
+    #     <% field.with_control_radio(value: "free") %>
+    #   <% end %>
+    #
+    # A checkbox or a radio sits in a cell as high as the label's first line, so it stays
     # beside that line when the label wraps or has helper text under it, as
     # in Flowbite's checkbox with helper text.
     #
@@ -82,8 +91,8 @@ module Gustwave
         md: "ms-3"
       }
 
-      # Set for a checkbox: Flowbite's +h-5+ on the cell, the height of the
-      # label's first line, so the box centers on that line and not on the
+      # Set for a checkbox or a radio: Flowbite's +h-5+ on the cell, the height
+      # of the label's first line, so the control centers on that line and not on the
       # whole text column.
       toggle :first_line_cell, "h-5", part: :control_cell, internal: true
 
@@ -95,14 +104,18 @@ module Gustwave
       #
       # * +toggle+: a Gustwave::Form::Toggle, built with the given arguments.
       # * +checkbox+: a Gustwave::Form::Checkbox, built with the given arguments.
+      # * +radio+: a Gustwave::Form::Radio, built with the given arguments.
       # * +renderable+: any component. One that implements +apply_slot_context+
       #   receives +attribute+, +form+, +id+ (without a form), +validation+ and
       #   +described_by+, as Gustwave::Form::Toggle does. One that implements
-      #   +disabled?+ grays the label while it's disabled.
+      #   +disabled?+ grays the label while it's disabled. One that implements
+      #   +value+ that isn't +nil+ gets its default label from the translation
+      #   for that value, otherwise from the humanized value.
       #
       #   <% field.with_control_toggle(size: :lg) %>
       #   <% field.with_control_checkbox(color: :green) %>
-      #   <% field.with_control_renderable(MyRadioButton.new) %>
+      #   <% field.with_control_radio(value: "free") %>
+      #   <% field.with_control_renderable(MyRating.new) %>
       renders_one_extensible :control, types: {
         toggle: ->(*args, **options) {
           select_options(gap: :md)
@@ -111,6 +124,10 @@ module Gustwave
         checkbox: ->(*args, **options) {
           select_options(first_line_cell: true)
           Gustwave::Form::Checkbox.new(*args, **options)
+        },
+        radio: ->(*args, **options) {
+          select_options(first_line_cell: true)
+          Gustwave::Form::Radio.new(*args, **options)
         }
       }, renderable: :control_context
 

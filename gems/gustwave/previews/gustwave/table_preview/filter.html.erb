@@ -15,23 +15,10 @@
           <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200">
             <% radio_labels.each_with_index do |label, index| %>
               <li>
-                <div class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                  <%= tag.input(
-                    id: "filter-radio-example-#{index + 1}",
-                    type: "radio",
-                    value: "",
-                    name: "filter-radio",
-                    checked: index == 1,
-                    class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  ) %>
-
-                  <label
-                    for="filter-radio-example-<%= index + 1 %>"
-                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300"
-                  >
-                    <%= label %>
-                  </label>
-                </div>
+                <%= render Gustwave::Form::InlineField.new(class: "p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600", row_options: { class: "items-center" }, text_options: { class: "w-full" }) do |field| %>
+                  <% field.with_control_radio(id: "filter-radio-example-#{index + 1}", value: "", name: "filter-radio", checked: index == 1, class: "dark:focus:ring-offset-gray-800") %>
+                  <% field.with_label(label, class: "block rounded-sm") %>
+                <% end %>
               </li>
             <% end %>
           </ul>
