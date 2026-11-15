@@ -5,7 +5,8 @@ module Gustwave
     # Use InlineField to render a form control with its label beside it, as
     # Flowbite does for a toggle, a checkbox and a radio button: the control
     # first, then a column with the label and the helper text under it. The
-    # validation message follows below the row. Like Gustwave::Form::Field,
+    # validation message, a Gustwave::Form::ValidationMessage, follows below
+    # the row. Like Gustwave::Form::Field,
     # which stacks them, it ties the control to them: the label's +for+, the
     # control's +aria-describedby+ and +aria-invalid+, and the validation
     # state's colors. The root is a plain +<div>+ without classes of its own,
@@ -61,22 +62,15 @@ module Gustwave
       # The helper text under the label
       part :helper_text, "text-xs font-normal text-gray-500 dark:text-gray-300"
 
-      # The validation message below the row. Without a validation state it
-      # looks like the stacked field's helper text.
-      part :validation_message, "mt-2 text-sm"
-
       variant :validation, default: :none, values: {
         none: {
-          label: "text-gray-900 dark:text-gray-300",
-          validation_message: "text-gray-500 dark:text-gray-400"
+          label: "text-gray-900 dark:text-gray-300"
         },
         success: {
-          label: "text-green-700 dark:text-green-500",
-          validation_message: "text-green-600 dark:text-green-500"
+          label: "text-green-700 dark:text-green-500"
         },
         error: {
-          label: "text-red-700 dark:text-red-500",
-          validation_message: "text-red-600 dark:text-red-500"
+          label: "text-red-700 dark:text-red-500"
         }
       }
 
@@ -125,7 +119,7 @@ module Gustwave
       # @param label [String, Boolean, nil] the text of the label. Shorthand for the +label+ slot. By default a bound field renders the text of Rails' +label+ helper. +false+ or +nil+ renders no label.
       # @param helper_text [String, nil] shorthand for the +helper_text+ slot.
       # @param validation [Symbol] the validation state. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+.
-      # @param validation_message [String, nil] shorthand for the +validation_message+ slot. By default a bound field renders the attribute's error messages.
+      # @param validation_message [String, nil] shorthand for the +validation_message+ slot. By default a bound field renders the attribute's error messages, unless its control is one of several for the attribute, like a +multiple+ checkbox: its group renders them, see Gustwave::Form::Fieldset.
       # @param row_options [Hash] the HTML attributes of the row's +<div>+.
       # @param control_cell_options [Hash] the HTML attributes of the +<div>+ around the control.
       # @param text_options [Hash] the HTML attributes of the +<div>+ around the label and the helper text.

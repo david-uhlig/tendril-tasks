@@ -81,12 +81,14 @@ module Gustwave
   #
   # An app's subclass renders its own field classes with +field_class+, for
   # the helpers with the label above the control, and +inline_field_class+,
-  # for those with the label beside it. It adds helpers for its own controls
-  # with +render_field+ and +render_inline_field+:
+  # for those with the label beside it. +fieldset_class+ is the class of
+  # +fieldset+. It adds helpers for its own controls with +render_field+ and
+  # +render_inline_field+:
   #
   #   class AppFormBuilder < Gustwave::FormBuilder
   #     self.field_class = "App::Field"
   #     self.inline_field_class = "App::InlineField"
+  #     self.fieldset_class = "App::Fieldset"
   #
   #     def rating(attribute, options = {}, &block)
   #       render_field(attribute, :rating, options, &block)
@@ -109,6 +111,13 @@ module Gustwave
                     instance_writer: false,
                     instance_predicate: false,
                     default: "Gustwave::Form::InlineField"
+
+    # The class +fieldset+ renders, as a class or class name. Set it like
+    # +field_class+.
+    class_attribute :fieldset_class,
+                    instance_writer: false,
+                    instance_predicate: false,
+                    default: "Gustwave::Form::Fieldset"
 
     # The options that go to the field. The rest goes to the control: an
     # input's +size+ and +icon+ are its options, everything else the HTML
@@ -187,6 +196,35 @@ module Gustwave
     end
     # Rails 8 names the helper +checkbox+ and keeps +check_box+ as its alias.
     alias_method :checkbox, :check_box if ActionView::Helpers::FormBuilder.method_defined?(:checkbox)
+
+    # Renders a Gustwave::Form::Fieldset for the fields of one attribute, like
+    # the checkboxes of a +multiple+ attribute, with the legend, the validation
+    # message and the helper text of the group. There is no Rails helper
+    # of this name.
+    #
+    #   <%= f.fieldset :tag_ids, helper_text: "Pick any." do %>
+    #     <%= f.check_box :tag_ids, { multiple: true, label: "Urgent" }, "urgent", nil %>
+    #     <%= f.check_box :tag_ids, { multiple: true, label: "Home" }, "home", nil %>
+    #   <% end %>
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+, and the HTML attributes of the +<fieldset>+.
+    # @yield [fieldset] the fields of the group. Receives the fieldset, to set its slots.
+    # @return [ActiveSupport::SafeBuffer]
+    def fieldset(attribute, options = {}, &block)
+      @template.render(fieldset_class.to_s.constantize.new(attribute, form: self, **options.to_h.symbolize_keys), &block)
+    end
+
+    # Renders a Gustwave::Form::ValidationMessage: the attribute's error
+    # messages on their own, for a group that isn't a Gustwave::Form::Fieldset.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] +validation+ and the HTML attributes of the +<p>+.
+    # @yield the message, instead of the attribute's errors.
+    # @return [ActiveSupport::SafeBuffer]
+    def validation_message(attribute, options = {}, &block)
+      @template.render(Gustwave::Form::ValidationMessage.new(attribute, form: self, **options.to_h.symbolize_keys), &block)
+    end
 
     # The options of a select helper that go to the control as they are.
     # +disabled+ goes as +disabled_choices+.

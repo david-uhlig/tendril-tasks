@@ -1,0 +1,43 @@
+---
+status: alpha
+constructor:
+- attribute (optional)
+- 'form: (optional)'
+- 'label: (optional)'
+- 'helper_text: (optional)'
+- 'validation: (optional)'
+- 'validation_message: (optional)'
+- "**options"
+options:
+  validation:
+    default: none
+    values:
+    - none
+    - success
+    - error
+parts:
+- helper_text
+- label
+slots:
+  helper_text:
+    many: false
+  label:
+    many: false
+  validation_message:
+    many: false
+methods:
+- helper_text
+- helper_text?
+- label?
+- validation_message
+- validation_message?
+- with_helper_text
+- with_helper_text_content
+- with_label
+- with_label_content
+- with_validation_message
+- with_validation_message_content
+slot_builders:
+- build_slot_helper_text
+- build_slot_label
+- build_slot_validation_message
