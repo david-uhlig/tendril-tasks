@@ -18,7 +18,6 @@ options:
 parts:
 - helper_text
 - label
-- validation_message
 slots:
   control:
     many: false

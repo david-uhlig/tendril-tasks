@@ -24,7 +24,6 @@ parts:
 - label
 - row
 - text
-- validation_message
 slots:
   control:
     many: false

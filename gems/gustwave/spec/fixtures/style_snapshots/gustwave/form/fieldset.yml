@@ -1,0 +1,32 @@
+---
+validation validation=:none:
+- fieldset aria-describedby="field-r0000001-helper-text field-r0000001-validation-message"
+- 'legend: dark:text-white font-medium mb-2 text-gray-900 text-sm'
+- input type="checkbox"
+- 'p id="field-r0000001-helper-text": dark:text-gray-400 mt-2 text-gray-500 text-sm'
+- 'p id="field-r0000001-validation-message": dark:text-gray-400 mt-2 text-gray-500
+  text-sm'
+validation validation=:success:
+- fieldset aria-describedby="field-r0000001-helper-text field-r0000001-validation-message"
+- 'legend: dark:text-green-500 font-medium mb-2 text-green-700 text-sm'
+- input type="checkbox"
+- 'p id="field-r0000001-helper-text": dark:text-gray-400 mt-2 text-gray-500 text-sm'
+- 'p id="field-r0000001-validation-message": dark:text-green-500 mt-2 text-green-600
+  text-sm'
+validation validation=:error:
+- fieldset aria-describedby="field-r0000001-helper-text field-r0000001-validation-message"
+- 'legend: dark:text-red-500 font-medium mb-2 text-red-700 text-sm'
+- input type="checkbox"
+- 'p id="field-r0000001-helper-text": dark:text-gray-400 mt-2 text-gray-500 text-sm'
+- 'p id="field-r0000001-validation-message": dark:text-red-500 mt-2 text-red-600 text-sm'
+label_only validation=:none:
+- fieldset
+- 'legend: dark:text-white font-medium mb-2 text-gray-900 text-sm'
+- input type="checkbox"
+label_only validation=:error:
+- fieldset
+- 'legend: dark:text-red-500 font-medium mb-2 text-red-700 text-sm'
+- input type="checkbox"
+content validation=:none:
+- fieldset
+- input type="checkbox"

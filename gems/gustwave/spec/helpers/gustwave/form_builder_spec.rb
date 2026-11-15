@@ -776,6 +776,18 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
       expect(described_class.inline_field_class).to eq("Gustwave::Form::InlineField")
     end
 
+    it "renders the fieldset class of a subclass" do
+      stub_const("SpecFieldset", Class.new(Gustwave::Form::Fieldset) {
+        def call = tag.section(super, class: "spec-fieldset")
+      })
+      stub_const("SpecBuilder", Class.new(described_class) { self.fieldset_class = "SpecFieldset" })
+
+      html = parse(form_builder(builder: SpecBuilder).fieldset(:title, label: "Titles") { "Fields" })
+
+      expect(html).to have_css("section.spec-fieldset > fieldset > legend", text: "Titles")
+      expect(described_class.fieldset_class).to eq("Gustwave::Form::Fieldset")
+    end
+
     it "adds helpers with render_inline_field" do
       stub_const("SpecBuilder", Class.new(described_class) {
         def switch(attribute, options = {}, &block) = render_inline_field(attribute, :toggle, options, &block)

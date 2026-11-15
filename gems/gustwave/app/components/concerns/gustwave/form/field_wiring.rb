@@ -11,11 +11,13 @@ module Gustwave
     # There is one field class per label layout: Gustwave::Form::Field stacks
     # the label, the control and the texts, Gustwave::Form::InlineField puts
     # the label beside the control. A field class includes the concern,
-    # declares the +label+, +helper_text+ and +validation_message+ parts, the
-    # +validation+ variant and its polymorphic +control+ slot with
+    # declares the +label+ and +helper_text+ parts, the +validation+ variant
+    # (it colors the label) and its polymorphic +control+ slot with
     # <tt>renderable: :control_context</tt>, and arranges the elements in
     # +call+ from +label_element+, +control_element+, +helper_text_element+
-    # and +validation_message_element+.
+    # and +validation_message_element+. The message is a
+    # Gustwave::Form::ValidationMessage, so it has no part of the field's own:
+    # style it with the slot's HTML attributes.
     #
     # A field class without a +control+ slot, like Gustwave::Form::Fieldset,
     # wires nothing and arranges its own content.
@@ -207,9 +209,10 @@ module Gustwave
       def validation_message_element
         return unless @validation_message_content
 
-        options = attributes_for(:validation_message,
-                                 { id: validation_message_id }.merge(@validation_message_content.options))
-        tag.p(@validation_message_content.text, **options)
+        options = { id: validation_message_id }.merge(@validation_message_content.options)
+        render(Gustwave::Form::ValidationMessage.new(validation: option_value(:validation), **options)) do
+          @validation_message_content.text
+        end
       end
     end
   end

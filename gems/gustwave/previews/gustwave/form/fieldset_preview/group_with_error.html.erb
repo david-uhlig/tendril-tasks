@@ -1,0 +1,7 @@
+<%= form_with model: settings, scope: :settings, url: "#", builder: Gustwave::FormBuilder do |f| %>
+  <%= f.fieldset :channels, label: "Notify me by", helper_text: "Pick any." do %>
+    <%= f.check_box :channels, { multiple: true, label: "Email", class: "mb-4" }, "email", nil %>
+    <%= f.check_box :channels, { multiple: true, label: "Text message", class: "mb-4" }, "sms", nil %>
+    <%= f.check_box :channels, { multiple: true, label: "Push notification" }, "push", nil %>
+  <% end %>
+<% end %>
