@@ -42,9 +42,9 @@ module Gustwave
         render_with_template
       end
 
-      # Flowbite's "Colors": +color+ is +:blue+, +:red+, +:green+, +:purple+, +:teal+, +:yellow+ or +:orange+. Each radio
-      # has a +name+ of its own and is checked, so its color shows. Blue is the default and Flowbite's example leaves
-      # it out.
+      # Flowbite's "Colors": +color+ is +:blue+, +:red+, +:green+, +:purple+, +:teal+, +:yellow+ or +:orange+. The radios
+      # are one group, with purple checked: check another to see its color. Blue is the default and Flowbite's example
+      # leaves it out.
       def colors
         render_with_template
       end
