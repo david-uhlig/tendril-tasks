@@ -708,6 +708,48 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "a group of fields for one attribute" do
+    def render_erb(erb, **locals)
+      parse(vc_test_controller.view_context.render(inline: erb, locals:))
+    end
+
+    it "renders the errors once with fieldset, from an ERB template" do
+      html = render_erb(<<~ERB, record: invalid_task)
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <%= f.fieldset :title, helper_text: "Pick any." do |fieldset| %>
+            <% fieldset.with_label("Titles", class: "sr-only") %>
+            <%= f.check_box :title, { multiple: true, label: "A" }, "a", nil %>
+            <%= f.check_box :title, { multiple: true, label: "B" }, "b", nil %>
+          <% end %>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("fieldset[aria-describedby='task_title_helper_text task_title_validation_message'] > legend.sr-only", text: "Titles")
+      expect(html).to have_css("fieldset input[type='checkbox'][aria-invalid='true']", count: 2)
+      expect(html).to have_css("fieldset p#task_title_validation_message", count: 1)
+      expect(html).to have_css("p.text-red-600", count: 1)
+    end
+
+    it "renders the errors once with validation_message, in the caller's own fieldset" do
+      html = render_erb(<<~ERB, record: invalid_task)
+        <%= form_with model: record, scope: :task, url: "/tasks", builder: Gustwave::FormBuilder do |f| %>
+          <fieldset aria-describedby="<%= f.field_id(:title, :validation_message) %>">
+            <%= f.check_box :title, { multiple: true, label: "A" }, "a", nil %>
+            <%= f.check_box :title, { multiple: true, label: "B" }, "b", nil %>
+            <%= f.validation_message :title, class: "mb-4" %>
+          </fieldset>
+        <% end %>
+      ERB
+
+      expect(html).to have_css("fieldset[aria-describedby='task_title_validation_message'] > p#task_title_validation_message.mb-4.text-red-600", count: 1)
+      expect(html).to have_css("p", count: 1)
+    end
+
+    it "renders no message with validation_message for a valid record" do
+      expect(gustwave_form.validation_message(:title).to_s).to be_blank
+    end
+  end
+
   describe "extending it" do
     it "renders the field class of a subclass" do
       stub_const("SpecField", Class.new(Gustwave::Form::Field) {

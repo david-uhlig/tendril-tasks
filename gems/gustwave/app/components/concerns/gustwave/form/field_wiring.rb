@@ -16,6 +16,19 @@ module Gustwave
     # <tt>renderable: :control_context</tt>, and arranges the elements in
     # +call+ from +label_element+, +control_element+, +helper_text_element+
     # and +validation_message_element+.
+    #
+    # A field class without a +control+ slot, like Gustwave::Form::Fieldset,
+    # wires nothing and arranges its own content.
+    #
+    # === Several fields for one attribute
+    #
+    # The checkboxes of a +multiple+ attribute, like the radios of a group,
+    # are one field each, and the attribute's errors belong to all of them.
+    # A control tells its field with +shares_attribute?+. Such a field keeps
+    # the validation state, but doesn't render the attribute's error messages
+    # by default: the group renders them once, with
+    # Gustwave::Form::Fieldset or Gustwave::Form::ValidationMessage. A
+    # +validation_message+ of the field's own is still rendered.
     module FieldWiring
       extend ActiveSupport::Concern
 
@@ -58,7 +71,7 @@ module Gustwave
       # @param label [String, Boolean, nil] the text of the label. Shorthand for the +label+ slot. By default a bound field renders the text of Rails' +label+ helper. +false+ or +nil+ renders no label.
       # @param helper_text [String, nil] shorthand for the +helper_text+ slot.
       # @param validation [Symbol] the validation state. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+.
-      # @param validation_message [String, nil] shorthand for the +validation_message+ slot. By default a bound field renders the attribute's error messages.
+      # @param validation_message [String, nil] shorthand for the +validation_message+ slot. By default a bound field renders the attribute's error messages, unless its control shares the attribute with other fields.
       # @param options [Hash] HTML attributes of the +<div>+.
       # @raise [ArgumentError] for an +attribute+ without +form+.
       def initialize(attribute = nil, form: nil, label: Gustwave::Options::DEFAULT, helper_text: nil, validation: Gustwave::Options::DEFAULT,
@@ -122,26 +135,42 @@ module Gustwave
       end
 
       def keyword_validation_message
-        text = @validation_message.presence || error_sentence
+        text = @validation_message.presence
+        text ||= error_sentence unless shared_attribute?
         Content.new(text, {}) if text.present?
       end
 
+      # Whether the control is one of several for the attribute, so the
+      # attribute's errors are the group's to render.
+      def shared_attribute?
+        wired_control.respond_to?(:shares_attribute?) && wired_control.shares_attribute?
+      end
+
+      # The control slot, +nil+ while it isn't set or the field class has none.
+      def wired_control = respond_to?(:control) ? control : nil
+
       def error_sentence
-        error_messages.to_sentence.upcase_first.presence
+        Gustwave::Form::BoundControl.error_sentence(@form, @attribute)
       end
 
       # Ties the control to the field: binding, ID, validation state and the
       # IDs of the helper text and message that are rendered.
       def wire_control
+        control = wired_control
         explicit = control.html_id.presence if control.respond_to?(:html_id)
         @control_id = explicit || (@form.field_id(@attribute) if bound?) || @control_id
 
         if control.respond_to?(:apply_slot_context)
-          described_by = [ helper_text_id, validation_message_id ].compact.join(" ").presence
           control.apply_slot_context(slot: :control, **control_context, described_by:)
         end
 
         @label_for = control ? (control.html_id.presence if control.respond_to?(:html_id)) || @control_id : (@control_id if bound?)
+      end
+
+      # The IDs of the helper text and the message that are rendered, for
+      # +aria-describedby+.
+      def described_by
+        [ helper_text_id, validation_message_id ].compact.join(" ").presence
       end
 
       def helper_text_id
