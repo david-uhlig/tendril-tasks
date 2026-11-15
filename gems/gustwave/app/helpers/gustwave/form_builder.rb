@@ -198,8 +198,8 @@ module Gustwave
     alias_method :checkbox, :check_box if ActionView::Helpers::FormBuilder.method_defined?(:checkbox)
 
     # Renders a Gustwave::Form::Fieldset for the fields of one attribute, like
-    # the checkboxes of a +multiple+ attribute, with the legend, the helper
-    # text and the validation message of the group. There is no Rails helper
+    # the checkboxes of a +multiple+ attribute, with the legend, the validation
+    # message and the helper text of the group. There is no Rails helper
     # of this name.
     #
     #   <%= f.fieldset :tag_ids, helper_text: "Pick any." do %>

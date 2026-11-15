@@ -49,12 +49,13 @@ RSpec.describe Gustwave::Form::Fieldset, type: :component do
       expect(page).to have_css("legend.sr-only", text: "Plan")
     end
 
-    it "renders the helper text and the message after the group, and names both on the fieldset" do
+    it "renders the message and the helper text after the group, and names both on the fieldset" do
       render_group(gustwave_form, helper_text: "Pick any.", validation: :error, validation_message: "Pick one.")
 
       fieldset = page.find("fieldset")
       expect(fieldset.all(:xpath, "./*").map(&:tag_name)).to eq(%w[legend div div p p])
-      expect(fieldset["aria-describedby"]).to eq("task_title_helper_text task_title_validation_message")
+      expect(fieldset.all(:xpath, "./p").map { |p| p[:id] }).to eq(%w[task_title_validation_message task_title_helper_text])
+      expect(fieldset["aria-describedby"]).to eq("task_title_validation_message task_title_helper_text")
       expect(page).to have_css("p#task_title_helper_text", text: "Pick any.")
       expect(page).to have_css("p#task_title_validation_message.text-red-600", text: "Pick one.")
     end
@@ -94,10 +95,10 @@ RSpec.describe Gustwave::Form::Fieldset, type: :component do
                                         validation_message: "Choose a plan.")) { "content" }
 
       fieldset = page.find("fieldset")
-      helper, message = fieldset.all("p").to_a
+      message, helper = fieldset.all("p").to_a
       expect(fieldset).to have_css("legend", text: "Plan")
       expect(helper[:id]).to match(/\Afield-\w+-helper-text\z/)
-      expect(fieldset["aria-describedby"]).to eq("#{helper[:id]} #{message[:id]}")
+      expect(fieldset["aria-describedby"]).to eq("#{message[:id]} #{helper[:id]}")
     end
 
     it "raises for an attribute without a form" do

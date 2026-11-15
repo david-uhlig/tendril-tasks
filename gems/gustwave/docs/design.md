@@ -215,9 +215,9 @@ A field takes the same `attribute` and `form:` as a control and passes them on, 
 
 A group is what several fields of one attribute share: the checkboxes of a `multiple` attribute, and the radios of a choice later (D15).
 
-- **`Form::Fieldset` is a `<fieldset>` with a `<legend>`** (its `label` slot), the block, a helper text and the validation message once, below the group. Its `aria-describedby` names the helper text and the message. The fields inside reference nothing: they need no context from the group, so the block is plain content.
+- **`Form::Fieldset` is a `<fieldset>` with a `<legend>`** (its `label` slot), the block, the validation message and a helper text once, below the group, in this order. Its `aria-describedby` names the message and the helper text in that order. The fields inside reference nothing: they need no context from the group, so the block is plain content.
 - **`Form::ValidationMessage` is the message on its own,** for a group in the caller's own `<fieldset>`. Bound, it renders the attribute's error sentence under the ID `field_id(attribute, :validation_message)`, which the caller's `aria-describedby` names. The fields use it for their own message, so the message has one set of classes.
-- **Flowbite has no fieldset component.** The legend, helper text and message copy the look of `Form::Field`.
+- **Flowbite has no fieldset component.** The legend, message and helper text copy the look of `Form::Field`.
 
 ### Form builder
 

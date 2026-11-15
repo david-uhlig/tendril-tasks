@@ -1,7 +1,12 @@
+<%# The builder sends every option but the field's own to the checkbox, so the spacing goes on a wrapper %>
 <%= form_with model: settings, scope: :settings, url: "#", builder: Gustwave::FormBuilder do |f| %>
   <%= f.fieldset :channels, label: "Notify me by", helper_text: "Pick any." do %>
-    <%= f.check_box :channels, { multiple: true, label: "Email", class: "mb-4" }, "email", nil %>
-    <%= f.check_box :channels, { multiple: true, label: "Text message", class: "mb-4" }, "sms", nil %>
+    <div class="mb-4">
+      <%= f.check_box :channels, { multiple: true, label: "Email" }, "email", nil %>
+    </div>
+    <div class="mb-4">
+      <%= f.check_box :channels, { multiple: true, label: "Text message" }, "sms", nil %>
+    </div>
     <%= f.check_box :channels, { multiple: true, label: "Push notification" }, "push", nil %>
   <% end %>
 <% end %>

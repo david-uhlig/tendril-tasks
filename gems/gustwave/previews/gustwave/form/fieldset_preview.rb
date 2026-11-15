@@ -11,14 +11,14 @@ module Gustwave
         validate { errors.add(:channels, "pick at least one channel") if channels.blank? }
       end
 
-      # Not a Flowbite example, Flowbite has no fieldset component. A group of checkboxes with a legend and a helper
-      # text under the group. The fieldset's +aria-describedby+ names the helper text.
+      # Not a Flowbite example, Flowbite has no fieldset component. A group of checkboxes with a legend and, under the
+      # group, a helper text. The fieldset's +aria-describedby+ names it.
       def default
         render_with_template
       end
 
-      # Not a Flowbite example. The legend takes the validation state's colors, and the helper text and the message
-      # below the group follow: none, success and error.
+      # Not a Flowbite example. The legend takes the validation state's colors, and the validation message and the helper
+      # text below the group follow, in this order: none, success and error.
       def validation
         render_with_template
       end

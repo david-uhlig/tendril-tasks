@@ -4,10 +4,10 @@ module Gustwave
   module Form
     # Use Fieldset to render a group of fields for one attribute, like the
     # radios of a choice or the checkboxes of a +multiple+ attribute, with
-    # what belongs to the group as a whole: the +<legend>+, a helper text and
-    # the validation message, rendered once. The +<fieldset>+ names the helper
-    # text and the message in +aria-describedby+, so they're announced with
-    # the group. The root has no classes of its own, so spacing is up to the
+    # what belongs to the group as a whole: the +<legend>+, the
+    # validation message and a helper text, rendered once, in this order
+    # below the group. The +<fieldset>+ names the message and the helper text
+    # in +aria-describedby+, so they're announced with the group. The root has no classes of its own, so spacing is up to the
     # caller.
     #
     # The block is the group: one field per control, or any markup. The
@@ -34,7 +34,7 @@ module Gustwave
       # The legend, with the validation state's colors
       part :label, "mb-2 text-sm font-medium"
 
-      # The helper text below the group
+      # The helper text below the group, after the validation message
       part :helper_text, "mt-2 text-sm text-gray-500 dark:text-gray-400"
 
       variant :validation, default: :none, values: {
@@ -51,13 +51,19 @@ module Gustwave
 
       def call
         tag.fieldset(**fieldset_options) do
-          safe_join([ legend_element, content, helper_text_element, validation_message_element ].compact)
+          safe_join([ legend_element, content, validation_message_element, helper_text_element ].compact)
         end
       end
 
       private
 
-      # The caller's HTML attributes, with the helper text and the message
+      # The message and the helper text, in the order they're rendered. Fields
+      # list the helper text first, see FieldWiring.
+      def described_by
+        [ validation_message_id, helper_text_id ].compact.join(" ").presence
+      end
+
+      # The caller's HTML attributes, with the message and the helper text
       # added to +aria-describedby+.
       def fieldset_options
         options = attributes_for(@options)

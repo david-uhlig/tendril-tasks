@@ -724,7 +724,7 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
         <% end %>
       ERB
 
-      expect(html).to have_css("fieldset[aria-describedby='task_title_helper_text task_title_validation_message'] > legend.sr-only", text: "Titles")
+      expect(html).to have_css("fieldset[aria-describedby='task_title_validation_message task_title_helper_text'] > legend.sr-only", text: "Titles")
       expect(html).to have_css("fieldset input[type='checkbox'][aria-invalid='true']", count: 2)
       expect(html).to have_css("fieldset p#task_title_validation_message", count: 1)
       expect(html).to have_css("p.text-red-600", count: 1)
