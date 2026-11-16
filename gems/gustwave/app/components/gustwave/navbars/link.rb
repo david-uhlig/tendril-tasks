@@ -5,8 +5,7 @@ module Gustwave
     # A link in a navbar. Renders an +a+ only: the navbar wraps it in a list
     # item.
     #
-    # Whether the link is active is up to the caller. Pass +active: true+ to
-    # mark the link as the current page with +aria-current="page"+.
+    # Whether the link is active is up to the caller.
     #
     #   render Gustwave::Navbars::Link.new("Home", href: "/", active: true)
     #
@@ -20,7 +19,7 @@ module Gustwave
 
       # @param text [String, nil] Text to display within the link. Takes precedence over block content.
       # @param href [String] The URL the link points to.
-      # @param active [Boolean] Whether the link is the current page. Defaults to +false+.
+      # @param active [Boolean] Whether the link is the current page, marked with +aria-current="page"+. Defaults to +false+.
       # @param options [Hash] Additional HTML attributes passed to the +a+ element.
       def initialize(text = nil, href:, active: false, **options)
         @text = text

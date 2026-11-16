@@ -25,9 +25,6 @@ module Gustwave
   # and +gustwave--undismissible-modal+ Stimulus controllers. Gustwave ships
   # both, and the modal wires them up itself.
   #
-  # Set +dismissible: false+ for a decision the user can't skip. Only the
-  # modal's own hide buttons then close it, see +dismissible+ below.
-  #
   # @status alpha
   class Modal < Gustwave::Component
     attr_reader :id

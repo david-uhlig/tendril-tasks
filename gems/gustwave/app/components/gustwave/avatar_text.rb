@@ -3,34 +3,14 @@
 module Gustwave
   # Use AvatarText to render text when no image is available.
   #
-  # This can be used to display initials or indicate that there are additional
-  # elements in a shortened AvatarGroup, e.g. "+99".
-  #
-  # === Basic Usage
-  #
-  # When using the +text+ attribute, the AvatarText component will automatically
-  # adjust the size of the text based on the size of the avatar. All other
-  # attributes are passed to the Avatar component.
+  # E.g. initials, or the "+99" that ends a shortened AvatarGroup. The text's
+  # size follows the avatar's. A block replaces the text, without that
+  # sizing:
   #
   #   render Gustwave::AvatarText.new("AB", size: :lg)
-  #
-  # === Custom Usage
-  #
-  # You can also provide a block to the AvatarText component. The block will be
-  # rendered inside the Avatar component, allowing you to fully customize the
-  # appearance of the avatar. No automatic text-size adjustment will be
-  # performed in this case. Note +text+ takes precedent over block content.
-  #
   #   render Gustwave::AvatarText.new(size: :lg) do
   #     tag.div "Custom Content"
   #   end
-  #
-  # @param text [String] The text to display in the avatar. Takes precedent over
-  #  block content.
-  # @param size [Symbol] The size of the avatar, see +Gustwave::Avatar+ for
-  #   available options. Default is :md.
-  # @param options [Hash] Arguments and HTML attributes passed to the
-  #  +Gustwave::Avatar+ component, e.g. +shape+ and +border+.
   #
   # @status alpha
   class AvatarText < Gustwave::Component
@@ -50,6 +30,9 @@ module Gustwave
       "4xl": "text-4xl"
     }
 
+    # @param text [String, nil] the text. Takes precedence over the block.
+    # @param size [Symbol] the size of the avatar and its text. Defaults to +:md+. Valid values are +:xs+, +:sm+, +:md+, +:lg+, +:xl+, +:"2xl"+, +:"3xl"+ and +:"4xl"+.
+    # @param options [Hash] the arguments and HTML attributes of the Gustwave::Avatar it renders, e.g. +shape+ and +border+.
     def initialize(text = nil, size: DEFAULT, **options)
       select_options(size:)
       @text = text

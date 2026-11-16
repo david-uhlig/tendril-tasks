@@ -22,6 +22,11 @@ module Gustwave
             attach_files: "attachFiles"
           }.freeze
 
+          # @param attribute [Symbol, String] the Trix attribute or action the button applies, e.g. +:bold+ or +:undo+.
+          # @param icon_or_text [Symbol, String, nil] the icon name, or the text, the button shows. Defaults to the attribute's icon, see Gustwave::Form::RichText::Button.
+          # @param key [String, nil] the keyboard shortcut, as +data-trix-key+. Defaults to the attribute's entry in ATTRIBUTE_KEY_MAPPINGS.
+          # @param disabled [Boolean] whether the button is disabled. A disabled button applies nothing. Defaults to +false+.
+          # @param options [Hash] the arguments and HTML attributes of the Gustwave::Form::RichText::Button it renders.
           def initialize(attribute, icon_or_text: nil, key: nil, disabled: false, **options)
             @attribute = attribute.downcase.to_sym
             key ||= ATTRIBUTE_KEY_MAPPINGS[@attribute]

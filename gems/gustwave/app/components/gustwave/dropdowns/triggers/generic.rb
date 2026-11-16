@@ -4,10 +4,8 @@ module Gustwave
   module Dropdowns
     module Triggers
       # Use the Generic trigger to convert any HTML element into a dropdown
-      # trigger, including components
-      #
-      # Wraps the supplied content in an HTML element (default: +div+) that acts
-      # as the trigger.
+      # trigger, including components. The element that wraps the content is
+      # the trigger.
       #
       # @status alpha
       class Generic < Gustwave::Dropdowns::Triggers::Base
@@ -17,7 +15,7 @@ module Gustwave
         option :tag, default: :div, values: %i[div span]
 
         # @param text [String, nil] the text to appear on the generic dropdown. Takes precedent over block content.
-        # @param tag [Symbol] HTML tag used to wrap the generic dropdown component in.
+        # @param tag [Symbol] the element that wraps the content. Defaults to +:div+. Valid values are +:div+ and +:span+.
         # @param options [Hash] additional options passed to Gustwave::Dropdowns::Triggers::Base component and the wrapping `content_tag`.
         # @see Gustwave::Dropdowns::Triggers::Base
         def initialize(text = nil, tag: DEFAULT, **options)

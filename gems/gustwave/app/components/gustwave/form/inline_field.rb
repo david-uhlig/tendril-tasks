@@ -3,18 +3,14 @@
 module Gustwave
   module Form
     # Use InlineField to render a form control with its label beside it, as
-    # for a toggle, a checkbox and a radio button: the control
-    # first, then a column with the label and the helper text under it. The
-    # validation message, a Gustwave::Form::ValidationMessage, follows below
-    # the row. Like Gustwave::Form::Field,
-    # which stacks them, it ties the control to them: the label's +for+, the
-    # control's +aria-describedby+ and +aria-invalid+, and the validation
-    # state's colors. The root is a plain +<div>+ without classes of its own,
-    # so spacing is up to the caller.
-    #
-    # +attribute+, +form:+, +label:+, +helper_text:+, +validation:+ and
-    # +validation_message:+ work as in Gustwave::Form::Field, and so do the
-    # slots of the same name.
+    # for a toggle, a checkbox and a radio button: the control first, then a
+    # column with the label and the helper text under it. The validation
+    # message, a Gustwave::Form::ValidationMessage, follows below the row.
+    # Like Gustwave::Form::Field, which stacks them, it ties the control to
+    # them: the label's +for+, the control's +aria-describedby+ and
+    # +aria-invalid+, and the validation state's colors. The root is a plain
+    # +<div>+ without classes of its own, so spacing is up to the caller. The
+    # slots work as in Gustwave::Form::Field.
     #
     # === Example
     #
@@ -36,8 +32,9 @@ module Gustwave
     #     <% field.with_control_radio(value: "free") %>
     #   <% end %>
     #
-    # A checkbox or a radio sits in a cell as high as the label's first line, so it stays
-    # beside that line when the label wraps or has helper text under it.
+    # A checkbox or a radio sits in a cell as high as the label's first line,
+    # so it stays beside that line when the label wraps or has helper text
+    # under it.
     #
     # The block without a +control+ slot is the control, for an app's own
     # markup:
@@ -46,9 +43,9 @@ module Gustwave
     #     <%= check_box_tag :remember_me %>
     #   <% end %>
     #
-    # The label of a disabled control is gray.
-    # The field asks its control with +disabled?+, so with a block as the
-    # control the gray is the label's class:
+    # The label of a disabled control is gray. The field asks its control with
+    # +disabled?+, so with a block as the control the gray is the label's
+    # class:
     # <tt>field.with_label("Sync", class: "text-gray-400 dark:text-gray-500")</tt>.
     #
     # @status alpha

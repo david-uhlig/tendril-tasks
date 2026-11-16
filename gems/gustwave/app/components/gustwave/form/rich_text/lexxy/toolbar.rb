@@ -23,6 +23,11 @@ module Gustwave
 
           HEADING_ACTIONS = %i[heading1 heading2 heading3 heading4].freeze
 
+          # @param form [ActionView::Helpers::FormBuilder, nil] the editor's form builder, as Gustwave::Form::RichTextarea passes it.
+          # @param id [String, nil] the toolbar's id, for the editor's +toolbar+ attribute. Defaults to a random id.
+          # @param hidden [Symbol, Array<Symbol>] the actions to leave out, from ACTION_OPTIONS.
+          # @param disabled [Symbol, Array<Symbol>] the actions to disable, from ACTION_OPTIONS.
+          # @param options [Hash] the HTML attributes of the +<div>+ around the toolbar.
           def initialize(form = nil, id: nil, hidden: [], disabled: [], **options)
             @id = id.presence || generate_random_id(prefix: "toolbar")
             @form = form

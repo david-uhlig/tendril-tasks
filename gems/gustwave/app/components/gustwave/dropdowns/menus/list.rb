@@ -35,7 +35,7 @@ module Gustwave
 
         # @param id [String] the id attribute for the dropdown menu. Must match the id attribute called by the triggering element.
         # @param content_for [Symbol, nil] the name of the content area to render the menu. If +nil+, the menu is rendered right after the triggering element.
-        # @param tag [Symbol] HTML tag to use for the dropdown menu. Default: +div+.
+        # @param tag [Symbol] the HTML tag of the dropdown menu. Defaults to +:div+. Valid values are +:div+, +:nav+ and +:section+.
         # @param list_options [Hash] HTML attributes passed to the list element, and its +tag+ (+ul+ or +ol+), e.g. +{ tag: :ol, class: "py-1" }+ (optional).
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
         def initialize(id:, content_for: nil, tag: DEFAULT, list_options: {}, **options)

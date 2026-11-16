@@ -2,14 +2,8 @@
 
 module Gustwave
   module SpeedDials
-    # One action button of a speed dial: an icon with a label.
-    #
-    # The label is shown as a tooltip beside the button (+:tooltip+), as text
-    # inside the button below the icon (+:inside+), or as text next to the
-    # button (+:outside+). The side of the tooltip, or of the outside label, is
-    # set by +label_placement+.
-    #
-    # Block content replaces the icon.
+    # One action button of a speed dial: an icon with a label. Block content
+    # replaces the icon.
     #
     # @example
     #   <%= render Gustwave::SpeedDials::Action.new("Edit", icon: :edit, label_display: :outside) %>
@@ -18,15 +12,6 @@ module Gustwave
     #   <%= render Gustwave::SpeedDials::Action.new("Edit") do |action| %>
     #     <% action.with_visual_icon :pencil_square, theme: :outline %>
     #   <% end %>
-    #
-    # @param text [String] the label of the action. Required.
-    # @param icon [Symbol, nil] the name of the icon, in the solid theme. Ignored when block content is given. Shorthand for +with_visual_icon+, see Gustwave::Visuals.
-    # @param tag [Symbol] the HTML tag to render, :button or :a. Defaults to :button.
-    # @param color [Symbol] the color of the button, :default or :none. :none renders no base styles.
-    # @param shape [Symbol] the shape of the button, :round or :square.
-    # @param label_display [Symbol] where the label is shown, :tooltip, :inside or :outside.
-    # @param label_placement [Symbol] the side of the label, :left, :right, :top or :bottom.
-    # @param options [Hash] HTML attributes, e.g. +href+ for the :a tag.
     #
     # @status alpha
     class Action < Gustwave::Component
@@ -67,6 +52,14 @@ module Gustwave
         bottom: "top-full mt-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2"
       }
 
+      # @param text [String] the label of the action.
+      # @param icon [Symbol, nil] the name of the icon, in the solid theme. Ignored when block content is given. Shorthand for +with_visual_icon+, see Gustwave::Visuals.
+      # @param tag [Symbol] Defaults to +:button+. Valid values are +:button+ and +:a+.
+      # @param color [Symbol] Defaults to +:default+. +:none+ renders no base styles.
+      # @param shape [Symbol] Defaults to +:round+. Valid values are +:round+ and +:square+.
+      # @param label_display [Symbol] where the label is shown: +:tooltip+ (default) beside the button, +:inside+ the button below the icon, or +:outside+ next to the button.
+      # @param label_placement [Symbol] the side of the tooltip or the outside label. Defaults to +:left+. Valid values are +:left+, +:right+, +:top+ and +:bottom+.
+      # @param options [Hash] the HTML attributes of the button, e.g. +href+ for +tag: :a+.
       def initialize(text,
                      icon: nil,
                      tag: DEFAULT,

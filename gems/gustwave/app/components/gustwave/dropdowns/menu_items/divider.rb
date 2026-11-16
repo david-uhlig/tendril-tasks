@@ -11,6 +11,8 @@ module Gustwave
 
         option :tag, default: :div, values: %i[div span]
 
+        # @param tag [Symbol] Defaults to +:div+. Valid values are +:div+ and +:span+.
+        # @param options [Hash] the HTML attributes of the divider.
         def initialize(tag: DEFAULT, **options)
           select_options(tag:)
           @divider_tag = option_value(:tag)

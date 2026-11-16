@@ -6,31 +6,11 @@ module Gustwave
   # A paragraph has no margin, so it sits flush against its neighbours. Space
   # several paragraphs with a wrapper, e.g. +space-y-3+.
   #
-  # Examples:
-  #
-  # Renders a gray paragraph
-  #
   #   <%= render Gustwave::Paragraph.new("Track work across the enterprise.") %>
-  #
-  # Pass a block for content with inline elements:
-  #
+  #   <%= render Gustwave::Paragraph.new("Centered", align: :center) %>
   #   <%= render Gustwave::Paragraph.new do %>
   #     Read the <a href="/docs">docs</a>.
   #   <% end %>
-  #
-  # Line the text up with a side of the container. The sides are mirrored for
-  # right-to-left text:
-  #
-  #   <%= render Gustwave::Paragraph.new("Centered", align: :center) %>
-  #
-  # You can pass HTML attributes to the +<p>+ element and your css classes
-  # will be merged with the default classes without style conflicts:
-  #
-  #   <%= render Gustwave::Paragraph.new("Dark", class: "text-gray-900") %>
-  #
-  # Reset the color by passing the +none+ color:
-  #
-  #   <%= render Gustwave::Paragraph.new("Plain", color: :none) %>
   #
   # @status alpha
   class Paragraph < Gustwave::Component
@@ -47,6 +27,10 @@ module Gustwave
       right: "text-right rtl:text-left"
     }
 
+    # @param text [String, nil] the text. Without it the block is the content.
+    # @param color [Symbol] Defaults to +:default+, gray. +:none+ adds no color classes.
+    # @param align [Symbol] the side the text lines up with, mirrored for right-to-left text. Defaults to +:none+. Valid values are +:none+, +:left+, +:center+ and +:right+.
+    # @param options [Hash] the HTML attributes of the +<p>+.
     def initialize(text = nil, color: DEFAULT, align: DEFAULT, **options)
       @text = text
       select_options(color:, align:)

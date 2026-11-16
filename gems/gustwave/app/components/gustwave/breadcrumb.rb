@@ -26,11 +26,6 @@ module Gustwave
   #     <% end %>
   #   <% end %>
   #
-  # @param solid [Boolean] Whether the breadcrumb has a bordered, solid background.
-  # @param separator [Symbol] The separator between items, +:chevron+ (default) or +:slash+.
-  # @param list_options [Hash] HTML attributes for the +ol+ element, e.g. +class+ to change its margins.
-  # @param options [Hash] HTML attributes for the +nav+ element, e.g. +aria: { label: "Tasks" }+.
-  #
   # @status alpha
   class Breadcrumb < Gustwave::Component
     base "flex"
@@ -54,9 +49,9 @@ module Gustwave
     }
 
     # @param solid [Boolean] Whether the breadcrumb has a bordered, solid background.
-    # @param separator [Symbol] +:chevron+ (default) or +:slash+.
-    # @param list_options [Hash] HTML attributes for the +ol+ element.
-    # @param options [Hash] HTML attributes for the +nav+ element.
+    # @param separator [Symbol] The separator between items, +:chevron+ (default) or +:slash+.
+    # @param list_options [Hash] HTML attributes for the +ol+ element, e.g. +class+ to change its margins.
+    # @param options [Hash] HTML attributes for the +nav+ element, e.g. +aria: { label: "Tasks" }+.
     def initialize(solid: DEFAULT, separator: DEFAULT, list_options: {}, **options)
       select_options(solid:, separator:)
       select_options(spaced: option_value(:separator) == :chevron)

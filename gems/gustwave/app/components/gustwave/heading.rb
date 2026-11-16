@@ -43,6 +43,11 @@ module Gustwave
       xs: "text-base md:text-lg lg:text-xl"
     }
 
+    # @param text [String, nil] the text. Without it the block is the content.
+    # @param tag [Symbol] the heading level. Defaults to +:h2+. Valid values are +:h1+ to +:h6+.
+    # @param size [Symbol] Defaults to the size of the +tag+: +:xl+ for +:h1+, +:lg+ for +:h2+, +:md+ for +:h3+, +:sm+ for +:h4+ and +:xs+ for +:h5+ and +:h6+. Valid values are +:"2xl"+, +:xl+, +:lg+, +:md+, +:sm+, +:xs+ and +:none+, which adds no size classes.
+    # @param responsive [Boolean] whether the font size grows with the screen. Defaults to +false+.
+    # @param options [Hash] the HTML attributes of the heading. Without an +id+, the id is the parameterized text.
     def initialize(
       text = nil,
       tag: DEFAULT,

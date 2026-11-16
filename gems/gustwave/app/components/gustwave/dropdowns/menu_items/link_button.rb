@@ -3,16 +3,11 @@
 module Gustwave
   module Dropdowns
     module MenuItems
-      # Use LinkButton to render a Gustwave::Button element as an anchor
+      # Use LinkButton to render a Gustwave::Button element as an anchor.
       #
-      # Accepts the same parameters as Gustwave::Button and supports using
-      # Gustwave::Button slots. The +icon+ and +trailing_icon+ parameters come
-      # with preformatted styling. When using the +leading_*+ and +trailing_*+
-      # slots directly, you must apply the styling yourself.
-      #
-      # === Right aligned trailing icon
-      #
-      # Calling the component with the +trailing_icon+ parameter:
+      # +icon+ and +trailing_icon+ come styled for a menu item. Visuals set
+      # through the button's +leading_*+ and +trailing_*+ slots need that
+      # styling from the caller. This right-aligned trailing icon:
       #
       #   <%= render Gustwave::Dropdown.new "Dropdown" do |dropdown| %>
       #     <% dropdown.with_menu_list do |menu| %>

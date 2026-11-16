@@ -7,19 +7,12 @@ module Gustwave
     # item with an +href+ is a link; without one it's the text of the current
     # page. Block content replaces the link or text, e.g. for a dropdown.
     #
-    # Pass +icon+ to show an icon before the text. Set visuals on either side
-    # of the text with +with_leading_visual_icon+, +with_trailing_visual_icon+
-    # and the other types of Gustwave::Visuals.
+    # Set visuals on either side of the text with +with_leading_visual_icon+,
+    # +with_trailing_visual_icon+ and the other types of Gustwave::Visuals.
     #
     # === Example
     #
     #   <%= render Gustwave::Breadcrumb::Item.new("Home", href: "/", icon: :home) %>
-    #
-    # @param text [String, nil] The item text. Takes precedence over block content.
-    # @param href [String, nil] The URL the item links to.
-    # @param icon [Symbol, nil] Shorthand for +with_leading_visual_icon+: an icon shown before the text, in the solid theme.
-    # @param separator [Symbol] +:chevron+ (default) or +:slash+. Set by Gustwave::Breadcrumb.
-    # @param options [Hash] HTML attributes for the +li+ element.
     #
     # @status alpha
     class Item < Gustwave::Component
@@ -59,8 +52,8 @@ module Gustwave
 
       # @param text [String, nil] The item text. Takes precedence over block content.
       # @param href [String, nil] The URL the item links to.
-      # @param icon [Symbol, nil] An icon shown before the text.
-      # @param separator [Symbol] +:chevron+ (default) or +:slash+.
+      # @param icon [Symbol, nil] Shorthand for +with_leading_visual_icon+: an icon shown before the text, in the solid theme.
+      # @param separator [Symbol] +:chevron+ (default) or +:slash+. Set by Gustwave::Breadcrumb.
       # @param options [Hash] HTML attributes for the +li+ element.
       def initialize(text = nil, href: nil, icon: nil, separator: DEFAULT, **options)
         @text = text

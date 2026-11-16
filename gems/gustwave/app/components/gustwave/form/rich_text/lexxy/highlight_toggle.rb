@@ -11,6 +11,8 @@ module Gustwave
         #
         # @status alpha
         class HighlightToggle < Gustwave::Component
+          # @param disabled [Boolean] whether the toolbar button is disabled. Defaults to +false+.
+          # @param options [Hash] the HTML attributes of the +lexxy-highlight-dropdown+ element.
           def initialize(disabled: false, **options)
             @disabled = disabled
             @options = options

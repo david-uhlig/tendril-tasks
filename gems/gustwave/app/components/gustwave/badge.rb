@@ -177,8 +177,8 @@ module Gustwave
     # @param text [String, NilClass] Text to display within the badge. Takes precedence over block content.
     # @param tag [Symbol] The HTML tag to use for the badge. Defaults to :span. Valid values are :div, :span, :button, and :a. Be aware, that :a and :button tags are not supported when using a dismiss button.
     # @param type [Symbol] The HTML type attribute to use for the badge. Defaults to +nil+. Valid values are +nil+, :button, :submit, and :reset.
-    # @param color [Symbol] The color for the badge. Defaults to :default.
-    # @param size [Symbol] The size of the badge. Defaults to :xs.
+    # @param color [Symbol] The color for the badge. Defaults to +:default+. Valid values are +:default+, +:dark+, +:red+, +:green+, +:yellow+, +:indigo+, +:purple+, +:pink+ and +:base+.
+    # @param size [Symbol] The size of the badge. Defaults to +:xs+. Valid values are +:xs+, +:sm+, +:md+, +:lg+, +:xl+ and +:"2xl"+.
     # @param pill [Boolean] Rounds the Badge corners to make it look like a pill. Defaults to +false+.
     # @param border [Boolean] Whether the badge includes a border. Border adds 1px to all edges. Defaults to +false+.
     # @param outline [Boolean] Whether the badge includes an outline. Outline keeps the badges dimensions consistent between outlined and non-outlined badges. Defaults to +false+.

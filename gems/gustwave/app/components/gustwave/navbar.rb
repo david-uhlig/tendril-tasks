@@ -16,19 +16,9 @@ module Gustwave
   # when the navbar has items, and it controls the menu, whose id is
   # +menu_id+.
   #
-  # Pass +sticky: true+ to keep the navbar at the top of the viewport. It is
-  # then fixed and overlays the page, so the page content needs its own top
-  # offset.
-  #
-  # Pass +solid: true+ for a grey background.
-  #
   # Items that aren't links, e.g. a dropdown or a search field, go in a
   # +generic+ item. Use +class: "md:hidden"+ on it to show it on small screens
   # only.
-  #
-  # Use +container_options:+ and +menu_options:+ to set the HTML attributes
-  # of the container and the menu. Their classes win conflicts with the
-  # defaults.
   #
   #   render Gustwave::Navbar.new do |navbar|
   #     navbar.with_brand(href: "/") do
@@ -90,7 +80,7 @@ module Gustwave
     attr_reader :menu_id
 
     # @param menu_id [String, nil] the id of the menu, which the toggle controls. Generated if +nil+.
-    # @param sticky [Boolean] whether the navbar sticks to the top of the viewport. Defaults to +false+.
+    # @param sticky [Boolean] whether the navbar sticks to the top of the viewport. It then overlays the page, so the page content needs its own top offset. Defaults to +false+.
     # @param solid [Boolean] whether the navbar has a solid grey background. Defaults to +false+.
     # @param container_options [Hash] additional HTML attributes passed to the container element, which holds the brand, actions and menu.
     # @param menu_options [Hash] additional HTML attributes passed to the menu element, which holds the list of items. Its +id+ is always +menu_id+.

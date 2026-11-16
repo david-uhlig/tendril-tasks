@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Progress to show a completion rate as a bar. The value is a percentage, clamped to 0..100.
-  #
-  # Examples:
+  # Use Progress to show a completion rate as a bar.
   #
   # Renders a bar filled to 45%:
   #
@@ -70,8 +68,8 @@ module Gustwave
     }, internal: true
 
     # @param value [Numeric, nil] The percentage, clamped to 0..100. +nil+ counts as 0.
-    # @param color [Symbol] The colour of the fill. Defaults to :blue.
-    # @param size [Symbol] The height of the bar. Defaults to :md.
+    # @param color [Symbol] The colour of the fill. Defaults to +:blue+. Valid values are +:blue+, +:dark+, +:red+, +:green+, +:yellow+, +:indigo+ and +:purple+.
+    # @param size [Symbol] The height of the bar. Defaults to +:md+. Valid values are +:sm+, +:md+, +:lg+ and +:xl+.
     # @param fill_options [Hash] Additional HTML attributes for the fill, e.g. +class+ for any other colour. Its +style+ is kept, and the width always applies.
     # @param options [Hash] Additional HTML attributes for the root element, e.g. +aria+ or +class+.
     def initialize(value = 0, color: DEFAULT, size: DEFAULT, fill_options: {}, **options)

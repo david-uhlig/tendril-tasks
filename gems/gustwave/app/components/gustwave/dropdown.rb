@@ -2,12 +2,10 @@
 
 module Gustwave
   # Use Dropdown to render a trigger that shows a menu when clicking it and
-  # hides it when clicking outside
+  # hides it when clicking outside.
   #
-  # By default, renders a trigger button with a trailing chevron icon in the
-  # direction of the menu's placement and a list menu.
-  #
-  # The trigger and menu can be customized through their respective slots.
+  # By default the trigger is a button and the menu a list. Their slots
+  # replace or customize them.
   #
   # @status alpha
   class Dropdown < Gustwave::Component

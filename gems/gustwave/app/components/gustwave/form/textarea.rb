@@ -3,17 +3,13 @@
 module Gustwave
   module Form
     # Use Textarea to render a textarea: a multi-line text field. It has one
-    # size, so there is no +size+ option. Rails'
-    # +size: "20x40"+ sets +cols+ and +rows+ as in any Rails form.
-    #
-    # +options+ are the +<textarea>+'s HTML attributes, e.g. +rows+,
-    # +placeholder+ and +maxlength+. The label, helper text and validation
-    # message belong to Gustwave::Form::Field.
+    # size, so there is no +size+ option. Rails' +size: "20x40"+ sets +cols+
+    # and +rows+ as in any Rails form.
     #
     # === Without a form builder
     #
-    # Renders a plain +<textarea>+. +name+ and +id+ are ordinary HTML
-    # attributes. The text is the +value+ option, or the block:
+    # Renders a plain +<textarea>+. The text is the +value+ option, or the
+    # block:
     #
     #   <%= render Gustwave::Form::Textarea.new(name: "message", rows: 4, value: "Hello") %>
     #
@@ -27,9 +23,7 @@ module Gustwave
     #
     #   <%= render Gustwave::Form::Textarea.new(:notes, form: f, rows: 4) %>
     #
-    # Rails' +field_error_proc+ never wraps the textarea. In the +error+
-    # validation state the textarea sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise.
+    # Rails' +field_error_proc+ never wraps the textarea.
     #
     # === Header and footer
     #
@@ -45,17 +39,13 @@ module Gustwave
     #     <% end %>
     #   <% end %>
     #
-    # The frame's parts take +frame_options:+, +header_options:+,
-    # +body_options:+ and +footer_options:+, e.g. <tt>frame_options: { class:
-    # "mb-4" }</tt>. +options+ still go to the +<textarea>+. The validation
-    # state colors the frame's border, and the textarea gets +aria-invalid+
-    # only. For a real editor such as Lexxy, use
-    # Gustwave::Form::RichTextarea.
+    # For a real editor such as Lexxy, use Gustwave::Form::RichTextarea.
     #
     # === In a field
     #
-    # Gustwave::Form::Field builds the textarea and wires it through
-    # +apply_slot_context+ (see there).
+    # Gustwave::Form::Field builds the textarea with its label, helper text
+    # and validation message, and wires it through +apply_slot_context+ (see
+    # there).
     #
     # @status alpha
     class Textarea < Gustwave::Component
@@ -100,7 +90,7 @@ module Gustwave
 
       # @param attribute [Symbol, String, nil] the attribute of the form's object the textarea is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the textarea is a plain +<textarea>+.
-      # @param validation [Symbol] the look of the textarea. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+.
+      # @param validation [Symbol] the look of the textarea. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise. In the frame it colors the frame's border.
       # @param frame_options [Hash] the HTML attributes of the frame's +<div>+, e.g. +class+ for its margin. Only with a header or footer.
       # @param header_options [Hash] the HTML attributes of the header bar. Only with a header.
       # @param body_options [Hash] the HTML attributes of the white area around the textarea. Only in the frame.

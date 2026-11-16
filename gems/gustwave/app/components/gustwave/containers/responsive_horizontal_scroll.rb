@@ -69,9 +69,9 @@ module Gustwave
         end
       end
 
-      # @param tag [Symbol] the HTML tag for the container.
-      # @param breakpoint [Symbol] the breakpoint at and above which the container wraps its items. Use t-shirt sizes from :sm to +:"2xl"+
-      # @param snap [Symbol] the scroll snap behavior on mobile devices. Use +:none+, +:start+, +:center+, or +:end+. See: https://v3.tailwindcss.com/docs/scroll-snap-align
+      # @param tag [Symbol] the HTML tag for the container. Defaults to +:div+. Valid values are +:div+, +:span+, +:ul+ and +:ol+.
+      # @param breakpoint [Symbol] the breakpoint at and above which the container wraps its items. Defaults to +:md+. Valid values are +:sm+, +:md+, +:lg+, +:xl+ and +:"2xl"+.
+      # @param snap [Symbol] the scroll snap behavior on mobile devices. Defaults to +:none+. Valid values are +:none+, +:start+, +:center+ and +:end+. See: https://v3.tailwindcss.com/docs/scroll-snap-align
       # @param options [Hash] additional options for the HTML tag.
       def initialize(tag: DEFAULT, breakpoint: DEFAULT, snap: DEFAULT, **options)
         select_options(tag:, breakpoint:, snap:)

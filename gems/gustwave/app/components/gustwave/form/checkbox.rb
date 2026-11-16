@@ -3,23 +3,15 @@
 module Gustwave
   module Form
     # Use Checkbox to render a checkbox: a square box for a yes or no
-    # answer, or for one of several options, in seven colors.
+    # answer, or for one of several options.
     #
-    # The checkbox is the +<input type="checkbox">+ itself, and +options+ are
-    # its HTML attributes, e.g. +checked+, +disabled+, +name+, +value+ and
-    # +required+. It renders no label: the text beside the box is the label of
-    # a Gustwave::Form::InlineField. On its own, the checkbox gets its
-    # accessible name from the caller:
+    # It renders the +<input type="checkbox">+ only, no label: the text beside
+    # the box is the label of a Gustwave::Form::InlineField. On its own, the
+    # checkbox gets its accessible name from the caller:
     #
     #   <%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: "7", aria: { label: "Select task" }) %>
     #
-    # +color+ is an option: +:blue+, +:red+, +:green+, +:purple+, +:teal+,
-    # +:yellow+ or +:orange+. The checkbox has one size.
-    #
-    # === Without a form builder
-    #
-    # Renders a plain checkbox. +name+, +id+, +value+ and +checked+ are
-    # ordinary HTML attributes.
+    # The checkbox has one size.
     #
     # === With a form builder
     #
@@ -27,15 +19,11 @@ module Gustwave
     # Rails renders the element through its +check_box+ helper, so name, ID,
     # the record's value, +index+ and +namespace+ behave as in any Rails form,
     # and the hidden field that sends the unchecked value comes along, before
-    # the checkbox. +checked_value+ and +unchecked_value+ are Rails' own,
-    # +"1"+ and +"0"+ by default, and +include_hidden: false+ leaves the
-    # hidden field out:
+    # the checkbox:
     #
     #   <%= render Gustwave::Form::Checkbox.new(:terms, form: f, aria: { label: "I accept the terms" }) %>
     #
-    # Rails' +field_error_proc+ never wraps the checkbox. In the +error+
-    # validation state the checkbox sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise. The state changes no classes.
+    # Rails' +field_error_proc+ never wraps the checkbox.
     #
     # === In a field
     #
@@ -72,7 +60,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the checkbox is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the checkbox is a plain +<input>+.
       # @param color [Symbol] the color of the checked box and of the focus ring. Defaults to +:blue+. Valid values are +:blue+, +:red+, +:green+, +:purple+, +:teal+, +:yellow+ and +:orange+.
-      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+. The state has no look.
+      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
       # @param checked_value [Object] Rails' +check_box+ value of a checked box, only with +form+. Defaults to +"1"+.
       # @param unchecked_value [Object] Rails' +check_box+ value of an unchecked box, only with +form+. Defaults to +"0"+; +nil+ leaves out the hidden field.
       # @param include_hidden [Boolean] Rails' +include_hidden+ option: whether a bound checkbox renders the hidden field for the unchecked value. Defaults to +true+.

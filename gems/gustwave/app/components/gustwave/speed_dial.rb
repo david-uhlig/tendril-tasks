@@ -5,8 +5,7 @@ module Gustwave
   # actions.
   #
   # The trigger comes first in the DOM, followed by the menu of actions, so
-  # the tab order runs trigger, then actions. The +direction+ places the menu
-  # relative to the trigger.
+  # the tab order runs trigger, then actions.
   #
   # The menu is shown and hidden by Flowbite's JavaScript, which needs the
   # Flowbite Dial behavior loaded. Its +data-dial-init+ wrapper and trigger
@@ -18,14 +17,6 @@ module Gustwave
   #     <% dial.with_action("Edit", icon: :edit) %>
   #     <% dial.with_action("Share", icon: :link) %>
   #   <% end %>
-  #
-  # @param id [String, nil] the id of the menu element. If not provided, a random id will be generated.
-  # @param position [Symbol] where the speed dial is placed. +:bottom_right+ (default), +:bottom_left+, +:top_right+, +:top_left+, or +:none+ to render in the flow of the page.
-  # @param direction [Symbol, nil] the direction the menu opens in, +:up+, +:down+, +:left+ or +:right+. Defaults to +:up+ for bottom positions and +:down+ for top positions.
-  # @param trigger_event [Symbol] how the menu opens, +:hover+ (default) or +:click+.
-  # @param shape [Symbol] the shape of the trigger and actions, +:round+ (default) or +:square+.
-  # @param label_display [Symbol] where the labels of the actions are shown, +:tooltip+ (default), +:inside+ or +:outside+.
-  # @param options [Hash] HTML attributes for the wrapper element.
   #
   # @status alpha
   class SpeedDial < Gustwave::Component
@@ -90,11 +81,11 @@ module Gustwave
     }
 
     # @param id [String, nil] the id of the menu element. If not provided, a random id will be generated.
-    # @param position [Symbol] the position of the speed dial, see the class documentation.
-    # @param direction [Symbol, nil] the direction the menu opens in. Defaults per position when +nil+.
-    # @param trigger_event [Symbol] +:hover+ or +:click+.
-    # @param shape [Symbol] +:round+ or +:square+.
-    # @param label_display [Symbol] +:tooltip+, +:inside+ or +:outside+.
+    # @param position [Symbol] where the speed dial is placed. +:bottom_right+ (default), +:bottom_left+, +:top_right+, +:top_left+, or +:none+ to render in the flow of the page.
+    # @param direction [Symbol, nil] the direction the menu opens in, +:up+, +:down+, +:left+ or +:right+. Defaults to +:up+ for bottom positions and +:down+ for top positions.
+    # @param trigger_event [Symbol] how the menu opens, +:hover+ (default) or +:click+.
+    # @param shape [Symbol] the shape of the trigger and actions, +:round+ (default) or +:square+.
+    # @param label_display [Symbol] where the labels of the actions are shown, +:tooltip+ (default), +:inside+ or +:outside+.
     # @param options [Hash] HTML attributes for the wrapper element.
     def initialize(id: nil,
                    position: DEFAULT,

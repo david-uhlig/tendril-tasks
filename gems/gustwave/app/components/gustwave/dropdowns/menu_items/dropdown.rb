@@ -15,10 +15,9 @@ module Gustwave
         # @param href [String] the URL to link to. Pass in +nil+ to not render a link.
         # @param icon [Symbol, nil] the icon identifier rendered as leading visual menu item. Pass in +nil+ to not render an icon.
         # @param trailing_icon [Symbol, nil, false] the icon identifier rendered as trailing visual on the trigger button. Pass in +nil+ to automatically render a chevron icon pointing in the direction of +placement+. Pass in +false+ to not render a trailing icon.
-        # @param trigger_event [Symbol] the trigger event for the dropdown. Pass in :click (default) or :hover.
-        # @param placement [Symbol] the placement of the dropdown. Options: +auto+, +auto-start+, +auto-end+, +top+, +top-start+, +top-end+, +bottom+, +bottom-start+, +bottom-end+, +right+, +right-start+, +right-end+, +left+, +left-start+, +left-end+. See: https://popper.js.org/docs/v2/constructors/#options
-        #
-        # @see Gustwave::Dropdown for the other trigger settings and HTML attributes
+        # @param trigger_event [Symbol] what opens the submenu. Defaults to +:hover+. Valid values are +:hover+ and +:click+.
+        # @param placement [Symbol] where the submenu opens. Defaults to +:right+. Valid values are +auto+, +auto-start+, +auto-end+, +top+, +top-start+, +top-end+, +bottom+, +bottom-start+, +bottom-end+, +right+, +right-start+, +right-end+, +left+, +left-start+, +left-end+. See: https://popper.js.org/docs/v2/constructors/#options
+        # @param options [Hash] the arguments and HTML attributes of the Gustwave::Dropdown it renders, e.g. the other trigger settings.
         def initialize(
           text = nil,
           href: nil,

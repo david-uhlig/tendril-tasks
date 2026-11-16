@@ -3,10 +3,10 @@
 module Gustwave
   # A bar fixed to the top or bottom of the page.
   #
-  # Pass the message as +text+ or as a block. The body takes the width next to
-  # the dismiss button and is a plain block, so text and links flow inline and
-  # a heading and a paragraph stack. Compose anything else in the block, e.g. a
-  # call to action or an inline form:
+  # The body takes the width next to the dismiss button and is a plain block,
+  # so text and links flow inline and a heading and a paragraph stack.
+  # Compose anything else in the block, e.g. a call to action or an inline
+  # form:
   #
   #   render Gustwave::Banner.new("We've updated our terms.")
   #   render Gustwave::Banner.new("We've updated our terms.", position: :bottom)

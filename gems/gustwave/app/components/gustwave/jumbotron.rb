@@ -2,14 +2,10 @@
 
 module Gustwave
   # Use Jumbotron for a hero section, the first section of a page with a
-  # marketing message. The section holds a
-  # container with a maximum width. The content is a block: compose the
-  # heading, text, buttons, media or form in it with the other components.
-  #
-  # The jumbotron has no slots for these parts. Pass the content as a block,
-  # and HTML attributes for the section as options.
-  #
-  # Examples:
+  # marketing message. The section holds a container with a maximum width.
+  # The content is a block: compose the heading, text, buttons, media or
+  # form in it with the other components. The jumbotron has no slots for
+  # these parts.
   #
   # Renders a centered hero with a heading, a paragraph and two buttons:
   #
@@ -23,7 +19,7 @@ module Gustwave
   #   <% end %>
   #
   # Lays the content out in two columns from the +lg+ breakpoint up, with
-  # +container_options:+. Its classes win conflicts with the container's:
+  # +container_options:+:
   #
   #   <%= render Gustwave::Jumbotron.new(container_options: { class: "grid lg:grid-cols-2 gap-8 lg:gap-16" }) do %>
   #     <div class="flex flex-col justify-center">
@@ -59,7 +55,6 @@ module Gustwave
   #   <% end %>
   #
   # Spacing around the jumbotron is up to the caller, e.g. +class: "mb-4"+.
-  # Caller classes win conflicts with the jumbotron's classes.
   #
   # @status alpha
   class Jumbotron < Gustwave::Component

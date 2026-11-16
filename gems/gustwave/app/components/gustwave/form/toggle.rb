@@ -2,43 +2,28 @@
 
 module Gustwave
   module Form
-    # Use Toggle to render a toggle: a checkbox shown as a switch for
-    # a yes or no answer, in three sizes and seven colors.
+    # Use Toggle to render a toggle: a checkbox shown as a switch for a yes or
+    # no answer.
     #
-    # +options+ are the +<input type="checkbox">+'s HTML attributes, e.g.
-    # +checked+, +disabled+, +name+ and +required+. The input itself is hidden
-    # and the switch is its +track+, which is drawn from the input's state.
-    # The toggle renders a +<label>+ around the two, so a click on the switch
-    # reaches the input. That label holds no text: the text
-    # beside the switch is the label of a Gustwave::Form::InlineField. On its
-    # own, the toggle gets its accessible name from the caller:
+    # The +<input type="checkbox">+ is hidden and the switch is its +track+,
+    # which is drawn from the input's state. The toggle renders a +<label>+
+    # around the two, so a click on the switch reaches the input. That label
+    # holds no text: the text beside the switch is the label of a
+    # Gustwave::Form::InlineField. On its own, the toggle gets its accessible
+    # name from the caller:
     #
     #   <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
-    #
-    # +size+ and +color+ are options. The sizes are +:sm+, +:md+ and +:lg+
-    # and the colors +:blue+, +:red+, +:green+, +:purple+, +:yellow+,
-    # +:teal+ and +:orange+. +size+ is also an HTML attribute, so it goes in
-    # +html:+ when you need it.
-    #
-    # === Without a form builder
-    #
-    # Renders a plain checkbox. +name+, +id+, +value+ and +checked+ are
-    # ordinary HTML attributes.
     #
     # === With a form builder
     #
     # Pass the attribute and +form:+, a Rails form builder or any subclass.
     # Rails renders the element through its +check_box+ helper, so name, ID,
     # the record's value, +index+ and +namespace+ behave as in any Rails form,
-    # and the hidden field that sends the unchecked value comes along.
-    # +checked_value+ and +unchecked_value+ are Rails' own, +"1"+ and +"0"+
-    # by default, and +include_hidden: false+ leaves the hidden field out:
+    # and the hidden field that sends the unchecked value comes along:
     #
     #   <%= render Gustwave::Form::Toggle.new(:published, form: f, aria: { label: "Published" }) %>
     #
-    # Rails' +field_error_proc+ never wraps the toggle. In the +error+
-    # validation state the toggle sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise. The state changes no classes.
+    # Rails' +field_error_proc+ never wraps the toggle.
     #
     # === In a field
     #
@@ -90,7 +75,7 @@ module Gustwave
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the toggle is a plain checkbox.
       # @param size [Symbol] the size of the toggle. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
       # @param color [Symbol] the color of the switch when it is on and when it has focus. Defaults to +:blue+. Valid values are +:blue+, +:red+, +:green+, +:purple+, +:yellow+, +:teal+ and +:orange+.
-      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+. The state has no look.
+      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
       # @param checked_value [Object] Rails' +check_box+ value of a checked box, only with +form+. Defaults to +"1"+.
       # @param unchecked_value [Object] Rails' +check_box+ value of an unchecked box, only with +form+. Defaults to +"0"+; +nil+ leaves out the hidden field.
       # @param include_hidden [Boolean] Rails' +include_hidden+ option: whether a bound toggle renders the hidden field for the unchecked value. Defaults to +true+.

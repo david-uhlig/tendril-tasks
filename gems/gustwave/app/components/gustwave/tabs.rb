@@ -35,16 +35,9 @@ module Gustwave
   # === Active and inactive classes
   #
   # Flowbite's JS swaps the +active+ and +inactive+ classes of a tab when it's
-  # selected. The +active_class+ and +inactive_class+ options replace the
-  # classes of these states, e.g. for purple tabs. The classes of the active
-  # and inactive states must not share a class, and a trigger's own +class:+
-  # must not conflict with its state's classes, or the swap breaks.
-  #
-  # === List options
-  #
-  # The +list_options+ option sets the HTML attributes of the list of tabs,
-  # e.g. its classes, to round it or give it a background. Its classes win
-  # conflicts with the style's classes.
+  # selected. The classes of the active and inactive states must not share a
+  # class, and a trigger's own +class:+ must not conflict with its state's
+  # classes, or the swap breaks.
   #
   # @status alpha
   class Tabs < Gustwave::Component
@@ -147,8 +140,8 @@ module Gustwave
     }
 
     # @param id [String, nil] the id of the root element. Defaults to a random id.
-    # @param style [Symbol] the style of the tabs: +:default+, +:underline+, +:pills+ or +:full_width+.
-    # @param vertical [Boolean] whether the tabs are stacked in a column, beside their panels.
+    # @param style [Symbol] the style of the tabs. Defaults to +:default+. Valid values are +:default+, +:underline+, +:pills+ and +:full_width+.
+    # @param vertical [Boolean] whether the tabs are stacked in a column, beside their panels. Defaults to +false+.
     # @param active_class [String, nil] classes of the selected tab that replace the style's, e.g. +"text-purple-600 border-purple-600"+. They win conflicts with the style's classes.
     # @param inactive_class [String, nil] classes of the unselected tabs that replace the style's. They win conflicts with the style's classes.
     # @param list_options [Hash] HTML attributes of the list of tabs, e.g. +{ class: "rounded-t-lg bg-gray-50" }+. Its classes win conflicts with the style's classes.

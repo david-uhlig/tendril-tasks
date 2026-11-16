@@ -3,9 +3,7 @@
 module Gustwave
   # A message that stands out from the page.
   #
-  # Pass the message as +text+ or as a block. The +title+ renders in bold
-  # before it. Spacing around the alert is up to the caller, e.g.
-  # +class: "mb-4"+.
+  # Spacing around the alert is up to the caller, e.g. +class: "mb-4"+.
   #
   #   render Gustwave::Alert.new("A simple info alert.")
   #   render Gustwave::Alert.new("Check the form.", color: :red, border: true)
@@ -31,9 +29,6 @@ module Gustwave
   #     alert.with_icon(label: "Info")
   #     alert.with_dismiss_button
   #   end
-  #
-  # Use +border+ for a border all around and +accent+ for a thick border at
-  # the top only.
   #
   # @status alpha
   class Alert < Gustwave::Component
@@ -133,7 +128,7 @@ module Gustwave
 
     # @param text [String, nil] Text to display within the alert. Takes precedence over block content.
     # @param title [String, nil] A title rendered in bold before the text.
-    # @param color [Symbol] The color of the alert. Defaults to :blue.
+    # @param color [Symbol] The color of the alert. Defaults to +:blue+. Valid values are +:blue+, +:red+, +:green+, +:yellow+ and +:dark+.
     # @param align [Symbol] How the icon aligns with the text, :center or :start. Defaults to :center.
     # @param border [Boolean] Whether the alert has a border. Defaults to +false+.
     # @param accent [Boolean] Whether the alert has a thick border at the top only. Wins over +border+. Defaults to +false+.

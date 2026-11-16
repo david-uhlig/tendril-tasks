@@ -2,26 +2,17 @@
 
 module Gustwave
   # Use Clipboard to copy the text of an element to the clipboard with a
-  # button. For a few seconds after the
-  # copy the button shows its copied state.
-  #
-  # +target_id+ is the id of the element the text is copied from, e.g. an
-  # input. Pass the button's label as +text+ or as a block:
+  # button. For a few seconds after the copy the button shows its copied
+  # state:
   #
   #   render Gustwave::Clipboard.new("Copy", target_id: "npm-install")
   #
-  # The button is a Gustwave::Button of +theme+, so its +color+ and +size+
-  # apply. Without a label it is icon-only, and its label is only read by
-  # screen readers:
+  # Without a label the button is icon-only, and the labels of both states
+  # are read by screen readers only:
   #
   #   render Gustwave::Clipboard.new(target_id: "api-key", theme: :inline)
   #
-  # +copied_text+ is the label of the copied state. Without a visible label,
-  # it is read by screen readers only.
-  #
-  # Copy the content of an inner HTML or text element with +content_type+. Set
-  # +html_entities+ to decode the HTML's entities into plain text, e.g. for a
-  # code block:
+  # Copying a code block:
   #
   #   render Gustwave::Clipboard.new("Copy code", target_id: "code", content_type: :inner_html, html_entities: true)
   #

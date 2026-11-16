@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Footer to render the footer at the bottom of a page. The footer is a layout wrapper: it renders a +<footer>+ element
-  # with a container around the content block. Put the copyright notice,
-  # link lists, sitemap groups, brand and social icons in the block, composed
-  # from other components.
-  #
-  # Pass +sticky: true+ to fix the footer to the bottom of the viewport. It
-  # then overlays the page, so the page content needs its own bottom offset,
-  # as Navbar documents for its top.
-  #
-  # Use +container_options:+ to set the HTML attributes of the container. Its
-  # classes win conflicts with the defaults.
-  #
-  # Examples:
+  # Use Footer to render the footer at the bottom of a page. The footer is a
+  # layout wrapper: it renders a +<footer>+ element with a container around
+  # the content block. Put the copyright notice, link lists, sitemap groups,
+  # brand and social icons in the block, composed from other components.
   #
   # Renders a copyright notice and a row of links:
   #
@@ -67,7 +58,7 @@ module Gustwave
 
     toggle :sticky, "fixed bottom-0 left-0 z-20 w-full border-t border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-600"
 
-    # @param sticky [Boolean] whether the footer sticks to the bottom of the viewport. Defaults to +false+.
+    # @param sticky [Boolean] whether the footer sticks to the bottom of the viewport. It then overlays the page, so the page content needs its own bottom offset, as Navbar documents for its top. Defaults to +false+.
     # @param container_options [Hash] HTML attributes for the container inside the footer. Its classes win conflicts.
     # @param options [Hash] HTML attributes for the +<footer>+ element.
     def initialize(sticky: false, container_options: {}, **options)
