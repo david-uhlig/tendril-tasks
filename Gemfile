@@ -93,6 +93,9 @@ group :development, :test do
   # HTML+ERB parser, linter and formatter [https://herb-tools.dev]
   gem "herb", "~> 0.11.1", require: false
 
+  # Builds and checks Gustwave's API docs [https://yardoc.org]
+  gem "yard", require: false
+
   # Runs the specs in parallel processes [https://github.com/grosser/parallel_tests]
   gem "parallel_tests"
 

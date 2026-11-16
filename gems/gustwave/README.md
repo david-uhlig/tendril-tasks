@@ -249,6 +249,10 @@ Read [docs/design.md](docs/design.md) before you add a component or change a com
 
 The API snapshots in `spec/fixtures/api_snapshots` record each component's public and extension API, so every API change shows up in review. Run `UPDATE_API_SNAPSHOTS=1 bundle exec rspec spec/components/api_snapshot_spec.rb` to record an intended change. `spec/components/conventions_spec.rb` checks the conventions of [docs/design.md](docs/design.md#enforcement).
 
+### API docs
+
+The classes and methods are documented with [YARD](https://yardoc.org). Run `bundle exec yard` in the gem's directory to build the docs into `doc/`, or `bundle exec yard server --reload` to browse them while you edit. `.yardopts` sets what they include, and `spec/docs/yard_spec.rb` fails when something they show is undocumented.
+
 ### Previewing components
 
 Start the host application in development and open `/lookbook` to browse every preview with its source, notes and params. Set the `theme` display option to `dark` to check the `dark:` variants.

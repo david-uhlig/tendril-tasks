@@ -1,0 +1,11 @@
+--markup rdoc
+--tag status:Status
+--hide-api private
+--query '!(object.type == :method && [:call, :before_render].include?(object.name))'
+--output-dir doc
+--no-save
+app/**/*.rb
+lib/**/*.rb
+-
+README.md
+docs/design.md
