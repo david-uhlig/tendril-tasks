@@ -251,7 +251,7 @@ The API snapshots in `spec/fixtures/api_snapshots` record each component's publi
 
 ### API docs
 
-The classes and methods are documented with [YARD](https://yardoc.org). Run `bundle exec yard` in the gem's directory to build the docs into `doc/`, or `bundle exec yard server --reload` to browse them while you edit. `.yardopts` sets what they include, and `spec/docs/yard_spec.rb` fails when something they show is undocumented.
+The classes and methods are documented with [YARD](https://yardoc.org). Run `bundle exec yard` in the gem's directory to build the docs into `doc/`, or `bundle exec yard server --reload` to browse them while you edit. `.yardopts` sets what they include, and `bundle exec yard stats --list-undoc` lists what they show without a docstring.
 
 ### Previewing components
 
