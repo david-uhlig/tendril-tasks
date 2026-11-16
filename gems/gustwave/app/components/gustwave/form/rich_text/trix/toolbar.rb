@@ -3,9 +3,11 @@
 module Gustwave
   module Form
     module RichText
+      # Toolbar parts for Trix, the editor Action Text uses.
       module Trix
         # @status alpha
         class Toolbar < Gustwave::Component
+          # The actions of the toolbar, in groups. A divider goes between the groups.
           ACTION_GROUPS = [
             %i[bold italic strike link],
             %i[heading1 heading2 heading3 heading4 heading5 heading6],
@@ -13,6 +15,7 @@ module Gustwave
             %i[attach_files],
             %i[undo redo]
           ].freeze
+          # Every action in ACTION_GROUPS, the values the +hidden+ and +disabled+ options take.
           ACTION_OPTIONS = ACTION_GROUPS.flatten.freeze
 
           # @param form [ActionView::Helpers::FormBuilder, nil] the editor's form builder, as Gustwave::Form::RichTextarea passes it.

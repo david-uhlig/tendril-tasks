@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Form controls and the fields that wrap them with a label, helper text and
+  # validation message. Gustwave::FormBuilder renders them for a Rails form.
   module Form
     # Use Field to render a form control with its label, helper text and
     # validation message stacked around it, and to tie them together: the

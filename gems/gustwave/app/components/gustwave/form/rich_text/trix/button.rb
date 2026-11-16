@@ -3,9 +3,12 @@
 module Gustwave
   module Form
     module RichText
+      # Toolbar parts for Trix, the editor Action Text uses: buttons that set its
+      # attributes or run its actions through +data-trix-*+ attributes, and a toolbar for them.
       module Trix
         # @status alpha
         class Button < Gustwave::Component
+          # The keyboard shortcut of each attribute, as +data-trix-key+.
           ATTRIBUTE_KEY_MAPPINGS = {
             bold: "b",
             italic: "i",
@@ -14,6 +17,7 @@ module Gustwave
             redo: "shift+z"
           }.freeze
 
+          # The Trix action each button runs as +data-trix-action+, for the attributes that are actions.
           ATTRIBUTE_ACTION_MAPPINGS = {
             undo: "undo",
             redo: "redo",

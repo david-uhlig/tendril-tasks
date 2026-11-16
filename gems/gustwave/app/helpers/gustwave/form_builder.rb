@@ -160,10 +160,22 @@ module Gustwave
       end
     end
 
+    # Renders an input of type +tel+, as +telephone_field+ does, under Rails'
+    # name +phone_field+. The options are as for +render_field+: an input's
+    # +size+ and +icon+ go to the input, and the rest are HTML attributes.
+    #
+    # @return [ActiveSupport::SafeBuffer]
     alias_method :phone_field, :telephone_field
 
     # Renders a field with a Gustwave::Form::Textarea. Rails' +size: "20x40"+
     # still sets +cols+ and +rows+.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field,
+    #   +frame_options+, +header_options+, +body_options+ and +footer_options+ to the textarea's frame, and the
+    #   rest are the HTML attributes of the +<textarea>+.
+    # @yield [field] the field, to set its slots.
+    # @return [ActiveSupport::SafeBuffer]
     def textarea(attribute, options = {}, &block)
       render_field(attribute, :textarea, options, &block)
     end
@@ -171,12 +183,26 @@ module Gustwave
 
     # Renders a field with a Gustwave::Form::RichTextarea. The block receives
     # the field, as for the input helpers.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field,
+    #   +editor+, +sticky_toolbar+, +toolbar_id+, +frame_options+, +header_options+, +body_options+ and
+    #   +footer_options+ to the editor, and the rest are the HTML attributes of the editor element.
+    # @yield [field] the field, to set its slots.
+    # @return [ActiveSupport::SafeBuffer]
     def rich_textarea(attribute, options = {}, &block)
       render_field(attribute, :rich_textarea, options, &block)
     end
     alias_method :rich_text_area, :rich_textarea
 
-    # Renders a field with a Gustwave::Form::FileInput.
+    # Renders a field with a Gustwave::Form::FileInput. +size+ is Gustwave's,
+    # so the HTML attribute goes in +html:+.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field,
+    #   +size+ to the file input, and the rest are the HTML attributes of the +<input>+.
+    # @yield [field] the field, to set its slots.
+    # @return [ActiveSupport::SafeBuffer]
     def file_field(attribute, options = {}, &block)
       render_field(attribute, :file_input, options, &block)
     end
@@ -190,6 +216,7 @@ module Gustwave
     # @param options [Hash] as for +render_field+; +size+ and +color+ go to the toggle.
     # @param checked_value [Object] Rails' value of a checked box.
     # @param unchecked_value [Object] Rails' value of an unchecked box.
+    # @return [ActiveSupport::SafeBuffer]
     def toggle(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
       options = options.to_h.symbolize_keys.merge(checked_value:, unchecked_value:)
       render_inline_field(attribute, :toggle, options, &block)
@@ -203,6 +230,7 @@ module Gustwave
     # @param options [Hash] as for +render_field+; +color+ and +include_hidden+ go to the checkbox.
     # @param checked_value [Object] Rails' value of a checked box.
     # @param unchecked_value [Object] Rails' value of an unchecked box.
+    # @return [ActiveSupport::SafeBuffer]
     def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
       options = options.to_h.symbolize_keys.merge(checked_value:, unchecked_value:)
       render_inline_field(attribute, :checkbox, options, &block)
@@ -217,6 +245,7 @@ module Gustwave
     # @param attribute [Symbol, String] the attribute.
     # @param tag_value [Object] the value of the radio.
     # @param options [Hash] as for +render_field+; +color+ goes to the radio.
+    # @return [ActiveSupport::SafeBuffer]
     def radio_button(attribute, tag_value, options = {}, &block)
       options = options.to_h.symbolize_keys.merge(value: tag_value)
       render_inline_field(attribute, :radio, options, &block)
@@ -279,6 +308,19 @@ module Gustwave
     # objects. +value_method+ and +text_method+ are method names or anything
     # that responds to +call+, and +selected+ and +disabled+ may be a Proc that
     # tells which objects, as in Rails. Takes the options of +select+.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param collection [Enumerable] the objects to choose from.
+    # @param value_method [Symbol, String, Proc] the method that returns each option's value, or a Proc that
+    #   takes an object.
+    # @param text_method [Symbol, String, Proc] the method that returns each option's text, or a Proc that
+    #   takes an object.
+    # @param options [Hash] as for +select+'s +options+: Rails' +prompt+, +include_blank+, +selected+,
+    #   +disabled+ and +include_hidden+, the field's +label+, +helper_text+, +validation+ and
+    #   +validation_message+, and the select's +size+ and +style+. +selected+ and +disabled+ may be a Proc
+    #   that tells which objects.
+    # @param html_options [Hash] the HTML attributes of the +<select>+, as for +select+'s +html_options+.
+    # @return [ActiveSupport::SafeBuffer]
     def collection_select(attribute, collection, value_method, text_method, options = {}, html_options = {})
       options = options.to_h.symbolize_keys
       choices = collection.map do |item|

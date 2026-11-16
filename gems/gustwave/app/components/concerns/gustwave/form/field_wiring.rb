@@ -76,6 +76,7 @@ module Gustwave
       # @param validation_message [String, nil] shorthand for the +validation_message+ slot. By default a bound field renders the attribute's error messages, unless its control shares the attribute with other fields.
       # @param options [Hash] HTML attributes of the +<div>+.
       # @raise [ArgumentError] for an +attribute+ without +form+.
+      # @return [void]
       def initialize(attribute = nil, form: nil, label: Gustwave::Options::DEFAULT, helper_text: nil, validation: Gustwave::Options::DEFAULT,
                      validation_message: nil, **options)
         if attribute && form.nil?
