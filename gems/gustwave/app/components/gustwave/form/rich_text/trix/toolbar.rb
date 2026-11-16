@@ -3,7 +3,6 @@
 module Gustwave
   module Form
     module RichText
-      # Toolbar parts for Trix, the editor Action Text uses.
       module Trix
         # @status alpha
         class Toolbar < Gustwave::Component
