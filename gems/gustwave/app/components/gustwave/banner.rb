@@ -1,19 +1,18 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A bar fixed to the top or bottom of the page, as in Flowbite's sticky
-  # banners.
+  # A bar fixed to the top or bottom of the page.
   #
-  # Pass the message as +text+ or as a block. The body takes the width next to
-  # the dismiss button and is a plain block, so text and links flow inline and
-  # a heading and a paragraph stack. Compose anything else in the block, e.g. a
-  # call to action or an inline form:
+  # The body takes the width next to the dismiss button and is a plain block,
+  # so text and links flow inline and a heading and a paragraph stack.
+  # Compose anything else in the block, e.g. a call to action or an inline
+  # form:
   #
   #   render Gustwave::Banner.new("We've updated our terms.")
   #   render Gustwave::Banner.new("We've updated our terms.", position: :bottom)
   #
-  # Floating, as a centered card instead of a full-width bar. With a call to
-  # action, this is Flowbite's marketing banner:
+  # Floating, as a centered card instead of a full-width bar, e.g. a
+  # marketing banner with a call to action:
   #
   #   render Gustwave::Banner.new(floating: true, align: :start) do |banner|
   #     banner.with_dismiss_button

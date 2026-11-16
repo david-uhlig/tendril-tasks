@@ -9,12 +9,8 @@ module Gustwave
   # element without calling +drawer.hide()+, which leaves the backdrop and the
   # scroll lock behind.
   #
-  # With +edge+, the header is the swipeable handle that toggles the drawer,
-  # and it has no close button.
-  #
-  # Pass +icon+ to show an icon before the title. Set visuals on either side
-  # of the title with +with_leading_visual_icon+, +with_trailing_visual_icon+
-  # and the other types of Gustwave::Visuals.
+  # Set visuals on either side of the title with +with_leading_visual_icon+,
+  # +with_trailing_visual_icon+ and the other types of Gustwave::Visuals.
   #
   #   <% drawer = Gustwave::Drawer.new(id: "info", placement: :right) %>
   #   <%= render drawer do |d| %>

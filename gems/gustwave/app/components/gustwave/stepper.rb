@@ -2,18 +2,7 @@
 
 module Gustwave
   # Use Stepper to show the steps of a process, such as a checkout, and how far
-  # the user has got. Add each step with +with_step+. A step is +:complete+ once
-  # it's done, +:current+ while the user is on it, and +:upcoming+ otherwise (the
-  # default). The current step's item gets +aria-current="step"+.
-  #
-  # Pick a style with +style+:
-  #
-  # * +:default+ (default): numbered steps in a row, joined by a line.
-  # * +:progress+: icons in circles in a row, joined by a line. The step text is
-  #   for screen readers only.
-  # * +:detailed+: numbered steps with a description under each title.
-  # * +:breadcrumb+: numbered steps in a bordered bar, with chevrons between them.
-  # * +:vertical+: one box per step, stacked, colored by state.
+  # the user has got. Add each step with +with_step+, see Gustwave::Stepper::Step.
   #
   # === Basic Usage
   #
@@ -47,16 +36,12 @@ module Gustwave
   #
   # === Detailed
   #
-  # Pass +description+ to add a line under each title. Only the +:detailed+ style
-  # shows it:
+  # A line under each title:
   #
   #   <%= render Gustwave::Stepper.new(style: :detailed) do |stepper| %>
   #     <% stepper.with_step("User info", state: :current, description: "Step details here") %>
   #     <% stepper.with_step("Company info", description: "Step details here") %>
   #   <% end %>
-  #
-  # @param style [Symbol] +:default+ (default), +:progress+, +:detailed+, +:breadcrumb+ or +:vertical+.
-  # @param options [Hash] HTML attributes for the +<ol>+ element.
   #
   # @status alpha
   class Stepper < Gustwave::Component
@@ -74,8 +59,13 @@ module Gustwave
       Gustwave::Stepper::Step.new(text, style: option_value(:style), **options)
     }
 
-    # @param style [Symbol] +:default+ (default), +:progress+, +:detailed+, +:breadcrumb+ or +:vertical+.
-    # @param options [Hash] HTML attributes for the +ol+ element.
+    # @param style [Symbol] Defaults to +:default+. Valid values are:
+    #   * +:default+: numbered steps in a row, joined by a line.
+    #   * +:progress+: icons in circles in a row, joined by a line. The step text is for screen readers only.
+    #   * +:detailed+: numbered steps with a description under each title.
+    #   * +:breadcrumb+: numbered steps in a bordered bar, with chevrons between them.
+    #   * +:vertical+: one box per step, stacked, colored by state.
+    # @param options [Hash] HTML attributes for the +<ol>+ element.
     def initialize(style: DEFAULT, **options)
       select_options(style:)
       @options = attributes_for(options)
@@ -91,10 +81,7 @@ module Gustwave
       tag.ol(**@options) { slots_and_content(*steps) }
     end
 
-    # A step of a Gustwave::Stepper, set with +with_step+. Its +state+ is
-    # +:complete+, +:current+ or +:upcoming+ (default). A current step's item
-    # gets +aria-current="step"+. Its +description+ shows only in the +:detailed+
-    # style, and its text is for screen readers only in the +:progress+ style.
+    # A step of a Gustwave::Stepper, set with +with_step+.
     #
     # === Icon
     #
@@ -178,9 +165,9 @@ module Gustwave
         Gustwave::Icon.new(name, theme:, **configure_html_attributes(options, class: classes(:icon), aria: { hidden: true }))
       }
 
-      # @param text [String, nil] The step's title. Takes precedence over block content.
+      # @param text [String, nil] The step's title. Takes precedence over block content. Only for screen readers in the +:progress+ style.
       # @param style [Symbol] Set by Gustwave::Stepper.
-      # @param state [Symbol] +:complete+, +:current+ or +:upcoming+ (default).
+      # @param state [Symbol] +:complete+ once the step is done, +:current+ while the user is on it, which sets +aria-current="step"+, or +:upcoming+ (default).
       # @param description [String, nil] A line under the title. Only the +:detailed+ style shows it.
       # @param options [Hash] HTML attributes for the +li+ element.
       def initialize(text = nil, style: DEFAULT, state: DEFAULT, description: nil, **options)

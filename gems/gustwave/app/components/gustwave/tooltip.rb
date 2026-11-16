@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A short text that appears next to a trigger element, using Flowbite's
-  # tooltip. Spread +trigger_options+ into the trigger, which also points
-  # +aria-describedby+ at the tooltip. Pass the trigger's own
-  # +aria-describedby+ to +trigger_options+ to keep it.
+  # A short text that appears next to a trigger element. Spread
+  # +trigger_options+ into the trigger, which also points +aria-describedby+
+  # at the tooltip. Pass the trigger's own +aria-describedby+ to
+  # +trigger_options+ to keep it.
   #
   # Render the tooltip anywhere on the page; it doesn't need to follow its
   # trigger. The arrow is drawn by its +::before+ only: the +::after+ of
@@ -53,6 +53,11 @@ module Gustwave
       }
     }
 
+    # @param text [String, nil] the tooltip's text. Without it the block is the content.
+    # @param id [String, nil] the tooltip's id, which +trigger_options+ point at. Defaults to a random id.
+    # @param color [Symbol] Defaults to +:dark+. Valid values are +:dark+, +:light+ and +:none+, see above.
+    # @param arrow [Boolean] whether the tooltip has an arrow towards its trigger. Defaults to +true+.
+    # @param options [Hash] the HTML attributes of the tooltip's +<div>+.
     def initialize(text = nil, id: nil, color: DEFAULT, arrow: true, **options)
       @id = id || generate_random_id(prefix: "tooltip")
       @arrow = ActiveModel::Type::Boolean.new.cast(arrow) != false

@@ -43,8 +43,8 @@ module Gustwave
     }
 
     # @param text [String, nil] The link text. Pass a block for other content.
-    # @param color [Symbol] The text color. Use +:none+ to inherit the surrounding text style.
-    # @param underline [Symbol] When the link shows its underline, +:hover+ or +:always+.
+    # @param color [Symbol] The text color. Defaults to +:default+, blue. Use +:none+ to inherit the surrounding text style.
+    # @param underline [Symbol] When the link shows its underline. Defaults to +:hover+. Valid values are +:hover+ and +:always+.
     # @param options [Hash] Additional HTML attributes passed to the +<a>+ element, e.g. +href+, +id+ or +class+.
     def initialize(text = nil, color: DEFAULT, underline: DEFAULT, **options)
       @text = text

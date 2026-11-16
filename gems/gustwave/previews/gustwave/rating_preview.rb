@@ -1,6 +1,6 @@
 module Gustwave
   class RatingPreview < ViewComponent::Preview
-    # A score of 4 out of 5 stars, Flowbite's default rating.
+    # A score of 4 out of 5 stars.
     def default
       render Gustwave::Rating.new(4)
     end

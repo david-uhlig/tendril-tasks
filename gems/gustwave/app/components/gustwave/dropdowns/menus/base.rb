@@ -6,8 +6,7 @@ module Gustwave
       # Use Base as a base class for building dropdown menus
       #
       # Renders optional header and footer slots, and a content area in between.
-      # Provides consistent base styling. Can be placed in any content area with
-      # the +content_for+ argument.
+      # Provides consistent base styling.
       #
       # Inherit from this class when your menu needs extended behavior or
       # configuration. To customize, add content slots, overwrite the call
@@ -56,7 +55,7 @@ module Gustwave
         # @param text [String, nil] the text to appear in the dropdown menu. Takes precedent over block content.
         # @param id [String] the id attribute for the dropdown menu. Must match the id attribute called by the triggering element.
         # @param content_for [Symbol, nil] the name of the content area to render the menu. If +nil+, the menu is rendered right after the triggering element.
-        # @param tag [Symbol] HTML tag to use for the dropdown menu. Default: +div+.
+        # @param tag [Symbol] the HTML tag of the dropdown menu. Defaults to +:div+. Valid values are +:div+, +:nav+ and +:section+.
         # @param options [Hash] additional HTML attributes passed to the surrounding HTML element.
         def initialize(text = nil, id:, content_for: nil, tag: DEFAULT, **options)
           @text = text

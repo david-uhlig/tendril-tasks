@@ -4,7 +4,7 @@ module Gustwave
       render_with_template
     end
 
-    # The whole card as a link, with a hover style. This is Flowbite's default card.
+    # The whole card as a link, with a hover style.
     def link
       render_with_template
     end

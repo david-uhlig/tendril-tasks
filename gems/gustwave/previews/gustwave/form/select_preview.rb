@@ -1,43 +1,40 @@
 module Gustwave
   module Form
     class SelectPreview < ViewComponent::Preview
-      # Flowbite's "Select input example": a field with a label and a select. The first option, "Choose a country", is
-      # the +prompt+. Like Flowbite's other select examples, it sits in a +form+ that is centered and at most
-      # +max-w-sm+ wide.
+      # A field with a label and a select. The first option, "Choose a country", is the +prompt+. Like the other
+      # select previews, it sits in a +form+ that is centered and at most +max-w-sm+ wide.
       def default
         render_with_template
       end
 
-      # Flowbite's "Multiple options" example: +multiple: true+ makes the select a list box. The first option is
-      # selected, as in Flowbite.
+      # +multiple: true+ makes the select a list box. The first option is selected.
       def multiple
         render_with_template
       end
 
-      # Flowbite's "Size attribute" example: +html: { size: 5 }+ is the HTML attribute, which shows five options of the
-      # list. The select keeps the default size, because the +size+ keyword is Flowbite's size.
+      # +html: { size: 5 }+ is the HTML attribute, which shows five options of the list. The select keeps the default
+      # size, because the +size+ keyword is Gustwave's size.
       def size_attribute
         render_with_template
       end
 
-      # Flowbite's "Disabled state" example: a disabled select. Its classes are the default ones.
+      # A disabled select. Its classes are the default ones.
       def disabled
         render_with_template
       end
 
-      # Flowbite's "Underline select" example: +style: :underline+. The label is hidden, so it takes +sr-only+.
+      # +style: :underline+. The label is hidden, so it takes +sr-only+.
       def underline
         render_with_template
       end
 
-      # Flowbite's "Sizes" example: the small, default and large select, each in a field with a label. The large
-      # one's label is +text-base+, as in Flowbite.
+      # The small, default and large select, each in a field with a label. The large one's label is +text-base+.
       def sizes
         render_with_template
       end
 
-      # Not a Flowbite example. The success and error look of the select, each with a validation message. The looks
-      # follow the input field's.
+      # The success and error look of the select, each with a validation message. The looks follow the input
+      # field's.
       def validation
         render_with_template
       end

@@ -2,7 +2,7 @@
   clipboards = {
     "account-id" => "756593826",
     "api-key" => "f4h6sd3t-jsy63ind-hsgdt7rs-jdhf76st",
-    "role-arn" => "123456789012:user/Flowbite"
+    "role-arn" => "123456789012:user/Acme"
   }.map do |target_id, value|
     clipboard = Gustwave::Clipboard.new(
       target_id:,
@@ -22,14 +22,14 @@
     <%= render Gustwave::Heading.new("Create a role with read only in-line policies", tag: :h2, size: :none, class: "text-lg font-semibold text-gray-900 dark:text-white mb-2") %>
 
     <%= render Gustwave::Paragraph.new(class: "mb-6") do %>
-      To give Flowbite read access, please create an IAM Role following
+      To give Acme read access, please create an IAM Role following
       <%= render Gustwave::Link.new("trust relationship", href: "#", color: :none, underline: :always, class: "text-blue-700 dark:text-blue-500") %>
       and
       <%= render Gustwave::Link.new("inline policy", href: "#", color: :none, underline: :always, class: "text-blue-700 dark:text-blue-500") %>.
     <% end %>
 
     <% clipboards.each do |target_id, value, clipboard| %>
-      <label for="<%= target_id %>" class="text-sm font-medium text-gray-900 dark:text-white mb-2 block"><%= { "account-id" => "Flowbite account ID:", "api-key" => "API key:", "role-arn" => "Role ARN:" }.fetch(target_id) %></label>
+      <label for="<%= target_id %>" class="text-sm font-medium text-gray-900 dark:text-white mb-2 block"><%= { "account-id" => "Acme account ID:", "api-key" => "API key:", "role-arn" => "Role ARN:" }.fetch(target_id) %></label>
 
       <div class="relative <%= target_id == "role-arn" ? "mb-6" : "mb-4" %>">
         <input

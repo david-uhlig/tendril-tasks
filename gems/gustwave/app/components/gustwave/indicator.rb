@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Indicator to display status information
+  # Use Indicator to display status information.
   #
   # Indicator supports three modes:
   # - By default, the indicator is rendered as a dot.
-  # - When +text+ or block content is provided, the content is rendered within the dot. Works best for +size+ :lg and larger. The dot is automatically stretched to a pill to fit the content.
-  # - Use the +legend+ slot to render content to the right of the dot, making it look like a legend.
+  # - With +text+ or block content, the content is rendered within the dot,
+  #   which stretches to a pill to fit it. Works best for +size+ +:lg+ and
+  #   larger.
+  # - The +legend+ slot renders content to the right of the dot, like a
+  #   legend.
   #
   # === Position Indicator on other Components
-  # Use the +position+ option to position the indicator on other components. Note: The underlying component must be +relative+ positioned.
   #
   #   <%= render Gustwave::Badge.new("Badge", class: "relative") do %>
   #     <%= render Gustwave::Indicator.new(position: :top_right, color: :blue) %>
@@ -61,9 +63,9 @@ module Gustwave
     }
 
     # @param text [String] the text to display in the indicator. Takes precedence over block content.
-    # @param color [Symbol] the color for the indicator. Pass in :none to define your own styles.
+    # @param color [Symbol] the color for the indicator. Defaults to +:gray+. Valid values are +:gray+, +:dark+, +:blue+, +:green+, +:red+, +:purple+, +:indigo+, +:yellow+, +:teal+, +:white+ and +:none+, which adds no color classes.
     # @param size [Symbol] the size of the indicator. Options: :none, :auto, :xs, :sm, :md, :lg, :xl, :"2xl". Defaults to :sm. When choosing :auto, the indicator matches the line-height.
-    # @param pulse [Boolean] whether to apply the pulse animation.
+    # @param pulse [Boolean] whether to apply the pulse animation. Defaults to +false+.
     # @param position [Symbol] positions the indicator on another component. The enclosing component must be +relative+ positioned.
     # @param options [Hash] additional options for the HTML tag, like class.
     def initialize(text = nil,

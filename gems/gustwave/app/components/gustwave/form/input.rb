@@ -2,20 +2,12 @@
 
 module Gustwave
   module Form
-    # Use Input to render Flowbite's input field: a text, email, password,
-    # number, URL, phone number, search, date or time input, in three sizes
-    # and with a success or error look.
-    #
-    # +options+ are the +<input>+'s HTML attributes. The label, helper text
-    # and validation message belong to Gustwave::Form::Field. +size+ and
-    # +type+ are options, so the HTML attributes of those names go in +html:+:
-    # <tt>size: :lg, html: { size: 20 }</tt> is the large input with
-    # +size="20"+.
+    # Use Input to render a single-line input field, e.g. for text, an email
+    # address or a date.
     #
     # === Without a form builder
     #
-    # Renders a plain +<input>+. +name+, +id+ and +value+ are ordinary HTML
-    # attributes:
+    # Renders a plain +<input>+:
     #
     #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
     #
@@ -27,15 +19,13 @@ module Gustwave
     #
     #   <%= render Gustwave::Form::Input.new(:title, form: f, size: :lg) %>
     #
-    # Rails' +field_error_proc+ never wraps the input. In the +error+
-    # validation state the input sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise.
+    # Rails' +field_error_proc+ never wraps the input.
     #
     # === Visuals
     #
     # A leading visual, e.g. an icon, sits inside the input at its start. The
-    # input then renders in Flowbite's input group, a +relative+ wrapper with
-    # the icon beside the input. +icon:+ is shorthand for the icon slot:
+    # input then renders in an input group, a +relative+ wrapper with
+    # the icon beside the input:
     #
     #   <%= render Gustwave::Form::Input.new(:email, form: f, type: :email, icon: :envelope) %>
     #
@@ -47,8 +37,9 @@ module Gustwave
     #
     # === In a field
     #
-    # Gustwave::Form::Field builds the input and wires it through
-    # +apply_slot_context+ (see there).
+    # Gustwave::Form::Field builds the input with its label, helper text and
+    # validation message, and wires it through +apply_slot_context+ (see
+    # there).
     #
     # @status alpha
     class Input < Gustwave::Component
@@ -116,7 +107,7 @@ module Gustwave
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the input is a plain +<input>+.
       # @param type [Symbol] the input type. Defaults to +:text+. Valid values are +:text+, +:email+, +:password+, +:number+, +:url+, +:tel+, +:search+, +:date+, +:time+, +:datetime_local+, +:month+ and +:week+.
       # @param size [Symbol] the size of the input. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
-      # @param validation [Symbol] the look of the input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+.
+      # @param validation [Symbol] the look of the input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise.
       # @param icon [Symbol, nil] the name of an icon rendered as leading visual. Shorthand for +with_leading_visual_icon+.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +value+, +placeholder+, +required+, +disabled+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+.

@@ -2,20 +2,16 @@
 
 module Gustwave
   # Use Jumbotron for a hero section, the first section of a page with a
-  # marketing message, as in Flowbite's jumbotrons. The section holds a
-  # container with a maximum width. The content is a block: compose the
-  # heading, text, buttons, media or form in it with the other components.
-  #
-  # The jumbotron has no slots for these parts. Pass the content as a block,
-  # and HTML attributes for the section as options.
-  #
-  # Examples:
+  # marketing message. The section holds a container with a maximum width.
+  # The content is a block: compose the heading, text, buttons, media or
+  # form in it with the other components. The jumbotron has no slots for
+  # these parts.
   #
   # Renders a centered hero with a heading, a paragraph and two buttons:
   #
   #   <%= render Gustwave::Jumbotron.new(centered: true) do %>
   #     <%= render Gustwave::Heading.new("We invest in the world’s potential", tag: :h1, size: :"2xl", responsive: true, class: "mb-4 tracking-tight leading-none") %>
-  #     <%= render Gustwave::Paragraph.new("Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value.", class: "mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48") %>
+  #     <%= render Gustwave::Paragraph.new("Here at Acme we focus on markets where technology, innovation, and capital can unlock long-term value.", class: "mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48") %>
   #     <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
   #       <%= render Gustwave::Buttons::Default.new("Get started", tag: :a, href: "#", size: :lg) %>
   #       <%= render Gustwave::Buttons::Default.new("Learn more", tag: :a, href: "#", color: :alternative, size: :lg, class: "sm:ms-4") %>
@@ -23,7 +19,7 @@ module Gustwave
   #   <% end %>
   #
   # Lays the content out in two columns from the +lg+ breakpoint up, with
-  # +container_options:+. Its classes win conflicts with the container's:
+  # +container_options:+:
   #
   #   <%= render Gustwave::Jumbotron.new(container_options: { class: "grid lg:grid-cols-2 gap-8 lg:gap-16" }) do %>
   #     <div class="flex flex-col justify-center">
@@ -59,7 +55,6 @@ module Gustwave
   #   <% end %>
   #
   # Spacing around the jumbotron is up to the caller, e.g. +class: "mb-4"+.
-  # Caller classes win conflicts with the jumbotron's classes.
   #
   # @status alpha
   class Jumbotron < Gustwave::Component
@@ -69,7 +64,7 @@ module Gustwave
 
     part :background_image, "absolute inset-0 -z-10 size-full object-cover mix-blend-multiply"
 
-    # Centers the content, as in Flowbite's default jumbotron
+    # Centers the content
     toggle :centered, "text-center", part: :container
 
     # Set by the component: the section holds the background image and

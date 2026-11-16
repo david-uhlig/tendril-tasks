@@ -8,8 +8,6 @@ module Gustwave
     # list or a group.
     #
     # A link or button item is interactive: it shows hover and focus states.
-    # Pass +active: true+ to mark the current item, which also sets
-    # +aria-current="true"+, or +disabled: true+ to disable a button.
     #
     # Renders leading and trailing visuals, see Gustwave::Visuals, e.g. a
     # count after the text:
@@ -18,9 +16,8 @@ module Gustwave
     #     item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
     #   end
     #
-    # Icons are solid, as in Flowbite; pass +theme: :outline+ for an outline
-    # one. +icon:+ is shorthand for +with_leading_visual_icon+. Visuals are
-    # decorative and hidden from screen readers.
+    # Icons are solid; pass +theme: :outline+ to a visual icon for an outline
+    # one. Visuals are decorative and hidden from screen readers.
     #
     # @status alpha
     class Item < Gustwave::Component
@@ -78,8 +75,8 @@ module Gustwave
       # @param text [String, nil] The item text. Takes precedence over block content.
       # @param icon [Symbol, nil] Shorthand for +with_leading_visual_icon+: an icon shown before the text.
       # @param tag [Symbol] +:li+ (default), +:div+, +:a+ or +:button+. Set by Gustwave::ListGroup for text items.
-      # @param active [Boolean] Whether this is the current item.
-      # @param disabled [Boolean] Whether a button item is disabled.
+      # @param active [Boolean] Whether this is the current item, which also sets +aria-current="true"+. Defaults to +false+.
+      # @param disabled [Boolean] Whether a button item is disabled. Defaults to +false+.
       # @param options [Hash] HTML attributes for the item element, e.g. +href:+ for a link.
       def initialize(text = nil, icon: nil, tag: DEFAULT, active: false, disabled: false, **options)
         @text = text

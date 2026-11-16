@@ -2,10 +2,7 @@
 
 module Gustwave
   # Use DismissButton to render a button that dismisses the target element.
-  #
-  # The button is an Inline button with an "X" icon by default. It closes the
-  # element with the HTML id attribute that matches the target parameter. The
-  # target element doesn't require any additional markup.
+  # The target needs no markup of its own.
   #
   # The button's visual slots, such as +with_leading_visual_icon+, are
   # delegated to Gustwave::Button. A leading visual set through them replaces

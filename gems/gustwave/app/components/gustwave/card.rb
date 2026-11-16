@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Card to group content in a bordered box, as in Flowbite's cards.
-  #
-  # The card renders a +<div>+, or an +<a>+ with +tag: :a+ and a +href+. A
-  # card as a link gets a hover style. Pass the content as a block, and HTML
-  # attributes for the root element as options.
-  #
-  # Examples:
-  #
-  # Renders a card with a block of content:
+  # Use Card to group content in a bordered box.
   #
   #   <%= render Gustwave::Card.new do %>
   #     <%= render Gustwave::Heading.new("Noteworthy technology", tag: :h5, size: :sm, class: "mb-2 tracking-tight") %>
@@ -46,9 +38,8 @@ module Gustwave
   #     <%= render Gustwave::Paragraph.new("Padding on the sides is up to the content.") %>
   #   <% end %>
   #
-  # Spacing around the card is up to the caller, e.g. +class: "mb-4"+. Caller
-  # classes win conflicts with the card's classes, e.g. +class: "max-w-md"+
-  # replaces the default +max-w-sm+.
+  # Spacing around the card is up to the caller, e.g. +class: "mb-4"+. The
+  # default width is +max-w-sm+.
   #
   # @status alpha
   class Card < Gustwave::Component
@@ -83,7 +74,7 @@ module Gustwave
       href ? link_to(img, href) : img
     }
 
-    # @param tag [Symbol] The HTML tag of the card. Defaults to :div. Use :a with an +href+ to render the whole card as a link.
+    # @param tag [Symbol] The HTML tag of the card. Defaults to :div. Use :a with an +href+ to render the whole card as a link, with a hover style.
     # @param horizontal [Boolean] Whether the image sits beside the body from the +md+ breakpoint up. Defaults to +false+.
     # @param body_options [Hash] Additional HTML attributes for the body element, e.g. +class+. Its classes win conflicts with the body's classes.
     # @param options [Hash] Additional HTML attributes passed to the root element, e.g. +href+, +id+ or +class+.

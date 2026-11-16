@@ -11,6 +11,8 @@ module Gustwave
         #
         # @status alpha
         class LinkToggle < Gustwave::Component
+          # @param disabled [Boolean] whether the toolbar button is disabled. Defaults to +false+.
+          # @param options [Hash] the HTML attributes of the +lexxy-link-dropdown+ element.
           def initialize(disabled: false, **options)
             @disabled = disabled
             @options = options

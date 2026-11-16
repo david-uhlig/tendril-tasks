@@ -3,13 +3,9 @@
 module Gustwave
   # Use Kbd to render a keyboard key in a +<kbd>+ element.
   #
-  # Examples:
-  #
-  # Renders a key from the text argument
-  #
   #   <%= render Gustwave::Kbd.new("Shift") %>
   #
-  # Pass a wider key by adding padding, e.g. for the space bar:
+  # Widen a key with padding, e.g. for the space bar:
   #
   #   <%= render Gustwave::Kbd.new("Space", class: "px-4") %>
   #
@@ -27,9 +23,6 @@ module Gustwave
   #
   # Renders leading and trailing visuals, see Gustwave::Visuals. Unlike
   # +with_icon+, these don't add a label.
-  #
-  # You can pass HTML attributes to the +<kbd>+ element and your css classes
-  # will be merged with the default classes without style conflicts.
   #
   # @status alpha
   class Kbd < Gustwave::Component
@@ -49,6 +42,8 @@ module Gustwave
 
     derive :indicator_size, from: :size, values: { xs: :sm }
 
+    # @param text [String, nil] the key's text. Without it the block is the content.
+    # @param options [Hash] the HTML attributes of the +<kbd>+.
     def initialize(text = nil, **options)
       @text = text
       @icon_labels = []

@@ -10,6 +10,8 @@ module Gustwave
         # The HTML tag, the custom element of the editor's toolbar
         option :tag, default: :div, values: %i[div trix-toolbar lexxy-toolbar]
 
+        # @param tag [Symbol] Defaults to +:div+. Valid values are +:div+, +:"trix-toolbar"+ and +:"lexxy-toolbar"+.
+        # @param options [Hash] the HTML attributes of the toolbar.
         def initialize(tag: DEFAULT, **options)
           select_options(tag:)
           @tag = option_value(:tag)

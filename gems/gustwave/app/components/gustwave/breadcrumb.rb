@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Breadcrumb to show where the current page sits in a hierarchy, as in
-  # Flowbite's breadcrumbs. It joins its items with a separator and marks the
-  # last item as the current page with +aria-current="page"+.
+  # Use Breadcrumb to show where the current page sits in a hierarchy. It
+  # joins its items with a separator and marks the last item as the current
+  # page with +aria-current="page"+.
   #
   # Add an item with +with_item+. Pass it an +href+ to link it. The content
   # block renders after the list of items, e.g. a dropdown on the right.
@@ -15,21 +15,16 @@ module Gustwave
   #   <%= render Gustwave::Breadcrumb.new(solid: true) do |breadcrumb| %>
   #     <% breadcrumb.with_item("Home", href: "/", icon: :home) %>
   #     <% breadcrumb.with_item("Projects", href: "/projects") %>
-  #     <% breadcrumb.with_item("Flowbite") %>
+  #     <% breadcrumb.with_item("Acme") %>
   #   <% end %>
   #
   # Pass a block to an item for other content, e.g. a dropdown:
   #
   #   <%= render Gustwave::Breadcrumb.new(separator: :slash) do |breadcrumb| %>
   #     <% breadcrumb.with_item do %>
-  #       <%= render Gustwave::Dropdown.new("flowbite.com") %>
+  #       <%= render Gustwave::Dropdown.new("acme.com") %>
   #     <% end %>
   #   <% end %>
-  #
-  # @param solid [Boolean] Whether the breadcrumb has a bordered, solid background.
-  # @param separator [Symbol] The separator between items, +:chevron+ (default) or +:slash+.
-  # @param list_options [Hash] HTML attributes for the +ol+ element, e.g. +class+ to change its margins.
-  # @param options [Hash] HTML attributes for the +nav+ element, e.g. +aria: { label: "Tasks" }+.
   #
   # @status alpha
   class Breadcrumb < Gustwave::Component
@@ -54,9 +49,9 @@ module Gustwave
     }
 
     # @param solid [Boolean] Whether the breadcrumb has a bordered, solid background.
-    # @param separator [Symbol] +:chevron+ (default) or +:slash+.
-    # @param list_options [Hash] HTML attributes for the +ol+ element.
-    # @param options [Hash] HTML attributes for the +nav+ element.
+    # @param separator [Symbol] The separator between items, +:chevron+ (default) or +:slash+.
+    # @param list_options [Hash] HTML attributes for the +ol+ element, e.g. +class+ to change its margins.
+    # @param options [Hash] HTML attributes for the +nav+ element, e.g. +aria: { label: "Tasks" }+.
     def initialize(solid: DEFAULT, separator: DEFAULT, list_options: {}, **options)
       select_options(solid:, separator:)
       select_options(spaced: option_value(:separator) == :chevron)

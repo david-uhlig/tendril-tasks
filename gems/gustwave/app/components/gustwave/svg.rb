@@ -19,6 +19,8 @@ module Gustwave
       preserve_aspect_ratio: "preserveAspectRatio"
     }.freeze
 
+    # @param source [String, Symbol, nil] the SVG file, as +inline_svg_tag+ finds it. Without it the block is the SVG markup.
+    # @param options [Hash] the HTML attributes of the +<svg>+, and +inline_svg+'s options such as +title+, +desc+ and +nocomment+.
     def initialize(source = nil, **options)
       @source = source&.to_s
       @options = options

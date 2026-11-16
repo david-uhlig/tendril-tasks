@@ -3,34 +3,13 @@
 module Gustwave
   # Use Avatar to render a user's avatar image.
   #
-  # The avatar can be either passed in with the +src+ attribute or in a block.
-  # If both are present, the +src+ attribute takes precedence. The block is
-  # wrapped in a +div+ element, or the element given by +tag+, to provide
-  # consistent styling.
-  #
-  # === Basic Usage
+  # The image comes from +src+ or from the block. With both, +src+ wins.
   #
   #  <%= render Gustwave::Avatar.new(src: "https://example.com/avatar.png") %>
-  #
-  # === Passing in a Block
   #
   #  <%= render Gustwave::Avatar.new do %>
   #    <img src="https://example.com/avatar.png" alt="Avatar" />
   #  <% end %>
-  #
-  # You can customize the avatar's appearance using the +shape+, +size+ and
-  # +border+ options. The +shape+ option determines the avatar's shape, the
-  # +size+ option determines the avatar's size, and the +border+ option
-  # determines whether the avatar has a border or not. The +border+ is
-  # automatically scaled based on the +size+ option.
-  #
-  # @param src [String] The URL of the avatar image.
-  # @param alt [String] The alt text for the avatar image.
-  # @param shape [Symbol] The shape of the avatar, one of :round, :square.
-  # @param size [Symbol] The size of the avatar, one of :xs, :sm, :md, :lg, :xl, :2xl, :3xl, :4xl.
-  # @param border [Boolean] Whether the avatar should have a border.
-  # @param tag [Symbol] The element wrapping the block when there is no +src+, e.g. +:span+ inside a button.
-  # @param options [Hash] HTML attributes passed to the img element.
   #
   # @see Gustwave::AvatarGroup
   # @see Gustwave::AvatarText
@@ -71,6 +50,13 @@ module Gustwave
       "4xl": "ring-8 ring-gray-300 dark:ring-gray-500"
     }
 
+    # @param src [String, nil] the URL of the image. Takes precedence over the block.
+    # @param alt [String, nil] the alt text of the image.
+    # @param shape [Symbol] Defaults to +:round+. Valid values are +:round+ and +:square+.
+    # @param size [Symbol] Defaults to +:md+. Valid values are +:original+, +:xs+, +:sm+, +:md+, +:lg+, +:xl+, +:"2xl"+, +:"3xl"+ and +:"4xl"+.
+    # @param border [Boolean] whether the avatar has a ring around it, as thick as its size calls for. Defaults to +false+.
+    # @param tag [Symbol] the element that wraps the block when there is no +src+. Defaults to +:div+. Valid values are +:div+ and +:span+, e.g. inside a button.
+    # @param options [Hash] the HTML attributes of the +<img>+, or of the wrapper without +src+.
     def initialize(src: nil,
                    alt: nil,
                    shape: DEFAULT,

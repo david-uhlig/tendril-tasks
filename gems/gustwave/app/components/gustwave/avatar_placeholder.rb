@@ -4,33 +4,16 @@ module Gustwave
   # Use AvatarPlaceholder to render a placeholder image when no avatar is
   # available.
   #
-  # With default options, it renders a default placeholder image with the
-  # default +Gustwave::Avatar+ options. You can supply a custom placeholder
-  # through the +src+ attribute, or by providing a block.
-  #
-  # === Basic Usage
-  #
-  # Renders the default placeholder image with default styling.
+  # Without +src+ or a block it renders a generic person icon. A +src+ or a
+  # block replaces the icon:
   #
   #   render Gustwave::AvatarPlaceholder.new
-  #
-  # === Custom Usage
-  #
-  # Renders the +src+ image with default styling.
-  #
   #   render Gustwave::AvatarPlaceholder.new(src: "https://example.com/avatar.png")
-  #
-  # Renders the block content with default styling.
-  #
   #   render Gustwave::AvatarPlaceholder.new do
   #     render Gustwave::Svg.new do
   #      "<svg>...</svg>".html_safe
   #     end
   #   end
-  #
-  # @param options [Hash] Arguments and HTML attributes passed to the
-  #  +Gustwave::Avatar+ component, e.g. +src+, +alt+, +shape+, +size+ and
-  #  +border+.
   #
   # @status alpha
   class AvatarPlaceholder < Gustwave::Component
@@ -41,6 +24,7 @@ module Gustwave
 
     base "relative overflow-hidden bg-gray-100 dark:bg-gray-600"
 
+    # @param options [Hash] the arguments and HTML attributes of the Gustwave::Avatar it renders, e.g. +src+, +alt+, +shape+, +size+ and +border+.
     def initialize(**options)
       @options = attributes_for(options)
     end

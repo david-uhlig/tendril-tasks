@@ -45,6 +45,10 @@ module Gustwave
 
         part :icon, "w-5 h-5"
 
+        # @param attribute [Symbol, String] the formatting or action the button stands for, one of ATTRIBUTE_OPTIONS.
+        # @param icon_or_text [Symbol, String, nil] the icon name, or the text, the button shows. Defaults to the attribute's entry in ATTRIBUTE_VISUAL_MAPPINGS.
+        # @param disabled [Boolean] whether the button is disabled. Defaults to +false+.
+        # @param options [Hash] the arguments and HTML attributes of the button it renders. +theme+ picks the button theme, see Gustwave::Button.for.
         def initialize(attribute,
                        icon_or_text: nil,
                        disabled: false,

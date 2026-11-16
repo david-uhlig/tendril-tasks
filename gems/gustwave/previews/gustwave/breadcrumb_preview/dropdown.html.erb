@@ -2,7 +2,7 @@
 
 <%= render Gustwave::Breadcrumb.new(separator: :slash, class: "justify-between", list_options: { class: "mb-3 sm:mb-0" }) do |breadcrumb| %>
   <% breadcrumb.with_item do %>
-    <%= render Gustwave::Dropdown.new("flowbite.com", icon: :code_branch, size: :sm, color: :base, class: trigger_class) do |dropdown| %>
+    <%= render Gustwave::Dropdown.new("acme.com", icon: :code_branch, size: :sm, color: :base, class: trigger_class) do |dropdown| %>
       <% dropdown.with_menu_list do |menu| %>
         <% menu.with_item_link "themesberg.com", href: "#" %>
         <% menu.with_item_link "ui.glass", href: "#" %>
@@ -21,7 +21,7 @@
       <% dropdown.with_menu_list do |menu| %>
         <% menu.with_item_link "databaseProd", href: "#" %>
         <% menu.with_item_link "databaseStaging", href: "#" %>
-        <% menu.with_item_link "flowbiteProd", href: "#" %>
+        <% menu.with_item_link "acmeProd", href: "#" %>
       <% end %>
     <% end %>
   <% end %>

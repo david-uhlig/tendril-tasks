@@ -12,11 +12,6 @@ module Gustwave
   # +trigger_options+ never emit +data-drawer-target+, since a second one would
   # create a duplicate instance.
   #
-  # +edge+ gives a bottom drawer a rounded top edge and leaves a gap of
-  # +edge_offset+ at the bottom, e.g. for a tab bar. It is only valid with
-  # +placement: :bottom+ and raises +ArgumentError+ otherwise when
-  # Gustwave.strict?, and is dropped otherwise.
-  #
   #   <% drawer = Gustwave::Drawer.new(id: "info", placement: :right) %>
   #   <%= render Gustwave::Button.new("Show", **drawer.trigger_options) %>
   #   <%= render drawer do |d| %>
@@ -52,7 +47,7 @@ module Gustwave
     # @param placement [Symbol] The edge the drawer slides in from: :left, :right, :top or :bottom. Defaults to :left.
     # @param backdrop [Boolean] Whether a backdrop covers the page while the drawer is open. Defaults to +true+.
     # @param body_scrolling [Boolean] Whether the page scrolls while the drawer is open. Defaults to +false+.
-    # @param edge [Boolean] Whether a bottom drawer has a rounded top edge and a gap at the bottom. Only valid with placement: :bottom. Defaults to +false+.
+    # @param edge [Boolean] Whether a bottom drawer has a rounded top edge and a gap at the bottom, e.g. for a tab bar. Only valid with +placement: :bottom+: otherwise it raises +ArgumentError+ when Gustwave.strict?, and is dropped when not. Defaults to +false+.
     # @param edge_offset [String] The Tailwind class for the gap at the bottom of an edge drawer. Defaults to +bottom-[60px]+.
     # @param options [Hash] Additional HTML options passed to the component.
     def initialize(text = nil, id: nil, placement: DEFAULT, backdrop: true, body_scrolling: false,

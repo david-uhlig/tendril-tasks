@@ -18,7 +18,7 @@
           <% item.with_marker_icon :calendar_week, class: marker_icon_class %>
 
           <%= render Gustwave::Heading.new(tag: :h3, size: :none, class: "flex items-start #{title_class}") do %>
-            Flowbite Application UI v2.0.0 <%= render Gustwave::Badge.new("Latest", size: :sm, class: "ms-3 mr-2") %>
+            Acme Application UI v2.0.0 <%= render Gustwave::Badge.new("Latest", size: :sm, class: "ms-3 mr-2") %>
           <% end %>
 
           <time class="<%= time_class %>">Released on Nov 10th, 2023</time>
@@ -31,7 +31,7 @@
         <% timeline.with_item(class: "ms-8", marker_options:) do |item| %>
           <% item.with_marker_icon :calendar_week, class: marker_icon_class %>
 
-          <%= render Gustwave::Heading.new("Flowbite Figma v2.8.0", tag: :h3, size: :none, class: title_class) %>
+          <%= render Gustwave::Heading.new("Acme Figma v2.8.0", tag: :h3, size: :none, class: title_class) %>
           <time class="<%= time_class %>">Released on Oct 7th, 2023</time>
           <% figma = Gustwave::Buttons::Default.new("Duplicate in Figma", color: :alternative, size: :sm) %>
 
@@ -70,7 +70,7 @@
         <% timeline.with_item(class: "ms-8", marker_options:) do |item| %>
           <% item.with_marker_icon :calendar_week, class: marker_icon_class %>
 
-          <%= render Gustwave::Heading.new("Flowbite Library v1.2.2", tag: :h3, size: :none, class: title_class) %>
+          <%= render Gustwave::Heading.new("Acme Library v1.2.2", tag: :h3, size: :none, class: title_class) %>
           <time class="<%= time_class %>">Released on December 2nd, 2021</time>
         <% end %>
       <% end %>

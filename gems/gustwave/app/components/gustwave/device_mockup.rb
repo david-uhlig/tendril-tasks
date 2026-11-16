@@ -2,7 +2,7 @@
 
 module Gustwave
   # Use DeviceMockup to draw a device frame around your content, such as a
-  # screenshot or a live example. Matches Flowbite's device mockups.
+  # screenshot or a live example.
   #
   # Examples:
   #
@@ -38,17 +38,6 @@ module Gustwave
   #       }
   #     }
   #   end
-  #
-  # You can pass HTML attributes to the wrapper element, and your css classes
-  # will be merged with its classes:
-  #
-  #   <%= render Gustwave::DeviceMockup.new(id: "demo", class: "my-8") do %>
-  #     ...
-  #   <% end %>
-  #
-  # @param device [Symbol] +:phone+ (default), +:iphone+, +:android+, +:tablet+, +:laptop+, +:desktop+ or +:smartwatch+.
-  # @param color [Symbol] +:dark+ (default), +:light+ or +:none+.
-  # @param options [Hash] HTML attributes for the wrapper element.
   #
   # @status alpha
   class DeviceMockup < Gustwave::Component
@@ -138,8 +127,8 @@ module Gustwave
       smartwatch: %i[strap_top crown crown_button strap_bottom]
     }
 
-    # @param device [Symbol] the device to draw, see the class documentation.
-    # @param color [Symbol] +:dark+, +:light+ or +:none+.
+    # @param device [Symbol] +:phone+ (default), +:iphone+, +:android+, +:tablet+, +:laptop+, +:desktop+ or +:smartwatch+.
+    # @param color [Symbol] +:dark+ (default), +:light+ or +:none+.
     # @param options [Hash] HTML attributes for the wrapper element.
     def initialize(device: DEFAULT, color: DEFAULT, **options)
       select_options(device:, color:)

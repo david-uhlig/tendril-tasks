@@ -36,7 +36,6 @@ module Gustwave
   #
   # === Outline
   #
-  # Pass +outline: true+ to render every button outlined. A button's own +color+ takes precedence:
   #
   #   <%= render Gustwave::ButtonGroup.new(outline: true) do |group| %>
   #     <% group.with_button("Profile") %>

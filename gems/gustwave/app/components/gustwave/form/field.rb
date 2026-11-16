@@ -3,18 +3,15 @@
 module Gustwave
   module Form
     # Use Field to render a form control with its label, helper text and
-    # validation message stacked around it, and to tie them together: the label's +for+, the
-    # control's +aria-describedby+ and +aria-invalid+, and the validation
-    # state's colors. The root is a plain +<div>+ without classes of its own,
+    # validation message stacked around it, and to tie them together: the
+    # label's +for+, the control's +aria-describedby+ and +aria-invalid+, and
+    # the validation state's colors. The root is a plain +<div>+ without classes of its own,
     # so spacing is up to the caller.
     #
     # With +form:+, Rails' form builder or any subclass, the field is bound to
     # an attribute. It then renders the label Rails' +label+ helper would,
     # takes its IDs from +field_id+ and shows the attribute's errors. Without
     # +form:+ it renders only what the caller sets and generates the IDs.
-    #
-    # +label:+, +helper_text:+ and +validation_message:+ are shorthand for the
-    # slots of the same name.
     #
     # === Example
     #
@@ -31,14 +28,12 @@ module Gustwave
     #
     # === Validation
     #
-    # The field holds the state. The caller's +validation+ wins, otherwise
-    # it's +:error+ while the bound attribute has errors, or the attribute of
-    # a +name_id+ attribute's +name+, and +:none+ otherwise. It passes the
-    # state to its control. Without a +validation_message+, a bound field
-    # shows the attribute's error messages as a sentence, unless its control
-    # is one of several for the attribute, see Gustwave::Form::Fieldset. The
-    # message is a Gustwave::Form::ValidationMessage: style it with the
-    # slot's HTML attributes.
+    # The field holds the state and passes it to its control. A +name_id+
+    # attribute takes the errors of +name+ too, e.g. +author_id+ those of
+    # +author+. A bound field shows the error messages as a sentence, in a
+    # Gustwave::Form::ValidationMessage: style it with the slot's HTML
+    # attributes. For a control that is one of several for the attribute, see
+    # Gustwave::Form::Fieldset.
     #
     # A checkbox, radio button or toggle has its label beside it: see
     # Gustwave::Form::InlineField.

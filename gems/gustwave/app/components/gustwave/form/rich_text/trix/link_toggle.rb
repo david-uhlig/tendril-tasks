@@ -6,6 +6,9 @@ module Gustwave
       module Trix
         # @status alpha
         class LinkToggle < Gustwave::Component
+          # @param form [ActionView::Helpers::FormBuilder, nil] the editor's form builder, as the toolbar passes it.
+          # @param disabled [Boolean] whether the toolbar button is disabled. Defaults to +false+.
+          # @param options [Hash] the arguments and HTML attributes of the toolbar button.
           def initialize(form, disabled: false, **options)
             @form = form
             @disabled = disabled

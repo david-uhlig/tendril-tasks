@@ -11,29 +11,26 @@ module Gustwave
         validate { errors.add(:channels, "pick at least one channel") if channels.blank? }
       end
 
-      # Not a Flowbite example, the message is a part of Flowbite's form fields. The message on its own, without a
-      # validation state: it looks like a helper text. The block is the message.
+      # The message on its own, without a validation state: it looks like a helper text. The block is the message.
       def default
         render_with_template
       end
 
-      # Not a Flowbite example. The message in the success and the error state, with a bold lead-in as in Flowbite's
-      # validation examples.
+      # The message in the success and the error state, with a bold lead-in.
       def validation
         render_with_template
       end
 
-      # Not a Flowbite example. A message for a group that isn't a Gustwave::Form::Fieldset: a +<fieldset>+ of the
-      # caller's own, with the checkboxes of a +multiple+ attribute. The message renders the attribute's error
-      # sentence once, in the error state, under the ID the fieldset's +aria-describedby+ names.
+      # A message for a group that isn't a Gustwave::Form::Fieldset: a +<fieldset>+ of the caller's own, with the
+      # checkboxes of a +multiple+ attribute. The message renders the attribute's error sentence once, in the
+      # error state, under the ID the fieldset's +aria-describedby+ names.
       def in_own_fieldset
         settings = SampleSettings.new
         settings.validate
         render_with_template(locals: { settings: settings })
       end
 
-      # Not a Flowbite example. A message without a form: it renders only the block, and the ID and the state are
-      # up to the caller.
+      # A message without a form: it renders only the block, and the ID and the state are up to the caller.
       def without_form
         render_with_template
       end

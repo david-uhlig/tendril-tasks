@@ -70,6 +70,8 @@ module Gustwave
     class Column < Gustwave::Component
       base "px-6 py-3"
 
+      # @param text [String, nil] the column's heading. Without it the block is the content.
+      # @param options [Hash] the arguments and HTML attributes of the Gustwave::TableCell it renders, a +<th scope="col">+ by default.
       def initialize(text = nil, **options)
         @text = text
         @config = { tag: :th, scope: "col" }.merge(attributes_for(options))

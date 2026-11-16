@@ -6,9 +6,6 @@ module Gustwave
   #
   # === Basic Usage
   #
-  # The text attribute provides a way to render simple text content without
-  # having to use a block.
-  #
   #   <%= render Gustwave::TableCell.new("John Doe") %>
   #   # => <td class="px-6 py-4">John Doe</td>
   #

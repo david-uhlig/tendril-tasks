@@ -26,7 +26,7 @@ module Gustwave
       render_with_template
     end
 
-    # Button tabs with panels. Flowbite's JS shows the panel of the selected tab.
+    # Button tabs with panels. Selecting a tab shows its panel.
     # @param style select { choices: [default, underline, pills, full_width] }
     # @param vertical toggle
     def interactive(style: :underline, vertical: false)

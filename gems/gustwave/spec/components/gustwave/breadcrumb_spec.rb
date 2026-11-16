@@ -8,7 +8,7 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
       render_inline(described_class.new) do |breadcrumb|
         breadcrumb.with_item("Home", href: "/", icon: :home)
         breadcrumb.with_item("Projects", href: "/projects")
-        breadcrumb.with_item("Flowbite")
+        breadcrumb.with_item("Acme")
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe Gustwave::Breadcrumb, type: :component do
 
     it "marks the last item as the current page as text" do
       expect(rendered_content).to have_selector("li[aria-current='page']", count: 1)
-      expect(rendered_content).to have_selector("li[aria-current='page'] span.text-gray-500", text: "Flowbite")
+      expect(rendered_content).to have_selector("li[aria-current='page'] span.text-gray-500", text: "Acme")
     end
 
     it "separates every item but the first with a chevron" do

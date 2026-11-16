@@ -51,6 +51,10 @@ module Gustwave
         xl: "p-3.5 *:h-7 *:mx-0"
       }
 
+      # @param text [String, nil] the button's text. Takes precedence over the block.
+      # @param color [Symbol] the gradient. Defaults to +:purple_to_blue+. Valid values are +:purple_to_blue+, +:cyan_to_blue+, +:green_to_blue+, +:purple_to_pink+, +:pink_to_orange+, +:teal_to_lime+, +:red_to_yellow+ and +:base+.
+      # @param size [Symbol] Defaults to +:md+. Valid values are +:xs+, +:sm+, +:md+, +:lg+ and +:xl+.
+      # @param options [Hash] the arguments and HTML attributes of the Buttons::Base it renders, e.g. +tag+, +type+, +pill+ and +href+.
       def initialize(text = nil, color: DEFAULT, size: DEFAULT, **options)
         @text = text
         @options = options

@@ -2,21 +2,13 @@
 
 module Gustwave
   module Form
-    # Use Select to render Flowbite's select: a drop-down list, or with
-    # +multiple+ a list box, in three sizes, with a success or error look and
-    # an underline style.
-    #
-    # +options+ are the +<select>+'s HTML attributes, e.g. +multiple+,
-    # +required+, +disabled+, +name+ and +id+. The label, helper text and
-    # validation message belong to Gustwave::Form::Field.
+    # Use Select to render a select: a drop-down list, or with +multiple+ a
+    # list box.
     #
     # === Choices
     #
-    # The options of the select are +choices:+, anything Rails' +select+
-    # takes: an array, an array of pairs of text and value, a hash, grouped
-    # choices or a string of option tags, e.g. from +options_for_select+. Or
-    # the block, which is the option tags, as with Rails' +select+ and
-    # +select_tag+. The block wins over +choices+.
+    # The choices are +choices:+, e.g. an array of pairs of text and value,
+    # grouped choices or a string of option tags, or the block of option tags:
     #
     #   <%= render Gustwave::Form::Select.new(name: "country", choices: [["Canada", "CA"], ["France", "FR"]],
     #                                          prompt: "Choose a country") %>
@@ -25,19 +17,10 @@ module Gustwave
     #     <%= options_for_select([["Canada", "CA"], ["France", "FR"]], "FR") %>
     #   <% end %>
     #
-    # +prompt+, +include_blank+, +selected+ and +include_hidden+ are Rails'
-    # select options of the same name. +disabled_choices+ is Rails' +disabled+
-    # select option, the values of the options to disable. It has another
-    # name because +disabled: true+ is the HTML attribute that disables the
-    # whole select. A select option the caller doesn't give is left to Rails,
-    # so +selected: nil+ selects nothing, and not giving +selected+ selects
-    # the record's value.
-    #
     # === Without a form builder
     #
-    # Renders a plain +<select>+. +name+ and +id+ are ordinary HTML
-    # attributes, and +prompt+, +include_blank+ and +multiple+ (which adds
-    # +[]+ to the name) work as in Rails' +select_tag+. There is no +id+ unless
+    # Renders a plain +<select>+. +prompt+, +include_blank+ and +multiple+
+    # (which adds +[]+ to the name) work as in Rails' +select_tag+. There is no +id+ unless
     # the caller or a Gustwave::Form::Field gives one:
     #
     #   <%= render Gustwave::Form::Select.new(name: "year", choices: 2016..2022, selected: 2020) %>
@@ -51,26 +34,13 @@ module Gustwave
     #
     #   <%= render Gustwave::Form::Select.new(:country, form: f, choices: @countries, size: :lg) %>
     #
-    # Rails' +field_error_proc+ never wraps the select. In the +error+
-    # validation state the select sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise.
-    #
-    # === Sizes and styles
-    #
-    # +size+ is +:sm+, +:md+ or +:lg+, and +style+ is +:default+, the bordered
-    # select, or +:underline+. Flowbite shows the underline select in one
-    # size and without validation looks, so with +style: :underline+ neither
-    # the size's nor the validation's classes apply. +aria-invalid+ still does.
-    #
-    # +size+ and +style+ are also HTML attributes. The keywords are always
-    # the options, so the attributes go in +html:+:
-    # <tt>size: :lg, html: { size: 5, style: "min-width: 12rem" }</tt> is the
-    # large select with +size="5"+ and inline CSS.
+    # Rails' +field_error_proc+ never wraps the select.
     #
     # === In a field
     #
-    # Gustwave::Form::Field builds the select and wires it through
-    # +apply_slot_context+ (see there):
+    # Gustwave::Form::Field builds the select with its label, helper text and
+    # validation message, and wires it through +apply_slot_context+ (see
+    # there):
     #
     #   <% field.with_control_select(choices: @countries, prompt: "Choose a country") %>
     #
@@ -109,8 +79,8 @@ module Gustwave
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the select is a plain +<select>+.
       # @param choices [Array, Hash, String, Range, nil] the options of the select, as Rails' +select+ takes them. The content block is used instead when there is one.
       # @param size [Symbol] the size of the select. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
-      # @param style [Symbol] the style of the select. Defaults to +:default+. Valid values are +:default+ and +:underline+. The HTML attribute +style+ goes in +html:+.
-      # @param validation [Symbol] the look of the select. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+. The underline style has no looks.
+      # @param style [Symbol] the style of the select. Defaults to +:default+. Valid values are +:default+, bordered, and +:underline+, which has one size and no validation looks. The HTML attribute +style+ goes in +html:+.
+      # @param validation [Symbol] the look of the select. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise, also with the underline style.
       # @param prompt [String, Boolean] Rails' +prompt+ option: an option with no value, first in the list.
       # @param include_blank [String, Boolean] Rails' +include_blank+ option: a blank option, or one with this text.
       # @param selected [Object] Rails' +selected+ option: the value or values to select. +nil+ selects nothing. Without it a bound select selects the record's value.

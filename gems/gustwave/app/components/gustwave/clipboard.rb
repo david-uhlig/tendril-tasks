@@ -2,26 +2,17 @@
 
 module Gustwave
   # Use Clipboard to copy the text of an element to the clipboard with a
-  # button, as in Flowbite's clipboard examples. For a few seconds after the
-  # copy the button shows its copied state.
-  #
-  # +target_id+ is the id of the element the text is copied from, e.g. an
-  # input. Pass the button's label as +text+ or as a block:
+  # button. For a few seconds after the copy the button shows its copied
+  # state:
   #
   #   render Gustwave::Clipboard.new("Copy", target_id: "npm-install")
   #
-  # The button is a Gustwave::Button of +theme+, so its +color+ and +size+
-  # apply. Without a label it is icon-only, and its label is only read by
-  # screen readers:
+  # Without a label the button is icon-only, and the labels of both states
+  # are read by screen readers only:
   #
   #   render Gustwave::Clipboard.new(target_id: "api-key", theme: :inline)
   #
-  # +copied_text+ is the label of the copied state. Without a visible label,
-  # it is read by screen readers only.
-  #
-  # Copy the content of an inner HTML or text element with +content_type+. Set
-  # +html_entities+ to decode the HTML's entities into plain text, e.g. for a
-  # code block:
+  # Copying a code block:
   #
   #   render Gustwave::Clipboard.new("Copy code", target_id: "code", content_type: :inner_html, html_entities: true)
   #
@@ -38,7 +29,7 @@ module Gustwave
     BUTTON_CLASS = "inline-flex items-center justify-center"
     CONTENT_TYPES = { inner_html: "innerHTML", text_content: "textContent" }.freeze
 
-    # Where Flowbite reads the text from. The default, +:input+, is the value
+    # Where the text is copied from. The default, +:input+, is the value
     # of the target element.
     option :content_type, default: :input, values: %i[input inner_html text_content]
 
@@ -58,7 +49,7 @@ module Gustwave
     #   end
     #
     # @param name [Symbol] The icon to use. Defaults to +:clipboard+.
-    # @param theme [Symbol] The icon theme. Defaults to +:solid+, as Flowbite's.
+    # @param theme [Symbol] The icon theme. Defaults to +:solid+.
     # @param options [Hash] Additional HTML options passed to the icon component.
     renders_one_extensible :icon, ->(name = :clipboard, theme: :solid, **options) {
       clipboard_icon(name, theme:, **options)
@@ -78,7 +69,7 @@ module Gustwave
       clipboard_icon(name, theme:, **options)
     }
 
-    # Renders a tooltip next to the button, as Flowbite's tooltips. The button
+    # Renders a tooltip next to the button. The button
     # gets the tooltip's trigger attributes, and the tooltip's text swaps to
     # +copied_text+ when the text is copied. Renders no tooltip unless set.
     #

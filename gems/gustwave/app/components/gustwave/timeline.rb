@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Timeline to render a list of events along a line, as in Flowbite's
-  # timeline. The timeline draws the line and places each item's marker. What an
-  # item shows is up to its block, composed from other components.
+  # Use Timeline to render a list of events along a line. The timeline draws
+  # the line and places each item's marker. What an item shows is up to its
+  # block, composed from other components.
   #
   # A vertical item's dot lines up with a first line of text 24px tall. Keep a
   # date in that first line inline, as below, not +block+ with +leading-none+.
@@ -26,7 +26,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
+  #       <%= render Gustwave::Heading.new("Acme Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_image "/avatar.png", alt: "Bonnie Green" %>
@@ -37,7 +37,7 @@ module Gustwave
   #   <% end %>
   #
   # Restyle a marker or dot with +marker_options+, e.g. to match a darker
-  # background. Its classes merge with the default ones:
+  # background:
   #
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item(marker_options: { class: "bg-gray-100 dark:bg-gray-600 dark:ring-gray-700" }) do |item| %>
@@ -52,12 +52,9 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new(orientation: :horizontal) do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
+  #       <%= render Gustwave::Heading.new("Acme Library v1.0.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #   <% end %>
-  #
-  # @param orientation [Symbol] +:vertical+ (default) or +:horizontal+. The items take the timeline's orientation.
-  # @param options [Hash] HTML attributes for the +<ol>+ element.
   #
   # @status alpha
   class Timeline < Gustwave::Component
@@ -71,6 +68,8 @@ module Gustwave
       Gustwave::Timeline::Item.new(orientation: option_value(:orientation), **options)
     }
 
+    # @param orientation [Symbol] Defaults to +:vertical+. Valid values are +:vertical+ and +:horizontal+, which stacks on small screens. The items take the timeline's orientation.
+    # @param options [Hash] the HTML attributes of the +<ol>+.
     def initialize(orientation: DEFAULT, **options)
       select_options(orientation:)
       @options = attributes_for(options)

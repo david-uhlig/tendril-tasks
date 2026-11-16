@@ -47,6 +47,10 @@ module Gustwave
             heading4: "h4"
           }.freeze
 
+          # @param attribute [Symbol, String] the command the button dispatches, a key of ATTRIBUTE_COMMAND_MAPPINGS.
+          # @param icon_or_text [Symbol, String, nil] the icon name, or the text, the button shows. Defaults to the attribute's icon, see Gustwave::Form::RichText::Button.
+          # @param disabled [Boolean] whether the button is disabled. A disabled button dispatches no command. Defaults to +false+.
+          # @param options [Hash] the arguments and HTML attributes of the Gustwave::Form::RichText::Button it renders.
           def initialize(attribute, icon_or_text: nil, disabled: false, **options)
             @attribute = attribute.downcase.to_sym
 

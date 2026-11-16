@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Icon to render an SVG icon.
-  #
-  # The icon is rendered as an +<svg>+ element. The +name+ parameter is used
-  # to determine the icon's filename. The +theme+ parameter determines the
-  # icon's theme, either +:outline+ or +:solid+, i.e. the path where it's found.
-  # Several other parameters can be passed to customize the icon's appearance.
+  # Use Icon to render an SVG icon as an +<svg>+ element.
   #
   # @status alpha
   class Icon < Gustwave::Component
@@ -58,7 +53,7 @@ module Gustwave
     }
 
     # @param name [Symbol] the icon's identifier. Corresponds to the icons filename, underscores +_+ in the identifier are replaced with dashes +-+, e.g. +:arrow_up+ loads +arrow-up.svg+ in the +ICON_PATH/theme/+ directory.
-    # @param theme [Symbol] either +:outline+ or +:solid+.
+    # @param theme [Symbol] the icon set, i.e. the directory the icon is found in. Defaults to +:outline+. Valid values are +:outline+ and +:solid+.
     # @param color [Symbol] +:light+, +:dark+, or +:none+ (default). Color of the SVG's outline.
     # @param size [Symbol] +:xs+, +:sm+, +:md+, +:lg+, +:xl+, +:2xl+, +:3xl+, +:4xl+, +:5xl+, +:6xl+, +:7xl+, +:8xl+, or +:9xl+. Size of the SVG.
     # @param stroke_width [String] changes the stroke width of the SVG. Supported values are +0+, +0.5+, +1+, +1.5+, +2+, +2.5+, +3+, +3.5+, and +4+. Set custom values by overwriting +stroke_width+ with the +class: "*:stroke-[10px]"+ argument.

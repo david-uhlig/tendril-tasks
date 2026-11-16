@@ -2,25 +2,16 @@
 
 module Gustwave
   module Form
-    # Use Radio to render Flowbite's radio button: a round button for one
-    # choice out of several, in seven colors.
+    # Use Radio to render a radio button: a round button for one choice out
+    # of several.
     #
-    # The radio is the +<input type="radio">+ itself, and +options+ are its
-    # HTML attributes, e.g. +value+, +checked+, +disabled+, +name+ and
-    # +required+. It renders no label: the text beside the button is the label
-    # of a Gustwave::Form::InlineField. On its own, the radio gets its
-    # accessible name from the caller:
+    # It renders the +<input type="radio">+ only, no label: the text beside the
+    # button is the label of a Gustwave::Form::InlineField. On its own, the
+    # radio gets its accessible name from the caller:
     #
     #   <%= render Gustwave::Form::Radio.new(name: "plan", value: "free", aria: { label: "Free plan" }) %>
     #
-    # +color+ is an option. Flowbite's colors are +:blue+, +:red+, +:green+,
-    # +:purple+, +:teal+, +:yellow+ and +:orange+. Flowbite shows the radio in
-    # one size.
-    #
-    # === Without a form builder
-    #
-    # Renders a plain radio. +name+, +id+, +value+ and +checked+ are ordinary
-    # HTML attributes.
+    # The radio has one size.
     #
     # === With a form builder
     #
@@ -28,16 +19,12 @@ module Gustwave
     # the +value+ the radio stands for. Rails renders the element through its
     # +radio_button+ helper, so the name, the ID (+task_plan_free+), +index+
     # and +namespace+ behave as in any Rails form, and the radio is checked
-    # when the record's value equals +value+. A +checked+ of the caller wins.
-    # A bound radio needs a +value+:
+    # when the record's value equals +value+. A +checked+ of the caller wins:
     #
     #   <%= render Gustwave::Form::Radio.new(:plan, form: f, value: "free", aria: { label: "Free" }) %>
     #   <%= render Gustwave::Form::Radio.new(:plan, form: f, value: "pro", aria: { label: "Pro" }) %>
     #
-    # Rails' +field_error_proc+ never wraps the radio. In the +error+
-    # validation state the radio sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise. Flowbite shows no validation look
-    # for the radio, so the state changes no classes.
+    # Rails' +field_error_proc+ never wraps the radio.
     #
     # === In a field
     #
@@ -78,7 +65,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the radio is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the radio is a plain +<input>+.
       # @param color [Symbol] the color of the checked button and of the focus ring. Defaults to +:blue+. Valid values are +:blue+, +:red+, +:green+, +:purple+, +:teal+, +:yellow+ and +:orange+.
-      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+. The state has no look.
+      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +value+, +name+, +id+, +checked+, +required+, +disabled+. A bound radio needs +value+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+, and when rendered bound without a +value+.
       def initialize(attribute = nil, form: nil, color: DEFAULT, validation: DEFAULT, **options)

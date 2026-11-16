@@ -1,6 +1,6 @@
 module Gustwave
   class ListGroupPreview < ViewComponent::Preview
-    # Text items in a ul, as in Flowbite's default list group. The width comes from the caller.
+    # Text items in a ul. The width comes from the caller.
     # http://localhost:3030/rails/view_components/gustwave/list_group/default
     def default
       render Gustwave::ListGroup.new(class: "w-48") do |list_group|
@@ -44,7 +44,7 @@ module Gustwave
       end
     end
 
-    # Links with a leading icon and a trailing count or chevron. Not a Flowbite example.
+    # Links with a leading icon and a trailing count or chevron.
     # http://localhost:3030/rails/view_components/gustwave/list_group/trailing_visuals
     def trailing_visuals
       render Gustwave::ListGroup.new(class: "w-56") do |list_group|

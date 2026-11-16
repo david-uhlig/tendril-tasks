@@ -11,7 +11,7 @@ module Gustwave
     end
 
     def colors
-      render_with_template(locals: { colors: flowbite_colors })
+      render_with_template(locals: { colors: badge_colors })
     end
 
     def sizes
@@ -19,15 +19,15 @@ module Gustwave
     end
 
     def large
-      render_with_template(locals: { colors: flowbite_colors })
+      render_with_template(locals: { colors: badge_colors })
     end
 
     def pill
-      render_with_template(locals: { colors: flowbite_colors })
+      render_with_template(locals: { colors: badge_colors })
     end
 
     def bordered
-      render_with_template(locals: { colors: flowbite_colors })
+      render_with_template(locals: { colors: badge_colors })
     end
 
     def outlined
@@ -53,12 +53,12 @@ module Gustwave
     end
 
     def dismissible
-      render_with_template(locals: { colors: flowbite_colors })
+      render_with_template(locals: { colors: badge_colors })
     end
 
     private
 
-    def flowbite_colors
+    def badge_colors
       Gustwave::Badge.option_values(:color).excluding(:none, :base)
     end
   end

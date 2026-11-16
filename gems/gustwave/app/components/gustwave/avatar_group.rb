@@ -3,25 +3,21 @@
 module Gustwave
   # Use AvatarGroup to render an overlapping group of avatars.
   #
-  # This component is useful for displaying a list of users or items in a
-  # compact format. Supply Avatar, AvatarPlaceholder and AvatarText components
-  # as block content. You can freely mix and match these components.
-  #
-  # === Basic Usage
+  # The block holds the avatars, any mix of Avatar, AvatarPlaceholder and
+  # AvatarText:
   #
   #  <%= render Gustwave::AvatarGroup.new do %>
   #    <%= render Gustwave::Avatar.new(src: "https://example.com/avatar1.png") %>
   #    <%= render Gustwave::Avatar.new(src: "https://example.com/avatar2.png") %>
   #    <%= render Gustwave::AvatarPlaceholder.new %>
-  #    <%= render Gustwave::AvatarText.new(text: "+5") %>
+  #    <%= render Gustwave::AvatarText.new("+5") %>
   #  <% end %>
-  #
-  # @param options [Hash] HTML attributes passed to the div element.
   #
   # @status alpha
   class AvatarGroup < Gustwave::Component
     base "flex -space-x-4 rtl:space-x-reverse"
 
+    # @param options [Hash] the HTML attributes of the +<div>+.
     def initialize(**options)
       @options = attributes_for(options)
     end

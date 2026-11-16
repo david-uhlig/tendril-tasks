@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Spinner as a loading indicator
+  # Use Spinner as a loading indicator.
   #
   # @status alpha
   class Spinner < Gustwave::Component
@@ -29,9 +29,9 @@ module Gustwave
     }
 
     # @param text [String, nil] the text to display to screen readers. Takes precedence over block content. If neither is provided, a i18n version of "Loading..." is used. Block content must render sr-only markup itself, e.g. "<span class='sr-only'>Loading...</span>".
-    # @param color [Symbol] the color for the spinner. To further customize use `fill-{*}` to change the main colors, use `text-{*}` to change the background by passing these CSS classes through the options hash.
-    # @param size [Symbol] the size of the spinner. Pass in t-shirt sizes from :xs to :"9xl" to change the size. Passthrough to Gustwave::Icon.
-    # @param align [Symbol] the text alignment of the spinner. Pass in :none, :left, :center, or :right to change the alignment.
+    # @param color [Symbol] the color for the spinner. Defaults to +:blue+. Valid values are +:blue+, +:dark+, +:green+, +:red+, +:yellow+, +:pink+, +:purple+ and +:base+. To further customize use `fill-{*}` to change the main colors, use `text-{*}` to change the background by passing these CSS classes through the options hash.
+    # @param size [Symbol] the size of the spinner, as Gustwave::Icon's +size+. Defaults to +:md+. Valid values are +:xs+ to +:"9xl"+.
+    # @param align [Symbol] the text alignment of the spinner. Defaults to +:none+. Valid values are +:none+, +:left+, +:center+ and +:right+.
     # @param position [Symbol] the position of the spinner relative to its enclosing element. Make sure the enclosing element has the Tailwind class +relative+. See Gustwave::Positionable for options.
     # @param icon_options [Hash] additional HTML attributes and component options for the Gustwave::Icon component, e.g. its +class+.
     # @param options [Hash] additional HTML attributes for the wrapping div tag.

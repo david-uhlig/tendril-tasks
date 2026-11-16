@@ -2,7 +2,7 @@
 
 module Gustwave
   module Form
-    # Flowbite's frame around a text editor: a bordered box with the editor in
+    # The frame around a text editor: a bordered box with the editor in
     # a white body, and a bar above it, below it or both, as in Flowbite's
     # "WYSIWYG Editor" and "Comment box" textarea examples.
     #

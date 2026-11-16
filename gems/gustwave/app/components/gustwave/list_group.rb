@@ -2,8 +2,8 @@
 
 module Gustwave
   # Use ListGroup to show a series of items in one bordered box, like a
-  # sidebar menu, as in Flowbite's list group. The list rounds its outer corners
-  # and separates the items with a border, whatever the item types are.
+  # sidebar menu. The list rounds its outer corners and separates the items
+  # with a border, whatever the item types are.
   #
   # Add items with +with_item_text+, +with_item_link+ or +with_item_button+. A
   # text item renders as an +li+ in a +ul+. As soon as the list holds a link or

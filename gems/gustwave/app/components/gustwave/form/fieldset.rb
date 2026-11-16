@@ -7,8 +7,8 @@ module Gustwave
     # what belongs to the group as a whole: the +<legend>+, the
     # validation message and a helper text, rendered once, in this order
     # below the group. The +<fieldset>+ names the message and the helper text
-    # in +aria-describedby+, so they're announced with the group. The root has no classes of its own, so spacing is up to the
-    # caller.
+    # in +aria-describedby+, so they're announced with the group. The root has
+    # no classes of its own, so spacing is up to the caller.
     #
     # The block is the group: one field per control, or any markup. The
     # fields keep the validation state. They leave the attribute's error
@@ -20,10 +20,8 @@ module Gustwave
     #     <% end %>
     #   <% end %>
     #
-    # +attribute+, +form:+, +label:+, +helper_text:+, +validation:+ and
-    # +validation_message:+ work as in Gustwave::Form::Field, and so do the
-    # slots of the same name. The label is the +<legend>+, so a legend only
-    # for screen readers is <tt>fieldset.with_label("Plan", class: "sr-only")</tt>.
+    # The slots work as in Gustwave::Form::Field. The label is the
+    # +<legend>+, so a legend only for screen readers is <tt>fieldset.with_label("Plan", class: "sr-only")</tt>.
     #
     # Without +form:+ it renders only what the caller sets.
     #

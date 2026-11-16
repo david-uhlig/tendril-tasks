@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A notification that floats on the page, as in Flowbite's toasts.
+  # A notification that floats on the page.
   #
   # A +status+ shows the status's icon in a colored box beside the text, and
   # names the status for screen readers. Replace the icon with +icon:+, or
@@ -17,9 +17,6 @@ module Gustwave
   #   render Gustwave::Toast.new("Saved.") do |toast|
   #     toast.with_dismiss_button(text: "Close notification")
   #   end
-  #
-  # With +dismissible: false+ no button is rendered, whatever the slot
-  # holds.
   #
   # To place the button in your own layout, call +dismiss_button+ in the
   # block. The toast then doesn't render its own at the end. Set the button
@@ -90,7 +87,7 @@ module Gustwave
     # @param icon [Symbol, nil] Shorthand for +with_visual_icon+: replaces the status's icon. Solid by default.
     # @param position [Symbol] Fixes the toast to a corner or edge of the page. Defaults to +:none+.
     # @param id [String, nil] The id of the toast, which its dismiss button targets. Generated if missing.
-    # @param dismissible [Boolean] Whether the toast has a dismiss button. Defaults to +true+.
+    # @param dismissible [Boolean] Whether the toast has a dismiss button. With +false+ no button is rendered, whatever the slot holds. Defaults to +true+.
     # @param auto_remove [Boolean] Animates and removes the toast after a few
     #   seconds, pausing while hovered. Needs the Stimulus controller
     #   +gustwave--animate-and-remove+ that Gustwave ships. Off by default.

@@ -141,12 +141,12 @@ RSpec.describe Gustwave::Form::Input, type: :component do
 
   describe "a leading icon" do
     it "renders Flowbite's input group" do
-      render_inline(described_class.new(icon: :envelope, placeholder: "name@flowbite.com"))
+      render_inline(described_class.new(icon: :envelope, placeholder: "name@acme.com"))
 
       expect(page).to have_css("div.relative > div.absolute.inset-y-0.start-0.flex.items-center.ps-3\\.5.pointer-events-none > svg")
       expect(page).to have_css("div.relative > input")
       expect(input_classes).to eq(class_set(helpers::FLOWBITE_INPUT_WITH_ICON))
-      expect(input[:placeholder]).to eq("name@flowbite.com")
+      expect(input[:placeholder]).to eq("name@acme.com")
     end
 
     it "renders a filled icon like Flowbite's, hidden from screen readers" do

@@ -1,48 +1,46 @@
 module Gustwave
   module Form
     class TogglePreview < ViewComponent::Preview
-      # Flowbite's "Toggle example": a toggle with its text next to it. The text is the label of a
-      # Gustwave::Form::InlineField, a sibling of the toggle's own label around the switch, where Flowbite has one
-      # label around both.
+      # A toggle with its text next to it. The text is the label of a Gustwave::Form::InlineField, a sibling of
+      # the toggle's own label around the switch, where Flowbite has one label around both.
       def default
         render_with_template
       end
 
-      # Flowbite's "Checked state": +checked: true+ turns the toggle on by default.
+      # +checked: true+ turns the toggle on by default.
       def checked
         render_with_template
       end
 
-      # Flowbite's "Disabled state": a disabled toggle and a disabled, checked one. The field grays the label of a disabled
-      # control.
+      # A disabled toggle and a disabled, checked one. The field grays the label of a disabled control.
       def disabled
         render_with_template
       end
 
-      # Flowbite's "Colors": +color+ is +:blue+, +:red+, +:green+, +:purple+, +:yellow+, +:teal+ or +:orange+. Each
-      # toggle is checked, so its color shows. Blue is the default and Flowbite's example leaves it out.
+      # +color+ is +:blue+, +:red+, +:green+, +:purple+, +:yellow+, +:teal+ or +:orange+. Each toggle is checked,
+      # so its color shows. Blue is the default.
       def colors
         render_with_template
       end
 
-      # Flowbite's "Sizes": +size+ is +:sm+, +:md+ or +:lg+.
+      # +size+ is +:sm+, +:md+ or +:lg+.
       def sizes
         render_with_template
       end
 
-      # Flowbite's "Toggle Switch" example on its forms page: a toggle, a checked one and a disabled one. Flowbite
-      # keeps the text of the disabled toggle dark there, so its label takes the dark classes.
+      # A toggle, a checked one and a disabled one. Flowbite keeps the text of the disabled toggle dark there, so
+      # its label takes the dark classes.
       def toggle_switch
         render_with_template
       end
 
-      # Not a Flowbite example. A toggle in an inline field with helper text under its label, and one in the error
-      # state with a validation message.
+      # A toggle in an inline field with helper text under its label, and one in the error state with a validation
+      # message.
       def in_a_field
         render_with_template
       end
 
-      # Not a Flowbite example. A toggle on its own, without text, named with +aria-label+.
+      # A toggle on its own, without text, named with +aria-label+.
       def standalone
         render_with_template
       end

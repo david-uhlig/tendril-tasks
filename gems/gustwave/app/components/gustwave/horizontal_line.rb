@@ -3,24 +3,8 @@
 module Gustwave
   # Use HorizontalLine to separate sections of content with a horizontal line.
   #
-  # Examples:
-  #
-  # Renders a thin gray horizontal line
-  #
   #   <%= render Gustwave::HorizontalLine.new %>
-  #
-  # You can pass HTML attributes to the +<hr>+ element and your css classes
-  # will be merged with the default classes without style conflicts:
-  #
-  #   <%= render Gustwave::HorizontalLine.new(class: "border-t-2 border-gray-300") %>
-  #
-  # Customize the appearance of the line by passing a shape:
-  #
   #   <%= render Gustwave::HorizontalLine.new(shape: :trimmed) %>
-  #
-  # Reset all styles by passing the +none+ shape:
-  #
-  #   <%= render Gustwave::HorizontalLine.new(shape: :none) %>
   #
   # You can render text in the middle of the line by passing a block or using
   # the +with_content+ method:
@@ -86,7 +70,7 @@ module Gustwave
 
     # Initializes a new HorizontalLine component.
     #
-    # @param shape [Symbol] the shape to be used for styling the horizontal line.
+    # @param shape [Symbol] the shape of the line. Defaults to +:default+, a thin gray line. Valid values are +:default+, +:trimmed+, +:squared+ and +:none+, which adds no classes.
     # @param options [Hash] additional HTML options to be applied to the +<hr>+ element.
     def initialize(shape: DEFAULT, **options)
       select_options(shape:)

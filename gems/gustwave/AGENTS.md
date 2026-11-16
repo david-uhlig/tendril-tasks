@@ -12,6 +12,7 @@ The short version:
 
 - Options for fixed choices, slots for parts the component has to place or wire, the content block for everything else. A new slot or option needs a reason from `docs/design.md`; when in doubt, leave it to the block.
 - No `Component` suffix: `Gustwave::Card`.
+- Docstrings and previews name Flowbite only where a sentence needs it, e.g. a JavaScript dependency or a deviation from Flowbite's markup. Readers know Gustwave implements Flowbite and what HTML elements do. Example brand text is "Acme".
 - Every new component, nested and base classes included, gets `# @status alpha` as the last line of its class docstring. `spec/components/component_status_spec.rb` checks it. Don't change a status unless asked; promotions follow `docs/design.md`.
 - Style a part with `<part>_options:`. Never add `configure_<part>` or `<part>_class:` for an element. `<state>_class:` is only for classes a script swaps.
 - `dismiss_button` slot for elements that go away for good, `close_button` slot for overlays that reopen.

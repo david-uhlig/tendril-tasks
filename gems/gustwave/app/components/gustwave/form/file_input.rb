@@ -2,19 +2,12 @@
 
 module Gustwave
   module Form
-    # Use FileInput to render Flowbite's file input: a field that picks files
-    # to upload, in three sizes and with a success or error look.
-    #
-    # +options+ are the +<input>+'s HTML attributes, e.g. +multiple+,
-    # +accept+, +required+ and +disabled+. The label, helper text and
-    # validation message belong to Gustwave::Form::Field. +size+ is an option,
-    # so the HTML attribute of that name goes in +html:+:
-    # <tt>size: :lg, html: { size: 20 }</tt>.
+    # Use FileInput to render a file input: a field that picks files to
+    # upload.
     #
     # === Without a form builder
     #
-    # Renders a plain +<input type="file">+. +name+, +id+, +multiple+ and
-    # +accept+ are ordinary HTML attributes:
+    # Renders a plain +<input type="file">+:
     #
     #   <%= render Gustwave::Form::FileInput.new(name: "avatar", accept: "image/*") %>
     #
@@ -32,14 +25,13 @@ module Gustwave
     # bound file input marks the form itself as multipart. The upload then
     # works without +multipart: true+ on the form.
     #
-    # Rails' +field_error_proc+ never wraps the file input. In the +error+
-    # validation state the file input sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise.
+    # Rails' +field_error_proc+ never wraps the file input.
     #
     # === In a field
     #
-    # Gustwave::Form::Field builds the file input and wires it through
-    # +apply_slot_context+ (see there):
+    # Gustwave::Form::Field builds the file input with its label, helper text
+    # and validation message, and wires it through +apply_slot_context+ (see
+    # there):
     #
     #   <% field.with_control_file_input(accept: "image/*") %>
     #
@@ -74,7 +66,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the file input is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the file input is a plain +<input type="file">+.
       # @param size [Symbol] the size of the file input. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
-      # @param validation [Symbol] the look of the file input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+.
+      # @param validation [Symbol] the look of the file input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +multiple+, +accept+, +required+, +disabled+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+.
       def initialize(attribute = nil, form: nil, size: DEFAULT, validation: DEFAULT, **options)
