@@ -27,9 +27,10 @@ module Gustwave
         render_with_template
       end
 
-      # The rich textarea's options, for trying out how they combine. @param validation
-      # select { choices: [none, success, error] } @param sticky_toolbar toggle @param
-      # toolbar_place select { choices: [header, footer] }
+      # The rich textarea's options, for trying out how they combine.
+      # @param validation select { choices: [none, success, error] }
+      # @param sticky_toolbar toggle
+      # @param toolbar_place select { choices: [header, footer] }
       def playground(validation: :none, sticky_toolbar: true, toolbar_place: :header)
         render_with_template(locals: {
           validation: validation.to_sym,
