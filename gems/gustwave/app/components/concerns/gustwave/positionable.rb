@@ -44,18 +44,21 @@ module Gustwave
     extend ActiveSupport::Concern
     include Gustwave::Styling
 
+    # The vertical anchors (+top+, +middle+, +bottom+) and their classes; POSITIONS combines them with HORIZONTAL.
     VERTICAL = {
       top: "top-0 -translate-y-1/2",
       middle: "top-1/2 -translate-y-1/2",
       bottom: "bottom-0 translate-y-1/2"
     }.freeze
 
+    # The horizontal anchors (+left+, +center+, +right+) and their classes; POSITIONS combines them with VERTICAL.
     HORIZONTAL = {
       left: "left-0 -translate-x-1/2",
       center: "left-1/2 -translate-x-1/2",
       right: "right-0 translate-x-1/2"
     }.freeze
 
+    # Shorthand positions and the centered position each stands for, e.g. +top+ for +top_center+; POSITIONS adds them.
     ALIASES = {
       top: :top_center,
       middle: :middle_center,
@@ -63,6 +66,7 @@ module Gustwave
       bottom: :bottom_center
     }.freeze
 
+    # Every position with its classes, aliases included; the values of the +position+ variant.
     POSITIONS = VERTICAL.keys.product(HORIZONTAL.keys)
                         .to_h { |vertical, horizontal| [ :"#{vertical}_#{horizontal}", "absolute #{VERTICAL[vertical]} #{HORIZONTAL[horizontal]}" ] }
                         .then { |positions| positions.merge(ALIASES.transform_values(&positions)) }

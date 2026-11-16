@@ -106,6 +106,9 @@ module Gustwave
 
     # Raised when Gustwave.strict? for a part the component doesn't declare.
     class UnknownPartError < Gustwave::Error
+      # @param component [String] the component's class name.
+      # @param given [Symbol, String] the part name the component doesn't declare.
+      # @param expected [Array<Symbol>] the part names the component declares.
       def initialize(component, given:, expected:)
         super(Options.suggest("#{component} has no part #{given.inspect}", given, expected))
       end
@@ -257,6 +260,10 @@ module Gustwave
     #   classes                       # root element
     #   classes(:icon)                # a part
     #   classes(pill: true, class: "ms-2")
+    #
+    # @param part [Symbol, String] +:root+ or the name of a part.
+    # @param overrides [Hash{Symbol => Object}] option values for this call only, and +class:+ classes to add.
+    # @return [String, nil] the classes, or +nil+ if there are none.
     def classes(part = Definition::ROOT, **overrides)
       extra = overrides.delete(:class)
       definition = self.class.style_definition
@@ -279,6 +286,10 @@ module Gustwave
     #
     # An +html+ hash within +options+ is merged into it first, see
     # Gustwave::Component.new.
+    #
+    # @param args [Array] an optional part name, then the HTML attributes to add classes to.
+    # @param overrides [Hash{Symbol => Object}] option values for this call only, as for +classes+.
+    # @return [Hash] the HTML attributes, with +class+ when there are classes.
     def attributes_for(*args, **overrides)
       part = args.first.is_a?(Symbol) || args.first.is_a?(String) ? args.shift : Definition::ROOT
       attributes = Gustwave::HtmlAttributesHelper.merge_html((args.first || {}).to_h.symbolize_keys)
@@ -288,6 +299,7 @@ module Gustwave
 
     # Merges class strings or arrays with the component's class merger.
     #
+    # @param classes [Array] class strings or arrays of them, or +nil+.
     # @return [String, nil]
     def merge_classes(*classes)
       self.class.class_merger.merge(classes.flatten.compact_blank).presence

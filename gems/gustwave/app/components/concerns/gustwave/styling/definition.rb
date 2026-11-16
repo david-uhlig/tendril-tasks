@@ -14,11 +14,16 @@ module Gustwave
     # declaration on any class, so extensions of a parent class reach
     # subclasses that are already loaded.
     class Definition
+      # The name of the root element, the target of styles that name no part.
       ROOT = :root
 
+      # The base styles: classes per part, and the +unless:+ conditions that skip them.
       Base = Struct.new(:classes, :unless, keyword_init: true)
+      # A part besides the root: its name, its classes, and the +unless:+ conditions that skip them.
       Part = Struct.new(:name, :classes, :unless, keyword_init: true)
+      # A variant's classes: +values+ map each option value to its classes per part, and +unless:+ skips them.
       Variant = Struct.new(:name, :values, :unless, keyword_init: true)
+      # A toggle's classes per part: +on+ and +off+, or with +per:+, +values+ per value of that option.
       Toggle = Struct.new(:name, :on, :off, :per, :values, :unless, keyword_init: true)
       # The option values that skip the base styles, like an +unless:+ of the
       # base that a redeclared base keeps
@@ -31,6 +36,11 @@ module Gustwave
       # nil) and the component's own +declarations+, then checks it against
       # the component's +options+.
       #
+      # @param component [String] the component's class name, for messages.
+      # @param parent [Definition, nil] the superclass's definition.
+      # @param declarations [Array<Array>] the component's styling declarations, as action and arguments pairs.
+      # @param options [Gustwave::Options::Definition] the component's options, to check against.
+      # @return [Definition] the frozen definition.
       # @raise [Gustwave::DefinitionError] if the result is inconsistent.
       def self.build(component, parent, declarations, options)
         definition = new(component, parent&.entries || {}, options)
@@ -42,6 +52,9 @@ module Gustwave
 
       attr_reader :component, :entries, :options
 
+      # @param component [String] the component's class name, for messages.
+      # @param entries [Hash] the entries to start from, e.g. the parent's, keyed by kind and name.
+      # @param options [Gustwave::Options::Definition] the component's options.
       def initialize(component, entries, options)
         @component = component
         @entries = entries.dup
@@ -49,6 +62,8 @@ module Gustwave
       end
 
       # Freezes the definition and computes what rendering looks up often.
+      #
+      # @return [Definition] the definition itself, frozen.
       def freeze
         @entries.freeze
         @parts = parts.freeze
@@ -61,6 +76,10 @@ module Gustwave
         @parts || [ ROOT, *@entries.values.grep(Part).map(&:name) ]
       end
 
+      # Whether +name+ is +:root+ or a declared part.
+      #
+      # @param name [Symbol] the part's name.
+      # @return [Boolean]
       def part?(name)
         parts.include?(name)
       end
@@ -83,6 +102,8 @@ module Gustwave
       end
 
       # A plain description of the definition, e.g. for docs and previews.
+      #
+      # @return [Hash] the +parts+, +variants+ and +toggles+ of the definition, as plain data.
       def to_h
         {
           parts: parts,

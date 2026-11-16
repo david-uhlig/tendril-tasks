@@ -94,6 +94,9 @@ module Gustwave
     # Raised when Gustwave.strict? for an option the component doesn't
     # declare.
     class UnknownOptionError < Gustwave::Error
+      # @param component [String] the component's class name.
+      # @param given [Symbol, String] the option name the component doesn't declare.
+      # @param expected [Array<Symbol>] the option names the component declares.
       def initialize(component, given:, expected:)
         super(Options.suggest("#{component} has no option #{given.inspect}", given, expected))
       end
@@ -102,6 +105,12 @@ module Gustwave
     # Raised when Gustwave.strict? for a value an option doesn't declare.
     # +passed+ is the value before it was normalized, for the hint.
     class UnknownValueError < Gustwave::Error
+      # @param component [String] the component's class name.
+      # @param option [Symbol, String] the option the value is for.
+      # @param given [Symbol] the value the option doesn't declare.
+      # @param expected [Array<Symbol>] the values the option declares.
+      # @param fallback [Object] the option's default, which the value falls back to when not strict.
+      # @param passed [Object] the value before it was normalized.
       def initialize(component, option, given:, expected:, fallback:, passed: given)
         message = Options.suggest("Unknown value #{given.inspect} for #{option.inspect} of #{component}", given, expected)
         hint = Options.html_attribute_hint(option, passed)
@@ -111,6 +120,9 @@ module Gustwave
 
     # Raised for a derived value the component doesn't declare.
     class UnknownDerivedValueError < Gustwave::Error
+      # @param component [String] the component's class name.
+      # @param given [Symbol, String] the derived value name the component doesn't declare.
+      # @param expected [Array<Symbol>] the derived value names the component declares.
       def initialize(component, given:, expected:)
         super(Options.suggest("#{component} has no derived value #{given.inspect}", given, expected))
       end
@@ -123,17 +135,25 @@ module Gustwave
       # definitions get rebuilt.
       attr_reader :version
 
+      # Bumps the version, so cached definitions are rebuilt on their next use.
+      #
+      # @return [void]
       def changed!
         @version += 1
       end
 
       # Tells what a component falls back to when Gustwave isn't strict.
+      #
+      # @param fallback [Object] the default that an unknown value falls back to.
+      # @return [String]
       def fallback_note(fallback)
         "When Gustwave isn't strict, e.g. outside development and test, this falls back to #{fallback.inspect}."
       end
 
       # Tells how to pass the HTML attribute an option shares its name with.
       #
+      # @param option [Symbol, String] the option's name.
+      # @param value [Object] the value passed for the option, before it's normalized.
       # @return [String, nil] +nil+ for an option that isn't named like an HTML attribute.
       def html_attribute_hint(option, value)
         return unless HTML_ATTRIBUTE_NAMES.include?(option.to_sym)
@@ -142,10 +162,19 @@ module Gustwave
       end
 
       # Converts an option value to a symbol: +2+ becomes +:"2"+.
+      #
+      # @param value [Object] the value to convert, e.g. a string or a number.
+      # @return [Symbol]
       def normalize_value(value)
         value.is_a?(Symbol) ? value : value.to_s.to_sym
       end
 
+      # Appends a suggestion for +given+, the closest of +expected+, to +message+, and lists +expected+.
+      #
+      # @param message [String] the start of the error message.
+      # @param given [Symbol, String] the name or value that isn't declared.
+      # @param expected [Array<Symbol>] the names or values that are declared.
+      # @return [String] the message with its suggestion and the expected values.
       def suggest(message, given, expected)
         suggestion = DidYouMean::SpellChecker.new(dictionary: expected.map(&:to_s)).correct(given.to_s).first
         message += ". Did you mean #{suggestion.to_sym.inspect}?" if suggestion
@@ -272,11 +301,16 @@ module Gustwave
     #
     # Merges with earlier calls, e.g. for an option only known in
     # +before_render+.
+    #
+    # @param selection [Hash{Symbol => Object}] the option values to select, by option name.
+    # @return [self] the component, so calls can be chained.
     def select_options(**selection)
       option_selection.merge!(normalize_option_selection(selection))
       self
     end
 
+    # @param name [Symbol, String] the option's name.
+    # @param overrides [Hash{Symbol => Object}] option values to use for this call only.
     # @return [Object] the value in effect for an option: the selected one or
     #   the default. +true+ or +false+ for a toggle. Options given here
     #   override the selection for this call.
@@ -295,6 +329,9 @@ module Gustwave
     #   derived_value(:icon_size)
     #   derived_value(:icon_size, size: :sm)
     #
+    # @param name [Symbol, String] the name of the derived value.
+    # @param overrides [Hash{Symbol => Object}] option values to use for this call only.
+    # @return [Symbol, nil] the derived value, or +nil+ for an option value it doesn't cover.
     # @raise [UnknownDerivedValueError] if the component derives no such value.
     def derived_value(name, **overrides)
       definition = self.class.option_definition
@@ -304,7 +341,12 @@ module Gustwave
       derived.values[option_values_for(overrides)[derived.from]]
     end
 
+    # Returns the default of an option, as the class declares it.
+    #
     # @see Gustwave::Options::ClassMethods#option_default
+    #
+    # @param name [Symbol, String] the option's name.
+    # @return [Object] the default value.
     def option_default(name)
       self.class.option_default(name)
     end

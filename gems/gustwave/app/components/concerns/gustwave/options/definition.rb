@@ -20,11 +20,17 @@ module Gustwave
         def internal? = internal == true
       end
 
+      # A derived value: the option +from+ that it derives from, and its +values+, one for each value of
+      # that option, e.g. +{ sm: :xs }+ for +from: :size+.
       Derived = Struct.new(:name, :from, :values, keyword_init: true)
 
       # Builds the definition of +component+ from +parent+ (a Definition or
       # nil) and the component's own +declarations+, then checks it.
       #
+      # @param component [String] the component's class name, for messages.
+      # @param parent [Definition, nil] the superclass's definition.
+      # @param declarations [Array<Array>] the component's declarations, as action and arguments pairs.
+      # @return [Definition] the frozen definition.
       # @raise [Gustwave::DefinitionError] if the result is inconsistent.
       def self.build(component, parent, declarations)
         definition = new(component, parent&.entries || {})
@@ -35,12 +41,16 @@ module Gustwave
 
       attr_reader :component, :entries
 
+      # @param component [String] the component's class name, for messages.
+      # @param entries [Hash] the entries to start from, e.g. the parent's, keyed by kind and name.
       def initialize(component, entries)
         @component = component
         @entries = entries.dup
       end
 
       # Freezes the definition and computes what rendering looks up often.
+      #
+      # @return [Definition] the definition itself, frozen.
       def freeze
         @entries.freeze
         @options = options.freeze
@@ -53,20 +63,32 @@ module Gustwave
         @options || @entries.values.grep(Option).index_by(&:name)
       end
 
+      # The option +name+, a variant, option or toggle, or +nil+ if the component declares none.
+      #
+      # @param name [Symbol] the option's name.
+      # @return [Option, nil]
       def option(name)
         @entries[[ :option, name ]]
       end
 
+      # @param name [Symbol] the option's name.
       # @return [Option, nil] the option, unless it's a boolean toggle.
       def enum_option(name)
         entry = option(name)
         entry unless entry.nil? || entry.boolean?
       end
 
+      # The derived values of the definition, by name.
+      #
+      # @return [Hash{Symbol => Derived}]
       def derived_values
         @entries.values.grep(Derived).index_by(&:name)
       end
 
+      # The derived value +name+, or +nil+ if the component doesn't derive it.
+      #
+      # @param name [Symbol] the derived value's name.
+      # @return [Derived, nil]
       def derived(name)
         @entries[[ :derived, name ]]
       end
@@ -80,6 +102,11 @@ module Gustwave
       # +name+: +values+ must cover each of its values, except an implicit
       # +:none+, and none it doesn't have.
       #
+      # @param label [String] names the entry in messages, e.g. +derived :icon_size+.
+      # @param values [Array<Symbol>] the values that the relation covers.
+      # @param name [Symbol] the option that the relation points at.
+      # @param relation [String] the word for the relation in messages, e.g. +from+ or +per+.
+      # @param noun [String] the word for the values in messages, e.g. +values+ or +classes+.
       # @return [Array<String>]
       def coverage_problems(label, values, name, relation, noun)
         option = enum_option(name)
@@ -95,6 +122,8 @@ module Gustwave
       end
 
       # A plain description of the definition, e.g. for docs and previews.
+      #
+      # @return [Hash] the +options+ and +derived+ values of the definition, as plain data.
       def to_h
         {
           options: options.transform_values { |o| { kind: o.kind, default: o.default, values: o.values, internal: o.internal? } },
