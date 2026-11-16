@@ -65,7 +65,10 @@ module Gustwave
       # it. Every other attribute is merged into +options+ under its Symbol
       # key.
       #
+      # @param args [Array] the positional arguments of +initialize+, e.g. the component's text.
+      # @param options [Hash] the keyword arguments of +initialize+: the component's options and HTML attributes.
       # @param html [Hash, nil] HTML attributes for the element the component's +options+ go to.
+      # @return [Gustwave::Component] the new component.
       # @raise [ArgumentError] if +html+ is neither a Hash nor +nil+.
       def new(*args, html: nil, **options, &block)
         return super(*args, **options, &block) if html.nil?

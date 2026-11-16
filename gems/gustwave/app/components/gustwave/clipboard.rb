@@ -23,10 +23,13 @@ module Gustwave
   #
   # @status alpha
   class Clipboard < Gustwave::Component
+    # The Stimulus controller that changes the button's states, which the component attaches itself.
     CONTROLLER = "gustwave--clipboard"
+    # The Stimulus action that switches the button to its copied state on click.
     COPY_ACTION = "click->gustwave--clipboard#copied"
     # Every Flowbite clipboard button centers its states, which are spans.
     BUTTON_CLASS = "inline-flex items-center justify-center"
+    # Maps +content_type+ to the value of the button's +copy-to-clipboard-content-type+ data attribute.
     CONTENT_TYPES = { inner_html: "innerHTML", text_content: "textContent" }.freeze
 
     # Where the text is copied from. The default, +:input+, is the value
@@ -94,11 +97,15 @@ module Gustwave
 
     # The icon of an icon-only button, which has no label. Public, because
     # ViewComponent only finds +default_<slot>+ methods that are public.
+    #
+    # @return [Gustwave::Icon, nil] the icon, or +nil+ when the button has a label.
     def default_icon
       build_slot_icon unless visible_label
     end
 
     # The check icon of the copied state. Public, see +default_icon+.
+    #
+    # @return [Gustwave::Icon] the check icon.
     def default_copied_icon
       build_slot_copied_icon
     end

@@ -76,7 +76,9 @@ module Gustwave
       bottom_right: "fixed bottom-5 right-5"
     }
 
+    # The Stimulus controller that animates and removes the toast when +auto_remove+ is set.
     CONTROLLER = "gustwave--animate-and-remove"
+    # The actions that pause the auto removal while the toast is hovered, added with +auto_remove+.
     AUTO_REMOVE_ACTIONS = %W[
       mouseover->#{CONTROLLER}#pause
       mouseout->#{CONTROLLER}#continue
@@ -137,12 +139,16 @@ module Gustwave
 
     # The button rendered when no +dismiss_button+ is set. Public, because
     # ViewComponent only finds +default_<slot>+ methods that are public.
+    #
+    # @return [Gustwave::DismissButton, nil] the button, or +nil+ when the toast isn't dismissible.
     def default_dismiss_button
       build_slot_dismiss_button if dismissible?
     end
 
     # Marks the button as placed by a block, so the template doesn't render a
     # second one at the end. Renders nothing when the toast isn't dismissible.
+    #
+    # @return [ViewComponent::Slot, Gustwave::DismissButton, nil] the button, or +nil+ when not dismissible.
     def dismiss_button
       @dismiss_button_rendered = true
       super if dismissible?

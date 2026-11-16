@@ -59,6 +59,7 @@ module Gustwave
       #
       # @param list_position [Symbol, nil] +:only+, +:first+, +:middle+ or +:last+.
       # @param default_text [String, nil] The text when the link has none.
+      # @return [void]
       def apply_slot_context(list_position: nil, default_text: nil)
         @default_text = default_text if default_text
         select_options(list_position:) if list_position

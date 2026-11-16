@@ -51,7 +51,11 @@ module Gustwave
     #
     #   <%= link_to "Docs", docs_path, **popover.trigger_options(class: "underline", data: { controller: "x" }) %>
     #
+    # @param placement [Symbol] where the popover sits relative to the trigger. Defaults to +:top+.
+    # @param trigger_event [Symbol] +:hover+ or +:click+, what opens the popover. Defaults to +:hover+.
+    # @param offset [Integer, nil] the distance in pixels between the trigger and the popover. Omitted when blank.
     # @param attributes [Hash] the trigger's own HTML attributes.
+    # @return [Hash] the HTML attributes of the trigger.
     def trigger_options(placement: DEFAULT,
                         trigger_event: DEFAULT,
                         offset: nil,

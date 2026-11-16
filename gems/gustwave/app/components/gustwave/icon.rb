@@ -5,9 +5,12 @@ module Gustwave
   #
   # @status alpha
   class Icon < Gustwave::Component
+    # The directory of the icon files, under the asset path, that +icon_path+ joins with the theme and name.
     ICON_PATH = File.join("gustwave", "icons").freeze
 
+    # The stroke width the icon files are drawn with, which the +stroke_width+ variant leaves unchanged.
     SVG_STROKE_WIDTH = 2
+    # The default +stroke_width+ of an icon, the same as SVG_STROKE_WIDTH.
     DEFAULT_STROKE_WIDTH = SVG_STROKE_WIDTH
 
     # The folder the icon is loaded from

@@ -82,6 +82,7 @@ module Gustwave
     # @option classes [String, nil] :panel the classes of the panel.
     # @option classes [Hash{Symbol => String, nil}] :states the classes of the +:active+, +:inactive+ and +:disabled+ states.
     # @option classes [String, nil] :edge the classes of the first or last tab, if any.
+    # @return [void]
     def apply_slot_context(selected:, interactive:, classes:, **)
       @selected = selected == true
       @interactive = interactive == true

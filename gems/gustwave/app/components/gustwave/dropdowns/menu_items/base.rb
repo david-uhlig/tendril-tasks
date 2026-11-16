@@ -2,6 +2,7 @@
 
 module Gustwave
   module Dropdowns
+    # The items of a Gustwave::Dropdown menu, e.g. links, buttons and dividers.
     module MenuItems
       # @status alpha
       class Base < Gustwave::Component

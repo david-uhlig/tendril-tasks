@@ -90,6 +90,7 @@ module Gustwave
       #
       # @param list_position [Symbol, nil] +:only+, +:first+, +:middle+ or +:last+.
       # @param container [Symbol, nil] +:list+ inside a +ul+, or +:group+ inside a +div+. A text item becomes a +div+ in a group.
+      # @return [void]
       def apply_slot_context(list_position: nil, container: nil, **)
         select_options(list_position:) if list_position
         select_options(tag: :div) if container == :group && option_value(:tag) == :li

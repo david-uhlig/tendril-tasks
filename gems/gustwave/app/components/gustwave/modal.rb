@@ -129,6 +129,7 @@ module Gustwave
     #
     # @param action [Symbol] +:toggle+, +:show+ or +:hide+. Defaults to +:toggle+.
     # @param attributes [Hash] the trigger's own HTML attributes.
+    # @return [Hash] the HTML attributes of the trigger.
     def trigger_options(action: DEFAULT, **attributes)
       options = attributes.reject { |key, _| TRIGGER_KEYS.include?(key.to_s) }
       action = option_value(:action, action:)
@@ -147,6 +148,10 @@ module Gustwave
 
     # Returns the trigger attributes of the modal with the given +id+, for a
     # trigger rendered apart from its modal, which knows only the id.
+    #
+    # @param id [String] the id of the modal the trigger targets.
+    # @param kwargs [Hash] the keyword arguments of #trigger_options: +action:+ and the trigger's own HTML attributes.
+    # @return [Hash] the HTML attributes of the trigger.
     def self.trigger_options(id, **kwargs) = new(id:).trigger_options(**kwargs)
   end
 end

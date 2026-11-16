@@ -6,6 +6,7 @@ module Gustwave
     # serialized markup of its children, so rendering a source doesn't parse
     # and serialize the file again.
     class Template
+      # The templates of the source files already built, keyed by source path. See +for+.
       CACHE = Concurrent::Map.new
 
       attr_reader :attributes, :inner_html
@@ -23,6 +24,9 @@ module Gustwave
           CACHE[source] || build(source).tap { |template| CACHE[source] = template if template }
         end
 
+        # Empties the cache, so the next +for+ builds each template again.
+        #
+        # @return [void]
         def clear_cache
           CACHE.clear
         end
