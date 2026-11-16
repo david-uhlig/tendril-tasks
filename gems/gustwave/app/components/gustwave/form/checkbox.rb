@@ -2,7 +2,7 @@
 
 module Gustwave
   module Form
-    # Use Checkbox to render Flowbite's checkbox: a square box for a yes or no
+    # Use Checkbox to render a checkbox: a square box for a yes or no
     # answer, or for one of several options, in seven colors.
     #
     # The checkbox is the +<input type="checkbox">+ itself, and +options+ are
@@ -13,9 +13,8 @@ module Gustwave
     #
     #   <%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: "7", aria: { label: "Select task" }) %>
     #
-    # +color+ is an option. Flowbite's colors are +:blue+, +:red+, +:green+,
-    # +:purple+, +:teal+, +:yellow+ and +:orange+. Flowbite shows the checkbox
-    # in one size.
+    # +color+ is an option: +:blue+, +:red+, +:green+, +:purple+, +:teal+,
+    # +:yellow+ or +:orange+. The checkbox has one size.
     #
     # === Without a form builder
     #
@@ -36,8 +35,7 @@ module Gustwave
     #
     # Rails' +field_error_proc+ never wraps the checkbox. In the +error+
     # validation state the checkbox sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise. Flowbite shows no validation look
-    # for the checkbox, so the state changes no classes.
+    # caller's +aria+ options say otherwise. The state changes no classes.
     #
     # === In a field
     #

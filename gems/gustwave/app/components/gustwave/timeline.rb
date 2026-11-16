@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Timeline to render a list of events along a line, as in Flowbite's
-  # timeline. The timeline draws the line and places each item's marker. What an
+  # Use Timeline to render a list of events along a line. The timeline draws the line and places each item's marker. What an
   # item shows is up to its block, composed from other components.
   #
   # A vertical item's dot lines up with a first line of text 24px tall. Keep a
@@ -26,7 +25,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
+  #       <%= render Gustwave::Heading.new("Acme Figma v1.3.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_image "/avatar.png", alt: "Bonnie Green" %>
@@ -52,7 +51,7 @@ module Gustwave
   #   <%= render Gustwave::Timeline.new(orientation: :horizontal) do |timeline| %>
   #     <% timeline.with_item do |item| %>
   #       <% item.with_marker_icon :calendar_month %>
-  #       <%= render Gustwave::Heading.new("Flowbite Library v1.0.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
+  #       <%= render Gustwave::Heading.new("Acme Library v1.0.0", tag: :h3, size: :xs, class: "text-lg font-semibold") %>
   #     <% end %>
   #   <% end %>
   #

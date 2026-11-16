@@ -2,7 +2,7 @@
 
 module Gustwave
   module Form
-    # Use Input to render Flowbite's input field: a text, email, password,
+    # Use Input to render an input field: a text, email, password,
     # number, URL, phone number, search, date or time input, in three sizes
     # and with a success or error look.
     #
@@ -34,7 +34,7 @@ module Gustwave
     # === Visuals
     #
     # A leading visual, e.g. an icon, sits inside the input at its start. The
-    # input then renders in Flowbite's input group, a +relative+ wrapper with
+    # input then renders in an input group, a +relative+ wrapper with
     # the icon beside the input. +icon:+ is shorthand for the icon slot:
     #
     #   <%= render Gustwave::Form::Input.new(:email, form: f, type: :email, icon: :envelope) %>

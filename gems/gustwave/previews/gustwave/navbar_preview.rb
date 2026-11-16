@@ -26,27 +26,27 @@ module Gustwave
       render_with_template
     end
 
-    # Smaller text than +with_dropdown+, as in the example on Flowbite's dropdown page.
+    # Smaller text than +with_dropdown+.
     def with_compact_dropdown
       render_with_template
     end
 
-    # A dropdown with a submenu inside its menu, as in Flowbite's multi-level dropdown example.
+    # A dropdown with a submenu inside its menu.
     def with_multi_level_dropdown
       render_with_template
     end
 
-    # A second row of links below the navbar, as in Flowbite's navbar with submenu example.
+    # A second row of links below the navbar.
     def with_submenu
       render_with_template
     end
 
-    # A language switcher with Flowbite's flags in the actions row, as in its language dropdown example.
+    # A language switcher with flags in the actions row.
     def with_language_dropdown
       render_with_template
     end
 
-    # A user avatar that opens a user menu in the actions row, as in Flowbite's user menu example.
+    # A user avatar that opens a user menu in the actions row.
     def with_user_menu
       render_with_template
     end

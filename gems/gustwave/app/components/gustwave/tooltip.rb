@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A short text that appears next to a trigger element, using Flowbite's
-  # tooltip. Spread +trigger_options+ into the trigger, which also points
+  # A short text that appears next to a trigger element. Spread +trigger_options+ into the trigger, which also points
   # +aria-describedby+ at the tooltip. Pass the trigger's own
   # +aria-describedby+ to +trigger_options+ to keep it.
   #

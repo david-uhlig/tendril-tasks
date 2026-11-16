@@ -2,7 +2,7 @@
 
 module Gustwave
   module Form
-    # Use Radio to render Flowbite's radio button: a round button for one
+    # Use Radio to render a radio button: a round button for one
     # choice out of several, in seven colors.
     #
     # The radio is the +<input type="radio">+ itself, and +options+ are its
@@ -13,9 +13,8 @@ module Gustwave
     #
     #   <%= render Gustwave::Form::Radio.new(name: "plan", value: "free", aria: { label: "Free plan" }) %>
     #
-    # +color+ is an option. Flowbite's colors are +:blue+, +:red+, +:green+,
-    # +:purple+, +:teal+, +:yellow+ and +:orange+. Flowbite shows the radio in
-    # one size.
+    # +color+ is an option: +:blue+, +:red+, +:green+, +:purple+, +:teal+,
+    # +:yellow+ or +:orange+. The radio has one size.
     #
     # === Without a form builder
     #
@@ -36,8 +35,7 @@ module Gustwave
     #
     # Rails' +field_error_proc+ never wraps the radio. In the +error+
     # validation state the radio sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise. Flowbite shows no validation look
-    # for the radio, so the state changes no classes.
+    # caller's +aria+ options say otherwise. The state changes no classes.
     #
     # === In a field
     #

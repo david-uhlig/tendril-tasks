@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Rating to show a score as a row of stars, as in Flowbite's rating component.
+  # Use Rating to show a score as a row of stars.
   #
   # The score fills the stars up to its whole part, so 4.95 shows four filled
-  # stars and one empty star, as in Flowbite. The stars are the solid star icon,
+  # stars and one empty star. The stars are the solid star icon,
   # the filled ones in yellow and the empty ones in gray. The row's label is
   # read out by screen readers. Content passed as a block follows the stars in
   # the same row, e.g. the score as text or a review count.
@@ -57,7 +57,7 @@ module Gustwave
 
     # @param value [Numeric] the score, e.g. 4.95. Its whole part sets the number of filled stars, clamped to +max+.
     # @param max [Integer] the number of stars. Defaults to 5. Must be a positive Integer.
-    # @param size [Symbol] the size of the stars, +:sm+ (default), +:md+ or +:lg+, Flowbite's star sizes.
+    # @param size [Symbol] the size of the stars, +:sm+ (default), +:md+ or +:lg+.
     # @param label [String, nil] what screen readers announce for the stars. Defaults to a translated "Rated %{value} out of %{max}".
     # @param stars_options [Hash] additional HTML attributes for the wrapper of the stars, e.g. +class+.
     # @param filled_star_options [Hash] additional HTML attributes and component options for each filled star's Gustwave::Icon, e.g. +class+.

@@ -2,7 +2,7 @@
 
 module Gustwave
   module Form
-    # Use FileInput to render Flowbite's file input: a field that picks files
+    # Use FileInput to render a file input: a field that picks files
     # to upload, in three sizes and with a success or error look.
     #
     # +options+ are the +<input>+'s HTML attributes, e.g. +multiple+,

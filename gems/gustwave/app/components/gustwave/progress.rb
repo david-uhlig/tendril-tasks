@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Progress to show a completion rate as a bar, as in Flowbite's progress
-  # bars. The value is a percentage, clamped to 0..100.
+  # Use Progress to show a completion rate as a bar. The value is a percentage, clamped to 0..100.
   #
   # Examples:
   #
@@ -28,7 +27,7 @@ module Gustwave
   # Puts a label outside the bar by composition:
   #
   #   <div class="flex justify-between mb-1">
-  #     <span id="upload-label" class="text-base font-medium text-blue-700 dark:text-white">Flowbite</span>
+  #     <span id="upload-label" class="text-base font-medium text-blue-700 dark:text-white">Acme</span>
   #     <span class="text-sm font-medium text-blue-700 dark:text-white">45%</span>
   #   </div>
   #   <%= render Gustwave::Progress.new(45, aria: { labelledby: "upload-label" }) %>

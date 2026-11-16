@@ -1,6 +1,6 @@
 module Gustwave
   class JumbotronPreview < ViewComponent::Preview
-    # A centered hero with a heading, a paragraph and two buttons. This is Flowbite's default jumbotron.
+    # A centered hero with a heading, a paragraph and two buttons.
     def default
       render_with_template
     end

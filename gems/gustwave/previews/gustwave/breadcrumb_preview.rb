@@ -1,12 +1,12 @@
 module Gustwave
   class BreadcrumbPreview < ViewComponent::Preview
     # http://localhost:3030/rails/view_components/gustwave/breadcrumb/default
-    # Flowbite's default breadcrumb: a home icon, a link and the current page.
+    # A home icon, a link and the current page.
     def default
       render Gustwave::Breadcrumb.new do |breadcrumb|
         breadcrumb.with_item("Home", href: "#", icon: :home)
         breadcrumb.with_item("Projects", href: "#")
-        breadcrumb.with_item("Flowbite")
+        breadcrumb.with_item("Acme")
       end
     end
 
@@ -16,7 +16,7 @@ module Gustwave
       render Gustwave::Breadcrumb.new(solid: true) do |breadcrumb|
         breadcrumb.with_item("Home", href: "#", icon: :home)
         breadcrumb.with_item("Templates", href: "#")
-        breadcrumb.with_item("Flowbite")
+        breadcrumb.with_item("Acme")
       end
     end
 

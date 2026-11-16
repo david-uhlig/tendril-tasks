@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Footer to render the footer at the bottom of a page, as in Flowbite's
-  # footers. The footer is a layout wrapper: it renders a +<footer>+ element
+  # Use Footer to render the footer at the bottom of a page. The footer is a layout wrapper: it renders a +<footer>+ element
   # with a container around the content block. Put the copyright notice,
   # link lists, sitemap groups, brand and social icons in the block, composed
   # from other components.
@@ -20,7 +19,7 @@ module Gustwave
   #
   #   <%= render Gustwave::Footer.new do %>
   #     <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-  #       © 2023 <%= render Gustwave::Link.new("Flowbite", href: "#", color: :none) %>. All Rights Reserved.
+  #       © 2023 <%= render Gustwave::Link.new("Acme", href: "#", color: :none) %>. All Rights Reserved.
   #     </span>
   #     <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
   #       <li><%= render Gustwave::Link.new("About", href: "#", color: :none, class: "me-4 md:me-6") %></li>
@@ -31,21 +30,21 @@ module Gustwave
   # Renders a sticky footer, fixed to the bottom of the viewport:
   #
   #   <%= render Gustwave::Footer.new(sticky: true) do %>
-  #     <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Flowbite. All Rights Reserved.</span>
+  #     <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Acme. All Rights Reserved.</span>
   #   <% end %>
   #
   # Renders a rounded footer that floats inside the page, with a card-like
   # outline:
   #
   #   <%= render Gustwave::Footer.new(class: "rounded-lg shadow-sm m-4") do %>
-  #     <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Flowbite. All Rights Reserved.</span>
+  #     <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Acme. All Rights Reserved.</span>
   #   <% end %>
   #
   # Lays out a second row with +container_options:+, e.g. a row of links
   # beside the copyright notice from the +md+ breakpoint up:
   #
   #   <%= render Gustwave::Footer.new(container_options: { class: "md:flex md:items-center md:justify-between" }) do %>
-  #     <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Flowbite. All Rights Reserved.</span>
+  #     <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Acme. All Rights Reserved.</span>
   #     <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
   #       <li><%= render Gustwave::Link.new("Privacy Policy", href: "#", color: :none, class: "me-4 md:me-6") %></li>
   #       <li><%= render Gustwave::Link.new("Contact", href: "#", color: :none) %></li>

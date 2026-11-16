@@ -14,7 +14,7 @@ module Gustwave
       render Gustwave::Heading.new("An h2 sized as md", tag: :h2, size: :md)
     end
 
-    # Flowbite's default heading: a hero with a paragraph and a button.
+    # A hero with a paragraph and a button.
     def default
       render_with_template
     end
@@ -54,7 +54,7 @@ module Gustwave
       render_with_template
     end
 
-    # A breadcrumb above the heading, as in Flowbite's breadcrumb context example.
+    # A breadcrumb above the heading.
     def breadcrumb
       render_with_template
     end

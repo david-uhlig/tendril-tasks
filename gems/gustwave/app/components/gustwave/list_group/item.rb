@@ -18,7 +18,7 @@ module Gustwave
     #     item.with_trailing_visual_renderable(Gustwave::Badge.new("3", class: "ms-auto"))
     #   end
     #
-    # Icons are solid, as in Flowbite; pass +theme: :outline+ for an outline
+    # Icons are solid; pass +theme: :outline+ for an outline
     # one. +icon:+ is shorthand for +with_leading_visual_icon+. Visuals are
     # decorative and hidden from screen readers.
     #

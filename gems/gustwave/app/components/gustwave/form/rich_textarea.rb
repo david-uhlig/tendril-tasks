@@ -2,10 +2,8 @@
 
 module Gustwave
   module Form
-    # Use RichTextarea to render a rich text editor, Lexxy or Trix, in
-    # Flowbite's frame with its toolbar: a bar above the editor, below it or
-    # both, as in Flowbite's "WYSIWYG Editor" and "Comment box" textarea
-    # examples.
+    # Use RichTextarea to render a rich text editor, Lexxy or Trix, in a
+    # frame with its toolbar: a bar above the editor, below it or both.
     #
     # +options+ are the editor element's HTML attributes, e.g. +placeholder+
     # and +data+. The label, helper text and validation message belong to

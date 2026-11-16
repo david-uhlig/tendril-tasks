@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A dialog that overlays the page, as in Flowbite's modals.
+  # A dialog that overlays the page.
   #
   # Pass a +header+, a +body+ and a +footer+ slot, and block content after
   # them. The block content is appended after the slots, so a form can wrap a
@@ -32,7 +32,6 @@ module Gustwave
   class Modal < Gustwave::Component
     attr_reader :id
 
-    # See: https://flowbite.com/docs/components/modal/
     option :placement, default: :center, values: %i[
       top-left top-center top-right
       center-left center center-right

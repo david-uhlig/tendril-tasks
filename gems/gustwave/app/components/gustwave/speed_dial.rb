@@ -2,7 +2,7 @@
 
 module Gustwave
   # Use SpeedDial to render a floating button that expands into a menu of
-  # actions. Matches Flowbite's speed dial.
+  # actions.
   #
   # The trigger comes first in the DOM, followed by the menu of actions, so
   # the tab order runs trigger, then actions. The +direction+ places the menu

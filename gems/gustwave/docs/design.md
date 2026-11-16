@@ -303,7 +303,7 @@ A component becomes stable when all of these hold:
 
 ```ruby
 module Gustwave
-  # Use Card to group content in a bordered box, as in Flowbite's cards.
+  # Use Card to group content in a bordered box.
   # ...
   # @status alpha
   class Card < Gustwave::Component

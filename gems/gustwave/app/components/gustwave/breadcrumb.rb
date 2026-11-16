@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Breadcrumb to show where the current page sits in a hierarchy, as in
-  # Flowbite's breadcrumbs. It joins its items with a separator and marks the
-  # last item as the current page with +aria-current="page"+.
+  # Use Breadcrumb to show where the current page sits in a hierarchy. It
+  # joins its items with a separator and marks the last item as the current
+  # page with +aria-current="page"+.
   #
   # Add an item with +with_item+. Pass it an +href+ to link it. The content
   # block renders after the list of items, e.g. a dropdown on the right.
@@ -15,14 +15,14 @@ module Gustwave
   #   <%= render Gustwave::Breadcrumb.new(solid: true) do |breadcrumb| %>
   #     <% breadcrumb.with_item("Home", href: "/", icon: :home) %>
   #     <% breadcrumb.with_item("Projects", href: "/projects") %>
-  #     <% breadcrumb.with_item("Flowbite") %>
+  #     <% breadcrumb.with_item("Acme") %>
   #   <% end %>
   #
   # Pass a block to an item for other content, e.g. a dropdown:
   #
   #   <%= render Gustwave::Breadcrumb.new(separator: :slash) do |breadcrumb| %>
   #     <% breadcrumb.with_item do %>
-  #       <%= render Gustwave::Dropdown.new("flowbite.com") %>
+  #       <%= render Gustwave::Dropdown.new("acme.com") %>
   #     <% end %>
   #   <% end %>
   #

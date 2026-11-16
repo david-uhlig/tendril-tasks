@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A notification that floats on the page, as in Flowbite's toasts.
+  # A notification that floats on the page.
   #
   # A +status+ shows the status's icon in a colored box beside the text, and
   # names the status for screen readers. Replace the icon with +icon:+, or

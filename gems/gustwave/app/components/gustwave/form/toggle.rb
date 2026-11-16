@@ -2,21 +2,21 @@
 
 module Gustwave
   module Form
-    # Use Toggle to render Flowbite's toggle: a checkbox shown as a switch for
+    # Use Toggle to render a toggle: a checkbox shown as a switch for
     # a yes or no answer, in three sizes and seven colors.
     #
     # +options+ are the +<input type="checkbox">+'s HTML attributes, e.g.
     # +checked+, +disabled+, +name+ and +required+. The input itself is hidden
-    # and the switch is its +track+, which Flowbite's classes draw from the
-    # input's state. The toggle renders a +<label>+ around the two, so a click
-    # on the switch reaches the input. That label holds no text: the text
+    # and the switch is its +track+, which is drawn from the input's state.
+    # The toggle renders a +<label>+ around the two, so a click on the switch
+    # reaches the input. That label holds no text: the text
     # beside the switch is the label of a Gustwave::Form::InlineField. On its
     # own, the toggle gets its accessible name from the caller:
     #
     #   <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
     #
-    # +size+ and +color+ are options. Flowbite's sizes are +:sm+, +:md+ and
-    # +:lg+ and its colors +:blue+, +:red+, +:green+, +:purple+, +:yellow+,
+    # +size+ and +color+ are options. The sizes are +:sm+, +:md+ and +:lg+
+    # and the colors +:blue+, +:red+, +:green+, +:purple+, +:yellow+,
     # +:teal+ and +:orange+. +size+ is also an HTML attribute, so it goes in
     # +html:+ when you need it.
     #
@@ -38,8 +38,7 @@ module Gustwave
     #
     # Rails' +field_error_proc+ never wraps the toggle. In the +error+
     # validation state the toggle sets +aria-invalid="true"+, unless the
-    # caller's +aria+ options say otherwise. Flowbite shows no validation look
-    # for the toggle, so the state changes no classes.
+    # caller's +aria+ options say otherwise. The state changes no classes.
     #
     # === In a field
     #

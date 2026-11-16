@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # A message that stands out from the page, as in Flowbite's alerts.
+  # A message that stands out from the page.
   #
   # Pass the message as +text+ or as a block. The +title+ renders in bold
   # before it. Spacing around the alert is up to the caller, e.g.
@@ -96,8 +96,7 @@ module Gustwave
       start: "flex"
     }
 
-    # Set when the alert renders a dismiss button, as in Flowbite's
-    # dismissible alerts
+    # Set when the alert renders a dismiss button
     toggle :dismissible, "font-medium", part: :body, internal: true
 
     part :icon, "shrink-0 inline w-4 h-4 me-3"

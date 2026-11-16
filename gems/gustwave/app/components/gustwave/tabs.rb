@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Tabs to render a set of tabs, as in Flowbite's tabs.
+  # Use Tabs to render a set of tabs.
   #
   # Two kinds of tabs, which can't be mixed in strict mode:
   #

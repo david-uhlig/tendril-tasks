@@ -1,37 +1,36 @@
 module Gustwave
   module Form
     class InputPreview < ViewComponent::Preview
-      # Flowbite's "Input fields" example: an account form with the fields in a two-column grid. Every field is a
-      # Form::Field with a Form::Input, and the terms checkbox a Form::InlineField with a Form::Checkbox.
+      # An account form with the fields in a two-column grid. Every field is a Form::Field with a Form::Input,
+      # and the terms checkbox a Form::InlineField with a Form::Checkbox.
       def default
         render_with_template
       end
 
-      # Flowbite's "Input sizes" example: the large, default and small input, each in a field with a label.
+      # The large, default and small input, each in a field with a label.
       def sizes
         render_with_template
       end
 
-      # Flowbite's "Disabled state" example: a disabled input and a disabled read-only input. They have no field,
-      # so they take an +aria-label+ instead of a label.
+      # A disabled input and a disabled read-only input. They have no field, so they take an +aria-label+ instead
+      # of a label.
       def disabled
         render_with_template
       end
 
-      # Flowbite's "Validation" example: a field in the success and one in the error state. The label, the input
-      # and the message take the state's color, and the message starts in bold.
+      # A field in the success and one in the error state. The label, the input and the message take the state's
+      # color, and the message starts in bold.
       def validation
         render_with_template
       end
 
-      # Flowbite's "Input group" example, first variant: an icon inside the input at its start. The second variant,
-      # a text or icon addon attached to the input, isn't built yet.
+      # An icon inside the input at its start. The second variant, a text or icon addon attached to the input,
+      # isn't built yet.
       def group
         render_with_template
       end
 
-      # Flowbite's "Helper text" example: helper text below the input, with a link. The field ties it to the input
-      # with +aria-describedby+.
+      # Helper text below the input, with a link. The field ties it to the input with +aria-describedby+.
       def helper_text
         render_with_template
       end

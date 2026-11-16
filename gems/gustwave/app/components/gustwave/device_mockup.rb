@@ -2,7 +2,7 @@
 
 module Gustwave
   # Use DeviceMockup to draw a device frame around your content, such as a
-  # screenshot or a live example. Matches Flowbite's device mockups.
+  # screenshot or a live example.
   #
   # Examples:
   #

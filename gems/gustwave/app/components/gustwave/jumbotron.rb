@@ -2,7 +2,7 @@
 
 module Gustwave
   # Use Jumbotron for a hero section, the first section of a page with a
-  # marketing message, as in Flowbite's jumbotrons. The section holds a
+  # marketing message. The section holds a
   # container with a maximum width. The content is a block: compose the
   # heading, text, buttons, media or form in it with the other components.
   #
@@ -15,7 +15,7 @@ module Gustwave
   #
   #   <%= render Gustwave::Jumbotron.new(centered: true) do %>
   #     <%= render Gustwave::Heading.new("We invest in the world’s potential", tag: :h1, size: :"2xl", responsive: true, class: "mb-4 tracking-tight leading-none") %>
-  #     <%= render Gustwave::Paragraph.new("Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value.", class: "mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48") %>
+  #     <%= render Gustwave::Paragraph.new("Here at Acme we focus on markets where technology, innovation, and capital can unlock long-term value.", class: "mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48") %>
   #     <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
   #       <%= render Gustwave::Buttons::Default.new("Get started", tag: :a, href: "#", size: :lg) %>
   #       <%= render Gustwave::Buttons::Default.new("Learn more", tag: :a, href: "#", color: :alternative, size: :lg, class: "sm:ms-4") %>
@@ -69,7 +69,7 @@ module Gustwave
 
     part :background_image, "absolute inset-0 -z-10 size-full object-cover mix-blend-multiply"
 
-    # Centers the content, as in Flowbite's default jumbotron
+    # Centers the content
     toggle :centered, "text-center", part: :container
 
     # Set by the component: the section holds the background image and

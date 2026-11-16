@@ -75,7 +75,7 @@ module Gustwave
     # keywords are ignored.
     #
     # @param selected [Boolean] whether the tab is selected.
-    # @param interactive [Boolean] whether the list is interactive, i.e. Flowbite's JS toggles its panels. Otherwise the tabs are navigation links.
+    # @param interactive [Boolean] whether the list is interactive, i.e. its tabs toggle panels. Otherwise the tabs are navigation links.
     # @param classes [Hash] the classes of the tab, with the keys below.
     # @option classes [String, nil] :item the classes of the list item.
     # @option classes [String, nil] :tab the classes of the trigger.

@@ -2,8 +2,8 @@
 
 module Gustwave
   module Navbars
-    # A link in a navbar, as in Flowbite's navbars. Renders an +a+ only: the
-    # navbar wraps it in a list item.
+    # A link in a navbar. Renders an +a+ only: the navbar wraps it in a list
+    # item.
     #
     # Whether the link is active is up to the caller. Pass +active: true+ to
     # mark the link as the current page with +aria-current="page"+.

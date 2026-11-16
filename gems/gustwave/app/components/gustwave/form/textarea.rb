@@ -2,8 +2,8 @@
 
 module Gustwave
   module Form
-    # Use Textarea to render Flowbite's textarea: a multi-line text field.
-    # Flowbite shows it in one size, so there is no +size+ option. Rails'
+    # Use Textarea to render a textarea: a multi-line text field. It has one
+    # size, so there is no +size+ option. Rails'
     # +size: "20x40"+ sets +cols+ and +rows+ as in any Rails form.
     #
     # +options+ are the +<textarea>+'s HTML attributes, e.g. +rows+,
@@ -33,7 +33,7 @@ module Gustwave
     #
     # === Header and footer
     #
-    # A header or footer puts the textarea in Flowbite's frame, borderless.
+    # A header or footer puts the textarea in a frame, borderless.
     # The slots are the content of the bars, e.g. toolbar buttons or a submit
     # button; the bars themselves belong to the frame. The text then comes
     # from +value:+ or the record, not from the block, because the block sets
@@ -84,7 +84,7 @@ module Gustwave
                              values: DISABLED_LOOK
 
       # The content of the bar above the textarea, e.g. toolbar buttons. With
-      # a header or footer the textarea renders in Flowbite's frame.
+      # a header or footer the textarea renders in a frame.
       #
       #   <% textarea.with_header do %>
       #     <button type="button">…</button>

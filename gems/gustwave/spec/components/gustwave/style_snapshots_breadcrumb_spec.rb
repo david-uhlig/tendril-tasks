@@ -9,7 +9,7 @@ RSpec.describe "Gustwave::Breadcrumb style snapshot", type: :component do
     items = ->(breadcrumb) do
       breadcrumb.with_item("Home", href: "#", icon: :home)
       breadcrumb.with_item("Projects", href: "#")
-      breadcrumb.with_item("Flowbite")
+      breadcrumb.with_item("Acme")
     end
 
     group :look, solid: [ false, true ], separator: %i[chevron slash], slots: items do |**args|

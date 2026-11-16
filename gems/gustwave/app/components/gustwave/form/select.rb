@@ -2,7 +2,7 @@
 
 module Gustwave
   module Form
-    # Use Select to render Flowbite's select: a drop-down list, or with
+    # Use Select to render a select: a drop-down list, or with
     # +multiple+ a list box, in three sizes, with a success or error look and
     # an underline style.
     #
@@ -58,9 +58,9 @@ module Gustwave
     # === Sizes and styles
     #
     # +size+ is +:sm+, +:md+ or +:lg+, and +style+ is +:default+, the bordered
-    # select, or +:underline+. Flowbite shows the underline select in one
-    # size and without validation looks, so with +style: :underline+ neither
-    # the size's nor the validation's classes apply. +aria-invalid+ still does.
+    # select, or +:underline+. The underline select has one size and no
+    # validation looks, so with +style: :underline+ neither the size's nor
+    # the validation's classes apply. +aria-invalid+ still does.
     #
     # +size+ and +style+ are also HTML attributes. The keywords are always
     # the options, so the attributes go in +html:+:

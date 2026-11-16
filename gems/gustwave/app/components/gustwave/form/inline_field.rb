@@ -3,7 +3,7 @@
 module Gustwave
   module Form
     # Use InlineField to render a form control with its label beside it, as
-    # Flowbite does for a toggle, a checkbox and a radio button: the control
+    # for a toggle, a checkbox and a radio button: the control
     # first, then a column with the label and the helper text under it. The
     # validation message, a Gustwave::Form::ValidationMessage, follows below
     # the row. Like Gustwave::Form::Field,
@@ -37,8 +37,7 @@ module Gustwave
     #   <% end %>
     #
     # A checkbox or a radio sits in a cell as high as the label's first line, so it stays
-    # beside that line when the label wraps or has helper text under it, as
-    # in Flowbite's checkbox with helper text.
+    # beside that line when the label wraps or has helper text under it.
     #
     # The block without a +control+ slot is the control, for an app's own
     # markup:
@@ -47,7 +46,7 @@ module Gustwave
     #     <%= check_box_tag :remember_me %>
     #   <% end %>
     #
-    # The label of a disabled control is gray, as on Flowbite's toggle page.
+    # The label of a disabled control is gray.
     # The field asks its control with +disabled?+, so with a block as the
     # control the gray is the label's class:
     # <tt>field.with_label("Sync", class: "text-gray-400 dark:text-gray-500")</tt>.

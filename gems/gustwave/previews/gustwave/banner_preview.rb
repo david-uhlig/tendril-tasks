@@ -9,7 +9,7 @@ module Gustwave
       render_with_template(template: "gustwave/banner_preview/default", locals: { position: :bottom })
     end
 
-    # Flowbite's marketing CTA
+    # A marketing banner with a call to action
     def marketing
       render_with_template
     end

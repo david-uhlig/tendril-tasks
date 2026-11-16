@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
-  # Use Card to group content in a bordered box, as in Flowbite's cards.
+  # Use Card to group content in a bordered box.
   #
   # The card renders a +<div>+, or an +<a>+ with +tag: :a+ and a +href+. A
   # card as a link gets a hover style. Pass the content as a block, and HTML
