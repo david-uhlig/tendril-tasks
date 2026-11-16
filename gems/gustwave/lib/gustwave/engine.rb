@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Rails engine that loads Gustwave into the host app when the gem is required. It
+  # reads +config.gustwave+, registers Gustwave.deprecator with the app's deprecators,
+  # and adds the gem's JavaScript to the asset and importmap paths.
   class Engine < ::Rails::Engine
     engine_name "gustwave"
 

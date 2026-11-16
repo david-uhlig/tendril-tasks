@@ -30,6 +30,8 @@ module Gustwave
   # Raised when a component's declarations of options or styles are
   # inconsistent, e.g. a default that isn't one of its values.
   class DefinitionError < Error
+    # @param component [String] the component's name, as it appears in the message.
+    # @param message [String] what is inconsistent, one problem per line.
     def initialize(component, message)
       super("Invalid declarations of #{component}:\n#{message}")
     end
@@ -51,6 +53,8 @@ module Gustwave
     #   config.gustwave.strict = true
     #
     # Setting it to +nil+ restores the default.
+    #
+    # @param value [Boolean, nil] true to raise, false to fall back, or nil for the default.
     attr_writer :strict
 
     def strict?
@@ -73,6 +77,8 @@ module Gustwave
     # The engine registers it with +Rails.application.deprecators+, so it
     # follows the app's +config.active_support.deprecation+ settings, e.g.
     # raising in test with +:raise+.
+    #
+    # @return [ActiveSupport::Deprecation] the deprecator for Gustwave's deprecations.
     def deprecator
       @deprecator ||= ActiveSupport::Deprecation.new(removal_version, "Gustwave")
     end

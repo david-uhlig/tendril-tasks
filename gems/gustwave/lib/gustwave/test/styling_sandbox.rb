@@ -16,9 +16,11 @@ module Gustwave
     #     end
     #   end
     module StylingSandbox
+      # The instance variables that hold a component's option and styling declarations, which +isolate+ restores.
       DECLARATIONS = %i[@option_declarations @styling_declarations].freeze
 
       # @param components [Array<Class>] components whose declarations to restore.
+      # @return [Object] the value of the block.
       def self.isolate(*components)
         saved = components.to_h do |component|
           [ component, DECLARATIONS.to_h { |name| [ name, component.instance_variable_get(name).dup ] } ]
