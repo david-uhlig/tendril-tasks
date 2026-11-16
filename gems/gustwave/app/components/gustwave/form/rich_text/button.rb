@@ -2,9 +2,12 @@
 
 module Gustwave
   module Form
+    # Toolbar parts of the rich text editors. Button is the button both editors
+    # share, and the Lexxy and Trix namespaces hold their own buttons and toolbars.
     module RichText
       # @status alpha
       class Button < Gustwave::Component
+        # The formatting and actions a button can stand for, as its +attribute+.
         ATTRIBUTE_OPTIONS = %w[
           bold italic strike underline highlight bullet number quote code href
           link heading1 heading2 heading3 heading4 heading5 heading6
@@ -12,6 +15,7 @@ module Gustwave
           attach_files
         ].freeze
 
+        # The icon name, or the text, each attribute's button shows by default.
         ATTRIBUTE_VISUAL_MAPPINGS = {
           bold: :letter_bold,
           italic: :letter_italic,

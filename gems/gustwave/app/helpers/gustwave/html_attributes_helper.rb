@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Normalizes and merges the HTML attributes of components, and generates
+  # their IDs. Gustwave::Component includes it.
   module HtmlAttributesHelper
     # Merges the HTML attributes under +html:+ into the hash they are in, so
     # they reach the same element as the attributes next to them. An
@@ -44,6 +46,7 @@ module Gustwave
     #   # => { accept_charset: "UTF-8" }
     #
     # @param options [Hash] the options hash to normalize.
+    # @return [Hash] the attributes, with symbol keys and the +aria+ and +data+ hashes flattened.
     def normalize_html_attributes(**options)
       options = options.symbolize_keys
       %i[aria data].each do |key|
@@ -75,6 +78,7 @@ module Gustwave
     # @param postfix [String, NilClass] String appended to the random part of the id. (Optional)
     # @param length [Integer] Length of the random part of the id. Defaults to 8 characters.
     # @param separator [String] Separator between the prefix, random part, and postfix. Defaults to "-".
+    # @return [String] the random id.
     def generate_random_id(prefix: nil, postfix: nil, length: 8, separator: "-")
       [ prefix, SecureRandom.alphanumeric(length).downcase, postfix ]
         .compact_blank

@@ -186,6 +186,7 @@ module Gustwave
       #
       # @param number [Integer, nil] the step's position, from 1.
       # @param last [Boolean] whether it's the last step, which draws no connector.
+      # @return [void]
       def apply_slot_context(number: nil, last: true, **)
         @number = number
         @last = last

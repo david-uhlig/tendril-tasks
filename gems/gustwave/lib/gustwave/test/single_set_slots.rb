@@ -14,12 +14,20 @@ module Gustwave
     #   require "gustwave/test/single_set_slots"
     #   ViewComponent::Base.prepend(Gustwave::Test::SingleSetSlots)
     module SingleSetSlots
+      # Raised by SingleSetSlots when a +renders_one+ slot that already has a value is set again.
       class SlotAlreadySetError < StandardError
+        # @param component_name [String] the class name of the component.
+        # @param slot_name [Symbol] the slot that is already set.
         def initialize(component_name, slot_name)
           super("#{component_name} already has the renders_one slot `#{slot_name}` set. Setting it again would silently replace the first value.")
         end
       end
 
+      # Raises SlotAlreadySetError when a plain +renders_one+ slot already has a value, and
+      # otherwise sets the slot as ViewComponent does.
+      #
+      # @param slot_name [Symbol] the slot being set.
+      # @return [ViewComponent::Slot] the slot that was set.
       def __vc_set_slot(slot_name, *, **, &)
         if !self.class.registered_slots.dig(slot_name, :collection) &&
             defined?(@__vc_set_slots) && @__vc_set_slots&.key?(slot_name)

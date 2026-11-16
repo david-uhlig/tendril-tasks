@@ -2,6 +2,7 @@
 
 module Gustwave
   module Dropdowns
+    # The buttons that open and close a Gustwave::Dropdown's menu.
     module Triggers
       # Use Base as a base class for building dropdown triggers
       #
@@ -21,6 +22,7 @@ module Gustwave
         # Delay in milliseconds before showing the dropdown menu when the
         # trigger is activated
         DELAY_FLOWBITE_DEFAULT = 300
+        # The default +delay+ of +initialize+, the delay in milliseconds before the menu opens.
         DELAY_DEFAULT = DELAY_FLOWBITE_DEFAULT
 
         # How the trigger activates
@@ -41,11 +43,13 @@ module Gustwave
         # Distance in pixels between the dropdown menu and the trigger in the
         # +placement+ main axis
         OFFSET_DISTANCE_FLOWBITE_DEFAULT = nil
+        # The default +offset_distance+ of +initialize+. +nil+ leaves the attribute out, so the default applies.
         OFFSET_DISTANCE_DEFAULT = OFFSET_DISTANCE_FLOWBITE_DEFAULT
 
         # Distance in pixels between the dropdown menu and the trigger in the
         # +placement+ secondary axis
         OFFSET_SKIDDING_FLOWBITE_DEFAULT = nil
+        # The default +offset_skidding+ of +initialize+. +nil+ leaves the attribute out, so the default applies.
         OFFSET_SKIDDING_DEFAULT = OFFSET_SKIDDING_FLOWBITE_DEFAULT
 
         # @param text [String, nil] the text to appear on the trigger. Takes precedent over block content.

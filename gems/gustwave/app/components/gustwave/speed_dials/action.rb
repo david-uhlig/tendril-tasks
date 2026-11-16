@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Parts of Gustwave::SpeedDial: its trigger and its action buttons.
   module SpeedDials
     # One action button of a speed dial: an icon with a label. Block content
     # replaces the icon.

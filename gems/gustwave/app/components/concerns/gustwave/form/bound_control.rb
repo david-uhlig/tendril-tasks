@@ -73,9 +73,14 @@ module Gustwave
       # A stand-in for a record that reports no errors, so Rails' helpers
       # render the bare element. Everything else goes to the record.
       class ErrorlessObject < SimpleDelegator
+        # The errors of the record, always empty, so the helper shows no error state.
+        #
+        # @return [Hash] an empty hash.
         def errors = {}
 
         # Rails derives names and translations from the record's class.
+        #
+        # @return [Class] the class of the record.
         def class = __getobj__.class
       end
 
@@ -117,6 +122,7 @@ module Gustwave
       # @param id [String, nil] the ID of a control without a form.
       # @param validation [Symbol, nil] the validation state, unless the caller picked one.
       # @param described_by [String, nil] IDs of the elements describing the control, merged with the caller's +aria-describedby+.
+      # @return [void]
       def apply_slot_context(attribute: nil, form: nil, id: nil, validation: nil, described_by: nil, **)
         @context_attribute = attribute
         @context_form = form

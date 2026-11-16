@@ -21,6 +21,7 @@ module Gustwave
   #
   # @status alpha
   class Drawer < Gustwave::Component
+    # The default Tailwind class for the gap at the bottom of an edge drawer, used by +initialize+'s +edge_offset+.
     EDGE_OFFSET_DEFAULT = "bottom-[60px]"
 
     attr_reader :id
@@ -112,6 +113,7 @@ module Gustwave
     #
     # @param action [Symbol] What the trigger does: :toggle, :show or :hide. Defaults to :toggle.
     # @param attributes [Hash] the trigger's own HTML attributes.
+    # @return [Hash] the HTML attributes of the trigger.
     def trigger_options(action: DEFAULT, **attributes)
       drawer_keys = %w[data-drawer-target data-drawer-toggle data-drawer-show data-drawer-hide]
       options = attributes.reject { |key, _| drawer_keys.include?(key.to_s) }
@@ -128,6 +130,10 @@ module Gustwave
     # Returns the trigger's HTML attributes for the drawer with the given +id+.
     #
     #   <%= render Gustwave::Button.new("Show", **Gustwave::Drawer.trigger_options("info")) %>
+    #
+    # @param id [String] the id of the drawer the trigger targets.
+    # @param kwargs [Hash] the keyword arguments of #trigger_options: +action:+ and the trigger's own HTML attributes.
+    # @return [Hash] the HTML attributes of the trigger.
     def self.trigger_options(id, **kwargs)
       new(id:).trigger_options(**kwargs)
     end

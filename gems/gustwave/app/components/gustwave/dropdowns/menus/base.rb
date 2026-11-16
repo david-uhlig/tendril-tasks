@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Parts of Gustwave::Dropdown: its triggers, menus and menu items.
   module Dropdowns
+    # The panels that list the items of a Gustwave::Dropdown.
     module Menus
       # Use Base as a base class for building dropdown menus
       #

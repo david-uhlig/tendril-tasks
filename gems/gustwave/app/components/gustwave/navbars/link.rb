@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Parts of Gustwave::Navbar, e.g. its links.
   module Navbars
     # A link in a navbar. Renders an +a+ only: the navbar wraps it in a list
     # item.

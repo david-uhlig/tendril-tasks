@@ -69,6 +69,7 @@ module Gustwave
       # @param position [Symbol, nil] +:first+ for the first item, otherwise +:other+.
       # @param current [Boolean, nil] Whether the item is the current page.
       # @param separator [Symbol, nil] +:chevron+ or +:slash+.
+      # @return [void]
       def apply_slot_context(position: nil, current: nil, separator: nil, **)
         select_options(position:) if position
         select_options(separator:) if separator

@@ -3,6 +3,9 @@
 require "yaml"
 
 module Gustwave
+  # Test helpers for specs of apps that use Gustwave. Each helper is in its own file under
+  # +gustwave/test+ and is required on its own, e.g. +require "gustwave/test/style_snapshots"+,
+  # so a spec loads only the helpers it uses.
   module Test
     # Records the markup a component renders for every combination of its
     # style options and compares it to a committed YAML fixture.
@@ -34,12 +37,21 @@ module Gustwave
     #     end
     #   end
     module StyleSnapshots
+      # Adds the +style_snapshot_dir+ class attribute to the example group, which names the
+      # directory of the fixtures.
+      #
+      # @param base [Class] the example group that extends StyleSnapshots.
+      # @return [void]
       def self.extended(base)
         base.class_attribute :style_snapshot_dir
       end
 
       # Defines an example that renders all groups of +name+ and compares the
       # result to the fixture +<style_snapshot_dir>/<name.underscore>.yml+.
+      #
+      # @param name [Class, String] the component, or its name, e.g. +"Gustwave::Badge"+.
+      # @yield the groups to record, see Snapshot#group.
+      # @return [void]
       def style_snapshot(name, &definition)
         name = name.to_s
 
@@ -71,6 +83,10 @@ module Gustwave
       # Numbers the ids from +generate_random_id+ while a snapshot records,
       # so they stay stable between runs.
       module StableRandomIds
+        # Runs the block with the ids from +generate_random_id+ numbered from 1.
+        #
+        # @yieldparam reset [Proc] restarts the numbering, so each combination starts again at 1.
+        # @return [Object] the value of the block.
         def self.while_recording
           Thread.current[:gustwave_style_snapshot_ids] = 0
           yield -> { Thread.current[:gustwave_style_snapshot_ids] = 0 }
@@ -78,6 +94,14 @@ module Gustwave
           Thread.current[:gustwave_style_snapshot_ids] = nil
         end
 
+        # Returns an id such as +prefix-r1-postfix+ while a snapshot records, and otherwise the
+        # id from HtmlAttributesHelper.
+        #
+        # @param prefix [String, nil] text before the id.
+        # @param postfix [String, nil] text after the id.
+        # @param length [Integer] the length of the id, including its +r+.
+        # @param separator [String] what joins the prefix, the id and the postfix.
+        # @return [String] the id.
         def generate_random_id(prefix: nil, postfix: nil, length: 8, separator: "-")
           count = Thread.current[:gustwave_style_snapshot_ids]
           return super unless count
@@ -88,12 +112,25 @@ module Gustwave
       end
       Gustwave::HtmlAttributesHelper.prepend(StableRandomIds)
 
+      # The groups of one +style_snapshot+ and the markup each combination renders. Its +group+
+      # method is what the definition block of +style_snapshot+ calls.
       class Snapshot
+        # A group of combinations: its +axes+, the +content+ and +slots+ to render each with, and
+        # the +builder+ that returns the component.
         Group = Struct.new(:name, :axes, :content, :slots, :builder)
 
+        # How many changed combinations Snapshot.diff lists before it says how many more there are.
         MAX_REPORTED_DIFFERENCES = 20
+        # Attributes that Snapshot#elements leaves out: +class+, which is recorded as sorted
+        # classes, and +d+, the SVG path geometry.
         IGNORED_ATTRIBUTES = %w[class d].freeze
 
+        # Describes how +actual+ differs from +expected+ combination by combination, or returns
+        # nil when they match.
+        #
+        # @param expected [Hash{String => Array<String>}] the recorded fixture.
+        # @param actual [Hash{String => Array<String>}] the markup recorded now.
+        # @return [String, nil] the message for a failing example, or nil.
         def self.diff(expected, actual)
           differences = (expected.keys | actual.keys).filter_map do |key|
             next if expected[key] == actual[key]
@@ -114,6 +151,7 @@ module Gustwave
             (more.positive? ? [ "… and #{more} more" ] : [])).join("\n")
         end
 
+        # @param name [String] the component's name, which names the snapshot in errors.
         def initialize(name)
           @name = name
           @groups = []
@@ -125,6 +163,12 @@ module Gustwave
         # called with the component inside the render block, where slot
         # setters have a view context. Both blocks run in the example, so
         # they can use factories, stubs and test helpers.
+        #
+        # @param name [Symbol, String] the group's name, which starts each of its keys in the fixture.
+        # @param content [String, nil] the block content that each combination renders with.
+        # @param slots [Proc, nil] called with the component inside the render block, to set its slots.
+        # @param axes [Hash{Symbol => Object}] the options to vary, each with a value or an array of values.
+        # @return [void]
         def group(name, content: nil, slots: nil, **axes, &builder)
           raise ArgumentError, "group #{name.inspect} needs a block" unless builder
 
@@ -133,6 +177,10 @@ module Gustwave
 
         # Returns { "group key=value …" => ["tag attribute=\"value\": classes", …] }.
         # +reset+ is called before each combination is built.
+        #
+        # @param example [RSpec::Core::ExampleGroup] the example that builds each component.
+        # @param reset [Proc, nil] called before each combination is built.
+        # @return [Hash{String => Array<String>}] the recorded elements of each combination, by key.
         def record(example, reset: nil)
           @groups.each_with_object({}) do |group, result|
             combinations(group.axes).each do |args|

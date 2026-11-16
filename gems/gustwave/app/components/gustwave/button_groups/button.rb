@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Components of Gustwave::ButtonGroup, which lays out its buttons as one group.
   module ButtonGroups
     # A button within Gustwave::ButtonGroup. The group selects its position,
     # which sets the border and rounding. +pill+ has no effect in a group.
@@ -36,6 +37,9 @@ module Gustwave
       }
 
       # Called by Gustwave::ButtonGroup before rendering
+      #
+      # @param group_position [Symbol] +:only+, +:first+, +:middle+ or +:last+, the button's place in the group.
+      # @return [void]
       def apply_slot_context(group_position:, **)
         select_options(group_position:)
       end

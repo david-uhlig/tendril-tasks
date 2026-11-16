@@ -88,8 +88,10 @@ module Gustwave
     #
     #   <%= link_to "Docs", docs_path, **tooltip.trigger_options("aria-describedby": "help", class: "underline") %>
     #
+    # @param placement [Symbol] where the tooltip sits relative to the trigger. Defaults to +:top+.
     # @param trigger_event [Symbol] +:hover+ or +:click+.
     # @param attributes [Hash] the trigger's own HTML attributes.
+    # @return [Hash] the HTML attributes of the trigger.
     def trigger_options(placement: DEFAULT, trigger_event: DEFAULT, **attributes)
       described_by, options = extract_described_by(attributes)
       tooltip_keys = %w[data-tooltip-target data-tooltip-placement data-tooltip-trigger data-tooltip-style]

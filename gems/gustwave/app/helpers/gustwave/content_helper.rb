@@ -9,6 +9,7 @@ module Gustwave
     # If +text+ is not present, returns nil.
     #
     # @param text [String] the text to render.
+    # @return [ActiveSupport::SafeBuffer, nil] the span, or +nil+ for blank text.
     def sr_only(text)
       return unless text.present?
 

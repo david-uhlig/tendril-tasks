@@ -11,6 +11,7 @@ module Gustwave
         #
         # @status alpha
         class Toolbar < Gustwave::Component
+          # The actions of the toolbar, in groups. A divider goes between the groups.
           ACTION_GROUPS = [
             %i[bold italic strike underline highlight link],
             %i[heading1 heading2 heading3 heading4],
@@ -19,8 +20,10 @@ module Gustwave
             %i[attach_files],
             %i[undo redo]
           ].freeze
+          # Every action in ACTION_GROUPS, the values the +hidden+ and +disabled+ options take.
           ACTION_OPTIONS = ACTION_GROUPS.flatten.freeze
 
+          # The heading actions, which the Stimulus heading controller turns into toggles.
           HEADING_ACTIONS = %i[heading1 heading2 heading3 heading4].freeze
 
           # @param form [ActionView::Helpers::FormBuilder, nil] the editor's form builder, as Gustwave::Form::RichTextarea passes it.

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gustwave
+  # Layout containers that arrange their children, e.g. a horizontally scrolling row of items.
   module Containers
     # Use ResponsiveHorizontalScroll to create a container that scrolls
     # horizontally on mobile device viewports and wraps its elements on larger

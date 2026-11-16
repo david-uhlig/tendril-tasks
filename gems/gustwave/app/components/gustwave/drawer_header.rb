@@ -70,6 +70,8 @@ module Gustwave
 
     # The button rendered when no +close_button+ is set. Public, because
     # ViewComponent only finds +default_<slot>+ methods that are public.
+    #
+    # @return [Gustwave::Component] the close button.
     def default_close_button
       build_slot_close_button
     end

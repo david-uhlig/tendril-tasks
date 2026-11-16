@@ -3,6 +3,8 @@
 module Gustwave
   module Form
     module RichText
+      # Toolbar parts for Lexxy, the rich text editor: buttons that dispatch its
+      # editor commands, and a toolbar for them.
       module Lexxy
         # Renders a toolbar button that dispatches a Lexxy editor command.
         #
@@ -11,6 +13,7 @@ module Gustwave
         #
         # @status alpha
         class Button < Gustwave::Component
+          # The Lexxy editor command each attribute dispatches as +data-command+.
           ATTRIBUTE_COMMAND_MAPPINGS = {
             bold: "bold",
             italic: "italic",
@@ -40,6 +43,7 @@ module Gustwave
             attach_files: "file"
           }.freeze
 
+          # The payload each attribute passes its command as +data-payload+, e.g. the heading level.
           ATTRIBUTE_PAYLOAD_MAPPINGS = {
             heading1: "h1",
             heading2: "h2",
