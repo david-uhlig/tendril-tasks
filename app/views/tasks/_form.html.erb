@@ -2,6 +2,7 @@
 <%= form_with model: form_object,
               url: form_object.form_path,
               method: form_object.form_method,
+              builder: Gustwave::FormBuilder,
               class: "mx-auto space-y-4" do |f| %>
   <%= render Gustwave::Form::Field.new(:project_id, form: f, label: Project.model_name.human) do |field| %>
     <% field.with_control_input_group do |group| %>
@@ -19,9 +20,7 @@
     <% end %>
   <% end %>
 
-  <%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
-    <% field.with_control_input %>
-  <% end %>
+  <%= f.text_field :title %>
 
   <%= render Gustwave::Form::Field.new(:description, form: f) do |field| %>
     <% field.with_control_rich_textarea(spellcheck: false) do |editor| %>

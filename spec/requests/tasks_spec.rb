@@ -124,6 +124,18 @@ RSpec.describe "Tasks", type: :request do
       expect(response).to have_http_status(:unprocessable_content)
     end
 
+    it "ties the project select to its error message" do
+      login_as(editor)
+
+      post tasks_path, params: { task_form: attributes_for(:task) }
+
+      page = Capybara.string(response.body)
+      expect(page).to have_css("label[for='task_form_project_id']")
+      expect(page).to have_css("select#task_form_project_id[aria-invalid='true']" \
+                               "[aria-describedby='task_form_project_id_validation_message']")
+      expect(page).to have_css("#task_form_project_id_validation_message")
+    end
+
     it "responds with bad request when the task form is missing" do
       login_as(editor)
       post tasks_path
