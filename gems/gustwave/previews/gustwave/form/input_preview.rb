@@ -24,8 +24,7 @@ module Gustwave
         render_with_template
       end
 
-      # An icon inside the input at its start. The second variant, a text or icon addon attached to the input,
-      # isn't built yet.
+      # An icon inside the input at its start, and a text or icon addon attached to the input in an input group.
       def group
         render_with_template
       end

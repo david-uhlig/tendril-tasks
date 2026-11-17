@@ -1,0 +1,34 @@
+module Gustwave
+  module Form
+    class InputGroupPreview < ViewComponent::Preview
+      # A leading dropdown with country flags, and a select. The menu items are buttons. The 2px light divider between
+      # the dropdown and the select is a class on the select.
+      def select_dropdown
+        render_with_template
+      end
+
+      # A leading dropdown, "All categories", and an input. The input's search button, which sits inside the input at
+      # its end, is left out: that is the search input, which isn't built yet.
+      def dropdown
+        render_with_template
+      end
+
+      # The input group's options, for trying out how they combine. The addons take the group's size, and the row stays
+      # as high as the taller of control and addons. The icon toggle puts an icon inside the input.
+      # @param size select { choices: [sm, md, lg] }
+      # @param leading select { choices: [none, text, button, dropdown] }
+      # @param trailing select { choices: [none, text, button, dropdown] }
+      # @param control select { choices: [input, select] }
+      # @param icon toggle
+      def playground(size: :md, leading: :text, trailing: :none, control: :input, icon: false)
+        render_with_template(locals: {
+          size: size.to_sym,
+          leading: leading.to_sym,
+          trailing: trailing.to_sym,
+          control: control.to_sym,
+          icon: ActiveModel::Type::Boolean.new.cast(icon)
+        })
+      end
+    end
+  end
+end
