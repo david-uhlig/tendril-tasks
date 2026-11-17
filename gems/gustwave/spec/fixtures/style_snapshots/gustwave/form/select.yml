@@ -74,6 +74,65 @@ look style=:underline size=:lg validation=:error:
 - 'select aria-invalid="true": appearance-none bg-transparent block border-0 border-b-2
   border-gray-200 dark:border-gray-700 dark:text-gray-400 focus:border-gray-200 focus:outline-none
   focus:ring-0 peer px-0 py-2.5 text-gray-500 text-sm w-full'
+joined joined=:none size=:sm:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2 rounded-lg text-gray-900 text-sm w-full'
+joined joined=:none size=:md:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  w-full'
+joined joined=:none size=:lg:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  focus:border-blue-500 focus:ring-blue-500 px-4 py-3 rounded-lg text-base text-gray-900
+  w-full'
+joined joined=:start size=:sm:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 rounded-e-lg rounded-none
+  text-gray-900 text-sm w-full'
+joined joined=:start size=:md:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 rounded-e-lg rounded-none
+  text-gray-900 text-sm w-full'
+joined joined=:start size=:lg:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 px-4 py-3 rounded-e-lg
+  rounded-none text-base text-gray-900 w-full'
+joined joined=:end size=:sm:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 rounded-none rounded-s-lg
+  text-gray-900 text-sm w-full'
+joined joined=:end size=:md:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 rounded-none rounded-s-lg
+  text-gray-900 text-sm w-full'
+joined joined=:end size=:lg:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 px-4 py-3 rounded-none
+  rounded-s-lg text-base text-gray-900 w-full'
+joined joined=:both size=:sm:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 rounded-none text-gray-900
+  text-sm w-full'
+joined joined=:both size=:md:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 rounded-none text-gray-900
+  text-sm w-full'
+joined joined=:both size=:lg:
+- 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
+  dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 px-4 py-3 rounded-none
+  text-base text-gray-900 w-full'
 disabled style=:default validation=:none disabled=true:
 - 'select disabled="disabled": bg-gray-50 block border border-gray-300 dark:bg-gray-700
   dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400

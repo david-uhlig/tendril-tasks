@@ -10,7 +10,8 @@ RSpec.describe "Extending Gustwave::Buttons::Base", type: :component do
     gradient_monochrome_colored_shadow: Gustwave::Buttons::GradientMonochromeColoredShadow,
     gradient_duotone: Gustwave::Buttons::GradientDuotone,
     gradient_duotone_outline: Gustwave::Buttons::GradientDuotoneOutline,
-    inline: Gustwave::Buttons::Inline
+    inline: Gustwave::Buttons::Inline,
+    input_addon: Gustwave::Form::InputGroups::Button
   }.freeze
 
   around do |example|

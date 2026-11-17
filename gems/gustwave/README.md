@@ -207,6 +207,7 @@ Gustwave has the following controls built in:
 | `Gustwave::Form::Toggle` | A checkbox shown as a switch, for a yes or no answer |
 | `Gustwave::Form::Checkbox` | A checkbox, for a yes or no answer or one of several options |
 | `Gustwave::Form::Radio` | A radio button, for one choice out of several |
+| `Gustwave::Form::InputGroup` | An input or a select with a text, a button or a dropdown attached beside it |
 
 > [!NOTE] 
 > A control has no visible label, so make sure to give it an accessible name, e.g. with `aria: { label: … }`.

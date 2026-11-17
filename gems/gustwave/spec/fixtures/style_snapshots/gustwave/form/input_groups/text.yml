@@ -1,0 +1,39 @@
+---
+look size=:sm side=:leading:
+- 'span: bg-gray-200 border border-e-0 border-gray-300 dark:bg-gray-600 dark:border-gray-600
+  dark:text-gray-400 inline-flex items-center px-3 py-2 rounded-s-md text-gray-900
+  text-xs'
+look size=:sm side=:trailing:
+- 'span: bg-gray-200 border border-gray-300 border-s-0 dark:bg-gray-600 dark:border-gray-600
+  dark:text-gray-400 inline-flex items-center px-3 py-2 rounded-e-md text-gray-900
+  text-xs'
+look size=:md side=:leading:
+- 'span: bg-gray-200 border border-e-0 border-gray-300 dark:bg-gray-600 dark:border-gray-600
+  dark:text-gray-400 inline-flex items-center px-3 py-2.5 rounded-s-md text-gray-900
+  text-sm'
+look size=:md side=:trailing:
+- 'span: bg-gray-200 border border-gray-300 border-s-0 dark:bg-gray-600 dark:border-gray-600
+  dark:text-gray-400 inline-flex items-center px-3 py-2.5 rounded-e-md text-gray-900
+  text-sm'
+look size=:lg side=:leading:
+- 'span: bg-gray-200 border border-e-0 border-gray-300 dark:bg-gray-600 dark:border-gray-600
+  dark:text-gray-400 inline-flex items-center px-4 py-3 rounded-s-md text-base text-gray-900'
+look size=:lg side=:trailing:
+- 'span: bg-gray-200 border border-gray-300 border-s-0 dark:bg-gray-600 dark:border-gray-600
+  dark:text-gray-400 inline-flex items-center px-4 py-3 rounded-e-md text-base text-gray-900'
+icon side=:leading:
+- 'span: align-bottom bg-gray-200 border border-e-0 border-gray-300 dark:bg-gray-600
+  dark:border-gray-600 dark:text-gray-400 gap-1.5 inline-flex items-center px-3 py-2.5
+  rounded-s-md text-gray-900 text-sm'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
+- path clip-rule="evenodd" fill-rule="evenodd"
+icon side=:trailing:
+- 'span: align-bottom bg-gray-200 border border-gray-300 border-s-0 dark:bg-gray-600
+  dark:border-gray-600 dark:text-gray-400 gap-1.5 inline-flex items-center px-3 py-2.5
+  rounded-e-md text-gray-900 text-sm'
+- 'svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
+  xmlns="http://www.w3.org/2000/svg": -mx-0.5 dark:text-gray-400 h-5 text-gray-500
+  w-5'
+- path clip-rule="evenodd" fill-rule="evenodd"

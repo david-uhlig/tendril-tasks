@@ -1,0 +1,92 @@
+---
+status: alpha
+constructor:
+- 'size: (optional)'
+- "**options"
+options:
+  size:
+    default: md
+    values:
+    - sm
+    - md
+    - lg
+slots:
+  control:
+    many: false
+    types:
+    - input
+    - renderable
+    - select
+  leading_addon:
+    many: false
+    types:
+    - button
+    - dropdown
+    - generic
+    - renderable
+    - text
+  trailing_addon:
+    many: false
+    types:
+    - button
+    - dropdown
+    - generic
+    - renderable
+    - text
+methods:
+- apply_slot_context
+- control
+- control?
+- disabled?
+- html_id
+- leading_addon
+- leading_addon?
+- shares_attribute?
+- trailing_addon
+- trailing_addon?
+- with_control
+- with_control_content
+- with_control_input
+- with_control_input_content
+- with_control_renderable
+- with_control_renderable_content
+- with_control_select
+- with_control_select_content
+- with_leading_addon
+- with_leading_addon_button
+- with_leading_addon_button_content
+- with_leading_addon_content
+- with_leading_addon_dropdown
+- with_leading_addon_dropdown_content
+- with_leading_addon_generic
+- with_leading_addon_generic_content
+- with_leading_addon_renderable
+- with_leading_addon_renderable_content
+- with_leading_addon_text
+- with_leading_addon_text_content
+- with_trailing_addon
+- with_trailing_addon_button
+- with_trailing_addon_button_content
+- with_trailing_addon_content
+- with_trailing_addon_dropdown
+- with_trailing_addon_dropdown_content
+- with_trailing_addon_generic
+- with_trailing_addon_generic_content
+- with_trailing_addon_renderable
+- with_trailing_addon_renderable_content
+- with_trailing_addon_text
+- with_trailing_addon_text_content
+slot_builders:
+- build_slot_control_input
+- build_slot_control_renderable
+- build_slot_control_select
+- build_slot_leading_addon_button
+- build_slot_leading_addon_dropdown
+- build_slot_leading_addon_generic
+- build_slot_leading_addon_renderable
+- build_slot_leading_addon_text
+- build_slot_trailing_addon_button
+- build_slot_trailing_addon_dropdown
+- build_slot_trailing_addon_generic
+- build_slot_trailing_addon_renderable
+- build_slot_trailing_addon_text

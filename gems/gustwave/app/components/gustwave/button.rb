@@ -17,6 +17,7 @@ module Gustwave
   # - :gradient_duotone
   # - :gradient_duotone_outline
   # - :inline
+  # - :input_addon, for the dropdown of Gustwave::Form::InputGroup
   #
   # === Using a Fixed Theme
   #
@@ -90,6 +91,7 @@ module Gustwave
     register_theme :gradient_duotone, "Gustwave::Buttons::GradientDuotone"
     register_theme :gradient_duotone_outline, "Gustwave::Buttons::GradientDuotoneOutline"
     register_theme :inline, "Gustwave::Buttons::Inline"
+    register_theme :input_addon, "Gustwave::Form::InputGroups::Button"
     with_default_theme :default
 
     # Returns the themed button class for +theme+.

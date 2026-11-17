@@ -1,0 +1,37 @@
+---
+look size=:sm side=:leading:
+- 'button type="button": bg-gray-100 border border-e-0 border-gray-300 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-600 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-gray-100
+  font-medium gap-1.5 hover:bg-gray-200 inline-flex items-center px-3 py-2 rounded-s-lg
+  shrink-0 text-center text-gray-900 text-xs whitespace-nowrap z-10'
+look size=:sm side=:trailing:
+- 'button type="button": bg-gray-100 border border-gray-300 border-s-0 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-600 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-gray-100
+  font-medium gap-1.5 hover:bg-gray-200 inline-flex items-center px-3 py-2 rounded-e-lg
+  shrink-0 text-center text-gray-900 text-xs whitespace-nowrap z-10'
+look size=:md side=:leading:
+- 'button type="button": bg-gray-100 border border-e-0 border-gray-300 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-600 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-gray-100
+  font-medium gap-1.5 hover:bg-gray-200 inline-flex items-center px-4 py-2.5 rounded-s-lg
+  shrink-0 text-center text-gray-900 text-sm whitespace-nowrap z-10'
+look size=:md side=:trailing:
+- 'button type="button": bg-gray-100 border border-gray-300 border-s-0 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-600 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-gray-100
+  font-medium gap-1.5 hover:bg-gray-200 inline-flex items-center px-4 py-2.5 rounded-e-lg
+  shrink-0 text-center text-gray-900 text-sm whitespace-nowrap z-10'
+look size=:lg side=:leading:
+- 'button type="button": bg-gray-100 border border-e-0 border-gray-300 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-600 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-gray-100
+  font-medium gap-1.5 hover:bg-gray-200 inline-flex items-center px-5 py-3 rounded-s-lg
+  shrink-0 text-base text-center text-gray-900 whitespace-nowrap z-10'
+look size=:lg side=:trailing:
+- 'button type="button": bg-gray-100 border border-gray-300 border-s-0 dark:bg-gray-700
+  dark:border-gray-600 dark:focus:ring-gray-700 dark:hover:bg-gray-600 dark:text-white
+  disabled:cursor-not-allowed focus:outline-hidden focus:ring-4 focus:ring-gray-100
+  font-medium gap-1.5 hover:bg-gray-200 inline-flex items-center px-5 py-3 rounded-e-lg
+  shrink-0 text-base text-center text-gray-900 whitespace-nowrap z-10'

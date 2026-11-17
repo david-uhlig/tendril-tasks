@@ -18,6 +18,15 @@ RSpec.describe "Gustwave::Form::Input style snapshot", type: :component do
       Gustwave::Form::Input.new(icon: :envelope, **args)
     end
 
+    # The group selects the joined edges through the slot context
+    group :joined, joined: %i[none start end both], size: %i[sm md lg] do |joined:, **args|
+      Gustwave::Form::Input.new(**args).tap { |input| input.apply_slot_context(joined:) }
+    end
+
+    group :joined_icon, joined: %i[start end both] do |joined:, **args|
+      Gustwave::Form::Input.new(icon: :envelope, **args).tap { |input| input.apply_slot_context(joined:) }
+    end
+
     group :type, type: Gustwave::Form::Input::HELPERS.keys do |**args|
       Gustwave::Form::Input.new(**args)
     end
