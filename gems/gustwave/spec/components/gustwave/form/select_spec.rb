@@ -443,6 +443,42 @@ RSpec.describe Gustwave::Form::Select, type: :component do
     end
   end
 
+  describe "joined to addons" do
+    def joined_classes(joined)
+      component = described_class.new
+      component.apply_slot_context(joined:)
+      render_inline(component)
+      select_classes
+    end
+
+    it "drops the rounding of the attached corners and fills the row" do
+      expect(joined_classes(:start)).to include("rounded-none", "rounded-e-lg", "flex-1", "min-w-0")
+      expect(joined_classes(:start)).not_to include("rounded-lg", "rounded-s-lg")
+      expect(joined_classes(:end)).to include("rounded-none", "rounded-s-lg", "flex-1")
+      expect(joined_classes(:both)).to include("rounded-none", "flex-1")
+      expect(joined_classes(:both)).not_to include("rounded-s-lg", "rounded-e-lg")
+    end
+
+    it "keeps its corners by default" do
+      render_inline(described_class.new)
+
+      expect(select_classes).to include("rounded-lg")
+      expect(select_classes).not_to include("flex-1", "rounded-none")
+    end
+
+    it "gives the context's size unless the select has its own" do
+      component = described_class.new
+      component.apply_slot_context(size: :lg)
+      render_inline(component)
+      expect(select_classes).to include("px-4", "py-3")
+
+      component = described_class.new(size: :sm)
+      component.apply_slot_context(size: :lg)
+      render_inline(component)
+      expect(select_classes).to include("p-2")
+    end
+  end
+
   describe "#apply_slot_context" do
     it "binds the select to the context's form and attribute" do
       component = described_class.new(choices: countries)

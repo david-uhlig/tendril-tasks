@@ -1,0 +1,7 @@
+---
+look size=:sm:
+- 'div: flex'
+look size=:md:
+- 'div: flex'
+look size=:lg:
+- 'div: flex'

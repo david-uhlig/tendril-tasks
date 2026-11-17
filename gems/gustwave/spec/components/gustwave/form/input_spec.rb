@@ -281,6 +281,52 @@ RSpec.describe Gustwave::Form::Input, type: :component do
     end
   end
 
+  describe "joined to addons" do
+    def joined_classes(joined, **options)
+      component = described_class.new(**options)
+      component.apply_slot_context(joined:)
+      render_inline(component)
+      class_set(page.find("input")[:class])
+    end
+
+    it "drops the rounding of the attached corners and fills the row" do
+      expect(joined_classes(:start)).to include("rounded-none", "rounded-e-lg", "flex-1", "min-w-0")
+      expect(joined_classes(:start)).not_to include("rounded-lg", "rounded-s-lg")
+      expect(joined_classes(:end)).to include("rounded-none", "rounded-s-lg", "flex-1")
+      expect(joined_classes(:both)).to include("rounded-none", "flex-1")
+      expect(joined_classes(:both)).not_to include("rounded-s-lg", "rounded-e-lg")
+    end
+
+    it "keeps its corners and border by default" do
+      render_inline(described_class.new)
+
+      expect(class_set(input[:class])).to include("rounded-lg", "border", "w-full")
+      expect(class_set(input[:class])).not_to include("flex-1", "rounded-none")
+    end
+
+    it "keeps the validation border whole" do
+      expect(joined_classes(:start, validation: :error)).to include("border", "border-red-500")
+    end
+
+    it "makes the wrapper of a leading visual fill the row" do
+      joined_classes(:start, icon: :envelope)
+
+      expect(class_set(page.find("div.relative")[:class])).to include("flex-1", "min-w-0")
+    end
+
+    it "gives the context's size unless the input has its own" do
+      component = described_class.new
+      component.apply_slot_context(size: :lg)
+      render_inline(component)
+      expect(class_set(input[:class])).to include("p-4", "text-base")
+
+      component = described_class.new(size: :sm)
+      component.apply_slot_context(size: :lg)
+      render_inline(component)
+      expect(class_set(input[:class])).to include("p-2", "text-xs")
+    end
+  end
+
   describe "#apply_slot_context" do
     it "binds the input to the context's form and attribute" do
       component = described_class.new

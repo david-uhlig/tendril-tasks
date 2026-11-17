@@ -76,6 +76,12 @@ module Gustwave
 
       variant :validation, part: :input, default: :none, values: VALIDATION_LOOK
 
+      # Set by Gustwave::Form::InputGroup when the input sits beside addons.
+      # With a leading visual the wrapper fills the row for the input.
+      variant :joined, default: :none, internal: true, values: JOINED_LOOK.to_h { |name, look|
+        [ name, { input: look, wrapper: ("flex-1 min-w-0" unless name == :none) }.compact ]
+      }
+
       # Set when the input has a leading visual, which needs room at the start
       toggle :has_visual, "ps-10", part: :input, internal: true
 
@@ -102,6 +108,7 @@ module Gustwave
         @icon = icon
         @options = options
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
+        @size_given = !size.equal?(DEFAULT)
         select_options(type:, size:, validation:)
       end
 

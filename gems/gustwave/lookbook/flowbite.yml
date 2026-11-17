@@ -1698,10 +1698,8 @@ pages:
     preview: gustwave/form/input/validation
   - id: input-field-group-example
     title: Input group
-    status: partial
-    needs: input-group
+    status: previewed
     preview: gustwave/form/input/group
-    note: The icon inside the input is covered. The attached addon, a text or icon beside the input, is not.
   - id: input-field-helper-example
     title: Helper text
     status: previewed
@@ -1712,8 +1710,8 @@ pages:
     needs: search-input
   - id: input-field-dropdown-example
     title: Dropdown input
-    status: blocked
-    needs: input-group
+    status: previewed
+    preview: gustwave/form/input_group/dropdown
   forms/number-input:
   - id: default-number-input
     title: Default number input
@@ -1915,8 +1913,9 @@ pages:
     preview: gustwave/form/select/underline
   - id: select-dropdown-example
     title: Select with dropdown
-    status: blocked
-    needs: input-group
+    status: previewed
+    preview: gustwave/form/input_group/select_dropdown
+    note: The flags are simplified drawings and the menu items are buttons, as Flowbite's. The 2px light divider is a class on the select.
   - id: select-sizes-example
     title: Sizes
     status: previewed

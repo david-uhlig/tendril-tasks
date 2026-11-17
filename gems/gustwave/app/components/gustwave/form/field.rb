@@ -67,6 +67,7 @@ module Gustwave
       # * +input+: a Gustwave::Form::Input, built with the given arguments.
       # * +textarea+: a Gustwave::Form::Textarea, built with the given arguments.
       # * +select+: a Gustwave::Form::Select, built with the given arguments.
+      # * +input_group+: a Gustwave::Form::InputGroup, built with the given arguments. It passes the context to its own control.
       # * +rich_textarea+: a Gustwave::Form::RichTextarea, built with the given arguments.
       # * +file_input+: a Gustwave::Form::FileInput, built with the given arguments.
       # * +renderable+: any component. One that implements +apply_slot_context+
@@ -76,6 +77,7 @@ module Gustwave
       #   <% field.with_control_input(type: :email, icon: :envelope) %>
       #   <% field.with_control_textarea(rows: 4) %>
       #   <% field.with_control_select(choices: @countries, prompt: "Choose a country") %>
+      #   <% field.with_control_input_group { |group| group.with_leading_addon_text("@"); group.with_control_input } %>
       #   <% field.with_control_rich_textarea %>
       #   <% field.with_control_file_input(accept: "image/*") %>
       #   <% field.with_control_renderable(MyRating.new) %>
@@ -83,6 +85,7 @@ module Gustwave
         input: ->(*args, **options) { Gustwave::Form::Input.new(*args, **options) },
         textarea: ->(*args, **options) { Gustwave::Form::Textarea.new(*args, **options) },
         select: ->(*args, **options) { Gustwave::Form::Select.new(*args, **options) },
+        input_group: ->(*args, **options) { Gustwave::Form::InputGroup.new(*args, **options) },
         rich_textarea: ->(*args, **options) { Gustwave::Form::RichTextarea.new(*args, **options) },
         file_input: ->(*args, **options) { Gustwave::Form::FileInput.new(*args, **options) }
       }, renderable: :control_context

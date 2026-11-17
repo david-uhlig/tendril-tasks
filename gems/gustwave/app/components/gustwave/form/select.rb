@@ -50,6 +50,9 @@ module Gustwave
 
       variant :validation, part: :select, default: :none, unless: { style: :underline }, values: VALIDATION_LOOK
 
+      # Set by Gustwave::Form::InputGroup when the select sits beside addons
+      variant :joined, part: :select, default: :none, internal: true, unless: { style: :underline }, values: JOINED_LOOK
+
       # There is no disabled look: Flowbite's disabled select has the classes
       # of the default one.
 
@@ -78,6 +81,7 @@ module Gustwave
                          .reject { |_name, value| value.equal?(DEFAULT) }
         @options = options
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
+        @size_given = !size.equal?(DEFAULT)
         select_options(size:, style:, validation:)
       end
 

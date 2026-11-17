@@ -183,6 +183,10 @@ module Gustwave
           control.apply_slot_context(slot: :control, **control_context, described_by:)
         end
 
+        # Render the control before the label's +for+ is read: a control that
+        # builds its own control while rendering, like an input group, knows
+        # the ID the caller gave it only then.
+        control_element if respond_to?(:control)
         @label_for = control ? (control.html_id.presence if control.respond_to?(:html_id)) || @control_id : (@control_id if bound?)
       end
 
@@ -222,7 +226,7 @@ module Gustwave
       end
 
       def control_element
-        control || content.presence
+        @control_element ||= (control || content.presence)&.to_s
       end
 
       def helper_text_element

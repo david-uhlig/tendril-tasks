@@ -103,6 +103,17 @@ module Gustwave
         error: "cursor-not-allowed"
       }.freeze
 
+      # The classes of a control joined to the addons of a
+      # Gustwave::Form::InputGroup, per attached edge: +:start+ for a leading
+      # addon, +:end+ for a trailing one, +:both+ for both. The control drops
+      # the rounding of the attached corners and fills the row.
+      JOINED_LOOK = {
+        none: "",
+        start: "rounded-none rounded-e-lg flex-1 min-w-0",
+        end: "rounded-none rounded-s-lg flex-1 min-w-0",
+        both: "rounded-none flex-1 min-w-0"
+      }.freeze
+
       # A stand-in for a record that reports no errors, so Rails' helpers
       # render the bare element. Everything else goes to the record.
       class ErrorlessObject < SimpleDelegator
@@ -156,12 +167,16 @@ module Gustwave
       # @param id [String, nil] the ID of a control without a form.
       # @param validation [Symbol, nil] the validation state, unless the caller picked one.
       # @param described_by [String, nil] IDs of the elements describing the control, merged with the caller's +aria-describedby+.
+      # @param joined [Symbol, nil] the edges attached to addons, for a control with the +joined+ variant, set by Gustwave::Form::InputGroup.
+      # @param size [Symbol, nil] the size, for a control with a +size+ option, unless the caller picked one. Set by Gustwave::Form::InputGroup.
       # @return [void]
-      def apply_slot_context(attribute: nil, form: nil, id: nil, validation: nil, described_by: nil, **)
+      def apply_slot_context(attribute: nil, form: nil, id: nil, validation: nil, described_by: nil, joined: nil, size: nil, **)
         @context_attribute = attribute
         @context_form = form
         @context_id = id.presence
         @described_by = described_by.presence
+        select_options(joined:) if joined && self.class.option_definition.option(:joined)
+        select_options(size:) if size && !@size_given && self.class.option_definition.option(:size)
         return unless validation && !@validation_given
 
         @context_validation_given = true
