@@ -98,17 +98,59 @@ RSpec.describe Gustwave::Form::InputGroup, type: :component do
       expect(page).to have_css("span svg[aria-hidden=true]")
     end
 
-    it "renders a button addon with the seam border dropped" do
+    it "renders a default button addon joined to the control, per side" do
+      render_group do |group|
+        group.with_leading_addon_button("Go")
+        group.with_control_input
+        group.with_trailing_addon_button("Copy")
+      end
+
+      leading, trailing = page.all("button")
+      expect(trailing[:type]).to eq("button")
+      expect(trailing.text).to eq("Copy")
+      expect(classes_of(leading)).to include("bg-blue-700", "text-white", "rounded-s-lg", "border-e-0", "rounded-none", "shrink-0")
+      expect(classes_of(leading)).not_to include("rounded-e-lg", "rounded-lg", "bg-gray-100")
+      expect(classes_of(trailing)).to include("bg-blue-700", "rounded-e-lg", "border-s-0", "shrink-0")
+      expect(classes_of(trailing)).not_to include("rounded-s-lg", "rounded-lg", "bg-gray-100")
+    end
+
+    it "renders a button addon in another theme with its options" do
       render_group do |group|
         group.with_control_input
-        group.with_trailing_addon_button("Copy", class: "bg-blue-700")
+        group.with_trailing_addon_button("New", theme: :outline, color: :green)
       end
 
       button = page.find("button")
-      expect(button[:type]).to eq("button")
-      expect(button.text).to eq("Copy")
+      expect(classes_of(button)).to include("rounded-e-lg", "border-s-0", "text-green-700", "border-green-700")
+      expect(classes_of(button)).not_to include("bg-blue-700", "rounded-lg")
+    end
+
+    it "renders the grey addon look with theme: :input_addon" do
+      render_group do |group|
+        group.with_control_input
+        group.with_trailing_addon_button("Copy", theme: :input_addon, class: "bg-blue-700")
+      end
+
+      button = page.find("button")
       expect(classes_of(button)).to include("rounded-e-lg", "border", "border-s-0", "bg-blue-700", "shrink-0")
       expect(classes_of(button)).not_to include("bg-gray-100", "rounded-s-lg")
+    end
+
+    it "keeps the caller's classes on a button addon" do
+      render_group do |group|
+        group.with_control_input
+        group.with_trailing_addon_button("Go", class: "bg-red-700 px-8")
+      end
+
+      expect(classes_of(page.find("button"))).to include("bg-red-700", "px-8", "rounded-e-lg")
+    end
+
+    it "maps the group's size to the button's size" do
+      render_group(size: :sm) { |group| group.with_trailing_addon_button("Go") }
+      expect(classes_of(page.find("button"))).to include("px-3", "py-2", "text-xs")
+
+      render_group(size: :sm) { |group| group.with_trailing_addon_button("Go", size: :lg) }
+      expect(classes_of(page.find("button"))).to include("px-5", "py-3", "text-base")
     end
 
     it "renders a dropdown addon with the menu as the trigger's sibling" do
