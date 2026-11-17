@@ -291,6 +291,14 @@ RSpec.describe Gustwave::Form::InputGroup, type: :component do
       expect(classes_of(page.find("input"))).to include("border-green-500")
     end
 
+    it "labels the control by the ID the caller gave it" do
+      render_field(label: "Name") { |group| group.with_control_input(id: "own-id", name: "name") }
+
+      expect(page.find("input")[:id]).to eq("own-id")
+      expect(page.find("label")[:for]).to eq("own-id")
+      expect(children_of(page.find("div", match: :first)).map(&:tag_name).first(2)).to eq(%w[label div])
+    end
+
     it "gives a control without a form the field's generated ID" do
       render_field(label: "Name") { |group| group.with_control_input(name: "name") }
 
