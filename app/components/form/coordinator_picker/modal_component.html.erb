@@ -16,15 +16,17 @@
         <label for="search" class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= t ".select_additional_contacts" %></label>
 
         <%# Search field %>
-        <%= f.text_field :search,
-                         placeholder: t(".search_by_name_or_username"),
-                         data: {
-                             action: "input->auto-submit#delayed",
-                             auto_focus_target: "focusHere"
-                         },
-                         autocomplete: "off",
-                         class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" do %>
-        <% end %>
+        <%= render Gustwave::Form::Input.new(
+              :search,
+              form: f,
+              type: :search,
+              icon: :search,
+              placeholder: t(".search_by_name_or_username"),
+              data: {
+                  action: "input->auto-submit#delayed",
+                  auto_focus_target: "focusHere"
+              },
+              autocomplete: "off") %>
 
         <%# Search field submit button %>
         <%# Auto submit the search field through a GET request %>
