@@ -2,7 +2,7 @@
   addon = lambda do |group, side, type|
     case type
     when :text then group.public_send("with_#{side}_addon_text", "@")
-    when :button then group.public_send("with_#{side}_addon_button", "Copy", type: :button)
+    when :button then group.public_send("with_#{side}_addon_button", "Copy", type: :button, theme: :input_addon)
     when :dropdown
       group.public_send("with_#{side}_addon_dropdown", "Acme", menu_id: "playground-#{side}-menu") do |dropdown|
         dropdown.with_menu_list do |menu|

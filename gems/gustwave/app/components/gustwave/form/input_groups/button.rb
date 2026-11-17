@@ -3,15 +3,17 @@
 module Gustwave
   module Form
     module InputGroups
-      # Use Button to render a button attached beside the control of a
-      # Gustwave::Form::InputGroup, e.g. a "Copy" button. It is also the
-      # button of the group's dropdown addon, registered as the +:input_addon+
-      # theme of Gustwave::Button. The group sets its +side+ and +size+. It
+      # Use Button to render the grey addon button of a
+      # Gustwave::Form::InputGroup, registered as the +:input_addon+ theme of
+      # Gustwave::Button. It is the button of the group's dropdown addon. The
+      # group's addon buttons use the +:default+ theme instead: pass
+      # <tt>theme: :input_addon</tt> for this look. Any other theme and its
+      # options work too. The group sets the +side+ and +size+. The button
       # drops the border of the side facing the control, so the control's
       # border, and with it its validation color, stays whole.
       #
       #   <%= render Gustwave::Form::InputGroup.new do |group| %>
-      #     <% group.with_leading_addon_button("All categories") %>
+      #     <% group.with_leading_addon_button("All categories", theme: :input_addon) %>
       #     <% group.with_control_input(name: "q", type: :search) %>
       #   <% end %>
       #

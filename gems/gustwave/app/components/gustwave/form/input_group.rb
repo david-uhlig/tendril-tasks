@@ -36,6 +36,17 @@ module Gustwave
     class InputGroup < Gustwave::Component
       base "flex"
 
+      # The button size with the padding and text of each group size.
+      BUTTON_SIZES = { sm: :xs, md: :md, lg: :lg }.freeze
+      private_constant :BUTTON_SIZES
+
+      # Classes that attach a themed button to the control. +rounded-none+
+      # makes TailwindMerge drop the theme's own rounding, and the border
+      # facing the control goes so the seam isn't doubled by bordered themes.
+      ADDON_BUTTON_CLASSES = "shrink-0 z-10 inline-flex items-center justify-center rounded-none"
+      ADDON_BUTTON_SIDE_CLASSES = { leading: "rounded-s-lg border-e-0", trailing: "rounded-e-lg border-s-0" }.freeze
+      private_constant :ADDON_BUTTON_CLASSES, :ADDON_BUTTON_SIDE_CLASSES
+
       # The size of the addons, and of the control unless it has its own. Each
       # addon is as high as the control or higher, because the row stretches.
       option :size, default: :md, values: %i[sm md lg]
@@ -61,14 +72,15 @@ module Gustwave
       # The addon before the control.
       #
       # * +text+: a Gustwave::Form::InputGroups::Text, with the text or a block, e.g. with a visual.
-      # * +button+: a Gustwave::Form::InputGroups::Button.
-      # * +dropdown+: a Gustwave::Dropdown whose trigger is a Gustwave::Form::InputGroups::Button. Its menu sits in the row beside the trigger.
+      # * +button+: a Gustwave::Button, in the +:default+ theme unless given a +theme+. It takes the options of the theme, e.g. <tt>theme: :outline, color: :green</tt>, and <tt>theme: :input_addon</tt> gives the grey addon look of Gustwave::Form::InputGroups::Button.
+      # * +dropdown+: a Gustwave::Dropdown whose trigger is a Gustwave::Form::InputGroups::Button, unless given another +theme+. Its menu sits in the row beside the trigger.
       # * +generic+: the block, as it is.
       # * +renderable+: any component. One that implements +apply_slot_context+ receives +side+ and +size+.
       #
       #   <% group.with_leading_addon_text("@") %>
       #   <% group.with_leading_addon_text { |addon| addon.with_leading_visual_icon(:user_circle) } %>
       #   <% group.with_leading_addon_button("Copy", type: :button) %>
+      #   <% group.with_leading_addon_button("New", theme: :outline, color: :green) %>
       #   <% group.with_leading_addon_dropdown("All categories") { |dropdown| dropdown.with_menu_list { ... } } %>
       #   <% group.with_leading_addon_generic { tag.span("Any markup") } %>
       #   <% group.with_leading_addon_renderable(MyAddon.new) %>
@@ -177,12 +189,24 @@ module Gustwave
         Gustwave::Form::InputGroups::Text.new(*args, side:, size: option_value(:size), **options)
       end
 
-      def addon_button(side, *args, **options)
-        Gustwave::Form::InputGroups::Button.new(*args, side:, size: option_value(:size), **options)
+      def addon_button(side, *args, theme: :default, **options)
+        Gustwave::Button.for(theme).new(*args, **addon_button_options(theme, side, options))
       end
 
-      def addon_dropdown(side, *args, **options)
-        Gustwave::Dropdown.new(*args, **{ theme: :input_addon, side:, size: option_value(:size) }.merge(options))
+      def addon_dropdown(side, *args, theme: :input_addon, **options)
+        Gustwave::Dropdown.new(*args, theme:, **addon_button_options(theme, side, options))
+      end
+
+      # The options that attach a button of +theme+ to the control. The addon
+      # theme takes the side and size itself. Any other theme gets the group's
+      # size as its nearest button size, and the classes that square off the
+      # corner facing the control, ahead of the caller's classes.
+      def addon_button_options(theme, side, options)
+        if Gustwave::Button.for(theme) <= Gustwave::Form::InputGroups::Button
+          { side:, size: option_value(:size) }.merge(options)
+        else
+          { size: BUTTON_SIZES.fetch(option_value(:size)) }.merge(options, class: [ ADDON_BUTTON_CLASSES, ADDON_BUTTON_SIDE_CLASSES.fetch(side), options[:class] ])
+        end
       end
     end
   end
