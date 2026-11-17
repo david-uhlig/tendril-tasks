@@ -1,4 +1,4 @@
-<form>
+<form class="pb-48">
   <%= render Gustwave::Form::Field.new do |field| %>
     <% field.with_label("Your search", for: "search-dropdown", class: "sr-only") %>
 
@@ -13,6 +13,14 @@
       <% end %>
 
       <% group.with_control_input(type: :search, id: "search-dropdown", placeholder: "Search") %>
+
+      <% search_button = group.with_trailing_addon_button(
+           type: :submit,
+           class: "p-2.5 text-white bg-blue-700 border-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:border-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+           aria: { label: "Search" }
+         ) %>
+
+      <% search_button.with_trailing_visual_icon :search, theme: :solid, class: "w-4 h-4" %>
     <% end %>
   <% end %>
 </form>

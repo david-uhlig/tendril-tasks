@@ -19,12 +19,12 @@
   ]
 %>
 
-<form class="max-w-sm mx-auto">
+<form class="max-w-sm mx-auto pb-48">
   <%= render Gustwave::Form::Field.new do |field| %>
     <% field.with_label("Choose a state", for: "states", class: "sr-only") %>
 
     <% field.with_control_input_group do |group| %>
-      <% group.with_leading_addon_dropdown(tag.span(safe_join([ us_flag, "USA" ]), class: "inline-flex items-center"), menu_id: "dropdown-states", class: "text-gray-500") do |dropdown| %>
+      <% group.with_leading_addon_dropdown(tag.span(safe_join([ us_flag, "USA" ]), class: "inline-flex items-center"), menu_id: "dropdown-states", class: "text-gray-500 border-e") do |dropdown| %>
         <% dropdown.with_menu_list do |menu| %>
           <% countries.each do |name, icon| %>
             <% menu.with_item_link(tag: :button, href: nil, class: "inline-flex w-full") { safe_join([ icon, name ]) } %>

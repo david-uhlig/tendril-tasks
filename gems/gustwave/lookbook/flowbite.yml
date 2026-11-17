@@ -1710,10 +1710,8 @@ pages:
     needs: search-input
   - id: input-field-dropdown-example
     title: Dropdown input
-    status: partial
-    needs: search-input
+    status: previewed
     preview: gustwave/form/input_group/dropdown
-    note: The dropdown and the input are covered. The search button sits inside the input, at its end, which is the search input, so the preview leaves it out.
   forms/number-input:
   - id: default-number-input
     title: Default number input

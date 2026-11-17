@@ -1,14 +1,13 @@
 module Gustwave
   module Form
     class InputGroupPreview < ViewComponent::Preview
-      # A leading dropdown with country flags, and a select. The menu items are buttons. The 2px light divider between
-      # the dropdown and the select is a class on the select.
+      # A leading dropdown with country flags, and a select. The menu items are buttons. The divider between the
+      # dropdown and the select is the dropdown's end border plus the select's 2px light start border, both caller classes.
       def select_dropdown
         render_with_template
       end
 
-      # A leading dropdown, "All categories", and an input. The input's search button, which sits inside the input at
-      # its end, is left out: that is the search input, which isn't built yet.
+      # A leading dropdown, "All categories", an input and a search button attached at its end.
       def dropdown
         render_with_template
       end
