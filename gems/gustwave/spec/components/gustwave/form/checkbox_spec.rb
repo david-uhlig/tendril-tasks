@@ -3,6 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::Checkbox, type: :component do
+  it_behaves_like "a bound control defaulting to the error state",
+                  slot: :checkbox, field_class: Gustwave::Form::InlineField
+
   # Flowbite's "Checkbox example": the default checkbox
   flowbite_checkbox = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 " \
                       "dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 " \

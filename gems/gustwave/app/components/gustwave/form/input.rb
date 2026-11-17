@@ -107,7 +107,7 @@ module Gustwave
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the input is a plain +<input>+.
       # @param type [Symbol] the input type. Defaults to +:text+. Valid values are +:text+, +:email+, +:password+, +:number+, +:url+, +:tel+, +:search+, +:date+, +:time+, +:datetime_local+, +:month+ and +:week+.
       # @param size [Symbol] the size of the input. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
-      # @param validation [Symbol] the look of the input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise.
+      # @param validation [Symbol] the look of the input. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise.
       # @param icon [Symbol, nil] the name of an icon rendered as leading visual. Shorthand for +with_leading_visual_icon+.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +value+, +placeholder+, +required+, +disabled+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+.

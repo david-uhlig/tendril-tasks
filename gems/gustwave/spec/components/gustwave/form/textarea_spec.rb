@@ -3,6 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::Textarea, type: :component do
+  it_behaves_like "a bound control defaulting to the error state",
+                  slot: :textarea, error_look: "textarea.bg-red-50"
+
   helpers = FormSpecHelpers
 
   def textarea

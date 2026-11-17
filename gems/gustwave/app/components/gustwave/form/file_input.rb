@@ -66,7 +66,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the file input is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the file input is a plain +<input type="file">+.
       # @param size [Symbol] the size of the file input. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
-      # @param validation [Symbol] the look of the file input. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise.
+      # @param validation [Symbol] the look of the file input. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +name+, +id+, +multiple+, +accept+, +required+, +disabled+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+.
       def initialize(attribute = nil, form: nil, size: DEFAULT, validation: DEFAULT, **options)

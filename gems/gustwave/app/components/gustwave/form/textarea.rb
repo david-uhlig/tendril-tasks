@@ -90,7 +90,7 @@ module Gustwave
 
       # @param attribute [Symbol, String, nil] the attribute of the form's object the textarea is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the textarea is a plain +<textarea>+.
-      # @param validation [Symbol] the look of the textarea. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise. In the frame it colors the frame's border.
+      # @param validation [Symbol] the look of the textarea. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise. In the frame it colors the frame's border.
       # @param frame_options [Hash] the HTML attributes of the frame's +<div>+, e.g. +class+ for its margin. Only with a header or footer.
       # @param header_options [Hash] the HTML attributes of the header bar. Only with a header.
       # @param body_options [Hash] the HTML attributes of the white area around the textarea. Only in the frame.

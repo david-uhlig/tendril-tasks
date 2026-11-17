@@ -3,6 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::FileInput, type: :component do
+  it_behaves_like "a bound control defaulting to the error state",
+                  slot: :file_input, error_look: "input.bg-red-50"
+
   # Flowbite's "File input" example, the default file input
   flowbite_file_input = "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer " \
                         "bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 " \

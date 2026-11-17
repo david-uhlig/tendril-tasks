@@ -14,6 +14,14 @@ module Gustwave
     # list the IDs of the helper text and message in +aria-describedby+, and
     # gray its label along with a disabled control.
     #
+    # *Validation.* A bound control defaults to the +:error+ state while its
+    # attribute has errors, as Gustwave::Form::Field and
+    # Gustwave::Form::ValidationMessage do, so it sets +aria-invalid+ also on
+    # its own. The control's own +validation+ wins, then the state a parent
+    # passes through +apply_slot_context+, then the attribute's errors (D17
+    # in docs/design.md). The default is picked before the control's own
+    # +before_render+, once the context is known.
+    #
     # *Looks.* It holds the classes of the validation states and of a
     # disabled control, so every control looks alike (+VALIDATION_LOOK+ and
     # +DISABLED_LOOK+).
@@ -54,6 +62,31 @@ module Gustwave
     # markup, and the app's global proc stays as it is. The control marks the
     # error state itself.
     module BoundControl
+      # Picks the default validation state before the control's own
+      # +before_render+, which may read it. BoundControl prepends it to every
+      # class that includes it.
+      module DefaultValidation
+        # Selects +:error+ for a bound control whose attribute has errors,
+        # unless the caller or a parent picked a state, then runs the
+        # control's own +before_render+.
+        #
+        # @return [void]
+        def before_render
+          select_default_validation
+          super
+        end
+      end
+
+      # Prepends DefaultValidation, so the default comes before the
+      # control's own +before_render+.
+      #
+      # @param base [Class] the control.
+      # @return [void]
+      def self.included(base)
+        super
+        base.prepend(DefaultValidation)
+      end
+
       # The classes of the validation states, as Flowbite's input field has
       # them. The other controls follow the input field.
       VALIDATION_LOOK = {
@@ -114,7 +147,8 @@ module Gustwave
 
       # Lets a parent bind and wire the control, as Gustwave::Form::Field does.
       # What the caller gave the control itself wins over the context: its own
-      # +form+ and attribute, an explicit +validation+ and its own +id+. The
+      # +form+ and attribute, an explicit +validation+ and its own +id+. A
+      # +validation+ from the context wins over the attribute's errors. The
       # parent may add keys later, so unknown ones are accepted.
       #
       # @param attribute [Symbol, String, nil] the attribute to bind to.
@@ -128,7 +162,10 @@ module Gustwave
         @context_form = form
         @context_id = id.presence
         @described_by = described_by.presence
-        select_options(validation:) if validation && !@validation_given
+        return unless validation && !@validation_given
+
+        @context_validation_given = true
+        select_options(validation:)
       end
 
       # The ID the control renders: the caller's own, one from the context, or
@@ -162,6 +199,15 @@ module Gustwave
       def bound_attribute = @attribute || @context_attribute
 
       def bound? = bound_form.present? && bound_attribute.present?
+
+      # +:error+ while the bound attribute has errors, unless the caller or
+      # the context picked a state.
+      def select_default_validation
+        return if @validation_given || @context_validation_given || !bound?
+        return if BoundControl.error_messages(bound_form, bound_attribute).empty?
+
+        select_options(validation: :error)
+      end
 
       # A value as Rails writes it into an ID, e.g. of a radio button or of a
       # +multiple+ checkbox.

@@ -65,7 +65,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the radio is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the radio is a plain +<input>+.
       # @param color [Symbol] the color of the checked button and of the focus ring. Defaults to +:blue+. Valid values are +:blue+, +:red+, +:green+, +:purple+, +:teal+, +:yellow+ and +:orange+.
-      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
+      # @param validation [Symbol] the validation state. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
       # @param options [Hash] the HTML attributes of the +<input>+, e.g. +value+, +name+, +id+, +checked+, +required+, +disabled+. A bound radio needs +value+. +html:+ takes them as a hash, see Gustwave::Component.new.
       # @raise [ArgumentError] for an +attribute+ without +form+, and when rendered bound without a +value+.
       def initialize(attribute = nil, form: nil, color: DEFAULT, validation: DEFAULT, **options)
