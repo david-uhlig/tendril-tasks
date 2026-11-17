@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Icons in buttons are smaller, matching Flowbite, so buttons with an icon are slightly narrower.
 - Made smaller headings bold to match the rest of the heading scale.
 - Upgrade dependencies: ViewComponent 4.22.0, and other gems and npm packages.
+- The admin role page picks a user's role from a select instead of buttons, and saves as soon as you choose one.
 
 ## [0.8.1] - 2026-11-04
 

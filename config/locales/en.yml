@@ -262,6 +262,9 @@ en:
         cannot_change_current_user:
           cannot_change_own_permissions: "You cannot modify your own permissions."
         description: "Define which users should have special access rights."
+        user_role:
+          role_of: "Role of %{name}"
+          save: "Save role"
     index:
       title: "Administration"
     legal:
