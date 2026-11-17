@@ -80,7 +80,7 @@ module Gustwave
       # @param choices [Array, Hash, String, Range, nil] the options of the select, as Rails' +select+ takes them. The content block is used instead when there is one.
       # @param size [Symbol] the size of the select. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
       # @param style [Symbol] the style of the select. Defaults to +:default+. Valid values are +:default+, bordered, and +:underline+, which has one size and no validation looks. The HTML attribute +style+ goes in +html:+.
-      # @param validation [Symbol] the look of the select. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise, also with the underline style.
+      # @param validation [Symbol] the look of the select. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise, also with the underline style.
       # @param prompt [String, Boolean] Rails' +prompt+ option: an option with no value, first in the list.
       # @param include_blank [String, Boolean] Rails' +include_blank+ option: a blank option, or one with this text.
       # @param selected [Object] Rails' +selected+ option: the value or values to select. +nil+ selects nothing. Without it a bound select selects the record's value.

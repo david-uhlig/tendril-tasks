@@ -3,6 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::RichTextarea, type: :component do
+  it_behaves_like "a bound control defaulting to the error state",
+                  slot: :rich_textarea, error_look: ".border-red-500"
+
   # The editor part's classes and the content class of Lexxy
   def lexxy_editor_classes
     class_set("block w-full min-h-80 px-0 text-sm text-gray-800 border-0 focus:outline-hidden " \

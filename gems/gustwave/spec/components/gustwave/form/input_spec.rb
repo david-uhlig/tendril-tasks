@@ -3,6 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::Input, type: :component do
+  it_behaves_like "a bound control defaulting to the error state",
+                  slot: :input, error_look: "input.bg-red-50"
+
   helpers = FormSpecHelpers
 
   def input

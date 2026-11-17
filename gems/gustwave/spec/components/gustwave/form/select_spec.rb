@@ -3,6 +3,10 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::Select, type: :component do
+  it_behaves_like "a bound control defaulting to the error state",
+                  slot: :select, error_look: "select.bg-red-50",
+                  control_options: { choices: %w[a b] }
+
   helpers = FormSpecHelpers
 
   let(:countries) { [ [ "Canada", "CA" ], [ "France", "FR" ], [ "Germany", "DE" ] ] }

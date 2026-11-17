@@ -60,7 +60,7 @@ module Gustwave
       # @param attribute [Symbol, String, nil] the attribute of the form's object the checkbox is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the checkbox is a plain +<input>+.
       # @param color [Symbol] the color of the checked box and of the focus ring. Defaults to +:blue+. Valid values are +:blue+, +:red+, +:green+, +:purple+, +:teal+, +:yellow+ and +:orange+.
-      # @param validation [Symbol] the validation state. Defaults to +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
+      # @param validation [Symbol] the validation state. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ sets +aria-invalid+, unless the caller's +aria+ options say otherwise. The state has no look.
       # @param checked_value [Object] Rails' +check_box+ value of a checked box, only with +form+. Defaults to +"1"+.
       # @param unchecked_value [Object] Rails' +check_box+ value of an unchecked box, only with +form+. Defaults to +"0"+; +nil+ leaves out the hidden field.
       # @param include_hidden [Boolean] Rails' +include_hidden+ option: whether a bound checkbox renders the hidden field for the unchecked value. Defaults to +true+.
