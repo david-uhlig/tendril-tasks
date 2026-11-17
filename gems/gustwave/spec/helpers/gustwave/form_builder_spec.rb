@@ -437,7 +437,7 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     it "takes the large size without a hash around the options" do
       select = parse(gustwave_form.select(:country, countries, size: :lg)).find("select")
 
-      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_LARGE))
+      expect(class_set(select[:class])).to eq(class_set(FormSpecHelpers::FLOWBITE_SELECT_LARGE) << "pe-10")
     end
 
     it "takes the HTML attributes from the second hash, where size and style stay attributes" do
