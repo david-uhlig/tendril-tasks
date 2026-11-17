@@ -2,38 +2,16 @@
 
 module Gustwave
   module Form
-    # Use Checkbox to render a checkbox: a square box for a yes or no
-    # answer, or for one of several options.
-    #
-    # It renders the +<input type="checkbox">+ only, no label: the text beside
-    # the box is the label of a Gustwave::Form::InlineField. On its own, the
-    # checkbox gets its accessible name from the caller:
+    # Use Checkbox to render a checkbox: a square box for a yes or no answer, or
+    # for one of several options. It has one size. Like every control, it renders
+    # on its own or bound to a form builder, and Gustwave::Form::InlineField
+    # renders it with its label beside the box: see {file:README.md#Forms Forms}.
     #
     #   <%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: "7", aria: { label: "Select task" }) %>
-    #
-    # The checkbox has one size.
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the element through its +check_box+ helper, so name, ID,
-    # the record's value, +index+ and +namespace+ behave as in any Rails form,
-    # and the hidden field that sends the unchecked value comes along, before
-    # the checkbox:
-    #
     #   <%= render Gustwave::Form::Checkbox.new(:terms, form: f, aria: { label: "I accept the terms" }) %>
     #
-    # Rails' +field_error_proc+ never wraps the checkbox.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::InlineField builds the checkbox, wires it through
-    # +apply_slot_context+ (see there) and renders its label beside the box,
-    # with the helper text under it:
-    #
-    #   <%= render Gustwave::Form::InlineField.new(:terms, form: f) do |field| %>
-    #     <% field.with_control_checkbox %>
-    #   <% end %>
+    # Bound, it renders through Rails' +check_box+, so the hidden field that
+    # sends the unchecked value comes along, before the checkbox.
     #
     # @status alpha
     class Checkbox < Gustwave::Component

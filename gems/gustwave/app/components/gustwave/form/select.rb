@@ -2,47 +2,25 @@
 
 module Gustwave
   module Form
-    # Use Select to render a select: a drop-down list, or with +multiple+ a
-    # list box.
+    # Use Select to render a select: a drop-down list, or with +multiple+ a list
+    # box. Like every control, it renders on its own or bound to a form builder,
+    # and Gustwave::Form::Field renders it with its label: see
+    # {file:README.md#Forms Forms}.
     #
-    # === Choices
+    #   <%= render Gustwave::Form::Select.new(name: "year", choices: 2016..2022, selected: 2020) %>
+    #   <%= render Gustwave::Form::Select.new(:country, form: f, choices: @countries, size: :lg) %>
     #
     # The choices are +choices:+, e.g. an array of pairs of text and value,
     # grouped choices or a string of option tags, or the block of option tags:
-    #
-    #   <%= render Gustwave::Form::Select.new(name: "country", choices: [["Canada", "CA"], ["France", "FR"]],
-    #                                          prompt: "Choose a country") %>
     #
     #   <%= render Gustwave::Form::Select.new(name: "country") do %>
     #     <%= options_for_select([["Canada", "CA"], ["France", "FR"]], "FR") %>
     #   <% end %>
     #
-    # === Without a form builder
-    #
-    # Renders a plain +<select>+. +prompt+, +include_blank+ and +multiple+
-    # (which adds +[]+ to the name) work as in Rails' +select_tag+. There is no +id+ unless
-    # the caller or a Gustwave::Form::Field gives one:
-    #
-    #   <%= render Gustwave::Form::Select.new(name: "year", choices: 2016..2022, selected: 2020) %>
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the element through its +select+ helper, so name, ID, the
-    # selected option of the record, the hidden field of a +multiple+ select,
-    # +index+ and +namespace+ behave as in any Rails form:
-    #
-    #   <%= render Gustwave::Form::Select.new(:country, form: f, choices: @countries, size: :lg) %>
-    #
-    # Rails' +field_error_proc+ never wraps the select.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::Field builds the select with its label, helper text and
-    # validation message, and wires it through +apply_slot_context+ (see
-    # there):
-    #
-    #   <% field.with_control_select(choices: @countries, prompt: "Choose a country") %>
+    # On its own, +prompt+, +include_blank+ and +multiple+ (which adds +[]+ to
+    # the name) work as in Rails' +select_tag+, and there is no +id+ unless the
+    # caller or a field gives one. Bound, Rails' +select+ helper selects the
+    # record's option and adds the hidden field of a +multiple+ select.
     #
     # @status alpha
     class Select < Gustwave::Component
