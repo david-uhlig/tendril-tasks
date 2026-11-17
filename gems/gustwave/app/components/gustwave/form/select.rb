@@ -41,7 +41,8 @@ module Gustwave
         underline: "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
       }
 
-      # Flowbite's sizes of the select differ from the input's
+      # Flowbite's sizes of the select differ from the input's. Their padding
+      # overrides the chevron's room, which +chevron_room+ below restores.
       variant :size, part: :select, default: :md, unless: { style: :underline }, values: {
         sm: "p-2 text-sm",
         md: "p-2.5 text-sm",
@@ -53,8 +54,17 @@ module Gustwave
       # Set by Gustwave::Form::InputGroup when the select sits beside addons
       variant :joined, part: :select, default: :none, internal: true, unless: { style: :underline }, values: JOINED_LOOK
 
-      # There is no disabled look: Flowbite's disabled select has the classes
-      # of the default one.
+      # Set unless the select is a list box (+multiple+, or an HTML +size+ above
+      # 1). The size paddings override the end padding @tailwindcss/forms
+      # reserves for the chevron, so long text would run under it: +pe-10+
+      # keeps its 2.5rem. A list box has no chevron.
+      toggle :chevron_room, "pe-10", part: :select, internal: true, unless: { style: :underline }
+
+      # Set when the select is disabled. It follows the input's disabled look,
+      # unlike Flowbite's docs, whose disabled select has the classes of the
+      # default one, so all controls agree.
+      toggle :disabled_look, part: :select, per: :validation, internal: true, unless: { style: :underline },
+                             values: DISABLED_LOOK
 
       # @param attribute [Symbol, String, nil] the attribute of the form's object the select is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the select is a plain +<select>+.
@@ -82,10 +92,11 @@ module Gustwave
         @options = options
         @validation_given = !validation.nil? && !validation.equal?(DEFAULT)
         @size_given = !size.equal?(DEFAULT)
-        select_options(size:, style:, validation:)
+        select_options(size:, style:, validation:, chevron_room: !list_box?)
       end
 
       def before_render
+        select_options(disabled_look: disabled?)
         @select_options = select_attributes
       end
 
@@ -94,6 +105,10 @@ module Gustwave
       end
 
       private
+
+      def list_box?
+        @options[:multiple].present? || (@options[:size] || @options["size"]).to_i > 1
+      end
 
       def select_attributes
         options = attributes_for(:select, @options)

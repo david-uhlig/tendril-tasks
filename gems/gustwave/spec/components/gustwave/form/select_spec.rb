@@ -19,6 +19,11 @@ RSpec.describe Gustwave::Form::Select, type: :component do
     class_set(select_element[:class])
   end
 
+  # Flowbite's classes and the end padding that keeps the chevron's room
+  def with_chevron_room(flowbite_classes)
+    class_set(flowbite_classes) << "pe-10"
+  end
+
   # The text, value and state of every option, optgroups left out
   def option_rows
     page.all("option").map do |option|
@@ -35,26 +40,26 @@ RSpec.describe Gustwave::Form::Select, type: :component do
     it "carries Flowbite's classes by default" do
       render_inline(described_class.new)
 
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_SELECT))
     end
 
     it "carries Flowbite's classes for the sizes" do
       render_inline(described_class.new(size: :sm))
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_SMALL))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_SELECT_SMALL))
 
       render_inline(described_class.new(size: :md))
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_SELECT))
 
       render_inline(described_class.new(size: :lg))
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_LARGE))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_SELECT_LARGE))
     end
 
     it "carries the input field's classes for the success and error state" do
       render_inline(described_class.new(validation: :success))
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_INPUT_SUCCESS))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_INPUT_SUCCESS))
 
       render_inline(described_class.new(validation: :error))
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_INPUT_ERROR))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_INPUT_ERROR))
     end
 
     it "carries Flowbite's classes for the underline style" do
@@ -74,7 +79,7 @@ RSpec.describe Gustwave::Form::Select, type: :component do
     it "accepts a string naming the size or style" do
       render_inline(described_class.new(size: "lg", style: "default"))
 
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_LARGE))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_SELECT_LARGE))
       expect(select_element[:size]).to be_nil
       expect(select_element[:style]).to be_nil
     end
@@ -84,17 +89,50 @@ RSpec.describe Gustwave::Form::Select, type: :component do
       expect { described_class.new(style: :pills) }.to raise_error(Gustwave::Options::UnknownValueError)
     end
 
-    it "has no disabled look, as Flowbite's disabled select is the default one" do
+    it "adds the input's disabled look to a disabled select" do
       render_inline(described_class.new(disabled: true))
 
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+      expect(select_classes).to include("bg-gray-100", "cursor-not-allowed", "dark:text-gray-400", "pe-10", "p-2.5", "border-gray-300")
+      expect(select_classes).not_to include("bg-gray-50")
       expect(select_element[:disabled]).to be_present
     end
 
     it "keeps the validation look for a disabled select" do
       render_inline(described_class.new(disabled: true, validation: :error))
 
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_INPUT_ERROR))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_INPUT_ERROR) << "cursor-not-allowed")
+    end
+
+    it "keeps room for the chevron in every size" do
+      %i[sm md lg].each do |size|
+        render_inline(described_class.new(size:))
+
+        expect(select_classes).to include("pe-10"), size.to_s
+      end
+    end
+
+    it "gives a multiple select, which has no chevron, no end padding for it" do
+      render_inline(described_class.new(multiple: true))
+
+      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+    end
+
+    it "gives a select with an HTML size above 1 no end padding for the chevron" do
+      render_inline(described_class.new(html: { size: 4 }))
+
+      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+    end
+
+    it "keeps room for the chevron of a select with an HTML size of 1" do
+      render_inline(described_class.new(html: { size: 1 }))
+
+      expect(select_classes).to include("pe-10")
+    end
+
+    it "gives the underline style no end padding and no disabled look" do
+      render_inline(described_class.new(style: :underline, disabled: true))
+
+      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT_UNDERLINE))
     end
 
     it "adds the caller's classes, which win conflicts" do
@@ -134,7 +172,7 @@ RSpec.describe Gustwave::Form::Select, type: :component do
 
       expect(select_element[:size]).to be_nil
       expect(select_element[:style]).to be_nil
-      expect(select_classes).to eq(class_set(helpers::FLOWBITE_SELECT))
+      expect(select_classes).to eq(with_chevron_room(helpers::FLOWBITE_SELECT))
     end
   end
 

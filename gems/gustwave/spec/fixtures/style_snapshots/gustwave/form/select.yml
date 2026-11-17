@@ -2,41 +2,44 @@
 look style=:default size=:sm validation=:none:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  focus:border-blue-500 focus:ring-blue-500 p-2 rounded-lg text-gray-900 text-sm w-full'
+  focus:border-blue-500 focus:ring-blue-500 p-2 pe-10 rounded-lg text-gray-900 text-sm
+  w-full'
 look style=:default size=:sm validation=:success:
 - 'select: bg-green-50 block border border-green-500 dark:bg-gray-700 dark:border-green-500
   dark:placeholder-green-500 dark:text-green-400 focus:border-green-500 focus:ring-green-500
-  p-2 placeholder-green-700 rounded-lg text-green-900 text-sm w-full'
+  p-2 pe-10 placeholder-green-700 rounded-lg text-green-900 text-sm w-full'
 look style=:default size=:sm validation=:error:
 - 'select aria-invalid="true": bg-red-50 block border border-red-500 dark:bg-gray-700
   dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
-  focus:ring-red-500 p-2 placeholder-red-700 rounded-lg text-red-900 text-sm w-full'
+  focus:ring-red-500 p-2 pe-10 placeholder-red-700 rounded-lg text-red-900 text-sm
+  w-full'
 look style=:default size=:md validation=:none:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 pe-10 rounded-lg text-gray-900 text-sm
   w-full'
 look style=:default size=:md validation=:success:
 - 'select: bg-green-50 block border border-green-500 dark:bg-gray-700 dark:border-green-500
   dark:placeholder-green-500 dark:text-green-400 focus:border-green-500 focus:ring-green-500
-  p-2.5 placeholder-green-700 rounded-lg text-green-900 text-sm w-full'
+  p-2.5 pe-10 placeholder-green-700 rounded-lg text-green-900 text-sm w-full'
 look style=:default size=:md validation=:error:
 - 'select aria-invalid="true": bg-red-50 block border border-red-500 dark:bg-gray-700
   dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
-  focus:ring-red-500 p-2.5 placeholder-red-700 rounded-lg text-red-900 text-sm w-full'
+  focus:ring-red-500 p-2.5 pe-10 placeholder-red-700 rounded-lg text-red-900 text-sm
+  w-full'
 look style=:default size=:lg validation=:none:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  focus:border-blue-500 focus:ring-blue-500 px-4 py-3 rounded-lg text-base text-gray-900
+  focus:border-blue-500 focus:ring-blue-500 pe-10 px-4 py-3 rounded-lg text-base text-gray-900
   w-full'
 look style=:default size=:lg validation=:success:
 - 'select: bg-green-50 block border border-green-500 dark:bg-gray-700 dark:border-green-500
   dark:placeholder-green-500 dark:text-green-400 focus:border-green-500 focus:ring-green-500
-  placeholder-green-700 px-4 py-3 rounded-lg text-base text-green-900 w-full'
+  pe-10 placeholder-green-700 px-4 py-3 rounded-lg text-base text-green-900 w-full'
 look style=:default size=:lg validation=:error:
 - 'select aria-invalid="true": bg-red-50 block border border-red-500 dark:bg-gray-700
   dark:border-red-500 dark:placeholder-red-500 dark:text-red-500 focus:border-red-500
-  focus:ring-red-500 placeholder-red-700 px-4 py-3 rounded-lg text-base text-red-900
+  focus:ring-red-500 pe-10 placeholder-red-700 px-4 py-3 rounded-lg text-base text-red-900
   w-full'
 look style=:underline size=:sm validation=:none:
 - 'select: appearance-none bg-transparent block border-0 border-b-2 border-gray-200
@@ -77,77 +80,78 @@ look style=:underline size=:lg validation=:error:
 joined joined=:none size=:sm:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  focus:border-blue-500 focus:ring-blue-500 p-2 rounded-lg text-gray-900 text-sm w-full'
+  focus:border-blue-500 focus:ring-blue-500 p-2 pe-10 rounded-lg text-gray-900 text-sm
+  w-full'
 joined joined=:none size=:md:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm
+  focus:border-blue-500 focus:ring-blue-500 p-2.5 pe-10 rounded-lg text-gray-900 text-sm
   w-full'
 joined joined=:none size=:lg:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  focus:border-blue-500 focus:ring-blue-500 px-4 py-3 rounded-lg text-base text-gray-900
+  focus:border-blue-500 focus:ring-blue-500 pe-10 px-4 py-3 rounded-lg text-base text-gray-900
   w-full'
 joined joined=:start size=:sm:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 rounded-e-lg rounded-none
-  text-gray-900 text-sm w-full'
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 pe-10 rounded-e-lg
+  rounded-none text-gray-900 text-sm w-full'
 joined joined=:start size=:md:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 rounded-e-lg rounded-none
-  text-gray-900 text-sm w-full'
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 pe-10 rounded-e-lg
+  rounded-none text-gray-900 text-sm w-full'
 joined joined=:start size=:lg:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 px-4 py-3 rounded-e-lg
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 pe-10 px-4 py-3 rounded-e-lg
   rounded-none text-base text-gray-900 w-full'
 joined joined=:end size=:sm:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 rounded-none rounded-s-lg
-  text-gray-900 text-sm w-full'
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 pe-10 rounded-none
+  rounded-s-lg text-gray-900 text-sm w-full'
 joined joined=:end size=:md:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 rounded-none rounded-s-lg
-  text-gray-900 text-sm w-full'
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 pe-10 rounded-none
+  rounded-s-lg text-gray-900 text-sm w-full'
 joined joined=:end size=:lg:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 px-4 py-3 rounded-none
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 pe-10 px-4 py-3 rounded-none
   rounded-s-lg text-base text-gray-900 w-full'
 joined joined=:both size=:sm:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 rounded-none text-gray-900
-  text-sm w-full'
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2 pe-10 rounded-none
+  text-gray-900 text-sm w-full'
 joined joined=:both size=:md:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 rounded-none text-gray-900
-  text-sm w-full'
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 p-2.5 pe-10 rounded-none
+  text-gray-900 text-sm w-full'
 joined joined=:both size=:lg:
 - 'select: bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600
   dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white
-  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 px-4 py-3 rounded-none
+  flex-1 focus:border-blue-500 focus:ring-blue-500 min-w-0 pe-10 px-4 py-3 rounded-none
   text-base text-gray-900 w-full'
 disabled style=:default validation=:none disabled=true:
-- 'select disabled="disabled": bg-gray-50 block border border-gray-300 dark:bg-gray-700
-  dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400
-  dark:text-white focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900
-  text-sm w-full'
+- 'select disabled="disabled": bg-gray-100 block border border-gray-300 cursor-not-allowed
+  dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500
+  dark:placeholder-gray-400 dark:text-gray-400 focus:border-blue-500 focus:ring-blue-500
+  p-2.5 pe-10 rounded-lg text-gray-900 text-sm w-full'
 disabled style=:default validation=:success disabled=true:
-- 'select disabled="disabled": bg-green-50 block border border-green-500 dark:bg-gray-700
-  dark:border-green-500 dark:placeholder-green-500 dark:text-green-400 focus:border-green-500
-  focus:ring-green-500 p-2.5 placeholder-green-700 rounded-lg text-green-900 text-sm
-  w-full'
+- 'select disabled="disabled": bg-green-50 block border border-green-500 cursor-not-allowed
+  dark:bg-gray-700 dark:border-green-500 dark:placeholder-green-500 dark:text-green-400
+  focus:border-green-500 focus:ring-green-500 p-2.5 pe-10 placeholder-green-700 rounded-lg
+  text-green-900 text-sm w-full'
 disabled style=:default validation=:error disabled=true:
 - 'select aria-invalid="true" disabled="disabled": bg-red-50 block border border-red-500
-  dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500 dark:text-red-500
-  focus:border-red-500 focus:ring-red-500 p-2.5 placeholder-red-700 rounded-lg text-red-900
-  text-sm w-full'
+  cursor-not-allowed dark:bg-gray-700 dark:border-red-500 dark:placeholder-red-500
+  dark:text-red-500 focus:border-red-500 focus:ring-red-500 p-2.5 pe-10 placeholder-red-700
+  rounded-lg text-red-900 text-sm w-full'
 disabled style=:underline validation=:none disabled=true:
 - 'select disabled="disabled": appearance-none bg-transparent block border-0 border-b-2
   border-gray-200 dark:border-gray-700 dark:text-gray-400 focus:border-gray-200 focus:outline-none

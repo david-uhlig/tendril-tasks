@@ -18,7 +18,7 @@ module Gustwave
         render_with_template
       end
 
-      # A disabled select. Its classes are the default ones.
+      # A disabled select, with the input's disabled look.
       def disabled
         render_with_template
       end
