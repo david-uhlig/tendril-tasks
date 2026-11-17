@@ -133,16 +133,36 @@ Gustwave's form components build on each other, from a bare form element up to e
 
 ### Controls
 
-A control renders one form element and its look, nothing around it: `Gustwave::Form::Input`, `Textarea`, `RichTextarea`, `FileInput`, `Select`, `Toggle`, `Checkbox` and `Radio`. Use one on its own where the element has no visible label, like a search box in a navbar or a checkbox per table row, and give it an accessible name.
+A control renders one form element and its look, nothing around it: `Gustwave::Form::Input`, `Textarea`, `RichTextarea`, `FileInput`, `Select`, `Toggle`, `Checkbox` and `Radio`. A control has no visible label, so give it an accessible name. The examples shorten Tailwind's classes to `class="…"`.
 
-Without `form:`, a control is a plain element, and `name`, `id` and `value` are HTML attributes. With an attribute and `form:`, any Rails form builder, Rails' own helper renders the element, so name, ID, value, nested attributes, `index` and `namespace` behave as in any Rails form:
+#### Without a form builder
+
+The lowest level is a plain element: `name`, `id` and `value` are HTML attributes, as with `tag.input`. Use it for an element outside a model's form, like a search box in a navbar or a checkbox per table row:
 
 ```erb
 <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
-<%= render Gustwave::Form::Checkbox.new(:archived, form: f, aria: { label: "Archived" }) %>
+# => <input type="search" name="q" aria-label="Search" class="…">
+
+<%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: 7, aria: { label: "Select task" }) %>
+# => <input type="checkbox" name="task_ids[]" value="7" aria-label="Select task" class="…">
 ```
 
-Rails' `field_error_proc` never wraps a control: its `<div class="field_with_errors">` would break the markup, so the control shows the error state itself.
+#### With a form builder
+
+With an attribute and `form:`, any Rails form builder, Rails' own helper renders the element. So the name, ID and value come from the record, and nested attributes, `index` and `namespace` behave as in any Rails form. A checkbox brings the hidden field that sends the unchecked value:
+
+```erb
+<%= form_with model: @task do |f| %>
+  <%= render Gustwave::Form::Input.new(:title, form: f, aria: { label: "Title" }) %>
+  # => <input type="text" name="task[title]" id="task_title" value="Write the README" aria-label="Title" class="…">
+
+  <%= render Gustwave::Form::Checkbox.new(:archived, form: f, aria: { label: "Archived" }) %>
+  # => <input type="hidden" name="task[archived]" value="0">
+  #    <input type="checkbox" name="task[archived]" id="task_archived" value="1" aria-label="Archived" class="…">
+<% end %>
+```
+
+Rails' `field_error_proc` never wraps a control, because its `<div class="field_with_errors">` would break the markup. The error state is the control's `validation: :error` instead, which a field sets for an attribute with errors.
 
 ### Fields
 
@@ -154,12 +174,30 @@ Use a field in a form with another builder, or where the builder's shorthand doe
 <%= render Gustwave::Form::Field.new(:title, form: f, helper_text: "Shown in the task list.") do |field| %>
   <% field.with_control_input(size: :lg) %>
 <% end %>
+# => <div>
+#      <label for="task_title" class="…">Title</label>
+#      <input type="text" name="task[title]" id="task_title" value="Write the README" aria-describedby="task_title_helper_text" class="…">
+#      <p id="task_title_helper_text" class="…">Shown in the task list.</p>
+#    </div>
 
 <%= render Gustwave::Form::InlineField.new(:terms, form: f) do |field| %>
   <% field.with_control_checkbox %>
   <% field.with_label { "I accept the #{link_to("terms", terms_path)}.".html_safe } %>
 <% end %>
+# => <div>
+#      <div class="flex">
+#        <div class="flex items-center h-5">
+#          <input type="hidden" name="task[terms]" value="0">
+#          <input type="checkbox" name="task[terms]" id="task_terms" value="1" class="…">
+#        </div>
+#        <div class="text-sm ms-2">
+#          <label for="task_terms" class="…">I accept the <a href="/terms">terms</a>.</label>
+#        </div>
+#      </div>
+#    </div>
 ```
+
+With errors on the attribute, the field sets the control's `validation: :error`, which adds `aria-invalid="true"` and, on an input, the red classes. It colors the label red and renders the messages below: `<p id="task_title_validation_message" class="…">Can't be blank</p>`.
 
 ### Groups
 
@@ -174,6 +212,11 @@ The radios of a choice and the checkboxes of a `multiple` attribute are one fiel
     <% field.with_control_radio(value: "pro") %>
   <% end %>
 <% end %>
+# => <fieldset>
+#      <legend class="…">Plan</legend>
+#      <div>… <input type="radio" name="task[plan]" id="task_plan_free" value="free" checked class="…"> … <label for="task_plan_free">Free</label> …</div>
+#      <div>… <input type="radio" name="task[plan]" id="task_plan_pro" value="pro" class="…"> … <label for="task_plan_pro">Pro</label> …</div>
+#    </fieldset>
 ```
 
 ### Form builder
@@ -183,6 +226,7 @@ The radios of a choice and the checkboxes of a `multiple` attribute are one fiel
 ```erb
 <%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
   <%= f.text_field :title, helper_text: "Shown in the task list." %>
+  # => the <div> of the Field example above, with the default size
   <%= f.email_field :contact, icon: :envelope, size: :lg %>
   <%= f.select :country, @countries, prompt: "Choose a country" %>
   <%= f.toggle :published, color: :green %>
