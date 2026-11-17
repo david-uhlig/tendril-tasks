@@ -15,6 +15,11 @@ RSpec.describe Form::CoordinatorPicker::ModalComponent, type: :component do
 
     expect(page).to have_css("label[for='search']")
     expect(page).to have_css("input#search[type='search'][name='search'][data-action='input->auto-submit#delayed']")
+    expect(page).to have_css(
+      "button[type='submit'][formmethod='get'][data-auto-submit-target='submit'][aria-label='#{I18n.t('forms.search')}'] svg",
+      count: 1
+    )
+    expect(page).to have_no_css("button.sr-only[type='submit']", visible: :all)
   end
 
   it "names every coordinator checkbox coordinator_ids[]" do
