@@ -5,7 +5,7 @@ module Gustwave
     # Use Input to render a single-line input field, e.g. for text, an email
     # address or a date. Like every control, it renders on its own or bound to a
     # form builder, and Gustwave::Form::Field renders it with its label: see
-    # {file:README.md#Forms Forms}.
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
     #   <%= render Gustwave::Form::Input.new(:title, form: f, size: :lg) %>

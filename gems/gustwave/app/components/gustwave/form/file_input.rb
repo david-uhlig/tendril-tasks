@@ -5,7 +5,7 @@ module Gustwave
     # Use FileInput to render a file input: a field that picks files to upload.
     # Like every control, it renders on its own or bound to a form builder, and
     # Gustwave::Form::Field renders it with its label: see
-    # {file:README.md#Forms Forms}.
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::FileInput.new(name: "avatar", accept: "image/*") %>
     #   <%= render Gustwave::Form::FileInput.new(:attachments, form: f, multiple: true) %>

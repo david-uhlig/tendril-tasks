@@ -5,7 +5,7 @@ module Gustwave
     # Use Toggle to render a toggle: a checkbox shown as a switch for a yes or no
     # answer. Like every control, it renders on its own or bound to a form
     # builder, and Gustwave::Form::InlineField renders it with its label beside
-    # the switch: see {file:README.md#Forms Forms}.
+    # the switch: see {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
     #   <%= render Gustwave::Form::Toggle.new(:published, form: f, aria: { label: "Published" }) %>

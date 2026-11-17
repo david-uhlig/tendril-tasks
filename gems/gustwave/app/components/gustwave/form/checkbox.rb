@@ -5,7 +5,7 @@ module Gustwave
     # Use Checkbox to render a checkbox: a square box for a yes or no answer, or
     # for one of several options. It has one size. Like every control, it renders
     # on its own or bound to a form builder, and Gustwave::Form::InlineField
-    # renders it with its label beside the box: see {file:README.md#Forms Forms}.
+    # renders it with its label beside the box: see {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: "7", aria: { label: "Select task" }) %>
     #   <%= render Gustwave::Form::Checkbox.new(:terms, form: f, aria: { label: "I accept the terms" }) %>

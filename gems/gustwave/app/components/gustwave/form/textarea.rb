@@ -5,7 +5,7 @@ module Gustwave
     # Use Textarea to render a textarea: a multi-line text field. Like every
     # control, it renders on its own or bound to a form builder, and
     # Gustwave::Form::Field renders it with its label: see
-    # {file:README.md#Forms Forms}.
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Textarea.new(name: "message", rows: 4, value: "Hello") %>
     #   <%= render Gustwave::Form::Textarea.new(:notes, form: f, rows: 4) %>

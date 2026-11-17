@@ -5,7 +5,7 @@ module Gustwave
     # Use Radio to render a radio button: a round button for one choice out of
     # several. It has one size. Like every control, it renders on its own or
     # bound to a form builder, and Gustwave::Form::InlineField renders it with
-    # its label beside the button: see {file:README.md#Forms Forms}.
+    # its label beside the button: see {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Radio.new(name: "plan", value: "free", aria: { label: "Free plan" }) %>
     #   <%= render Gustwave::Form::Radio.new(:plan, form: f, value: "free", aria: { label: "Free" }) %>

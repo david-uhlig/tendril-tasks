@@ -6,7 +6,7 @@ module Gustwave
     # with its toolbar: a bar above the editor, below it or both. Like every
     # control, it renders on its own or bound to a form builder, and
     # Gustwave::Form::Field renders it with its label: see
-    # {file:README.md#Forms Forms}.
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::RichTextarea.new(name: "article[body]", value: "<p>Hello</p>") %>
     #   <%= render Gustwave::Form::RichTextarea.new(:body, form: f) %>

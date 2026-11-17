@@ -5,7 +5,7 @@ module Gustwave
     # Use Select to render a select: a drop-down list, or with +multiple+ a list
     # box. Like every control, it renders on its own or bound to a form builder,
     # and Gustwave::Form::Field renders it with its label: see
-    # {file:README.md#Forms Forms}.
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Select.new(name: "year", choices: 2016..2022, selected: 2020) %>
     #   <%= render Gustwave::Form::Select.new(:country, form: f, choices: @countries, size: :lg) %>
