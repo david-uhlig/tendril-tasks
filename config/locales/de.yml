@@ -306,6 +306,9 @@ de:
         cannot_change_current_user:
           cannot_change_own_permissions: "Du kannst deine eigenen Berechtigungen nicht ändern."
         description: "Lege fest, welche Benutzer besondere Zugriffsrechte haben sollen."
+        user_role:
+          role_of: "Rolle von %{name}"
+          save: "Rolle speichern"
     index:
       title: "Administration"
     legal:
