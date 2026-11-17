@@ -118,11 +118,20 @@ render Gustwave::Buttons::GradientDuotone.new("Sign in")
 render Gustwave::Button.for(theme).new("Sign in")
 ```
 
-### Forms
+### Strictness
+
+In development and test, an unknown option, value, part or theme raises an error that names the valid ones. For an option named like an HTML attribute, such as `size`, the error says how to pass the attribute: `html: { size: 20 }`. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
+
+```ruby
+# config/environments/staging.rb
+config.gustwave.strict = true
+```
+
+## Forms
 
 Gustwave's form components build on each other, from a bare form element up to every form of a controller. Use the highest layer that fits, and step down where you need more control.
 
-#### Controls
+### Controls
 
 A control renders one form element and its look, nothing around it: `Gustwave::Form::Input`, `Textarea`, `RichTextarea`, `FileInput`, `Select`, `Toggle`, `Checkbox` and `Radio`. Use one on its own where the element has no visible label, like a search box in a navbar or a checkbox per table row, and give it an accessible name.
 
@@ -135,7 +144,7 @@ Without `form:`, a control is a plain element, and `name`, `id` and `value` are 
 
 Rails' `field_error_proc` never wraps a control: its `<div class="field_with_errors">` would break the markup, so the control shows the error state itself.
 
-#### Fields
+### Fields
 
 A field renders a control with its label, helper text and validation message, and ties them together: the label's `for`, the control's `aria-describedby` and `aria-invalid`, and the colors of the validation state. `Gustwave::Form::Field` stacks them. `Gustwave::Form::InlineField` puts the label beside the control, for a toggle, a checkbox or a radio. A bound field takes its label from Rails' `label` helper and shows the attribute's errors.
 
@@ -152,7 +161,7 @@ Use a field in a form with another builder, or where the builder's shorthand doe
 <% end %>
 ```
 
-#### Groups
+### Groups
 
 The radios of a choice and the checkboxes of a `multiple` attribute are one field each, so they leave the attribute's error message to their group. `Gustwave::Form::Fieldset` renders the group in a `<fieldset>`, with the `<legend>`, the message and a helper text once. `Gustwave::Form::ValidationMessage` renders the message alone, for a `<fieldset>` of your own.
 
@@ -167,7 +176,7 @@ The radios of a choice and the checkboxes of a `multiple` attribute are one fiel
 <% end %>
 ```
 
-#### Form builder
+### Form builder
 
 `Gustwave::FormBuilder` renders Rails' form helpers as fields. Use it for the forms you write: it keeps Rails' helper names and signatures, so a form switches with `builder:` alone:
 
@@ -188,7 +197,7 @@ The helpers also take the field's `label`, `helper_text`, `validation` and `vali
 
 To add your own controls or field classes, subclass the builder, as its docs show.
 
-#### Every form of a controller
+### Every form of a controller
 
 `default_form_builder` makes the builder the default of a controller and its subclasses, so their forms need no `builder:`:
 
@@ -201,15 +210,6 @@ end
 Use it once a controller's forms are all yours. Gustwave never sets it, because it would restyle forms you didn't write: Devise's controllers inherit from `ApplicationController`, so its forms switch too. Set it on a base controller of your own to leave them out. A single form opts out with `builder: ActionView::Helpers::FormBuilder`.
 
 See [Forms in the design notes](docs/design.md#forms).
-
-### Strictness
-
-In development and test, an unknown option, value, part or theme raises an error that names the valid ones. For an option named like an HTML attribute, such as `size`, the error says how to pass the attribute: `html: { size: 20 }`. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
-
-```ruby
-# config/environments/staging.rb
-config.gustwave.strict = true
-```
 
 ## Component status
 
