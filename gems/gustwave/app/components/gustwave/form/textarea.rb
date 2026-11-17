@@ -2,28 +2,17 @@
 
 module Gustwave
   module Form
-    # Use Textarea to render a textarea: a multi-line text field. It has one
-    # size, so there is no +size+ option. Rails' +size: "20x40"+ sets +cols+
-    # and +rows+ as in any Rails form.
-    #
-    # === Without a form builder
-    #
-    # Renders a plain +<textarea>+. The text is the +value+ option, or the
-    # block:
+    # Use Textarea to render a textarea: a multi-line text field. Like every
+    # control, it renders on its own or bound to a form builder, and
+    # Gustwave::Form::Field renders it with its label: see
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Textarea.new(name: "message", rows: 4, value: "Hello") %>
-    #
-    #   <%= render Gustwave::Form::Textarea.new(name: "message", rows: 4) { "Hello" } %>
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the element, so name, ID, text, nested attributes,
-    # +index+ and +namespace+ behave as in any Rails form:
-    #
     #   <%= render Gustwave::Form::Textarea.new(:notes, form: f, rows: 4) %>
     #
-    # Rails' +field_error_proc+ never wraps the textarea.
+    # On its own, the text is the +value+ option or the block. It has one size,
+    # so there is no +size+ option: Rails' <tt>size: "20x40"</tt> sets +cols+
+    # and +rows+.
     #
     # === Header and footer
     #
@@ -40,12 +29,6 @@ module Gustwave
     #   <% end %>
     #
     # For a real editor such as Lexxy, use Gustwave::Form::RichTextarea.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::Field builds the textarea with its label, helper text
-    # and validation message, and wires it through +apply_slot_context+ (see
-    # there).
     #
     # @status alpha
     class Textarea < Gustwave::Component

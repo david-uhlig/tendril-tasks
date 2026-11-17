@@ -2,24 +2,16 @@
 
 module Gustwave
   module Form
-    # Use RichTextarea to render a rich text editor, Lexxy or Trix, in a
-    # frame with its toolbar: a bar above the editor, below it or both.
-    #
-    # === Without a form builder
-    #
-    # The editor renders +value+ as its content:
+    # Use RichTextarea to render a rich text editor, Lexxy or Trix, in a frame
+    # with its toolbar: a bar above the editor, below it or both. Like every
+    # control, it renders on its own or bound to a form builder, and
+    # Gustwave::Form::Field renders it with its label: see
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::RichTextarea.new(name: "article[body]", value: "<p>Hello</p>") %>
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the editor, so name, ID, content, nested attributes,
-    # +index+ and +namespace+ behave as in any Rails form:
-    #
     #   <%= render Gustwave::Form::RichTextarea.new(:body, form: f) %>
     #
-    # Rails' +field_error_proc+ never wraps the editor.
+    # On its own, the editor renders +value+ as its content.
     #
     # === Toolbar
     #
@@ -32,6 +24,9 @@ module Gustwave
     #   <%= render Gustwave::Form::RichTextarea.new(:body, form: f) do |editor| %>
     #     <% editor.with_footer_toolbar(hidden: %i[table]) %>
     #   <% end %>
+    #
+    # In a Gustwave::Form::Field, the toolbar is built after the field binds the
+    # editor, so it binds to the form too.
     #
     # === Header and footer
     #
@@ -50,19 +45,6 @@ module Gustwave
     # to the bottom when it's in the footer, while the editor has focus or the
     # pointer is over the frame. <tt>sticky_toolbar: false</tt> turns that
     # off.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::Field builds the editor with its label, helper text and
-    # validation message, and wires it through +apply_slot_context+, which sets the attribute, the form, the validation
-    # state and +aria-describedby+. The toolbar is built after that, so it
-    # binds to the form too:
-    #
-    #   <%= render Gustwave::Form::Field.new(:body, form: f, label: "Body") do |field| %>
-    #     <% field.with_control_rich_textarea(editor: :trix) do |editor| %>
-    #       <% editor.with_footer_toolbar %>
-    #     <% end %>
-    #   <% end %>
     #
     # @status alpha
     class RichTextarea < Gustwave::Component

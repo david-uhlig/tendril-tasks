@@ -118,105 +118,6 @@ render Gustwave::Buttons::GradientDuotone.new("Sign in")
 render Gustwave::Button.for(theme).new("Sign in")
 ```
 
-### Forms
-
-A form opts in to Gustwave's inputs with `builder: Gustwave::FormBuilder`. The builder is never the default: Gustwave doesn't set `default_form_builder`, so forms the app didn't write keep Rails' output.
-
-```erb
-<%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
-  <%= f.text_field :title, helper_text: "Shown in the task list." %>
-  <%= f.email_field :contact, icon: :envelope, size: :lg, placeholder: "name@example.com" %>
-  <%= f.text_area :notes, rows: 4 %>
-  <%= f.rich_textarea :description %>
-  <%= f.file_field :attachment, accept: "image/*" %>
-  <%= f.select :country, @countries, prompt: "Choose a country", size: :lg %>
-  <%= f.toggle :published, color: :green %>
-  <%= f.check_box :terms, label: "I accept the terms" %>
-  <%= f.hidden_field :project_id %>
-<% end %>
-```
-
-A file field marks the form as multipart, so `form_with` needs no `multipart: true`.
-
-The helpers keep Rails' names and arguments, so unknown options are still the `<input>`'s or `<textarea>`'s HTML attributes. They also take `label`, `helper_text`, `validation` and `validation_message` for the field, and `size` and `icon` for the input. `size` is Gustwave's size, so the HTML attribute goes in `html:`: `f.text_field :title, html: { size: 20 }`. Without `validation_message`, a field with errors shows them as a sentence. A block receives the field to set its slots, e.g. `field.with_helper_text { ... }`.
-
-`select` and `collection_select` take two hashes, as in Rails. The first holds Rails' select options (`prompt`, `include_blank`, `selected`, `disabled`, `include_hidden`) and Gustwave's (`label`, `helper_text`, `validation`, `validation_message`, and the select's `size` and `style`), so `f.select :country, @countries, prompt: "Choose", size: :lg` needs no braces. The second is the `<select>`'s HTML attributes, e.g. `multiple: true` or `size: 5`, also when the first has a `size`: `f.select :tags, @tags, { size: :lg }, { size: 5 }`. The block of `select` stays Rails': it supplies the option tags and doesn't receive the field. Set the slots of a select's field with `Gustwave::Form::Field` and `with_control_select`.
-
-`f.toggle` has no Rails helper of its own. It renders a toggle, a checkbox shown as a switch, through Rails' `check_box`, so it takes `checked_value` and `unchecked_value` after the options: `f.toggle :published, { size: :lg }, "yes", "no"`. It renders in a `Gustwave::Form::InlineField`, so its label goes beside the switch, with the helper text under the label.
-
-`f.check_box`, or `f.checkbox` as Rails 8 names it, renders a checkbox in a `Gustwave::Form::InlineField` as well. It keeps Rails' signature, with `checked_value` and `unchecked_value` after the options, and takes the checkbox's `color`: `f.check_box :newsletter, { color: :green }, "yes", "no"`. A label with a link goes in the block: `field.with_label(...)`. `collection_check_boxes` stays Rails'. A form that switches to the builder gets the label with every `check_box`, so drop the `f.label` beside it, or pass `label: false`.
-
-`f.radio_button` renders a radio button in a `Gustwave::Form::InlineField`. It keeps Rails' signature, the attribute, the value and the options, and takes the radio's `color`: `f.radio_button :plan, "pro", color: :green`. The label is the translation for the value (`helpers.label.task.plan.pro`), otherwise the humanized value, "Pro". One radio is one field, so the radios of a group go in an `f.fieldset`, which renders the error message once (see below). `collection_radio_buttons` stays Rails'. A form that switches to the builder gets the label with every `radio_button`, so drop the `f.label` beside it, or pass `label: false`.
-
-The radios of a group and the checkboxes of a `multiple` attribute are one field each. Such a field keeps the validation state, but doesn't render the attribute's error messages, so the error isn't repeated per field: the group renders it once. `f.fieldset` renders a `Gustwave::Form::Fieldset`, a `<fieldset>` with a `<legend>` (the `label`), the validation message and a helper text below the group. `f.validation_message` renders a `Gustwave::Form::ValidationMessage`, the attribute's error sentence on its own, for a `<fieldset>` of your own. A group without either shows the error state without a message. A `validation_message:` set on a field is still rendered.
-
-```erb
-<%= f.fieldset :plan, label: "Plan", helper_text: "You can change it later." do %>
-  <%= f.radio_button :plan, "free" %>
-  <%= f.radio_button :plan, "pro" %>
-<% end %>
-
-<%= f.fieldset :tag_ids, label: "Tags", helper_text: "Pick any." do %>
-  <%= f.check_box :tag_ids, { multiple: true, label: "Urgent" }, "urgent", nil %>
-  <%= f.check_box :tag_ids, { multiple: true, label: "Home" }, "home", nil %>
-<% end %>
-
-<fieldset aria-describedby="<%= f.field_id(:tag_ids, :validation_message) %>">
-  <legend>Tags</legend>
-  <%= f.check_box :tag_ids, { multiple: true, label: "Urgent" }, "urgent", nil %>
-  <%= f.validation_message :tag_ids %>
-</fieldset>
-```
-
-The fieldset's `aria-describedby` names its message and helper text. A legend for screen readers only is `fieldset.with_label("Tags", class: "sr-only")`. The message of every field is a `Gustwave::Form::ValidationMessage`, so style it with the HTML attributes of the `validation_message` slot.
-
-`Gustwave::Form::Field`, `Gustwave::Form::InlineField`, `Gustwave::Form::Fieldset`, `Gustwave::Form::ValidationMessage`, `Gustwave::Form::Input`, `Gustwave::Form::Textarea`, `Gustwave::Form::FileInput`, `Gustwave::Form::Select`, `Gustwave::Form::Toggle`, `Gustwave::Form::Checkbox` and `Gustwave::Form::Radio` work on their own: with any Rails builder, or without one:
-
-```erb
-<%= render Gustwave::Form::Field.new(:title, form: f) do |field| %>
-  <% field.with_control_input(size: :lg) %>
-  <% field.with_helper_text("Shown in the task list.") %>
-<% end %>
-
-<%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
-<%= render Gustwave::Form::FileInput.new(name: "avatar", accept: "image/*") %>
-<%= render Gustwave::Form::Select.new(name: "country", choices: @countries, prompt: "Choose a country") %>
-<%= render Gustwave::Form::InlineField.new(label: "Enable notifications") do |field| %>
-  <% field.with_control_toggle(name: "notifications", value: "1", color: :green) %>
-<% end %>
-
-<%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
-
-<%= render Gustwave::Form::InlineField.new(label: "Remember me", helper_text: "For 30 days on this device.") do |field| %>
-  <% field.with_control_checkbox(name: "remember_me", value: "1") %>
-<% end %>
-
-<%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: task.id, aria: { label: "Select task" }) %>
-
-<%= render Gustwave::Form::InlineField.new(label: "Free") do |field| %>
-  <% field.with_control_radio(name: "plan", value: "free") %>
-<% end %>
-
-<%= render Gustwave::Form::Radio.new(name: "assignee", value: "7", aria: { label: "Assign to Sam" }) %>
-```
-
-A textarea takes `header` and `footer` slots, and then renders in a frame, borderless. For a rich editor such as Lexxy, use `Gustwave::Form::RichTextarea`. It renders Lexxy or Trix in the same frame. Its toolbar goes to the header by default, or to the footer with `with_footer_toolbar`.
-
-To extend the builder, subclass it. `field_class` names the field class its helpers render, and `inline_field_class` the one of the helpers with the label beside the control, like `toggle` and `check_box`. `fieldset_class` names the class of `fieldset`. `render_field(attribute, control, options)` and `render_inline_field(attribute, control, options)` are what each helper calls, for helpers of your own:
-
-```ruby
-class AppFormBuilder < Gustwave::FormBuilder
-  self.field_class = "App::Field"
-  self.fieldset_class = "App::Fieldset"
-
-  def rating(attribute, options = {}, &block)
-    render_field(attribute, :rating, options, &block)
-  end
-end
-```
-
-See [Forms in the design notes](docs/design.md#forms).
-
 ### Strictness
 
 In development and test, an unknown option, value, part or theme raises an error that names the valid ones. For an option named like an HTML attribute, such as `size`, the error says how to pass the attribute: `html: { size: 20 }`. In every other environment, the component falls back instead, e.g. to the option's default. Set `config.gustwave.strict` to choose, e.g. to raise in staging, or in a CI environment that doesn't run as `test`:
@@ -225,6 +126,208 @@ In development and test, an unknown option, value, part or theme raises an error
 # config/environments/staging.rb
 config.gustwave.strict = true
 ```
+
+## Building forms
+
+Gustwave's form components come in layers. They give you fine-grained control when you need it, and full convenience when you're happy with the defaults:
+
+* A **control** renders the bare form element, e.g. an input field, in Flowbite's look.
+* Give the **control** an attribute and any Rails form builder, and it renders through Rails' form helpers.
+* **Fields** add a label, an optional helper text and an error or success message to the control. They take care of wiring up the elements and come in two flavors: stacked (`Gustwave::Form::Field`) and inline (`Gustwave::Form::InlineField`).
+* **Groups** wrap the controls that set one shared attribute, e.g. the radio buttons of a choice or the checkboxes of a multiple choice, in a `<fieldset>` with a legend and a single error message (`Gustwave::Form::Fieldset`).
+* The **form builder** `Gustwave::FormBuilder` renders all of the above through Rails' form helpers you already know, like `f.text_field` and `f.check_box`.
+* Make the **form builder the default** of a controller, and its forms use Gustwave without asking for it.
+
+Start with the highest layer that fits, and step down wherever you need more control.
+
+### Controls
+
+By default, a control renders one form element in Flowbite's look. On its own, a control is a plain element: you pass `name`, `id` and `value` as HTML attributes, just like with `tag.input`.
+
+Typical use-cases are:
+
+* Plain controls for elements that aren't part of a model's form, like a search box or a checkbox in each row of a table:
+
+    ```erb
+    <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
+    # => <input type="search" name="q" aria-label="Search" class="…">
+    
+    <%= render Gustwave::Form::Checkbox.new(name: "task_ids[]", value: 7, aria: { label: "Select    task" }) %>
+    # => <input type="checkbox" name="task_ids[]" value="7" aria-label="Select task" class="…">
+    ```
+
+* Building blocks in your own components:
+
+    ```ruby
+    class SearchBoxComponent < ViewComponent::Base
+    def initialize(query: nil)
+        @query = query
+    end
+    
+    def call
+        form_with url: tasks_path, method: :get, role: "search" do
+          render Gustwave::Form::Input.new(
+            type: :search, name: "q", value: @query, icon: :search,
+            placeholder: "Search tasks", aria: { label: "Search tasks" }
+          )
+        end
+    end
+    end
+    ```
+  
+#### Binding controls to a form builder
+
+When you pass the `attribute` and `form:` parameters to a control, e.g. `<%= render Gustwave::Form::Input.new(:title, form: f, ...) %>`, it renders through any Rails form builder. So the ID, name and value come from the record, and nested attributes, `index` and `namespace` work just like in any other Rails form. Checkboxes bring along their hidden field that sends the unchecked value:
+
+```erb
+<%= form_with model: @task do |f| %>
+  <%= render Gustwave::Form::Input.new(:title, form: f, aria: { label: "Title" }) %>
+  # => <input type="text" name="task[title]" id="task_title" value="Write the README" aria-label="Title" class="…">
+
+  <%= render Gustwave::Form::Checkbox.new(:archived, form: f, aria: { label: "Archived" }) %>
+  # => <input type="hidden" name="task[archived]" value="0">
+  #    <input type="checkbox" name="task[archived]" id="task_archived" value="1" aria-label="Archived" class="…">
+<% end %>
+```
+
+> [!NOTE]
+> Rails' `field_error_proc` never wraps a control, because its `<div class="field_with_errors">` would break the markup. Instead, a bound control switches to `validation: :error` by itself while its attribute has errors. That adds `aria-invalid="true"` and, on controls that have one, the error look. It doesn't add a message, because the message belongs to the field. Pass `validation: :none` if you don't want it.
+
+#### Built in controls
+
+Gustwave has the following controls built in:
+
+| Component | Renders |
+|---|---|
+| `Gustwave::Form::Input` | A single-line input field, e.g. for text, an email address or a date |
+| `Gustwave::Form::Textarea` | A multi-line text field |
+| `Gustwave::Form::RichTextarea` | A rich text editor, Lexxy or Trix, in a frame with its toolbar |
+| `Gustwave::Form::FileInput` | A file input that picks files to upload |
+| `Gustwave::Form::Select` | A drop-down list, or with `multiple` a list box |
+| `Gustwave::Form::Toggle` | A checkbox shown as a switch, for a yes or no answer |
+| `Gustwave::Form::Checkbox` | A checkbox, for a yes or no answer or one of several options |
+| `Gustwave::Form::Radio` | A radio button, for one choice out of several |
+
+> [!NOTE] 
+> A control has no visible label, so make sure to give it an accessible name, e.g. with `aria: { label: … }`.
+
+### Fields
+
+A field renders a control together with its label, helper text and validation message. It takes care of wiring them up, too. The label's `for`, the control's `aria-describedby` and `aria-invalid`, and the colors of the validation state. 
+
+Gustwave comes with two field layout types out of the box:
+* `Gustwave::Form::Field` stacks the elements vertically. 
+* `Gustwave::Form::InlineField` puts the label next to the control, which is what you want for a toggle, a checkbox or a radio button. Bound to an attribute, a field takes its label from Rails' `label` helper and shows the attribute's errors.
+
+You usually get fields from the form builder. Render one yourself in a form with a different builder, or when the builder's shorthand isn't enough, e.g. for a label with a link in it or for your own markup as the control:
+
+```erb
+<%= render Gustwave::Form::Field.new(:title, form: f, helper_text: "Shown in the task list.") do |field| %>
+  <% field.with_control_input(size: :lg) %>
+<% end %>
+# => <div>
+#      <label for="task_title" class="…">Title</label>
+#      <input type="text" name="task[title]" id="task_title" value="Write the README" aria-describedby="task_title_helper_text" class="…">
+#      <p id="task_title_helper_text" class="…">Shown in the task list.</p>
+#    </div>
+
+<%= render Gustwave::Form::InlineField.new(:terms, form: f) do |field| %>
+  <% field.with_control_checkbox %>
+  <% field.with_label { "I accept the #{link_to("terms", terms_path)}.".html_safe } %>
+<% end %>
+# => <div>
+#      <div class="flex">
+#        <div class="flex items-center h-5">
+#          <input type="hidden" name="task[terms]" value="0">
+#          <input type="checkbox" name="task[terms]" id="task_terms" value="1" class="…">
+#        </div>
+#        <div class="text-sm ms-2">
+#          <label for="task_terms" class="…">I accept the <a href="/terms">terms</a>.</label>
+#        </div>
+#      </div>
+#    </div>
+```
+
+When the attribute has errors, the control is in the error state (`aria-invalid="true"` and, on an input, the red classes), and the field adds the rest: it colors the label red and renders the error messages below the control: `<p id="task_title_validation_message" class="…">Can't be blank</p>`. `validation: :none` on the field turns off the error colors and `aria-invalid`, on the control too. The message is still rendered.
+
+### Groups
+
+A group renders the controls that set one shared attribute together, e.g. the radio buttons of a choice or the checkboxes of a `multiple` attribute. Each control keeps its own field and error state, but the group shows the error message once.
+
+You have two ways to render a group:
+* `Gustwave::Form::Fieldset` wraps the fields in a `<fieldset>` with a `<legend>`, an optional helper text and the error message, each shown once.
+* `Gustwave::Form::ValidationMessage` renders just the message, for when you'd rather write the `<fieldset>` yourself. Then wiring up the message is up to you, too:
+
+    ```erb
+    <fieldset aria-describedby="<%= f.field_id(:plan, :validation_message) %>">
+      <legend>Plan</legend>
+      <%# … one InlineField per radio button … %>
+      <%= render Gustwave::Form::ValidationMessage.new(:plan, form: f) %>
+      # => <p id="task_plan_validation_message" class="…">Can't be blank</p>
+    </fieldset>
+    ```
+
+You usually get a fieldset from the form builder's `f.fieldset`. Render one yourself in a form with a different builder:
+
+```erb
+<%= render Gustwave::Form::Fieldset.new(:plan, form: f, label: "Plan") do %>
+  <%= render Gustwave::Form::InlineField.new(:plan, form: f) do |field| %>
+    <% field.with_control_radio(value: "free") %>
+  <% end %>
+  <%= render Gustwave::Form::InlineField.new(:plan, form: f) do |field| %>
+    <% field.with_control_radio(value: "pro") %>
+  <% end %>
+<% end %>
+# => <fieldset>
+#      <legend class="…">Plan</legend>
+#      <div>… <input type="radio" name="task[plan]" id="task_plan_free" value="free" checked class="…"> … <label for="task_plan_free">Free</label> …</div>
+#      <div>… <input type="radio" name="task[plan]" id="task_plan_pro" value="pro" class="…"> … <label for="task_plan_pro">Pro</label> …</div>
+#    </fieldset>
+```
+
+### Form builder
+
+The form builder renders a whole field (label, control, helper text and error message) from a single Rails form helper call. It keeps Rails' helper names and arguments, so to switch an existing form over, add `builder: Gustwave::FormBuilder` and you're done:
+
+```erb
+<%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
+  <%= f.text_field :title, helper_text: "Shown in the task list." %>
+  # => the <div> of the Field example above, with the default size
+  <%= f.email_field :contact, icon: :envelope, size: :lg %>
+  <%= f.select :country, @countries, prompt: "Choose a country" %>
+  <%= f.toggle :published, color: :green %>
+  <%= f.fieldset :plan, label: "Plan" do %>
+    <%= f.radio_button :plan, "free" %>
+    <%= f.radio_button :plan, "pro" %>
+  <% end %>
+<% end %>
+```
+
+On top of Rails' arguments, a helper takes:
+* The field's options: `label`, `helper_text`, `validation` and `validation_message`.
+* The control's options, like `size` and `icon`. If an HTML attribute has the same name as an option, pass it in `html:`, e.g. `html: { size: 20 }`.
+* A block, which gets the field, so you can set its slots.
+
+A few things work differently from Rails:
+* `f.check_box`, `f.radio_button` and `f.toggle` render their own label, so you don't need an `f.label` next to them.
+* Helpers that have no Gustwave control, like `hidden_field`, stay as Rails renders them.
+
+See `Gustwave::FormBuilder` for every helper. Want your own controls or field classes? Subclass the builder, as its docs show.
+
+### Make `Gustwave::FormBuilder` the default
+
+You can use [Rails' `default_form_builder`](https://api.rubyonrails.org/classes/ActionController/FormBuilder/ClassMethods.html#method-i-default_form_builder) to make `Gustwave::FormBuilder` the default form builder of a controller and its subclasses. Then their forms don't need `builder: Gustwave::FormBuilder` anymore:
+
+```ruby
+class ApplicationController < ActionController::Base
+  default_form_builder Gustwave::FormBuilder
+end
+```
+
+> [!WARNING]
+> Gems like Devise have controllers that inherit from your `ApplicationController`, so setting the default there restyles their forms too. To leave them alone, set it on a base controller of your own instead. A single form can opt out with `builder: ActionView::Helpers::FormBuilder`.
+
+For the reasoning behind the layers, see [Forms in the design notes](docs/design.md#forms).
 
 ## Component status
 

@@ -2,43 +2,18 @@
 
 module Gustwave
   module Form
-    # Use Radio to render a radio button: a round button for one choice out
-    # of several.
-    #
-    # It renders the +<input type="radio">+ only, no label: the text beside the
-    # button is the label of a Gustwave::Form::InlineField. On its own, the
-    # radio gets its accessible name from the caller:
+    # Use Radio to render a radio button: a round button for one choice out of
+    # several. It has one size. Like every control, it renders on its own or
+    # bound to a form builder, and Gustwave::Form::InlineField renders it with
+    # its label beside the button: see {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Radio.new(name: "plan", value: "free", aria: { label: "Free plan" }) %>
-    #
-    # The radio has one size.
-    #
-    # === With a form builder
-    #
-    # Pass the attribute, +form:+ (a Rails form builder or any subclass) and
-    # the +value+ the radio stands for. Rails renders the element through its
-    # +radio_button+ helper, so the name, the ID (+task_plan_free+), +index+
-    # and +namespace+ behave as in any Rails form, and the radio is checked
-    # when the record's value equals +value+. A +checked+ of the caller wins:
-    #
     #   <%= render Gustwave::Form::Radio.new(:plan, form: f, value: "free", aria: { label: "Free" }) %>
-    #   <%= render Gustwave::Form::Radio.new(:plan, form: f, value: "pro", aria: { label: "Pro" }) %>
     #
-    # Rails' +field_error_proc+ never wraps the radio.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::InlineField builds the radio, wires it through
-    # +apply_slot_context+ (see there) and renders its label beside the
-    # button, with the helper text under it. The radios of one group are
-    # fields for one attribute:
-    #
-    #   <%= render Gustwave::Form::InlineField.new(:plan, form: f) do |field| %>
-    #     <% field.with_control_radio(value: "free") %>
-    #   <% end %>
-    #   <%= render Gustwave::Form::InlineField.new(:plan, form: f) do |field| %>
-    #     <% field.with_control_radio(value: "pro") %>
-    #   <% end %>
+    # Bound, it needs the +value+ it stands for: Rails' +radio_button+ derives
+    # the ID from it (+task_plan_free+) and checks the radio when the record's
+    # value equals it. A +checked+ of the caller wins. The radios of a group are
+    # one field each, in a Gustwave::Form::Fieldset.
     #
     # @status alpha
     class Radio < Gustwave::Component

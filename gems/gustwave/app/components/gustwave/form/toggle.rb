@@ -2,38 +2,19 @@
 
 module Gustwave
   module Form
-    # Use Toggle to render a toggle: a checkbox shown as a switch for a yes or
-    # no answer.
-    #
-    # The +<input type="checkbox">+ is hidden and the switch is its +track+,
-    # which is drawn from the input's state. The toggle renders a +<label>+
-    # around the two, so a click on the switch reaches the input. That label
-    # holds no text: the text beside the switch is the label of a
-    # Gustwave::Form::InlineField. On its own, the toggle gets its accessible
-    # name from the caller:
+    # Use Toggle to render a toggle: a checkbox shown as a switch for a yes or no
+    # answer. Like every control, it renders on its own or bound to a form
+    # builder, and Gustwave::Form::InlineField renders it with its label beside
+    # the switch: see {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Toggle.new(name: "notifications", value: "1", aria: { label: "Enable notifications" }) %>
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the element through its +check_box+ helper, so name, ID,
-    # the record's value, +index+ and +namespace+ behave as in any Rails form,
-    # and the hidden field that sends the unchecked value comes along:
-    #
     #   <%= render Gustwave::Form::Toggle.new(:published, form: f, aria: { label: "Published" }) %>
     #
-    # Rails' +field_error_proc+ never wraps the toggle.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::InlineField builds the toggle, wires it through
-    # +apply_slot_context+ (see there) and renders its label beside the
-    # switch, with the helper text under it:
-    #
-    #   <%= render Gustwave::Form::InlineField.new(:published, form: f) do |field| %>
-    #     <% field.with_control_toggle %>
-    #   <% end %>
+    # The +<input type="checkbox">+ is hidden and the switch is its +track+,
+    # which is drawn from the input's state. A +<label>+ without text wraps the
+    # two, so a click on the switch reaches the input. Bound, it renders through
+    # Rails' +check_box+, so the hidden field that sends the unchecked value
+    # comes along.
     #
     # @status alpha
     class Toggle < Gustwave::Component

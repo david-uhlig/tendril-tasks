@@ -2,38 +2,19 @@
 
 module Gustwave
   module Form
-    # Use FileInput to render a file input: a field that picks files to
-    # upload.
-    #
-    # === Without a form builder
-    #
-    # Renders a plain +<input type="file">+:
+    # Use FileInput to render a file input: a field that picks files to upload.
+    # Like every control, it renders on its own or bound to a form builder, and
+    # Gustwave::Form::Field renders it with its label: see
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::FileInput.new(name: "avatar", accept: "image/*") %>
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the element, so name, ID, nested attributes, +index+ and
-    # +namespace+ behave as in any Rails form. +multiple: true+ names the
-    # input as a list, e.g. +task[attachments][]+:
-    #
     #   <%= render Gustwave::Form::FileInput.new(:attachments, form: f, multiple: true) %>
     #
-    # A file upload needs the form's +multipart+ encoding. Rails' +file_field+
-    # sets it, but on a copy of the builder that renders the element, so a
-    # bound file input marks the form itself as multipart. The upload then
-    # works without +multipart: true+ on the form.
-    #
-    # Rails' +field_error_proc+ never wraps the file input.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::Field builds the file input with its label, helper text
-    # and validation message, and wires it through +apply_slot_context+ (see
-    # there):
-    #
-    #   <% field.with_control_file_input(accept: "image/*") %>
+    # Bound, +multiple: true+ names the input as a list, e.g.
+    # +task[attachments][]+. A bound file input marks its form as multipart, so
+    # the upload works without +multipart: true+ on the form. Rails'
+    # +file_field+ would mark only the copy of the builder that renders the
+    # element.
     #
     # @status alpha
     class FileInput < Gustwave::Component

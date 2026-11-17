@@ -3,23 +3,12 @@
 module Gustwave
   module Form
     # Use Input to render a single-line input field, e.g. for text, an email
-    # address or a date.
-    #
-    # === Without a form builder
-    #
-    # Renders a plain +<input>+:
+    # address or a date. Like every control, it renders on its own or bound to a
+    # form builder, and Gustwave::Form::Field renders it with its label: see
+    # {file:README.md#Building_forms Building forms}.
     #
     #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) %>
-    #
-    # === With a form builder
-    #
-    # Pass the attribute and +form:+, a Rails form builder or any subclass.
-    # Rails renders the element, so name, ID, value, type casting, nested
-    # attributes, +index+ and +namespace+ behave as in any Rails form:
-    #
     #   <%= render Gustwave::Form::Input.new(:title, form: f, size: :lg) %>
-    #
-    # Rails' +field_error_proc+ never wraps the input.
     #
     # === Visuals
     #
@@ -34,12 +23,6 @@ module Gustwave
     #   <% end %>
     #
     # The icon keeps its size and the input its start padding at every +size+.
-    #
-    # === In a field
-    #
-    # Gustwave::Form::Field builds the input with its label, helper text and
-    # validation message, and wires it through +apply_slot_context+ (see
-    # there).
     #
     # @status alpha
     class Input < Gustwave::Component
