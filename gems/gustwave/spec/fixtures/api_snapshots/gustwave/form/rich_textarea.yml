@@ -26,6 +26,11 @@ options:
     - none
     - success
     - error
+derived:
+  content_class:
+    from: editor
+  toolbar_class:
+    from: editor
 parts:
 - body
 - editor

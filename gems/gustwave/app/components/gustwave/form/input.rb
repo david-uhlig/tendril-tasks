@@ -56,8 +56,11 @@ module Gustwave
       include Gustwave::Form::BoundControl
       include Gustwave::Visuals
 
+      # The input type. +datetime_local+ renders +type="datetime-local"+.
+      option :type, default: :text, values: %i[text email password number url tel search date time datetime_local month week]
+
       # Rails' helper of each +type+ option.
-      HELPERS = {
+      derive :helper, from: :type, values: {
         text: :text_field,
         email: :email_field,
         password: :password_field,
@@ -70,10 +73,7 @@ module Gustwave
         datetime_local: :datetime_local_field,
         month: :month_field,
         week: :week_field
-      }.freeze
-
-      # The input type. +datetime_local+ renders +type="datetime-local"+.
-      option :type, default: :text, values: HELPERS.keys
+      }
 
       # The input itself, which is the root element unless it has a leading
       # visual.
@@ -181,7 +181,7 @@ module Gustwave
 
       def element
         if bound?
-          render_bound_element(HELPERS.fetch(option_value(:type)), bound_form, bound_attribute, @input_options)
+          render_bound_element(derived_value(:helper), bound_form, bound_attribute, @input_options)
         else
           tag.input(type: html_type, **@input_options)
         end

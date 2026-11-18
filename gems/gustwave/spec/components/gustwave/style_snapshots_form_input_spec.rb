@@ -33,7 +33,7 @@ RSpec.describe "Gustwave::Form::Input style snapshot", type: :component do
       Gustwave::Form::Input.new(icon: :envelope, **args).tap { |input| input.apply_slot_context(joined:) }
     end
 
-    group :type, type: Gustwave::Form::Input::HELPERS.keys do |**args|
+    group :type, type: Gustwave::Form::Input.option_values(:type) do |**args|
       Gustwave::Form::Input.new(**args)
     end
   end

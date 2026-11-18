@@ -10,6 +10,11 @@ options:
     - sm
     - md
     - lg
+derived:
+  button_size:
+    from: size
+parts:
+- addon_button
 slots:
   control:
     many: false

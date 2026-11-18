@@ -36,20 +36,25 @@ module Gustwave
     class InputGroup < Gustwave::Component
       base "flex"
 
-      # The button size with the padding and text of each group size.
-      BUTTON_SIZES = { sm: :xs, md: :md, lg: :lg }.freeze
-      private_constant :BUTTON_SIZES
+      # The size of the addons, and of the control unless it has its own. Each
+      # addon is as high as the control or higher, because the row stretches.
+      option :size, default: :md, values: %i[sm md lg]
+
+      # The button size with the padding and text of each group size, for a
+      # button addon of a theme other than Gustwave::Form::InputGroups::Button.
+      derive :button_size, from: :size, values: { sm: :xs, md: :md, lg: :lg }
 
       # Classes that attach a themed button to the control. +rounded-none+
       # makes TailwindMerge drop the theme's own rounding, and the border
       # facing the control goes so the seam isn't doubled by bordered themes.
-      ADDON_BUTTON_CLASSES = "shrink-0 z-10 inline-flex items-center justify-center rounded-none"
-      ADDON_BUTTON_SIDE_CLASSES = { leading: "rounded-s-lg border-e-0", trailing: "rounded-e-lg border-s-0" }.freeze
-      private_constant :ADDON_BUTTON_CLASSES, :ADDON_BUTTON_SIDE_CLASSES
+      part :addon_button, "shrink-0 z-10 inline-flex items-center justify-center rounded-none"
 
-      # The size of the addons, and of the control unless it has its own. Each
-      # addon is as high as the control or higher, because the row stretches.
-      option :size, default: :md, values: %i[sm md lg]
+      # The side of the control an addon button sits on, set for each addon by
+      # the group. Squares off the corner facing the control.
+      variant :side, part: :addon_button, default: :leading, internal: true, values: {
+        leading: "rounded-s-lg border-e-0",
+        trailing: "rounded-e-lg border-s-0"
+      }
 
       # The control the addons are attached to. Its corners are joined to the
       # addons on its own.
@@ -205,7 +210,7 @@ module Gustwave
         if Gustwave::Button.for(theme) <= Gustwave::Form::InputGroups::Button
           { side:, size: option_value(:size) }.merge(options)
         else
-          { size: BUTTON_SIZES.fetch(option_value(:size)) }.merge(options, class: [ ADDON_BUTTON_CLASSES, ADDON_BUTTON_SIDE_CLASSES.fetch(side), options[:class] ])
+          { size: derived_value(:button_size) }.merge(attributes_for(:addon_button, options, side:))
         end
       end
     end

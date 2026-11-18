@@ -111,7 +111,7 @@ RSpec.describe Gustwave::Form::Input, type: :component do
   end
 
   describe "types" do
-    described_class::HELPERS.each_key do |type|
+    described_class.option_values(:type).each do |type|
       it "renders type #{type}" do
         render_inline(described_class.new(type:))
 
