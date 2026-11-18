@@ -36,7 +36,7 @@ module Gustwave
     #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) do |input| %>
     #     <% input.with_trailing_action_generic do %>
     #       <button type="button" aria-label="Search by voice" class="absolute inset-y-0 end-0 flex items-center pe-3">
-    #         <%= render Gustwave::Icon.new(:microphone) %>
+    #         <%= render Gustwave::Icon.new(:microphone, theme: :outline) %>
     #       </button>
     #     <% end %>
     #   <% end %>
