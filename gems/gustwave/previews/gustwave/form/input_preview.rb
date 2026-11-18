@@ -34,19 +34,42 @@ module Gustwave
         render_with_template
       end
 
+      # A large search input with a search icon and a search button inside it, in a field with a hidden label.
+      def search
+        render_with_template
+      end
+
+      # A search input with a branch icon and an icon-only search button beside it.
+      def search_simple
+        render_with_template
+      end
+
+      # A search input with a palette icon, a microphone button at its end for voice search, and a search button
+      # beside it. The microphone button has an accessible name, which the Flowbite example lacks.
+      def search_voice
+        render_with_template
+      end
+
+      # A search input in each size, each with a search icon and a search button inside it.
+      def search_sizes
+        render_with_template
+      end
+
       # The input's options side by side, for trying out how they combine.
       # @param type select { choices: [text, email, password, number, url, tel, search, date, time, datetime_local, month, week] }
       # @param size select { choices: [sm, md, lg] }
       # @param validation select { choices: [none, success, error] }
       # @param icon select { choices: [none, envelope, search, users, profile_card] }
+      # @param trailing_action select { choices: [none, button] }
       # @param disabled toggle
       # @param placeholder text
-      def playground(type: :text, size: :md, validation: :none, icon: :none, disabled: false, placeholder: "Task title")
+      def playground(type: :text, size: :md, validation: :none, icon: :none, trailing_action: :none, disabled: false, placeholder: "Task title")
         render_with_template(locals: {
           type: type.to_sym,
           size: size.to_sym,
           validation: validation.to_sym,
           icon: (icon.to_sym unless icon.to_s == "none"),
+          trailing_action: (trailing_action.to_sym unless trailing_action.to_s == "none"),
           disabled: ActiveModel::Type::Boolean.new.cast(disabled),
           placeholder: placeholder
         })
