@@ -30,8 +30,8 @@ module CoordinatedRecordForm
       @coordinated_record_class
     end
 
-    def human_attribute_name(attribute, **options)
-      coordinated_record_class.human_attribute_name(attribute, **options)
+    def human_attribute_name(attribute, options = {})
+      coordinated_record_class.human_attribute_name(attribute, options)
     end
   end
 
