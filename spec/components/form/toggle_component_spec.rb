@@ -11,7 +11,7 @@ RSpec.describe Form::ToggleComponent, type: :component do
   }.each do |name, builder|
     context "with #{name}" do
       let(:form) { builder.new(:site, site, vc_test_controller.view_context, {}) }
-      let(:row) { page.find("div.inline-flex") }
+      let(:row) { page.find("div.inline-flex", visible: :all) }
 
       before do
         render_inline(described_class.new(form, :name, false)) do |component|
@@ -26,8 +26,7 @@ RSpec.describe Form::ToggleComponent, type: :component do
         expect(row).to have_selector(
           "input[type='checkbox'][id='site_name'][name='site[name]'][value='1']", visible: :all
         )
-        expect(page.first("span", visible: :all).text).to eq("On")
-        expect(page.all("span", visible: :all).last.text).to eq("Off")
+        expect(row.all(:xpath, "./*", visible: :all).map(&:tag_name)).to eq(%w[span label span])
       end
 
       it "puts the checkbox directly before the track without state texts" do
@@ -47,6 +46,16 @@ RSpec.describe Form::ToggleComponent, type: :component do
 
         expect(page).to have_no_selector("label label")
         expect(page).to have_selector("label[for='site_name']", text: "Site name")
+      end
+
+      it "marks the checkbox invalid and describes it by the error message" do
+        site.errors.add(:name, "is invalid")
+        render_inline(described_class.new(form, :name, "Site name"))
+
+        checkbox = page.find("input[type='checkbox']", visible: :all)
+        message = page.find("[id='#{checkbox["aria-describedby"]}']", visible: :all)
+        expect(checkbox["aria-invalid"]).to eq("true")
+        expect(message.text(:all)).to match(/is invalid/i)
       end
     end
   end
