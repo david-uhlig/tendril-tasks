@@ -1,7 +1,0 @@
-<%= render Form::BaseFieldComponent.new(@form, @attribute, @label) do %>
-  <div class="inline-flex items-center">
-    <%= checked_state_text if checked_state_text? %>
-    <%= render Gustwave::Form::Toggle.new(@attribute, form: @form, **@options) %>
-    <%= unchecked_state_text if unchecked_state_text? %>
-  </div>
-<% end %>
