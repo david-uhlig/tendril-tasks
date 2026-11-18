@@ -8,17 +8,24 @@ module Gustwave
   # Slot structure (all optional)
   # - +brand+ (any HTML markup, as a link when +href+ is given)
   # - +actions+ (any HTML markup), e.g. a call to action or a user menu
+  # - +menu_header+ (any HTML markup), in the collapsing menu above its items
   # - +items+, the menu's list items:
   #   - +link+ (Gustwave::Navbars::Link), set with +with_item_link+
   #   - +generic+ (any HTML markup), set with +with_item_generic+
   #
   # The actions and the hamburger toggle share a row. The toggle only renders
-  # when the navbar has items, and it controls the menu, whose id is
-  # +menu_id+.
+  # when the navbar has items or a menu header, and it controls the menu, whose
+  # id is +menu_id+.
   #
-  # Items that aren't links, e.g. a dropdown or a search field, go in a
-  # +generic+ item. Use +class: "md:hidden"+ on it to show it on small screens
-  # only.
+  # Items that aren't links, e.g. a dropdown, go in a +generic+ item. Use
+  # +class: "md:hidden"+ on it to show it on small screens only.
+  #
+  # Content that belongs above the items, outside their box, e.g. a search field
+  # for small screens, goes in the menu header. The caller spaces and hides it:
+  #
+  #   navbar.with_menu_header do
+  #     tag.div(class: "mt-3 md:hidden") { render Gustwave::Form::Input.new(type: :search, aria: { label: "Search" }) }
+  #   end
   #
   #   render Gustwave::Navbar.new do |navbar|
   #     navbar.with_brand(href: "/") do
@@ -66,6 +73,9 @@ module Gustwave
 
     renders_one_extensible :actions, ->(&block) { capture(&block) }
 
+    # Content in the collapsing menu above its items, outside the items' box.
+    renders_one_extensible :menu_header, ->(&block) { capture(&block) }
+
     renders_many_extensible :items, types: {
       link: ->(text = nil, href:, active: false, **options, &block) do
         link = Gustwave::Navbars::Link.new(text, href:, active:, **options)
@@ -83,7 +93,7 @@ module Gustwave
     # @param sticky [Boolean] whether the navbar sticks to the top of the viewport. It then overlays the page, so the page content needs its own top offset. Defaults to +false+.
     # @param solid [Boolean] whether the navbar has a solid grey background. Defaults to +false+.
     # @param container_options [Hash] additional HTML attributes passed to the container element, which holds the brand, actions and menu.
-    # @param menu_options [Hash] additional HTML attributes passed to the menu element, which holds the list of items. Its +id+ is always +menu_id+.
+    # @param menu_options [Hash] additional HTML attributes passed to the menu element, which holds the menu header and the list of items. Its +id+ is always +menu_id+.
     # @param options [Hash] additional HTML attributes passed to the +nav+ element.
     def initialize(menu_id: nil, sticky: false, solid: false, container_options: {}, menu_options: {}, **options)
       @menu_id = menu_id || generate_random_id(prefix: "navbar")
@@ -105,6 +115,10 @@ module Gustwave
     end
 
     private
+
+    # Whether the navbar has a collapsing menu, and with it the toggle.
+    def menu? = items? || menu_header?
+
     attr_reader :config, :container_config, :actions_config, :menu_config, :list_config,
                 :toggle
   end

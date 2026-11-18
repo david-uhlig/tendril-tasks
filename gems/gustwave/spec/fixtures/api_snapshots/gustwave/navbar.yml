@@ -29,6 +29,8 @@ slots:
     types:
     - generic
     - link
+  menu_header:
+    many: false
 methods:
 - actions
 - actions?
@@ -36,6 +38,8 @@ methods:
 - brand?
 - items
 - items?
+- menu_header
+- menu_header?
 - menu_id
 - with_actions
 - with_actions_content
@@ -48,8 +52,11 @@ methods:
 - with_item_link
 - with_item_link_content
 - with_items
+- with_menu_header
+- with_menu_header_content
 slot_builders:
 - build_slot_actions
 - build_slot_brand
 - build_slot_item_generic
 - build_slot_item_link
+- build_slot_menu_header

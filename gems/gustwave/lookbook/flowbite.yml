@@ -1021,7 +1021,6 @@ pages:
     title: Navbar with search
     status: previewed
     preview: gustwave/navbar/with_search
-    note: On phones the search is the menu's first list item, not a block before the list.
   - id: navbar-cta-example
     title: Navbar with CTA button
     status: previewed
