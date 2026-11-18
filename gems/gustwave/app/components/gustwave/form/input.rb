@@ -24,6 +24,33 @@ module Gustwave
     #
     # The icon keeps its size and the input its start padding at every +size+.
     #
+    # === Trailing action
+    #
+    # A trailing action, e.g. a search button or a voice search button, sits
+    # inside the input at its end, in the same wrapper as a leading visual:
+    #
+    #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) do |input| %>
+    #     <% input.with_trailing_action_button("Search", type: :submit) %>
+    #   <% end %>
+    #
+    #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) do |input| %>
+    #     <% input.with_trailing_action_generic do %>
+    #       <button type="button" aria-label="Search by voice" class="absolute inset-y-0 end-0 flex items-center pe-3">
+    #         <%= render Gustwave::Icon.new(:microphone, theme: :outline) %>
+    #       </button>
+    #     <% end %>
+    #   <% end %>
+    #
+    #   <%= render Gustwave::Form::Input.new(type: :search, name: "q", aria: { label: "Search" }) do |input| %>
+    #     <% input.with_trailing_action_renderable(VoiceSearchButton.new) %>
+    #   <% end %>
+    #
+    # A +button+ gets a size that fits the input's +size+, unless the caller
+    # gives one. The input reserves no room at its end for the action, so when
+    # its text can run under the action, the caller adds the padding, e.g. with
+    # <tt>class: "pe-10"</tt> on the input. A +generic+ action or a
+    # +renderable+ is positioned by the caller.
+    #
     # @status alpha
     class Input < Gustwave::Component
       include Gustwave::Form::BoundControl
@@ -65,14 +92,23 @@ module Gustwave
       # It keeps its size at every input size.
       part :visual, "h-5 w-5 -ms-0.5 text-gray-500 dark:text-gray-400"
 
+      # A +button+ trailing action, placed inside the input at its end and
+      # centered vertically
+      part :action_button, "absolute end-2.5 top-1/2 -translate-y-1/2"
+
       # The classes shared by every size and validation state
       base input: "block w-full border rounded-lg dark:bg-gray-700"
 
-      variant :size, part: :input, default: :md, values: {
-        sm: "p-2 text-xs",
-        md: "p-2.5 text-sm",
-        lg: "p-4 text-base"
+      # An +xs+ button is 32px high and an +sm+ input 34px, so in an +sm+ input
+      # the button loses 8px of padding and keeps the 5px gap it has in an +md+ one.
+      variant :size, default: :md, values: {
+        sm: { input: "p-2 text-xs", action_button: "py-1" },
+        md: { input: "p-2.5 text-sm" },
+        lg: { input: "p-4 text-base" }
       }
+
+      # The size of a +button+ trailing action, the one that fits the input's size
+      derive :action_button_size, from: :size, values: { sm: :xs, md: :xs, lg: :sm }
 
       variant :validation, part: :input, default: :none, values: VALIDATION_LOOK
 
@@ -89,6 +125,21 @@ module Gustwave
       toggle :disabled_look, part: :input, per: :validation, internal: true, values: DISABLED_LOOK
 
       renders_visuals :leading_visuals
+
+      # An action inside the input at its end, rendered beside the input in
+      # its wrapper.
+      #
+      # * +button+: a Gustwave::Button, in the +:default+ theme unless given a +theme+. It takes the options of the theme, and the size that fits the input's +size+ unless it has its own.
+      # * +generic+: the block, as it is.
+      # * +renderable+: any component, placed by the caller. One that implements +apply_slot_context+ receives +size+.
+      #
+      #   <% input.with_trailing_action_button("Search", type: :submit) %>
+      #   <% input.with_trailing_action_generic { tag.button("Voice", type: "button") } %>
+      #   <% input.with_trailing_action_renderable(VoiceSearchButton.new) %>
+      renders_one_extensible :trailing_action, types: {
+        button: ->(*args, theme: :default, **options) { action_button(*args, theme:, **options) },
+        generic: ->(&block) { block&.call }
+      }, renderable: :trailing_action_context
 
       self.visual_icon_theme = :solid
 
@@ -119,10 +170,10 @@ module Gustwave
       end
 
       def call
-        return element unless leading_visuals?
+        return element unless leading_visuals? || trailing_action?
 
         tag.div(class: classes(:wrapper)) do
-          safe_join([ tag.div(safe_join(leading_visuals), class: classes(:icon_container)), element ])
+          safe_join([ (tag.div(safe_join(leading_visuals), class: classes(:icon_container)) if leading_visuals?), element, trailing_action ].compact)
         end
       end
 
@@ -138,6 +189,16 @@ module Gustwave
 
       # +datetime_local+ is spelled +datetime-local+ in HTML
       def html_type = option_value(:type).to_s.tr("_", "-")
+
+      # The button of +theme+ inside the input. Its size fits the input's size,
+      # and the classes that place it come ahead of the caller's, so the
+      # caller's own size and classes win.
+      def action_button(*args, theme:, **options)
+        Gustwave::Button.for(theme).new(*args, **{ size: derived_value(:action_button_size) }.merge(attributes_for(:action_button, options)))
+      end
+
+      # The context a +renderable+ action receives: the input's size.
+      def trailing_action_context = { size: option_value(:size) }
 
       def input_options
         options = attributes_for(:input, @options)

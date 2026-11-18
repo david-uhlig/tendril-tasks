@@ -160,6 +160,27 @@ RSpec.describe Gustwave::Navbar, type: :component do
     end
   end
 
+  describe "#with_menu_header" do
+    it "renders the header in the menu before the list of items" do
+      render_inline(described_class.new(menu_id: "menu")) do |navbar|
+        navbar.with_menu_header { '<div class="mt-3" id="header">Search</div>'.html_safe }
+        navbar.with_item_link("Home", href: "/")
+      end
+
+      expect(rendered_content).to have_selector("div#menu > div#header:first-child + ul li", text: "Home")
+    end
+
+    it "renders the menu and its toggle without a list when the navbar has only the header" do
+      render_inline(described_class.new(menu_id: "menu")) do |navbar|
+        navbar.with_menu_header { '<div id="header">Search</div>'.html_safe }
+      end
+
+      expect(rendered_content).to have_selector("div#menu > div#header")
+      expect(rendered_content).to have_selector("button[data-collapse-toggle='menu']")
+      expect(rendered_content).not_to have_selector("div#menu ul")
+    end
+  end
+
   context "with sticky" do
     it "adds the sticky classes to the root" do
       render_inline(described_class.new(sticky: true))

@@ -192,6 +192,127 @@ RSpec.describe Gustwave::Form::Input, type: :component do
     end
   end
 
+  describe "a trailing action" do
+    def action_classes = class_set(page.find("button")[:class])
+
+    # The classes of a plain button of +size+, for the size of the action to match
+    def plain_button_classes(size)
+      render_inline(Gustwave::Button.for(:default).new("Search", size:))
+      class_set(page.find("button")[:class])
+    end
+
+    def children_tags(selector) = page.find(selector).all(:xpath, "./*").map(&:tag_name)
+
+    it "renders the wrapper around the input and the action" do
+      render_inline(described_class.new) { |input| input.with_trailing_action_button("Search", type: :submit) }
+
+      expect(children_tags("div.relative")).to eq(%w[input button])
+      expect(page.find("button")[:type]).to eq("submit")
+      expect(page).to have_css("div.relative > input + button", text: "Search")
+    end
+
+    it "renders the icon container, the input and the action in that order" do
+      render_inline(described_class.new(icon: :envelope)) { |input| input.with_trailing_action_button("Search") }
+
+      expect(children_tags("div.relative")).to eq(%w[div input button])
+      expect(page).to have_css("div.relative > div.absolute > svg")
+      expect(input_classes).to include("ps-10")
+    end
+
+    it "places the button at the end of the input, centered vertically" do
+      render_inline(described_class.new) { |input| input.with_trailing_action_button("Search") }
+
+      expect(action_classes).to include("absolute", "end-2.5", "top-1/2", "-translate-y-1/2")
+    end
+
+    it "sizes the button to fit the input at each size" do
+      { md: :xs, lg: :sm }.each do |size, button_size|
+        expected = plain_button_classes(button_size)
+
+        render_inline(described_class.new(size:)) { |input| input.with_trailing_action_button("Search") }
+
+        expect(action_classes).to include(*expected)
+      end
+    end
+
+    it "makes the xs button lower in a small input" do
+      expected = plain_button_classes(:xs) - Set["py-2"]
+
+      render_inline(described_class.new(size: :sm)) { |input| input.with_trailing_action_button("Search") }
+
+      expect(action_classes).to include(*expected, "py-1")
+      expect(action_classes).not_to include("py-2")
+    end
+
+    it "lets the caller's padding win over the small input's" do
+      render_inline(described_class.new(size: :sm)) { |input| input.with_trailing_action_button("Search", class: "py-2") }
+
+      expect(action_classes).to include("py-2")
+      expect(action_classes).not_to include("py-1")
+    end
+
+    it "lets the caller's size and classes win" do
+      expected = plain_button_classes(:lg)
+
+      render_inline(described_class.new) { |input| input.with_trailing_action_button("Search", size: :lg, class: "end-4") }
+
+      expect(action_classes).to include(*expected, "end-4")
+      expect(action_classes).not_to include("end-2.5")
+    end
+
+    it "keeps the input's own padding, which reserves no room for the action" do
+      render_inline(described_class.new) { |input| input.with_trailing_action_button("Search") }
+
+      expect(input_classes).not_to include("pe-10")
+    end
+
+    it "renders a generic action as it is" do
+      render_inline(described_class.new) do |input|
+        input.with_trailing_action_generic { "<button type=\"button\" aria-label=\"Search by voice\" class=\"end-0\">Voice</button>".html_safe }
+      end
+
+      expect(page).to have_css("div.relative > input + button.end-0[aria-label='Search by voice']", text: "Voice")
+      expect(page).to have_no_css("button.absolute")
+    end
+
+    it "gives a renderable action the input's size" do
+      action = Class.new(Gustwave::Component) do
+        def self.name = "TestAction"
+
+        def apply_slot_context(slot:, size:, **) = @size = size
+
+        def call = tag.i(@size.to_s)
+      end
+
+      render_inline(described_class.new(size: :lg)) { |input| input.with_trailing_action_renderable(action.new) }
+
+      expect(page.find("i").text).to eq("lg")
+      expect(children_tags("div.relative")).to eq(%w[input i])
+    end
+
+    it "keeps the label's for on the input inside a field" do
+      render_inline(Gustwave::Form::Field.new(:title, form: form_builder)) do |field|
+        field.with_control_input { |input| input.with_trailing_action_button("Search") }
+      end
+
+      expect(page.find("label")[:for]).to eq("task_title")
+      expect(page).to have_css("div.relative > input#task_title + button", text: "Search")
+    end
+
+    it "renders inside an input group, at the group's size" do
+      expected = plain_button_classes(:sm)
+
+      render_inline(Gustwave::Form::InputGroup.new(size: :lg)) do |group|
+        group.with_leading_addon_text("@")
+        group.with_control_input(name: "q") { |input| input.with_trailing_action_button("Search") }
+      end
+
+      expect(children_tags("div.flex")).to eq(%w[span div])
+      expect(page).to have_css("div.relative > input[name='q'] + button", text: "Search")
+      expect(action_classes).to include(*expected)
+    end
+  end
+
   describe "without a form" do
     it "renders a plain input with name, id and value as attributes" do
       render_inline(described_class.new(name: "q", id: "search", value: "rails", type: :search, aria: { label: "Search" }))

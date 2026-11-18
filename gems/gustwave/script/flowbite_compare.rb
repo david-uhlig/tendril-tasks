@@ -25,7 +25,9 @@ module Gustwave
     # Examples whose own interaction differs from their page's, keyed by example id.
     EXAMPLE_STRATEGIES = {
       "avatar-user-dropdown-example" => :dropdown,
-      "card-user-profile-example" => :dropdown
+      "card-user-profile-example" => :dropdown,
+      "search-bar-dropdown-example" => :dropdown,
+      "search-bar-location-example" => :dropdown
     }.freeze
     # Pages whose interactions no strategy covers yet. Each needs one before it runs.
     NOT_YET = %w[speed-dial drawer tabs tooltips].map { "components/#{_1}" }.freeze

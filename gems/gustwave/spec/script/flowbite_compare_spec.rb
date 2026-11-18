@@ -161,6 +161,11 @@ RSpec.describe Gustwave::FlowbiteCompare do
       expect(strategy_for_pair({ "id" => "card-user-profile-example" }, :static)).to eq(:dropdown)
     end
 
+    it "gives the search bar dropdown examples the dropdown strategy on a static page" do
+      expect(strategy_for_pair({ "id" => "search-bar-dropdown-example" }, :static)).to eq(:dropdown)
+      expect(strategy_for_pair({ "id" => "search-bar-location-example" }, :static)).to eq(:dropdown)
+    end
+
     it "gives any other example the page strategy" do
       expect(strategy_for_pair({ "id" => "avatar-sizes-example" }, :static)).to eq(:static)
     end
