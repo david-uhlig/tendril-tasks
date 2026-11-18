@@ -226,13 +226,31 @@ RSpec.describe Gustwave::Form::Input, type: :component do
     end
 
     it "sizes the button to fit the input at each size" do
-      { sm: :xs, md: :xs, lg: :sm }.each do |size, button_size|
+      { md: :xs, lg: :sm }.each do |size, button_size|
         expected = plain_button_classes(button_size)
 
         render_inline(described_class.new(size:)) { |input| input.with_trailing_action_button("Search") }
 
         expect(action_classes).to include(*expected)
       end
+    end
+
+    it "makes the xs button lower in a small input" do
+      expected = plain_button_classes(:xs) - Set["py-2"]
+
+      render_inline(described_class.new(size: :sm)) { |input| input.with_trailing_action_button("Search") }
+
+      expect(action_classes).to include(*expected, "py-1")
+      expect(action_classes).not_to include("py-2")
+    end
+
+    it "keeps a button of the caller's size as high as it is" do
+      expected = plain_button_classes(:xs)
+
+      render_inline(described_class.new(size: :sm)) { |input| input.with_trailing_action_button("Search", size: :xs) }
+
+      expect(action_classes).to include(*expected)
+      expect(action_classes).not_to include("py-1")
     end
 
     it "lets the caller's size and classes win" do

@@ -3,7 +3,7 @@
     <% field.with_label("Search", class: "sr-only") %>
 
     <% field.with_control_input(type: :search, size: :lg, class: "text-sm", placeholder: "Search projects, tasks…", required: true) do |input| %>
-      <% input.with_leading_visual_icon(:search, theme: :outline) %>
+      <% input.with_leading_visual_icon(:search, theme: :outline, class: "-ms-1") %>
       <% input.with_trailing_action_button("Search", type: :submit, class: "px-4") %>
     <% end %>
   <% end %>

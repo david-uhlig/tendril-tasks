@@ -133,7 +133,7 @@ trailing_action size=:sm icon=nil:
   dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
   dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
   end-2.5 focus:outline-hidden focus:ring-4 focus:ring-blue-300 font-medium gap-2
-  hover:bg-blue-800 overflow-hidden px-3 py-2 rounded-lg text-center text-white text-xs
+  hover:bg-blue-800 overflow-hidden px-3 py-1 rounded-lg text-center text-white text-xs
   top-1/2 whitespace-nowrap'
 trailing_action size=:sm icon=:envelope:
 - 'div: relative'
@@ -151,7 +151,7 @@ trailing_action size=:sm icon=:envelope:
   dark:disabled:bg-blue-500 dark:disabled:hover:bg-blue-500 dark:focus:ring-blue-800
   dark:hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed disabled:hover:bg-blue-400
   end-2.5 focus:outline-hidden focus:ring-4 focus:ring-blue-300 font-medium gap-2
-  hover:bg-blue-800 overflow-hidden px-3 py-2 rounded-lg text-center text-white text-xs
+  hover:bg-blue-800 overflow-hidden px-3 py-1 rounded-lg text-center text-white text-xs
   top-1/2 whitespace-nowrap'
 trailing_action size=:md icon=nil:
 - 'div: relative'

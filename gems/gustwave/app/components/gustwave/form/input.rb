@@ -75,10 +75,15 @@ module Gustwave
       # The button size that fits inside the input at each input size.
       ACTION_BUTTON_SIZES = { sm: :xs, md: :xs, lg: :sm }.freeze
 
+      # The padding that makes the button of that size fit a smaller input:
+      # an +xs+ button is 32px high, an +sm+ input 34px, so it loses 8px and
+      # keeps the 5px gap it has in an +md+ input.
+      ACTION_BUTTON_SIZE_CLASSES = { sm: "py-1" }.freeze
+
       # Classes that place a themed button inside the input at its end, centered vertically.
       ACTION_BUTTON_CLASSES = "absolute end-2.5 top-1/2 -translate-y-1/2"
 
-      private_constant :ACTION_BUTTON_SIZES, :ACTION_BUTTON_CLASSES
+      private_constant :ACTION_BUTTON_SIZES, :ACTION_BUTTON_SIZE_CLASSES, :ACTION_BUTTON_CLASSES
 
       # The input type. +datetime_local+ renders +type="datetime-local"+.
       option :type, default: :text, values: HELPERS.keys
@@ -193,8 +198,10 @@ module Gustwave
       # and the classes that place it come ahead of the caller's, so the
       # caller's own size and classes win.
       def action_button(*args, theme:, **options)
-        defaults = { size: ACTION_BUTTON_SIZES.fetch(option_value(:size)) }
-        Gustwave::Button.for(theme).new(*args, **defaults.merge(options, class: [ ACTION_BUTTON_CLASSES, options[:class] ]))
+        size = option_value(:size)
+        fit = ACTION_BUTTON_SIZE_CLASSES[size] unless options.key?(:size)
+        defaults = { size: ACTION_BUTTON_SIZES.fetch(size) }
+        Gustwave::Button.for(theme).new(*args, **defaults.merge(options, class: [ ACTION_BUTTON_CLASSES, fit, options[:class] ]))
       end
 
       # The context a +renderable+ action receives: the input's size.

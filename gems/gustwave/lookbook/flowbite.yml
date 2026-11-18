@@ -1709,6 +1709,7 @@ pages:
     title: Search input
     status: previewed
     preview: gustwave/form/input/search
+    note: The preview is the search input page's example, which is narrowed to max-w-md where this one fills the width.
   - id: input-field-dropdown-example
     title: Dropdown input
     status: previewed
