@@ -51,22 +51,22 @@ module Gustwave
       include Gustwave::Form::BoundControl
       include Gustwave::Form::Framed
 
-      # The toolbar component of each editor
-      TOOLBARS = {
-        lexxy: "Gustwave::Form::RichText::Lexxy::Toolbar",
-        trix: "Gustwave::Form::RichText::Trix::Toolbar"
-      }.freeze
-
-      # The class each editor's own stylesheet styles its content with
-      CONTENT_CLASSES = { lexxy: "lexxy-content", trix: "trix-content" }.freeze
+      # The editor element, borderless inside the frame's body
+      part :editor, "block w-full min-h-80 px-0 text-sm text-gray-800 border-0 focus:outline-hidden " \
+                    "dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
 
       # The editor whose toolbar and content class the component uses. The
       # editor element itself is what Rails' +rich_textarea+ renders.
       option :editor, default: :lexxy, values: %i[lexxy trix]
 
-      # The editor element, borderless inside the frame's body
-      part :editor, "block w-full min-h-80 px-0 text-sm text-gray-800 border-0 focus:outline-hidden " \
-                    "dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+      # The class each editor's own stylesheet styles its content with
+      derive :content_class, from: :editor, values: { lexxy: "lexxy-content", trix: "trix-content" }
+
+      # The toolbar component of each editor
+      derive :toolbar_class, from: :editor, values: {
+        lexxy: "Gustwave::Form::RichText::Lexxy::Toolbar",
+        trix: "Gustwave::Form::RichText::Trix::Toolbar"
+      }
 
       # The validation state colors the frame's border; the editor has no
       # classes of its own for it.
@@ -159,7 +159,7 @@ module Gustwave
         end
 
         @toolbar_placement = placement
-        TOOLBARS.fetch(option_value(:editor)).constantize.new(bound_form, id: toolbar_id, **options)
+        derived_value(:toolbar_class).constantize.new(bound_form, id: toolbar_id, **options)
       end
 
       def place_default_toolbar
@@ -174,7 +174,7 @@ module Gustwave
 
       def editor_options
         options = attributes_for(:editor, @options)
-        options[:class] = [ options[:class], CONTENT_CLASSES.fetch(option_value(:editor)) ].compact.join(" ")
+        options[:class] = [ options[:class], derived_value(:content_class) ].compact.join(" ")
         options[:id] = explicit_id if explicit_id
         options[:toolbar] = toolbar_id unless own_toolbar?
         merge_aria(options)

@@ -40,6 +40,8 @@ options:
 derived:
   action_button_size:
     from: size
+  helper:
+    from: type
 parts:
 - action_button
 - icon_container
