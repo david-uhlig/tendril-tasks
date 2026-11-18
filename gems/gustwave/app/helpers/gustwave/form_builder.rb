@@ -51,8 +51,8 @@ module Gustwave
   # (+text_area+), +rich_textarea+ (+rich_text_area+) and +file_field+, which
   # render a textarea, a rich textarea and a file input, +range_field+, which
   # renders a range, and +select+ and +collection_select+, which render a
-  # select, and +check_box+ (+checkbox+),
-  # which renders a checkbox, and +radio_button+, which renders a radio.
+  # select, and +check_box+ (+checkbox+), which renders a checkbox, and
+  # +radio_button+, which renders a radio.
   # Every other helper stays Rails', including the other select helpers such
   # as +grouped_collection_select+ and +time_zone_select+,
   # +collection_check_boxes+ and +collection_radio_buttons+.
