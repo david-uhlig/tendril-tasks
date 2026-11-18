@@ -20,13 +20,13 @@ RSpec.describe Form::ToggleComponent, type: :component do
         end
       end
 
-      it "renders Rails' hidden field and checkbox, with the texts around the switch" do
-        expect(row.all(:xpath, "./span", visible: :all).map(&:text)).to eq(%w[On Off])
+      it "renders Rails' hidden field and checkbox, with the texts around the switch as its labels" do
+        expect(row.all(:xpath, "./label[@for='site_name']", visible: :all).map(&:text)).to eq(%w[On Off])
         expect(row).to have_selector("input[type='hidden'][name='site[name]'][value='0']", visible: :all)
         expect(row).to have_selector(
           "input[type='checkbox'][id='site_name'][name='site[name]'][value='1']", visible: :all
         )
-        expect(row.all(:xpath, "./*", visible: :all).map(&:tag_name)).to eq(%w[span label span])
+        expect(row.all(:xpath, "./*", visible: :all).map(&:tag_name)).to eq(%w[label label label])
       end
 
       it "puts the checkbox directly before the track without state texts" do

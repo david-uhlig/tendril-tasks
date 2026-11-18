@@ -2,26 +2,25 @@
 
 module Form
   # A Gustwave::Form::Toggle with the field's label and errors, and optional
-  # texts around the switch: one shown before it and one after it.
+  # texts around the switch: one shown before it and one after it. Both are
+  # labels of the checkbox, so a click on them flips the switch.
   #
   # Example Usage:
   #   <%= render Form::ToggleComponent.new(f, :publish, "Visibility") do |toggle| %>
   #     <% toggle.with_checked_state_text("Private") %>
   #     <% toggle.with_unchecked_state_text("Public") %>
   #   <% end %>
+  #
+  # @todo Refactor to use dual sided toggle once Gustwave for Flowbite v4 is released
   class ToggleComponent < TendrilTasks::Component
-    STATE_TEXT_CLASSES = "text-sm font-medium text-gray-900 dark:text-gray-300"
+    STATE_TEXT_CLASSES = "text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
 
     renders_one :checked_state_text, ->(text, **options) do
-      options.deep_symbolize_keys!
-      options[:class] = class_merge("me-3", STATE_TEXT_CLASSES, options.delete(:class))
-      tag.span(text, **options)
+      state_text_label(text, "me-3", options)
     end
 
     renders_one :unchecked_state_text, ->(text, **options) do
-      options.deep_symbolize_keys!
-      options[:class] = class_merge("ms-3", STATE_TEXT_CLASSES, options.delete(:class))
-      tag.span(text, **options)
+      state_text_label(text, "ms-3", options)
     end
 
     # @param form [Object] the form builder
@@ -44,6 +43,17 @@ module Form
         )
       end
     end
+
+    private
+
+    # A label for the checkbox, so a click on the text flips the switch.
+    def state_text_label(text, margin, options)
+      options = options.deep_symbolize_keys
+      options[:class] = class_merge(margin, STATE_TEXT_CLASSES, options.delete(:class))
+      tag.label(text, for: checkbox_id, **options)
+    end
+
+    def checkbox_id = @options[:id] || @form.field_id(@attribute)
 
     # The toggle with the state texts beside it, as the field's control. It
     # passes the field's wiring (binding, ID, validation state and
