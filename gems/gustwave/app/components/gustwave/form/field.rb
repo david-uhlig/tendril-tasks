@@ -70,6 +70,7 @@ module Gustwave
       # * +input_group+: a Gustwave::Form::InputGroup, built with the given arguments. It passes the context to its own control.
       # * +rich_textarea+: a Gustwave::Form::RichTextarea, built with the given arguments.
       # * +file_input+: a Gustwave::Form::FileInput, built with the given arguments.
+      # * +range+: a Gustwave::Form::Range, built with the given arguments.
       # * +renderable+: any component. One that implements +apply_slot_context+
       #   receives +attribute+, +form+, +id+ (without a form), +validation+ and
       #   +described_by+, as Gustwave::Form::Input does.
@@ -80,6 +81,7 @@ module Gustwave
       #   <% field.with_control_input_group { |group| group.with_leading_addon_text("@"); group.with_control_input } %>
       #   <% field.with_control_rich_textarea %>
       #   <% field.with_control_file_input(accept: "image/*") %>
+      #   <% field.with_control_range(min: 0, max: 100, step: 5) %>
       #   <% field.with_control_renderable(MyRating.new) %>
       renders_one_extensible :control, types: {
         input: ->(*args, **options) { Gustwave::Form::Input.new(*args, **options) },
@@ -87,7 +89,8 @@ module Gustwave
         select: ->(*args, **options) { Gustwave::Form::Select.new(*args, **options) },
         input_group: ->(*args, **options) { Gustwave::Form::InputGroup.new(*args, **options) },
         rich_textarea: ->(*args, **options) { Gustwave::Form::RichTextarea.new(*args, **options) },
-        file_input: ->(*args, **options) { Gustwave::Form::FileInput.new(*args, **options) }
+        file_input: ->(*args, **options) { Gustwave::Form::FileInput.new(*args, **options) },
+        range: ->(*args, **options) { Gustwave::Form::Range.new(*args, **options) }
       }, renderable: :control_context
 
       def call

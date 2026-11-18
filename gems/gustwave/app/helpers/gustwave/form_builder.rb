@@ -4,9 +4,10 @@ module Gustwave
   # A form builder that renders Rails' input, text area, rich text area, file
   # field and select helpers as Gustwave::Form::Field with a
   # Gustwave::Form::Input, Gustwave::Form::Textarea,
-  # Gustwave::Form::RichTextarea, Gustwave::Form::FileInput or
-  # Gustwave::Form::Select. A form opts in with +builder:+. Gustwave never
-  # sets +default_form_builder+ (D10 in docs/design.md).
+  # Gustwave::Form::RichTextarea, Gustwave::Form::FileInput,
+  # Gustwave::Form::Range or Gustwave::Form::Select. A form opts in with
+  # +builder:+. Gustwave never sets +default_form_builder+ (D10 in
+  # docs/design.md).
   #
   #   <%= form_with model: @task, builder: Gustwave::FormBuilder do |f| %>
   #     <%= f.text_field :title, helper_text: "Shown in the task list." %>
@@ -48,8 +49,9 @@ module Gustwave
   # +date_field+, +time_field+, +datetime_field+, +datetime_local_field+,
   # +month_field+ and +week_field+, which render an input, +textarea+
   # (+text_area+), +rich_textarea+ (+rich_text_area+) and +file_field+, which
-  # render a textarea, a rich textarea and a file input, and +select+ and
-  # +collection_select+, which render a select, and +check_box+ (+checkbox+),
+  # render a textarea, a rich textarea and a file input, +range_field+, which
+  # renders a range, and +select+ and +collection_select+, which render a
+  # select, and +check_box+ (+checkbox+),
   # which renders a checkbox, and +radio_button+, which renders a radio.
   # Every other helper stays Rails', including the other select helpers such
   # as +grouped_collection_select+ and +time_zone_select+,
@@ -205,6 +207,19 @@ module Gustwave
     # @return [ActiveSupport::SafeBuffer]
     def file_field(attribute, options = {}, &block)
       render_field(attribute, :file_input, options, &block)
+    end
+
+    # Renders a field with a Gustwave::Form::Range. +size+ is Gustwave's, so
+    # the HTML attribute goes in +html:+.
+    #
+    # @param attribute [Symbol, String] the attribute.
+    # @param options [Hash] +label+, +helper_text+, +validation+ and +validation_message+ go to the field,
+    #   +size+ to the range, and the rest are the HTML attributes of the +<input>+, e.g. +min+, +max+, +step+
+    #   and +value+.
+    # @yield [field] the field, to set its slots.
+    # @return [ActiveSupport::SafeBuffer]
+    def range_field(attribute, options = {}, &block)
+      render_field(attribute, :range, options, &block)
     end
 
     # Renders an inline field with a Gustwave::Form::Toggle. There is no

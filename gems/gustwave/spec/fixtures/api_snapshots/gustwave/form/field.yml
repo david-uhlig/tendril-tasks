@@ -25,6 +25,7 @@ slots:
     - file_input
     - input
     - input_group
+    - range
     - renderable
     - rich_textarea
     - select
@@ -51,6 +52,8 @@ methods:
 - with_control_input_content
 - with_control_input_group
 - with_control_input_group_content
+- with_control_range
+- with_control_range_content
 - with_control_renderable
 - with_control_renderable_content
 - with_control_rich_textarea
@@ -69,6 +72,7 @@ slot_builders:
 - build_slot_control_file_input
 - build_slot_control_input
 - build_slot_control_input_group
+- build_slot_control_range
 - build_slot_control_renderable
 - build_slot_control_rich_textarea
 - build_slot_control_select

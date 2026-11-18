@@ -445,6 +445,45 @@ RSpec.describe Gustwave::Form::Field, type: :component do
     end
   end
 
+  describe "a range control" do
+    def range_input
+      page.find("input[type='range']")
+    end
+
+    it "binds a range to the attribute, with the label's for matching its id" do
+      render_field(:progress, form: form_builder(task(progress: 40)), helper_text: "Help") do |field|
+        field.with_control_range(min: 0, max: 100)
+      end
+
+      expect(label[:for]).to eq("task_progress")
+      expect(range_input[:id]).to eq("task_progress")
+      expect(range_input[:name]).to eq("task[progress]")
+      expect(range_input[:value]).to eq("40")
+      expect(range_input[:min]).to eq("0")
+      expect(range_input[:max]).to eq("100")
+      expect(range_input["aria-describedby"]).to eq("task_progress_helper_text")
+    end
+
+    it "passes the error state on, with aria-invalid and no red look on the range" do
+      record = task.tap { |t| t.errors.add(:progress, "is invalid") }
+      render_field(:progress, form: form_builder(record)) { |field| field.with_control_range }
+
+      expect(range_input["aria-invalid"]).to eq("true")
+      expect(class_set(range_input[:class]).grep(/red/)).to be_empty
+      expect(range_input["aria-describedby"]).to eq("task_progress_validation_message")
+      expect(classes_of(label)).to include("text-red-700")
+    end
+
+    it "wires an unbound range with a generated ID" do
+      render_field(label: "Priority", helper_text: "Help") { |field| field.with_control(:range, min: 1, max: 5) }
+
+      expect(range_input[:id]).to start_with("field-")
+      expect(range_input[:name]).to be_nil
+      expect(label[:for]).to eq(range_input[:id])
+      expect(range_input["aria-describedby"]).to eq("#{range_input[:id]}-helper-text")
+    end
+  end
+
   describe "ids" do
     it "differ between forms with another namespace or object name" do
       render_inline(described_class.new(:title, form: form_builder(namespace: "a"), helper_text: "Help")) { |f| f.with_control_input }

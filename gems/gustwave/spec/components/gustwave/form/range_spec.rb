@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe Gustwave::Form::Range, type: :component do
+  it_behaves_like "a bound control defaulting to the error state", slot: :range, id: "task_%s"
+
   # Flowbite's "Default range" example, the default range
   flowbite_range = "w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
 
