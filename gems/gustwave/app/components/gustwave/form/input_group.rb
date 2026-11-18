@@ -210,7 +210,7 @@ module Gustwave
         if Gustwave::Button.for(theme) <= Gustwave::Form::InputGroups::Button
           { side:, size: option_value(:size) }.merge(options)
         else
-          { size: derived_value(:button_size) }.merge(attributes_for(:addon_button, options, side:))
+          { size: derived_value(:button_size) }.merge(options, class: classes(:addon_button, side:, class: options[:class]))
         end
       end
     end

@@ -153,6 +153,13 @@ RSpec.describe Gustwave::Form::InputGroup, type: :component do
       expect(classes_of(page.find("button"))).to include("px-5", "py-3", "text-base")
     end
 
+    it "keeps the group's size on a button addon given an HTML size attribute in html:" do
+      render_group(size: :sm) { |group| group.with_trailing_addon_button("Go", html: { size: 5 }) }
+
+      expect(page.find("button")[:size]).to eq("5")
+      expect(classes_of(page.find("button"))).to include("px-3", "py-2", "text-xs")
+    end
+
     it "renders a dropdown addon with the menu as the trigger's sibling" do
       render_group do |group|
         group.with_leading_addon_dropdown("All categories", menu_id: "cats") do |dropdown|
