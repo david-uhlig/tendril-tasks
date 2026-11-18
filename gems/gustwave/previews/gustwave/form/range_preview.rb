@@ -27,9 +27,8 @@ module Gustwave
         render_with_template
       end
 
-      # A slider with labels under its track at the minimum, the midpoint, the other midpoint and the maximum. The
-      # labels are spans that the caller positions in a relative wrapper, because the range has no tick labels of its
-      # own.
+      # A slider with labels under its track at $100, $500, $1000 and $1500. The labels are spans that the caller
+      # positions in a relative wrapper, because the range has no tick labels of its own.
       def labels
         render_with_template
       end
