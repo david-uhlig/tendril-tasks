@@ -18,6 +18,12 @@ RSpec.describe "Gustwave::Form::Input style snapshot", type: :component do
       Gustwave::Form::Input.new(icon: :envelope, **args)
     end
 
+    # The action sits at the end of the input, with and without a leading icon. The slot is set in the render block, where the input's size is known.
+    group :trailing_action, size: %i[sm md lg], icon: [ nil, :envelope ],
+          slots: ->(input) { input.with_trailing_action_button("Search", type: :submit) } do |**args|
+      Gustwave::Form::Input.new(**args)
+    end
+
     # The group selects the joined edges through the slot context
     group :joined, joined: %i[none start end both], size: %i[sm md lg] do |joined:, **args|
       Gustwave::Form::Input.new(**args).tap { |input| input.apply_slot_context(joined:) }
