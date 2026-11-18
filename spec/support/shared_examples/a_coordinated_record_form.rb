@@ -61,6 +61,15 @@ RSpec.shared_examples "a coordinated record form" do |record_factory|
       expect(form.valid?).to be(false)
       expect(form.errors[:title]).to be_present
     end
+
+    it "builds full messages with the translated attribute names when coordinators are missing" do
+      form = described_class.new(build(record_factory, coordinators: []))
+
+      expect(form.valid?).to be(false)
+      expect(form.errors.full_messages).to include(
+        "#{described_class.human_attribute_name(:coordinators)} #{form.errors[:coordinators].first}"
+      )
+    end
   end
 
   describe "#save" do
