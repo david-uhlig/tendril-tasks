@@ -50,5 +50,12 @@ module Gustwave
     def with_user_menu
       render_with_template
     end
+
+    # A search field beside the actions on desktop. On mobile, a search button
+    # in the actions opens the menu, where the field is the first item. So the
+    # mobile search is a list item in the menu rather than a block before the list.
+    def with_search
+      render_with_template
+    end
   end
 end
