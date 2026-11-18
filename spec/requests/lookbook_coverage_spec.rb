@@ -25,7 +25,9 @@ RSpec.describe "Lookbook's Flowbite coverage", type: :request do
   end
 
   describe "the Flowbite pages" do
-    it "shows every example of every page" do
+    # Rendering every page is slow, and only developers see these pages, so
+    # this runs nightly with the other optional specs.
+    it "shows every example of every page", optional: true do
       failures = coverage.page_keys.flat_map do |key|
         get "/lookbook/pages/flowbite/#{key.tr("-", "_")}"
         next [ "#{key} returned #{response.status}" ] unless response.ok?
