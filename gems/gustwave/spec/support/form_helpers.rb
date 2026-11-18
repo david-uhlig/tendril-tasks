@@ -8,6 +8,7 @@ class FormSpecTask
   attribute :title, :string
   attribute :due_on, :date
   attribute :project_id, :integer
+  attribute :progress, :integer
   attribute :password, :string
   attribute :country, :string
   attribute :body, :string

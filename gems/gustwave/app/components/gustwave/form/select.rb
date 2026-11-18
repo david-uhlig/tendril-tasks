@@ -68,7 +68,7 @@ module Gustwave
 
       # @param attribute [Symbol, String, nil] the attribute of the form's object the select is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the select is a plain +<select>+.
-      # @param choices [Array, Hash, String, Range, nil] the options of the select, as Rails' +select+ takes them. The content block is used instead when there is one.
+      # @param choices [Array, Hash, String, ::Range, nil] the options of the select, as Rails' +select+ takes them. The content block is used instead when there is one.
       # @param size [Symbol] the size of the select. Defaults to +:md+. Valid values are +:sm+, +:md+ and +:lg+. The HTML attribute +size+ goes in +html:+.
       # @param style [Symbol] the style of the select. Defaults to +:default+. Valid values are +:default+, bordered, and +:underline+, which has one size and no validation looks. The HTML attribute +style+ goes in +html:+.
       # @param validation [Symbol] the look of the select. Defaults to +:error+ while a bound attribute has errors, otherwise +:none+. Valid values are +:none+, +:success+ and +:error+. +:error+ also sets +aria-invalid+, unless the caller's +aria+ options say otherwise, also with the underline style.
@@ -141,7 +141,7 @@ module Gustwave
         return content if content?
         return @choices if @choices.is_a?(String)
 
-        choices = @choices.is_a?(Range) ? @choices.to_a : @choices || []
+        choices = @choices.is_a?(::Range) ? @choices.to_a : @choices || []
         selection = { selected: @rails_options[:selected], disabled: @rails_options[:disabled] }
         if grouped_choices?(choices)
           helpers.grouped_options_for_select(choices, selection)
