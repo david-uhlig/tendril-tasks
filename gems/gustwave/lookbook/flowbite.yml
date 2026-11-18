@@ -1019,8 +1019,9 @@ pages:
     preview: gustwave/navbar/with_submenu
   - id: navbar-search-example
     title: Navbar with search
-    status: partial
-    needs: search-input
+    status: previewed
+    preview: gustwave/navbar/with_search
+    note: On phones the search is the menu's first list item, not a block before the list.
   - id: navbar-cta-example
     title: Navbar with CTA button
     status: previewed
@@ -1706,8 +1707,8 @@ pages:
     preview: gustwave/form/input/helper_text
   - id: input-field-search-example
     title: Search input
-    status: blocked
-    needs: search-input
+    status: previewed
+    preview: gustwave/form/input/search
   - id: input-field-dropdown-example
     title: Dropdown input
     status: previewed
@@ -1873,24 +1874,25 @@ pages:
   forms/search-input:
   - id: default-search-bar-example
     title: Search bar example
-    status: blocked
-    needs: search-input
+    status: previewed
+    preview: gustwave/form/input/search
   - id: search-bar-dropdown-example
     title: Search with dropdown
-    status: blocked
-    needs: search-input
+    status: previewed
+    preview: gustwave/form/input_group/search_dropdown
   - id: search-bar-simple-example
     title: Simple search input
-    status: blocked
-    needs: search-input
+    status: previewed
+    preview: gustwave/form/input/search_simple
   - id: search-bar-location-example
     title: Location search
-    status: blocked
-    needs: search-input
+    status: previewed
+    preview: gustwave/form/input_group/search_location
   - id: search-bar-voice-example
     title: Voice search
-    status: blocked
-    needs: search-input
+    status: previewed
+    preview: gustwave/form/input/search_voice
+    note: The voice search button has an accessible name, which Flowbite's lacks.
   forms/select:
   - id: default-select-example
     title: Select input example
