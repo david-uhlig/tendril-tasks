@@ -147,7 +147,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-        run: bin/rails tailwindcss:build parallel:setup parallel:spec
+        run: bin/rails tailwindcss:build parallel:setup 'parallel:spec[,,,--runtime-log spec/parallel_runtime.log]'
 
       - name: Run Gustwave tests
         working-directory: gems/gustwave

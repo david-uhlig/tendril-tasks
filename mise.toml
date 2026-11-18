@@ -132,7 +132,11 @@ run = "bin/check-gem-npm-versions"
 
 [tasks."test"]
 description = "Tests: RSpec, the whole suite in parallel"
-run = "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup parallel:spec"
+run = "env RAILS_ENV=test bin/rails tailwindcss:build parallel:setup 'parallel:spec[,,,--runtime-log spec/parallel_runtime.log]'"
+
+[tasks."test:rebalance"]
+description = "Tests: Re-record the spec runtimes that balance the parallel run (commit spec/parallel_runtime.log)"
+run = "bin/rebalance-parallel-specs"
 
 [tasks."test:ff"]
 description = "Tests: RSpec (fail fast; no coverage). Pass spec paths to run only those; fewer than 4 spec files or PARALLEL_PROCESSES=1 run in one process"

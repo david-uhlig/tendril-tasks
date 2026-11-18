@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Re-records how long each spec file takes, so the parallel run can split the
+# files into evenly long groups instead of evenly large ones. Run it after
+# adding, removing or substantially changing spec files, on a quiet machine
+# with as many cores as the parallel run is meant to use, and commit the result.
+set -euo pipefail
+
+PROCESSES="${PARALLEL_PROCESSES:-4}"
+runtime_log=spec/parallel_runtime.log
+recording="$(mktemp)"
+trap 'rm -f "$recording"' EXIT
+
+# Record into a fresh file, so removed spec files don't linger in the log. The
+# existing log is not passed on, so this run groups by file size, as a first run does.
+set +e
+RAILS_ENV=test SKIP_COVERAGE=1 bundle exec parallel_rspec -n "$PROCESSES" spec/ \
+  -o "--format progress --format ParallelTests::RSpec::RuntimeLogger --out $recording"
+status=$?
+set -e
+
+# Sorted and rounded, so that a re-recording changes the diff only where a runtime did.
+awk -F: '{ printf "%s:%.2f\n", $1, $2 }' "$recording" | sort > "$runtime_log"
+echo "Recorded $(wc -l < "$runtime_log") spec files in $runtime_log"
+
+if [ "$status" -ne 0 ]; then
+  echo "Some specs failed, so their runtimes may be off. Fix them and record again." >&2
+  exit "$status"
+fi
