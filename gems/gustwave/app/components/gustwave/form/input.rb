@@ -72,19 +72,6 @@ module Gustwave
         week: :week_field
       }.freeze
 
-      # The button size that fits inside the input at each input size.
-      ACTION_BUTTON_SIZES = { sm: :xs, md: :xs, lg: :sm }.freeze
-
-      # The padding that makes the button of that size fit a smaller input:
-      # an +xs+ button is 32px high, an +sm+ input 34px, so it loses 8px and
-      # keeps the 5px gap it has in an +md+ input.
-      ACTION_BUTTON_SIZE_CLASSES = { sm: "py-1" }.freeze
-
-      # Classes that place a themed button inside the input at its end, centered vertically.
-      ACTION_BUTTON_CLASSES = "absolute end-2.5 top-1/2 -translate-y-1/2"
-
-      private_constant :ACTION_BUTTON_SIZES, :ACTION_BUTTON_SIZE_CLASSES, :ACTION_BUTTON_CLASSES
-
       # The input type. +datetime_local+ renders +type="datetime-local"+.
       option :type, default: :text, values: HELPERS.keys
 
@@ -105,14 +92,23 @@ module Gustwave
       # It keeps its size at every input size.
       part :visual, "h-5 w-5 -ms-0.5 text-gray-500 dark:text-gray-400"
 
+      # A +button+ trailing action, placed inside the input at its end and
+      # centered vertically
+      part :action_button, "absolute end-2.5 top-1/2 -translate-y-1/2"
+
       # The classes shared by every size and validation state
       base input: "block w-full border rounded-lg dark:bg-gray-700"
 
-      variant :size, part: :input, default: :md, values: {
-        sm: "p-2 text-xs",
-        md: "p-2.5 text-sm",
-        lg: "p-4 text-base"
+      # An +xs+ button is 32px high and an +sm+ input 34px, so in an +sm+ input
+      # the button loses 8px of padding and keeps the 5px gap it has in an +md+ one.
+      variant :size, default: :md, values: {
+        sm: { input: "p-2 text-xs", action_button: "py-1" },
+        md: { input: "p-2.5 text-sm" },
+        lg: { input: "p-4 text-base" }
       }
+
+      # The size of a +button+ trailing action, the one that fits the input's size
+      derive :action_button_size, from: :size, values: { sm: :xs, md: :xs, lg: :sm }
 
       variant :validation, part: :input, default: :none, values: VALIDATION_LOOK
 
@@ -198,10 +194,7 @@ module Gustwave
       # and the classes that place it come ahead of the caller's, so the
       # caller's own size and classes win.
       def action_button(*args, theme:, **options)
-        size = option_value(:size)
-        fit = ACTION_BUTTON_SIZE_CLASSES[size] unless options.key?(:size)
-        defaults = { size: ACTION_BUTTON_SIZES.fetch(size) }
-        Gustwave::Button.for(theme).new(*args, **defaults.merge(options, class: [ ACTION_BUTTON_CLASSES, fit, options[:class] ]))
+        Gustwave::Button.for(theme).new(*args, **{ size: derived_value(:action_button_size) }.merge(attributes_for(:action_button, options)))
       end
 
       # The context a +renderable+ action receives: the input's size.

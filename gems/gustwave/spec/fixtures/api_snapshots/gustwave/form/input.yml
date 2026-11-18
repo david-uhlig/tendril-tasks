@@ -37,7 +37,11 @@ options:
     - none
     - success
     - error
+derived:
+  action_button_size:
+    from: size
 parts:
+- action_button
 - icon_container
 - input
 - visual

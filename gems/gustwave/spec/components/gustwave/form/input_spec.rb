@@ -244,12 +244,10 @@ RSpec.describe Gustwave::Form::Input, type: :component do
       expect(action_classes).not_to include("py-2")
     end
 
-    it "keeps a button of the caller's size as high as it is" do
-      expected = plain_button_classes(:xs)
+    it "lets the caller's padding win over the small input's" do
+      render_inline(described_class.new(size: :sm)) { |input| input.with_trailing_action_button("Search", class: "py-2") }
 
-      render_inline(described_class.new(size: :sm)) { |input| input.with_trailing_action_button("Search", size: :xs) }
-
-      expect(action_classes).to include(*expected)
+      expect(action_classes).to include("py-2")
       expect(action_classes).not_to include("py-1")
     end
 
