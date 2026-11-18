@@ -1,0 +1,19 @@
+---
+size size=:sm:
+- 'input type="range": appearance-none bg-gray-200 cursor-pointer dark:bg-gray-700
+  h-1 range-sm rounded-lg w-full'
+size size=:md:
+- 'input type="range": appearance-none bg-gray-200 cursor-pointer dark:bg-gray-700
+  h-2 rounded-lg w-full'
+size size=:lg:
+- 'input type="range": appearance-none bg-gray-200 cursor-pointer dark:bg-gray-700
+  h-3 range-lg rounded-lg w-full'
+validation validation=:none:
+- 'input type="range": appearance-none bg-gray-200 cursor-pointer dark:bg-gray-700
+  h-2 rounded-lg w-full'
+validation validation=:success:
+- 'input type="range": appearance-none bg-gray-200 cursor-pointer dark:bg-gray-700
+  h-2 rounded-lg w-full'
+validation validation=:error:
+- 'input aria-invalid="true" type="range": appearance-none bg-gray-200 cursor-pointer
+  dark:bg-gray-700 h-2 rounded-lg w-full'

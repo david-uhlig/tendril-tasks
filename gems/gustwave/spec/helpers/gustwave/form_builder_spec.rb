@@ -199,6 +199,50 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     end
   end
 
+  describe "#range_field" do
+    it "renders a field with a range" do
+      html = parse(gustwave_form.range_field(:progress))
+
+      expect(html).to have_css("div > label[for='task_progress'] + input#task_progress[name='task[progress]'][type='range']")
+    end
+
+    it "sends size to the range and the rest to the field and the HTML attributes" do
+      html = parse(gustwave_form.range_field(:progress, size: :lg, label: "Priority", helper_text: "Help",
+                                                        min: 0, max: 10, step: 0.5, class: "mx-4"))
+      input = html.find("input")
+
+      expect(html.find("label").text).to eq("Priority")
+      expect(html).to have_css("p#task_progress_helper_text", text: "Help")
+      expect(input[:class].split).to include("h-3", "range-lg", "mx-4")
+      expect(input[:min]).to eq("0")
+      expect(input[:max]).to eq("10")
+      expect(input[:step]).to eq("0.5")
+      expect(input["aria-describedby"]).to eq("task_progress_helper_text")
+    end
+
+    it "renders the HTML attribute size from html:" do
+      input = parse(gustwave_form.range_field(:progress, size: :lg, html: { size: 5 })).find("input")
+
+      expect(input[:size]).to eq("5")
+      expect(input[:class].split).to include("h-3", "range-lg")
+    end
+
+    it "marks the range as invalid for a record with errors, without a red look" do
+      record = task.tap { |t| t.errors.add(:progress, "is invalid") }
+      html = parse(gustwave_form(record).range_field(:progress))
+
+      expect(html).to have_css("input[type='range'][aria-invalid='true'][aria-describedby='task_progress_validation_message']")
+      expect(html.find("input")[:class].split.grep(/red/)).to be_empty
+    end
+
+    it "passes the field to a block" do
+      html = parse(gustwave_form.range_field(:progress) { |field| field.with_helper_text("From the block") })
+
+      expect(html).to have_css("p#task_progress_helper_text", text: "From the block")
+      expect(html).to have_css("input[type='range'][aria-describedby='task_progress_helper_text']")
+    end
+  end
+
   describe "#toggle" do
     it "renders an inline field with a toggle, bound through Rails' check_box" do
       html = parse(gustwave_form.toggle(:title))

@@ -1847,28 +1847,29 @@ pages:
   forms/range:
   - id: default-range-example
     title: Range slider example
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/range/default
   - id: range-disabled-example
     title: Disabled state
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/range/disabled
   - id: range-minmax-example
     title: Min and max
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/range/min_max
   - id: range-steps-example
     title: Steps
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/range/steps
   - id: range-sizes-example
     title: Sizes
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/range/sizes
   - id: range-labels-example
     title: Labels
-    status: blocked
-    needs: form
+    status: previewed
+    preview: gustwave/form/range/labels
+    note: The tick labels are spans that the caller positions under the track, in a relative wrapper, as this example does by hand.
   forms/search-input:
   - id: default-search-bar-example
     title: Search bar example
