@@ -12,6 +12,18 @@ module Gustwave
         render_with_template
       end
 
+      # A search input with a category dropdown in front of it. The dropdown's menu items are buttons, and the search
+      # button is an icon at the input's end.
+      def search_dropdown
+        render_with_template
+      end
+
+      # A search input with a country dropdown in front of it. The trigger shows a flag and "USA", and each country in
+      # the menu has a round flag. The divider is the dropdown's end border plus the input's 2px light start border.
+      def search_location
+        render_with_template
+      end
+
       # The input group's options, for trying out how they combine. The addons take the group's size, and the row stays
       # as high as the taller of control and addons. The icon toggle puts an icon inside the input.
       # @param size select { choices: [sm, md, lg] }
