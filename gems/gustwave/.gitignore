@@ -1,5 +1,6 @@
 /coverage/
 /spec/dummy/log/
 /spec/dummy/tmp/
+/tmp/
 /doc/
 /.yardoc/
