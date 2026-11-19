@@ -175,8 +175,9 @@ module Release
       git_ok?("switch", "main")
     end
 
+    # Untracked files can stay: the release commits only take tracked files
     def require_clean_tree
-      raise Error, "Commit or stash your changes first" unless git("status", "--porcelain").empty?
+      raise Error, "Commit or stash your changes first" unless git("status", "--porcelain", "--untracked-files=no").empty?
     end
 
     def require_branch(branch)

@@ -121,6 +121,25 @@ RSpec.describe Release::CLI do
       expect { cli.prepare("0.7.1") }.to raise_error(Release::CLI::Error, /only contain Fixed and Security.*Added/)
     end
 
+    it "ignores untracked files and leaves them out of the release commit" do
+      git("switch", "--quiet", "0-7-stable")
+      add_unreleased("Fixed", "A fix.")
+      commit("Fix a bug")
+      write("notes.txt", "Not versioned.")
+
+      cli.prepare("0.7.1")
+
+      expect(git("show", "--name-only", "--format=", "HEAD").split).to contain_exactly("CHANGELOG.md", "config/version.rb")
+      expect(git("status", "--porcelain").strip).to eq("?? notes.txt")
+    end
+
+    it "refuses to run with uncommitted changes" do
+      git("switch", "--quiet", "0-7-stable")
+      write("CHANGELOG.md", "Changed.")
+
+      expect { cli.prepare("0.7.1") }.to raise_error(Release::CLI::Error, "Commit or stash your changes first")
+    end
+
     it "refuses to run on the wrong branch" do
       expect { cli.prepare("0.7.1") }.to raise_error(Release::CLI::Error, "Run this on 0-7-stable, not main")
     end
