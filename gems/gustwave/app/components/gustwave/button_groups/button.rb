@@ -3,8 +3,9 @@
 module Gustwave
   # Components of Gustwave::ButtonGroup, which lays out its buttons as one group.
   module ButtonGroups
-    # A button within Gustwave::ButtonGroup. The group selects its position,
-    # which sets the border and rounding. +pill+ has no effect in a group.
+    # A button within Gustwave::ButtonGroup. Renders only inside a
+    # Gustwave::ButtonGroup; the group sets its position, which sets the border
+    # and rounding. +pill+ has no effect in a group.
     #
     # @status alpha
     class Button < Gustwave::Buttons::Base

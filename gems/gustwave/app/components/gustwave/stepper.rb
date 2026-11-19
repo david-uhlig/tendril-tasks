@@ -81,7 +81,9 @@ module Gustwave
       tag.ol(**@options) { slots_and_content(*steps) }
     end
 
-    # A step of a Gustwave::Stepper, set with +with_step+.
+    # A step of a Gustwave::Stepper, set with +with_step+. Renders only inside
+    # a Gustwave::Stepper; the stepper sets its number and whether it's the
+    # last step.
     #
     # === Icon
     #

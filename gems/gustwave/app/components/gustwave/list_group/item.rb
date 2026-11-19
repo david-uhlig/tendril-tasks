@@ -3,9 +3,9 @@
 module Gustwave
   class ListGroup < Gustwave::Component
     # One item of a Gustwave::ListGroup, set with +with_item_text+,
-    # +with_item_link+ or +with_item_button+. The list sets the item's position,
-    # which rounds its corners and draws its separator, and whether it sits in a
-    # list or a group.
+    # +with_item_link+ or +with_item_button+. Renders only inside a
+    # Gustwave::ListGroup; the list sets its position, which rounds its corners
+    # and draws its separator, and whether it sits in a list or a group.
     #
     # A link or button item is interactive: it shows hover and focus states.
     #

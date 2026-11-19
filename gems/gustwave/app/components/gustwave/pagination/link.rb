@@ -2,14 +2,17 @@
 
 module Gustwave
   class Pagination < Gustwave::Component
-    # One link in a Gustwave::Pagination. The pagination sets its position in
-    # the list, its size and its default label. Set a visual to show it
+    # One link in a Gustwave::Pagination. Renders only inside a
+    # Gustwave::Pagination; the pagination sets its position in the list, its
+    # size and its default label. Set a visual to show it
     # instead of the text, which then stays for screen readers only. See
     # Gustwave::Visuals for the visual types.
     #
     # @example A visual through the slot
-    #   <%= render Gustwave::Pagination::Link.new(href: "/tasks?page=2") do |link| %>
-    #     <% link.with_visual_icon :arrow_right, theme: :solid %>
+    #   <%= render Gustwave::Pagination.new do |pagination| %>
+    #     <% pagination.with_page("Next", href: "/tasks?page=2") do |link| %>
+    #       <% link.with_visual_icon :arrow_right, theme: :solid %>
+    #     <% end %>
     #   <% end %>
     #
     # @status alpha

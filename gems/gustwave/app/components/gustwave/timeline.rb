@@ -79,7 +79,8 @@ module Gustwave
       tag.ol(**@options) { slots_and_content(items) }
     end
 
-    # An item of a Gustwave::Timeline, set with +with_item+.
+    # An item of a Gustwave::Timeline, set with +with_item+. Renders only
+    # inside a Gustwave::Timeline; the timeline sets its orientation.
     #
     # @status alpha
     class Item < Gustwave::Component
