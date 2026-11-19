@@ -47,7 +47,7 @@ module Gustwave
         # The side of the control the button sits on, which the group selects
         # from the slot. The button has no border on the side facing the
         # control.
-        variant :side, default: :leading, internal: true, values: {
+        variant :side, default: :leading, allow_none: false, internal: true, values: {
           leading: "rounded-s-lg border border-e-0",
           trailing: "rounded-e-lg border border-s-0"
         }

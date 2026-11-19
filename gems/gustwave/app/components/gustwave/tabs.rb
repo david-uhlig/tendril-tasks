@@ -107,7 +107,6 @@ module Gustwave
 
     # The vertical layout per +style+, with the classes of each style
     toggle :vertical, per: :style, values: {
-      none: "",
       default: VERTICAL.merge(
         list: "#{VERTICAL[:list]} border-b-0 border-e",
         tab: "#{VERTICAL[:tab]} rounded-t-none rounded-s-lg"

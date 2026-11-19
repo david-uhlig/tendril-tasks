@@ -30,7 +30,7 @@ module Gustwave
 
     base "fixed z-40 p-4 transition-transform bg-white dark:bg-gray-800"
 
-    variant :placement, default: :left, values: {
+    variant :placement, default: :left, allow_none: false, values: {
       left: "top-0 left-0 h-screen w-80 overflow-y-auto -translate-x-full",
       right: "top-0 right-0 h-screen w-80 overflow-y-auto translate-x-full",
       top: "top-0 left-0 right-0 w-full -translate-y-full",

@@ -43,7 +43,7 @@ module Gustwave
       bottom: "fixed bottom-0 start-0 w-full border-t"
     }
 
-    variant :align, part: :body, default: :center, values: {
+    variant :align, part: :body, default: :center, allow_none: false, values: {
       center: "text-center",
       start: "text-start"
     }

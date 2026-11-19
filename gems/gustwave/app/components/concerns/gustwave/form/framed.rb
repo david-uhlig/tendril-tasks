@@ -10,7 +10,8 @@ module Gustwave
     # concern. It holds the frame, so every control with one shares it. A
     # control that includes it
     #
-    # * declares a +validation+ variant, which the frame's border follows,
+    # * declares a +validation+ variant or option, which the frame's border
+    #   follows,
     # * takes +frame_options:+, +header_options:+, +body_options:+ and
     #   +footer_options:+ and hands them to +frame_part_options+,
     # * calls +select_frame+ in +before_render+, once its slots are known,

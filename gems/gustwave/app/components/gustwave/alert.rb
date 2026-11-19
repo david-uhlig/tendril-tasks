@@ -63,7 +63,7 @@ module Gustwave
 
     # Top-aligns the icon, e.g. for alerts with a title and a list. Only
     # flex alerts align, see +flex+.
-    variant :align, default: :center, values: {
+    variant :align, default: :center, allow_none: false, values: {
       center: "",
       start: { root: "", icon: "mt-[2px]" }
     }

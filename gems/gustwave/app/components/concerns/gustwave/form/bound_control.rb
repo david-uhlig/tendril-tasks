@@ -108,7 +108,6 @@ module Gustwave
       # addon, +:end+ for a trailing one, +:both+ for both. The control drops
       # the rounding of the attached corners and fills the row.
       JOINED_LOOK = {
-        none: "",
         start: "rounded-none rounded-e-lg flex-1 min-w-0",
         end: "rounded-none rounded-s-lg flex-1 min-w-0",
         both: "rounded-none flex-1 min-w-0"

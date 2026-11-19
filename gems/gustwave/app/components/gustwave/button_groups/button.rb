@@ -30,7 +30,7 @@ module Gustwave
       }
 
       # Selected by Gustwave::ButtonGroup. Declared after color so it wins.
-      variant :group_position, default: :only, internal: true, values: {
+      variant :group_position, default: :only, allow_none: false, internal: true, values: {
         only: "rounded-lg border",
         first: "rounded-none rounded-s-lg border",
         middle: "rounded-none border-0 border-y",

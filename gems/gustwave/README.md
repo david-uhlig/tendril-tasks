@@ -34,7 +34,15 @@ Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and 
 
 ## Options and styling
 
-Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `color` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts. Components that declare `unstyled color: :none` skip their base styles for `color: :none`, so callers can bring their own.
+Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `color` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts.
+
+| A caller passes | Meaning |
+|---|---|
+| nothing, `nil` or `DEFAULT` | The declared default |
+| `:none` | None of this variant's classes, e.g. `size: :none` to bring your own sizing |
+| a value `unstyled` names, usually `color: :none` | None of the variant's classes, and no base styles either |
+
+Variants where no classes isn't a choice, like an HTML tag, declare `allow_none: false` and have no `:none`.
 
 A keyword that is neither an option nor one of the component's own arguments is an HTML attribute of the component's element. A keyword named like an option is always the option, so pass the HTML attribute of that name in `html:`, which takes any attributes as a hash and wins over the flat ones: `Gustwave::Tabs.new(style: :underline, html: { style: "max-width: 40rem" })`. It works on slot setters that build an element too.
 
@@ -73,6 +81,7 @@ end
 | `part:` | Target a declared part instead of the root | `toggle :pill, "rounded-full", part: :icon` |
 | `{ root:, icon: }` | Target several parts at once | `md: { root: "text-sm", icon: "h-3" }` |
 | `internal: true` | The component selects the value itself, not callers | `toggle :visual_only, "p-2", internal: true` |
+| `allow_none: false` | A variant without the implicit `:none` value | `variant :tag, default: :li, allow_none: false, values: { … }` |
 | `extend_option` / `extend_variant` / `extend_toggle` / `extend_derived` | Merge values into an inherited declaration | `extend_variant :color, values: { brand: "bg-brand-600" }` |
 | `remove_option` / `remove_part` / `remove_variant` / `remove_toggle` / `remove_derived` | Delete an inherited declaration | `remove_toggle :pill` |
 

@@ -12,7 +12,8 @@ module Gustwave
       # An option and the declaration that made it: +:option+, or +:variant+
       # or +:toggle+ from Gustwave::Styling. Toggles are boolean, so their
       # values are +false+ and +true+. +implicit_none+ marks a +:none+ value
-      # that was added for a variant, which derived values needn't cover.
+      # that was added for a variant, which derived values needn't cover. A
+      # variant declared with +allow_none: false+ gets none.
       # +internal+ marks an option the component selects itself, which takes no
       # keyword argument.
       Option = Struct.new(:name, :kind, :default, :values, :implicit_none, :internal, keyword_init: true) do
@@ -144,19 +145,42 @@ module Gustwave
         end
       end
 
-      def new_option(name, kind:, default:, values:, implicit_none: false, internal: false)
-        implicit_none &&= !values.include?(:none)
+      def new_option(name, kind:, default:, values:, implicit_none: false, allow_none: nil, internal: false)
+        check_allow_none(name, values, allow_none)
+        implicit_none &&= allow_none != false && !values.include?(:none)
         values += [ :none ] if implicit_none
         Option.new(name:, kind:, default:, values:, implicit_none:, internal:)
       end
 
-      def extend_option(name, kind:, default:, values:)
+      # +allow_none+ is +nil+ to keep the option's +:none+ as it is, +true+ to
+      # add an implicit one, or +false+ to remove it.
+      def extend_option(name, kind:, default:, values:, allow_none: nil)
         option = existing_option(name, kind)
         @entries[[ :option, name ]] = option.dup.tap do |entry|
           entry.values = option.values | values
           entry.implicit_none = option.implicit_none && !values.include?(:none)
           entry.default = default unless default.nil?
+          change_implicit_none(entry, allow_none)
         end
+      end
+
+      def change_implicit_none(entry, allow_none)
+        return if allow_none.nil?
+
+        if allow_none == false
+          check_allow_none(entry.name, entry.values - (entry.implicit_none ? [ :none ] : []), false)
+          entry.values -= [ :none ]
+          entry.implicit_none = false
+        elsif !entry.values.include?(:none)
+          entry.values += [ :none ]
+          entry.implicit_none = true
+        end
+      end
+
+      def check_allow_none(name, values, allow_none)
+        return unless allow_none == false && values.include?(:none)
+
+        raise DefinitionError.new(component, "variant #{name.inspect} declares a :none value and has allow_none: false")
       end
 
       def extend_derived(name, values:)

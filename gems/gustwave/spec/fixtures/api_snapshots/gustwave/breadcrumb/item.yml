@@ -12,7 +12,6 @@ options:
     values:
     - chevron
     - slash
-    - none
 parts:
 - content
 - separator

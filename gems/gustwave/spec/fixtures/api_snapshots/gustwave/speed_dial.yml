@@ -16,7 +16,6 @@ options:
     - down
     - left
     - right
-    - none
   label_display:
     default: tooltip
     values:

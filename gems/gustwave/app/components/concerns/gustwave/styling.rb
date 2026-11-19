@@ -32,13 +32,18 @@ module Gustwave
   #   optionally with its own classes.
   # * +variant+ declares an option with a fixed set of values and a
   #   +default:+, and the classes of each value. A variant without a +:none+
-  #   value gets one that adds no classes.
+  #   value gets one that adds none of its classes, so callers can bring
+  #   their own, unless it's declared with +allow_none: false+.
   # * +toggle+ declares an on/off option, off unless given +default: true+,
   #   and its classes. It can style both states (+on:+ / +off:+) or depend on
   #   another option (+per:+).
   #
   # Variants and toggles take +internal: true+ for state the component
   # selects itself, as options do; see Gustwave::Options.
+  #
+  # +nil+ and +DEFAULT+ pick a variant's default. +:none+ picks no classes
+  # from that variant. Only the values +unstyled+ names drop the base
+  # styles too.
   #
   # Read the option of a variant or toggle with +option_value+, and derive
   # values from it with +derive+, as for any option; see Gustwave::Options.
@@ -142,12 +147,16 @@ module Gustwave
       #
       #   variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
       #   variant :size, part: :icon, default: :md, values: { sm: "h-4", md: "h-5" }
+      #   variant :tag, default: :li, allow_none: false, values: { li: "", a: "block" }
       #
       # +internal: true+ marks a variant the component selects itself.
-      def variant(name, default:, values:, part: Definition::ROOT, internal: false, **options)
+      # +allow_none: false+ leaves out the implicit +:none+ value, for a
+      # variant where no classes isn't a choice, like an HTML tag.
+      def variant(name, default:, values:, part: Definition::ROOT, internal: false, allow_none: true, **options)
         values = style_values(values, part)
         declare_option(:option, name:, kind: :variant, default: Options.normalize_value(default),
-                                values: values.keys, implicit_none: true, internal: internal == true)
+                                values: values.keys, implicit_none: true, allow_none: allow_none != false,
+                                internal: internal == true)
         declare_styling(:variant, name: name.to_sym, values:, unless: style_unless(options))
       end
 
@@ -170,11 +179,12 @@ module Gustwave
       end
 
       # Merges values into an inherited variant, per value and part, and
-      # optionally changes its default.
-      def extend_variant(name, default: nil, values: {}, part: Definition::ROOT, **options)
+      # optionally changes its default. +allow_none:+ adds or removes the
+      # implicit +:none+ value; leave it out to keep it as it is.
+      def extend_variant(name, default: nil, values: {}, part: Definition::ROOT, allow_none: nil, **options)
         values = style_values(values, part)
         declare_option(:extend_option, name:, kind: :variant, default: default && Options.normalize_value(default),
-                                       values: values.keys)
+                                       values: values.keys, allow_none: allow_none.nil? ? nil : allow_none != false)
         declare_styling(:extend_variant, name: name.to_sym, values:, unless: style_unless(options, keep: true))
       end
 

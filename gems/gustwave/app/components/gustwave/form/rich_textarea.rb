@@ -70,7 +70,7 @@ module Gustwave
 
       # The validation state colors the frame's border; the editor has no
       # classes of its own for it.
-      variant :validation, part: :editor, default: :none, values: { none: "", success: "", error: "" }
+      option :validation, default: :none, values: %i[none success error]
 
       # Keeps the toolbar in view while the editor has focus or the pointer
       toggle :sticky_toolbar, "group", part: :frame, default: true

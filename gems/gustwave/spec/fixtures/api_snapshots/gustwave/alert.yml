@@ -16,7 +16,6 @@ options:
     values:
     - center
     - start
-    - none
   border:
     default: 'false'
   color:

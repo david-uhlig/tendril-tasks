@@ -50,7 +50,7 @@ module Gustwave
         # The side of the control the addon sits on, which the group selects
         # from the slot. The addon has no border on the side facing the
         # control.
-        variant :side, default: :leading, internal: true, values: {
+        variant :side, default: :leading, allow_none: false, internal: true, values: {
           leading: "rounded-s-md border-e-0",
           trailing: "rounded-e-md border-s-0"
         }

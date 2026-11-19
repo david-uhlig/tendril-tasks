@@ -25,7 +25,6 @@ options:
     - right
     - top
     - bottom
-    - none
 slots:
   header:
     many: false

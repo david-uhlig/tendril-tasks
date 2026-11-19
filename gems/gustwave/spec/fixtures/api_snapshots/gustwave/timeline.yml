@@ -9,7 +9,6 @@ options:
     values:
     - vertical
     - horizontal
-    - none
 slots:
   items:
     many: true

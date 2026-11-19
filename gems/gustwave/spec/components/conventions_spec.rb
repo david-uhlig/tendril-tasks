@@ -18,6 +18,11 @@ RSpec.describe "Component conventions" do
     component.instance_method(:initialize).parameters.select { |type, _| %i[key keyreq].include?(type) }.to_h { |type, name| [ name, type ] }
   }
   slots = ->(component) { component.registered_slots.keys }
+  # Option names that something in the gem sets to :none, e.g. "color: :none",
+  # "unstyled size: :none" or "unless: { style: [:none, :pills] }".
+  none_used = Dir[Gustwave::Engine.root.join("{app/components,previews,spec}/**/*.rb").to_s].flat_map do |file|
+    File.read(file).scan(/\b(\w+): (?::none\b|\[[^\]]*:none\b)/).flatten
+  end.map(&:to_sym).to_set
 
   rules = {
     part_options: {
@@ -71,6 +76,18 @@ RSpec.describe "Component conventions" do
         found << "trigger_options(trigger:)" if component.method_defined?(:trigger_options) && takes_trigger.(component.instance_method(:trigger_options))
         found << "self.trigger_options(trigger:)" if component.respond_to?(:trigger_options) && takes_trigger.(component.method(:trigger_options))
         found
+      }
+    },
+    implicit_none: {
+      section: "variants-and-none",
+      rule: "A variant's implicit :none is a value callers can pass; declare allow_none: false where no classes isn't a choice",
+      check: ->(component) {
+        component.option_definition.options.values.filter_map do |option|
+          next unless option.kind == :variant && option.implicit_none
+          next if option.default == :none || none_used.include?(option.name)
+
+          "variant #{option.name}"
+        end
       }
     },
     parent_id: {
