@@ -45,7 +45,7 @@ module Gustwave
 
       # Set to +:framed+ when the textarea has a header or footer: Flowbite's
       # borderless textarea inside the frame.
-      variant :layout, part: :textarea, default: :plain, internal: true, values: {
+      variant :layout, part: :textarea, default: :plain, allow_none: false, internal: true, values: {
         plain: "",
         framed: "block w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
       }

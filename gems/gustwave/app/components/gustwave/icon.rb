@@ -17,7 +17,7 @@ module Gustwave
     option :theme, default: :outline, values: %i[outline solid]
 
     # Modifies the icon's stroke width. Supply custom values by passing +class: "*:stroke-[10px]"+ through the +options+ hash, where +10px+ is your chosen stroke width.
-    variant :stroke_width, default: SVG_STROKE_WIDTH, values: {
+    variant :stroke_width, default: SVG_STROKE_WIDTH, allow_none: false, values: {
       "0": "*:stroke-0",
       "0.5": "*:stroke-[0.5px]",
       "1": "*:stroke-1",

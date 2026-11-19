@@ -58,7 +58,7 @@ module Gustwave
   #
   # @status alpha
   class Timeline < Gustwave::Component
-    variant :orientation, default: :vertical, values: {
+    variant :orientation, default: :vertical, allow_none: false, values: {
       vertical: "relative border-s border-gray-200 dark:border-gray-700",
       horizontal: "sm:flex"
     }
@@ -90,7 +90,7 @@ module Gustwave
       part :connector
       part :content
 
-      variant :orientation, default: :vertical, values: {
+      variant :orientation, default: :vertical, allow_none: false, values: {
         vertical: {
           root: "mb-10 ms-4 last:mb-0",
           dot: "absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700",

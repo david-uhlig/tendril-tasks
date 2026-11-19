@@ -12,7 +12,6 @@ options:
     values:
     - center
     - start
-    - none
   floating:
     default: 'false'
   position:

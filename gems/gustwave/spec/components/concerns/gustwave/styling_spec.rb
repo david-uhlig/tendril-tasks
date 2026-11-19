@@ -113,6 +113,38 @@ RSpec.describe Gustwave::Styling do
       expect(bordered.new.classes).to eq "border-0"
     end
 
+    it "leaves out the :none value with allow_none: false" do
+      tagged = component { variant :tag, default: :li, allow_none: false, values: { li: "", a: "block" } }
+
+      expect(tagged.option_values(:tag)).to eq %i[li a]
+      expect { tagged.new.select_options(tag: :none) }.to raise_error(Gustwave::Options::UnknownValueError)
+    end
+
+    it "needs no classes for :none in a per: toggle with allow_none: false" do
+      tagged = component do
+        variant :tag, default: :li, allow_none: false, values: { li: "", a: "block" }
+        toggle :hover, per: :tag, values: { li: "", a: "hover:bg-gray-100" }
+      end
+
+      expect(tagged.new.select_options(tag: :a, hover: true).classes).to eq "block hover:bg-gray-100"
+    end
+
+    it "rejects allow_none: false on a variant that declares :none" do
+      contradictory = component { variant :border, default: :md, allow_none: false, values: { none: "", md: "border-2" } }
+
+      expect { contradictory.style_definition }
+        .to raise_error(Gustwave::DefinitionError, /variant :border declares a :none value and has allow_none: false/)
+    end
+
+    it "adds or removes the :none value with extend_variant's allow_none:" do
+      tagged = component { variant :tag, default: :li, allow_none: false, values: { li: "", a: "block" } }
+
+      expect(component(button) { extend_variant :color, allow_none: false }.option_values(:color)).to eq %i[blue red]
+      expect(component(tagged) { extend_variant :tag, allow_none: true }.option_values(:tag)).to eq %i[li a none]
+      expect(component(button) { extend_variant :color, values: { green: "bg-green-500" } }.option_values(:color))
+        .to eq %i[blue red none green]
+    end
+
     it "converts strings and numbers to symbols" do
       stroked = component { variant :stroke, default: 1.5, values: { "1.5": "stroke-[1.5]", "2": "stroke-2" } }
 

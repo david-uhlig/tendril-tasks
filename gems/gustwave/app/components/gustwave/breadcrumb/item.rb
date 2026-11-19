@@ -48,7 +48,7 @@ module Gustwave
 
       # The chevron is Flowbite's own 6x10 glyph, +chevron_right_compact+. With a
       # chevron the content is indented, as in Flowbite; a slash has its own margins.
-      variant :separator, default: :chevron, unless: { position: :first }, values: {
+      variant :separator, default: :chevron, allow_none: false, unless: { position: :first }, values: {
         chevron: { separator: "w-3 h-3 mx-1 rtl:rotate-180 text-gray-400", content: "ms-1 md:ms-2" },
         slash: { separator: "mx-2 text-gray-400" }
       }

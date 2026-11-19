@@ -10,7 +10,6 @@ options:
     values:
     - vertical
     - horizontal
-    - none
 parts:
 - connector
 - content

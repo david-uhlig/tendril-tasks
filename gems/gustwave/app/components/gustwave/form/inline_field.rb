@@ -82,7 +82,7 @@ module Gustwave
       # The space between the control and the text, which Flowbite sets per
       # control: +ms-3+ after a toggle, +ms-2+ after anything else. The field
       # picks it from the type of its control.
-      variant :gap, part: :text, default: :sm, internal: true, values: {
+      variant :gap, part: :text, default: :sm, allow_none: false, internal: true, values: {
         sm: "ms-2",
         md: "ms-3"
       }

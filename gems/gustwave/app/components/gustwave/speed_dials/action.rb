@@ -39,14 +39,14 @@ module Gustwave
 
       # Where the label is shown. The icons are padded within their viewBox, so
       # these sizes draw them as large as Flowbite draws its tighter icons.
-      variant :label_display, default: :tooltip, values: {
+      variant :label_display, default: :tooltip, allow_none: false, values: {
         tooltip: { root: "size-13",          visual: "size-6.5" },
         inside:  { root: "size-14",          visual: "size-5.5 mb-1" },
         outside: { root: "relative size-13", visual: "size-6.5" }
       }
 
       # The side of the label: the tooltip's placement, or the side of the outside label
-      variant :label_placement, part: :outside_label, default: :left, values: {
+      variant :label_placement, part: :outside_label, default: :left, allow_none: false, values: {
         left:   "end-full me-3 top-1/2 -translate-y-1/2",
         right:  "start-full ms-3 top-1/2 -translate-y-1/2",
         top:    "bottom-full mb-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2",

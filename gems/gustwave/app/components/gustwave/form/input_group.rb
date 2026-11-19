@@ -51,7 +51,7 @@ module Gustwave
 
       # The side of the control an addon button sits on, set for each addon by
       # the group. Squares off the corner facing the control.
-      variant :side, part: :addon_button, default: :leading, internal: true, values: {
+      variant :side, part: :addon_button, default: :leading, allow_none: false, internal: true, values: {
         leading: "rounded-s-lg border-e-0",
         trailing: "rounded-e-lg border-s-0"
       }

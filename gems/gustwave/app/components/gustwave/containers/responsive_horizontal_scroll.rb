@@ -19,7 +19,7 @@ module Gustwave
 
       # Use Tailwind CSS mobile breakpoints to determine when to wrap the items
       # instead of scrolling them horizontally.
-      variant :breakpoint, default: :md, values: {
+      variant :breakpoint, default: :md, allow_none: false, values: {
         sm: "sm:flex-wrap sm:overflow-visible sm:py-0",
         md: "md:flex-wrap md:overflow-visible md:py-0",
         lg: "lg:flex-wrap lg:overflow-visible lg:py-0",

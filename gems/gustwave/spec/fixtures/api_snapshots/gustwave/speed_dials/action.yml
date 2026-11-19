@@ -21,7 +21,6 @@ options:
     - tooltip
     - inside
     - outside
-    - none
   label_placement:
     default: left
     values:
@@ -29,7 +28,6 @@ options:
     - right
     - top
     - bottom
-    - none
   shape:
     default: round
     values:

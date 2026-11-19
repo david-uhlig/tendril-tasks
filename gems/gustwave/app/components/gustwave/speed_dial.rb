@@ -36,7 +36,7 @@ module Gustwave
     }
 
     # Where the menu opens relative to the trigger
-    variant :direction, default: :up, values: {
+    variant :direction, default: :up, allow_none: false, values: {
       up:    { root: "flex-col-reverse", menu: "flex-col" },
       down:  { root: "flex-col",         menu: "flex-col" },
       left:  { root: "flex-row-reverse", menu: "flex-row" },
