@@ -155,6 +155,7 @@ A component takes `id:` for its own root and generates one with a component-spec
 - The parent owns wiring. When it builds a slot, it passes IDs, `aria-labelledby` or `aria-describedby`, and Flowbite's `data-*` attributes. Callers never have to repeat them.
 - A standalone sub-component takes its wiring as a **required** keyword: `ModalHeader` requires `modal_id:`. It never guesses or silently renders unwired.
 - A child that adapts to its parent implements `apply_slot_context` and accepts unknown keywords with `**`, so parents can add context later without breaking it.
+- A child that renders only inside its parent says so in its docstring, right after the opening sentence and always in the same words: "Renders only inside a Gustwave::ListGroup; the list sets its position.", naming what the parent sets. Its examples render it through the parent's slot, never on its own.
 - Decorative visuals get `aria-hidden`. A visual that carries meaning takes a label keyword.
 - Behavior that Flowbite's JavaScript doesn't cover ships as a `gustwave--*` Stimulus controller, which the component wires up itself, e.g. `gustwave--focus-trap` on Modal.
 

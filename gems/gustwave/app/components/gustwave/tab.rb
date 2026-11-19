@@ -2,11 +2,12 @@
 
 module Gustwave
   # One tab of Gustwave::Tabs: the list item with its trigger, a button or a
-  # link, and the +panel+ slot shown when a button tab is selected.
+  # link, and the +panel+ slot shown when a button tab is selected. Renders
+  # only inside a Gustwave::Tabs; the tabs set whether it's selected and
+  # interactive, and its classes.
   #
-  # Tabs builds its tabs through the +tabs+ slot, so set a tab's content with
-  # +with_tab_button+ or +with_tab_link+ rather than rendering a Tab directly.
-  # Inside the block, set the visuals and the panel:
+  # Set a tab with +with_tab_button+ or +with_tab_link+. Inside the block, set
+  # the visuals and the panel:
   #
   #   <%= render Gustwave::Tabs.new do |tabs| %>
   #     <% tabs.with_tab_button("Profile") do |tab| %>

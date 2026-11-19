@@ -2,8 +2,9 @@
 
 module Gustwave
   class Breadcrumb < Gustwave::Component
-    # One item of a Gustwave::Breadcrumb, set with +with_item+. The breadcrumb
-    # sets its position, its separator and whether it's the current page. An
+    # One item of a Gustwave::Breadcrumb, set with +with_item+. Renders only
+    # inside a Gustwave::Breadcrumb; the breadcrumb sets its position, its
+    # separator and whether it's the current page. An
     # item with an +href+ is a link; without one it's the text of the current
     # page. Block content replaces the link or text, e.g. for a dropdown.
     #
@@ -12,7 +13,9 @@ module Gustwave
     #
     # === Example
     #
-    #   <%= render Gustwave::Breadcrumb::Item.new("Home", href: "/", icon: :home) %>
+    #   <%= render Gustwave::Breadcrumb.new do |breadcrumb| %>
+    #     <% breadcrumb.with_item("Home", href: "/", icon: :home) %>
+    #   <% end %>
     #
     # @status alpha
     class Item < Gustwave::Component
