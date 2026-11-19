@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+- Upgrade Ruby to 4.0.10 to fix memory-safety vulnerabilities in Regexp and String case conversion, some of which allow remote code execution.
+
 ## [0.8.1] - 2026-11-04
 
 ### Fixed
