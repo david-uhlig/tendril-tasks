@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.2] - 2026-11-19
+
 ### Security
 - Upgrade Ruby to 4.0.10 to fix memory-safety vulnerabilities in Regexp and String case conversion, some of which allow remote code execution.
 
@@ -213,7 +215,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade dependencies: Ruby 3.4.2.
 
-[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.1...HEAD
+[unreleased]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.2...HEAD
+[0.8.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.1...v0.8.2
 [0.8.1]: https://github.com/david-uhlig/tendril-tasks/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.0...v0.8.0
 [0.7.2]: https://github.com/david-uhlig/tendril-tasks/compare/v0.7.1...v0.7.2
