@@ -35,13 +35,11 @@ module Gustwave
       include Gustwave::Form::BoundControl
       include Gustwave::Form::Framed
 
-      # The textarea itself, which is the root element
-      part :textarea
-
-      # Flowbite's textarea has the classes of its input field at the default
-      # size. It doesn't show a validation or disabled state, so those follow
-      # the input field's. In the frame the textarea has none of them.
-      base textarea: "block w-full border rounded-lg p-2.5 text-sm dark:bg-gray-700", unless: { layout: :framed }
+      # The textarea itself, which is the root element. Flowbite's textarea
+      # has the classes of its input field at the default size. It doesn't
+      # show a validation or disabled state, so those follow the input
+      # field's. In the frame the textarea has none of them.
+      part :textarea, "block w-full border rounded-lg p-2.5 text-sm dark:bg-gray-700", unless: { layout: :framed }
 
       # Set to +:framed+ when the textarea has a header or footer: Flowbite's
       # borderless textarea inside the frame.

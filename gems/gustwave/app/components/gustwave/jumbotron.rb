@@ -58,7 +58,7 @@ module Gustwave
   #
   # @status alpha
   class Jumbotron < Gustwave::Component
-    base "bg-white dark:bg-gray-900"
+    part :root, "bg-white dark:bg-gray-900"
 
     part :container, "py-8 px-4 mx-auto max-w-screen-xl lg:py-16"
 

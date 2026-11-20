@@ -76,8 +76,8 @@ module Gustwave
       }
 
       # The input itself, which is the root element unless it has a leading
-      # visual.
-      part :input
+      # visual, with the classes shared by every size and validation state
+      part :input, "block w-full border rounded-lg dark:bg-gray-700"
 
       # The wrapper of the input group, rendered with a leading visual
       part :wrapper, "relative"
@@ -95,9 +95,6 @@ module Gustwave
       # A +button+ trailing action, placed inside the input at its end and
       # centered vertically
       part :action_button, "absolute end-2.5 top-1/2 -translate-y-1/2"
-
-      # The classes shared by every size and validation state
-      base input: "block w-full border rounded-lg dark:bg-gray-700"
 
       # An +xs+ button is 32px high and an +sm+ input 34px, so in an +sm+ input
       # the button loses 8px of padding and keeps the 5px gap it has in an +md+ one.

@@ -37,7 +37,7 @@ module Gustwave
   #
   # @status alpha
   class Rating < Gustwave::Component
-    base "flex items-center"
+    part :root, "flex items-center"
 
     part :stars, "flex items-center"
     part :filled_star, "text-yellow-300"

@@ -6,7 +6,7 @@ module TendrilTasks
   # The buttons stack vertically on mobile viewports and horizontally on
   # larger viewports.
   class ButtonGrid < TendrilTasks::Component
-    base "gap-2 grid text-center"
+    part :root, "gap-2 grid text-center"
 
     # Determines the orientation of the button grid
     #

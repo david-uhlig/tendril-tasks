@@ -19,7 +19,7 @@ module Gustwave
 
       # Flowbite's range track. Flowbite's plugin styles the thumb, grays it
       # when the range is disabled, and sizes it with range-sm and range-lg.
-      base "w-full bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+      part :root, "w-full bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
 
       # The height of the track, and the size of the thumb through the plugin
       variant :size, default: :md, values: {

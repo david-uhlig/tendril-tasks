@@ -30,7 +30,7 @@ module Gustwave
   #
   # @status alpha
   class TableCaption < Gustwave::Component
-    base "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
+    part :root, "p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800"
 
     part :description, "mt-1 text-sm font-normal"
 

@@ -7,7 +7,7 @@ module Gustwave
       #
       # @status alpha
       class Divider < Gustwave::Dropdowns::MenuItems::Base
-        base "my-1 h-px bg-gray-100 dark:bg-gray-700 w-full"
+        part :root, "my-1 h-px bg-gray-100 dark:bg-gray-700 w-full"
 
         option :tag, default: :div, values: %i[div span]
 

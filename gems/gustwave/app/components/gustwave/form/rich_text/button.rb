@@ -43,9 +43,9 @@ module Gustwave
           attach_files: :paper_clip
         }.freeze
 
-        base "p-1.5 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 " \
-             "dark:hover:text-white dark:hover:bg-gray-600 " \
-             "disabled:text-gray-400 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
+        part :root, "p-1.5 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 " \
+                    "dark:hover:text-white dark:hover:bg-gray-600 " \
+                    "disabled:text-gray-400 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
 
         part :icon, "w-5 h-5"
 

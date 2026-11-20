@@ -5,7 +5,7 @@ module Gustwave
   #
   # @status alpha
   class RichText < Gustwave::Component
-    base "*:hyphens-auto"
+    part :root, "*:hyphens-auto"
 
     # @param rich_text [ActionText::RichText, String] The rich text content to render. Strings will be converted to ActionText::Content.
     # @param options [Hash] Additional html attributes to pass to the enclosing div tag.

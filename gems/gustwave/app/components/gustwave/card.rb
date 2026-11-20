@@ -45,7 +45,7 @@ module Gustwave
   class Card < Gustwave::Component
     option :tag, default: :div, values: %i[div a]
 
-    base "max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+    part :root, "max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
 
     part :body, "p-6"
     part :image, "rounded-t-lg"

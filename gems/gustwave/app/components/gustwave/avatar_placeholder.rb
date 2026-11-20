@@ -22,7 +22,7 @@ module Gustwave
       <svg class="absolute w-[120%] h-[120%] -left-[10%] text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
     SVG
 
-    base "relative overflow-hidden bg-gray-100 dark:bg-gray-600"
+    part :root, "relative overflow-hidden bg-gray-100 dark:bg-gray-600"
 
     # @param options [Hash] the arguments and HTML attributes of the Gustwave::Avatar it renders, e.g. +src+, +alt+, +shape+, +size+ and +border+.
     def initialize(**options)

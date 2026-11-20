@@ -45,7 +45,7 @@ module Gustwave
   #
   # @status alpha
   class ListGroup < Gustwave::Component
-    base "text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+    part :root, "text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
 
     # @param text [String, nil] The item text. Takes precedence over block content.
     # @param options [Hash] the arguments of Gustwave::ListGroup::Item, e.g. +icon:+.

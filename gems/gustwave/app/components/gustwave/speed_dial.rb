@@ -23,7 +23,7 @@ module Gustwave
     # The id of the menu element shown when the trigger is activated
     attr_reader :menu_id
 
-    base "group flex items-center gap-4"
+    part :root, "group flex items-center gap-4"
     part :menu, "hidden not-[.hidden]:flex items-center gap-2" # never plain `flex`: class_merge drops it next to `hidden`
 
     # Where the speed dial is placed on the page, +:none+ renders it in the flow

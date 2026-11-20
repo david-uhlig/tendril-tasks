@@ -15,7 +15,7 @@ module Gustwave
   # @status alpha
   class ModalFooter < Gustwave::Component
     # The gap-3 replaces the ms-3 Flowbite puts on the second button
-    base "flex items-center gap-3 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+    part :root, "flex items-center gap-3 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
 
     # @param options [Hash] additional options for the HTML tag, like class
     def initialize(**options)

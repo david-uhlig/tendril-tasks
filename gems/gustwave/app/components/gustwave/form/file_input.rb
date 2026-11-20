@@ -20,11 +20,9 @@ module Gustwave
     class FileInput < Gustwave::Component
       include Gustwave::Form::BoundControl
 
-      # The file input itself, which is the root element
-      part :input
-
-      # The classes shared by every size and validation state
-      base input: "block w-full border rounded-lg cursor-pointer focus:outline-none dark:bg-gray-700"
+      # The file input itself, which is the root element, with the classes
+      # shared by every size and validation state
+      part :input, "block w-full border rounded-lg cursor-pointer focus:outline-none dark:bg-gray-700"
 
       variant :size, part: :input, default: :md, values: {
         sm: "text-xs",

@@ -3,8 +3,8 @@
 module Gustwave
   module Styling
     # The styling of a component class: its superclass's definition with the
-    # class's own declarations applied on top. Emits base and part classes
-    # first, then those of variants and toggles, each in declaration order.
+    # class's own declarations applied on top. Emits part classes first, then
+    # those of variants and toggles, each in declaration order.
     #
     # Holds the classes only. The options that variants and toggles style,
     # with their values and defaults, are in the component's
@@ -17,9 +17,7 @@ module Gustwave
       # The name of the root element, the target of styles that name no part.
       ROOT = :root
 
-      # The base styles: classes per part, and the +unless:+ conditions that skip them.
-      Base = Struct.new(:classes, :unless, keyword_init: true)
-      # A part besides the root: its name, its classes, and the +unless:+ conditions that skip them.
+      # A part, the root or another element: its name, its classes, and the +unless:+ conditions that skip them.
       Part = Struct.new(:name, :classes, :unless, keyword_init: true)
       # A variant's classes: +values+ map each option value to its classes per part, and +unless:+ skips them.
       Variant = Struct.new(:name, :values, :unless, keyword_init: true)
@@ -70,7 +68,7 @@ module Gustwave
 
       # @return [Array<Symbol>] :root and every declared part.
       def parts
-        @parts || [ ROOT, *@entries.values.grep(Part).map(&:name) ]
+        @parts || [ ROOT, *@entries.values.grep(Part).map(&:name) ].uniq
       end
 
       # Whether +name+ is +:root+ or a declared part.
@@ -83,14 +81,13 @@ module Gustwave
 
       # @param part [Symbol] :root or a declared part.
       # @param values [Hash{Symbol => Object}] a value for every option.
-      # @return [Array<String>] the part's classes: base and part classes
+      # @return [Array<String>] the part's classes: its own classes
       #   first, then those of variants and toggles, each in declaration order.
       def classes_for(part, values)
         ordered.filter_map do |entry|
           next if skipped?(entry, values)
 
           case entry
-          when Base then entry.classes[part]
           when Part then entry.classes if entry.name == part
           when Variant then entry.values.dig(values[entry.name], part)
           when Toggle then toggle_classes(entry, part, values)
@@ -111,7 +108,7 @@ module Gustwave
 
       private
 
-      # The styled entries, base and parts before variants and toggles, so
+      # The styled entries, parts before variants and toggles, so
       # variants and toggles win conflicts
       def ordered
         @ordered || @entries.values.partition { |entry| !KINDS.key?(entry.class) }.flatten
@@ -130,7 +127,6 @@ module Gustwave
 
       def apply(action, name: nil, **args)
         case action
-        when :base then @entries[:base] = Base.new(classes: args[:classes], unless: args.fetch(:unless) || {})
         when :part then @entries[[ :part, name ]] = Part.new(name:, classes: args[:classes], unless: args.fetch(:unless) || {})
         when :remove_part then existing([ :part, name ], Part, "part #{name.inspect}") && @entries.delete([ :part, name ])
         when :variant then @entries[[ :option, name ]] = Variant.new(name:, values: args[:values], unless: args.fetch(:unless) || {})
@@ -203,7 +199,6 @@ module Gustwave
 
       def part_problems(entry)
         targets = case entry
-        when Base then entry.classes.keys
         when Variant then entry.values.values.flat_map(&:keys)
         when Toggle then entry.on.keys + entry.off.keys + entry.values.values.flat_map(&:keys)
         else []
@@ -213,10 +208,7 @@ module Gustwave
       end
 
       def label(entry)
-        case entry
-        when Base then "base"
-        else "#{entry.class.name.demodulize.downcase} #{entry.name.inspect}"
-        end
+        "#{entry.class.name.demodulize.downcase} #{entry.name.inspect}"
       end
     end
   end

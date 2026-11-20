@@ -38,7 +38,7 @@ module Gustwave
   #
   # @status alpha
   class Progress < Gustwave::Component
-    base "w-full bg-gray-200 rounded-full dark:bg-gray-700"
+    part :root, "w-full bg-gray-200 rounded-full dark:bg-gray-700"
 
     part :fill, "rounded-full"
 

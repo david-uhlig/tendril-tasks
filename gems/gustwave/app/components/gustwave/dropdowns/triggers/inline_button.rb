@@ -8,7 +8,7 @@ module Gustwave
       #
       # @status alpha
       class InlineButton < Gustwave::Dropdowns::Triggers::Button
-        base "align-baseline gap-0"
+        part :root, "align-baseline gap-0"
 
         part :icon, "h-[1.5em] w-auto"
 

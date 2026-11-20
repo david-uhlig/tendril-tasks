@@ -17,7 +17,7 @@ module Gustwave
     #
     # @status alpha
     class Link < Gustwave::Component
-      base "flex items-center justify-center leading-tight border"
+      part :root, "flex items-center justify-center leading-tight border"
 
       include Gustwave::Visuals
       renders_visuals :visuals

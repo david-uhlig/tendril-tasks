@@ -44,7 +44,7 @@ module Gustwave
   #
   # @status alpha
   class TableHead < Gustwave::Component
-    base "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    part :root, "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 
     renders_many_extensible :columns, "Column"
 
@@ -68,7 +68,7 @@ module Gustwave
 
     # @status alpha
     class Column < Gustwave::Component
-      base "px-6 py-3"
+      part :root, "px-6 py-3"
 
       # @param text [String, nil] the column's heading. Without it the block is the content.
       # @param options [Hash] the arguments and HTML attributes of the Gustwave::TableCell it renders, a +<th scope="col">+ by default.

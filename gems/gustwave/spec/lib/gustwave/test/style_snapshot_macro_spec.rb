@@ -6,7 +6,7 @@ module Gustwave
     module StyleSnapshotMacro
       # A component of its own, so the fixture only changes with the harness.
       class Example < Gustwave::Component
-        base "inline-flex"
+        part :root, "inline-flex"
         part :label, "font-medium"
         variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
         toggle :pill, "rounded-full"

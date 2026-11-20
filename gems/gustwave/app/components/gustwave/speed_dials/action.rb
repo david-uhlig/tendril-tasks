@@ -19,7 +19,7 @@ module Gustwave
       # The HTML tag to render the action as
       option :tag, default: :button, values: %i[button a]
 
-      base "flex flex-col items-center justify-center shadow-xs focus:ring-4 focus:outline-hidden", unless: { color: :none }
+      part :root, "flex flex-col items-center justify-center shadow-xs focus:ring-4 focus:outline-hidden", unless: { color: :none }
 
       variant :color, default: :default, values: {
         default: "text-gray-500 hover:text-gray-900 bg-white border border-gray-200 hover:bg-gray-50 focus:ring-gray-300 " \

@@ -9,7 +9,7 @@ module Gustwave
       #
       # @status alpha
       class Generic < Gustwave::Dropdowns::Triggers::Base
-        base "inline-flex cursor-pointer"
+        part :root, "inline-flex cursor-pointer"
 
         # The HTML tag wrapping the content
         option :tag, default: :div, values: %i[div span]

@@ -14,7 +14,7 @@ module Gustwave
   #
   # @status alpha
   class AvatarText < Gustwave::Component
-    base "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
+    part :root, "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-600"
 
     part :text, "font-medium text-gray-600 dark:text-gray-300"
 

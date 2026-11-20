@@ -33,7 +33,7 @@ module Gustwave
     renders_visuals :visuals
     self.visual_icon_theme = :solid
 
-    base "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800"
+    part :root, "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800"
 
     # The box that holds the visuals beside the text
     part :visual_box, "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"

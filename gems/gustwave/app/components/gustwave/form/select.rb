@@ -26,12 +26,9 @@ module Gustwave
     class Select < Gustwave::Component
       include Gustwave::Form::BoundControl
 
-      # The select itself, which is the root element
-      part :select
-
-      # The classes shared by every size and validation state of the bordered
-      # style
-      base select: "block w-full border rounded-lg dark:bg-gray-700", unless: { style: :underline }
+      # The select itself, which is the root element, with the classes shared
+      # by every size and validation state of the bordered style
+      part :select, "block w-full border rounded-lg dark:bg-gray-700", unless: { style: :underline }
 
       # The bordered select, and Flowbite's underline select with its classes
       # only. They stand alone, so the underline style skips the base, size and

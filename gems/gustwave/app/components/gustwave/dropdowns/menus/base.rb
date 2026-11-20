@@ -19,7 +19,7 @@ module Gustwave
       #
       # @status alpha
       class Base < Gustwave::Component
-        base "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm min-w-44 dark:bg-gray-700 hidden"
+        part :root, "z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm min-w-44 dark:bg-gray-700 hidden"
 
         # The HTML tag of the menu
         option :tag, default: :div, values: %i[div nav section]

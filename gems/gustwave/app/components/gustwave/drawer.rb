@@ -28,7 +28,7 @@ module Gustwave
 
     option :action, default: :toggle, values: %i[toggle show hide]
 
-    base "fixed z-40 p-4 transition-transform bg-white dark:bg-gray-800"
+    part :root, "fixed z-40 p-4 transition-transform bg-white dark:bg-gray-800"
 
     variant :placement, default: :left, allow_none: false, values: {
       left: "top-0 left-0 h-screen w-80 overflow-y-auto -translate-x-full",

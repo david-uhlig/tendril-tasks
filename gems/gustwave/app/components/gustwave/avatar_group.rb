@@ -15,7 +15,7 @@ module Gustwave
   #
   # @status alpha
   class AvatarGroup < Gustwave::Component
-    base "flex -space-x-4 rtl:space-x-reverse"
+    part :root, "flex -space-x-4 rtl:space-x-reverse"
 
     # @param options [Hash] the HTML attributes of the +<div>+.
     def initialize(**options)
