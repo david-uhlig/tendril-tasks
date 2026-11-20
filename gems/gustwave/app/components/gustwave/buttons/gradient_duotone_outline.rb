@@ -6,7 +6,7 @@ module Gustwave
     class GradientDuotoneOutline < Gustwave::Buttons::Base
       # The root element is the gradient border; the inner span holds the
       # label and visuals, so it takes the size styles.
-      base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white"
+      base "relative inline-flex items-center justify-center p-0.5 text-gray-900 group bg-linear-to-br dark:text-white", unless: { color: :none }
 
       part :inner,
            "relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent dark:group-hover:bg-transparent gap-2"

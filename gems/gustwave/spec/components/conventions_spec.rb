@@ -19,7 +19,7 @@ RSpec.describe "Component conventions" do
   }
   slots = ->(component) { component.registered_slots.keys }
   # Option names that something in the gem sets to :none, e.g. "color: :none",
-  # "unstyled size: :none" or "unless: { style: [:none, :pills] }".
+  # "unless: { size: :none }" or "unless: { style: [:none, :pills] }".
   none_used = Dir[Gustwave::Engine.root.join("{app/components,previews,spec}/**/*.rb").to_s].flat_map do |file|
     File.read(file).scan(/\b(\w+): (?::none\b|\[[^\]]*:none\b)/).flatten
   end.map(&:to_sym).to_set

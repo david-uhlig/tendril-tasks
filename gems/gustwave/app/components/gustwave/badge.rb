@@ -18,8 +18,7 @@ module Gustwave
     # Renders no +type+ attribute by default
     option :type, default: :none, values: %i[none button submit reset]
 
-    base "rounded-sm whitespace-nowrap inline-flex items-center"
-    unstyled color: :none
+    base "rounded-sm whitespace-nowrap inline-flex items-center", unless: { color: :none }
 
     # +:base+ renders only the base styles.
     variant :color, default: :default, values: {

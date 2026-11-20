@@ -14,8 +14,6 @@ module Gustwave
   #
   # @status alpha
   class Paragraph < Gustwave::Component
-    unstyled color: :none
-
     variant :color, default: :default, values: {
       default: "text-gray-500 dark:text-gray-400"
     }

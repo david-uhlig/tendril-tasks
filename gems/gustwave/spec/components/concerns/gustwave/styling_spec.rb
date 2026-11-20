@@ -7,8 +7,7 @@ RSpec.describe Gustwave::Styling do
 
   let(:button) do
     component do
-      base "inline-flex"
-      unstyled color: :none
+      base "inline-flex", unless: { color: :none }
       part :icon, "h-4"
       variant :color, default: :blue, values: { blue: "bg-blue-500", red: "bg-red-500" }
       variant :size, default: :md, values: {
@@ -262,7 +261,7 @@ RSpec.describe Gustwave::Styling do
     end
   end
 
-  describe "unstyled" do
+  describe "base unless:" do
     it "skips the base styles for the given values, and only them" do
       expect(button.new.select_options(color: :none).classes).to eq "text-base px-4"
       expect(button.new.select_options(color: :none, size: :sm).classes(:icon)).to eq "h-3"
@@ -271,8 +270,7 @@ RSpec.describe Gustwave::Styling do
 
     it "skips the base styles of parts" do
       spinner = component do
-        base root: "flex", icon: "animate-spin"
-        unstyled color: :none
+        base root: "flex", icon: "animate-spin", unless: { color: :none }
         part :icon, "h-4"
         variant :color, default: :blue, values: { blue: "fill-blue-600" }
       end
@@ -282,19 +280,16 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "takes several options and values" do
-      several = component(button) { unstyled color: :none, size: %i[sm] }
+      several = component(button) { base "inline-flex", unless: { color: :none, size: %i[sm] } }
 
       expect(several.new.select_options(size: :sm).classes).to eq "bg-blue-500 text-sm px-2"
       expect(several.new.select_options(color: :none).classes).to eq "text-base px-4"
     end
 
-    it "is inherited, reaches a redeclared base, and can be replaced" do
+    it "is replaced along with a redeclared base" do
       redeclared = component(button) { base "flex" }
-      replaced = component(button) { unstyled color: :red }
 
-      expect(redeclared.new.select_options(color: :none).classes).to eq "text-base px-4"
-      expect(replaced.new.select_options(color: :none).classes).to eq "inline-flex text-base px-4"
-      expect(replaced.new.select_options(color: :red).classes).to eq "bg-red-500 text-base px-4"
+      expect(redeclared.new.select_options(color: :none).classes).to eq "flex text-base px-4"
     end
   end
 
@@ -469,16 +464,6 @@ RSpec.describe Gustwave::Styling do
       end.to raise_error(Gustwave::DefinitionError, /unknown values \[:xl\]/)
     end
 
-    it "is raised for unknown unstyled options and values" do
-      expect { resolve { unstyled color: :none } }
-        .to raise_error(Gustwave::DefinitionError, /unstyled has color:, which isn't an option/)
-      expect do
-        resolve do
-          variant :color, default: :blue, values: { blue: "" }
-          unstyled color: :brand
-        end
-      end.to raise_error(Gustwave::DefinitionError, /unstyled has color: with unknown values \[:brand\]/)
-    end
 
     it "is raised for unknown parts" do
       expect { resolve { base icon: "h-4" } }

@@ -29,8 +29,7 @@ module Gustwave
   #
   # @status alpha
   class Link < Gustwave::Component
-    base "font-medium"
-    unstyled color: :none
+    base "font-medium", unless: { color: :none }
 
     variant :color, default: :default, values: {
       default: "text-blue-600 dark:text-blue-500"
