@@ -24,23 +24,23 @@ module Gustwave
       # shared by every size and validation state
       part :input, "block w-full border rounded-lg cursor-pointer focus:outline-none dark:bg-gray-700"
 
-      variant :size, part: :input, default: :md, values: {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-lg"
+      variant :size, default: :md, values: {
+        sm: { input: "text-xs" },
+        md: { input: "text-sm" },
+        lg: { input: "text-lg" }
       }
 
       # Flowbite shows no validation look for the file input, so the states
       # use the input field's colors and the default look is Flowbite's file
       # input.
-      variant :validation, part: :input, default: :none, values: {
-        none: "bg-gray-50 border-gray-300 text-gray-900 dark:text-gray-400 dark:border-gray-600 dark:placeholder-gray-400",
-        success: VALIDATION_LOOK[:success],
-        error: VALIDATION_LOOK[:error]
+      variant :validation, default: :none, values: {
+        none: { input: "bg-gray-50 border-gray-300 text-gray-900 dark:text-gray-400 dark:border-gray-600 dark:placeholder-gray-400" },
+        success: { input: VALIDATION_LOOK[:success] },
+        error: { input: VALIDATION_LOOK[:error] }
       }
 
       # Set when the file input is disabled
-      toggle :disabled_look, part: :input, per: :validation, internal: true, values: DISABLED_LOOK
+      toggle :disabled_look, per: :validation, internal: true, values: DISABLED_LOOK.transform_values { |look| { input: look } }
 
       # @param attribute [Symbol, String, nil] the attribute of the form's object the file input is for. Requires +form+.
       # @param form [ActionView::Helpers::FormBuilder, nil] a Rails form builder, or any subclass. Without it the file input is a plain +<input type="file">+.

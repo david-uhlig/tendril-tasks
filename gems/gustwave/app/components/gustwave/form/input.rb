@@ -107,7 +107,7 @@ module Gustwave
       # The size of a +button+ trailing action, the one that fits the input's size
       derive :action_button_size, from: :size, values: { sm: :xs, md: :xs, lg: :sm }
 
-      variant :validation, part: :input, default: :none, values: VALIDATION_LOOK
+      variant :validation, default: :none, values: VALIDATION_LOOK.transform_values { |look| { input: look } }
 
       # Set by Gustwave::Form::InputGroup when the input sits beside addons.
       # With a leading visual the wrapper fills the row for the input.
@@ -116,10 +116,10 @@ module Gustwave
       }
 
       # Set when the input has a leading visual, which needs room at the start
-      toggle :has_visual, "ps-10", part: :input, internal: true
+      toggle :has_visual, { input: "ps-10" }, internal: true
 
       # Set when the input is disabled, as Flowbite's disabled example does
-      toggle :disabled_look, part: :input, per: :validation, internal: true, values: DISABLED_LOOK
+      toggle :disabled_look, per: :validation, internal: true, values: DISABLED_LOOK.transform_values { |look| { input: look } }
 
       renders_visuals :leading_visuals
 

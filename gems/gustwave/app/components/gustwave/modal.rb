@@ -45,11 +45,11 @@ module Gustwave
     part :dialog, "relative p-4 w-full max-h-full"
     part :content, "relative bg-white rounded-lg shadow-sm dark:bg-gray-700"
 
-    variant :size, part: :dialog, default: :md, values: {
-      sm: "max-w-md",
-      md: "max-w-2xl",
-      lg: "max-w-4xl",
-      xl: "max-w-7xl"
+    variant :size, default: :md, values: {
+      sm: { dialog: "max-w-md" },
+      md: { dialog: "max-w-2xl" },
+      lg: { dialog: "max-w-4xl" },
+      xl: { dialog: "max-w-7xl" }
     }
 
     # The flat trigger attributes that Flowbite reads, which +trigger_options+ replaces

@@ -65,7 +65,7 @@ module Gustwave
     part :background_image, "absolute inset-0 -z-10 size-full object-cover mix-blend-multiply"
 
     # Centers the content
-    toggle :centered, "text-center", part: :container
+    toggle :centered, { container: "text-center" }
 
     # Set by the component: the section holds the background image and
     # darkens it with its gray background

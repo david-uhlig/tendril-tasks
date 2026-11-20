@@ -45,11 +45,11 @@ module Gustwave
       }
 
       # The side of the label: the tooltip's placement, or the side of the outside label
-      variant :label_placement, part: :outside_label, default: :left, allow_none: false, values: {
-        left:   "end-full me-3 top-1/2 -translate-y-1/2",
-        right:  "start-full ms-3 top-1/2 -translate-y-1/2",
-        top:    "bottom-full mb-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2",
-        bottom: "top-full mt-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2"
+      variant :label_placement, default: :left, allow_none: false, values: {
+        left:   { outside_label: "end-full me-3 top-1/2 -translate-y-1/2" },
+        right:  { outside_label: "start-full ms-3 top-1/2 -translate-y-1/2" },
+        top:    { outside_label: "bottom-full mb-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2" },
+        bottom: { outside_label: "top-full mt-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2" }
       }
 
       # @param text [String] the label of the action.

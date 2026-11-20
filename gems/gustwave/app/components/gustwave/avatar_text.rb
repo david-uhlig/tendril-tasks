@@ -19,15 +19,15 @@ module Gustwave
     part :text, "font-medium text-gray-600 dark:text-gray-300"
 
     # Also passed to Gustwave::Avatar.
-    variant :size, part: :text, default: :md, values: {
-      xs: "text-xs",
-      sm: "text-sm",
-      md: "text-md",
-      lg: "text-lg",
-      xl: "text-xl",
-      "2xl": "text-2xl",
-      "3xl": "text-3xl",
-      "4xl": "text-4xl"
+    variant :size, default: :md, values: {
+      xs: { text: "text-xs" },
+      sm: { text: "text-sm" },
+      md: { text: "text-md" },
+      lg: { text: "text-lg" },
+      xl: { text: "text-xl" },
+      "2xl": { text: "text-2xl" },
+      "3xl": { text: "text-3xl" },
+      "4xl": { text: "text-4xl" }
     }
 
     # @param text [String, nil] the text. Takes precedence over the block.

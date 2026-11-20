@@ -32,7 +32,7 @@ module Gustwave
       # Buttons::Base don't reach this theme; extend it separately, e.g.
       #
       #   extend_variant :size, values: { "2xl": { inner: "…", visual: "…" } }
-      #   extend_toggle :visual_only, part: :inner, values: { "2xl": "…" }
+      #   extend_toggle :visual_only, values: { "2xl": { inner: "…" } }
       variant :size, default: :md, values: {
         xs: { inner: "px-2.5 py-2 text-xs font-medium", visual: "h-4 w-auto -mx-0.5" },
         sm: { inner: "px-3 py-2 text-sm font-medium", visual: "h-4 w-auto -mx-0.5" },
@@ -41,14 +41,14 @@ module Gustwave
         xl: { inner: "px-6 py-3.5 text-base font-medium", visual: "h-5 w-auto -mx-0.5" }
       }
 
-      toggle :has_visual, "inline-flex items-center align-bottom gap-2", part: :inner, internal: true
+      toggle :has_visual, { inner: "inline-flex items-center align-bottom gap-2" }, internal: true
 
-      toggle :visual_only, per: :size, part: :inner, internal: true, values: {
-        xs: "p-2 *:h-4 *:mx-0",
-        sm: "p-2 *:h-5 *:mx-0",
-        md: "p-2.5 *:h-5 *:mx-0",
-        lg: "p-3 *:h-6 *:mx-0",
-        xl: "p-3.5 *:h-7 *:mx-0"
+      toggle :visual_only, per: :size, internal: true, values: {
+        xs: { inner: "p-2 *:h-4 *:mx-0" },
+        sm: { inner: "p-2 *:h-5 *:mx-0" },
+        md: { inner: "p-2.5 *:h-5 *:mx-0" },
+        lg: { inner: "p-3 *:h-6 *:mx-0" },
+        xl: { inner: "p-3.5 *:h-7 *:mx-0" }
       }
 
       # @param text [String, nil] the button's text. Takes precedence over the block.

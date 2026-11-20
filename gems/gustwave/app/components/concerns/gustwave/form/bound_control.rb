@@ -37,8 +37,9 @@ module Gustwave
     #     include Gustwave::Form::BoundControl
     #
     #     part :textarea
-    #     variant :validation, part: :textarea, default: :none, values: VALIDATION_LOOK
-    #     toggle :disabled_look, part: :textarea, per: :validation, internal: true, values: DISABLED_LOOK
+    #     variant :validation, default: :none, values: VALIDATION_LOOK.transform_values { |look| { textarea: look } }
+    #     toggle :disabled_look, per: :validation, internal: true,
+    #            values: DISABLED_LOOK.transform_values { |look| { textarea: look } }
     #
     #     def initialize(attribute = nil, form: nil, validation: DEFAULT, **options)
     #       require_form_for_attribute(attribute, form)

@@ -34,9 +34,9 @@ module Gustwave
   class Pagination < Gustwave::Component
     part :list, "inline-flex -space-x-px"
 
-    variant :size, part: :list, default: :sm, values: {
-      sm: "text-sm",
-      md: "text-base"
+    variant :size, default: :sm, values: {
+      sm: { list: "text-sm" },
+      md: { list: "text-base" }
     }
 
     renders_one_extensible :previous_page, ->(text = nil, href:, icon_only: false, **options) {

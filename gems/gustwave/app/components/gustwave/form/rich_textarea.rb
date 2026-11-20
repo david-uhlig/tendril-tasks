@@ -73,7 +73,7 @@ module Gustwave
       option :validation, default: :none, values: %i[none success error]
 
       # Keeps the toolbar in view while the editor has focus or the pointer
-      toggle :sticky_toolbar, "group", part: :frame, default: true
+      toggle :sticky_toolbar, { frame: "group" }, default: true
 
       # The bar that sticks, set to where the toolbar is
       variant :sticky, default: :none, internal: true, values: {

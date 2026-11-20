@@ -47,8 +47,8 @@ module Gustwave
   # Read the option of a variant or toggle with +option_value+, and derive
   # values from it with +derive+, as for any option; see Gustwave::Options.
   #
-  # A plain string targets the root element, or the part named by +part:+. A
-  # hash targets parts by name: <tt>{ root: "…", icon: "…" }</tt>. Every
+  # A plain string targets the root element, and a hash targets parts by
+  # name: <tt>{ root: "…", icon: "…" }</tt>. Every
   # declaration takes +unless:+ to skip it for some option values, e.g.
   # <tt>unless: { color: :none }</tt> or <tt>unless: { size: [:xs, :sm] }</tt>.
   #
@@ -132,14 +132,17 @@ module Gustwave
       # classes of each value.
       #
       #   variant :size, default: :md, values: { sm: "text-sm", md: "text-base" }
-      #   variant :size, part: :icon, default: :md, values: { sm: "h-4", md: "h-5" }
+      #   variant :size, default: :md, values: { sm: { root: "text-sm", icon: "h-4" }, md: { icon: "h-5" } }
       #   variant :tag, default: :li, allow_none: false, values: { li: "", a: "block" }
+      #
+      # A value's classes are a string for the root element, or a hash of
+      # classes per part.
       #
       # +internal: true+ marks a variant the component selects itself.
       # +allow_none: false+ leaves out the implicit +:none+ value, for a
       # variant where no classes isn't a choice, like an HTML tag.
-      def variant(name, default:, values:, part: Definition::ROOT, internal: false, allow_none: true, **options)
-        values = style_values(values, part)
+      def variant(name, default:, values:, internal: false, allow_none: true, **options)
+        values = style_values(values)
         declare_option(:option, name:, kind: :variant, default: Options.normalize_value(default),
                                 values: values.keys, implicit_none: true, allow_none: allow_none != false,
                                 internal: internal == true)
@@ -150,35 +153,40 @@ module Gustwave
       # and its classes.
       #
       #   toggle :pill, "rounded-full"
+      #   toggle :centered, { root: "text-center", icon: "mx-auto" }
       #   toggle :visible, default: true, on: "opacity-100", off: "opacity-0"
       #   toggle :border, per: :size, values: { sm: "ring-1", md: "ring-2" }
       #
+      # Classes are a string for the root element, or a hash of classes per
+      # part. The on classes come positionally or as +on:+, not both. With
+      # +per:+ they come per value of that option in +values:+ instead,
+      # while +off:+ stays one set.
+      #
       # +internal: true+ marks a toggle the component selects itself, e.g.
       # whether it renders any text.
-      def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, part: Definition::ROOT, default: false,
-                 internal: false, **options)
+      def toggle(name, classes = nil, on: nil, off: nil, per: nil, values: {}, default: false, internal: false, **options)
         declare_option(:option, name:, kind: :toggle, default: default == true, values: [ false, true ],
                                 internal: internal == true)
-        declare_styling(:toggle, name: name.to_sym,
-                                 on: style_targets(classes || on, part), off: style_targets(off, part),
-                                 per: per&.to_sym, values: style_values(values, part), unless: style_unless(options))
+        declare_styling(:toggle, name: name.to_sym, on: style_targets(toggle_on(name, classes, on)),
+                                 off: style_targets(off), per: per&.to_sym, values: style_values(values),
+                                 unless: style_unless(options))
       end
 
       # Merges values into an inherited variant, per value and part, and
       # optionally changes its default. +allow_none:+ adds or removes the
       # implicit +:none+ value; leave it out to keep it as it is.
-      def extend_variant(name, default: nil, values: {}, part: Definition::ROOT, allow_none: nil, **options)
-        values = style_values(values, part)
+      def extend_variant(name, default: nil, values: {}, allow_none: nil, **options)
+        values = style_values(values)
         declare_option(:extend_option, name:, kind: :variant, default: default && Options.normalize_value(default),
                                        values: values.keys, allow_none: allow_none.nil? ? nil : allow_none != false)
         declare_styling(:extend_variant, name: name.to_sym, values:, unless: style_unless(options, keep: true))
       end
 
       # Merges classes into an inherited toggle, per state, value and part.
-      def extend_toggle(name, classes = nil, on: nil, off: nil, values: {}, part: Definition::ROOT, **options)
-        declare_styling(:extend_toggle, name: name.to_sym,
-                                        on: style_targets(classes || on, part), off: style_targets(off, part),
-                                        values: style_values(values, part), unless: style_unless(options, keep: true))
+      def extend_toggle(name, classes = nil, on: nil, off: nil, values: {}, **options)
+        declare_styling(:extend_toggle, name: name.to_sym, on: style_targets(toggle_on(name, classes, on)),
+                                        off: style_targets(off), values: style_values(values),
+                                        unless: style_unless(options, keep: true))
       end
 
       def remove_part(name)
@@ -226,17 +234,24 @@ module Gustwave
         nil
       end
 
-      # "classes" → { target => "classes" }, { root: …, icon: … } stays.
-      def style_targets(classes, target = Definition::ROOT)
+      # The on classes, given positionally or as on: but not both
+      def toggle_on(name, classes, on)
+        return classes || on if classes.nil? || on.nil?
+
+        raise DefinitionError.new(self.name || inspect, "toggle #{name.to_sym.inspect} has positional classes and on:, give one")
+      end
+
+      # "classes" → { root: "classes" }, { root: …, icon: … } stays.
+      def style_targets(classes)
         case classes
         when nil then {}
         when Hash then classes.to_h { |part, value| [ part.to_sym, value.to_s ] }
-        else { target.to_sym => classes.to_s }
+        else { Definition::ROOT => classes.to_s }
         end
       end
 
-      def style_values(values, target)
-        values.to_h { |value, classes| [ Options.normalize_value(value), style_targets(classes, target) ] }
+      def style_values(values)
+        values.to_h { |value, classes| [ Options.normalize_value(value), style_targets(classes) ] }
       end
 
       def style_unless(options, keep: false)
