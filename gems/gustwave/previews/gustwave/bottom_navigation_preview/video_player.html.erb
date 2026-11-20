@@ -1,0 +1,169 @@
+<%# The whole bar is block content: a player with its progress bar. Its controls are icon buttons with tooltips. %>
+<%= render Gustwave::BottomNavigation.new(class: "grid h-24 grid-cols-1 px-8 md:grid-cols-3") do %>
+  <div class="items-center justify-center hidden me-auto md:flex">
+    <div class="h-8 w-14 me-3 rounded-sm bg-gray-200 dark:bg-gray-600" role="img" aria-label="Video preview"></div>
+    <span class="text-sm text-gray-500 dark:text-gray-400">Flowbite Crash Course</span>
+  </div>
+
+  <div class="flex items-center w-full">
+    <div class="w-full">
+      <div class="flex items-center justify-center mx-auto mb-1">
+        <% shuffle = Gustwave::Tooltip.new("Shuffle video") %>
+
+        <button
+          type="button"
+          class="
+            p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+            dark:focus:ring-gray-600 dark:hover:bg-gray-600
+          "
+          <%= tag.attributes(shuffle.trigger_options.except("aria-describedby")) %>
+        >
+          <%= render Gustwave::Icon.new(:shuffle, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <span class="sr-only">Shuffle video</span>
+        </button>
+
+        <%= render shuffle %>
+
+        <% previous = Gustwave::Tooltip.new("Previous video") %>
+
+        <button
+          type="button"
+          class="
+            p-2.5 group rounded-full hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200
+            dark:focus:ring-gray-600 dark:hover:bg-gray-600
+          "
+          <%= tag.attributes(previous.trigger_options.except("aria-describedby")) %>
+        >
+          <%= render Gustwave::Icon.new(:backward_step, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <span class="sr-only">Previous video</span>
+        </button>
+
+        <%= render previous %>
+
+        <% pause = Gustwave::Tooltip.new("Pause video") %>
+
+        <button
+          type="button"
+          class="
+            inline-flex items-center justify-center p-2.5 mx-2 font-medium bg-blue-600 rounded-full
+            hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800
+          "
+          <%= tag.attributes(pause.trigger_options.except("aria-describedby")) %>
+        >
+          <%= render Gustwave::Icon.new(:pause, theme: :solid, class: "size-4 -m-0.5 text-white", aria: { hidden: true }) %>
+          <span class="sr-only">Pause video</span>
+        </button>
+
+        <%= render pause %>
+
+        <% next_video = Gustwave::Tooltip.new("Next video") %>
+
+        <button
+          type="button"
+          class="
+            p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+            dark:focus:ring-gray-600 dark:hover:bg-gray-600
+          "
+          <%= tag.attributes(next_video.trigger_options.except("aria-describedby")) %>
+        >
+          <%= render Gustwave::Icon.new(:forward_step, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <span class="sr-only">Next video</span>
+        </button>
+
+        <%= render next_video %>
+
+        <% restart = Gustwave::Tooltip.new("Restart video") %>
+
+        <button
+          type="button"
+          class="
+            p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+            dark:focus:ring-gray-600 dark:hover:bg-gray-600
+          "
+          <%= tag.attributes(restart.trigger_options.except("aria-describedby")) %>
+        >
+          <%= render Gustwave::Icon.new(:refresh, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+          <span class="sr-only">Restart video</span>
+        </button>
+
+        <%= render restart %>
+      </div>
+
+      <div class="flex items-center justify-between space-x-2 rtl:space-x-reverse">
+        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">3:45</span>
+
+        <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-800">
+          <div class="bg-blue-600 h-1.5 rounded-full" style="width: 65%"></div>
+        </div>
+
+        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">5:00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="items-center justify-center hidden ms-auto md:flex">
+    <% playlist = Gustwave::Tooltip.new("View playlist") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(playlist.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:list_music, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">View playlist</span>
+    </button>
+
+    <%= render playlist %>
+
+    <% captions = Gustwave::Tooltip.new("Toggle captions") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(captions.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:caption, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Captions</span>
+    </button>
+
+    <%= render captions %>
+
+    <% expand = Gustwave::Tooltip.new("Full screen") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 me-1 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(expand.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:expand, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Expand</span>
+    </button>
+
+    <%= render expand %>
+
+    <% volume = Gustwave::Tooltip.new("Adjust volume") %>
+
+    <button
+      type="button"
+      class="
+        p-2.5 group rounded-full hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200
+        dark:focus:ring-gray-600 dark:hover:bg-gray-600
+      "
+      <%= tag.attributes(volume.trigger_options.except("aria-describedby")) %>
+    >
+      <%= render Gustwave::Icon.new(:volume_up, theme: :solid, class: "size-5 -m-0.5 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white", aria: { hidden: true }) %>
+      <span class="sr-only">Adjust volume</span>
+    </button>
+
+    <%= render volume %>
+  </div>
+<% end %>
