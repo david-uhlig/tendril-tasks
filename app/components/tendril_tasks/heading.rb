@@ -2,7 +2,7 @@
 
 module TendrilTasks
   class Heading < TendrilTasks::Component
-    base "group leading-none tracking-tight"
+    part :root, "group leading-none tracking-tight"
 
     variant :size, default: :"2xl", values: {
       "2xl": "mb-4",

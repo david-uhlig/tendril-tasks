@@ -9,7 +9,7 @@ module Gustwave
     #
     # @status alpha
     class ResponsiveHorizontalScroll < Gustwave::Component
-      base "flex flex-nowrap overflow-x-auto touch-pan-x gap-2 pb-2"
+      part :root, "flex flex-nowrap overflow-x-auto touch-pan-x gap-2 pb-2"
 
       # The HTML tag of the container
       option :tag, default: :div, values: %i[div span ul ol]

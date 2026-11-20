@@ -12,7 +12,7 @@ module Gustwave
     #
     # @status alpha
     class Link < Gustwave::Component
-      base "block py-2 px-3 md:p-0 rounded-sm"
+      part :root, "block py-2 px-3 md:p-0 rounded-sm"
 
       toggle :active,
              on: "text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white dark:bg-blue-600 md:dark:bg-transparent md:dark:text-blue-500",

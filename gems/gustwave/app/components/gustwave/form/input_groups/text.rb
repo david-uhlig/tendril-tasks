@@ -32,7 +32,7 @@ module Gustwave
 
         self.visual_icon_theme = :solid
 
-        base "inline-flex items-center text-gray-900 bg-gray-200 border border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
+        part :root, "inline-flex items-center text-gray-900 bg-gray-200 border border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
 
         # The icon fills the addon's text height, as Flowbite's 16px icon
         # does. Gustwave's icons leave a margin inside their box, so it is

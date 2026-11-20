@@ -49,7 +49,7 @@ module Gustwave
   #
   # @status alpha
   class Navbar < Gustwave::Component
-    base "bg-white border-gray-200 dark:bg-gray-900"
+    part :root, "bg-white border-gray-200 dark:bg-gray-900"
 
     part :container, "max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     part :brand, "flex items-center space-x-3 rtl:space-x-reverse"

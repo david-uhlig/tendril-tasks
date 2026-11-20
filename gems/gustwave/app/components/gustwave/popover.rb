@@ -14,7 +14,7 @@ module Gustwave
 
     option :trigger_event, default: :hover, values: %i[hover click]
 
-    base "absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
+    part :root, "absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
 
     # @param text [String, nil] the popover's content. Without it the block is the content.
     # @param id [String, nil] the popover's id, which +trigger_options+ point at. Defaults to a random id.

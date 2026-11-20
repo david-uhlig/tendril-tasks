@@ -46,7 +46,7 @@ module Gustwave
   #
   # @status alpha
   class ButtonGroup < Gustwave::Component
-    base "inline-flex rounded-md shadow-xs"
+    part :root, "inline-flex rounded-md shadow-xs"
 
     # Renders every button outlined, unless a button picks its own color
     toggle :outline

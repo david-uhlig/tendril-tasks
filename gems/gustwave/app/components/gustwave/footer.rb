@@ -52,7 +52,7 @@ module Gustwave
   #
   # @status alpha
   class Footer < Gustwave::Component
-    base "bg-white dark:bg-gray-900"
+    part :root, "bg-white dark:bg-gray-900"
 
     part :container, "w-full max-w-screen-xl mx-auto p-4"
 

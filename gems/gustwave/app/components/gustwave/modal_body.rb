@@ -13,7 +13,7 @@ module Gustwave
   #
   # @status alpha
   class ModalBody < Gustwave::Component
-    base "p-4 md:p-5 space-y-4"
+    part :root, "p-4 md:p-5 space-y-4"
 
     # @param options [Hash] additional options for the HTML tag, like class
     def initialize(**options)

@@ -50,7 +50,7 @@ module Gustwave
 
     # @status alpha
     class Row < Gustwave::Component
-      base "font-semibold text-gray-900 dark:text-white"
+      part :root, "font-semibold text-gray-900 dark:text-white"
 
       part :cell, "px-6 py-3"
       part :header_cell, "px-6 py-3 text-base"

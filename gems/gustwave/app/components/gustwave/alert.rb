@@ -34,7 +34,7 @@ module Gustwave
   class Alert < Gustwave::Component
     attr_reader :id
 
-    base "p-4 text-sm rounded-lg", unless: { color: :none }
+    part :root, "p-4 text-sm rounded-lg", unless: { color: :none }
 
     # The +dismiss_button+ part colors the dismiss button to match.
     variant :color, default: :blue, values: {

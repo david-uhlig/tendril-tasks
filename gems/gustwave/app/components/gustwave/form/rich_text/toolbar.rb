@@ -5,7 +5,7 @@ module Gustwave
     module RichText
       # @status alpha
       class Toolbar < Gustwave::Component
-        base "flex items-center space-x-1 rtl:space-x-reverse flex-wrap"
+        part :root, "flex items-center space-x-1 rtl:space-x-reverse flex-wrap"
 
         # The HTML tag, the custom element of the editor's toolbar
         option :tag, default: :div, values: %i[div trix-toolbar lexxy-toolbar]

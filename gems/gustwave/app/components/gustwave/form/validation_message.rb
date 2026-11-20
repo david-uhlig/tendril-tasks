@@ -30,7 +30,7 @@ module Gustwave
     #
     # @status alpha
     class ValidationMessage < Gustwave::Component
-      base "mt-2 text-sm"
+      part :root, "mt-2 text-sm"
 
       # The color of the message. Without a state it looks like a helper text.
       variant :validation, default: :none, values: {

@@ -3,7 +3,7 @@
 module TendrilTasks
   module Dashboard
     class Application < TendrilTasks::Component
-      base "bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col sm:flex-row"
+      part :root, "bg-white border rounded-xl shadow-md dark:bg-gray-900 py-4 px-4 text-left flex flex-col sm:flex-row"
 
       toggle :disabled, "grayscale opacity-70", internal: true
 

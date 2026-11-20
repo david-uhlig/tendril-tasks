@@ -20,7 +20,7 @@ module Gustwave
   #
   # @status alpha
   class TableCell < Gustwave::Component
-    base "px-6 py-4"
+    part :root, "px-6 py-4"
 
     option :tag, default: :td, values: %i[td th]
 

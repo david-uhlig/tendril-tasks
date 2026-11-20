@@ -34,13 +34,13 @@ Flowbite itself is up to the host application, i.e. its Tailwind CSS plugin and 
 
 ## Options and styling
 
-Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: a `base`, named `part`s, `variant`s such as `color` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts.
+Components declare their options with the DSL in `Gustwave::Options`: `option`s, a value from a fixed list such as an HTML `tag`, and values `derive`d from them. They declare their Tailwind CSS classes with the DSL in `Gustwave::Styling`, which builds on it: named `part`s, the root among them, `variant`s such as `color` and `size`, and on/off `toggle`s. Variants and toggles are options with classes. Callers pick values with keyword arguments and add classes with `class:`, which win conflicts.
 
 | A caller passes | Meaning |
 |---|---|
 | nothing, `nil` or `DEFAULT` | The declared default |
 | `:none` | None of this variant's classes, e.g. `size: :none` to bring your own sizing |
-| a value the `base`'s `unless:` names, usually `color: :none` | None of the variant's classes, and no base styles either |
+| a value the root part's `unless:` names, usually `color: :none` | None of the variant's classes, and none of the root's classes either |
 
 Variants where no classes isn't a choice, like an HTML tag, declare `allow_none: false` and have no `:none`.
 
@@ -70,13 +70,12 @@ end
 |---|---|---|
 | `option` | A value from a fixed list, with a default | `option :tag, default: :h2, values: %i[h1 h2 h3]` |
 | `derive` | A value derived per value of an option | `derive :icon_size, from: :size, values: { sm: :xs, md: :sm }` |
-| `base` | Classes of the root element, or of parts given a hash | `base "inline-flex items-center"` |
-| `part` | A named element besides the root, with optional classes | `part :icon, "h-3 w-auto"` |
+| `part` | The classes of a named element. `:root` is the component's own element | `part :root, "inline-flex items-center"` |
 | `variant` | An option with classes per value | `variant :size, default: :md, values: { sm: "text-xs", md: "text-sm" }` |
 | `toggle` | An on/off option with classes, off by default | `toggle :pill, "rounded-full"` |
 | `on:` / `off:` | A toggle's classes for each state | `toggle :shadow, on: "shadow", off: "shadow-none"` |
 | `per:` | A toggle's classes per value of another option; needs one for each value | `toggle :border, per: :color, values: { gray: "ring-gray-300", red: "ring-red-300" }` |
-| `unless:` | Skip a declaration for some option values | `base "px-2", unless: { size: [:xs, :sm] }` |
+| `unless:` | Skip a declaration for some option values | `part :root, "px-2", unless: { size: [:xs, :sm] }` |
 | `part:` | Target a declared part instead of the root | `toggle :pill, "rounded-full", part: :icon` |
 | `{ root:, icon: }` | Target several parts at once | `md: { root: "text-sm", icon: "h-3" }` |
 | `internal: true` | The component selects the value itself, not callers | `toggle :visual_only, "p-2", internal: true` |
@@ -88,8 +87,8 @@ In the component, default keyword arguments to `DEFAULT`, pick values with `sele
 
 ```ruby
 class Badge < Gustwave::Component
-  base     "inline-flex items-center rounded-sm", unless: { color: :none }
-  part     :icon, "h-3 w-auto"
+  part    :root, "inline-flex items-center rounded-sm", unless: { color: :none }
+  part    :icon, "h-3 w-auto"
 
   variant :color, default: :gray, values: { gray: "bg-gray-100 text-gray-800", red: "bg-red-100 text-red-800" }
   variant :size, default: :md, values: { sm: { root: "text-xs px-1.5", icon: "h-2.5" }, md: "text-sm px-2" }

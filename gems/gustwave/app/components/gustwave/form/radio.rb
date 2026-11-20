@@ -20,7 +20,7 @@ module Gustwave
       include Gustwave::Form::BoundControl
 
       # Flowbite's radio. It keeps these classes when it's disabled.
-      base "w-4 h-4 bg-gray-100 border-gray-300 focus:ring-2 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+      part :root, "w-4 h-4 bg-gray-100 border-gray-300 focus:ring-2 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
 
       # The color of the checked button and of the focus ring
       variant :color, default: :blue, values: {

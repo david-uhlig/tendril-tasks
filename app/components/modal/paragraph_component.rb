@@ -2,7 +2,7 @@
 
 # The body text of a modal, rendered with Gustwave::Paragraph.
 class Modal::ParagraphComponent < TendrilTasks::Component
-  base "text-base leading-relaxed"
+  part :root, "text-base leading-relaxed"
 
   def initialize(text = nil, **options)
     @text = text

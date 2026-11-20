@@ -34,7 +34,7 @@ module Gustwave
     #
     # @status alpha
     class InputGroup < Gustwave::Component
-      base "flex"
+      part :root, "flex"
 
       # The size of the addons, and of the control unless it has its own. Each
       # addon is as high as the control or higher, because the row stretches.

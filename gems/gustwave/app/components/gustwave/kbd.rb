@@ -29,8 +29,8 @@ module Gustwave
     include Gustwave::Visuals
     renders_visuals :leading_visuals, :trailing_visuals
 
-    base "px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg " \
-         "dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
+    part :root, "px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg " \
+                "dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
 
     # Gustwave::Visuals needs a size. Keys have one. Gustwave's icons leave a
     # blank margin around their drawing, so the 16px icon takes a negative

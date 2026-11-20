@@ -8,8 +8,8 @@ module Gustwave
   # === Declaring styles
   #
   #   class Badge < Gustwave::Component
-  #     base     "inline-flex items-center rounded-sm", unless: { color: :none }
-  #     part     :icon, "h-3 w-auto"
+  #     part    :root, "inline-flex items-center rounded-sm", unless: { color: :none }
+  #     part    :icon, "h-3 w-auto"
   #
   #     variant :color, default: :gray, values: {
   #       gray: "bg-gray-100 text-gray-800",
@@ -23,13 +23,12 @@ module Gustwave
   #     toggle  :border, per: :color, values: { gray: "ring-1 ring-gray-300", red: "ring-1 ring-red-300" }
   #   end
   #
-  # * +base+ styles the root element, or several parts when given a hash.
-  #   Its +unless:+ names the option values that render the component
-  #   without its base styles, so callers can bring their own. By convention
-  #   that's <tt>color: :none</tt>. A subclass that redeclares the base
-  #   restates it.
-  # * +part+ declares a named element besides the root, e.g. an icon slot,
-  #   optionally with its own classes.
+  # * +part+ declares a named element, e.g. an icon slot, optionally with
+  #   its own classes. The root element always exists; <tt>part :root</tt>
+  #   gives it classes. A part's +unless:+ names the option values that
+  #   render it without its classes, so callers can bring their own. By
+  #   convention that's <tt>color: :none</tt> on the root. A subclass that
+  #   redeclares a part restates it.
   # * +variant+ declares an option with a fixed set of values and a
   #   +default:+, and the classes of each value. A variant without a +:none+
   #   value gets one that adds none of its classes, so callers can bring
@@ -42,8 +41,8 @@ module Gustwave
   # selects itself, as options do; see Gustwave::Options.
   #
   # +nil+ and +DEFAULT+ pick a variant's default. +:none+ picks no classes
-  # from that variant. Only the values the base's +unless:+ names
-  # drop the base styles too.
+  # from that variant. Only the values a part's +unless:+ names
+  # drop that part's classes too.
   #
   # Read the option of a variant or toggle with +option_value+, and derive
   # values from it with +derive+, as for any option; see Gustwave::Options.
@@ -53,17 +52,17 @@ module Gustwave
   # declaration takes +unless:+ to skip it for some option values, e.g.
   # <tt>unless: { color: :none }</tt> or <tt>unless: { size: [:xs, :sm] }</tt>.
   #
-  # Base and part classes are emitted first, then those of variants and
+  # Part classes are emitted first, then those of variants and
   # toggles, each group in declaration order, inherited declarations first.
   # They're merged with TailwindMerge, so a later class wins a conflict:
-  # variants and toggles win over base and part classes.
+  # variants and toggles win over part classes.
   #
   # === Inheritance and extension
   #
   # Subclasses inherit every declaration. Declaring a name again replaces it
   # in place; nothing merges implicitly. To change an inherited variant or
   # toggle partially, use +extend_variant+ or +extend_toggle+, which merge per
-  # value and per part. Change the base or a part by declaring it again.
+  # value and per part. Change a part by declaring it again.
   # +remove_part+, +remove_variant+ and +remove_toggle+ delete one.
   #
   # Definitions are resolved on first use and again after any declaration, so
@@ -120,16 +119,11 @@ module Gustwave
     end
 
     class_methods do
-      # Styles the root element, or several parts given as a hash.
+      # Declares a part, an element of the component, with optional classes.
+      # +:root+ always exists; declaring it gives the root element classes.
       #
-      #   base "inline-flex items-center", unless: { color: :none }
-      #   base root: "relative", icon: "absolute"
-      def base(classes = nil, **parts)
-        options = parts.extract!(:unless)
-        declare_styling(:base, classes: style_targets(classes || parts), unless: style_unless(options))
-      end
-
-      # Declares a part, an element besides the root, with optional classes.
+      #   part :root, "inline-flex items-center", unless: { color: :none }
+      #   part :icon, "h-4 w-4"
       def part(name, classes = nil, **options)
         declare_styling(:part, name: name.to_sym, classes: classes, unless: style_unless(options))
       end

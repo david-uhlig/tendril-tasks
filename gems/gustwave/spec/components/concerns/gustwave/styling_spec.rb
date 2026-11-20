@@ -7,7 +7,7 @@ RSpec.describe Gustwave::Styling do
 
   let(:button) do
     component do
-      base "inline-flex", unless: { color: :none }
+      part :root, "inline-flex", unless: { color: :none }
       part :icon, "h-4"
       variant :color, default: :blue, values: { blue: "bg-blue-500", red: "bg-red-500" }
       variant :size, default: :md, values: {
@@ -19,7 +19,7 @@ RSpec.describe Gustwave::Styling do
   end
 
   describe "#classes" do
-    it "applies the base and every variant's default" do
+    it "applies the root part and every variant's default" do
       expect(button.new.classes).to eq "inline-flex bg-blue-500 text-base px-4"
     end
 
@@ -74,27 +74,32 @@ RSpec.describe Gustwave::Styling do
       expect(sized.new.classes(:inner)).to eq "py-1 px-4"
     end
 
-    it "emits a toggle declared before the base after the base's classes" do
+    it "emits a toggle declared before the root part after the root's classes" do
       padded = component do
         toggle :compact, "p-1"
-        base "flex p-4"
+        part :root, "flex p-4"
       end
 
       expect(padded.new.select_options(compact: true).classes).to eq "flex p-1"
     end
 
-    it "emits base and part classes for a part in declaration order" do
-      later_part = component do
-        base root: "flex", inner: "p-1"
+    it "replaces a part redeclared later" do
+      redeclared = component do
         part :inner, "p-2"
-      end
-      later_base = component do
-        part :inner, "p-2"
-        base root: "flex", inner: "p-1"
+        part :inner, "p-1"
       end
 
-      expect(later_part.new.classes(:inner)).to eq "p-2"
-      expect(later_base.new.classes(:inner)).to eq "p-1"
+      expect(redeclared.new.classes(:inner)).to eq "p-1"
+    end
+
+    it "lists :root once, however often it is declared" do
+      twice = component do
+        part :root, "flex"
+        part :root, "block"
+      end
+
+      expect(twice.style_definition.parts).to eq [ :root ]
+      expect(twice.new.classes).to eq "block"
     end
   end
 
@@ -240,7 +245,7 @@ RSpec.describe Gustwave::Styling do
   describe "unless:" do
     let(:guarded) do
       component do
-        base "font-medium", unless: { size: [ :xs, :sm ] }
+        part :root, "font-medium", unless: { size: [ :xs, :sm ] }
         part :icon, "h-4", unless: { icon: false }
         variant :size, default: :md, values: { xs: "text-xs", sm: "text-sm", md: "text-base" }
         variant :color, default: :blue, values: { blue: "text-blue-500" }, unless: { size: :xs }
@@ -261,33 +266,33 @@ RSpec.describe Gustwave::Styling do
     end
   end
 
-  describe "base unless:" do
-    it "skips the base styles for the given values, and only them" do
+  describe "part unless:" do
+    it "skips the root part's classes for the given values, and only them" do
       expect(button.new.select_options(color: :none).classes).to eq "text-base px-4"
       expect(button.new.select_options(color: :none, size: :sm).classes(:icon)).to eq "h-3"
       expect(button.new.select_options(color: :red).classes).to eq "inline-flex bg-red-500 text-base px-4"
     end
 
-    it "skips the base styles of parts" do
+    it "skips the classes of any part" do
       spinner = component do
-        base root: "flex", icon: "animate-spin", unless: { color: :none }
-        part :icon, "h-4"
+        part :root, "flex", unless: { color: :none }
+        part :icon, "animate-spin h-4", unless: { color: :none }
         variant :color, default: :blue, values: { blue: "fill-blue-600" }
       end
 
       expect(spinner.new.classes(:icon)).to eq "animate-spin h-4"
-      expect(spinner.new.select_options(color: :none).classes(:icon)).to eq "h-4"
+      expect(spinner.new.select_options(color: :none).classes(:icon)).to be_nil
     end
 
     it "takes several options and values" do
-      several = component(button) { base "inline-flex", unless: { color: :none, size: %i[sm] } }
+      several = component(button) { part :root, "inline-flex", unless: { color: :none, size: %i[sm] } }
 
       expect(several.new.select_options(size: :sm).classes).to eq "bg-blue-500 text-sm px-2"
       expect(several.new.select_options(color: :none).classes).to eq "text-base px-4"
     end
 
-    it "is replaced along with a redeclared base" do
-      redeclared = component(button) { base "flex" }
+    it "is replaced along with a redeclared root part" do
+      redeclared = component(button) { part :root, "flex" }
 
       expect(redeclared.new.select_options(color: :none).classes).to eq "flex text-base px-4"
     end
@@ -343,9 +348,16 @@ RSpec.describe Gustwave::Styling do
       expect(component(button).new.classes).to eq "inline-flex bg-blue-500 text-base px-4"
     end
 
+    it "replaces the parent's root classes with a redeclared root part" do
+      child = component(button) { part :root, "block" }
+
+      expect(child.new.classes).to eq "block bg-blue-500 text-base px-4"
+      expect(child.style_definition.parts).to eq %i[root icon]
+    end
+
     it "replaces a redeclared name in place" do
       child = component(button) do
-        base "flex"
+        part :root, "flex"
         variant :color, default: :green, values: { green: "bg-green-500" }
       end
 
@@ -413,7 +425,7 @@ RSpec.describe Gustwave::Styling do
       plain = Class.new(ViewComponent::Base) do
         include Gustwave::Styling
 
-        base "flex"
+        part :root, "flex"
       end
 
       expect(plain.new.classes).to eq "flex"
@@ -454,19 +466,19 @@ RSpec.describe Gustwave::Styling do
     end
 
     it "is raised for unknown unless: options and values" do
-      expect { resolve { base "flex", unless: { color: :none } } }
+      expect { resolve { part :root, "flex", unless: { color: :none } } }
         .to raise_error(Gustwave::DefinitionError, /unless: :color/)
       expect do
         resolve do
           variant :size, default: :md, values: { md: "" }
-          base "flex", unless: { size: :xl }
+          part :root, "flex", unless: { size: :xl }
         end
       end.to raise_error(Gustwave::DefinitionError, /unknown values \[:xl\]/)
     end
 
 
     it "is raised for unknown parts" do
-      expect { resolve { base icon: "h-4" } }
+      expect { resolve { toggle :pill, "rounded-full", part: :icon } }
         .to raise_error(Gustwave::DefinitionError, /unknown parts \[:icon\]/)
     end
 

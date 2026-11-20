@@ -28,7 +28,7 @@ module Gustwave
   #
   # @status alpha
   class Breadcrumb < Gustwave::Component
-    base "flex"
+    part :root, "flex"
 
     toggle :solid, "px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
 

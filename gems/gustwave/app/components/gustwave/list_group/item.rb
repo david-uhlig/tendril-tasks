@@ -43,7 +43,7 @@ module Gustwave
         last: "rounded-b-lg"
       }
 
-      base "w-full px-4 py-2"
+      part :root, "w-full px-4 py-2"
 
       # Hover and focus states, while the item can be pressed
       toggle :hover, "hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white",

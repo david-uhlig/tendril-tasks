@@ -2,7 +2,7 @@
 
 module TendrilTasks
   class Logo < TendrilTasks::Component
-    base "[&_svg]:w-auto [&_img]:w-auto"
+    part :root, "[&_svg]:w-auto [&_img]:w-auto"
 
     variant :size, default: :sm, values: {
       sm: "[&_img]:h-8 sm:[&_img]:h-11 [&_svg]:h-8 sm:[&_svg]:h-11",

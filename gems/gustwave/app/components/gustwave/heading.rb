@@ -8,7 +8,7 @@ module Gustwave
     # The id prefix of a heading whose text yields no id, e.g. one made of symbols
     FALLBACK_ID_PREFIX = "heading"
 
-    base "text-gray-900 dark:text-white", unless: { size: :none }
+    part :root, "text-gray-900 dark:text-white", unless: { size: :none }
 
     # The HTML tag, i.e. the heading level in the document outline
     option :tag, default: :h2, values: %i[h1 h2 h3 h4 h5 h6]

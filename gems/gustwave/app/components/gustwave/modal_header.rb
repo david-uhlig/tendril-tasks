@@ -16,7 +16,7 @@ module Gustwave
   #
   # @status alpha
   class ModalHeader < Gustwave::Component
-    base "flex items-center justify-between p-4 md:p-5 border-b border-gray-200 rounded-t dark:border-gray-600"
+    part :root, "flex items-center justify-between p-4 md:p-5 border-b border-gray-200 rounded-t dark:border-gray-600"
 
     # @param text [String, nil] The title. Takes precedence over block content.
     # @param modal_id [String] The id of the modal, which the title and the close button refer to.

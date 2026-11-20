@@ -7,8 +7,7 @@ module Gustwave
   class Spinner < Gustwave::Component
     include Gustwave::Positionable
 
-    base icon: "inline animate-spin", unless: { color: :none }
-    part :icon
+    part :icon, "inline animate-spin", unless: { color: :none }
 
     variant :color, part: :icon, default: :blue, values: {
       base: "",
