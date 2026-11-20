@@ -8,8 +8,7 @@ module Gustwave
   # === Declaring styles
   #
   #   class Badge < Gustwave::Component
-  #     base     "inline-flex items-center rounded-sm"
-  #     unstyled color: :none
+  #     base     "inline-flex items-center rounded-sm", unless: { color: :none }
   #     part     :icon, "h-3 w-auto"
   #
   #     variant :color, default: :gray, values: {
@@ -25,9 +24,10 @@ module Gustwave
   #   end
   #
   # * +base+ styles the root element, or several parts when given a hash.
-  # * +unstyled+ names the option values that render the component
-  #   unstyled, i.e. without its base styles, so callers can bring their
-  #   own. By convention that's <tt>color: :none</tt>. Subclasses inherit it.
+  #   Its +unless:+ names the option values that render the component
+  #   without its base styles, so callers can bring their own. By convention
+  #   that's <tt>color: :none</tt>. A subclass that redeclares the base
+  #   restates it.
   # * +part+ declares a named element besides the root, e.g. an icon slot,
   #   optionally with its own classes.
   # * +variant+ declares an option with a fixed set of values and a
@@ -42,8 +42,8 @@ module Gustwave
   # selects itself, as options do; see Gustwave::Options.
   #
   # +nil+ and +DEFAULT+ pick a variant's default. +:none+ picks no classes
-  # from that variant. Only the values +unstyled+ names drop the base
-  # styles too.
+  # from that variant. Only the values the base's +unless:+ names
+  # drop the base styles too.
   #
   # Read the option of a variant or toggle with +option_value+, and derive
   # values from it with +derive+, as for any option; see Gustwave::Options.
@@ -127,14 +127,6 @@ module Gustwave
       def base(classes = nil, **parts)
         options = parts.extract!(:unless)
         declare_styling(:base, classes: style_targets(classes || parts), unless: style_unless(options))
-      end
-
-      # Skips the base styles for the given option values, rendering the
-      # component unstyled. Replaces an inherited declaration.
-      #
-      #   unstyled color: :none
-      def unstyled(**conditions)
-        declare_styling(:unstyled, unless: style_unless({ unless: conditions }))
       end
 
       # Declares a part, an element besides the root, with optional classes.

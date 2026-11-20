@@ -10,7 +10,7 @@ module Gustwave
     # @status alpha
     class Button < Gustwave::Buttons::Base
       # Replaces Base's rounded-lg focus:ring-4
-      base "text-center whitespace-nowrap align-bottom overflow-hidden focus:outline-hidden focus:ring-2 focus:z-10 disabled:cursor-not-allowed"
+      base "text-center whitespace-nowrap align-bottom overflow-hidden focus:outline-hidden focus:ring-2 focus:z-10 disabled:cursor-not-allowed", unless: { color: :none }
 
       extend_variant :color, default: :default, values: {
         default: "text-gray-900 bg-white border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white",

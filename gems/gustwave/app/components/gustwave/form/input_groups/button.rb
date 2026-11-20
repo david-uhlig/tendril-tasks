@@ -21,7 +21,7 @@ module Gustwave
       class Button < Gustwave::Buttons::Base
         # Replaces Base's rounded-lg focus:ring-4. The gap and the chevron's
         # margin sum to Flowbite's chevron spacing.
-        base "shrink-0 z-10 inline-flex items-center text-center whitespace-nowrap font-medium focus:outline-hidden focus:ring-4 disabled:cursor-not-allowed"
+        base "shrink-0 z-10 inline-flex items-center text-center whitespace-nowrap font-medium focus:outline-hidden focus:ring-4 disabled:cursor-not-allowed", unless: { color: :none }
 
         extend_variant :color, default: :default, values: {
           default: "text-gray-900 bg-gray-100 border-gray-300 hover:bg-gray-200 focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"

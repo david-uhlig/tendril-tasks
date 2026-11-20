@@ -35,8 +35,7 @@ module Gustwave
   #
   # @status alpha
   class HorizontalLine < Gustwave::Component
-    base "mx-auto border-0 dark:bg-gray-700"
-    unstyled shape: :none
+    base "mx-auto border-0 dark:bg-gray-700", unless: { shape: :none }
 
     variant :shape, default: :default, values: {
       default: "w-full h-px my-8 bg-gray-200",

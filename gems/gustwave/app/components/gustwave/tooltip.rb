@@ -37,9 +37,8 @@ module Gustwave
 
     option :trigger_event, default: :hover, values: %i[hover click]
 
-    base "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium transition-opacity duration-300 rounded-lg shadow-xs opacity-0"
+    base "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium transition-opacity duration-300 rounded-lg shadow-xs opacity-0", unless: { color: :none }
     part :arrow, "tooltip-arrow after:hidden"
-    unstyled color: :none
 
     variant :color, default: :dark, values: {
       dark: "text-white bg-gray-900 dark:bg-gray-700",

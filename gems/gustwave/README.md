@@ -40,7 +40,7 @@ Components declare their options with the DSL in `Gustwave::Options`: `option`s,
 |---|---|
 | nothing, `nil` or `DEFAULT` | The declared default |
 | `:none` | None of this variant's classes, e.g. `size: :none` to bring your own sizing |
-| a value `unstyled` names, usually `color: :none` | None of the variant's classes, and no base styles either |
+| a value the `base`'s `unless:` names, usually `color: :none` | None of the variant's classes, and no base styles either |
 
 Variants where no classes isn't a choice, like an HTML tag, declare `allow_none: false` and have no `:none`.
 
@@ -72,7 +72,6 @@ end
 | `derive` | A value derived per value of an option | `derive :icon_size, from: :size, values: { sm: :xs, md: :sm }` |
 | `base` | Classes of the root element, or of parts given a hash | `base "inline-flex items-center"` |
 | `part` | A named element besides the root, with optional classes | `part :icon, "h-3 w-auto"` |
-| `unstyled` | Option values that skip the base styles | `unstyled color: :none` |
 | `variant` | An option with classes per value | `variant :size, default: :md, values: { sm: "text-xs", md: "text-sm" }` |
 | `toggle` | An on/off option with classes, off by default | `toggle :pill, "rounded-full"` |
 | `on:` / `off:` | A toggle's classes for each state | `toggle :shadow, on: "shadow", off: "shadow-none"` |
@@ -89,8 +88,7 @@ In the component, default keyword arguments to `DEFAULT`, pick values with `sele
 
 ```ruby
 class Badge < Gustwave::Component
-  base     "inline-flex items-center rounded-sm"
-  unstyled color: :none
+  base     "inline-flex items-center rounded-sm", unless: { color: :none }
   part     :icon, "h-3 w-auto"
 
   variant :color, default: :gray, values: { gray: "bg-gray-100 text-gray-800", red: "bg-red-100 text-red-800" }

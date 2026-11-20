@@ -93,7 +93,6 @@ module Gustwave
       }
     }
 
-    unstyled style: :none
 
     # Classes shared by the vertical layout of every style
     VERTICAL = {
