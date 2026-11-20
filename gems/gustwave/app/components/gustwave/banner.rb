@@ -43,9 +43,9 @@ module Gustwave
       bottom: "fixed bottom-0 start-0 w-full border-t"
     }
 
-    variant :align, part: :body, default: :center, allow_none: false, values: {
-      center: "text-center",
-      start: "text-start"
+    variant :align, default: :center, allow_none: false, values: {
+      center: { body: "text-center" },
+      start: { body: "text-start" }
     }
 
     # A centered card instead of a full-width bar

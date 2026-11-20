@@ -157,14 +157,16 @@ RSpec.describe Gustwave::Styling do
       expect(stroked.new.select_options(stroke: "2").option_value(:stroke)).to eq :"2"
     end
 
-    it "targets a part with part:" do
+    it "targets parts with a hash of classes per part" do
       sized = component do
         part :icon
-        variant :size, part: :icon, default: :md, values: { md: "h-5" }
+        variant :size, default: :md, values: { md: { icon: "h-5" } }
       end
 
       expect(sized.new.classes).to be_nil
       expect(sized.new.classes(:icon)).to eq "h-5"
+      expect { component { variant :size, part: :icon, default: :md, values: { md: "h-5" } } }
+        .to raise_error(ArgumentError, /Unknown key: :part/)
     end
   end
 
@@ -232,13 +234,33 @@ RSpec.describe Gustwave::Styling do
         .to raise_error(Gustwave::DefinitionError, /toggle :hover has no classes for :tag \[:span\]/)
     end
 
-    it "targets a part with part:" do
+    it "targets parts with a hash of classes per part" do
       sticky = component do
         part :toolbar, "flex"
-        toggle :sticky, "sticky top-0", part: :toolbar
+        toggle :sticky, { toolbar: "sticky top-0" }
       end
 
       expect(sticky.new.select_options(sticky: true).classes(:toolbar)).to eq "flex sticky top-0"
+      expect { component { toggle :sticky, "sticky", part: :toolbar } }.to raise_error(ArgumentError, /Unknown key: :part/)
+    end
+
+    it "rejects positional classes together with on:" do
+      expect { component { toggle :pill, "rounded-full", on: "rounded-lg" } }
+        .to raise_error(Gustwave::DefinitionError, /toggle :pill has positional classes and on:/)
+      expect { component(button) { extend_toggle :pill, "shadow", on: "ring" } }
+        .to raise_error(Gustwave::DefinitionError, /toggle :pill has positional classes and on:/)
+    end
+
+    it "rejects on classes beside per:, which only values: holds" do
+      expect { component { variant(:size, default: :md, values: { md: "" }); toggle :border, "ring", per: :size, values: { md: "ring-2" } }.style_definition }
+        .to raise_error(Gustwave::DefinitionError, /toggle :border has per:, so its on classes go in values:/)
+    end
+
+    it "rejects values: without per:" do
+      expect { component { toggle :pill, values: { md: "rounded-full" } }.style_definition }
+        .to raise_error(Gustwave::DefinitionError, /toggle :pill has values: but no per:/)
+      expect { component(button) { extend_toggle :pill, values: { md: "rounded-full" } }.style_definition }
+        .to raise_error(Gustwave::DefinitionError, /toggle :pill has values: but no per:/)
     end
   end
 
@@ -478,7 +500,7 @@ RSpec.describe Gustwave::Styling do
 
 
     it "is raised for unknown parts" do
-      expect { resolve { toggle :pill, "rounded-full", part: :icon } }
+      expect { resolve { toggle :pill, { icon: "rounded-full" } } }
         .to raise_error(Gustwave::DefinitionError, /unknown parts \[:icon\]/)
     end
 

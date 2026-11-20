@@ -41,9 +41,8 @@ module Gustwave
 
       # Set by the item: a link, or the text of the current page
       toggle :linked,
-             on: "text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white",
-             off: "text-gray-500 dark:text-gray-400",
-             part: :content,
+             on: { content: "text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white" },
+             off: { content: "text-gray-500 dark:text-gray-400" },
              internal: true
 
       # The chevron is Flowbite's own 6x10 glyph, +chevron_right_compact+. With a

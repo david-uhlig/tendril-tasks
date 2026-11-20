@@ -182,9 +182,24 @@ module Gustwave
 
       def problems(entry)
         errors = unless_problems(entry) + part_problems(entry)
-        return errors unless entry.is_a?(Toggle) && entry.per
+        return errors unless entry.is_a?(Toggle)
+
+        errors += toggle_problems(entry)
+        return errors unless entry.per
 
         errors + options.coverage_problems(label(entry), entry.values.keys, entry.per, "per", "classes")
+      end
+
+      # With per:, values: holds the on classes; without it, the on classes
+      # come positionally or as on:.
+      def toggle_problems(entry)
+        if entry.per && entry.on.any?
+          [ "#{label(entry)} has per:, so its on classes go in values:, not in positional classes or on:" ]
+        elsif !entry.per && entry.values.any?
+          [ "#{label(entry)} has values: but no per:" ]
+        else
+          []
+        end
       end
 
       def unless_problems(entry)

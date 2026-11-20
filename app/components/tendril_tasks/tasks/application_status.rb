@@ -15,14 +15,14 @@ module TendrilTasks
       # The dropdown button showing the current status
       part :trigger, "focus:ring-4 focus:outline-hidden focus:ring-gray-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ms-2"
 
-      variant :status, part: :trigger, default: :received, internal: true, values: {
-        received: "bg-gray-100 text-gray-800",
-        under_review: "bg-cyan-100 text-cyan-800",
-        interviewing: "bg-blue-100 text-blue-800",
-        on_hold: "bg-yellow-100 text-yellow-800",
-        accepted: "bg-green-100 text-green-800",
-        rejected: "bg-red-100 text-red-800",
-        withdrawn: "bg-indigo-100 text-indigo-800"
+      variant :status, default: :received, internal: true, values: {
+        received: { trigger: "bg-gray-100 text-gray-800" },
+        under_review: { trigger: "bg-cyan-100 text-cyan-800" },
+        interviewing: { trigger: "bg-blue-100 text-blue-800" },
+        on_hold: { trigger: "bg-yellow-100 text-yellow-800" },
+        accepted: { trigger: "bg-green-100 text-green-800" },
+        rejected: { trigger: "bg-red-100 text-red-800" },
+        withdrawn: { trigger: "bg-indigo-100 text-indigo-800" }
       }
 
       derive :icon, from: :status, values: {

@@ -82,19 +82,19 @@ module Gustwave
       # The space between the control and the text, which Flowbite sets per
       # control: +ms-3+ after a toggle, +ms-2+ after anything else. The field
       # picks it from the type of its control.
-      variant :gap, part: :text, default: :sm, allow_none: false, internal: true, values: {
-        sm: "ms-2",
-        md: "ms-3"
+      variant :gap, default: :sm, allow_none: false, internal: true, values: {
+        sm: { text: "ms-2" },
+        md: { text: "ms-3" }
       }
 
       # Set for a checkbox or a radio: Flowbite's +h-5+ on the cell, the height
       # of the label's first line, so the control centers on that line and not on the
       # whole text column.
-      toggle :first_line_cell, "h-5", part: :control_cell, internal: true
+      toggle :first_line_cell, { control_cell: "h-5" }, internal: true
 
       # Set while the control is disabled: Flowbite's gray label, in every
       # validation state
-      toggle :disabled_look, "text-gray-400 dark:text-gray-500", part: :label, internal: true
+      toggle :disabled_look, { label: "text-gray-400 dark:text-gray-500" }, internal: true
 
       # The control of the field.
       #

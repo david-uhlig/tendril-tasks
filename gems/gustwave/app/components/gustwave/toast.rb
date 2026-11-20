@@ -42,14 +42,14 @@ module Gustwave
 
     # Colors the visual box and picks its default icon. +:notice+, +:failure+
     # and +:alert+ are aliases for Rails' flash types.
-    variant :status, part: :visual_box, default: :none, values: {
-      info: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
-      notice: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200",
-      success: "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200",
-      error: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200",
-      failure: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200",
-      warning: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200",
-      alert: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200"
+    variant :status, default: :none, values: {
+      info: { visual_box: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200" },
+      notice: { visual_box: "text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200" },
+      success: { visual_box: "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200" },
+      error: { visual_box: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200" },
+      failure: { visual_box: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200" },
+      warning: { visual_box: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200" },
+      alert: { visual_box: "text-orange-500 bg-orange-100 dark:bg-orange-700 dark:text-orange-200" }
     }
 
     # The icon per status

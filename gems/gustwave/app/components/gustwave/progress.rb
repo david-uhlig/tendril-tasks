@@ -50,14 +50,14 @@ module Gustwave
     }
 
     # The text colour only shows on a label inside the fill
-    variant :color, part: :fill, default: :blue, values: {
-      blue: "bg-blue-600 dark:bg-blue-500 text-blue-100",
-      dark: "bg-gray-600 dark:bg-gray-300 text-white dark:text-gray-900",
-      red: "bg-red-600 dark:bg-red-500 text-red-100",
-      green: "bg-green-600 dark:bg-green-500 text-green-100",
-      yellow: "bg-yellow-400 text-yellow-900",
-      indigo: "bg-indigo-600 dark:bg-indigo-500 text-indigo-100",
-      purple: "bg-purple-600 dark:bg-purple-500 text-purple-100"
+    variant :color, default: :blue, values: {
+      blue: { fill: "bg-blue-600 dark:bg-blue-500 text-blue-100" },
+      dark: { fill: "bg-gray-600 dark:bg-gray-300 text-white dark:text-gray-900" },
+      red: { fill: "bg-red-600 dark:bg-red-500 text-red-100" },
+      green: { fill: "bg-green-600 dark:bg-green-500 text-green-100" },
+      yellow: { fill: "bg-yellow-400 text-yellow-900" },
+      indigo: { fill: "bg-indigo-600 dark:bg-indigo-500 text-indigo-100" },
+      purple: { fill: "bg-purple-600 dark:bg-purple-500 text-purple-100" }
     }
 
     # A label inside the fill sets the height, whatever the size. Declared after

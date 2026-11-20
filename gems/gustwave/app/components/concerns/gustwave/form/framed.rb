@@ -50,14 +50,14 @@ module Gustwave
         part :footer, "flex items-center justify-between px-3 py-2 border-t border-gray-200 dark:border-gray-600"
 
         # Set when the control renders in the frame
-        toggle :framed, part: :frame, per: :validation, internal: true, values: FRAME_LOOK
+        toggle :framed, per: :validation, internal: true, values: FRAME_LOOK.transform_values { |look| { frame: look } }
 
         # Which bars the frame has. The body rounds the corners no bar covers.
-        variant :bars, part: :body, default: :none, internal: true, values: {
-          none: "rounded-lg",
-          header: "rounded-b-lg",
-          footer: "rounded-t-lg",
-          both: ""
+        variant :bars, default: :none, internal: true, values: {
+          none: { body: "rounded-lg" },
+          header: { body: "rounded-b-lg" },
+          footer: { body: "rounded-t-lg" },
+          both: { body: "" }
         }
       end
 

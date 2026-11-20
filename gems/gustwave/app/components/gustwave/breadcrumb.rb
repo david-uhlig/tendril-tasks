@@ -38,7 +38,7 @@ module Gustwave
 
     # Chevrons need space around them. A slash brings its own margins, so
     # the list has none, as in Flowbite.
-    toggle :spaced, "space-x-1 md:space-x-2 rtl:space-x-reverse", part: :list, internal: true
+    toggle :spaced, { list: "space-x-1 md:space-x-2 rtl:space-x-reverse" }, internal: true
 
     # @param text [String, nil] The item text. Takes precedence over block content.
     # @param href [String, nil] The URL the item links to. Leave it out for the current page.

@@ -76,8 +76,7 @@ end
 | `on:` / `off:` | A toggle's classes for each state | `toggle :shadow, on: "shadow", off: "shadow-none"` |
 | `per:` | A toggle's classes per value of another option; needs one for each value | `toggle :border, per: :color, values: { gray: "ring-gray-300", red: "ring-red-300" }` |
 | `unless:` | Skip a declaration for some option values | `part :root, "px-2", unless: { size: [:xs, :sm] }` |
-| `part:` | Target a declared part instead of the root | `toggle :pill, "rounded-full", part: :icon` |
-| `{ root:, icon: }` | Target several parts at once | `md: { root: "text-sm", icon: "h-3" }` |
+| `{ root:, icon: }` | Classes per part, keyed by part; a plain string styles the root | `toggle :pill, { icon: "rounded-full" }`, `md: { root: "text-sm", icon: "h-3" }` |
 | `internal: true` | The component selects the value itself, not callers | `toggle :visual_only, "p-2", internal: true` |
 | `allow_none: false` | A variant without the implicit `:none` value | `variant :tag, default: :li, allow_none: false, values: { … }` |
 | `extend_option` / `extend_variant` / `extend_toggle` / `extend_derived` | Merge values into an inherited declaration | `extend_variant :color, values: { brand: "bg-brand-600" }` |

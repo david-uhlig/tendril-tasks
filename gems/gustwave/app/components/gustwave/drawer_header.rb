@@ -36,7 +36,7 @@ module Gustwave
     part :handle_bar, "absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"
 
     # Flowbite's edge drawer title has no bottom margin and a medium weight
-    toggle :edge, "mb-0 font-medium", part: :title
+    toggle :edge, { title: "mb-0 font-medium" }
 
     # @param text [String, nil] The title text. Takes precedence over block content.
     # @param drawer_id [String] The id of the drawer this header belongs to. The title's id is +"#{drawer_id}-title"+, which the drawer labels itself by, and the close button or handle targets the drawer.

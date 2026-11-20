@@ -43,16 +43,16 @@ module Gustwave
 
       # Set to +:framed+ when the textarea has a header or footer: Flowbite's
       # borderless textarea inside the frame.
-      variant :layout, part: :textarea, default: :plain, allow_none: false, internal: true, values: {
-        plain: "",
-        framed: "block w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+      variant :layout, default: :plain, allow_none: false, internal: true, values: {
+        plain: { textarea: "" },
+        framed: { textarea: "block w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400" }
       }
 
-      variant :validation, part: :textarea, default: :none, unless: { layout: :framed }, values: VALIDATION_LOOK
+      variant :validation, default: :none, unless: { layout: :framed }, values: VALIDATION_LOOK.transform_values { |look| { textarea: look } }
 
       # Set when the textarea is disabled
-      toggle :disabled_look, part: :textarea, per: :validation, internal: true, unless: { layout: :framed },
-                             values: DISABLED_LOOK
+      toggle :disabled_look, per: :validation, internal: true, unless: { layout: :framed },
+                             values: DISABLED_LOOK.transform_values { |look| { textarea: look } }
 
       # The content of the bar above the textarea, e.g. toolbar buttons. With
       # a header or footer the textarea renders in a frame.

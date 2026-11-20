@@ -91,7 +91,7 @@ module Gustwave
     }
 
     # Set when the alert renders a dismiss button
-    toggle :dismissible, "font-medium", part: :body, internal: true
+    toggle :dismissible, { body: "font-medium" }, internal: true
 
     part :icon, "shrink-0 inline w-4 h-4 me-3"
     part :body

@@ -9,15 +9,15 @@ module Gustwave
 
     part :icon, "inline animate-spin", unless: { color: :none }
 
-    variant :color, part: :icon, default: :blue, values: {
-      base: "",
-      blue: "text-gray-200 dark:text-gray-600 fill-blue-600",
-      dark: "text-gray-200 dark:text-gray-600 fill-gray-600 dark:fill-gray-300",
-      green: "text-gray-200 dark:text-gray-600 fill-green-500",
-      red: "text-gray-200 dark:text-gray-600 fill-red-600",
-      yellow: "text-gray-200 dark:text-gray-600 fill-yellow-400",
-      pink: "text-gray-200 dark:text-gray-600 fill-pink-600",
-      purple: "text-gray-200 dark:text-gray-600 fill-purple-600"
+    variant :color, default: :blue, values: {
+      base: { icon: "" },
+      blue: { icon: "text-gray-200 dark:text-gray-600 fill-blue-600" },
+      dark: { icon: "text-gray-200 dark:text-gray-600 fill-gray-600 dark:fill-gray-300" },
+      green: { icon: "text-gray-200 dark:text-gray-600 fill-green-500" },
+      red: { icon: "text-gray-200 dark:text-gray-600 fill-red-600" },
+      yellow: { icon: "text-gray-200 dark:text-gray-600 fill-yellow-400" },
+      pink: { icon: "text-gray-200 dark:text-gray-600 fill-pink-600" },
+      purple: { icon: "text-gray-200 dark:text-gray-600 fill-purple-600" }
     }
 
     variant :align, default: :none, values: {
