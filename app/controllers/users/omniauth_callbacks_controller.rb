@@ -11,9 +11,10 @@ class Users::OmniauthCallbacksController < ApplicationController
       sign_in @user, event: :authentication
       DownloadAvatarJob.perform_later(@user)
       redirect_to_stored_location
+    elsif @user.errors.of_kind?(:email, :taken)
+      redirect_to new_user_session_path, alert: t(".email_taken")
     else
-      session["devise.rocketchat_data"] = auth.except(:extra)
-      redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
+      redirect_to new_user_session_path, alert: t(".invalid")
     end
   end
 

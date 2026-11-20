@@ -85,29 +85,52 @@ RSpec.describe "Users::OmniauthCallbacks", type: :request do
       end
     end
 
-    context "when the user cannot be saved" do
-      let(:unsaved_user) do
-        build(:user, email: nil).tap { |user| user.errors.add(:email, :blank) }
+    context "when the auth data is invalid" do
+      before do
+        OmniAuth.config.mock_auth[:rocketchat] = OmniAuth::AuthHash.new(
+          provider: "rocketchat",
+          uid: "123456",
+          info: { name: "John Doe", email: nil, nickname: "john.doe", image: nil }
+        )
       end
 
-      before { allow(User).to receive(:from_omniauth).and_return(unsaved_user) }
-
-      # The registration route does not exist, so the controller raises a
-      # NameError here. Pending until the route is added.
-      it "redirects to the registration page with the errors as alert",
-         pending: "new_user_registration_url is not defined (NameError)" do
+      it "redirects to the sign-in page with the alert" do
         get user_rocketchat_omniauth_callback_path
 
-        expect(response).to redirect_to(new_user_registration_url)
-        expect(flash[:alert]).to eq("Email can't be blank")
-        expect(session["devise.rocketchat_data"]).to include("uid" => "123456")
+        expect(response).to redirect_to(new_user_session_path)
+        expect(flash[:alert]).to eq(I18n.t("users.omniauth_callbacks.rocketchat.invalid"))
       end
 
-      it "does not sign the user in",
-         pending: "new_user_registration_url is not defined (NameError)" do
+      it "does not sign the user in" do
         get user_rocketchat_omniauth_callback_path
 
         expect(controller.current_user).to be_nil
+      end
+
+      it "does not create a user" do
+        expect { get user_rocketchat_omniauth_callback_path }.not_to change(User, :count)
+      end
+    end
+
+    context "when another user already has the email" do
+      let!(:existing_user) { create(:user, email: "john.doe@example.com") }
+
+      it "redirects to the sign-in page with the alert" do
+        get user_rocketchat_omniauth_callback_path
+
+        expect(response).to redirect_to(new_user_session_path)
+        expect(flash[:alert]).to eq(I18n.t("users.omniauth_callbacks.rocketchat.email_taken"))
+      end
+
+      it "does not sign the user in" do
+        get user_rocketchat_omniauth_callback_path
+
+        expect(controller.current_user).to be_nil
+      end
+
+      it "does not create a user or change the existing one" do
+        expect { get user_rocketchat_omniauth_callback_path }
+          .not_to(change { [ User.count, existing_user.reload.attributes ] })
       end
     end
   end
