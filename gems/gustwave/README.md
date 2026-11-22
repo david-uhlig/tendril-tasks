@@ -6,7 +6,7 @@
 </h1>
 
 <p align="center">
-  Flowbite components for Rails, built with<br>
+  Rails UI components, built with<br>
   <a href="https://flowbite.com/"><img src="https://raw.githubusercontent.com/themesberg/flowbite/main/static/images/logo.svg" alt="" height="16"> Flowbite</a>
   and
   <a href="https://viewcomponent.org/"><img src="https://raw.githubusercontent.com/ViewComponent/view_component/main/docs/logo/viewcomponent-color-logomark.svg" alt="" height="16"> ViewComponent</a>
