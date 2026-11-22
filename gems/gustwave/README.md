@@ -12,9 +12,9 @@
   <a href="https://viewcomponent.org/"><img src="https://raw.githubusercontent.com/ViewComponent/view_component/main/docs/logo/viewcomponent-color-logomark.svg" alt="" height="16"> ViewComponent</a>
 </p>
 
-Gustwave is an unofficial implementation of the [Flowbite](https://flowbite.com/docs/) UI library in [ViewComponent](https://viewcomponent.org/). It only implements Flowbite's open source components.
+Gustwave brings [Flowbite](https://flowbite.com/docs/)'s open source UI components to Rails as [ViewComponents](https://viewcomponent.org/). You write Ruby, with options for variants such as color and size and slots for the parts a component places. The HTML stays Flowbite's own: the same markup, Tailwind CSS classes and `data-*` attributes, so Flowbite's JavaScript works unchanged.
 
-Gustwave is built against Flowbite 3.x, currently 3.1.2. Its markup, classes and `data-*` attributes follow Flowbite's docs for that version.
+Gustwave targets Flowbite 3.x, currently 3.1.2, and covers its open source components, not Flowbite Pro. It's an unofficial project and isn't affiliated with Flowbite (Bergside Inc.) or ViewComponent.
 
 Gustwave isn't published yet. It's used as a path gem and will move to its own repository once its API settles.
 
