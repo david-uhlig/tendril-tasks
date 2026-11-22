@@ -19,7 +19,7 @@ The files live in `app/assets/images/gustwave/logo/` and resolve as `gustwave/lo
 | `icon-192.png`, `icon-512.png` | Web app manifest icons, `"purpose": "any"`. |
 | `icon-maskable-512.png` | Web app manifest icon, `"purpose": "maskable"`. The mark sits inside the safe zone. |
 
-The wordmark is set in Bricolage Grotesque Bold (SIL Open Font License) and converted to outlines, so the lockups don't need the font installed.
+The wordmark is set in [Bricolage Grotesque](https://github.com/ateliertriay/bricolage) Bold, licensed under the [SIL Open Font License](https://openfontlicense.org), and converted to outlines, so the lockups don't need the font installed.
 
 ## Colors
 
