@@ -1,9 +1,9 @@
-<h1 align="center">
+<p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="app/assets/images/gustwave/logo/gustwave-lockup-on-dark.svg">
     <img src="app/assets/images/gustwave/logo/gustwave-lockup.svg" alt="Gustwave" height="48">
   </picture>
-</h1>
+</p>
 
 <p align="center">
   Rails UI components, built with<br>
