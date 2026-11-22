@@ -1,4 +1,9 @@
-# Gustwave
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="app/assets/images/gustwave/logo/gustwave-lockup-on-dark.svg">
+    <img src="app/assets/images/gustwave/logo/gustwave-lockup.svg" alt="Gustwave" height="48">
+  </picture>
+</h1>
 
 Gustwave is an unofficial implementation of the [Flowbite](https://flowbite.com/docs/) UI library in [ViewComponent](https://viewcomponent.org/). It only implements Flowbite's open source components.
 
