@@ -12,6 +12,8 @@
   <a href="https://viewcomponent.org/"><img src="https://raw.githubusercontent.com/ViewComponent/view_component/main/docs/logo/viewcomponent-color-logomark.svg" alt="" height="16"> ViewComponent</a>
 </p>
 
+---
+
 Gustwave brings [Flowbite](https://flowbite.com/docs/)'s open source UI components to Rails as [ViewComponents](https://viewcomponent.org/). You write Ruby, with options for variants such as color and size and slots for the parts a component places. The HTML stays Flowbite's own: the same markup, Tailwind CSS classes and `data-*` attributes, so Flowbite's JavaScript works unchanged.
 
 Gustwave targets Flowbite 3.x, currently 3.1.2, and covers its open source components, not Flowbite Pro. It's an unofficial project and isn't affiliated with Flowbite (Bergside Inc.) or ViewComponent.
