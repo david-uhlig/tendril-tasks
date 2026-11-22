@@ -11,7 +11,9 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2"
 
-  spec.files = Dir["{app,config,lib,previews}/**/*", "LICENSE.txt", "README.md"]
+  # The logo files are for the repository and docs, not for apps using the gem.
+  spec.files = Dir["{app,config,lib,previews}/**/*", "LICENSE.txt", "README.md"] -
+    Dir["app/assets/images/gustwave/logo{,/**/*}"]
 
   spec.add_dependency "inline_svg"
   spec.add_dependency "nokogiri"
