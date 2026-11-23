@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70.35 62" width="70.35" height="62" role="img" aria-label="Gustwave">
+  <title>Gustwave</title>
+  <path class="gw-kite gw-kite-blue" fill="#2D5BFF" d="M38.64 2L50.73 22.94A4 4 0 0 1 49.27 28.4L37.18 35.38A4 4 0 0 1 33.18 35.38L21.09 28.4A4 4 0 0 1 19.62 22.94L31.71 2A4 4 0 0 1 38.64 2Z"/>
+  <path class="gw-kite gw-kite-teal" fill="#13B3A2" d="M66.35 62L42.18 62A4 4 0 0 1 38.18 58L38.18 44.04A4 4 0 0 1 40.18 40.58L52.27 33.6A4 4 0 0 1 57.73 35.06L69.82 56A4 4 0 0 1 66.35 62Z"/>
+  <path class="gw-kite gw-kite-amber" fill="#FFB020" d="M0.54 56L12.62 35.06A4 4 0 0 1 18.09 33.6L30.18 40.58A4 4 0 0 1 32.18 44.04L32.18 58A4 4 0 0 1 28.18 62L4 62A4 4 0 0 1 0.54 56Z"/>
+</svg>
