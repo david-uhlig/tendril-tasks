@@ -91,7 +91,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # HTML+ERB parser, linter and formatter [https://herb-tools.dev]
-  gem "herb", "~> 0.11.1", require: false
+  gem "herb", "~> 0.11.2", require: false
 
   # Builds and checks Gustwave's API docs [https://yardoc.org]
   gem "yard", require: false
@@ -118,12 +118,12 @@ group :development do
   gem "hotwire-spark"
 
   # Find and manage missing and unused translations [https://github.com/glebm/i18n-tasks]
-  gem "i18n-tasks", "~> 1.0", require: false
+  gem "i18n-tasks", "~> 1.2", require: false
 end
 
 group :test do
   # Testing framework
-  gem "rspec-rails", "~> 8.0"
+  gem "rspec-rails", "~> 8.1"
   gem "factory_bot_rails"
   gem "simplecov"
   gem "capybara"
