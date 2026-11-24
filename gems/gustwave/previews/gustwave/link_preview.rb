@@ -28,5 +28,15 @@ module Gustwave
     def none_color
       render_with_template
     end
+
+    # Underlined links in running text, each with its own underline color.
+    def decoration_colors
+      render_with_template
+    end
+
+    # Underlined links in running text, each with its own underline color and style.
+    def decoration_styles
+      render_with_template
+    end
   end
 end

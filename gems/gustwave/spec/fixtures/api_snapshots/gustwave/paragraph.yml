@@ -12,6 +12,7 @@ options:
     - left
     - center
     - right
+    - justify
     - none
   color:
     default: default

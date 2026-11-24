@@ -62,13 +62,20 @@ RSpec.describe Gustwave::Paragraph, type: :component do
       expect(page).to have_selector("p.text-right.rtl\\:text-left")
     end
 
+    it "justifies" do
+      render_inline(described_class.new("Some text", align: :justify))
+
+      expect(page).to have_selector("p.text-justify")
+    end
+
     it "falls back to no alignment for an unknown align when Gustwave isn't strict" do
       Gustwave.strict = false
-      render_inline(described_class.new("Some text", align: :justify))
+      render_inline(described_class.new("Some text", align: :middle))
 
       expect(page).to have_selector("p.text-gray-500")
       expect(page).to have_no_selector("p[class*='text-left']")
       expect(page).to have_no_selector("p[class*='text-right']")
+      expect(page).to have_no_selector("p[class*='text-justify']")
     end
   end
 

@@ -1,0 +1,11 @@
+<%= render Gustwave::Paragraph.new do %>
+  Track work across the enterprise through an open, collaborative platform.
+  <%= render Gustwave::Link.new("Link issues across Jira", href: "#", color: :none, class: "font-semibold text-gray-900 underline decoration-indigo-500 dark:text-white") %>
+  and ingest data from other
+  <%= render Gustwave::Link.new("software development", href: "#", color: :none, class: "font-semibold text-gray-900 underline decoration-blue-500 decoration-double dark:text-white") %>
+  tools, so your IT support and operations teams have richer contextual information to rapidly respond to
+  <%= render Gustwave::Link.new("requests", href: "#", color: :none, class: "font-semibold text-gray-900 underline decoration-green-500 decoration-dotted dark:text-white") %>,
+  <%= render Gustwave::Link.new("incidents", href: "#", color: :none, class: "font-semibold text-gray-900 underline decoration-red-500 decoration-dashed dark:text-white") %>,
+  and
+  <%= render Gustwave::Link.new("changes", href: "#", color: :none, class: "font-semibold text-gray-900 underline decoration-sky-500 decoration-wavy dark:text-white") %>.
+<% end %>

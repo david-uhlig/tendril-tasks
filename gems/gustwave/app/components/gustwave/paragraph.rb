@@ -22,12 +22,13 @@ module Gustwave
     variant :align, default: :none, values: {
       left: "text-left rtl:text-right",
       center: "text-center",
-      right: "text-right rtl:text-left"
+      right: "text-right rtl:text-left",
+      justify: "text-justify"
     }
 
     # @param text [String, nil] the text. Without it the block is the content.
     # @param color [Symbol] Defaults to +:default+, gray. +:none+ adds no color classes.
-    # @param align [Symbol] the side the text lines up with, mirrored for right-to-left text. Defaults to +:none+. Valid values are +:none+, +:left+, +:center+ and +:right+.
+    # @param align [Symbol] the side the text lines up with, mirrored for right-to-left text. Defaults to +:none+. Valid values are +:none+, +:left+, +:center+, +:right+ and +:justify+.
     # @param options [Hash] the HTML attributes of the +<p>+.
     def initialize(text = nil, color: DEFAULT, align: DEFAULT, **options)
       @text = text
