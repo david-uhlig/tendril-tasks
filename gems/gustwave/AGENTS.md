@@ -45,6 +45,8 @@ Run from this directory:
 - `bundle exec rspec` for all specs, or `bundle exec rspec spec/components/gustwave/card_spec.rb` for one file.
 - `bundle exec rubocop` for lint.
 
+In Claude Code, hooks in `.claude/hooks/` at the repository root enforce part of this section: RuboCop runs on every Ruby file you edit, the gem's specs run before you finish and block it while they fail, and snapshot updates and edits to `spec/components/conventions_spec.rb` wait for the user's approval. The rules below still apply in full.
+
 When a change to a component's classes is intended, update its style snapshot as described in `Gustwave::Test::StyleSnapshots`.
 
 When a change to a component's API is intended, first check its `@status` for whether the change needs a deprecation, then record it with `UPDATE_API_SNAPSHOTS=1 bundle exec rspec spec/components/api_snapshot_spec.rb`. Never update a snapshot just to make the spec pass.
