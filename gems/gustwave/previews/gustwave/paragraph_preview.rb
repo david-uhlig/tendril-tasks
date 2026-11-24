@@ -50,6 +50,11 @@ module Gustwave
       render_with_template
     end
 
+    # Justified text, spread to fill each line.
+    def align_justify
+      render_with_template
+    end
+
     # A link that triggers a popover.
     def popover
       render_with_template
@@ -72,6 +77,81 @@ module Gustwave
 
     # A wide and a narrow column between full-width paragraphs.
     def two_columns_uneven
+      render_with_template
+    end
+
+    # Text in each font size, from extra small to 9xl.
+    def font_size
+      render_with_template
+    end
+
+    # Text in each font weight, from thin to black.
+    def font_weight
+      render_with_template
+    end
+
+    # Text in different colors.
+    def text_color
+      render_with_template
+    end
+
+    # Text with each letter spacing, from tighter to widest.
+    def letter_spacing
+      render_with_template
+    end
+
+    # An old price struck through next to the new one.
+    def line_through
+      render_with_template
+    end
+
+    # A word in uppercase inside a sentence.
+    def uppercase
+      render_with_template
+    end
+
+    # A word in italics inside a sentence.
+    def font_style_italic
+      render_with_template
+    end
+
+    # Text in the normal, non-italic font style.
+    def font_style_normal
+      render_with_template
+    end
+
+    # Large text with normal line height.
+    def line_height_normal
+      render_with_template
+    end
+
+    # Large text with relaxed line height.
+    def line_height_relaxed
+      render_with_template
+    end
+
+    # Large text with loose line height.
+    def line_height_loose
+      render_with_template
+    end
+
+    # Text whose line breaks collapse into spaces.
+    def whitespace_normal
+      render_with_template
+    end
+
+    # Text that stays on one line, even past the edge.
+    def whitespace_nowrap
+      render_with_template
+    end
+
+    # Text that keeps the line breaks of its source.
+    def whitespace_pre_line
+      render_with_template
+    end
+
+    # Text in one color at decreasing opacity.
+    def opacity
       render_with_template
     end
   end

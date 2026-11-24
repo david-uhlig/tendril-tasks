@@ -2318,67 +2318,88 @@ pages:
   typography/text:
   - id: font-size-example
     title: Font size
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/font_size
   - id: font-weight-example
     title: Font weight
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/font_weight
   - id: text-color-example
     title: Text color
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/text_color
   - id: letter-spacing-example
     title: Letter spacing
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/letter_spacing
   - id: text-underline-example
     title: Text Decoration > Underline
-    status: tailwind
+    status: previewed
+    preview: gustwave/link/decoration_colors
   - id: text-line-through-example
     title: Text Decoration > Line through
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/line_through
   - id: text-uppercase-example
     title: Text Decoration > Uppercase
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/uppercase
   - id: text-italic-example
     title: Font style > Italic
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/font_style_italic
   - id: text-normal-example
     title: Font style > Normal
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/font_style_normal
   - id: font-leading-normal-example
     title: Line Height > Leading normal
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/line_height_normal
   - id: leading-relaxed-example
     title: Line Height > Leading relaxed
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/line_height_relaxed
   - id: leading-loose-example
     title: Line Height > Leading loose
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/line_height_loose
   - id: text-left-example
     title: Text Align > Left
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/align_left
   - id: text-center-example
     title: Text Align > Center
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/align_center
   - id: text-right-example
     title: Text Align > Right
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/align_right
   - id: text-justify-example
     title: Text Align > Text justify
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/align_justify
   - id: whitespace-normal-example
     title: Whitespace > Normal
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/whitespace_normal
   - id: whitespace-nowrap-example
     title: Whitespace > Nowrap
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/whitespace_nowrap
   - id: whitespace-preline-example
     title: Whitespace > Pre line
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/whitespace_pre_line
   - id: text-decoration-style-example
     title: Text Decoration Style
-    status: tailwind
+    status: previewed
+    preview: gustwave/link/decoration_styles
   - id: text-opacity-example
     title: Opacity
-    status: tailwind
+    status: previewed
+    preview: gustwave/paragraph/opacity
   plugins/charts:
   - id: default-area-chart-example
     title: Area chart

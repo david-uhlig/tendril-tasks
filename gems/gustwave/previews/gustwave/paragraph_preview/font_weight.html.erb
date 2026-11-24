@@ -1,0 +1,5 @@
+<div class="flex items-center space-x-8 rtl:space-x-reverse">
+  <% %w[font-thin font-extralight font-light font-normal font-medium font-semibold font-bold font-extrabold font-black].each do |weight| %>
+    <%= render Gustwave::Paragraph.new("Aa", color: :none, class: "text-4xl #{weight} text-gray-900 dark:text-white") %>
+  <% end %>
+</div>

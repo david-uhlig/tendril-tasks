@@ -1,0 +1,5 @@
+<div class="space-y-3">
+  <% %w[tracking-tighter tracking-tight tracking-normal tracking-wide tracking-wider tracking-widest].each do |tracking| %>
+    <%= render Gustwave::Paragraph.new("The Acme app helps you plan your week and keep track of your tasks.", class: "#{tracking} md:text-lg") %>
+  <% end %>
+</div>
