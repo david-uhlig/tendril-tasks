@@ -2,6 +2,9 @@
 # Stop hook: when gems/gustwave differs from origin/main, runs the gem's specs
 # (about 15 seconds) and keeps Claude from finishing while they fail.
 #
+# Claude may stop without the check when it ends its turn with a question to
+# the user, since specs often fail on purpose halfway through a change.
+#
 # Loop guards, kept per session in the worktree's git dir:
 # - a gem state that already passed or already failed isn't run again, so
 #   Claude can stop when it can't fix a failure, and the user sees why;
@@ -13,6 +16,19 @@ GEM=gems/gustwave
 
 input=$(cat)
 session=$(jq -r '.session_id // "unknown"' <<<"$input")
+
+# The text Claude ended its turn with: from the hook input when Claude Code
+# sends it, otherwise the last assistant text in the transcript.
+last_message=$(jq -r '.last_assistant_message // empty' <<<"$input")
+transcript=$(jq -r '.transcript_path // empty' <<<"$input")
+if [ -z "$last_message" ] && [ -f "$transcript" ]; then
+  last_message=$(tail -n 200 "$transcript" | jq -rs '
+    [.[] | select(.type == "assistant") | .message.content[]? | select(.type == "text") | .text] | last // ""' 2>/dev/null)
+fi
+last_line=$(grep -v '^[[:space:]]*$' <<<"$last_message" | tail -n 1)
+if grep -qiE '^needs input:' <<<"$last_message" || grep -q '?' <<<"$last_line"; then
+  exit 0
+fi
 
 root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
 cd "$root" || exit 0
@@ -66,5 +82,5 @@ failures=$(head -c 8000 <<<"$failures")
 
 jq -n --arg failures "$failures" '{
   decision: "block",
-  reason: ("The Gustwave specs fail (cd gems/gustwave && bundle exec rspec). Fix the cause, not the spec, and follow the Checking changes section of gems/gustwave/AGENTS.md:\n\n" + $failures)
+  reason: ("The Gustwave specs fail (cd gems/gustwave && bundle exec rspec). Fix the cause, not the spec, and follow the Checking changes section of gems/gustwave/AGENTS.md. If you stopped to ask the user something, end your turn with that question instead:\n\n" + $failures)
 }'
