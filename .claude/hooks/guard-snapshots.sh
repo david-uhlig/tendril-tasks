@@ -25,6 +25,21 @@ case "$tool" in
         reason="This edits the conventions spec, where known violations and exceptions live. Approve only for a removed violation or a rule change, not to make the spec pass."
         ;;
     esac
+    # AGENTS.md: "Don't change a status unless asked." Adding one to a new class is fine.
+    if [ -z "$reason" ]; then
+      if [ "$tool" = Write ]; then
+        before=$(cat -- "$path" 2>/dev/null)
+        after=$(jq -r '.tool_input.content // empty' <<<"$input")
+      else
+        before=$(jq -r '[.tool_input.old_string, (.tool_input.edits // [])[].old_string] | map(select(. != null)) | join("\n")' <<<"$input")
+        after=$(jq -r '[.tool_input.new_string, (.tool_input.edits // [])[].new_string] | map(select(. != null)) | join("\n")' <<<"$input")
+      fi
+      statuses() { grep -oE '@status[[:space:]]+[a-z]+' <<<"$1" | tr -s '[:space:]' ' '; }
+      old_status=$(statuses "$before") new_status=$(statuses "$after")
+      if [ -n "$old_status" ] && [ "$old_status" != "$new_status" ]; then
+        reason="This changes a component's @status (${old_status//@status /} → ${new_status//@status /}). Status changes follow docs/design.md's lifecycle; approve only if you asked for it."
+      fi
+    fi
     ;;
 esac
 
