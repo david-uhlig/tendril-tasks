@@ -29,12 +29,12 @@ module Gustwave
     COPY_ACTION = "click->gustwave--clipboard#copied"
     # Every Flowbite clipboard button centers its states, which are spans.
     BUTTON_CLASS = "inline-flex items-center justify-center"
-    # Maps +content_type+ to the value of the button's +copy-to-clipboard-content-type+ data attribute.
-    CONTENT_TYPES = { inner_html: "innerHTML", text_content: "textContent" }.freeze
-
     # Where the text is copied from. The default, +:input+, is the value
     # of the target element.
     option :content_type, default: :input, values: %i[input inner_html text_content]
+    # The button's +copy-to-clipboard-content-type+ data attribute; Flowbite
+    # reads the input's value without one.
+    derive :content_type_attribute, from: :content_type, values: { input: nil, inner_html: "innerHTML", text_content: "textContent" }
 
     # The label and icon of the default state.
     part :message, "inline-flex items-center gap-1.5"
@@ -219,7 +219,7 @@ module Gustwave
     def button_data
       {
         "copy-to-clipboard-target": @target_id,
-        "copy-to-clipboard-content-type": CONTENT_TYPES[option_value(:content_type)],
+        "copy-to-clipboard-content-type": derived_value(:content_type_attribute),
         "copy-to-clipboard-html-entities": ("true" if @html_entities),
         "gustwave--clipboard-reset-after-value": @reset_after,
         "gustwave--clipboard-tooltip-id-value": (@tooltip_id if tooltip?)

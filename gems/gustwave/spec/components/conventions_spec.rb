@@ -25,6 +25,27 @@ RSpec.describe "Component conventions" do
   end.map(&:to_sym).to_set
 
   rules = {
+    component_suffix: {
+      section: "when-a-piece-becomes-a-component",
+      rule: "Name a component after its Flowbite pattern, without a Component suffix (D2)",
+      check: ->(component) { component.name.end_with?("Component") ? [ component.name.demodulize ] : [] }
+    },
+    mapping_constant: {
+      section: "values-that-follow-from-an-option",
+      rule: "A value per option value is a derive, and classes per option value are a part plus a variant, not a constant keyed by the option's values",
+      check: ->(component) {
+        option_values = component.option_definition.options.values.filter_map do |option|
+          values = Array(option.values).grep(Symbol) - [ :none ]
+          values if values.size > 1
+        end
+        component.constants(false).filter_map do |name|
+          value = component.const_get(name)
+          next unless value.is_a?(Hash) && value.size > 1 && value.keys.all?(Symbol)
+
+          name if option_values.any? { |values| (value.keys - values).empty? }
+        end
+      }
+    },
     part_options: {
       section: "styling-a-part",
       rule: "A <name>_options: keyword names a declared part, or a component the component renders for it",

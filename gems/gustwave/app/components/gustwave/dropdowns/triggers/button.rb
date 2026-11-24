@@ -11,9 +11,8 @@ module Gustwave
       class Button < Gustwave::Dropdowns::Triggers::Base
         delegate_missing_to :button_component
 
-        # Translate the placement setting to an icon identifier showing to the
-        # direction of the menu's placement
-        PLACEMENT_ICON_MAPPINGS = {
+        # The chevron pointing in the direction the menu opens.
+        derive :placement_icon, from: :placement, values: {
           "auto": :chevron_down_compact,
           "auto-start": :chevron_down_compact,
           "auto-end": :chevron_down_compact,
@@ -29,7 +28,7 @@ module Gustwave
           "left": :chevron_left_compact,
           "left-start": :chevron_left_compact,
           "left-end": :chevron_left_compact
-        }.freeze
+        }
 
         part :leading_chevron, "h-2.5 w-2.5 mx-0 me-1"
 
@@ -44,7 +43,7 @@ module Gustwave
           super(text, **options)
           @icon = icon
           @trailing_icon = trailing_icon || nil
-          @chevron = icon_by_placement(option_value(:placement)) if trailing_icon.nil?
+          @chevron = derived_value(:placement_icon) if trailing_icon.nil?
         end
 
         def call
@@ -75,10 +74,6 @@ module Gustwave
 
         def button_component
           @button_component ||= Gustwave::Button.for(config[:theme]).new(**config.except(:theme))
-        end
-
-        def icon_by_placement(placement)
-          PLACEMENT_ICON_MAPPINGS[placement]
         end
       end
     end

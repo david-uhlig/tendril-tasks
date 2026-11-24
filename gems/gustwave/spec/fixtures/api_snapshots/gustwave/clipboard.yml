@@ -18,6 +18,9 @@ options:
     - input
     - inner_html
     - text_content
+derived:
+  content_type_attribute:
+    from: content_type
 parts:
 - copied_message
 - icon

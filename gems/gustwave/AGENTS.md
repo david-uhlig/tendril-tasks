@@ -13,10 +13,10 @@ The short version:
 - Options for fixed choices, slots for parts the component has to place or wire, the content block for everything else. A new slot or option needs a reason from `docs/design.md`; when in doubt, leave it to the block.
 - No `Component` suffix: `Gustwave::Card`.
 - Docstrings and previews name Flowbite only where a sentence needs it, e.g. a JavaScript dependency or a deviation from Flowbite's markup. Readers know Gustwave implements Flowbite and what HTML elements do. Example brand text is "Acme".
-- Document public classes, modules and methods with YARD: a docstring, a `@param` per parameter (on `initialize` for constructors) and a `@return`. `bundle exec yard stats --list-undoc` lists what lacks a docstring.
+- Document public classes, modules and methods with YARD: a docstring, a `@param` per parameter (on `initialize` for constructors) and a `@return`. `spec/lib/gustwave/documentation_spec.rb` checks it.
 - Every new component, nested and base classes included, gets `# @status alpha` as the last line of its class docstring. `spec/components/component_status_spec.rb` checks it. Don't change a status unless asked; promotions follow `docs/design.md`.
 - Style a part with `<part>_options:`. Never add `configure_<part>` or `<part>_class:` for an element. `<state>_class:` is only for classes a script swaps.
-- A value that follows from an option, like a child button's size per component size, is a `derive` read with `derived_value`. Classes per option value on a child element are a `part` plus its key in the `variant`'s values, as Badge's dismiss button does. Never a private constant: derived values are validated, recorded in the API snapshot and extendable with `extend_derived`.
+- A value that follows from an option is a `derive`, and classes per option value on a child element are a `part` plus a `variant`, never a constant keyed by the option's values. See "Values that follow from an option" in `docs/design.md`.
 - `dismiss_button` slot for elements that go away for good, `close_button` slot for overlays that reopen.
 - `Gustwave::Visuals` for visuals: `leading_visuals` and `trailing_visuals` inline with text, `visuals` for visuals the component places. All three are many, with every type. A slot named after its role only for a visual that carries meaning or isn't an icon, image or SVG, like Alert's `icon` or Timeline's `marker`, and a slot per state for a visual per state, like Clipboard's `icon` and `copied_icon`. `icon:` keywords are shorthand for a slot, never the only way.
 - Flowbite's hover or click trigger setting is `trigger_event:`. Triggers rendered elsewhere use `trigger_options(...)`.
@@ -45,7 +45,7 @@ Run from this directory:
 - `bundle exec rspec` for all specs, or `bundle exec rspec spec/components/gustwave/card_spec.rb` for one file.
 - `bundle exec rubocop` for lint.
 
-In Claude Code, hooks in `.claude/hooks/` at the repository root enforce part of this section: RuboCop runs on every Ruby file you edit, the gem's specs run before you finish and block it while they fail, and snapshot updates and edits to `spec/components/conventions_spec.rb` wait for the user's approval. The rules below still apply in full.
+In Claude Code, hooks in `.claude/hooks/` at the repository root enforce part of this section: RuboCop runs on every Ruby file you edit, the gem's specs run before you finish and block it while they fail, and snapshot updates, edits to `spec/components/conventions_spec.rb` and changes to a `@status` wait for the user's approval. The rules below still apply in full.
 
 When a change to a component's classes is intended, update its style snapshot as described in `Gustwave::Test::StyleSnapshots`.
 
