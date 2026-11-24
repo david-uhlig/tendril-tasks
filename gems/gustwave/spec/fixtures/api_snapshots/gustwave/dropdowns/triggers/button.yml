@@ -29,6 +29,9 @@ options:
     values:
     - click
     - hover
+derived:
+  placement_icon:
+    from: placement
 parts:
 - leading_chevron
 - trailing_chevron

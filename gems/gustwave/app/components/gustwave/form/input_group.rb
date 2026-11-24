@@ -119,7 +119,8 @@ module Gustwave
       # which the group passes on once it has the control: the field asks the
       # group for the control's ID before the group renders.
       #
-      # @param context [Hash] the context of the field, see Gustwave::Form::BoundControl#apply_slot_context. +slot+ is left out.
+      # @param slot [Symbol, nil] the field's slot the group renders in, which the group doesn't pass on.
+      # @param context [Hash] the context of the field, see Gustwave::Form::BoundControl#apply_slot_context.
       # @return [void]
       def apply_slot_context(slot: nil, **context)
         @context = context

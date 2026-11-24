@@ -32,6 +32,17 @@ RSpec.describe Gustwave::FormBuilder, type: :component do
     expect(described_class.superclass).to eq(ActionView::Helpers::FormBuilder)
   end
 
+  it "holds no markup or classes, which belong to the components it renders" do
+    source = Gustwave::Engine.root.join("app/helpers/gustwave/form_builder.rb")
+    markup = /\btag[.(]|content_tag|html_safe|safe_join|\braw\(|["']\s*<\w|\bclass:/
+    offending = File.readlines(source).each_with_index.filter_map do |line, index|
+      "#{index + 1}: #{line.strip}" if !line.lstrip.start_with?("#") && line.match?(markup)
+    end
+
+    expect(offending).to be_empty,
+      "Gustwave::FormBuilder holds no markup (docs/design.md#form-builder). Move it into a component:\n  #{offending.join("\n  ")}"
+  end
+
   helpers.each do |helper, type|
     it "renders #{helper} as a field with an input of type #{type}" do
       html = parse(gustwave_form.public_send(helper, :title))

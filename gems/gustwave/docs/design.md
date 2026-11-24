@@ -80,6 +80,10 @@ Every variant has a `:none` value that adds none of its classes, so a caller can
 
 Where no classes isn't a choice, like an HTML tag, a position in a group or an orientation, the variant declares `allow_none: false` and has no `:none` (D22). The conventions spec flags a variant whose `:none` nothing in the gem uses.
 
+### Values that follow from an option
+
+A value that follows from an option, like a child button's size per component size, is a `derive` read with `derived_value`. Classes per option value on a child element are a part plus its key in the variant's values, merged with `attributes_for`. Badge's dismiss button does both. A constant keyed by an option's values does neither job as well: derived values are validated, recorded in the API snapshot and extendable with `extend_derived`. The conventions spec flags such a constant.
+
 ## Recurring sub-patterns
 
 These parts show up across many Flowbite patterns. Each has one shape, so callers learn it once.
