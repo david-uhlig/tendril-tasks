@@ -137,7 +137,7 @@ RSpec.describe Gustwave::List, type: :component do
       render_inline(described_class.new) { |list| list.with_item "Acme", icon: :check }
 
       item = page.find("li")
-      expect(item[:class].split).to include("flex", "items-center", "gap-2.5")
+      expect(item[:class].split).to include("flex", "items-center", "gap-2")
       expect(item[:class].split).not_to include("inline-flex")
       expect(item).to have_selector("svg.size-4\\.5.-m-0\\.5.shrink-0[aria-hidden='true']")
       expect(item).to have_text("Acme")

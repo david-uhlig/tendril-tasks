@@ -15,8 +15,8 @@ module Gustwave
 
       # Gustwave's icons leave 3 units of their 24x24 viewBox empty on each side.
       # At size-4.5 the glyph is about as large as Flowbite's w-3.5 icon, and the
-      # negative margin makes up for the empty part; gap-2.5 less the margin leaves
-      # Flowbite's 8px between icon and text.
+      # negative margin makes up for the empty part, so the icon takes Flowbite's
+      # 14px and gap-2 leaves its 8px between icon and text.
       part :visual, "size-4.5 -m-0.5 shrink-0"
 
       # Set by Gustwave::List
@@ -34,7 +34,7 @@ module Gustwave
       }
 
       # Selected by the item when it has a visual; declared after Visuals' has_visual so flex wins over inline-flex
-      toggle :has_visual_item, "flex items-center gap-2.5", internal: true
+      toggle :has_visual_item, "flex items-center gap-2", internal: true
 
       # @param text [String, nil] The item text. Takes precedence over block content.
       # @param icon [Symbol, nil] Shorthand for +with_leading_visual_icon+: an outline icon shown before the text.

@@ -2,7 +2,7 @@
 tag tag=:ul:
 - 'ul: dark:text-gray-400 list-disc list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -10,7 +10,7 @@ tag tag=:ul:
 tag tag=:ol:
 - 'ol: dark:text-gray-400 list-decimal list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,7 +18,7 @@ tag tag=:ol:
 marker tag=:ul marker=:disc:
 - 'ul: dark:text-gray-400 list-disc list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -26,7 +26,7 @@ marker tag=:ul marker=:disc:
 marker tag=:ul marker=:decimal:
 - 'ul: dark:text-gray-400 list-decimal list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -34,7 +34,7 @@ marker tag=:ul marker=:decimal:
 marker tag=:ul marker=:none:
 - 'ul role="list": dark:text-gray-400 space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -42,7 +42,7 @@ marker tag=:ul marker=:none:
 marker tag=:ol marker=:disc:
 - 'ol: dark:text-gray-400 list-disc list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -50,7 +50,7 @@ marker tag=:ol marker=:disc:
 marker tag=:ol marker=:decimal:
 - 'ol: dark:text-gray-400 list-decimal list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -58,7 +58,7 @@ marker tag=:ol marker=:decimal:
 marker tag=:ol marker=:none:
 - 'ol role="list": dark:text-gray-400 space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,7 +66,7 @@ marker tag=:ol marker=:none:
 color color=:default nested=false:
 - 'ul: dark:text-gray-400 list-disc list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,7 +74,7 @@ color color=:default nested=false:
 color color=:default nested=true:
 - 'ul: dark:text-gray-400 list-disc list-inside mt-2 ps-5 space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -82,7 +82,7 @@ color color=:default nested=true:
 color color=:none nested=false:
 - 'ul: list-disc list-inside space-y-1'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -90,7 +90,7 @@ color color=:none nested=false:
 color color=:none nested=true:
 - 'ul: list-disc list-inside mt-2 ps-5 space-y-1'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -98,7 +98,7 @@ color color=:none nested=true:
 layout orientation=:vertical divided=false:
 - 'ul: dark:text-gray-400 list-disc list-inside space-y-1 text-gray-500'
 - li
-- 'li: align-bottom flex gap-2.5 items-center'
+- 'li: align-bottom flex gap-2 items-center'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -107,7 +107,7 @@ layout orientation=:vertical divided=true:
 - 'ul: dark:divide-gray-700 dark:text-gray-400 divide-gray-200 divide-y list-disc
   list-inside space-y-0 text-gray-500'
 - 'li: pb-3 sm:pb-4'
-- 'li: align-bottom flex gap-2.5 items-center py-3 sm:py-4'
+- 'li: align-bottom flex gap-2 items-center py-3 sm:py-4'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -115,7 +115,7 @@ layout orientation=:vertical divided=true:
 layout orientation=:horizontal divided=false:
 - 'ul: dark:text-gray-400 flex flex-wrap items-center list-disc list-inside text-gray-500'
 - 'li: md:me-6 me-4'
-- 'li: align-bottom flex gap-2.5 items-center md:me-6 me-4'
+- 'li: align-bottom flex gap-2 items-center md:me-6 me-4'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -124,7 +124,7 @@ layout orientation=:horizontal divided=true:
 - 'ul: dark:divide-gray-700 dark:text-gray-400 divide-gray-200 divide-y flex flex-wrap
   items-center list-disc list-inside space-y-0 text-gray-500'
 - 'li: md:me-6 me-4 pb-3 sm:pb-4'
-- 'li: align-bottom flex gap-2.5 items-center md:me-6 me-4 py-3 sm:py-4'
+- 'li: align-bottom flex gap-2 items-center md:me-6 me-4 py-3 sm:py-4'
 - 'svg aria-hidden="true" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg":
   -m-0.5 shrink-0 size-4.5'
 - path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
