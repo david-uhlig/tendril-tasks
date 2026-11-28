@@ -1,0 +1,12 @@
+<%= render Gustwave::Heading.new("Top volunteers:", size: :xs, class: "mb-2 text-lg font-semibold") %>
+<%= render Gustwave::List.new(tag: :ol, class: "max-w-md") do |list| %>
+  <% list.with_item do %>
+    <span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span> with <span class="font-semibold text-gray-900 dark:text-white">70</span> hours
+  <% end %>
+  <% list.with_item do %>
+    <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span> with <span class="font-semibold text-gray-900 dark:text-white">63</span> hours
+  <% end %>
+  <% list.with_item do %>
+    <span class="font-semibold text-gray-900 dark:text-white">Leslie Livingston</span> with <span class="font-semibold text-gray-900 dark:text-white">57</span> hours
+  <% end %>
+<% end %>

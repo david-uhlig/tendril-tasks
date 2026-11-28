@@ -1,0 +1,9 @@
+<%= render Gustwave::List.new(marker: :none, color: :none, orientation: :horizontal, class: "justify-center text-gray-900 dark:text-white") do |list| %>
+  <% list.with_item do %><%= render Gustwave::Link.new("About", href: "#", color: :none) %><% end %>
+  <% list.with_item do %><%= render Gustwave::Link.new("Premium", href: "#", color: :none) %><% end %>
+  <% list.with_item do %><%= render Gustwave::Link.new("Campaigns", href: "#", color: :none) %><% end %>
+  <% list.with_item do %><%= render Gustwave::Link.new("Blog", href: "#", color: :none) %><% end %>
+  <% list.with_item do %><%= render Gustwave::Link.new("Affiliate Program", href: "#", color: :none) %><% end %>
+  <% list.with_item do %><%= render Gustwave::Link.new("FAQs", href: "#", color: :none) %><% end %>
+  <% list.with_item do %><%= render Gustwave::Link.new("Contact", href: "#", color: :none) %><% end %>
+<% end %>

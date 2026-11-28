@@ -2216,44 +2216,47 @@ pages:
   typography/lists:
   - id: unordered-list-example
     title: Unordered list
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/default
   - id: unordered-list-icon-example
     title: Unordered list > Icons
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/icons
   - id: unordered-list-nested-example
     title: Unordered list > Nested
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/nested_unordered
+    note: Flowbite renders two of the three inner lists as a ul with list-decimal; each numbered inner list here is an ol.
   - id: unordered-list-unstyled-example
     title: Unordered list > Unstyled
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/unstyled
+    note: The list has no list-none class; Tailwind's preflight already hides the markers. It has role="list", so screen readers still announce it as a list.
   - id: ordered-list-example
     title: Ordered list
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/ordered
   - id: ordered-list-nested-example
     title: Ordered list > Nested
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/nested_ordered
   - id: description-list-example
     title: Description list
-    status: blocked
-    needs: list
+    status: tailwind
+    note: A dl with Tailwind classes on its dt and dd elements.
   - id: list-icons-example
     title: List with icons
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/with_icons
   - id: list-advanced-layout-example
     title: Advanced layout
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/advanced_layout
   - id: horizontal-list-example
     title: Horizontal list
-    status: blocked
-    needs: list
+    status: previewed
+    preview: gustwave/list/horizontal
+    note: The items' spacing is on the li, not on the link.
   typography/paragraphs:
   - id: default-paragraph-example
     title: Default paragraph

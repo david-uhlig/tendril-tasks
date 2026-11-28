@@ -1,0 +1,26 @@
+<%= render Gustwave::List.new(tag: :ol, class: "space-y-4") do |list| %>
+  <% list.with_item do %>
+    Sign up
+    <%= render Gustwave::List.new(nested: true) do |points| %>
+      <% points.with_item "Enter your name and email" %>
+      <% points.with_item "Choose a password" %>
+      <% points.with_item "Confirm your email address" %>
+    <% end %>
+  <% end %>
+  <% list.with_item do %>
+    Join a project
+    <%= render Gustwave::List.new(nested: true) do |points| %>
+      <% points.with_item "Browse the open projects" %>
+      <% points.with_item "Read the project's goals" %>
+      <% points.with_item "Ask to join" %>
+    <% end %>
+  <% end %>
+  <% list.with_item do %>
+    Pick a task
+    <%= render Gustwave::List.new(nested: true) do |points| %>
+      <% points.with_item "Filter tasks by skill" %>
+      <% points.with_item "Check the time it needs" %>
+      <% points.with_item "Assign it to yourself" %>
+    <% end %>
+  <% end %>
+<% end %>

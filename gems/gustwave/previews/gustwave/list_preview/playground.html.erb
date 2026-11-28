@@ -1,0 +1,5 @@
+<%= render Gustwave::List.new(tag:, marker: (marker unless marker == :default), color:, orientation:, nested:, divided:) do |list| %>
+  <% list.with_item "Acme Design System" %>
+  <% list.with_item "Acme Icons" %>
+  <% list.with_item "Acme Fonts" %>
+<% end %>
