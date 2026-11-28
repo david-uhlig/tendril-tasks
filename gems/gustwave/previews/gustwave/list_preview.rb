@@ -30,6 +30,12 @@ module Gustwave
       render_with_template
     end
 
+    # Contact details as terms and their values, separated by lines. Plain Tailwind: a +dl+ isn't a
+    # Gustwave::List, which renders a +ul+ or an +ol+.
+    def description_list
+      render_with_template
+    end
+
     # Items with check icons, some followed by a value in bold.
     def with_icons
       render_with_template

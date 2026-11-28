@@ -2242,8 +2242,9 @@ pages:
     preview: gustwave/list/nested_ordered
   - id: description-list-example
     title: Description list
-    status: tailwind
-    note: A dl with Tailwind classes on its dt and dd elements.
+    status: previewed
+    preview: gustwave/list/description_list
+    note: Plain Tailwind, since no Gustwave component renders a dl.
   - id: list-icons-example
     title: List with icons
     status: previewed
