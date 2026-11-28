@@ -61,7 +61,19 @@ module Gustwave
       end
 
       def call
-        tag.li(**@config) { slots_and_content(leading_visuals, text_or_content(@text), append_content: false) }
+        tag.li(**@config) { slots_and_content(leading_visuals, item_content, append_content: false) }
+      end
+
+      private
+
+      # The text, or the block without the indentation ERB gives it. Firefox
+      # renders whitespace after a marker inside the item as a space, so a
+      # block's item would start further from its marker than a text item.
+      def item_content
+        text = text_or_content(@text)
+        return text unless text.is_a?(String) && text.html_safe?
+
+        String.new(text).lstrip.html_safe
       end
     end
   end

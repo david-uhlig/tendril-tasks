@@ -154,6 +154,24 @@ RSpec.describe Gustwave::List, type: :component do
     end
   end
 
+  context "with an indented item block" do
+    it "starts the item at its content, as a text item does" do
+      render_inline(described_class.new) do |list|
+        list.with_item { "\n    <strong>Acme</strong> Icons\n".html_safe }
+      end
+
+      expect(rendered_content).to include("<li><strong>Acme</strong> Icons\n</li>")
+    end
+
+    it "keeps escaping a block that isn't safe" do
+      render_inline(described_class.new) do |list|
+        list.with_item { "  <b>Acme</b>" }
+      end
+
+      expect(rendered_content).to include("<li>&lt;b&gt;Acme&lt;/b&gt;</li>")
+    end
+  end
+
   context "with an item block" do
     it "renders a nested list inside the item" do
       nested = described_class.new(tag: :ol, nested: true)
