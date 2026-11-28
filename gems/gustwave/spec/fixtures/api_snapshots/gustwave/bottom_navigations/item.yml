@@ -1,0 +1,38 @@
+---
+status: alpha
+constructor:
+- text (optional)
+- 'tag: (optional)'
+- 'href: (optional)'
+- 'icon: (optional)'
+- 'active: (optional)'
+- 'label_display: (optional)'
+- "**options"
+options:
+  active:
+    default: 'false'
+  label_display:
+    default: inside
+    values:
+    - inside
+    - tooltip
+    - none
+  tag:
+    default: button
+    values:
+    - button
+    - a
+parts:
+- icon
+- label
+slots:
+  icon:
+    many: false
+methods:
+- apply_slot_context
+- icon
+- icon?
+- with_icon
+- with_icon_content
+slot_builders:
+- build_slot_icon
