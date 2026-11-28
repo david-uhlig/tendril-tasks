@@ -33,6 +33,7 @@ RSpec.describe "Gustwave constructor convention", type: :component do
     Gustwave::Form::RichText::Trix::Toolbar => { args: [ nil ] },
     Gustwave::Heading => { derived_defaults: { size: :default_size } },
     Gustwave::Icon => { args: [ :close ] },
+    Gustwave::List => { derived_defaults: { marker: :default_marker } },
     Gustwave::Modal => { selected_elsewhere: %i[action] },
     Gustwave::ModalHeader => { kwargs: { modal_id: "modal" } },
     Gustwave::Navbars::Link => { kwargs: { href: "#" } },

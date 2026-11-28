@@ -1,0 +1,28 @@
+<%= render Gustwave::List.new(class: "space-y-4") do |list| %>
+  <% list.with_item do %>
+    Plan the release
+    <%= render Gustwave::List.new(tag: :ol, nested: true) do |steps| %>
+      <% steps.with_item "Collect the merged changes" %>
+      <% steps.with_item "Write the release notes" %>
+      <% steps.with_item "Tag the version" %>
+    <% end %>
+  <% end %>
+
+  <% list.with_item do %>
+    Test the build
+    <%= render Gustwave::List.new(tag: :ol, nested: true) do |steps| %>
+      <% steps.with_item "Run the test suite" %>
+      <% steps.with_item "Check the previews in light and dark mode" %>
+      <% steps.with_item "Try the upgrade on a staging app" %>
+    <% end %>
+  <% end %>
+
+  <% list.with_item do %>
+    Publish
+    <%= render Gustwave::List.new(tag: :ol, nested: true) do |steps| %>
+      <% steps.with_item "Push the gem" %>
+      <% steps.with_item "Announce the release" %>
+      <% steps.with_item "Close the milestone" %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,24 @@
+<%= render Gustwave::List.new(marker: :none, class: "space-y-4 text-left rtl:text-right") do |list| %>
+  <% list.with_item "Individual configuration", class: "gap-3" do |item| %>
+    <% item.with_leading_visual_icon :check, class: "text-green-500 dark:text-green-400" %>
+  <% end %>
+
+  <% list.with_item "No setup, or hidden fees", class: "gap-3" do |item| %>
+    <% item.with_leading_visual_icon :check, class: "text-green-500 dark:text-green-400" %>
+  <% end %>
+
+  <% list.with_item class: "gap-3" do |item| %>
+    <% item.with_leading_visual_icon :check, class: "text-green-500 dark:text-green-400" %>
+    <span>Team size: <span class="font-semibold text-gray-900 dark:text-white">1 developer</span></span>
+  <% end %>
+
+  <% list.with_item class: "gap-3" do |item| %>
+    <% item.with_leading_visual_icon :check, class: "text-green-500 dark:text-green-400" %>
+    <span>Premium support: <span class="font-semibold text-gray-900 dark:text-white">6 months</span></span>
+  <% end %>
+
+  <% list.with_item class: "gap-3" do |item| %>
+    <% item.with_leading_visual_icon :check, class: "text-green-500 dark:text-green-400" %>
+    <span>Free updates: <span class="font-semibold text-gray-900 dark:text-white">6 months</span></span>
+  <% end %>
+<% end %>

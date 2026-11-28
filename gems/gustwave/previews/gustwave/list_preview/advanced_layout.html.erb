@@ -1,0 +1,66 @@
+<%= render Gustwave::List.new(marker: :none, color: :none, divided: true, class: "max-w-md") do |list| %>
+  <% list.with_item do %>
+    <div class="flex items-center gap-4">
+      <div class="shrink-0"><%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Neil Sims", size: :sm) %></div>
+
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">Neil Sims</p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">neil@example.com</p>
+      </div>
+
+      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$320</div>
+    </div>
+  <% end %>
+
+  <% list.with_item do %>
+    <div class="flex items-center gap-4">
+      <div class="shrink-0"><%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Bonnie Green", size: :sm) %></div>
+
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">Bonnie Green</p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">bonnie@example.com</p>
+      </div>
+
+      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$3467</div>
+    </div>
+  <% end %>
+
+  <% list.with_item do %>
+    <div class="flex items-center gap-4">
+      <div class="shrink-0"><%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Michael Gough", size: :sm) %></div>
+
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">Michael Gough</p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">michael@example.com</p>
+      </div>
+
+      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$67</div>
+    </div>
+  <% end %>
+
+  <% list.with_item do %>
+    <div class="flex items-center gap-4">
+      <div class="shrink-0"><%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Thomas Lean", size: :sm) %></div>
+
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">Thomas Lean</p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">thomas@example.com</p>
+      </div>
+
+      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$2367</div>
+    </div>
+  <% end %>
+
+  <% list.with_item do %>
+    <div class="flex items-center gap-4">
+      <div class="shrink-0"><%= render Gustwave::Avatar.new(src: "/icon.png", alt: "Lana Byrd", size: :sm) %></div>
+
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">Lana Byrd</p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">lana@example.com</p>
+      </div>
+
+      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$367</div>
+    </div>
+  <% end %>
+<% end %>
