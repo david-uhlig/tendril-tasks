@@ -7,6 +7,7 @@
       <% steps.with_item "Tag the version" %>
     <% end %>
   <% end %>
+
   <% list.with_item do %>
     Test the build
     <%= render Gustwave::List.new(tag: :ol, nested: true) do |steps| %>
@@ -15,6 +16,7 @@
       <% steps.with_item "Try the upgrade on a staging app" %>
     <% end %>
   <% end %>
+
   <% list.with_item do %>
     Publish
     <%= render Gustwave::List.new(tag: :ol, nested: true) do |steps| %>

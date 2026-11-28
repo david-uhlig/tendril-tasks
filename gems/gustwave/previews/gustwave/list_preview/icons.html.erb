@@ -1,11 +1,14 @@
 <%= render Gustwave::Heading.new("Password requirements:", size: :xs, class: "mb-2 text-lg font-semibold") %>
+
 <%= render Gustwave::List.new(marker: :none, class: "max-w-md") do |list| %>
   <% list.with_item "At least 10 characters" do |item| %>
     <% item.with_leading_visual_icon :check_circle, theme: :solid, class: "text-green-500 dark:text-green-400" %>
   <% end %>
+
   <% list.with_item "At least one lowercase character" do |item| %>
     <% item.with_leading_visual_icon :check_circle, theme: :solid, class: "text-green-500 dark:text-green-400" %>
   <% end %>
+
   <% list.with_item "At least one special character, e.g., ! @ # ?" do |item| %>
     <% item.with_leading_visual_icon :check_circle, theme: :solid, class: "text-gray-500 dark:text-gray-400" %>
   <% end %>

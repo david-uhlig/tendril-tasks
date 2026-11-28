@@ -7,6 +7,7 @@
       <% points.with_item "Confirm your email address" %>
     <% end %>
   <% end %>
+
   <% list.with_item do %>
     Join a project
     <%= render Gustwave::List.new(nested: true) do |points| %>
@@ -15,6 +16,7 @@
       <% points.with_item "Ask to join" %>
     <% end %>
   <% end %>
+
   <% list.with_item do %>
     Pick a task
     <%= render Gustwave::List.new(nested: true) do |points| %>
